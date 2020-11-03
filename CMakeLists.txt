@@ -103,8 +103,7 @@ set(INCLUDES
         src/pf_imgui/elements/interface/LabeledElement.h
         src/pf_imgui/elements/interface/ResizableElement.h
         src/pf_imgui/elements/interface/SavableElement.h
-        src/pf_imgui/elements/interface/ValueObservableElement.h
-        test/main.cpp)
+        src/pf_imgui/elements/interface/ValueObservableElement.h)
 
 option(BUILD_SHARED_LIBS "build this library as shared")
 
