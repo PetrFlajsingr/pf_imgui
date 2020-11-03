@@ -11,10 +11,11 @@
 #include "elements/interface/SavableElement.h"
 #include <imgui.h>
 #include <toml++/toml.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class ImGuiInterface : public Container {
+class PF_IMGUI_EXPORT ImGuiInterface : public Container {
  public:
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
 
