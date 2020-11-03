@@ -20,6 +20,12 @@ endif ()
 include(${CPM_DOWNLOAD_LOCATION})
 
 set(CMAKE_CXX_STANDARD 20)
+list(APPEND flags "-o3" "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
+        "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
+        "-Wpointer-arith" "-Wcast-qual" "-Wno-type-limits")
+if (CMAKE_BUILD_TYPE MATCHES Release)
+    list(APPEND flags "-o3")
+endif()
 
 hunter_add_package(imgui)
 find_package(imgui CONFIG REQUIRED)
@@ -33,25 +39,14 @@ CPMAddPackage(
         GITHUB_REPOSITORY marzer/tomlplusplus
         GIT_TAG v2.2.0
 )
-CPMAddPackage(
-        NAME cppcoro
-        GITHUB_REPOSITORY dutow/cppcoro
-        GIT_TAG 4b1951ff3c25fea78198a5c0aabb50589946b694
-)
 include_directories(${toml++_SOURCE_DIR}/include)
 
+
 set(RANGE_V3_TESTS OFF)
-set(SHADERC_SKIP_TESTS ON)
-set(SPIRV_CROSS_ENABLE_TESTS OFF)
 CPMAddPackage(
         NAME range-v3
         GITHUB_REPOSITORY ericniebler/range-v3
         GIT_TAG 0.11.0
-)
-CPMAddPackage(
-        NAME backward_cpp
-        GITHUB_REPOSITORY bombela/backward-cpp
-        GIT_TAG v1.5
 )
 
 set(SOURCES
@@ -123,15 +118,16 @@ SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windo
 SET(CMAKE_RELWITHDEBINFO_POSTFIX "rd" CACHE STRING "add a postfix, usually empty on windows")
 SET(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on windows")
 
-add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDES} ${BACKWARD_ENABLE})
+add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDES})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 add_backward(${PROJECT_NAME})
+target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
 
 include(GNUInstallDirs)
 
 target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
-target_link_libraries(${PROJECT_NAME} imgui::imgui pf_common::pf_common cppcoro range-v3)
+target_link_libraries(${PROJECT_NAME} imgui::imgui pf_common::pf_common range-v3)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
