@@ -1,0 +1,189 @@
+//
+// Created by petr on 10/31/20.
+//
+
+#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INPUT_H
+#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INPUT_H
+
+#include <pf_common/concepts/OneOf.h>
+#include "interface/LabeledElement.h"
+#include "interface/SavableElement.h"
+#include "interface/ValueObservableElement.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <imgui.h>
+#include <utility>
+
+namespace pf::ui::ig {
+namespace details {
+#define IMGUI_INPUT_STEP_TYPE_LIST float, double, int
+#define IMGUI_INPUT_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
+#define IMGUI_INPUT_DOUBLE_TYPE_LIST double
+#define IMGUI_INPUT_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
+#define IMGUI_INPUT_GLM_TYPE_LIST                                                                  \
+  glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
+#define IMGUI_INPUT_TYPE_LIST                                                                      \
+  IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_INT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
+using InputUnderlyingType =
+    std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST>, float,
+                       std::conditional_t<OneOf<T, IMGUI_INPUT_INT_TYPE_LIST>, int, double>>;
+
+template<typename T>
+struct InputData {};
+
+template<>
+struct InputData<int> {
+  int step;
+  int fastStep;
+};
+template<>
+struct InputData<float> {
+  float step;
+  float fastStep;
+  static constexpr const char *defaultFormat() { return "%.3f"; }
+};
+template<>
+struct InputData<double> {
+  double step;
+  double fastStep;
+  static constexpr const char *defaultFormat() { return "%.6f"; }
+};
+
+template<typename T>
+concept UnformattedWithStep =
+    OneOf<
+        T,
+        IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+
+template<typename T>
+concept UnformattedWithoutStep =
+    !OneOf<
+        T,
+        IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+
+template<typename T>
+concept FormattedWithStep = OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST>
+    &&OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+template<typename T>
+concept FormattedWithoutStep =
+    !OneOf<
+        T,
+        IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+}// namespace details
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
+class Input : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
+  details::InputData<details::InputUnderlyingType<T>> data;
+
+ public:
+  Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
+        Persistent persistent = Persistent::No,
+        T value = T{}) requires details::UnformattedWithStep<T>
+      : Element(elementName),
+        LabeledElement(elementName, caption),
+        ValueObservableElement<T>(elementName, value),
+        SavableElement(elementName, persistent),
+        data(st, fStep) {}
+
+  Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
+        std::string format = decltype(data)::defaultFormat(),
+        Persistent persistent = Persistent::No,
+        T value = T{}) requires details::FormattedWithStep<T>
+      : Element(elementName),
+        LabeledElement(elementName, caption),
+        ValueObservableElement<T>(elementName, value),
+        SavableElement(elementName, persistent),
+        format(std::move(format)),
+        data(st, fStep) {}
+
+  Input(const std::string &elementName, const std::string &caption,
+        Persistent persistent = Persistent::No,
+        T value = T{}) requires details::UnformattedWithoutStep<T>
+      : Element(elementName),
+        LabeledElement(elementName, caption),
+        ValueObservableElement<T>(elementName, value),
+        SavableElement(elementName, persistent)
+  {}
+
+  Input(const std::string &elementName, const std::string &caption,
+        Persistent persistent = Persistent::No,
+        std::string format = decltype(data)::defaultFormat(),
+        T value = T{}) requires details::FormattedWithoutStep<T>
+      : Element(elementName),
+        LabeledElement(elementName, caption),
+        ValueObservableElement<T>(elementName, value),
+        SavableElement(elementName, persistent),
+        format(std::move(format)) {}
+
+ protected:
+  void unserialize_impl(const toml::table &src) override {
+    if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
+      const auto tomlVec = src["value"].as_array();
+      const auto vec = deserializeGlmVec<T>(*tomlVec);
+      ValueObservableElement<T>::setValueAndNotifyIfChanged(vec);
+    } else {
+      ValueObservableElement<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+    }
+  }
+
+  toml::table serialize_impl() override {
+    const auto value = ValueObservableElement<T>::getValue();
+    if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
+      return toml::table{{{"value", serializeGlmVec(value)}}};
+    } else {
+      return toml::table{{{"value", value}}};
+    }
+  }
+
+  void renderImpl() override {
+    const auto oldValue = ValueObservableElement<T>::getValue();
+    if constexpr (std::same_as<T, float>) {
+      ImGui::InputFloat(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step,
+                        data.fastStep, format.c_str());
+    }
+    if constexpr (std::same_as<T, glm::vec2>) {
+      ImGui::InputFloat2(getLabel().c_str(),
+                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+    }
+    if constexpr (std::same_as<T, glm::vec3>) {
+      ImGui::InputFloat3(getLabel().c_str(),
+                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+    }
+    if constexpr (std::same_as<T, glm::vec4>) {
+      ImGui::InputFloat4(getLabel().c_str(),
+                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+    }
+    if constexpr (std::same_as<T, int>) {
+      ImGui::InputInt(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step,
+                      data.fastStep);
+    }
+    if constexpr (std::same_as<T, glm::ivec2>) {
+      ImGui::InputInt2(getLabel().c_str(),
+                       glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+    }
+    if constexpr (std::same_as<T, glm::ivec3>) {
+      ImGui::InputInt3(getLabel().c_str(),
+                       glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+    }
+    if constexpr (std::same_as<T, glm::ivec4>) {
+      ImGui::InputInt4(getLabel().c_str(),
+                       glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+    }
+    if constexpr (std::same_as<T, double>) {
+      ImGui::InputDouble(getLabel().c_str(),
+                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), data.step,
+                         data.fastStep, format.c_str());
+    }
+    if (oldValue != ValueObservableElement<T>::getValue()) {
+      ValueObservableElement<T>::notifyValueChanged();
+    }
+  }
+
+ private:
+  std::string format;
+};
+}// namespace pf::ui::ig
+
+#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INPUT_H
