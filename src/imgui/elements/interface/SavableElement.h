@@ -7,6 +7,7 @@
 
 #include "Element.h"
 #include <toml++/toml.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
@@ -14,7 +15,7 @@ enum class Persistent {
   Yes, No
 };
 
-class SavableElement : public virtual Element {
+class PF_IMGUI_EXPORT SavableElement : public virtual Element {
  public:
   SavableElement(const std::string &elementName, Persistent persistent);
 

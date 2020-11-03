@@ -8,10 +8,11 @@
 #include "RadioButton.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class RadioGroup : public LabeledElement,
+class PF_IMGUI_EXPORT RadioGroup : public LabeledElement,
                    public ValueObservableElement<std::string_view>,
                    public SavableElement {
  public:

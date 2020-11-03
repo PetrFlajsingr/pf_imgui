@@ -10,13 +10,14 @@
 #include <functional>
 #include <variant>
 #include <vector>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
 class ImGuiSubMenu;
 class ImGuiMenuItem;
 
-class ImGuiMenuContainer{
+class PF_IMGUI_EXPORT ImGuiMenuContainer{
  public:
   ImGuiSubMenu &addSubmenu(const std::string &name, const std::string &caption);
   ImGuiMenuItem &addItem(const std::string &name, const std::string &caption);
@@ -30,7 +31,7 @@ class ImGuiMenuContainer{
 };
 
 
-class ImGuiMenuItem : public LabeledElement {
+class PF_IMGUI_EXPORT ImGuiMenuItem : public LabeledElement {
  public:
   ImGuiMenuItem(const std::string &elementName, const std::string &caption);
 
@@ -45,7 +46,7 @@ class ImGuiMenuItem : public LabeledElement {
   std::function<void()> onClick = []{};
 };
 
-class ImGuiSubMenu : public LabeledElement, public ImGuiMenuContainer {
+class PF_IMGUI_EXPORT ImGuiSubMenu : public LabeledElement, public ImGuiMenuContainer {
  public:
   ImGuiSubMenu(const std::string &elementName, const std::string &caption);
  protected:
@@ -53,7 +54,7 @@ class ImGuiSubMenu : public LabeledElement, public ImGuiMenuContainer {
 
 };
 
-class ImGuiWindowMenuBar : public Element, public ImGuiMenuContainer {
+class PF_IMGUI_EXPORT ImGuiWindowMenuBar : public Element, public ImGuiMenuContainer {
  public:
   explicit ImGuiWindowMenuBar(const std::string &elementName);
 
@@ -62,7 +63,7 @@ class ImGuiWindowMenuBar : public Element, public ImGuiMenuContainer {
 
 };
 
-class ImGuiAppMenuBar : public Element, public ImGuiMenuContainer {
+class PF_IMGUI_EXPORT ImGuiAppMenuBar : public Element, public ImGuiMenuContainer {
  public:
   explicit ImGuiAppMenuBar(const std::string &elementName);
 

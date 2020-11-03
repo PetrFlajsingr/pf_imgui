@@ -8,10 +8,11 @@
 #include "interface/Container.h"
 #include "interface/Element.h"
 #include "interface/LabeledElement.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class ImGuiTab : public LabeledElement, public Container {
+class PF_IMGUI_EXPORT ImGuiTab : public LabeledElement, public Container {
  public:
   ImGuiTab(const std::string &elementName, const std::string &caption);
 
@@ -19,7 +20,7 @@ class ImGuiTab : public LabeledElement, public Container {
   void renderImpl() override;
 };
 
-class TabBar : public Element {
+class PF_IMGUI_EXPORT TabBar : public Element {
  public:
   explicit TabBar(const std::string &elementName);
 

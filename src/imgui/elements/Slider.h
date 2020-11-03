@@ -13,6 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
 #include <utility>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 //TODO: angle
@@ -36,7 +37,7 @@ constexpr const char *defaultSliderFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
-class Slider : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
+class PF_IMGUI_EXPORT Slider : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
  public:
   using MinMaxType = details::SliderMinMaxType<T>;
   Slider(const std::string &elementName, const std::string &caption, MinMaxType min, MinMaxType max,

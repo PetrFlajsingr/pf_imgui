@@ -14,6 +14,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
 #include <utility>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 namespace details {
@@ -36,7 +37,7 @@ constexpr const char *defaultDragFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
-class DragInput : public ValueObservableElement<T>, public LabeledElement, public SavableElement {
+class PF_IMGUI_EXPORT DragInput : public ValueObservableElement<T>, public LabeledElement, public SavableElement {
  public:
   using ParamType = details::UnderlyingType<T>;
 

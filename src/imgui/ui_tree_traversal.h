@@ -22,7 +22,7 @@ inline void traverseImGuiTree_impl(Element &element,
 }
 }// namespace details
 
-inline void traverseImGuiTree(Element &root, std::invocable<Element &> auto callback) {
+PF_IMGUI_EXPORT inline void traverseImGuiTree(Element &root, std::invocable<Element &> auto callback) {
   details::traverseImGuiTree_impl(root, callback);
 }
 

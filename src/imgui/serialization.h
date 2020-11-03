@@ -11,7 +11,7 @@
 
 namespace pf::ui::ig {
 
-inline toml::table serializeImGuiTree(Element &root) {
+PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Element &root) {
   auto result = toml::table();
   traverseImGuiTree(root, [&result](Element &element) {
     if (auto ptrSavable = dynamic_cast<SavableElement *>(&element); ptrSavable != nullptr) {
@@ -25,7 +25,7 @@ inline toml::table serializeImGuiTree(Element &root) {
 }
 
 template<typename T>
-T deserializeGlmVec(const toml::array &arr) {
+PF_IMGUI_EXPORT T deserializeGlmVec(const toml::array &arr) {
   auto result = T{};
   for (auto i : std::views::iota(0, T::length())) {
     if constexpr (std::same_as<typename T::value_type, float>) {
@@ -37,7 +37,7 @@ T deserializeGlmVec(const toml::array &arr) {
   return result;
 }
 template<typename T>
-toml::array serializeGlmVec(const T &vec) {
+PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &vec) {
   auto result = toml::array{};
   for (auto i : std::views::iota(0, T::length())) { result.push_back(vec[i]); }
   return result;

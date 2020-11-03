@@ -14,13 +14,14 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
 #include <toml++/toml.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
 enum class ColorChooserType { Edit, Picker };
 
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
-class ColorChooser : public LabeledElement,
+class PF_IMGUI_EXPORT ColorChooser : public LabeledElement,
                      public ValueObservableElement<T>,
                      public SavableElement {
  public:

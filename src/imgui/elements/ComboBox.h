@@ -10,9 +10,10 @@
 #include "interface/ValueObservableElement.h"
 #include <optional>
 #include <vector>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class ComboBox : public LabeledElement,
+class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
                  public ValueObservableElement<std::string_view>,
                  public SavableElement {
  public:

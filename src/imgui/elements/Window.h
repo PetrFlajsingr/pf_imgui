@@ -8,11 +8,12 @@
 #include "MenuBars.h"
 #include "interface/Container.h"
 #include "interface/ResizableElement.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
 // TODO: resize, focus, collapse, position
-class Window : public Container {
+class PF_IMGUI_EXPORT Window : public Container {
  public:
   Window(const std::string &elementName, std::string title);
 

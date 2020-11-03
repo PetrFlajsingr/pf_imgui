@@ -13,6 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
 #include <utility>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 namespace details {
@@ -74,7 +75,7 @@ concept FormattedWithoutStep =
 }// namespace details
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-class Input : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
+class PF_IMGUI_EXPORT Input : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:

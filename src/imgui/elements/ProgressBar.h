@@ -8,6 +8,7 @@
 #include "interface/ResizableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <imgui.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
@@ -20,7 +21,7 @@ concept ProgressBarCompatible = requires(T t, float f) {
 };
 
 template<ProgressBarCompatible T>
-class ProgressBar : public ValueObservableElement<T>, public ResizableElement {
+class PF_IMGUI_EXPORT ProgressBar : public ValueObservableElement<T>, public ResizableElement {
  public:
   ProgressBar(const std::string &elementName, T stepValue, T min, T max,
                    std::optional<T> value = std::nullopt, const ImVec2 &size = {-1, 0})

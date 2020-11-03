@@ -7,9 +7,10 @@
 
 #include "Element.h"
 #include <imgui.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class ResizableElement : public virtual Element {
+class PF_IMGUI_EXPORT ResizableElement : public virtual Element {
  public:
   ResizableElement(std::string elementName, const ImVec2 &size);
 

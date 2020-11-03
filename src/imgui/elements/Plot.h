@@ -8,12 +8,13 @@
 #include "interface/LabeledElement.h"
 #include <optional>
 #include <vector>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
 enum class PlotType { Lines, Histogram };
 
-class Plot : public LabeledElement {
+class PF_IMGUI_EXPORT Plot : public LabeledElement {
  public:
   Plot(const std::string &elementName, const std::string &caption, PlotType plotType,
             std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,

@@ -9,9 +9,10 @@
 #include "interface/LabeledElement.h"
 #include "interface/ValueObservableElement.h"
 #include <vector>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class ListBox : public LabeledElement,
+class PF_IMGUI_EXPORT ListBox : public LabeledElement,
                      public ValueObservableElement<std::string_view> {
  public:
   ListBox(const std::string &elementName, const std::string &caption,

@@ -6,10 +6,11 @@
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMAGE_H
 
 #include "interface/ResizableElement.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class Image : public ResizableElement {
+class PF_IMGUI_EXPORT Image : public ResizableElement {
  public:
  protected:
   void renderImpl() override;

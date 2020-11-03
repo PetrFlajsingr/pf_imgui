@@ -6,9 +6,10 @@
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICAPTIONEDELEMENT_H
 
 #include "Element.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class LabeledElement : public virtual Element {
+class PF_IMGUI_EXPORT LabeledElement : public virtual Element {
  public:
   LabeledElement(std::string elementName, std::string caption);
 

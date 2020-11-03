@@ -8,10 +8,11 @@
 #include "interface/Container.h"
 #include "interface/LabeledElement.h"
 #include <vector>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class Tree : public LabeledElement, public Container {
+class PF_IMGUI_EXPORT Tree : public LabeledElement, public Container {
  public:
   Tree(const std::string &elementName, const std::string &caption);
 

@@ -8,10 +8,11 @@
 #include "interface/LabeledElement.h"
 #include "interface/ResizableElement.h"
 #include "interface/ValueObservableElement.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class RadioButton : public LabeledElement, public ValueObservableElement<bool> {
+class PF_IMGUI_EXPORT RadioButton : public LabeledElement, public ValueObservableElement<bool> {
  public:
   friend class RadioGroup;
   RadioButton(const std::string &elementName, const std::string &caption, bool value = false);

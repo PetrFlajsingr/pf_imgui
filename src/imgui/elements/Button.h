@@ -9,13 +9,14 @@
 #include "interface/ResizableElement.h"
 #include <functional>
 #include <imgui.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
 enum class ButtonType { Normal, Small, ArrowUp, ArrowLeft, ArrowRight, ArrowDown };
 
 // TODO: multiple listeners
-class Button : public LabeledElement, public ResizableElement {
+class PF_IMGUI_EXPORT Button : public LabeledElement, public ResizableElement {
  public:
   Button(const std::string &name, std::string caption,
               ButtonType buttonType = ButtonType::Normal, const ImVec2 &size = {0, 0});

@@ -10,9 +10,10 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class Container : public virtual Element {
+class PF_IMGUI_EXPORT Container : public virtual Element {
  public:
   explicit Container(const std::string &elementName);
   template<typename T, typename... Args>

@@ -8,9 +8,10 @@
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class Checkbox : public ValueObservableElement<bool>,
+class PF_IMGUI_EXPORT Checkbox : public ValueObservableElement<bool>,
                       public LabeledElement,
                       public SavableElement {
  public:

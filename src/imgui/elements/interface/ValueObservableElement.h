@@ -5,16 +5,17 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
 
-#include <pf_common/Subscription.h>
 #include "Element.h"
-#include <pf_common/coroutines/Sequence.h>
 #include <algorithm>
 #include <functional>
+#include <pf_common/Subscription.h>
+#include <pf_common/coroutines/Sequence.h>
 #include <ranges>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 template<typename T>
-class ValueObservableElement : public virtual Element {
+class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
  public:
   using Callback = std::function<void(const T &)>;
   using Id = uint32_t;

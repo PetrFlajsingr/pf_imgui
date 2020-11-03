@@ -8,12 +8,13 @@
 #include "interface/Container.h"
 #include "interface/ResizableElement.h"
 #include <imgui.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
 enum class PanelLayout { Vertical, Horizontal };
 
-class Panel : public Container, public ResizableElement {
+class PF_IMGUI_EXPORT Panel : public Container, public ResizableElement {
  public:
   Panel(const std::string &elementName, std::string title,
              PanelLayout layout = PanelLayout::Vertical, const ImVec2 &panelSize = {0, 0});

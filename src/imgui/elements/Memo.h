@@ -9,10 +9,11 @@
 #include "Text.h"
 #include "interface/LabeledElement.h"
 #include <vector>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class Memo : public LabeledElement {
+class PF_IMGUI_EXPORT Memo : public LabeledElement {
  public:
   Memo(const std::string &elementName, const std::string &caption, float textAHeight = 0, bool buttonsEnabled = true,
             bool filterEnabled = true, const std::optional<std::size_t> &recordLimit = std::nullopt);

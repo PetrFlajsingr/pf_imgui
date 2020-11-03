@@ -7,9 +7,10 @@
 
 #include "interface/Container.h"
 #include "interface/LabeledElement.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class Group : public Container, public LabeledElement {
+class PF_IMGUI_EXPORT Group : public Container, public LabeledElement {
  public:
   Group(const std::string &elementName, const std::string &caption);
 
