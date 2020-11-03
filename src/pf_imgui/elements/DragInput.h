@@ -6,7 +6,7 @@
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DRAGINPUT_H
 
 #include <pf_common/concepts/OneOf.h>
-#include <pf_common/math.h>
+#include <pf_common/math/Range.h>
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"

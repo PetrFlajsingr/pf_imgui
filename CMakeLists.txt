@@ -42,12 +42,7 @@ CPMAddPackage(
 include_directories(${toml++_SOURCE_DIR}/include)
 
 
-set(RANGE_V3_TESTS OFF)
-CPMAddPackage(
-        NAME range-v3
-        GITHUB_REPOSITORY ericniebler/range-v3
-        GIT_TAG 0.11.0
-)
+
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
