@@ -20,7 +20,7 @@ endif ()
 include(${CPM_DOWNLOAD_LOCATION})
 
 set(CMAKE_CXX_STANDARD 20)
-list(APPEND flags "-o3" "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
+list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
         "-Wpointer-arith" "-Wcast-qual" "-Wno-type-limits")
 if (CMAKE_BUILD_TYPE MATCHES Release)
