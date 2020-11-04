@@ -31,6 +31,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
   void updateConfig();
   void setStateFromConfig();
 
+  void setStyle(std::invocable<ImGuiStyle&> auto styleSetter) {
+    styleSetter(ImGui::GetStyle());
+  }
+
  protected:
   std::optional<AppMenuBar> menuBar = std::nullopt;
 
