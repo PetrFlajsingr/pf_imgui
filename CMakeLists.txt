@@ -25,7 +25,16 @@ list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return
         "-Wpointer-arith" "-Wcast-qual" "-Wno-type-limits")
 if (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND flags "-o3")
-endif()
+elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
+    list(APPEND flags "-fno-omit-frame-pointer" "-fsanitize=address")
+elseif (CMAKE_BUILD_TYPE MATCHES LSAN)
+    list(APPEND flags "-fno-omit-frame-pointer" "-fsanitize=leak")
+elseif (CMAKE_BUILD_TYPE MATCHES UBSAN)
+    list(APPEND flags "-fsanitize=undefined")
+elseif (CMAKE_BUILD_TYPE MATCHES TSAN)
+    list(APPEND flags "-fsanitize=thread")
+endif ()
+
 
 hunter_add_package(imgui)
 find_package(imgui CONFIG REQUIRED)
