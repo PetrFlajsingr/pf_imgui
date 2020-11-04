@@ -35,6 +35,9 @@ elseif (CMAKE_BUILD_TYPE MATCHES TSAN)
     list(APPEND flags "-fsanitize=thread")
 endif ()
 
+if (BUILD_SHARED_LIBS)
+    list(APPEND flags "-fPIC")
+endif ()
 
 hunter_add_package(imgui)
 find_package(imgui CONFIG REQUIRED)
