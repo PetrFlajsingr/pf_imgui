@@ -5,18 +5,18 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_LISTBOX_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_LISTBOX_H
 
-#include <pf_common/concepts/Iterable.h>
 #include "interface/LabeledElement.h"
 #include "interface/ValueObservableElement.h"
-#include <vector>
+#include <pf_common/concepts/Iterable.h>
 #include <pf_imgui/_export.h>
+#include <vector>
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT ListBox : public LabeledElement,
-                     public ValueObservableElement<std::string_view> {
+                                public ValueObservableElement<std::string_view> {
  public:
   ListBox(const std::string &elementName, const std::string &caption,
-               std::vector<std::string> items_ = {}, int selectedIdx = 0, int heightInItems = -1);
+          std::vector<std::string> items_ = {}, int selectedIdx = 0, int heightInItems = -1);
 
   void addItem(std::string item);
   void addItems(const Iterable_of<std::string> auto &data) {
@@ -33,5 +33,5 @@ class PF_IMGUI_EXPORT ListBox : public LabeledElement,
   int currentItemIdx = 0;
   int height = -1;
 };
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_LISTBOX_H

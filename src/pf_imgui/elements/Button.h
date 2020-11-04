@@ -8,18 +8,15 @@
 #include "interface/LabeledElement.h"
 #include "interface/ResizableElement.h"
 #include <functional>
-#include <imgui.h>
 #include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-
-enum class ButtonType { Normal, Small, ArrowUp, ArrowLeft, ArrowRight, ArrowDown };
 
 // TODO: multiple listeners
 class PF_IMGUI_EXPORT Button : public LabeledElement, public ResizableElement {
  public:
   Button(const std::string &name, std::string caption,
-              ButtonType buttonType = ButtonType::Normal, const ImVec2 &size = {0, 0});
+         ButtonType buttonType = ButtonType::Normal, const ImVec2 &size = {0, 0});
   void setOnClick(std::invocable auto fnc) { onClick = fnc; }
 
   [[nodiscard]] ButtonType getType() const;
@@ -34,5 +31,5 @@ class PF_IMGUI_EXPORT Button : public LabeledElement, public ResizableElement {
   ButtonType type;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_BUTTON_H

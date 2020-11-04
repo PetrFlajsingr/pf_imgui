@@ -24,5 +24,5 @@ class PF_IMGUI_EXPORT Text : public virtual Element {
   std::string text;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TEXT_H

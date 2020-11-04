@@ -13,8 +13,8 @@
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT RadioGroup : public LabeledElement,
-                   public ValueObservableElement<std::string_view>,
-                   public SavableElement {
+                                   public ValueObservableElement<std::string_view>,
+                                   public SavableElement {
  public:
   RadioGroup(const std::string &elementName, const std::string &caption,
              std::vector<RadioButton> buttons = {},

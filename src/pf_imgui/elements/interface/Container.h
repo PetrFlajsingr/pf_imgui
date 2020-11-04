@@ -5,12 +5,12 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICONTAINER_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICONTAINER_H
 
-#include <pf_common/exceptions/StackTraceException.h>
 #include "Element.h"
 #include <map>
 #include <memory>
-#include <string>
+#include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
+#include <string>
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Container : public virtual Element {
@@ -49,5 +49,5 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
   std::vector<std::string> childrenToRemove;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICONTAINER_H

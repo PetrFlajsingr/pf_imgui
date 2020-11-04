@@ -5,15 +5,15 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INPUT_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INPUT_H
 
-#include <pf_common/concepts/OneOf.h>
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
-#include <utility>
+#include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <utility>
 
 namespace pf::ui::ig {
 namespace details {
@@ -21,9 +21,9 @@ namespace details {
 #define IMGUI_INPUT_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
 #define IMGUI_INPUT_DOUBLE_TYPE_LIST double
 #define IMGUI_INPUT_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
-#define IMGUI_INPUT_GLM_TYPE_LIST                                                                  \
+#define IMGUI_INPUT_GLM_TYPE_LIST \
   glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
-#define IMGUI_INPUT_TYPE_LIST                                                                      \
+#define IMGUI_INPUT_TYPE_LIST \
   IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_INT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
@@ -105,8 +105,7 @@ class PF_IMGUI_EXPORT Input : public LabeledElement, public ValueObservableEleme
       : Element(elementName),
         LabeledElement(elementName, caption),
         ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent)
-  {}
+        SavableElement(elementName, persistent) {}
 
   Input(const std::string &elementName, const std::string &caption,
         Persistent persistent = Persistent::No,

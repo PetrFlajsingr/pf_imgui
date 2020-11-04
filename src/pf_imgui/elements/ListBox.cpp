@@ -10,7 +10,7 @@
 namespace pf::ui::ig {
 
 ListBox::ListBox(const std::string &elementName, const std::string &caption,
-                           std::vector<std::string> items_, int selectedIdx, int heightInItems)
+                 std::vector<std::string> items_, int selectedIdx, int heightInItems)
     : Element(elementName), LabeledElement(elementName, caption),
       ValueObservableElement(elementName, ""), items(std::move(items_)),
       currentItemIdx(selectedIdx), height(heightInItems) {}
@@ -32,4 +32,4 @@ std::string_view ListBox::getSelectedItem() const {
   return items[currentItemIdx];
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

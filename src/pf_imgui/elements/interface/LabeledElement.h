@@ -20,5 +20,5 @@ class PF_IMGUI_EXPORT LabeledElement : public virtual Element {
   std::string label;
 };
 
-}
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICAPTIONEDELEMENT_H

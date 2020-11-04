@@ -5,13 +5,12 @@
 #ifndef VOXEL_RENDER_IMGUIBASE_H
 #define VOXEL_RENDER_IMGUIBASE_H
 
-#include "elements/Dialog.h"
+#include "fwd.h"
 #include "elements/MenuBars.h"
 #include "elements/interface/Container.h"
-#include "elements/interface/SavableElement.h"
 #include <imgui.h>
-#include <toml++/toml.h>
 #include <pf_imgui/_export.h>
+#include <toml++/toml.h>
 
 namespace pf::ui::ig {
 
@@ -19,13 +18,12 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
  public:
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
 
-
   [[nodiscard]] ImGuiIO &getIo() const;
 
   std::shared_ptr<Dialog> createDialog(const std::string &elementName,
-                                            const std::string &caption, Modal modal = Modal::Yes);
+                                       const std::string &caption, Modal modal = Modal::Yes);
 
-  [[nodiscard]] ImGuiAppMenuBar &getMenuBar();
+  [[nodiscard]] AppMenuBar &getMenuBar();
   [[nodiscard]] bool hasMenuBar() const;
 
   [[nodiscard]] const toml::table &getConfig() const;
@@ -34,7 +32,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
   void setStateFromConfig();
 
  protected:
-  std::optional<ImGuiAppMenuBar> menuBar = std::nullopt;
+  std::optional<AppMenuBar> menuBar = std::nullopt;
 
  private:
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
@@ -43,5 +41,5 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
   toml::table config;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//VOXEL_RENDER_IMGUIBASE_H

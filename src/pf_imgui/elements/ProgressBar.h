@@ -24,9 +24,9 @@ template<ProgressBarCompatible T>
 class PF_IMGUI_EXPORT ProgressBar : public ValueObservableElement<T>, public ResizableElement {
  public:
   ProgressBar(const std::string &elementName, T stepValue, T min, T max,
-                   std::optional<T> value = std::nullopt, const ImVec2 &size = {-1, 0})
+              std::optional<T> value = std::nullopt, const ImVec2 &size = {-1, 0})
       : Element(elementName), ValueObservableElement<T>(elementName,
-                                                                  value.has_value() ? *value : min),
+                                                        value.has_value() ? *value : min),
         ResizableElement(elementName, size), stepValue(stepValue), min(min), max(max) {}
 
   T setPercentage(float percentage) {
@@ -63,5 +63,5 @@ class PF_IMGUI_EXPORT ProgressBar : public ValueObservableElement<T>, public Res
   T min;
   T max;
 };
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_PROGRESSBAR_H

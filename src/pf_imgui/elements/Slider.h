@@ -5,15 +5,15 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_SLIDER_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_SLIDER_H
 
-#include <pf_common/concepts/OneOf.h>
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
-#include <utility>
+#include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <utility>
 
 namespace pf::ui::ig {
 //TODO: angle
@@ -21,7 +21,7 @@ namespace pf::ui::ig {
 namespace details {
 #define IMGUI_SLIDER_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
 #define IMGUI_SLIDER_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
-#define IMGUI_SLIDER_GLM_TYPE_LIST                                                                 \
+#define IMGUI_SLIDER_GLM_TYPE_LIST \
   glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
 #define IMGUI_SLIDER_TYPE_LIST IMGUI_SLIDER_FLOAT_TYPE_LIST, IMGUI_SLIDER_INT_TYPE_LIST
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>

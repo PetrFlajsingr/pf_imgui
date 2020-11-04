@@ -23,10 +23,10 @@ const std::string &Window::getTitle() const { return title; }
 
 void Window::setTitle(const std::string &tit) { title = tit; }
 
-ImGuiWindowMenuBar &Window::getMenuBar() {
-  if (!menuBar.has_value()) { menuBar = ImGuiWindowMenuBar(getName() + "_menu_bar"); }
+WindowMenuBar &Window::getMenuBar() {
+  if (!menuBar.has_value()) { menuBar = WindowMenuBar(getName() + "_menu_bar"); }
   return *menuBar;
 }
 
 bool Window::hasMenuBar() const { return menuBar.has_value(); }
-}// namespace pf::ui
+}// namespace pf::ui::ig

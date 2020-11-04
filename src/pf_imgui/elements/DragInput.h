@@ -5,16 +5,16 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DRAGINPUT_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DRAGINPUT_H
 
-#include <pf_common/concepts/OneOf.h>
-#include <pf_common/math/Range.h>
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
-#include <utility>
+#include <pf_common/concepts/OneOf.h>
+#include <pf_common/math/Range.h>
 #include <pf_imgui/_export.h>
+#include <utility>
 
 namespace pf::ui::ig {
 namespace details {
@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT DragInput : public ValueObservableElement<T>, public Label
       range.start = *tomlRange->get(0)->template value<ParamType>();
       range.end = *tomlRange->get(1)->template value<ParamType>();
       ValueObservableElement<T>::setValueAndNotifyIfChanged(range);
-    }else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+    } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
       const auto tomlVec = src["value"].as_array();
       const auto vec = deserializeGlmVec<T>(*tomlVec);
       ValueObservableElement<T>::setValueAndNotifyIfChanged(vec);

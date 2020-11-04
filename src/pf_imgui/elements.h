@@ -16,6 +16,7 @@
 #include "elements/InputText.h"
 #include "elements/ListBox.h"
 #include "elements/Memo.h"
+#include "elements/MenuBars.h"
 #include "elements/Panel.h"
 #include "elements/Plot.h"
 #include "elements/ProgressBar.h"

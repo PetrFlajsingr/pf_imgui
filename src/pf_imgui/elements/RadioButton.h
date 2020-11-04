@@ -25,5 +25,5 @@ class PF_IMGUI_EXPORT RadioButton : public LabeledElement, public ValueObservabl
  private:
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_RADIOBUTTON_H

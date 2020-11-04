@@ -5,18 +5,20 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MEMO_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MEMO_H
 
+#include "../fwd.h"
 #include "Panel.h"
-#include "Text.h"
 #include "interface/LabeledElement.h"
-#include <vector>
+#include <memory>
+#include <optional>
 #include <pf_imgui/_export.h>
+#include <vector>
 
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Memo : public LabeledElement {
  public:
   Memo(const std::string &elementName, const std::string &caption, float textAHeight = 0, bool buttonsEnabled = true,
-            bool filterEnabled = true, const std::optional<std::size_t> &recordLimit = std::nullopt);
+       bool filterEnabled = true, const std::optional<std::size_t> &recordLimit = std::nullopt);
 
   [[nodiscard]] const std::vector<std::string> &getRecords() const;
   [[nodiscard]] std::string getText() const;
@@ -50,5 +52,5 @@ class PF_IMGUI_EXPORT Memo : public LabeledElement {
   float textAreaHeight;
   std::shared_ptr<Text> textArea;
 };
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MEMO_H

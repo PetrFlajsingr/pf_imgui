@@ -33,4 +33,4 @@ void Dialog::close() {
   closed = true;
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

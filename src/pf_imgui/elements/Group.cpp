@@ -19,4 +19,4 @@ void Group::renderImpl() {
   ImGui::EndGroup();
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

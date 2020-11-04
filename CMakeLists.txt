@@ -83,6 +83,7 @@ set(SOURCES
         src/pf_imgui/elements/interface/SavableElement.cpp
         )
 set(INCLUDES
+        src/pf_imgui/fwd.h
         src/pf_imgui/elements.h
         src/pf_imgui/ImGuiInterface.h
         src/pf_imgui/serialization.h

@@ -5,7 +5,7 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_UI_TREE_TRAVERSAL_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_UI_TREE_TRAVERSAL_H
 
-#include "elements.h"
+#include "elements/interface/Element.h"
 #include <algorithm>
 
 namespace pf::ui::ig {
@@ -26,5 +26,5 @@ PF_IMGUI_EXPORT inline void traverseImGuiTree(Element &root, std::invocable<Elem
   details::traverseImGuiTree_impl(root, callback);
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_UI_TREE_TRAVERSAL_H

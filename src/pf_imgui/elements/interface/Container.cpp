@@ -38,4 +38,4 @@ void Container::clear() {
   children.clear();
   childrenToRemove.clear();
 }
-}// namespace pf::ui
+}// namespace pf::ui::ig

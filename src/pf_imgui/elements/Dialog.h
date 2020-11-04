@@ -11,12 +11,12 @@
 
 namespace pf::ui::ig {
 
-enum class Modal { Yes, No };
+
 
 class PF_IMGUI_EXPORT Dialog : public Container, public LabeledElement {
  public:
   Dialog(Container &parent, const std::string &elementName, const std::string &caption,
-              Modal modal = Modal::Yes);
+         Modal modal = Modal::Yes);
 
   void close();
 
@@ -28,5 +28,5 @@ class PF_IMGUI_EXPORT Dialog : public Container, public LabeledElement {
   bool closed = false;
   Container &owner;
 };
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DIALOG_H

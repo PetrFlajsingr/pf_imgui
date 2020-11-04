@@ -8,11 +8,12 @@
 
 namespace pf::ui::ig {
 LabeledElement::LabeledElement(std::string elementName,
-                                             std::string caption)
+                               std::string caption)
     : Element(std::move(elementName)), label(std::move(caption)) {}
 
 const std::string &LabeledElement::getLabel() const { return label; }
 
-void LabeledElement::setLabel(const std::string &cap) { label = cap;
+void LabeledElement::setLabel(const std::string &cap) {
+  label = cap;
 }
-}
+}// namespace pf::ui::ig

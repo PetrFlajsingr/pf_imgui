@@ -8,10 +8,10 @@
 
 namespace pf::ui::ig {
 
-ImGuiTab::ImGuiTab(const std::string &elementName, const std::string &caption)
+Tab::Tab(const std::string &elementName, const std::string &caption)
     : Element(elementName), LabeledElement(elementName, caption), Container(elementName) {}
 
-void ImGuiTab::renderImpl() {
+void Tab::renderImpl() {
   if (ImGui::BeginTabItem(getLabel().c_str())) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.get().render(); });
     ImGui::EndTabItem();
@@ -26,8 +26,8 @@ void TabBar::renderImpl() {
     ImGui::EndTabBar();
   }
 }
-std::shared_ptr<ImGuiTab> TabBar::addTab(const std::string &name, const std::string &caption) {
-  tabs.emplace_back(std::make_shared<ImGuiTab>(name, caption));
+std::shared_ptr<Tab> TabBar::addTab(const std::string &name, const std::string &caption) {
+  tabs.emplace_back(std::make_shared<Tab>(name, caption));
   return tabs.back();
 }
 void TabBar::removeTab(const std::string &name) {
@@ -37,4 +37,4 @@ void TabBar::removeTab(const std::string &name) {
     tabs.erase(iter);
   }
 }
-}// namespace pf::ui
+}// namespace pf::ui::ig

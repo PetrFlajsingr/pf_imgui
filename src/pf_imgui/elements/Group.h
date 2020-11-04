@@ -17,5 +17,5 @@ class PF_IMGUI_EXPORT Group : public Container, public LabeledElement {
  protected:
   void renderImpl() override;
 };
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_GROUP_H

@@ -20,16 +20,17 @@ class PF_IMGUI_EXPORT Window : public Container {
   [[nodiscard]] const std::string &getTitle() const;
   void setTitle(const std::string &title);
 
-  [[nodiscard]] ImGuiWindowMenuBar &getMenuBar();
+  [[nodiscard]] WindowMenuBar &getMenuBar();
 
   [[nodiscard]] bool hasMenuBar() const;
+
  protected:
   void renderImpl() override;
 
  private:
   std::string title;
-  std::optional<ImGuiWindowMenuBar> menuBar = std::nullopt;
+  std::optional<WindowMenuBar> menuBar = std::nullopt;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_WINDOW_H

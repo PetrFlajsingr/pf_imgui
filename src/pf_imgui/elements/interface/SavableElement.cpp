@@ -18,4 +18,4 @@ std::optional<toml::table> SavableElement::serialize() {
   }
   return std::nullopt;
 }
-}
+}// namespace pf::ui::ig

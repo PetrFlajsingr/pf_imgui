@@ -5,7 +5,6 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_COLORCHOOSER_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_COLORCHOOSER_H
 
-#include <pf_common/concepts/OneOf.h>
 #include "../serialization.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
@@ -13,17 +12,18 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
-#include <toml++/toml.h>
+#include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <toml++/toml.h>
 
 namespace pf::ui::ig {
 
-enum class ColorChooserType { Edit, Picker };
+
 
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
 class PF_IMGUI_EXPORT ColorChooser : public LabeledElement,
-                     public ValueObservableElement<T>,
-                     public SavableElement {
+                                     public ValueObservableElement<T>,
+                                     public SavableElement {
  public:
   ColorChooser(const std::string &elementName, const std::string &caption,
                Persistent persistent = Persistent::No, T value = T{})

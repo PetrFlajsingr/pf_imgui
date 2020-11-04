@@ -7,7 +7,7 @@
 namespace pf::ui::ig {
 
 RadioButton::RadioButton(const std::string &elementName, const std::string &caption,
-                                   bool value)
+                         bool value)
     : Element(elementName), LabeledElement(elementName, caption),
       ValueObservableElement(elementName, value) {}
 
@@ -22,4 +22,4 @@ bool RadioButton::isSelected() const {
   return getValue();
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

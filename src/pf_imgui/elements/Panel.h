@@ -7,17 +7,14 @@
 
 #include "interface/Container.h"
 #include "interface/ResizableElement.h"
-#include <imgui.h>
 #include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-enum class PanelLayout { Vertical, Horizontal };
-
 class PF_IMGUI_EXPORT Panel : public Container, public ResizableElement {
  public:
   Panel(const std::string &elementName, std::string title,
-             PanelLayout layout = PanelLayout::Vertical, const ImVec2 &panelSize = {0, 0});
+        PanelLayout layout = PanelLayout::Vertical, const ImVec2 &panelSize = {0, 0});
 
  protected:
   void renderImpl() override;
@@ -27,5 +24,5 @@ class PF_IMGUI_EXPORT Panel : public Container, public ResizableElement {
   PanelLayout panelLayout;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_PANEL_H

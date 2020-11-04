@@ -4,11 +4,13 @@
 
 #include "Button.h"
 #include <utility>
+#include <imgui.h>
+
 
 namespace pf::ui::ig {
 
 Button::Button(const std::string &name, std::string caption, ButtonType buttonType,
-                         const ImVec2 &size)
+               const ImVec2 &size)
     : Element(name), LabeledElement(name, std::move(caption)), ResizableElement(name, size), type(buttonType) {}
 
 void Button::renderImpl() {
@@ -35,4 +37,4 @@ void Button::renderImpl() {
 }
 ButtonType Button::getType() const { return type; }
 void Button::setType(ButtonType buttonType) { type = buttonType; }
-}// namespace pf::ui
+}// namespace pf::ui::ig

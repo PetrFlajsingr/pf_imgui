@@ -3,14 +3,14 @@
 //
 
 #include "Panel.h"
-#include "imgui.h"
 #include <algorithm>
+#include <imgui.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
 Panel::Panel(const std::string &elementName, std::string title, PanelLayout layout,
-                       const ImVec2 &panelSize)
+             const ImVec2 &panelSize)
     : Element(elementName), Container(elementName), ResizableElement(elementName, panelSize), title(std::move(title)), panelLayout(layout) {}
 
 void Panel::renderImpl() {
@@ -29,4 +29,4 @@ void Panel::renderImpl() {
   ImGui::EndChild();
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

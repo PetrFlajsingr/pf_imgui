@@ -9,8 +9,8 @@
 namespace pf::ui::ig {
 
 Plot::Plot(const std::string &elementName, const std::string &caption, PlotType plotType,
-                     std::vector<float> values, std::optional<std::string> overlayText,
-                     const std::optional<std::size_t> &historyLimit)
+           std::vector<float> values, std::optional<std::string> overlayText,
+           const std::optional<std::size_t> &historyLimit)
     : Element(elementName), LabeledElement(elementName, caption), plotType(plotType),
       values(std::move(values)), overlayText(std::move(overlayText)), historyLimit(historyLimit) {}
 
@@ -33,4 +33,4 @@ void Plot::addValue(float value) {
 void Plot::clear() { values.clear(); }
 void Plot::setValues(const std::vector<float> &vals) { values = vals; }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

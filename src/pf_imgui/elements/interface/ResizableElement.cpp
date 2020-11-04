@@ -13,4 +13,4 @@ ResizableElement::ResizableElement(std::string elementName, const ImVec2 &size)
 const ImVec2 &ResizableElement::getSize() const { return size; }
 
 void ResizableElement::setSize(const ImVec2 &s) { size = s; }
-}// namespace pf::ui
+}// namespace pf::ui::ig

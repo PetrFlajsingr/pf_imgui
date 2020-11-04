@@ -7,8 +7,8 @@
 
 #include "interface/Container.h"
 #include "interface/LabeledElement.h"
-#include <vector>
 #include <pf_imgui/_export.h>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -22,5 +22,5 @@ class PF_IMGUI_EXPORT Tree : public LabeledElement, public Container {
   void renderImpl() override;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TREE_H

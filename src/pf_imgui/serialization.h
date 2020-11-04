@@ -43,7 +43,6 @@ PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &vec) {
   return result;
 }
 
-
-}// namespace pf::ui
+}// namespace pf::ui::ig
 
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_SERIALIZATION_H

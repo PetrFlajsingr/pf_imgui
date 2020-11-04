@@ -6,6 +6,5 @@
 
 namespace pf::ui::ig {
 void Image::renderImpl() {
-
 }
-}
+}// namespace pf::ui::ig

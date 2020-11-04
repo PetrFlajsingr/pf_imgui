@@ -5,14 +5,11 @@
 #ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_IMGUIELEMENT_H
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_IMGUIELEMENT_H
 
-#include <string>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/enums.h>
+#include <string>
 
 namespace pf::ui::ig {
-
-enum class Visibility {
-  Visible, Invisible
-};
 
 class PF_IMGUI_EXPORT Element {
  public:
@@ -33,5 +30,5 @@ class PF_IMGUI_EXPORT Element {
   Visibility visibility = Visibility::Visible;
 };
 
-}
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_IMGUIELEMENT_H

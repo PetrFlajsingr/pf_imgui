@@ -21,5 +21,5 @@ class PF_IMGUI_EXPORT ResizableElement : public virtual Element {
   ImVec2 size;
 };
 
-}
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUIRESIZABLEELEMENT_H

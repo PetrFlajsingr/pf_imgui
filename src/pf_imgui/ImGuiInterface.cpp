@@ -20,14 +20,14 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 std::shared_ptr<Dialog> ImGuiInterface::createDialog(const std::string &elementName,
-                                                          const std::string &caption, Modal modal) {
+                                                     const std::string &caption, Modal modal) {
   auto result = std::make_shared<Dialog>(*this, elementName, caption, modal);
   addChild(result);
   return result;
 }
 
-ImGuiAppMenuBar &ImGuiInterface::getMenuBar() {
-  if (!menuBar.has_value()) { menuBar = ImGuiAppMenuBar("app_menu_bar"); }
+AppMenuBar &ImGuiInterface::getMenuBar() {
+  if (!menuBar.has_value()) { menuBar = AppMenuBar("app_menu_bar"); }
   return *menuBar;
 }
 bool ImGuiInterface::hasMenuBar() const { return menuBar.has_value(); }
@@ -45,4 +45,4 @@ void ImGuiInterface::setStateFromConfig() {
   });
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

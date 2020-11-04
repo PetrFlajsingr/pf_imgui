@@ -6,14 +6,12 @@
 #define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H
 
 #include "Element.h"
-#include <toml++/toml.h>
 #include <pf_imgui/_export.h>
+#include <toml++/toml.h>
 
 namespace pf::ui::ig {
 
-enum class Persistent {
-  Yes, No
-};
+
 
 class PF_IMGUI_EXPORT SavableElement : public virtual Element {
  public:
@@ -21,6 +19,7 @@ class PF_IMGUI_EXPORT SavableElement : public virtual Element {
 
   void unserialize(const toml::table &src);
   std::optional<toml::table> serialize();
+
  protected:
   virtual void unserialize_impl(const toml::table &src) = 0;
   virtual toml::table serialize_impl() = 0;
@@ -29,5 +28,5 @@ class PF_IMGUI_EXPORT SavableElement : public virtual Element {
   bool persist;
 };
 
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H

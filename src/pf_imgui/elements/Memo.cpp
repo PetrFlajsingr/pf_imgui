@@ -10,8 +10,8 @@
 namespace pf::ui::ig {
 
 Memo::Memo(const std::string &elementName, const std::string &caption, float textAHeight,
-                     bool buttonsEnabled, bool filterEnabled,
-                     const std::optional<std::size_t> &recordLimit)
+           bool buttonsEnabled, bool filterEnabled,
+           const std::optional<std::size_t> &recordLimit)
     : Element(elementName), LabeledElement(elementName, caption),
       textAreaPanel(elementName + "_memo_panel###", getLabel(), PanelLayout::Vertical,
                     ImVec2{0, textAHeight}),
@@ -49,7 +49,7 @@ void Memo::rebuildPanel() {
   if (buttonsEnabled || filterEnabled) {
     controlsPanel =
         std::make_unique<Panel>(getName() + "button_filter_panel", getLabel() + " controls",
-                                     PanelLayout::Horizontal, ImVec2{0, 20});
+                                PanelLayout::Horizontal, ImVec2{0, 20});
     if (buttonsEnabled) {
       controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear")->setOnClick([this] {
         clearRecords();
@@ -96,4 +96,4 @@ void Memo::removeRecordsAboveLimit() {
   }
 }
 
-}// namespace pf::ui
+}// namespace pf::ui::ig

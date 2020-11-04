@@ -15,4 +15,4 @@ const std::string &Text::getText() const { return text; }
 void Text::setText(const std::string &txt) { text = txt; }
 
 void Text::renderImpl() { ImGui::Text("%s", text.c_str()); }
-}// namespace pf::ui
+}// namespace pf::ui::ig

@@ -16,5 +16,5 @@ class PF_IMGUI_EXPORT Image : public ResizableElement {
   void renderImpl() override;
 };
 
-}
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMAGE_H

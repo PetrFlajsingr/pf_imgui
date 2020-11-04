@@ -9,13 +9,13 @@
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <optional>
-#include <vector>
 #include <pf_imgui/_export.h>
+#include <vector>
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
-                 public ValueObservableElement<std::string_view>,
-                 public SavableElement {
+                                 public ValueObservableElement<std::string_view>,
+                                 public SavableElement {
  public:
   ComboBox(const std::string &elementName, const std::string &caption, std::string previewValue,
            std::vector<std::string> items, Persistent persistent = Persistent::No);

@@ -12,8 +12,8 @@
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Checkbox : public ValueObservableElement<bool>,
-                      public LabeledElement,
-                      public SavableElement {
+                                 public LabeledElement,
+                                 public SavableElement {
  public:
   Checkbox(const std::string &elementName, const std::string &caption,
            Persistent persistent = Persistent::No, bool value = false);
@@ -25,5 +25,5 @@ class PF_IMGUI_EXPORT Checkbox : public ValueObservableElement<bool>,
  protected:
   void renderImpl() override;
 };
-}// namespace pf::ui
+}// namespace pf::ui::ig
 #endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_CHECKBOX_H

@@ -3,72 +3,72 @@
 //
 
 #include "MenuBars.h"
-#include <pf_common/Visitor.h>
 #include <algorithm>
 #include <imgui.h>
+#include <pf_common/Visitor.h>
 
 namespace pf::ui::ig {
 
-ImGuiMenuItem::ImGuiMenuItem(const std::string &elementName, const std::string &caption)
+MenuItem::MenuItem(const std::string &elementName, const std::string &caption)
     : Element(elementName), LabeledElement(elementName, caption) {}
 
-void ImGuiMenuItem::renderImpl() {
+void MenuItem::renderImpl() {
   if (ImGui::MenuItem(getLabel().c_str())) { onClick(); }
 }
 
-void ImGuiSubMenu::renderImpl() {
+void SubMenu::renderImpl() {
   if (ImGui::BeginMenu(getLabel().c_str())) {
     renderItems();
     ImGui::EndMenu();
   }
 }
 
-ImGuiSubMenu::ImGuiSubMenu(const std::string &elementName, const std::string &caption)
+SubMenu::SubMenu(const std::string &elementName, const std::string &caption)
     : Element(elementName), LabeledElement(elementName, caption) {}
 
-ImGuiWindowMenuBar::ImGuiWindowMenuBar(const std::string &elementName)
+WindowMenuBar::WindowMenuBar(const std::string &elementName)
     : Element(elementName) {}
 
-void ImGuiWindowMenuBar::renderImpl() {
+void WindowMenuBar::renderImpl() {
   ImGui::BeginMenuBar();
   renderItems();
   ImGui::EndMenuBar();
 }
-ImGuiAppMenuBar::ImGuiAppMenuBar(const std::string &elementName) : Element(elementName) {}
+AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 
-void ImGuiAppMenuBar::renderImpl() {
+void AppMenuBar::renderImpl() {
   ImGui::BeginMainMenuBar();
   renderItems();
   ImGui::EndMainMenuBar();
 }
 
-ImGuiSubMenu &ImGuiMenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
-  items.emplace_back(ImGuiSubMenu(name, caption));
-  return std::get<ImGuiSubMenu>(items.back());
+SubMenu &MenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
+  items.emplace_back(SubMenu(name, caption));
+  return std::get<SubMenu>(items.back());
 }
 
-ImGuiMenuItem &ImGuiMenuContainer::addItem(const std::string &name, const std::string &caption) {
-  items.emplace_back(ImGuiMenuItem(name, caption));
-  return std::get<ImGuiMenuItem>(items.back());
+MenuItem &MenuContainer::addItem(const std::string &name, const std::string &caption) {
+  items.emplace_back(MenuItem(name, caption));
+  return std::get<MenuItem>(items.back());
 }
-void ImGuiMenuContainer::removeItem(const std::string &name) {
+void MenuContainer::removeItem(const std::string &name) {
   if (const auto iter = std::ranges::find_if(
           items,
           [name](auto &item) {
             return std::visit(
-                Visitor{[name](ImGuiSubMenu &item) { return item.getName() == name; },
-                        [name](ImGuiMenuItem &item) { return item.getName() == name; }},
+                Visitor{[name](SubMenu &item) { return item.getName() == name; },
+                        [name](MenuItem &item) { return item.getName() == name; }},
                 item);
           });
       iter != items.end()) {
     items.erase(iter);
   }
 }
-void ImGuiMenuContainer::renderItems() {
+void MenuContainer::renderItems() {
   std::ranges::for_each(items, [](auto &item) {
-    std::visit(Visitor{[](ImGuiMenuItem &item) { item.render(); },
-                       [](ImGuiSubMenu &subMenu) { subMenu.render(); }},
+    std::visit(Visitor{[](MenuItem &item) { item.render(); },
+                       [](SubMenu &subMenu) { subMenu.render(); }},
                item);
   });
 }
-}// namespace pf::ui
+}// namespace pf::ui::ig
