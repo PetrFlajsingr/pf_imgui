@@ -5,10 +5,12 @@
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 
+#include "elements/FileDialog.h"
 #include "elements/MenuBars.h"
 #include "elements/interface/Container.h"
 #include "fwd.h"
 #include <imgui.h>
+#include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
 #include <toml++/toml.h>
 
@@ -35,12 +37,39 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
     styleSetter(ImGui::GetStyle());
   }
 
+  void openFileDialog(const std::string &caption,
+                      const std::vector<FileExtensionSettings> &extSettings,
+                      std::invocable<std::vector<std::string>> auto onSelect,
+                      std::invocable auto onCancel,
+                      std::string startPath = ".", std::string startName = "",
+                      Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
+    using namespace std::string_literals;
+    fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)),
+                             caption, extSettings, onSelect, onCancel,
+                             startPath, startName, modality, maxSelectedFiles);
+  }
+
+  void openDirDialog(const std::string &caption,
+                     std::invocable<std::vector<std::string>> auto onSelect,
+                     std::invocable auto onCancel,
+                     std::string startPath = ".", std::string startName = "",
+                     Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
+    using namespace std::string_literals;
+    fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)),
+                             caption, onSelect, onCancel, startPath, startName,
+                             modality, maxSelectedFiles);
+  }
+
  protected:
   std::optional<AppMenuBar> menuBar = std::nullopt;
+
+  void renderFileDialogs();
 
  private:
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
+  std::vector<FileDialog> fileDialogs;
+  cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
 
   toml::table config;
 };

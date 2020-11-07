@@ -44,5 +44,16 @@ void ImGuiInterface::setStateFromConfig() {
     }
   });
 }
+void ImGuiInterface::renderFileDialogs() {
+  std::ranges::for_each(fileDialogs, [](auto &dialog) {
+    dialog.render();
+  });
+  if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) {
+        return dialog.isDone();
+      });
+      iter != fileDialogs.end()) {
+    fileDialogs.erase(iter);
+  }
+}
 
 }// namespace pf::ui::ig

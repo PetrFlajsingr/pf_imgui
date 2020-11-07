@@ -7,8 +7,8 @@
 
 #include "../enums.h"
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
-#include <pf_imgui/elements/interface/LabeledElement.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/interface/LabeledElement.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -26,12 +26,30 @@ class PF_IMGUI_EXPORT FileDialog : public LabeledElement {
  public:
   FileDialog(const std::string &elementName, const std::string &caption,
              const std::vector<FileExtensionSettings> &extSettings,
+             std::invocable<std::vector<std::string>> auto onSelect,
+             std::invocable auto onCancel,
              std::string startPath = ".", std::string startName = "",
-             Modal modality = Modal::No, uint32_t maxSelectedFiles = 1);
+             Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
+      : Element(elementName), LabeledElement(elementName, caption),
+        openPath(std::move(startPath)), defaultName(std::move(startName)),
+        modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
+        onFilesSelected(onSelect), onSelectCanceled(onCancel) {
+    prepareExtInfos(extSettings);
+  }
 
   FileDialog(const std::string &elementName, const std::string &caption,
+             std::invocable<std::vector<std::string>> auto onSelect,
+             std::invocable auto onCancel,
              std::string startPath = ".", std::string startName = "",
-             Modal modality = Modal::No, uint32_t maxSelectedDirs = 1);
+             Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
+      : Element(elementName), LabeledElement(elementName, caption), openPath(std::move(startPath)),
+        defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
+        maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {
+  }
+
+  [[nodiscard]] bool isDone() const {
+    return done;
+  }
 
  protected:
   void renderImpl() override;
@@ -50,6 +68,10 @@ class PF_IMGUI_EXPORT FileDialog : public LabeledElement {
   FileType fileType;
   uint32_t maxSelectCount;
 
+  std::function<void(std::vector<std::string>)> onFilesSelected;
+  std::function<void()> onSelectCanceled;
+
+  bool done = false;
 };
 
 }// namespace pf::ui::ig
