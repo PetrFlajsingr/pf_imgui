@@ -30,14 +30,43 @@
 
 #include <climits>
 
+#include <algorithm>
+#include <chrono>
 #include <imgui.h>
+#include <pf_common/math/Range.h>
+#include <string>
+#include <vector>
 
 namespace ImGuiWidgetFlameGraph {
+
+class FlameGraphSample {
+ public:
+  FlameGraphSample(pf::math::Range<std::chrono::microseconds> sampleTime,
+                   std::string sampleCaption,
+                   uint8_t sampleLevel = 0);
+
+  FlameGraphSample &addSubSample(pf::math::Range<std::chrono::microseconds> sampleTime,
+                                 std::string sampleCaption);
+  [[nodiscard]] const pf::math::Range<std::chrono::microseconds> &getTime() const;
+  [[nodiscard]] uint8_t getLevel() const;
+  [[nodiscard]] const std::string &getCaption() const;
+  [[nodiscard]] const std::vector<FlameGraphSample> &getSubSamples() const;
+
+  [[nodiscard]] uint8_t getMaxDepth() const;
+
+ private:
+  pf::math::Range<std::chrono::microseconds> time;
+  uint8_t level;
+  std::string caption;
+  std::vector<FlameGraphSample> subSamples;
+};
+
+
 IMGUI_API void PlotFlame(
     const char *label,
-    void (*values_getter)(float *start, float *end, ImU8 *level,
-                          const char **caption, const void *data, int idx),
-    const void *data, int values_count, int values_offset = 0,
-    const char *overlay_text = NULL, float scale_min = FLT_MAX,
-    float scale_max = FLT_MAX, ImVec2 graph_size = ImVec2(0, 0));
+    const std::vector<FlameGraphSample> &samples,
+    const std::optional<std::string>& overlay_text = std::nullopt,
+    float scale_min = FLT_MAX,
+    float scale_max = FLT_MAX,
+    ImVec2 graph_size = ImVec2(0, 0));
 }

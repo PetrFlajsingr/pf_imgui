@@ -28,26 +28,57 @@
 #endif
 #include "imgui_internal.h"
 
-void ImGuiWidgetFlameGraph::PlotFlame(
+namespace ImGuiWidgetFlameGraph {
+FlameGraphSample::FlameGraphSample(pf::math::Range<std::chrono::microseconds> sampleTime, std::string sampleCaption, uint8_t sampleLevel)
+    : time(sampleTime), level(sampleLevel), caption(std::move(sampleCaption)) {}
+FlameGraphSample &FlameGraphSample::addSubSample(pf::math::Range<std::chrono::microseconds> sampleTime, std::string sampleCaption) {
+  assert(time.start <= sampleTime.start);
+  assert(sampleTime.end <= time.end);
+  subSamples.emplace_back(sampleTime, std::move(sampleCaption), level + 1);
+  return subSamples.back();
+}
+const pf::math::Range<std::chrono::microseconds> &FlameGraphSample::getTime() const {
+  return time;
+}
+uint8_t FlameGraphSample::getLevel() const {
+  return level;
+}
+const std::string &FlameGraphSample::getCaption() const {
+  return caption;
+}
+const std::vector<FlameGraphSample> &FlameGraphSample::getSubSamples() const {
+  return subSamples;
+}
+uint8_t FlameGraphSample::getMaxDepth() const {
+  if (subSamples.empty()) {
+    return level;
+  }
+  return std::ranges::max_element(subSamples, [](const auto &a, const auto &b) {
+           return a.getMaxDepth() < b.getMaxDepth();
+         })
+      ->getLevel();
+}
+
+void PlotFlame(
     const char *label,
-    void (*values_getter)(float *start, float *end, ImU8 *level,
-                          const char **caption, const void *data, int idx),
-    const void *data, int values_count, int values_offset,
-    const char *overlay_text, float scale_min, float scale_max,
+    const std::vector<FlameGraphSample> &samples,
+    const std::optional<std::string> &overlay_text,
+    float scale_min,
+    float scale_max,
     ImVec2 graph_size) {
-  ImGuiWindow *window = ImGui::GetCurrentWindow();
+  auto *window = ImGui::GetCurrentWindow();
   if (window->SkipItems)
     return;
 
-  ImGuiContext &g = *GImGui;
-  const ImGuiStyle &style = g.Style;
+  const auto &g = *GImGui;
+  const auto &style = g.Style;
 
-  // Find the maximum depth
   ImU8 maxDepth = 0;
-  for (int i = values_offset; i < values_count; ++i) {
-    ImU8 depth;
-    values_getter(nullptr, nullptr, &depth, nullptr, data, i);
-    maxDepth = ImMax(maxDepth, depth);
+  if (const auto max = std::ranges::max_element(samples, [](const auto &a, const auto &b) {
+        return a.getMaxDepth() < b.getMaxDepth();
+      });
+      max != samples.end()) {
+    maxDepth = max->getMaxDepth();
   }
 
   const auto blockHeight =
@@ -56,19 +87,14 @@ void ImGuiWidgetFlameGraph::PlotFlame(
   if (graph_size.x == 0.0f)
     graph_size.x = ImGui::CalcItemWidth();
   if (graph_size.y == 0.0f)
-    graph_size.y = label_size.y + (style.FramePadding.y * 3) +
-                   blockHeight * (maxDepth + 1);
+    graph_size.y = label_size.y + (style.FramePadding.y * 3) + blockHeight * (maxDepth + 1);
 
   const ImRect frame_bb(window->DC.CursorPos,
                         window->DC.CursorPos + graph_size);
   const ImRect inner_bb(frame_bb.Min + style.FramePadding,
                         frame_bb.Max - style.FramePadding);
   const ImRect total_bb(frame_bb.Min,
-                        frame_bb.Max +
-                            ImVec2(label_size.x > 0.0f
-                                       ? style.ItemInnerSpacing.x + label_size.x
-                                       : 0.0f,
-                                   0));
+                        frame_bb.Max + ImVec2(label_size.x > 0.0f ? style.ItemInnerSpacing.x + label_size.x : 0.0f, 0));
   ImGui::ItemSize(total_bb, style.FramePadding.y);
   if (!ImGui::ItemAdd(total_bb, 0, &frame_bb))
     return;
@@ -77,13 +103,18 @@ void ImGuiWidgetFlameGraph::PlotFlame(
   if (scale_min == FLT_MAX || scale_max == FLT_MAX) {
     float v_min = FLT_MAX;
     float v_max = -FLT_MAX;
-    for (int i = values_offset; i < values_count; i++) {
-      float v_start, v_end;
-      values_getter(&v_start, &v_end, nullptr, nullptr, data, i);
-      if (v_start == v_start) // Check non-NaN values
-        v_min = ImMin(v_min, v_start);
-      if (v_end == v_end) // Check non-NaN values
-        v_max = ImMax(v_max, v_end);
+
+    if (const auto min = std::ranges::min_element(samples, [](const auto &a, const auto &b) {
+          return a.getTime().start < b.getTime().start;
+        });
+        min != samples.end()) {
+      scale_min = min->getTime().start.count();
+    }
+    if (const auto max = std::ranges::max_element(samples, [](const auto &a, const auto &b) {
+          return a.getTime().end < b.getTime().end;
+        });
+        max != samples.end()) {
+      scale_max = max->getTime().end.count();
     }
     if (scale_min == FLT_MAX)
       scale_min = v_min;
@@ -96,7 +127,7 @@ void ImGuiWidgetFlameGraph::PlotFlame(
                      style.FrameRounding);
 
   bool any_hovered = false;
-  if (values_count - values_offset >= 1) {
+  if (!samples.empty()) {
     const ImU32 col_base =
         ImGui::GetColorU32(ImGuiCol_PlotHistogram) & 0x77FFFFFF;
     const ImU32 col_hovered =
@@ -106,64 +137,68 @@ void ImGuiWidgetFlameGraph::PlotFlame(
     const ImU32 col_outline_hovered =
         ImGui::GetColorU32(ImGuiCol_PlotHistogramHovered) & 0x7FFFFFFF;
 
-    for (int i = values_offset; i < values_count; ++i) {
-      float stageStart, stageEnd;
-      ImU8 depth;
-      const char *caption;
+    std::ranges::for_each(samples,
+                          [&](const auto &sample) {
+                            const auto stageStart = sample.getTime().start;
+                            const auto stageEnd = sample.getTime().end;
+                            const ImU8 depth = sample.getLevel();
+                            const auto caption = sample.getCaption();
 
-      values_getter(&stageStart, &stageEnd, &depth, &caption, data, i);
+                            const auto duration = scale_max - scale_min;
+                            if (duration == 0) {
+                              return;
+                            }
 
-      auto duration = scale_max - scale_min;
-      if (duration == 0) {
-        return;
-      }
+                            const auto start = stageStart.count() - scale_min;
+                            const auto end = stageEnd.count() - scale_min;
 
-      auto start = stageStart - scale_min;
-      auto end = stageEnd - scale_min;
+                            const auto startX = start / (double) duration;
+                            const auto endX = end / (double) duration;
 
-      float startX = start / (double)duration;
-      float endX = end / (double)duration;
+                            const auto width = inner_bb.Max.x - inner_bb.Min.x;
+                            const auto height =
+                                blockHeight * (maxDepth - depth + 1) - style.FramePadding.y;
 
-      float width = inner_bb.Max.x - inner_bb.Min.x;
-      float height =
-          blockHeight * (maxDepth - depth + 1) - style.FramePadding.y;
+                            const auto pos0 = inner_bb.Min + ImVec2(startX * width, height);
+                            const auto pos1 = inner_bb.Min + ImVec2(endX * width, height + blockHeight);
 
-      auto pos0 = inner_bb.Min + ImVec2(startX * width, height);
-      auto pos1 = inner_bb.Min + ImVec2(endX * width, height + blockHeight);
+                            auto v_hovered = false;
+                            if (ImGui::IsMouseHoveringRect(pos0, pos1)) {
+                              ImGui::SetTooltip("%s: %8.4g", caption.c_str(), static_cast<double>(stageEnd.count() - stageStart.count()));
+                              v_hovered = true;
+                              any_hovered = v_hovered;
+                            }
 
-      bool v_hovered = false;
-      if (ImGui::IsMouseHoveringRect(pos0, pos1)) {
-        ImGui::SetTooltip("%s: %8.4g", caption, stageEnd - stageStart);
-        v_hovered = true;
-        any_hovered = v_hovered;
-      }
-
-      window->DrawList->AddRectFilled(pos0, pos1,
-                                      v_hovered ? col_hovered : col_base);
-      window->DrawList->AddRect(
-          pos0, pos1, v_hovered ? col_outline_hovered : col_outline_base);
-      auto textSize = ImGui::CalcTextSize(caption);
-      auto boxSize = (pos1 - pos0);
-      auto textOffset = ImVec2(0.0f, 0.0f);
-      if (textSize.x < boxSize.x) {
-        textOffset = ImVec2(0.5f, 0.5f) * (boxSize - textSize);
-        ImGui::RenderText(pos0 + textOffset, caption);
-      }
-    }
+                            window->DrawList->AddRectFilled(pos0, pos1,
+                                                            v_hovered ? col_hovered : col_base);
+                            window->DrawList->AddRect(
+                                pos0, pos1, v_hovered ? col_outline_hovered : col_outline_base);
+                            auto textSize = ImGui::CalcTextSize(caption.c_str());
+                            auto boxSize = (pos1 - pos0);
+                            auto textOffset = ImVec2(0.0f, 0.0f);
+                            if (textSize.x < boxSize.x) {
+                              textOffset = ImVec2(0.5f, 0.5f) * (boxSize - textSize);
+                              ImGui::RenderText(pos0 + textOffset, caption.c_str());
+                            }
+                          });
 
     // Text overlay
-    if (overlay_text)
+    if (overlay_text.has_value()) {
       ImGui::RenderTextClipped(
           ImVec2(frame_bb.Min.x, frame_bb.Min.y + style.FramePadding.y),
-          frame_bb.Max, overlay_text, NULL, NULL, ImVec2(0.5f, 0.0f));
+          frame_bb.Max, overlay_text->c_str(), nullptr, nullptr, ImVec2(0.5f, 0.0f));
+    }
 
-    if (label_size.x > 0.0f)
+    if (label_size.x > 0.0f) {
       ImGui::RenderText(
           ImVec2(frame_bb.Max.x + style.ItemInnerSpacing.x, inner_bb.Min.y),
           label);
+    }
   }
 
   if (!any_hovered && ImGui::IsItemHovered()) {
     ImGui::SetTooltip("Total: %8.4g", scale_max - scale_min);
   }
 }
+
+}// namespace ImGuiWidgetFlameGraph

@@ -47,8 +47,10 @@ elseif(USE_GOLD_LINKER)
 endif()
 
 set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
+set(IMGUI_FLAME_GRAPH_DIR src/include/ImGUiFlamegraph)
 include_directories(${toml++_SOURCE_DIR}/include)
 include_directories(${IMGUI_FILE_DIALOG_DIR})
+include_directories(${IMGUI_FLAME_GRAPH_DIR})
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -71,12 +73,14 @@ set(SOURCES
         src/pf_imgui/elements/Tree.cpp
         src/pf_imgui/elements/Window.cpp
         src/pf_imgui/elements/FileDialog.cpp
+        src/pf_imgui/elements/FlameGraph.cpp
         src/pf_imgui/elements/interface/Container.cpp
         src/pf_imgui/elements/interface/Element.cpp
         src/pf_imgui/elements/interface/LabeledElement.cpp
         src/pf_imgui/elements/interface/ResizableElement.cpp
         src/pf_imgui/elements/interface/SavableElement.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
+        ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         )
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -108,6 +112,7 @@ set(INCLUDES
         src/pf_imgui/elements/Tree.h
         src/pf_imgui/elements/Window.h
         src/pf_imgui/elements/FileDialog.h
+        src/pf_imgui/elements/FlameGraph.h
         src/pf_imgui/elements/interface/Container.h
         src/pf_imgui/elements/interface/Element.h
         src/pf_imgui/elements/interface/LabeledElement.h
@@ -116,6 +121,7 @@ set(INCLUDES
         src/pf_imgui/elements/interface/ValueObservableElement.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
+        ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
         )
 
 hunter_add_package(imgui)
