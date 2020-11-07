@@ -6,9 +6,9 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 
 #include "interface/LabeledElement.h"
+#include <include/ImGUiFlamegraph/imgui_widget_flamegraph.h>
 #include <optional>
 #include <src/pf_imgui/elements/interface/ResizableElement.h>
-#include <include/ImGUiFlamegraph/imgui_widget_flamegraph.h>
 
 namespace pf::ui::ig {
 
@@ -20,6 +20,8 @@ class FlameGraph : public LabeledElement, public ResizableElement {
   void setOverlay(std::string text);
   void disableOverlay();
 
+  void setSamples(const std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> &newSamples);
+
  protected:
   void renderImpl() override;
 
@@ -28,6 +30,6 @@ class FlameGraph : public LabeledElement, public ResizableElement {
   std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> samples;
 };
 
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H

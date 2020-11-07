@@ -23,5 +23,8 @@ void FlameGraph::setOverlay(std::string text) {
 void FlameGraph::disableOverlay() {
   overlay = std::nullopt;
 }
+void FlameGraph::setSamples(const std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> &newSamples) {
+  samples = newSamples;
+}
 
 }// namespace pf::ui::ig
