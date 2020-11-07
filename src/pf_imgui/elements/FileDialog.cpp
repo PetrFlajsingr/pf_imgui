@@ -61,7 +61,7 @@ void FileDialog::renderImpl() {
       break;
   }
   setExtInfos();
-  if (igfd::ImGuiFileDialog::Instance()->FileDialog(getName())) {
+  if (igfd::ImGuiFileDialog::Instance()->FileDialog(getName(), ImGuiWindowFlags_NoCollapse, ImVec2{200, 150})) {
     if (igfd::ImGuiFileDialog::Instance()->IsOk) {
       const auto filePathName = igfd::ImGuiFileDialog::Instance()->GetFilePathName();
       const auto selection = igfd::ImGuiFileDialog::Instance()->GetSelection();
