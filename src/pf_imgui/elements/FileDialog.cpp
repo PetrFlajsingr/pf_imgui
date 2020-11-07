@@ -79,7 +79,7 @@ void FileDialog::renderImpl() {
     } else {
       onSelectCanceled();
     }
-    igfd::ImGuiFileDialog::Instance()->CloseDialog("ChooseFileDlgKey");
+    igfd::ImGuiFileDialog::Instance()->CloseDialog(getName());
     done = true;
   }
 }
