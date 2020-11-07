@@ -27,5 +27,6 @@
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/Window.h"
+#include "elements/FlameGraph.h"
 
 #endif//PF_IMGUI_ELEMENTS_H
