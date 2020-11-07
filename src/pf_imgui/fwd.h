@@ -30,7 +30,7 @@ class WindowMenuBar;
 class AppMenuBar;
 class MenuBars;
 class Panel;
-class Plot;
+class SimplePlot;
 class RadioButton;
 class Tab;
 class TabBar;

@@ -14,9 +14,9 @@ namespace pf::ui::ig {
 
 // TODO: advanced plot using implot
 
-class PF_IMGUI_EXPORT Plot : public LabeledElement {
+class PF_IMGUI_EXPORT SimplePlot : public LabeledElement {
  public:
-  Plot(const std::string &elementName, const std::string &caption, PlotType plotType,
+  SimplePlot(const std::string &elementName, const std::string &caption, PlotType plotType,
        std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
        const std::optional<std::size_t> &historyLimit = std::nullopt);
   void addValue(float value);
