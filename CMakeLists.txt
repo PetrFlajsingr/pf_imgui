@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.17)
 
 include("cmake/HunterGate.cmake")
 HunterGate(
-        URL "https://github.com/cpp-pm/hunter/archive/v0.23.269.tar.gz"
-        SHA1 "64024b7b95b4c86d50ae05b926814448c93a70a0"
+        URL "https://github.com/cpp-pm/hunter/archive/v0.23.283.tar.gz"
+        SHA1 "f445fbb4716e5485e83f6acf110b51d3b8916b2c"
 )
 
 project(pf_imgui
@@ -39,31 +39,16 @@ if (BUILD_SHARED_LIBS)
     list(APPEND flags "-fPIC")
 endif ()
 
-hunter_add_package(imgui)
-find_package(imgui CONFIG REQUIRED)
-CPMAddPackage(
-        NAME pf_common
-        GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG master
-)
-CPMAddPackage(
-        NAME toml++
-        GITHUB_REPOSITORY marzer/tomlplusplus
-        GIT_TAG v2.2.0
-)
-CPMAddPackage(
-        NAME imguifiledialog
-        GITHUB_REPOSITORY aiekick/ImGuiFileDialog
-        GIT_TAG v0.5.1
-)
-include_directories(${toml++_SOURCE_DIR}/include)
-
 
 if(USE_LLD_LINKER)
     list(APPEND flags "-fuse-ld=lld")
 elseif(USE_GOLD_LINKER)
     list(APPEND flags "-fuse-ld=gold")
 endif()
+
+set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
+include_directories(${toml++_SOURCE_DIR}/include)
+include_directories(${IMGUI_FILE_DIALOG_DIR})
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -91,6 +76,7 @@ set(SOURCES
         src/pf_imgui/elements/interface/LabeledElement.cpp
         src/pf_imgui/elements/interface/ResizableElement.cpp
         src/pf_imgui/elements/interface/SavableElement.cpp
+        ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         )
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -127,7 +113,26 @@ set(INCLUDES
         src/pf_imgui/elements/interface/LabeledElement.h
         src/pf_imgui/elements/interface/ResizableElement.h
         src/pf_imgui/elements/interface/SavableElement.h
-        src/pf_imgui/elements/interface/ValueObservableElement.h)
+        src/pf_imgui/elements/interface/ValueObservableElement.h
+        ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
+        ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
+        )
+
+hunter_add_package(imgui)
+find_package(imgui CONFIG REQUIRED)
+CPMAddPackage(
+        NAME pf_common
+        GITHUB_REPOSITORY PetrFlajsingr/pf_common
+        GIT_TAG master
+)
+CPMAddPackage(
+        NAME toml++
+        GITHUB_REPOSITORY marzer/tomlplusplus
+        GIT_TAG v2.2.0
+)
+
+include_directories(${toml++_SOURCE_DIR}/include)
+
 
 option(BUILD_SHARED_LIBS "build this library as shared")
 

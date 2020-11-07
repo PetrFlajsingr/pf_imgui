@@ -38,6 +38,10 @@ enum class ColorChooserType { Edit,
 
 enum class PanelLayout { Vertical,
                          Horizontal };
+
+enum class FileType {
+  File, Directory
+};
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ENUMS_H
