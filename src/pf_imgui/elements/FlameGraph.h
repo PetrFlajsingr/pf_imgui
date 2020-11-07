@@ -8,7 +8,7 @@
 #include "interface/LabeledElement.h"
 #include <optional>
 #include <src/pf_imgui/elements/interface/ResizableElement.h>
-#include <imgui_widget_flamegraph.h>
+#include <include/ImGUiFlamegraph/imgui_widget_flamegraph.h>
 
 namespace pf::ui::ig {
 
