@@ -36,12 +36,16 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
     }
     filters += '{';
     for (const auto &name : names) {
-      filters += name;
+      filters += name + ',';
       if (color.has_value()) {
         extColors.emplace_back(name, *color);
       }
     }
-    filters += '}';
+    filters = filters.substr(0, filters.size() - 1);
+    filters += "},";
+  }
+  if (!filters.empty()) {
+    filters = filters.substr(0, filters.size() - 1);
   }
 }
 void FileDialog::renderImpl() {

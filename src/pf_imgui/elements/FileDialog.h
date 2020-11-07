@@ -8,12 +8,12 @@
 #include "../enums.h"
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/elements/interface/LabeledElement.h>
-
+#include <pf_imgui/_export.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
-struct FileExtensionSettings {
+struct PF_IMGUI_EXPORT FileExtensionSettings {
   explicit FileExtensionSettings(std::vector<std::string> extensions,
                                  std::string description = "",
                                  const std::optional<ImVec4> &color = std::nullopt);
@@ -22,7 +22,7 @@ struct FileExtensionSettings {
   std::optional<ImVec4> color;
 };
 
-class FileDialog : public LabeledElement {
+class PF_IMGUI_EXPORT FileDialog : public LabeledElement {
  public:
   FileDialog(const std::string &elementName, const std::string &caption,
              const std::vector<FileExtensionSettings> &extSettings,
