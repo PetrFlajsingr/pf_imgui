@@ -60,14 +60,14 @@ void FileDialog::renderImpl() {
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      igfd::ImGuiFileDialog::Instance()->OpenDialog(getName(),
+      igfd::ImGuiFileDialog::Instance()->OpenModal(getName(),
                                                     getLabel().c_str(),
                                                     extCstr,
                                                     defaultName,
                                                     maxSelectCount);
       break;
     case Modal::No:
-      igfd::ImGuiFileDialog::Instance()->OpenModal(getName(),
+      igfd::ImGuiFileDialog::Instance()->OpenDialog(getName(),
                                                    getLabel().c_str(),
                                                    extCstr,
                                                    defaultName,
