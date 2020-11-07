@@ -15,7 +15,7 @@ FlameGraph::FlameGraph(const std::string &elementName, const std::string &captio
 
 void FlameGraph::renderImpl() {
   ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples,
-                                   overlay, FLT_MAX, FLT_MIN, getSize());
+                                   overlay, FLT_MAX, FLT_MAX, getSize());
 }
 void FlameGraph::setOverlay(std::string text) {
   overlay = std::move(text);

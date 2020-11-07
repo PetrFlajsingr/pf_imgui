@@ -54,9 +54,9 @@ uint8_t FlameGraphSample::getMaxDepth() const {
     return level;
   }
   return std::ranges::max_element(subSamples, [](const auto &a, const auto &b) {
-           return a.getMaxDepth() < b.getMaxDepth();
-         })
-      ->getLevel();
+    return a.getMaxDepth() < b.getMaxDepth();
+  })
+      ->getMaxDepth();
 }
 
 void PlotFlame(
@@ -75,8 +75,8 @@ void PlotFlame(
 
   ImU8 maxDepth = 0;
   if (const auto max = std::ranges::max_element(samples, [](const auto &a, const auto &b) {
-        return a.getMaxDepth() < b.getMaxDepth();
-      });
+      return a.getMaxDepth() < b.getMaxDepth();
+    });
       max != samples.end()) {
     maxDepth = max->getMaxDepth();
   }
@@ -105,16 +105,16 @@ void PlotFlame(
     float v_max = -FLT_MAX;
 
     if (const auto min = std::ranges::min_element(samples, [](const auto &a, const auto &b) {
-          return a.getTime().start < b.getTime().start;
-        });
+        return a.getTime().start < b.getTime().start;
+      });
         min != samples.end()) {
-      scale_min = min->getTime().start.count();
+      v_min = min->getTime().start.count();
     }
     if (const auto max = std::ranges::max_element(samples, [](const auto &a, const auto &b) {
-          return a.getTime().end < b.getTime().end;
-        });
+        return a.getTime().end < b.getTime().end;
+      });
         max != samples.end()) {
-      scale_max = max->getTime().end.count();
+      v_max = max->getTime().end.count();
     }
     if (scale_min == FLT_MAX)
       scale_min = v_min;
@@ -137,50 +137,55 @@ void PlotFlame(
     const ImU32 col_outline_hovered =
         ImGui::GetColorU32(ImGuiCol_PlotHistogramHovered) & 0x7FFFFFFF;
 
+    std::function<void(const FlameGraphSample &)> renderSample;
+
+    renderSample = ([&](const auto &sample) {
+      const auto stageStart = sample.getTime().start;
+      const auto stageEnd = sample.getTime().end;
+      const ImU8 depth = sample.getLevel();
+      const auto caption = sample.getCaption();
+
+      const auto duration = scale_max - scale_min;
+      if (duration == 0) {
+        return;
+      }
+
+      const auto start = stageStart.count() - scale_min;
+      const auto end = stageEnd.count() - scale_min;
+
+      const auto startX = start / (double) duration;
+      const auto endX = end / (double) duration;
+
+      const auto width = inner_bb.Max.x - inner_bb.Min.x;
+      const auto height =
+          blockHeight * (maxDepth - depth + 1) - style.FramePadding.y;
+
+      const auto pos0 = inner_bb.Min + ImVec2(startX * width, height);
+      const auto pos1 = inner_bb.Min + ImVec2(endX * width, height + blockHeight);
+
+      auto v_hovered = false;
+      if (ImGui::IsMouseHoveringRect(pos0, pos1)) {
+        ImGui::SetTooltip("%s: %8.4g", caption.c_str(), static_cast<double>(stageEnd.count() - stageStart.count()));
+        v_hovered = true;
+        any_hovered = v_hovered;
+      }
+
+      window->DrawList->AddRectFilled(pos0, pos1,
+                                      v_hovered ? col_hovered : col_base);
+      window->DrawList->AddRect(
+          pos0, pos1, v_hovered ? col_outline_hovered : col_outline_base);
+      auto textSize = ImGui::CalcTextSize(caption.c_str());
+      auto boxSize = (pos1 - pos0);
+      auto textOffset = ImVec2(0.0f, 0.0f);
+      if (textSize.x < boxSize.x) {
+        textOffset = ImVec2(0.5f, 0.5f) * (boxSize - textSize);
+        ImGui::RenderText(pos0 + textOffset, caption.c_str());
+      }
+      std::ranges::for_each(sample.getSubSamples(), renderSample);
+    });
+
     std::ranges::for_each(samples,
-                          [&](const auto &sample) {
-                            const auto stageStart = sample.getTime().start;
-                            const auto stageEnd = sample.getTime().end;
-                            const ImU8 depth = sample.getLevel();
-                            const auto caption = sample.getCaption();
-
-                            const auto duration = scale_max - scale_min;
-                            if (duration == 0) {
-                              return;
-                            }
-
-                            const auto start = stageStart.count() - scale_min;
-                            const auto end = stageEnd.count() - scale_min;
-
-                            const auto startX = start / (double) duration;
-                            const auto endX = end / (double) duration;
-
-                            const auto width = inner_bb.Max.x - inner_bb.Min.x;
-                            const auto height =
-                                blockHeight * (maxDepth - depth + 1) - style.FramePadding.y;
-
-                            const auto pos0 = inner_bb.Min + ImVec2(startX * width, height);
-                            const auto pos1 = inner_bb.Min + ImVec2(endX * width, height + blockHeight);
-
-                            auto v_hovered = false;
-                            if (ImGui::IsMouseHoveringRect(pos0, pos1)) {
-                              ImGui::SetTooltip("%s: %8.4g", caption.c_str(), static_cast<double>(stageEnd.count() - stageStart.count()));
-                              v_hovered = true;
-                              any_hovered = v_hovered;
-                            }
-
-                            window->DrawList->AddRectFilled(pos0, pos1,
-                                                            v_hovered ? col_hovered : col_base);
-                            window->DrawList->AddRect(
-                                pos0, pos1, v_hovered ? col_outline_hovered : col_outline_base);
-                            auto textSize = ImGui::CalcTextSize(caption.c_str());
-                            auto boxSize = (pos1 - pos0);
-                            auto textOffset = ImVec2(0.0f, 0.0f);
-                            if (textSize.x < boxSize.x) {
-                              textOffset = ImVec2(0.5f, 0.5f) * (boxSize - textSize);
-                              ImGui::RenderText(pos0 + textOffset, caption.c_str());
-                            }
-                          });
+                          renderSample);
 
     // Text overlay
     if (overlay_text.has_value()) {
