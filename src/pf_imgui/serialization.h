@@ -2,12 +2,13 @@
 // Created by petr on 11/2/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_SERIALIZATION_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_SERIALIZATION_H
+#ifndef PF_IMGUI_SERIALIZATION_H
+#define PF_IMGUI_SERIALIZATION_H
 
 #include "elements.h"
 #include "ui_tree_traversal.h"
-#include <toml++/toml.h>
+#include <toml++/toml_table.h>
+#include <toml++/toml_array.h>
 
 namespace pf::ui::ig {
 
@@ -45,4 +46,4 @@ PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &vec) {
 
 }// namespace pf::ui::ig
 
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_SERIALIZATION_H
+#endif//PF_IMGUI_SERIALIZATION_H

@@ -2,8 +2,8 @@
 // Created by petr on 11/1/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_PLOT_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_PLOT_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_PLOT_H
+#define PF_IMGUI_IMGUI_ELEMENTS_PLOT_H
 
 #include "interface/LabeledElement.h"
 #include <optional>
@@ -12,7 +12,7 @@
 
 namespace pf::ui::ig {
 
-
+// TODO: advanced plot using implot
 
 class PF_IMGUI_EXPORT Plot : public LabeledElement {
  public:
@@ -33,4 +33,4 @@ class PF_IMGUI_EXPORT Plot : public LabeledElement {
   std::optional<std::size_t> historyLimit = std::nullopt;
 };
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_PLOT_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_PLOT_H

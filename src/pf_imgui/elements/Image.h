@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMAGE_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMAGE_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_IMAGE_H
+#define PF_IMGUI_IMGUI_ELEMENTS_IMAGE_H
 
 #include "interface/ResizableElement.h"
 #include <pf_imgui/_export.h>
@@ -17,4 +17,4 @@ class PF_IMGUI_EXPORT Image : public ResizableElement {
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMAGE_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_IMAGE_H

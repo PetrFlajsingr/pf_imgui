@@ -5,7 +5,8 @@
 #include "Memo.h"
 #include "Button.h"
 #include "InputText.h"
-#include <range/v3/view.hpp>
+#include <range/v3/view/filter.hpp>
+#include <range/v3/view/join.hpp>
 
 namespace pf::ui::ig {
 
@@ -15,8 +16,7 @@ Memo::Memo(const std::string &elementName, const std::string &caption, float tex
     : Element(elementName), LabeledElement(elementName, caption),
       textAreaPanel(elementName + "_memo_panel###", getLabel(), PanelLayout::Vertical,
                     ImVec2{0, textAHeight}),
-      buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit),
-      textAreaHeight(textAHeight) {}
+      buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {}
 
 void Memo::renderImpl() {
   if (rebuild) { rebuildPanel(); }

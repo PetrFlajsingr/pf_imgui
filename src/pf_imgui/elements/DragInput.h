@@ -2,13 +2,15 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DRAGINPUT_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DRAGINPUT_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
+#define PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
 
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
-#include <glm/glm.hpp>
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
@@ -139,4 +141,4 @@ class PF_IMGUI_EXPORT DragInput : public ValueObservableElement<T>, public Label
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DRAGINPUT_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H

@@ -18,6 +18,7 @@ void RadioButton::renderImpl() {
   }
   if (oldValue != getValue() && getValue()) { notifyValueChanged(); }
 }
+
 bool RadioButton::isSelected() const {
   return getValue();
 }

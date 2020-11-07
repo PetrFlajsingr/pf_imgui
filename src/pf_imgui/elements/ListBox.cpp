@@ -4,7 +4,8 @@
 
 #include "ListBox.h"
 #include <imgui.h>
-#include <range/v3/view.hpp>
+#include <range/v3/core.hpp>
+#include <range/v3/view/transform.hpp>
 #include <utility>
 
 namespace pf::ui::ig {

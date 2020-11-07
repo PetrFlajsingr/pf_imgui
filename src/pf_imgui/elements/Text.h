@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TEXT_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TEXT_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
+#define PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
 
 #include "interface/Element.h"
 #include <pf_imgui/_export.h>
@@ -25,4 +25,4 @@ class PF_IMGUI_EXPORT Text : public virtual Element {
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TEXT_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_TEXT_H

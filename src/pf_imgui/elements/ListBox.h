@@ -2,8 +2,8 @@
 // Created by petr on 11/1/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_LISTBOX_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_LISTBOX_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_LISTBOX_H
+#define PF_IMGUI_IMGUI_ELEMENTS_LISTBOX_H
 
 #include "interface/LabeledElement.h"
 #include "interface/ValueObservableElement.h"
@@ -34,4 +34,4 @@ class PF_IMGUI_EXPORT ListBox : public LabeledElement,
   int height = -1;
 };
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_LISTBOX_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_LISTBOX_H

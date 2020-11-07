@@ -2,16 +2,14 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DIALOG_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DIALOG_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
+#define PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
 
 #include "interface/Container.h"
 #include "interface/LabeledElement.h"
 #include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-
-
 
 class PF_IMGUI_EXPORT Dialog : public Container, public LabeledElement {
  public:
@@ -29,4 +27,4 @@ class PF_IMGUI_EXPORT Dialog : public Container, public LabeledElement {
   Container &owner;
 };
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_DIALOG_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H

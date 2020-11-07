@@ -2,8 +2,8 @@
 // Created by petr on 11/2/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TABBAR_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TABBAR_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H
+#define PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H
 
 #include "interface/Container.h"
 #include "interface/Element.h"
@@ -35,4 +35,4 @@ class PF_IMGUI_EXPORT TabBar : public Element {
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_TABBAR_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H

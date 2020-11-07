@@ -2,17 +2,18 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICONTAINER_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICONTAINER_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_CONTAINER_H
+#define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_CONTAINER_H
 
 #include "Element.h"
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
 #include <string>
 
 namespace pf::ui::ig {
+
 class PF_IMGUI_EXPORT Container : public virtual Element {
  public:
   explicit Container(const std::string &elementName);
@@ -44,10 +45,10 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
   void clear();
 
  private:
-  std::map<std::string, std::shared_ptr<Element>> children;
+  std::unordered_map<std::string, std::shared_ptr<Element>> children;
   std::vector<std::reference_wrapper<Element>> childrenInOrder;
   std::vector<std::string> childrenToRemove;
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_IMGUICONTAINER_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_CONTAINER_H

@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_WINDOW_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_WINDOW_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_WINDOW_H
+#define PF_IMGUI_IMGUI_ELEMENTS_WINDOW_H
 
 #include "MenuBars.h"
 #include "interface/Container.h"
@@ -33,4 +33,4 @@ class PF_IMGUI_EXPORT Window : public Container {
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_WINDOW_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_WINDOW_H

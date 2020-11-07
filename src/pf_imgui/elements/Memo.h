@@ -2,8 +2,8 @@
 // Created by petr on 11/2/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MEMO_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MEMO_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
+#define PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
 
 #include "../fwd.h"
 #include "Panel.h"
@@ -49,8 +49,7 @@ class PF_IMGUI_EXPORT Memo : public LabeledElement {
   std::function<bool(std::string_view)> filterFnc = [](auto) { return true; };
   std::optional<std::size_t> recordLimit;
   std::vector<std::string> records;
-  float textAreaHeight;
   std::shared_ptr<Text> textArea;
 };
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MEMO_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_MEMO_H

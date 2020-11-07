@@ -2,14 +2,16 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_SLIDER_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_SLIDER_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
+#define PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
 
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
-#include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
@@ -119,4 +121,4 @@ class PF_IMGUI_EXPORT Slider : public LabeledElement, public ValueObservableElem
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_SLIDER_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H

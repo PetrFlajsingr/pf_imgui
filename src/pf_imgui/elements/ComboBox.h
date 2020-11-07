@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_COMBOBOX_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_COMBOBOX_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H
+#define PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H
 
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
@@ -35,4 +35,4 @@ class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
   std::optional<uint> selectedItemIndex = std::nullopt;
 };
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_COMBOBOX_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H

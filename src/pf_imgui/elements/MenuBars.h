@@ -2,8 +2,8 @@
 // Created by petr on 11/1/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MENUBARS_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MENUBARS_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_MENUBARS_H
+#define PF_IMGUI_IMGUI_ELEMENTS_MENUBARS_H
 
 #include "interface/Element.h"
 #include "interface/LabeledElement.h"
@@ -72,4 +72,4 @@ class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
 
 }// namespace pf::ui::ig
 
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_MENUBARS_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_MENUBARS_H

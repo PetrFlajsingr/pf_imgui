@@ -3,9 +3,8 @@
 //
 
 #include "Button.h"
-#include <utility>
 #include <imgui.h>
-
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -35,6 +34,8 @@ void Button::renderImpl() {
       break;
   }
 }
+
 ButtonType Button::getType() const { return type; }
+
 void Button::setType(ButtonType buttonType) { type = buttonType; }
 }// namespace pf::ui::ig

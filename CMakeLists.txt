@@ -54,7 +54,11 @@ CPMAddPackage(
 include_directories(${toml++_SOURCE_DIR}/include)
 
 
-
+if(USE_LLD_LINKER)
+    list(APPEND flags "-fuse-ld=lld")
+elseif(USE_GOLD_LINKER)
+    list(APPEND flags "-fuse-ld=gold")
+endif()
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -129,6 +133,10 @@ add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDES} ${BACKWARD_ENABLE})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 add_backward(${PROJECT_NAME})
 target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
+
+if (MEASURE_BUILD_TIME)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
+endif()
 
 include(GNUInstallDirs)
 

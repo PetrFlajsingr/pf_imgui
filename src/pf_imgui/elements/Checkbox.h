@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_CHECKBOX_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_CHECKBOX_H
+#ifndef PF_IMGUI_ELEMENTS_CHECKBOX_H
+#define PF_IMGUI_ELEMENTS_CHECKBOX_H
 
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
@@ -26,4 +26,4 @@ class PF_IMGUI_EXPORT Checkbox : public ValueObservableElement<bool>,
   void renderImpl() override;
 };
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_CHECKBOX_H
+#endif//PF_IMGUI_ELEMENTS_CHECKBOX_H

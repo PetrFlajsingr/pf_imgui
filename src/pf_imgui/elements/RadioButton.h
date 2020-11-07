@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_RADIOBUTTON_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_RADIOBUTTON_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_RADIOBUTTON_H
+#define PF_IMGUI_IMGUI_ELEMENTS_RADIOBUTTON_H
 
 #include "interface/LabeledElement.h"
 #include "interface/ResizableElement.h"
@@ -26,4 +26,4 @@ class PF_IMGUI_EXPORT RadioButton : public LabeledElement, public ValueObservabl
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_RADIOBUTTON_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_RADIOBUTTON_H

@@ -2,8 +2,8 @@
 // Created by petr on 11/4/20.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ENUMS_H
-#define PF_IMGUI_SRC_PF_IMGUI_ENUMS_H
+#ifndef PF_IMGUI_ENUMS_H
+#define PF_IMGUI_ENUMS_H
 
 namespace pf::ui::ig {
 
@@ -40,4 +40,4 @@ enum class PanelLayout { Vertical,
                          Horizontal };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ENUMS_H
+#endif//PF_IMGUI_ENUMS_H

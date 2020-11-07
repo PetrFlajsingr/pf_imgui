@@ -2,16 +2,14 @@
 // Created by petr on 11/2/20.
 //
 
-#ifndef REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H
-#define REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H
+#ifndef PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H
+#define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H
 
 #include "Element.h"
 #include <pf_imgui/_export.h>
-#include <toml++/toml.h>
+#include <toml++/toml_table.h>
 
 namespace pf::ui::ig {
-
-
 
 class PF_IMGUI_EXPORT SavableElement : public virtual Element {
  public:
@@ -29,4 +27,4 @@ class PF_IMGUI_EXPORT SavableElement : public virtual Element {
 };
 
 }// namespace pf::ui::ig
-#endif//REALISTIC_VOXEL_RENDERING_UI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H
+#endif//PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H

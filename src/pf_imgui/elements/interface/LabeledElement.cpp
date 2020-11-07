@@ -3,7 +3,6 @@
 //
 
 #include "LabeledElement.h"
-
 #include <utility>
 
 namespace pf::ui::ig {

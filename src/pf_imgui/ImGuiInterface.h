@@ -2,12 +2,12 @@
 // Created by petr on 10/27/20.
 //
 
-#ifndef VOXEL_RENDER_IMGUIBASE_H
-#define VOXEL_RENDER_IMGUIBASE_H
+#ifndef PF_IMGUI_IMGUIINTERFACE_H
+#define PF_IMGUI_IMGUIINTERFACE_H
 
-#include "fwd.h"
 #include "elements/MenuBars.h"
 #include "elements/interface/Container.h"
+#include "fwd.h"
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 #include <toml++/toml.h>
@@ -31,7 +31,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
   void updateConfig();
   void setStateFromConfig();
 
-  void setStyle(std::invocable<ImGuiStyle&> auto styleSetter) {
+  void setStyle(std::invocable<ImGuiStyle &> auto styleSetter) {
     styleSetter(ImGui::GetStyle());
   }
 
@@ -46,4 +46,4 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
 };
 
 }// namespace pf::ui::ig
-#endif//VOXEL_RENDER_IMGUIBASE_H
+#endif//PF_IMGUI_IMGUIINTERFACE_H
