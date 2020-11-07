@@ -12,6 +12,7 @@
 
 namespace pf::ui::ig {
 
+using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
 class FlameGraph : public LabeledElement, public ResizableElement {
  public:
   FlameGraph(const std::string &elementName, const std::string &caption,
