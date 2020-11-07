@@ -33,16 +33,24 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
   for (const auto &[names, desc, color] : extSettings) {
     if (!desc.empty()) {
       filters += desc;
-    }
-    filters += '{';
-    for (const auto &name : names) {
-      filters += name + ',';
-      if (color.has_value()) {
-        extColors.emplace_back(name, *color);
+      filters += '{';
+      for (const auto &name : names) {
+        filters += name + ',';
+        if (color.has_value()) {
+          extColors.emplace_back(name, *color);
+        }
       }
+      filters = filters.substr(0, filters.size() - 1);
+      filters += "},";
+    } else {
+      for (const auto &name : names) {
+        filters += name + ',';
+        if (color.has_value()) {
+          extColors.emplace_back(name, *color);
+        }
+      }
+      filters = filters.substr(0, filters.size() - 1);
     }
-    filters = filters.substr(0, filters.size() - 1);
-    filters += "},";
   }
   if (!filters.empty()) {
     filters = filters.substr(0, filters.size() - 1);
