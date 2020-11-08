@@ -21,4 +21,11 @@ void Plot::renderImpl() {
     ImPlot::EndPlot();
   }
 }
+void Plot::removeData(const std::string &name) {
+  if (const auto iter =
+          std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
+      iter != datas.end()) {
+    datas.erase(iter);
+  }
+}
 }// namespace pf::ui::ig

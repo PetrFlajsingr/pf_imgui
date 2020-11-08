@@ -10,6 +10,7 @@
 #include "types/PlotDataBase.h"
 #include <bits/ranges_algo.h>
 #include <optional>
+#include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
 #include <string>
 #include <vector>
@@ -22,6 +23,25 @@ class PF_IMGUI_EXPORT Plot : public LabeledElement, public ResizableElement {
   Plot(const std::string &elementName, const std::string &caption,
        std::optional<std::string> xLabel = std::nullopt,
        std::optional<std::string> yLabel = std::nullopt, const ImVec2 &size = ImVec2{-1, 0});
+
+  template<std::derived_from<plot_type::PlotData> T, typename... Args>
+  requires std::constructible_from<T, Args...> T &addData(Args &&... args) {
+    datas.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
+    return *datas.back();
+  }
+
+  template<std::derived_from<plot_type::PlotData> T>
+  void dataByName(const std::string &name) {
+    if (const auto iter = std::ranges::find_if(
+            datas, [name](const auto &data) { return data->getName() == name; });
+        iter != datas.end()) {
+      if (auto result = std::dynamic_pointer_cast<T>(*iter); result != nullptr) { return result; }
+      throw StackTraceException::fmt("Wrong type for data: '{}' in '{}'", name, getName());
+    }
+    throw StackTraceException::fmt("Data not found: '{}' in '{}'", name, getName());
+  }
+
+  void removeData(const std::string &name);
 
  protected:
   void renderImpl() override;
