@@ -10,7 +10,7 @@
 
 namespace pf::ui::ig::plot_type {
 
-template<BarType Type = BarType::Horizontal>
+template<BarType Type = BarType::Vertical>
 class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotDataSetting {
  public:
   Bar(const std::string &elementName, const std::string &caption)
@@ -19,9 +19,9 @@ class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotD
  protected:
   void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
-      ImPlot::PlotBars(getLabel().c_str(), xData.data(), yData.data(), xData.size(), width);
+      ImPlot::PlotBars(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
     } else {
-      ImPlot::PlotBarsH(getLabel().c_str(), xData.data(), yData.data(), xData.size(), width);
+      ImPlot::PlotBarsH(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
     }
   }
 };
