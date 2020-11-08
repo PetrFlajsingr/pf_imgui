@@ -55,8 +55,7 @@ CPMAddPackage(
 )
 
 include_directories(${imgui_SOURCE_DIR})
-file(GLOB IMGUI_SOURCES ${imgui_SOURCE_DIR} "*.cpp")
-
+file(GLOB IMGUI_SOURCES ${imgui_SOURCE_DIR}/*.cpp)
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -98,6 +97,7 @@ set(SOURCES
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         ${IMGUI_SOURCES}
         )
+
 set(INCLUDES
         src/pf_imgui/fwd.h
         src/pf_imgui/elements.h
