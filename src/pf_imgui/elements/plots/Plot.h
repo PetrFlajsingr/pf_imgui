@@ -19,8 +19,9 @@ namespace pf::ui::ig {
 // TODO: pie chart
 class PF_IMGUI_EXPORT Plot : public LabeledElement, public ResizableElement {
  public:
-  Plot(const std::string &elementName, const std::string &caption, const ImVec2 &size,
-       std::optional<std::string> xLabel, std::optional<std::string> yLabel);
+  Plot(const std::string &elementName, const std::string &caption,
+       std::optional<std::string> xLabel = std::nullopt,
+       std::optional<std::string> yLabel = std::nullopt, const ImVec2 &size = ImVec2{-1, 0});
 
  protected:
   void renderImpl() override;
