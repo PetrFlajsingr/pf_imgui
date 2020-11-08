@@ -75,6 +75,7 @@ include_directories(${imgui_SOURCE_DIR})
 file(GLOB IMGUI_SOURCES ${imgui_SOURCE_DIR}/*.cpp)
 file(GLOB IMGUI_INCLUDES ${imgui_SOURCE_DIR}/*.h)
 file(GLOB IMPLOT_SOURCES ${implot_SOURCE_DIR}/*.cpp)
+file(GLOB IMPLOT_INCLUDES ${implot_SOURCE_DIR}/*.h)
 
 
 include_directories(${implot_SOURCE_DIR})
@@ -174,7 +175,7 @@ set(INCLUDES
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
-        ${IMGUI_INCLUDES}
+        ${IMPLOT_INCLUDES}
         )
 
 
