@@ -22,17 +22,17 @@ TabBar::TabBar(const std::string &elementName) : Element(elementName) {}
 
 void TabBar::renderImpl() {
   if (ImGui::BeginTabBar(getName().c_str())) {
-    std::ranges::for_each(tabs, [](auto &tab) { tab.render(); });
+    std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });
     ImGui::EndTabBar();
   }
 }
 Tab &TabBar::addTab(const std::string &name, const std::string &caption) {
-  tabs.emplace_back(name, caption);
-  return tabs.back();
+  tabs.emplace_back(std::make_unique<Tab>(name, caption));
+  return *tabs.back();
 }
 void TabBar::removeTab(const std::string &name) {
   if (const auto iter =
-          std::ranges::find_if(tabs, [name](const auto &tab) { return tab.getName() == name; });
+          std::ranges::find_if(tabs, [name](const auto &tab) { return tab->getName() == name; });
       iter != tabs.cend()) {
     tabs.erase(iter);
   }

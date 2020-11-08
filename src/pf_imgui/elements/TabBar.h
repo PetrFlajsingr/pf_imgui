@@ -31,7 +31,7 @@ class PF_IMGUI_EXPORT TabBar : public Element {
   void renderImpl() override;
 
  private:
-  std::vector<Tab> tabs;
+  std::vector<std::unique_ptr<Tab>> tabs;
 };
 
 }// namespace pf::ui::ig
