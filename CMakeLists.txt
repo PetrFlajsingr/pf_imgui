@@ -53,9 +53,28 @@ CPMAddPackage(
         GITHUB_REPOSITORY ocornut/imgui
         GIT_TAG v1.79
 )
+CPMAddPackage(
+        NAME pf_common
+        GITHUB_REPOSITORY PetrFlajsingr/pf_common
+        GIT_TAG master
+)
+CPMAddPackage(
+        NAME toml++
+        GITHUB_REPOSITORY marzer/tomlplusplus
+        GIT_TAG v2.2.0
+)
+CPMAddPackage(
+        NAME implot
+        GITHUB_REPOSITORY epezent/implot
+        GIT_TAG v0.8
+        DOWNLOAD_ONLY YES
+)
+
 
 include_directories(${imgui_SOURCE_DIR})
 file(GLOB IMGUI_SOURCES ${imgui_SOURCE_DIR}/*.cpp)
+file(GLOB IMPLOT_SOURCES ${implot_SOURCE_DIR}/*.cpp)
+
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -96,6 +115,7 @@ set(SOURCES
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         ${IMGUI_SOURCES}
+        ${IMPLOT_SOURCES}
         )
 
 set(INCLUDES
@@ -151,25 +171,6 @@ set(INCLUDES
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
         )
-
-#hunter_add_package(imgui)
-#find_package(imgui CONFIG REQUIRED)
-CPMAddPackage(
-        NAME pf_common
-        GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG master
-)
-CPMAddPackage(
-        NAME toml++
-        GITHUB_REPOSITORY marzer/tomlplusplus
-        GIT_TAG v2.2.0
-)
-CPMAddPackage(
-        NAME implot
-        GITHUB_REPOSITORY epezent/implot
-        GIT_TAG v0.8
-        DOWNLOAD_ONLY YES
-)
 
 
 include_directories(${implot_SOURCE_DIR})
