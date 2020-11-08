@@ -24,7 +24,7 @@ class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotD
       ImPlot::PlotBarsH(getLabel().c_str(), xData.data(), yData.data(), xData.size(), width);
     }
   }
-}
-};// namespace pf::ui::ig::plot_type
+};
+}// namespace pf::ui::ig::plot_type
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_BAR_H

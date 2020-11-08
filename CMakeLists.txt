@@ -49,11 +49,6 @@ include_directories(${IMGUI_FILE_DIALOG_DIR})
 include_directories(${IMGUI_FLAME_GRAPH_DIR})
 
 CPMAddPackage(
-        NAME imgui
-        GITHUB_REPOSITORY ocornut/imgui
-        GIT_TAG v1.79
-)
-CPMAddPackage(
         NAME pf_common
         GITHUB_REPOSITORY PetrFlajsingr/pf_common
         GIT_TAG master
@@ -63,19 +58,9 @@ CPMAddPackage(
         GITHUB_REPOSITORY marzer/tomlplusplus
         GIT_TAG v2.2.0
 )
-CPMAddPackage(
-        NAME implot
-        GITHUB_REPOSITORY epezent/implot
-        GIT_TAG v0.8
-        DOWNLOAD_ONLY YES
-)
 
-
-include_directories(${imgui_SOURCE_DIR})
-file(GLOB IMGUI_SOURCES ${imgui_SOURCE_DIR}/*.cpp)
-file(GLOB IMGUI_INCLUDES ${imgui_SOURCE_DIR}/*.h)
-file(GLOB IMPLOT_SOURCES ${implot_SOURCE_DIR}/*.cpp)
-file(GLOB IMPLOT_INCLUDES ${implot_SOURCE_DIR}/*.h)
+include_directories(src/include/implot)
+include_directories(src/include/imgui)
 
 
 include_directories(${implot_SOURCE_DIR})
@@ -119,8 +104,11 @@ set(SOURCES
         src/pf_imgui/elements/interface/SavableElement.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
-        ${IMGUI_SOURCES}
-        ${IMPLOT_SOURCES}
+        src/include/implot/implot_items.cpp
+        src/include/implot/implot.cpp
+        src/include/imgui/imgui.cpp
+        src/include/imgui/imgui_widgets.cpp
+        src/include/imgui/imgui_draw.cpp
         )
 
 set(INCLUDES
@@ -175,7 +163,14 @@ set(INCLUDES
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
-        ${IMPLOT_INCLUDES}
+        src/include/implot/implot.h
+        src/include/implot/implot_internal.h
+        src/include/imgui/imgui.h
+        src/include/imgui/imgui_internal.h
+        src/include/imgui/imconfig.h
+        src/include/imgui/imstb_rectpack.h
+        src/include/imgui/imstb_textedit.h
+        src/include/imgui/imstb_truetype.h
         )
 
 
