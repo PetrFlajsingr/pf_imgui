@@ -48,6 +48,16 @@ include_directories(${toml++_SOURCE_DIR}/include)
 include_directories(${IMGUI_FILE_DIALOG_DIR})
 include_directories(${IMGUI_FLAME_GRAPH_DIR})
 
+CPMAddPackage(
+        NAME imgui
+        GITHUB_REPOSITORY ocornut/imgui
+        GIT_TAG v1.79
+)
+
+include_directories(${imgui_SOURCE_DIR})
+file(GLOB IMGUI_SOURCES ${imgui_SOURCE_DIR} "*.cpp")
+
+
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
         src/pf_imgui/elements/Button.cpp
@@ -62,6 +72,7 @@ set(SOURCES
         src/pf_imgui/elements/MenuBars.cpp
         src/pf_imgui/elements/Panel.cpp
         src/pf_imgui/elements/plots/SimplePlot.cpp
+        src/pf_imgui/elements/plots/Plot.cpp
         src/pf_imgui/elements/RadioButton.cpp
         src/pf_imgui/elements/RadioGroup.cpp
         src/pf_imgui/elements/TabBar.cpp
@@ -70,6 +81,14 @@ set(SOURCES
         src/pf_imgui/elements/Window.cpp
         src/pf_imgui/elements/FileDialog.cpp
         src/pf_imgui/elements/FlameGraph.cpp
+        src/pf_imgui/elements/plots/PieChart.cpp
+        src/pf_imgui/elements/plots/types/PlotDataBase.cpp
+        src/pf_imgui/elements/plots/types/Line.cpp
+        src/pf_imgui/elements/plots/types/Stairs.cpp
+        src/pf_imgui/elements/plots/types/Shaded.cpp
+        src/pf_imgui/elements/plots/types/Stems.cpp
+        src/pf_imgui/elements/plots/types/HeatMap.cpp
+        src/pf_imgui/elements/plots/types/Digital.cpp
         src/pf_imgui/elements/interface/Container.cpp
         src/pf_imgui/elements/interface/Element.cpp
         src/pf_imgui/elements/interface/LabeledElement.cpp
@@ -77,6 +96,7 @@ set(SOURCES
         src/pf_imgui/elements/interface/SavableElement.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
+        ${IMGUI_SOURCES}
         )
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -99,6 +119,7 @@ set(INCLUDES
         src/pf_imgui/elements/MenuBars.h
         src/pf_imgui/elements/Panel.h
         src/pf_imgui/elements/plots/SimplePlot.h
+        src/pf_imgui/elements/plots/Plot.h
         src/pf_imgui/elements/ProgressBar.h
         src/pf_imgui/elements/RadioButton.h
         src/pf_imgui/elements/RadioGroup.h
@@ -109,6 +130,17 @@ set(INCLUDES
         src/pf_imgui/elements/Window.h
         src/pf_imgui/elements/FileDialog.h
         src/pf_imgui/elements/FlameGraph.h
+        src/pf_imgui/elements/plots.h
+        src/pf_imgui/elements/plots/PieChart.h
+        src/pf_imgui/elements/plots/types/PlotDataBase.h
+        src/pf_imgui/elements/plots/types/Bar.h
+        src/pf_imgui/elements/plots/types/Line.h
+        src/pf_imgui/elements/plots/types/Stairs.h
+        src/pf_imgui/elements/plots/types/Shaded.h
+        src/pf_imgui/elements/plots/types/ErrorBar.h
+        src/pf_imgui/elements/plots/types/Stems.h
+        src/pf_imgui/elements/plots/types/HeatMap.h
+        src/pf_imgui/elements/plots/types/Digital.h
         src/pf_imgui/elements/interface/Container.h
         src/pf_imgui/elements/interface/Element.h
         src/pf_imgui/elements/interface/LabeledElement.h
@@ -120,8 +152,8 @@ set(INCLUDES
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
         )
 
-hunter_add_package(imgui)
-find_package(imgui CONFIG REQUIRED)
+#hunter_add_package(imgui)
+#find_package(imgui CONFIG REQUIRED)
 CPMAddPackage(
         NAME pf_common
         GITHUB_REPOSITORY PetrFlajsingr/pf_common
@@ -141,7 +173,6 @@ CPMAddPackage(
 
 
 include_directories(${implot_SOURCE_DIR})
-
 include_directories(${toml++_SOURCE_DIR}/include)
 
 
@@ -165,7 +196,7 @@ include(GNUInstallDirs)
 
 target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
-target_link_libraries(${PROJECT_NAME} imgui::imgui pf_common::pf_common range-v3)
+target_link_libraries(${PROJECT_NAME} imgui pf_common::pf_common range-v3)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)

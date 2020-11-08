@@ -4,18 +4,26 @@
 
 #include "ImGuiInterface.h"
 #include "serialization.h"
+#include <implot.h>
 
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
     : Container("Main"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
+
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
+  ImPlot::CreateContext();
   auto &imguiIo = ImGui::GetIO();
   imguiIo.ConfigFlags |= flags;
   ImGui::StyleColorsDark();
   return imguiIo;
+}
+
+ImGuiInterface::~ImGuiInterface() {
+  ImPlot::DestroyContext();
+  ImGui::DestroyContext();
 }
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
