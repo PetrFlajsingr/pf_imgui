@@ -73,8 +73,12 @@ CPMAddPackage(
 
 include_directories(${imgui_SOURCE_DIR})
 file(GLOB IMGUI_SOURCES ${imgui_SOURCE_DIR}/*.cpp)
+file(GLOB IMGUI_INCLUDES ${imgui_SOURCE_DIR}/*.h)
 file(GLOB IMPLOT_SOURCES ${implot_SOURCE_DIR}/*.cpp)
 
+
+include_directories(${implot_SOURCE_DIR})
+include_directories(${toml++_SOURCE_DIR}/include)
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -118,7 +122,6 @@ set(SOURCES
         ${IMPLOT_SOURCES}
         )
 
-set(PF_IMGUI_COMPILE_SRC ${IMGUI_SOURCES} CACHE STRING "something..." FORCE)
 set(INCLUDES
         src/pf_imgui/fwd.h
         src/pf_imgui/elements.h
@@ -171,11 +174,10 @@ set(INCLUDES
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
+        ${IMGUI_INCLUDES}
         )
 
 
-include_directories(${implot_SOURCE_DIR})
-include_directories(${toml++_SOURCE_DIR}/include)
 
 
 option(BUILD_SHARED_LIBS "build this library as shared")
