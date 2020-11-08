@@ -32,7 +32,7 @@ AppMenuBar &ImGuiInterface::getMenuBar() {
   if (menuBar == nullptr) { menuBar = std::make_unique<AppMenuBar>("app_menu_bar"); }
   return *menuBar;
 }
-bool ImGuiInterface::hasMenuBar() const { return menuBar == nullptr; }
+bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() { config = serializeImGuiTree(*this); }
