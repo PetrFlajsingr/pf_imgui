@@ -22,7 +22,7 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
         | ranges::views::transform([](const auto &data) { return XYPlotData(data.x, data.y); })
         | ranges::to_vector;
     details::DefaultPlotDataSetting::setData(xyData);
-    error = newData | ranges::views::transform([](const auto &data) { return data.error; })
+    error = newData | ranges::views::transform([](const auto &data) { return static_cast<double>(data.error); })
         | ranges::to_vector;
   }
 
