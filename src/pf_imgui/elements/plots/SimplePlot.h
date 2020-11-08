@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_PLOT_H
 #define PF_IMGUI_IMGUI_ELEMENTS_PLOT_H
 
-#include "interface/LabeledElement.h"
+#include "src/pf_imgui/elements/interface/LabeledElement.h"
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <vector>

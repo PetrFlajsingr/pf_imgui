@@ -22,11 +22,11 @@
 #include "elements/ProgressBar.h"
 #include "elements/RadioButton.h"
 #include "elements/RadioGroup.h"
-#include "elements/SimplePlot.h"
 #include "elements/Slider.h"
 #include "elements/TabBar.h"
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/Window.h"
+#include "src/pf_imgui/elements/plots/SimplePlot.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

@@ -61,7 +61,7 @@ set(SOURCES
         src/pf_imgui/elements/Memo.cpp
         src/pf_imgui/elements/MenuBars.cpp
         src/pf_imgui/elements/Panel.cpp
-        src/pf_imgui/elements/SimplePlot.cpp
+        src/pf_imgui/elements/plots/SimplePlot.cpp
         src/pf_imgui/elements/RadioButton.cpp
         src/pf_imgui/elements/RadioGroup.cpp
         src/pf_imgui/elements/TabBar.cpp
@@ -98,7 +98,7 @@ set(INCLUDES
         src/pf_imgui/elements/Memo.h
         src/pf_imgui/elements/MenuBars.h
         src/pf_imgui/elements/Panel.h
-        src/pf_imgui/elements/SimplePlot.h
+        src/pf_imgui/elements/plots/SimplePlot.h
         src/pf_imgui/elements/ProgressBar.h
         src/pf_imgui/elements/RadioButton.h
         src/pf_imgui/elements/RadioGroup.h
