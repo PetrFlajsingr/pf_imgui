@@ -27,6 +27,6 @@
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/Window.h"
-#include "src/pf_imgui/elements/plots/SimplePlot.h"
+#include "elements/plots.h"
 
 #endif//PF_IMGUI_ELEMENTS_H
