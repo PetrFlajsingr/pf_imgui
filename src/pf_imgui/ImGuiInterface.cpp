@@ -21,11 +21,6 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   return imguiIo;
 }
 
-ImGuiInterface::~ImGuiInterface() {
-  ImPlot::DestroyContext();
-  ImGui::DestroyContext();
-}
-
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
 Dialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption,

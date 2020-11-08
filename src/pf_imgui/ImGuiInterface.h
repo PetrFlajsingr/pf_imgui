@@ -19,7 +19,6 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT ImGuiInterface : public Container {
  public:
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
-  ~ImGuiInterface() override;
 
   [[nodiscard]] ImGuiIO &getIo() const;
 
