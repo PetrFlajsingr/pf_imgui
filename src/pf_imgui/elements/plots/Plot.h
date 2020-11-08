@@ -26,8 +26,10 @@ class PF_IMGUI_EXPORT Plot : public LabeledElement, public ResizableElement {
 
   template<std::derived_from<plot_type::PlotData> T, typename... Args>
   requires std::constructible_from<T, Args...> T &addData(Args &&... args) {
-    datas.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
-    return *datas.back();
+    auto data = std::make_unique<T>(std::forward<Args>(args)...);
+    const auto ptr = data.get();
+    datas.emplace_back(std::move(data));
+    return *ptr;
   }
 
   template<std::derived_from<plot_type::PlotData> T>
