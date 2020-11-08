@@ -24,6 +24,7 @@ class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
       recordCount = 0;
       return;
     }
+    recordCount = newData.size();
     rowSize = newData[0].size();
     std::ranges::for_each(newData, [this](const auto &row) { assert(row.size() == rowSize); });
     data = newData | ranges::views::join
