@@ -6,7 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 
 #include "interface/LabeledElement.h"
-#include <imgui_widget_flamegraph.h>
+#include <include/ImGuiFlamegraph/imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/ResizableElement.h>
