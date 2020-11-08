@@ -11,6 +11,7 @@
 #include "elements/ComboBox.h"
 #include "elements/Dialog.h"
 #include "elements/DragInput.h"
+#include "elements/FlameGraph.h"
 #include "elements/Group.h"
 #include "elements/Input.h"
 #include "elements/InputText.h"
@@ -27,6 +28,5 @@
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/Window.h"
-#include "elements/FlameGraph.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

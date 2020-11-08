@@ -15,8 +15,8 @@ namespace pf::ui::ig {
 // TODO: multiple listeners
 class PF_IMGUI_EXPORT Button : public LabeledElement, public ResizableElement {
  public:
-  Button(const std::string &name, std::string caption,
-         ButtonType buttonType = ButtonType::Normal, const ImVec2 &size = {0, 0});
+  Button(const std::string &name, std::string caption, ButtonType buttonType = ButtonType::Normal,
+         const ImVec2 &size = {0, 0});
   void setOnClick(std::invocable auto fnc) { onClick = fnc; }
 
   [[nodiscard]] ButtonType getType() const;

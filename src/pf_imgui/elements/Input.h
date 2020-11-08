@@ -23,9 +23,9 @@ namespace details {
 #define IMGUI_INPUT_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
 #define IMGUI_INPUT_DOUBLE_TYPE_LIST double
 #define IMGUI_INPUT_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
-#define IMGUI_INPUT_GLM_TYPE_LIST \
+#define IMGUI_INPUT_GLM_TYPE_LIST                                                                  \
   glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
-#define IMGUI_INPUT_TYPE_LIST \
+#define IMGUI_INPUT_TYPE_LIST                                                                      \
   IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_INT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
@@ -77,7 +77,9 @@ concept FormattedWithoutStep =
 }// namespace details
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Input : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
+class PF_IMGUI_EXPORT Input : public LabeledElement,
+                              public ValueObservableElement<T>,
+                              public SavableElement {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:

@@ -8,10 +8,10 @@
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
+#include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/math/Range.h>
@@ -39,7 +39,9 @@ constexpr const char *defaultDragFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
-class PF_IMGUI_EXPORT DragInput : public ValueObservableElement<T>, public LabeledElement, public SavableElement {
+class PF_IMGUI_EXPORT DragInput : public ValueObservableElement<T>,
+                                  public LabeledElement,
+                                  public SavableElement {
  public:
   using ParamType = details::UnderlyingType<T>;
 

@@ -26,8 +26,7 @@ void SubMenu::renderImpl() {
 SubMenu::SubMenu(const std::string &elementName, const std::string &caption)
     : Element(elementName), LabeledElement(elementName, caption) {}
 
-WindowMenuBar::WindowMenuBar(const std::string &elementName)
-    : Element(elementName) {}
+WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void WindowMenuBar::renderImpl() {
   ImGui::BeginMenuBar();
@@ -56,18 +55,13 @@ MenuItem &MenuContainer::addItem(const std::string &name, const std::string &cap
   return *ptr;
 }
 void MenuContainer::removeItem(const std::string &name) {
-  if (const auto iter = std::ranges::find_if(
-          items,
-          [name](auto &item) {
-            return item->getName() == name;
-          });
+  if (const auto iter =
+          std::ranges::find_if(items, [name](auto &item) { return item->getName() == name; });
       iter != items.end()) {
     items.erase(iter);
   }
 }
 void MenuContainer::renderItems() {
-  std::ranges::for_each(items, [](auto &item) {
-    item->render();
-  });
+  std::ranges::for_each(items, [](auto &item) { item->render(); });
 }
 }// namespace pf::ui::ig

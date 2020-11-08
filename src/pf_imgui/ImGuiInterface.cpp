@@ -20,8 +20,8 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
-Dialog &ImGuiInterface::createDialog(const std::string &elementName,
-                                     const std::string &caption, Modal modal) {
+Dialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption,
+                                     Modal modal) {
   auto dialog = std::make_unique<Dialog>(*this, elementName, caption, modal);
   const auto ptr = dialog.get();
   addChild(std::move(dialog));
@@ -47,12 +47,9 @@ void ImGuiInterface::setStateFromConfig() {
   });
 }
 void ImGuiInterface::renderFileDialogs() {
-  std::ranges::for_each(fileDialogs, [](auto &dialog) {
-    dialog.render();
-  });
-  if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) {
-        return dialog.isDone();
-      });
+  std::ranges::for_each(fileDialogs, [](auto &dialog) { dialog.render(); });
+  if (const auto iter =
+          std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
       iter != fileDialogs.end()) {
     fileDialogs.erase(iter);
   }

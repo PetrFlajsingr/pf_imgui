@@ -6,8 +6,10 @@
 #include <imgui.h>
 
 namespace pf::ui::ig {
-Dialog::Dialog(Container &parent, const std::string &elementName, const std::string &caption, Modal modal)
-    : Element(elementName), Container(elementName), LabeledElement(elementName, caption), modal(modal), owner(parent) {}
+Dialog::Dialog(Container &parent, const std::string &elementName, const std::string &caption,
+               Modal modal)
+    : Element(elementName), Container(elementName), LabeledElement(elementName, caption),
+      modal(modal), owner(parent) {}
 
 void Dialog::renderImpl() {
   if (closed) {
@@ -25,12 +27,8 @@ void Dialog::renderImpl() {
     std::ranges::for_each(getChildren(), [](auto &child) { child.get().render(); });
     ImGui::EndPopup();
   }
-  if (closed) {
-    owner.enqueueChildRemoval(getName());
-  }
+  if (closed) { owner.enqueueChildRemoval(getName()); }
 }
-void Dialog::close() {
-  closed = true;
-}
+void Dialog::close() { closed = true; }
 
 }// namespace pf::ui::ig

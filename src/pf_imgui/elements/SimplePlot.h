@@ -17,8 +17,8 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT SimplePlot : public LabeledElement {
  public:
   SimplePlot(const std::string &elementName, const std::string &caption, PlotType plotType,
-       std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
-       const std::optional<std::size_t> &historyLimit = std::nullopt);
+             std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
+             const std::optional<std::size_t> &historyLimit = std::nullopt);
   void addValue(float value);
   void clear();
   void setValues(const std::vector<float> &vals);

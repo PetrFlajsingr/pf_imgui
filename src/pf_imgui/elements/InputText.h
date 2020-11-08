@@ -20,7 +20,8 @@ class PF_IMGUI_EXPORT InputText : public Text,
                                   public SavableElement {
  public:
   InputText(const std::string &elementName, std::string caption, const std::string &text = "",
-            TextInputType textInputType = TextInputType::SingleLine, Persistent persistent = Persistent::No);
+            TextInputType textInputType = TextInputType::SingleLine,
+            Persistent persistent = Persistent::No);
 
   void clear();
 

@@ -36,9 +36,7 @@ class PF_IMGUI_EXPORT MenuItem : public LabeledElement {
  public:
   MenuItem(const std::string &elementName, const std::string &caption);
 
-  void setOnClick(std::invocable auto fnc) {
-    onClick = fnc;
-  }
+  void setOnClick(std::invocable auto fnc) { onClick = fnc; }
 
  protected:
   void renderImpl() override;

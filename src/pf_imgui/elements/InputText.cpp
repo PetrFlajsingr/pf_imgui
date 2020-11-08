@@ -4,8 +4,8 @@
 
 #include "InputText.h"
 #include <imgui.h>
-#include <utility>
 #include <toml++/toml_node_view.h>
+#include <utility>
 
 namespace pf::ui::ig {
 InputText::InputText(const std::string &elementName, std::string caption, const std::string &text,

@@ -8,9 +8,10 @@
 
 namespace pf::ui::ig {
 
-SimplePlot::SimplePlot(const std::string &elementName, const std::string &caption, PlotType plotType,
-           std::vector<float> values, std::optional<std::string> overlayText,
-           const std::optional<std::size_t> &historyLimit)
+SimplePlot::SimplePlot(const std::string &elementName, const std::string &caption,
+                       PlotType plotType, std::vector<float> values,
+                       std::optional<std::string> overlayText,
+                       const std::optional<std::size_t> &historyLimit)
     : Element(elementName), LabeledElement(elementName, caption), plotType(plotType),
       values(std::move(values)), overlayText(std::move(overlayText)), historyLimit(historyLimit) {}
 

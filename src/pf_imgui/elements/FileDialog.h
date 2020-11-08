@@ -14,8 +14,7 @@
 namespace pf::ui::ig {
 
 struct PF_IMGUI_EXPORT FileExtensionSettings {
-  explicit FileExtensionSettings(std::vector<std::string> extensions,
-                                 std::string description = "",
+  explicit FileExtensionSettings(std::vector<std::string> extensions, std::string description = "",
                                  const std::optional<ImVec4> &color = std::nullopt);
   std::vector<std::string> extensions;
   std::string description;
@@ -26,30 +25,24 @@ class PF_IMGUI_EXPORT FileDialog : public LabeledElement {
  public:
   FileDialog(const std::string &elementName, const std::string &caption,
              const std::vector<FileExtensionSettings> &extSettings,
-             std::invocable<std::vector<std::string>> auto onSelect,
-             std::invocable auto onCancel,
-             std::string startPath = ".", std::string startName = "",
-             Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
-      : Element(elementName), LabeledElement(elementName, caption),
-        openPath(std::move(startPath)), defaultName(std::move(startName)),
-        modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
-        onFilesSelected(onSelect), onSelectCanceled(onCancel) {
+             std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
+             std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
+             uint32_t maxSelectedFiles = 1)
+      : Element(elementName), LabeledElement(elementName, caption), openPath(std::move(startPath)),
+        defaultName(std::move(startName)), modal(modality), fileType(FileType::File),
+        maxSelectCount(maxSelectedFiles), onFilesSelected(onSelect), onSelectCanceled(onCancel) {
     prepareExtInfos(extSettings);
   }
 
   FileDialog(const std::string &elementName, const std::string &caption,
-             std::invocable<std::vector<std::string>> auto onSelect,
-             std::invocable auto onCancel,
-             std::string startPath = ".", std::string startName = "",
-             Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
+             std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
+             std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
+             uint32_t maxSelectedDirs = 1)
       : Element(elementName), LabeledElement(elementName, caption), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
-        maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {
-  }
+        maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
 
-  [[nodiscard]] bool isDone() const {
-    return done;
-  }
+  [[nodiscard]] bool isDone() const { return done; }
 
  protected:
   void renderImpl() override;

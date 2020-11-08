@@ -5,6 +5,5 @@
 #include "Image.h"
 
 namespace pf::ui::ig {
-void Image::renderImpl() {
-}
+void Image::renderImpl() {}
 }// namespace pf::ui::ig

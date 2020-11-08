@@ -26,11 +26,7 @@ void ListBox::renderImpl() {
     notifyValueChanged();
   }
 }
-void ListBox::addItem(std::string item) {
-  items.emplace_back(std::move(item));
-}
-std::string_view ListBox::getSelectedItem() const {
-  return items[currentItemIdx];
-}
+void ListBox::addItem(std::string item) { items.emplace_back(std::move(item)); }
+std::string_view ListBox::getSelectedItem() const { return items[currentItemIdx]; }
 
 }// namespace pf::ui::ig

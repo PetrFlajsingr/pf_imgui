@@ -13,7 +13,6 @@ class LabeledElement;
 class ResizableElement;
 class SavableElement;
 
-
 class Button;
 class Checkbox;
 class ComboBox;
@@ -37,6 +36,6 @@ class TabBar;
 class Text;
 class Tree;
 class Window;
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_FWD_H

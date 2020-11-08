@@ -9,18 +9,14 @@ namespace pf::ui::ig {
 Element::Element(std::string elementName) : name(std::move(elementName)) {}
 
 Element::Element(Element &&other) noexcept {
-  if (isMoved) {
-    return;
-  }
+  if (isMoved) { return; }
   name = std::move(other.name);
   visibility = other.visibility;
   isMoved = true;
 }
 
 Element &Element::operator=(Element &&other) noexcept {
-  if (isMoved) {
-    return *this;
-  }
+  if (isMoved) { return *this; }
   name = std::move(other.name);
   visibility = other.visibility;
   isMoved = true;
@@ -34,9 +30,7 @@ Visibility Element::getVisibility() const { return visibility; }
 void Element::setVisibility(Visibility visi) { visibility = visi; }
 
 void Element::render() {
-  if (visibility == Visibility::Visible) {
-    renderImpl();
-  }
+  if (visibility == Visibility::Visible) { renderImpl(); }
 }
 
 }// namespace pf::ui::ig

@@ -18,7 +18,8 @@ class PF_IMGUI_EXPORT RadioGroup : public LabeledElement,
  public:
   RadioGroup(const std::string &elementName, const std::string &caption,
              std::vector<RadioButton> buttons = {},
-             const std::optional<std::size_t> &selectedButtonIndex = std::nullopt, Persistent persistent = Persistent::No);
+             const std::optional<std::size_t> &selectedButtonIndex = std::nullopt,
+             Persistent persistent = Persistent::No);
 
   void addButton(const std::string &elementName, const std::string &caption, bool value = false);
 

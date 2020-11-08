@@ -7,41 +7,23 @@
 
 namespace pf::ui::ig {
 
-enum class Visibility {
-  Visible,
-  Invisible
-};
+enum class Visibility { Visible, Invisible };
 
-enum class Modal { Yes,
-                   No };
+enum class Modal { Yes, No };
 
-enum class TextInputType { SingleLine,
-                           MultiLine };
+enum class TextInputType { SingleLine, MultiLine };
 
-enum class PlotType { Lines,
-                      Histogram };
+enum class PlotType { Lines, Histogram };
 
-enum class ButtonType { Normal,
-                        Small,
-                        ArrowUp,
-                        ArrowLeft,
-                        ArrowRight,
-                        ArrowDown };
+enum class ButtonType { Normal, Small, ArrowUp, ArrowLeft, ArrowRight, ArrowDown };
 
-enum class Persistent {
-  Yes,
-  No
-};
+enum class Persistent { Yes, No };
 
-enum class ColorChooserType { Edit,
-                              Picker };
+enum class ColorChooserType { Edit, Picker };
 
-enum class PanelLayout { Vertical,
-                         Horizontal };
+enum class PanelLayout { Vertical, Horizontal };
 
-enum class FileType {
-  File, Directory
-};
+enum class FileType { File, Directory };
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ENUMS_H
