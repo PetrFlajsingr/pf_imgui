@@ -15,6 +15,9 @@ class PF_IMGUI_EXPORT SavableElement : public virtual Element {
  public:
   SavableElement(const std::string &elementName, Persistent persistent);
 
+  SavableElement(SavableElement &&other) noexcept;
+  SavableElement &operator=(SavableElement &&other) noexcept;
+
   void unserialize(const toml::table &src);
   std::optional<toml::table> serialize();
 

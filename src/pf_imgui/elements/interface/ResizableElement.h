@@ -14,6 +14,9 @@ class PF_IMGUI_EXPORT ResizableElement : public virtual Element {
  public:
   ResizableElement(std::string elementName, const ImVec2 &size);
 
+  ResizableElement(ResizableElement &&other) noexcept;
+  ResizableElement &operator=(ResizableElement &&other) noexcept;
+
   [[nodiscard]] const ImVec2 &getSize() const;
   void setSize(const ImVec2 &s);
 

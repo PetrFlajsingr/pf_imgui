@@ -6,20 +6,24 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_CONTAINER_H
 
 #include "Element.h"
-#include <unordered_map>
 #include <memory>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
 #include <string>
+#include <unordered_map>
 
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Container : public virtual Element {
  public:
   explicit Container(const std::string &elementName);
+
+  Container(Container &&other) noexcept;
+  Container &operator=(Container &&other) noexcept;
+
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...>
-      T &createChild(std::string name, Args &&... args) {
+  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &
+  createChild(std::string name, Args &&... args) {
     if (const auto iter = children.find(name); iter != children.end()) {
       throw StackTraceException::fmt("{} already present in ui", name);
     }

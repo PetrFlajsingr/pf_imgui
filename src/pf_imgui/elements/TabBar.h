@@ -24,14 +24,14 @@ class PF_IMGUI_EXPORT TabBar : public Element {
  public:
   explicit TabBar(const std::string &elementName);
 
-  std::shared_ptr<Tab> addTab(const std::string &name, const std::string &caption);
+  Tab &addTab(const std::string &name, const std::string &caption);
   void removeTab(const std::string &name);
 
  protected:
   void renderImpl() override;
 
  private:
-  std::vector<std::shared_ptr<Tab>> tabs;
+  std::vector<Tab> tabs;
 };
 
 }// namespace pf::ui::ig
