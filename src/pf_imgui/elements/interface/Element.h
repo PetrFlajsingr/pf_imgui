@@ -15,6 +15,11 @@ class PF_IMGUI_EXPORT Element {
  public:
   explicit Element(std::string elementName);
   virtual ~Element() = default;
+  Element(Element &&other) noexcept;
+  Element &operator=(Element &&other) noexcept;
+  Element(const Element &) = delete;
+  Element &operator=(const Element &) = delete;
+
   [[nodiscard]] const std::string &getName() const;
 
   [[nodiscard]] Visibility getVisibility() const;
@@ -28,6 +33,7 @@ class PF_IMGUI_EXPORT Element {
  private:
   std::string name;
   Visibility visibility = Visibility::Visible;
+  bool isMoved = false;
 };
 
 }// namespace pf::ui::ig

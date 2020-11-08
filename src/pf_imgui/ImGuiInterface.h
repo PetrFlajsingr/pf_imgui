@@ -1,5 +1,5 @@
 //
-// Created by petr on 10/27/20.
+// Created by petr on 10/27/20.mvoe
 //
 
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
@@ -22,8 +22,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
 
   [[nodiscard]] ImGuiIO &getIo() const;
 
-  std::shared_ptr<Dialog> createDialog(const std::string &elementName,
-                                       const std::string &caption, Modal modal = Modal::Yes);
+  Dialog &createDialog(const std::string &elementName,
+                       const std::string &caption, Modal modal = Modal::Yes);
 
   [[nodiscard]] AppMenuBar &getMenuBar();
   [[nodiscard]] bool hasMenuBar() const;
@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
   }
 
  protected:
-  std::optional<AppMenuBar> menuBar = std::nullopt;
+  std::unique_ptr<AppMenuBar> menuBar = nullptr;
 
   void renderFileDialogs();
 

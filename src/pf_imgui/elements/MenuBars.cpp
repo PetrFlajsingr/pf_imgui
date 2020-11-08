@@ -43,22 +43,23 @@ void AppMenuBar::renderImpl() {
 }
 
 SubMenu &MenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
-  items.emplace_back(SubMenu(name, caption));
-  return std::get<SubMenu>(items.back());
+  auto newSubMenu = std::make_unique<SubMenu>(name, caption);
+  const auto ptr = newSubMenu.get();
+  items.emplace_back(std::move(newSubMenu));
+  return *ptr;
 }
 
 MenuItem &MenuContainer::addItem(const std::string &name, const std::string &caption) {
-  items.emplace_back(MenuItem(name, caption));
-  return std::get<MenuItem>(items.back());
+  auto newItem = std::make_unique<MenuItem>(name, caption);
+  const auto ptr = newItem.get();
+  items.emplace_back(std::move(newItem));
+  return *ptr;
 }
 void MenuContainer::removeItem(const std::string &name) {
   if (const auto iter = std::ranges::find_if(
           items,
           [name](auto &item) {
-            return std::visit(
-                Visitor{[name](SubMenu &item) { return item.getName() == name; },
-                        [name](MenuItem &item) { return item.getName() == name; }},
-                item);
+            return item->getName() == name;
           });
       iter != items.end()) {
     items.erase(iter);
@@ -66,9 +67,7 @@ void MenuContainer::removeItem(const std::string &name) {
 }
 void MenuContainer::renderItems() {
   std::ranges::for_each(items, [](auto &item) {
-    std::visit(Visitor{[](MenuItem &item) { item.render(); },
-                       [](SubMenu &subMenu) { subMenu.render(); }},
-               item);
+    item->render();
   });
 }
 }// namespace pf::ui::ig

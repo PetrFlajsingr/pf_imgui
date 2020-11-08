@@ -24,9 +24,9 @@ const std::string &Window::getTitle() const { return title; }
 void Window::setTitle(const std::string &tit) { title = tit; }
 
 WindowMenuBar &Window::getMenuBar() {
-  if (!menuBar.has_value()) { menuBar = WindowMenuBar(getName() + "_menu_bar"); }
+  if (menuBar == nullptr) { menuBar = std::make_unique<WindowMenuBar>(getName() + "_menu_bar"); }
   return *menuBar;
 }
 
-bool Window::hasMenuBar() const { return menuBar.has_value(); }
+bool Window::hasMenuBar() const { return menuBar == nullptr; }
 }// namespace pf::ui::ig

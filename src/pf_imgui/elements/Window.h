@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT Window : public Container {
 
  private:
   std::string title;
-  std::optional<WindowMenuBar> menuBar = std::nullopt;
+  std::unique_ptr<WindowMenuBar> menuBar = nullptr;
 };
 
 }// namespace pf::ui::ig

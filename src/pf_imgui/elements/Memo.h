@@ -49,7 +49,7 @@ class PF_IMGUI_EXPORT Memo : public LabeledElement {
   std::function<bool(std::string_view)> filterFnc = [](auto) { return true; };
   std::optional<std::size_t> recordLimit;
   std::vector<std::string> records;
-  std::shared_ptr<Text> textArea;
+  Text *textArea;
 };
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_IMGUI_ELEMENTS_MEMO_H

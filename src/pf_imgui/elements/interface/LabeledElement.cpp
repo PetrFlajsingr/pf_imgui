@@ -6,6 +6,16 @@
 #include <utility>
 
 namespace pf::ui::ig {
+LabeledElement::LabeledElement(LabeledElement &&other) noexcept : Element(std::move(other)),
+                                                                  label(std::move(other.label)) {
+}
+
+LabeledElement &LabeledElement::operator=(LabeledElement &&other) noexcept {
+  label = std::move(other.label);
+  Element::operator=(std::move(other));
+  return *this;
+}
+
 LabeledElement::LabeledElement(std::string elementName,
                                std::string caption)
     : Element(std::move(elementName)), label(std::move(caption)) {}

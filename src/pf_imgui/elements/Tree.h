@@ -15,7 +15,7 @@ class PF_IMGUI_EXPORT Tree : public LabeledElement, public Container {
  public:
   Tree(const std::string &elementName, const std::string &caption);
 
-  std::shared_ptr<Tree> addNode(const std::string &elementName, const std::string &caption);
+  Tree &addNode(const std::string &elementName, const std::string &caption);
 
  protected:
   void renderImpl() override;

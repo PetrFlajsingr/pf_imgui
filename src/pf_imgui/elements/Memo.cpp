@@ -51,16 +51,16 @@ void Memo::rebuildPanel() {
         std::make_unique<Panel>(getName() + "button_filter_panel", getLabel() + " controls",
                                 PanelLayout::Horizontal, ImVec2{0, 20});
     if (buttonsEnabled) {
-      controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear")->setOnClick([this] {
+      controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear").setOnClick([this] {
         clearRecords();
       });
-      controlsPanel->createChild<Button>(getName() + "copy_btn", "Copy")->setOnClick([this] {
+      controlsPanel->createChild<Button>(getName() + "copy_btn", "Copy").setOnClick([this] {
         ImGui::SetClipboardText(getText().c_str());
       });
     }
     if (filterEnabled) {
       controlsPanel->createChild<InputText>(getName() + "filter_input", "Filter")
-          ->addValueListener([this](std::string_view str) {
+          .addValueListener([this](std::string_view str) {
             const auto filterStr = std::string(str);
             filterFnc = [filterStr](std::string_view recordStr) {
               return recordStr.find(filterStr) != std::string::npos;
@@ -68,7 +68,7 @@ void Memo::rebuildPanel() {
           });
     }
   }
-  textArea = textAreaPanel.createChild<Text>(getName() + "memo_text", "Memo");
+  textArea = &textAreaPanel.createChild<Text>(getName() + "memo_text", "Memo");
   rebuild = false;
 }
 bool Memo::isButtonsEnabled() const { return buttonsEnabled; }

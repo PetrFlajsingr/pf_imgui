@@ -132,7 +132,15 @@ CPMAddPackage(
         GITHUB_REPOSITORY marzer/tomlplusplus
         GIT_TAG v2.2.0
 )
+CPMAddPackage(
+        NAME implot
+        GITHUB_REPOSITORY epezent/implot
+        GIT_TAG v0.8
+        DOWNLOAD_ONLY YES
+)
 
+
+include_directories(${implot_SOURCE_DIR})
 
 include_directories(${toml++_SOURCE_DIR}/include)
 

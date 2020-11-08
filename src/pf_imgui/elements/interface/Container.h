@@ -19,18 +19,22 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
   explicit Container(const std::string &elementName);
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...>
-      std::shared_ptr<T> createChild(std::string name, Args &&... args) {
-    auto child = std::make_shared<T>(name, std::forward<Args>(args)...);
-    addChild(child);
-    return child;
+      T &createChild(std::string name, Args &&... args) {
+    if (const auto iter = children.find(name); iter != children.end()) {
+      throw StackTraceException::fmt("{} already present in ui", name);
+    }
+    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    addChild(std::move(child));
+    return *ptr;
   }
-  void addChild(std::shared_ptr<Element> child);
   void removeChild(const std::string &name);
+  void addChild(std::unique_ptr<Element> child);
 
   void enqueueChildRemoval(const std::string &name);
 
   template<std::derived_from<Element> T>
-  [[nodiscard]] std::shared_ptr<T> childByName(const std::string &name) {
+  [[nodiscard]] T &childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) {
         return result;
@@ -45,7 +49,7 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
   void clear();
 
  private:
-  std::unordered_map<std::string, std::shared_ptr<Element>> children;
+  std::unordered_map<std::string, std::unique_ptr<Element>> children;
   std::vector<std::reference_wrapper<Element>> childrenInOrder;
   std::vector<std::string> childrenToRemove;
 };

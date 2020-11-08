@@ -19,18 +19,20 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
 }
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
-std::shared_ptr<Dialog> ImGuiInterface::createDialog(const std::string &elementName,
-                                                     const std::string &caption, Modal modal) {
-  auto result = std::make_shared<Dialog>(*this, elementName, caption, modal);
-  addChild(result);
-  return result;
+
+Dialog &ImGuiInterface::createDialog(const std::string &elementName,
+                                     const std::string &caption, Modal modal) {
+  auto dialog = std::make_unique<Dialog>(*this, elementName, caption, modal);
+  const auto ptr = dialog.get();
+  addChild(std::move(dialog));
+  return *ptr;
 }
 
 AppMenuBar &ImGuiInterface::getMenuBar() {
-  if (!menuBar.has_value()) { menuBar = AppMenuBar("app_menu_bar"); }
+  if (menuBar == nullptr) { menuBar = std::make_unique<AppMenuBar>("app_menu_bar"); }
   return *menuBar;
 }
-bool ImGuiInterface::hasMenuBar() const { return menuBar.has_value(); }
+bool ImGuiInterface::hasMenuBar() const { return menuBar == nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() { config = serializeImGuiTree(*this); }

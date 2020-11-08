@@ -8,6 +8,7 @@
 #include "interface/Element.h"
 #include "interface/LabeledElement.h"
 #include <functional>
+#include <memory>
 #include <pf_imgui/_export.h>
 #include <variant>
 #include <vector>
@@ -28,7 +29,7 @@ class PF_IMGUI_EXPORT MenuContainer {
   void renderItems();
 
  private:
-  std::vector<std::variant<MenuItem, SubMenu>> items;
+  std::vector<std::unique_ptr<Element>> items;
 };
 
 class PF_IMGUI_EXPORT MenuItem : public LabeledElement {

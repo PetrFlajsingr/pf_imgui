@@ -13,6 +13,9 @@ class PF_IMGUI_EXPORT LabeledElement : public virtual Element {
  public:
   LabeledElement(std::string elementName, std::string caption);
 
+  LabeledElement(LabeledElement &&other) noexcept;
+  LabeledElement &operator=(LabeledElement &&other) noexcept;
+
   [[nodiscard]] const std::string &getLabel() const;
   void setLabel(const std::string &cap);
 

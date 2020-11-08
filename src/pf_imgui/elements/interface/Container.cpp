@@ -8,14 +8,10 @@ namespace pf::ui::ig {
 
 Container::Container(const std::string &elementName) : Element(elementName) {}
 
-void Container::addChild(std::shared_ptr<Element> child) {
-  if (const auto iter = children.find(child->getName()); iter != children.end()) {
-    throw StackTraceException::fmt("{} already present in ui", child->getName());
-  }
+void Container::addChild(std::unique_ptr<Element> child) {
   childrenInOrder.emplace_back(*child);
   children[child->getName()] = std::move(child);
 }
-
 void Container::removeChild(const std::string &name) {
   if (const auto iter = children.find(name); iter != children.end()) {
     auto ptr = iter->second.get();
