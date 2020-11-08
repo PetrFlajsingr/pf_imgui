@@ -36,11 +36,11 @@ elseif (CMAKE_BUILD_TYPE MATCHES TSAN)
 endif ()
 
 
-if(USE_LLD_LINKER)
+if (USE_LLD_LINKER)
     list(APPEND flags "-fuse-ld=lld")
-elseif(USE_GOLD_LINKER)
+elseif (USE_GOLD_LINKER)
     list(APPEND flags "-fuse-ld=gold")
-endif()
+endif ()
 
 set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
 set(IMGUI_FLAME_GRAPH_DIR src/include/ImGUiFlamegraph)
@@ -190,13 +190,13 @@ target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
 
 if (MEASURE_BUILD_TIME)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
-endif()
+endif ()
 
 include(GNUInstallDirs)
 
 target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
-target_link_libraries(${PROJECT_NAME} imgui pf_common::pf_common range-v3)
+target_link_libraries(${PROJECT_NAME} PUBLIC imgui pf_common::pf_common range-v3)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
