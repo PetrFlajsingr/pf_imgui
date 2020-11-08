@@ -118,6 +118,8 @@ set(SOURCES
         ${IMPLOT_SOURCES}
         )
 
+set(PF_IMGUI_COMPILE_SRC ${IMGUI_SOURCES} PARENT_SCOPE)
+
 set(INCLUDES
         src/pf_imgui/fwd.h
         src/pf_imgui/elements.h
