@@ -7,7 +7,7 @@
 
 #include "Element.h"
 #include <pf_imgui/_export.h>
-#include <toml++/toml_table.h>
+#include <toml++/toml.h>
 
 namespace pf::ui::ig {
 
