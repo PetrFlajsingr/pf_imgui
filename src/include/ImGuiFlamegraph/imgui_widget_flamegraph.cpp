@@ -58,6 +58,12 @@ uint8_t FlameGraphSample::getMaxDepth() const {
   })
       ->getMaxDepth();
 }
+void FlameGraphSample::addSubSample(FlameGraphSample &&sample) {
+  subSamples.emplace_back(std::forward<FlameGraphSample>(sample));
+}
+void FlameGraphSample::addSubSample(const FlameGraphSample &sample) {
+  subSamples.emplace_back(sample);
+}
 
 void PlotFlame(
     const char *label,

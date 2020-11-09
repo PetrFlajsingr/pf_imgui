@@ -47,6 +47,8 @@ class FlameGraphSample {
 
   FlameGraphSample &addSubSample(pf::math::Range<std::chrono::microseconds> sampleTime,
                                  std::string sampleCaption);
+  void addSubSample(FlameGraphSample &&sample);
+  void addSubSample(const FlameGraphSample &sample);
   [[nodiscard]] const pf::math::Range<std::chrono::microseconds> &getTime() const;
   [[nodiscard]] uint8_t getLevel() const;
   [[nodiscard]] const std::string &getCaption() const;
