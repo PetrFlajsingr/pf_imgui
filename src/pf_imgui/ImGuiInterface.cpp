@@ -57,5 +57,11 @@ void ImGuiInterface::renderFileDialogs() {
     fileDialogs.erase(iter);
   }
 }
+bool ImGuiInterface::isWindowHovered() const {
+  return io.WantCaptureMouse;
+}
+bool ImGuiInterface::isKeyboardCaptured() const {
+  return io.WantCaptureKeyboard;
+}
 
 }// namespace pf::ui::ig

@@ -30,6 +30,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
 
   [[nodiscard]] const toml::table &getConfig() const;
 
+  [[nodiscard]] bool isWindowHovered() const;
+
+  [[nodiscard]] bool isKeyboardCaptured() const;
+
   void updateConfig();
   void setStateFromConfig();
 
