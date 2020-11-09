@@ -4,7 +4,7 @@
 
 #include "RadioGroup.h"
 #include <range/v3/view/enumerate.hpp>
-#include <toml++/toml_node_view.h>
+#include <toml++/toml_node.hpp>
 #include <utility>
 
 namespace pf::ui::ig {

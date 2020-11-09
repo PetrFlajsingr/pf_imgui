@@ -4,7 +4,7 @@
 
 #include "Checkbox.h"
 #include <imgui.h>
-#include <toml++/toml_node_view.h>
+#include <toml++/toml_node.hpp>
 
 namespace pf::ui::ig {
 

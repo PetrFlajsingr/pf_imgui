@@ -7,7 +7,7 @@
 #include <imgui.h>
 #include <range/v3/view/enumerate.hpp>
 #include <range/v3/view/transform.hpp>
-#include <toml++/toml_node_view.h>
+#include <toml++/toml_node.hpp>
 #include <utility>
 
 namespace pf::ui::ig {
