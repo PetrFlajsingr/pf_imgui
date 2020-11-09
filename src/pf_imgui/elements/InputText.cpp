@@ -4,7 +4,7 @@
 
 #include "InputText.h"
 #include <imgui.h>
-#include <toml++/toml_node.hpp>
+#include <toml++/toml_node_view.h>
 #include <utility>
 
 namespace pf::ui::ig {

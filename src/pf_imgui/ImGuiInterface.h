@@ -12,7 +12,7 @@
 #include <imgui.h>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
-#include <toml++/toml_table.hpp>
+#include <toml++/toml_table.h>
 
 namespace pf::ui::ig {
 

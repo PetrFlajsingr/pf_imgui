@@ -7,8 +7,8 @@
 
 #include "elements.h"
 #include "ui_tree_traversal.h"
-#include <toml++/toml_array.hpp>
-#include <toml++/toml_table.hpp>
+#include <toml++/toml_array.h>
+#include <toml++/toml_table.h>
 
 namespace pf::ui::ig {
 
