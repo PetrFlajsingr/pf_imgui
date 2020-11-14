@@ -17,7 +17,7 @@ class Clickable {
   using Callback = std::function<void()>;
   using Id = uint32_t;
 
-  Subscription addValueListener(std::invocable auto fnc) {
+  Subscription addClickListener(std::invocable auto fnc) {
     const auto id = generateListenerId();
     listeners[id] = fnc;
     return Subscription([id, this] { listeners.erase(id); });
