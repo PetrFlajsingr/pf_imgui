@@ -18,9 +18,9 @@ void Image::renderImpl() {
   const auto [uvStart, uvEnd] = uvMappingProvider();
   const auto textureId = textureIdProvider();
   if (isButton_) {
-    ImGui::Image(textureId, getSize(), uvStart, uvEnd);
-  } else {
     if (ImGui::ImageButton(textureId, getSize(), uvStart, uvEnd)) { onClick(); }
+  } else {
+    ImGui::Image(textureId, getSize(), uvStart, uvEnd);
   }
 }
 
