@@ -5,6 +5,7 @@
 #include "ListBox.h"
 #include <imgui.h>
 #include <range/v3/core.hpp>
+#include <range/v3/view/enumerate.hpp>
 #include <range/v3/view/transform.hpp>
 #include <utility>
 
@@ -28,5 +29,14 @@ void ListBox::renderImpl() {
 }
 void ListBox::addItem(std::string item) { items.emplace_back(std::move(item)); }
 std::string_view ListBox::getSelectedItem() const { return items[currentItemIdx]; }
+
+void ListBox::selectItem(std::string_view itemToSelect) {
+  for (const auto &[idx, item] : ranges::views::enumerate(items)) {
+    if (item == itemToSelect) {
+      currentItemIdx = idx;
+      break;
+    }
+  }
+}
 
 }// namespace pf::ui::ig

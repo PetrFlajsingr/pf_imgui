@@ -25,6 +25,8 @@ class PF_IMGUI_EXPORT ListBox : public LabeledElement,
 
   [[nodiscard]] std::string_view getSelectedItem() const;
 
+  void selectItem(std::string_view itemToSelect);
+
  protected:
   void renderImpl() override;
 

@@ -13,7 +13,7 @@ MenuItem::MenuItem(const std::string &elementName, const std::string &caption)
     : Element(elementName), LabeledElement(elementName, caption) {}
 
 void MenuItem::renderImpl() {
-  if (ImGui::MenuItem(getLabel().c_str())) { onClick(); }
+  if (ImGui::MenuItem(getLabel().c_str())) { notifyOnClick(); }
 }
 
 void SubMenu::renderImpl() {

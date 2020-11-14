@@ -21,8 +21,6 @@ class PF_IMGUI_EXPORT RadioButton : public LabeledElement, public ValueObservabl
 
  protected:
   void renderImpl() override;
-
- private:
 };
 
 }// namespace pf::ui::ig

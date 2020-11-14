@@ -6,13 +6,14 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_IMAGE_H
 
 #include "../enums.h"
+#include "interface/Clickable.h"
 #include "interface/ResizableElement.h"
 #include <functional>
 #include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Image : public ResizableElement {
+class PF_IMGUI_EXPORT Image : public ResizableElement, public Clickable {
  public:
   using ImTextureIDProvider = std::function<ImTextureID()>;
   using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
@@ -25,8 +26,6 @@ class PF_IMGUI_EXPORT Image : public ResizableElement {
 
   [[nodiscard]] bool isButton() const;
 
-  void setOnClick(std::invocable auto fnc) { onClick = fnc; }
-
  protected:
   void renderImpl() override;
 
@@ -34,8 +33,6 @@ class PF_IMGUI_EXPORT Image : public ResizableElement {
   bool isButton_;
   ImTextureIDProvider textureIdProvider;
   UvMappingProvider uvMappingProvider;
-
-  std::function<void()> onClick = [] {};
 };
 
 }// namespace pf::ui::ig

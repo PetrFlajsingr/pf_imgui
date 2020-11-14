@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_MENUBARS_H
 #define PF_IMGUI_IMGUI_ELEMENTS_MENUBARS_H
 
+#include "interface/Clickable.h"
 #include "interface/Element.h"
 #include "interface/LabeledElement.h"
 #include <functional>
@@ -32,17 +33,12 @@ class PF_IMGUI_EXPORT MenuContainer {
   std::vector<std::unique_ptr<Element>> items;
 };
 
-class PF_IMGUI_EXPORT MenuItem : public LabeledElement {
+class PF_IMGUI_EXPORT MenuItem : public LabeledElement, public Clickable {
  public:
   MenuItem(const std::string &elementName, const std::string &caption);
 
-  void setOnClick(std::invocable auto fnc) { onClick = fnc; }
-
  protected:
   void renderImpl() override;
-
- private:
-  std::function<void()> onClick = [] {};
 };
 
 class PF_IMGUI_EXPORT SubMenu : public LabeledElement, public MenuContainer {

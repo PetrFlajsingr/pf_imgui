@@ -18,6 +18,10 @@ class PF_IMGUI_EXPORT Checkbox : public ValueObservableElement<bool>,
   Checkbox(const std::string &elementName, const std::string &caption,
            Persistent persistent = Persistent::No, bool value = false);
 
+  void setSelected(bool value);
+
+  [[nodiscard]] bool isSelected() const;
+
  protected:
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;

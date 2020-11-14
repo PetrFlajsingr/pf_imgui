@@ -14,26 +14,24 @@ Button::Button(const std::string &name, std::string caption, ButtonType buttonTy
       type(buttonType) {}
 
 void Button::renderImpl() {
+  auto wasClicked = false;
   switch (type) {
-    case ButtonType::Normal:
-      if (ImGui::Button(getLabel().c_str(), getSize())) { onClick(); }
-      break;
-    case ButtonType::Small:
-      if (ImGui::SmallButton(getLabel().c_str())) { onClick(); }
-      break;
+    case ButtonType::Normal: wasClicked = ImGui::Button(getLabel().c_str(), getSize()); break;
+    case ButtonType::Small: wasClicked = ImGui::SmallButton(getLabel().c_str()); break;
     case ButtonType::ArrowUp:
-      if (ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Up)) { onClick(); }
+      wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Up);
       break;
     case ButtonType::ArrowLeft:
-      if (ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Left)) { onClick(); }
+      wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Left);
       break;
     case ButtonType::ArrowRight:
-      if (ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Right)) { onClick(); }
+      wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Right);
       break;
     case ButtonType::ArrowDown:
-      if (ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Down)) { onClick(); }
+      wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Down);
       break;
   }
+  if (wasClicked) { notifyOnClick(); }
 }
 
 ButtonType Button::getType() const { return type; }
