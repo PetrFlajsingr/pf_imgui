@@ -50,10 +50,10 @@ void Memo::rebuildPanel() {
         std::make_unique<Panel>(getName() + "button_filter_panel", getLabel() + " controls",
                                 PanelLayout::Horizontal, ImVec2{0, 20});
     if (buttonsEnabled) {
-      controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear").setOnClick([this] {
+      controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] {
         clearRecords();
       });
-      controlsPanel->createChild<Button>(getName() + "copy_btn", "Copy").setOnClick([this] {
+      controlsPanel->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
         ImGui::SetClipboardText(getText().c_str());
       });
     }
