@@ -12,7 +12,6 @@
 
 namespace pf::ui::ig {
 
-// TODO: resize, focus, collapse, position
 class PF_IMGUI_EXPORT Window : public Container {
  public:
   Window(const std::string &elementName, std::string title);
