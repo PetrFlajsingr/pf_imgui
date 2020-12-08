@@ -13,7 +13,6 @@
 
 namespace pf::ui::ig {
 
-// TODO: advanced plot using implot
 
 class PF_IMGUI_EXPORT SimplePlot : public LabeledElement, public ResizableElement {
  public:

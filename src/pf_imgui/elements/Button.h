@@ -13,7 +13,6 @@
 
 namespace pf::ui::ig {
 
-// TODO: multiple listeners
 class PF_IMGUI_EXPORT Button : public LabeledElement, public ResizableElement, public Clickable {
  public:
   Button(const std::string &name, std::string caption, ButtonType buttonType = ButtonType::Normal,
