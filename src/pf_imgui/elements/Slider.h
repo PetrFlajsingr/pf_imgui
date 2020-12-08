@@ -18,7 +18,6 @@
 #include <utility>
 
 namespace pf::ui::ig {
-//TODO: angle
 
 namespace details {
 #define IMGUI_SLIDER_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4

@@ -84,6 +84,7 @@ set(SOURCES
         src/pf_imgui/elements/RadioButton.cpp
         src/pf_imgui/elements/RadioGroup.cpp
         src/pf_imgui/elements/TabBar.cpp
+        src/pf_imgui/elements/SliderAngle.cpp
         src/pf_imgui/elements/Text.cpp
         src/pf_imgui/elements/Tree.cpp
         src/pf_imgui/elements/Window.cpp
@@ -138,6 +139,7 @@ set(INCLUDES
         src/pf_imgui/elements/RadioButton.h
         src/pf_imgui/elements/RadioGroup.h
         src/pf_imgui/elements/Slider.h
+        src/pf_imgui/elements/SliderAngle.h
         src/pf_imgui/elements/TabBar.h
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
