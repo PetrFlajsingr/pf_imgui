@@ -17,7 +17,6 @@
 
 namespace pf::ui::ig {
 
-// TODO: pie chart
 class PF_IMGUI_EXPORT Plot : public LabeledElement, public ResizableElement {
  public:
   Plot(const std::string &elementName, const std::string &caption,
