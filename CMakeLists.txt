@@ -167,6 +167,7 @@ set(INCLUDES
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
+        src/pf_imgui/styles/dark.h
         src/include/implot/implot.h
         src/include/implot/implot_internal.h
         src/include/imgui/imgui.h

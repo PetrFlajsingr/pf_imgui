@@ -7,6 +7,8 @@
 
 namespace pf::ui::ig {
 
+class ImGuiInterface;
+
 class Element;
 class Container;
 class LabeledElement;
