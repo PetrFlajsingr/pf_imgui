@@ -23,7 +23,7 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
 
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &
-  createChild(std::string name, Args &&... args) {
+  createChild(std::string name, Args &&...args) {
     if (const auto iter = children.find(name); iter != children.end()) {
       throw StackTraceException::fmt("{} already present in ui", name);
     }
@@ -40,9 +40,7 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
   template<std::derived_from<Element> T>
   [[nodiscard]] T &childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
-      if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) {
-        return result;
-      }
+      if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
       throw StackTraceException::fmt("Wrong type for child: '{}' in '{}'", name, getName());
     }
     throw StackTraceException::fmt("Child not found: '{}' in '{}'", name, getName());

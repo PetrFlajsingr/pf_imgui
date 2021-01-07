@@ -16,8 +16,8 @@ namespace pf::ui::ig {
 using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
 class PF_IMGUI_EXPORT FlameGraph : public LabeledElement, public ResizableElement {
  public:
-  FlameGraph(const std::string &elementName, const std::string &caption,
-             const ImVec2 &size = ImVec2{0, 0}, std::optional<std::string> overlay = std::nullopt);
+  FlameGraph(const std::string &elementName, const std::string &caption, const ImVec2 &size = ImVec2{0, 0},
+             std::optional<std::string> overlay = std::nullopt);
 
   void setOverlay(std::string text);
   void disableOverlay();

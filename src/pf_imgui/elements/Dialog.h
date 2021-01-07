@@ -13,8 +13,7 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Dialog : public Container, public LabeledElement {
  public:
-  Dialog(Container &parent, const std::string &elementName, const std::string &caption,
-         Modal modal = Modal::Yes);
+  Dialog(Container &parent, const std::string &elementName, const std::string &caption, Modal modal = Modal::Yes);
 
   void close();
 

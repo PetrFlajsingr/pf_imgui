@@ -11,15 +11,14 @@
 
 namespace pf::ui::ig {
 
-ListBox::ListBox(const std::string &elementName, const std::string &caption,
-                 std::vector<std::string> items_, int selectedIdx, int heightInItems)
-    : Element(elementName), LabeledElement(elementName, caption),
-      ValueObservableElement(elementName, ""), items(std::move(items_)),
-      currentItemIdx(selectedIdx), height(heightInItems) {}
+ListBox::ListBox(const std::string &elementName, const std::string &caption, std::vector<std::string> items_,
+                 int selectedIdx, int heightInItems)
+    : Element(elementName), LabeledElement(elementName, caption), ValueObservableElement(elementName, ""),
+      items(std::move(items_)), currentItemIdx(selectedIdx), height(heightInItems) {}
 
 void ListBox::renderImpl() {
-  const auto cStrItems = items
-      | ranges::views::transform([](const auto &str) { return str.c_str(); }) | ranges::to_vector;
+  const auto cStrItems =
+      items | ranges::views::transform([](const auto &str) { return str.c_str(); }) | ranges::to_vector;
   const auto oldIdx = currentItemIdx;
   ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height);
   if (currentItemIdx != oldIdx) {

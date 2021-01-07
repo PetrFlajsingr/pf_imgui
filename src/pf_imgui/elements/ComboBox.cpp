@@ -12,19 +12,16 @@
 
 namespace pf::ui::ig {
 
-ComboBox::ComboBox(const std::string &elementName, const std::string &caption,
-                   std::string previewValue, std::vector<std::string> items, Persistent persistent)
+ComboBox::ComboBox(const std::string &elementName, const std::string &caption, std::string previewValue,
+                   std::vector<std::string> items, Persistent persistent)
     : Element(elementName),
-      LabeledElement(elementName, caption), ValueObservableElement<std::string_view>(elementName,
-                                                                                     ""),
-      SavableElement(elementName, persistent), items(std::move(items)),
-      previewValue(std::move(previewValue)) {}
+      LabeledElement(elementName, caption), ValueObservableElement<std::string_view>(elementName, ""),
+      SavableElement(elementName, persistent), items(std::move(items)), previewValue(std::move(previewValue)) {}
 
 void ComboBox::renderImpl() {
   using namespace ranges::views;
   if (ImGui::BeginCombo(getLabel().c_str(),
-                        selectedItemIndex.has_value() ? items[*selectedItemIndex].c_str()
-                                                      : previewValue.c_str())) {
+                        selectedItemIndex.has_value() ? items[*selectedItemIndex].c_str() : previewValue.c_str())) {
     auto cStrItems = items | transform([](const auto &str) { return str.c_str(); });
     std::ranges::for_each(cStrItems | enumerate, [&](auto idxPtr) {
       const auto [idx, ptr] = idxPtr;

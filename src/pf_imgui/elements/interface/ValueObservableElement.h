@@ -19,12 +19,11 @@ class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
  public:
   using Callback = std::function<void(const T &)>;
   using Id = uint32_t;
-  explicit ValueObservableElement(const std::string &elementName, T value = T{})
-      : Element(elementName), value(value) {}
+  explicit ValueObservableElement(const std::string &elementName, T value = T{}) : Element(elementName), value(value) {}
 
   ValueObservableElement(ValueObservableElement &&other) noexcept
-      : Element(std::move(other)), value(std::move(other.value)),
-        listeners(std::move(other.listeners)), idGenerator(std::move(idGenerator)) {}
+      : Element(std::move(other)), value(std::move(other.value)), listeners(std::move(other.listeners)),
+        idGenerator(std::move(idGenerator)) {}
   ValueObservableElement &operator=(ValueObservableElement &&other) noexcept {
     value = std::move(other.value);
     listeners = std::move(other.listeners);

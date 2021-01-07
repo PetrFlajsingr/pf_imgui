@@ -23,15 +23,12 @@ namespace details {
 #define IMGUI_INPUT_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
 #define IMGUI_INPUT_DOUBLE_TYPE_LIST double
 #define IMGUI_INPUT_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
-#define IMGUI_INPUT_GLM_TYPE_LIST                                                                  \
-  glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
-#define IMGUI_INPUT_TYPE_LIST                                                                      \
-  IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_INT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST
+#define IMGUI_INPUT_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
+#define IMGUI_INPUT_TYPE_LIST IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_INT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-using InputUnderlyingType =
-    std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST>, float,
-                       std::conditional_t<OneOf<T, IMGUI_INPUT_INT_TYPE_LIST>, int, double>>;
+using InputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST>, float,
+                                               std::conditional_t<OneOf<T, IMGUI_INPUT_INT_TYPE_LIST>, int, double>>;
 
 template<typename T>
 struct InputData {};
@@ -56,36 +53,27 @@ struct InputData<double> {
 
 template<typename T>
 concept UnformattedWithStep =
-    OneOf<
-        T,
-        IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+    OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 
 template<typename T>
 concept UnformattedWithoutStep =
-    !OneOf<
-        T,
-        IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+    !OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 
 template<typename T>
-concept FormattedWithStep = OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST>
-    &&OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+concept FormattedWithStep =
+    OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> &&OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 template<typename T>
 concept FormattedWithoutStep =
-    !OneOf<
-        T,
-        IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+    !OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 }// namespace details
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Input : public LabeledElement,
-                              public ValueObservableElement<T>,
-                              public SavableElement {
+class PF_IMGUI_EXPORT Input : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:
   Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
-        Persistent persistent = Persistent::No,
-        T value = T{}) requires details::UnformattedWithStep<T>
+        Persistent persistent = Persistent::No, T value = T{}) requires details::UnformattedWithStep<T>
       : Element(elementName),
         LabeledElement(elementName, caption),
         ValueObservableElement<T>(elementName, value),
@@ -93,28 +81,22 @@ class PF_IMGUI_EXPORT Input : public LabeledElement,
         data(st, fStep) {}
 
   Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
-        std::string format = decltype(data)::defaultFormat(),
-        Persistent persistent = Persistent::No,
-        T value = T{}) requires details::FormattedWithStep<T>
-      : Element(elementName),
-        LabeledElement(elementName, caption),
-        ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent),
-        format(std::move(format)),
-        data(st, fStep) {}
+        std::string format = decltype(data)::defaultFormat(), Persistent persistent = Persistent::No,
+        T value = T{}) requires details::FormattedWithStep<T> : Element(elementName),
+                                                                LabeledElement(elementName, caption),
+                                                                ValueObservableElement<T>(elementName, value),
+                                                                SavableElement(elementName, persistent),
+                                                                format(std::move(format)),
+                                                                data(st, fStep) {}
 
-  Input(const std::string &elementName, const std::string &caption,
-        Persistent persistent = Persistent::No,
-        T value = T{}) requires details::UnformattedWithoutStep<T>
-      : Element(elementName),
-        LabeledElement(elementName, caption),
-        ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent) {}
+  Input(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+        T value = T{}) requires details::UnformattedWithoutStep<T> : Element(elementName),
+                                                                     LabeledElement(elementName, caption),
+                                                                     ValueObservableElement<T>(elementName, value),
+                                                                     SavableElement(elementName, persistent) {}
 
-  Input(const std::string &elementName, const std::string &caption,
-        Persistent persistent = Persistent::No,
-        std::string format = decltype(data)::defaultFormat(),
-        T value = T{}) requires details::FormattedWithoutStep<T>
+  Input(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+        std::string format = decltype(data)::defaultFormat(), T value = T{}) requires details::FormattedWithoutStep<T>
       : Element(elementName),
         LabeledElement(elementName, caption),
         ValueObservableElement<T>(elementName, value),
@@ -144,45 +126,35 @@ class PF_IMGUI_EXPORT Input : public LabeledElement,
   void renderImpl() override {
     const auto oldValue = ValueObservableElement<T>::getValue();
     if constexpr (std::same_as<T, float>) {
-      ImGui::InputFloat(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step,
-                        data.fastStep, format.c_str());
+      ImGui::InputFloat(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step, data.fastStep,
+                        format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      ImGui::InputFloat2(getLabel().c_str(),
-                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      ImGui::InputFloat3(getLabel().c_str(),
-                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      ImGui::InputFloat4(getLabel().c_str(),
-                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, int>) {
-      ImGui::InputInt(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step,
-                      data.fastStep);
+      ImGui::InputInt(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step, data.fastStep);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      ImGui::InputInt2(getLabel().c_str(),
-                       glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      ImGui::InputInt3(getLabel().c_str(),
-                       glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      ImGui::InputInt4(getLabel().c_str(),
-                       glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, double>) {
-      ImGui::InputDouble(getLabel().c_str(),
-                         glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), data.step,
+      ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), data.step,
                          data.fastStep, format.c_str());
     }
-    if (oldValue != ValueObservableElement<T>::getValue()) {
-      ValueObservableElement<T>::notifyValueChanged();
-    }
+    if (oldValue != ValueObservableElement<T>::getValue()) { ValueObservableElement<T>::notifyValueChanged(); }
   }
 
  private:

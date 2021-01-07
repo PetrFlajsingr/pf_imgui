@@ -9,10 +9,10 @@
 
 namespace pf::ui::ig {
 
-Plot::Plot(const std::string &elementName, const std::string &caption,
-           std::optional<std::string> xLabel, std::optional<std::string> yLabel, const ImVec2 &size)
-    : Element(elementName), LabeledElement(elementName, caption),
-      ResizableElement(elementName, size), xLabel(std::move(xLabel)), yLabel(std::move(yLabel)) {}
+Plot::Plot(const std::string &elementName, const std::string &caption, std::optional<std::string> xLabel,
+           std::optional<std::string> yLabel, const ImVec2 &size)
+    : Element(elementName), LabeledElement(elementName, caption), ResizableElement(elementName, size),
+      xLabel(std::move(xLabel)), yLabel(std::move(yLabel)) {}
 
 void Plot::renderImpl() {
   if (ImPlot::BeginPlot(getLabel().c_str(), xLabel.has_value() ? xLabel->c_str() : nullptr,
@@ -22,8 +22,7 @@ void Plot::renderImpl() {
   }
 }
 void Plot::removeData(const std::string &name) {
-  if (const auto iter =
-          std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
+  if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
       iter != datas.end()) {
     datas.erase(iter);
   }

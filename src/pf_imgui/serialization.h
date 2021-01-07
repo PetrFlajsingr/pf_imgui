@@ -17,9 +17,7 @@ PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Element &root) {
   traverseImGuiTree(root, [&result](Element &element) {
     if (auto ptrSavable = dynamic_cast<SavableElement *>(&element); ptrSavable != nullptr) {
       const auto optSerialised = ptrSavable->serialize();
-      if (optSerialised.has_value()) {
-        result.insert_or_assign(ptrSavable->getName(), *optSerialised);
-      }
+      if (optSerialised.has_value()) { result.insert_or_assign(ptrSavable->getName(), *optSerialised); }
     }
   });
   return result;

@@ -7,8 +7,7 @@
 namespace pf::ui::ig {
 
 Container::Container(Container &&other) noexcept
-    : Element(std::move(other)), children(std::move(other.children)),
-      childrenInOrder(std::move(other.childrenInOrder)),
+    : Element(std::move(other)), children(std::move(other.children)), childrenInOrder(std::move(other.childrenInOrder)),
       childrenToRemove(std::move(other.childrenToRemove)) {}
 
 Container &Container::operator=(Container &&other) noexcept {
@@ -28,8 +27,7 @@ void Container::addChild(std::unique_ptr<Element> child) {
 void Container::removeChild(const std::string &name) {
   if (const auto iter = children.find(name); iter != children.end()) {
     auto ptr = iter->second.get();
-    auto ptrIter =
-        std::ranges::find_if(childrenInOrder, [ptr](auto &child) { return &child.get() == ptr; });
+    auto ptrIter = std::ranges::find_if(childrenInOrder, [ptr](auto &child) { return &child.get() == ptr; });
     childrenInOrder.erase(ptrIter);
     children.erase(iter);
   }
@@ -39,9 +37,7 @@ const std::vector<std::reference_wrapper<Element>> &Container::getChildren() {
   childrenToRemove.clear();
   return childrenInOrder;
 }
-void Container::enqueueChildRemoval(const std::string &name) {
-  childrenToRemove.emplace_back(name);
-}
+void Container::enqueueChildRemoval(const std::string &name) { childrenToRemove.emplace_back(name); }
 void Container::clear() {
   childrenInOrder.clear();
   children.clear();

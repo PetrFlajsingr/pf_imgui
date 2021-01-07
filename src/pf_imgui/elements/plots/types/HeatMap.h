@@ -13,8 +13,7 @@ namespace pf::ui::ig::plot_type {
 
 class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
  public:
-  HeatMap(const std::string &elementName, const std::string &caption, double minVal = 0.0,
-          double maxVal = 0.0);
+  HeatMap(const std::string &elementName, const std::string &caption, double minVal = 0.0, double maxVal = 0.0);
 
   template<Plottable T>
   void setData(const std::vector<std::vector<T>> &newData) {
@@ -28,8 +27,7 @@ class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
     rowSize = newData[0].size();
     std::ranges::for_each(newData, [this](const auto &row) { assert(row.size() == rowSize); });
     data = newData | ranges::views::join
-        | ranges::views::transform([](const auto &val) { return static_cast<double>(val); })
-        | ranges::to_vector;
+        | ranges::views::transform([](const auto &val) { return static_cast<double>(val); }) | ranges::to_vector;
   }
 
  protected:

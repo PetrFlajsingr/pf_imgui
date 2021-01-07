@@ -11,12 +11,10 @@
 #include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT Checkbox : public ValueObservableElement<bool>,
-                                 public LabeledElement,
-                                 public SavableElement {
+class PF_IMGUI_EXPORT Checkbox : public ValueObservableElement<bool>, public LabeledElement, public SavableElement {
  public:
-  Checkbox(const std::string &elementName, const std::string &caption,
-           Persistent persistent = Persistent::No, bool value = false);
+  Checkbox(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+           bool value = false);
 
   void setSelected(bool value);
 

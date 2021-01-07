@@ -20,14 +20,11 @@
 namespace pf::ui::ig {
 
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
-class PF_IMGUI_EXPORT ColorChooser : public LabeledElement,
-                                     public ValueObservableElement<T>,
-                                     public SavableElement {
+class PF_IMGUI_EXPORT ColorChooser : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
  public:
-  ColorChooser(const std::string &elementName, const std::string &caption,
-               Persistent persistent = Persistent::No, T value = T{})
-      : Element(elementName),
-        LabeledElement(elementName, caption), ValueObservableElement<T>(elementName, value),
+  ColorChooser(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+               T value = T{})
+      : Element(elementName), LabeledElement(elementName, caption), ValueObservableElement<T>(elementName, value),
         SavableElement(elementName, persistent) {}
 
  protected:
@@ -47,24 +44,18 @@ class PF_IMGUI_EXPORT ColorChooser : public LabeledElement,
     const auto oldValue = ValueObservableElement<T>::getValue();
     if constexpr (Type == ColorChooserType::Edit) {
       if constexpr (std::same_as<glm::vec3, T>) {
-        ImGui::ColorEdit3(getLabel().c_str(),
-                          glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
       } else {
-        ImGui::ColorEdit4(getLabel().c_str(),
-                          glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
       }
     } else {
       if constexpr (std::same_as<glm::vec3, T>) {
-        ImGui::ColorPicker3(getLabel().c_str(),
-                            glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
       } else {
-        ImGui::ColorPicker4(getLabel().c_str(),
-                            glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
       }
     }
-    if (oldValue != ValueObservableElement<T>::getValue()) {
-      ValueObservableElement<T>::notifyValueChanged();
-    }
+    if (oldValue != ValueObservableElement<T>::getValue()) { ValueObservableElement<T>::notifyValueChanged(); }
   }
 };
 

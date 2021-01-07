@@ -19,12 +19,11 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Plot : public LabeledElement, public ResizableElement {
  public:
-  Plot(const std::string &elementName, const std::string &caption,
-       std::optional<std::string> xLabel = std::nullopt,
+  Plot(const std::string &elementName, const std::string &caption, std::optional<std::string> xLabel = std::nullopt,
        std::optional<std::string> yLabel = std::nullopt, const ImVec2 &size = ImVec2{-1, 0});
 
   template<std::derived_from<plot_type::PlotData> T, typename... Args>
-  requires std::constructible_from<T, Args...> T &addData(Args &&... args) {
+  requires std::constructible_from<T, Args...> T &addData(Args &&...args) {
     auto data = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = data.get();
     datas.emplace_back(std::move(data));
@@ -33,8 +32,7 @@ class PF_IMGUI_EXPORT Plot : public LabeledElement, public ResizableElement {
 
   template<std::derived_from<plot_type::PlotData> T>
   void dataByName(const std::string &name) {
-    if (const auto iter = std::ranges::find_if(
-            datas, [name](const auto &data) { return data->getName() == name; });
+    if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
         iter != datas.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(*iter); result != nullptr) { return result; }
       throw StackTraceException::fmt("Wrong type for data: '{}' in '{}'", name, getName());

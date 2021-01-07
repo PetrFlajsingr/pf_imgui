@@ -35,13 +35,11 @@ class DefaultPlotDataSetting {
  public:
   template<Plottable T>
   void setData(const std::vector<XYPlotData<T>> &newData) {
-    xData = newData
-        | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); })
+    xData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); })
         | ranges::to_vector;
     const auto [min, max] = ranges::minmax(xData);
     width = max - min;
-    yData = newData
-        | ranges::views::transform([](const auto &val) { return static_cast<double>(val.y); })
+    yData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.y); })
         | ranges::to_vector;
   }
 

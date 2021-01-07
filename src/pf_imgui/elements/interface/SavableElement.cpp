@@ -8,8 +8,7 @@ namespace pf::ui::ig {
 SavableElement::SavableElement(const std::string &elementName, Persistent persistent)
     : Element(elementName), persist(persistent == Persistent::Yes) {}
 
-SavableElement::SavableElement(SavableElement &&other) noexcept
-    : Element(std::move(other)), persist(other.persist) {}
+SavableElement::SavableElement(SavableElement &&other) noexcept : Element(std::move(other)), persist(other.persist) {}
 SavableElement &SavableElement::operator=(SavableElement &&other) noexcept {
   persist = other.persist;
   Element::operator=(std::move(other));

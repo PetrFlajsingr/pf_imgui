@@ -9,8 +9,7 @@
 
 namespace pf::ui::ig {
 
-FileExtensionSettings::FileExtensionSettings(std::vector<std::string> extensions,
-                                             std::string description,
+FileExtensionSettings::FileExtensionSettings(std::vector<std::string> extensions, std::string description,
                                              const std::optional<ImVec4> &color)
     : extensions(std::move(extensions)), description(std::move(description)), color(color) {}
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
@@ -39,17 +38,15 @@ void FileDialog::renderImpl() {
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      igfd::ImGuiFileDialog::Instance()->OpenModal(getName(), getLabel().c_str(), extCstr,
-                                                   defaultName, maxSelectCount);
+      igfd::ImGuiFileDialog::Instance()->OpenModal(getName(), getLabel().c_str(), extCstr, defaultName, maxSelectCount);
       break;
     case Modal::No:
-      igfd::ImGuiFileDialog::Instance()->OpenDialog(getName(), getLabel().c_str(), extCstr,
-                                                    defaultName, maxSelectCount);
+      igfd::ImGuiFileDialog::Instance()->OpenDialog(getName(), getLabel().c_str(), extCstr, defaultName,
+                                                    maxSelectCount);
       break;
   }
   setExtInfos();
-  if (igfd::ImGuiFileDialog::Instance()->FileDialog(getName(), ImGuiWindowFlags_NoCollapse,
-                                                    ImVec2{200, 150})) {
+  if (igfd::ImGuiFileDialog::Instance()->FileDialog(getName(), ImGuiWindowFlags_NoCollapse, ImVec2{200, 150})) {
     if (igfd::ImGuiFileDialog::Instance()->IsOk) {
       const auto filePathName = igfd::ImGuiFileDialog::Instance()->GetFilePathName();
       const auto selection = igfd::ImGuiFileDialog::Instance()->GetSelection();
@@ -70,8 +67,6 @@ void FileDialog::renderImpl() {
   }
 }
 void FileDialog::setExtInfos() {
-  for (const auto &[ext, color] : extColors) {
-    igfd::ImGuiFileDialog::Instance()->SetExtentionInfos(ext, color);
-  }
+  for (const auto &[ext, color] : extColors) { igfd::ImGuiFileDialog::Instance()->SetExtentionInfos(ext, color); }
 }
 }// namespace pf::ui::ig

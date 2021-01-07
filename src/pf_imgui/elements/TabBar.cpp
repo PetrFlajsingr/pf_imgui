@@ -31,8 +31,7 @@ Tab &TabBar::addTab(const std::string &name, const std::string &caption) {
   return *tabs.back();
 }
 void TabBar::removeTab(const std::string &name) {
-  if (const auto iter =
-          std::ranges::find_if(tabs, [name](const auto &tab) { return tab->getName() == name; });
+  if (const auto iter = std::ranges::find_if(tabs, [name](const auto &tab) { return tab->getName() == name; });
       iter != tabs.cend()) {
     tabs.erase(iter);
   }

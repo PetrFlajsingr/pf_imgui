@@ -74,6 +74,6 @@ inline void setDarkStyle(ImGuiInterface &interface) {
   };
   interface.setStyle(styleSetter);
 }
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_STYLES_DARK_H

@@ -12,13 +12,10 @@
 #include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT SliderAngle : public LabeledElement,
-                                    public ValueObservableElement<float>,
-                                    public SavableElement {
+class PF_IMGUI_EXPORT SliderAngle : public LabeledElement, public ValueObservableElement<float>, public SavableElement {
  public:
-  SliderAngle(const std::string &elementName, const std::string &caption, float min, float max,
-              float value = 0.0, Persistent persistent = Persistent::No,
-              std::string format = "%.0f deg");
+  SliderAngle(const std::string &elementName, const std::string &caption, float min, float max, float value = 0.0,
+              Persistent persistent = Persistent::No, std::string format = "%.0f deg");
 
  protected:
   void renderImpl() override;

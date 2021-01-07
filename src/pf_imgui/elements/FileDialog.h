@@ -29,8 +29,8 @@ class PF_IMGUI_EXPORT FileDialog : public LabeledElement {
              std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
              uint32_t maxSelectedFiles = 1)
       : Element(elementName), LabeledElement(elementName, caption), openPath(std::move(startPath)),
-        defaultName(std::move(startName)), modal(modality), fileType(FileType::File),
-        maxSelectCount(maxSelectedFiles), onFilesSelected(onSelect), onSelectCanceled(onCancel) {
+        defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
+        onFilesSelected(onSelect), onSelectCanceled(onCancel) {
     prepareExtInfos(extSettings);
   }
 

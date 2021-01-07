@@ -10,11 +10,10 @@
 
 namespace pf::ui::ig {
 
-Memo::Memo(const std::string &elementName, const std::string &caption, float textAHeight,
-           bool buttonsEnabled, bool filterEnabled, const std::optional<std::size_t> &recordLimit)
+Memo::Memo(const std::string &elementName, const std::string &caption, float textAHeight, bool buttonsEnabled,
+           bool filterEnabled, const std::optional<std::size_t> &recordLimit)
     : Element(elementName), LabeledElement(elementName, caption),
-      textAreaPanel(elementName + "_memo_panel###", getLabel(), PanelLayout::Vertical,
-                    ImVec2{0, textAHeight}),
+      textAreaPanel(elementName + "_memo_panel###", getLabel(), PanelLayout::Vertical, ImVec2{0, textAHeight}),
       buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {}
 
 void Memo::renderImpl() {
@@ -31,8 +30,7 @@ void Memo::renderImpl() {
 const std::vector<std::string> &Memo::getRecords() const { return records; }
 
 std::string Memo::getText() const {
-  return records | ranges::views::filter(filterFnc) | ranges::views::join('\n')
-      | ranges::to<std::string>();
+  return records | ranges::views::filter(filterFnc) | ranges::views::join('\n') | ranges::to<std::string>();
 }
 
 void Memo::addRecord(std::string_view record) { records.emplace_back(std::string(record)); }
@@ -46,13 +44,10 @@ void Memo::clearRecords() { records.clear(); }
 
 void Memo::rebuildPanel() {
   if (buttonsEnabled || filterEnabled) {
-    controlsPanel =
-        std::make_unique<Panel>(getName() + "button_filter_panel", getLabel() + " controls",
-                                PanelLayout::Horizontal, ImVec2{0, 20});
+    controlsPanel = std::make_unique<Panel>(getName() + "button_filter_panel", getLabel() + " controls",
+                                            PanelLayout::Horizontal, ImVec2{0, 20});
     if (buttonsEnabled) {
-      controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] {
-        clearRecords();
-      });
+      controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] { clearRecords(); });
       controlsPanel->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
         ImGui::SetClipboardText(getText().c_str());
       });

@@ -12,16 +12,13 @@
 #include <vector>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT ListBox : public LabeledElement,
-                                public ValueObservableElement<std::string_view> {
+class PF_IMGUI_EXPORT ListBox : public LabeledElement, public ValueObservableElement<std::string_view> {
  public:
-  ListBox(const std::string &elementName, const std::string &caption,
-          std::vector<std::string> items_ = {}, int selectedIdx = 0, int heightInItems = -1);
+  ListBox(const std::string &elementName, const std::string &caption, std::vector<std::string> items_ = {},
+          int selectedIdx = 0, int heightInItems = -1);
 
   void addItem(std::string item);
-  void addItems(const Iterable_of<std::string> auto &data) {
-    std::ranges::copy(data, std::back_inserter(items));
-  }
+  void addItems(const Iterable_of<std::string> auto &data) { std::ranges::copy(data, std::back_inserter(items)); }
 
   [[nodiscard]] std::string_view getSelectedItem() const;
 

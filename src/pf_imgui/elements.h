@@ -13,6 +13,7 @@
 #include "elements/DragInput.h"
 #include "elements/FlameGraph.h"
 #include "elements/Group.h"
+#include "elements/Image.h"
 #include "elements/Input.h"
 #include "elements/InputText.h"
 #include "elements/ListBox.h"
@@ -28,7 +29,6 @@
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/Window.h"
-#include "elements/Image.h"
 #include "elements/plots.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

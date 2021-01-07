@@ -8,22 +8,20 @@
 
 namespace pf::ui::ig {
 
-FlameGraph::FlameGraph(const std::string &elementName, const std::string &caption,
-                       const ImVec2 &size, std::optional<std::string> overlay)
-    : Element(elementName), LabeledElement(elementName, caption),
-      ResizableElement(elementName, size), overlay(std::move(overlay)) {}
+FlameGraph::FlameGraph(const std::string &elementName, const std::string &caption, const ImVec2 &size,
+                       std::optional<std::string> overlay)
+    : Element(elementName), LabeledElement(elementName, caption), ResizableElement(elementName, size),
+      overlay(std::move(overlay)) {}
 
 void FlameGraph::renderImpl() {
-  ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples, overlay, FLT_MAX, FLT_MAX,
-                                   getSize());
+  ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples, overlay, FLT_MAX, FLT_MAX, getSize());
 }
 
 void FlameGraph::setOverlay(std::string text) { overlay = std::move(text); }
 
 void FlameGraph::disableOverlay() { overlay = std::nullopt; }
 
-void FlameGraph::setSamples(
-    const std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> &newSamples) {
+void FlameGraph::setSamples(const std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> &newSamples) {
   samples = newSamples;
 }
 

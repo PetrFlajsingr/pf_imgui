@@ -17,9 +17,8 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Memo : public LabeledElement {
  public:
-  Memo(const std::string &elementName, const std::string &caption, float textAHeight = 0,
-       bool buttonsEnabled = true, bool filterEnabled = true,
-       const std::optional<std::size_t> &recordLimit = std::nullopt);
+  Memo(const std::string &elementName, const std::string &caption, float textAHeight = 0, bool buttonsEnabled = true,
+       bool filterEnabled = true, const std::optional<std::size_t> &recordLimit = std::nullopt);
 
   [[nodiscard]] const std::vector<std::string> &getRecords() const;
   [[nodiscard]] std::string getText() const;

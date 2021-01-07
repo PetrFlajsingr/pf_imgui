@@ -55,8 +55,7 @@ MenuItem &MenuContainer::addItem(const std::string &name, const std::string &cap
   return *ptr;
 }
 void MenuContainer::removeItem(const std::string &name) {
-  if (const auto iter =
-          std::ranges::find_if(items, [name](auto &item) { return item->getName() == name; });
+  if (const auto iter = std::ranges::find_if(items, [name](auto &item) { return item->getName() == name; });
       iter != items.end()) {
     items.erase(iter);
   }

@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig {
 
-ResizableElement::ResizableElement(ResizableElement &&other) noexcept
-    : Element(std::move(other)), size(other.size) {}
+ResizableElement::ResizableElement(ResizableElement &&other) noexcept : Element(std::move(other)), size(other.size) {}
 
 ResizableElement &ResizableElement::operator=(ResizableElement &&other) noexcept {
   size = other.size;

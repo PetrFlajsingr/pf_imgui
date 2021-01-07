@@ -18,8 +18,7 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
 
   template<Plottable T>
   void setData(const std::vector<XYErrorPlotData<T>> &newData) {
-    const auto xyData = newData
-        | ranges::views::transform([](const auto &data) { return XYPlotData(data.x, data.y); })
+    const auto xyData = newData | ranges::views::transform([](const auto &data) { return XYPlotData(data.x, data.y); })
         | ranges::to_vector;
     details::DefaultPlotDataSetting::setData(xyData);
     error = newData | ranges::views::transform([](const auto &data) { return static_cast<double>(data.error); })
@@ -29,11 +28,9 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
  protected:
   void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
-      ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(),
-                            xData.size());
+      ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     } else {
-      ImPlot::PlotErrorBarsH(getLabel().c_str(), xData.data(), yData.data(), error.data(),
-                             xData.size());
+      ImPlot::PlotErrorBarsH(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     }
   }
 

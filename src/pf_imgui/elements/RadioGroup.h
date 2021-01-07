@@ -16,8 +16,7 @@ class PF_IMGUI_EXPORT RadioGroup : public LabeledElement,
                                    public ValueObservableElement<std::string_view>,
                                    public SavableElement {
  public:
-  RadioGroup(const std::string &elementName, const std::string &caption,
-             std::vector<RadioButton> buttons = {},
+  RadioGroup(const std::string &elementName, const std::string &caption, std::vector<RadioButton> buttons = {},
              const std::optional<std::size_t> &selectedButtonIndex = std::nullopt,
              Persistent persistent = Persistent::No);
 
