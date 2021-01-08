@@ -65,5 +65,7 @@ toml::table ComboBox::serialize_impl() {
   if (selectedItemIndex.has_value()) { result.insert_or_assign("selected", *selectedItemIndex); }
   return result;
 }
+const std::vector<std::string> &ComboBox::getItems() const { return items; }
+void ComboBox::setItems(std::vector<std::string> newItems) { items = std::move(newItems); }
 
 }// namespace pf::ui::ig

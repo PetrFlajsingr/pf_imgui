@@ -24,6 +24,9 @@ class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
   void removeItem(const std::string &item);
   void addItem(const std::string &item);
 
+  [[nodiscard]] const std::vector<std::string> &getItems() const;
+  void setItems(std::vector<std::string> newItems);
+
  protected:
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
