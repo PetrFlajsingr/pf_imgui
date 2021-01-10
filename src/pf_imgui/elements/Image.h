@@ -13,14 +13,17 @@
 
 namespace pf::ui::ig {
 
+/**
+ * ImTextureId is basically anything.
+ * For example in Vulkan implementation it could be a descriptor set.
+ */
 class PF_IMGUI_EXPORT Image : public ResizableElement, public Clickable {
  public:
-  using ImTextureIDProvider = std::function<ImTextureID()>;
   using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
 
   Image(
-      const std::string &elementName, ImTextureIDProvider imTextureIdProvider, const ImVec2 &size,
-      IsButton isBtn = IsButton::No, UvMappingProvider uvTextureMappingProvider = [] {
+      const std::string &elementName, ImTextureID imTextureId, const ImVec2 &size, IsButton isBtn = IsButton::No,
+      UvMappingProvider uvTextureMappingProvider = [] {
         return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
       });
 
@@ -31,7 +34,7 @@ class PF_IMGUI_EXPORT Image : public ResizableElement, public Clickable {
 
  private:
   bool isButton_;
-  ImTextureIDProvider textureIdProvider;
+  ImTextureID textureId;
   UvMappingProvider uvMappingProvider;
 };
 
