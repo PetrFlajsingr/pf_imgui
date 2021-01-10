@@ -27,6 +27,9 @@ class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
   [[nodiscard]] const std::vector<std::string> &getItems() const;
   void setItems(std::vector<std::string> newItems);
 
+  void setFilter(std::predicate<std::string_view> auto filterFnc) { filter = filterFnc; }
+  void clearFilter();
+
  protected:
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
@@ -36,6 +39,7 @@ class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
   std::vector<std::string> items;
   std::string previewValue;
   std::optional<uint> selectedItemIndex = std::nullopt;
+  std::function<bool(std::string_view)> filter = [](auto) { return true; };
 };
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H
