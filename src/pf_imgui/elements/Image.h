@@ -29,6 +29,8 @@ class PF_IMGUI_EXPORT Image : public ResizableElement, public Clickable {
 
   [[nodiscard]] bool isButton() const;
 
+  void setTextureId(ImTextureID textureId);
+
  protected:
   void renderImpl() override;
 
