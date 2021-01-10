@@ -11,6 +11,8 @@
 #include <pf_imgui/_export.h>
 #include <string>
 #include <unordered_map>
+#include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 

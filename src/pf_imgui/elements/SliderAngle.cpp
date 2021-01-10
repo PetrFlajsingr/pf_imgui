@@ -22,4 +22,5 @@ void SliderAngle::unserialize_impl(const toml::table &src) {
 }
 
 toml::table SliderAngle::serialize_impl() { return toml::table{{{"value", getValue()}}}; }
+
 }// namespace pf::ui::ig

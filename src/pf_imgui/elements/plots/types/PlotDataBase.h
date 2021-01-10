@@ -6,12 +6,14 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 
 #include "../../interface/LabeledElement.h"
+#include <algorithm>
 #include <concepts>
 #include <pf_imgui/_export.h>
 #include <range/v3/algorithm/minmax.hpp>
 #include <range/v3/core.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
+#include <vector>
 
 namespace pf::ui::ig::plot_type {
 template<typename T>

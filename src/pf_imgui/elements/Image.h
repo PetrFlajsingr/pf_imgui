@@ -10,9 +10,10 @@
 #include "interface/ResizableElement.h"
 #include <functional>
 #include <pf_imgui/_export.h>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
-
 /**
  * ImTextureId is basically anything.
  * For example in Vulkan implementation it could be a descriptor set.

@@ -35,7 +35,7 @@ void InputText::clear() {
 void InputText::unserialize_impl(const toml::table &src) {
   setText(**src["text"].as_string());
   setValueAndNotifyIfChanged(getText());
-  std::strcpy(buffer, getText().c_str());
+  std::snprintf(buffer, getText().size(), "%s", getText().c_str());
 }
 
 toml::table InputText::serialize_impl() { return toml::table{{{"text", getText()}}}; }

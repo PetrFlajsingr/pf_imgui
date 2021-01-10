@@ -9,6 +9,7 @@
 #include <pf_imgui/_export.h>
 #include <src/pf_imgui/elements/interface/LabeledElement.h>
 #include <src/pf_imgui/elements/interface/ResizableElement.h>
+#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

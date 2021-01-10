@@ -23,5 +23,7 @@ void Image::renderImpl() {
 }
 
 void Image::setTextureId(ImTextureID imTetureId) { textureId = imTetureId; }
+
 bool Image::isButton() const { return isButton_; }
+
 }// namespace pf::ui::ig

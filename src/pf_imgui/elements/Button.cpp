@@ -27,4 +27,5 @@ void Button::renderImpl() {
 ButtonType Button::getType() const { return type; }
 
 void Button::setType(ButtonType buttonType) { type = buttonType; }
+
 }// namespace pf::ui::ig

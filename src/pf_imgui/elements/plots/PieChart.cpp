@@ -3,6 +3,7 @@
 //
 
 #include "PieChart.h"
+#include <algorithm>
 #include <implot.h>
 
 namespace pf::ui::ig {

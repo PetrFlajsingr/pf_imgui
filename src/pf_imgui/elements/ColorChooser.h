@@ -15,6 +15,7 @@
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <string>
 #include <toml++/toml_node_view.h>
 
 namespace pf::ui::ig {

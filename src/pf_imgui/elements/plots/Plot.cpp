@@ -5,7 +5,6 @@
 #include "Plot.h"
 #include <algorithm>
 #include <implot.h>
-#include <utility>
 
 namespace pf::ui::ig {
 

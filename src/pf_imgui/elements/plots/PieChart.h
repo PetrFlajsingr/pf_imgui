@@ -9,6 +9,9 @@
 #include "../interface/ResizableElement.h"
 #include "types/PlotDataBase.h"
 #include <pf_imgui/_export.h>
+#include <string>
+#include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 

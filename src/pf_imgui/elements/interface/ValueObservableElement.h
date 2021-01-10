@@ -12,6 +12,9 @@
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
 #include <ranges>
+#include <string>
+#include <unordered_map>
+#include <utility>
 
 namespace pf::ui::ig {
 template<typename T>
@@ -49,7 +52,7 @@ class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
  protected:
   void notifyValueChanged() {
     auto callables = listeners | std::views::values;
-    std::ranges::for_each(callables, [&](auto &callable) { callable(value); });
+    std::ranges::for_each(callables, [&](const auto &callable) { callable(value); });
   }
   void setValue(T val) { value = val; }
 

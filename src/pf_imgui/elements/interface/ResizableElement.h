@@ -8,6 +8,7 @@
 #include "Element.h"
 #include <imgui.h>
 #include <pf_imgui/_export.h>
+#include <string>
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT ResizableElement : public virtual Element {

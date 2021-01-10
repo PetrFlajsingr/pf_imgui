@@ -20,4 +20,5 @@ void Tree::renderImpl() {
     ImGui::TreePop();
   }
 }
+
 }// namespace pf::ui::ig

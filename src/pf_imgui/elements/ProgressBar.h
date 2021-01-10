@@ -9,6 +9,7 @@
 #include "interface/ValueObservableElement.h"
 #include <imgui.h>
 #include <pf_imgui/_export.h>
+#include <string>
 
 namespace pf::ui::ig {
 

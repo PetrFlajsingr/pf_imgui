@@ -7,8 +7,10 @@
 
 #include "interface/LabeledElement.h"
 #include "interface/ValueObservableElement.h"
+#include <algorithm>
 #include <pf_common/concepts/Iterable.h>
 #include <pf_imgui/_export.h>
+#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

@@ -3,6 +3,7 @@
 //
 
 #include "LabeledElement.h"
+#include <string>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -21,4 +22,5 @@ LabeledElement::LabeledElement(std::string elementName, std::string caption)
 const std::string &LabeledElement::getLabel() const { return label; }
 
 void LabeledElement::setLabel(const std::string &cap) { label = cap; }
+
 }// namespace pf::ui::ig

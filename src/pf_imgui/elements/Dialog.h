@@ -8,6 +8,7 @@
 #include "interface/Container.h"
 #include "interface/LabeledElement.h"
 #include <pf_imgui/_export.h>
+#include <string>
 
 namespace pf::ui::ig {
 

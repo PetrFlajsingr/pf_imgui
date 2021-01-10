@@ -8,6 +8,7 @@
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
+#include <algorithm>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
@@ -16,6 +17,7 @@
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/math/Range.h>
 #include <pf_imgui/_export.h>
+#include <string>
 #include <utility>
 
 namespace pf::ui::ig {

@@ -9,6 +9,8 @@
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include <pf_imgui/_export.h>
+#include <string>
+#include <vector>
 
 namespace pf::ui::ig {
 

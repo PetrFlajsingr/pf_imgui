@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <imgui.h>
 #include <pf_common/Visitor.h>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -54,13 +55,16 @@ MenuItem &MenuContainer::addItem(const std::string &name, const std::string &cap
   items.emplace_back(std::move(newItem));
   return *ptr;
 }
+
 void MenuContainer::removeItem(const std::string &name) {
   if (const auto iter = std::ranges::find_if(items, [name](auto &item) { return item->getName() == name; });
       iter != items.end()) {
     items.erase(iter);
   }
 }
+
 void MenuContainer::renderItems() {
   std::ranges::for_each(items, [](auto &item) { item->render(); });
 }
+
 }// namespace pf::ui::ig

@@ -9,10 +9,12 @@
 #include "../interface/ResizableElement.h"
 #include "types/PlotDataBase.h"
 #include <bits/ranges_algo.h>
+#include <memory>
 #include <optional>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace pf::ui::ig {

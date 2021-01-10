@@ -7,6 +7,7 @@
 
 #include "PlotDataBase.h"
 #include <implot.h>
+#include <string>
 
 namespace pf::ui::ig::plot_type {
 

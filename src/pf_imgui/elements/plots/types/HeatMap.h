@@ -6,8 +6,10 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_HEATMAP_H
 
 #include "PlotDataBase.h"
-#include <bits/ranges_algo.h>
+#include <algorithm>
 #include <implot.h>
+#include <string>
+#include <vector>
 
 namespace pf::ui::ig::plot_type {
 

@@ -10,9 +10,12 @@
 #include "elements/interface/Container.h"
 #include "fwd.h"
 #include <imgui.h>
+#include <memory>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
+#include <string>
 #include <toml++/toml.h>
+#include <vector>
 
 namespace pf::ui::ig {
 

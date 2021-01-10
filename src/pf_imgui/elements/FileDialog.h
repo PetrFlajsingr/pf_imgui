@@ -9,7 +9,9 @@
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/LabeledElement.h>
+#include <string>
 #include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 

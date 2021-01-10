@@ -11,6 +11,7 @@
 #include <memory>
 #include <optional>
 #include <pf_imgui/_export.h>
+#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

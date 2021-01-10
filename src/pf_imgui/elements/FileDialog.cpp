@@ -3,8 +3,6 @@
 //
 
 #include "FileDialog.h"
-
-#include <iostream>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -12,6 +10,7 @@ namespace pf::ui::ig {
 FileExtensionSettings::FileExtensionSettings(std::vector<std::string> extensions, std::string description,
                                              const std::optional<ImVec4> &color)
     : extensions(std::move(extensions)), description(std::move(description)), color(color) {}
+
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
   for (const auto &[names, desc, color] : extSettings) {
     if (!desc.empty()) {
@@ -33,6 +32,7 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
   }
   if (!filters.empty()) { filters = filters.substr(0, filters.size() - 1); }
 }
+
 void FileDialog::renderImpl() {
   if (done) { return; }
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
@@ -66,7 +66,9 @@ void FileDialog::renderImpl() {
     done = true;
   }
 }
+
 void FileDialog::setExtInfos() {
   for (const auto &[ext, color] : extColors) { igfd::ImGuiFileDialog::Instance()->SetExtentionInfos(ext, color); }
 }
+
 }// namespace pf::ui::ig

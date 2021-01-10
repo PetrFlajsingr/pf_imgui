@@ -29,4 +29,5 @@ WindowMenuBar &Window::getMenuBar() {
 }
 
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
+
 }// namespace pf::ui::ig

@@ -9,6 +9,7 @@
 #include <imgui.h>
 #include <optional>
 #include <pf_imgui/_export.h>
+#include <string>
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Text : public virtual Element {

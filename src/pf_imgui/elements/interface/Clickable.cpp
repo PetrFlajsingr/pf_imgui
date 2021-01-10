@@ -10,8 +10,9 @@ namespace pf::ui::ig {
 
 void Clickable::notifyOnClick() {
   auto callables = listeners | std::views::values;
-  std::ranges::for_each(callables, [&](auto &callable) { callable(); });
+  std::ranges::for_each(callables, [&](const auto &callable) { callable(); });
 }
 
 Clickable::Id Clickable::generateListenerId() { return getNext(idGenerator); }
+
 }// namespace pf::ui::ig

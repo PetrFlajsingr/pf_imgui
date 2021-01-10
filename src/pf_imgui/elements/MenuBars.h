@@ -11,6 +11,7 @@
 #include <functional>
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <string>
 #include <variant>
 #include <vector>
 
