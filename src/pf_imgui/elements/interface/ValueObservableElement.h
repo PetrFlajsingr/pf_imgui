@@ -33,6 +33,7 @@ class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
   }
 
   Subscription addValueListener(std::invocable<const T &> auto fnc, bool callNow = false) {
+    if (callNow) { fnc(value); }
     const auto id = generateListenerId();
     listeners[id] = fnc;
     return Subscription([id, this] { listeners.erase(id); });
