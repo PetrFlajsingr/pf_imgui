@@ -44,9 +44,6 @@ endif ()
 
 set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
 set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
-include_directories(${toml++_SOURCE_DIR}/include)
-include_directories(${IMGUI_FILE_DIALOG_DIR})
-include_directories(${IMGUI_FLAME_GRAPH_DIR})
 
 CPMAddPackage(
         NAME pf_common
@@ -62,9 +59,16 @@ CPMAddPackage(
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
 
+file(GLOB toml++_headers
+        "${toml++_SOURCE_DIR}/include/toml++/*.h"
+        "${toml++_SOURCE_DIR}/include/toml++/*.hpp"
+        )
+
+include_directories(${toml++_SOURCE_DIR}/include)
+include_directories(${IMGUI_FILE_DIALOG_DIR})
+include_directories(${IMGUI_FLAME_GRAPH_DIR})
 
 include_directories(${implot_SOURCE_DIR})
-include_directories(${toml++_SOURCE_DIR}/include)
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -178,7 +182,7 @@ set(INCLUDES
         src/include/imgui/imstb_truetype.h
         )
 
-
+list(APPEND INCLUDES ${toml++_headers})
 
 
 option(BUILD_SHARED_LIBS "build this library as shared")
