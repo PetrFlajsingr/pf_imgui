@@ -26,6 +26,8 @@ enum class PanelLayout { Vertical, Horizontal };
 enum class FileType { File, Directory };
 
 enum class IsButton { Yes, No };
+
+enum class State { Enabled, Disabled };
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ENUMS_H

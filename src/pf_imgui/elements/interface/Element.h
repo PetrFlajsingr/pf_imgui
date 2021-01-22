@@ -25,10 +25,14 @@ class PF_IMGUI_EXPORT Element {
   [[nodiscard]] Visibility getVisibility() const;
   void setVisibility(Visibility visibility);
 
+  [[nodiscard]] State getState() const;
+  void setState(State eleState);
+
   void render();
 
  protected:
   virtual void renderImpl() = 0;
+  State state = State::Enabled;
 
  private:
   std::string name;

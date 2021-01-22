@@ -3,6 +3,8 @@
 //
 
 #include "Element.h"
+#include <imgui.h>
+#include <imgui_internal.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -31,7 +33,21 @@ Visibility Element::getVisibility() const { return visibility; }
 void Element::setVisibility(Visibility visi) { visibility = visi; }
 
 void Element::render() {
-  if (visibility == Visibility::Visible) { renderImpl(); }
+  if (visibility == Visibility::Visible) {
+    if (state == State::Disabled) {
+      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+    }
+    renderImpl();
+    if (state == State::Disabled) {
+      ImGui::PopItemFlag();
+      ImGui::PopStyleVar();
+    }
+  }
 }
+
+void Element::setState(State eleState) { state = eleState; }
+
+State Element::getState() const { return state; }
 
 }// namespace pf::ui::ig
