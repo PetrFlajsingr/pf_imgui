@@ -13,7 +13,8 @@ Window::Window(const std::string &elementName, std::string title)
     : Element(elementName), Container(elementName), title(std::move(title)) {}
 
 void Window::renderImpl() {
-  ImGui::Begin(title.c_str(), nullptr, ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar);
+  auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
+  ImGui::Begin(title.c_str(), nullptr, flags);
   if (hasMenuBar()) { menuBar->render(); }
   std::ranges::for_each(getChildren(), [&](auto &child) { child.get().render(); });
   ImGui::End();

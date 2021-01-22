@@ -39,8 +39,10 @@ class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
  private:
   std::vector<std::string> items;
   std::string previewValue;
-  std::optional<uint> selectedItemIndex = std::nullopt;
+  std::optional<unsigned int> selectedItemIndex = std::nullopt;
   std::function<bool(std::string_view)> filter = [](auto) { return true; };
 };
+
+
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H
