@@ -39,7 +39,7 @@ void Element::render() {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
     }
-    auto raiiEnabled = pf::RAII([this]() {
+    auto raiiEnabled = pf::RAII([this] {
       if (enabled == Enabled::No) {
         ImGui::PopItemFlag();
         ImGui::PopStyleVar();
