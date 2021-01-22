@@ -27,7 +27,7 @@ enum class FileType { File, Directory };
 
 enum class IsButton { Yes, No };
 
-enum class State { Enabled, Disabled };
+enum class Enabled { Yes, No };
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ENUMS_H

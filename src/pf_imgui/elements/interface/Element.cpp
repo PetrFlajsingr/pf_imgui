@@ -34,20 +34,20 @@ void Element::setVisibility(Visibility visi) { visibility = visi; }
 
 void Element::render() {
   if (visibility == Visibility::Visible) {
-    if (state == State::Disabled) {
+    if (state == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
     }
     renderImpl();
-    if (state == State::Disabled) {
+    if (state == Enabled::No) {
       ImGui::PopItemFlag();
       ImGui::PopStyleVar();
     }
   }
 }
 
-void Element::setState(State eleState) { state = eleState; }
+void Element::setEnabled(Enabled eleState) { state = eleState; }
 
-State Element::getState() const { return state; }
+Enabled Element::getEnabled() const { return state; }
 
 }// namespace pf::ui::ig
