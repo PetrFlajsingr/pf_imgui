@@ -38,14 +38,14 @@ void Element::render() {
     if (enabled == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-    }
-    auto raiiEnabled = pf::RAII([this] {
-      if (enabled == Enabled::No) {
+      auto raiiEnabled = pf::RAII([] {
         ImGui::PopItemFlag();
         ImGui::PopStyleVar();
-      }
-    });
-    renderImpl();
+      });
+      renderImpl();
+    } else {
+      renderImpl();
+    }
   }
 }
 
