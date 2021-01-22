@@ -32,11 +32,11 @@ class PF_IMGUI_EXPORT Element {
 
  protected:
   virtual void renderImpl() = 0;
-  Enabled enabled = Enabled::Yes;
 
  private:
   std::string name;
   Visibility visibility = Visibility::Visible;
+  Enabled enabled = Enabled::Yes;
   bool isMoved = false;
 };
 
