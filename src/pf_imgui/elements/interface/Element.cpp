@@ -5,6 +5,7 @@
 #include "Element.h"
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <pf_common/RAII.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -34,20 +35,22 @@ void Element::setVisibility(Visibility visi) { visibility = visi; }
 
 void Element::render() {
   if (visibility == Visibility::Visible) {
-    if (state == Enabled::No) {
+    if (enabled == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
     }
+    auto raiiEnabled = pf::RAII([this]() {
+      if (enabled == Enabled::No) {
+        ImGui::PopItemFlag();
+        ImGui::PopStyleVar();
+      }
+    });
     renderImpl();
-    if (state == Enabled::No) {
-      ImGui::PopItemFlag();
-      ImGui::PopStyleVar();
-    }
   }
 }
 
-void Element::setEnabled(Enabled eleState) { state = eleState; }
+void Element::setEnabled(Enabled eleState) { enabled = eleState; }
 
-Enabled Element::getEnabled() const { return state; }
+Enabled Element::getEnabled() const { return enabled; }
 
 }// namespace pf::ui::ig

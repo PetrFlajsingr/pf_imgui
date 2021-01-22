@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT Element {
 
  protected:
   virtual void renderImpl() = 0;
-  Enabled state = Enabled::Yes;
+  Enabled enabled = Enabled::Yes;
 
  private:
   std::string name;
