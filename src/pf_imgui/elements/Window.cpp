@@ -15,6 +15,11 @@ Window::Window(const std::string &elementName, std::string title)
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
   ImGui::Begin(title.c_str(), nullptr, flags);
+  const auto wasHovered = hovered;
+  hovered = ImGui::IsWindowHovered();
+  if (hovered != wasHovered) {
+    notifyHovered(hovered);
+  }
   const auto wasCollapsed = collapsed;
   collapsed = ImGui::IsWindowCollapsed();
   if (collapsed != wasCollapsed) {

@@ -21,7 +21,11 @@ ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
 
 void ItemElement::render() {
   Element::render();
+  const auto wasHovered = hovered;
   hovered = ImGui::IsItemHovered();
+  if (hovered != wasHovered) {
+    notifyHovered(hovered);
+  }
   const auto wasFocused = focused;
   focused = ImGui::IsItemFocused();
   if (wasFocused != focused) {

@@ -11,11 +11,12 @@
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Focusable.h>
+#include <pf_imgui/elements/interface/Hoverable.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Window : public Container, public Focusable {
+class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hoverable {
  public:
   Window(const std::string &elementName, std::string title);
 
@@ -39,6 +40,10 @@ class PF_IMGUI_EXPORT Window : public Container, public Focusable {
 
   [[nodiscard]] bool isFocused() const;
   void setFocused(bool focused);
+
+  Subscription addCollapseListener(std::invocable<bool> auto listener) {
+    return observableImplCollapse.template addListener(listener);
+  }
 
  protected:
   void renderImpl() override;

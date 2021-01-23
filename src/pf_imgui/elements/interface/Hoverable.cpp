@@ -4,4 +4,8 @@
 
 #include "Hoverable.h"
 
-namespace pf::ui::ig {}
+namespace pf::ui::ig {
+void Hoverable::notifyHovered(bool hovered) {
+  observableImpl.notify(hovered);
+}
+}
