@@ -19,7 +19,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT ImGuiInterface {
+class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
 
@@ -64,7 +64,7 @@ class PF_IMGUI_EXPORT ImGuiInterface {
                              startName, modality, maxSelectedFiles);
   }
 
-  void render();
+  void render() override;
 
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;

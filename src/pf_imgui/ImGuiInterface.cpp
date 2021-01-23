@@ -42,22 +42,16 @@ bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() {
-  config.clear();
-  std::ranges::for_each(
-      windows, [this](auto &window) { config.insert_or_assign(window->getName(), serializeImGuiTree(*window)); });
+  config = serializeImGuiTree(*this);
 }
 
 void ImGuiInterface::setStateFromConfig() {
-  std::ranges::for_each(windows, [this](auto &window) {
-    traverseImGuiTree(*window, [this](Renderable &renderable) {
-      if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
-        if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
-          if (config.contains(ptrElement->getName())) {
-            ptrSavable->unserialize(*config[ptrElement->getName()].as_table());
-          }
-        }
+  traverseImGuiTree(*this, [this](Renderable &renderable) {
+    if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
+      if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
+        if (config.contains(ptrElement->getName())) { ptrSavable->unserialize(*config[ptrElement->getName()].as_table()); }
       }
-    });
+    }
   });
 }
 void ImGuiInterface::renderFileDialogs() {
