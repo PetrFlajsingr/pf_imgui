@@ -9,16 +9,22 @@
 #include "interface/Container.h"
 #include "interface/LabeledElement.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/interface/SavableElement.h>
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT Group : public Container, public LabeledElement, public Collapsible {
+class PF_IMGUI_EXPORT Group : public Container, public LabeledElement, public SavableElement, public Collapsible {
  public:
-  Group(const std::string &elementName, const std::string &caption, AllowCollapse allowCollapse = AllowCollapse::No);
+  Group(const std::string &elementName, const std::string &caption, AllowCollapse allowCollapse = AllowCollapse::No,
+        Persistent persistent = Persistent::No);
 
  protected:
   void renderImpl() override;
   void collapse_impl(bool) override;
+
+  void unserialize_impl(const toml::table &src) override;
+  toml::table serialize_impl() override;
+
  private:
   AllowCollapse collapsible;
 };
