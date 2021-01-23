@@ -15,8 +15,10 @@ Window::Window(const std::string &elementName, std::string title)
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
   ImGui::Begin(title.c_str(), nullptr, flags);
-  if (hasMenuBar()) { menuBar->render(); }
-  std::ranges::for_each(getChildren(), [&](auto &child) { child.get().render(); });
+  if (!collapsed) {
+    if (hasMenuBar()) { menuBar->render(); }
+    std::ranges::for_each(getChildren(), [&](auto &child) { child.get().render(); });
+  }
   ImGui::End();
 }
 
@@ -30,5 +32,36 @@ WindowMenuBar &Window::getMenuBar() {
 }
 
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
+void Window::removeMenuBar() { menuBar = nullptr; }
+
+bool Window::isCollapsed() const { return collapsed; }
+
+void Window::setCollapsed(bool newCollapsed) {
+  collapsed = newCollapsed;
+  ImGui::SetWindowCollapsed(getTitle().c_str(), collapsed);
+}
+
+bool Window::isHovered() const { return hovered; }
+
+const ImVec2 &Window::getPosition() const { return position; }
+
+void Window::setPosition(const ImVec2 &newPosition) {
+  position = newPosition;
+  ImGui::SetWindowPos(getTitle().c_str(), position);
+}
+
+const ImVec2 &Window::getSize() const { return size; }
+
+void Window::setSize(const ImVec2 &newSize) {
+  size = newSize;
+  ImGui::SetWindowSize(getTitle().c_str(), size);
+}
+
+bool Window::isFocused() const { return focused; }
+
+void Window::setFocused(bool newFocused) {
+  focused = newFocused;
+  ImGui::SetWindowFocus(getTitle().c_str());
+}
 
 }// namespace pf::ui::ig
