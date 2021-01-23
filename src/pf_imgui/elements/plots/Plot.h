@@ -6,7 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_PLOT_H
 
 #include "../interface/Labellable.h"
-#include "../interface/ResizableElement.h"
+#include "../interface/Resizable.h"
 #include "types/PlotDataBase.h"
 #include <bits/ranges_algo.h>
 #include <memory>
@@ -19,7 +19,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Plot : public Labellable, public ResizableElement {
+class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable {
  public:
   Plot(const std::string &elementName, const std::string &label, std::optional<std::string> xLabel = std::nullopt,
        std::optional<std::string> yLabel = std::nullopt, const ImVec2 &size = ImVec2{-1, 0});

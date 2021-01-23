@@ -23,6 +23,8 @@ class Focusable {
     }
   }
 
+  virtual ~Focusable() = default;
+
  protected:
   virtual void setFocus_impl() = 0;
   void setFocusedWithoutDemandingFocusChange(bool newFocused);

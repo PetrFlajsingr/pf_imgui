@@ -3,12 +3,12 @@
 //
 
 #include "RadioButton.h"
+#include <imgui.h>
 
 namespace pf::ui::ig {
 
 RadioButton::RadioButton(const std::string &elementName, const std::string &label, bool value)
-    : Element(elementName), ItemElement(elementName), Labellable(label),
-      ValueObservableElement(elementName, value) {}
+    : Element(elementName), ItemElement(elementName), Labellable(label), ValueObservableElement(elementName, value) {}
 
 void RadioButton::renderImpl() {
   const auto oldValue = getValue();

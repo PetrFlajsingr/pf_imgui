@@ -106,7 +106,7 @@ set(SOURCES
         src/pf_imgui/elements/interface/Container.cpp
         src/pf_imgui/elements/interface/Element.cpp
         src/pf_imgui/elements/interface/Labellable.cpp
-        src/pf_imgui/elements/interface/ResizableElement.cpp
+        src/pf_imgui/elements/interface/Resizable.cpp
         src/pf_imgui/elements/interface/SavableElement.cpp
         src/pf_imgui/elements/interface/Clickable.cpp
         src/pf_imgui/elements/interface/ItemElement.cpp
@@ -170,7 +170,7 @@ set(INCLUDES
         src/pf_imgui/elements/interface/Container.h
         src/pf_imgui/elements/interface/Element.h
         src/pf_imgui/elements/interface/Labellable.h
-        src/pf_imgui/elements/interface/ResizableElement.h
+        src/pf_imgui/elements/interface/Resizable.h
         src/pf_imgui/elements/interface/SavableElement.h
         src/pf_imgui/elements/interface/Clickable.h
         src/pf_imgui/elements/interface/ValueObservableElement.h

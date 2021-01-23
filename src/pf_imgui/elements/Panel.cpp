@@ -11,8 +11,8 @@
 namespace pf::ui::ig {
 
 Panel::Panel(const std::string &elementName, std::string title, PanelLayout layout, const ImVec2 &panelSize)
-    : Element(elementName), Container(elementName), ResizableElement(elementName, panelSize), title(std::move(title)),
-      panelLayout(layout) {}
+    : Element(elementName), Container(elementName), Resizable(panelSize), title(std::move(title)), panelLayout(layout) {
+}
 
 void Panel::renderImpl() {
   ImGui::BeginChild(title.c_str(), getSize());

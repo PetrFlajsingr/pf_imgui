@@ -16,6 +16,8 @@ class Hoverable {
 
   [[nodiscard]] bool isHovered() const;
 
+  virtual ~Hoverable() = default;
+
  protected:
   void setHovered(bool hover);
  private:

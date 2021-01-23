@@ -12,7 +12,7 @@
 namespace pf::ui::ig {
 
 Window::Window(const std::string &elementName, std::string title)
-    : Element(elementName), Container(elementName), title(std::move(title)) {}
+    : Element(elementName), Container(elementName), Resizable(ImVec2(0, 0)), title(std::move(title)) {}
 
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
@@ -48,11 +48,9 @@ void Window::setPosition(const ImVec2 &newPosition) {
   ImGui::SetWindowPos(getTitle().c_str(), position);
 }
 
-const ImVec2 &Window::getSize() const { return size; }
-
 void Window::setSize(const ImVec2 &newSize) {
-  size = newSize;
-  ImGui::SetWindowSize(getTitle().c_str(), size);
+  Resizable::setSize(newSize);
+  ImGui::SetWindowSize(getTitle().c_str(), getSize());
 }
 
 void Window::setFocus_impl() { ImGui::SetWindowFocus(getTitle().c_str()); }

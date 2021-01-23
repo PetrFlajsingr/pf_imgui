@@ -8,13 +8,13 @@
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <src/pf_imgui/elements/interface/Labellable.h>
-#include <src/pf_imgui/elements/interface/ResizableElement.h>
+#include <src/pf_imgui/elements/interface/Resizable.h>
 #include <string>
 #include <vector>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT SimplePlot : public Labellable, public ResizableElement {
+class PF_IMGUI_EXPORT SimplePlot : public Element, public Labellable, public Resizable {
  public:
   SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
              std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,

@@ -17,6 +17,8 @@ class Collapsible {
   [[nodiscard]] bool isCollapsed() const;
   void setCollapsed(bool collapsed);
 
+  virtual ~Collapsible() = default;
+
  protected:
   virtual void collapse_impl(bool collapse) = 0;
   void setCollapsedWithoutDemandingCollapseChange(bool collapse);

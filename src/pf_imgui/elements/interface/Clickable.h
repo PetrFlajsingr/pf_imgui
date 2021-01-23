@@ -17,6 +17,7 @@ class Clickable {
  public:
   Subscription addClickListener(std::invocable auto fnc) { return observableImpl.template addListener(fnc); }
 
+  virtual ~Clickable() = default;
  protected:
   void notifyOnClick();
 

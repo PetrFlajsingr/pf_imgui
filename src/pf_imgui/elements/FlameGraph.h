@@ -9,14 +9,14 @@
 #include <include/ImGuiFlamegraph/imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/ResizableElement.h>
+#include <pf_imgui/elements/interface/Resizable.h>
 #include <string>
 #include <vector>
 
 namespace pf::ui::ig {
 
 using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
-class PF_IMGUI_EXPORT FlameGraph : public Labellable, public ResizableElement {
+class PF_IMGUI_EXPORT FlameGraph : public Element, public Labellable, public Resizable {
  public:
   FlameGraph(const std::string &elementName, const std::string &label, const ImVec2 &size = ImVec2{0, 0},
              std::optional<std::string> overlay = std::nullopt);

@@ -12,7 +12,7 @@ class ImGuiInterface;
 class Element;
 class Container;
 class Labellable;
-class ResizableElement;
+class Resizable;
 class SavableElement;
 
 class Button;

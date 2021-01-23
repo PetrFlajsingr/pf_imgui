@@ -20,6 +20,7 @@ class PF_IMGUI_EXPORT Labellable {
   [[nodiscard]] const std::string &getLabel() const;
   void setLabel(const std::string &cap);
 
+  virtual ~Labellable() = default;
  private:
   std::string label_;
 };

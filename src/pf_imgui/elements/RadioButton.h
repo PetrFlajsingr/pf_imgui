@@ -7,7 +7,6 @@
 
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
-#include "interface/ResizableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <pf_imgui/_export.h>
 #include <string>

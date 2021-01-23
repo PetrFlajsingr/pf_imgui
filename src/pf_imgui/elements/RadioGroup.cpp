@@ -6,6 +6,7 @@
 #include <range/v3/view/enumerate.hpp>
 #include <toml++/toml_node_view.h>
 #include <utility>
+#include <imgui.h>
 
 namespace pf::ui::ig {
 
