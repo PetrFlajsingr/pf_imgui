@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_ELEMENTS_INTERFACE_ELEMENT_H
 #define PF_IMGUI_ELEMENTS_INTERFACE_ELEMENT_H
 
+#include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
 #include <string>
