@@ -22,7 +22,7 @@ void Dialog::renderImpl() {
     open = ImGui::BeginPopup(getLabel().c_str());
   }
   if (open) {
-    std::ranges::for_each(getChildren(), [](auto &child) { child.get().render(); });
+    std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndPopup();
   }
   if (closed) { owner.enqueueChildRemoval(getName()); }

@@ -6,6 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_SLIDERANGLE_H
 
 #include "ColorChooser.h"
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
@@ -13,7 +14,10 @@
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT SliderAngle : public LabeledElement, public ValueObservableElement<float>, public SavableElement {
+class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
+                                    public LabeledElement,
+                                    public ValueObservableElement<float>,
+                                    public SavableElement {
  public:
   SliderAngle(const std::string &elementName, const std::string &caption, float min, float max, float value = 0.0,
               Persistent persistent = Persistent::No, std::string format = "%.0f deg");

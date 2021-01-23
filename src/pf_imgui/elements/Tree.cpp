@@ -16,7 +16,7 @@ Tree &Tree::addNode(const std::string &elementName, const std::string &caption) 
 
 void Tree::renderImpl() {
   if (ImGui::TreeNode(getLabel().c_str())) {
-    std::ranges::for_each(getChildren(), [](auto &child) { child.get().render(); });
+    std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::TreePop();
   }
 }

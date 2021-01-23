@@ -15,7 +15,7 @@ inline void traverseImGuiTree_impl(Element &element, std::invocable<Element &> a
   callback(element);
   if (auto ptrContainer = dynamic_cast<Container *>(&element); ptrContainer != nullptr) {
     std::ranges::for_each(ptrContainer->getChildren(),
-                          [&callback](auto &child) { traverseImGuiTree_impl(child.get(), callback); });
+                          [&callback](auto &child) { traverseImGuiTree_impl(child, callback); });
   }
 }
 }// namespace details

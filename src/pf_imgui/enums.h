@@ -15,7 +15,7 @@ enum class TextInputType { SingleLine, MultiLine };
 
 enum class PlotType { Lines, Histogram };
 
-enum class ButtonType { Normal, Small, ArrowUp, ArrowLeft, ArrowRight, ArrowDown };
+enum class ButtonType { Normal, Invisible, Small, ArrowUp, ArrowLeft, ArrowRight, ArrowDown };
 
 enum class Persistent { Yes, No };
 

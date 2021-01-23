@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
 #define PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
 
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
@@ -38,12 +39,16 @@ constexpr const char *defaultSliderFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Slider : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
+class PF_IMGUI_EXPORT Slider : public ItemElement,
+                               public LabeledElement,
+                               public ValueObservableElement<T>,
+                               public SavableElement {
  public:
   using MinMaxType = details::SliderMinMaxType<T>;
   Slider(const std::string &elementName, const std::string &caption, MinMaxType min, MinMaxType max, T value = T{},
          Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>())
-      : Element(elementName), LabeledElement(elementName, caption), ValueObservableElement<T>(elementName, value),
+      : Element(elementName), ItemElement(elementName),
+        LabeledElement(elementName, caption), ValueObservableElement<T>(elementName, value),
         SavableElement(elementName, persistent), min(min), max(max), format(std::move(format)) {}
 
  protected:

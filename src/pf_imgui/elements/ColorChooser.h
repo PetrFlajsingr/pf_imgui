@@ -6,6 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_COLORCHOOSER_H
 
 #include "../serialization.h"
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
@@ -21,7 +22,10 @@
 namespace pf::ui::ig {
 
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
-class PF_IMGUI_EXPORT ColorChooser : public LabeledElement, public ValueObservableElement<T>, public SavableElement {
+class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
+                                     public LabeledElement,
+                                     public ValueObservableElement<T>,
+                                     public SavableElement {
  public:
   ColorChooser(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
                T value = T{})

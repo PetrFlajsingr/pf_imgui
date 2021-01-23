@@ -5,6 +5,7 @@
 #include "Panel.h"
 #include <algorithm>
 #include <imgui.h>
+#include <range/v3/view/enumerate.hpp>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -16,14 +17,17 @@ Panel::Panel(const std::string &elementName, std::string title, PanelLayout layo
 void Panel::renderImpl() {
   ImGui::BeginChild(title.c_str(), getSize());
   if (panelLayout == PanelLayout::Vertical) {
-    std::ranges::for_each(getChildren(), [&](auto &child) { child.get().render(); });
+    std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
   } else {
-    if (!getChildren().empty()) {
-      std::ranges::for_each_n(getChildren().begin(), getChildren().size() - 1, [&](auto &child) {
-        child.get().render();
-        ImGui::SameLine();
+    auto children = getChildren();
+    if (!children.empty()) {
+      const auto size = children.size();
+      auto idx = 0u;
+      std::ranges::for_each(children, [&](auto &child) {
+        child.render();
+        if (idx != size - 1) { ImGui::SameLine(); }
+        ++idx;
       });
-      getChildren().back().get().render();
     }
   }
   ImGui::EndChild();

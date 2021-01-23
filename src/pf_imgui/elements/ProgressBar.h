@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
 #define PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
 
+#include "interface/ItemElement.h"
 #include "interface/ResizableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <imgui.h>
@@ -22,11 +23,12 @@ concept ProgressBarCompatible = requires(T t, float f) {
 };
 
 template<ProgressBarCompatible T>
-class PF_IMGUI_EXPORT ProgressBar : public ValueObservableElement<T>, public ResizableElement {
+class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservableElement<T>, public ResizableElement {
  public:
   ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
               const ImVec2 &size = {-1, 0})
-      : Element(elementName), ValueObservableElement<T>(elementName, value.has_value() ? *value : min),
+      : Element(elementName),
+        ItemElement(elementName), ValueObservableElement<T>(elementName, value.has_value() ? *value : min),
         ResizableElement(elementName, size), stepValue(stepValue), min(min), max(max) {}
 
   T setPercentage(float percentage) {

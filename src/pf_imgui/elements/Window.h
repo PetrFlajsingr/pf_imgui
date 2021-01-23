@@ -22,8 +22,22 @@ class PF_IMGUI_EXPORT Window : public Container {
   void setTitle(const std::string &title);
 
   [[nodiscard]] WindowMenuBar &getMenuBar();
-
   [[nodiscard]] bool hasMenuBar() const;
+  void removeMenuBar();
+
+  [[nodiscard]] bool isCollapsed() const;
+  void setCollapsed(bool collapsed);
+
+  [[nodiscard]] bool isHovered() const;
+
+  [[nodiscard]] const ImVec2 &getPosition() const;
+  void setPosition(const ImVec2 &position);
+
+  [[nodiscard]] const ImVec2 &getSize() const;
+  void setSize(const ImVec2 &size);
+
+  [[nodiscard]] bool isFocused() const;
+  void setFocused(bool focused);
 
  protected:
   void renderImpl() override;
@@ -31,6 +45,11 @@ class PF_IMGUI_EXPORT Window : public Container {
  private:
   std::string title;
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
+  bool collapsed = false;
+  bool hovered = false;
+  ImVec2 position;
+  ImVec2 size;
+  bool focused = false;
 };
 
 }// namespace pf::ui::ig

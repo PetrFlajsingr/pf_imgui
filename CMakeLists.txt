@@ -92,6 +92,7 @@ set(SOURCES
         src/pf_imgui/elements/Text.cpp
         src/pf_imgui/elements/Tree.cpp
         src/pf_imgui/elements/Window.cpp
+        src/pf_imgui/elements/Tooltip.cpp
         src/pf_imgui/elements/FileDialog.cpp
         src/pf_imgui/elements/FlameGraph.cpp
         src/pf_imgui/elements/plots/PieChart.cpp
@@ -108,6 +109,7 @@ set(SOURCES
         src/pf_imgui/elements/interface/ResizableElement.cpp
         src/pf_imgui/elements/interface/SavableElement.cpp
         src/pf_imgui/elements/interface/Clickable.cpp
+        src/pf_imgui/elements/interface/ItemElement.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
@@ -148,6 +150,7 @@ set(INCLUDES
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
         src/pf_imgui/elements/Window.h
+        src/pf_imgui/elements/Tooltip.h
         src/pf_imgui/elements/FileDialog.h
         src/pf_imgui/elements/FlameGraph.h
         src/pf_imgui/elements/plots.h
@@ -168,6 +171,7 @@ set(INCLUDES
         src/pf_imgui/elements/interface/SavableElement.h
         src/pf_imgui/elements/interface/Clickable.h
         src/pf_imgui/elements/interface/ValueObservableElement.h
+        src/pf_imgui/elements/interface/ItemElement.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
