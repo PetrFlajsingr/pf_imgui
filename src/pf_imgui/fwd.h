@@ -13,7 +13,7 @@ class Element;
 class Container;
 class Labellable;
 class Resizable;
-class SavableElement;
+class Savable;
 
 class Button;
 class Checkbox;

@@ -8,7 +8,7 @@
 #include "../serialization.h"
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
-#include "interface/SavableElement.h"
+#include "interface/Savable.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec3.hpp>
@@ -25,12 +25,11 @@ template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
 class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
                                      public Labellable,
                                      public ValueObservableElement<T>,
-                                     public SavableElement {
+                                     public Savable {
  public:
   ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
                T value = T{})
-      : Element(elementName), Labellable(label), ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent) {}
+      : Element(elementName), Labellable(label), ValueObservableElement<T>(elementName, value), Savable(persistent) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {

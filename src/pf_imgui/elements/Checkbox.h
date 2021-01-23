@@ -7,7 +7,7 @@
 
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
-#include "interface/SavableElement.h"
+#include "interface/Savable.h"
 #include "interface/ValueObservableElement.h"
 #include <pf_imgui/_export.h>
 #include <string>
@@ -16,7 +16,7 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Checkbox : public ItemElement,
                                  public ValueObservableElement<bool>,
                                  public Labellable,
-                                 public SavableElement {
+                                 public Savable {
  public:
   Checkbox(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
            bool value = false);

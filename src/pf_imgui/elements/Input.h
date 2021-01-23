@@ -7,7 +7,7 @@
 
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
-#include "interface/SavableElement.h"
+#include "interface/Savable.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
@@ -70,10 +70,7 @@ concept FormattedWithoutStep =
 }// namespace details
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Input : public ItemElement,
-                              public Labellable,
-                              public ValueObservableElement<T>,
-                              public SavableElement {
+class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public ValueObservableElement<T>, public Savable {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:
@@ -83,7 +80,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
         ItemElement(elementName),
         Labellable(label),
         ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent),
+        Savable(elementName, persistent),
         data(st, fStep) {}
 
   Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
@@ -92,7 +89,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
                                                                 ItemElement(elementName),
                                                                 Labellable(label),
                                                                 ValueObservableElement<T>(elementName, value),
-                                                                SavableElement(elementName, persistent),
+                                                                Savable(persistent),
                                                                 format(std::move(format)),
                                                                 data(st, fStep) {}
 
@@ -101,7 +98,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
                                                                      ItemElement(elementName),
                                                                      Labellable(label),
                                                                      ValueObservableElement<T>(elementName, value),
-                                                                     SavableElement(elementName, persistent) {}
+                                                                     Savable(persistent) {}
 
   Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
         std::string format = decltype(data)::defaultFormat(), T value = T{}) requires details::FormattedWithoutStep<T>
@@ -109,7 +106,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
         ItemElement(elementName),
         Labellable(label),
         ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent),
+        Savable(persistent),
         format(std::move(format)) {}
 
  protected:

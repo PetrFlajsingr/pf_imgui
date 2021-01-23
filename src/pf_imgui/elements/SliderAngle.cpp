@@ -8,9 +8,8 @@ namespace pf::ui::ig {
 
 SliderAngle::SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value,
                          Persistent persistent, std::string format)
-    : Element(elementName), ItemElement(elementName), Labellable(label),
-      ValueObservableElement(elementName, value), SavableElement(elementName, persistent), minDeg(min), maxDeg(max),
-      format(std::move(format)) {}
+    : Element(elementName), ItemElement(elementName), Labellable(label), ValueObservableElement(elementName, value),
+      Savable(persistent), minDeg(min), maxDeg(max), format(std::move(format)) {}
 
 void SliderAngle::renderImpl() {
   const auto oldValue = ValueObservableElement::getValue();

@@ -7,7 +7,7 @@
 
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
-#include "interface/SavableElement.h"
+#include "interface/Savable.h"
 #include "interface/ValueObservableElement.h"
 #include <algorithm>
 #include <glm/gtc/type_ptr.hpp>
@@ -45,15 +45,14 @@ template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
 class PF_IMGUI_EXPORT DragInput : public ItemElement,
                                   public ValueObservableElement<T>,
                                   public Labellable,
-                                  public SavableElement {
+                                  public Savable {
  public:
   using ParamType = details::UnderlyingType<T>;
 
   DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
             Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
       : Element(elementName), ItemElement(elementName), ValueObservableElement<T>(elementName, value),
-        Labellable(label), SavableElement(elementName, persistent), speed(speed), min(min), max(max),
-        format(std::move(format)) {}
+        Labellable(label), Savable(persistent), speed(speed), min(min), max(max), format(std::move(format)) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {

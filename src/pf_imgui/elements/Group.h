@@ -9,11 +9,11 @@
 #include "interface/Container.h"
 #include "interface/Labellable.h"
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/SavableElement.h>
+#include <pf_imgui/elements/interface/Savable.h>
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT Group : public Container, public Labellable, public SavableElement, public Collapsible {
+class PF_IMGUI_EXPORT Group : public Container, public Labellable, public Savable, public Collapsible {
  public:
   Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::No,
         Persistent persistent = Persistent::No);

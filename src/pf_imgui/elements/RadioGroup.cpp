@@ -3,17 +3,17 @@
 //
 
 #include "RadioGroup.h"
+#include <imgui.h>
 #include <range/v3/view/enumerate.hpp>
 #include <toml++/toml_node_view.h>
 #include <utility>
-#include <imgui.h>
 
 namespace pf::ui::ig {
 
 RadioGroup::RadioGroup(const std::string &elementName, const std::string &label, std::vector<RadioButton> buttons,
                        const std::optional<std::size_t> &selectedButtonIndex, Persistent persistent)
     : Element(elementName), Labellable(label), ValueObservableElement<std::string_view>(elementName, ""),
-      SavableElement(elementName, persistent), buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
+      Savable(persistent), buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
 
 void RadioGroup::renderImpl() {
   ImGui::Separator();

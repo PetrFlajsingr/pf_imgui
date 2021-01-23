@@ -44,9 +44,9 @@ void ImGuiInterface::updateConfig() { config = serializeImGuiTree(*this); }
 
 void ImGuiInterface::setStateFromConfig() {
   traverseImGuiTree(*this, [this](Element &element) {
-    if (auto ptrSavable = dynamic_cast<SavableElement *>(&element); ptrSavable != nullptr) {
-      if (config.contains(ptrSavable->getName())) {
-        ptrSavable->unserialize(*config[ptrSavable->getName()].as_table());
+    if (auto ptrSavable = dynamic_cast<Savable *>(&element); ptrSavable != nullptr) {
+      if (config.contains(element.getName())) {
+        ptrSavable->unserialize(*config[element.getName()].as_table());
       }
     }
   });

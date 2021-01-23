@@ -7,7 +7,7 @@
 
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
-#include "interface/SavableElement.h"
+#include "interface/Savable.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
@@ -39,17 +39,14 @@ constexpr const char *defaultSliderFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Slider : public ItemElement,
-                               public Labellable,
-                               public ValueObservableElement<T>,
-                               public SavableElement {
+class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public ValueObservableElement<T>, public Savable {
  public:
   using MinMaxType = details::SliderMinMaxType<T>;
   Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
          Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>())
       : Element(elementName), ItemElement(elementName),
-        Labellable(label), ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent), min(min), max(max), format(std::move(format)) {}
+        Labellable(label), ValueObservableElement<T>(elementName, value), Savable(persistent), min(min), max(max),
+        format(std::move(format)) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {
