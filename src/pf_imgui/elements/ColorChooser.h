@@ -7,7 +7,7 @@
 
 #include "../serialization.h"
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
+#include "interface/Labellable.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/gtc/type_ptr.hpp>
@@ -23,13 +23,13 @@ namespace pf::ui::ig {
 
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
 class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
-                                     public LabeledElement,
+                                     public Labellable,
                                      public ValueObservableElement<T>,
                                      public SavableElement {
  public:
-  ColorChooser(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+  ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
                T value = T{})
-      : Element(elementName), LabeledElement(elementName, caption), ValueObservableElement<T>(elementName, value),
+      : Element(elementName), Labellable(label), ValueObservableElement<T>(elementName, value),
         SavableElement(elementName, persistent) {}
 
  protected:

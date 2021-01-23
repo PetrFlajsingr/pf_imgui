@@ -8,8 +8,8 @@
 
 namespace pf::ui::ig {
 
-Button::Button(const std::string &name, std::string caption, ButtonType buttonType, const ImVec2 &size)
-    : Element(name), ItemElement(name), LabeledElement(name, std::move(caption)), ResizableElement(name, size),
+Button::Button(const std::string &name, std::string label, ButtonType buttonType, const ImVec2 &size)
+    : Element(name), ItemElement(name), Labellable(std::move(label)), ResizableElement(name, size),
       type(buttonType) {}
 
 void Button::renderImpl() {

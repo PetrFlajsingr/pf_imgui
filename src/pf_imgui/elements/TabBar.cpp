@@ -8,8 +8,8 @@
 
 namespace pf::ui::ig {
 
-Tab::Tab(const std::string &elementName, const std::string &caption)
-    : Element(elementName), ItemElement(elementName), LabeledElement(elementName, caption), Container(elementName) {}
+Tab::Tab(const std::string &elementName, const std::string &label)
+    : Element(elementName), ItemElement(elementName), Labellable(label), Container(elementName) {}
 
 void Tab::renderImpl() {
   if (ImGui::BeginTabItem(getLabel().c_str())) {

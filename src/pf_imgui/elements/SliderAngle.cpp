@@ -6,9 +6,9 @@
 
 namespace pf::ui::ig {
 
-SliderAngle::SliderAngle(const std::string &elementName, const std::string &caption, float min, float max, float value,
+SliderAngle::SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value,
                          Persistent persistent, std::string format)
-    : Element(elementName), ItemElement(elementName), LabeledElement(elementName, caption),
+    : Element(elementName), ItemElement(elementName), Labellable(label),
       ValueObservableElement(elementName, value), SavableElement(elementName, persistent), minDeg(min), maxDeg(max),
       format(std::move(format)) {}
 

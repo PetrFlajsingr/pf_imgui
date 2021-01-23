@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 
-#include "interface/LabeledElement.h"
+#include "interface/Labellable.h"
 #include <include/ImGuiFlamegraph/imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_imgui/_export.h>
@@ -16,9 +16,9 @@
 namespace pf::ui::ig {
 
 using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
-class PF_IMGUI_EXPORT FlameGraph : public LabeledElement, public ResizableElement {
+class PF_IMGUI_EXPORT FlameGraph : public Labellable, public ResizableElement {
  public:
-  FlameGraph(const std::string &elementName, const std::string &caption, const ImVec2 &size = ImVec2{0, 0},
+  FlameGraph(const std::string &elementName, const std::string &label, const ImVec2 &size = ImVec2{0, 0},
              std::optional<std::string> overlay = std::nullopt);
 
   void setOverlay(std::string text);

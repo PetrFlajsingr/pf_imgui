@@ -11,7 +11,7 @@ class ImGuiInterface;
 
 class Element;
 class Container;
-class LabeledElement;
+class Labellable;
 class ResizableElement;
 class SavableElement;
 

@@ -10,18 +10,18 @@
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT LabeledElement : public virtual Element {
+class PF_IMGUI_EXPORT Labellable {
  public:
-  LabeledElement(std::string elementName, std::string caption);
+  explicit Labellable(std::string label);
 
-  LabeledElement(LabeledElement &&other) noexcept;
-  LabeledElement &operator=(LabeledElement &&other) noexcept;
+  Labellable(Labellable &&other) noexcept;
+  Labellable &operator=(Labellable &&other) noexcept;
 
   [[nodiscard]] const std::string &getLabel() const;
   void setLabel(const std::string &cap);
 
  private:
-  std::string label;
+  std::string label_;
 };
 
 }// namespace pf::ui::ig

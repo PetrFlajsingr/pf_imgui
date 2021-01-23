@@ -9,10 +9,9 @@
 
 namespace pf::ui::ig {
 
-RadioGroup::RadioGroup(const std::string &elementName, const std::string &caption, std::vector<RadioButton> buttons,
+RadioGroup::RadioGroup(const std::string &elementName, const std::string &label, std::vector<RadioButton> buttons,
                        const std::optional<std::size_t> &selectedButtonIndex, Persistent persistent)
-    : Element(elementName),
-      LabeledElement(elementName, caption), ValueObservableElement<std::string_view>(elementName, ""),
+    : Element(elementName), Labellable(label), ValueObservableElement<std::string_view>(elementName, ""),
       SavableElement(elementName, persistent), buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
 
 void RadioGroup::renderImpl() {

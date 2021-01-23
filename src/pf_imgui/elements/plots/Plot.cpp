@@ -10,7 +10,7 @@ namespace pf::ui::ig {
 
 Plot::Plot(const std::string &elementName, const std::string &caption, std::optional<std::string> xLabel,
            std::optional<std::string> yLabel, const ImVec2 &size)
-    : Element(elementName), LabeledElement(elementName, caption), ResizableElement(elementName, size),
+    : Element(elementName), Labellable(elementName, caption), ResizableElement(elementName, size),
       xLabel(std::move(xLabel)), yLabel(std::move(yLabel)) {}
 
 void Plot::renderImpl() {

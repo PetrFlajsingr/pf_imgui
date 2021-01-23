@@ -7,8 +7,8 @@
 
 namespace pf::ui::ig {
 
-Tree::Tree(const std::string &elementName, const std::string &caption)
-    : Element(elementName), LabeledElement(elementName, caption), Container(elementName) {}
+Tree::Tree(const std::string &elementName, const std::string &label)
+    : Element(elementName), Labellable(label), Container(elementName) {}
 
 Tree &Tree::addNode(const std::string &elementName, const std::string &caption) {
   return createChild<Tree>(elementName, caption);

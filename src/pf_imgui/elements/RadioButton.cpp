@@ -6,8 +6,8 @@
 
 namespace pf::ui::ig {
 
-RadioButton::RadioButton(const std::string &elementName, const std::string &caption, bool value)
-    : Element(elementName), ItemElement(elementName), LabeledElement(elementName, caption),
+RadioButton::RadioButton(const std::string &elementName, const std::string &label, bool value)
+    : Element(elementName), ItemElement(elementName), Labellable(label),
       ValueObservableElement(elementName, value) {}
 
 void RadioButton::renderImpl() {

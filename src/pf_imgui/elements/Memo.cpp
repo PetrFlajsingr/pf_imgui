@@ -10,9 +10,9 @@
 
 namespace pf::ui::ig {
 
-Memo::Memo(const std::string &elementName, const std::string &caption, float textAHeight, bool buttonsEnabled,
+Memo::Memo(const std::string &elementName, const std::string &label, float textAHeight, bool buttonsEnabled,
            bool filterEnabled, const std::optional<std::size_t> &recordLimit)
-    : Element(elementName), LabeledElement(elementName, caption),
+    : Element(elementName), Labellable(label),
       textAreaPanel(elementName + "_memo_panel###", getLabel(), PanelLayout::Vertical, ImVec2{0, textAHeight}),
       buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {}
 

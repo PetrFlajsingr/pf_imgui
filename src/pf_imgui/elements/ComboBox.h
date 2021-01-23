@@ -6,7 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H
 
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
+#include "interface/Labellable.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <optional>
@@ -16,11 +16,11 @@
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT ComboBox : public ItemElement,
-                                 public LabeledElement,
+                                 public Labellable,
                                  public ValueObservableElement<std::string_view>,
                                  public SavableElement {
  public:
-  ComboBox(const std::string &elementName, const std::string &caption, std::string previewValue,
+  ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
            std::vector<std::string> items, Persistent persistent = Persistent::No);
 
   [[nodiscard]] std::optional<std::string_view> getSelectedItem();

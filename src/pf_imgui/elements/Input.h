@@ -6,7 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_INPUT_H
 
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
+#include "interface/Labellable.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <glm/gtc/type_ptr.hpp>
@@ -71,43 +71,43 @@ concept FormattedWithoutStep =
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Input : public ItemElement,
-                              public LabeledElement,
+                              public Labellable,
                               public ValueObservableElement<T>,
                               public SavableElement {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:
-  Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
+  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
         Persistent persistent = Persistent::No, T value = T{}) requires details::UnformattedWithStep<T>
       : Element(elementName),
         ItemElement(elementName),
-        LabeledElement(elementName, caption),
+        Labellable(label),
         ValueObservableElement<T>(elementName, value),
         SavableElement(elementName, persistent),
         data(st, fStep) {}
 
-  Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
+  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
         std::string format = decltype(data)::defaultFormat(), Persistent persistent = Persistent::No,
         T value = T{}) requires details::FormattedWithStep<T> : Element(elementName),
                                                                 ItemElement(elementName),
-                                                                LabeledElement(elementName, caption),
+                                                                Labellable(label),
                                                                 ValueObservableElement<T>(elementName, value),
                                                                 SavableElement(elementName, persistent),
                                                                 format(std::move(format)),
                                                                 data(st, fStep) {}
 
-  Input(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+  Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
         T value = T{}) requires details::UnformattedWithoutStep<T> : Element(elementName),
                                                                      ItemElement(elementName),
-                                                                     LabeledElement(elementName, caption),
+                                                                     Labellable(label),
                                                                      ValueObservableElement<T>(elementName, value),
                                                                      SavableElement(elementName, persistent) {}
 
-  Input(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+  Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
         std::string format = decltype(data)::defaultFormat(), T value = T{}) requires details::FormattedWithoutStep<T>
       : Element(elementName),
         ItemElement(elementName),
-        LabeledElement(elementName, caption),
+        Labellable(label),
         ValueObservableElement<T>(elementName, value),
         SavableElement(elementName, persistent),
         format(std::move(format)) {}

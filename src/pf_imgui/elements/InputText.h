@@ -7,7 +7,7 @@
 
 #include "Text.h"
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
+#include "interface/Labellable.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
 #include <functional>
@@ -17,11 +17,11 @@
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT InputText : public Text,
-                                  public LabeledElement,
+                                  public Labellable,
                                   public ValueObservableElement<std::string_view>,
                                   public SavableElement {
  public:
-  InputText(const std::string &elementName, std::string caption, const std::string &text = "",
+  InputText(const std::string &elementName, std::string label, const std::string &text = "",
             TextInputType textInputType = TextInputType::SingleLine, Persistent persistent = Persistent::No);
 
   void clear();

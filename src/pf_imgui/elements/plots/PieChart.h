@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
 
-#include "../interface/LabeledElement.h"
+#include "../interface/Labellable.h"
 #include "../interface/ResizableElement.h"
 #include "types/PlotDataBase.h"
 #include <pf_imgui/_export.h>
@@ -21,7 +21,7 @@ struct PieChartSample {
   T value;
 };
 
-class PieChart : public LabeledElement, public ResizableElement {
+class PieChart : public Labellable, public ResizableElement {
  public:
   template<plot_type::Plottable T>
   void addValue(PieChartSample<T> &&sample) {
