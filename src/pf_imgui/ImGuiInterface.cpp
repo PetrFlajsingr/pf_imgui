@@ -41,15 +41,15 @@ AppMenuBar &ImGuiInterface::getMenuBar() {
 bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
-void ImGuiInterface::updateConfig() {
-  config = serializeImGuiTree(*this);
-}
+void ImGuiInterface::updateConfig() { config = serializeImGuiTree(*this); }
 
 void ImGuiInterface::setStateFromConfig() {
   traverseImGuiTree(*this, [this](Renderable &renderable) {
     if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
       if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
-        if (config.contains(ptrElement->getName())) { ptrSavable->unserialize(*config[ptrElement->getName()].as_table()); }
+        if (config.contains(ptrElement->getName())) {
+          ptrSavable->unserialize(*config[ptrElement->getName()].as_table());
+        }
       }
     }
   });
@@ -69,10 +69,6 @@ ImVec2 ImGuiInterface::getCursorPosition() const { return ImGui::GetCursorScreen
 
 void ImGuiInterface::setCursorPosition(const ImVec2 &position) { ImGui::SetCursorScreenPos(position); }
 
-void ImGuiInterface::render() {
-  std::ranges::for_each(windows, [](auto &window) { window->render(); });
-}
-
 Window &ImGuiInterface::createWindow(const std::string &windowName, std::string title) {
   windows.emplace_back(std::make_unique<Window>(windowName, std::move(title)));
   return *windows.back();
@@ -83,6 +79,9 @@ void ImGuiInterface::removeWindow(const std::string &name) {
       iter != windows.end()) {
     windows.erase(iter);
   }
+}
+void ImGuiInterface::renderImpl() {
+  std::ranges::for_each(windows, [](auto &window) { window->render(); });
 }
 
 }// namespace pf::ui::ig
