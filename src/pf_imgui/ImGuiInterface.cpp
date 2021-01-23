@@ -49,9 +49,13 @@ void ImGuiInterface::updateConfig() {
 
 void ImGuiInterface::setStateFromConfig() {
   std::ranges::for_each(windows, [this](auto &window) {
-    traverseImGuiTree(*window, [this](Element &element) {
-      if (auto ptrSavable = dynamic_cast<Savable *>(&element); ptrSavable != nullptr) {
-        if (config.contains(element.getName())) { ptrSavable->unserialize(*config[element.getName()].as_table()); }
+    traverseImGuiTree(*window, [this](Renderable &renderable) {
+      if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
+        if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
+          if (config.contains(ptrElement->getName())) {
+            ptrSavable->unserialize(*config[ptrElement->getName()].as_table());
+          }
+        }
       }
     });
   });

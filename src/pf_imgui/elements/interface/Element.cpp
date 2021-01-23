@@ -3,56 +3,29 @@
 //
 
 #include "Element.h"
+#include <utility>
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <pf_common/RAII.h>
-#include <utility>
 
 namespace pf::ui::ig {
 
 Element::Element(std::string elementName) : name(std::move(elementName)) {}
 
-Element::Element(Element &&other) noexcept {
-  if (isMoved) { return; }
-  name = std::move(other.name);
-  visibility = other.visibility;
-  isMoved = true;
-}
+Element::Element(Element &&other) noexcept : Renderable(std::move(other)), name(std::move(other.name)) {}
 
 Element &Element::operator=(Element &&other) noexcept {
-  if (isMoved) { return *this; }
   name = std::move(other.name);
-  visibility = other.visibility;
-  isMoved = true;
+  Renderable::operator=(std::move(other));
   return *this;
 }
 
 const std::string &Element::getName() const { return name; }
 
-Visibility Element::getVisibility() const { return visibility; }
-
-void Element::setVisibility(Visibility visi) { visibility = visi; }
-
 void Element::render() {
-  if (visibility == Visibility::Visible) {
-    ImGui::PushID(getName().c_str());
-    if (enabled == Enabled::No) {
-      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-      auto raiiEnabled = pf::RAII([] {
-        ImGui::PopItemFlag();
-        ImGui::PopStyleVar();
-      });
-      renderImpl();
-    } else {
-      renderImpl();
-    }
-    ImGui::PopID();
-  }
+  ImGui::PushID(getName().c_str());
+  Renderable::render();
+  ImGui::PopID();
 }
-
-void Element::setEnabled(Enabled eleState) { enabled = eleState; }
-
-Enabled Element::getEnabled() const { return enabled; }
 
 }// namespace pf::ui::ig
