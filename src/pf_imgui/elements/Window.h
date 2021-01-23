@@ -10,11 +10,12 @@
 #include "interface/ResizableElement.h"
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/interface/Focusable.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Window : public Container {
+class PF_IMGUI_EXPORT Window : public Container, public Focusable {
  public:
   Window(const std::string &elementName, std::string title);
 
@@ -41,6 +42,7 @@ class PF_IMGUI_EXPORT Window : public Container {
 
  protected:
   void renderImpl() override;
+  void notifyCollapseChanged();
 
  private:
   std::string title;
@@ -50,6 +52,7 @@ class PF_IMGUI_EXPORT Window : public Container {
   ImVec2 position;
   ImVec2 size;
   bool focused = false;
+  Observable_impl<bool> observableImplCollapse;
 };
 
 }// namespace pf::ui::ig

@@ -15,12 +15,7 @@ namespace pf::ui::ig {
 
 class Clickable {
  public:
-  using Callback = std::function<void()>;
-  using Id = uint32_t;
-
-  Subscription addClickListener(std::invocable auto fnc) {
-    return observableImpl.template addListener(fnc);
-  }
+  Subscription addClickListener(std::invocable auto fnc);
 
  protected:
   void notifyOnClick();

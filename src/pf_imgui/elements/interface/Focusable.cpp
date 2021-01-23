@@ -4,4 +4,8 @@
 
 #include "Focusable.h"
 
-namespace pf::ui::ig {}
+namespace pf::ui::ig {
+void Focusable::notifyFocusChanged(bool focused) {
+  observableImpl.notify(focused);
+}
+}

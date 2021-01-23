@@ -22,7 +22,11 @@ ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
 void ItemElement::render() {
   Element::render();
   hovered = ImGui::IsItemHovered();
+  const auto wasFocused = focused;
   focused = ImGui::IsItemFocused();
+  if (wasFocused != focused) {
+    notifyFocusChanged(focused);
+  }
   if (tooltip != nullptr) {
     if (getVisibility() == Visibility::Visible && hovered) { tooltip->render(); }
   }

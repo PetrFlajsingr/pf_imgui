@@ -7,13 +7,14 @@
 
 #include "../Tooltip.h"
 #include "Element.h"
+#include "Focusable.h"
 #include <memory>
 #include <string>
 
 namespace pf::ui::ig {
 
 // TODO: observable focus & hovered
-class ItemElement : public virtual Element {
+class ItemElement : public virtual Element, public Focusable {
  public:
   explicit ItemElement(const std::string &elementName);
 
