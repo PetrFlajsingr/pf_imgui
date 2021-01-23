@@ -172,6 +172,7 @@ set(INCLUDES
         src/pf_imgui/elements/interface/Clickable.h
         src/pf_imgui/elements/interface/ValueObservableElement.h
         src/pf_imgui/elements/interface/ItemElement.h
+        src/pf_imgui/elements/interface/Observable_impl.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
