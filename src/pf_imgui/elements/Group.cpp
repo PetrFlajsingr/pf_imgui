@@ -14,7 +14,7 @@ void Group::renderImpl() {
   ImGui::BeginGroup();
   ImGui::Text("%s:", getLabel().c_str());
   ImGui::Separator();
-  std::ranges::for_each(getChildren(), [](auto &child) { child.get().render(); });
+  std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
   ImGui::Separator();
   ImGui::EndGroup();
 }

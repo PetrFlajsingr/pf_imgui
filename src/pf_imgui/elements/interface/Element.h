@@ -29,7 +29,10 @@ class PF_IMGUI_EXPORT Element {
   [[nodiscard]] Enabled getEnabled() const;
   void setEnabled(Enabled eleState);
 
-  void render();
+  /**
+   * DO NOT OVERRIDE UNLESS YOU WANT TO LOSE SOME FUNCTIONALITY
+   */
+  virtual void render();
 
  protected:
   virtual void renderImpl() = 0;

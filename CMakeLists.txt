@@ -92,6 +92,7 @@ set(SOURCES
         src/pf_imgui/elements/Text.cpp
         src/pf_imgui/elements/Tree.cpp
         src/pf_imgui/elements/Window.cpp
+        src/pf_imgui/elements/Tooltip.cpp
         src/pf_imgui/elements/FileDialog.cpp
         src/pf_imgui/elements/FlameGraph.cpp
         src/pf_imgui/elements/plots/PieChart.cpp
@@ -149,6 +150,7 @@ set(INCLUDES
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
         src/pf_imgui/elements/Window.h
+        src/pf_imgui/elements/Tooltip.h
         src/pf_imgui/elements/FileDialog.h
         src/pf_imgui/elements/FlameGraph.h
         src/pf_imgui/elements/plots.h

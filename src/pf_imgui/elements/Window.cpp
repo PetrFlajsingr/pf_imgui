@@ -17,7 +17,7 @@ void Window::renderImpl() {
   ImGui::Begin(title.c_str(), nullptr, flags);
   if (!collapsed) {
     if (hasMenuBar()) { menuBar->render(); }
-    std::ranges::for_each(getChildren(), [&](auto &child) { child.get().render(); });
+    std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
   }
   ImGui::End();
 }

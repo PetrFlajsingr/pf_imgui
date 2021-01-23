@@ -9,6 +9,9 @@
 #include <memory>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
+#include <range/v3/view/all.hpp>
+#include <range/v3/view/map.hpp>
+#include <range/v3/view/transform.hpp>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -48,7 +51,10 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
     throw StackTraceException::fmt("Child not found: '{}' in '{}'", name, getName());
   }
 
-  [[nodiscard]] const std::vector<std::reference_wrapper<Element>> &getChildren();
+  [[nodiscard]] inline auto getChildren() {
+    return children | ranges::views::values
+        | ranges::views::transform([](auto &childPtr) -> Element & { return *childPtr; }) | ranges::views::all;
+  }
 
   void clear();
 

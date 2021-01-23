@@ -4,7 +4,6 @@
 
 #include "Container.h"
 #include <utility>
-#include <vector>
 
 namespace pf::ui::ig {
 
@@ -35,13 +34,6 @@ void Container::removeChild(const std::string &name) {
     children.erase(iter);
   }
 }
-
-const std::vector<std::reference_wrapper<Element>> &Container::getChildren() {
-  std::ranges::for_each(childrenToRemove, [this](const auto &name) { removeChild(name); });
-  childrenToRemove.clear();
-  return childrenInOrder;
-}
-
 void Container::enqueueChildRemoval(const std::string &name) { childrenToRemove.emplace_back(name); }
 
 void Container::clear() {
