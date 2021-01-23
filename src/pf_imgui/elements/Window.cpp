@@ -5,6 +5,8 @@
 #include "Window.h"
 #include <algorithm>
 #include <imgui.h>
+#include <imgui_internal.h>
+#include <pf_common/RAII.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -53,12 +55,24 @@ void Window::setSize(const ImVec2 &newSize) {
   ImGui::SetWindowSize(getTitle().c_str(), size);
 }
 
-void Window::setFocus_impl() {
-  ImGui::SetWindowFocus(getTitle().c_str());
-}
+void Window::setFocus_impl() { ImGui::SetWindowFocus(getTitle().c_str()); }
 
-void Window::collapse_impl(bool collapse) {
-  ImGui::SetWindowCollapsed(getTitle().c_str(), collapse);
+void Window::collapse_impl(bool collapse) { ImGui::SetWindowCollapsed(getTitle().c_str(), collapse); }
+
+void Window::render() {
+  if (getVisibility() == Visibility::Visible) {
+    if (getEnabled() == Enabled::No) {
+      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+      auto raiiEnabled = pf::RAII([] {
+        ImGui::PopItemFlag();
+        ImGui::PopStyleVar();
+      });
+      renderImpl();
+    } else {
+      renderImpl();
+    }
+  }
 }
 
 }// namespace pf::ui::ig

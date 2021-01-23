@@ -34,6 +34,7 @@ class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hovera
   [[nodiscard]] const ImVec2 &getSize() const;
   void setSize(const ImVec2 &size);
 
+  void render() override;
 
  protected:
   void renderImpl() override;
