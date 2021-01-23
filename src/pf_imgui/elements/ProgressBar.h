@@ -28,8 +28,8 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
               const ImVec2 &size = {-1, 0})
       : Element(elementName),
-        ItemElement(elementName), ValueObservable<T>(elementName, value.has_value() ? *value : min),
-        Resizable(size), stepValue(stepValue), min(min), max(max) {}
+        ItemElement(elementName), ValueObservable<T>(elementName, value.has_value() ? *value : min), Resizable(size),
+        stepValue(stepValue), min(min), max(max) {}
 
   T setPercentage(float percentage) {
     percentage = std::clamp(percentage, 0.f, 1.f);

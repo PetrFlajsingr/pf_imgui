@@ -24,8 +24,7 @@ void SubMenu::renderImpl() {
   }
 }
 
-SubMenu::SubMenu(const std::string &elementName, const std::string &label)
-    : Element(elementName), Labellable(label) {}
+SubMenu::SubMenu(const std::string &elementName, const std::string &label) : Element(elementName), Labellable(label) {}
 
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 

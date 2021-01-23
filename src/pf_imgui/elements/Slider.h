@@ -44,8 +44,7 @@ class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public Val
   using MinMaxType = details::SliderMinMaxType<T>;
   Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
          Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>())
-      : Element(elementName), ItemElement(elementName),
-        Labellable(label), ValueObservable<T>(elementName, value), Savable(persistent), min(min), max(max),
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent), min(min), max(max),
         format(std::move(format)) {}
 
  protected:

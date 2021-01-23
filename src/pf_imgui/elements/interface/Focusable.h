@@ -10,9 +10,7 @@
 namespace pf::ui::ig {
 class Focusable {
  public:
-  Subscription addFocusListener(std::invocable<bool> auto fnc) {
-    return observableImpl.template addListener(fnc);
-  }
+  Subscription addFocusListener(std::invocable<bool> auto fnc) { return observableImpl.template addListener(fnc); }
 
   [[nodiscard]] bool isFocused() const;
   void setFocused(bool newFocused) {
@@ -34,6 +32,6 @@ class Focusable {
   Observable_impl<bool> observableImpl;
   bool focused = false;
 };
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_FOCUSABLE_H

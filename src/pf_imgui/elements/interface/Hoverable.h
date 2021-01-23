@@ -10,9 +10,7 @@
 namespace pf::ui::ig {
 class Hoverable {
  public:
-  Subscription addHoverListener(std::invocable<bool> auto fnc) {
-    return observableImpl.template addListener(fnc);
-  }
+  Subscription addHoverListener(std::invocable<bool> auto fnc) { return observableImpl.template addListener(fnc); }
 
   [[nodiscard]] bool isHovered() const;
 
@@ -20,11 +18,12 @@ class Hoverable {
 
  protected:
   void setHovered(bool hover);
+
  private:
   void notifyHovered(bool hover);
   Observable_impl<bool> observableImpl;
   bool hovered = false;
 };
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H

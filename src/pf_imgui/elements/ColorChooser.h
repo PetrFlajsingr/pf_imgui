@@ -22,14 +22,11 @@
 namespace pf::ui::ig {
 
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
-class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
-                                     public Labellable,
-                                     public ValueObservable<T>,
-                                     public Savable {
+class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
  public:
   ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
                T value = T{})
-      : Element(elementName), Labellable(label), ValueObservable<T>(elementName, value), Savable(persistent) {}
+      : Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {

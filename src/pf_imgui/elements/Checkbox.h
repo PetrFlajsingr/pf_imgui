@@ -13,10 +13,7 @@
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT Checkbox : public ItemElement,
-                                 public ValueObservable<bool>,
-                                 public Labellable,
-                                 public Savable {
+class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool>, public Labellable, public Savable {
  public:
   Checkbox(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
            bool value = false);

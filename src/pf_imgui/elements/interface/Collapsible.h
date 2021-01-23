@@ -28,6 +28,6 @@ class Collapsible {
   bool collapsed = false;
   Observable_impl<bool> observableImpl;
 };
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_COLLAPSIBLE_H

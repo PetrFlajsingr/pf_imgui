@@ -76,36 +76,26 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
  public:
   Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
         Persistent persistent = Persistent::No, T value = T{}) requires details::UnformattedWithStep<T>
-      : Element(elementName),
-        ItemElement(elementName),
-        Labellable(label),
-        ValueObservable<T>(elementName, value),
-        Savable(elementName, persistent),
-        data(st, fStep) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent), data(st, fStep) {}
 
   Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
         std::string format = decltype(data)::defaultFormat(), Persistent persistent = Persistent::No,
-        T value = T{}) requires details::FormattedWithStep<T> : Element(elementName),
-                                                                ItemElement(elementName),
+        T value = T{}) requires details::FormattedWithStep<T> : ItemElement(elementName),
                                                                 Labellable(label),
-                                                                ValueObservable<T>(elementName, value),
+                                                                ValueObservable<T>(value),
                                                                 Savable(persistent),
                                                                 format(std::move(format)),
                                                                 data(st, fStep) {}
 
   Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
-        T value = T{}) requires details::UnformattedWithoutStep<T> : Element(elementName),
-                                                                     ItemElement(elementName),
-                                                                     Labellable(label),
-                                                                     ValueObservable<T>(elementName, value),
-                                                                     Savable(persistent) {}
+        T value = T{}) requires details::UnformattedWithoutStep<T>
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
 
   Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
         std::string format = decltype(data)::defaultFormat(), T value = T{}) requires details::FormattedWithoutStep<T>
-      : Element(elementName),
-        ItemElement(elementName),
+      : ItemElement(elementName),
         Labellable(label),
-        ValueObservable<T>(elementName, value),
+        ValueObservable<T>(value),
         Savable(persistent),
         format(std::move(format)) {}
 
