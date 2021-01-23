@@ -60,12 +60,8 @@ bool ImGuiInterface::isWindowHovered() const { return io.WantCaptureMouse; }
 
 bool ImGuiInterface::isKeyboardCaptured() const { return io.WantCaptureKeyboard; }
 
-ImVec2 ImGuiInterface::getCursorPosition() const {
-  return ImGui::GetCursorScreenPos();
-}
+ImVec2 ImGuiInterface::getCursorPosition() const { return ImGui::GetCursorScreenPos(); }
 
-void ImGuiInterface::setCursorPosition(const ImVec2 &position) {
-  ImGui::SetCursorScreenPos(position);
-}
+void ImGuiInterface::setCursorPosition(const ImVec2 &position) { ImGui::SetCursorScreenPos(position); }
 
 }// namespace pf::ui::ig

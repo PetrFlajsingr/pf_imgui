@@ -7,6 +7,7 @@
 
 #include "interface/Container.h"
 #include "interface/Element.h"
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include <memory>
 #include <pf_imgui/_export.h>
@@ -15,7 +16,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Tab : public LabeledElement, public Container {
+class PF_IMGUI_EXPORT Tab : public ItemElement, public LabeledElement, public Container {
  public:
   Tab(const std::string &elementName, const std::string &caption);
 

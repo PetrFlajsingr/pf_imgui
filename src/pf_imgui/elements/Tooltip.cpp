@@ -15,4 +15,4 @@ void Tooltip::renderImpl() {
   ImGui::EndTooltip();
 }
 
-}
+}// namespace pf::ui::ig

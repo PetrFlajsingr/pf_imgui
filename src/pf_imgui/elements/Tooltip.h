@@ -17,9 +17,8 @@ class Tooltip : public Container {
   void renderImpl() override;
 
  private:
-
 };
 
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TOOLTIP_H

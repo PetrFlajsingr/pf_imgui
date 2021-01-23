@@ -6,6 +6,7 @@
 #define PF_IMGUI_ELEMENTS_BUTTON_H
 
 #include "interface/Clickable.h"
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include "interface/ResizableElement.h"
 #include <functional>
@@ -14,7 +15,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Button : public LabeledElement, public ResizableElement, public Clickable {
+class PF_IMGUI_EXPORT Button : public ItemElement, public LabeledElement, public ResizableElement, public Clickable {
  public:
   Button(const std::string &name, std::string caption, ButtonType buttonType = ButtonType::Normal,
          const ImVec2 &size = {0, 0});

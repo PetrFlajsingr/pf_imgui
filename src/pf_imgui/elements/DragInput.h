@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
 #define PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
 
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
@@ -41,14 +42,18 @@ constexpr const char *defaultDragFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
-class PF_IMGUI_EXPORT DragInput : public ValueObservableElement<T>, public LabeledElement, public SavableElement {
+class PF_IMGUI_EXPORT DragInput : public ItemElement,
+                                  public ValueObservableElement<T>,
+                                  public LabeledElement,
+                                  public SavableElement {
  public:
   using ParamType = details::UnderlyingType<T>;
 
   DragInput(const std::string &elementName, const std::string &caption, ParamType speed, ParamType min, ParamType max,
             Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
-      : Element(elementName), ValueObservableElement<T>(elementName, value), LabeledElement(elementName, caption),
-        SavableElement(elementName, persistent), speed(speed), min(min), max(max), format(std::move(format)) {}
+      : Element(elementName), ItemElement(elementName), ValueObservableElement<T>(elementName, value),
+        LabeledElement(elementName, caption), SavableElement(elementName, persistent), speed(speed), min(min), max(max),
+        format(std::move(format)) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {

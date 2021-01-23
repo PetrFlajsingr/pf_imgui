@@ -5,8 +5,8 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H
 
-#include "Element.h"
 #include "../Tooltip.h"
+#include "Element.h"
 #include <memory>
 
 namespace pf::ui::ig {
@@ -14,6 +14,9 @@ namespace pf::ui::ig {
 class ItemElement : public virtual Element {
  public:
   explicit ItemElement(const std::string &elementName);
+
+  ItemElement(ItemElement &&other) noexcept;
+  ItemElement &operator=(ItemElement &&other) noexcept;
 
   void render() override;
 
@@ -31,5 +34,5 @@ class ItemElement : public virtual Element {
   std::unique_ptr<Tooltip> tooltip = nullptr;
 };
 
-}// namespace pf
+}// namespace pf::ui::ig
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H

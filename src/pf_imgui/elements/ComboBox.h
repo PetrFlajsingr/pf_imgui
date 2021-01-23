@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H
 #define PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H
 
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"
@@ -14,7 +15,8 @@
 #include <vector>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
+class PF_IMGUI_EXPORT ComboBox : public ItemElement,
+                                 public LabeledElement,
                                  public ValueObservableElement<std::string_view>,
                                  public SavableElement {
  public:
@@ -42,7 +44,6 @@ class PF_IMGUI_EXPORT ComboBox : public LabeledElement,
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
   std::function<bool(std::string_view)> filter = [](auto) { return true; };
 };
-
 
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_IMGUI_ELEMENTS_COMBOBOX_H

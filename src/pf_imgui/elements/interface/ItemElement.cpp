@@ -10,6 +10,14 @@ namespace pf::ui::ig {
 
 ItemElement::ItemElement(const std::string &elementName) : Element(elementName) {}
 
+ItemElement::ItemElement(ItemElement &&other) noexcept : Element(std::move(other)), tooltip(std::move(other.tooltip)) {}
+
+ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
+  tooltip = std::move(other.tooltip);
+  Element::operator=(std::move(other));
+  return *this;
+}
+
 void ItemElement::render() {
   Element::render();
   hovered = ImGui::IsItemHovered();

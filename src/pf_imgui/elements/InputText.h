@@ -6,6 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_INPUTTEXT_H
 
 #include "Text.h"
+#include "interface/ItemElement.h"
 #include "interface/LabeledElement.h"
 #include "interface/SavableElement.h"
 #include "interface/ValueObservableElement.h"

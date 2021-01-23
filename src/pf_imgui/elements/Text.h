@@ -6,13 +6,14 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
 
 #include "interface/Element.h"
+#include "interface/ItemElement.h"
 #include <imgui.h>
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT Text : public virtual Element {
+class PF_IMGUI_EXPORT Text : public ItemElement {
  public:
   Text(const std::string &elementName, std::string text);
   Text(const std::string &elementName, std::string text, ImVec4 textColor);
