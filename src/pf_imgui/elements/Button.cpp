@@ -20,6 +20,7 @@ void Button::renderImpl() {
     case ButtonType::ArrowLeft: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Left); break;
     case ButtonType::ArrowRight: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Right); break;
     case ButtonType::ArrowDown: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Down); break;
+    case ButtonType::Invisible: wasClicked = ImGui::InvisibleButton(getLabel().c_str(), getSize()); break;
   }
   if (wasClicked) { notifyOnClick(); }
 }
