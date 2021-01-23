@@ -15,7 +15,10 @@ void Group::renderImpl() {
   ImGui::Text("%s:", getLabel().c_str());
   if (collapsible == AllowCollapse::Yes) {
     ImGui::SameLine(ImGui::GetWindowWidth() - ImGui::GetItemRectSize().x);
-    if (ImGui::Button(isCollapsed() ? "Show" : "Collapse")) { setCollapsed(!isCollapsed()); }
+    if (ImGui::ArrowButton((getName() + "collapse_btn").c_str(),
+                           isCollapsed() ? ImGuiDir_::ImGuiDir_Up : ImGuiDir_::ImGuiDir_Down)) {
+      setCollapsed(!isCollapsed());
+    }
   }
   ImGui::Separator();
   if (!isCollapsed()) {
