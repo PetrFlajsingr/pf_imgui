@@ -12,11 +12,12 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Focusable.h>
 #include <pf_imgui/elements/interface/Hoverable.h>
+#include <pf_imgui/elements/interface/Collapsible.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hoverable {
+class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hoverable, public Collapsible {
  public:
   Window(const std::string &elementName, std::string title);
 
@@ -27,32 +28,23 @@ class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hovera
   [[nodiscard]] bool hasMenuBar() const;
   void removeMenuBar();
 
-  [[nodiscard]] bool isCollapsed() const;
-  void setCollapsed(bool collapsed);
-
   [[nodiscard]] const ImVec2 &getPosition() const;
   void setPosition(const ImVec2 &position);
 
   [[nodiscard]] const ImVec2 &getSize() const;
   void setSize(const ImVec2 &size);
 
- public:
-  Subscription addCollapseListener(std::invocable<bool> auto listener) {
-    return observableImplCollapse.template addListener(listener);
-  }
 
  protected:
   void renderImpl() override;
-  void notifyCollapseChanged();
   void setFocus_impl() override;
+  void collapse_impl(bool collapse) override;
 
  private:
   std::string title;
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
-  bool collapsed = false;
   ImVec2 position;
   ImVec2 size;
-  Observable_impl<bool> observableImplCollapse;
 };
 
 }// namespace pf::ui::ig

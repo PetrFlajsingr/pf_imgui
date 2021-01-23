@@ -16,14 +16,10 @@ void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
   ImGui::Begin(title.c_str(), nullptr, flags);
   setHovered(ImGui::IsWindowHovered());
-  const auto wasCollapsed = collapsed;
-  collapsed = ImGui::IsWindowCollapsed();
-  if (collapsed != wasCollapsed) {
-    notifyCollapseChanged();
-  }
 
+  setCollapsedWithoutDemandingCollapseChange(ImGui::IsWindowCollapsed());
   setFocusedWithoutDemandingFocusChange(ImGui::IsWindowFocused());
-  if (!collapsed) {
+  if (!isCollapsed()) {
     if (hasMenuBar()) { menuBar->render(); }
     std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
   }
@@ -40,17 +36,8 @@ WindowMenuBar &Window::getMenuBar() {
 }
 
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
+
 void Window::removeMenuBar() { menuBar = nullptr; }
-
-bool Window::isCollapsed() const { return collapsed; }
-
-void Window::setCollapsed(bool newCollapsed) {
-  collapsed = newCollapsed;
-  ImGui::SetWindowCollapsed(getTitle().c_str(), collapsed);
-  notifyCollapseChanged();
-}
-
-bool Window::isHovered() const { return hovered; }
 
 const ImVec2 &Window::getPosition() const { return position; }
 
@@ -70,8 +57,8 @@ void Window::setFocus_impl() {
   ImGui::SetWindowFocus(getTitle().c_str());
 }
 
-void Window::notifyCollapseChanged() {
-  observableImplCollapse.notify(collapsed);
+void Window::collapse_impl(bool collapse) {
+  ImGui::SetWindowCollapsed(getTitle().c_str(), collapse);
 }
 
 }// namespace pf::ui::ig

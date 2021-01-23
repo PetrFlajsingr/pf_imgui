@@ -25,10 +25,10 @@ class Focusable {
 
  protected:
   virtual void setFocus_impl() = 0;
-  void notifyFocusChanged(bool focused);
   void setFocusedWithoutDemandingFocusChange(bool newFocused);
- private:
 
+ private:
+  void notifyFocusChanged(bool focused);
   Observable_impl<bool> observableImpl;
   bool focused = false;
 };
