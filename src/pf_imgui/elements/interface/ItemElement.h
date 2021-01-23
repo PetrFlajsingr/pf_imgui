@@ -12,6 +12,7 @@
 
 namespace pf::ui::ig {
 
+// TODO: observable focus & hovered
 class ItemElement : public virtual Element {
  public:
   explicit ItemElement(const std::string &elementName);

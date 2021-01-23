@@ -9,6 +9,7 @@
 #include <pf_common/Subscription.h>
 #include <pf_common/coroutines/Sequence.h>
 #include <unordered_map>
+#include "Observable_impl.h"
 
 namespace pf::ui::ig {
 
@@ -18,19 +19,14 @@ class Clickable {
   using Id = uint32_t;
 
   Subscription addClickListener(std::invocable auto fnc) {
-    const auto id = generateListenerId();
-    listeners[id] = fnc;
-    return Subscription([id, this] { listeners.erase(id); });
+    return observableImpl.template addListener(fnc);
   }
 
  protected:
   void notifyOnClick();
 
  private:
-  Id generateListenerId();
-
-  std::unordered_map<Id, Callback> listeners;
-  cppcoro::generator<Id> idGenerator = iota<Id>();
+  Observable_impl<> observableImpl;
 };
 
 }// namespace pf::ui::ig
