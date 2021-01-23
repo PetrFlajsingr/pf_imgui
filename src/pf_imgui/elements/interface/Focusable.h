@@ -14,10 +14,23 @@ class Focusable {
     return observableImpl.template addListener(fnc);
   }
 
+  [[nodiscard]] bool isFocused() const;
+  void setFocused(bool newFocused) {
+    if (newFocused != focused) {
+      focused = newFocused;
+      notifyFocusChanged(focused);
+      if (focused) { setFocus_impl(); }
+    }
+  }
+
  protected:
+  virtual void setFocus_impl() = 0;
   void notifyFocusChanged(bool focused);
+  void setFocusedWithoutDemandingFocusChange(bool newFocused);
  private:
+
   Observable_impl<bool> observableImpl;
+  bool focused = false;
 };
 }
 

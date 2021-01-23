@@ -14,10 +14,14 @@ class Hoverable {
     return observableImpl.template addListener(fnc);
   }
 
+  [[nodiscard]] bool isHovered() const;
+
  protected:
-  void notifyHovered(bool hovered);
+  void setHovered(bool hover);
  private:
+  void notifyHovered(bool hover);
   Observable_impl<bool> observableImpl;
+  bool hovered = false;
 };
 }
 

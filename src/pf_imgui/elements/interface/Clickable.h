@@ -5,17 +5,17 @@
 #ifndef PF_IMGUI_ELEMENTS_INTERFACE_CLICKABLE_H
 #define PF_IMGUI_ELEMENTS_INTERFACE_CLICKABLE_H
 
+#include "Observable_impl.h"
 #include <functional>
 #include <pf_common/Subscription.h>
 #include <pf_common/coroutines/Sequence.h>
 #include <unordered_map>
-#include "Observable_impl.h"
 
 namespace pf::ui::ig {
 
 class Clickable {
  public:
-  Subscription addClickListener(std::invocable auto fnc);
+  Subscription addClickListener(std::invocable auto fnc) { return observableImpl.template addListener(fnc); }
 
  protected:
   void notifyOnClick();

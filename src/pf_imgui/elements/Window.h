@@ -30,17 +30,13 @@ class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hovera
   [[nodiscard]] bool isCollapsed() const;
   void setCollapsed(bool collapsed);
 
-  [[nodiscard]] bool isHovered() const;
-
   [[nodiscard]] const ImVec2 &getPosition() const;
   void setPosition(const ImVec2 &position);
 
   [[nodiscard]] const ImVec2 &getSize() const;
   void setSize(const ImVec2 &size);
 
-  [[nodiscard]] bool isFocused() const;
-  void setFocused(bool focused);
-
+ public:
   Subscription addCollapseListener(std::invocable<bool> auto listener) {
     return observableImplCollapse.template addListener(listener);
   }
@@ -48,15 +44,14 @@ class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hovera
  protected:
   void renderImpl() override;
   void notifyCollapseChanged();
+  void setFocus_impl() override;
 
  private:
   std::string title;
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
   bool collapsed = false;
-  bool hovered = false;
   ImVec2 position;
   ImVec2 size;
-  bool focused = false;
   Observable_impl<bool> observableImplCollapse;
 };
 
