@@ -7,14 +7,14 @@
 
 namespace pf::ui::ig {
 
-Group::Group(const std::string &elementName, const std::string &caption, bool allowCollapse)
+Group::Group(const std::string &elementName, const std::string &caption, AllowCollapse allowCollapse)
     : Element(elementName), Container(elementName), LabeledElement(elementName, caption), collapsible(allowCollapse) {}
 
 void Group::renderImpl() {
   ImGui::BeginGroup();
   ImGui::Text("%s:", getLabel().c_str());
-  if (collapsible) {
-    ImGui::SameLine();
+  if (collapsible == AllowCollapse::Yes) {
+    ImGui::SameLine(ImGui::GetWindowWidth() - ImGui::GetItemRectSize().x);
     if (ImGui::Button(isCollapsed() ? "Show" : "Collapse")) { setCollapsed(!isCollapsed()); }
   }
   ImGui::Separator();

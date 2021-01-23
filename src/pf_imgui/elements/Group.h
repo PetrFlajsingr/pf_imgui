@@ -14,13 +14,13 @@
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Group : public Container, public LabeledElement, public Collapsible {
  public:
-  Group(const std::string &elementName, const std::string &caption, bool allowCollapse = false);
+  Group(const std::string &elementName, const std::string &caption, AllowCollapse allowCollapse = AllowCollapse::No);
 
  protected:
   void renderImpl() override;
   void collapse_impl(bool) override;
  private:
-  bool collapsible;
+  AllowCollapse collapsible;
 };
 
 }// namespace pf::ui::ig
