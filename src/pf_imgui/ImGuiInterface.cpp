@@ -3,11 +3,9 @@
 //
 
 #include "ImGuiInterface.h"
-#include "elements/Window.h"
 #include "serialization.h"
 #include <imgui_internal.h>
 #include <implot.h>
-#include <pf_common/RAII.h>
 #include <utility>
 
 namespace pf::ui::ig {

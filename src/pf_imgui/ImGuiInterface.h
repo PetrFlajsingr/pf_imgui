@@ -7,6 +7,7 @@
 
 #include "elements/FileDialog.h"
 #include "elements/MenuBars.h"
+#include "elements/Window.h"
 #include "elements/interface/Container.h"
 #include "fwd.h"
 #include <imgui.h>
