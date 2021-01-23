@@ -8,6 +8,7 @@
 #include "../Tooltip.h"
 #include "Element.h"
 #include <memory>
+#include <string>
 
 namespace pf::ui::ig {
 
