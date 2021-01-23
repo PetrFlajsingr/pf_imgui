@@ -16,7 +16,7 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT SimplePlot : public Labellable, public ResizableElement {
  public:
-  SimplePlot(const std::string &elementName, const std::string &caption, PlotType plotType,
+  SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
              std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
              const std::optional<std::size_t> &historyLimit = std::nullopt, float scaleLow = FLT_MAX,
              float scaleHigh = FLT_MAX, ImVec2 size = {0, 0});
