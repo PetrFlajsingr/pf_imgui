@@ -4,7 +4,9 @@
 
 #include "ImGuiInterface.h"
 #include "serialization.h"
+#include <imgui_internal.h>
 #include <implot.h>
+#include <pf_common/RAII.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -63,5 +65,20 @@ bool ImGuiInterface::isKeyboardCaptured() const { return io.WantCaptureKeyboard;
 ImVec2 ImGuiInterface::getCursorPosition() const { return ImGui::GetCursorScreenPos(); }
 
 void ImGuiInterface::setCursorPosition(const ImVec2 &position) { ImGui::SetCursorScreenPos(position); }
+void ImGuiInterface::render() {
+  if (getVisibility() == Visibility::Visible) {
+    if (getEnabled() == Enabled::No) {
+      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+      auto raiiEnabled = pf::RAII([] {
+        ImGui::PopItemFlag();
+        ImGui::PopStyleVar();
+      });
+      renderImpl();
+    } else {
+      renderImpl();
+    }
+  }
+}
 
 }// namespace pf::ui::ig

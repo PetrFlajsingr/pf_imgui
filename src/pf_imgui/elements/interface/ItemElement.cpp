@@ -22,7 +22,6 @@ ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
 void ItemElement::render() {
   Element::render();
   setHovered(ImGui::IsItemHovered());
-
   setFocusedWithoutDemandingFocusChange(ImGui::IsItemFocused());
   if (tooltip != nullptr) {
     if (getVisibility() == Visibility::Visible && isHovered()) { tooltip->render(); }
