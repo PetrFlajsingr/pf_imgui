@@ -39,17 +39,25 @@ AppMenuBar &ImGuiInterface::getMenuBar() {
 bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
-void ImGuiInterface::updateConfig() { config = serializeImGuiTree(*this); }
+void ImGuiInterface::updateConfig() {
+  config.clear();
+  std::ranges::for_each(windows, [this](auto &window) {
+    auto serialised = serializeImGuiTree(*window);
+    config.insert(serialised.begin(), serialised.end());
+  });
+}
 
 void ImGuiInterface::setStateFromConfig() {
-  traverseImGuiTree(*this, [this](Renderable &renderable) {
-    if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
-      if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
-        if (config.contains(ptrElement->getName())) {
-          ptrSavable->unserialize(*config[ptrElement->getName()].as_table());
+  std::ranges::for_each(windows, [this](auto &window) {
+    traverseImGuiTree(*window, [this](Renderable &renderable) {
+      if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
+        if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
+          if (config.contains(ptrElement->getName())) {
+            ptrSavable->unserialize(*config[ptrElement->getName()].as_table());
+          }
         }
       }
-    }
+    });
   });
 }
 void ImGuiInterface::renderFileDialogs() {
