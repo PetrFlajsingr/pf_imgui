@@ -12,12 +12,12 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT SavableElement : public virtual Element {
+class PF_IMGUI_EXPORT Savable {
  public:
-  SavableElement(const std::string &elementName, Persistent persistent);
+  explicit Savable(Persistent persistent);
 
-  SavableElement(SavableElement &&other) noexcept;
-  SavableElement &operator=(SavableElement &&other) noexcept;
+  Savable(Savable &&other) noexcept;
+  Savable &operator=(Savable &&other) noexcept;
 
   void unserialize(const toml::table &src);
   std::optional<toml::table> serialize();

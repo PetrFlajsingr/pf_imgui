@@ -5,11 +5,11 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_OBSERVABLE_IMPL_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_OBSERVABLE_IMPL_H
 
-#include <pf_common/coroutines/Sequence.h>
-#include <pf_common/Subscription.h>
-#include <utility>
 #include <algorithm>
+#include <pf_common/Subscription.h>
+#include <pf_common/coroutines/Sequence.h>
 #include <unordered_map>
+#include <utility>
 
 namespace pf::ui::ig {
 template<typename... Args>

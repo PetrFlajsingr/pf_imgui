@@ -9,10 +9,10 @@
 namespace pf::ui::ig {
 
 Text::Text(const std::string &elementName, std::string text)
-    : Element(elementName), ItemElement(elementName), text(std::move(text)), color(std::nullopt) {}
+    : ItemElement(elementName), text(std::move(text)), color(std::nullopt) {}
 
 Text::Text(const std::string &elementName, std::string text, ImVec4 textColor)
-    : Element(elementName), ItemElement(elementName), text(std::move(text)), color(textColor) {}
+    : ItemElement(elementName), text(std::move(text)), color(textColor) {}
 
 const std::string &Text::getText() const { return text; }
 

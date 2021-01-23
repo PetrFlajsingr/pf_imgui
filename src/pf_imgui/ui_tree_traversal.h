@@ -11,7 +11,7 @@
 namespace pf::ui::ig {
 
 namespace details {
-inline void traverseImGuiTree_impl(Element &element, std::invocable<Element &> auto callback) {
+inline void traverseImGuiTree_impl(Renderable &element, std::invocable<Renderable &> auto callback) {
   callback(element);
   if (auto ptrContainer = dynamic_cast<Container *>(&element); ptrContainer != nullptr) {
     std::ranges::for_each(ptrContainer->getChildren(),
@@ -20,7 +20,7 @@ inline void traverseImGuiTree_impl(Element &element, std::invocable<Element &> a
 }
 }// namespace details
 
-PF_IMGUI_EXPORT inline void traverseImGuiTree(Element &root, std::invocable<Element &> auto callback) {
+PF_IMGUI_EXPORT inline void traverseImGuiTree(Renderable &root, std::invocable<Renderable &> auto callback) {
   details::traverseImGuiTree_impl(root, callback);
 }
 

@@ -6,19 +6,20 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_RADIOGROUP_H
 
 #include "RadioButton.h"
-#include "interface/LabeledElement.h"
-#include "interface/SavableElement.h"
+#include "interface/Labellable.h"
+#include "interface/Savable.h"
 #include <pf_imgui/_export.h>
 #include <string>
 #include <vector>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT RadioGroup : public LabeledElement,
-                                   public ValueObservableElement<std::string_view>,
-                                   public SavableElement {
+class PF_IMGUI_EXPORT RadioGroup : public Element,
+                                   public Labellable,
+                                   public ValueObservable<std::string_view>,
+                                   public Savable {
  public:
-  RadioGroup(const std::string &elementName, const std::string &caption, std::vector<RadioButton> buttons = {},
+  RadioGroup(const std::string &elementName, const std::string &label, std::vector<RadioButton> buttons = {},
              const std::optional<std::size_t> &selectedButtonIndex = std::nullopt,
              Persistent persistent = Persistent::No);
 

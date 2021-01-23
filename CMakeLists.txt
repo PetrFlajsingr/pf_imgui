@@ -105,14 +105,15 @@ set(SOURCES
         src/pf_imgui/elements/plots/types/Digital.cpp
         src/pf_imgui/elements/interface/Container.cpp
         src/pf_imgui/elements/interface/Element.cpp
-        src/pf_imgui/elements/interface/LabeledElement.cpp
-        src/pf_imgui/elements/interface/ResizableElement.cpp
-        src/pf_imgui/elements/interface/SavableElement.cpp
+        src/pf_imgui/elements/interface/Labellable.cpp
+        src/pf_imgui/elements/interface/Resizable.cpp
+        src/pf_imgui/elements/interface/Savable.cpp
         src/pf_imgui/elements/interface/Clickable.cpp
         src/pf_imgui/elements/interface/ItemElement.cpp
         src/pf_imgui/elements/interface/Focusable.cpp
         src/pf_imgui/elements/interface/Hoverable.cpp
         src/pf_imgui/elements/interface/Collapsible.cpp
+        src/pf_imgui/elements/interface/Renderable.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
@@ -169,16 +170,17 @@ set(INCLUDES
         src/pf_imgui/elements/plots/types/Digital.h
         src/pf_imgui/elements/interface/Container.h
         src/pf_imgui/elements/interface/Element.h
-        src/pf_imgui/elements/interface/LabeledElement.h
-        src/pf_imgui/elements/interface/ResizableElement.h
-        src/pf_imgui/elements/interface/SavableElement.h
+        src/pf_imgui/elements/interface/Labellable.h
+        src/pf_imgui/elements/interface/Resizable.h
+        src/pf_imgui/elements/interface/Savable.h
         src/pf_imgui/elements/interface/Clickable.h
-        src/pf_imgui/elements/interface/ValueObservableElement.h
+        src/pf_imgui/elements/interface/ValueObservable.h
         src/pf_imgui/elements/interface/ItemElement.h
         src/pf_imgui/elements/interface/Observable_impl.h
         src/pf_imgui/elements/interface/Focusable.h
         src/pf_imgui/elements/interface/Hoverable.h
         src/pf_imgui/elements/interface/Collapsible.h
+        src/pf_imgui/elements/interface/Renderable.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h

@@ -11,11 +11,10 @@
 
 namespace pf::ui::ig {
 
-ListBox::ListBox(const std::string &elementName, const std::string &caption, std::vector<std::string> items_,
+ListBox::ListBox(const std::string &elementName, const std::string &label, std::vector<std::string> items_,
                  int selectedIdx, int heightInItems)
-    : Element(elementName), ItemElement(elementName), LabeledElement(elementName, caption),
-      ValueObservableElement(elementName, ""), items(std::move(items_)), currentItemIdx(selectedIdx),
-      height(heightInItems) {}
+    : ItemElement(elementName), Labellable(label), ValueObservable(""), items(std::move(items_)),
+      currentItemIdx(selectedIdx), height(heightInItems) {}
 
 void ListBox::renderImpl() {
   const auto cStrItems =

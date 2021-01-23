@@ -7,6 +7,7 @@
 
 #include "elements/FileDialog.h"
 #include "elements/MenuBars.h"
+#include "elements/Window.h"
 #include "elements/interface/Container.h"
 #include "fwd.h"
 #include <imgui.h>
@@ -19,13 +20,16 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT ImGuiInterface : public Container {
+class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
 
   [[nodiscard]] ImGuiIO &getIo() const;
 
   Dialog &createDialog(const std::string &elementName, const std::string &caption, Modal modal = Modal::Yes);
+
+  Window &createWindow(const std::string &windowName, std::string title);
+  void removeWindow(const std::string &name);
 
   [[nodiscard]] AppMenuBar &getMenuBar();
   [[nodiscard]] bool hasMenuBar() const;
@@ -61,18 +65,24 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
                              startName, modality, maxSelectedFiles);
   }
 
-  void render() override;
-
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
 
   void renderFileDialogs();
 
+  void renderImpl() override;
+
  private:
+  struct DialogContainer : public Container {};
+
+  DialogContainer dialogContainer;
+
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
   std::vector<FileDialog> fileDialogs;
   cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
+
+  std::vector<std::unique_ptr<Window>> windows;
 
   toml::table config;
 };

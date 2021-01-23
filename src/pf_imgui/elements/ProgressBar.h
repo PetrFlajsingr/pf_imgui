@@ -6,8 +6,8 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
 
 #include "interface/ItemElement.h"
-#include "interface/ResizableElement.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/Resizable.h"
+#include "interface/ValueObservable.h"
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 #include <string>
@@ -23,34 +23,34 @@ concept ProgressBarCompatible = requires(T t, float f) {
 };
 
 template<ProgressBarCompatible T>
-class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservableElement<T>, public ResizableElement {
+class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T>, public Resizable {
  public:
   ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
               const ImVec2 &size = {-1, 0})
       : Element(elementName),
-        ItemElement(elementName), ValueObservableElement<T>(elementName, value.has_value() ? *value : min),
-        ResizableElement(elementName, size), stepValue(stepValue), min(min), max(max) {}
+        ItemElement(elementName), ValueObservable<T>(elementName, value.has_value() ? *value : min), Resizable(size),
+        stepValue(stepValue), min(min), max(max) {}
 
   T setPercentage(float percentage) {
     percentage = std::clamp(percentage, 0.f, 1.f);
-    const auto oldValue = ValueObservableElement<T>::getValue();
+    const auto oldValue = ValueObservable<T>::getValue();
     const auto newValue = min + (max - min) * percentage;
-    ValueObservableElement<T>::setValue(newValue);
-    if (ValueObservableElement<T>::getValue() != oldValue) { ValueObservableElement<T>::notifyValueChanged(); }
+    ValueObservable<T>::setValue(newValue);
+    if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
     return newValue;
   }
 
   T step() {
-    const auto oldValue = ValueObservableElement<T>::getValue();
+    const auto oldValue = ValueObservable<T>::getValue();
     const auto newValue = std::clamp(oldValue + stepValue, min, max);
-    ValueObservableElement<T>::setValue(newValue);
-    if (ValueObservableElement<T>::getValue() != oldValue) { ValueObservableElement<T>::notifyValueChanged(); }
+    ValueObservable<T>::setValue(newValue);
+    if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
     return newValue;
   }
 
   float getCurrentPercentage() {
     const auto size = max - min;
-    return (ValueObservableElement<T>::getValue() - min) / static_cast<float>(size);
+    return (ValueObservable<T>::getValue() - min) / static_cast<float>(size);
   }
 
  protected:

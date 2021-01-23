@@ -11,9 +11,9 @@ class ImGuiInterface;
 
 class Element;
 class Container;
-class LabeledElement;
-class ResizableElement;
-class SavableElement;
+class Labellable;
+class Resizable;
+class Savable;
 
 class Button;
 class Checkbox;

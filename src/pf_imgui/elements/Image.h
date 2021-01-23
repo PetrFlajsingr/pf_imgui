@@ -8,7 +8,7 @@
 #include "../enums.h"
 #include "interface/Clickable.h"
 #include "interface/ItemElement.h"
-#include "interface/ResizableElement.h"
+#include "interface/Resizable.h"
 #include <functional>
 #include <pf_imgui/_export.h>
 #include <string>
@@ -19,7 +19,7 @@ namespace pf::ui::ig {
  * ImTextureId is basically anything.
  * For example in Vulkan implementation it could be a descriptor set.
  */
-class PF_IMGUI_EXPORT Image : public ItemElement, public ResizableElement, public Clickable {
+class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Clickable {
  public:
   using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
 

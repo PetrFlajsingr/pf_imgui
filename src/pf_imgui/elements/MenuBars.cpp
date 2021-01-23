@@ -10,8 +10,8 @@
 
 namespace pf::ui::ig {
 
-MenuItem::MenuItem(const std::string &elementName, const std::string &caption)
-    : Element(elementName), LabeledElement(elementName, caption) {}
+MenuItem::MenuItem(const std::string &elementName, const std::string &label)
+    : Element(elementName), Labellable(label) {}
 
 void MenuItem::renderImpl() {
   if (ImGui::MenuItem(getLabel().c_str())) { notifyOnClick(); }
@@ -24,8 +24,7 @@ void SubMenu::renderImpl() {
   }
 }
 
-SubMenu::SubMenu(const std::string &elementName, const std::string &caption)
-    : Element(elementName), LabeledElement(elementName, caption) {}
+SubMenu::SubMenu(const std::string &elementName, const std::string &label) : Element(elementName), Labellable(label) {}
 
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 

@@ -7,10 +7,9 @@
 
 namespace pf::ui::ig {
 
-Group::Group(const std::string &elementName, const std::string &caption, AllowCollapse allowCollapse,
+Group::Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse,
              Persistent persistent)
-    : Element(elementName), Container(elementName), LabeledElement(elementName, caption),
-      SavableElement(elementName, persistent), collapsible(allowCollapse) {}
+    : Element(elementName), Labellable(label), Savable(persistent), collapsible(allowCollapse) {}
 
 void Group::renderImpl() {
   ImGui::BeginGroup();
@@ -34,6 +33,6 @@ void Group::collapse_impl(bool) {}
 
 void Group::unserialize_impl(const toml::table &src) { setCollapsed(*src["collapsed"].value<bool>()); }
 
-toml::table Group::serialize_impl() { return toml::table{{{"collapsed", true}}}; }
+toml::table Group::serialize_impl() { return toml::table{{{"collapsed", isCollapsed()}}}; }
 
 }// namespace pf::ui::ig

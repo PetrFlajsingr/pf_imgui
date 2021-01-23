@@ -11,15 +11,17 @@
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT ResizableElement : public virtual Element {
+class PF_IMGUI_EXPORT Resizable {
  public:
-  ResizableElement(std::string elementName, const ImVec2 &size);
+  explicit Resizable(const ImVec2 &size);
 
-  ResizableElement(ResizableElement &&other) noexcept;
-  ResizableElement &operator=(ResizableElement &&other) noexcept;
+  Resizable(Resizable &&other) noexcept;
+  Resizable &operator=(Resizable &&other) noexcept;
 
   [[nodiscard]] const ImVec2 &getSize() const;
-  void setSize(const ImVec2 &s);
+  virtual void setSize(const ImVec2 &s);
+
+  virtual ~Resizable() = default;
 
  private:
   ImVec2 size;

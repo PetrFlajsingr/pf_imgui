@@ -40,8 +40,6 @@ Tooltip &ItemElement::createTooltip() {
   tooltip = std::make_unique<Tooltip>(getName() + "_tooltip");
   return *tooltip;
 }
-void ItemElement::setFocus_impl() {
-  ImGui::SetKeyboardFocusHere();
-}
+void ItemElement::setFocus_impl() { ImGui::SetKeyboardFocusHere(); }
 
 }// namespace pf::ui::ig

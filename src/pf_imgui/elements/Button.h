@@ -7,17 +7,17 @@
 
 #include "interface/Clickable.h"
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
-#include "interface/ResizableElement.h"
+#include "interface/Labellable.h"
+#include "interface/Resizable.h"
 #include <functional>
 #include <pf_imgui/_export.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Button : public ItemElement, public LabeledElement, public ResizableElement, public Clickable {
+class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Resizable, public Clickable {
  public:
-  Button(const std::string &name, std::string caption, ButtonType buttonType = ButtonType::Normal,
+  Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
          const ImVec2 &size = {0, 0});
 
   [[nodiscard]] ButtonType getType() const;

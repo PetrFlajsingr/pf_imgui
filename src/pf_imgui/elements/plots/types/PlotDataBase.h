@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 
-#include "../../interface/LabeledElement.h"
+#include "../../interface/Labellable.h"
 #include <algorithm>
 #include <concepts>
 #include <pf_imgui/_export.h>
@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT PlotData : public virtual Element {
   explicit PlotData(const std::string &elementName);
 };
 
-class PF_IMGUI_EXPORT LabeledPlotData : public PlotData, public LabeledElement {
+class PF_IMGUI_EXPORT LabeledPlotData : public PlotData, public Labellable {
  public:
   LabeledPlotData(const std::string &elementName, const std::string &caption);
 };

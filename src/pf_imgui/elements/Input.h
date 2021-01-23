@@ -6,9 +6,9 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_INPUT_H
 
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
-#include "interface/SavableElement.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/Labellable.h"
+#include "interface/Savable.h"
+#include "interface/ValueObservable.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
@@ -70,46 +70,33 @@ concept FormattedWithoutStep =
 }// namespace details
 
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Input : public ItemElement,
-                              public LabeledElement,
-                              public ValueObservableElement<T>,
-                              public SavableElement {
+class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:
-  Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
+  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
         Persistent persistent = Persistent::No, T value = T{}) requires details::UnformattedWithStep<T>
-      : Element(elementName),
-        ItemElement(elementName),
-        LabeledElement(elementName, caption),
-        ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent),
-        data(st, fStep) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent), data(st, fStep) {}
 
-  Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
+  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
         std::string format = decltype(data)::defaultFormat(), Persistent persistent = Persistent::No,
-        T value = T{}) requires details::FormattedWithStep<T> : Element(elementName),
-                                                                ItemElement(elementName),
-                                                                LabeledElement(elementName, caption),
-                                                                ValueObservableElement<T>(elementName, value),
-                                                                SavableElement(elementName, persistent),
+        T value = T{}) requires details::FormattedWithStep<T> : ItemElement(elementName),
+                                                                Labellable(label),
+                                                                ValueObservable<T>(value),
+                                                                Savable(persistent),
                                                                 format(std::move(format)),
                                                                 data(st, fStep) {}
 
-  Input(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
-        T value = T{}) requires details::UnformattedWithoutStep<T> : Element(elementName),
-                                                                     ItemElement(elementName),
-                                                                     LabeledElement(elementName, caption),
-                                                                     ValueObservableElement<T>(elementName, value),
-                                                                     SavableElement(elementName, persistent) {}
+  Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
+        T value = T{}) requires details::UnformattedWithoutStep<T>
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
 
-  Input(const std::string &elementName, const std::string &caption, Persistent persistent = Persistent::No,
+  Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
         std::string format = decltype(data)::defaultFormat(), T value = T{}) requires details::FormattedWithoutStep<T>
-      : Element(elementName),
-        ItemElement(elementName),
-        LabeledElement(elementName, caption),
-        ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent),
+      : ItemElement(elementName),
+        Labellable(label),
+        ValueObservable<T>(value),
+        Savable(persistent),
         format(std::move(format)) {}
 
  protected:
@@ -117,14 +104,14 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
     if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
       const auto tomlVec = src["value"].as_array();
       const auto vec = deserializeGlmVec<T>(*tomlVec);
-      ValueObservableElement<T>::setValueAndNotifyIfChanged(vec);
+      ValueObservable<T>::setValueAndNotifyIfChanged(vec);
     } else {
-      ValueObservableElement<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+      ValueObservable<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
     }
   }
 
   toml::table serialize_impl() override {
-    const auto value = ValueObservableElement<T>::getValue();
+    const auto value = ValueObservable<T>::getValue();
     if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
       return toml::table{{{"value", serializeGlmVec(value)}}};
     } else {
@@ -133,37 +120,37 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservableElement<T>::getValue();
+    const auto oldValue = ValueObservable<T>::getValue();
     if constexpr (std::same_as<T, float>) {
-      ImGui::InputFloat(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step, data.fastStep,
+      ImGui::InputFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep,
                         format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, int>) {
-      ImGui::InputInt(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), data.step, data.fastStep);
+      ImGui::InputInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+      ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, double>) {
-      ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), data.step,
+      ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), data.step,
                          data.fastStep, format.c_str());
     }
-    if (oldValue != ValueObservableElement<T>::getValue()) { ValueObservableElement<T>::notifyValueChanged(); }
+    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
   }
 
  private:

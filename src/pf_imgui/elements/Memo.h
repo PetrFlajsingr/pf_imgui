@@ -7,7 +7,7 @@
 
 #include "../fwd.h"
 #include "Panel.h"
-#include "interface/LabeledElement.h"
+#include "interface/Labellable.h"
 #include <memory>
 #include <optional>
 #include <pf_imgui/_export.h>
@@ -16,9 +16,9 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Memo : public LabeledElement {
+class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
  public:
-  Memo(const std::string &elementName, const std::string &caption, float textAHeight = 0, bool buttonsEnabled = true,
+  Memo(const std::string &elementName, const std::string &label, float textAHeight = 0, bool buttonsEnabled = true,
        bool filterEnabled = true, const std::optional<std::size_t> &recordLimit = std::nullopt);
 
   [[nodiscard]] const std::vector<std::string> &getRecords() const;

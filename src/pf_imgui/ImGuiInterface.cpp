@@ -6,13 +6,12 @@
 #include "serialization.h"
 #include <imgui_internal.h>
 #include <implot.h>
-#include <pf_common/RAII.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
-    : Container("Main"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
+    : io(baseInit(flags)), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
@@ -27,9 +26,9 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
 Dialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption, Modal modal) {
-  auto dialog = std::make_unique<Dialog>(*this, elementName, caption, modal);
+  auto dialog = std::make_unique<Dialog>(dialogContainer, elementName, caption, modal);
   const auto ptr = dialog.get();
-  addChild(std::move(dialog));
+  dialogContainer.addChild(std::move(dialog));
   return *ptr;
 }
 
@@ -40,15 +39,25 @@ AppMenuBar &ImGuiInterface::getMenuBar() {
 bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
-void ImGuiInterface::updateConfig() { config = serializeImGuiTree(*this); }
+void ImGuiInterface::updateConfig() {
+  config.clear();
+  std::ranges::for_each(windows, [this](auto &window) {
+    auto serialised = serializeImGuiTree(*window);
+    config.insert(serialised.begin(), serialised.end());
+  });
+}
 
 void ImGuiInterface::setStateFromConfig() {
-  traverseImGuiTree(*this, [this](Element &element) {
-    if (auto ptrSavable = dynamic_cast<SavableElement *>(&element); ptrSavable != nullptr) {
-      if (config.contains(ptrSavable->getName())) {
-        ptrSavable->unserialize(*config[ptrSavable->getName()].as_table());
+  std::ranges::for_each(windows, [this](auto &window) {
+    traverseImGuiTree(*window, [this](Renderable &renderable) {
+      if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
+        if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
+          if (config.contains(ptrElement->getName())) {
+            ptrSavable->unserialize(*config[ptrElement->getName()].as_table());
+          }
+        }
       }
-    }
+    });
   });
 }
 void ImGuiInterface::renderFileDialogs() {
@@ -65,20 +74,20 @@ bool ImGuiInterface::isKeyboardCaptured() const { return io.WantCaptureKeyboard;
 ImVec2 ImGuiInterface::getCursorPosition() const { return ImGui::GetCursorScreenPos(); }
 
 void ImGuiInterface::setCursorPosition(const ImVec2 &position) { ImGui::SetCursorScreenPos(position); }
-void ImGuiInterface::render() {
-  if (getVisibility() == Visibility::Visible) {
-    if (getEnabled() == Enabled::No) {
-      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-      auto raiiEnabled = pf::RAII([] {
-        ImGui::PopItemFlag();
-        ImGui::PopStyleVar();
-      });
-      renderImpl();
-    } else {
-      renderImpl();
-    }
+
+Window &ImGuiInterface::createWindow(const std::string &windowName, std::string title) {
+  windows.emplace_back(std::make_unique<Window>(windowName, std::move(title)));
+  return *windows.back();
+}
+
+void ImGuiInterface::removeWindow(const std::string &name) {
+  if (auto iter = std::ranges::find_if(windows, [name](const auto &window) { return window->getName() == name; });
+      iter != windows.end()) {
+    windows.erase(iter);
   }
+}
+void ImGuiInterface::renderImpl() {
+  std::ranges::for_each(windows, [](auto &window) { window->render(); });
 }
 
 }// namespace pf::ui::ig

@@ -7,16 +7,16 @@
 
 #include <optional>
 #include <pf_imgui/_export.h>
-#include <src/pf_imgui/elements/interface/LabeledElement.h>
-#include <src/pf_imgui/elements/interface/ResizableElement.h>
+#include <src/pf_imgui/elements/interface/Labellable.h>
+#include <src/pf_imgui/elements/interface/Resizable.h>
 #include <string>
 #include <vector>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT SimplePlot : public LabeledElement, public ResizableElement {
+class PF_IMGUI_EXPORT SimplePlot : public Element, public Labellable, public Resizable {
  public:
-  SimplePlot(const std::string &elementName, const std::string &caption, PlotType plotType,
+  SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
              std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
              const std::optional<std::size_t> &historyLimit = std::nullopt, float scaleLow = FLT_MAX,
              float scaleHigh = FLT_MAX, ImVec2 size = {0, 0});

@@ -8,9 +8,8 @@
 
 namespace pf::ui::ig {
 
-Checkbox::Checkbox(const std::string &elementName, const std::string &caption, Persistent persistent, bool value)
-    : Element(elementName), ItemElement(elementName), ValueObservableElement(elementName, value),
-      LabeledElement(elementName, caption), SavableElement(elementName, persistent) {}
+Checkbox::Checkbox(const std::string &elementName, const std::string &label, Persistent persistent, bool value)
+    : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
 
 void Checkbox::renderImpl() {
   const auto oldValue = getValue();

@@ -6,9 +6,9 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
 
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
-#include "interface/SavableElement.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/Labellable.h"
+#include "interface/Savable.h"
+#include "interface/ValueObservable.h"
 #include <algorithm>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
@@ -42,18 +42,14 @@ constexpr const char *defaultDragFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
-class PF_IMGUI_EXPORT DragInput : public ItemElement,
-                                  public ValueObservableElement<T>,
-                                  public LabeledElement,
-                                  public SavableElement {
+class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>, public Labellable, public Savable {
  public:
   using ParamType = details::UnderlyingType<T>;
 
-  DragInput(const std::string &elementName, const std::string &caption, ParamType speed, ParamType min, ParamType max,
+  DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
             Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
-      : Element(elementName), ItemElement(elementName), ValueObservableElement<T>(elementName, value),
-        LabeledElement(elementName, caption), SavableElement(elementName, persistent), speed(speed), min(min), max(max),
-        format(std::move(format)) {}
+      : ItemElement(elementName), ValueObservable<T>(value), Labellable(label), Savable(persistent), speed(speed),
+        min(min), max(max), format(std::move(format)) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {
@@ -62,18 +58,18 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
       const auto tomlRange = src["value"].as_array();
       range.start = *tomlRange->get(0)->template value<ParamType>();
       range.end = *tomlRange->get(1)->template value<ParamType>();
-      ValueObservableElement<T>::setValueAndNotifyIfChanged(range);
+      ValueObservable<T>::setValueAndNotifyIfChanged(range);
     } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
       const auto tomlVec = src["value"].as_array();
       const auto vec = deserializeGlmVec<T>(*tomlVec);
-      ValueObservableElement<T>::setValueAndNotifyIfChanged(vec);
+      ValueObservable<T>::setValueAndNotifyIfChanged(vec);
     } else {
-      ValueObservableElement<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+      ValueObservable<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
     }
   }
 
   toml::table serialize_impl() override {
-    const auto value = ValueObservableElement<T>::getValue();
+    const auto value = ValueObservable<T>::getValue();
     if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
       return toml::table{{{"value", toml::array{value.start, value.end}}}};
     } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
@@ -84,47 +80,46 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservableElement<T>::getValue();
+    const auto oldValue = ValueObservable<T>::getValue();
     if constexpr (std::same_as<T, float>) {
-      ImGui::DragFloat(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), speed, min, max,
-                       format.c_str());
+      ImGui::DragFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), speed, min,
-                        max, format.c_str());
+      ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
+                        format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), speed, min,
-                        max, format.c_str());
+      ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
+                        format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), speed, min,
-                        max, format.c_str());
+      ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
+                        format.c_str());
     }
     if constexpr (std::same_as<T, int>) {
-      ImGui::DragInt(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), speed, min, max, format.c_str());
+      ImGui::DragInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), speed, min,
-                      max, format.c_str());
+      ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
+                      format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), speed, min,
-                      max, format.c_str());
+      ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
+                      format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), speed, min,
-                      max, format.c_str());
+      ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
+                      format.c_str());
     }
     if constexpr (std::same_as<T, math::Range<int>>) {
-      ImGui::DragIntRange2(getLabel().c_str(), reinterpret_cast<int *>(ValueObservableElement<T>::getValueAddress()),
-                           speed, min, max, format.c_str());
+      ImGui::DragIntRange2(getLabel().c_str(), reinterpret_cast<int *>(ValueObservable<T>::getValueAddress()), speed,
+                           min, max, format.c_str());
     }
     if constexpr (std::same_as<T, math::Range<float>>) {
-      ImGui::DragFloatRange2(getLabel().c_str(), &ValueObservableElement<T>::getValueAddress()->start,
-                             &ValueObservableElement<T>::getValueAddress()->end, speed, min, max, format.c_str());
+      ImGui::DragFloatRange2(getLabel().c_str(), &ValueObservable<T>::getValueAddress()->start,
+                             &ValueObservable<T>::getValueAddress()->end, speed, min, max, format.c_str());
     }
-    if (oldValue != ValueObservableElement<T>::getValue()) { ValueObservableElement<T>::notifyValueChanged(); }
+    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
   }
 
  private:

@@ -5,17 +5,15 @@
 #ifndef PF_IMGUI_ELEMENTS_INTERFACE_ELEMENT_H
 #define PF_IMGUI_ELEMENTS_INTERFACE_ELEMENT_H
 
-#include <pf_common/enums.h>
+#include "Renderable.h"
 #include <pf_imgui/_export.h>
-#include <pf_imgui/enums.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Element {
+class PF_IMGUI_EXPORT Element : public Renderable {
  public:
   explicit Element(std::string elementName);
-  virtual ~Element() = default;
   Element(Element &&other) noexcept;
   Element &operator=(Element &&other) noexcept;
   Element(const Element &) = delete;
@@ -23,25 +21,10 @@ class PF_IMGUI_EXPORT Element {
 
   [[nodiscard]] const std::string &getName() const;
 
-  [[nodiscard]] Visibility getVisibility() const;
-  void setVisibility(Visibility visibility);
-
-  [[nodiscard]] Enabled getEnabled() const;
-  void setEnabled(Enabled eleState);
-
-  /**
-   * DO NOT OVERRIDE UNLESS YOU WANT TO LOSE SOME FUNCTIONALITY
-   */
-  virtual void render();
-
- protected:
-  virtual void renderImpl() = 0;
+  void render() override;
 
  private:
   std::string name;
-  Visibility visibility = Visibility::Visible;
-  Enabled enabled = Enabled::Yes;
-  bool isMoved = false;
 };
 
 }// namespace pf::ui::ig

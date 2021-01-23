@@ -8,7 +8,7 @@
 #include "../enums.h"
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/LabeledElement.h>
+#include <pf_imgui/elements/interface/Labellable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -23,26 +23,26 @@ struct PF_IMGUI_EXPORT FileExtensionSettings {
   std::optional<ImVec4> color;
 };
 
-class PF_IMGUI_EXPORT FileDialog : public LabeledElement {
+class PF_IMGUI_EXPORT FileDialog : public Element, public Labellable {
  public:
-  FileDialog(const std::string &elementName, const std::string &caption,
+  FileDialog(const std::string &elementName, const std::string &label,
              const std::vector<FileExtensionSettings> &extSettings,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
              std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
              uint32_t maxSelectedFiles = 1)
-      : Element(elementName), LabeledElement(elementName, caption), openPath(std::move(startPath)),
-        defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
-        onFilesSelected(onSelect), onSelectCanceled(onCancel) {
+      : Element(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
+        modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles), onFilesSelected(onSelect),
+        onSelectCanceled(onCancel) {
     prepareExtInfos(extSettings);
   }
 
-  FileDialog(const std::string &elementName, const std::string &caption,
+  FileDialog(const std::string &elementName, const std::string &label,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
              std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
              uint32_t maxSelectedDirs = 1)
-      : Element(elementName), LabeledElement(elementName, caption), openPath(std::move(startPath)),
-        defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
-        maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
+      : Element(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
+        modal(modality), fileType(FileType::Directory), maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect),
+        onSelectCanceled(onCancel) {}
 
   [[nodiscard]] bool isDone() const { return done; }
 

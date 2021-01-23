@@ -7,7 +7,7 @@
 
 #include "interface/Clickable.h"
 #include "interface/Element.h"
-#include "interface/LabeledElement.h"
+#include "interface/Labellable.h"
 #include <functional>
 #include <memory>
 #include <pf_imgui/_export.h>
@@ -34,17 +34,17 @@ class PF_IMGUI_EXPORT MenuContainer {
   std::vector<std::unique_ptr<Element>> items;
 };
 
-class PF_IMGUI_EXPORT MenuItem : public LabeledElement, public Clickable {
+class PF_IMGUI_EXPORT MenuItem : public Element, public Labellable, public Clickable {
  public:
-  MenuItem(const std::string &elementName, const std::string &caption);
+  MenuItem(const std::string &elementName, const std::string &label);
 
  protected:
   void renderImpl() override;
 };
 
-class PF_IMGUI_EXPORT SubMenu : public LabeledElement, public MenuContainer {
+class PF_IMGUI_EXPORT SubMenu : public Element, public Labellable, public MenuContainer {
  public:
-  SubMenu(const std::string &elementName, const std::string &caption);
+  SubMenu(const std::string &elementName, const std::string &label);
 
  protected:
   void renderImpl() override;

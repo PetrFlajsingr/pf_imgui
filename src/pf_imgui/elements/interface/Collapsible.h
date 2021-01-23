@@ -17,6 +17,8 @@ class Collapsible {
   [[nodiscard]] bool isCollapsed() const;
   void setCollapsed(bool collapsed);
 
+  virtual ~Collapsible() = default;
+
  protected:
   virtual void collapse_impl(bool collapse) = 0;
   void setCollapsedWithoutDemandingCollapseChange(bool collapse);
@@ -26,6 +28,6 @@ class Collapsible {
   bool collapsed = false;
   Observable_impl<bool> observableImpl;
 };
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_COLLAPSIBLE_H

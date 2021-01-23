@@ -8,10 +8,9 @@
 
 namespace pf::ui::ig {
 
-FlameGraph::FlameGraph(const std::string &elementName, const std::string &caption, const ImVec2 &size,
+FlameGraph::FlameGraph(const std::string &elementName, const std::string &label, const ImVec2 &size,
                        std::optional<std::string> overlay)
-    : Element(elementName), LabeledElement(elementName, caption), ResizableElement(elementName, size),
-      overlay(std::move(overlay)) {}
+    : Element(elementName), Labellable(label), Resizable(size), overlay(std::move(overlay)) {}
 
 void FlameGraph::renderImpl() {
   ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples, overlay, FLT_MAX, FLT_MAX, getSize());

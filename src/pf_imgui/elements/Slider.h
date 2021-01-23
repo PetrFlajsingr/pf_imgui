@@ -6,9 +6,9 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
 
 #include "interface/ItemElement.h"
-#include "interface/LabeledElement.h"
-#include "interface/SavableElement.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/Labellable.h"
+#include "interface/Savable.h"
+#include "interface/ValueObservable.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
@@ -39,31 +39,27 @@ constexpr const char *defaultSliderFormat() {
 }
 }// namespace details
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Slider : public ItemElement,
-                               public LabeledElement,
-                               public ValueObservableElement<T>,
-                               public SavableElement {
+class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
  public:
   using MinMaxType = details::SliderMinMaxType<T>;
-  Slider(const std::string &elementName, const std::string &caption, MinMaxType min, MinMaxType max, T value = T{},
+  Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
          Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>())
-      : Element(elementName), ItemElement(elementName),
-        LabeledElement(elementName, caption), ValueObservableElement<T>(elementName, value),
-        SavableElement(elementName, persistent), min(min), max(max), format(std::move(format)) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent), min(min), max(max),
+        format(std::move(format)) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {
     if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
       const auto tomlVec = src["value"].as_array();
       const auto vec = deserializeGlmVec<T>(*tomlVec);
-      ValueObservableElement<T>::setValueAndNotifyIfChanged(vec);
+      ValueObservable<T>::setValueAndNotifyIfChanged(vec);
     } else {
-      ValueObservableElement<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+      ValueObservable<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
     }
   }
 
   toml::table serialize_impl() override {
-    const auto value = ValueObservableElement<T>::getValue();
+    const auto value = ValueObservable<T>::getValue();
     if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
       return toml::table{{{"value", serializeGlmVec(value)}}};
     } else {
@@ -72,38 +68,38 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservableElement<T>::getValue();
+    const auto oldValue = ValueObservable<T>::getValue();
     if constexpr (std::same_as<T, float>) {
-      ImGui::SliderFloat(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), min, max, format.c_str());
+      ImGui::SliderFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), min, max,
+      ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
                           format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), min, max,
+      ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
                           format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), min, max,
+      ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
                           format.c_str());
     }
     if constexpr (std::same_as<T, int>) {
-      ImGui::SliderInt(getLabel().c_str(), ValueObservableElement<T>::getValueAddress(), min, max, format.c_str());
+      ImGui::SliderInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), min, max,
+      ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
                         format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), min, max,
+      ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
                         format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()), min, max,
+      ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
                         format.c_str());
     }
-    if (oldValue != ValueObservableElement<T>::getValue()) { ValueObservableElement<T>::notifyValueChanged(); }
+    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
   }
 
  private:
