@@ -1,0 +1,12 @@
+//
+// Created by petr on 1/23/21.
+//
+
+#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H
+#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H
+
+namespace pf::ui::ig {
+class Hoverable {};
+}
+
+#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H
