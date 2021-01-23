@@ -6,6 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
 
 #include "Element.h"
+#include "Observable_impl.h"
 #include <algorithm>
 #include <functional>
 #include <pf_common/Subscription.h>
@@ -20,26 +21,21 @@ namespace pf::ui::ig {
 template<typename T>
 class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
  public:
-  using Callback = std::function<void(const T &)>;
-  using Id = uint32_t;
   explicit ValueObservableElement(const std::string &elementName, T value = T{}) : Element(elementName), value(value) {}
 
   ValueObservableElement(ValueObservableElement &&other) noexcept
-      : Element(std::move(other)), value(std::move(other.value)), listeners(std::move(other.listeners)),
-        idGenerator(std::move(idGenerator)) {}
+      : Element(std::move(other)), value(std::move(other.value)) {}
+
   ValueObservableElement &operator=(ValueObservableElement &&other) noexcept {
     value = std::move(other.value);
-    listeners = std::move(other.listeners);
-    idGenerator = std::move(other.idGenerator);
+    observableImpl = std::move(other.observableImpl);
     Element::operator=(std::move(other));
     return *this;
   }
 
   Subscription addValueListener(std::invocable<const T &> auto fnc, bool callNow = false) {
     if (callNow) { fnc(value); }
-    const auto id = generateListenerId();
-    listeners[id] = fnc;
-    return Subscription([id, this] { listeners.erase(id); });
+    return observableImpl.template addListener(fnc);
   }
 
   Subscription bind(T &toBind) {
@@ -50,10 +46,7 @@ class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
   [[nodiscard]] const T &getValue() const { return value; }
 
  protected:
-  void notifyValueChanged() {
-    auto callables = listeners | std::views::values;
-    std::ranges::for_each(callables, [&](const auto &callable) { callable(value); });
-  }
+  void notifyValueChanged() { observableImpl.notify(value); }
   void setValue(T val) { value = val; }
 
   void setValueAndNotifyIfChanged(T val) {
@@ -65,12 +58,8 @@ class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
   T *getValueAddress() { return &value; }
 
  private:
-  Id generateListenerId() { return getNext(idGenerator); }
-
   T value;
-  std::unordered_map<Id, Callback> listeners;
-
-  cppcoro::generator<Id> idGenerator = iota<Id>();
+  Observable_impl<T> observableImpl;
 };
 
 }// namespace pf::ui::ig

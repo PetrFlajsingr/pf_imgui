@@ -110,6 +110,9 @@ set(SOURCES
         src/pf_imgui/elements/interface/SavableElement.cpp
         src/pf_imgui/elements/interface/Clickable.cpp
         src/pf_imgui/elements/interface/ItemElement.cpp
+        src/pf_imgui/elements/interface/Focusable.cpp
+        src/pf_imgui/elements/interface/Hoverable.cpp
+        src/pf_imgui/elements/interface/Collapsible.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
@@ -172,6 +175,10 @@ set(INCLUDES
         src/pf_imgui/elements/interface/Clickable.h
         src/pf_imgui/elements/interface/ValueObservableElement.h
         src/pf_imgui/elements/interface/ItemElement.h
+        src/pf_imgui/elements/interface/Observable_impl.h
+        src/pf_imgui/elements/interface/Focusable.h
+        src/pf_imgui/elements/interface/Hoverable.h
+        src/pf_imgui/elements/interface/Collapsible.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h

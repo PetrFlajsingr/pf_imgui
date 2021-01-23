@@ -9,8 +9,6 @@
 #include <memory>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
-#include <range/v3/view/all.hpp>
-#include <range/v3/view/map.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <unordered_map>
@@ -52,8 +50,9 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
   }
 
   [[nodiscard]] inline auto getChildren() {
-    return children | ranges::views::values
-        | ranges::views::transform([](auto &childPtr) -> Element & { return *childPtr; }) | ranges::views::all;
+    std::ranges::for_each(childrenToRemove, [this](const auto &name) { removeChild(name); });
+    childrenToRemove.clear();
+    return childrenInOrder | ranges::views::transform([](auto &childRef) -> Element & { return childRef.get(); });
   }
 
   void clear();

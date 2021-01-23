@@ -10,11 +10,14 @@
 #include "interface/ResizableElement.h"
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/interface/Focusable.h>
+#include <pf_imgui/elements/interface/Hoverable.h>
+#include <pf_imgui/elements/interface/Collapsible.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Window : public Container {
+class PF_IMGUI_EXPORT Window : public Container, public Focusable, public Hoverable, public Collapsible {
  public:
   Window(const std::string &elementName, std::string title);
 
@@ -25,31 +28,24 @@ class PF_IMGUI_EXPORT Window : public Container {
   [[nodiscard]] bool hasMenuBar() const;
   void removeMenuBar();
 
-  [[nodiscard]] bool isCollapsed() const;
-  void setCollapsed(bool collapsed);
-
-  [[nodiscard]] bool isHovered() const;
-
   [[nodiscard]] const ImVec2 &getPosition() const;
   void setPosition(const ImVec2 &position);
 
   [[nodiscard]] const ImVec2 &getSize() const;
   void setSize(const ImVec2 &size);
 
-  [[nodiscard]] bool isFocused() const;
-  void setFocused(bool focused);
+  void render() override;
 
  protected:
   void renderImpl() override;
+  void setFocus_impl() override;
+  void collapse_impl(bool collapse) override;
 
  private:
   std::string title;
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
-  bool collapsed = false;
-  bool hovered = false;
   ImVec2 position;
   ImVec2 size;
-  bool focused = false;
 };
 
 }// namespace pf::ui::ig

@@ -5,6 +5,8 @@
 #include "Window.h"
 #include <algorithm>
 #include <imgui.h>
+#include <imgui_internal.h>
+#include <pf_common/RAII.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -15,7 +17,11 @@ Window::Window(const std::string &elementName, std::string title)
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
   ImGui::Begin(title.c_str(), nullptr, flags);
-  if (!collapsed) {
+  setHovered(ImGui::IsWindowHovered());
+
+  setCollapsedWithoutDemandingCollapseChange(ImGui::IsWindowCollapsed());
+  setFocusedWithoutDemandingFocusChange(ImGui::IsWindowFocused());
+  if (!isCollapsed()) {
     if (hasMenuBar()) { menuBar->render(); }
     std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
   }
@@ -32,16 +38,8 @@ WindowMenuBar &Window::getMenuBar() {
 }
 
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
+
 void Window::removeMenuBar() { menuBar = nullptr; }
-
-bool Window::isCollapsed() const { return collapsed; }
-
-void Window::setCollapsed(bool newCollapsed) {
-  collapsed = newCollapsed;
-  ImGui::SetWindowCollapsed(getTitle().c_str(), collapsed);
-}
-
-bool Window::isHovered() const { return hovered; }
 
 const ImVec2 &Window::getPosition() const { return position; }
 
@@ -57,11 +55,24 @@ void Window::setSize(const ImVec2 &newSize) {
   ImGui::SetWindowSize(getTitle().c_str(), size);
 }
 
-bool Window::isFocused() const { return focused; }
+void Window::setFocus_impl() { ImGui::SetWindowFocus(getTitle().c_str()); }
 
-void Window::setFocused(bool newFocused) {
-  focused = newFocused;
-  ImGui::SetWindowFocus(getTitle().c_str());
+void Window::collapse_impl(bool collapse) { ImGui::SetWindowCollapsed(getTitle().c_str(), collapse); }
+
+void Window::render() {
+  if (getVisibility() == Visibility::Visible) {
+    if (getEnabled() == Enabled::No) {
+      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+      auto raiiEnabled = pf::RAII([] {
+        ImGui::PopItemFlag();
+        ImGui::PopStyleVar();
+      });
+      renderImpl();
+    } else {
+      renderImpl();
+    }
+  }
 }
 
 }// namespace pf::ui::ig

@@ -7,11 +7,15 @@
 
 #include "../Tooltip.h"
 #include "Element.h"
+#include "Focusable.h"
+#include "Hoverable.h"
 #include <memory>
+#include <string>
 
 namespace pf::ui::ig {
 
-class ItemElement : public virtual Element {
+// TODO: observable focus & hovered
+class ItemElement : public virtual Element, public Focusable, public Hoverable {
  public:
   explicit ItemElement(const std::string &elementName);
 
@@ -20,17 +24,15 @@ class ItemElement : public virtual Element {
 
   void render() override;
 
-  [[nodiscard]] bool isFocused() const;
-  [[nodiscard]] bool isHovered() const;
-
   [[nodiscard]] bool hasTooltip() const;
   void removeTooltip();
   void setTooltip(std::string_view text);
   [[nodiscard]] Tooltip &createTooltip();
 
+ protected:
+  void setFocus_impl() override;
+
  private:
-  bool focused = false;
-  bool hovered = false;
   std::unique_ptr<Tooltip> tooltip = nullptr;
 };
 

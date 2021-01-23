@@ -61,6 +61,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Container {
                              startName, modality, maxSelectedFiles);
   }
 
+  void render() override;
+
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
 
