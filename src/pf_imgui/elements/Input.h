@@ -80,6 +80,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
   Input(const std::string &elementName, const std::string &caption, T st = 0, T fStep = 0,
         Persistent persistent = Persistent::No, T value = T{}) requires details::UnformattedWithStep<T>
       : Element(elementName),
+        ItemElement(elementName),
         LabeledElement(elementName, caption),
         ValueObservableElement<T>(elementName, value),
         SavableElement(elementName, persistent),
