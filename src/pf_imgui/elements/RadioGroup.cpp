@@ -12,8 +12,8 @@ namespace pf::ui::ig {
 
 RadioGroup::RadioGroup(const std::string &elementName, const std::string &label, std::vector<RadioButton> buttons,
                        const std::optional<std::size_t> &selectedButtonIndex, Persistent persistent)
-    : Element(elementName), Labellable(label), ValueObservableElement<std::string_view>(elementName, ""),
-      Savable(persistent), buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
+    : Element(elementName), Labellable(label), ValueObservable<std::string_view>(""), Savable(persistent),
+      buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
 
 void RadioGroup::renderImpl() {
   ImGui::Separator();

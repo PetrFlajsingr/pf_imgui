@@ -8,17 +8,17 @@ namespace pf::ui::ig {
 
 SliderAngle::SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value,
                          Persistent persistent, std::string format)
-    : Element(elementName), ItemElement(elementName), Labellable(label), ValueObservableElement(elementName, value),
-      Savable(persistent), minDeg(min), maxDeg(max), format(std::move(format)) {}
+    : ItemElement(elementName), Labellable(label), ValueObservable(value), Savable(persistent), minDeg(min),
+      maxDeg(max), format(std::move(format)) {}
 
 void SliderAngle::renderImpl() {
-  const auto oldValue = ValueObservableElement::getValue();
+  const auto oldValue = ValueObservable::getValue();
   ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str());
-  if (oldValue != ValueObservableElement::getValue()) { ValueObservableElement::notifyValueChanged(); }
+  if (oldValue != ValueObservable::getValue()) { ValueObservable::notifyValueChanged(); }
 }
 
 void SliderAngle::unserialize_impl(const toml::table &src) {
-  ValueObservableElement::setValueAndNotifyIfChanged(*src["value"].value<float>());
+  ValueObservable::setValueAndNotifyIfChanged(*src["value"].value<float>());
 }
 
 toml::table SliderAngle::serialize_impl() { return toml::table{{{"value", getValue()}}}; }

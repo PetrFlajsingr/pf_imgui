@@ -12,7 +12,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Panel : public Container, public Resizable {
+class PF_IMGUI_EXPORT Panel : public Element, public Container, public Resizable {
  public:
   Panel(const std::string &elementName, std::string title, PanelLayout layout = PanelLayout::Vertical,
         const ImVec2 &panelSize = {0, 0});

@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 
-Tooltip::Tooltip(const std::string &elementName) : Element(elementName), Container(elementName) {}
+Tooltip::Tooltip(const std::string &elementName) : Element(elementName) {}
 
 void Tooltip::renderImpl() {
   ImGui::BeginTooltip();

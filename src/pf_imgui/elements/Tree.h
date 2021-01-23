@@ -12,7 +12,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Tree : public Labellable, public Container {
+class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public Container {
  public:
   Tree(const std::string &elementName, const std::string &label);
 

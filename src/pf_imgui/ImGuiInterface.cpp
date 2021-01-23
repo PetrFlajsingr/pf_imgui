@@ -12,7 +12,7 @@
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
-    : Container("Main"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
+    : Element("imgui"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
@@ -45,9 +45,7 @@ void ImGuiInterface::updateConfig() { config = serializeImGuiTree(*this); }
 void ImGuiInterface::setStateFromConfig() {
   traverseImGuiTree(*this, [this](Element &element) {
     if (auto ptrSavable = dynamic_cast<Savable *>(&element); ptrSavable != nullptr) {
-      if (config.contains(element.getName())) {
-        ptrSavable->unserialize(*config[element.getName()].as_table());
-      }
+      if (config.contains(element.getName())) { ptrSavable->unserialize(*config[element.getName()].as_table()); }
     }
   });
 }

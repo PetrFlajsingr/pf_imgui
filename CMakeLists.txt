@@ -173,7 +173,7 @@ set(INCLUDES
         src/pf_imgui/elements/interface/Resizable.h
         src/pf_imgui/elements/interface/Savable.h
         src/pf_imgui/elements/interface/Clickable.h
-        src/pf_imgui/elements/interface/ValueObservableElement.h
+        src/pf_imgui/elements/interface/ValueObservable.h
         src/pf_imgui/elements/interface/ItemElement.h
         src/pf_imgui/elements/interface/Observable_impl.h
         src/pf_imgui/elements/interface/Focusable.h

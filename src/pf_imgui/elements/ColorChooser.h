@@ -9,7 +9,7 @@
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
 #include "interface/Savable.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/ValueObservable.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
@@ -24,42 +24,42 @@ namespace pf::ui::ig {
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
 class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
                                      public Labellable,
-                                     public ValueObservableElement<T>,
+                                     public ValueObservable<T>,
                                      public Savable {
  public:
   ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
                T value = T{})
-      : Element(elementName), Labellable(label), ValueObservableElement<T>(elementName, value), Savable(persistent) {}
+      : Element(elementName), Labellable(label), ValueObservable<T>(elementName, value), Savable(persistent) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {
     const auto tomlColor = src["color"].as_array();
     const auto color = deserializeGlmVec<T>(*tomlColor);
-    ValueObservableElement<T>::setValueAndNotifyIfChanged(color);
+    ValueObservable<T>::setValueAndNotifyIfChanged(color);
   }
 
   toml::table serialize_impl() override {
-    const auto color = ValueObservableElement<T>::getValue();
+    const auto color = ValueObservable<T>::getValue();
     const auto tomlColor = serializeGlmVec(color);
     return toml::table{{{"color", tomlColor}}};
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservableElement<T>::getValue();
+    const auto oldValue = ValueObservable<T>::getValue();
     if constexpr (Type == ColorChooserType::Edit) {
       if constexpr (std::same_as<glm::vec3, T>) {
-        ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       } else {
-        ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       }
     } else {
       if constexpr (std::same_as<glm::vec3, T>) {
-        ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       } else {
-        ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservableElement<T>::getValueAddress()));
+        ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       }
     }
-    if (oldValue != ValueObservableElement<T>::getValue()) { ValueObservableElement<T>::notifyValueChanged(); }
+    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
   }
 };
 

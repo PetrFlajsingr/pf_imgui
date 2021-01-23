@@ -8,18 +8,15 @@
 namespace pf::ui::ig {
 
 Container::Container(Container &&other) noexcept
-    : Element(std::move(other)), children(std::move(other.children)), childrenInOrder(std::move(other.childrenInOrder)),
+    : children(std::move(other.children)), childrenInOrder(std::move(other.childrenInOrder)),
       childrenToRemove(std::move(other.childrenToRemove)) {}
 
 Container &Container::operator=(Container &&other) noexcept {
   children = std::move(other.children);
   childrenInOrder = std::move(other.childrenInOrder);
   childrenToRemove = std::move(other.childrenToRemove);
-  Element::operator=(std::move(other));
   return *this;
 }
-
-Container::Container(const std::string &elementName) : Element(elementName) {}
 
 void Container::addChild(std::unique_ptr<Element> child) {
   childrenInOrder.emplace_back(*child);

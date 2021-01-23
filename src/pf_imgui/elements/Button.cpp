@@ -9,7 +9,7 @@
 namespace pf::ui::ig {
 
 Button::Button(const std::string &name, std::string label, ButtonType buttonType, const ImVec2 &size)
-    : Element(name), ItemElement(name), Labellable(std::move(label)), Resizable(size), type(buttonType) {}
+    : ItemElement(name), Labellable(std::move(label)), Resizable(size), type(buttonType) {}
 
 void Button::renderImpl() {
   auto wasClicked = false;

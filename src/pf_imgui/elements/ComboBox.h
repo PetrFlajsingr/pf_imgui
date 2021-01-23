@@ -8,7 +8,7 @@
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
 #include "interface/Savable.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/ValueObservable.h"
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <string>
@@ -17,7 +17,7 @@
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT ComboBox : public ItemElement,
                                  public Labellable,
-                                 public ValueObservableElement<std::string_view>,
+                                 public ValueObservable<std::string_view>,
                                  public Savable {
  public:
   ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,

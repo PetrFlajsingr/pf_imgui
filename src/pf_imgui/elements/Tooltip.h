@@ -9,14 +9,12 @@
 
 namespace pf::ui::ig {
 
-class Tooltip : public Container {
+class Tooltip : public Element, public Container {
  public:
   explicit Tooltip(const std::string &elementName);
 
  protected:
   void renderImpl() override;
-
- private:
 };
 
 }// namespace pf::ui::ig

@@ -17,9 +17,9 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Container : public virtual Element {
+class PF_IMGUI_EXPORT Container {
  public:
-  explicit Container(const std::string &elementName);
+  Container() = default;
 
   Container(Container &&other) noexcept;
   Container &operator=(Container &&other) noexcept;
@@ -44,9 +44,9 @@ class PF_IMGUI_EXPORT Container : public virtual Element {
   [[nodiscard]] T &childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
-      throw StackTraceException::fmt("Wrong type for child: '{}' in '{}'", name, getName());
+      throw StackTraceException::fmt("Wrong type for child: '{}'", name);
     }
-    throw StackTraceException::fmt("Child not found: '{}' in '{}'", name, getName());
+    throw StackTraceException::fmt("Child not found: '{}'", name);
   }
 
   [[nodiscard]] inline auto getChildren() {

@@ -15,9 +15,8 @@ namespace pf::ui::ig {
 
 ComboBox::ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
                    std::vector<std::string> items, Persistent persistent)
-    : Element(elementName), ItemElement(elementName),
-      Labellable(label), ValueObservableElement<std::string_view>(elementName, ""), Savable(persistent),
-      items(std::move(items)), previewValue(std::move(previewValue)) {}
+    : ItemElement(elementName), Labellable(label), ValueObservable<std::string_view>(""),
+      Savable(persistent), items(std::move(items)), previewValue(std::move(previewValue)) {}
 
 void ComboBox::renderImpl() {
   using namespace ranges;

@@ -14,7 +14,7 @@
 
 namespace pf::ui::ig {
 
-class ItemElement : public virtual Element, public Focusable, public Hoverable {
+class ItemElement : public Element, public Focusable, public Hoverable {
  public:
   explicit ItemElement(const std::string &elementName);
 

@@ -9,7 +9,7 @@
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
 #include "interface/Savable.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/ValueObservable.h"
 #include <functional>
 #include <pf_imgui/_export.h>
 #include <string>
@@ -18,7 +18,7 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,
-                                  public ValueObservableElement<std::string_view>,
+                                  public ValueObservable<std::string_view>,
                                   public Savable {
  public:
   InputText(const std::string &elementName, std::string label, const std::string &text = "",

@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 Dialog::Dialog(Container &parent, const std::string &elementName, const std::string &label, Modal modal)
-    : Element(elementName), Container(elementName), Labellable(label), modal(modal), owner(parent) {}
+    : Element(elementName), Labellable(label), modal(modal), owner(parent) {}
 
 void Dialog::renderImpl() {
   if (closed) {

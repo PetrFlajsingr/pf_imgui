@@ -7,7 +7,7 @@
 
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
-#include "interface/ValueObservableElement.h"
+#include "interface/ValueObservable.h"
 #include <algorithm>
 #include <pf_common/concepts/Iterable.h>
 #include <pf_imgui/_export.h>
@@ -17,7 +17,7 @@
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT ListBox : public ItemElement,
                                 public Labellable,
-                                public ValueObservableElement<std::string_view> {
+                                public ValueObservable<std::string_view> {
  public:
   ListBox(const std::string &elementName, const std::string &label, std::vector<std::string> items_ = {},
           int selectedIdx = 0, int heightInItems = -1);

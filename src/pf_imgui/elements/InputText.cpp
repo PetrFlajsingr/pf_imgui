@@ -10,8 +10,8 @@
 namespace pf::ui::ig {
 InputText::InputText(const std::string &elementName, std::string label, const std::string &text,
                      TextInputType textInputType, Persistent persistent)
-    : Element(elementName), Text(elementName, text), Labellable(std::move(label)),
-      ValueObservableElement(elementName, ""), Savable(persistent), inputType(textInputType) {
+    : Text(elementName, text), Labellable(std::move(label)), ValueObservable(""), Savable(persistent),
+      inputType(textInputType) {
   setValue(text);
 }
 

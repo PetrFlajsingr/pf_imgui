@@ -12,7 +12,7 @@
 namespace pf::ui::ig {
 
 Window::Window(const std::string &elementName, std::string title)
-    : Element(elementName), Container(elementName), Resizable(ImVec2(0, 0)), title(std::move(title)) {}
+    : Element(elementName), Resizable(ImVec2(0, 0)), title(std::move(title)) {}
 
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};

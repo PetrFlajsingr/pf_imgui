@@ -19,17 +19,15 @@
 
 namespace pf::ui::ig {
 template<typename T>
-class PF_IMGUI_EXPORT ValueObservableElement : public virtual Element {
+class PF_IMGUI_EXPORT ValueObservable {
  public:
-  explicit ValueObservableElement(const std::string &elementName, T value = T{}) : Element(elementName), value(value) {}
+  explicit ValueObservable(T value = T{}) : value(value) {}
 
-  ValueObservableElement(ValueObservableElement &&other) noexcept
-      : Element(std::move(other)), value(std::move(other.value)) {}
+  ValueObservable(ValueObservable &&other) noexcept : value(std::move(other.value)) {}
 
-  ValueObservableElement &operator=(ValueObservableElement &&other) noexcept {
+  ValueObservable &operator=(ValueObservable &&other) noexcept {
     value = std::move(other.value);
     observableImpl = std::move(other.observableImpl);
-    Element::operator=(std::move(other));
     return *this;
   }
 

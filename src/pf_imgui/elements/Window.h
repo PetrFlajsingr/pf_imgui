@@ -17,7 +17,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Window : public Container,
+class PF_IMGUI_EXPORT Window : public Element,public Container,
                                public Focusable,
                                public Hoverable,
                                public Collapsible,
