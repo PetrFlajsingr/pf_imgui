@@ -35,6 +35,7 @@ void Element::setVisibility(Visibility visi) { visibility = visi; }
 
 void Element::render() {
   if (visibility == Visibility::Visible) {
+    ImGui::PushID(getName().c_str());
     if (enabled == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
@@ -46,6 +47,7 @@ void Element::render() {
     } else {
       renderImpl();
     }
+    ImGui::PopID();
   }
 }
 
