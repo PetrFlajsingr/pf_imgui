@@ -19,7 +19,10 @@ void StackedLayout::renderImpl() {
   ImGui::EndChild();
 }
 
-void StackedLayout::pushStack() { stacks.emplace_back(); }
+StackedLayout::StackContainer &StackedLayout::pushStack() {
+  stacks.emplace_back();
+  return stacks.back();
+}
 
 void StackedLayout::removeStack(std::size_t index) { stacks.erase(stacks.begin() + index); }
 
