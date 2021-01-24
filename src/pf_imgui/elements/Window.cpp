@@ -17,12 +17,16 @@ Window::Window(std::string elementName, std::string title)
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
   ImGui::Begin(title.c_str(), nullptr, flags);
-  ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-  ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+  if (getEnabled() == Enabled::No) {
+    ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+    ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+  }
   {
-    auto raiiEnabled = pf::RAII([] {
-      ImGui::PopItemFlag();
-      ImGui::PopStyleVar();
+    auto raiiEnabled = pf::RAII([this] {
+      if (getEnabled() == Enabled::No) {
+        ImGui::PopItemFlag();
+        ImGui::PopStyleVar();
+      }
     });
     setHovered(ImGui::IsWindowHovered());
 
