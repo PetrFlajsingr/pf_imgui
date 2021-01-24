@@ -5,7 +5,6 @@
 #include "MenuBars.h"
 #include <algorithm>
 #include <imgui.h>
-#include <pf_common/Visitor.h>
 #include <utility>
 
 namespace pf::ui::ig {
