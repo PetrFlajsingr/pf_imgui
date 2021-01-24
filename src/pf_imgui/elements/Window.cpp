@@ -19,17 +19,19 @@ void Window::renderImpl() {
   ImGui::Begin(title.c_str(), nullptr, flags);
   ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
   ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-  auto raiiEnabled = pf::RAII([] {
-    ImGui::PopItemFlag();
-    ImGui::PopStyleVar();
-  });
-  setHovered(ImGui::IsWindowHovered());
+  {
+    auto raiiEnabled = pf::RAII([] {
+      ImGui::PopItemFlag();
+      ImGui::PopStyleVar();
+    });
+    setHovered(ImGui::IsWindowHovered());
 
-  setCollapsedWithoutDemandingCollapseChange(ImGui::IsWindowCollapsed());
-  setFocusedWithoutDemandingFocusChange(ImGui::IsWindowFocused());
-  if (!isCollapsed()) {
-    if (hasMenuBar()) { menuBar->render(); }
-    std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
+    setCollapsedWithoutDemandingCollapseChange(ImGui::IsWindowCollapsed());
+    setFocusedWithoutDemandingFocusChange(ImGui::IsWindowFocused());
+    if (!isCollapsed()) {
+      if (hasMenuBar()) { menuBar->render(); }
+      std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
+    }
   }
   ImGui::End();
 }
@@ -64,9 +66,7 @@ void Window::setFocus_impl() { ImGui::SetWindowFocus(getTitle().c_str()); }
 void Window::collapse_impl(bool collapse) { ImGui::SetWindowCollapsed(getTitle().c_str(), collapse); }
 
 void Window::render() {
-  if (getVisibility() == Visibility::Visible) {
-      renderImpl();
-  }
+  if (getVisibility() == Visibility::Visible) { renderImpl(); }
 }
 const std::string &Window::getName() const { return name; }
 
