@@ -31,19 +31,11 @@ class PF_IMGUI_EXPORT BoxLayout : public Layout {
     return children | ranges::views::transform([](auto &child) -> Element & { return *child; });
   }
 
-  void pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
+  void pushChild(std::unique_ptr<Element> child);
 
-  void insertChild(std::unique_ptr<Element> child, std::size_t index) {
-    if (index > children.size()) { throw StackTraceException::fmt("Index out of bounds: {}", index); }
-    children.insert(children.begin() + index, std::move(child));
-  }
+  void insertChild(std::unique_ptr<Element> child, std::size_t index);
 
-  void removeChild(const std::string &name) {
-    if (auto iter = std::ranges::find_if(children, [name](const auto &child) { return child->getName() == name; });
-        iter != children.end()) {
-      children.erase(iter);
-    }
-  }
+  void removeChild(const std::string &name);
 
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &

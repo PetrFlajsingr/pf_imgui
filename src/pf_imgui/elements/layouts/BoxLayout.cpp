@@ -42,4 +42,18 @@ void BoxLayout::renderLeftToRight() {
   }
 }
 
+void BoxLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
+
+void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
+  if (index > children.size()) { throw StackTraceException::fmt("Index out of bounds: {}", index); }
+  children.insert(children.begin() + index, std::move(child));
+}
+
+void BoxLayout::removeChild(const std::string &name) {
+  if (auto iter = std::ranges::find_if(children, [name](const auto &child) { return child->getName() == name; });
+      iter != children.end()) {
+    children.erase(iter);
+  }
+}
+
 }// namespace pf::ui::ig
