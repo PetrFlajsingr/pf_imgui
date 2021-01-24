@@ -16,7 +16,7 @@ LayoutDirection BoxLayout::getLayoutDirection() const { return layoutDirection; 
 void BoxLayout::setLayoutDirection(LayoutDirection newLayoutDirection) { layoutDirection = newLayoutDirection; }
 
 void BoxLayout::renderImpl() {
-  ImGui::BeginChild(getName().c_str(), getSize(), isShowBorder());
+  ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder());
   switch (layoutDirection) {
     case LayoutDirection::LeftToRight: renderLeftToRight(); break;
     case LayoutDirection::TopToBottom: renderTopToBottom(); break;

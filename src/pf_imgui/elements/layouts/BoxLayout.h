@@ -9,6 +9,7 @@
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_common/enums.h>
+#include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Resizable.h>
 #include <range/v3/view/addressof.hpp>
