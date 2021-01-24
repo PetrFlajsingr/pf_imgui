@@ -6,7 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
 
 #include "../fwd.h"
-#include "Panel.h"
+#include "layouts/BoxLayout.h"
 #include "interface/Labellable.h"
 #include <memory>
 #include <optional>
@@ -42,8 +42,8 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
   void rebuildPanel();
   void removeRecordsAboveLimit();
 
-  std::unique_ptr<Panel> controlsPanel = nullptr;
-  Panel textAreaPanel;
+  std::unique_ptr<BoxLayout> controlsLayout = nullptr;
+  BoxLayout textAreaLayout;
   bool buttonsEnabled;
   bool filterEnabled;
   bool rebuild = true;

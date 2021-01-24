@@ -5,11 +5,12 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TOOLTIP_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TOOLTIP_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Container.h>
 
 namespace pf::ui::ig {
 
-class Tooltip : public Element, public Container {
+class PF_IMGUI_EXPORT Tooltip : public Element, public Container {
  public:
   explicit Tooltip(const std::string &elementName);
 

@@ -35,8 +35,22 @@ class PF_IMGUI_EXPORT Container {
     addChild(std::move(child));
     return *ptr;
   }
+
+  template<typename T, typename... Args>
+  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &
+  createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
+    if (const auto iter = children.find(name); iter != children.end()) {
+      throw StackTraceException::fmt("{} already present in ui", name);
+    }
+    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    insertChild(std::move(child), index);
+    return *ptr;
+  }
+
   void removeChild(const std::string &name);
   void addChild(std::unique_ptr<Element> child);
+  void insertChild(std::unique_ptr<Element> child, std::size_t index);
 
   void enqueueChildRemoval(const std::string &name);
 

@@ -9,11 +9,12 @@
 #include <functional>
 #include <pf_common/Subscription.h>
 #include <pf_common/coroutines/Sequence.h>
+#include <pf_imgui/_export.h>
 #include <unordered_map>
 
 namespace pf::ui::ig {
 
-class Clickable {
+class PF_IMGUI_EXPORT Clickable {
  public:
   Subscription addClickListener(std::invocable auto fnc) { return observableImpl.template addListener(fnc); }
 

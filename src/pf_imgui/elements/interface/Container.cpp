@@ -23,6 +23,12 @@ void Container::addChild(std::unique_ptr<Element> child) {
   children[child->getName()] = std::move(child);
 }
 
+void Container::insertChild(std::unique_ptr<Element> child, std::size_t index) {
+  if (index > childrenInOrder.size()) { throw StackTraceException::fmt("Index out of bounds: {}", index); }
+  childrenInOrder.insert(childrenInOrder.begin() + index, *child);
+  children[child->getName()] = std::move(child);
+}
+
 void Container::removeChild(const std::string &name) {
   if (const auto iter = children.find(name); iter != children.end()) {
     auto ptr = iter->second.get();
@@ -31,6 +37,7 @@ void Container::removeChild(const std::string &name) {
     children.erase(iter);
   }
 }
+
 void Container::enqueueChildRemoval(const std::string &name) { childrenToRemove.emplace_back(name); }
 
 void Container::clear() {

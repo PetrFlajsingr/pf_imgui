@@ -10,11 +10,12 @@
 #include "Focusable.h"
 #include "Hoverable.h"
 #include <memory>
+#include <pf_imgui/_export.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class ItemElement : public Element, public Focusable, public Hoverable {
+class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hoverable {
  public:
   explicit ItemElement(const std::string &elementName);
 

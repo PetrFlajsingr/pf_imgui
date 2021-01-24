@@ -21,7 +21,7 @@ enum class Persistent { Yes, No };
 
 enum class ColorChooserType { Edit, Picker };
 
-enum class PanelLayout { Vertical, Horizontal };
+enum class LayoutDirection { LeftToRight, TopToBottom };
 
 enum class FileType { File, Directory };
 

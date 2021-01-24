@@ -6,9 +6,10 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H
 
 #include "Observable_impl.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class Hoverable {
+class PF_IMGUI_EXPORT Hoverable {
  public:
   Subscription addHoverListener(std::invocable<bool> auto fnc) { return observableImpl.template addListener(fnc); }
 

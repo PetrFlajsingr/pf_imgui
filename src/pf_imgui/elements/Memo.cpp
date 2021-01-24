@@ -13,7 +13,7 @@ namespace pf::ui::ig {
 Memo::Memo(const std::string &elementName, const std::string &label, float textAHeight, bool buttonsEnabled,
            bool filterEnabled, const std::optional<std::size_t> &recordLimit)
     : Element(elementName), Labellable(label),
-      textAreaPanel(elementName + "_memo_panel###", getLabel(), PanelLayout::Vertical, ImVec2{0, textAHeight}),
+      textAreaLayout(elementName + "_memo_panel###", LayoutDirection::LeftToRight, ImVec2{0, textAHeight}),
       buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {}
 
 void Memo::renderImpl() {
@@ -21,9 +21,9 @@ void Memo::renderImpl() {
   removeRecordsAboveLimit();
   textArea->setText(getText());
   ImGui::Text("%s", getLabel().c_str());
-  if (controlsPanel != nullptr) { controlsPanel->render(); }
+  if (controlsLayout != nullptr) { controlsLayout->render(); }
   ImGui::Separator();
-  textAreaPanel.render();
+  textAreaLayout.render();
   ImGui::Separator();
 }
 
@@ -44,16 +44,18 @@ void Memo::clearRecords() { records.clear(); }
 
 void Memo::rebuildPanel() {
   if (buttonsEnabled || filterEnabled) {
-    controlsPanel = std::make_unique<Panel>(getName() + "button_filter_panel", getLabel() + " controls",
-                                            PanelLayout::Horizontal, ImVec2{0, 20});
+    controlsLayout =
+        std::make_unique<BoxLayout>(getName() + "button_filter_panel", LayoutDirection::TopToBottom, ImVec2{0, 20});
     if (buttonsEnabled) {
-      controlsPanel->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] { clearRecords(); });
-      controlsPanel->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
+      controlsLayout->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] {
+        clearRecords();
+      });
+      controlsLayout->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
         ImGui::SetClipboardText(getText().c_str());
       });
     }
     if (filterEnabled) {
-      controlsPanel->createChild<InputText>(getName() + "filter_input", "Filter")
+      controlsLayout->createChild<InputText>(getName() + "filter_input", "Filter")
           .addValueListener([this](std::string_view str) {
             const auto filterStr = std::string(str);
             filterFnc = [filterStr](std::string_view recordStr) {
@@ -62,7 +64,7 @@ void Memo::rebuildPanel() {
           });
     }
   }
-  textArea = &textAreaPanel.createChild<Text>(getName() + "memo_text", "Memo");
+  textArea = &textAreaLayout.createChild<Text>(getName() + "memo_text", "Memo");
   rebuild = false;
 }
 bool Memo::isButtonsEnabled() const { return buttonsEnabled; }

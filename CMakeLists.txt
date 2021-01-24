@@ -82,7 +82,6 @@ set(SOURCES
         src/pf_imgui/elements/ListBox.cpp
         src/pf_imgui/elements/Memo.cpp
         src/pf_imgui/elements/MenuBars.cpp
-        src/pf_imgui/elements/Panel.cpp
         src/pf_imgui/elements/plots/SimplePlot.cpp
         src/pf_imgui/elements/plots/Plot.cpp
         src/pf_imgui/elements/RadioButton.cpp
@@ -114,6 +113,8 @@ set(SOURCES
         src/pf_imgui/elements/interface/Hoverable.cpp
         src/pf_imgui/elements/interface/Collapsible.cpp
         src/pf_imgui/elements/interface/Renderable.cpp
+        src/pf_imgui/elements/layouts/Layout.cpp
+        src/pf_imgui/elements/layouts/BoxLayout.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
@@ -142,7 +143,6 @@ set(INCLUDES
         src/pf_imgui/elements/ListBox.h
         src/pf_imgui/elements/Memo.h
         src/pf_imgui/elements/MenuBars.h
-        src/pf_imgui/elements/Panel.h
         src/pf_imgui/elements/plots/SimplePlot.h
         src/pf_imgui/elements/plots/Plot.h
         src/pf_imgui/elements/ProgressBar.h
@@ -181,6 +181,9 @@ set(INCLUDES
         src/pf_imgui/elements/interface/Hoverable.h
         src/pf_imgui/elements/interface/Collapsible.h
         src/pf_imgui/elements/interface/Renderable.h
+        src/pf_imgui/elements/layouts/Layout.h
+        src/pf_imgui/elements/layouts/BoxLayout.h
+        src/pf_imgui/elements/layouts/layouts.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h
