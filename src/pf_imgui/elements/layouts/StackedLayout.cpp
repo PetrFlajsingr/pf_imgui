@@ -7,6 +7,9 @@
 
 namespace pf::ui::ig {
 
+StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, bool showBorder)
+    : Layout(elementName, size, showBorder) {}
+
 void StackedLayout::renderImpl() {
   ImGui::BeginChild(getName().c_str(), getSize(), false);
   if (selectedIndex.has_value()) {
@@ -31,7 +34,6 @@ std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
 void StackedLayout::setIndex(std::size_t index) { selectedIndex = index; }
 
 StackedLayout::StackContainer &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
-
 StackedLayout::StackContainer &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
 
 }// namespace pf::ui::ig

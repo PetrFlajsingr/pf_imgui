@@ -15,6 +15,7 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT StackedLayout : public Layout {
   struct StackContainer : public Container {};
  public:
+  StackedLayout(const std::string &elementName, const ImVec2 &size, bool showBorder = false);
   void pushStack();
   void removeStack(std::size_t index);
   void moveStack(std::size_t srcIndex, std::size_t dstIndex);
