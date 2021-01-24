@@ -57,7 +57,7 @@ CPMAddPackage(
 )
 
 include_directories(src/include/implot)
-include_directories(src/include/imgui_old)
+include_directories(src/include/imgui)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -118,9 +118,9 @@ set(SOURCES
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
         src/include/implot/implot.cpp
-        src/include/imgui_old/imgui.cpp
-        src/include/imgui_old/imgui_widgets.cpp
-        src/include/imgui_old/imgui_draw.cpp
+        src/include/imgui/imgui.cpp
+        src/include/imgui/imgui_widgets.cpp
+        src/include/imgui/imgui_draw.cpp
         )
 
 set(INCLUDES
@@ -187,12 +187,12 @@ set(INCLUDES
         src/pf_imgui/styles/dark.h
         src/include/implot/implot.h
         src/include/implot/implot_internal.h
-        src/include/imgui_old/imgui.h
-        src/include/imgui_old/imgui_internal.h
-        src/include/imgui_old/imconfig.h
-        src/include/imgui_old/imstb_rectpack.h
-        src/include/imgui_old/imstb_textedit.h
-        src/include/imgui_old/imstb_truetype.h
+        src/include/imgui/imgui.h
+        src/include/imgui/imgui_internal.h
+        src/include/imgui/imconfig.h
+        src/include/imgui/imstb_rectpack.h
+        src/include/imgui/imstb_textedit.h
+        src/include/imgui/imstb_truetype.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
