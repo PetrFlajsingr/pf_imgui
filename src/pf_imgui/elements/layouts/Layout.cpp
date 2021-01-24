@@ -6,6 +6,10 @@
 
 namespace pf::ui::ig {
 
-Layout::Layout(const std::string &elementName, const ImVec2 &size) : Element(elementName), Resizable(size) {}
+Layout::Layout(const std::string &elementName, const ImVec2 &size, bool showBorder)
+    : Element(elementName), Resizable(size), drawBorder(showBorder) {}
+
+bool Layout::isDrawBorder() const { return drawBorder; }
+void Layout::setDrawBorder(bool showBorder) { drawBorder = showBorder; }
 
 }// namespace pf::ui::ig

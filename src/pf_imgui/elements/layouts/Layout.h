@@ -6,7 +6,6 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Container.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Resizable.h>
 
@@ -14,9 +13,13 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Layout : public Element, public Resizable {
  public:
-  Layout(const std::string &elementName, const ImVec2 &size);
+  Layout(const std::string &elementName, const ImVec2 &size, bool showBorder);
+
+  [[nodiscard]] bool isDrawBorder() const;
+  void setDrawBorder(bool drawBorder);
 
  private:
+  bool drawBorder;
 };
 
 }// namespace pf::ui::ig

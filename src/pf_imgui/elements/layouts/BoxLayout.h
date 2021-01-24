@@ -24,9 +24,6 @@ class PF_IMGUI_EXPORT BoxLayout : public Layout {
   [[nodiscard]] LayoutDirection getLayoutDirection() const;
   void setLayoutDirection(LayoutDirection layoutDirection);
 
-  [[nodiscard]] bool isShowBorder() const;
-  void setShowBorder(bool showBorder);
-
   inline auto getChildren() {
     return children | ranges::views::transform([](auto &child) -> Element & { return *child; });
   }
@@ -70,7 +67,6 @@ class PF_IMGUI_EXPORT BoxLayout : public Layout {
 
  private:
   LayoutDirection layoutDirection;
-  bool showBorder;
   std::vector<std::unique_ptr<Element>> children;
 
   void renderTopToBottom();

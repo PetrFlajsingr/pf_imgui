@@ -10,13 +10,13 @@ namespace pf::ui::ig {
 
 BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
                      bool showBorder)
-    : Layout(elementName, size), layoutDirection(layoutDirection), showBorder(showBorder) {}
+    : Layout(elementName, size, showBorder), layoutDirection(layoutDirection) {}
 
 LayoutDirection BoxLayout::getLayoutDirection() const { return layoutDirection; }
 void BoxLayout::setLayoutDirection(LayoutDirection newLayoutDirection) { layoutDirection = newLayoutDirection; }
 
 void BoxLayout::renderImpl() {
-  ImGui::BeginChild(getName().c_str(), getSize(), showBorder);
+  ImGui::BeginChild(getName().c_str(), getSize(), isShowBorder());
   switch (layoutDirection) {
     case LayoutDirection::LeftToRight: renderLeftToRight(); break;
     case LayoutDirection::TopToBottom: renderTopToBottom(); break;
@@ -24,9 +24,6 @@ void BoxLayout::renderImpl() {
   ImGui::EndChild();
 }
 
-bool BoxLayout::isShowBorder() const { return showBorder; }
-
-void BoxLayout::setShowBorder(bool border) { showBorder = border; }
 void BoxLayout::renderTopToBottom() {
   std::ranges::for_each(children, [&](auto &child) { child->render(); });
 }
