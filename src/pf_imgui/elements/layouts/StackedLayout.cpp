@@ -11,7 +11,7 @@ StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size,
     : Layout(elementName, size, showBorder) {}
 
 void StackedLayout::renderImpl() {
-  ImGui::BeginChild(getName().c_str(), getSize(), false);
+  ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder());
   if (selectedIndex.has_value()) {
     auto &activeStack = stacks[*selectedIndex];
     std::ranges::for_each(activeStack.getChildren(), [](auto &child) { child.render(); });
