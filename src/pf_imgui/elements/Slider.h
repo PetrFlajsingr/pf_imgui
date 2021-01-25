@@ -68,38 +68,40 @@ class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public Val
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservable<T>::getValue();
+    auto valueChanged = false;
     if constexpr (std::same_as<T, float>) {
-      ImGui::SliderFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, format.c_str());
+      valueChanged =
+          ImGui::SliderFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
-                          format.c_str());
+      valueChanged = ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
+                                         min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
-                          format.c_str());
+      valueChanged = ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
+                                         min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
-                          format.c_str());
+      valueChanged = ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
+                                         min, max, format.c_str());
     }
     if constexpr (std::same_as<T, int>) {
-      ImGui::SliderInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, format.c_str());
+      valueChanged =
+          ImGui::SliderInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
-                        format.c_str());
+      valueChanged = ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min,
+                                       max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
-                        format.c_str());
+      valueChanged = ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min,
+                                       max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min, max,
-                        format.c_str());
+      valueChanged = ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), min,
+                                       max, format.c_str());
     }
-    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
+    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
 
  private:
