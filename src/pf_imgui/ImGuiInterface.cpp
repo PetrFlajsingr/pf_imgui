@@ -73,10 +73,6 @@ bool ImGuiInterface::isWindowHovered() const { return io.WantCaptureMouse; }
 
 bool ImGuiInterface::isKeyboardCaptured() const { return io.WantCaptureKeyboard; }
 
-ImVec2 ImGuiInterface::getCursorPosition() const { return ImGui::GetCursorScreenPos(); }
-
-void ImGuiInterface::setCursorPosition(const ImVec2 &position) { ImGui::SetCursorScreenPos(position); }
-
 Window &ImGuiInterface::createWindow(const std::string &windowName, std::string title) {
   windows.emplace_back(std::make_unique<Window>(windowName, std::move(title)));
   return *windows.back();

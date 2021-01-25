@@ -46,8 +46,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
 
   [[nodiscard]] bool isKeyboardCaptured() const;
 
-  [[nodiscard]] ImVec2 getCursorPosition() const;
-  void setCursorPosition(const ImVec2 &position);
 
   void updateConfig();
   void setStateFromConfig();
