@@ -21,7 +21,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   AbsoluteLayout(const std::string &elementName, const ImVec2 &size, bool showBorder = false);
 
   inline auto getChildren() {
-    return children | ranges::views::transform([](auto &child) -> Element & { return *child; });
+    return children | ranges::views::transform([](auto &child) -> Element & { return *child.first; });
   }
 
   template<typename T, typename... Args>
