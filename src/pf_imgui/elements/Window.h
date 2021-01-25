@@ -13,6 +13,7 @@
 #include <pf_imgui/elements/interface/Collapsible.h>
 #include <pf_imgui/elements/interface/Focusable.h>
 #include <pf_imgui/elements/interface/Hoverable.h>
+#include <pf_imgui/elements/interface/Positionable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -22,7 +23,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public Focusable,
                                public Hoverable,
                                public Collapsible,
-                               public Resizable {
+                               public Resizable,
+                               public Positionable {
  public:
   Window(std::string elementName, std::string title);
 
@@ -33,25 +35,26 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   [[nodiscard]] bool hasMenuBar() const;
   void removeMenuBar();
 
-  [[nodiscard]] const ImVec2 &getPosition() const;
-  void setPosition(const ImVec2 &position);
-
   void setSize(const ImVec2 &size) override;
 
   void render() override;
 
   [[nodiscard]] const std::string &getName() const;
 
+  void setFocus() override;
+
+  void setCollapsed(bool collapsed) override;
+
+  void setPosition(ImVec2 pos) override;
+
  protected:
   void renderImpl() override;
-  void setFocus_impl() override;
-  void collapse_impl(bool collapse) override;
 
+ protected:
  private:
   std::string name;
   std::string title;
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
-  ImVec2 position;
 };
 
 }// namespace pf::ui::ig

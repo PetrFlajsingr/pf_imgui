@@ -29,7 +29,6 @@ void Group::renderImpl() {
   ImGui::EndGroup();
 }
 
-void Group::collapse_impl(bool) {}
 
 void Group::unserialize_impl(const toml::table &src) { setCollapsed(*src["collapsed"].value<bool>()); }
 

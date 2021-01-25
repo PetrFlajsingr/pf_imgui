@@ -14,19 +14,12 @@ class PF_IMGUI_EXPORT Focusable {
   Subscription addFocusListener(std::invocable<bool> auto fnc) { return observableImpl.template addListener(fnc); }
 
   [[nodiscard]] bool isFocused() const;
-  void setFocused(bool newFocused) {
-    if (newFocused != focused) {
-      focused = newFocused;
-      notifyFocusChanged(focused);
-      if (focused) { setFocus_impl(); }
-    }
-  }
+  virtual void setFocus();
 
   virtual ~Focusable() = default;
 
  protected:
-  virtual void setFocus_impl() = 0;
-  void setFocusedWithoutDemandingFocusChange(bool newFocused);
+  void updateFocused(bool focus);
 
  private:
   void notifyFocusChanged(bool focused);

@@ -22,7 +22,7 @@ ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
 void ItemElement::render() {
   Element::render();
   setHovered(ImGui::IsItemHovered());
-  setFocusedWithoutDemandingFocusChange(ImGui::IsItemFocused());
+  updateFocused(ImGui::IsItemFocused());
   if (tooltip != nullptr) {
     if (getVisibility() == Visibility::Visible && isHovered()) { tooltip->render(); }
   }
@@ -40,6 +40,9 @@ Tooltip &ItemElement::createTooltip() {
   tooltip = std::make_unique<Tooltip>(getName() + "_tooltip");
   return *tooltip;
 }
-void ItemElement::setFocus_impl() { ImGui::SetKeyboardFocusHere(); }
+void ItemElement::setFocus() {
+  ImGui::SetKeyboardFocusHere();
+  Focusable::setFocus();
+}
 
 }// namespace pf::ui::ig

@@ -21,8 +21,6 @@ class PF_IMGUI_EXPORT Group : public ItemElement, public Container, public Label
 
  protected:
   void renderImpl() override;
-  void collapse_impl(bool) override;
-
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
 

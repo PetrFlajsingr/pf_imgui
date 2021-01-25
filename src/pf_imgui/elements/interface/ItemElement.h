@@ -29,8 +29,7 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
   void setTooltip(std::string_view text);
   [[nodiscard]] Tooltip &createTooltip();
 
- protected:
-  void setFocus_impl() override;
+  void setFocus() override;
 
  private:
   std::unique_ptr<Tooltip> tooltip = nullptr;

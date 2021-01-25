@@ -12,7 +12,7 @@
 namespace pf::ui::ig {
 
 Window::Window(std::string elementName, std::string title)
-    : Resizable(ImVec2(0, 0)), name(std::move(elementName)), title(std::move(title)) {}
+    : Resizable(ImVec2(0, 0)), Positionable(ImVec2{}), name(std::move(elementName)), title(std::move(title)) {}
 
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
@@ -29,9 +29,9 @@ void Window::renderImpl() {
         }
       });
       setHovered(ImGui::IsWindowHovered());
-
-      setCollapsedWithoutDemandingCollapseChange(ImGui::IsWindowCollapsed());
-      setFocusedWithoutDemandingFocusChange(ImGui::IsWindowFocused());
+      Collapsible::setCollapsed(ImGui::IsWindowCollapsed());
+      updateFocused(ImGui::IsWindowFocused());
+      updatePosition(ImGui::GetWindowPos());
       if (!isCollapsed()) {
         if (hasMenuBar()) { menuBar->render(); }
         std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
@@ -54,25 +54,27 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 
 void Window::removeMenuBar() { menuBar = nullptr; }
 
-const ImVec2 &Window::getPosition() const { return position; }
-
-void Window::setPosition(const ImVec2 &newPosition) {
-  position = newPosition;
-  ImGui::SetWindowPos(getTitle().c_str(), position);
-}
-
 void Window::setSize(const ImVec2 &newSize) {
   Resizable::setSize(newSize);
   ImGui::SetWindowSize(getTitle().c_str(), getSize());
 }
 
-void Window::setFocus_impl() { ImGui::SetWindowFocus(getTitle().c_str()); }
-
-void Window::collapse_impl(bool collapse) { ImGui::SetWindowCollapsed(getTitle().c_str(), collapse); }
-
 void Window::render() {
   if (getVisibility() == Visibility::Visible) { renderImpl(); }
 }
 const std::string &Window::getName() const { return name; }
+
+void Window::setCollapsed(bool collapsed) {
+  ImGui::SetWindowCollapsed(getTitle().c_str(), collapsed);
+  Collapsible::setCollapsed(collapsed);
+}
+void Window::setFocus() {
+  ImGui::SetWindowFocus(getTitle().c_str());
+  Focusable::setFocus();
+}
+void Window::setPosition(ImVec2 pos) {
+  ImGui::SetWindowPos(getName().c_str(), pos);
+  Positionable::setPosition(pos);
+}
 
 }// namespace pf::ui::ig
