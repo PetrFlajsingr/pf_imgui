@@ -3,7 +3,6 @@
 //
 
 #include "GridLayout.h"
-#include "AbsoluteLayout.h"
 
 namespace pf::ui::ig {
 GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
@@ -11,7 +10,7 @@ GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint3
     : Layout(elementName, size, showBorder), width(width), height(height) {}
 
 void GridLayout::renderImpl() {
-  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder())) {
+  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder(), ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
     const auto xCellSize = getSize().x / width;
     const auto yCellSize = getSize().y / height;
     for (uint32_t y = 0; y < height; ++y) {
