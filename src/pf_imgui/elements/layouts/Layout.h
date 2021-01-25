@@ -18,8 +18,12 @@ class PF_IMGUI_EXPORT Layout : public Element, public Resizable {
   [[nodiscard]] bool isDrawBorder() const;
   void setDrawBorder(bool drawBorder);
 
+  bool isScrollable() const;
+  void setScrollable(bool scrollable);
+
  private:
   bool drawBorder;
+  bool scrollable = false;
 };
 
 }// namespace pf::ui::ig

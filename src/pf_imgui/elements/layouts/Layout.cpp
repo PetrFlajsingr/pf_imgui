@@ -12,4 +12,8 @@ Layout::Layout(const std::string &elementName, const ImVec2 &size, bool showBord
 bool Layout::isDrawBorder() const { return drawBorder; }
 void Layout::setDrawBorder(bool showBorder) { drawBorder = showBorder; }
 
+bool Layout::isScrollable() const { return scrollable; }
+
+void Layout::setScrollable(bool scroll) { scrollable = scroll; }
+
 }// namespace pf::ui::ig

@@ -10,7 +10,9 @@ AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &siz
     : Layout(elementName, size, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
-  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder()) ) {
+  const auto flags =
+      isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder(), flags)) {
     std::ranges::for_each(children, [](auto &childPair) {
       auto &[child, positionable] = childPair;
       [[maybe_unused]] auto hihi = positionable->getPosition();

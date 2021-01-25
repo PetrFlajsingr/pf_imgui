@@ -16,7 +16,9 @@ LayoutDirection BoxLayout::getLayoutDirection() const { return layoutDirection; 
 void BoxLayout::setLayoutDirection(LayoutDirection newLayoutDirection) { layoutDirection = newLayoutDirection; }
 
 void BoxLayout::renderImpl() {
-  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder())) {
+  const auto flags =
+      isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder(), flags)) {
     switch (layoutDirection) {
       case LayoutDirection::LeftToRight: renderLeftToRight(); break;
       case LayoutDirection::TopToBottom: renderTopToBottom(); break;
