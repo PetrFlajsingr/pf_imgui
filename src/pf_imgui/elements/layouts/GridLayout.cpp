@@ -11,7 +11,7 @@ GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint3
                        bool showBorder)
     : ResizableLayout(elementName, size, showBorder), width(width), height(height) {
   const auto cellCount = width * height;
-  cells.reserve(cellCount);
+  cells.resize(cellCount, nullptr);
 }
 
 void GridLayout::setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout) {
