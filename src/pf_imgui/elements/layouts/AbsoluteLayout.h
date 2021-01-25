@@ -21,8 +21,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   AbsoluteLayout(const std::string &elementName, const ImVec2 &size, bool showBorder = false);
 
   inline auto getChildren() {
-    //return children | ranges::views::transform([](auto &child) -> Element & { return *child.first; });
-    return children | ranges::views::transform([](auto &child) -> Positionable & { return *child; });
+    return children | ranges::views::transform([](auto &child) -> Element & { return *child.first; });
   }
 
   template<typename T, typename... Args>
@@ -35,8 +34,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
     }
     auto child = std::make_unique<PositionDecorator<T>>(position, name, std::forward<Args>(args)...);
     const auto ptr = child.get();
-    //children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
-    children.template emplace_back(std::move(child));
+    children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
     return *ptr;
   }
 
@@ -48,8 +46,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   void renderImpl() override;
 
  private:
-  //std::vector<std::pair<std::unique_ptr<Element>, Positionable *>> children;
-  std::vector<std::unique_ptr<Positionable>> children;
+  std::vector<std::pair<std::unique_ptr<Element>, Positionable *>> children;
 };
 }// namespace pf::ui::ig
 
