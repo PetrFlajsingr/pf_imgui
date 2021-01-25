@@ -7,7 +7,6 @@
 
 #include <concepts>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Anchorable.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Positionable.h>
 #include <pf_imgui/elements/interface/Resizable.h>
@@ -21,16 +20,6 @@ class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
   template<typename... Args>
   requires std::constructible_from<T, Args...> explicit PositionDecorator(ImVec2 pos, Args &&...args)
       : T(std::forward<Args>(args)...), Positionable(pos) {}
-};
-
-template<std::derived_from<Element> T>
-class PF_IMGUI_EXPORT AnchorDecorator : public T, public Anchorable {
- public:
-  template<typename... Args>
-  requires std::constructible_from<T, Args...> explicit AnchorDecorator(Anchor anchor, Args &&...args)
-      : T(std::forward<Args>(args)...), Anchorable(anchor) {}
-
- private:
 };
 
 }// namespace pf::ui::ig

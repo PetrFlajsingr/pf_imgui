@@ -14,6 +14,10 @@
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT GridLayout : public Layout {
  public:
+  GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height, bool showBorder = false);
+
+ protected:
+  void renderImpl() override;
 
  private:
   uint32_t width;

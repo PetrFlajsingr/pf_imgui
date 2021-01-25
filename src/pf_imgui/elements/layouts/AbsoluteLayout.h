@@ -13,6 +13,7 @@
 #include <pf_imgui/elements/interface/Positionable.h>
 #include <range/v3/view/transform.hpp>
 #include <vector>
+#include <string>
 
 namespace pf::ui::ig {
 

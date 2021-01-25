@@ -10,14 +10,14 @@ AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &siz
     : Layout(elementName, size, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
-  ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder());
-  std::ranges::for_each(children, [](auto &childPair) {
-    auto &[child, positionable] = childPair;
-    [[maybe_unused]] auto hihi = positionable->getPosition();
-    ImGui::SetCursorPos(positionable->getPosition());
-    child->render();
-  });
-
+  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder()) ) {
+    std::ranges::for_each(children, [](auto &childPair) {
+      auto &[child, positionable] = childPair;
+      [[maybe_unused]] auto hihi = positionable->getPosition();
+      ImGui::SetCursorPos(positionable->getPosition());
+      child->render();
+    });
+  }
   ImGui::EndChild();
 }
 void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) {
