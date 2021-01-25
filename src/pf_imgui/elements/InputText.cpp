@@ -16,12 +16,13 @@ InputText::InputText(const std::string &elementName, std::string label, const st
 }
 
 void InputText::renderImpl() {
+  auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
-    ImGui::InputText(getLabel().c_str(), buffer, 256);
+    valueChanged = ImGui::InputText(getLabel().c_str(), buffer, 256);
   } else {
-    ImGui::InputTextMultiline(getLabel().c_str(), buffer, 256);
+    valueChanged = ImGui::InputTextMultiline(getLabel().c_str(), buffer, 256);
   }
-  if (strcmp(buffer, getText().c_str()) != 0) {
+  if (valueChanged && strcmp(buffer, getText().c_str()) != 0) {
     setText(buffer);
     setValue(getText());
     notifyValueChanged();
