@@ -25,14 +25,16 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   }
 
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> PositionDecorator<T> &
+  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> auto &
   createChild(std::string name, ImVec2 position, Args &&...args) {
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {
       throw StackTraceException::fmt("{} already present in ui", name);
     }
-    auto child = std::make_unique<PositionDecorator<T>>(position, name, std::forward<Args>(args)...);
+    constexpr auto IsPositionable = std::derived_from<T, Positionable>;
+    using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
+    auto child = std::make_unique<CreateType>(position, name, std::forward<Args>(args)...);
     const auto ptr = child.get();
     children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
     return *ptr;
