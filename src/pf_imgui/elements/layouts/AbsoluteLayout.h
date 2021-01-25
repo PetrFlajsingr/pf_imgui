@@ -34,11 +34,13 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
     }
     auto child = std::make_unique<PositionDecorator<T>>(position, name, std::forward<Args>(args)...);
     const auto ptr = child.get();
-    pushChild(std::move(child));
+    children.template emplace_back(std::move(child));
     return *ptr;
   }
 
   void setChildPosition(const std::string &name, ImVec2 position);
+
+  void removeChild(const std::string &name);
 
  protected:
   void renderImpl() override;

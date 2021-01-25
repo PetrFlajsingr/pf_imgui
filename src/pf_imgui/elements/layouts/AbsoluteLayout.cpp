@@ -29,4 +29,10 @@ void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) 
     throw StackTraceException::fmt("Child not found: {}", name);
   }
 }
+void AbsoluteLayout::removeChild(const std::string &name) {
+  if (auto iter = std::ranges::find_if(children, [name](const auto &child) { return child->getName() == name; });
+      iter != children.end()) {
+    children.erase(iter);
+  }
+}
 }// namespace pf::ui::ig
