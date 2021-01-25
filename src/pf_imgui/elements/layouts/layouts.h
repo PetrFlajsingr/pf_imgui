@@ -8,6 +8,7 @@
 #include "BoxLayout.h"
 #include "StackedLayout.h"
 #include "GridLayout.h"
-#include "Layout.h"
+#include "AbsoluteLayout.h"
+#include "AnchorLayout.h"
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUTS_H
