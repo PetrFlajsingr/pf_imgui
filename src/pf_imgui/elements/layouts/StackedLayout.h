@@ -5,14 +5,14 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STACKEDLAYOUT_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STACKEDLAYOUT_H
 
-#include "Layout.h"
+#include "ResizableLayout.h"
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Container.h>
 #include <vector>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT StackedLayout : public Layout {
+class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
   struct StackContainer : public Container {};
 
  public:

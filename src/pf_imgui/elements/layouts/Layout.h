@@ -1,5 +1,5 @@
 //
-// Created by petr on 1/24/21.
+// Created by petr on 1/25/21.
 //
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H
@@ -11,14 +11,14 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Layout : public Element, public Resizable {
+class PF_IMGUI_EXPORT Layout : public Element {
  public:
-  Layout(const std::string &elementName, const ImVec2 &size, bool showBorder);
+  Layout(const std::string &elementName, bool showBorder);
 
   [[nodiscard]] bool isDrawBorder() const;
   void setDrawBorder(bool drawBorder);
 
-  bool isScrollable() const;
+  [[nodiscard]] bool isScrollable() const;
   void setScrollable(bool scrollable);
 
  private:
@@ -27,4 +27,5 @@ class PF_IMGUI_EXPORT Layout : public Element, public Resizable {
 };
 
 }// namespace pf::ui::ig
+
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H

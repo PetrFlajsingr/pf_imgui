@@ -15,7 +15,7 @@ class Labellable;
 class Resizable;
 class Savable;
 
-class Layout;
+class ResizableLayout;
 
 class BoxLayout;
 

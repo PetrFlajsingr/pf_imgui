@@ -6,7 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_ABSOLUTELAYOUT_H
 
 #include "BoxLayout.h"
-#include "Layout.h"
+#include "ResizableLayout.h"
 #include "layout_decorators.h"
 #include <memory>
 #include <pf_imgui/_export.h>
@@ -17,7 +17,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
+class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
  public:
   AbsoluteLayout(const std::string &elementName, const ImVec2 &size, bool showBorder = false);
 

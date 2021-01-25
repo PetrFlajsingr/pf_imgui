@@ -7,7 +7,7 @@
 namespace pf::ui::ig {
 
 AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, bool showBorder)
-    : Layout(elementName, size, showBorder) {}
+    : ResizableLayout(elementName, size, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
   const auto flags =

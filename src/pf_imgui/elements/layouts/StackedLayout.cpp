@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, bool showBorder)
-    : Layout(elementName, size, showBorder) {}
+    : ResizableLayout(elementName, size, showBorder) {}
 
 void StackedLayout::renderImpl() {
   const auto flags =

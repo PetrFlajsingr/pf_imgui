@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_GRIDLAYOUT_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_GRIDLAYOUT_H
 
-#include "Layout.h"
+#include "ResizableLayout.h"
 #include <algorithm>
 #include <concepts>
 #include <memory>
@@ -14,14 +14,14 @@
 #include <vector>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT GridLayout : public Layout {
+class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
  public:
   GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
              bool showBorder = false);
 
-  void setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<Layout> layout);
+  void setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout);
 
-  [[nodiscard]] Layout &getCellLayout(uint32_t column, uint32_t row);
+  [[nodiscard]] ResizableLayout &getCellLayout(uint32_t column, uint32_t row);
 
  protected:
   void renderImpl() override;
@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT GridLayout : public Layout {
  private:
   uint32_t width;
   uint32_t height;
-  std::vector<std::unique_ptr<Layout>> cells;
+  std::vector<std::unique_ptr<ResizableLayout>> cells;
 
   [[nodiscard]] uint32_t indexForCell(uint32_t column, uint32_t row) const;
 };

@@ -10,7 +10,7 @@ namespace pf::ui::ig {
 
 BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
                      bool showBorder)
-    : Layout(elementName, size, showBorder), layoutDirection(layoutDirection) {}
+    : ResizableLayout(elementName, size, showBorder), layoutDirection(layoutDirection) {}
 
 LayoutDirection BoxLayout::getLayoutDirection() const { return layoutDirection; }
 void BoxLayout::setLayoutDirection(LayoutDirection newLayoutDirection) { layoutDirection = newLayoutDirection; }

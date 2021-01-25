@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_BOXLAYOUT_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_BOXLAYOUT_H
 
-#include "Layout.h"
+#include "ResizableLayout.h"
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_common/enums.h>
@@ -17,7 +17,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT BoxLayout : public Layout {
+class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
  public:
   BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size = ImVec2{0, 0},
             bool showBorder = false);
