@@ -6,6 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUTS_H
 
 #include "AbsoluteLayout.h"
+#include "StretchLayout.h"
 #include "BoxLayout.h"
 #include "GridLayout.h"
 #include "StackedLayout.h"
