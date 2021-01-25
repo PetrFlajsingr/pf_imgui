@@ -8,10 +8,11 @@
 #include <concepts>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Resizable.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 template<typename T>
-requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class PositionDecorator : public T {
+requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class PF_IMGUI_EXPORT PositionDecorator : public T {
  public:
   template<typename... Args>
   requires std::constructible_from<T, Args...> PositionDecorator(ImVec2 pos, Args &&...args)
@@ -26,7 +27,7 @@ requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class P
 
 
 template<typename T>
-requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class AnchorDecorator : public PositionDecorator<T> {
+requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class PF_IMGUI_EXPORT AnchorDecorator : public PositionDecorator<T> {
  public:
   template<typename... Args>
   requires std::constructible_from<T, Args...> AnchorDecorator(Anchor anchor, Args &&...args)
