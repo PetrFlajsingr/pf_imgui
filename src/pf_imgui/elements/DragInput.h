@@ -80,46 +80,50 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>,
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservable<T>::getValue();
+    bool valueChanged = false;
     if constexpr (std::same_as<T, float>) {
-      ImGui::DragFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
-                        format.c_str());
+      valueChanged = ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
+                                       speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
-                        format.c_str());
+      valueChanged = ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
+                                       speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
-                        format.c_str());
+      valueChanged = ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
+                                       speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, int>) {
-      ImGui::DragInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
-                      format.c_str());
+      valueChanged = ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed,
+                                     min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
-                      format.c_str());
+      valueChanged = ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed,
+                                     min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed, min, max,
-                      format.c_str());
+      valueChanged = ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed,
+                                     min, max, format.c_str());
     }
     if constexpr (std::same_as<T, math::Range<int>>) {
-      ImGui::DragIntRange2(getLabel().c_str(), reinterpret_cast<int *>(ValueObservable<T>::getValueAddress()), speed,
-                           min, max, format.c_str());
+      valueChanged =
+          ImGui::DragIntRange2(getLabel().c_str(), reinterpret_cast<int *>(ValueObservable<T>::getValueAddress()),
+                               speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, math::Range<float>>) {
-      ImGui::DragFloatRange2(getLabel().c_str(), &ValueObservable<T>::getValueAddress()->start,
-                             &ValueObservable<T>::getValueAddress()->end, speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragFloatRange2(getLabel().c_str(), &ValueObservable<T>::getValueAddress()->start,
+                                 &ValueObservable<T>::getValueAddress()->end, speed, min, max, format.c_str());
     }
-    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
+    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
 
  private:
