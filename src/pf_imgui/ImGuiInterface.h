@@ -31,6 +31,12 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   Window &createWindow(const std::string &windowName, std::string title);
   void removeWindow(const std::string &name);
 
+  Window &windowByName(const std::string &name);
+
+  inline auto getWindows() {
+    return windows | ranges::views::transform([](auto &window) -> Window & { return *window; });
+  }
+
   [[nodiscard]] AppMenuBar &getMenuBar();
   [[nodiscard]] bool hasMenuBar() const;
 

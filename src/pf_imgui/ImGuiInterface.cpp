@@ -6,6 +6,8 @@
 #include "serialization.h"
 #include <imgui_internal.h>
 #include <implot.h>
+#include <pf_common/algorithms.h>
+#include <range/v3/view/addressof.hpp>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -84,6 +86,15 @@ void ImGuiInterface::removeWindow(const std::string &name) {
   if (auto iter = std::ranges::find_if(windows, [name](const auto &window) { return window->getName() == name; });
       iter != windows.end()) {
     windows.erase(iter);
+  }
+}
+Window &ImGuiInterface::windowByName(const std::string &name) {
+  if (auto window = findIf(getWindows() | ranges::views::addressof,
+                           [name](const auto &window) { return window->getName() == name; });
+      window.has_value()) {
+    return **window;
+  } else {
+    throw StackTraceException::fmt("Child not found: {}", name);
   }
 }
 void ImGuiInterface::renderImpl() {
