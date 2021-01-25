@@ -8,12 +8,13 @@
 #include <algorithm>
 #include <pf_common/Subscription.h>
 #include <pf_common/coroutines/Sequence.h>
+#include <pf_imgui/_export.h>
 #include <unordered_map>
 #include <utility>
 
 namespace pf::ui::ig {
 template<typename... Args>
-class Observable_impl {
+class PF_IMGUI_EXPORT Observable_impl {
  public:
   Observable_impl() = default;
   Observable_impl(Observable_impl &&other) noexcept

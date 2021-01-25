@@ -6,9 +6,10 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_FOCUSABLE_H
 
 #include "Observable_impl.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class Focusable {
+class PF_IMGUI_EXPORT Focusable {
  public:
   Subscription addFocusListener(std::invocable<bool> auto fnc) { return observableImpl.template addListener(fnc); }
 

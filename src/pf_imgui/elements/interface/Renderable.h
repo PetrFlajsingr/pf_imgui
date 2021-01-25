@@ -6,11 +6,12 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_RENDERABLE_H
 
 #include <pf_common/enums.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
 
 namespace pf::ui::ig {
 
-class Renderable {
+class PF_IMGUI_EXPORT Renderable {
  public:
   Renderable() = default;
   Renderable(Renderable &&other) noexcept;

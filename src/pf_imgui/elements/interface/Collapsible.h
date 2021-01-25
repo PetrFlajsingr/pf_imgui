@@ -6,9 +6,10 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_COLLAPSIBLE_H
 
 #include "Observable_impl.h"
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
-class Collapsible {
+class PF_IMGUI_EXPORT Collapsible {
  public:
   Subscription addCollapseListener(std::invocable<bool> auto listener) {
     return observableImpl.template addListener(listener);

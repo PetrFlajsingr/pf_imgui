@@ -19,7 +19,6 @@
 #include "elements/ListBox.h"
 #include "elements/Memo.h"
 #include "elements/MenuBars.h"
-#include "elements/Panel.h"
 #include "elements/ProgressBar.h"
 #include "elements/RadioButton.h"
 #include "elements/RadioGroup.h"
@@ -29,6 +28,7 @@
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/Window.h"
+#include "elements/layouts/layouts.h"
 #include "elements/plots.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

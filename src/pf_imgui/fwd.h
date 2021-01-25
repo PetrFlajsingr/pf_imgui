@@ -15,6 +15,10 @@ class Labellable;
 class Resizable;
 class Savable;
 
+class ResizableLayout;
+
+class BoxLayout;
+
 class Button;
 class Checkbox;
 class ComboBox;
@@ -30,7 +34,6 @@ class SubMenu;
 class WindowMenuBar;
 class AppMenuBar;
 class MenuBars;
-class Panel;
 class SimplePlot;
 class RadioButton;
 class Tab;

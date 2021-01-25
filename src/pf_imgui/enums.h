@@ -5,6 +5,9 @@
 #ifndef PF_IMGUI_ENUMS_H
 #define PF_IMGUI_ENUMS_H
 
+#include <cstdint>
+#include <type_traits>
+
 namespace pf::ui::ig {
 
 enum class Visibility { Visible, Invisible };
@@ -21,13 +24,55 @@ enum class Persistent { Yes, No };
 
 enum class ColorChooserType { Edit, Picker };
 
-enum class PanelLayout { Vertical, Horizontal };
+enum class LayoutDirection { LeftToRight, TopToBottom };
 
 enum class FileType { File, Directory };
 
 enum class IsButton { Yes, No };
 
 enum class AllowCollapse { Yes, No };
+
+enum class Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };
+
+inline Stretch operator|(Stretch lhs, Stretch rhs) {
+  using T = std::underlying_type_t<Stretch>;
+  return static_cast<Stretch>(static_cast<T>(lhs) | static_cast<T>(rhs));
+}
+inline Stretch &operator|=(Stretch &lhs, Stretch rhs) {
+  lhs = lhs | rhs;
+  return lhs;
+}
+inline bool is(Stretch self, Stretch other) {
+  using T = std::underlying_type_t<Stretch>;
+  return (static_cast<T>(self) & static_cast<T>(other)) != 0;
+}
+
+enum class Anchor : uint8_t {
+  Top = 0x1,
+  Left = 0x2,
+  Bottom = 0x4,
+  Right = 0x8,
+  TopLeft = 0x3,
+  TopRight = 0x5,
+  BottomLeft = 0x6,
+  BottomRight = 0xC,
+  TopBottomLeft = 0x7,
+  TopBottomRight = 0xD,
+  TopBottomLeftRight = 0xFF
+};
+
+inline Anchor operator|(Anchor lhs, Anchor rhs) {
+  using T = std::underlying_type_t<Anchor>;
+  return static_cast<Anchor>(static_cast<T>(lhs) | static_cast<T>(rhs));
+}
+inline Anchor &operator|=(Anchor &lhs, Anchor rhs) {
+  lhs = lhs | rhs;
+  return lhs;
+}
+inline bool is(Anchor self, Anchor other) {
+  using T = std::underlying_type_t<Anchor>;
+  return (static_cast<T>(self) & static_cast<T>(other)) != 0;
+}
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ENUMS_H
