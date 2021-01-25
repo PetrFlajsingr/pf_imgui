@@ -6,6 +6,8 @@
 
 namespace pf::ui::ig {
 
+Positionable::Positionable(const ImVec2 &position) : position(position) {}
+
 ImVec2 Positionable::getPosition() const { return position; }
 
 void Positionable::setPosition(ImVec2 pos) { position = pos; }

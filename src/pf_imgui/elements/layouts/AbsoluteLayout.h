@@ -7,6 +7,7 @@
 
 #include "BoxLayout.h"
 #include "Layout.h"
+#include "layout_decorators.h"
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Positionable.h>
@@ -21,6 +22,20 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
 
   inline auto getChildren() {
     return children | ranges::views::transform([](auto &child) -> Element & { return *child; });
+  }
+
+  template<typename T, typename... Args>
+  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> PositionDecorator<T> &
+  createChild(std::string name, ImVec2 position, Args &&...args) {
+    if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
+          return child->getName() == name;
+        }).has_value()) {
+      throw StackTraceException::fmt("{} already present in ui", name);
+    }
+    auto child = std::make_unique<PositionDecorator<T>>(position, name, std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    pushChild(std::move(child));
+    return *ptr;
   }
 
   void setChildPosition(const std::string &name, ImVec2 position);

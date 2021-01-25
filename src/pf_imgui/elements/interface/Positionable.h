@@ -10,8 +10,11 @@
 namespace pf::ui::ig {
 class Positionable {
  public:
+  explicit Positionable(const ImVec2 &position);
   [[nodiscard]] ImVec2 getPosition() const;
   void setPosition(ImVec2 pos);
+
+  virtual ~Positionable() = default;
 
  private:
   ImVec2 position;

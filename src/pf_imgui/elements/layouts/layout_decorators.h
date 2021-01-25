@@ -18,7 +18,7 @@ requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class P
  public:
   template<typename... Args>
   requires std::constructible_from<T, Args...> explicit PositionDecorator(ImVec2 pos, Args &&...args)
-      : T(std::forward<Args>(args)...), position(pos) {}
+      : T(std::forward<Args>(args)...), Positionable(pos) {}
 };
 
 template<typename T>
