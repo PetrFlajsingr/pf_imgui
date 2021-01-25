@@ -6,6 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_GRIDLAYOUT_H
 
 #include "Layout.h"
+#include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 
 // TODO: implement
