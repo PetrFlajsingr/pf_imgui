@@ -3,6 +3,7 @@
 //
 
 #include "SliderAngle.h"
+#include <imgui.h>
 
 namespace pf::ui::ig {
 

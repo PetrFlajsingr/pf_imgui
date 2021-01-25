@@ -5,7 +5,6 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_SLIDERANGLE_H
 #define PF_IMGUI_IMGUI_ELEMENTS_SLIDERANGLE_H
 
-#include "ColorChooser.h"
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
 #include "interface/Savable.h"

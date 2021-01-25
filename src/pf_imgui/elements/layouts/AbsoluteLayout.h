@@ -34,7 +34,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
     }
     auto child = std::make_unique<PositionDecorator<T>>(position, name, std::forward<Args>(args)...);
     const auto ptr = child.get();
-    children.template emplace_back(std::move(child));
+    children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
     return *ptr;
   }
 
@@ -46,12 +46,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   void renderImpl() override;
 
  private:
-  inline auto childrenWithPos() {
-    return children | ranges::views::transform([](auto &child) {
-             return std::make_pair(child.get(), reinterpret_cast<Positionable *>(child.get()));
-           });
-  }
-  std::vector<std::unique_ptr<Element>> children;
+  std::vector<std::pair<std::unique_ptr<Element>, Positionable *>> children;
 };
 }// namespace pf::ui::ig
 
