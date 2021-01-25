@@ -12,9 +12,7 @@ Checkbox::Checkbox(const std::string &elementName, const std::string &label, Per
     : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
 
 void Checkbox::renderImpl() {
-  const auto oldValue = getValue();
-  ImGui::Checkbox(getLabel().c_str(), getValueAddress());
-  if (getValue() != oldValue) { notifyValueChanged(); }
+  if (ImGui::Checkbox(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 
 void Checkbox::unserialize_impl(const toml::table &src) { setValueAndNotifyIfChanged(src["checked"].as_boolean()); }
