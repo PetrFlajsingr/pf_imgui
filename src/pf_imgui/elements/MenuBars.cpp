@@ -28,16 +28,18 @@ SubMenu::SubMenu(const std::string &elementName, const std::string &label) : Ele
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void WindowMenuBar::renderImpl() {
-  ImGui::BeginMenuBar();
-  renderItems();
-  ImGui::EndMenuBar();
+  if (ImGui::BeginMenuBar()) {
+    renderItems();
+    ImGui::EndMenuBar();
+  }
 }
 AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void AppMenuBar::renderImpl() {
-  ImGui::BeginMainMenuBar();
-  renderItems();
-  ImGui::EndMainMenuBar();
+  if (ImGui::BeginMainMenuBar()) {
+    renderItems();
+    ImGui::EndMainMenuBar();
+  }
 }
 
 SubMenu &MenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
