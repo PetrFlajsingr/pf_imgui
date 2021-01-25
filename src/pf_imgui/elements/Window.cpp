@@ -16,25 +16,26 @@ Window::Window(std::string elementName, std::string title)
 
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
-  ImGui::Begin(title.c_str(), nullptr, flags);
-  if (getEnabled() == Enabled::No) {
-    ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-    ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-  }
-  {
-    auto raiiEnabled = pf::RAII([this] {
-      if (getEnabled() == Enabled::No) {
-        ImGui::PopItemFlag();
-        ImGui::PopStyleVar();
-      }
-    });
-    setHovered(ImGui::IsWindowHovered());
+  if (ImGui::Begin(title.c_str(), nullptr, flags)) {
+    if (getEnabled() == Enabled::No) {
+      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+    }
+    {
+      auto raiiEnabled = pf::RAII([this] {
+        if (getEnabled() == Enabled::No) {
+          ImGui::PopItemFlag();
+          ImGui::PopStyleVar();
+        }
+      });
+      setHovered(ImGui::IsWindowHovered());
 
-    setCollapsedWithoutDemandingCollapseChange(ImGui::IsWindowCollapsed());
-    setFocusedWithoutDemandingFocusChange(ImGui::IsWindowFocused());
-    if (!isCollapsed()) {
-      if (hasMenuBar()) { menuBar->render(); }
-      std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
+      setCollapsedWithoutDemandingCollapseChange(ImGui::IsWindowCollapsed());
+      setFocusedWithoutDemandingFocusChange(ImGui::IsWindowFocused());
+      if (!isCollapsed()) {
+        if (hasMenuBar()) { menuBar->render(); }
+        std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
+      }
     }
   }
   ImGui::End();
