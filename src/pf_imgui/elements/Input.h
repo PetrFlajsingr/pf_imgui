@@ -120,37 +120,37 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservable<T>::getValue();
+    auto valueChanged = false;
     if constexpr (std::same_as<T, float>) {
-      ImGui::InputFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep,
+      valueChanged = ImGui::InputFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep,
                         format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, int>) {
-      ImGui::InputInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep);
+      valueChanged = ImGui::InputInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, double>) {
-      ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), data.step,
+      valueChanged = ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), data.step,
                          data.fastStep, format.c_str());
     }
-    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
+    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
 
  private:
