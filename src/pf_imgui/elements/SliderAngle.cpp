@@ -13,9 +13,9 @@ SliderAngle::SliderAngle(const std::string &elementName, const std::string &labe
       maxDeg(max), format(std::move(format)) {}
 
 void SliderAngle::renderImpl() {
-  const auto oldValue = ValueObservable::getValue();
-  ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str());
-  if (oldValue != ValueObservable::getValue()) { ValueObservable::notifyValueChanged(); }
+  if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str())) {
+    ValueObservable::notifyValueChanged();
+  }
 }
 
 void SliderAngle::unserialize_impl(const toml::table &src) {
