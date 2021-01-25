@@ -6,31 +6,27 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_DECORATORS_H
 
 #include <concepts>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Resizable.h>
-#include <pf_imgui/_export.h>
+#include <pf_imgui/elements/interface/Positionable.h>
 
 namespace pf::ui::ig {
 template<typename T>
-requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class PF_IMGUI_EXPORT PositionDecorator : public T {
+requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class PF_IMGUI_EXPORT PositionDecorator
+    : public T, public Positionable {
  public:
   template<typename... Args>
-  requires std::constructible_from<T, Args...> PositionDecorator(ImVec2 pos, Args &&...args)
+  requires std::constructible_from<T, Args...> explicit PositionDecorator(ImVec2 pos, Args &&...args)
       : T(std::forward<Args>(args)...), position(pos) {}
-
-  [[nodiscard]] ImVec2 getPosition() const { return position; }
-  void setPosition(ImVec2 pos) { position = pos; }
-
- private:
-  ImVec2 position;
 };
 
-
 template<typename T>
-requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class PF_IMGUI_EXPORT AnchorDecorator : public PositionDecorator<T> {
+requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class PF_IMGUI_EXPORT AnchorDecorator
+    : public PositionDecorator<T> {
  public:
   template<typename... Args>
-  requires std::constructible_from<T, Args...> AnchorDecorator(Anchor anchor, Args &&...args)
+  requires std::constructible_from<T, Args...> explicit AnchorDecorator(Anchor anchor, Args &&...args)
       : T(std::forward<Args>(args)...), anchor(anchor) {}
 
   [[nodiscard]] Anchor getAnchor() const { return anchor; }
@@ -39,6 +35,6 @@ requires std::derived_from<T, Resizable> &&std::derived_from<T, Element> class P
   Anchor anchor;
 };
 
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_DECORATORS_H
