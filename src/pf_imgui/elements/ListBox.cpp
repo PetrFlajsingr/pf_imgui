@@ -19,9 +19,7 @@ ListBox::ListBox(const std::string &elementName, const std::string &label, std::
 void ListBox::renderImpl() {
   const auto cStrItems =
       items | ranges::views::transform([](const auto &str) { return str.c_str(); }) | ranges::to_vector;
-  const auto oldIdx = currentItemIdx;
-  ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height);
-  if (currentItemIdx != oldIdx) {
+  if (ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {
     setValue(items[currentItemIdx]);
     notifyValueChanged();
   }

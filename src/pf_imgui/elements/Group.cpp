@@ -9,7 +9,7 @@ namespace pf::ui::ig {
 
 Group::Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse,
              Persistent persistent)
-    : Element(elementName), Labellable(label), Savable(persistent), collapsible(allowCollapse) {}
+    : ItemElement(elementName), Labellable(label), Savable(persistent), collapsible(allowCollapse) {}
 
 void Group::renderImpl() {
   ImGui::BeginGroup();
