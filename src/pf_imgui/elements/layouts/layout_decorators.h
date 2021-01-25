@@ -7,30 +7,30 @@
 
 #include <concepts>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/interface/Anchorable.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Positionable.h>
 #include <pf_imgui/elements/interface/Resizable.h>
+#include <utility>
 
 namespace pf::ui::ig {
-template<typename T>
-requires std::derived_from<T, Element> class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
+
+template<std::derived_from<Element> T>
+class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
  public:
   template<typename... Args>
   requires std::constructible_from<T, Args...> explicit PositionDecorator(ImVec2 pos, Args &&...args)
       : T(std::forward<Args>(args)...), Positionable(pos) {}
 };
 
-template<typename T>
-requires std::derived_from<T, Element> class PF_IMGUI_EXPORT AnchorDecorator : public PositionDecorator<T> {
+template<std::derived_from<Element> T>
+class PF_IMGUI_EXPORT AnchorDecorator : public T, public Anchorable {
  public:
   template<typename... Args>
   requires std::constructible_from<T, Args...> explicit AnchorDecorator(Anchor anchor, Args &&...args)
-      : T(std::forward<Args>(args)...), anchor(anchor) {}
-
-  [[nodiscard]] Anchor getAnchor() const { return anchor; }
+      : T(std::forward<Args>(args)...), Anchorable(anchor) {}
 
  private:
-  Anchor anchor;
 };
 
 }// namespace pf::ui::ig

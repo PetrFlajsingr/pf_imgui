@@ -114,6 +114,7 @@ set(SOURCES
         src/pf_imgui/elements/interface/Collapsible.cpp
         src/pf_imgui/elements/interface/Renderable.cpp
         src/pf_imgui/elements/interface/Positionable.cpp
+        src/pf_imgui/elements/interface/Anchorable.cpp
         src/pf_imgui/elements/layouts/Layout.cpp
         src/pf_imgui/elements/layouts/BoxLayout.cpp
         src/pf_imgui/elements/layouts/GridLayout.cpp
@@ -187,6 +188,7 @@ set(INCLUDES
         src/pf_imgui/elements/interface/Collapsible.h
         src/pf_imgui/elements/interface/Renderable.h
         src/pf_imgui/elements/interface/Positionable.h
+        src/pf_imgui/elements/interface/Anchorable.h
         src/pf_imgui/elements/layouts/Layout.h
         src/pf_imgui/elements/layouts/BoxLayout.h
         src/pf_imgui/elements/layouts/layouts.h
