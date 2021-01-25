@@ -13,7 +13,6 @@
 #include <pf_imgui/_export.h>
 #include <vector>
 
-// TODO: implement
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT GridLayout : public Layout {
  public:
