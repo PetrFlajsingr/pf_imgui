@@ -16,8 +16,9 @@ void GridLayout::renderImpl() {
     const auto yCellSize = getSize().y / height;
     for (uint32_t y = 0; y < height; ++y) {
       for (uint32_t x = 0; x < width; ++x) {
+        ImGui::SetCursorPos(ImVec2{xCellSize * x, yCellSize * y});
         if (ImGui::BeginChild((getName() + std::to_string(y) + std::to_string(x)).c_str(),
-                              ImVec2{xCellSize * x, yCellSize * y}, true)) {}
+                              ImVec2{xCellSize, yCellSize}, true)) {}
         ImGui::EndChild();
       }
     }
