@@ -114,13 +114,11 @@ set(SOURCES
         src/pf_imgui/elements/interface/Collapsible.cpp
         src/pf_imgui/elements/interface/Renderable.cpp
         src/pf_imgui/elements/interface/Positionable.cpp
-        src/pf_imgui/elements/interface/Anchorable.cpp
         src/pf_imgui/elements/layouts/Layout.cpp
         src/pf_imgui/elements/layouts/BoxLayout.cpp
         src/pf_imgui/elements/layouts/GridLayout.cpp
         src/pf_imgui/elements/layouts/StackedLayout.cpp
         src/pf_imgui/elements/layouts/AbsoluteLayout.cpp
-        src/pf_imgui/elements/layouts/AnchorLayout.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
@@ -188,14 +186,12 @@ set(INCLUDES
         src/pf_imgui/elements/interface/Collapsible.h
         src/pf_imgui/elements/interface/Renderable.h
         src/pf_imgui/elements/interface/Positionable.h
-        src/pf_imgui/elements/interface/Anchorable.h
         src/pf_imgui/elements/layouts/Layout.h
         src/pf_imgui/elements/layouts/BoxLayout.h
         src/pf_imgui/elements/layouts/layouts.h
         src/pf_imgui/elements/layouts/GridLayout.h
         src/pf_imgui/elements/layouts/StackedLayout.h
         src/pf_imgui/elements/layouts/AbsoluteLayout.h
-        src/pf_imgui/elements/layouts/AnchorLayout.h
         src/pf_imgui/elements/layouts/layout_decorators.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
