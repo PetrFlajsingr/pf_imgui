@@ -42,21 +42,21 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, publ
   }
 
   void renderImpl() override {
-    const auto oldValue = ValueObservable<T>::getValue();
+    auto valueChanged = false;
     if constexpr (Type == ColorChooserType::Edit) {
       if constexpr (std::same_as<glm::vec3, T>) {
-        ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       } else {
-        ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       }
     } else {
       if constexpr (std::same_as<glm::vec3, T>) {
-        ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       } else {
-        ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
       }
     }
-    if (oldValue != ValueObservable<T>::getValue()) { ValueObservable<T>::notifyValueChanged(); }
+    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
 };
 
