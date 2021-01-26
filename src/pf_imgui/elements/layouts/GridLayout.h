@@ -23,6 +23,8 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
 
   [[nodiscard]] ResizableLayout &getCellLayout(uint32_t column, uint32_t row);
 
+  std::vector<Renderable *> getRenderables() override;
+
  protected:
   void renderImpl() override;
 

@@ -29,6 +29,8 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     return children | ranges::views::transform([](auto &child) -> Element & { return *child; });
   }
 
+  std::vector<Renderable *> getRenderables() override;
+
   void pushChild(std::unique_ptr<Element> child);
 
   void insertChild(std::unique_ptr<Element> child, std::size_t index);

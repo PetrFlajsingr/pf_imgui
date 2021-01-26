@@ -45,6 +45,8 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
 
   void removeChild(const std::string &name);
 
+  std::vector<Renderable *> getRenderables() override;
+
  protected:
   void renderImpl() override;
 

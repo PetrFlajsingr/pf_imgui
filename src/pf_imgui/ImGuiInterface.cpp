@@ -9,6 +9,7 @@
 #include <pf_common/algorithms.h>
 #include <range/v3/view/addressof.hpp>
 #include <utility>
+#include "elements/Dialog.h"
 
 namespace pf::ui::ig {
 

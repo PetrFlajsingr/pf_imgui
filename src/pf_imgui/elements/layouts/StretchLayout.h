@@ -22,6 +22,8 @@ class StretchLayout : public ResizableLayout {
     return *child;
   }
 
+  std::vector<Renderable *> getRenderables() override;
+
  public:
   [[nodiscard]] Element &getChild();
 

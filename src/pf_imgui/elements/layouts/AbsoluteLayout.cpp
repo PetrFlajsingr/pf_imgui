@@ -10,8 +10,8 @@ AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &siz
     : ResizableLayout(elementName, size, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
-  const auto flags =
-      isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
+                                    : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder(), flags)) {
     std::ranges::for_each(children, [](auto &childPair) {
       auto &[child, positionable] = childPair;
@@ -36,5 +36,10 @@ void AbsoluteLayout::removeChild(const std::string &name) {
       iter != children.end()) {
     children.erase(iter);
   }
+}
+
+std::vector<Renderable *> AbsoluteLayout::getRenderables() {
+  return children | ranges::views::transform([](auto &child) -> Renderable * { return child.first.get(); })
+      | ranges::to_vector;
 }
 }// namespace pf::ui::ig

@@ -4,6 +4,7 @@
 
 #include "GridLayout.h"
 #include <pf_common/exceptions/StackTraceException.h>
+#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 
@@ -45,6 +46,9 @@ ResizableLayout &GridLayout::getCellLayout(uint32_t column, uint32_t row) {
   const auto index = indexForCell(column, row);
   if (index >= cells.size()) { throw StackTraceException::fmt("Indices out of bounds: {}x{}", column, row); }
   return *cells[index];
+}
+std::vector<Renderable *> GridLayout::getRenderables() {
+  return cells | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
 }
 
 }// namespace pf::ui::ig

@@ -56,4 +56,9 @@ void BoxLayout::removeChild(const std::string &name) {
   }
 }
 
+std::vector<Renderable *> BoxLayout::getRenderables() {
+  return children | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); })
+      | ranges::to_vector;
+}
+
 }// namespace pf::ui::ig

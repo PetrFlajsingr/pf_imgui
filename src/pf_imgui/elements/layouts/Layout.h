@@ -8,9 +8,11 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Resizable.h>
+#include <vector>
 
 namespace pf::ui::ig {
 
+// TODO: collapse support in children
 class PF_IMGUI_EXPORT Layout : public Element {
  public:
   Layout(const std::string &elementName, bool showBorder);
@@ -21,9 +23,15 @@ class PF_IMGUI_EXPORT Layout : public Element {
   [[nodiscard]] bool isScrollable() const;
   void setScrollable(bool scrollable);
 
+  [[nodiscard]] bool isCollapsible() const;
+  void setCollapsible(bool collapsible);
+
+  [[nodiscard]] virtual std::vector<Renderable*> getRenderables() = 0;
+
  private:
   bool drawBorder;
   bool scrollable = false;
+  bool collapsible = false;
 };
 
 }// namespace pf::ui::ig

@@ -5,8 +5,10 @@
 #ifndef PF_IMGUI_SERIALIZATION_H
 #define PF_IMGUI_SERIALIZATION_H
 
-#include "elements.h"
 #include "ui_tree_traversal.h"
+#include <pf_imgui/elements/interface/Element.h>
+#include <pf_imgui/elements/interface/Savable.h>
+#include <pf_imgui/elements/layouts/Layout.h>
 #include <toml++/toml_array.h>
 #include <toml++/toml_table.h>
 

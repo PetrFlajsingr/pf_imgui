@@ -14,5 +14,7 @@ void Layout::setDrawBorder(bool showBorder) { drawBorder = showBorder; }
 bool Layout::isScrollable() const { return scrollable; }
 
 void Layout::setScrollable(bool scroll) { scrollable = scroll; }
+bool Layout::isCollapsible() const { return collapsible; }
+void Layout::setCollapsible(bool collapsible) { Layout::collapsible = collapsible; }
 
 }// namespace pf::ui::ig

@@ -27,6 +27,8 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
   [[nodiscard]] StackContainer &getCurrentStack();
   [[nodiscard]] StackContainer &getStackAtIndex(std::size_t index);
 
+  std::vector<Renderable *> getRenderables() override;
+
  protected:
   void renderImpl() override;
 

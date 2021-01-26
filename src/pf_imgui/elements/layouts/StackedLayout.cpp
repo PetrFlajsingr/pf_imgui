@@ -3,6 +3,8 @@
 //
 
 #include "StackedLayout.h"
+#include <range/v3/view/addressof.hpp>
+#include <range/v3/view/join.hpp>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -41,5 +43,11 @@ void StackedLayout::setIndex(std::size_t index) { selectedIndex = index; }
 
 StackedLayout::StackContainer &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
 StackedLayout::StackContainer &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
+
+std::vector<Renderable *> StackedLayout::getRenderables() {
+  return stacks | ranges::views::transform([](auto &stack) { return stack.getChildren() | ranges::views::all; })
+      | ranges::views::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
+      | ranges::to_vector;
+}
 
 }// namespace pf::ui::ig

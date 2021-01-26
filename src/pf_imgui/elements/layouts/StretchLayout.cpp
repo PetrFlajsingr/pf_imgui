@@ -31,5 +31,6 @@ void StretchLayout::renderImpl() {
   if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder(), flags)) {}
   ImGui::EndChild();
 }
+std::vector<Renderable *> StretchLayout::getRenderables() { return {dynamic_cast<Renderable *>(child.get())}; }
 
 }// namespace pf::ui::ig
