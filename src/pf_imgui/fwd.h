@@ -10,7 +10,7 @@ namespace pf::ui::ig {
 class ImGuiInterface;
 
 class Element;
-class Container;
+class ElementContainer;
 class Labellable;
 class Resizable;
 class Savable;

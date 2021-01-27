@@ -8,7 +8,7 @@
 #include "elements/FileDialog.h"
 #include "elements/MenuBars.h"
 #include "elements/Window.h"
-#include "elements/interface/Container.h"
+#include "elements/interface/ElementContainer.h"
 #include "fwd.h"
 #include <imgui.h>
 #include <memory>
@@ -77,10 +77,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   void renderImpl() override;
 
  private:
-  struct DialogContainer : public Container {};
-
-  DialogContainer dialogContainer;
-
+  friend class Dialog;
+  std::vector<std::unique_ptr<Dialog>> dialogs;
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
   std::vector<FileDialog> fileDialogs;
@@ -89,6 +87,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   std::vector<std::unique_ptr<Window>> windows;
 
   toml::table config;
+
+  void removeDialog(Dialog &dialog);
 };
 
 }// namespace pf::ui::ig

@@ -6,7 +6,7 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_WINDOW_H
 
 #include "MenuBars.h"
-#include "interface/Container.h"
+#include "interface/ElementContainer.h"
 #include "interface/Resizable.h"
 #include <memory>
 #include <pf_imgui/_export.h>
@@ -19,18 +19,16 @@
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Window : public Renderable,
-                               public Container,
+                               public ElementContainer,
                                public Focusable,
                                public Hoverable,
                                public Collapsible,
                                public Resizable,
-                               public Positionable {
+                               public Positionable, public Labellable {
  public:
-  Window(std::string name, std::string title, AllowCollapse allowCollapse = AllowCollapse::No, Persistent persistent = Persistent::No);
-  Window(std::string name, std::string title, Persistent persistent);
+  Window(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No, Persistent persistent = Persistent::No);
+  Window(std::string name, std::string label, Persistent persistent);
 
-  [[nodiscard]] const std::string &getTitle() const;
-  void setTitle(const std::string &title);
 
   [[nodiscard]] WindowMenuBar &getMenuBar();
   [[nodiscard]] bool hasMenuBar() const;
@@ -40,21 +38,14 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   void render() override;
 
-  [[nodiscard]] const std::string &getName() const;
-
   void setFocus() override;
-
   void setCollapsed(bool collapsed) override;
-
   void setPosition(ImVec2 pos) override;
 
  protected:
   void renderImpl() override;
 
- protected:
  private:
-  std::string name;
-  std::string title;
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
 };
 

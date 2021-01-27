@@ -5,9 +5,9 @@
 #ifndef PF_IMGUI_TREE_TRAVERSAL_H
 #define PF_IMGUI_TREE_TRAVERSAL_H
 
-#include "elements/interface/Container.h"
+#include "elements/interface/ElementContainer.h"
 #include "elements/interface/Renderable.h"
-#include "elements/layouts/Layout.h"
+#include "src/pf_imgui/elements/interface/Layout.h"
 #include <algorithm>
 
 namespace pf::ui::ig {
@@ -15,7 +15,7 @@ namespace pf::ui::ig {
 namespace details {
 inline void traverseImGuiTree_impl(Renderable &element, std::invocable<Renderable &> auto callback) {
   callback(element);
-  if (auto ptrContainer = dynamic_cast<Container *>(&element); ptrContainer != nullptr) {
+  if (auto ptrContainer = dynamic_cast<ElementContainer *>(&element); ptrContainer != nullptr) {
     std::ranges::for_each(ptrContainer->getChildren(),
                           [&callback](auto &child) { traverseImGuiTree_impl(child, callback); });
   } else if (auto ptrLayout = dynamic_cast<Layout *>(&element); ptrLayout != nullptr) {

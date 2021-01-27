@@ -4,14 +4,15 @@
 
 #include "Dialog.h"
 #include <imgui.h>
+#include <pf_imgui/ImGuiInterface.h>
 
 namespace pf::ui::ig {
-Dialog::Dialog(Container &parent, const std::string &elementName, const std::string &label, Modal modal)
-    : Element(elementName), Labellable(label), modal(modal), owner(parent) {}
+Dialog::Dialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label, Modal modal)
+    : Renderable(elementName), Labellable(label), modal(modal), owner(parent) {}
 
 void Dialog::renderImpl() {
   if (closed) {
-    owner.enqueueChildRemoval(getName());
+    owner.removeDialog(*this);
     return;
   }
   ImGui::OpenPopup(getLabel().c_str());
@@ -25,7 +26,6 @@ void Dialog::renderImpl() {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndPopup();
   }
-  if (closed) { owner.enqueueChildRemoval(getName()); }
 }
 void Dialog::close() { closed = true; }
 

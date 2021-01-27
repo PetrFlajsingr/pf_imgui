@@ -102,7 +102,7 @@ set(SOURCES
         src/pf_imgui/elements/plots/types/Stems.cpp
         src/pf_imgui/elements/plots/types/HeatMap.cpp
         src/pf_imgui/elements/plots/types/Digital.cpp
-        src/pf_imgui/elements/interface/Container.cpp
+        src/pf_imgui/elements/interface/ElementContainer.cpp
         src/pf_imgui/elements/interface/Element.cpp
         src/pf_imgui/elements/interface/Labellable.cpp
         src/pf_imgui/elements/interface/Resizable.cpp
@@ -120,7 +120,7 @@ set(SOURCES
         src/pf_imgui/elements/layouts/StackedLayout.cpp
         src/pf_imgui/elements/layouts/AbsoluteLayout.cpp
         src/pf_imgui/elements/layouts/StretchLayout.cpp
-        src/pf_imgui/elements/layouts/Layout.cpp
+        src/pf_imgui/elements/interface/Layout.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
@@ -174,7 +174,7 @@ set(INCLUDES
         src/pf_imgui/elements/plots/types/Stems.h
         src/pf_imgui/elements/plots/types/HeatMap.h
         src/pf_imgui/elements/plots/types/Digital.h
-        src/pf_imgui/elements/interface/Container.h
+        src/pf_imgui/elements/interface/ElementContainer.h
         src/pf_imgui/elements/interface/Element.h
         src/pf_imgui/elements/interface/Labellable.h
         src/pf_imgui/elements/interface/Resizable.h
@@ -196,7 +196,7 @@ set(INCLUDES
         src/pf_imgui/elements/layouts/AbsoluteLayout.h
         src/pf_imgui/elements/layouts/StretchLayout.h
         src/pf_imgui/elements/layouts/layout_decorators.h
-        src/pf_imgui/elements/layouts/Layout.h
+        src/pf_imgui/elements/interface/Layout.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h

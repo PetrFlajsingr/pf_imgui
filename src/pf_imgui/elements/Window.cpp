@@ -11,16 +11,16 @@
 
 namespace pf::ui::ig {
 
-Window::Window(std::string name, std::string title, AllowCollapse allowCollapse, Persistent persistent)
-    : Collapsible(allowCollapse, persistent), Resizable(ImVec2(0, 0)), Positionable(ImVec2{}), name(std::move(name)),
-      title(std::move(title)) {}
+Window::Window(std::string name, std::string label, AllowCollapse allowCollapse, Persistent persistent)
+    : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(ImVec2(0, 0)),
+      Positionable(ImVec2{}), Labellable(std::move(label)) {}
 
-Window::Window(std::string name, std::string title, Persistent persistent)
-    : Window(std::move(name), std::move(title), AllowCollapse::No, persistent) {}
+Window::Window(std::string name, std::string label, Persistent persistent)
+    : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
-  if (ImGui::Begin(title.c_str(), nullptr, flags)) {
+  if (ImGui::Begin(getName().c_str(), nullptr, flags)) {
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
@@ -45,10 +45,6 @@ void Window::renderImpl() {
   ImGui::End();
 }
 
-const std::string &Window::getTitle() const { return title; }
-
-void Window::setTitle(const std::string &tit) { title = tit; }
-
 WindowMenuBar &Window::getMenuBar() {
   if (menuBar == nullptr) { menuBar = std::make_unique<WindowMenuBar>(std::string("getName()") + "_menu_bar"); }
   return *menuBar;
@@ -59,19 +55,19 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 void Window::removeMenuBar() { menuBar = nullptr; }
 void Window::setSize(const ImVec2 &newSize) {
   Resizable::setSize(newSize);
-  ImGui::SetWindowSize(getTitle().c_str(), getSize());
+  ImGui::SetWindowSize(getName().c_str(), getSize());
 }
 
 void Window::render() {
   if (getVisibility() == Visibility::Visible) { renderImpl(); }
 }
-const std::string &Window::getName() const { return name; }
+
 void Window::setCollapsed(bool collapsed) {
-  ImGui::SetWindowCollapsed(getTitle().c_str(), collapsed);
+  ImGui::SetWindowCollapsed(getName().c_str(), collapsed);
   Collapsible::setCollapsed(collapsed);
 }
 void Window::setFocus() {
-  ImGui::SetWindowFocus(getTitle().c_str());
+  ImGui::SetWindowFocus(getName().c_str());
   Focusable::setFocus();
 }
 void Window::setPosition(ImVec2 pos) {

@@ -5,11 +5,11 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_CONTAINER_H
 #define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_CONTAINER_H
 
-#include "Element.h"
 #include <memory>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
 #include <range/v3/view/transform.hpp>
+#include <src/pf_imgui/elements/interface/Element.h>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -17,12 +17,12 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Container {
+class PF_IMGUI_EXPORT ElementContainer {
  public:
-  Container() = default;
+  ElementContainer() = default;
 
-  Container(Container &&other) noexcept;
-  Container &operator=(Container &&other) noexcept;
+  ElementContainer(ElementContainer &&other) noexcept;
+  ElementContainer &operator=(ElementContainer &&other) noexcept;
 
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &

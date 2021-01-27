@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_RESIZABLELAYOUT_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_RESIZABLELAYOUT_H
 
-#include "Layout.h"
+#include "src/pf_imgui/elements/interface/Layout.h"
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Resizable.h>

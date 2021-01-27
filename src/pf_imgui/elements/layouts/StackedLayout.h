@@ -7,13 +7,13 @@
 
 #include "ResizableLayout.h"
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Container.h>
+#include <pf_imgui/elements/interface/ElementContainer.h>
 #include <vector>
 
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
-  struct StackContainer : public Container {};
+  struct StackContainer : public ElementContainer {};
 
  public:
   StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No,

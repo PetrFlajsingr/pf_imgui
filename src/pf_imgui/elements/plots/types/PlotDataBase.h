@@ -13,6 +13,7 @@
 #include <range/v3/core.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
+#include <src/pf_imgui/elements/interface/Element.h>
 #include <vector>
 
 namespace pf::ui::ig::plot_type {

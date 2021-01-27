@@ -10,6 +10,7 @@
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Resizable.h>
+#include <src/pf_imgui/elements/interface/Element.h>
 #include <string>
 #include <vector>
 

@@ -5,14 +5,14 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_TREE_H
 #define PF_IMGUI_IMGUI_ELEMENTS_TREE_H
 
-#include "interface/Container.h"
+#include "interface/ElementContainer.h"
 #include "interface/Labellable.h"
 #include <pf_imgui/_export.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public Container {
+class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementContainer {
  public:
   Tree(const std::string &elementName, const std::string &label);
 

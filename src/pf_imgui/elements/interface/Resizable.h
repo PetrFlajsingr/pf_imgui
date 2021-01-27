@@ -5,7 +5,6 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_RESIZABLEELEMENT_H
 #define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_RESIZABLEELEMENT_H
 
-#include "Element.h"
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 #include <string>

@@ -5,16 +5,18 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
 #define PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
 
-#include "interface/Container.h"
+#include "interface/ElementContainer.h"
 #include "interface/Labellable.h"
+#include "interface/Renderable.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/fwd.h>
 #include <string>
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Dialog : public Element, public Container, public Labellable {
+class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, public Labellable {
  public:
-  Dialog(Container &parent, const std::string &elementName, const std::string &label, Modal modal = Modal::Yes);
+  Dialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label, Modal modal = Modal::Yes);
 
   void close();
 
@@ -24,7 +26,7 @@ class PF_IMGUI_EXPORT Dialog : public Element, public Container, public Labellab
  private:
   Modal modal;
   bool closed = false;
-  Container &owner;
+  ImGuiInterface &owner;
 };
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H

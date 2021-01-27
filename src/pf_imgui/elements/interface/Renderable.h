@@ -8,12 +8,13 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <string>
 
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Renderable {
  public:
-  Renderable() = default;
+  explicit Renderable(std::string name);
   Renderable(Renderable &&other) noexcept;
   Renderable &operator=(Renderable &&other) noexcept;
   Renderable(const Renderable &) = delete;
@@ -32,12 +33,15 @@ class PF_IMGUI_EXPORT Renderable {
   [[nodiscard]] Enabled getEnabled() const;
   void setEnabled(Enabled eleState);
 
+  [[nodiscard]] const std::string &getName() const;
+
  protected:
   virtual void renderImpl() = 0;
 
  private:
   Visibility visibility = Visibility::Visible;
   Enabled enabled = Enabled::Yes;
+  std::string name;
 };
 
 }// namespace pf::ui::ig

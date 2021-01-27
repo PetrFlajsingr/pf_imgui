@@ -2,34 +2,34 @@
 // Created by petr on 10/31/20.
 //
 
-#include "Container.h"
+#include "ElementContainer.h"
 #include <utility>
 
 namespace pf::ui::ig {
 
-Container::Container(Container &&other) noexcept
+ElementContainer::ElementContainer(ElementContainer &&other) noexcept
     : children(std::move(other.children)), childrenInOrder(std::move(other.childrenInOrder)),
       childrenToRemove(std::move(other.childrenToRemove)) {}
 
-Container &Container::operator=(Container &&other) noexcept {
+ElementContainer &ElementContainer::operator=(ElementContainer &&other) noexcept {
   children = std::move(other.children);
   childrenInOrder = std::move(other.childrenInOrder);
   childrenToRemove = std::move(other.childrenToRemove);
   return *this;
 }
 
-void Container::addChild(std::unique_ptr<Element> child) {
+void ElementContainer::addChild(std::unique_ptr<Element> child) {
   childrenInOrder.emplace_back(*child);
   children[child->getName()] = std::move(child);
 }
 
-void Container::insertChild(std::unique_ptr<Element> child, std::size_t index) {
+void ElementContainer::insertChild(std::unique_ptr<Element> child, std::size_t index) {
   if (index > childrenInOrder.size()) { throw StackTraceException::fmt("Index out of bounds: {}", index); }
   childrenInOrder.insert(childrenInOrder.begin() + index, *child);
   children[child->getName()] = std::move(child);
 }
 
-void Container::removeChild(const std::string &name) {
+void ElementContainer::removeChild(const std::string &name) {
   if (const auto iter = children.find(name); iter != children.end()) {
     auto ptr = iter->second.get();
     auto ptrIter = std::ranges::find_if(childrenInOrder, [ptr](auto &child) { return &child.get() == ptr; });
@@ -38,9 +38,9 @@ void Container::removeChild(const std::string &name) {
   }
 }
 
-void Container::enqueueChildRemoval(const std::string &name) { childrenToRemove.emplace_back(name); }
+void ElementContainer::enqueueChildRemoval(const std::string &name) { childrenToRemove.emplace_back(name); }
 
-void Container::clear() {
+void ElementContainer::clear() {
   childrenInOrder.clear();
   children.clear();
   childrenToRemove.clear();

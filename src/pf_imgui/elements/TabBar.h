@@ -5,8 +5,8 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H
 #define PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H
 
-#include "interface/Container.h"
 #include "interface/Element.h"
+#include "interface/ElementContainer.h"
 #include "interface/ItemElement.h"
 #include "interface/Labellable.h"
 #include <memory>
@@ -16,7 +16,7 @@
 
 namespace pf::ui::ig {
 
-class PF_IMGUI_EXPORT Tab : public ItemElement, public Labellable, public Container {
+class PF_IMGUI_EXPORT Tab : public ItemElement, public Labellable, public ElementContainer {
  public:
   Tab(const std::string &elementName, const std::string &label);
 

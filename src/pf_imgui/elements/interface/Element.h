@@ -13,18 +13,7 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT Element : public Renderable {
  public:
-  explicit Element(std::string elementName);
-  Element(Element &&other) noexcept;
-  Element &operator=(Element &&other) noexcept;
-  Element(const Element &) = delete;
-  Element &operator=(const Element &) = delete;
-
-  [[nodiscard]] const std::string &getName() const;
-
-  void render() override;
-
- private:
-  std::string name;
+  explicit Element(const std::string &name);
 };
 
 }// namespace pf::ui::ig

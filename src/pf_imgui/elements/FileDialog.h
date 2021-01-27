@@ -9,6 +9,7 @@
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Labellable.h>
+#include <pf_imgui/elements/interface/Renderable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -23,14 +24,14 @@ struct PF_IMGUI_EXPORT FileExtensionSettings {
   std::optional<ImVec4> color;
 };
 
-class PF_IMGUI_EXPORT FileDialog : public Element, public Labellable {
+class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable {
  public:
   FileDialog(const std::string &elementName, const std::string &label,
              const std::vector<FileExtensionSettings> &extSettings,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
              std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
              uint32_t maxSelectedFiles = 1)
-      : Element(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
+      : Renderable(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
         modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles), onFilesSelected(onSelect),
         onSelectCanceled(onCancel) {
     prepareExtInfos(extSettings);
@@ -40,7 +41,7 @@ class PF_IMGUI_EXPORT FileDialog : public Element, public Labellable {
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
              std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
              uint32_t maxSelectedDirs = 1)
-      : Element(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
+      : Renderable(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
         modal(modality), fileType(FileType::Directory), maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect),
         onSelectCanceled(onCancel) {}
 

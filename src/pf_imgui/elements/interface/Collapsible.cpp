@@ -3,7 +3,7 @@
 //
 
 #include "Collapsible.h"
-#include "Container.h"
+#include "ElementContainer.h"
 
 namespace pf::ui::ig {
 Collapsible::Collapsible(AllowCollapse allowCollapse, Persistent persistent)

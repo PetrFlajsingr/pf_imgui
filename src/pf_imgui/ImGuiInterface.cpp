@@ -3,18 +3,18 @@
 //
 
 #include "ImGuiInterface.h"
+#include "elements/Dialog.h"
 #include "serialization.h"
 #include <imgui_internal.h>
 #include <implot.h>
 #include <pf_common/algorithms.h>
 #include <range/v3/view/addressof.hpp>
 #include <utility>
-#include "elements/Dialog.h"
 
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
-    : io(baseInit(flags)), config(std::move(tomlConfig)) {}
+    : Renderable("imgui_interface"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
@@ -29,9 +29,9 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
 Dialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption, Modal modal) {
-  auto dialog = std::make_unique<Dialog>(dialogContainer, elementName, caption, modal);
+  auto dialog = std::make_unique<Dialog>(*this, elementName, caption, modal);
   const auto ptr = dialog.get();
-  dialogContainer.addChild(std::move(dialog));
+  dialogs.emplace_back(std::move(dialog));
   return *ptr;
 }
 
@@ -96,6 +96,13 @@ Window &ImGuiInterface::windowByName(const std::string &name) {
 }
 void ImGuiInterface::renderImpl() {
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
+}
+void ImGuiInterface::removeDialog(Dialog &dialog) {
+  if (const auto iter = std::ranges::find_if(dialogs, [&dialog](const auto &ptr) {
+      return ptr.get() == &dialog;
+    }); iter != dialogs.end()) {
+    dialogs.erase(iter);
+  }
 }
 
 }// namespace pf::ui::ig

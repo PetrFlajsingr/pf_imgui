@@ -5,7 +5,6 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
 #define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
 
-#include "Element.h"
 #include "Observable_impl.h"
 #include <algorithm>
 #include <functional>

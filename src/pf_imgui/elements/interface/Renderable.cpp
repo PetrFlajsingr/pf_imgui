@@ -7,7 +7,11 @@
 #include <imgui_internal.h>
 #include <pf_common/RAII.h>
 
+#include <utility>
+
 namespace pf::ui::ig {
+
+Renderable::Renderable(std::string name) : name(std::move(name)) {}
 
 Renderable::Renderable(Renderable &&other) noexcept { visibility = other.visibility; }
 
@@ -26,6 +30,7 @@ void Renderable::setEnabled(Enabled eleState) { enabled = eleState; }
 Enabled Renderable::getEnabled() const { return enabled; }
 
 void Renderable::render() {
+  ImGui::PushID(getName().c_str());
   if (visibility == Visibility::Visible) {
     if (enabled == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
@@ -39,5 +44,8 @@ void Renderable::render() {
       renderImpl();
     }
   }
+  ImGui::PopID();
 }
+const std::string &Renderable::getName() const { return name; }
+
 }// namespace pf::ui::ig
