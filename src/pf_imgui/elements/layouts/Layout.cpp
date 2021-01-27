@@ -28,7 +28,7 @@ bool Layout::renderCollapseButton() {
     if (ImGui::ArrowButton((getName() + "_collapse_btn").c_str(), btnDir)) { setCollapsed(!isCollapsed()); }
     ImGui::SetCursorPos(origDrawPos);
   }
-  return isCollapsed();
+  return !isCollapsed();
 }
 
 }// namespace pf::ui::ig
