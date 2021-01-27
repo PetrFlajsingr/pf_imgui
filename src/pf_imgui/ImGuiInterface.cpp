@@ -94,15 +94,17 @@ Window &ImGuiInterface::windowByName(const std::string &name) {
     throw StackTraceException::fmt("Child not found: {}", name);
   }
 }
-void ImGuiInterface::renderImpl() {}
+
+void ImGuiInterface::renderImpl() {
+  std::ranges::for_each(windows, [](auto &window) { window->render(); });
+}
+
 void ImGuiInterface::removeDialog(Dialog &dialog) {
   if (const auto iter = std::ranges::find_if(dialogs, [&dialog](const auto &ptr) { return ptr.get() == &dialog; });
       iter != dialogs.end()) {
     dialogs.erase(iter);
   }
 }
-void ImGuiInterface::render() {
-  std::ranges::for_each(windows, [](auto &window) { window->render(); });
-}
+
 
 }// namespace pf::ui::ig

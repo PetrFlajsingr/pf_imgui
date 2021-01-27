@@ -30,7 +30,6 @@ void Renderable::setEnabled(Enabled eleState) { enabled = eleState; }
 Enabled Renderable::getEnabled() const { return enabled; }
 
 void Renderable::render() {
-  ImGui::PushID(getName().c_str());
   if (visibility == Visibility::Visible) {
     if (enabled == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
@@ -44,7 +43,6 @@ void Renderable::render() {
       renderImpl();
     }
   }
-  ImGui::PopID();
 }
 const std::string &Renderable::getName() const { return name; }
 

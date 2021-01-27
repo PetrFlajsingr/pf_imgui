@@ -10,4 +10,9 @@
 
 namespace pf::ui::ig {
 Element::Element(const std::string &name) : Renderable(name) {}
+void Element::render() {
+  ImGui::PushID(getName().c_str());
+  Renderable::render();
+  ImGui::PopID();
+}
 }// namespace pf::ui::ig

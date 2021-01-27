@@ -70,8 +70,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
                              startName, modality, maxSelectedFiles);
   }
 
-  void render() override;
-
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
 

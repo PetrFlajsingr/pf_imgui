@@ -14,6 +14,8 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Element : public Renderable {
  public:
   explicit Element(const std::string &name);
+
+  void render() override;
 };
 
 }// namespace pf::ui::ig
