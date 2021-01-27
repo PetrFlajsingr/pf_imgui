@@ -9,7 +9,6 @@
 #include "elements/Checkbox.h"
 #include "elements/ColorChooser.h"
 #include "elements/ComboBox.h"
-#include "elements/Dialog.h"
 #include "elements/DragInput.h"
 #include "elements/FlameGraph.h"
 #include "elements/Group.h"
@@ -27,8 +26,9 @@
 #include "elements/TabBar.h"
 #include "elements/Text.h"
 #include "elements/Tree.h"
-#include "elements/Window.h"
 #include "elements/layouts/layouts.h"
 #include "elements/plots.h"
+#include "src/pf_imgui/dialogs/Dialog.h"
+#include "src/pf_imgui/dialogs/Window.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

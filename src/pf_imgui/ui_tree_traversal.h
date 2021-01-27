@@ -5,10 +5,10 @@
 #ifndef PF_IMGUI_TREE_TRAVERSAL_H
 #define PF_IMGUI_TREE_TRAVERSAL_H
 
-#include "elements/interface/ElementContainer.h"
-#include "elements/interface/Renderable.h"
-#include "src/pf_imgui/elements/interface/Layout.h"
 #include <algorithm>
+#include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/Layout.h>
+#include <pf_imgui/interface/Renderable.h>
 
 namespace pf::ui::ig {
 

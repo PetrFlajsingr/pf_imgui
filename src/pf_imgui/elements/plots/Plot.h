@@ -5,14 +5,13 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_PLOT_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_PLOT_H
 
-#include "../interface/Labellable.h"
-#include "../interface/Resizable.h"
-#include "types/PlotDataBase.h"
 #include <bits/ranges_algo.h>
 #include <memory>
 #include <optional>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/plots/types/PlotDataBase.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <utility>
 #include <vector>

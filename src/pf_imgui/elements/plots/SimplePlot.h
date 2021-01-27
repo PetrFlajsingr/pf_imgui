@@ -7,9 +7,9 @@
 
 #include <optional>
 #include <pf_imgui/_export.h>
-#include <src/pf_imgui/elements/interface/Labellable.h>
-#include <src/pf_imgui/elements/interface/Resizable.h>
-#include <src/pf_imgui/elements/interface/Element.h>
+#include <src/pf_imgui/interface/Element.h>
+#include <src/pf_imgui/interface/Labellable.h>
+#include <src/pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
 

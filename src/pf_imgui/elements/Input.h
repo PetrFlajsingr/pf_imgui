@@ -5,10 +5,6 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_INPUT_H
 #define PF_IMGUI_IMGUI_ELEMENTS_INPUT_H
 
-#include "interface/ItemElement.h"
-#include "interface/Labellable.h"
-#include "interface/Savable.h"
-#include "interface/ValueObservable.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
@@ -16,6 +12,10 @@
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 #include <utility>
 
@@ -122,8 +122,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
   void renderImpl() override {
     auto valueChanged = false;
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::InputFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep,
-                        format.c_str());
+      valueChanged = ImGui::InputFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step,
+                                       data.fastStep, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
       valueChanged = ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
@@ -135,7 +135,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
       valueChanged = ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::InputInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep);
+      valueChanged =
+          ImGui::InputInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
       valueChanged = ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
@@ -147,8 +148,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
       valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
     }
     if constexpr (std::same_as<T, double>) {
-      valueChanged = ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), data.step,
-                         data.fastStep, format.c_str());
+      valueChanged = ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
+                                        data.step, data.fastStep, format.c_str());
     }
     if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }

@@ -5,8 +5,8 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
 #define PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
 
-#include "interface/Element.h"
-#include "interface/ItemElement.h"
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <imgui.h>
 #include <optional>
 #include <pf_imgui/_export.h>

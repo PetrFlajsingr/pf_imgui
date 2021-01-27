@@ -5,11 +5,11 @@
 #ifndef PF_IMGUI_ELEMENTS_FILEDIALOG_H
 #define PF_IMGUI_ELEMENTS_FILEDIALOG_H
 
-#include "../enums.h"
+#include <pf_imgui/enums.h>
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Labellable.h>
-#include <pf_imgui/elements/interface/Renderable.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Renderable.h>
 #include <string>
 #include <utility>
 #include <vector>

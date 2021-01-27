@@ -5,15 +5,15 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_WINDOW_H
 #define PF_IMGUI_IMGUI_ELEMENTS_WINDOW_H
 
-#include "MenuBars.h"
-#include "interface/ElementContainer.h"
-#include "interface/Resizable.h"
 #include <memory>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Collapsible.h>
-#include <pf_imgui/elements/interface/Focusable.h>
-#include <pf_imgui/elements/interface/Hoverable.h>
-#include <pf_imgui/elements/interface/Positionable.h>
+#include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/interface/Collapsible.h>
+#include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/Focusable.h>
+#include <pf_imgui/interface/Hoverable.h>
+#include <pf_imgui/interface/Positionable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -24,11 +24,12 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public Hoverable,
                                public Collapsible,
                                public Resizable,
-                               public Positionable, public Labellable {
+                               public Positionable,
+                               public Labellable {
  public:
-  Window(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No, Persistent persistent = Persistent::No);
+  Window(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No,
+         Persistent persistent = Persistent::No);
   Window(std::string name, std::string label, Persistent persistent);
-
 
   [[nodiscard]] WindowMenuBar &getMenuBar();
   [[nodiscard]] bool hasMenuBar() const;

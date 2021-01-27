@@ -10,7 +10,7 @@
 #include "layout_decorators.h"
 #include <memory>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Positionable.h>
+#include <pf_imgui/interface/Positionable.h>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <vector>
@@ -21,8 +21,10 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
  public:
   AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No,
                  ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
-  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder, Persistent persistent = Persistent::No);
-  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
+  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
+                 Persistent persistent = Persistent::No);
+  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+                 Persistent persistent = Persistent::No);
 
   inline auto getChildren() {
     return children | ranges::views::transform([](auto &child) -> Element & { return *child.first; });

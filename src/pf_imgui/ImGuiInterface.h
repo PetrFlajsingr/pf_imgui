@@ -5,16 +5,16 @@
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 
-#include "elements/FileDialog.h"
-#include "elements/Dialog.h"
-#include "elements/MenuBars.h"
-#include "elements/Window.h"
-#include "elements/interface/ElementContainer.h"
 #include "fwd.h"
+#include "src/pf_imgui/dialogs/Dialog.h"
+#include "src/pf_imgui/dialogs/FileDialog.h"
+#include "src/pf_imgui/dialogs/Window.h"
 #include <imgui.h>
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/interface/ElementContainer.h>
 #include <string>
 #include <toml++/toml.h>
 #include <vector>
@@ -44,9 +44,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   [[nodiscard]] const toml::table &getConfig() const;
 
   [[nodiscard]] bool isWindowHovered() const;
-
   [[nodiscard]] bool isKeyboardCaptured() const;
-
 
   void updateConfig();
   void setStateFromConfig();

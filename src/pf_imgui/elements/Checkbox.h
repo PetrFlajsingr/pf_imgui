@@ -5,11 +5,11 @@
 #ifndef PF_IMGUI_ELEMENTS_CHECKBOX_H
 #define PF_IMGUI_ELEMENTS_CHECKBOX_H
 
-#include "interface/ItemElement.h"
-#include "interface/Labellable.h"
-#include "interface/Savable.h"
-#include "interface/ValueObservable.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 
 namespace pf::ui::ig {

@@ -3,8 +3,8 @@
 //
 
 #include "ImGuiInterface.h"
-#include "elements/Dialog.h"
 #include "serialization.h"
+#include "src/pf_imgui/dialogs/Dialog.h"
 #include <imgui_internal.h>
 #include <implot.h>
 #include <pf_common/algorithms.h>

@@ -6,9 +6,9 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_RADIOGROUP_H
 
 #include "RadioButton.h"
-#include "interface/Labellable.h"
-#include "interface/Savable.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Savable.h>
 #include <string>
 #include <vector>
 

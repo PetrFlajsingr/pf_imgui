@@ -5,10 +5,9 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_IMAGE_H
 #define PF_IMGUI_IMGUI_ELEMENTS_IMAGE_H
 
-#include "../enums.h"
-#include "interface/Clickable.h"
-#include "interface/ItemElement.h"
-#include "interface/Resizable.h"
+#include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <functional>
 #include <pf_imgui/_export.h>
 #include <string>

@@ -5,11 +5,10 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_COLORCHOOSER_H
 #define PF_IMGUI_IMGUI_ELEMENTS_COLORCHOOSER_H
 
-#include "../serialization.h"
-#include "interface/ItemElement.h"
-#include "interface/Labellable.h"
-#include "interface/Savable.h"
-#include "interface/ValueObservable.h"
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueObservable.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>

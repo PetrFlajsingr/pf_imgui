@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_HEATMAP_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_HEATMAP_H
 
-#include "PlotDataBase.h"
+#include <pf_imgui/elements/plots/types/PlotDataBase.h>
 #include <algorithm>
 #include <implot.h>
 #include <string>

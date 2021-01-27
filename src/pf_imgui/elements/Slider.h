@@ -5,10 +5,6 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
 #define PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
 
-#include "interface/ItemElement.h"
-#include "interface/Labellable.h"
-#include "interface/Savable.h"
-#include "interface/ValueObservable.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
@@ -16,6 +12,10 @@
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 #include <utility>
 

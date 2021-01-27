@@ -5,12 +5,13 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
 #define PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
 
-#include "../fwd.h"
-#include "layouts/BoxLayout.h"
-#include "interface/Labellable.h"
 #include <memory>
 #include <optional>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/layouts/BoxLayout.h>
 #include <string>
 #include <vector>
 

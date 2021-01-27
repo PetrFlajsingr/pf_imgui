@@ -5,11 +5,11 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
 #define PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
 
-#include "interface/ItemElement.h"
-#include "interface/Resizable.h"
-#include "interface/ValueObservable.h"
 #include <imgui.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 
 namespace pf::ui::ig {

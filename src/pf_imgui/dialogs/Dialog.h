@@ -5,11 +5,11 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
 #define PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
 
-#include "interface/ElementContainer.h"
-#include "interface/Labellable.h"
-#include "interface/Renderable.h"
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/Labellable.h>
 #include <string>
 
 namespace pf::ui::ig {

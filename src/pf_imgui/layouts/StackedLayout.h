@@ -7,7 +7,7 @@
 
 #include "ResizableLayout.h"
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/ElementContainer.h>
+#include <pf_imgui/interface/ElementContainer.h>
 #include <vector>
 
 namespace pf::ui::ig {

@@ -5,12 +5,12 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 
-#include "interface/Labellable.h"
 #include <include/ImGuiFlamegraph/imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Resizable.h>
-#include <src/pf_imgui/elements/interface/Element.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
 

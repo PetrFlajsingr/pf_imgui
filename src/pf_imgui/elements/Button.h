@@ -5,12 +5,12 @@
 #ifndef PF_IMGUI_ELEMENTS_BUTTON_H
 #define PF_IMGUI_ELEMENTS_BUTTON_H
 
-#include "interface/Clickable.h"
-#include "interface/ItemElement.h"
-#include "interface/Labellable.h"
-#include "interface/Resizable.h"
 #include <functional>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 
 namespace pf::ui::ig {

@@ -6,9 +6,9 @@
 #define PF_IMGUI_SERIALIZATION_H
 
 #include "ui_tree_traversal.h"
-#include <pf_imgui/elements/interface/Element.h>
-#include <pf_imgui/elements/interface/Savable.h>
-#include <src/pf_imgui/elements/interface/Layout.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/Layout.h>
 #include <toml++/toml_array.h>
 #include <toml++/toml_table.h>
 

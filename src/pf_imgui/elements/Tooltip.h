@@ -6,7 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TOOLTIP_H
 
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/ElementContainer.h>
+#include <pf_imgui/interface/ElementContainer.h>
 
 namespace pf::ui::ig {
 

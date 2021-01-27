@@ -5,10 +5,10 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H
 
-#include "../Tooltip.h"
 #include "Element.h"
 #include "Focusable.h"
 #include "Hoverable.h"
+#include "src/pf_imgui/elements/Tooltip.h"
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <string>

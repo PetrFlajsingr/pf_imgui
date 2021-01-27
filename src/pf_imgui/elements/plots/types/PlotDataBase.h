@@ -5,15 +5,15 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 
-#include "../../interface/Labellable.h"
 #include <algorithm>
 #include <concepts>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Labellable.h>
 #include <range/v3/algorithm/minmax.hpp>
 #include <range/v3/core.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
-#include <src/pf_imgui/elements/interface/Element.h>
 #include <vector>
 
 namespace pf::ui::ig::plot_type {

@@ -6,9 +6,9 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Collapsible.h>
-#include <pf_imgui/elements/interface/Element.h>
-#include <pf_imgui/elements/interface/Resizable.h>
+#include <src/pf_imgui/interface/Collapsible.h>
+#include <src/pf_imgui/interface/Element.h>
+#include <src/pf_imgui/interface/Resizable.h>
 #include <vector>
 
 namespace pf::ui::ig {

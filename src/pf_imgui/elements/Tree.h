@@ -5,9 +5,9 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_TREE_H
 #define PF_IMGUI_IMGUI_ELEMENTS_TREE_H
 
-#include "interface/ElementContainer.h"
-#include "interface/Labellable.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/Labellable.h>
 #include <string>
 
 namespace pf::ui::ig {

@@ -75,7 +75,7 @@ set(SOURCES
         src/pf_imgui/elements/Button.cpp
         src/pf_imgui/elements/Checkbox.cpp
         src/pf_imgui/elements/ComboBox.cpp
-        src/pf_imgui/elements/Dialog.cpp
+        src/pf_imgui/dialogs/Dialog.cpp
         src/pf_imgui/elements/Group.cpp
         src/pf_imgui/elements/Image.cpp
         src/pf_imgui/elements/InputText.cpp
@@ -90,9 +90,9 @@ set(SOURCES
         src/pf_imgui/elements/SliderAngle.cpp
         src/pf_imgui/elements/Text.cpp
         src/pf_imgui/elements/Tree.cpp
-        src/pf_imgui/elements/Window.cpp
+        src/pf_imgui/dialogs/Window.cpp
         src/pf_imgui/elements/Tooltip.cpp
-        src/pf_imgui/elements/FileDialog.cpp
+        src/pf_imgui/dialogs/FileDialog.cpp
         src/pf_imgui/elements/FlameGraph.cpp
         src/pf_imgui/elements/plots/PieChart.cpp
         src/pf_imgui/elements/plots/types/PlotDataBase.cpp
@@ -102,25 +102,25 @@ set(SOURCES
         src/pf_imgui/elements/plots/types/Stems.cpp
         src/pf_imgui/elements/plots/types/HeatMap.cpp
         src/pf_imgui/elements/plots/types/Digital.cpp
-        src/pf_imgui/elements/interface/ElementContainer.cpp
-        src/pf_imgui/elements/interface/Element.cpp
-        src/pf_imgui/elements/interface/Labellable.cpp
-        src/pf_imgui/elements/interface/Resizable.cpp
-        src/pf_imgui/elements/interface/Savable.cpp
-        src/pf_imgui/elements/interface/Clickable.cpp
-        src/pf_imgui/elements/interface/ItemElement.cpp
-        src/pf_imgui/elements/interface/Focusable.cpp
-        src/pf_imgui/elements/interface/Hoverable.cpp
-        src/pf_imgui/elements/interface/Collapsible.cpp
-        src/pf_imgui/elements/interface/Renderable.cpp
-        src/pf_imgui/elements/interface/Positionable.cpp
-        src/pf_imgui/elements/layouts/ResizableLayout.cpp
-        src/pf_imgui/elements/layouts/BoxLayout.cpp
-        src/pf_imgui/elements/layouts/GridLayout.cpp
-        src/pf_imgui/elements/layouts/StackedLayout.cpp
-        src/pf_imgui/elements/layouts/AbsoluteLayout.cpp
-        src/pf_imgui/elements/layouts/StretchLayout.cpp
-        src/pf_imgui/elements/interface/Layout.cpp
+        src/pf_imgui/interface/ElementContainer.cpp
+        src/pf_imgui/interface/Element.cpp
+        src/pf_imgui/interface/Labellable.cpp
+        src/pf_imgui/interface/Resizable.cpp
+        src/pf_imgui/interface/Savable.cpp
+        src/pf_imgui/interface/Clickable.cpp
+        src/pf_imgui/interface/ItemElement.cpp
+        src/pf_imgui/interface/Focusable.cpp
+        src/pf_imgui/interface/Hoverable.cpp
+        src/pf_imgui/interface/Collapsible.cpp
+        src/pf_imgui/interface/Renderable.cpp
+        src/pf_imgui/interface/Positionable.cpp
+        src/pf_imgui/layouts/ResizableLayout.cpp
+        src/pf_imgui/layouts/BoxLayout.cpp
+        src/pf_imgui/layouts/GridLayout.cpp
+        src/pf_imgui/layouts/StackedLayout.cpp
+        src/pf_imgui/layouts/AbsoluteLayout.cpp
+        src/pf_imgui/layouts/StretchLayout.cpp
+        src/pf_imgui/interface/Layout.cpp
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.cpp
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
@@ -140,7 +140,7 @@ set(INCLUDES
         src/pf_imgui/elements/Checkbox.h
         src/pf_imgui/elements/ColorChooser.h
         src/pf_imgui/elements/ComboBox.h
-        src/pf_imgui/elements/Dialog.h
+        src/pf_imgui/dialogs/Dialog.h
         src/pf_imgui/elements/DragInput.h
         src/pf_imgui/elements/Group.h
         src/pf_imgui/elements/Image.h
@@ -159,9 +159,9 @@ set(INCLUDES
         src/pf_imgui/elements/TabBar.h
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
-        src/pf_imgui/elements/Window.h
+        src/pf_imgui/dialogs/Window.h
         src/pf_imgui/elements/Tooltip.h
-        src/pf_imgui/elements/FileDialog.h
+        src/pf_imgui/dialogs/FileDialog.h
         src/pf_imgui/elements/FlameGraph.h
         src/pf_imgui/elements/plots.h
         src/pf_imgui/elements/plots/PieChart.h
@@ -174,29 +174,29 @@ set(INCLUDES
         src/pf_imgui/elements/plots/types/Stems.h
         src/pf_imgui/elements/plots/types/HeatMap.h
         src/pf_imgui/elements/plots/types/Digital.h
-        src/pf_imgui/elements/interface/ElementContainer.h
-        src/pf_imgui/elements/interface/Element.h
-        src/pf_imgui/elements/interface/Labellable.h
-        src/pf_imgui/elements/interface/Resizable.h
-        src/pf_imgui/elements/interface/Savable.h
-        src/pf_imgui/elements/interface/Clickable.h
-        src/pf_imgui/elements/interface/ValueObservable.h
-        src/pf_imgui/elements/interface/ItemElement.h
-        src/pf_imgui/elements/interface/Observable_impl.h
-        src/pf_imgui/elements/interface/Focusable.h
-        src/pf_imgui/elements/interface/Hoverable.h
-        src/pf_imgui/elements/interface/Collapsible.h
-        src/pf_imgui/elements/interface/Renderable.h
-        src/pf_imgui/elements/interface/Positionable.h
-        src/pf_imgui/elements/layouts/ResizableLayout.h
-        src/pf_imgui/elements/layouts/BoxLayout.h
-        src/pf_imgui/elements/layouts/layouts.h
-        src/pf_imgui/elements/layouts/GridLayout.h
-        src/pf_imgui/elements/layouts/StackedLayout.h
-        src/pf_imgui/elements/layouts/AbsoluteLayout.h
-        src/pf_imgui/elements/layouts/StretchLayout.h
-        src/pf_imgui/elements/layouts/layout_decorators.h
-        src/pf_imgui/elements/interface/Layout.h
+        src/pf_imgui/interface/ElementContainer.h
+        src/pf_imgui/interface/Element.h
+        src/pf_imgui/interface/Labellable.h
+        src/pf_imgui/interface/Resizable.h
+        src/pf_imgui/interface/Savable.h
+        src/pf_imgui/interface/Clickable.h
+        src/pf_imgui/interface/ValueObservable.h
+        src/pf_imgui/interface/ItemElement.h
+        src/pf_imgui/interface/Observable_impl.h
+        src/pf_imgui/interface/Focusable.h
+        src/pf_imgui/interface/Hoverable.h
+        src/pf_imgui/interface/Collapsible.h
+        src/pf_imgui/interface/Renderable.h
+        src/pf_imgui/interface/Positionable.h
+        src/pf_imgui/layouts/ResizableLayout.h
+        src/pf_imgui/layouts/BoxLayout.h
+        src/pf_imgui/layouts/layouts.h
+        src/pf_imgui/layouts/GridLayout.h
+        src/pf_imgui/layouts/StackedLayout.h
+        src/pf_imgui/layouts/AbsoluteLayout.h
+        src/pf_imgui/layouts/StretchLayout.h
+        src/pf_imgui/layouts/layout_decorators.h
+        src/pf_imgui/interface/Layout.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.h

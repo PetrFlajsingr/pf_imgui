@@ -11,7 +11,7 @@
 #include <pf_common/enums.h>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/interface/Resizable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <range/v3/view/addressof.hpp>
 #include <vector>
 
@@ -20,9 +20,12 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
  public:
   BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
-            AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size, ShowBorder showBorder, Persistent persistent = Persistent::No);
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size, AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
+            AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
+            Persistent persistent = Persistent::No);
+  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size, ShowBorder showBorder,
+            Persistent persistent = Persistent::No);
+  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
+            AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
 
   [[nodiscard]] LayoutDirection getLayoutDirection() const;
   void setLayoutDirection(LayoutDirection layoutDirection);
