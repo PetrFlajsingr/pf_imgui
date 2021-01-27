@@ -5,11 +5,11 @@
 #ifndef PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
 #define PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
 
-#include <pf_imgui/interface/Element.h>
-#include <pf_imgui/interface/ItemElement.h>
 #include <imgui.h>
 #include <optional>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <string>
 
 namespace pf::ui::ig {

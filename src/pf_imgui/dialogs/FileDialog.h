@@ -5,9 +5,9 @@
 #ifndef PF_IMGUI_ELEMENTS_FILEDIALOG_H
 #define PF_IMGUI_ELEMENTS_FILEDIALOG_H
 
-#include <pf_imgui/enums.h>
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/enums.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>

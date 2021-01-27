@@ -16,10 +16,11 @@
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
  public:
-  GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height, AllowCollapse allowCollapse = AllowCollapse::No,
-             ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
   GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
-             ShowBorder showBorder, Persistent persistent = Persistent::No);
+             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
+             Persistent persistent = Persistent::No);
+  GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height, ShowBorder showBorder,
+             Persistent persistent = Persistent::No);
   GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
              AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
 

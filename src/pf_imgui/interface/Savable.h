@@ -6,9 +6,9 @@
 #define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_SAVABLEELEMENT_H
 
 #include <pf_imgui/_export.h>
+#include <pf_imgui/enums.h>
 #include <string>
 #include <toml++/toml.h>
-#include <pf_imgui/enums.h>
 
 namespace pf::ui::ig {
 

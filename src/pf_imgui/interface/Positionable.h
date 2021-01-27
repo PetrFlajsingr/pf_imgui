@@ -5,8 +5,8 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_POSITIONABLE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_POSITIONABLE_H
 
-#include <imgui.h>
 #include "Observable_impl.h"
+#include <imgui.h>
 
 namespace pf::ui::ig {
 class Positionable {
@@ -24,6 +24,7 @@ class Positionable {
 
  protected:
   void updatePosition(ImVec2 pos);
+
  private:
   ImVec2 position;
   Observable_impl<ImVec2> observableImpl;

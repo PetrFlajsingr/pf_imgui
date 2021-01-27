@@ -106,5 +106,4 @@ void ImGuiInterface::removeDialog(Dialog &dialog) {
   }
 }
 
-
 }// namespace pf::ui::ig
