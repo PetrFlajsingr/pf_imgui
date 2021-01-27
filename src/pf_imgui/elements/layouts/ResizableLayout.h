@@ -9,13 +9,14 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Resizable.h>
+#include <string>
 
 namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT ResizableLayout : public Layout, public Resizable {
  public:
   ResizableLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
-                  ShowBorder showBorder);
+                  ShowBorder showBorder, Persistent persistent);
 
  protected:
   [[nodiscard]] ImVec2 getSizeIfCollapsed() const;

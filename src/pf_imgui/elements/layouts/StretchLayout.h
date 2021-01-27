@@ -13,8 +13,12 @@ namespace pf::ui::ig {
 class StretchLayout : public ResizableLayout {
  public:
   StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch,
-                AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No);
-  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, ShowBorder showBorder);
+                AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
+                Persistent persistent = Persistent::No);
+  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, ShowBorder showBorder,
+                Persistent persistent = Persistent::No);
+  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, AllowCollapse allowCollapse,
+                Persistent persistent = Persistent::No);
 
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> &&std::derived_from<T, Resizable> &&

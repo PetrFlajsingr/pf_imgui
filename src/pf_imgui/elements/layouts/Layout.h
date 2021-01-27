@@ -17,8 +17,8 @@ namespace pf::ui::ig {
 // TODO: flags getter for children
 class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
  public:
-  explicit Layout(const std::string &elementName, AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No);
-  Layout(const std::string &elementName, ShowBorder showBorder);
+  explicit Layout(const std::string &elementName, AllowCollapse allowCollapse, ShowBorder showBorder,
+                  Persistent persistent);
 
   [[nodiscard]] bool isDrawBorder() const;
   void setDrawBorder(bool drawBorder);
@@ -26,9 +26,7 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
   [[nodiscard]] bool isScrollable() const;
   void setScrollable(bool scrollable);
 
-  [[nodiscard]] virtual std::vector<Renderable*> getRenderables() = 0;
-
-
+  [[nodiscard]] virtual std::vector<Renderable *> getRenderables() = 0;
 
  protected:
   [[nodiscard]] bool renderCollapseButton();

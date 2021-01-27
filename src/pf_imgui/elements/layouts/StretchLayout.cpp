@@ -8,14 +8,18 @@
 namespace pf::ui::ig {
 
 StretchLayout::StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch,
-                             AllowCollapse allowCollapse, ShowBorder showBorder)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder), stretch(stretch) {}
+                             AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
+    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), stretch(stretch) {}
 
-StretchLayout::StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, ShowBorder showBorder)
-    : StretchLayout(elementName, size, stretch, AllowCollapse::No, showBorder) {}
+StretchLayout::StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, ShowBorder showBorder,
+                             Persistent persistent)
+    : StretchLayout(elementName, size, stretch, AllowCollapse::No, showBorder, persistent) {}
+
+StretchLayout::StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch,
+                             AllowCollapse allowCollapse, Persistent persistent)
+    : StretchLayout(elementName, size, stretch, allowCollapse, ShowBorder::No, persistent) {}
 
 Stretch StretchLayout::getStretch() const { return stretch; }
-
 void StretchLayout::setStretch(Stretch newStretch) {
   stretch = newStretch;
   switch (stretch) {

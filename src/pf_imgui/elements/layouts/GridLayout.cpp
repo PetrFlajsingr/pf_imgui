@@ -9,21 +9,24 @@
 namespace pf::ui::ig {
 
 GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
-                       AllowCollapse allowCollapse, ShowBorder showBorder)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder), width(width), height(height) {
+                       AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
+    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), width(width), height(height) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
   std::ranges::fill(cells, nullptr);
 }
 
 GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
-                       ShowBorder showBorder)
-    : GridLayout(elementName, size, width, height, AllowCollapse::No, showBorder) {}
+                       ShowBorder showBorder, Persistent persistent)
+    : GridLayout(elementName, size, width, height, AllowCollapse::No, showBorder, persistent) {}
+
+GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
+                       AllowCollapse allowCollapse, Persistent persistent)
+    : GridLayout(elementName, size, width, height, allowCollapse, ShowBorder::No, persistent) {}
 
 void GridLayout::setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout) {
   cells[indexForCell(column, row)] = std::move(layout);
 }
-
 void GridLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;

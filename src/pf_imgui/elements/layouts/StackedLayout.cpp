@@ -10,11 +10,16 @@
 namespace pf::ui::ig {
 
 StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
-                             ShowBorder showBorder)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder) {}
+                             ShowBorder showBorder, Persistent persistent)
+    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
 
-StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder)
-    : StackedLayout(elementName, size, AllowCollapse::No, showBorder) {}
+StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
+                             Persistent persistent)
+    : StackedLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
+
+StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+                             Persistent persistent)
+    : StackedLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
 
 void StackedLayout::renderImpl() {
   const auto flags =
@@ -42,10 +47,9 @@ void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
   stacks.erase(stacks.begin() + srcIndex);
   stacks.insert(stacks.begin() + dstIndex, std::move(stack));
 }
-
 std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
-void StackedLayout::setIndex(std::size_t index) { selectedIndex = index; }
 
+void StackedLayout::setIndex(std::size_t index) { selectedIndex = index; }
 StackedLayout::StackContainer &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
 StackedLayout::StackContainer &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
 std::vector<Renderable *> StackedLayout::getRenderables() {

@@ -7,11 +7,16 @@
 namespace pf::ui::ig {
 
 AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
-                               ShowBorder showBorder)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder) {}
+                               ShowBorder showBorder, Persistent persistent)
+    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
 
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder)
-    : AbsoluteLayout(elementName, size, AllowCollapse::No, showBorder) {}
+AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
+                               Persistent persistent)
+    : AbsoluteLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
+
+AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+                               Persistent persistent)
+    : AbsoluteLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
 
 void AbsoluteLayout::renderImpl() {
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
@@ -28,7 +33,6 @@ void AbsoluteLayout::renderImpl() {
   }
   ImGui::EndChild();
 }
-
 void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) {
   if (auto child =
           findIf(children | ranges::views::addressof, [name](auto child) { return child->first->getName() == name; });

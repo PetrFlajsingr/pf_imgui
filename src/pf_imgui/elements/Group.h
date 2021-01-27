@@ -14,7 +14,7 @@
 #include <string>
 
 namespace pf::ui::ig {
-class PF_IMGUI_EXPORT Group : public ItemElement, public Container, public Labellable, public Savable, public Collapsible {
+class PF_IMGUI_EXPORT Group : public ItemElement, public Container, public Labellable, public Collapsible {
  public:
 
   Group(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No, AllowCollapse allowCollapse = AllowCollapse::No);
@@ -22,9 +22,6 @@ class PF_IMGUI_EXPORT Group : public ItemElement, public Container, public Label
 
  protected:
   void renderImpl() override;
-  void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() override;
-
 };
 
 }// namespace pf::ui::ig

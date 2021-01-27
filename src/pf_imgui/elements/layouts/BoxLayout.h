@@ -20,8 +20,9 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
  public:
   BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
-            AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No);
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size, ShowBorder showBorder);
+            AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
+  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size, ShowBorder showBorder, Persistent persistent = Persistent::No);
+  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size, AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
 
   [[nodiscard]] LayoutDirection getLayoutDirection() const;
   void setLayoutDirection(LayoutDirection layoutDirection);

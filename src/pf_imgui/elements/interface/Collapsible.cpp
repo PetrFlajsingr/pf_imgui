@@ -3,9 +3,11 @@
 //
 
 #include "Collapsible.h"
+#include "Container.h"
 
 namespace pf::ui::ig {
-Collapsible::Collapsible(AllowCollapse allowCollapse) : collapsible(allowCollapse == AllowCollapse::Yes) {}
+Collapsible::Collapsible(AllowCollapse allowCollapse, Persistent persistent)
+    : Savable(persistent), collapsible(allowCollapse == AllowCollapse::Yes) {}
 
 bool Collapsible::isCollapsed() const { return collapsed; }
 
@@ -20,5 +22,9 @@ void Collapsible::notifyCollapseChanged(bool collapse) { observableImpl.notify(c
 bool Collapsible::isCollapsible() const { return collapsible; }
 
 void Collapsible::setCollapsible(bool newCollapsible) { collapsible = newCollapsible; }
+
+void Collapsible::unserialize_impl(const toml::table &src) { setCollapsed(*src["collapsed"].value<bool>()); }
+
+toml::table Collapsible::serialize_impl() { return toml::table{{{"collapsed", isCollapsed()}}}; }
 
 }// namespace pf::ui::ig

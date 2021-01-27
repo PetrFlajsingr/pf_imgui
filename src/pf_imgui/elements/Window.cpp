@@ -11,9 +11,12 @@
 
 namespace pf::ui::ig {
 
-Window::Window(std::string name, std::string title, AllowCollapse allowCollapse)
-    : Collapsible(allowCollapse), Resizable(ImVec2(0, 0)), Positionable(ImVec2{}), name(std::move(name)),
+Window::Window(std::string name, std::string title, AllowCollapse allowCollapse, Persistent persistent)
+    : Collapsible(allowCollapse, persistent), Resizable(ImVec2(0, 0)), Positionable(ImVec2{}), name(std::move(name)),
       title(std::move(title)) {}
+
+Window::Window(std::string name, std::string title, Persistent persistent)
+    : Window(std::move(name), std::move(title), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
@@ -54,15 +57,14 @@ WindowMenuBar &Window::getMenuBar() {
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
 
 void Window::removeMenuBar() { menuBar = nullptr; }
-
 void Window::setSize(const ImVec2 &newSize) {
   Resizable::setSize(newSize);
   ImGui::SetWindowSize(getTitle().c_str(), getSize());
 }
+
 void Window::render() {
   if (getVisibility() == Visibility::Visible) { renderImpl(); }
 }
-
 const std::string &Window::getName() const { return name; }
 void Window::setCollapsed(bool collapsed) {
   ImGui::SetWindowCollapsed(getTitle().c_str(), collapsed);

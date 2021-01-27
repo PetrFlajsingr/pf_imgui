@@ -6,11 +6,10 @@
 
 namespace pf::ui::ig {
 
-Layout::Layout(const std::string &elementName, AllowCollapse allowCollapse, ShowBorder showBorder)
-    : Element(elementName), Collapsible(allowCollapse), drawBorder(showBorder == ShowBorder::Yes) {}
+Layout::Layout(const std::string &elementName, AllowCollapse allowCollapse, ShowBorder showBorder,
+               Persistent persistent)
+    : Element(elementName), Collapsible(allowCollapse, persistent), drawBorder(showBorder == ShowBorder::Yes) {}
 
-Layout::Layout(const std::string &elementName, ShowBorder showBorder)
-    : Layout(elementName, AllowCollapse::No, showBorder) {}
 bool Layout::isDrawBorder() const { return drawBorder; }
 
 void Layout::setDrawBorder(bool showBorder) { drawBorder = showBorder; }

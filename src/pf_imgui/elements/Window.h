@@ -26,7 +26,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public Resizable,
                                public Positionable {
  public:
-  Window(std::string name, std::string title, AllowCollapse allowCollapse = AllowCollapse::No);
+  Window(std::string name, std::string title, AllowCollapse allowCollapse = AllowCollapse::No, Persistent persistent = Persistent::No);
+  Window(std::string name, std::string title, Persistent persistent);
 
   [[nodiscard]] const std::string &getTitle() const;
   void setTitle(const std::string &title);

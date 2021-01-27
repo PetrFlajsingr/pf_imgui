@@ -9,16 +9,20 @@
 namespace pf::ui::ig {
 
 BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
-                     AllowCollapse allowCollapse, ShowBorder showBorder)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder), layoutDirection(layoutDirection) {}
+                     AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
+    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), layoutDirection(layoutDirection) {}
 
 BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
-                     ShowBorder showBorder)
-    : BoxLayout(elementName, layoutDirection, size, AllowCollapse::No, showBorder) {}
+                     ShowBorder showBorder, Persistent persistent)
+    : BoxLayout(elementName, layoutDirection, size, AllowCollapse::No, showBorder, persistent) {}
+
+BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
+                     AllowCollapse allowCollapse, Persistent persistent)
+    : BoxLayout(elementName, layoutDirection, size, allowCollapse, ShowBorder::No, persistent) {}
 
 LayoutDirection BoxLayout::getLayoutDirection() const { return layoutDirection; }
-
 void BoxLayout::setLayoutDirection(LayoutDirection newLayoutDirection) { layoutDirection = newLayoutDirection; }
+
 void BoxLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
@@ -50,7 +54,6 @@ void BoxLayout::renderLeftToRight() {
 }
 
 void BoxLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
-
 void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
   if (index > children.size()) { throw StackTraceException::fmt("Index out of bounds: {}", index); }
   children.insert(children.begin() + index, std::move(child));

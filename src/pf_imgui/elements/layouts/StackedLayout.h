@@ -16,8 +16,12 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
   struct StackContainer : public Container {};
 
  public:
-  StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No);
-  StackedLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder = ShowBorder::No);
+  StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No,
+                ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
+  StackedLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
+                Persistent persistent = Persistent::No);
+  StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+                Persistent persistent = Persistent::No);
 
   StackContainer &pushStack();
   void removeStack(std::size_t index);

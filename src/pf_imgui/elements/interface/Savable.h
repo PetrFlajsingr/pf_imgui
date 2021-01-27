@@ -22,6 +22,8 @@ class PF_IMGUI_EXPORT Savable {
   void unserialize(const toml::table &src);
   std::optional<toml::table> serialize();
 
+  virtual ~Savable() = default;
+
  protected:
   virtual void unserialize_impl(const toml::table &src) = 0;
   virtual toml::table serialize_impl() = 0;
