@@ -6,6 +6,7 @@
 #define PF_IMGUI_IMGUIINTERFACE_H
 
 #include "elements/FileDialog.h"
+#include "elements/Dialog.h"
 #include "elements/MenuBars.h"
 #include "elements/Window.h"
 #include "elements/interface/ElementContainer.h"
