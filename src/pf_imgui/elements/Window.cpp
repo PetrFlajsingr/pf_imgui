@@ -20,7 +20,7 @@ Window::Window(std::string name, std::string label, Persistent persistent)
 
 void Window::renderImpl() {
   auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
-  if (ImGui::Begin(getName().c_str(), nullptr, flags)) {
+  if (ImGui::Begin(getLabel().c_str(), nullptr, flags)) {
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
@@ -46,7 +46,7 @@ void Window::renderImpl() {
 }
 
 WindowMenuBar &Window::getMenuBar() {
-  if (menuBar == nullptr) { menuBar = std::make_unique<WindowMenuBar>(std::string("getName()") + "_menu_bar"); }
+  if (menuBar == nullptr) { menuBar = std::make_unique<WindowMenuBar>(getName() + "_menu_bar"); }
   return *menuBar;
 }
 
@@ -55,7 +55,7 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 void Window::removeMenuBar() { menuBar = nullptr; }
 void Window::setSize(const ImVec2 &newSize) {
   Resizable::setSize(newSize);
-  ImGui::SetWindowSize(getName().c_str(), getSize());
+  ImGui::SetWindowSize(getLabel().c_str(), getSize());
 }
 
 void Window::render() {
@@ -63,15 +63,15 @@ void Window::render() {
 }
 
 void Window::setCollapsed(bool collapsed) {
-  ImGui::SetWindowCollapsed(getName().c_str(), collapsed);
+  ImGui::SetWindowCollapsed(getLabel().c_str(), collapsed);
   Collapsible::setCollapsed(collapsed);
 }
 void Window::setFocus() {
-  ImGui::SetWindowFocus(getName().c_str());
+  ImGui::SetWindowFocus(getLabel().c_str());
   Focusable::setFocus();
 }
 void Window::setPosition(ImVec2 pos) {
-  ImGui::SetWindowPos(getName().c_str(), pos);
+  ImGui::SetWindowPos(getLabel().c_str(), pos);
   Positionable::setPosition(pos);
 }
 
