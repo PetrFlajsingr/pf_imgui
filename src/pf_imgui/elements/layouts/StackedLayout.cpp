@@ -9,16 +9,22 @@
 
 namespace pf::ui::ig {
 
-StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, bool showBorder)
-    : ResizableLayout(elementName, size, showBorder) {}
+StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+                             ShowBorder showBorder)
+    : ResizableLayout(elementName, size, allowCollapse, showBorder) {}
+
+StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder)
+    : StackedLayout(elementName, size, AllowCollapse::No, showBorder) {}
 
 void StackedLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder(), flags)) {
-    if (selectedIndex.has_value()) {
-      auto &activeStack = stacks[*selectedIndex];
-      std::ranges::for_each(activeStack.getChildren(), [](auto &child) { child.render(); });
+  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
+    if (renderCollapseButton()) {
+      if (selectedIndex.has_value()) {
+        auto &activeStack = stacks[*selectedIndex];
+        std::ranges::for_each(activeStack.getChildren(), [](auto &child) { child.render(); });
+      }
     }
   }
   ImGui::EndChild();
@@ -38,12 +44,10 @@ void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
 }
 
 std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
-
 void StackedLayout::setIndex(std::size_t index) { selectedIndex = index; }
 
 StackedLayout::StackContainer &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
 StackedLayout::StackContainer &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
-
 std::vector<Renderable *> StackedLayout::getRenderables() {
   return stacks | ranges::views::transform([](auto &stack) { return stack.getChildren() | ranges::views::all; })
       | ranges::views::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })

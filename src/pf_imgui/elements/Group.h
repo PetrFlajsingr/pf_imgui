@@ -16,16 +16,15 @@
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Group : public ItemElement, public Container, public Labellable, public Savable, public Collapsible {
  public:
-  Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::No,
-        Persistent persistent = Persistent::No);
+
+  Group(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No, AllowCollapse allowCollapse = AllowCollapse::No);
+  Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse);
 
  protected:
   void renderImpl() override;
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
 
- private:
-  AllowCollapse collapsible;
 };
 
 }// namespace pf::ui::ig

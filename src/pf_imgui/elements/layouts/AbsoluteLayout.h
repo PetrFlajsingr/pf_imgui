@@ -19,7 +19,9 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
  public:
-  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, bool showBorder = false);
+  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No,
+                 ShowBorder showBorder = ShowBorder::No);
+  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder = ShowBorder::No);
 
   inline auto getChildren() {
     return children | ranges::views::transform([](auto &child) -> Element & { return *child.first; });

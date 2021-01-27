@@ -5,6 +5,8 @@
 #include "Collapsible.h"
 
 namespace pf::ui::ig {
+Collapsible::Collapsible(AllowCollapse allowCollapse) : collapsible(allowCollapse == AllowCollapse::Yes) {}
+
 bool Collapsible::isCollapsed() const { return collapsed; }
 
 void Collapsible::setCollapsed(bool collapse) {
@@ -13,6 +15,10 @@ void Collapsible::setCollapsed(bool collapse) {
     notifyCollapseChanged(collapsed);
   }
 }
-
 void Collapsible::notifyCollapseChanged(bool collapse) { observableImpl.notify(collapse); }
+
+bool Collapsible::isCollapsible() const { return collapsible; }
+
+void Collapsible::setCollapsible(bool newCollapsible) { collapsible = newCollapsible; }
+
 }// namespace pf::ui::ig

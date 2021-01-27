@@ -14,7 +14,11 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT ResizableLayout : public Layout, public Resizable {
  public:
-  ResizableLayout(const std::string &elementName, const ImVec2 &size, bool showBorder);
+  ResizableLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+                  ShowBorder showBorder);
+
+ protected:
+  [[nodiscard]] ImVec2 getSizeIfCollapsed() const;
 };
 
 }// namespace pf::ui::ig

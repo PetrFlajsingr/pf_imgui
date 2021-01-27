@@ -12,13 +12,16 @@
 namespace pf::ui::ig {
 class StretchLayout : public ResizableLayout {
  public:
-  StretchLayout(const std::string &elementName, Stretch stretch, const ImVec2 &size, bool showBorder = false);
+  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch,
+                AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No);
+  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, ShowBorder showBorder);
 
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> &&std::derived_from<T, Resizable> &&
       std::constructible_from<T, std::string, Args...>
           T &createChild(std::string name, Args &&...args) {
     child = std::make_unique<T>(name, std::forward<Args>(args)...);
+    renderableChild = dynamic_cast<Renderable *>(child.get());
     return *child;
   }
 
@@ -35,9 +38,8 @@ class StretchLayout : public ResizableLayout {
 
  private:
   Stretch stretch;
-  std::unique_ptr<Resizable> child;
-
-
+  std::unique_ptr<Resizable> child = nullptr;
+  Renderable *renderableChild;
 };
 }// namespace pf::ui::ig
 

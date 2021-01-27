@@ -7,10 +7,13 @@
 
 #include "Observable_impl.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/enums.h>
 
 namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Collapsible {
  public:
+  explicit Collapsible(AllowCollapse allowCollapse);
+
   Subscription addCollapseListener(std::invocable<bool> auto listener) {
     return observableImpl.template addListener(listener);
   }
@@ -18,11 +21,15 @@ class PF_IMGUI_EXPORT Collapsible {
   [[nodiscard]] bool isCollapsed() const;
   virtual void setCollapsed(bool collapsed);
 
+  [[nodiscard]] bool isCollapsible() const;
+  void setCollapsible(bool collapsible);
+
   virtual ~Collapsible() = default;
 
  private:
   void notifyCollapseChanged(bool collapse);
   bool collapsed = false;
+  bool collapsible;
   Observable_impl<bool> observableImpl;
 };
 }// namespace pf::ui::ig

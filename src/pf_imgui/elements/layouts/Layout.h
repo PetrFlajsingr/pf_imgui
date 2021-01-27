@@ -6,6 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/interface/Collapsible.h>
 #include <pf_imgui/elements/interface/Element.h>
 #include <pf_imgui/elements/interface/Resizable.h>
 #include <vector>
@@ -13,9 +14,11 @@
 namespace pf::ui::ig {
 
 // TODO: collapse support in children
-class PF_IMGUI_EXPORT Layout : public Element {
+// TODO: flags getter for children
+class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
  public:
-  Layout(const std::string &elementName, bool showBorder);
+  explicit Layout(const std::string &elementName, AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No);
+  Layout(const std::string &elementName, ShowBorder showBorder);
 
   [[nodiscard]] bool isDrawBorder() const;
   void setDrawBorder(bool drawBorder);
@@ -23,15 +26,16 @@ class PF_IMGUI_EXPORT Layout : public Element {
   [[nodiscard]] bool isScrollable() const;
   void setScrollable(bool scrollable);
 
-  [[nodiscard]] bool isCollapsible() const;
-  void setCollapsible(bool collapsible);
-
   [[nodiscard]] virtual std::vector<Renderable*> getRenderables() = 0;
+
+
+
+ protected:
+  [[nodiscard]] bool renderCollapseButton();
 
  private:
   bool drawBorder;
   bool scrollable = false;
-  bool collapsible = false;
 };
 
 }// namespace pf::ui::ig

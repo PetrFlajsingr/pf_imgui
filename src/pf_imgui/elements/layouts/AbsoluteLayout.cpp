@@ -6,22 +6,29 @@
 
 namespace pf::ui::ig {
 
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, bool showBorder)
-    : ResizableLayout(elementName, size, showBorder) {}
+AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+                               ShowBorder showBorder)
+    : ResizableLayout(elementName, size, allowCollapse, showBorder) {}
+
+AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder)
+    : AbsoluteLayout(elementName, size, AllowCollapse::No, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-  if (ImGui::BeginChild(getName().c_str(), getSize(), isDrawBorder(), flags)) {
-    std::ranges::for_each(children, [](auto &childPair) {
-      auto &[child, positionable] = childPair;
-      [[maybe_unused]] auto hihi = positionable->getPosition();
-      ImGui::SetCursorPos(positionable->getPosition());
-      child->render();
-    });
+  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
+    if (renderCollapseButton()) {
+      std::ranges::for_each(children, [](auto &childPair) {
+        auto &[child, positionable] = childPair;
+        [[maybe_unused]] auto hihi = positionable->getPosition();
+        ImGui::SetCursorPos(positionable->getPosition());
+        child->render();
+      });
+    }
   }
   ImGui::EndChild();
 }
+
 void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) {
   if (auto child =
           findIf(children | ranges::views::addressof, [name](auto child) { return child->first->getName() == name; });
@@ -37,7 +44,6 @@ void AbsoluteLayout::removeChild(const std::string &name) {
     children.erase(iter);
   }
 }
-
 std::vector<Renderable *> AbsoluteLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.first.get(); })
       | ranges::to_vector;

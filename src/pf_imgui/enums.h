@@ -32,6 +32,8 @@ enum class IsButton { Yes, No };
 
 enum class AllowCollapse { Yes, No };
 
+enum class ShowBorder { Yes, No };
+
 enum class Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };
 
 inline Stretch operator|(Stretch lhs, Stretch rhs) {
