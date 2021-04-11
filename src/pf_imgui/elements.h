@@ -28,6 +28,7 @@
 #include "elements/Tree.h"
 #include "layouts/layouts.h"
 #include "elements/plots.h"
+#include "elements/SimpleTable.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
 #include "src/pf_imgui/dialogs/Window.h"
 
