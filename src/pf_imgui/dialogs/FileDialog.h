@@ -10,6 +10,7 @@
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -24,26 +25,26 @@ struct PF_IMGUI_EXPORT FileExtensionSettings {
   std::optional<ImVec4> color;
 };
 
-class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable {
+class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public Resizable {
  public:
   FileDialog(const std::string &elementName, const std::string &label,
              const std::vector<FileExtensionSettings> &extSettings,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-             std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
-             uint32_t maxSelectedFiles = 1)
-      : Renderable(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
-        modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles), onFilesSelected(onSelect),
-        onSelectCanceled(onCancel) {
+             ImVec2 size = {200, 150}, std::string startPath = ".", std::string startName = "",
+             Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
+      : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
+        defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
+        onFilesSelected(onSelect), onSelectCanceled(onCancel) {
     prepareExtInfos(extSettings);
   }
 
   FileDialog(const std::string &elementName, const std::string &label,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-             std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
-             uint32_t maxSelectedDirs = 1)
-      : Renderable(elementName), Labellable(label), openPath(std::move(startPath)), defaultName(std::move(startName)),
-        modal(modality), fileType(FileType::Directory), maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect),
-        onSelectCanceled(onCancel) {}
+             ImVec2 size = {200, 150}, std::string startPath = ".", std::string startName = "",
+             Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
+      : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
+        defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
+        maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
 
   [[nodiscard]] bool isDone() const { return done; }
 
