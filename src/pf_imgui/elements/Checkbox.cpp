@@ -23,4 +23,6 @@ void Checkbox::setSelected(bool value) { setValueAndNotifyIfChanged(value); }
 
 bool Checkbox::isSelected() const { return getValue(); }
 
+void Checkbox::toggle() { setSelected(!isSelected()); }
+
 }// namespace pf::ui::ig

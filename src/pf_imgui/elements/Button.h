@@ -21,7 +21,6 @@ class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Res
          const ImVec2 &size = {0, 0});
 
   [[nodiscard]] ButtonType getType() const;
-
   void setType(ButtonType type);
 
  protected:

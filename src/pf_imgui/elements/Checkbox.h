@@ -19,14 +19,13 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
            bool value = false);
 
   void setSelected(bool value);
-
   [[nodiscard]] bool isSelected() const;
+  void toggle();
 
  protected:
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
 
- protected:
   void renderImpl() override;
 };
 

@@ -20,10 +20,11 @@ class PF_IMGUI_EXPORT Text : public ItemElement {
 
   [[nodiscard]] const std::string &getText() const;
   void setText(const std::string &text);
+  void setText(const std::string &fmt, auto &&...args) requires(sizeof...(args) > 0) {
+    setText(fmt::format(fmt, std::forward<decltype(args)>(args)...));
+  }
 
- protected:
-  void renderImpl() override;
-
+ protected : void renderImpl() override;
  private:
   std::string text;
   std::optional<ImVec4> color;
