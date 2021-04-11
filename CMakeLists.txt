@@ -17,6 +17,8 @@ if (NOT (EXISTS ${CPM_DOWNLOAD_LOCATION} AND CPM_VERSION STREQUAL CPM_DOWNLOAD_V
     file(DOWNLOAD https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
 endif ()
 
+add_compile_definitions(IMGUI_DISABLE_OBSOLETE_FUNCTIONS)
+
 include(${CPM_DOWNLOAD_LOCATION})
 
 set(CMAKE_CXX_STANDARD 20)
@@ -128,6 +130,7 @@ set(SOURCES
         src/include/imgui/imgui.cpp
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
+        src/include/imgui/imgui_tables.cpp
         )
 
 set(INCLUDES
