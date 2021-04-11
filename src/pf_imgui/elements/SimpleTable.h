@@ -58,10 +58,10 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
     if (startIndex >= rows.size()) { return {}; }
     return {rows.begin() + startIndex, rows.begin() + startIndex + ColumnCount};
   }
-  [[nodiscard]] std::string &getCell(std::size_t row, std::size_t column) {
-    auto row = getRow(row);
-    assert(row.size() < column);
-    return row[column];
+  [[nodiscard]] std::string &getCell(std::size_t rowIdx, std::size_t columnIdx) {
+    auto row = getRow(rowIdx);
+    assert(row.size() < columnIdx);
+    return row[columnIdx];
   }
 
  protected:
