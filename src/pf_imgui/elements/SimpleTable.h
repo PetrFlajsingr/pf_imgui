@@ -14,6 +14,7 @@
 
 namespace pf::ui::ig {
 
+template <std::size_t ColumnCount>
 using SimpleTableRow = std::array<std::string, ColumnCount>;
 enum class TableBorder : uint16_t {
   None = 0b0,
@@ -25,8 +26,9 @@ enum class TableBorder : uint16_t {
   Outer = 0b1100,
   Full = 0b1111
 };
+template <std::size_t ColumnCount>
 struct SimpleTableSettings {
-  std::optional<SimpleTableRow> header = std::nullopt;
+  std::optional<SimpleTableRow<ColumnCount>> header = std::nullopt;
   TableBorder border = TableBorder::None;
   bool resizableCols = false;
   bool reorderable = false;
@@ -101,7 +103,7 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
     if (settings.hideableCols) { result |= ImGuiTableFlags_Hideable; }
     return result;
   }
-  std::optional<SimpleTableRow> header;
+  std::optional<SimpleTableRow<ColumnCount>> header;
   std::vector<std::string> rows;
   ImGuiTableFlags_ tableFlags;
 };
