@@ -32,7 +32,7 @@ inline bool ToggleButton(const char *str_id, bool *v) {
 
   ImU32 col_bg;
   if (ImGui::IsItemHovered())
-    col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.78f, 0.78f, 0.78f, 1.0f), ImVec4(0.64f, 0.83f, 0.34f, 1.0f), t));
+    col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.78f, 0.78f, 0.78f, 1.0f), ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive], t));
   else
     col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.85f, 0.85f, 0.85f, 1.0f), ImVec4(0.56f, 0.83f, 0.26f, 1.0f), t));
 
