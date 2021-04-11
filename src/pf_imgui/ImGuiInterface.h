@@ -53,16 +53,16 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
 
   void openFileDialog(const std::string &caption, const std::vector<FileExtensionSettings> &extSettings,
                       std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-                      std::string startPath = ".", std::string startName = "", Modal modality = Modal::No,
-                      uint32_t maxSelectedFiles = 1) {
+                      ImVec2 size = {200, 150}, std::string startPath = ".", std::string startName = "",
+                      Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, extSettings, onSelect, onCancel,
                              startPath, startName, modality, maxSelectedFiles);
   }
 
   void openDirDialog(const std::string &caption, std::invocable<std::vector<std::string>> auto onSelect,
-                     std::invocable auto onCancel, std::string startPath = ".", std::string startName = "",
-                     Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
+                     std::invocable auto onCancel, ImVec2 size = {200, 150}, std::string startPath = ".",
+                     std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, startPath,
                              startName, modality, maxSelectedFiles);
