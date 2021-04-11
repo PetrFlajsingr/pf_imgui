@@ -31,11 +31,16 @@ inline bool ToggleButton(const char *str_id, bool *v) {
   }
 
   ImU32 col_bg;
-  if (ImGui::IsItemHovered())
-    col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.78f, 0.78f, 0.78f, 1.0f), ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive], t));
-  else
-    col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.85f, 0.85f, 0.85f, 1.0f), ImVec4(0.56f, 0.83f, 0.26f, 1.0f), t));
-
+  if (ImGui::IsItemHovered()) {
+    auto col = ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive];
+    col.x *= 1.1f;
+    col.y *= 1.1f;
+    col.z *= 1.1f;
+    col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.78f, 0.78f, 0.78f, 1.0f), col, t));
+  } else {
+    col_bg = ImGui::GetColorU32(
+        ImLerp(ImVec4(0.85f, 0.85f, 0.85f, 1.0f), ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive], t));
+  }
   draw_list->AddRectFilled(p, ImVec2(p.x + width, p.y + height), col_bg, height * 0.5f);
   draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (width - radius * 2.0f), p.y + radius), radius - 1.5f,
                              IM_COL32(255, 255, 255, 255));
