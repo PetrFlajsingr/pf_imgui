@@ -15,6 +15,7 @@
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/serialization.h>
 #include <string>
 #include <toml++/toml_node_view.h>
 
