@@ -92,7 +92,6 @@ set(SOURCES
         src/pf_imgui/elements/SliderAngle.cpp
         src/pf_imgui/elements/Text.cpp
         src/pf_imgui/elements/Tree.cpp
-        src/pf_imgui/elements/Table.cpp
         src/pf_imgui/dialogs/Window.cpp
         src/pf_imgui/elements/Tooltip.cpp
         src/pf_imgui/dialogs/FileDialog.cpp
@@ -163,7 +162,7 @@ set(INCLUDES
         src/pf_imgui/elements/TabBar.h
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
-        src/pf_imgui/elements/Table.h
+        src/pf_imgui/elements/SimpleTable.h
         src/pf_imgui/dialogs/Window.h
         src/pf_imgui/elements/Tooltip.h
         src/pf_imgui/dialogs/FileDialog.h
