@@ -91,7 +91,7 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
     return static_cast<UnderType>(lhs) & static_cast<UnderType>(rhs);
   }
 
-  static ImGuiTableFlags createFlags(SimpleTableSettings &&settings) {
+  static ImGuiTableFlags createFlags(SimpleTableSettings<ColumnCount> &&settings) {
     auto result = ImGuiTableFlags{};
     if (is(settings.border, Border::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
     if (is(settings.border, Border::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
