@@ -14,31 +14,31 @@
 
 namespace pf::ui::ig {
 
+enum class TableBorder : uint16_t {
+  None = 0b0,
+  HorizontalInner = 0b1,
+  VerticalInner = 0b10,
+  Inner = 0b11,
+  HorizontalOuter = 0b100,
+  VerticalOuter = 0b1000,
+  Outer = 0b1100,
+  Full = 0b1111
+};
+struct SimpleTableSettings {
+  std::optional<Row> header = std::nullopt;
+  TableBorder border = TableBorder::None;
+  bool resizableCols = false;
+  bool reorderable = false;
+  bool sortable = false;
+  bool hideableCols = false;
+};
+
 template<std::size_t ColumnCount>
 class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
  public:
   using Row = std::array<std::string, ColumnCount>;
 
-  enum class Border : uint16_t {
-    None = 0b0,
-    HorizontalInner = 0b1,
-    VerticalInner = 0b10,
-    Inner = 0b11,
-    HorizontalOuter = 0b100,
-    VerticalOuter = 0b1000,
-    Outer = 0b1100,
-    Full = 0b1111
-  };
-  struct Settings {
-    std::optional<Row> header = std::nullopt;
-    Border border = Border::None;
-    bool resizableCols = false;
-    bool reorderable = false;
-    bool sortable = false;
-    bool hideableCols = false;
-  };
-
-  explicit SimpleTable(const std::string &elementName, Settings &&settings)
+  SimpleTable(const std::string &elementName, SimpleTableSettings &&settings)
       : ItemElement(elementName), header(settings.header), tableFlags(createFlags(settings)) {}
 
   void addRow(const std::ranges::range auto &vals) {
@@ -84,12 +84,12 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
   }
 
  private:
-  static bool is(Border lhs, Border rhs) {
-    using UnderType = std::underlying_type<Border>;
+  static bool is(TableBorder lhs, TableBorder rhs) {
+    using UnderType = std::underlying_type<TableBorder>;
     return static_cast<UnderType>(lhs) & static_cast<UnderType>(rhs);
   }
 
-  static ImGuiTableFlags createFlags(Settings &&settings) {
+  static ImGuiTableFlags createFlags(SimpleTableSettings &&settings) {
     auto result = ImGuiTableFlags{};
     if (is(settings.border, Border::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
     if (is(settings.border, Border::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
