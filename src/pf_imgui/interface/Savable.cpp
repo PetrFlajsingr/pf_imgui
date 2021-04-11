@@ -3,7 +3,6 @@
 //
 
 #include "Savable.h"
-#include <utility>
 
 namespace pf::ui::ig {
 Savable::Savable(Persistent persistent) : persist(persistent == Persistent::Yes) {}

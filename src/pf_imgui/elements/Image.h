@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Click
 
   [[nodiscard]] bool isButton() const;
 
-  void setTextureId(ImTextureID textureId);
+  void setTextureId(ImTextureID imTextureId);
 
  protected:
   void renderImpl() override;

@@ -51,7 +51,7 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
   std::function<bool(std::string_view)> filterFnc = [](auto) { return true; };
   std::optional<std::size_t> recordLimit;
   std::vector<std::string> records;
-  Text *textArea;
+  Text *textArea = nullptr;
 };
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_IMGUI_ELEMENTS_MEMO_H

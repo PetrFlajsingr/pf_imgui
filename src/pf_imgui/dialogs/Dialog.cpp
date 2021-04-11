@@ -16,7 +16,7 @@ void Dialog::renderImpl() {
     return;
   }
   ImGui::OpenPopup(getLabel().c_str());
-  auto open = bool{};
+  bool open;
   if (modal == Modal::Yes) {
     open = ImGui::BeginPopupModal(getLabel().c_str());
   } else {

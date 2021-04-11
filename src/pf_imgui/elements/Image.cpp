@@ -22,7 +22,7 @@ void Image::renderImpl() {
   }
 }
 
-void Image::setTextureId(ImTextureID imTetureId) { textureId = imTetureId; }
+void Image::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
 
 bool Image::isButton() const { return isButton_; }
 

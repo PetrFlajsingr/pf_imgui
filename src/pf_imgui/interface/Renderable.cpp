@@ -13,11 +13,10 @@ namespace pf::ui::ig {
 
 Renderable::Renderable(std::string name) : name(std::move(name)) {}
 
-Renderable::Renderable(Renderable &&other) noexcept { visibility = other.visibility; }
+Renderable::Renderable(Renderable &&other) noexcept : visibility(other.visibility) {}
 
 Renderable &Renderable::operator=(Renderable &&other) noexcept {
   visibility = other.visibility;
-  ;
   return *this;
 }
 
