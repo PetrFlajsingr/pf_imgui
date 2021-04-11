@@ -6,8 +6,11 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SIMPLETABLE_H
 
 #include <imgui.h>
+#include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <ranges>
+#include <span>
 
 namespace pf::ui::ig {
 
@@ -22,7 +25,7 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
     VerticalInner = 0b10,
     Inner = 0b11,
     HorizontalOuter = 0b100,
-    HorizontalOuter = 0b1000,
+    VerticalOuter = 0b1000,
     Outer = 0b1100,
     Full = 0b1111
   };
@@ -37,25 +40,25 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
 
   explicit SimpleTable(Settings &&settings) : header(settings.header), tableFlags(createFlags(settings)) {}
 
-  void addRow(const std::ranges::range &vals) {
+  void addRow(const std::ranges::range auto &vals) {
     assert(std::ranges::size(vals) == ColumnCount);
     std::ranges::copy(vals, std::back_inserter(rows));
   }
   void addRow(const ToStringConvertible auto &...vals) {
     static_assert(sizeof...(vals) == ColumnCount);
-    (rows.template emplace_back(vals)...);
+    (rows.template emplace_back(vals), ...);
   }
   void removeRow(std::size_t index) {
     const auto startIndex = index * ColumnCount;
     if (startIndex >= rows.size()) { return; }
     rows.erase(rows.begin() + startIndex, rows.begin() + startIndex + ColumnCount);
   }
-  [[nodiscard]] std::span<std::string> getRow(std::size_it index) {
+  [[nodiscard]] std::span<std::string> getRow(std::size_t index) {
     const auto startIndex = index * ColumnCount;
     if (startIndex >= rows.size()) { return {}; }
     return {rows.begin() + startIndex, rows.begin() + startIndex + ColumnCount};
   }
-  [[nodiscard]] std::string &getCell(std::size_it row, std::size_t column) {
+  [[nodiscard]] std::string &getCell(std::size_t row, std::size_t column) {
     auto row = getRow(row);
     assert(row.size() < column);
     return row[column];
@@ -80,13 +83,13 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
   }
 
  private:
-  bool is(Border lhs, Border rhs) {
+  static bool is(Border lhs, Border rhs) {
     using UnderType = std::underlying_type<Border>;
     return static_cast<UnderType>(lhs) & static_cast<UnderType>(rhs);
   }
 
-  static ImGuiTableFlags_ createFlags(Settings &&settings) const {
-    auto result = ImGuiTableFlags_{};
+  static ImGuiTableFlags createFlags(Settings &&settings) {
+    auto result = ImGuiTableFlags{};
     if (is(settings.border, Border::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
     if (is(settings.border, Border::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
     if (is(settings.border, Border::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
