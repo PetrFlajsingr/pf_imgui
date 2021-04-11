@@ -19,7 +19,11 @@ void Checkbox::renderImpl() {
   bool valueChanged;
   switch (type) {
     case Type::Checkbox: valueChanged = ImGui::Checkbox(getLabel().c_str(), getValueAddress()); break;
-    case Type::Toggle: valueChanged = ToggleButton(getLabel().c_str(), getValueAddress()); break;
+    case Type::Toggle:
+      ImGui::Text(getLabel().c_str());
+      ImGui::SameLine();
+      valueChanged = ToggleButton(getLabel().c_str(), getValueAddress());
+      break;
   }
   if (valueChanged) { notifyValueChanged(); }
 }

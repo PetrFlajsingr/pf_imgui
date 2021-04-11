@@ -16,7 +16,6 @@ inline bool ToggleButton(const char *str_id, bool *v) {
   float height = ImGui::GetFrameHeight();
   float width = height * 1.55f;
   float radius = height * 0.50f;
-
   ImGui::InvisibleButton(str_id, ImVec2(width, height));
   const auto wasClicked = ImGui::IsItemClicked();
   if (wasClicked) *v = !*v;
