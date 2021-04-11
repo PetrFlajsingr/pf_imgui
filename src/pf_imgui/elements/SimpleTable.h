@@ -40,7 +40,7 @@ template<std::size_t ColumnCount>
 class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
  public:
 
-  SimpleTable(const std::string &elementName, SimpleTableSettings &&settings)
+  SimpleTable(const std::string &elementName, SimpleTableSettings<ColumnCount> &&settings)
       : ItemElement(elementName), header(settings.header), tableFlags(createFlags(settings)) {}
 
   void addRow(const std::ranges::range auto &vals) {
