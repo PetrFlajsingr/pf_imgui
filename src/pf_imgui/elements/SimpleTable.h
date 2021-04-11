@@ -87,7 +87,7 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
 
  private:
   static bool is(TableBorder lhs, TableBorder rhs) {
-    using UnderType = std::underlying_type<TableBorder>;
+    using UnderType = std::underlying_type_t<TableBorder>;
     return static_cast<UnderType>(lhs) & static_cast<UnderType>(rhs);
   }
 
