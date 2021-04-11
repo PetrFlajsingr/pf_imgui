@@ -38,7 +38,8 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
     bool hideableCols = false;
   };
 
-  explicit SimpleTable(Settings &&settings) : header(settings.header), tableFlags(createFlags(settings)) {}
+  explicit SimpleTable(const std::string &elementName, Settings &&settings)
+      : ItemElement(elementName), header(settings.header), tableFlags(createFlags(settings)) {}
 
   void addRow(const std::ranges::range auto &vals) {
     assert(std::ranges::size(vals) == ColumnCount);
@@ -46,7 +47,7 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement {
   }
   void addRow(const ToStringConvertible auto &...vals) {
     static_assert(sizeof...(vals) == ColumnCount);
-    (rows.template emplace_back(vals), ...);
+    (rows.template emplace_back(toString(vals)), ...);
   }
   void removeRow(std::size_t index) {
     const auto startIndex = index * ColumnCount;
