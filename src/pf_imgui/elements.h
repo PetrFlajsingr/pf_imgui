@@ -26,7 +26,7 @@
 #include "elements/TabBar.h"
 #include "elements/Text.h"
 #include "elements/Tree.h"
-#include "elements/layouts/layouts.h"
+#include "layouts/layouts.h"
 #include "elements/plots.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
 #include "src/pf_imgui/dialogs/Window.h"

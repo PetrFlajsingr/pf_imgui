@@ -15,6 +15,7 @@
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/serialization.h>
 #include <string>
 #include <toml++/toml_node_view.h>
 
@@ -25,7 +26,7 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, publ
  public:
   ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
                T value = T{})
-      : Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
 
  protected:
   void unserialize_impl(const toml::table &src) override {

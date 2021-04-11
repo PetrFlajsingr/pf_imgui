@@ -13,9 +13,15 @@
 #include <string>
 
 namespace pf::ui::ig {
+
 class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool>, public Labellable, public Savable {
  public:
+  enum class Type {
+    Checkbox, Toggle
+  };
   Checkbox(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
+           bool value = false);
+  Checkbox(const std::string &elementName, const std::string &label, Type checkboxType, Persistent persistent = Persistent::No,
            bool value = false);
 
   void setSelected(bool value);
@@ -23,6 +29,7 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
   void toggle();
 
  protected:
+  Type type;
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
 

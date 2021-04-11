@@ -38,18 +38,19 @@ void FileDialog::renderImpl() {
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      igfd::ImGuiFileDialog::Instance()->OpenModal(getName(), getLabel().c_str(), extCstr, defaultName, maxSelectCount);
+      ImGuiFileDialog::Instance()->OpenModal(getName(), getLabel().c_str(), extCstr, defaultName, maxSelectCount);
       break;
     case Modal::No:
-      igfd::ImGuiFileDialog::Instance()->OpenDialog(getName(), getLabel().c_str(), extCstr, defaultName,
-                                                    maxSelectCount);
+      ImGuiFileDialog::Instance()->OpenDialog(getName(), getLabel().c_str(), extCstr, defaultName, maxSelectCount);
       break;
   }
   setExtInfos();
-  if (igfd::ImGuiFileDialog::Instance()->FileDialog(getName(), ImGuiWindowFlags_NoCollapse, ImVec2{200, 150})) {
-    if (igfd::ImGuiFileDialog::Instance()->IsOk) {
-      const auto filePathName = igfd::ImGuiFileDialog::Instance()->GetFilePathName();
-      const auto selection = igfd::ImGuiFileDialog::Instance()->GetSelection();
+
+
+  if (ImGuiFileDialog::Instance()->Display(getName(), ImGuiWindowFlags_NoCollapse, getSize())) {
+    if (ImGuiFileDialog::Instance()->IsOk()) {
+      const auto filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+      const auto selection = ImGuiFileDialog::Instance()->GetSelection();
 
       if (!selection.empty()) {
         auto selectionVec = std::vector<std::string>();
@@ -62,13 +63,13 @@ void FileDialog::renderImpl() {
     } else {
       onSelectCanceled();
     }
-    igfd::ImGuiFileDialog::Instance()->CloseDialog(getName());
-    done = true;
+    ImGuiFileDialog::Instance()->Close();
   }
+  done = true;
 }
 
 void FileDialog::setExtInfos() {
-  for (const auto &[ext, color] : extColors) { igfd::ImGuiFileDialog::Instance()->SetExtentionInfos(ext, color); }
+  for (const auto &[ext, color] : extColors) { ImGuiFileDialog::Instance()->SetExtentionInfos(ext, color); }
 }
 
 }// namespace pf::ui::ig

@@ -16,6 +16,7 @@
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/serialization.h>
 #include <string>
 #include <utility>
 
@@ -63,7 +64,7 @@ concept UnformattedWithoutStep =
 
 template<typename T>
 concept FormattedWithStep =
-    OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> &&OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+    OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 template<typename T>
 concept FormattedWithoutStep =
     !OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
