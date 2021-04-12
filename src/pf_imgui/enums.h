@@ -6,6 +6,7 @@
 #define PF_IMGUI_ENUMS_H
 
 #include <cstdint>
+#include <imgui.h>
 #include <type_traits>
 
 namespace pf::ui::ig {
@@ -33,6 +34,35 @@ enum class IsButton { Yes, No };
 enum class AllowCollapse { Yes, No };
 
 enum class ShowBorder { Yes, No };
+
+enum class TableBorder : uint16_t {
+  None = 0b0,
+  HorizontalInner = 0b1,
+  VerticalInner = 0b10,
+  Inner = 0b11,
+  HorizontalOuter = 0b100,
+  VerticalOuter = 0b1000,
+  Outer = 0b1100,
+  Full = 0b1111
+};
+
+bool is(TableBorder lhs, TableBorder rhs) {
+  using T = std::underlying_type_t<TableBorder>;
+  return static_cast<T>(lhs) & static_cast<T>(rhs);
+}
+
+ImGuiTableFlags createFlags(TableBorder tableBorder, bool resizable, bool reorderable, bool sortable, bool hideable) {
+  auto result = ImGuiTableFlags{};
+  if (is(tableBorder, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
+  if (is(tableBorder, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
+  if (is(tableBorder, TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
+  if (is(tableBorder, TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }
+  if (resizable) { result |= ImGuiTableFlags_Resizable; }
+  if (reorderable) { result |= ImGuiTableFlags_Reorderable; }
+  if (sortable) { result |= ImGuiTableFlags_Sortable; }
+  if (hideable) { result |= ImGuiTableFlags_Hideable; }
+  return result;
+}
 
 enum class Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };
 

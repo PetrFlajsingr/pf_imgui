@@ -17,18 +17,10 @@ namespace pf::ui::ig {
 
 template<std::size_t ColumnCount>
 using StringTableRow = std::array<std::string, ColumnCount>;
-enum class TableBorder : uint16_t {
-  None = 0b0,
-  HorizontalInner = 0b1,
-  VerticalInner = 0b10,
-  Inner = 0b11,
-  HorizontalOuter = 0b100,
-  VerticalOuter = 0b1000,
-  Outer = 0b1100,
-  Full = 0b1111
-};
+
+
 template<std::size_t ColumnCount>
-struct StringTableSettings {
+struct TableSettings {
   std::optional<StringTableRow<ColumnCount>> header = std::nullopt;
   TableBorder border = TableBorder::None;
   bool resizableCols = false;
@@ -41,9 +33,10 @@ struct StringTableSettings {
 template<std::size_t ColumnCount>
 class PF_IMGUI_EXPORT StringTable : public ItemElement, public Resizable {
  public:
-  StringTable(const std::string &elementName, StringTableSettings<ColumnCount> &&settings)
+  StringTable(const std::string &elementName, TableSettings<ColumnCount> &&settings)
       : ItemElement(elementName), Resizable(settings.size), header(settings.header),
-        tableFlags(createFlags(std::move(settings))) {}
+        tableFlags(createFlags(settings.border, settings.resizableCols, settings.reorderable, settings.sortable,
+                               settings.hideableCols)) {}
 
   void addRow(const std::ranges::range auto &vals) {
     assert(std::ranges::size(vals) == ColumnCount);
@@ -88,23 +81,6 @@ class PF_IMGUI_EXPORT StringTable : public ItemElement, public Resizable {
   }
 
  private:
-  static bool is(TableBorder lhs, TableBorder rhs) {
-    using UnderType = std::underlying_type_t<TableBorder>;
-    return static_cast<UnderType>(lhs) & static_cast<UnderType>(rhs);
-  }
-
-  static ImGuiTableFlags createFlags(StringTableSettings<ColumnCount> &&settings) {
-    auto result = ImGuiTableFlags{};
-    if (is(settings.border, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
-    if (is(settings.border, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
-    if (is(settings.border, TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
-    if (is(settings.border, TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }
-    if (settings.resizableCols) { result |= ImGuiTableFlags_Resizable; }
-    if (settings.reorderable) { result |= ImGuiTableFlags_Reorderable; }
-    if (settings.sortable) { result |= ImGuiTableFlags_Sortable; }
-    if (settings.hideableCols) { result |= ImGuiTableFlags_Hideable; }
-    return result;
-  }
   std::optional<StringTableRow<ColumnCount>> header;
   std::vector<std::string> rows;
   ImGuiTableFlags tableFlags;
