@@ -24,6 +24,7 @@
 #include "elements/Slider.h"
 #include "elements/SliderAngle.h"
 #include "elements/StringTable.h"
+#include "elements/Table.h"
 #include "elements/TabBar.h"
 #include "elements/Text.h"
 #include "elements/Tree.h"
