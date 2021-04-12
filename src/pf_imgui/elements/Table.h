@@ -66,6 +66,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
 
     RowBuilder addClickListener(std::invocable auto fnc) requires (WasClickable) {
       std::get<TupleIndex>(resultRow)->addClickListener(std::forward<decltype(fnc)>(fnc));
+      return *this;
     }
 
    private : Table &table;
