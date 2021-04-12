@@ -18,7 +18,8 @@ namespace pf::ui::ig {
 template<std::derived_from<Renderable>... Cells>
 class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resizable {
  public:
-  using Row = std::tuple<std::unique_ptr<Cells>...>;
+  using Id = std::size_t;
+  using Row = std::tuple<Id, std::unique_ptr<Cells>...>;
   constexpr static auto ColumnCount = sizeof...(Cells);
 
   Table(const std::string &elementName, TableSettings<ColumnCount> &&settings,
@@ -42,12 +43,14 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
   template<std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
   class RowBuilder {
    public:
-    explicit RowBuilder(Table &parent) requires(sizeof...(FollowingCells) == ColumnCount - 1) : table(parent) {}
+    explicit RowBuilder(Table &parent) requires(sizeof...(FollowingCells) == ColumnCount - 1) : table(parent) {
+      std::get<0>(resultRow) = table.generateId();
+    }
     RowBuilder(Table &parent, Row &&row) : table(parent), resultRow(std::move(row)) {}
 
     template<typename... Args>
     auto operator()(Args &&...args) requires(std::constructible_from<CurrentCell, Args...>) {
-      std::get<TupleIndex>(resultRow) = std::make_unique<CurrentCell>(std::forward<Args>(args)...);
+      std::get<TupleIndex + 1>(resultRow) = std::make_unique<CurrentCell>(std::forward<Args>(args)...);
       if constexpr (sizeof...(FollowingCells) > 0) {
         return RowBuilder<TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
       } else {
@@ -73,12 +76,13 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
 
       std::ranges::for_each(rows, [](const auto &row) {
         ImGui::TableNextRow();
-        iterateTuple(
-            [](auto &column) {
-              ImGui::TableNextColumn();
-              column->render();
-            },
-            row);
+        iterateTuple(Visitor {
+          [](auto &column) {
+            ImGui::TableNextColumn();
+            column->render();
+          },
+              [](Id) {}
+        } row);
       });
       ImGui::EndTable();
     }
@@ -88,6 +92,10 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
   std::optional<StringTableRow<ColumnCount>> header;
   std::vector<Row> rows;
   ImGuiTableFlags tableFlags;
+
+  Id generateId() { return getNext(idGenerator); }
+
+  cppcoro::generator<Id> idGenerator = iota<Id>();
 };
 
 }// namespace pf::ui::ig
