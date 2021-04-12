@@ -10,10 +10,11 @@
 #include <pf_common/tuple.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/StringTable.h>
+#include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
-#include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/meta.h>
 
 namespace pf::ui::ig {
 
@@ -42,7 +43,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Row resultRow;
   };
 
-  template<bool WasClickable, std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
+  template<bool WasClickable, bool WasValueObservable, std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
   class RowBuilder {
    public:
     explicit RowBuilder(Table &parent) requires(sizeof...(FollowingCells) == ColumnCount - 1) : table(parent) {
@@ -54,18 +55,24 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     auto operator()(Args &&...args) requires(std::constructible_from<CurrentCell, std::string, Args...>) {
       using namespace std::string_literals;
       constexpr auto IsClickable = std::derived_from<CurrentCell, Clickable>;
+      constexpr auto IsValueObservable = IsValueObservable<CurrentCell>;
       std::get<TupleIndex + 1>(resultRow) = std::make_unique<CurrentCell>(
           "table_row"s + std::to_string(std::get<0>(resultRow)) + "_col" + std::to_string(TupleIndex),
           std::forward<Args>(args)...);
       if constexpr (sizeof...(FollowingCells) > 0) {
-        return RowBuilder<IsClickable, TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
+        return RowBuilder<IsClickable, IsValueObservable, TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
       } else {
         return RowBuilderFinish(table, std::move(resultRow));
       }
     }
 
-    RowBuilder &addClickListener(std::invocable auto fnc) requires (WasClickable) {
+    RowBuilder &addClickListener(std::invocable auto fnc) requires(WasClickable) {
       std::get<TupleIndex>(resultRow)->addClickListener(std::forward<decltype(fnc)>(fnc));
+      return *this;
+    }
+
+    RowBuilder &addValueListener(std::invocable<auto> auto fnc) requires(WasValueObservable) {
+      std::get<TupleIndex>(resultRow)->addValueListener(std::forward<decltype(fnc)>(fnc));
       return *this;
     }
 
@@ -73,7 +80,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Row resultRow;
   };
 
-  auto rowBuilder() { return RowBuilder<false, 0, Cells...>{*this}; }
+  auto rowBuilder() { return RowBuilder<false, false, 0, Cells...>{*this}; }
 
   void addRow(Row &&row) { rows.template emplace_back(std::move(row)); }
 
