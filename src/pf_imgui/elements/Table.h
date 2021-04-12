@@ -72,7 +72,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Row resultRow;
   };
 
-  auto rowBuilder() { return RowBuilder<0, Cells...>{*this}; }
+  auto rowBuilder() { return RowBuilder<false, 0, Cells...>{*this}; }
 
   void addRow(Row &&row) { rows.template emplace_back(std::move(row)); }
 
