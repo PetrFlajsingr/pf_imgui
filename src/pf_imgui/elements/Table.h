@@ -29,26 +29,37 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Labellable::setLabelVisible(label.has_value() ? Visibility::Visible : Visibility::Invisible);
   }
 
+  class RowBuilderFinish {
+   public:
+    RowBuilderFinish(Table &parent, Row &&row) : table(parent), resultRow(std::move(row)) {}
+    void build() { table.rows.emplace_back(std::move(resultRow)); }
+
+   private:
+    Table &table;
+    Row resultRow;
+  };
+
   template<std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
   class RowBuilder {
    public:
     explicit RowBuilder(Table &parent) requires(sizeof...(FollowingCells) == ColumnCount - 1) : table(parent) {}
-
     RowBuilder(Table &parent, Row &&row) : table(parent), resultRow(std::move(row)) {}
 
     template<typename... Args>
     auto operator()(Args &&...args) requires(std::constructible_from<CurrentCell, Args...>) {
-      std::get<TupleIndex>(resultRow) = std::make_unique<CurrentCell>(std::forward<Args...>(args)...);
-      return RowBuilder<TupleIndex + 1, FollowingCells...>{std::move(resultRow)};
+      std::get<TupleIndex>(resultRow) = std::make_unique<CurrentCell>(std::forward<Args>(args)...);
+      if constexpr (sizeof...(FollowingCells) > 0) {
+        return RowBuilder<TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
+      } else {
+        return RowBuilderFinish(table, std::move(resultRow));
+      }
     }
-
-    void build() requires(sizeof...(FollowingCells) == 0) { table.rows.emplace_back(std::move(resultRow)); }
 
    private : Table &table;
     Row resultRow;
   };
 
-  auto rowBuilder() { return RowBuilder<0, Cells...>{}; }
+  auto rowBuilder() { return RowBuilder<0, Cells...>{*this}; }
 
   void addRow(Row &&row) { rows.template emplace_back(std::move(row)); }
 
@@ -63,9 +74,9 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
       std::ranges::for_each(rows, [](const auto &row) {
         ImGui::TableNextRow();
         iterateTuple(
-            [](Renderable &column) {
+            [](auto &column) {
               ImGui::TableNextColumn();
-              column.render();
+              column->render();
             },
             row);
       });
