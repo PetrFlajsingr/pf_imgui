@@ -46,12 +46,12 @@ enum class TableBorder : uint16_t {
   Full = 0b1111
 };
 
-bool is(TableBorder lhs, TableBorder rhs) {
+inline bool is(TableBorder lhs, TableBorder rhs) {
   using T = std::underlying_type_t<TableBorder>;
   return static_cast<T>(lhs) & static_cast<T>(rhs);
 }
 
-ImGuiTableFlags createFlags(TableBorder tableBorder, bool resizable, bool reorderable, bool sortable, bool hideable) {
+inline ImGuiTableFlags createFlags(TableBorder tableBorder, bool resizable, bool reorderable, bool sortable, bool hideable) {
   auto result = ImGuiTableFlags{};
   if (is(tableBorder, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
   if (is(tableBorder, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
