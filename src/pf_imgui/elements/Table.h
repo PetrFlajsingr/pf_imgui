@@ -33,9 +33,22 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Labellable::setLabelVisible(label.has_value() ? Visibility::Visible : Visibility::Invisible);
   }
 
+  template<bool WasClickable, bool WasObservable, std::size_t TupleIndex>
   class RowBuilderFinish {
    public:
     RowBuilderFinish(Table &parent, Row &&row) : table(parent), resultRow(std::move(row)) {}
+    RowBuilderFinish &addClickListener(std::invocable auto fnc) requires(WasClickable) {
+      std::get<TupleIndex>(resultRow)->addClickListener(std::forward<decltype(fnc)>(fnc));
+      return *this;
+    }
+
+    RowBuilderFinish &addValueListener(auto fnc) requires(WasObservable) {
+      using ObservableType = decltype(std::get<TupleIndex>(resultRow)->getValue());
+      static_assert(std::invocable<decltype(fnc), ObservableType>, "Listener must be callable with correct value type");
+      std::get<TupleIndex>(resultRow)->addValueListener(std::forward<decltype(fnc)>(fnc));
+      return *this;
+    }
+
     void build() { table.rows.emplace_back(std::move(resultRow)); }
 
    private:
@@ -43,7 +56,8 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Row resultRow;
   };
 
-  template<bool WasClickable, bool WasObservable, std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
+  template<bool WasClickable, bool WasObservable, std::size_t TupleIndex, typename CurrentCell,
+      typename... FollowingCells>
   class RowBuilder {
    public:
     explicit RowBuilder(Table &parent) requires(sizeof...(FollowingCells) == ColumnCount - 1) : table(parent) {
@@ -62,7 +76,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
       if constexpr (sizeof...(FollowingCells) > 0) {
         return RowBuilder<IsClickable, IsObservable, TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
       } else {
-        return RowBuilderFinish(table, std::move(resultRow));
+        return RowBuilderFinish<IsClickable, IsObservable, TupleIndex + 1>(table, std::move(resultRow));
       }
     }
 
@@ -71,8 +85,10 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
       return *this;
     }
 
-    RowBuilder &addValueListener(std::invocable<auto> auto fnc) requires(WasObservable) {
-      std::get<TupleIndex>(resultRow)->addValueListener(std::forward<decltype(fnc)>(fnc));
+    RowBuilder &addValueListener(auto fnc, bool callNow = false) requires(WasObservable) {
+      using ObservableType = decltype(std::get<TupleIndex>(resultRow)->getValue());
+      static_assert(std::invocable<decltype(fnc), ObservableType>, "Listener must be callable with correct value type");
+      std::get<TupleIndex>(resultRow)->addValueListener(std::forward<decltype(fnc)>(fnc), callNow);
       return *this;
     }
 
@@ -95,9 +111,9 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
       std::ranges::for_each(rows, [](const auto &row) {
         ImGui::TableNextRow();
         iterateTuple(Visitor{[](auto &column) {
-                               ImGui::TableNextColumn();
-                               column->render();
-                             },
+                       ImGui::TableNextColumn();
+                       column->render();
+                     },
                              [](Id) {}},
                      row);
       });
