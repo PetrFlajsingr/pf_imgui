@@ -50,8 +50,10 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     RowBuilder(Table &parent, Row &&row) : table(parent), resultRow(std::move(row)) {}
 
     template<typename... Args>
-    auto operator()(Args &&...args) requires(std::constructible_from<CurrentCell, Args...>) {
-      std::get<TupleIndex + 1>(resultRow) = std::make_unique<CurrentCell>(std::forward<Args>(args)...);
+    auto operator()(Args &&...args) requires(std::constructible_from<CurrentCell, std::string, Args...>) {
+      std::get<TupleIndex + 1>(resultRow) = std::make_unique<CurrentCell>(
+          "table_row"s + std::to_string(std::get<0>(resultRow)) + "_col" + std::to_string(TupleIndex),
+          std::forward<Args>(args)...);
       if constexpr (sizeof...(FollowingCells) > 0) {
         return RowBuilder<TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
       } else {
