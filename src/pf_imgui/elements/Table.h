@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Row resultRow;
   };
 
-  template<bool WasClickable, bool WasValueObservable, std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
+  template<bool WasClickable, bool WasObservable, std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
   class RowBuilder {
    public:
     explicit RowBuilder(Table &parent) requires(sizeof...(FollowingCells) == ColumnCount - 1) : table(parent) {
@@ -55,12 +55,12 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     auto operator()(Args &&...args) requires(std::constructible_from<CurrentCell, std::string, Args...>) {
       using namespace std::string_literals;
       constexpr auto IsClickable = std::derived_from<CurrentCell, Clickable>;
-      constexpr auto IsValueObservable = IsValueObservable<CurrentCell>;
+      constexpr auto IsObservable = IsValueObservable<CurrentCell>;
       std::get<TupleIndex + 1>(resultRow) = std::make_unique<CurrentCell>(
           "table_row"s + std::to_string(std::get<0>(resultRow)) + "_col" + std::to_string(TupleIndex),
           std::forward<Args>(args)...);
       if constexpr (sizeof...(FollowingCells) > 0) {
-        return RowBuilder<IsClickable, IsValueObservable, TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
+        return RowBuilder<IsClickable, IsObservable, TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
       } else {
         return RowBuilderFinish(table, std::move(resultRow));
       }
@@ -71,7 +71,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
       return *this;
     }
 
-    RowBuilder &addValueListener(std::invocable<auto> auto fnc) requires(WasValueObservable) {
+    RowBuilder &addValueListener(std::invocable<auto> auto fnc) requires(WasObservable) {
       std::get<TupleIndex>(resultRow)->addValueListener(std::forward<decltype(fnc)>(fnc));
       return *this;
     }
