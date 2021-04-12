@@ -2,8 +2,8 @@
 // Created by petr on 4/11/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SIMPLETABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SIMPLETABLE_H
+#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_STRINGTABLE_H
+#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_STRINGTABLE_H
 
 #include <imgui.h>
 #include <pf_common/concepts/StringConvertible.h>
@@ -16,7 +16,7 @@
 namespace pf::ui::ig {
 
 template<std::size_t ColumnCount>
-using SimpleTableRow = std::array<std::string, ColumnCount>;
+using StringTableRow = std::array<std::string, ColumnCount>;
 enum class TableBorder : uint16_t {
   None = 0b0,
   HorizontalInner = 0b1,
@@ -28,8 +28,8 @@ enum class TableBorder : uint16_t {
   Full = 0b1111
 };
 template<std::size_t ColumnCount>
-struct SimpleTableSettings {
-  std::optional<SimpleTableRow<ColumnCount>> header = std::nullopt;
+struct StringTableSettings {
+  std::optional<StringTableRow<ColumnCount>> header = std::nullopt;
   TableBorder border = TableBorder::None;
   bool resizableCols = false;
   bool reorderable = false;
@@ -39,9 +39,9 @@ struct SimpleTableSettings {
 };
 
 template<std::size_t ColumnCount>
-class PF_IMGUI_EXPORT SimpleTable : public ItemElement, public Resizable {
+class PF_IMGUI_EXPORT StringTable : public ItemElement, public Resizable {
  public:
-  SimpleTable(const std::string &elementName, SimpleTableSettings<ColumnCount> &&settings)
+  StringTable(const std::string &elementName, StringTableSettings<ColumnCount> &&settings)
       : ItemElement(elementName), Resizable(settings.size), header(settings.header),
         tableFlags(createFlags(std::move(settings))) {}
 
@@ -93,7 +93,7 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement, public Resizable {
     return static_cast<UnderType>(lhs) & static_cast<UnderType>(rhs);
   }
 
-  static ImGuiTableFlags createFlags(SimpleTableSettings<ColumnCount> &&settings) {
+  static ImGuiTableFlags createFlags(StringTableSettings<ColumnCount> &&settings) {
     auto result = ImGuiTableFlags{};
     if (is(settings.border, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
     if (is(settings.border, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
@@ -105,11 +105,11 @@ class PF_IMGUI_EXPORT SimpleTable : public ItemElement, public Resizable {
     if (settings.hideableCols) { result |= ImGuiTableFlags_Hideable; }
     return result;
   }
-  std::optional<SimpleTableRow<ColumnCount>> header;
+  std::optional<StringTableRow<ColumnCount>> header;
   std::vector<std::string> rows;
   ImGuiTableFlags tableFlags;
 };
 
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SIMPLETABLE_H
+#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_STRINGTABLE_H

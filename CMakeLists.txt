@@ -17,7 +17,6 @@ if (NOT (EXISTS ${CPM_DOWNLOAD_LOCATION} AND CPM_VERSION STREQUAL CPM_DOWNLOAD_V
     file(DOWNLOAD https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
 endif ()
 
-add_compile_definitions(IMGUI_DISABLE_OBSOLETE_FUNCTIONS)
 
 include(${CPM_DOWNLOAD_LOCATION})
 
@@ -162,7 +161,7 @@ set(INCLUDES
         src/pf_imgui/elements/TabBar.h
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
-        src/pf_imgui/elements/SimpleTable.h
+        src/pf_imgui/elements/StringTable.h
         src/pf_imgui/dialogs/Window.h
         src/pf_imgui/elements/Tooltip.h
         src/pf_imgui/dialogs/FileDialog.h
