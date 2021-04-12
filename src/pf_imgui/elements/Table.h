@@ -12,6 +12,7 @@
 #include <pf_imgui/elements/StringTable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Resizable.h>
 
 namespace pf::ui::ig {
@@ -41,7 +42,7 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
     Row resultRow;
   };
 
-  template<std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
+  template<bool WasClickable, std::size_t TupleIndex, typename CurrentCell, typename... FollowingCells>
   class RowBuilder {
    public:
     explicit RowBuilder(Table &parent) requires(sizeof...(FollowingCells) == ColumnCount - 1) : table(parent) {
@@ -51,14 +52,20 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
 
     template<typename... Args>
     auto operator()(Args &&...args) requires(std::constructible_from<CurrentCell, std::string, Args...>) {
+      using namespace std::string_literals;
+      constexpr auto IsClickable = std::derived_from<CurrentCell, Clickable>;
       std::get<TupleIndex + 1>(resultRow) = std::make_unique<CurrentCell>(
           "table_row"s + std::to_string(std::get<0>(resultRow)) + "_col" + std::to_string(TupleIndex),
           std::forward<Args>(args)...);
       if constexpr (sizeof...(FollowingCells) > 0) {
-        return RowBuilder<TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
+        return RowBuilder<IsClickable, TupleIndex + 1, FollowingCells...>{table, std::move(resultRow)};
       } else {
         return RowBuilderFinish(table, std::move(resultRow));
       }
+    }
+
+    RowBuilder addClickListener(std::invocable auto fnc) requires (WasClickable) {
+      std::get<TupleIndex>.addClickListener(std::forward<decltype(fnc)>(fnc));
     }
 
    private : Table &table;
