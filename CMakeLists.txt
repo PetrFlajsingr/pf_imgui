@@ -161,6 +161,7 @@ set(INCLUDES
         src/pf_imgui/elements/TabBar.h
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
+        src/pf_imgui/elements/Table.h
         src/pf_imgui/elements/StringTable.h
         src/pf_imgui/dialogs/Window.h
         src/pf_imgui/elements/Tooltip.h
