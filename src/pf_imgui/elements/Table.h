@@ -7,6 +7,7 @@
 
 #include <imgui.h>
 #include <pf_common/tuple.h>
+#include <pf_common/Visitor.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/StringTable.h>
 #include <pf_imgui/interface/ItemElement.h>
