@@ -6,8 +6,8 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TABLE_H
 
 #include <imgui.h>
-#include <pf_common/tuple.h>
 #include <pf_common/Visitor.h>
+#include <pf_common/tuple.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/StringTable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -77,13 +77,12 @@ class PF_IMGUI_EXPORT Table : public ItemElement, public Labellable, public Resi
 
       std::ranges::for_each(rows, [](const auto &row) {
         ImGui::TableNextRow();
-        iterateTuple(Visitor {
-          [](auto &column) {
-            ImGui::TableNextColumn();
-            column->render();
-          },
-              [](Id) {}
-        } row);
+        iterateTuple(Visitor{[](auto &column) {
+                               ImGui::TableNextColumn();
+                               column->render();
+                             },
+                             [](Id) {}},
+                     row);
       });
       ImGui::EndTable();
     }
