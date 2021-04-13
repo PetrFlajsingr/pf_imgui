@@ -114,15 +114,15 @@ class PF_IMGUI_EXPORT ElementContainer {
    * @param name name of the searched for child
    * @return reference to the searched for child
    *
-   * @throws InvalidArgumentException when the child is not found or when it doesn't match the desired type
+   * @throws IdNotFoundException when the child is not found or when it doesn't match the desired type
    */
   template<std::derived_from<Element> T>
   [[nodiscard]] T &childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
-      throw InvalidArgumentException::fmt("Wrong type for child: '{}'", name);
+      throw IdNotFoundException("Wrong type for child: '{}'", name);
     }
-    throw InvalidArgumentException::fmt("Child not found: '{}'", name);
+    throw IdNotFoundException("Child not found: '{}'", name);
   }
 
   /**

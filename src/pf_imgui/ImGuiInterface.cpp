@@ -131,7 +131,7 @@ Window &ImGuiInterface::windowByName(const std::string &name) {
       window.has_value()) {
     return **window;
   } else {
-    throw StackTraceException::fmt("Child not found: {}", name);
+    throw IdNotFoundException("Child not found: {}", name);
   }
 }
 

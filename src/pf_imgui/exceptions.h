@@ -17,6 +17,14 @@ class DuplicateIdException : public StackTraceException {
   explicit DuplicateIdException(const std::string_view &fmt, auto &&...args)
       : StackTraceException(StackTraceException::fmt(fmt, args...)) {}
 };
+/**
+ * Exception thrown when a an ID is not present.
+ */
+class IdNotFoundException : public StackTraceException {
+ public:
+  explicit IdNotFoundException(const std::string_view &fmt, auto &&...args)
+      : StackTraceException(StackTraceException::fmt(fmt, args...)) {}
+};
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_EXCEPTIONS_H
