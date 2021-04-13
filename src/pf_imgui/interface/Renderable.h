@@ -75,6 +75,9 @@ class PF_IMGUI_EXPORT Renderable {
   [[nodiscard]] const std::string &getName() const;
 
  protected:
+  /**
+   * Implementation of rendering without checks for visibility etc. This should do pure rendering, nothing else.
+   */
   virtual void renderImpl() = 0;
 
  private:
