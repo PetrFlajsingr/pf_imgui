@@ -24,8 +24,8 @@ class Positionable {
   explicit Positionable(const ImVec2 &position);
 
   /**
-   * Add a listener, which is called every time the elements' size is changed.
-   * @param fnc listener for size change event, new size is passed to the listener
+   * Add a listener, which is called every time the elements' position is changed.
+   * @param fnc listener for position change event, new position is passed to the listener
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
