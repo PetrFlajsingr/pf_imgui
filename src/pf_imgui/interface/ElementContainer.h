@@ -25,7 +25,7 @@ class PF_IMGUI_EXPORT ElementContainer {
   ElementContainer &operator=(ElementContainer &&other) noexcept;
 
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &
+  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChild(std::string name, Args &&...args) {
     if (const auto iter = children.find(name); iter != children.end()) {
       throw StackTraceException::fmt("{} already present in ui", name);
@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT ElementContainer {
   }
 
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &
+  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
     if (const auto iter = children.find(name); iter != children.end()) {
       throw StackTraceException::fmt("{} already present in ui", name);

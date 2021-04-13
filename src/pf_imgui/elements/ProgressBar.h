@@ -18,8 +18,7 @@ template<typename T>
 concept ProgressBarCompatible = requires(T t, float f) {
   {t + t};
   {t *= f};
-  { std::clamp(t, t, t) }
-  ->std::convertible_to<T>;
+  { std::clamp(t, t, t) } -> std::convertible_to<T>;
 };
 
 template<ProgressBarCompatible T>

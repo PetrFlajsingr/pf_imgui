@@ -31,8 +31,8 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
   }
 
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> auto &
-  createChild(std::string name, ImVec2 position, Args &&...args) {
+  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
+  auto &createChild(std::string name, ImVec2 position, Args &&...args) {
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {

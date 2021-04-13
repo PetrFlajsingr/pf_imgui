@@ -46,7 +46,6 @@ void FileDialog::renderImpl() {
   }
   setExtInfos();
 
-
   if (ImGuiFileDialog::Instance()->Display(getName(), ImGuiWindowFlags_NoCollapse, getSize())) {
     if (ImGuiFileDialog::Instance()->IsOk()) {
       const auto filePathName = ImGuiFileDialog::Instance()->GetFilePathName();

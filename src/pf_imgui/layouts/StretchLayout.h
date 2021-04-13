@@ -21,9 +21,9 @@ class StretchLayout : public ResizableLayout {
                 Persistent persistent = Persistent::No);
 
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::derived_from<T, Resizable> &&
-      std::constructible_from<T, std::string, Args...>
-          T &createChild(std::string name, Args &&...args) {
+  requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, std::string,
+                                                                                                       Args...>
+      T &createChild(std::string name, Args &&...args) {
     child = std::make_unique<T>(name, std::forward<Args>(args)...);
     renderableChild = dynamic_cast<Renderable *>(child.get());
     return *child;

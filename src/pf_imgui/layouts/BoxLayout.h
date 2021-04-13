@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   void removeChild(const std::string &name);
 
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &
+  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChild(std::string name, Args &&...args) {
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   }
 
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> &&std::constructible_from<T, std::string, Args...> T &
+  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;

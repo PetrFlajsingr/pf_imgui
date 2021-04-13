@@ -10,8 +10,12 @@
 
 namespace pf::ui::ig {
 
-template <typename T>
+template<typename T>
 constexpr auto IsValueObservable = derived_specialization_of<T, ValueObservable>;
-}
+
+struct CommonPlaceholder {
+  using CreateType = int;
+};
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_META_H

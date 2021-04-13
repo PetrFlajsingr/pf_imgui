@@ -51,7 +51,8 @@ inline bool is(TableBorder lhs, TableBorder rhs) {
   return static_cast<T>(lhs) & static_cast<T>(rhs);
 }
 
-inline ImGuiTableFlags createFlags(TableBorder tableBorder, bool resizable, bool reorderable, bool sortable, bool hideable) {
+inline ImGuiTableFlags createFlags(TableBorder tableBorder, bool resizable, bool reorderable, bool sortable,
+                                   bool hideable) {
   auto result = ImGuiTableFlags{};
   if (is(tableBorder, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
   if (is(tableBorder, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }

@@ -18,7 +18,6 @@ namespace pf::ui::ig {
 template<std::size_t ColumnCount>
 using StringTableRow = std::array<std::string, ColumnCount>;
 
-
 template<std::size_t ColumnCount>
 struct TableSettings {
   std::optional<StringTableRow<ColumnCount>> header = std::nullopt;
