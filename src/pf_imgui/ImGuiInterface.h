@@ -22,7 +22,7 @@
 namespace pf::ui::ig {
 
 /**
- * Root class of an entire UI tree. Provides an ability to create windows and dialogs.
+ * @brief Root class of an entire UI tree. Provides an ability to create windows and dialogs.
  *
  * The class has it's own menu bar, which is applied to the entire render window.
  *
