@@ -18,6 +18,11 @@
 
 namespace pf::ui::ig {
 
+/**
+ * Main building piece for UI. Persistent element container with plenty of controls.
+ *
+ * May have a menu bar for additional controls.
+ */
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
                                public Focusable,
@@ -27,12 +32,36 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public Positionable,
                                public Labellable {
  public:
+  /**
+   * Construct Window.
+   * @param name ID of the window
+   * @param label title
+   * @param allowCollapse
+   * @param persistent saving state to disk
+   */
   Window(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No,
          Persistent persistent = Persistent::No);
-  Window(std::string name, std::string label, Persistent persistent);
+  /**
+   * Construct Window.
+   * @param name ID of the window
+   * @param label title
+   * @param persistent saving state to disk
+   */
+  Window(std::string name, std::string label, Persistent persistent = Persistent::No);
 
+  /**
+   * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
+   * @return Windows menu bar
+   */
   [[nodiscard]] WindowMenuBar &getMenuBar();
+  /**
+   * Check if the menu bar exists.
+   * @return true if menu bar exists, false otherwise
+   */
   [[nodiscard]] bool hasMenuBar() const;
+  /**
+   * Remove menu bar from the window - must be rebuilt when created again, use menuBar.setVisible... for temporary removal.
+   */
   void removeMenuBar();
 
   void setSize(const ImVec2 &size) override;

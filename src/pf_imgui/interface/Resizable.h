@@ -29,7 +29,15 @@ class PF_IMGUI_EXPORT Resizable {
   Resizable(Resizable &&other) noexcept;
   Resizable &operator=(Resizable &&other) noexcept;
 
+  /**
+   * Get current size.
+   * @return current size
+   */
   [[nodiscard]] const ImVec2 &getSize() const;
+  /**
+   * Set new size.
+   * @param s new size
+   */
   virtual void setSize(const ImVec2 &s);
 
   virtual ~Resizable() = default;
