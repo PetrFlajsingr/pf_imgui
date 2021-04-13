@@ -25,7 +25,7 @@ list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
         "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits")
 if (CMAKE_BUILD_TYPE MATCHES Release)
-    list(APPEND flags "-o3")
+    list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
     list(APPEND flags "-fno-omit-frame-pointer" "-fsanitize=address")
 elseif (CMAKE_BUILD_TYPE MATCHES LSAN)
