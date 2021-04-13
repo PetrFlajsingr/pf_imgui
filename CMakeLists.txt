@@ -219,6 +219,7 @@ list(APPEND INCLUDES ${toml++_headers})
 
 
 option(BUILD_SHARED_LIBS "build this library as shared")
+option(BUILD_DOCS "build doxygen docs" OFF)
 
 SET(CMAKE_DEBUG_POSTFIX "d" CACHE STRING "add a postfix, usually d on windows")
 SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windows")
@@ -320,3 +321,13 @@ install(
         Devel
 )
 
+
+if (BUILD_DOCS)
+    find_package(Doxygen)
+    if (DOXYGEN_FOUND)
+        doxygen_add_docs(doc ALL
+                ${CMAKE_SOURCE_DIR}/src/pf_imgui
+                )
+    endif()
+
+endif()
