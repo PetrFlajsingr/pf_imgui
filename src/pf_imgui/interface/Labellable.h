@@ -11,19 +11,46 @@
 #include <string>
 
 namespace pf::ui::ig {
+
+/**
+ * @brief Interface for labellable elements
+ *
+ * Provides a functionality to manage label for the subclass.
+ */
 class PF_IMGUI_EXPORT Labellable {
  public:
+  /**
+   * Construct Labellable with given label
+   * @param label label to be displayed
+   */
   explicit Labellable(std::string label);
 
   Labellable(Labellable &&other) noexcept;
   Labellable &operator=(Labellable &&other) noexcept;
 
+  /**
+   * Get current label
+   * @return label
+   */
   [[nodiscard]] const std::string &getLabel() const;
+  /**
+   * Set new label.
+   * @param cap new label
+   */
   void setLabel(const std::string &cap);
+  /**
+   * Set new label with formatting bz fmt::format
+   * @param fmt format string
+   * @param args arguments for format string
+   */
   void setLabel(const std::string &fmt, auto &&...args) requires(sizeof...(args) > 0) {
     setLabel(fmt::format(fmt, std::forward<decltype(args)>(args)...));
   }
 
+  /**
+   * Set visibility of the label
+   * @param newVisibility
+   */
   void setLabelVisible(Visibility newVisibility);
   void showLabel();
   void hideLabel();
