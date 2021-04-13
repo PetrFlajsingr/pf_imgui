@@ -13,7 +13,7 @@ namespace pf::ui::ig {
 /**
  * @brief Interface for positionable elements
  *
- * Provides a functionality to manage and observer position for the subclass.
+ * Provides a functionality to manage and observe position for the subclass.
  */
 class Positionable {
  public:

@@ -10,8 +10,20 @@
 #include <string>
 
 namespace pf::ui::ig {
+
+/**
+ * @brief Interface for resizable elements
+ *
+ * Provides a functionality to manage size for the subclass.
+ *
+ * @todo: observable part
+ */
 class PF_IMGUI_EXPORT Resizable {
  public:
+  /**
+   * Construct Resizable with the given size
+   * @param size size
+   */
   explicit Resizable(const ImVec2 &size);
 
   Resizable(Resizable &&other) noexcept;
