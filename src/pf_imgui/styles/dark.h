@@ -8,6 +8,10 @@
 #include <pf_imgui/ImGuiInterface.h>
 
 namespace pf::ui::ig {
+/**
+ * Dark style, mostly shades of gray, with some orange elements.
+ * @param interface
+ */
 inline void setDarkStyle(ImGuiInterface &interface) {
   auto styleSetter = [](ImGuiStyle &style) {
     ImVec4 *colors = style.Colors;
