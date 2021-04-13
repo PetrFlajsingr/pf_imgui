@@ -14,6 +14,11 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Decorator for non-Positionable elements.
+ *
+ * This decorator adds Positionable capabilities to any Element. It is used for AbsoluteLayout.
+ */
 template<std::derived_from<Element> T>
 class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
  public:
