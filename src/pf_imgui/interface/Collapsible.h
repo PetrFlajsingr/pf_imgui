@@ -32,7 +32,8 @@ class PF_IMGUI_EXPORT Collapsible : public Savable {
   /**
    * Add a listener, which is called every time the elements' collapse state is changed.
    * @param fnc listener for collapse change event, true is passed when the element is collapsed, false otherwise
-   * @return instance of @see Subscription, which allows to unsubscribe the listener
+   * @return instance of Subscription, which allows to unsubscribe the listener
+   * @see Subscription
    */
   Subscription addCollapseListener(std::invocable<bool> auto listener) {
     return observableImpl.template addListener(listener);
