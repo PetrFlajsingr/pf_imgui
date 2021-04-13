@@ -17,7 +17,8 @@ namespace pf::ui::ig {
  *
  * Provides the ability to add multiple observers to the elements' collapse state. Allow for collapse control.
  *
- * @details Interface inherits @see Savable, in order to save it's collapsed state.
+ * @details Interface inherits Savable, in order to save it's collapsed state.
+ * @see Savable
  */
 class PF_IMGUI_EXPORT Collapsible : public Savable {
  public:

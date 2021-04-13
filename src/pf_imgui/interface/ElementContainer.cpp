@@ -24,7 +24,7 @@ void ElementContainer::addChild(std::unique_ptr<Element> child) {
 }
 
 void ElementContainer::insertChild(std::unique_ptr<Element> child, std::size_t index) {
-  if (index > childrenInOrder.size()) { throw StackTraceException::fmt("Index out of bounds: {}", index); }
+  if (index > childrenInOrder.size()) { throw InvalidArgumentException::fmt("Index out of bounds: {}", index); }
   childrenInOrder.insert(childrenInOrder.begin() + index, *child);
   children[child->getName()] = std::move(child);
 }

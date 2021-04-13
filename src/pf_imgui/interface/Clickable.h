@@ -17,14 +17,15 @@ namespace pf::ui::ig {
 /**
  * @brief Interface for clickable elements
  *
- * Provides the ability to add multiple observers and also remove them via @see Subscription
+ * Provides the ability to add multiple observers and also remove them via Subscription.
  */
 class PF_IMGUI_EXPORT Clickable {
  public:
   /**
    * Add a parameterless listener, which is called every time the item is clicked.
    * @param fnc listener for click event
-   * @return instance of @see Subscription, which allows to unsubscribe the listener
+   * @return instance of Subscription, which allows to unsubscribe the listener
+   * @see Subscription
    */
   Subscription addClickListener(std::invocable auto fnc) { return observableImpl.template addListener(fnc); }
 
