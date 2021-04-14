@@ -24,31 +24,16 @@
 
 namespace pf::ui::ig {
 namespace details {
-/**
- * List of supported float types.
- */
 #define IMGUI_DRAG_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>
-/**
- * List of supported integer types.
- */
 #define IMGUI_DRAG_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4, math::Range<int>
-/**
- * List of all supported glm vector types.
- */
 #define IMGUI_DRAG_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
-/**
- * List of all supported range types.
- */
 #define IMGUI_DRAG_RANGE_TYPE_LIST math::Range<int>, math::Range<float>
-/**
- * List of all supported types.
- */
 #define IMGUI_DRAG_TYPE_LIST IMGUI_DRAG_FLOAT_TYPE_LIST, IMGUI_DRAG_INT_TYPE_LIST
 /**
  * Underlying type of supported types.
  */
 template<typename T>
-using UnderlyingType = std::conditional_t<OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>, float, int>;
+using DragInputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>, float, int>;
 /**
  * Default formatting string for supported types.
  * @tparam T type to based format on
@@ -74,7 +59,7 @@ constexpr const char *defaultDragFormat() {
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
 class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>, public Labellable, public Savable {
  public:
-  using ParamType = details::UnderlyingType<T>;
+  using ParamType = details::DragInputUnderlyingType<T>;
 
   /**
    * Construct DragInput.
