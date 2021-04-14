@@ -15,12 +15,34 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief A typical button element.
+ *
+ * A button with a text label and an option to change its render type by using enum ButtonType.
+ *
+ * @see ButtonType
+ */
 class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Resizable, public Clickable {
  public:
+  /**
+   * Construct Button.
+   * @param name ID of the button
+   * @param label label drawn on the button
+   * @param buttonType type of the button
+   * @param size size of the button
+   */
   Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
          const ImVec2 &size = {0, 0});
 
+  /**
+   * Get current type of the button.
+   * @return current type of the button
+   */
   [[nodiscard]] ButtonType getType() const;
+  /**
+   * Set new type to the button.
+   * @param type new type
+   */
   void setType(ButtonType type);
 
  protected:
