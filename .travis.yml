@@ -22,16 +22,12 @@ addons:
       - ninja-build
 
 install:
-  sudo apt-get remove cmake;
-  sudo apt-get install libuv1 rhash libstdc++6;
-  wget https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-linux-x86_64.tar.gz;
-  mkdir $HOME/cmake;
-  tar -xjvf cmake-3.20.1-linux-x86_64.tar.gz -C $HOME/cmake;
-  export PATH=$HOME/cmake/bin:$PATH;
+  sudo apt-get install snapd;
+  sudo snap install cmake - --beta --classic
 
 script:
   - export CC=gcc-10
   - export CXX=g++-10
-  - cmake --version
-  - cmake CMakeLists.txt
-  - cmake  --build . --target install
+  - /snap/cmake/current/bin/cmake --version
+  - /snap/cmake/current/bin/cmake CMakeLists.txt
+  - /snap/cmake/current/bin/cmake  --build . --target install
