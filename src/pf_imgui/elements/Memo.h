@@ -17,24 +17,91 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Multiline text overview with basic controls.
+ *
+ * User can add text by rows. Rows can be filtered using an Input. Copy and clear buttons can be enabled.
+ */
 class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
  public:
+  /**
+   * Construct Memo.
+   * @param elementName ID of the memo
+   * @param label text rendered above the memo
+   * @param textAHeight height of the text area
+   * @param buttonsEnabled enable button for copy and clear
+   * @param filterEnabled enable input for filter
+   * @param recordLimit limit rows - if size is bigger than limit then the old rows are erased
+   */
   Memo(const std::string &elementName, const std::string &label, float textAHeight = 0, bool buttonsEnabled = true,
        bool filterEnabled = true, const std::optional<std::size_t> &recordLimit = std::nullopt);
 
+  /**
+   * Get all records which are currently rendered.
+   * @return all records within the memo
+   */
   [[nodiscard]] const std::vector<std::string> &getRecords() const;
+  /**
+   * Get count of rows in the memo.
+   * @return count of rows in the memo
+   */
+  [[nodiscard]] std::size_t size() const;
+  /**
+   * Get all records concatenated using '\n'.
+   * @return all records as one string
+   */
   [[nodiscard]] std::string getText() const;
 
+  /**
+   * Add new row to the memo.
+   * @param record new row
+   */
   void addRecord(std::string_view record);
+  /**
+   * Remove text at index.
+   * @param index index to remove text at
+   * @throws InvalidArgumentException when index is out of bounds
+   */
   void removeRecord(std::size_t index);
+  /**
+   * Remove all records.
+   */
   void clearRecords();
 
+  /**
+   * Check if copy and clear buttons are enabled.
+   * @return true if copy and clear buttons are enabled, false otherwise
+   */
   [[nodiscard]] bool isButtonsEnabled() const;
+  /**
+   * Set copy and clear buttons being enabled.
+   * @param buttonsEnabled
+   */
   void setButtonsEnabled(bool buttonsEnabled);
+  /**
+   * Check if filter is enabled.
+   * @return true if filter is enabled, false otherwise
+   */
   [[nodiscard]] bool isFilterEnabled() const;
+  /**
+   * Set filter being enabled.
+   * @param filterEnabled
+   */
   void setFilterEnabled(bool filterEnabled);
+  /**
+   * Get current record count limit.
+   * @return current record count limit
+   */
   [[nodiscard]] const std::optional<std::size_t> &getRecordLimit() const;
+  /**
+   * Set new record limit.
+   * @param limit new limit
+   */
   void setRecordLimit(std::size_t limit);
+  /**
+   * Cancel record limit.
+   */
+  void cancelRecordLimit();
 
  protected:
   void renderImpl() override;
