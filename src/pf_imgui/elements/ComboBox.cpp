@@ -45,6 +45,7 @@ std::optional<std::string_view> ComboBox::getSelectedItem() {
   return items[*selectedItemIndex];
 }
 void ComboBox::removeItem(const std::string &item) {
+  using namespace std::string_literals;
   if (const auto iter = std::ranges::find(items, item); iter != items.end()) {
     const auto isAnyItemSelected = selectedItemIndex.has_value();
     const auto selectedItem = isAnyItemSelected ? items[*selectedItemIndex] : ""s;
