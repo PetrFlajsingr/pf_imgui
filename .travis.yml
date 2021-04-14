@@ -20,6 +20,7 @@ addons:
       - gcc-10
       - g++-10
       - ninja-build
+      - libbfd-dev
 
 install:
   sudo apt-get install snapd;
