@@ -22,6 +22,7 @@ addons:
       - ninja-build
 
 install:
+  sudo apt-get remove cmake
   sudo apt-get install libuv1 rhash libstdc++6;
   wget https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-linux-x86_64.tar.gz;
   mkdir $HOME/cmake;
@@ -31,6 +32,6 @@ install:
 script:
   - export CC=gcc-10
   - export CXX=g++-10
-  - $HOME/cmake/bin/cmake --version
-  - $HOME/cmake/bin/cmake CMakeLists.txt
-  - $HOME/cmake/bin/cmake  --build . --target install
+  - cmake --version
+  - cmake CMakeLists.txt
+  - cmake  --build . --target install
