@@ -1,14 +1,18 @@
 language: cpp
-dist: hirsute
+dist: bionic
 
 compiler:
 - gcc
+
 os:
 - linux
+
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+      - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main'
+        key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+      - sourceline: 'ppa:ubuntu-toolchain-r/test'
     packages:
       - cmake
       - gcc-10
@@ -20,4 +24,4 @@ script:
   - export CXX=g++-10
   - cmake --version
   - cmake CMakeLists.txt
-  - cmake  --build . --target neat
+  - cmake  --build . --target install
