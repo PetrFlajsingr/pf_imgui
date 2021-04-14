@@ -13,11 +13,26 @@
 #include <string>
 
 namespace pf::ui::ig {
+/**
+ * @brief Special slider for angles.
+ *
+ * Angles are in radians.
+ */
 class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
                                     public Labellable,
                                     public ValueObservable<float>,
                                     public Savable {
  public:
+  /**
+   * Construct SliderAngle.
+   * @param elementName ID of the slider
+   * @param label text rendered next to the slider
+   * @param min min rad angle
+   * @param max max rad angle
+   * @param value starting rad value
+   * @param persistent enable state saving to disk
+   * @param format printf-like format for rendering current value over the slider
+   */
   SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value = 0.0,
               Persistent persistent = Persistent::No, std::string format = "%.0f deg");
 
