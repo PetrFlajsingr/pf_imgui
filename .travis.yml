@@ -23,7 +23,7 @@ addons:
 
 install:
   sudo apt-get install snapd;
-  sudo snap install cmake - --beta --classic
+  sudo snap install cmake - --beta --classic;
 
 script:
   - export CC=gcc-10
