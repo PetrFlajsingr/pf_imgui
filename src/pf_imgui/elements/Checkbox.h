@@ -14,16 +14,53 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief A typical checkbox or a toggle.
+ *
+ * A checkbox which saves it's state and provides it to listeners.
+ */
 class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool>, public Labellable, public Savable {
  public:
-  enum class Type { Checkbox, Toggle };
+  /**
+   * Type of the checkbox.
+   */
+  enum class Type {
+    Checkbox, /**< Typical checkbox */
+    Toggle    /**< Toggle similiar to those on mobile devices */
+  };
+  /**
+   * Construct Checkbox. Default value is that of Type::Checkbox.
+   * @param elementName ID of the checkbox
+   * @param label label drawn next to the checkbox
+   * @param persistent allow value saving to disk
+   * @param value starting value
+   */
   Checkbox(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
            bool value = false);
+  /**
+   * Construct Checkbox.
+   * @param elementName ID of the checkbox
+   * @param label label drawn next to the checkbox
+   * @param checkboxType type of the checkbox
+   * @param persistent allow value saving to disk
+   * @param value starting value
+   */
   Checkbox(const std::string &elementName, const std::string &label, Type checkboxType,
            Persistent persistent = Persistent::No, bool value = false);
 
+  /**
+   * Set if the checkbox is selected or not.
+   * @param value new value
+   */
   void setSelected(bool value);
+  /**
+   * Check if the checkbox is selected.
+   * @return true if the checkbox is selected, false otherwise
+   */
   [[nodiscard]] bool isSelected() const;
+  /**
+   * Toggle the checkboxes state. True becomes false, false becomes true.
+   */
   void toggle();
 
  protected:
