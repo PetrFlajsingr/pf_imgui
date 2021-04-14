@@ -28,10 +28,10 @@ void RadioGroup::renderImpl() {
   if (newSelection.has_value()) {
     auto &selectedButton = buttons[*newSelection];
     std::ranges::for_each(buttons, [&](auto &button) {
-      if (&button != &selectedButton) { button.setValue(false); }
+      if (&button != &selectedButton) { button.setValueInner(false); }
     });
     selectedButton.notifyValueChanged();
-    setValue(selectedButton.getLabel());
+    setValueInner(selectedButton.getLabel());
     selectedButtonIndex = newSelection;
     notifyValueChanged();
   }
@@ -47,10 +47,10 @@ void RadioGroup::unserialize_impl(const toml::table &src) {
     if (static_cast<std::size_t>(idx) < buttons.size()) {
       selectedButtonIndex = idx;
       auto &selectedButton = buttons[idx];
-      selectedButton.setValue(true);
+      selectedButton.setValueInner(true);
       setValueAndNotifyIfChanged(buttons[idx].getLabel());
       std::ranges::for_each(buttons, [&](auto &button) {
-        if (&button != &selectedButton) { button.setValue(false); }
+        if (&button != &selectedButton) { button.setValueInner(false); }
       });
     }
   }

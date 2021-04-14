@@ -69,6 +69,14 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
   }
 
   /**
+   * Set value and notify listeners if the value is different.
+   * @param newValue value to set
+   */
+  virtual void setValue(const T &newValue) {
+    setValueAndNotifyIfChanged(newValue);
+  }
+
+  /**
    * Get inner value.
    * @return value
    */
@@ -83,7 +91,7 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
    * Set inner value.
    * @param val new value
    */
-  void setValue(T val) { value = val; }
+  void setValueInner(T val) { value = val; }
 
   /**
    * Set new value and check, if it differs from the previous one. If it does notify all listeners.
@@ -91,7 +99,7 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
    */
   void setValueAndNotifyIfChanged(T val) {
     const auto oldValue = getValue();
-    setValue(val);
+    setValueInner(val);
     if (oldValue != getValue()) { notifyValueChanged(); }
   }
 

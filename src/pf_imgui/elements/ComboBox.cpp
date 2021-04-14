@@ -31,7 +31,7 @@ void ComboBox::renderImpl() {
                             ImGui::Selectable(ptr, &isSelected);
                             if (isSelected) {
                               if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
-                                setValue(items[idx]);
+                                setValueInner(items[idx]);
                                 notifyValueChanged();
                               }
                               selectedItemIndex = idx;

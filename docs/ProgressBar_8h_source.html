@@ -106,7 +106,7 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    percentage = std::clamp(percentage, 0.f, 1.f);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> oldValue = ValueObservable&lt;T&gt;::getValue();</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> newValue = min + (max - min) * percentage;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ValueObservable&lt;T&gt;::setValue(newValue);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ValueObservable&lt;T&gt;::setValueInner(newValue);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> (ValueObservable&lt;T&gt;::getValue() != oldValue) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> newValue;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
@@ -114,7 +114,7 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  T step() {</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> oldValue = ValueObservable&lt;T&gt;::getValue();</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> newValue = std::clamp(oldValue + stepValue, min, max);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ValueObservable&lt;T&gt;::setValue(newValue);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ValueObservable&lt;T&gt;::setValueInner(newValue);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">if</span> (ValueObservable&lt;T&gt;::getValue() != oldValue) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> newValue;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  }</div>

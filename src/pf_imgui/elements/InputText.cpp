@@ -12,7 +12,7 @@ InputText::InputText(const std::string &elementName, std::string label, const st
                      TextInputType textInputType, Persistent persistent)
     : Text(elementName, text), Labellable(std::move(label)), ValueObservable(""), Savable(persistent),
       inputType(textInputType) {
-  setValue(text);
+  setValueInner(text);
 }
 
 void InputText::renderImpl() {
@@ -24,7 +24,7 @@ void InputText::renderImpl() {
   }
   if (valueChanged && strcmp(buffer, getText().c_str()) != 0) {
     setText(buffer);
-    setValue(getText());
+    setValueInner(getText());
     notifyValueChanged();
   }
 }
@@ -40,5 +40,9 @@ void InputText::unserialize_impl(const toml::table &src) {
 }
 
 toml::table InputText::serialize_impl() { return toml::table{{{"text", getText()}}}; }
+
+void InputText::setValue(const std::string_view &newValue) {
+  setText(std::string(newValue));
+}
 
 }// namespace pf::ui::ig

@@ -34,7 +34,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
     percentage = std::clamp(percentage, 0.f, 1.f);
     const auto oldValue = ValueObservable<T>::getValue();
     const auto newValue = min + (max - min) * percentage;
-    ValueObservable<T>::setValue(newValue);
+    ValueObservable<T>::setValueInner(newValue);
     if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
     return newValue;
   }
@@ -42,7 +42,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   T step() {
     const auto oldValue = ValueObservable<T>::getValue();
     const auto newValue = std::clamp(oldValue + stepValue, min, max);
-    ValueObservable<T>::setValue(newValue);
+    ValueObservable<T>::setValueInner(newValue);
     if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
     return newValue;
   }
