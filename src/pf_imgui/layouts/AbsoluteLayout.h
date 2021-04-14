@@ -27,7 +27,7 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
  public:
   /**
-   * Construct AbsolutLayout.
+   * Construct AbsoluteLayout.
    * @param elementName ID of the layout
    * @param size size of the layout
    * @param allowCollapse enable collapse button
@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
   AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No,
                  ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
   /**
-   * Construct AbsolutLayout.
+   * Construct AbsoluteLayout.
    * @param elementName ID of the layout
    * @param size size of the layout
    * @param showBorder draw border around the layout
@@ -46,7 +46,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
   AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
                  Persistent persistent = Persistent::No);
   /**
-   * Construct AbsolutLayout.
+   * Construct AbsoluteLayout.
    * @param elementName ID of the layout
    * @param size size of the layout
    * @param allowCollapse enable collapse button
