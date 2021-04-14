@@ -1,0 +1,17 @@
+language: cpp
+compiler: gcc
+
+os: linux
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-10
+
+script:
+  - export CC=gcc-10
+  - export CXX=g++-10
+  - cmake --version
+  - cmake CMakeLists.txt
+  - cmake  --build . --target neat
