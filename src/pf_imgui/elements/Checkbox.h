@@ -42,7 +42,7 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
    * @param elementName ID of the checkbox
    * @param label label drawn next to the checkbox
    * @param checkboxType type of the checkbox
-   * @param persistent allow value saving to disk
+   * @param persistent allow state saving to disk
    * @param value starting value
    */
   Checkbox(const std::string &elementName, const std::string &label, Type checkboxType,
