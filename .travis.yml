@@ -22,20 +22,11 @@ addons:
       - ninja-build
 
 install:
-  - if [[ "${TRAVIS_CPU_ARCH}" == "ppc64le" ]]; then
-      sudo apt-get install libuv1 rhash libstdc++6;
-      wget https://anaconda.org/conda-forge/cmake/3.17.0/download/linux-ppc64le/cmake-3.17.0-hfb1cb51_0.tar.bz2;
-      mkdir $HOME/cmake;
-      tar -xjvf cmake-3.17.0-hfb1cb51_0.tar.bz2 -C $HOME/cmake;
-      export PATH=$HOME/cmake/bin:$PATH;
-    fi
-  - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
-      sudo apt-get install libuv1 rhash libstdc++6;
-      wget https://anaconda.org/conda-forge/cmake/3.17.0/download/linux-aarch64/cmake-3.17.0-h28c56e5_0.tar.bz2;
-      mkdir $HOME/cmake;
-      tar -xjvf cmake-3.17.0-h28c56e5_0.tar.bz2 -C $HOME/cmake;
-      export PATH=$HOME/cmake/bin:$PATH;
-    fi
+  sudo apt-get install libuv1 rhash libstdc++6;
+  wget https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-linux-x86_64.tar.gz;
+  mkdir $HOME/cmake;
+  tar -xjvf cmake-3.20.1-linux-x86_64.tar.gz -C $HOME/cmake;
+  export PATH=$HOME/cmake/bin:$PATH;
 
 script:
   - export CC=gcc-10
