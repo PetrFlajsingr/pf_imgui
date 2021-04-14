@@ -15,21 +15,41 @@
 
 namespace pf::ui::ig {
 /**
- * ImTextureId is basically anything.
- * For example in Vulkan implementation it could be a descriptor set.
+ * @brief Image rendered from a texture. It can serve as a button.
+ *
+ * Image rendering should be handled by the use when descending from ImGuiInterface.
  */
 class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Clickable {
  public:
+  /**
+   * Provider of UV mapping for textures. First is left upper corner, right is right lower.
+   */
   using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
 
+  /**
+   * Construct Image.
+   * @param elementName ID of the element
+   * @param imTextureId ID of a texture
+   * @param size size of the image on screen
+   * @param isBtn allow for usage as a button
+   * @param uvTextureMappingProvider provider of UV coordinates
+   */
   Image(
       const std::string &elementName, ImTextureID imTextureId, const ImVec2 &size, IsButton isBtn = IsButton::No,
       UvMappingProvider uvTextureMappingProvider = [] {
         return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
       });
 
+  /**
+   * Check if the image acts as a button.
+   * @return true of image is a button, false otherwise
+   */
   [[nodiscard]] bool isButton() const;
 
+  /**
+   * Change texture ID.
+   * @param imTextureId new id
+   */
   void setTextureId(ImTextureID imTextureId);
 
  protected:
