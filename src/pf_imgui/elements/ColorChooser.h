@@ -21,9 +21,24 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief An element allowing for selecting a color intuitively.
+ *
+ * It can do either RGB or RGBA colors based on the T parameter.
+ *
+ * @tparam Type type of the chooser
+ * @tparam T inner value of the chooser
+ */
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
 class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
  public:
+  /**
+   * Construct ColorChooser.
+   * @param elementName ID of the element
+   * @param label label next to the interactable parts
+   * @param persistent allow state saving to disk
+   * @param value starting value
+   */
   ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
                T value = T{})
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent) {}

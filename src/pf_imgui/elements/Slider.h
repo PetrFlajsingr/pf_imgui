@@ -30,6 +30,11 @@ namespace details {
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
 using SliderMinMaxType = std::conditional_t<OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>, float, int>;
 
+/**
+ * Default formats for underlying types.
+ * @tparam T underlying type
+ * @return format
+ */
 template<typename T>
 constexpr const char *defaultSliderFormat() {
   if constexpr (OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>) {
@@ -39,10 +44,27 @@ constexpr const char *defaultSliderFormat() {
   }
 }
 }// namespace details
+
+/**
+ * @brief Slider supporting multiple types.
+ *
+ * If the type is not a scalar, each scalar part of the structure gets its own slider.
+ * @tparam T underlying type
+ */
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
  public:
   using MinMaxType = details::SliderMinMaxType<T>;
+  /**
+   * Construct Slider.
+   * @param elementName ID of the slider
+   * @param label text rendered next to the slider
+   * @param min min value
+   * @param max max value
+   * @param value starting value
+   * @param persistent enable state saving to disk
+   * @param format printf-like format for rendering value over slider
+   */
   Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
          Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>())
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent), min(min), max(max),

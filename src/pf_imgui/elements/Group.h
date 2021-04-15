@@ -14,10 +14,29 @@
 #include <string>
 
 namespace pf::ui::ig {
+
+/**
+ * @brief Group of elements which may be visually delimited.
+ *
+ * Elements are rendered in top-down order.
+ */
 class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, public Labellable, public Collapsible {
  public:
+  /**
+   * Construct Group.
+   * @param elementName ID of the group
+   * @param label text drawn on top of the group
+   * @param persistent enable state saving to disk
+   * @param allowCollapse show button for collapsing the group
+   */
   Group(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
         AllowCollapse allowCollapse = AllowCollapse::No);
+  /**
+   * Construct Group.
+   * @param elementName ID of the group
+   * @param label text drawn on top of the group
+   * @param allowCollapse show button for collapsing the group
+   */
   Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse);
 
  protected:

@@ -17,14 +17,35 @@
 namespace pf::ui::ig {
 
 using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
+/**
+ * @brief Graph for visualising stack traces, performance stuff...
+ */
 class PF_IMGUI_EXPORT FlameGraph : public Element, public Labellable, public Resizable {
  public:
+  /**
+   * Construct FlameGraph.
+   * @param elementName ID of the element
+   * @param label text drawn at the top of the graph
+   * @param size size of the graph
+   * @param overlay text render on top of the graph
+   */
   FlameGraph(const std::string &elementName, const std::string &label, const ImVec2 &size = ImVec2{0, 0},
              std::optional<std::string> overlay = std::nullopt);
 
+  /**
+   * Set text render on top of the graph.
+   * @param text text to be rendered
+   */
   void setOverlay(std::string text);
+  /**
+   * Disable overlay rendering.
+   */
   void disableOverlay();
 
+  /**
+   * Set samples from which the flame graph will be drawn.
+   * @param newSamples samples
+   */
   void setSamples(const std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> &newSamples);
 
  protected:

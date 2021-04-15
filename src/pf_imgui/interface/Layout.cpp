@@ -17,6 +17,7 @@ void Layout::setDrawBorder(bool showBorder) { drawBorder = showBorder; }
 bool Layout::isScrollable() const { return scrollable; }
 
 void Layout::setScrollable(bool scroll) { scrollable = scroll; }
+
 bool Layout::renderCollapseButton() {
   if (isCollapsible()) {
     const auto width = ImGui::GetContentRegionAvail().x;

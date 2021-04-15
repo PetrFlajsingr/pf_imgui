@@ -39,7 +39,7 @@ void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) 
       child.has_value()) {
     child.value()->second->setPosition(position);
   } else {
-    throw StackTraceException::fmt("Child not found: {}", name);
+    throw IdNotFoundException("Child not found: {}", name);
   }
 }
 void AbsoluteLayout::removeChild(const std::string &name) {

@@ -11,6 +11,14 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Interface for all ImGui elements
+ *
+ * Adds functionality of pushing unique names to ImGui render tree.
+ *
+ * @warning If there are duplicate IDs in the render tree the program may have some undefined behavior for functions which use IDs.
+ * @see Renderable
+ */
 class PF_IMGUI_EXPORT Element : public Renderable {
  public:
   explicit Element(const std::string &name);

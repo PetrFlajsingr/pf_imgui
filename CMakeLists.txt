@@ -7,7 +7,7 @@ HunterGate(
 )
 
 project(pf_imgui
-        VERSION 0.1.0)
+        VERSION 0.2.3)
 
 set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
 set(CPM_DOWNLOAD_VERSION 0.27.4)
@@ -17,7 +17,6 @@ if (NOT (EXISTS ${CPM_DOWNLOAD_LOCATION} AND CPM_VERSION STREQUAL CPM_DOWNLOAD_V
     file(DOWNLOAD https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
 endif ()
 
-add_compile_definitions(IMGUI_DISABLE_OBSOLETE_FUNCTIONS)
 
 include(${CPM_DOWNLOAD_LOCATION})
 
@@ -26,7 +25,7 @@ list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
         "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits")
 if (CMAKE_BUILD_TYPE MATCHES Release)
-    list(APPEND flags "-o3")
+    list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
     list(APPEND flags "-fno-omit-frame-pointer" "-fsanitize=address")
 elseif (CMAKE_BUILD_TYPE MATCHES LSAN)
@@ -162,6 +161,8 @@ set(INCLUDES
         src/pf_imgui/elements/TabBar.h
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
+        src/pf_imgui/elements/Table.h
+        src/pf_imgui/elements/StringTable.h
         src/pf_imgui/dialogs/Window.h
         src/pf_imgui/elements/Tooltip.h
         src/pf_imgui/dialogs/FileDialog.h
@@ -218,6 +219,7 @@ list(APPEND INCLUDES ${toml++_headers})
 
 
 option(BUILD_SHARED_LIBS "build this library as shared")
+option(BUILD_DOCS "build doxygen docs" OFF)
 
 SET(CMAKE_DEBUG_POSTFIX "d" CACHE STRING "add a postfix, usually d on windows")
 SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windows")
@@ -319,3 +321,13 @@ install(
         Devel
 )
 
+
+if (BUILD_DOCS)
+    find_package(Doxygen)
+    if (DOXYGEN_FOUND)
+        doxygen_add_docs(doc ALL
+                ${CMAKE_SOURCE_DIR}/src/pf_imgui
+                )
+    endif()
+
+endif()

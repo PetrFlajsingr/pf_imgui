@@ -29,10 +29,16 @@ namespace details {
 #define IMGUI_DRAG_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
 #define IMGUI_DRAG_RANGE_TYPE_LIST math::Range<int>, math::Range<float>
 #define IMGUI_DRAG_TYPE_LIST IMGUI_DRAG_FLOAT_TYPE_LIST, IMGUI_DRAG_INT_TYPE_LIST
-
+/**
+ * Underlying type of supported types.
+ */
 template<typename T>
-using UnderlyingType = std::conditional_t<OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>, float, int>;
-
+using DragInputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>, float, int>;
+/**
+ * Default formatting string for supported types.
+ * @tparam T type to based format on
+ * @return printf like format for numbers
+ */
 template<typename T>
 constexpr const char *defaultDragFormat() {
   if constexpr (OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST> || std::same_as<T, math::Range<float>>) {
@@ -42,11 +48,30 @@ constexpr const char *defaultDragFormat() {
   }
 }
 }// namespace details
+
+/**
+ * @brief Numeric input supporting either keyboard input or mouse drag.
+ *
+ * Type of the DragInput is based on underlying types. There is a separate input for each scalar part of type T.
+ *
+ * @tparam T Underlying type
+ */
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
 class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>, public Labellable, public Savable {
  public:
-  using ParamType = details::UnderlyingType<T>;
+  using ParamType = details::DragInputUnderlyingType<T>;
 
+  /**
+   * Construct DragInput.
+   * @param elementName ID of the DragInput
+   * @param label text drawn next to the input
+   * @param speed frequency of value change based on mouse movement distance
+   * @param min minimum allowed value
+   * @param max maximum allowed value
+   * @param persistent allow state saving to disk
+   * @param value starting value
+   * @param format format for formatting value to string
+   */
   DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
             Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
       : ItemElement(elementName), ValueObservable<T>(value), Labellable(label), Savable(persistent), speed(speed),

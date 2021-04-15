@@ -15,20 +15,56 @@ namespace pf::ui::ig {
 
 // TODO: collapse support in children
 // TODO: flags getter for children
+/**
+ * @brief Base class for layouts.
+ *
+ * Provides basic functionality for layouts - border drawing and scrolling.
+ */
 class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
  public:
+  /**
+   * Construct a layout.
+   * @param elementName ID of the element
+   * @param allowCollapse allow collapse button
+   * @param showBorder when allowed a border is drawn at the edges of the layout area
+   * @param persistent when enabled the collapse state of the layout is stored on disk
+   */
   explicit Layout(const std::string &elementName, AllowCollapse allowCollapse, ShowBorder showBorder,
                   Persistent persistent);
 
+  /**
+   * Check if border is drawn.
+   * @return true if border is drawn, false otherwise
+   */
   [[nodiscard]] bool isDrawBorder() const;
+  /**
+   * Set border drawing.
+   * @param drawBorder new value
+   */
   void setDrawBorder(bool drawBorder);
 
+  /**
+   * Check if the layout is scrollable.
+   * @return true if layout is scrollable, false otherwise
+   */
   [[nodiscard]] bool isScrollable() const;
+  /**
+   * Set layout scrollable
+   * @param scrollable new value
+   */
   void setScrollable(bool scrollable);
 
+  /**
+   * Get all renderables stored inside the layout.
+   * @return vector of pointers to renderables
+   */
   [[nodiscard]] virtual std::vector<Renderable *> getRenderables() = 0;
 
  protected:
+  /**
+   * Render collapse button when isCollapsible() == true.
+   * @return true if the layout is not collapsed, false otherwise
+   */
   [[nodiscard]] bool renderCollapseButton();
 
  private:

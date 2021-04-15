@@ -10,8 +10,17 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Tooltip to display when hovering over elements.
+ *
+ * This tooltip should usually be created via createTooltip() method in ItemElement s.
+ */
 class PF_IMGUI_EXPORT Tooltip : public Element, public ElementContainer {
  public:
+  /**
+   * Construct Tooltip.
+   * @param elementName ID of the tooltip
+   */
   explicit Tooltip(const std::string &elementName);
 
  protected:

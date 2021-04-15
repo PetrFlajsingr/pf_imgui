@@ -13,6 +13,12 @@
 #include <utility>
 
 namespace pf::ui::ig {
+/**
+ * @brief Implementation of observable design pattern.
+ *
+ * Allows multiple observers, each of which has a unique ID.
+ * @tparam Args Types of arguments to be used as callback parameters
+ */
 template<typename... Args>
 class PF_IMGUI_EXPORT Observable_impl {
  public:
@@ -25,12 +31,22 @@ class PF_IMGUI_EXPORT Observable_impl {
     return *this;
   }
 
+  /**
+   * Add a listener and return a Subscription object which can be used to unregister it.
+   * @param fnc listener
+   * @return Subscription for unregistration purposes
+   * @see Subscription
+   */
   Subscription addListener(std::invocable<const Args &...> auto fnc) {
     const auto id = generateListenerId();
     listeners[id] = fnc;
     return Subscription([id, this] { listeners.erase(id); });
   }
 
+  /**
+   * Notify all listeners with provided parameters.
+   * @param args parameters to be passed to listeners
+   */
   void notify(const Args &...args) {
     auto callables = listeners | std::views::values;
     std::ranges::for_each(callables, [&](const auto &callable) { callable(args...); });

@@ -44,5 +44,9 @@ void ItemElement::setFocus() {
   ImGui::SetKeyboardFocusHere();
   Focusable::setFocus();
 }
+Tooltip &ItemElement::getTooltip() {
+  if (tooltip == nullptr) { throw StackTraceException::fmt("Tooltip doesn't exist in {}", getName()); }
+  return *tooltip;
+}
 
 }// namespace pf::ui::ig

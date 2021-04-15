@@ -55,7 +55,7 @@ void BoxLayout::renderLeftToRight() {
 
 void BoxLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
 void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
-  if (index > children.size()) { throw StackTraceException::fmt("Index out of bounds: {}", index); }
+  if (index > children.size()) { throw InvalidArgumentException::fmt("Index out of bounds: {}", index); }
   children.insert(children.begin() + index, std::move(child));
 }
 void BoxLayout::removeChild(const std::string &name) {

@@ -25,6 +25,11 @@ inline void traverseImGuiTree_impl(Renderable &element, std::invocable<Renderabl
 }
 }// namespace details
 
+/**
+ * Traverse UI tree in a BFS way. Call callback for each node.
+ * @param root root of the UI tree
+ * @param callback function to be called on each node
+ */
 PF_IMGUI_EXPORT inline void traverseImGuiTree(Renderable &root, std::invocable<Renderable &> auto callback) {
   details::traverseImGuiTree_impl(root, callback);
 }

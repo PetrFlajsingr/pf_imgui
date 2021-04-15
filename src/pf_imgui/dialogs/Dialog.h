@@ -14,10 +14,29 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Simple dialog which can be modal. Contains Elements.
+ *
+ * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::createDialog(...). Closing of the dialog should be managed by user.
+ *
+ * @todo: convenience message dialog
+ */
 class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, public Labellable {
  public:
+  /**
+   * Create Dialog with given name and label.
+   * @param parent owner of the dialog - has to be present in order to render it
+   * @param elementName ID of the dialog
+   * @param label title
+   * @param modal modality
+   */
   Dialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label, Modal modal = Modal::Yes);
 
+  /**
+   * Set flag for closing the dialog, which invalidates the dialog.
+   * Dialog is invalidated in the next render call.
+   * @warning The dialog should not be accessed after calling close().
+   */
   void close();
 
  protected:

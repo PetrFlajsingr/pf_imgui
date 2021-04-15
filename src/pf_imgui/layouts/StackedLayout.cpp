@@ -6,6 +6,7 @@
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/join.hpp>
 #include <utility>
+#include <pf_common/exceptions/StackTraceException.h>
 
 namespace pf::ui::ig {
 
@@ -40,22 +41,43 @@ StackedLayout::StackContainer &StackedLayout::pushStack() {
   return stacks.back();
 }
 
-void StackedLayout::removeStack(std::size_t index) { stacks.erase(stacks.begin() + index); }
+void StackedLayout::popStack() {
+  if (!stacks.empty()) {
+    stacks.erase(stacks.end() - 1);
+  }
+}
 
+void StackedLayout::removeStack(std::size_t index) {
+  if (index >= stacks.size()) {
+    throw InvalidArgumentException::fmt("Index out of bounds: {}", index);
+  }
+  stacks.erase(stacks.begin() + index);
+}
 void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
   auto stack = std::move(stacks[srcIndex]);
   stacks.erase(stacks.begin() + srcIndex);
   stacks.insert(stacks.begin() + dstIndex, std::move(stack));
 }
-std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
 
-void StackedLayout::setIndex(std::size_t index) { selectedIndex = index; }
+std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
+void StackedLayout::setIndex(std::size_t index) {
+  if (index >= stacks.size()) {
+    throw InvalidArgumentException::fmt("Index out of bounds: {}", index);
+  }
+  selectedIndex = index;
+}
 StackedLayout::StackContainer &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
+
 StackedLayout::StackContainer &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
+
 std::vector<Renderable *> StackedLayout::getRenderables() {
   return stacks | ranges::views::transform([](auto &stack) { return stack.getChildren() | ranges::views::all; })
       | ranges::views::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
       | ranges::to_vector;
+}
+
+std::size_t StackedLayout::size() const {
+  return stacks.size();
 }
 
 }// namespace pf::ui::ig

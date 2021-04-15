@@ -16,15 +16,33 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Input for text with support for multiline strings.
+ *
+ * Typical text edit.
+ */
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,
                                   public ValueObservable<std::string_view>,
                                   public Savable {
  public:
+  /**
+   * Construct InputText.
+   * @param elementName ID of the input
+   * @param label text rendered next to the input
+   * @param text starting text in the input
+   * @param textInputType singleline or multiline support
+   * @param persistent enable state saving to disk
+   */
   InputText(const std::string &elementName, std::string label, const std::string &text = "",
             TextInputType textInputType = TextInputType::SingleLine, Persistent persistent = Persistent::No);
 
+  /**
+   * Clear text.
+   */
   void clear();
+
+  void setValue(const std::string_view &newValue) override;
 
  protected:
   void unserialize_impl(const toml::table &src) override;

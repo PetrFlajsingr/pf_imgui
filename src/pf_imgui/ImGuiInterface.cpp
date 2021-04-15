@@ -11,12 +11,52 @@
 #include <range/v3/view/addressof.hpp>
 #include <utility>
 
+#include <experimental/array>
+#include <pf_imgui/elements/Button.h>
+#include <pf_imgui/elements/Checkbox.h>
+#include <pf_imgui/elements/Table.h>
+#include <pf_imgui/elements/Text.h>
+
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
     : Renderable("imgui_interface"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
+
+  using namespace std::string_literals;
+
+  auto tab =
+      Table<Text, Button, Checkbox>{"table2 man",
+                                    TableSettings<3>{.header = std::experimental::make_array("txt"s, "btn", "chbox"),
+                                                     .border = TableBorder::Full,
+                                                     .resizableCols = true,
+                                                     .reorderable = true,
+                                                     .sortable = true,
+                                                     .hideableCols = true}};
+
+  auto hihi = tab.getRow(0);
+  std::get<0>(hihi).setText("test");
+  tab.removeRow(0);
+
+  struct Factory {
+    using CreateType = int;
+    TableRow<Text, Button, Checkbox> create(CreateType) { return {}; }
+  };
+
+  auto tab2 = TableWithFactory<Factory, Text, Button, Checkbox>{
+      "table2 man",
+      TableSettings<3>{.header = std::experimental::make_array("txt"s, "btn", "chbox"),
+                       .border = TableBorder::Full,
+                       .resizableCols = true,
+                       .reorderable = true,
+                       .sortable = true,
+                       .hideableCols = true}};
+
+  auto hihi2 = tab.getRow(0);
+  std::get<0>(hihi2).setText("test");
+  tab.removeRow(0);
+
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImPlot::CreateContext();
@@ -91,7 +131,7 @@ Window &ImGuiInterface::windowByName(const std::string &name) {
       window.has_value()) {
     return **window;
   } else {
-    throw StackTraceException::fmt("Child not found: {}", name);
+    throw IdNotFoundException("Child not found: {}", name);
   }
 }
 

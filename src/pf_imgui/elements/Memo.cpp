@@ -36,7 +36,7 @@ std::string Memo::getText() const {
 void Memo::addRecord(std::string_view record) { records.emplace_back(std::string(record)); }
 
 void Memo::removeRecord(std::size_t index) {
-  if (index >= records.size()) { return; }
+  if (index >= records.size()) { throw InvalidArgumentException{"Index out of bounds"}; }
   records.erase(records.begin() + index);
 }
 
@@ -90,6 +90,10 @@ void Memo::removeRecordsAboveLimit() {
     const auto cntToRemove = records.size() - *recordLimit;
     records.erase(records.begin(), records.begin() + cntToRemove);
   }
+}
+std::size_t Memo::size() const { return records.size(); }
+void Memo::cancelRecordLimit() {
+  recordLimit = std::nullopt;
 }
 
 }// namespace pf::ui::ig

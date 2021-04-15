@@ -14,6 +14,11 @@
 
 namespace pf::ui::ig {
 
+/**
+ * Traverse UI tree and serialize all Savable elements.
+ * @param root root node of the tree
+ * @return toml data containing serialized data
+ */
 PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Renderable &root) {
   auto result = toml::table();
   traverseImGuiTree(root, [&result](Renderable &renderable) {
@@ -27,6 +32,12 @@ PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Renderable &root) {
   return result;
 }
 
+/**
+ * Deserialize all types of glm::vec
+ * @tparam T one of glm::vec types
+ * @param arr toml data to deserialize
+ * @return deserialized value
+ */
 template<typename T>
 PF_IMGUI_EXPORT T deserializeGlmVec(const toml::array &arr) {
   auto result = T{};
@@ -39,6 +50,12 @@ PF_IMGUI_EXPORT T deserializeGlmVec(const toml::array &arr) {
   }
   return result;
 }
+/**
+ * Serialize all types of glm::vec
+ * @tparam T one of glm::vec types
+ * @param vec data to serialize
+ * @return serialized data as toml
+ */
 template<typename T>
 PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &vec) {
   auto result = toml::array{};

@@ -31,7 +31,7 @@ void ComboBox::renderImpl() {
                             ImGui::Selectable(ptr, &isSelected);
                             if (isSelected) {
                               if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
-                                setValue(items[idx]);
+                                setValueInner(items[idx]);
                                 notifyValueChanged();
                               }
                               selectedItemIndex = idx;
@@ -45,9 +45,13 @@ std::optional<std::string_view> ComboBox::getSelectedItem() {
   return items[*selectedItemIndex];
 }
 void ComboBox::removeItem(const std::string &item) {
+  using namespace std::string_literals;
   if (const auto iter = std::ranges::find(items, item); iter != items.end()) {
+    const auto isAnyItemSelected = selectedItemIndex.has_value();
+    const auto selectedItem = isAnyItemSelected ? items[*selectedItemIndex] : ""s;
     items.erase(iter);
     selectedItemIndex = std::nullopt;
+    if (isAnyItemSelected) { setSelectedItem(selectedItem); }
   }
 }
 void ComboBox::addItem(const std::string &item) { items.emplace_back(item); }
@@ -77,5 +81,14 @@ void ComboBox::setItems(std::vector<std::string> newItems) {
 void ComboBox::clearFilter() {
   filter = [](auto) { return true; };
 }
+void ComboBox::setSelectedItem(const std::string &item) {
+  if (const auto iter = std::ranges::find(items, item); iter != items.end()) {
+    const auto index = std::distance(items.begin(), iter);
+    selectedItemIndex = index;
+  } else {
+    cancelSelection();
+  }
+}
+void ComboBox::cancelSelection() { selectedItemIndex = std::nullopt; }
 
 }// namespace pf::ui::ig
