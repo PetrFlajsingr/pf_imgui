@@ -40,6 +40,7 @@ struct RowFactoryStorage {
   T rowFactory;
 };
 
+
 template<typename Factory, std::derived_from<Renderable>... Cells>
 class PF_IMGUI_EXPORT TableWithFactory : public ItemElement, public Labellable, public Resizable {
  public:
