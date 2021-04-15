@@ -13,18 +13,43 @@
 #include <string>
 
 namespace pf::ui::ig {
+
+/**
+ * @brief Simple rendered text. May be colored.
+ */
 class PF_IMGUI_EXPORT Text : public ItemElement {
  public:
+  /**
+   * Construct Text.
+   * @param elementName ID of the element
+   * @param text text to be rendered
+   */
   Text(const std::string &elementName, std::string text);
+  /**
+   * Construct Text.
+   * @param elementName ID of the element
+   * @param text text to be rendered
+   * @param textColor color of the text RGBA
+   */
   Text(const std::string &elementName, std::string text, ImVec4 textColor);
 
+  /**
+   * Get rendered text.
+   * @return text
+   */
   [[nodiscard]] const std::string &getText() const;
-  void setText(const std::string &text);
-  void setText(const std::string &fmt, auto &&...args) requires(sizeof...(args) > 0) {
+  /**
+   * Set new text for rendering
+   * @param text new text to set
+   * @param args values to insert into text using fmt::format
+   */
+  void setText(const std::string &fmt, auto &&...args) {
     setText(fmt::format(fmt, std::forward<decltype(args)>(args)...));
   }
 
- protected : void renderImpl() override;
+ protected:
+  void renderImpl() override;
+
  private:
   std::string text;
   std::optional<ImVec4> color;

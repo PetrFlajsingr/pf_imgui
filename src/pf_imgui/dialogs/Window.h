@@ -19,7 +19,7 @@
 namespace pf::ui::ig {
 
 /**
- * Main building piece for UI. Persistent element container with plenty of controls.
+ * @brief Main building piece for UI. Persistent element container with plenty of controls.
  *
  * May have a menu bar for additional controls.
  */

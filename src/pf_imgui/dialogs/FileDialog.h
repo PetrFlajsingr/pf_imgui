@@ -18,7 +18,7 @@
 namespace pf::ui::ig {
 
 /**
- * Settings for file extension filtering.
+ * @brief Settings for file extension filtering.
  */
 struct PF_IMGUI_EXPORT FileExtensionSettings {
   explicit FileExtensionSettings(std::vector<std::string> extensions, std::string description = "",

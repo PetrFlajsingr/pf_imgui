@@ -10,7 +10,7 @@
 namespace pf::ui::ig {
 
 /**
- * Exception thrown when a duplicate ID is added in the UI tree.
+ * @brief Exception thrown when a duplicate ID is added in the UI tree.
  */
 class DuplicateIdException : public StackTraceException {
  public:
@@ -18,7 +18,7 @@ class DuplicateIdException : public StackTraceException {
       : StackTraceException(StackTraceException::fmt(fmt, args...)) {}
 };
 /**
- * Exception thrown when a an ID is not present.
+ * @brief Exception thrown when a an ID is not present.
  */
 class IdNotFoundException : public StackTraceException {
  public:

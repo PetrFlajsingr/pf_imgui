@@ -17,7 +17,7 @@ namespace pf::ui::ig {
 template<typename T>
 constexpr auto IsValueObservable = derived_specialization_of<T, ValueObservable>;
 /**
- * Placeholder type to avoid compilation errors.
+ * @brief Placeholder type to avoid compilation errors.
  */
 struct CommonPlaceholder {
   using CreateType = int;

@@ -16,8 +16,16 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Par of TabBar, when clicked it switches to the selected sub-layout.
+ */
 class PF_IMGUI_EXPORT Tab : public ItemElement, public Labellable, public ElementContainer {
  public:
+  /**
+   * Construct Tab.
+   * @param elementName ID of the Tab
+   * @param label text rendered on the Tab
+   */
   Tab(const std::string &elementName, const std::string &label);
 
  protected:

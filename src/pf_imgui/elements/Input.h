@@ -41,18 +41,26 @@ using InputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_L
  */
 template<typename T>
 struct InputData {};
-
+/**
+ * @brief Storage structure for integer based types.
+ */
 template<>
 struct InputData<int> {
   int step;
   int fastStep;
 };
+/**
+ * @brief Storage structure for float based types.
+ */
 template<>
 struct InputData<float> {
   float step;
   float fastStep;
   static constexpr const char *defaultFormat() { return "%.3f"; }
 };
+/**
+ * @brief Storage structure for double based types.
+ */
 template<>
 struct InputData<double> {
   double step;
