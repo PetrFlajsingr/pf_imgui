@@ -31,4 +31,4 @@ script:
   - export CXX=g++-10
   - /snap/cmake/current/bin/cmake --version
   - /snap/cmake/current/bin/cmake CMakeLists.txt
-  - /snap/cmake/current/bin/cmake -G Ninja --build .
+  - /snap/cmake/current/bin/cmake  --build .
