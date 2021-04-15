@@ -102,94 +102,96 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;IMGUI_SLIDER_TYPE_LIST&gt; T&gt;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">using</span> SliderMinMaxType = std::conditional_t&lt;OneOf&lt;T, IMGUI_SLIDER_FLOAT_TYPE_LIST&gt;, float, <span class="keywordtype">int</span>&gt;;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> *defaultSliderFormat() {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_SLIDER_FLOAT_TYPE_LIST&gt;) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%.3f&quot;</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%d&quot;</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}<span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;IMGUI_SLIDER_TYPE_LIST&gt; T&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html">   43</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html">Slider</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">using</span> MinMaxType = details::SliderMinMaxType&lt;T&gt;;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html">Slider</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, MinMaxType min, MinMaxType max, T value = T{},</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;         Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat&lt;MinMaxType&gt;())</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), ValueObservable&lt;T&gt;(value), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent), min(min), max(max),</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        format(std::move(format)) {}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html#af6d8d7c65fe7b5c95c67f0920fbc168c">   52</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html#af6d8d7c65fe7b5c95c67f0920fbc168c">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_SLIDER_GLM_TYPE_LIST&gt;) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> tomlVec = src[<span class="stringliteral">&quot;value&quot;</span>].as_array();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> vec = deserializeGlmVec&lt;T&gt;(*tomlVec);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(vec);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(*src[<span class="stringliteral">&quot;value&quot;</span>].value&lt;T&gt;());</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html#ae52e89afb1e7bcfb1378bea366f18aef">   62</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html#ae52e89afb1e7bcfb1378bea366f18aef">serialize_impl</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> value = ValueObservable&lt;T&gt;::getValue();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_SLIDER_GLM_TYPE_LIST&gt;) {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, serializeGlmVec(value)}}};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, value}}};</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html#a7a29e3df5a0ffe1ae292ca2d818a618b">   71</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html#a7a29e3df5a0ffe1ae292ca2d818a618b">renderImpl</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      valueChanged =</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;          ImGui::SliderFloat(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), min, max, format.c_str());</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec2&gt;) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      valueChanged = ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                                         min, max, format.c_str());</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec3&gt;) {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      valueChanged = ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                                         min, max, format.c_str());</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec4&gt;) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      valueChanged = ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                                         min, max, format.c_str());</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, int&gt;) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      valueChanged =</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;          ImGui::SliderInt(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), min, max, format.c_str());</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec2&gt;) {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      valueChanged = ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), min,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                                       max, format.c_str());</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec3&gt;) {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      valueChanged = ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), min,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                       max, format.c_str());</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec4&gt;) {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      valueChanged = ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), min,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                                       max, format.c_str());</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">if</span> (valueChanged) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  MinMaxType min;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  MinMaxType max;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  std::string format;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> *defaultSliderFormat() {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_SLIDER_FLOAT_TYPE_LIST&gt;) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%.3f&quot;</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%d&quot;</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}<span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;IMGUI_SLIDER_TYPE_LIST&gt; T&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html">   55</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html">Slider</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">using</span> MinMaxType = details::SliderMinMaxType&lt;T&gt;;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html#abf05d4482b39a691a378b57ce69e5c65">   68</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html#abf05d4482b39a691a378b57ce69e5c65">Slider</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, MinMaxType min, MinMaxType max, T value = T{},</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;         Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat&lt;MinMaxType&gt;())</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), ValueObservable&lt;T&gt;(value), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent), min(min), max(max),</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        format(std::move(format)) {}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html#af6d8d7c65fe7b5c95c67f0920fbc168c">   74</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html#af6d8d7c65fe7b5c95c67f0920fbc168c">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_SLIDER_GLM_TYPE_LIST&gt;) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> tomlVec = src[<span class="stringliteral">&quot;value&quot;</span>].as_array();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> vec = deserializeGlmVec&lt;T&gt;(*tomlVec);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(vec);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(*src[<span class="stringliteral">&quot;value&quot;</span>].value&lt;T&gt;());</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html#ae52e89afb1e7bcfb1378bea366f18aef">   84</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html#ae52e89afb1e7bcfb1378bea366f18aef">serialize_impl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> value = ValueObservable&lt;T&gt;::getValue();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_SLIDER_GLM_TYPE_LIST&gt;) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, serializeGlmVec(value)}}};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, value}}};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Slider.html#a7a29e3df5a0ffe1ae292ca2d818a618b">   93</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Slider.html#a7a29e3df5a0ffe1ae292ca2d818a618b">renderImpl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      valueChanged =</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;          ImGui::SliderFloat(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), min, max, format.c_str());</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec2&gt;) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      valueChanged = ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                                         min, max, format.c_str());</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec3&gt;) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      valueChanged = ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                         min, max, format.c_str());</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec4&gt;) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      valueChanged = ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                                         min, max, format.c_str());</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, int&gt;) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      valueChanged =</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;          ImGui::SliderInt(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), min, max, format.c_str());</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec2&gt;) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      valueChanged = ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), min,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                                       max, format.c_str());</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec3&gt;) {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      valueChanged = ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), min,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                                       max, format.c_str());</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec4&gt;) {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;      valueChanged = ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), min,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                                       max, format.c_str());</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> (valueChanged) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  MinMaxType min;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  MinMaxType max;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  std::string format;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;};</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_a7a29e3df5a0ffe1ae292ca2d818a618b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#a7a29e3df5a0ffe1ae292ca2d818a618b">pf::ui::ig::Slider::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Slider.h:71</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider</a></div><div class="ttdef"><b>Definition:</b> Slider.h:43</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_ae52e89afb1e7bcfb1378bea366f18aef"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#ae52e89afb1e7bcfb1378bea366f18aef">pf::ui::ig::Slider::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> Slider.h:62</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_af6d8d7c65fe7b5c95c67f0920fbc168c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#af6d8d7c65fe7b5c95c67f0920fbc168c">pf::ui::ig::Slider::unserialize_impl</a></div><div class="ttdeci">void unserialize_impl(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> Slider.h:52</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_a7a29e3df5a0ffe1ae292ca2d818a618b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#a7a29e3df5a0ffe1ae292ca2d818a618b">pf::ui::ig::Slider::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Slider.h:93</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider</a></div><div class="ttdoc">Slider supporting multiple types.</div><div class="ttdef"><b>Definition:</b> Slider.h:55</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_ae52e89afb1e7bcfb1378bea366f18aef"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#ae52e89afb1e7bcfb1378bea366f18aef">pf::ui::ig::Slider::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> Slider.h:84</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_af6d8d7c65fe7b5c95c67f0920fbc168c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#af6d8d7c65fe7b5c95c67f0920fbc168c">pf::ui::ig::Slider::unserialize_impl</a></div><div class="ttdeci">void unserialize_impl(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> Slider.h:74</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_abf05d4482b39a691a378b57ce69e5c65"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#abf05d4482b39a691a378b57ce69e5c65">pf::ui::ig::Slider::Slider</a></div><div class="ttdeci">Slider(const std::string &amp;elementName, const std::string &amp;label, MinMaxType min, MinMaxType max, T value=T{}, Persistent persistent=Persistent::No, std::string format=details::defaultSliderFormat&lt; MinMaxType &gt;())</div><div class="ttdef"><b>Definition:</b> Slider.h:68</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:23</div></div>

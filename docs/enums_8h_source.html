@@ -87,63 +87,71 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">enum class</span> Modal { Yes, No };</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">enum class</span> TextInputType { SingleLine, MultiLine };</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">enum class</span> PlotType { Lines, Histogram };</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">enum class</span> ButtonType { Normal, Invisible, Small, ArrowUp, ArrowLeft, ArrowRight, ArrowDown };</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">enum class</span> Persistent { Yes, No };</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">enum class</span> ColorChooserType { Edit, Picker };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">enum class</span> LayoutDirection { LeftToRight, TopToBottom };</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">enum class</span> FileType { File, Directory };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">enum class</span> IsButton { Yes, No };</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">enum class</span> AllowCollapse { Yes, No };</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">enum class</span> ShowBorder { Yes, No };</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// clang-format off</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">enum class</span> TableBorder : uint16_t {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  None =            0x00,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  HorizontalInner = 0x01,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  VerticalInner =   0x02,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  Inner =           0x03,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  HorizontalOuter = 0x04,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  VerticalOuter =   0x08,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  Outer =           0x0C,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  Full =            0x0F</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">// clang-format on</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;ENABLE_BIT_MASK_ENUM(TableBorder)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">inline</span> ImGuiTableFlags createFlags(TableBorder tableBorder, <span class="keywordtype">bool</span> resizable, <span class="keywordtype">bool</span> reorderable, <span class="keywordtype">bool</span> sortable,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                   <span class="keywordtype">bool</span> hideable) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">auto</span> result = ImGuiTableFlags{};</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordflow">if</span> (resizable) { result |= ImGuiTableFlags_Resizable; }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">if</span> (reorderable) { result |= ImGuiTableFlags_Reorderable; }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordflow">if</span> (sortable) { result |= ImGuiTableFlags_Sortable; }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordflow">if</span> (hideable) { result |= ImGuiTableFlags_Hideable; }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">enum class</span> Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;ENABLE_BIT_MASK_ENUM(Stretch)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">// clang-format off</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">enum class</span> Anchor : uint8_t {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  Top =                 0x1,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  Left =                0x2,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  Bottom =              0x4,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  Right =               0x8,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  TopLeft =             0x3,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  TopRight =            0x5,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  BottomLeft =          0x6,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  BottomRight =         0xC,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  TopBottomLeft =       0x7,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  TopBottomRight =      0xD,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  TopBottomLeftRight =  0xFF</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;};</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">// clang-format oon</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;ENABLE_BIT_MASK_ENUM(Anchor)</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ENUMS_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">enum class</span> ButtonType {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  Normal,     </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  Invisible,  </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  Small,      </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  ArrowUp,    </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ArrowLeft,  </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ArrowRight, </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  ArrowDown   </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">enum class</span> Persistent { Yes, No };</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">enum class</span> ColorChooserType { Edit, Picker };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">enum class</span> LayoutDirection { LeftToRight, TopToBottom };</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">enum class</span> FileType { File, Directory };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">enum class</span> IsButton { Yes, No };</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">enum class</span> AllowCollapse { Yes, No };</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">enum class</span> ShowBorder { Yes, No };</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">// clang-format off</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">enum class</span> TableBorder : uint16_t {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  None =            0x00,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  HorizontalInner = 0x01,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  VerticalInner =   0x02,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  Inner =           0x03,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  HorizontalOuter = 0x04,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  VerticalOuter =   0x08,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  Outer =           0x0C,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  Full =            0x0F</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">// clang-format on</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;ENABLE_BIT_MASK_ENUM(TableBorder)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">inline</span> ImGuiTableFlags createFlags(TableBorder tableBorder, <span class="keywordtype">bool</span> resizable, <span class="keywordtype">bool</span> reorderable, <span class="keywordtype">bool</span> sortable,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                   <span class="keywordtype">bool</span> hideable) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keyword">auto</span> result = ImGuiTableFlags{};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span> (is(tableBorder, TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">if</span> (resizable) { result |= ImGuiTableFlags_Resizable; }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordflow">if</span> (reorderable) { result |= ImGuiTableFlags_Reorderable; }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">if</span> (sortable) { result |= ImGuiTableFlags_Sortable; }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">if</span> (hideable) { result |= ImGuiTableFlags_Hideable; }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">enum class</span> Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;ENABLE_BIT_MASK_ENUM(Stretch)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">// clang-format off</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">enum class</span> Anchor : uint8_t {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  Top =                 0x1,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  Left =                0x2,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  Bottom =              0x4,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  Right =               0x8,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  TopLeft =             0x3,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  TopRight =            0x5,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  BottomLeft =          0x6,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  BottomRight =         0xC,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  TopBottomLeft =       0x7,</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  TopBottomRight =      0xD,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  TopBottomLeftRight =  0xFF</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">// clang-format oon</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;ENABLE_BIT_MASK_ENUM(Anchor)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ENUMS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -74,13 +74,18 @@ $(function() {
 <div class="title">pf::ui::ig::GridLayout Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A layout which positions it's children in a grid.  
+ <a href="classpf_1_1ui_1_1ig_1_1GridLayout.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GridLayout_8h_source.html">GridLayout.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::GridLayout:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1GridLayout.png" usemap="#pf::ui::ig::GridLayout_map" alt=""/>
   <map id="pf::ui::ig::GridLayout_map" name="pf::ui::ig::GridLayout_map">
-<area href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html" alt="pf::ui::ig::ResizableLayout" shape="rect" coords="163,168,316,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="pf::ui::ig::ResizableLayout" shape="rect" coords="163,168,316,192"/>
 <area href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="pf::ui::ig::Layout" shape="rect" coords="81,112,234,136"/>
 <area href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="pf::ui::ig::Resizable" shape="rect" coords="244,112,397,136"/>
 <area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="pf::ui::ig::Element" shape="rect" coords="0,56,153,80"/>
@@ -92,26 +97,25 @@ Inheritance diagram for pf::ui::ig::GridLayout:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a52052f3790506bd420ced94249438cd6"><td class="memItemLeft" align="right" valign="top"><a id="a52052f3790506bd420ced94249438cd6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GridLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, uint32_t width, uint32_t height, AllowCollapse allowCollapse=AllowCollapse::No, ShowBorder showBorder=ShowBorder::No, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:a52052f3790506bd420ced94249438cd6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a52052f3790506bd420ced94249438cd6">GridLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, uint32_t width, uint32_t height, AllowCollapse allowCollapse=AllowCollapse::No, ShowBorder showBorder=ShowBorder::No, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:a52052f3790506bd420ced94249438cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a476ac7661e3500fbe83b4b19aa0fb36b"><td class="memItemLeft" align="right" valign="top"><a id="a476ac7661e3500fbe83b4b19aa0fb36b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GridLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, uint32_t width, uint32_t height, ShowBorder showBorder, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:a476ac7661e3500fbe83b4b19aa0fb36b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a476ac7661e3500fbe83b4b19aa0fb36b">GridLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, uint32_t width, uint32_t height, ShowBorder showBorder, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:a476ac7661e3500fbe83b4b19aa0fb36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b6dff8728d88c320260393677c7f65f"><td class="memItemLeft" align="right" valign="top"><a id="a7b6dff8728d88c320260393677c7f65f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GridLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, uint32_t width, uint32_t height, AllowCollapse allowCollapse, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:a7b6dff8728d88c320260393677c7f65f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a7b6dff8728d88c320260393677c7f65f">GridLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, uint32_t width, uint32_t height, AllowCollapse allowCollapse, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:a7b6dff8728d88c320260393677c7f65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae44881c61e6e8b5a46385cd10308ecb3"><td class="memItemLeft" align="right" valign="top"><a id="ae44881c61e6e8b5a46385cd10308ecb3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLayoutForCell</b> (uint32_t column, uint32_t row, std::unique_ptr&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &gt; layout)</td></tr>
+<tr class="memitem:ae44881c61e6e8b5a46385cd10308ecb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#ae44881c61e6e8b5a46385cd10308ecb3">setLayoutForCell</a> (uint32_t column, uint32_t row, std::unique_ptr&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &gt; layout)</td></tr>
 <tr class="separator:ae44881c61e6e8b5a46385cd10308ecb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dd11c207c5b1babf01c6d9f3a02f1a0"><td class="memItemLeft" align="right" valign="top"><a id="a3dd11c207c5b1babf01c6d9f3a02f1a0"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCellLayout</b> (uint32_t column, uint32_t row)</td></tr>
+<tr class="memitem:a04dbcb18a43eccd3eaf03a6815799d83"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:a04dbcb18a43eccd3eaf03a6815799d83"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">Layout</a> &gt; &amp;&amp;std::constructible_from&lt; T, std::string, Args... &gt; T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a04dbcb18a43eccd3eaf03a6815799d83">createLayout</a> (uint32_t column, uint32_t row, std::string name, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a04dbcb18a43eccd3eaf03a6815799d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd11c207c5b1babf01c6d9f3a02f1a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a3dd11c207c5b1babf01c6d9f3a02f1a0">getCellLayout</a> (uint32_t column, uint32_t row)</td></tr>
 <tr class="separator:a3dd11c207c5b1babf01c6d9f3a02f1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a094934d110dc7d2d19367bf0ca6f8ed9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a094934d110dc7d2d19367bf0ca6f8ed9">hasLayoutAt</a> (uint32_t column, uint32_t row)</td></tr>
+<tr class="separator:a094934d110dc7d2d19367bf0ca6f8ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a175c9361e812ac731c8585d1f7d6f885"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a175c9361e812ac731c8585d1f7d6f885">getRenderables</a> () override</td></tr>
 <tr class="separator:a175c9361e812ac731c8585d1f7d6f885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></td></tr>
-<tr class="memitem:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top"><a id="a1cd1af4d28f70b86a46d102f284f34bb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ResizableLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
+<tr class="memitem:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html#a1cd1af4d28f70b86a46d102f284f34bb">ResizableLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
 <tr class="separator:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Layout"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Layout')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></td></tr>
 <tr class="memitem:a4780532f31f3ca0095b997c3b0ac2d2b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Layout"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a4780532f31f3ca0095b997c3b0ac2d2b">Layout</a> (const std::string &amp;elementName, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
@@ -200,8 +204,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aaedd2fe574133f32fedfca8e8d5afbf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#aaedd2fe574133f32fedfca8e8d5afbf4">renderImpl</a> () override</td></tr>
 <tr class="separator:aaedd2fe574133f32fedfca8e8d5afbf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></td></tr>
-<tr class="memitem:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top"><a id="a6939442da81b673f1b800edf4370fa54"></a>
-ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed</b> () const</td></tr>
+<tr class="memitem:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top">ImVec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html#a6939442da81b673f1b800edf4370fa54">getSizeIfCollapsed</a> () const</td></tr>
 <tr class="separator:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Layout"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Layout')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></td></tr>
 <tr class="memitem:a1ae940223fe9a5f94137bed24cce603a inherit pro_methods_classpf_1_1ui_1_1ig_1_1Layout"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a1ae940223fe9a5f94137bed24cce603a">renderCollapseButton</a> ()</td></tr>
@@ -212,7 +215,323 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 <tr class="memitem:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">toml::table&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a387ab8ad61863c8c07a3b0d6302846f5">serialize_impl</a> () override</td></tr>
 <tr class="separator:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A layout which positions it's children in a grid. </p>
+<p>Only descendants of <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts.">Layout</a> interface are allowed as children, in order to avoid weird element positioning. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a52052f3790506bd420ced94249438cd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52052f3790506bd420ced94249438cd6">&#9670;&nbsp;</a></span>GridLayout() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::GridLayout::GridLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AllowCollapse&#160;</td>
+          <td class="paramname"><em>allowCollapse</em> = <code>AllowCollapse::No</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShowBorder&#160;</td>
+          <td class="paramname"><em>showBorder</em> = <code>ShowBorder::No</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid.">GridLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">width</td><td>width in cells - amount of cells in each row </td></tr>
+    <tr><td class="paramname">height</td><td>height in cells - amount of cells in each column </td></tr>
+    <tr><td class="paramname">allowCollapse</td><td>enable collapse button </td></tr>
+    <tr><td class="paramname">showBorder</td><td>draw border around the layout </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a476ac7661e3500fbe83b4b19aa0fb36b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a476ac7661e3500fbe83b4b19aa0fb36b">&#9670;&nbsp;</a></span>GridLayout() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::GridLayout::GridLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShowBorder&#160;</td>
+          <td class="paramname"><em>showBorder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid.">GridLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">width</td><td>width in cells - amount of cells in each row </td></tr>
+    <tr><td class="paramname">height</td><td>height in cells - amount of cells in each columnn </td></tr>
+    <tr><td class="paramname">showBorder</td><td>draw border around the layout </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7b6dff8728d88c320260393677c7f65f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b6dff8728d88c320260393677c7f65f">&#9670;&nbsp;</a></span>GridLayout() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::GridLayout::GridLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AllowCollapse&#160;</td>
+          <td class="paramname"><em>allowCollapse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid.">GridLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">width</td><td>width in cells - amount of cells in each row </td></tr>
+    <tr><td class="paramname">height</td><td>height in cells - amount of cells in each column </td></tr>
+    <tr><td class="paramname">allowCollapse</td><td>enable collapse button </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a04dbcb18a43eccd3eaf03a6815799d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04dbcb18a43eccd3eaf03a6815799d83">&#9670;&nbsp;</a></span>createLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">requires std::derived_from&lt;T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">Layout</a>&gt;&amp;&amp; std::constructible_from&lt;T, std::string, Args...&gt; T&amp; pf::ui::ig::GridLayout::createLayout </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>column</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a layout on given coordinates. If a layout is already present there it is overwritten. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>type of the created <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts.">Layout</a> </td></tr>
+    <tr><td class="paramname">Args</td><td>constructor argument types for T </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">column</td><td>column of the selected cell </td></tr>
+    <tr><td class="paramname">row</td><td>row of the selected cell </td></tr>
+    <tr><td class="paramname">name</td><td>ID of the newly created layout </td></tr>
+    <tr><td class="paramname">args</td><td>arguments passed to Ts constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the newly created <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts.">Layout</a> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InvalidArgumentException</td><td>when coordinates are out of bounds </td></tr>
+    <tr><td class="paramname"><a class="el" href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html" title="Exception thrown when a duplicate ID is added in the UI tree.">DuplicateIdException</a></td><td>when an ID is already present in the container </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3dd11c207c5b1babf01c6d9f3a02f1a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dd11c207c5b1babf01c6d9f3a02f1a0">&#9670;&nbsp;</a></span>getCellLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &amp; pf::ui::ig::GridLayout::getCellLayout </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>column</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>row</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts.">Layout</a> stored at the given coordinates. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">column</td><td>column of the cell </td></tr>
+    <tr><td class="paramname">row</td><td>row of the cell </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to layout at the given coordinates </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InvalidArgumentException</td><td>when coordinates are out of bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a175c9361e812ac731c8585d1f7d6f885"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a175c9361e812ac731c8585d1f7d6f885">&#9670;&nbsp;</a></span>getRenderables()</h2>
 
@@ -241,6 +560,48 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 
 </div>
 </div>
+<a id="a094934d110dc7d2d19367bf0ca6f8ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a094934d110dc7d2d19367bf0ca6f8ed9">&#9670;&nbsp;</a></span>hasLayoutAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pf::ui::ig::GridLayout::hasLayoutAt </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>column</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>row</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check whether a cell contains a <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts.">Layout</a> or not. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">column</td><td>column of the cell </td></tr>
+    <tr><td class="paramname">row</td><td>row of the cell </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the cell is filled, false otherwise </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InvalidArgumentException</td><td>when coordinates are out of bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aaedd2fe574133f32fedfca8e8d5afbf4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaedd2fe574133f32fedfca8e8d5afbf4">&#9670;&nbsp;</a></span>renderImpl()</h2>
 
@@ -266,6 +627,54 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 <p>Implementation of rendering without checks for visibility etc. This should do pure rendering, nothing else. </p>
 
 <p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a34318266adce6dae02e29a762cb4287c">pf::ui::ig::Renderable</a>.</p>
+
+</div>
+</div>
+<a id="ae44881c61e6e8b5a46385cd10308ecb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae44881c61e6e8b5a46385cd10308ecb3">&#9670;&nbsp;</a></span>setLayoutForCell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::GridLayout::setLayoutForCell </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>column</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &gt;&#160;</td>
+          <td class="paramname"><em>layout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set layout for a selected cell. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">column</td><td>column of the selected cell </td></tr>
+    <tr><td class="paramname">row</td><td>row of the selected cell </td></tr>
+    <tr><td class="paramname">layout</td><td>layout to be moved </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InvalidArgumentException</td><td>when coordinates are out of bounds </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

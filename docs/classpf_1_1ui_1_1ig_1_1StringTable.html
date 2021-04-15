@@ -68,12 +68,17 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classpf_1_1ui_1_1ig_1_1StringTable-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">pf::ui::ig::StringTable&lt; ColumnCount &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Table using strings as cell values.  
+ <a href="classpf_1_1ui_1_1ig_1_1StringTable.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="StringTable_8h_source.html">StringTable.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::StringTable&lt; ColumnCount &gt;:</div>
 <div class="dyncontent">
@@ -91,24 +96,12 @@ Inheritance diagram for pf::ui::ig::StringTable&lt; ColumnCount &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a720d26299e0db97f0c7022824dba2a16"><td class="memItemLeft" align="right" valign="top"><a id="a720d26299e0db97f0c7022824dba2a16"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StringTable</b> (const std::string &amp;elementName, <a class="el" href="structpf_1_1ui_1_1ig_1_1TableSettings.html">TableSettings</a>&lt; ColumnCount &gt; &amp;&amp;settings)</td></tr>
+<tr class="memitem:a720d26299e0db97f0c7022824dba2a16"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html#a720d26299e0db97f0c7022824dba2a16">StringTable</a> (const std::string &amp;elementName, <a class="el" href="structpf_1_1ui_1_1ig_1_1TableSettings.html">TableSettings</a>&lt; ColumnCount &gt; &amp;&amp;settings)</td></tr>
 <tr class="separator:a720d26299e0db97f0c7022824dba2a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac93daddc69917155e88e681b9e53966f"><td class="memItemLeft" align="right" valign="top"><a id="ac93daddc69917155e88e681b9e53966f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addRow</b> (const std::ranges::range auto &amp;vals)</td></tr>
-<tr class="separator:ac93daddc69917155e88e681b9e53966f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb675092d84a3c975ab24d1f39d87dba"><td class="memItemLeft" align="right" valign="top"><a id="abb675092d84a3c975ab24d1f39d87dba"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addRow</b> (const ToStringConvertible auto &amp;...vals)</td></tr>
-<tr class="separator:abb675092d84a3c975ab24d1f39d87dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19a08026ed6e1a3dd0ae0070db93b27d"><td class="memItemLeft" align="right" valign="top"><a id="a19a08026ed6e1a3dd0ae0070db93b27d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeRow</b> (std::size_t index)</td></tr>
-<tr class="separator:a19a08026ed6e1a3dd0ae0070db93b27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfe0fc58ed0e90a78b92e923429a8119"><td class="memItemLeft" align="right" valign="top"><a id="abfe0fc58ed0e90a78b92e923429a8119"></a>
-std::span&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getRow</b> (std::size_t index)</td></tr>
-<tr class="separator:abfe0fc58ed0e90a78b92e923429a8119"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dee1eea5b2b5806fc856ac756c67466"><td class="memItemLeft" align="right" valign="top"><a id="a0dee1eea5b2b5806fc856ac756c67466"></a>
-std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCell</b> (std::size_t rowIdx, std::size_t columnIdx)</td></tr>
-<tr class="separator:a0dee1eea5b2b5806fc856ac756c67466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d25c63b02a736dfd37386e9b9c29b5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html#a6d25c63b02a736dfd37386e9b9c29b5f">addRow</a> (const std::ranges::range auto &amp;vals) requires(ToStringConvertible&lt; std</td></tr>
+<tr class="separator:a6d25c63b02a736dfd37386e9b9c29b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc525eb53720bc6ad8cb51d2658af57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html#a2dc525eb53720bc6ad8cb51d2658af57">addRow</a> (const ToStringConvertible auto &amp;...vals) requires(sizeof...(vals)</td></tr>
+<tr class="separator:a2dc525eb53720bc6ad8cb51d2658af57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
 <tr class="memitem:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a1edd037f3e2d9f55121f68ffd6d3cba4">ItemElement</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,10 +178,20 @@ std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCell<
 <tr class="memitem:a75554dd4aa7788ffc48447bef7ba14a8 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Resizable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Resizable.html#a75554dd4aa7788ffc48447bef7ba14a8">setSize</a> (const ImVec2 &amp;s)</td></tr>
 <tr class="separator:a75554dd4aa7788ffc48447bef7ba14a8 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Resizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a262b725c5d0752ebe82d5f1402ee8df9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html#a262b725c5d0752ebe82d5f1402ee8df9">renderImpl</a> () override</td></tr>
-<tr class="separator:a262b725c5d0752ebe82d5f1402ee8df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:acffa406618c50c2735ce14643a2b24ff"><td class="memItemLeft" align="right" valign="top"><a id="acffa406618c50c2735ce14643a2b24ff"></a>
+std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rows</b></td></tr>
+<tr class="separator:acffa406618c50c2735ce14643a2b24ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0bc93379f75640117a8cca9ad461c8"><td class="memItemLeft" align="right" valign="top"><a id="a0b0bc93379f75640117a8cca9ad461c8"></a>
+ImGuiTableFlags&#160;</td><td class="memItemRight" valign="bottom"><b>tableFlags</b></td></tr>
+<tr class="separator:a0b0bc93379f75640117a8cca9ad461c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
+<tr class="memitem:a34318266adce6dae02e29a762cb4287c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a34318266adce6dae02e29a762cb4287c">renderImpl</a> ()=0</td></tr>
+<tr class="separator:a34318266adce6dae02e29a762cb4287c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Focusable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></td></tr>
 <tr class="memitem:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a5e95eaf5fa6175bfa7fe2e86648e1f92">updateFocused</a> (bool focus)</td></tr>
 <tr class="separator:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,9 +199,20 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6465fd6427653055a8ef5c52bdb4109c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#a6465fd6427653055a8ef5c52bdb4109c">setHovered</a> (bool hover)</td></tr>
 <tr class="separator:a6465fd6427653055a8ef5c52bdb4109c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a262b725c5d0752ebe82d5f1402ee8df9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a262b725c5d0752ebe82d5f1402ee8df9">&#9670;&nbsp;</a></span>renderImpl()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;std::size_t ColumnCount&gt;<br />
+class pf::ui::ig::StringTable&lt; ColumnCount &gt;</h3>
+
+<p>Table using strings as cell values. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ColumnCount</td><td>static column count </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a720d26299e0db97f0c7022824dba2a16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a720d26299e0db97f0c7022824dba2a16">&#9670;&nbsp;</a></span>StringTable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -209,21 +223,97 @@ template&lt;std::size_t ColumnCount&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html">pf::ui::ig::StringTable</a>&lt; ColumnCount &gt;::renderImpl </td>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html">pf::ui::ig::StringTable</a>&lt; ColumnCount &gt;::<a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html">StringTable</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpf_1_1ui_1_1ig_1_1TableSettings.html">TableSettings</a>&lt; ColumnCount &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>settings</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values.">StringTable</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the table </td></tr>
+    <tr><td class="paramname">settings</td><td>table settings </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6d25c63b02a736dfd37386e9b9c29b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d25c63b02a736dfd37386e9b9c29b5f">&#9670;&nbsp;</a></span>addRow() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t ColumnCount&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html">pf::ui::ig::StringTable</a>&lt; ColumnCount &gt;::addRow </td>
+          <td>(</td>
+          <td class="paramtype">const std::ranges::range auto &amp;&#160;</td>
+          <td class="paramname"><em>vals</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Implementation of rendering without checks for visibility etc. This should do pure rendering, nothing else. </p>
+<p>Add row to the tables end. size(vals) must be equal to ColumnCount, otherwise undefined behavior. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vals</td><td>values of cells in the row </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a34318266adce6dae02e29a762cb4287c">pf::ui::ig::Renderable</a>.</p>
+</div>
+</div>
+<a id="a2dc525eb53720bc6ad8cb51d2658af57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc525eb53720bc6ad8cb51d2658af57">&#9670;&nbsp;</a></span>addRow() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t ColumnCount&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html">pf::ui::ig::StringTable</a>&lt; ColumnCount &gt;::addRow </td>
+          <td>(</td>
+          <td class="paramtype">const ToStringConvertible auto &amp;...&#160;</td>
+          <td class="paramname"><em>vals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Add row to the tables end. sizeof...(vals) must be equal to ColumnCount. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vals</td><td>values of cells in the ro </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

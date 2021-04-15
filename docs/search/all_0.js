@@ -1,12 +1,20 @@
 var searchData=
 [
   ['absolutelayout_0',['AbsoluteLayout',['../classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html',1,'pf::ui::ig::AbsoluteLayout'],['../classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a9dfc48d27c5d13687cc86ad3ed53f906',1,'pf::ui::ig::AbsoluteLayout::AbsoluteLayout(const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse=AllowCollapse::No, ShowBorder showBorder=ShowBorder::No, Persistent persistent=Persistent::No)'],['../classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a1b2eb55d1f117ffd42326c46223a55c4',1,'pf::ui::ig::AbsoluteLayout::AbsoluteLayout(const std::string &amp;elementName, const ImVec2 &amp;size, ShowBorder showBorder, Persistent persistent=Persistent::No)'],['../classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a332dff89aa603e6770a9709dad901229',1,'pf::ui::ig::AbsoluteLayout::AbsoluteLayout(const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, Persistent persistent=Persistent::No)']]],
-  ['addchild_1',['addChild',['../classpf_1_1ui_1_1ig_1_1ElementContainer.html#a82a5b3a2b5609af3c0875556ab2c4a52',1,'pf::ui::ig::ElementContainer']]],
-  ['addclicklistener_2',['addClickListener',['../classpf_1_1ui_1_1ig_1_1Clickable.html#a675cbcb86e91544693e6cb743131befc',1,'pf::ui::ig::Clickable']]],
-  ['addcollapselistener_3',['addCollapseListener',['../classpf_1_1ui_1_1ig_1_1Collapsible.html#abcfb601759b43a95d26e4e386b40db7a',1,'pf::ui::ig::Collapsible']]],
-  ['addfocuslistener_4',['addFocusListener',['../classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6',1,'pf::ui::ig::Focusable']]],
-  ['addhoverlistener_5',['addHoverListener',['../classpf_1_1ui_1_1ig_1_1Hoverable.html#a10a8e27bf4bc88dfa128664485408893',1,'pf::ui::ig::Hoverable']]],
-  ['addlistener_6',['addListener',['../classpf_1_1ui_1_1ig_1_1Observable__impl.html#a57af863332f8d23d91cefe06213e1c5c',1,'pf::ui::ig::Observable_impl']]],
-  ['addpositionlistener_7',['addPositionListener',['../classpf_1_1ui_1_1ig_1_1Positionable.html#a441d5645b2df9ee0cad99d09c7d28f74',1,'pf::ui::ig::Positionable']]],
-  ['appmenubar_8',['AppMenuBar',['../classpf_1_1ui_1_1ig_1_1AppMenuBar.html',1,'pf::ui::ig']]]
+  ['addbutton_1',['addButton',['../classpf_1_1ui_1_1ig_1_1RadioGroup.html#a1bb79e3e99270b778aa691eddfbbe707',1,'pf::ui::ig::RadioGroup']]],
+  ['addchild_2',['addChild',['../classpf_1_1ui_1_1ig_1_1ElementContainer.html#a82a5b3a2b5609af3c0875556ab2c4a52',1,'pf::ui::ig::ElementContainer']]],
+  ['addclicklistener_3',['addClickListener',['../classpf_1_1ui_1_1ig_1_1Clickable.html#a675cbcb86e91544693e6cb743131befc',1,'pf::ui::ig::Clickable']]],
+  ['addcollapselistener_4',['addCollapseListener',['../classpf_1_1ui_1_1ig_1_1Collapsible.html#abcfb601759b43a95d26e4e386b40db7a',1,'pf::ui::ig::Collapsible']]],
+  ['addfocuslistener_5',['addFocusListener',['../classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6',1,'pf::ui::ig::Focusable']]],
+  ['addhoverlistener_6',['addHoverListener',['../classpf_1_1ui_1_1ig_1_1Hoverable.html#a10a8e27bf4bc88dfa128664485408893',1,'pf::ui::ig::Hoverable']]],
+  ['additem_7',['addItem',['../classpf_1_1ui_1_1ig_1_1ComboBox.html#ac43a0a4ebdb5d844ee1efda223959be3',1,'pf::ui::ig::ComboBox::addItem()'],['../classpf_1_1ui_1_1ig_1_1ListBox.html#a388ec905a031d2e0c86492d37529d129',1,'pf::ui::ig::ListBox::addItem()'],['../classpf_1_1ui_1_1ig_1_1MenuContainer.html#a087569cca272a276d3d5b604a5dbd532',1,'pf::ui::ig::MenuContainer::addItem()']]],
+  ['additems_8',['addItems',['../classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f',1,'pf::ui::ig::ListBox']]],
+  ['addlistener_9',['addListener',['../classpf_1_1ui_1_1ig_1_1Observable__impl.html#a57af863332f8d23d91cefe06213e1c5c',1,'pf::ui::ig::Observable_impl']]],
+  ['addnode_10',['addNode',['../classpf_1_1ui_1_1ig_1_1Tree.html#ab8f758bec8e86a61005f9ef3ead02f65',1,'pf::ui::ig::Tree']]],
+  ['addpositionlistener_11',['addPositionListener',['../classpf_1_1ui_1_1ig_1_1Positionable.html#a441d5645b2df9ee0cad99d09c7d28f74',1,'pf::ui::ig::Positionable']]],
+  ['addrecord_12',['addRecord',['../classpf_1_1ui_1_1ig_1_1Memo.html#a6583fcef45cf8a8fb5f9561555b9715a',1,'pf::ui::ig::Memo']]],
+  ['addrow_13',['addRow',['../classpf_1_1ui_1_1ig_1_1StringTable.html#a6d25c63b02a736dfd37386e9b9c29b5f',1,'pf::ui::ig::StringTable::addRow(const std::ranges::range auto &amp;vals) requires(ToStringConvertible&lt; std'],['../classpf_1_1ui_1_1ig_1_1StringTable.html#a2dc525eb53720bc6ad8cb51d2658af57',1,'pf::ui::ig::StringTable::addRow(const ToStringConvertible auto &amp;...vals) requires(sizeof...(vals)'],['../classpf_1_1ui_1_1ig_1_1TableWithFactory.html#a9f3495426257890b51cff03327e1ae02',1,'pf::ui::ig::TableWithFactory::addRow(Row &amp;&amp;row)'],['../classpf_1_1ui_1_1ig_1_1TableWithFactory.html#a2be7d7a188b189b95679b1d3b106b5d5',1,'pf::ui::ig::TableWithFactory::addRow(typename Factory::CreateType &amp;&amp;source) requires(HasFactory)']]],
+  ['addsubmenu_14',['addSubmenu',['../classpf_1_1ui_1_1ig_1_1MenuContainer.html#ad9419a65f7158d405829968349a5ae06',1,'pf::ui::ig::MenuContainer']]],
+  ['addtab_15',['addTab',['../classpf_1_1ui_1_1ig_1_1TabBar.html#a802b38dc9952446bded9615b61876aa4',1,'pf::ui::ig::TabBar']]],
+  ['appmenubar_16',['AppMenuBar',['../classpf_1_1ui_1_1ig_1_1AppMenuBar.html',1,'pf::ui::ig::AppMenuBar'],['../classpf_1_1ui_1_1ig_1_1AppMenuBar.html#a332d625576d7a0258d4e3176b5b86e40',1,'pf::ui::ig::AppMenuBar::AppMenuBar()']]]
 ];

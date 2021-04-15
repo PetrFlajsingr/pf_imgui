@@ -86,32 +86,32 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">   17</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">RadioGroup</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                   <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                                   <span class="keyword">public</span> ValueObservable&lt;std::string_view&gt;,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                                   <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">RadioGroup</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, std::vector&lt;RadioButton&gt; buttons = {},</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;             <span class="keyword">const</span> std::optional&lt;std::size_t&gt; &amp;selectedButtonIndex = std::nullopt,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;             Persistent persistent = Persistent::No);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">void</span> addButton(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;caption, <span class="keywordtype">bool</span> value = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">void</span> unserialize_impl(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  toml::table serialize_impl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  std::vector&lt;RadioButton&gt; buttons;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  std::optional&lt;std::size_t&gt; selectedButtonIndex = std::nullopt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUI_ELEMENTS_RADIOGROUP_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">   26</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">RadioGroup</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                   <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                   <span class="keyword">public</span> ValueObservable&lt;std::string_view&gt;,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                                   <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">RadioGroup</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, std::vector&lt;RadioButton&gt; buttons = {},</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;             <span class="keyword">const</span> std::optional&lt;std::size_t&gt; &amp;selectedButtonIndex = std::nullopt,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;             Persistent persistent = Persistent::No);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">void</span> addButton(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;caption, <span class="keywordtype">bool</span> value = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">void</span> unserialize_impl(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  toml::table serialize_impl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  std::vector&lt;RadioButton&gt; buttons;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  std::optional&lt;std::size_t&gt; selectedButtonIndex = std::nullopt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUI_ELEMENTS_RADIOGROUP_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Interface for all ImGui elements.</div><div class="ttdef"><b>Definition:</b> Element.h:22</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1RadioGroup_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">pf::ui::ig::RadioGroup</a></div><div class="ttdef"><b>Definition:</b> RadioGroup.h:17</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1RadioGroup_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">pf::ui::ig::RadioGroup</a></div><div class="ttdoc">Group of RadioButton.</div><div class="ttdef"><b>Definition:</b> RadioGroup.h:26</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:20</div></div>
 <!-- start footer part -->

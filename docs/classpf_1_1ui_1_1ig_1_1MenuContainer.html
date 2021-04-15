@@ -74,28 +74,30 @@ $(function() {
 <div class="title">pf::ui::ig::MenuContainer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An item which can contain other menus.  
+ <a href="classpf_1_1ui_1_1ig_1_1MenuContainer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="MenuBars_8h_source.html">MenuBars.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::MenuContainer:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1MenuContainer.png" usemap="#pf::ui::ig::MenuContainer_map" alt=""/>
   <map id="pf::ui::ig::MenuContainer_map" name="pf::ui::ig::MenuContainer_map">
-<area href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html" alt="pf::ui::ig::AppMenuBar" shape="rect" coords="0,56,157,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1SubMenu.html" alt="pf::ui::ig::SubMenu" shape="rect" coords="167,56,324,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html" alt="pf::ui::ig::WindowMenuBar" shape="rect" coords="334,56,491,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html" title="Menu bar belonging to the entire application window." alt="pf::ui::ig::AppMenuBar" shape="rect" coords="0,56,157,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="pf::ui::ig::SubMenu" shape="rect" coords="167,56,324,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html" title="Menu bar belonging to Window." alt="pf::ui::ig::WindowMenuBar" shape="rect" coords="334,56,491,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad9419a65f7158d405829968349a5ae06"><td class="memItemLeft" align="right" valign="top"><a id="ad9419a65f7158d405829968349a5ae06"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>addSubmenu</b> (const std::string &amp;name, const std::string &amp;caption)</td></tr>
+<tr class="memitem:ad9419a65f7158d405829968349a5ae06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html#ad9419a65f7158d405829968349a5ae06">addSubmenu</a> (const std::string &amp;name, const std::string &amp;caption)</td></tr>
 <tr class="separator:ad9419a65f7158d405829968349a5ae06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a087569cca272a276d3d5b604a5dbd532"><td class="memItemLeft" align="right" valign="top"><a id="a087569cca272a276d3d5b604a5dbd532"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>addItem</b> (const std::string &amp;name, const std::string &amp;caption)</td></tr>
+<tr class="memitem:a087569cca272a276d3d5b604a5dbd532"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html#a087569cca272a276d3d5b604a5dbd532">addItem</a> (const std::string &amp;name, const std::string &amp;caption)</td></tr>
 <tr class="separator:a087569cca272a276d3d5b604a5dbd532"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80e6f9a08181ee85625e22e42fac5334"><td class="memItemLeft" align="right" valign="top"><a id="a80e6f9a08181ee85625e22e42fac5334"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeItem</b> (const std::string &amp;name)</td></tr>
+<tr class="memitem:a80e6f9a08181ee85625e22e42fac5334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html#a80e6f9a08181ee85625e22e42fac5334">removeItem</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:a80e6f9a08181ee85625e22e42fac5334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -104,6 +106,105 @@ Protected Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>renderItems</b> ()</td></tr>
 <tr class="separator:ac8f0e5593596c4446d5cef2e0573d827"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An item which can contain other menus. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a087569cca272a276d3d5b604a5dbd532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087569cca272a276d3d5b604a5dbd532">&#9670;&nbsp;</a></span>addItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a> &amp; pf::ui::ig::MenuContainer::addItem </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>caption</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create an instance of <a class="el" href="classpf_1_1ui_1_1ig_1_1MenuItem.html" title="An item in SubMenu, which can be clicked. It is basically a popup menu item.">MenuItem</a> and add it to the end of children/ </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>ID of the <a class="el" href="classpf_1_1ui_1_1ig_1_1MenuItem.html" title="An item in SubMenu, which can be clicked. It is basically a popup menu item.">MenuItem</a> </td></tr>
+    <tr><td class="paramname">caption</td><td>text of the <a class="el" href="classpf_1_1ui_1_1ig_1_1MenuItem.html" title="An item in SubMenu, which can be clicked. It is basically a popup menu item.">MenuItem</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the created <a class="el" href="classpf_1_1ui_1_1ig_1_1MenuItem.html" title="An item in SubMenu, which can be clicked. It is basically a popup menu item.">MenuItem</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad9419a65f7158d405829968349a5ae06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9419a65f7158d405829968349a5ae06">&#9670;&nbsp;</a></span>addSubmenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a> &amp; pf::ui::ig::MenuContainer::addSubmenu </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>caption</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create an instance of <a class="el" href="classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items.">SubMenu</a> and add it to the end if children. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>ID of the <a class="el" href="classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items.">SubMenu</a> </td></tr>
+    <tr><td class="paramname">caption</td><td>text of the <a class="el" href="classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items.">SubMenu</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the created <a class="el" href="classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items.">SubMenu</a> </dd></dl>
+
+</div>
+</div>
+<a id="a80e6f9a08181ee85625e22e42fac5334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e6f9a08181ee85625e22e42fac5334">&#9670;&nbsp;</a></span>removeItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::MenuContainer::removeItem </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Remove item by ID. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>ID of the item to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/pf_imgui/elements/<a class="el" href="MenuBars_8h_source.html">MenuBars.h</a></li>
 <li>src/pf_imgui/elements/MenuBars.cpp</li>

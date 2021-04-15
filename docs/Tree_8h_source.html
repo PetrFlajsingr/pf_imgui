@@ -84,23 +84,23 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Tree.html">   15</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a> &amp;addNode(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;caption);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUI_ELEMENTS_TREE_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Tree.html">   20</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a> &amp;addNode(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;caption);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUI_ELEMENTS_TREE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:27</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Interface for all ImGui elements.</div><div class="ttdef"><b>Definition:</b> Element.h:22</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Tree_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Tree.html">pf::ui::ig::Tree</a></div><div class="ttdef"><b>Definition:</b> Tree.h:15</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Tree_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Tree.html">pf::ui::ig::Tree</a></div><div class="ttdoc">Structure for organising UI elements in a tree.</div><div class="ttdef"><b>Definition:</b> Tree.h:20</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

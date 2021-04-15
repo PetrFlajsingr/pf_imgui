@@ -75,13 +75,18 @@ $(function() {
 <div class="title">pf::ui::ig::StackedLayout Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A layout that uses stacks to show different 'pages', of which only one can be shown.  
+ <a href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="StackedLayout_8h_source.html">StackedLayout.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::StackedLayout:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1StackedLayout.png" usemap="#pf::ui::ig::StackedLayout_map" alt=""/>
   <map id="pf::ui::ig::StackedLayout_map" name="pf::ui::ig::StackedLayout_map">
-<area href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html" alt="pf::ui::ig::ResizableLayout" shape="rect" coords="163,168,316,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="pf::ui::ig::ResizableLayout" shape="rect" coords="163,168,316,192"/>
 <area href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="pf::ui::ig::Layout" shape="rect" coords="81,112,234,136"/>
 <area href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="pf::ui::ig::Resizable" shape="rect" coords="244,112,397,136"/>
 <area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="pf::ui::ig::Element" shape="rect" coords="0,56,153,80"/>
@@ -93,41 +98,34 @@ Inheritance diagram for pf::ui::ig::StackedLayout:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acb1e900d162cce2d58b1874e9849951d"><td class="memItemLeft" align="right" valign="top"><a id="acb1e900d162cce2d58b1874e9849951d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StackedLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse=AllowCollapse::No, ShowBorder showBorder=ShowBorder::No, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:acb1e900d162cce2d58b1874e9849951d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#acb1e900d162cce2d58b1874e9849951d">StackedLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;<a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a902b0bbd3e064addd60175c99ab839ce">size</a>, AllowCollapse allowCollapse=AllowCollapse::No, ShowBorder showBorder=ShowBorder::No, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:acb1e900d162cce2d58b1874e9849951d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbe61612e9d0eb158cfdb6c2c56cb611"><td class="memItemLeft" align="right" valign="top"><a id="abbe61612e9d0eb158cfdb6c2c56cb611"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StackedLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, ShowBorder showBorder, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:abbe61612e9d0eb158cfdb6c2c56cb611"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#abbe61612e9d0eb158cfdb6c2c56cb611">StackedLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;<a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a902b0bbd3e064addd60175c99ab839ce">size</a>, ShowBorder showBorder, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:abbe61612e9d0eb158cfdb6c2c56cb611"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa125971283852c4c23a6b39e6562acf1"><td class="memItemLeft" align="right" valign="top"><a id="aa125971283852c4c23a6b39e6562acf1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StackedLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:aa125971283852c4c23a6b39e6562acf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#aa125971283852c4c23a6b39e6562acf1">StackedLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;<a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a902b0bbd3e064addd60175c99ab839ce">size</a>, AllowCollapse allowCollapse, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:aa125971283852c4c23a6b39e6562acf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a869976bb2cd09541e45dadceb94a7895"><td class="memItemLeft" align="right" valign="top"><a id="a869976bb2cd09541e45dadceb94a7895"></a>
-StackContainer &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>pushStack</b> ()</td></tr>
+<tr class="memitem:a869976bb2cd09541e45dadceb94a7895"><td class="memItemLeft" align="right" valign="top">StackContainer &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a869976bb2cd09541e45dadceb94a7895">pushStack</a> ()</td></tr>
 <tr class="separator:a869976bb2cd09541e45dadceb94a7895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a937c6e5134da65f38b16a3362ae35943"><td class="memItemLeft" align="right" valign="top"><a id="a937c6e5134da65f38b16a3362ae35943"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeStack</b> (std::size_t index)</td></tr>
+<tr class="memitem:aa61f057442ac9e2ac5d20f133473fce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#aa61f057442ac9e2ac5d20f133473fce9">popStack</a> ()</td></tr>
+<tr class="separator:aa61f057442ac9e2ac5d20f133473fce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a937c6e5134da65f38b16a3362ae35943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a937c6e5134da65f38b16a3362ae35943">removeStack</a> (std::size_t index)</td></tr>
 <tr class="separator:a937c6e5134da65f38b16a3362ae35943"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92a0bf9831c619216387d520dd5b7322"><td class="memItemLeft" align="right" valign="top"><a id="a92a0bf9831c619216387d520dd5b7322"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>moveStack</b> (std::size_t srcIndex, std::size_t dstIndex)</td></tr>
+<tr class="memitem:a92a0bf9831c619216387d520dd5b7322"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a92a0bf9831c619216387d520dd5b7322">moveStack</a> (std::size_t srcIndex, std::size_t dstIndex)</td></tr>
 <tr class="separator:a92a0bf9831c619216387d520dd5b7322"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae965fee36cbe752f33c80d90f89e84f3"><td class="memItemLeft" align="right" valign="top"><a id="ae965fee36cbe752f33c80d90f89e84f3"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentIndex</b> () const</td></tr>
+<tr class="memitem:ae965fee36cbe752f33c80d90f89e84f3"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#ae965fee36cbe752f33c80d90f89e84f3">getCurrentIndex</a> () const</td></tr>
 <tr class="separator:ae965fee36cbe752f33c80d90f89e84f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bfc2a877ed3cd9b1e0f84245a9a7589"><td class="memItemLeft" align="right" valign="top"><a id="a5bfc2a877ed3cd9b1e0f84245a9a7589"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (std::size_t index)</td></tr>
+<tr class="memitem:a5bfc2a877ed3cd9b1e0f84245a9a7589"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a5bfc2a877ed3cd9b1e0f84245a9a7589">setIndex</a> (std::size_t index)</td></tr>
 <tr class="separator:a5bfc2a877ed3cd9b1e0f84245a9a7589"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73ba75d4601a02e93ad58f8cda40eb45"><td class="memItemLeft" align="right" valign="top"><a id="a73ba75d4601a02e93ad58f8cda40eb45"></a>
-StackContainer &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentStack</b> ()</td></tr>
+<tr class="memitem:a902b0bbd3e064addd60175c99ab839ce"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a902b0bbd3e064addd60175c99ab839ce">size</a> () const</td></tr>
+<tr class="separator:a902b0bbd3e064addd60175c99ab839ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73ba75d4601a02e93ad58f8cda40eb45"><td class="memItemLeft" align="right" valign="top">StackContainer &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a73ba75d4601a02e93ad58f8cda40eb45">getCurrentStack</a> ()</td></tr>
 <tr class="separator:a73ba75d4601a02e93ad58f8cda40eb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe54310d85f2a7addc5a39f6aaf19fa5"><td class="memItemLeft" align="right" valign="top"><a id="abe54310d85f2a7addc5a39f6aaf19fa5"></a>
-StackContainer &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStackAtIndex</b> (std::size_t index)</td></tr>
+<tr class="memitem:abe54310d85f2a7addc5a39f6aaf19fa5"><td class="memItemLeft" align="right" valign="top">StackContainer &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#abe54310d85f2a7addc5a39f6aaf19fa5">getStackAtIndex</a> (std::size_t index)</td></tr>
 <tr class="separator:abe54310d85f2a7addc5a39f6aaf19fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa74d7f687636b5843237e4b80a40fd6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#aaa74d7f687636b5843237e4b80a40fd6">getRenderables</a> () override</td></tr>
 <tr class="separator:aaa74d7f687636b5843237e4b80a40fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></td></tr>
-<tr class="memitem:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top"><a id="a1cd1af4d28f70b86a46d102f284f34bb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ResizableLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
+<tr class="memitem:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html#a1cd1af4d28f70b86a46d102f284f34bb">ResizableLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
 <tr class="separator:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Layout"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Layout')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></td></tr>
 <tr class="memitem:a4780532f31f3ca0095b997c3b0ac2d2b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Layout"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a4780532f31f3ca0095b997c3b0ac2d2b">Layout</a> (const std::string &amp;elementName, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
@@ -216,8 +214,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:abf23e66d621b95cfd05ae764ff46c1ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#abf23e66d621b95cfd05ae764ff46c1ac">renderImpl</a> () override</td></tr>
 <tr class="separator:abf23e66d621b95cfd05ae764ff46c1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></td></tr>
-<tr class="memitem:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top"><a id="a6939442da81b673f1b800edf4370fa54"></a>
-ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed</b> () const</td></tr>
+<tr class="memitem:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top">ImVec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html#a6939442da81b673f1b800edf4370fa54">getSizeIfCollapsed</a> () const</td></tr>
 <tr class="separator:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Layout"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Layout')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></td></tr>
 <tr class="memitem:a1ae940223fe9a5f94137bed24cce603a inherit pro_methods_classpf_1_1ui_1_1ig_1_1Layout"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a1ae940223fe9a5f94137bed24cce603a">renderCollapseButton</a> ()</td></tr>
@@ -228,7 +225,201 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 <tr class="memitem:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">toml::table&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a387ab8ad61863c8c07a3b0d6302846f5">serialize_impl</a> () override</td></tr>
 <tr class="separator:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A layout that uses stacks to show different 'pages', of which only one can be shown. </p>
+<p>This layout serves as a multi-page layout. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="acb1e900d162cce2d58b1874e9849951d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb1e900d162cce2d58b1874e9849951d">&#9670;&nbsp;</a></span>StackedLayout() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::StackedLayout::StackedLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AllowCollapse&#160;</td>
+          <td class="paramname"><em>allowCollapse</em> = <code>AllowCollapse::No</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShowBorder&#160;</td>
+          <td class="paramname"><em>showBorder</em> = <code>ShowBorder::No</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown.">StackedLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">allowCollapse</td><td>enable collapse button </td></tr>
+    <tr><td class="paramname">showBorder</td><td>draw border around the layout </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abbe61612e9d0eb158cfdb6c2c56cb611"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbe61612e9d0eb158cfdb6c2c56cb611">&#9670;&nbsp;</a></span>StackedLayout() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::StackedLayout::StackedLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShowBorder&#160;</td>
+          <td class="paramname"><em>showBorder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown.">StackedLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">showBorder</td><td>draw border around the layout </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa125971283852c4c23a6b39e6562acf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa125971283852c4c23a6b39e6562acf1">&#9670;&nbsp;</a></span>StackedLayout() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::StackedLayout::StackedLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AllowCollapse&#160;</td>
+          <td class="paramname"><em>allowCollapse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown.">StackedLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">allowCollapse</td><td>enable collapse button </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae965fee36cbe752f33c80d90f89e84f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae965fee36cbe752f33c80d90f89e84f3">&#9670;&nbsp;</a></span>getCurrentIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t pf::ui::ig::StackedLayout::getCurrentIndex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get index of currently active stack. </p><dl class="section return"><dt>Returns</dt><dd>index of currently active stack </dd></dl>
+
+</div>
+</div>
+<a id="a73ba75d4601a02e93ad58f8cda40eb45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73ba75d4601a02e93ad58f8cda40eb45">&#9670;&nbsp;</a></span>getCurrentStack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">StackedLayout::StackContainer &amp; pf::ui::ig::StackedLayout::getCurrentStack </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get currently active stack. </p><dl class="section return"><dt>Returns</dt><dd>reference to the currently active stack </dd></dl>
+
+</div>
+</div>
 <a id="aaa74d7f687636b5843237e4b80a40fd6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaa74d7f687636b5843237e4b80a40fd6">&#9670;&nbsp;</a></span>getRenderables()</h2>
 
@@ -257,6 +448,132 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 
 </div>
 </div>
+<a id="abe54310d85f2a7addc5a39f6aaf19fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe54310d85f2a7addc5a39f6aaf19fa5">&#9670;&nbsp;</a></span>getStackAtIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">StackedLayout::StackContainer &amp; pf::ui::ig::StackedLayout::getStackAtIndex </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get stack at the selected index. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>index of the stack </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the selected stack </dd></dl>
+
+</div>
+</div>
+<a id="a92a0bf9831c619216387d520dd5b7322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a0bf9831c619216387d520dd5b7322">&#9670;&nbsp;</a></span>moveStack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::StackedLayout::moveStack </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>srcIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>dstIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Move src stack to the dst index. Stacks at indices srcIndex&lt; &lt;dstIndex are moved one index to the left. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">srcIndex</td><td>index of the stack to be moved </td></tr>
+    <tr><td class="paramname">dstIndex</td><td>index of destination of the stack </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa61f057442ac9e2ac5d20f133473fce9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa61f057442ac9e2ac5d20f133473fce9">&#9670;&nbsp;</a></span>popStack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::StackedLayout::popStack </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Remove the last element container. If the layout is empty nothing happens. </p>
+
+</div>
+</div>
+<a id="a869976bb2cd09541e45dadceb94a7895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a869976bb2cd09541e45dadceb94a7895">&#9670;&nbsp;</a></span>pushStack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">StackedLayout::StackContainer &amp; pf::ui::ig::StackedLayout::pushStack </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Push a new element container to the last index. </p><dl class="section return"><dt>Returns</dt><dd>reference to the newly added stack </dd></dl>
+
+</div>
+</div>
+<a id="a937c6e5134da65f38b16a3362ae35943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a937c6e5134da65f38b16a3362ae35943">&#9670;&nbsp;</a></span>removeStack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::StackedLayout::removeStack </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Remove stack at the selected index. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>index of a stack to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InvalidArgumentException</td><td>when the index is out of bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abf23e66d621b95cfd05ae764ff46c1ac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf23e66d621b95cfd05ae764ff46c1ac">&#9670;&nbsp;</a></span>renderImpl()</h2>
 
@@ -282,6 +599,54 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 <p>Implementation of rendering without checks for visibility etc. This should do pure rendering, nothing else. </p>
 
 <p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a34318266adce6dae02e29a762cb4287c">pf::ui::ig::Renderable</a>.</p>
+
+</div>
+</div>
+<a id="a5bfc2a877ed3cd9b1e0f84245a9a7589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bfc2a877ed3cd9b1e0f84245a9a7589">&#9670;&nbsp;</a></span>setIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::StackedLayout::setIndex </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set active stack by index. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>index of a stack to activate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InvalidArgumentException</td><td>when the index is out of bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a902b0bbd3e064addd60175c99ab839ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902b0bbd3e064addd60175c99ab839ce">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t pf::ui::ig::StackedLayout::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Count of stacks in the layout. </p><dl class="section return"><dt>Returns</dt><dd>count of stacks </dd></dl>
 
 </div>
 </div>

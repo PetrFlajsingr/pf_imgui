@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['notify_307',['notify',['../classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2',1,'pf::ui::ig::Observable_impl']]],
-  ['notifyonclick_308',['notifyOnClick',['../classpf_1_1ui_1_1ig_1_1Clickable.html#ac05656c2542cdcd079c05bbcc0e2b2f9',1,'pf::ui::ig::Clickable']]]
+  ['memo_428',['Memo',['../classpf_1_1ui_1_1ig_1_1Memo.html#aa67e799298af1d09f495a75432259e73',1,'pf::ui::ig::Memo']]],
+  ['menuitem_429',['MenuItem',['../classpf_1_1ui_1_1ig_1_1MenuItem.html#a0f2532e51afc1c6929b868d0fe604ad0',1,'pf::ui::ig::MenuItem']]],
+  ['movestack_430',['moveStack',['../classpf_1_1ui_1_1ig_1_1StackedLayout.html#a92a0bf9831c619216387d520dd5b7322',1,'pf::ui::ig::StackedLayout']]]
 ];

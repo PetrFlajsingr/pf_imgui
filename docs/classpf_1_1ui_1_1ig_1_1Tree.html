@@ -74,6 +74,11 @@ $(function() {
 <div class="title">pf::ui::ig::Tree Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Structure for organising UI elements in a tree.  
+ <a href="classpf_1_1ui_1_1ig_1_1Tree.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Tree_8h_source.html">Tree.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::Tree:</div>
 <div class="dyncontent">
@@ -89,11 +94,9 @@ Inheritance diagram for pf::ui::ig::Tree:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adec8fd2c60da812385a5f60f52faaae5"><td class="memItemLeft" align="right" valign="top"><a id="adec8fd2c60da812385a5f60f52faaae5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tree</b> (const std::string &amp;elementName, const std::string &amp;label)</td></tr>
+<tr class="memitem:adec8fd2c60da812385a5f60f52faaae5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Tree.html#adec8fd2c60da812385a5f60f52faaae5">Tree</a> (const std::string &amp;elementName, const std::string &amp;label)</td></tr>
 <tr class="separator:adec8fd2c60da812385a5f60f52faaae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8f758bec8e86a61005f9ef3ead02f65"><td class="memItemLeft" align="right" valign="top"><a id="ab8f758bec8e86a61005f9ef3ead02f65"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>addNode</b> (const std::string &amp;elementName, const std::string &amp;caption)</td></tr>
+<tr class="memitem:ab8f758bec8e86a61005f9ef3ead02f65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Tree.html#ab8f758bec8e86a61005f9ef3ead02f65">addNode</a> (const std::string &amp;elementName, const std::string &amp;caption)</td></tr>
 <tr class="separator:ab8f758bec8e86a61005f9ef3ead02f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Element')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></td></tr>
 <tr class="memitem:a90b7bca38491872d8192dddaf317f1c7 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top"><a id="a90b7bca38491872d8192dddaf317f1c7"></a>
@@ -188,7 +191,82 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aac14ee41ef533655cd4b437e8485a0c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Tree.html#aac14ee41ef533655cd4b437e8485a0c2">renderImpl</a> () override</td></tr>
 <tr class="separator:aac14ee41ef533655cd4b437e8485a0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Structure for organising UI elements in a tree. </p>
+<p>Each node can contain subnodes or any other elements. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="adec8fd2c60da812385a5f60f52faaae5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adec8fd2c60da812385a5f60f52faaae5">&#9670;&nbsp;</a></span>Tree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::Tree::Tree </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>label</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree.">Tree</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the node </td></tr>
+    <tr><td class="paramname">label</td><td>text rendered on the node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab8f758bec8e86a61005f9ef3ead02f65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8f758bec8e86a61005f9ef3ead02f65">&#9670;&nbsp;</a></span>addNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1Tree.html">Tree</a> &amp; pf::ui::ig::Tree::addNode </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>caption</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create a new subnode. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the node </td></tr>
+    <tr><td class="paramname">caption</td><td>text rendered on the node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the newly created node </dd></dl>
+
+</div>
+</div>
 <a id="aac14ee41ef533655cd4b437e8485a0c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac14ee41ef533655cd4b437e8485a0c2">&#9670;&nbsp;</a></span>renderImpl()</h2>
 

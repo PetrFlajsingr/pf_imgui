@@ -83,40 +83,61 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/enums.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">   17</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> ImVec2 &amp;size, uint32_t width, uint32_t height,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;             Persistent persistent = Persistent::No);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> ImVec2 &amp;size, uint32_t width, uint32_t height, ShowBorder showBorder,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;             Persistent persistent = Persistent::No);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> ImVec2 &amp;size, uint32_t width, uint32_t height,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;             AllowCollapse allowCollapse, Persistent persistent = Persistent::No);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">void</span> setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr&lt;ResizableLayout&gt; layout);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &amp;getCellLayout(uint32_t column, uint32_t row);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  uint32_t width;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  uint32_t height;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  std::vector&lt;std::unique_ptr&lt;ResizableLayout&gt;&gt; cells;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  [[nodiscard]] uint32_t indexForCell(uint32_t column, uint32_t row) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_GRIDLAYOUT_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/exceptions.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">   23</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> ImVec2 &amp;size, uint32_t width, uint32_t height,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;             Persistent persistent = Persistent::No);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> ImVec2 &amp;size, uint32_t width, uint32_t height, ShowBorder showBorder,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;             Persistent persistent = Persistent::No);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html">GridLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> ImVec2 &amp;size, uint32_t width, uint32_t height,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;             AllowCollapse allowCollapse, Persistent persistent = Persistent::No);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr&lt;ResizableLayout&gt; layout);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  requires std::derived_from&lt;T, Layout&gt; &amp;&amp; std::constructible_from&lt;T, std::string, Args...&gt; T &amp;</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a04dbcb18a43eccd3eaf03a6815799d83">   84</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a04dbcb18a43eccd3eaf03a6815799d83">createLayout</a>(uint32_t column, uint32_t row,std::string name, Args &amp;&amp;...args) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> (findIf(cells, [name](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keywordflow">return</span> cell-&gt;getName() == name;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }).has_value()) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html">DuplicateIdException</a>(<span class="stringliteral">&quot;{} already present in ui&quot;</span>, name);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">auto</span> child = std::make_unique&lt;T&gt;(name, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = child.get();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> index = indexForCell(column, row);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">if</span> (index &gt;= cells.size()) { <span class="keywordflow">throw</span> InvalidArgumentException::fmt(<span class="stringliteral">&quot;Indices out of bounds: {}x{}&quot;</span>, column, row); }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    cells[index] = std::move(child);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">ResizableLayout</a> &amp;getCellLayout(uint32_t column, uint32_t row);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasLayoutAt(uint32_t column, uint32_t row);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  uint32_t width;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  uint32_t height;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  std::vector&lt;std::unique_ptr&lt;ResizableLayout&gt;&gt; cells;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  [[nodiscard]] uint32_t indexForCell(uint32_t column, uint32_t row) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;};</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_GRIDLAYOUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ResizableLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></div><div class="ttdef"><b>Definition:</b> ResizableLayout.h:16</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1GridLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1GridLayout.html">pf::ui::ig::GridLayout</a></div><div class="ttdef"><b>Definition:</b> GridLayout.h:17</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ResizableLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></div><div class="ttdoc">An interface for Layouts, which support changing their size.</div><div class="ttdef"><b>Definition:</b> ResizableLayout.h:21</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1GridLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1GridLayout.html">pf::ui::ig::GridLayout</a></div><div class="ttdoc">A layout which positions it's children in a grid.</div><div class="ttdef"><b>Definition:</b> GridLayout.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1GridLayout_html_a04dbcb18a43eccd3eaf03a6815799d83"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a04dbcb18a43eccd3eaf03a6815799d83">pf::ui::ig::GridLayout::createLayout</a></div><div class="ttdeci">requires std::derived_from&lt; T, Layout &gt; &amp;&amp;std::constructible_from&lt; T, std::string, Args... &gt; T &amp; createLayout(uint32_t column, uint32_t row, std::string name, Args &amp;&amp;...args)</div><div class="ttdef"><b>Definition:</b> GridLayout.h:84</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DuplicateIdException_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html">pf::ui::ig::DuplicateIdException</a></div><div class="ttdoc">Exception thrown when a duplicate ID is added in the UI tree.</div><div class="ttdef"><b>Definition:</b> exceptions.h:15</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

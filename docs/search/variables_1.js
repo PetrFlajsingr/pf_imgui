@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['description_351',['description',['../structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html#af49b0d019f7593b112c9082706097ae8',1,'pf::ui::ig::FileExtensionSettings']]]
+  ['color_522',['color',['../structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html#a17d7dc1e9477e39e967f39641cbdf6f0',1,'pf::ui::ig::FileExtensionSettings']]]
 ];

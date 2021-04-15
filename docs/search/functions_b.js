@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['opendirdialog_309',['openDirDialog',['../classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a72d83202f7d1bcb77b74cd32741658fb',1,'pf::ui::ig::ImGuiInterface']]],
-  ['openfiledialog_310',['openFileDialog',['../classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a586c7a8c65299d4350efb4fc30ed782c',1,'pf::ui::ig::ImGuiInterface']]]
+  ['notify_431',['notify',['../classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2',1,'pf::ui::ig::Observable_impl']]],
+  ['notifyonclick_432',['notifyOnClick',['../classpf_1_1ui_1_1ig_1_1Clickable.html#ac05656c2542cdcd079c05bbcc0e2b2f9',1,'pf::ui::ig::Clickable']]]
 ];

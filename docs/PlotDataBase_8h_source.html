@@ -112,8 +112,8 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">void</span> setData(<span class="keyword">const</span> std::vector&lt;<a class="code" href="structpf_1_1ui_1_1ig_1_1plot__type_1_1XYPlotData.html">XYPlotData&lt;T&gt;</a>&gt; &amp;newData) {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    xData = newData | ranges::views::transform([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;val) { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(val.x); })</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        | ranges::to_vector;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> [min, max] = ranges::minmax(xData);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    width = max - min;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> extremes = ranges::minmax(xData);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    width = extremes.max - extremes.min;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    yData = newData | ranges::views::transform([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;val) { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(val.y); })</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        | ranges::to_vector;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>

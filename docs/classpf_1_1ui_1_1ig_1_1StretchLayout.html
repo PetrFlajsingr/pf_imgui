@@ -74,13 +74,18 @@ $(function() {
 <div class="title">pf::ui::ig::StretchLayout Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A layout which stretches to the available area in desired direction.  
+ <a href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="StretchLayout_8h_source.html">StretchLayout.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::StretchLayout:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1StretchLayout.png" usemap="#pf::ui::ig::StretchLayout_map" alt=""/>
   <map id="pf::ui::ig::StretchLayout_map" name="pf::ui::ig::StretchLayout_map">
-<area href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html" alt="pf::ui::ig::ResizableLayout" shape="rect" coords="163,168,316,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="pf::ui::ig::ResizableLayout" shape="rect" coords="163,168,316,192"/>
 <area href="classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="pf::ui::ig::Layout" shape="rect" coords="81,112,234,136"/>
 <area href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="pf::ui::ig::Resizable" shape="rect" coords="244,112,397,136"/>
 <area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="pf::ui::ig::Element" shape="rect" coords="0,56,153,80"/>
@@ -92,33 +97,30 @@ Inheritance diagram for pf::ui::ig::StretchLayout:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a934b212dcbe0797dffdafacde37f5845"><td class="memItemLeft" align="right" valign="top"><a id="a934b212dcbe0797dffdafacde37f5845"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StretchLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, Stretch stretch, AllowCollapse allowCollapse=AllowCollapse::No, ShowBorder showBorder=ShowBorder::No, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:a934b212dcbe0797dffdafacde37f5845"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a934b212dcbe0797dffdafacde37f5845">StretchLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, Stretch stretch, AllowCollapse allowCollapse=AllowCollapse::No, ShowBorder showBorder=ShowBorder::No, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:a934b212dcbe0797dffdafacde37f5845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abee70ff7c9939c0a53bab46bbd8e6502"><td class="memItemLeft" align="right" valign="top"><a id="abee70ff7c9939c0a53bab46bbd8e6502"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StretchLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, Stretch stretch, ShowBorder showBorder, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:abee70ff7c9939c0a53bab46bbd8e6502"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#abee70ff7c9939c0a53bab46bbd8e6502">StretchLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, Stretch stretch, ShowBorder showBorder, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:abee70ff7c9939c0a53bab46bbd8e6502"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5de8ec17c5cc64c2765186442e2ef49b"><td class="memItemLeft" align="right" valign="top"><a id="a5de8ec17c5cc64c2765186442e2ef49b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StretchLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, Stretch stretch, AllowCollapse allowCollapse, Persistent persistent=Persistent::No)</td></tr>
+<tr class="memitem:a5de8ec17c5cc64c2765186442e2ef49b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a5de8ec17c5cc64c2765186442e2ef49b">StretchLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, Stretch stretch, AllowCollapse allowCollapse, Persistent persistent=Persistent::No)</td></tr>
 <tr class="separator:a5de8ec17c5cc64c2765186442e2ef49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac545ae586c7d27b19f9887febf744b15"><td class="memTemplParams" colspan="2"><a id="ac545ae586c7d27b19f9887febf744b15"></a>
-template&lt;typename T , typename... Args&gt; </td></tr>
-<tr class="memitem:ac545ae586c7d27b19f9887febf744b15"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &gt; &amp;&amp;std::derived_from&lt; T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a> &gt; &amp;&amp;std::constructible_from&lt; T, std::string, Args... &gt; T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>createChild</b> (std::string name, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:ac545ae586c7d27b19f9887febf744b15"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:ac545ae586c7d27b19f9887febf744b15"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &gt; &amp;&amp;std::derived_from&lt; T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a> &gt; &amp;&amp;std::constructible_from&lt; T, std::string, Args... &gt; T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#ac545ae586c7d27b19f9887febf744b15">createChild</a> (std::string name, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:ac545ae586c7d27b19f9887febf744b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d499e3386fc8fc3b58045c7a1c9e73"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; Element &gt; T&gt; </td></tr>
+<tr class="memitem:a92d499e3386fc8fc3b58045c7a1c9e73"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a92d499e3386fc8fc3b58045c7a1c9e73">setChild</a> (std::unique_ptr&lt; T &gt; &amp;&amp;newChild)</td></tr>
+<tr class="separator:a92d499e3386fc8fc3b58045c7a1c9e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84c8dc65b26c788ea2e37dc3f7624065"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a84c8dc65b26c788ea2e37dc3f7624065">getRenderables</a> () override</td></tr>
 <tr class="separator:a84c8dc65b26c788ea2e37dc3f7624065"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a373b38b3588bec189412c0490e7af978"><td class="memItemLeft" align="right" valign="top"><a id="a373b38b3588bec189412c0490e7af978"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getChild</b> ()</td></tr>
+<tr class="memitem:a373b38b3588bec189412c0490e7af978"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a373b38b3588bec189412c0490e7af978">getChild</a> ()</td></tr>
 <tr class="separator:a373b38b3588bec189412c0490e7af978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86822e700bf8d7dcf7a7835f324b2c89"><td class="memItemLeft" align="right" valign="top"><a id="a86822e700bf8d7dcf7a7835f324b2c89"></a>
-Stretch&#160;</td><td class="memItemRight" valign="bottom"><b>getStretch</b> () const</td></tr>
+<tr class="memitem:a58bcd91aca19f80a0de1c8bb8aaa85ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a58bcd91aca19f80a0de1c8bb8aaa85ee">hasChild</a> () const</td></tr>
+<tr class="separator:a58bcd91aca19f80a0de1c8bb8aaa85ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86822e700bf8d7dcf7a7835f324b2c89"><td class="memItemLeft" align="right" valign="top">Stretch&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a86822e700bf8d7dcf7a7835f324b2c89">getStretch</a> () const</td></tr>
 <tr class="separator:a86822e700bf8d7dcf7a7835f324b2c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36a4d3bb998cfc882fbe3b7da787e73d"><td class="memItemLeft" align="right" valign="top"><a id="a36a4d3bb998cfc882fbe3b7da787e73d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStretch</b> (Stretch newStretch)</td></tr>
+<tr class="memitem:a36a4d3bb998cfc882fbe3b7da787e73d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a36a4d3bb998cfc882fbe3b7da787e73d">setStretch</a> (Stretch newStretch)</td></tr>
 <tr class="separator:a36a4d3bb998cfc882fbe3b7da787e73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></td></tr>
-<tr class="memitem:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top"><a id="a1cd1af4d28f70b86a46d102f284f34bb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ResizableLayout</b> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
+<tr class="memitem:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html#a1cd1af4d28f70b86a46d102f284f34bb">ResizableLayout</a> (const std::string &amp;elementName, const ImVec2 &amp;size, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
 <tr class="separator:a1cd1af4d28f70b86a46d102f284f34bb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Layout"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Layout')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></td></tr>
 <tr class="memitem:a4780532f31f3ca0095b997c3b0ac2d2b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Layout"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a4780532f31f3ca0095b997c3b0ac2d2b">Layout</a> (const std::string &amp;elementName, AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)</td></tr>
@@ -207,8 +209,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8628d4e5e0b45e4ef9daa84e9b867b7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a8628d4e5e0b45e4ef9daa84e9b867b7f">renderImpl</a> () override</td></tr>
 <tr class="separator:a8628d4e5e0b45e4ef9daa84e9b867b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></td></tr>
-<tr class="memitem:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top"><a id="a6939442da81b673f1b800edf4370fa54"></a>
-ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed</b> () const</td></tr>
+<tr class="memitem:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memItemLeft" align="right" valign="top">ImVec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html#a6939442da81b673f1b800edf4370fa54">getSizeIfCollapsed</a> () const</td></tr>
 <tr class="separator:a6939442da81b673f1b800edf4370fa54 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ResizableLayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Layout"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Layout')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></td></tr>
 <tr class="memitem:a1ae940223fe9a5f94137bed24cce603a inherit pro_methods_classpf_1_1ui_1_1ig_1_1Layout"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a1ae940223fe9a5f94137bed24cce603a">renderCollapseButton</a> ()</td></tr>
@@ -219,7 +220,285 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 <tr class="memitem:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">toml::table&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a387ab8ad61863c8c07a3b0d6302846f5">serialize_impl</a> () override</td></tr>
 <tr class="separator:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A layout which stretches to the available area in desired direction. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a934b212dcbe0797dffdafacde37f5845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a934b212dcbe0797dffdafacde37f5845">&#9670;&nbsp;</a></span>StretchLayout() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::StretchLayout::StretchLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stretch&#160;</td>
+          <td class="paramname"><em>stretch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AllowCollapse&#160;</td>
+          <td class="paramname"><em>allowCollapse</em> = <code>AllowCollapse::No</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShowBorder&#160;</td>
+          <td class="paramname"><em>showBorder</em> = <code>ShowBorder::No</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction.">StretchLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">stretch</td><td>dimension to which the layout stretches </td></tr>
+    <tr><td class="paramname">allowCollapse</td><td>enable collapse button </td></tr>
+    <tr><td class="paramname">showBorder</td><td>draw border around the layout </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abee70ff7c9939c0a53bab46bbd8e6502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abee70ff7c9939c0a53bab46bbd8e6502">&#9670;&nbsp;</a></span>StretchLayout() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::StretchLayout::StretchLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stretch&#160;</td>
+          <td class="paramname"><em>stretch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShowBorder&#160;</td>
+          <td class="paramname"><em>showBorder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction.">StretchLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">stretch</td><td>dimension to which the layout stretches </td></tr>
+    <tr><td class="paramname">showBorder</td><td>draw border around the layout </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5de8ec17c5cc64c2765186442e2ef49b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de8ec17c5cc64c2765186442e2ef49b">&#9670;&nbsp;</a></span>StretchLayout() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pf::ui::ig::StretchLayout::StretchLayout </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ImVec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stretch&#160;</td>
+          <td class="paramname"><em>stretch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AllowCollapse&#160;</td>
+          <td class="paramname"><em>allowCollapse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Persistent&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction.">StretchLayout</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elementName</td><td>ID of the layout </td></tr>
+    <tr><td class="paramname">size</td><td>size of the layout </td></tr>
+    <tr><td class="paramname">stretch</td><td>dimension to which the layout stretches </td></tr>
+    <tr><td class="paramname">allowCollapse</td><td>enable collapse button </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable state saving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac545ae586c7d27b19f9887febf744b15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac545ae586c7d27b19f9887febf744b15">&#9670;&nbsp;</a></span>createChild()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">requires std::derived_from&lt;T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>&gt;&amp;&amp; std::derived_from&lt;T, <a class="el" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a>&gt;&amp;&amp; std::constructible_from&lt;T, std::string, Args...&gt; T&amp; pf::ui::ig::StretchLayout::createChild </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a child and append it to the end of children.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>type of created <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements.">Element</a> </td></tr>
+    <tr><td class="paramname">Args</td><td>arguments to pass to the Ts constructor after its name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>ID of the newly created element </td></tr>
+    <tr><td class="paramname">position</td><td>position of the newly created element </td></tr>
+    <tr><td class="paramname">args</td><td>arguments to pass to the Ts constructor after its nam </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the newly created <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements.">Element</a></dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html" title="Exception thrown when a duplicate ID is added in the UI tree.">DuplicateIdException</a></td><td>when an ID is already present in the container Create a child inside the layout. If the layout already contains one it gets overwritten.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>type of created <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements.">Element</a> </td></tr>
+    <tr><td class="paramname">Args</td><td>arguments to pass to the Ts constructor after its name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>ID of the newly created element </td></tr>
+    <tr><td class="paramname">args</td><td>arguments to pass to the Ts constructor after its nam </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the newly created <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements.">Element</a> </dd></dl>
+
+</div>
+</div>
+<a id="a373b38b3588bec189412c0490e7af978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373b38b3588bec189412c0490e7af978">&#9670;&nbsp;</a></span>getChild()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp; pf::ui::ig::StretchLayout::getChild </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get child of the layout. </p><dl class="section return"><dt>Returns</dt><dd>reference to the child </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">StackTraceException</td><td>when no child is present inside the layout </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a84c8dc65b26c788ea2e37dc3f7624065"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a84c8dc65b26c788ea2e37dc3f7624065">&#9670;&nbsp;</a></span>getRenderables()</h2>
 
@@ -248,6 +527,42 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 
 </div>
 </div>
+<a id="a86822e700bf8d7dcf7a7835f324b2c89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86822e700bf8d7dcf7a7835f324b2c89">&#9670;&nbsp;</a></span>getStretch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Stretch pf::ui::ig::StretchLayout::getStretch </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get current stretch setting. </p><dl class="section return"><dt>Returns</dt><dd>current stretch setting </dd></dl>
+
+</div>
+</div>
+<a id="a58bcd91aca19f80a0de1c8bb8aaa85ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58bcd91aca19f80a0de1c8bb8aaa85ee">&#9670;&nbsp;</a></span>hasChild()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pf::ui::ig::StretchLayout::hasChild </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check whether the layout contains a child. </p><dl class="section return"><dt>Returns</dt><dd>true if the layout contains a child, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a8628d4e5e0b45e4ef9daa84e9b867b7f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8628d4e5e0b45e4ef9daa84e9b867b7f">&#9670;&nbsp;</a></span>renderImpl()</h2>
 
@@ -273,6 +588,64 @@ ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>getSizeIfCollapsed<
 <p>Implementation of rendering without checks for visibility etc. This should do pure rendering, nothing else. </p>
 
 <p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a34318266adce6dae02e29a762cb4287c">pf::ui::ig::Renderable</a>.</p>
+
+</div>
+</div>
+<a id="a92d499e3386fc8fc3b58045c7a1c9e73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d499e3386fc8fc3b58045c7a1c9e73">&#9670;&nbsp;</a></span>setChild()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::derived_from&lt; Element &gt; T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::StretchLayout::setChild </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>newChild</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set child inside the layout. If the layout already contains one it gets overwritten. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newChild</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a36a4d3bb998cfc882fbe3b7da787e73d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36a4d3bb998cfc882fbe3b7da787e73d">&#9670;&nbsp;</a></span>setStretch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::StretchLayout::setStretch </td>
+          <td>(</td>
+          <td class="paramtype">Stretch&#160;</td>
+          <td class="paramname"><em>newStretch</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set new stretch setting. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newStretch</td><td>new stretch setting </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
