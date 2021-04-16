@@ -11,8 +11,16 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D plot where and area beneath the data set is colored.
+ */
 class PF_IMGUI_EXPORT Shaded : public LabeledPlotData, public details::DefaultPlotDataSetting {
  public:
+  /**
+   * Construct Shaded.
+   * @param elementName ID of the plot
+   * @param caption text rendered above the plot
+   */
   Shaded(const std::string &elementName, const std::string &caption);
 
  protected:
