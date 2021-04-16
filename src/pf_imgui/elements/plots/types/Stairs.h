@@ -11,8 +11,22 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D plot where neighboring values are connected via 'stairs'.
+ * Example:
+ *    _
+ *   | |
+ *  _| |
+ * |   |_
+ * ___________
+ */
 class PF_IMGUI_EXPORT Stairs : public LabeledPlotData, public details::DefaultPlotDataSetting {
  public:
+  /**
+   * Construct Stairs.
+   * @param elementName ID of the plot
+   * @param caption text rendered above the plot
+   */
   Stairs(const std::string &elementName, const std::string &caption);
 
  protected:

@@ -11,8 +11,24 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D graph, where each value is rendered as a stem on X axis.
+ *
+ * Example:
+ *        o
+ *        |
+ * o      |
+ * |  o   |
+ * |  |   |
+ * ________
+*/
 class PF_IMGUI_EXPORT Stems : public LabeledPlotData, public details::DefaultPlotDataSetting {
  public:
+  /**
+   * Construct Stems.
+   * @param elementName ID of the plot
+   * @param caption text rendered above the plot
+   */
   Stems(const std::string &elementName, const std::string &caption);
 
  protected:
