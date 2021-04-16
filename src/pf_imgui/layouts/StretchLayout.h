@@ -2,8 +2,8 @@
 // Created by petr on 1/25/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STRETCHLAYOUT_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STRETCHLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
+#define PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
 
 #include "ResizableLayout.h"
 #include <memory>
@@ -122,8 +122,8 @@ class StretchLayout : public ResizableLayout {
  private:
   Stretch stretch;
   std::unique_ptr<Resizable> child = nullptr;
-  Renderable *renderableChild;
+  Renderable *renderableChild = nullptr;
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STRETCHLAYOUT_H
+#endif//PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H

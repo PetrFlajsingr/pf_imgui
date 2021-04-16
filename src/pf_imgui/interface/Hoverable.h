@@ -2,8 +2,8 @@
 // Created by petr on 1/23/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H
+#ifndef PF_IMGUI_INTERFACE_HOVERABLE_H
+#define PF_IMGUI_INTERFACE_HOVERABLE_H
 
 #include "Observable_impl.h"
 #include <pf_imgui/_export.h>
@@ -50,4 +50,4 @@ class PF_IMGUI_EXPORT Hoverable {
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_HOVERABLE_H
+#endif//PF_IMGUI_INTERFACE_HOVERABLE_H

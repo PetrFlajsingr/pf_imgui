@@ -2,8 +2,8 @@
 // Created by petr on 4/11/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_STRINGTABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_STRINGTABLE_H
+#ifndef PF_IMGUI_ELEMENTS_STRINGTABLE_H
+#define PF_IMGUI_ELEMENTS_STRINGTABLE_H
 
 #include <imgui.h>
 #include <pf_common/concepts/StringConvertible.h>

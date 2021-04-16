@@ -2,8 +2,8 @@
 // Created by petr on 12/8/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_SLIDERANGLE_H
-#define PF_IMGUI_IMGUI_ELEMENTS_SLIDERANGLE_H
+#ifndef PF_IMGUI_ELEMENTS_SLIDERANGLE_H
+#define PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -48,4 +48,4 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_IMGUI_ELEMENTS_SLIDERANGLE_H
+#endif//PF_IMGUI_ELEMENTS_SLIDERANGLE_H

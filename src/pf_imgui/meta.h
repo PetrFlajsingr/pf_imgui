@@ -2,8 +2,8 @@
 // Created by petr on 4/12/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_META_H
-#define PF_IMGUI_SRC_PF_IMGUI_META_H
+#ifndef PF_IMGUI_META_H
+#define PF_IMGUI_META_H
 
 #include <pf_common/specializations.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -24,4 +24,4 @@ struct CommonPlaceholder {
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_META_H
+#endif//PF_IMGUI_META_H

@@ -2,8 +2,8 @@
 // Created by petr on 11/8/20.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_H
+#ifndef PF_IMGUI_ELEMENTS_PLOTS_H
+#define PF_IMGUI_ELEMENTS_PLOTS_H
 
 #include "plots/PieChart.h"
 #include "plots/Plot.h"

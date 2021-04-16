@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_INPUT_H
-#define PF_IMGUI_IMGUI_ELEMENTS_INPUT_H
+#ifndef PF_IMGUI_ELEMENTS_INPUT_H
+#define PF_IMGUI_ELEMENTS_INPUT_H
 
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
@@ -228,4 +228,4 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_IMGUI_ELEMENTS_INPUT_H
+#endif//PF_IMGUI_ELEMENTS_INPUT_H

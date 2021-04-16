@@ -2,8 +2,8 @@
 // Created by petr on 1/23/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_COLLAPSIBLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_COLLAPSIBLE_H
+#ifndef PF_IMGUI_INTERFACE_COLLAPSIBLE_H
+#define PF_IMGUI_INTERFACE_COLLAPSIBLE_H
 
 #include "Observable_impl.h"
 #include "Savable.h"
@@ -83,4 +83,4 @@ class PF_IMGUI_EXPORT Collapsible : public Savable {
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_COLLAPSIBLE_H
+#endif//PF_IMGUI_INTERFACE_COLLAPSIBLE_H

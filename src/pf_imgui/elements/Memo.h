@@ -2,8 +2,8 @@
 // Created by petr on 11/2/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
-#define PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
+#ifndef PF_IMGUI_ELEMENTS_MEMO_H
+#define PF_IMGUI_ELEMENTS_MEMO_H
 
 #include <memory>
 #include <optional>
@@ -121,4 +121,4 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
   Text *textArea = nullptr;
 };
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_MEMO_H
+#endif//PF_IMGUI_ELEMENTS_MEMO_H

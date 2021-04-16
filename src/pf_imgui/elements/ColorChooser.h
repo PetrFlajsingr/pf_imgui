@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_COLORCHOOSER_H
-#define PF_IMGUI_IMGUI_ELEMENTS_COLORCHOOSER_H
+#ifndef PF_IMGUI_ELEMENTS_COLORCHOOSER_H
+#define PF_IMGUI_ELEMENTS_COLORCHOOSER_H
 
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec3.hpp>
@@ -76,4 +76,4 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, publ
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_COLORCHOOSER_H
+#endif//PF_IMGUI_ELEMENTS_COLORCHOOSER_H

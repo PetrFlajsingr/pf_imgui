@@ -2,8 +2,8 @@
 // Created by petr on 1/24/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_BOXLAYOUT_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_BOXLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_BOXLAYOUT_H
+#define PF_IMGUI_LAYOUTS_BOXLAYOUT_H
 
 #include "ResizableLayout.h"
 #include <memory>
@@ -170,4 +170,4 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
 
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_BOXLAYOUT_H
+#endif//PF_IMGUI_LAYOUTS_BOXLAYOUT_H

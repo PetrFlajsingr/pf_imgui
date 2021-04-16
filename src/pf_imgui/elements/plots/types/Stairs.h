@@ -2,8 +2,8 @@
 // Created by petr on 11/8/20.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_STAIRS_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_STAIRS_H
+#ifndef PF_IMGUI_ELEMENTS_PLOTS_TYPES_STAIRS_H
+#define PF_IMGUI_ELEMENTS_PLOTS_TYPES_STAIRS_H
 
 #include <implot.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>

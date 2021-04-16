@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
-#define PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
+#ifndef PF_IMGUI_ELEMENTS_DRAGINPUT_H
+#define PF_IMGUI_ELEMENTS_DRAGINPUT_H
 
 #include <algorithm>
 #include <glm/gtc/type_ptr.hpp>
@@ -160,4 +160,4 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>,
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_DRAGINPUT_H
+#endif//PF_IMGUI_ELEMENTS_DRAGINPUT_H

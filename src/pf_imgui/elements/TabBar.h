@@ -2,8 +2,8 @@
 // Created by petr on 11/2/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H
-#define PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H
+#ifndef PF_IMGUI_ELEMENTS_TABBAR_H
+#define PF_IMGUI_ELEMENTS_TABBAR_H
 
 #include <memory>
 #include <pf_imgui/_export.h>
@@ -67,4 +67,4 @@ class PF_IMGUI_EXPORT TabBar : public Element {
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_TABBAR_H
+#endif//PF_IMGUI_ELEMENTS_TABBAR_H

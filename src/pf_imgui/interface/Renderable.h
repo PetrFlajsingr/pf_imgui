@@ -2,8 +2,8 @@
 // Created by petr on 1/23/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_RENDERABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_RENDERABLE_H
+#ifndef PF_IMGUI_INTERFACE_RENDERABLE_H
+#define PF_IMGUI_INTERFACE_RENDERABLE_H
 
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
@@ -88,4 +88,4 @@ class PF_IMGUI_EXPORT Renderable {
 
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_RENDERABLE_H
+#endif//PF_IMGUI_INTERFACE_RENDERABLE_H

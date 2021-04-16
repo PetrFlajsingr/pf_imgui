@@ -2,8 +2,8 @@
 // Created by petr on 4/13/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_EXCEPTIONS_H
-#define PF_IMGUI_SRC_PF_IMGUI_EXCEPTIONS_H
+#ifndef PF_IMGUI_EXCEPTIONS_H
+#define PF_IMGUI_EXCEPTIONS_H
 
 #include <pf_common/exceptions/StackTraceException.h>
 
@@ -27,4 +27,4 @@ class IdNotFoundException : public StackTraceException {
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_EXCEPTIONS_H
+#endif//PF_IMGUI_EXCEPTIONS_H

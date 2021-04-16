@@ -2,8 +2,8 @@
 // Created by petr on 1/24/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_RESIZABLELAYOUT_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_RESIZABLELAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_RESIZABLELAYOUT_H
+#define PF_IMGUI_LAYOUTS_RESIZABLELAYOUT_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
@@ -41,4 +41,4 @@ class PF_IMGUI_EXPORT ResizableLayout : public Layout, public Resizable {
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_RESIZABLELAYOUT_H
+#endif//PF_IMGUI_LAYOUTS_RESIZABLELAYOUT_H

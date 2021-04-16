@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
-#define PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
+#ifndef PF_IMGUI_ELEMENTS_SLIDER_H
+#define PF_IMGUI_ELEMENTS_SLIDER_H
 
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec2.hpp>
@@ -134,4 +134,4 @@ class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public Val
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_SLIDER_H
+#endif//PF_IMGUI_ELEMENTS_SLIDER_H

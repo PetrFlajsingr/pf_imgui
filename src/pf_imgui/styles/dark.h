@@ -2,8 +2,8 @@
 // Created by petr on 1/5/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_STYLES_DARK_H
-#define PF_IMGUI_SRC_PF_IMGUI_STYLES_DARK_H
+#ifndef PF_IMGUI_STYLES_DARK_H
+#define PF_IMGUI_STYLES_DARK_H
 
 #include <pf_imgui/ImGuiInterface.h>
 
@@ -80,4 +80,4 @@ inline void setDarkStyle(ImGuiInterface &interface) {
 }
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_STYLES_DARK_H
+#endif//PF_IMGUI_STYLES_DARK_H

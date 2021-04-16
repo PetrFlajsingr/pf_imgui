@@ -2,8 +2,8 @@
 // Created by petr on 11/1/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_LISTBOX_H
-#define PF_IMGUI_IMGUI_ELEMENTS_LISTBOX_H
+#ifndef PF_IMGUI_ELEMENTS_LISTBOX_H
+#define PF_IMGUI_ELEMENTS_LISTBOX_H
 
 #include <algorithm>
 #include <pf_common/concepts/Iterable.h>
@@ -80,4 +80,4 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
   int height = -1;
 };
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_LISTBOX_H
+#endif//PF_IMGUI_ELEMENTS_LISTBOX_H

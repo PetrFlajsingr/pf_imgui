@@ -2,8 +2,8 @@
 // Created by petr on 1/25/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_LAYOUT_H
+#define PF_IMGUI_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
 #include <src/pf_imgui/interface/Collapsible.h>
@@ -74,4 +74,4 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
 
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_LAYOUT_H
+#endif//PF_IMGUI_LAYOUTS_LAYOUT_H

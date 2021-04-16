@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
-#define PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
+#ifndef PF_IMGUI_ELEMENTS_TEXT_H
+#define PF_IMGUI_ELEMENTS_TEXT_H
 
 #include <imgui.h>
 #include <optional>
@@ -56,4 +56,4 @@ class PF_IMGUI_EXPORT Text : public ItemElement {
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_TEXT_H
+#endif//PF_IMGUI_ELEMENTS_TEXT_H

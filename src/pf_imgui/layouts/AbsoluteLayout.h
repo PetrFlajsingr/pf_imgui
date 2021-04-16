@@ -2,8 +2,8 @@
 // Created by xflajs00 on 25.01.2021.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_ABSOLUTELAYOUT_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_ABSOLUTELAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
+#define PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 
 #include "BoxLayout.h"
 #include "ResizableLayout.h"
@@ -123,4 +123,4 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_ABSOLUTELAYOUT_H
+#endif//PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H

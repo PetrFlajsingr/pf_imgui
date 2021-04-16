@@ -2,8 +2,8 @@
 // Created by petr on 11/2/20.
 //
 
-#ifndef PF_IMGUI_TREE_TRAVERSAL_H
-#define PF_IMGUI_TREE_TRAVERSAL_H
+#ifndef PF_IMGUI_UI_TREE_TRAVERSAL_H
+#define PF_IMGUI_UI_TREE_TRAVERSAL_H
 
 #include <algorithm>
 #include <pf_imgui/interface/ElementContainer.h>
@@ -35,4 +35,4 @@ PF_IMGUI_EXPORT inline void traverseImGuiTree(Renderable &root, std::invocable<R
 }
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_TREE_TRAVERSAL_H
+#endif//PF_IMGUI_UI_TREE_TRAVERSAL_H

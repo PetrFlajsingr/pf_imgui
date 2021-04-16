@@ -2,8 +2,8 @@
 // Created by petr on 1/23/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_OBSERVABLE_IMPL_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_OBSERVABLE_IMPL_H
+#ifndef PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
+#define PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
 
 #include <algorithm>
 #include <pf_common/Subscription.h>
@@ -61,4 +61,4 @@ class PF_IMGUI_EXPORT Observable_impl {
   cppcoro::generator<ListenerId> idGenerator = iota<ListenerId>();
 };
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_OBSERVABLE_IMPL_H
+#endif//PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H

@@ -2,8 +2,8 @@
 // Created by petr on 1/23/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TOOLTIP_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TOOLTIP_H
+#ifndef PF_IMGUI_ELEMENTS_TOOLTIP_H
+#define PF_IMGUI_ELEMENTS_TOOLTIP_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>

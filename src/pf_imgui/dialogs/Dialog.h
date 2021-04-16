@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
-#define PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
+#ifndef PF_IMGUI_ELEMENTS_DIALOG_H
+#define PF_IMGUI_ELEMENTS_DIALOG_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
@@ -48,4 +48,4 @@ class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, publi
   ImGuiInterface &owner;
 };
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_DIALOG_H
+#endif//PF_IMGUI_ELEMENTS_DIALOG_H

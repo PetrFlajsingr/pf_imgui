@@ -2,8 +2,8 @@
 // Created by petr on 11/7/20.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
+#ifndef PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
+#define PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 
 #include <include/ImGuiFlamegraph/imgui_widget_flamegraph.h>
 #include <optional>

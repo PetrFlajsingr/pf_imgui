@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_RADIOBUTTON_H
-#define PF_IMGUI_IMGUI_ELEMENTS_RADIOBUTTON_H
+#ifndef PF_IMGUI_ELEMENTS_RADIOBUTTON_H
+#define PF_IMGUI_ELEMENTS_RADIOBUTTON_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -38,4 +38,4 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public Labellable, publi
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_RADIOBUTTON_H
+#endif//PF_IMGUI_ELEMENTS_RADIOBUTTON_H

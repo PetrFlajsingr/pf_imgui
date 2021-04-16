@@ -2,8 +2,8 @@
 // Created by petr on 11/4/20.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_FWD_H
-#define PF_IMGUI_SRC_PF_IMGUI_FWD_H
+#ifndef PF_IMGUI_FWD_H
+#define PF_IMGUI_FWD_H
 
 namespace pf::ui::ig {
 
@@ -18,6 +18,10 @@ class Savable;
 class ResizableLayout;
 
 class BoxLayout;
+class AbsoluteLayout;
+class GridLayout;
+class StackedLayout;
+class StretchLayout;
 
 class Button;
 class Checkbox;
@@ -44,4 +48,4 @@ class Window;
 class Tooltip;
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_FWD_H
+#endif//PF_IMGUI_FWD_H

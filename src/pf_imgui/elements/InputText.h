@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_INPUTTEXT_H
-#define PF_IMGUI_IMGUI_ELEMENTS_INPUTTEXT_H
+#ifndef PF_IMGUI_ELEMENTS_INPUTTEXT_H
+#define PF_IMGUI_ELEMENTS_INPUTTEXT_H
 
 #include "Text.h"
 #include <functional>
@@ -56,4 +56,4 @@ class PF_IMGUI_EXPORT InputText : public Text,
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_INPUTTEXT_H
+#endif//PF_IMGUI_ELEMENTS_INPUTTEXT_H

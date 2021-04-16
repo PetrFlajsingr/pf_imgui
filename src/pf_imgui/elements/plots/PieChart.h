@@ -2,8 +2,8 @@
 // Created by petr on 11/8/20.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
+#ifndef PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
+#define PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>

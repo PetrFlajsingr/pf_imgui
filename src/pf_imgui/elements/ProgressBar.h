@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
-#define PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
+#ifndef PF_IMGUI_ELEMENTS_PROGRESSBAR_H
+#define PF_IMGUI_ELEMENTS_PROGRESSBAR_H
 
 #include <imgui.h>
 #include <pf_imgui/_export.h>
@@ -104,4 +104,4 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   T max;
 };
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_PROGRESSBAR_H
+#endif//PF_IMGUI_ELEMENTS_PROGRESSBAR_H

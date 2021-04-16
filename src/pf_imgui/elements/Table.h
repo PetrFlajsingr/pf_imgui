@@ -2,8 +2,8 @@
 // Created by petr on 4/12/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_TABLE_H
+#ifndef PF_IMGUI_ELEMENTS_TABLE_H
+#define PF_IMGUI_ELEMENTS_TABLE_H
 
 #include <imgui.h>
 #include <pf_common/Visitor.h>

@@ -2,8 +2,8 @@
 // Created by petr on 1/23/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H
+#ifndef PF_IMGUI_INTERFACE_ITEMELEMENT_H
+#define PF_IMGUI_INTERFACE_ITEMELEMENT_H
 
 #include "Element.h"
 #include "Focusable.h"
@@ -76,4 +76,4 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_ITEMELEMENT_H
+#endif//PF_IMGUI_INTERFACE_ITEMELEMENT_H

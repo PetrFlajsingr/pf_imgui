@@ -2,8 +2,8 @@
 // Created by petr on 1/25/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_POSITIONABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_POSITIONABLE_H
+#ifndef PF_IMGUI_INTERFACE_POSITIONABLE_H
+#define PF_IMGUI_INTERFACE_POSITIONABLE_H
 
 #include "Observable_impl.h"
 #include <imgui.h>
@@ -65,4 +65,4 @@ class Positionable {
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_INTERFACE_POSITIONABLE_H
+#endif//PF_IMGUI_INTERFACE_POSITIONABLE_H

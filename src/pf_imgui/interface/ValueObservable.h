@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
-#define PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
+#ifndef PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
+#define PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
 
 #include "Observable_impl.h"
 #include <algorithm>
@@ -115,4 +115,4 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_INTERFACE_VALUEOBSERVABLEELEMENT_H
+#endif//PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H

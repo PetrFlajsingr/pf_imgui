@@ -2,8 +2,8 @@
 // Created by petr on 10/31/20.
 //
 
-#ifndef PF_IMGUI_IMGUI_ELEMENTS_GROUP_H
-#define PF_IMGUI_IMGUI_ELEMENTS_GROUP_H
+#ifndef PF_IMGUI_ELEMENTS_GROUP_H
+#define PF_IMGUI_ELEMENTS_GROUP_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Collapsible.h>
@@ -44,4 +44,4 @@ class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, publi
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUI_ELEMENTS_GROUP_H
+#endif//PF_IMGUI_ELEMENTS_GROUP_H

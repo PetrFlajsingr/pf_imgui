@@ -2,8 +2,8 @@
 // Created by petr on 1/24/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STACKEDLAYOUT_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STACKEDLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
+#define PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
 
 #include "ResizableLayout.h"
 #include <pf_imgui/_export.h>
@@ -113,4 +113,4 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
 };
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_LAYOUTS_STACKEDLAYOUT_H
+#endif//PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
