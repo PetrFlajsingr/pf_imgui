@@ -13,12 +13,27 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D bar plot, which can either be horizontal or vertical. It shows error margin for each bar.
+ * @see PlotType
+ * @see XYErrorPlotData
+ */
 template<BarType Type = BarType::Horizontal>
 class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDataSetting {
  public:
+  /**
+   * Construct ErrorBar.
+   * @param elementName ID of the plot
+   * @param caption text rendered above the plot
+   */
   ErrorBar(const std::string &elementName, const std::string &caption)
       : Element(elementName), LabeledPlotData(elementName, caption) {}
 
+  /**
+   * Set new plot data.
+   * @param newData new data
+   * @tparam type of data to plot
+   */
   template<Plottable T>
   void setData(const std::vector<XYErrorPlotData<T>> &newData) {
     const auto xyData = newData | ranges::views::transform([](const auto &data) { return XYPlotData(data.x, data.y); })

@@ -11,9 +11,18 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D bar plot, which can either be horizontal or vertical.
+ * @see PlotType
+ */
 template<BarType Type = BarType::Vertical>
 class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotDataSetting {
  public:
+  /**
+   * Construct Bar.
+   * @param elementName ID of the plot
+   * @param caption text rendered above the plot
+   */
   Bar(const std::string &elementName, const std::string &caption)
       : Element(elementName), LabeledPlotData(elementName, caption) {}
 

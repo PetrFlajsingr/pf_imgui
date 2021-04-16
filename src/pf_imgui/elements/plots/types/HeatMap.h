@@ -13,10 +13,27 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D plot where data is visualised as a heat map.
+ *
+ * minVal and maxVal define where the 'coldest' and the 'hottest' colors are
+ */
 class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
  public:
+  /**
+   * Construct HeatMap.
+   * @param elementName ID of the element
+   * @param caption text rendered next to data
+   * @param minVal 'coldest' value
+   * @param maxVal 'hottest' vlaue
+   */
   HeatMap(const std::string &elementName, const std::string &caption, double minVal = 0.0, double maxVal = 0.0);
 
+ /**
+  * Set new plot data.
+  * @param newData new data
+  * @tparam type of data to plot
+  */
   template<Plottable T>
   void setData(const std::vector<std::vector<T>> &newData) {
     if (newData.empty()) {

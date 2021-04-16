@@ -11,8 +11,16 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D plot where each sample is connected to their neighbor via shortest line.
+ */
 class PF_IMGUI_EXPORT Line : public LabeledPlotData, public details::DefaultPlotDataSetting {
  public:
+  /**
+   * Construct Line.
+   * @param elementName ID of the plot
+   * @param caption text rendered above the plot
+   */
   Line(const std::string &elementName, const std::string &caption);
 
  protected:

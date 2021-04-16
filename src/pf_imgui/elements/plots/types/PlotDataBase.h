@@ -17,25 +17,47 @@
 #include <vector>
 
 namespace pf::ui::ig::plot_type {
+/**
+ * @brief A type which can be rendered using Plot and its descendants.
+ */
 template<typename T>
 concept Plottable = std::convertible_to<T, double>;
 
+/**
+ * @brief Simple 2D data sample.
+ */
 template<Plottable T>
 struct XYPlotData {
   T x;
   T y;
 };
 
+/**
+ * @brief 2D data sample with an error marker.
+ */
 template<Plottable T>
 struct XYErrorPlotData : XYPlotData<T> {
   T error;
 };
 
+/**
+ * Type of Bar plot.
+ */
 enum class BarType { Horizontal, Vertical };
 
 namespace details {
+/**
+ * @brief Default setter for data storage.
+ */
 class DefaultPlotDataSetting {
  public:
+  /**
+   * Set new plot data.
+   * @param newData new data
+   * @tparam type of data to plot
+   * @todo change these to ranges
+   * @todo plot data settings (line width etc.)
+   */
   template<Plottable T>
   void setData(const std::vector<XYPlotData<T>> &newData) {
     xData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); })
@@ -53,11 +75,17 @@ class DefaultPlotDataSetting {
 };
 }// namespace details
 
+/**
+ * @brief Base class for all types of plot data.
+ */
 class PF_IMGUI_EXPORT PlotData : public virtual Element {
  public:
   explicit PlotData(const std::string &elementName);
 };
 
+/**
+ * @brief Base class for plot data wich support data labeling.
+ */
 class PF_IMGUI_EXPORT LabeledPlotData : public PlotData, public Labellable {
  public:
   LabeledPlotData(const std::string &elementName, const std::string &caption);

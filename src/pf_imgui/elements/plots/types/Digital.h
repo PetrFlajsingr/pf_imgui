@@ -11,8 +11,16 @@
 
 namespace pf::ui::ig::plot_type {
 
+/**
+ * @brief 2D plot for digital data.
+ */
 class PF_IMGUI_EXPORT Digital : public LabeledPlotData, public details::DefaultPlotDataSetting {
  public:
+  /**
+   * Construct Digital.
+   * @param elementName ID of the plot
+   * @param caption text rendered above the plot
+   */
   Digital(const std::string &elementName, const std::string &caption);
 
  protected:
