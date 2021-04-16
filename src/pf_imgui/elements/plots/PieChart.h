@@ -16,14 +16,28 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Data storage for PieChart samples.
+ */
 template<plot_type::Plottable T>
 struct PieChartSample {
-  std::string label;
-  T value;
+  std::string label; /**< Text to be rendered next to the data */
+  T value; /**< Sample value */
 };
 
+/**
+ * @brief Typical pie chart.
+ *
+ * Each sample shows as a percentage in the sum of all sample values.
+ *
+ * @todo: fix constructor
+ */
 class PieChart : public Element, public Labellable, public Resizable {
  public:
+  /**
+   * Add a new sample to the graph.
+   * @param sample sample to be added
+   */
   template<plot_type::Plottable T>
   void addValue(PieChartSample<T> &&sample) {
     data.emplace_back(sample.label, static_cast<double>(sample.value));
