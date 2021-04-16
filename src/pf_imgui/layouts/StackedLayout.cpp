@@ -49,7 +49,7 @@ void StackedLayout::popStack() {
 
 void StackedLayout::removeStack(std::size_t index) {
   if (index >= stacks.size()) {
-    throw InvalidArgumentException::fmt("Index out of bounds: {}", index);
+    throw InvalidArgumentException("Index out of bounds: {}", index);
   }
   stacks.erase(stacks.begin() + index);
 }
@@ -62,7 +62,7 @@ void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
 std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
 void StackedLayout::setIndex(std::size_t index) {
   if (index >= stacks.size()) {
-    throw InvalidArgumentException::fmt("Index out of bounds: {}", index);
+    throw InvalidArgumentException("Index out of bounds: {}", index);
   }
   selectedIndex = index;
 }

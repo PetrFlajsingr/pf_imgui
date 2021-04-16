@@ -45,7 +45,7 @@ void ItemElement::setFocus() {
   Focusable::setFocus();
 }
 Tooltip &ItemElement::getTooltip() {
-  if (tooltip == nullptr) { throw StackTraceException::fmt("Tooltip doesn't exist in {}", getName()); }
+  if (tooltip == nullptr) { throw StackTraceException("Tooltip doesn't exist in {}", getName()); }
   return *tooltip;
 }
 

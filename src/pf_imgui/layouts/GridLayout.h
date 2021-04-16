@@ -90,7 +90,7 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
     auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
     const auto ptr = child.get();
     const auto index = indexForCell(column, row);
-    if (index >= cells.size()) { throw InvalidArgumentException::fmt("Indices out of bounds: {}x{}", column, row); }
+    if (index >= cells.size()) { throw InvalidArgumentException("Indices out of bounds: {}x{}", column, row); }
     cells[index] = std::move(child);
     return *ptr;
   }

@@ -15,7 +15,7 @@ namespace pf::ui::ig {
 class DuplicateIdException : public StackTraceException {
  public:
   explicit DuplicateIdException(const std::string_view &fmt, auto &&...args)
-      : StackTraceException(StackTraceException::fmt(fmt, args...)) {}
+      : StackTraceException(fmt, args...) {}
 };
 /**
  * @brief Exception thrown when a an ID is not present.
@@ -23,7 +23,7 @@ class DuplicateIdException : public StackTraceException {
 class IdNotFoundException : public StackTraceException {
  public:
   explicit IdNotFoundException(const std::string_view &fmt, auto &&...args)
-      : StackTraceException(StackTraceException::fmt(fmt, args...)) {}
+      : StackTraceException(fmt, args...) {}
 };
 }// namespace pf::ui::ig
 

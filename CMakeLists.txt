@@ -20,6 +20,12 @@ endif ()
 
 include(${CPM_DOWNLOAD_LOCATION})
 
+option(ENABLE_STACKTRACE "enable stacktrace in exceptions" OFF)
+
+if (ENABLE_STACKTRACE)
+    add_compile_definitions(STACKTRACE_ENABLE)
+endif()
+
 set(CMAKE_CXX_STANDARD 20)
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
@@ -46,11 +52,21 @@ endif ()
 set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
 set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
 
-CPMAddPackage(
-        NAME pf_common
-        GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG master
-)
+if (ENABLE_STACKTRACE)
+    CPMAddPackage(
+            NAME pf_common
+            GITHUB_REPOSITORY PetrFlajsingr/pf_common
+            GIT_TAG 1.0.3
+            OPTIONS "ENABLE_STACKTRACE ON"
+    )
+else()
+    CPMAddPackage(
+            NAME pf_common
+            GITHUB_REPOSITORY PetrFlajsingr/pf_common
+            GIT_TAG 1.0.3
+    )
+endif()
+
 CPMAddPackage(
         NAME toml++
         GITHUB_REPOSITORY marzer/tomlplusplus
@@ -218,7 +234,7 @@ set(INCLUDES
 list(APPEND INCLUDES ${toml++_headers})
 
 
-option(BUILD_SHARED_LIBS "build this library as shared")
+option(BUILD_SHARED_LIBS "build this library as shared" OFF)
 option(BUILD_DOCS "build doxygen docs" OFF)
 
 SET(CMAKE_DEBUG_POSTFIX "d" CACHE STRING "add a postfix, usually d on windows")
@@ -325,7 +341,7 @@ install(
 if (BUILD_DOCS)
     find_package(Doxygen)
     if (DOXYGEN_FOUND)
-        doxygen_add_docs(doc ALL
+        doxygen_add_docs(pf_imgui_doc ALL
                 ${CMAKE_SOURCE_DIR}/src/pf_imgui
                 )
     endif()

@@ -206,7 +206,7 @@ class PF_IMGUI_EXPORT TableWithFactory : public ItemElement, public Labellable, 
         iter != rows.end()) {
       return *iter;
     }
-    throw InvalidArgumentException::fmt("Row with id {} not found", id);
+    throw InvalidArgumentException("Row with id {} not found", id);
   }
 };
 

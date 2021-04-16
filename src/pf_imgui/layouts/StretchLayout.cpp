@@ -30,7 +30,7 @@ void StretchLayout::setStretch(Stretch newStretch) {
 }
 Element &StretchLayout::getChild() {
   if (child == nullptr) {
-    throw StackTraceException::fmt("Child not present");
+    throw StackTraceException("Child not present");
   }
   return *dynamic_cast<Element *>(child.get());
 }

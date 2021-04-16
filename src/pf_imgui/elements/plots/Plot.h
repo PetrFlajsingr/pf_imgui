@@ -62,7 +62,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
     if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
         iter != datas.end()) {
       if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }
-      throw StackTraceException::fmt("Wrong type for data: '{}' in '{}'", name, getName());
+      throw StackTraceException("Wrong type for data: '{}' in '{}'", name, getName());
     }
     throw IdNotFoundException("Data not found: '{}' in '{}'", name, getName());
   }

@@ -6,7 +6,6 @@
 #define PF_IMGUI_ELEMENTS_LISTBOX_H
 
 #include <algorithm>
-#include <pf_common/concepts/Iterable.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
