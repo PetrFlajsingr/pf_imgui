@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.17)
 
 include("cmake/HunterGate.cmake")
 HunterGate(
@@ -7,7 +7,7 @@ HunterGate(
 )
 
 project(pf_imgui
-        VERSION 0.2.3)
+        VERSION 0.3.0)
 
 set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
 set(CPM_DOWNLOAD_VERSION 0.27.4)
