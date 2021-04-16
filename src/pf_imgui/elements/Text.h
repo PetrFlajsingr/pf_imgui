@@ -44,7 +44,7 @@ class PF_IMGUI_EXPORT Text : public ItemElement {
    * @param args values to insert into text using fmt::format
    */
   void setText(const std::string &fmt, auto &&...args) {
-    setText(fmt::format(fmt, std::forward<decltype(args)>(args)...));
+    text = fmt::format(fmt, std::forward<decltype(args)>(args)...);
   }
 
  protected:
