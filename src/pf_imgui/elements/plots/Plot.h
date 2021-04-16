@@ -12,17 +12,36 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/exceptions.h>
 #include <string>
 #include <utility>
 #include <vector>
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Advanced plot for plotting 2D data.
+ */
 class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable {
  public:
+  /**
+   * Construct Plot.
+   * @param elementName ID of the plot
+   * @param text rendered above the plot
+   * @param xLabel label of x axis
+   * @param yLabel label of y axis
+   * @param size size of the element
+   */
   Plot(const std::string &elementName, const std::string &label, std::optional<std::string> xLabel = std::nullopt,
        std::optional<std::string> yLabel = std::nullopt, const ImVec2 &size = ImVec2{-1, 0});
 
+  /**
+   * Add new set of data.
+   * @param args argument for data constructor
+   * @tparam T type of data storage
+   * @tparam Args type of argument for data storage constructor
+   * @return reference to he newly created data
+   */
   template<std::derived_from<plot_type::PlotData> T, typename... Args>
   requires std::constructible_from<T, Args...> T &addData(Args &&...args) {
     auto data = std::make_unique<T>(std::forward<Args>(args)...);
@@ -31,16 +50,27 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
     return *ptr;
   }
 
+  /**
+   * Get data storage by its ID.
+   * @param name ID of the data storage
+   * @return reference to data storage
+   * @throws IdNotFoundException when no such data storage exists
+   * @throw StackTraceException when desired type doesn't match the storage data type
+   */
   template<std::derived_from<plot_type::PlotData> T>
-  void dataByName(const std::string &name) {
+  T &dataByName(const std::string &name) {
     if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
         iter != datas.end()) {
-      if (auto result = std::dynamic_pointer_cast<T>(*iter); result != nullptr) { return result; }
+      if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }
       throw StackTraceException::fmt("Wrong type for data: '{}' in '{}'", name, getName());
     }
-    throw StackTraceException::fmt("Data not found: '{}' in '{}'", name, getName());
+    throw IdNotFoundException("Data not found: '{}' in '{}'", name, getName());
   }
 
+  /**
+   * Remove data storage by ID.
+   * @param ID of the data storage to be removed
+   */
   void removeData(const std::string &name);
 
  protected:
