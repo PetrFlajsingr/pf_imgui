@@ -21,90 +21,36 @@
 
 namespace pf::ui::ig {
 
-///**
-// * @brief A typical combobox with string items.
-// *
-// * A combobox filled with strings. The element notifies listeners of changes in selection. It also has a filter functionality,
-// * which allows for delimiting shown items without the need to rebuild them.
-// *
-// * @warning If there are multiple items which are the same some unexpected behavior may occur.
-// *
-// * @todo: built-in filter
-// * @todo: generic item
-// */
-//class PF_IMGUI_EXPORT ComboBox : public ItemElement,
-//                                 public Labellable,
-//                                 public ValueObservable<std::string_view>,
-//                                 public Savable {
-// public:
-//  /**
-//   * Construct Combobox.
-//   * @param elementName ID of the combobox
-//   * @param label label drawn next to the element
-//   * @param previewValue value shown when no item is selected
-//   * @param items
-//   * @param persistent
-//   */
-//  ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
-//           std::vector<std::string> items, Persistent persistent = Persistent::No);
-//
-//  /**
-//   * Get currently selected item.
-//   * @return if any item is selected return it, otherwise std::nullopt
-//   */
-//  [[nodiscard]] std::optional<std::string_view> getSelectedItem();
-//  /**
-//   * Set selected item. If no such item is found the selection is cancelled.
-//   * @param item item to be selected
-//   */
-//  void setSelectedItem(const std::string &item);
-//  /**
-//   * Cancel selection and show previewValue.
-//   */
-//  void cancelSelection();
-//  /**
-//   * Remove this item from the Combobox. If no such item exists nothing happens.
-//   * @param item item to be removed
-//   */
-//  void removeItem(const std::string &item);
-//  /**
-//   * Add a new item to the end of the items.
-//   * @param item item to be added
-//   */
-//  void addItem(const std::string &item);
-//
-//  /**
-//   * Get all items.
-//   * @return items in the combobox
-//   */
-//  [[nodiscard]] const std::vector<std::string> &getItems() const;
-//  /**
-//   * Set new items, overwriting the old ones.
-//   * @param newItems items to set
-//   */
-//  void setItems(std::vector<std::string> newItems);
-//
-//  /**
-//   * Set a predicate that filters which items are displayed to the user.
-//   * @param filterFnc predicate returning true for items which should be shown to the user
-//   */
-//  void setFilter(std::predicate<std::string_view> auto filterFnc) { filter = filterFnc; }
-//  /**
-//   * Remove item filter.
-//   */
-//  void clearFilter();
-//
-// protected:
-//  void unserialize_impl(const toml::table &src) override;
-//  toml::table serialize_impl() override;
-//  void renderImpl() override;
-//
-// private:
-//  std::vector<std::string> items;
-//  std::string previewValue;
-//  std::optional<unsigned int> selectedItemIndex = std::nullopt;
-//  std::function<bool(std::string_view)> filter = [](auto) { return true; };
-//};
+namespace details {
+/**
+ * @brief Storage for combo box items.
+ * @tparam T type to be stored
+ */
+template<ToStringConvertible T>
+struct ComboBoxItemStorage {
+  ComboBoxItemStorage(T first) : first(first), second(toString(first)) {}
+  T first;
+  std::string second;
+};
+/**
+ * @brief Specialisation for std::string.
+ * This uses a union so there's no need to change code for this special case, but we don't waste 2 strings neither.
+ */
+template<>
+struct ComboBoxItemStorage<std::string> {
+  ComboBoxItemStorage(const std::string &first) : first(first) {}
+  ComboBoxItemStorage(const ComboBoxItemStorage &other) : first(other.first) {}
+  ComboBoxItemStorage &operator=(const ComboBoxItemStorage &other) {
+    first = other.first;
+    return *this;
+  }
+  ~ComboBoxItemStorage() {}
+  union {
+    std::string first;
+    std::string second;
+  };
+};
+}// namespace details
 
 /**
  * @brief A typical combobox with items which can be converted to string.
@@ -115,7 +61,6 @@ namespace pf::ui::ig {
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
  *
  * @todo: built-in filter
- * @todo: optimize for strings
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
@@ -128,16 +73,15 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * @param newItems items to use for combobox
    * @param persistent enable state saving to disk
    */
-   ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
-            const std::ranges::range auto &newItems,
-            Persistent persistent =
-                Persistent::No) requires(std::same_as<std::ranges::range_value_t<decltype(newItems)>, T>
-                                             &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+  ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
+           const std::ranges::range auto &newItems,
+           Persistent persistent =
+           Persistent::No) requires(std::same_as<std::ranges::range_value_t<decltype(newItems)>, T>
+      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
         previewValue(std::move(previewValue)) {
     items.reserve(std::ranges::size(newItems));
-    std::ranges::transform(newItems, std::back_inserter(items),
-                           [](const auto &item) { return std::make_pair(item, toString(item)); });
+    std::ranges::copy(newItems, std::back_inserter(items));
   }
 
   /**
@@ -145,7 +89,8 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * @return if any item is selected return it, otherwise std::nullopt
    */
   [[nodiscard]] std::optional<T> getSelectedItem() {
-    return selectedItemIndex.has_value() ? items[*selectedItemIndex] : std::nullopt;
+    if (selectedItemIndex.has_value()) { return items[*selectedItemIndex].first; }
+    return std::nullopt;
   }
   /**
    * Set selected item. If no such item is found the selection is cancelled.
@@ -161,7 +106,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       selectedItemIndex = index;
@@ -185,10 +130,10 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * Remove this item from the Combobox by its string value. If no such item exists nothing happens.
    * @param item item to be removed
    */
-  void removeItem(const std::string &itemAsString) {
+  void removeItem(const std::string &itemAsString) requires(!std::same_as<T, std::string>) {
     using namespace std::string_literals;
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto isAnyItemSelected = selectedItemIndex.has_value();
       const auto selectedItem = isAnyItemSelected ? items[*selectedItemIndex] : ""s;
@@ -238,7 +183,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
       const auto idx = **src["selected"].as_integer();
       if (static_cast<std::size_t>(idx) < items.size()) {
         selectedItemIndex = idx;
-        setValueAndNotifyIfChanged(items[idx]);
+        ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
       }
     }
   }
@@ -250,7 +195,8 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   void renderImpl() override {
     using namespace ranges;
     if (ImGui::BeginCombo(getLabel().c_str(),
-                          selectedItemIndex.has_value() ? items[*selectedItemIndex].c_str() : previewValue.c_str())) {
+                          selectedItemIndex.has_value() ? items[*selectedItemIndex].second.c_str()
+                                                        : previewValue.c_str())) {
       auto cStrItems = items | views::transform([](const auto &item) { return item.second.c_str(); });
       std::ranges::for_each(cStrItems | views::enumerate
                                 | views::filter([this](auto idxPtr) { return filter(idxPtr.second); }),
@@ -260,7 +206,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
                               ImGui::Selectable(ptr, &isSelected);
                               if (isSelected) {
                                 if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
-                                  ValueObservable<T>::setValueInner(items[idx]);
+                                  ValueObservable<T>::setValueInner(items[idx].first);
                                   ValueObservable<T>::notifyValueChanged();
                                 }
                                 selectedItemIndex = idx;
@@ -271,7 +217,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   }
 
  private:
-  std::vector<std::pair<T, std::string>> items;
+  std::vector<details::ComboBoxItemStorage<T>> items;
   std::string previewValue;
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
   std::function<bool(T)> filter = [](auto) { return true; };
