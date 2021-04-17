@@ -39,16 +39,16 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
    */
   MessageDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
                 const std::string &message, Flags<ButtonTypes> buttons, std::invocable<ButtonTypes> auto &&onDialogDone,
-                Modal modal = Modal::Yes) requires(std::same_as<std::invoke_result_t<decltype(onDialogDone)>, bool>)
+                Modal modal = Modal::Yes) requires(std::is_invocable_r_v<bool, decltype(onDialogDone), ButtonTypes>)
       : Dialog(parent, elementName, title, modal), dialogDone(onDialogDone) {
     createChild<Text>(getName() + "text", message);
     auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, ImVec2{0, 0});
     auto enabledButtons = magic_enum::enum_values<ButtonTypes>()
-        | std::views::filter([buttons](auto btnType) { return buttons.is(btnType); });
+        | std::views::filter([&buttons](auto btnType) { return buttons.is(btnType); });
     std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
       btnLayout
-          .template createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
-                                        magic_enum::enum_name(buttonType))
+          .createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
+                               std::string(magic_enum::enum_name(buttonType)))
           .addClickListener([this, buttonType] {
             if (dialogDone(buttonType)) { close(); }
           });
@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
   }
 
  private:
-  std::function<void(ButtonTypes)> dialogDone;
+  std::function<bool(ButtonTypes)> dialogDone;
 };
 
 }// namespace pf::ui::ig
