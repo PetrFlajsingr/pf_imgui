@@ -34,12 +34,12 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
    * @param title text rendered as a title
    * @param message message to show to the user
    * @param buttons allowed buttons, ButtonTypes must be bit masked
-   * @param onDialogDone callback for buttons being pressed
+   * @param onDialogDone callback for buttons being pressed, If returns true then the dialog is closed
    * @param modal dialog modality
    */
   MessageDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
                 const std::string &message, Flags<ButtonTypes> buttons, std::invocable<ButtonTypes> auto &&onDialogDone,
-                Modal modal = Modal::Yes)
+                Modal modal = Modal::Yes) requires(std::same_as<std::invoke_result_t<decltype(onDialogDone)>, bool>)
       : Dialog(parent, elementName, title, modal), dialogDone(onDialogDone) {
     createChild<Text>(getName() + "text", message);
     auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, ImVec2{0, 0});
@@ -48,8 +48,10 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
     std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
       btnLayout
           .template createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
-                               magic_enum::enum_name(buttonType))
-          .addClickListener([this, buttonType] { dialogDone(buttonType); });
+                                        magic_enum::enum_name(buttonType))
+          .addClickListener([this, buttonType] {
+            if (dialogDone(buttonType)) { close(); }
+          });
     });
   }
 
