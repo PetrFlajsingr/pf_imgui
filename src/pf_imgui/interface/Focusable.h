@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/23/21.
-//
+/**
+ * @file Focusable.h
+ * @brief Interface for elements which can hold focus.
+ * @author Petr Flajšingr
+ * @date 23.1.21
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_FOCUSABLE_H
 #define PF_IMGUI_INTERFACE_FOCUSABLE_H
@@ -10,7 +14,7 @@
 
 namespace pf::ui::ig {
 /**
- * @brief Interface for focusable elements
+ * @brief Interface for focusable elements.
  *
  * Provides a functionality to manage and observe focus changes.
  */

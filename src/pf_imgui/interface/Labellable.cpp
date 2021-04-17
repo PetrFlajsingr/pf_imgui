@@ -21,8 +21,6 @@ const std::string &Labellable::getLabel() const {
   return EMPTY_LABEL;
 }
 
-void Labellable::setLabel(const std::string &cap) { label_ = cap; }
-
 void Labellable::setLabelVisible(Visibility newVisibility) { visibility = newVisibility; }
 
 void Labellable::showLabel() { setLabelVisible(Visibility::Visible); }

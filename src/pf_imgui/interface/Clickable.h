@@ -1,6 +1,10 @@
-//
-// Created by petr on 11/14/20.
-//
+/**
+ * @file Clickable.h
+ * @brief Interface for elements which can be clicked.
+ * @author Petr Flajšingr
+ * @date 14.11.20
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_CLICKABLE_H
 #define PF_IMGUI_INTERFACE_CLICKABLE_H

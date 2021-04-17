@@ -1,6 +1,9 @@
-//
-// Created by petr on 11/2/20.
-//
+/**
+ * @file Savable.h
+ * @brief Interface for elements which can save their state.
+ * @author Petr Flajšingr
+ * @date 2.11.20
+ */
 
 #ifndef PF_IMGUI_INTERFACE_SAVABLEELEMENT_H
 #define PF_IMGUI_INTERFACE_SAVABLEELEMENT_H

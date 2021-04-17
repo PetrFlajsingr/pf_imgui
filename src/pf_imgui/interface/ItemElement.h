@@ -1,6 +1,9 @@
-//
-// Created by petr on 1/23/21.
-//
+/**
+ * @file ItemElement.h
+ * @brief Base class for elements on the lowest level.
+ * @author Petr Flajšingr
+ * @date 23.1.21
+ */
 
 #ifndef PF_IMGUI_INTERFACE_ITEMELEMENT_H
 #define PF_IMGUI_INTERFACE_ITEMELEMENT_H

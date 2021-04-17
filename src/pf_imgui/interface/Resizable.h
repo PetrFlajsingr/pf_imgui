@@ -1,6 +1,9 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file Resizable.h
+ * @brief Interface for elements which can be resized.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 
 #ifndef PF_IMGUI_INTERFACE_RESIZABLEELEMENT_H
 #define PF_IMGUI_INTERFACE_RESIZABLEELEMENT_H

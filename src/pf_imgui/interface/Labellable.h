@@ -1,6 +1,9 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file Labellable.h
+ * @brief Class providing label support.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 
 #ifndef PF_IMGUI_INTERFACE_CAPTIONEDELEMENT_H
 #define PF_IMGUI_INTERFACE_CAPTIONEDELEMENT_H
@@ -34,17 +37,12 @@ class PF_IMGUI_EXPORT Labellable {
    */
   [[nodiscard]] const std::string &getLabel() const;
   /**
-   * Set new label.
-   * @param cap new label
-   */
-  void setLabel(const std::string &cap);
-  /**
    * Set new label with formatting bz fmt::format
    * @param fmt format string
    * @param args arguments for format string
    */
-  void setLabel(const std::string &fmt, auto &&...args) requires(sizeof...(args) > 0) {
-    setLabel(fmt::format(fmt, std::forward<decltype(args)>(args)...));
+  void setLabel(const std::string &fmt, auto &&...args) {
+    label_ = fmt::format(fmt, std::forward<decltype(args)>(args)...);
   }
 
   /**

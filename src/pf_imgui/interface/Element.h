@@ -1,6 +1,10 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file Element.h
+ * @brief Base class for objects which can be considered UI elements.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_ELEMENT_H
 #define PF_IMGUI_INTERFACE_ELEMENT_H

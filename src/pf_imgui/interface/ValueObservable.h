@@ -1,6 +1,9 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file ValueObservable.h
+ * @brief Interface for providing observable support to elements.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 
 #ifndef PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
 #define PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
@@ -72,9 +75,7 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
    * Set value and notify listeners if the value is different.
    * @param newValue value to set
    */
-  virtual void setValue(const T &newValue) {
-    setValueAndNotifyIfChanged(newValue);
-  }
+  virtual void setValue(const T &newValue) { setValueAndNotifyIfChanged(newValue); }
 
   /**
    * Get inner value.

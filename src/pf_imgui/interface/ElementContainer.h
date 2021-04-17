@@ -1,6 +1,10 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file ElementContainer.h
+ * @brief Base class for objects which can hold arbitrary elements.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_CONTAINER_H
 #define PF_IMGUI_INTERFACE_CONTAINER_H

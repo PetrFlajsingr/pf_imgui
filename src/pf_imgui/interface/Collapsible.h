@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/23/21.
-//
+/**
+ * @file Collapsible.h
+ * @brief Interface for elements which can be collapsed.
+ * @author Petr Flajšingr
+ * @date 23.1.21
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_COLLAPSIBLE_H
 #define PF_IMGUI_INTERFACE_COLLAPSIBLE_H

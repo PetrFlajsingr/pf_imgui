@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/25/21.
-//
+/**
+ * @file Positionable.h
+ * @brief Interface for elements which can be positioned.
+ * @author Petr Flajšingr
+ * @date 25.1.21
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_POSITIONABLE_H
 #define PF_IMGUI_INTERFACE_POSITIONABLE_H

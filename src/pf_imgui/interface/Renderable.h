@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/23/21.
-//
+/**
+ * @file Renderable.h
+ * @brief Base class for renderables.
+ * @author Petr Flajšingr
+ * @date 23.1.21
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_RENDERABLE_H
 #define PF_IMGUI_INTERFACE_RENDERABLE_H

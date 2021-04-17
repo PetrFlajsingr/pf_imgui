@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/23/21.
-//
+/**
+ * @file Observable_impl.h
+ * @brief Implementation of observable.
+ * @author Petr Flajšingr
+ * @date 23.1.21
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
 #define PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H

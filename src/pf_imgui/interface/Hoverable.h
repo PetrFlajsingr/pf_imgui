@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/23/21.
-//
+/**
+ * @file Hoverable.h
+ * @brief Interface for elements which can be hovered.
+ * @author Petr Flajšingr
+ * @date 23.1.20
+ */
+
 
 #ifndef PF_IMGUI_INTERFACE_HOVERABLE_H
 #define PF_IMGUI_INTERFACE_HOVERABLE_H

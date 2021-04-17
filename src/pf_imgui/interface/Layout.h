@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/25/21.
-//
+/**
+ * @file Layout.h
+ * @brief Base class for layouts.
+ * @author Petr Flajšingr
+ * @date 25.1.21
+ */
+
 
 #ifndef PF_IMGUI_LAYOUTS_LAYOUT_H
 #define PF_IMGUI_LAYOUTS_LAYOUT_H
