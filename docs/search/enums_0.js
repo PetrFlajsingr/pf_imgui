@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type_568',['Type',['../classpf_1_1ui_1_1ig_1_1Checkbox.html#a6e2794b0c5e1b765543b7872d9335acf',1,'pf::ui::ig::Checkbox']]]
+  ['allowcollapse_776',['AllowCollapse',['../enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3',1,'pf::ui::ig']]],
+  ['anchor_777',['Anchor',['../enums_8h.html#af4587c31d0bdffdd51e49105d50f0372',1,'pf::ui::ig']]]
 ];

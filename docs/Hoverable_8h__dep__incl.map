@@ -1,0 +1,28 @@
+<map id="src/pf_imgui/interface/Hoverable.h" name="src/pf_imgui/interface/Hoverable.h">
+<area shape="rect" id="node1" title="Interface for elements which can be hovered." alt="" coords="747,5,911,47"/>
+<area shape="rect" id="node2" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="5,273,159,315"/>
+<area shape="rect" id="node6" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1501,95,1665,136"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="1089,363,1267,389"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="185,363,400,389"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="220,437,365,479"/>
+<area shape="rect" id="node7" href="$Button_8h.html" title="Button element." alt="" coords="356,184,523,225"/>
+<area shape="rect" id="node9" href="$Checkbox_8h.html" title="Checkbox element." alt="" coords="1509,273,1676,315"/>
+<area shape="rect" id="node10" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="1700,273,1867,315"/>
+<area shape="rect" id="node11" href="$ComboBox_8h.html" title="ComboBox element." alt="" coords="1891,273,2057,315"/>
+<area shape="rect" id="node12" href="$DragInput_8h.html" title="DragInput element." alt="" coords="2081,273,2248,315"/>
+<area shape="rect" id="node13" href="$Group_8h.html" title="Group element." alt="" coords="2272,273,2439,315"/>
+<area shape="rect" id="node14" href="$Image_8h.html" title="Image element." alt="" coords="2463,273,2629,315"/>
+<area shape="rect" id="node15" href="$Input_8h.html" title="Input element." alt="" coords="2500,184,2667,225"/>
+<area shape="rect" id="node16" href="$Text_8h.html" title="Text element." alt="" coords="113,184,280,225"/>
+<area shape="rect" id="node17" href="$InputText_8h.html" title="InputText element." alt="" coords="235,273,401,315"/>
+<area shape="rect" id="node18" href="$ListBox_8h.html" title="ListBox element." alt="" coords="547,184,713,225"/>
+<area shape="rect" id="node19" href="$ProgressBar_8h.html" title="ProgressBar element." alt="" coords="737,184,904,225"/>
+<area shape="rect" id="node20" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="928,184,1095,225"/>
+<area shape="rect" id="node22" href="$Slider_8h.html" title="Slider element." alt="" coords="1119,184,1285,225"/>
+<area shape="rect" id="node23" href="$SliderAngle_8h.html" title="SliderAngle element." alt="" coords="1309,184,1476,225"/>
+<area shape="rect" id="node24" href="$StringTable_8h.html" title="StringTable element." alt="" coords="1500,184,1667,225"/>
+<area shape="rect" id="node25" href="$Table_8h.html" title="Table element." alt="" coords="1267,273,1433,315"/>
+<area shape="rect" id="node26" href="$TabBar_8h.html" title="TabBar element." alt="" coords="1743,184,1909,225"/>
+<area shape="rect" id="node8" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="425,273,579,315"/>
+<area shape="rect" id="node21" href="$RadioGroup_8h.html" title="Radio group element." alt="" coords="923,273,1089,315"/>
+</map>

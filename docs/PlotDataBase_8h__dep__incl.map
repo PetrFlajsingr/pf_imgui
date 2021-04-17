@@ -1,0 +1,15 @@
+<map id="src/pf_imgui/elements/plots/types/PlotDataBase.h" name="src/pf_imgui/elements/plots/types/PlotDataBase.h">
+<area shape="rect" id="node1" title="Types for data storage in plots and base class used in most storage types." alt="" coords="847,5,1050,47"/>
+<area shape="rect" id="node2" href="$PieChart_8h.html" title="PieChart element." alt="" coords="5,95,172,136"/>
+<area shape="rect" id="node5" href="$Plot_8h.html" title="Plot element." alt="" coords="196,95,363,136"/>
+<area shape="rect" id="node6" href="$Bar_8h.html" title="Bar graph data." alt="" coords="387,95,553,136"/>
+<area shape="rect" id="node7" href="$Digital_8h.html" title="Digital graph data." alt="" coords="577,95,744,136"/>
+<area shape="rect" id="node8" href="$ErrorBar_8h.html" title="ErrorBar graph data." alt="" coords="768,95,935,136"/>
+<area shape="rect" id="node9" href="$HeatMap_8h.html" title="HeatMap graph data." alt="" coords="959,95,1133,136"/>
+<area shape="rect" id="node10" href="$Line_8h.html" title="Line graph data." alt="" coords="1157,95,1324,136"/>
+<area shape="rect" id="node11" href="$Shaded_8h.html" title="Shaded graph data." alt="" coords="1348,95,1515,136"/>
+<area shape="rect" id="node12" href="$Stairs_8h.html" title="Stairs graph data." alt="" coords="1539,95,1705,136"/>
+<area shape="rect" id="node13" href="$Stems_8h.html" title="Stem graph data." alt="" coords="1729,95,1896,136"/>
+<area shape="rect" id="node3" href="$plots_8h.html" title="Convenience include for all layout types." alt="" coords="865,184,1032,225"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="859,273,1038,300"/>
+</map>

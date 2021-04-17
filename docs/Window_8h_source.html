@@ -70,71 +70,77 @@ $(function() {
 <div class="title">Window.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 10/31/20.</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_WINDOW_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_WINDOW_H</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/elements/MenuBars.h&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Collapsible.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ElementContainer.h&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Focusable.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Hoverable.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Positionable.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Resizable.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Window.html">   26</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a>,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a>,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html">Focusable</a>,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">Hoverable</a>,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Collapsible.html">Collapsible</a>,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a>,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Positionable.html">Positionable</a>,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a>(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;         Persistent persistent = Persistent::No);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a>(std::string name, std::string label, Persistent persistent);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">WindowMenuBar</a> &amp;getMenuBar();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasMenuBar() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> removeMenuBar();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> setSize(<span class="keyword">const</span> ImVec2 &amp;size) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> setFocus() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> setCollapsed(<span class="keywordtype">bool</span> collapsed) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">void</span> setPosition(ImVec2 pos) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<a href="Window_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_WINDOW_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_WINDOW_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="MenuBars_8h.html">pf_imgui/elements/MenuBars.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Collapsible_8h.html">pf_imgui/interface/Collapsible.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementContainer_8h.html">pf_imgui/interface/ElementContainer.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Focusable_8h.html">pf_imgui/interface/Focusable.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Hoverable_8h.html">pf_imgui/interface/Hoverable.h</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Positionable_8h.html">pf_imgui/interface/Positionable.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Resizable_8h.html">pf_imgui/interface/Resizable.h</a>&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Window.html">   29</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html">Focusable</a>,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">Hoverable</a>,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Collapsible.html">Collapsible</a>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a>,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Positionable.html">Positionable</a>,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                               <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a>(std::string name, std::string label, <a class="code" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a> allowCollapse = AllowCollapse::No,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;         <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a>(std::string name, std::string label, <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">WindowMenuBar</a> &amp;getMenuBar();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasMenuBar() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> removeMenuBar();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> setSize(<span class="keyword">const</span> ImVec2 &amp;size) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> setFocus() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">void</span> setCollapsed(<span class="keywordtype">bool</span> collapsed) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordtype">void</span> setPosition(ImVec2 pos) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  std::unique_ptr&lt;WindowMenuBar&gt; menuBar = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_WINDOW_H</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  std::unique_ptr&lt;WindowMenuBar&gt; menuBar = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_WINDOW_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:27</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Hoverable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></div><div class="ttdoc">Interface for hoverable elements.</div><div class="ttdef"><b>Definition:</b> Hoverable.h:17</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Window_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Window.html">pf::ui::ig::Window</a></div><div class="ttdoc">Main building piece for UI. Persistent element container with plenty of controls.</div><div class="ttdef"><b>Definition:</b> Window.h:26</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:22</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1WindowMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">pf::ui::ig::WindowMenuBar</a></div><div class="ttdoc">Menu bar belonging to Window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:89</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></div><div class="ttdoc">Interface for focusable elements.</div><div class="ttdef"><b>Definition:</b> Focusable.h:17</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Positionable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Positionable.html">pf::ui::ig::Positionable</a></div><div class="ttdoc">Interface for positionable elements.</div><div class="ttdef"><b>Definition:</b> Positionable.h:18</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Collapsible_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Collapsible.html">pf::ui::ig::Collapsible</a></div><div class="ttdoc">Interface for collapsible elements.</div><div class="ttdef"><b>Definition:</b> Collapsible.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:31</div></div>
+<div class="ttc" id="aFocusable_8h_html"><div class="ttname"><a href="Focusable_8h.html">Focusable.h</a></div><div class="ttdoc">Interface for elements which can hold focus.</div></div>
+<div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:48</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Hoverable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></div><div class="ttdoc">Interface for hoverable elements.</div><div class="ttdef"><b>Definition:</b> Hoverable.h:21</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Window_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Window.html">pf::ui::ig::Window</a></div><div class="ttdoc">Main building piece for UI. Persistent element container with plenty of controls.</div><div class="ttdef"><b>Definition:</b> Window.h:29</div></div>
+<div class="ttc" id="aMenuBars_8h_html"><div class="ttname"><a href="MenuBars_8h.html">MenuBars.h</a></div><div class="ttdoc">All types necessary for building menu bars.</div></div>
+<div class="ttc" id="aResizable_8h_html"><div class="ttname"><a href="Resizable_8h.html">Resizable.h</a></div><div class="ttdoc">Interface for elements which can be resized.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:23</div></div>
+<div class="ttc" id="aCollapsible_8h_html"><div class="ttname"><a href="Collapsible_8h.html">Collapsible.h</a></div><div class="ttdoc">Interface for elements which can be collapsed.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:23</div></div>
+<div class="ttc" id="aElementContainer_8h_html"><div class="ttname"><a href="ElementContainer_8h.html">ElementContainer.h</a></div><div class="ttdoc">Base class for objects which can hold arbitrary elements.</div></div>
+<div class="ttc" id="aHoverable_8h_html"><div class="ttname"><a href="Hoverable_8h.html">Hoverable.h</a></div><div class="ttdoc">Interface for elements which can be hovered.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:26</div></div>
+<div class="ttc" id="aPositionable_8h_html"><div class="ttname"><a href="Positionable_8h.html">Positionable.h</a></div><div class="ttdoc">Interface for elements which can be positioned.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1WindowMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">pf::ui::ig::WindowMenuBar</a></div><div class="ttdoc">Menu bar belonging to Window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:93</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></div><div class="ttdoc">Interface for focusable elements.</div><div class="ttdef"><b>Definition:</b> Focusable.h:21</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Positionable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Positionable.html">pf::ui::ig::Positionable</a></div><div class="ttdoc">Interface for positionable elements.</div><div class="ttdef"><b>Definition:</b> Positionable.h:22</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Collapsible_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Collapsible.html">pf::ui::ig::Collapsible</a></div><div class="ttdoc">Interface for collapsible elements.</div><div class="ttdef"><b>Definition:</b> Collapsible.h:27</div></div>
+<div class="ttc" id="aenums_8h_html_a9ddf60f30df4e231fc6ee7a52e8cfac3"><div class="ttname"><a href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">pf::ui::ig::AllowCollapse</a></div><div class="ttdeci">AllowCollapse</div><div class="ttdef"><b>Definition:</b> enums.h:68</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

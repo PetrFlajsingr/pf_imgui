@@ -1,0 +1,7 @@
+<map id="src/pf_imgui/elements/Button.h" name="src/pf_imgui/elements/Button.h">
+<area shape="rect" id="node1" title="Button element." alt="" coords="69,5,235,47"/>
+<area shape="rect" id="node2" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="133,95,286,136"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,184,184,211"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="209,184,423,211"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="243,259,389,300"/>
+</map>

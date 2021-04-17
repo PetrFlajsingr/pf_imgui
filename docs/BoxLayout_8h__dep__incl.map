@@ -1,0 +1,10 @@
+<map id="src/pf_imgui/layouts/BoxLayout.h" name="src/pf_imgui/layouts/BoxLayout.h">
+<area shape="rect" id="node1" title="Layout boxing children in desired direction." alt="" coords="355,5,510,47"/>
+<area shape="rect" id="node2" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="181,95,335,136"/>
+<area shape="rect" id="node6" href="$Memo_8h.html" title="Memo element." alt="" coords="296,184,463,225"/>
+<area shape="rect" id="node7" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="413,95,567,136"/>
+<area shape="rect" id="node8" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="487,184,642,225"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="290,281,469,307"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="5,191,220,218"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="40,273,185,315"/>
+</map>

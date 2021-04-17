@@ -70,40 +70,38 @@ $(function() {
 <div class="title">Focusable.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 1/23/21.</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_INTERFACE_FOCUSABLE_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_INTERFACE_FOCUSABLE_H</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Observable_impl.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Focusable.html">   17</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html">Focusable</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6">   25</a></span>&#160;  Subscription <a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6">addFocusListener</a>(std::invocable&lt;bool&gt; <span class="keyword">auto</span> fnc) { <span class="keywordflow">return</span> observableImpl.template addListener(fnc); }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isFocused() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFocus();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html">Focusable</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">void</span> updateFocused(<span class="keywordtype">bool</span> focus);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> notifyFocusChanged(<span class="keywordtype">bool</span> focused);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> observableImpl;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">bool</span> focused = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_INTERFACE_FOCUSABLE_H</span></div>
+<a href="Focusable_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_INTERFACE_FOCUSABLE_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define PF_IMGUI_INTERFACE_FOCUSABLE_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Observable__impl_8h.html">Observable_impl.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Focusable.html">   21</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html">Focusable</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6">   29</a></span>&#160;  Subscription <a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6">addFocusListener</a>(std::invocable&lt;bool&gt; <span class="keyword">auto</span> fnc) { <span class="keywordflow">return</span> observableImpl.template addListener(fnc); }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isFocused() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFocus();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html">Focusable</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">void</span> updateFocused(<span class="keywordtype">bool</span> focus);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> notifyFocusChanged(<span class="keywordtype">bool</span> focused);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> observableImpl;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">bool</span> focused = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_INTERFACE_FOCUSABLE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html_a7a30d06f9907f87eb8c0941bc4138df6"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6">pf::ui::ig::Focusable::addFocusListener</a></div><div class="ttdeci">Subscription addFocusListener(std::invocable&lt; bool &gt; auto fnc)</div><div class="ttdef"><b>Definition:</b> Focusable.h:25</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></div><div class="ttdoc">Interface for focusable elements.</div><div class="ttdef"><b>Definition:</b> Focusable.h:17</div></div>
+<div class="ttc" id="aObservable__impl_8h_html"><div class="ttname"><a href="Observable__impl_8h.html">Observable_impl.h</a></div><div class="ttdoc">Implementation of observable.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html_a7a30d06f9907f87eb8c0941bc4138df6"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html#a7a30d06f9907f87eb8c0941bc4138df6">pf::ui::ig::Focusable::addFocusListener</a></div><div class="ttdeci">Subscription addFocusListener(std::invocable&lt; bool &gt; auto fnc)</div><div class="ttdef"><b>Definition:</b> Focusable.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></div><div class="ttdoc">Interface for focusable elements.</div><div class="ttdef"><b>Definition:</b> Focusable.h:21</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">pf::ui::ig::Observable_impl&lt; bool &gt;</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

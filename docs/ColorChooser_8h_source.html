@@ -70,79 +70,83 @@ $(function() {
 <div class="title">ColorChooser.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 10/31/20.</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;glm/gtc/type_ptr.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;glm/vec3.hpp&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;glm/vec4.hpp&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/concepts/OneOf.h&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ItemElement.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Labellable.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Savable.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ValueObservable.h&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/serialization.h&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;toml++/toml_node_view.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;ColorChooserType Type, OneOf&lt;glm::vec3, glm::vec4&gt; T&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">   33</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorChooser</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a2c2f542a853bc19e337f6eb55d32c41a">   42</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a2c2f542a853bc19e337f6eb55d32c41a">ColorChooser</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, Persistent persistent = Persistent::No,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;               T value = T{})</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), ValueObservable&lt;T&gt;(value), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent) {}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#aebfd95442b9eaeb126d21f3a2166a2ba">   47</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#aebfd95442b9eaeb126d21f3a2166a2ba">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> tomlColor = src[<span class="stringliteral">&quot;color&quot;</span>].as_array();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> color = deserializeGlmVec&lt;T&gt;(*tomlColor);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(color);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a84fc30d71b7da38def325da915750547">   53</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a84fc30d71b7da38def325da915750547">serialize_impl</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> color = ValueObservable&lt;T&gt;::getValue();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> tomlColor = serializeGlmVec(color);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;color&quot;</span>, tomlColor}}};</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a5c8d7516e568e506c462b06421ca7506">   59</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a5c8d7516e568e506c462b06421ca7506">renderImpl</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span> constexpr (Type == ColorChooserType::Edit) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">if</span> constexpr (std::same_as&lt;glm::vec3, T&gt;) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keywordflow">if</span> constexpr (std::same_as&lt;glm::vec3, T&gt;) {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> (valueChanged) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
+<a href="ColorChooser_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;glm/gtc/type_ptr.hpp&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;glm/vec3.hpp&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;glm/vec4.hpp&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pf_common/concepts/OneOf.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Savable_8h.html">pf_imgui/interface/Savable.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="serialization_8h.html">pf_imgui/serialization.h</a>&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;toml++/toml_node_view.h&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;ColorChooserType Type, OneOf&lt;glm::vec3, glm::vec4&gt; T&gt;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">   37</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorChooser</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a2c2f542a853bc19e337f6eb55d32c41a">   46</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a2c2f542a853bc19e337f6eb55d32c41a">ColorChooser</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;               T value = T{})</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), ValueObservable&lt;T&gt;(value), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent) {}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#aebfd95442b9eaeb126d21f3a2166a2ba">   51</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#aebfd95442b9eaeb126d21f3a2166a2ba">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> tomlColor = src[<span class="stringliteral">&quot;color&quot;</span>].as_array();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> color = deserializeGlmVec&lt;T&gt;(*tomlColor);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(color);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a84fc30d71b7da38def325da915750547">   57</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a84fc30d71b7da38def325da915750547">serialize_impl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> color = ValueObservable&lt;T&gt;::getValue();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> tomlColor = <a class="code" href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">serializeGlmVec</a>(color);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;color&quot;</span>, tomlColor}}};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a5c8d7516e568e506c462b06421ca7506">   63</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a5c8d7516e568e506c462b06421ca7506">renderImpl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> constexpr (Type == ColorChooserType::Edit) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">if</span> constexpr (std::same_as&lt;glm::vec3, T&gt;) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keywordflow">if</span> constexpr (std::same_as&lt;glm::vec3, T&gt;) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()));</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (valueChanged) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_a5c8d7516e568e506c462b06421ca7506"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a5c8d7516e568e506c462b06421ca7506">pf::ui::ig::ColorChooser::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:59</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">pf::ui::ig::ColorChooser</a></div><div class="ttdoc">An element allowing for selecting a color intuitively.</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:33</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_a2c2f542a853bc19e337f6eb55d32c41a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a2c2f542a853bc19e337f6eb55d32c41a">pf::ui::ig::ColorChooser::ColorChooser</a></div><div class="ttdeci">ColorChooser(const std::string &amp;elementName, const std::string &amp;label, Persistent persistent=Persistent::No, T value=T{})</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:42</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_a84fc30d71b7da38def325da915750547"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a84fc30d71b7da38def325da915750547">pf::ui::ig::ColorChooser::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:53</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_aebfd95442b9eaeb126d21f3a2166a2ba"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#aebfd95442b9eaeb126d21f3a2166a2ba">pf::ui::ig::ColorChooser::unserialize_impl</a></div><div class="ttdeci">void unserialize_impl(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:47</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:23</div></div>
+<div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
+<div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_a5c8d7516e568e506c462b06421ca7506"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a5c8d7516e568e506c462b06421ca7506">pf::ui::ig::ColorChooser::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:63</div></div>
+<div class="ttc" id="aValueObservable_8h_html"><div class="ttname"><a href="ValueObservable_8h.html">ValueObservable.h</a></div><div class="ttdoc">Interface for providing observable support to elements.</div></div>
+<div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:48</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">pf::ui::ig::ColorChooser</a></div><div class="ttdoc">An element allowing for selecting a color intuitively.</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:37</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_a2c2f542a853bc19e337f6eb55d32c41a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a2c2f542a853bc19e337f6eb55d32c41a">pf::ui::ig::ColorChooser::ColorChooser</a></div><div class="ttdeci">ColorChooser(const std::string &amp;elementName, const std::string &amp;label, Persistent persistent=Persistent::No, T value=T{})</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:46</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_a84fc30d71b7da38def325da915750547"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#a84fc30d71b7da38def325da915750547">pf::ui::ig::ColorChooser::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:57</div></div>
+<div class="ttc" id="aserialization_8h_html_a827e52c35c0f6324bb84a9d4c24919f4"><div class="ttname"><a href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">pf::ui::ig::serializeGlmVec</a></div><div class="ttdeci">PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &amp;vec)</div><div class="ttdef"><b>Definition:</b> serialization.h:62</div></div>
+<div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_aebfd95442b9eaeb126d21f3a2166a2ba"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#aebfd95442b9eaeb126d21f3a2166a2ba">pf::ui::ig::ColorChooser::unserialize_impl</a></div><div class="ttdeci">void unserialize_impl(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:51</div></div>
+<div class="ttc" id="aserialization_8h_html"><div class="ttname"><a href="serialization_8h.html">serialization.h</a></div><div class="ttdoc">Serialization of UI tree to toml.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

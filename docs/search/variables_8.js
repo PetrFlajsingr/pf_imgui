@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['value_564',['value',['../structpf_1_1ui_1_1ig_1_1PieChartSample.html#a0a5bdc13f9043afd34c98dd39100b9ec',1,'pf::ui::ig::PieChartSample']]]
+  ['plottable_758',['Plottable',['../PlotDataBase_8h.html#a3a1453670077c422d6f7ff74d89afbaf',1,'pf::ui::ig::plot_type']]],
+  ['progressbarcompatible_759',['ProgressBarCompatible',['../ProgressBar_8h.html#af446989080956359e834c697114439b1',1,'pf::ui::ig']]]
 ];

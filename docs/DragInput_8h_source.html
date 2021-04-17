@@ -70,153 +70,159 @@ $(function() {
 <div class="title">DragInput.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 10/31/20.</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;glm/gtc/type_ptr.hpp&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;glm/vec2.hpp&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;glm/vec3.hpp&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;glm/vec4.hpp&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_common/concepts/OneOf.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;pf_common/math/Range.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ItemElement.h&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Labellable.h&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Savable.h&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ValueObservable.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/serialization.h&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>details {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4, math::Range&lt;float&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4, math::Range&lt;int&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_RANGE_TYPE_LIST math::Range&lt;int&gt;, math::Range&lt;float&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_TYPE_LIST IMGUI_DRAG_FLOAT_TYPE_LIST, IMGUI_DRAG_INT_TYPE_LIST</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using</span> DragInputUnderlyingType = std::conditional_t&lt;OneOf&lt;T, IMGUI_DRAG_FLOAT_TYPE_LIST&gt;, float, <span class="keywordtype">int</span>&gt;;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> *defaultDragFormat() {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_FLOAT_TYPE_LIST&gt; || std::same_as&lt;T, math::Range&lt;float&gt;&gt;) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%.3f&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%d&quot;</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}<span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;IMGUI_DRAG_TYPE_LIST&gt; T&gt;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html">   60</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html">DragInput</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">using</span> ParamType = details::DragInputUnderlyingType&lt;T&gt;;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad2f762bb529334eaa84c67e3b19e2ea1">   75</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad2f762bb529334eaa84c67e3b19e2ea1">DragInput</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, ParamType speed, ParamType min, ParamType max,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat&lt;T&gt;())</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), ValueObservable&lt;T&gt;(value), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent), speed(speed),</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        min(min), max(max), format(std::move(format)) {}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ab364bf76c60a4b5323f20401839bd832">   81</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ab364bf76c60a4b5323f20401839bd832">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_RANGE_TYPE_LIST&gt;) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="keyword">auto</span> range = T{};</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> tomlRange = src[<span class="stringliteral">&quot;value&quot;</span>].as_array();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      range.start = *tomlRange-&gt;get(0)-&gt;template value&lt;ParamType&gt;();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      range.end = *tomlRange-&gt;get(1)-&gt;template value&lt;ParamType&gt;();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(range);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_GLM_TYPE_LIST&gt;) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> tomlVec = src[<span class="stringliteral">&quot;value&quot;</span>].as_array();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> vec = deserializeGlmVec&lt;T&gt;(*tomlVec);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(vec);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(*src[<span class="stringliteral">&quot;value&quot;</span>].value&lt;T&gt;());</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a0956b538052dd8fe49b60fd8e2074f2b">   97</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a0956b538052dd8fe49b60fd8e2074f2b">serialize_impl</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> value = ValueObservable&lt;T&gt;::getValue();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_RANGE_TYPE_LIST&gt;) {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, toml::array{value.start, value.end}}}};</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_GLM_TYPE_LIST&gt;) {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, serializeGlmVec(value)}}};</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, value}}};</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad9fcb7191b28a274452345293e4571da">  108</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad9fcb7191b28a274452345293e4571da">renderImpl</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">bool</span> valueChanged = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      valueChanged =</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;          ImGui::DragFloat(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), speed, min, max, format.c_str());</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec2&gt;) {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      valueChanged = ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                                       speed, min, max, format.c_str());</div>
+<a href="DragInput_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;glm/gtc/type_ptr.hpp&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;glm/vec2.hpp&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;glm/vec3.hpp&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;glm/vec4.hpp&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;pf_common/concepts/OneOf.h&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;pf_common/math/Range.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Savable_8h.html">pf_imgui/interface/Savable.h</a>&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="serialization_8h.html">pf_imgui/serialization.h</a>&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>details {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4, math::Range&lt;float&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4, math::Range&lt;int&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_RANGE_TYPE_LIST math::Range&lt;int&gt;, math::Range&lt;float&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#define IMGUI_DRAG_TYPE_LIST IMGUI_DRAG_FLOAT_TYPE_LIST, IMGUI_DRAG_INT_TYPE_LIST</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="DragInput_8h.html#a67e111db925e6c305fb5fa6f0fe36472">   40</a></span>&#160;<span class="keyword">using</span> <a class="code" href="DragInput_8h.html#a67e111db925e6c305fb5fa6f0fe36472">DragInputUnderlyingType</a> = std::conditional_t&lt;OneOf&lt;T, IMGUI_DRAG_FLOAT_TYPE_LIST&gt;, float, <span class="keywordtype">int</span>&gt;;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="DragInput_8h.html#ad271c352993f38ac56144e5b2c93045e">   47</a></span>&#160;constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="DragInput_8h.html#ad271c352993f38ac56144e5b2c93045e">defaultDragFormat</a>() {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_FLOAT_TYPE_LIST&gt; || std::same_as&lt;T, math::Range&lt;float&gt;&gt;) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%.3f&quot;</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;%d&quot;</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}<span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;IMGUI_DRAG_TYPE_LIST&gt; T&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html">   64</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html">DragInput</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">using</span> ParamType = <a class="code" href="DragInput_8h.html#a67e111db925e6c305fb5fa6f0fe36472">details::DragInputUnderlyingType&lt;T&gt;</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad2f762bb529334eaa84c67e3b19e2ea1">   79</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad2f762bb529334eaa84c67e3b19e2ea1">DragInput</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, ParamType speed, ParamType min, ParamType max,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat&lt;T&gt;())</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), ValueObservable&lt;T&gt;(value), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent), speed(speed),</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        min(min), max(max), format(std::move(format)) {}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ab364bf76c60a4b5323f20401839bd832">   85</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ab364bf76c60a4b5323f20401839bd832">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_RANGE_TYPE_LIST&gt;) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keyword">auto</span> range = T{};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> tomlRange = src[<span class="stringliteral">&quot;value&quot;</span>].as_array();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      range.start = *tomlRange-&gt;get(0)-&gt;template value&lt;ParamType&gt;();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      range.end = *tomlRange-&gt;get(1)-&gt;template value&lt;ParamType&gt;();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(range);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_GLM_TYPE_LIST&gt;) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> tomlVec = src[<span class="stringliteral">&quot;value&quot;</span>].as_array();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> vec = deserializeGlmVec&lt;T&gt;(*tomlVec);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(vec);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(*src[<span class="stringliteral">&quot;value&quot;</span>].value&lt;T&gt;());</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a0956b538052dd8fe49b60fd8e2074f2b">  101</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a0956b538052dd8fe49b60fd8e2074f2b">serialize_impl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> value = ValueObservable&lt;T&gt;::getValue();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_RANGE_TYPE_LIST&gt;) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, toml::array{value.start, value.end}}}};</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (OneOf&lt;T, IMGUI_DRAG_GLM_TYPE_LIST&gt;) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, <a class="code" href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">serializeGlmVec</a>(value)}}};</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keywordflow">return</span> toml::table{{{<span class="stringliteral">&quot;value&quot;</span>, value}}};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad9fcb7191b28a274452345293e4571da">  112</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad9fcb7191b28a274452345293e4571da">renderImpl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">bool</span> valueChanged = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      valueChanged =</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;          ImGui::DragFloat(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), speed, min, max, format.c_str());</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec3&gt;) {</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      valueChanged = ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec2&gt;) {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      valueChanged = ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                                       speed, min, max, format.c_str());</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec4&gt;) {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      valueChanged = ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec3&gt;) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      valueChanged = ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                       speed, min, max, format.c_str());</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, int&gt;) {</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      valueChanged =</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;          ImGui::DragInt(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), speed, min, max, format.c_str());</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec4&gt;) {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      valueChanged = ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()),</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                                       speed, min, max, format.c_str());</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec2&gt;) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      valueChanged = ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), speed,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                                     min, max, format.c_str());</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, int&gt;) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      valueChanged =</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;          ImGui::DragInt(getLabel().c_str(), ValueObservable&lt;T&gt;::getValueAddress(), speed, min, max, format.c_str());</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec3&gt;) {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      valueChanged = ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), speed,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec2&gt;) {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      valueChanged = ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), speed,</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                                     min, max, format.c_str());</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec4&gt;) {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      valueChanged = ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), speed,</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec3&gt;) {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      valueChanged = ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), speed,</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                     min, max, format.c_str());</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    }</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, math::Range&lt;int&gt;&gt;) {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      valueChanged =</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;          ImGui::DragIntRange2(getLabel().c_str(), <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">int</span> *<span class="keyword">&gt;</span>(ValueObservable&lt;T&gt;::getValueAddress()),</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                               speed, min, max, format.c_str());</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, math::Range&lt;float&gt;&gt;) {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      valueChanged =</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;          ImGui::DragFloatRange2(getLabel().c_str(), &amp;ValueObservable&lt;T&gt;::getValueAddress()-&gt;start,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                                 &amp;ValueObservable&lt;T&gt;::getValueAddress()-&gt;end, speed, min, max, format.c_str());</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">if</span> (valueChanged) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  ParamType speed;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  ParamType min;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  ParamType max;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  std::string format;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;};</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec4&gt;) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      valueChanged = ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable&lt;T&gt;::getValueAddress()), speed,</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                                     min, max, format.c_str());</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, math::Range&lt;int&gt;&gt;) {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;      valueChanged =</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;          ImGui::DragIntRange2(getLabel().c_str(), <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">int</span> *<span class="keyword">&gt;</span>(ValueObservable&lt;T&gt;::getValueAddress()),</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                               speed, min, max, format.c_str());</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    }</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, math::Range&lt;float&gt;&gt;) {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      valueChanged =</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;          ImGui::DragFloatRange2(getLabel().c_str(), &amp;ValueObservable&lt;T&gt;::getValueAddress()-&gt;start,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                                 &amp;ValueObservable&lt;T&gt;::getValueAddress()-&gt;end, speed, min, max, format.c_str());</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordflow">if</span> (valueChanged) { ValueObservable&lt;T&gt;::notifyValueChanged(); }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  ParamType speed;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  ParamType min;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  ParamType max;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  std::string format;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;};</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_a0956b538052dd8fe49b60fd8e2074f2b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#a0956b538052dd8fe49b60fd8e2074f2b">pf::ui::ig::DragInput::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> DragInput.h:97</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_ad2f762bb529334eaa84c67e3b19e2ea1"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad2f762bb529334eaa84c67e3b19e2ea1">pf::ui::ig::DragInput::DragInput</a></div><div class="ttdeci">DragInput(const std::string &amp;elementName, const std::string &amp;label, ParamType speed, ParamType min, ParamType max, Persistent persistent=Persistent::No, T value=T{}, std::string format=details::defaultDragFormat&lt; T &gt;())</div><div class="ttdef"><b>Definition:</b> DragInput.h:75</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_ad9fcb7191b28a274452345293e4571da"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad9fcb7191b28a274452345293e4571da">pf::ui::ig::DragInput::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> DragInput.h:108</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_ab364bf76c60a4b5323f20401839bd832"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#ab364bf76c60a4b5323f20401839bd832">pf::ui::ig::DragInput::unserialize_impl</a></div><div class="ttdeci">void unserialize_impl(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> DragInput.h:81</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html">pf::ui::ig::DragInput</a></div><div class="ttdoc">Numeric input supporting either keyboard input or mouse drag.</div><div class="ttdef"><b>Definition:</b> DragInput.h:60</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_a0956b538052dd8fe49b60fd8e2074f2b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#a0956b538052dd8fe49b60fd8e2074f2b">pf::ui::ig::DragInput::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> DragInput.h:101</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_ad2f762bb529334eaa84c67e3b19e2ea1"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad2f762bb529334eaa84c67e3b19e2ea1">pf::ui::ig::DragInput::DragInput</a></div><div class="ttdeci">DragInput(const std::string &amp;elementName, const std::string &amp;label, ParamType speed, ParamType min, ParamType max, Persistent persistent=Persistent::No, T value=T{}, std::string format=details::defaultDragFormat&lt; T &gt;())</div><div class="ttdef"><b>Definition:</b> DragInput.h:79</div></div>
+<div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
+<div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
+<div class="ttc" id="aValueObservable_8h_html"><div class="ttname"><a href="ValueObservable_8h.html">ValueObservable.h</a></div><div class="ttdoc">Interface for providing observable support to elements.</div></div>
+<div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:48</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_ad9fcb7191b28a274452345293e4571da"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad9fcb7191b28a274452345293e4571da">pf::ui::ig::DragInput::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> DragInput.h:112</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:23</div></div>
+<div class="ttc" id="aserialization_8h_html_a827e52c35c0f6324bb84a9d4c24919f4"><div class="ttname"><a href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">pf::ui::ig::serializeGlmVec</a></div><div class="ttdeci">PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &amp;vec)</div><div class="ttdef"><b>Definition:</b> serialization.h:62</div></div>
+<div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
+<div class="ttc" id="aserialization_8h_html"><div class="ttname"><a href="serialization_8h.html">serialization.h</a></div><div class="ttdoc">Serialization of UI tree to toml.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:23</div></div>
+<div class="ttc" id="aDragInput_8h_html_a67e111db925e6c305fb5fa6f0fe36472"><div class="ttname"><a href="DragInput_8h.html#a67e111db925e6c305fb5fa6f0fe36472">pf::ui::ig::details::DragInputUnderlyingType</a></div><div class="ttdeci">std::conditional_t&lt; OneOf&lt; T, IMGUI_DRAG_FLOAT_TYPE_LIST &gt;, float, int &gt; DragInputUnderlyingType</div><div class="ttdef"><b>Definition:</b> DragInput.h:40</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_ab364bf76c60a4b5323f20401839bd832"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#ab364bf76c60a4b5323f20401839bd832">pf::ui::ig::DragInput::unserialize_impl</a></div><div class="ttdeci">void unserialize_impl(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> DragInput.h:85</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html">pf::ui::ig::DragInput</a></div><div class="ttdoc">Numeric input supporting either keyboard input or mouse drag.</div><div class="ttdef"><b>Definition:</b> DragInput.h:64</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
+<div class="ttc" id="aDragInput_8h_html_ad271c352993f38ac56144e5b2c93045e"><div class="ttname"><a href="DragInput_8h.html#ad271c352993f38ac56144e5b2c93045e">pf::ui::ig::details::defaultDragFormat</a></div><div class="ttdeci">constexpr const char * defaultDragFormat()</div><div class="ttdef"><b>Definition:</b> DragInput.h:47</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
