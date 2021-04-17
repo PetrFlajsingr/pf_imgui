@@ -1,0 +1,6 @@
+<map id="pf::ui::ig::Memo" name="pf::ui::ig::Memo">
+<area shape="rect" id="node1" title="Multiline text overview with basic controls." alt="" coords="105,155,227,181"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="175,80,325,107"/>
+</map>

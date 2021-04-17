@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.2.3</span>
+   &#160;<span id="projectnumber">0.3.2</span>
    </div>
   </td>
  </tr>
@@ -71,7 +71,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 10/27/20.mvoe</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 10/27/20.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_IMGUIINTERFACE_H</span></div>
@@ -85,99 +85,112 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_common/coroutines/Sequence.h&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/elements/MenuBars.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ElementContainer.h&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;toml++/toml.h&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">   35</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a>(ImGuiConfigFlags flags, toml::table tomlConfig);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  [[nodiscard]] ImGuiIO &amp;getIo() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a> &amp;createDialog(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;caption, Modal modal = Modal::Yes);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp;createWindow(<span class="keyword">const</span> std::string &amp;windowName, std::string title);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> removeWindow(<span class="keyword">const</span> std::string &amp;name);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp;windowByName(<span class="keyword">const</span> std::string &amp;name);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">   81</a></span>&#160;  <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">getWindows</a>() {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> windows | ranges::views::transform([](<span class="keyword">auto</span> &amp;window) -&gt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp; { <span class="keywordflow">return</span> *window; });</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  }</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">   88</a></span>&#160;  <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">getWindows</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> windows | ranges::views::transform([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;window) -&gt; <span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp; { <span class="keywordflow">return</span> *window; });</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">AppMenuBar</a> &amp;getMenuBar();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasMenuBar() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  [[nodiscard]] <span class="keyword">const</span> toml::table &amp;getConfig() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isWindowHovered() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isKeyboardCaptured() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordtype">void</span> updateConfig();</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordtype">void</span> setStateFromConfig();</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">  136</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">setStyle</a>(std::invocable&lt;ImGuiStyle &amp;&gt; <span class="keyword">auto</span> styleSetter) { styleSetter(ImGui::GetStyle()); }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a586c7a8c65299d4350efb4fc30ed782c">  150</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a586c7a8c65299d4350efb4fc30ed782c">openFileDialog</a>(<span class="keyword">const</span> std::string &amp;caption, <span class="keyword">const</span> std::vector&lt;FileExtensionSettings&gt; &amp;extSettings,</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                      std::invocable&lt;std::vector&lt;std::string&gt;&gt; <span class="keyword">auto</span> onSelect, std::invocable <span class="keyword">auto</span> onCancel,</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                      ImVec2 size = {200, 150}, std::string startPath = <span class="stringliteral">&quot;.&quot;</span>, std::string startName = <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                      Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">using namespace </span>std::string_literals;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    fileDialogs.emplace_back(<span class="stringliteral">&quot;FileDialog&quot;</span>s + std::to_string(getNext(idGen)), caption, extSettings, onSelect, onCancel,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                             size, startPath, startName, modality, maxSelectedFiles);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  }</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a72d83202f7d1bcb77b74cd32741658fb">  170</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a72d83202f7d1bcb77b74cd32741658fb">openDirDialog</a>(<span class="keyword">const</span> std::string &amp;caption, std::invocable&lt;std::vector&lt;std::string&gt;&gt; <span class="keyword">auto</span> onSelect,</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                     std::invocable <span class="keyword">auto</span> onCancel, ImVec2 size = {200, 150}, std::string startPath = <span class="stringliteral">&quot;.&quot;</span>,</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                     std::string startName = <span class="stringliteral">&quot;&quot;</span>, Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">using namespace </span>std::string_literals;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    fileDialogs.emplace_back(<span class="stringliteral">&quot;FileDialog&quot;</span>s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                             startPath, startName, modality, maxSelectedFiles);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  std::unique_ptr&lt;AppMenuBar&gt; menuBar = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keywordtype">void</span> renderDialogs();</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span>Dialog;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  std::vector&lt;std::unique_ptr&lt;Dialog&gt;&gt; dialogs;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keyword">static</span> ImGuiIO &amp;baseInit(ImGuiConfigFlags flags);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  ImGuiIO &amp;io;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  std::vector&lt;FileDialog&gt; fileDialogs;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  cppcoro::generator&lt;std::size_t&gt; idGen = iota&lt;std::size_t&gt;();</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  std::vector&lt;std::unique_ptr&lt;Window&gt;&gt; windows;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  toml::table config;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/dialogs/MessageDialog.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/elements/MenuBars.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ElementContainer.h&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;toml++/toml.h&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">   36</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a>(ImGuiConfigFlags flags, toml::table tomlConfig);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  [[nodiscard]] ImGuiIO &amp;getIo() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a> &amp;createDialog(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;caption, Modal modal = Modal::Yes);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> ButtonTypes = MessageButtons&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">MessageDialog&lt;ButtonTypes&gt;</a> &amp;createMsgDlg(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;title,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                           <span class="keyword">const</span> std::string &amp;message, Flags&lt;ButtonTypes&gt; buttons,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                           std::invocable&lt;ButtonTypes&gt; <span class="keyword">auto</span> &amp;&amp;onDialogDone, Modal modal = Modal::Yes) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">auto</span> dialog = std::make_unique&lt;MessageDialog&lt;ButtonTypes&gt;&gt;(</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        *<span class="keyword">this</span>, elementName, title, message, buttons, std::forward&lt;decltype(onDialogDone)&gt;(onDialogDone), modal);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = dialog.get();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    dialogs.emplace_back(std::move(dialog));</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp;createWindow(<span class="keyword">const</span> std::string &amp;windowName, std::string title);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">void</span> removeWindow(<span class="keyword">const</span> std::string &amp;name);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp;windowByName(<span class="keyword">const</span> std::string &amp;name);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">   93</a></span>&#160;  <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">getWindows</a>() {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> windows | ranges::views::transform([](<span class="keyword">auto</span> &amp;window) -&gt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp; { <span class="keywordflow">return</span> *window; });</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">  100</a></span>&#160;  <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">getWindows</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> windows | ranges::views::transform([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;window) -&gt; <span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp; { <span class="keywordflow">return</span> *window; });</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">AppMenuBar</a> &amp;getMenuBar();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasMenuBar() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  [[nodiscard]] <span class="keyword">const</span> toml::table &amp;getConfig() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isWindowHovered() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isKeyboardCaptured() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="keywordtype">void</span> updateConfig();</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keywordtype">void</span> setStateFromConfig();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">  148</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">setStyle</a>(std::invocable&lt;ImGuiStyle &amp;&gt; <span class="keyword">auto</span> styleSetter) { styleSetter(ImGui::GetStyle()); }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a3edf6095e6e5b554034f0e4e7b1f2eec">  162</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a3edf6095e6e5b554034f0e4e7b1f2eec">openFileDialog</a>(<span class="keyword">const</span> std::string &amp;caption, <span class="keyword">const</span> std::vector&lt;FileExtensionSettings&gt; &amp;extSettings,</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                      std::invocable&lt;std::vector&lt;std::string&gt;&gt; <span class="keyword">auto</span> onSelect, std::invocable <span class="keyword">auto</span> onCancel,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                      ImVec2 size = {200, 150}, std::filesystem::path startPath = <span class="stringliteral">&quot;.&quot;</span>, std::string startName = <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                      Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">using namespace </span>std::string_literals;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    fileDialogs.emplace_back(<span class="stringliteral">&quot;FileDialog&quot;</span>s + std::to_string(getNext(idGen)), caption, extSettings, onSelect, onCancel,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                             size, startPath, startName, modality, maxSelectedFiles);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  }</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a86c30703d2bbad98122d18938ff35a6a">  182</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a86c30703d2bbad98122d18938ff35a6a">openDirDialog</a>(<span class="keyword">const</span> std::string &amp;caption, std::invocable&lt;std::vector&lt;std::string&gt;&gt; <span class="keyword">auto</span> onSelect,</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                     std::invocable <span class="keyword">auto</span> onCancel, ImVec2 size = {200, 150}, std::filesystem::path startPath = <span class="stringliteral">&quot;.&quot;</span>,</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                     std::string startName = <span class="stringliteral">&quot;&quot;</span>, Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">using namespace </span>std::string_literals;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    fileDialogs.emplace_back(<span class="stringliteral">&quot;FileDialog&quot;</span>s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                             startPath, startName, modality, maxSelectedFiles);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  std::unique_ptr&lt;AppMenuBar&gt; menuBar = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">void</span> renderDialogs();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordtype">void</span> removeDialog(Dialog &amp;dialog);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;};</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUIINTERFACE_H</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span>Dialog;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  std::vector&lt;std::unique_ptr&lt;Dialog&gt;&gt; dialogs;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keyword">static</span> ImGuiIO &amp;baseInit(ImGuiConfigFlags flags);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  ImGuiIO &amp;io;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  std::vector&lt;FileDialog&gt; fileDialogs;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  cppcoro::generator&lt;std::size_t&gt; idGen = iota&lt;std::size_t&gt;();</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  std::vector&lt;std::unique_ptr&lt;Window&gt;&gt; windows;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  toml::table config;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordtype">void</span> removeDialog(Dialog &amp;dialog);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;};</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_IMGUIINTERFACE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a502176a0deb2da5a07632f8792bd8d5f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">pf::ui::ig::ImGuiInterface::setStyle</a></div><div class="ttdeci">void setStyle(std::invocable&lt; ImGuiStyle &amp; &gt; auto styleSetter)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:136</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Dialog_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Dialog.html">pf::ui::ig::Dialog</a></div><div class="ttdoc">Simple dialog which can be modal. Contains Elements.</div><div class="ttdef"><b>Definition:</b> Dialog.h:24</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">pf::ui::ig::ImGuiInterface</a></div><div class="ttdoc">Root class of an entire UI tree. Provides an ability to create windows and dialogs.</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:35</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a72d83202f7d1bcb77b74cd32741658fb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a72d83202f7d1bcb77b74cd32741658fb">pf::ui::ig::ImGuiInterface::openDirDialog</a></div><div class="ttdeci">void openDirDialog(const std::string &amp;caption, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::string startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:170</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a502176a0deb2da5a07632f8792bd8d5f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">pf::ui::ig::ImGuiInterface::setStyle</a></div><div class="ttdeci">void setStyle(std::invocable&lt; ImGuiStyle &amp; &gt; auto styleSetter)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:148</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a3edf6095e6e5b554034f0e4e7b1f2eec"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a3edf6095e6e5b554034f0e4e7b1f2eec">pf::ui::ig::ImGuiInterface::openFileDialog</a></div><div class="ttdeci">void openFileDialog(const std::string &amp;caption, const std::vector&lt; FileExtensionSettings &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:162</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Dialog_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Dialog.html">pf::ui::ig::Dialog</a></div><div class="ttdoc">Simple dialog which can be modal. Contains Elements.</div><div class="ttdef"><b>Definition:</b> Dialog.h:22</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">pf::ui::ig::ImGuiInterface</a></div><div class="ttdoc">Root class of an entire UI tree. Provides an ability to create windows and dialogs.</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:36</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MessageDialog_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">pf::ui::ig::MessageDialog</a></div><div class="ttdoc">Simplified Dialog for showing messages. Button labels are the same as enums being used....</div><div class="ttdef"><b>Definition:</b> MessageDialog.h:28</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Window_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Window.html">pf::ui::ig::Window</a></div><div class="ttdoc">Main building piece for UI. Persistent element container with plenty of controls.</div><div class="ttdef"><b>Definition:</b> Window.h:26</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a15f8a8241912e4184754da4fda8bf9e5"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">pf::ui::ig::ImGuiInterface::getWindows</a></div><div class="ttdeci">auto getWindows() const</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:88</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a586c7a8c65299d4350efb4fc30ed782c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a586c7a8c65299d4350efb4fc30ed782c">pf::ui::ig::ImGuiInterface::openFileDialog</a></div><div class="ttdeci">void openFileDialog(const std::string &amp;caption, const std::vector&lt; FileExtensionSettings &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::string startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:150</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a7047a5ad8a32e1cb96101a29f8c24831"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">pf::ui::ig::ImGuiInterface::getWindows</a></div><div class="ttdeci">auto getWindows()</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:81</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a15f8a8241912e4184754da4fda8bf9e5"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">pf::ui::ig::ImGuiInterface::getWindows</a></div><div class="ttdeci">auto getWindows() const</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:100</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a7047a5ad8a32e1cb96101a29f8c24831"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">pf::ui::ig::ImGuiInterface::getWindows</a></div><div class="ttdeci">auto getWindows()</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:93</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:22</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AppMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">pf::ui::ig::AppMenuBar</a></div><div class="ttdoc">Menu bar belonging to the entire application window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:105</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a86c30703d2bbad98122d18938ff35a6a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a86c30703d2bbad98122d18938ff35a6a">pf::ui::ig::ImGuiInterface::openDirDialog</a></div><div class="ttdeci">void openDirDialog(const std::string &amp;caption, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:182</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

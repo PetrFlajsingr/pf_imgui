@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.2.3</span>
+   &#160;<span id="projectnumber">0.3.2</span>
    </div>
   </td>
  </tr>
@@ -197,7 +197,7 @@ $(function() {
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        iter != rows.end()) {</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;      <span class="keywordflow">return</span> *iter;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">throw</span> InvalidArgumentException::fmt(<span class="stringliteral">&quot;Row with id {} not found&quot;</span>, <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">throw</span> InvalidArgumentException(<span class="stringliteral">&quot;Row with id {} not found&quot;</span>, <span class="keywordtype">id</span>);</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  }</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;};</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
@@ -280,7 +280,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableWithFactory_html_a2be7d7a188b189b95679b1d3b106b5d5"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableWithFactory.html#a2be7d7a188b189b95679b1d3b106b5d5">pf::ui::ig::TableWithFactory::addRow</a></div><div class="ttdeci">Row &amp; addRow(typename Factory::CreateType &amp;&amp;source) requires(HasFactory)</div><div class="ttdef"><b>Definition:</b> Table.h:135</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TableSettings_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TableSettings.html">pf::ui::ig::TableSettings</a></div><div class="ttdoc">Settings for table creation.</div><div class="ttdef"><b>Definition:</b> StringTable.h:29</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableWithFactory_html_adf62a7aa72aa1d6b8e4637e72f0ea2fa"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableWithFactory.html#adf62a7aa72aa1d6b8e4637e72f0ea2fa">pf::ui::ig::TableWithFactory::removeRow</a></div><div class="ttdeci">void removeRow(Id id)</div><div class="ttdef"><b>Definition:</b> Table.h:168</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:21</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableWithFactory_1_1RowBuilderFinish_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableWithFactory_1_1RowBuilderFinish.html">pf::ui::ig::TableWithFactory::RowBuilderFinish</a></div><div class="ttdoc">Special case of RowBuilder, which handles last element in a tuple.</div><div class="ttdef"><b>Definition:</b> Table.h:115</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableWithFactory_html_a629d4c074f308424db575491ef83bd5f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableWithFactory.html#a629d4c074f308424db575491ef83bd5f">pf::ui::ig::TableWithFactory::Row</a></div><div class="ttdeci">TableRow&lt; Cells... &gt; Row</div><div class="ttdef"><b>Definition:</b> Table.h:64</div></div>

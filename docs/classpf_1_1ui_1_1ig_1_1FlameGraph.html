@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.2.3</span>
+   &#160;<span id="projectnumber">0.3.2</span>
    </div>
   </td>
  </tr>
@@ -82,15 +82,27 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::FlameGraph:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classpf_1_1ui_1_1ig_1_1FlameGraph.png" usemap="#pf::ui::ig::FlameGraph_map" alt=""/>
-  <map id="pf::ui::ig::FlameGraph_map" name="pf::ui::ig::FlameGraph_map">
-<area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="pf::ui::ig::Element" shape="rect" coords="0,56,130,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="pf::ui::ig::Labellable" shape="rect" coords="140,56,270,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="pf::ui::ig::Resizable" shape="rect" coords="280,56,410,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,130,24"/>
-  </map>
-</div></div>
+<div class="center"><img src="classpf_1_1ui_1_1ig_1_1FlameGraph__inherit__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1FlameGraph_inherit__map" alt="Inheritance graph"/></div>
+<map name="pf_1_1ui_1_1ig_1_1FlameGraph_inherit__map" id="pf_1_1ui_1_1ig_1_1FlameGraph_inherit__map">
+<area shape="rect" title="Graph for visualising stack traces, performance stuff..." alt="" coords="169,155,331,181"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="175,80,325,107"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="349,80,495,107"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for pf::ui::ig::FlameGraph:</div>
+<div class="dyncontent">
+<div class="center"><img src="classpf_1_1ui_1_1ig_1_1FlameGraph__coll__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1FlameGraph_coll__map" alt="Collaboration graph"/></div>
+<map name="pf_1_1ui_1_1ig_1_1FlameGraph_coll__map" id="pf_1_1ui_1_1ig_1_1FlameGraph_coll__map">
+<area shape="rect" title="Graph for visualising stack traces, performance stuff..." alt="" coords="169,155,331,181"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="175,80,325,107"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="349,80,495,107"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -172,6 +184,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLabelVisible</b> ()
 <tr class="separator:a660d41f276f8744fb9aeddc3fd833be0 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Resizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75554dd4aa7788ffc48447bef7ba14a8 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Resizable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Resizable.html#a75554dd4aa7788ffc48447bef7ba14a8">setSize</a> (const ImVec2 &amp;s)</td></tr>
 <tr class="separator:a75554dd4aa7788ffc48447bef7ba14a8 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Resizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a303f1320db00aa12f8a0889c732e3e7f inherit pub_methods_classpf_1_1ui_1_1ig_1_1Resizable"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Resizable.html#a303f1320db00aa12f8a0889c732e3e7f">addSizeListener</a> (std::invocable&lt; ImVec2 &gt; auto listener)</td></tr>
+<tr class="separator:a303f1320db00aa12f8a0889c732e3e7f inherit pub_methods_classpf_1_1ui_1_1ig_1_1Resizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>

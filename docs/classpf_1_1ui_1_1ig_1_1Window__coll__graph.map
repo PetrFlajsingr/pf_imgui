@@ -1,0 +1,12 @@
+<map id="pf::ui::ig::Window" name="pf::ui::ig::Window">
+<area shape="rect" id="node1" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="435,183,569,209"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="209,5,365,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="188,56,387,83"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="214,107,361,133"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="213,157,362,184"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="210,208,365,235"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="5,208,140,235"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="215,259,360,285"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Positionable.html" title="Interface for positionable elements." alt="" coords="206,309,369,336"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="213,360,362,387"/>
+</map>

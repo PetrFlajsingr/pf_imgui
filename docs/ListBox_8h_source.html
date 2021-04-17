@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.2.3</span>
+   &#160;<span id="projectnumber">0.3.2</span>
    </div>
   </td>
  </tr>
@@ -78,51 +78,50 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_LISTBOX_H</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;pf_common/concepts/Iterable.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ItemElement.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Labellable.h&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ValueObservable.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html">   25</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html">ListBox</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;std::string_view&gt; {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html">ListBox</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, std::vector&lt;std::string&gt; items_ = {},</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;          <span class="keywordtype">int</span> selectedIdx = 0, <span class="keywordtype">int</span> heightInItems = -1);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">void</span> addItem(std::string item);</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f">   47</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f">addItems</a>(<span class="keyword">const</span> std::ranges::range <span class="keyword">auto</span> &amp;data) requires(</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      std::same_as&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, std::string&gt;) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#acc011c9bc4ecc0ac556be0f360727ab8">   55</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#acc011c9bc4ecc0ac556be0f360727ab8">setItems</a>(<span class="keyword">const</span> std::ranges::range <span class="keyword">auto</span> &amp;data) requires(</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      std::same_as&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, std::string&gt;) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    items.clear();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    currentItemIdx = 0;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  [[nodiscard]] std::string_view getSelectedItem() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> selectItem(std::string_view itemToSelect);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  std::vector&lt;std::string&gt; items;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">int</span> currentItemIdx = 0;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordtype">int</span> height = -1;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_LISTBOX_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ItemElement.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/Labellable.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/ValueObservable.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html">   24</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html">ListBox</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;std::string_view&gt; {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html">ListBox</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, std::vector&lt;std::string&gt; items_ = {},</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;          <span class="keywordtype">int</span> selectedIdx = 0, <span class="keywordtype">int</span> heightInItems = -1);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">void</span> addItem(std::string item);</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f">   46</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f">addItems</a>(<span class="keyword">const</span> std::ranges::range <span class="keyword">auto</span> &amp;data) requires(</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      std::same_as&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, std::string&gt;) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  }</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#acc011c9bc4ecc0ac556be0f360727ab8">   54</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#acc011c9bc4ecc0ac556be0f360727ab8">setItems</a>(<span class="keyword">const</span> std::ranges::range <span class="keyword">auto</span> &amp;data) requires(</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      std::same_as&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, std::string&gt;) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    items.clear();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    currentItemIdx = 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  [[nodiscard]] std::string_view getSelectedItem() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> selectItem(std::string_view itemToSelect);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  std::vector&lt;std::string&gt; items;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">int</span> currentItemIdx = 0;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">int</span> height = -1;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_LISTBOX_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a066540749b526ae7e75dd938c3964a2f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f">pf::ui::ig::ListBox::addItems</a></div><div class="ttdeci">void addItems(const std::ranges::range auto &amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:47</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a066540749b526ae7e75dd938c3964a2f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f">pf::ui::ig::ListBox::addItems</a></div><div class="ttdeci">void addItems(const std::ranges::range auto &amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:46</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a></div><div class="ttdoc">Container for strings shown as list box and selectable by user.</div><div class="ttdef"><b>Definition:</b> ListBox.h:25</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_acc011c9bc4ecc0ac556be0f360727ab8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#acc011c9bc4ecc0ac556be0f360727ab8">pf::ui::ig::ListBox::setItems</a></div><div class="ttdeci">void setItems(const std::ranges::range auto &amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:55</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a></div><div class="ttdoc">Container for strings shown as list box and selectable by user.</div><div class="ttdef"><b>Definition:</b> ListBox.h:24</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_acc011c9bc4ecc0ac556be0f360727ab8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#acc011c9bc4ecc0ac556be0f360727ab8">pf::ui::ig::ListBox::setItems</a></div><div class="ttdeci">void setItems(const std::ranges::range auto &amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:54</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:23</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

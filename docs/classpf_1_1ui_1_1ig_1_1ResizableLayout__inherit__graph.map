@@ -1,0 +1,14 @@
+<map id="pf::ui::ig::ResizableLayout" name="pf::ui::ig::ResizableLayout">
+<area shape="rect" id="node1" title="An interface for Layouts, which support changing their size." alt="" coords="605,107,795,133"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="843,5,1025,32"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="859,56,1009,83"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="857,107,1011,133"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="845,157,1023,184"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="848,208,1020,235"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="421,81,548,108"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="219,56,355,83"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,56,161,83"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="209,107,364,133"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="16,107,151,133"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="412,132,557,159"/>
+</map>

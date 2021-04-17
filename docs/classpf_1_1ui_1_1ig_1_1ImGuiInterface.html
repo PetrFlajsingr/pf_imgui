@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.2.3</span>
+   &#160;<span id="projectnumber">0.3.2</span>
    </div>
   </td>
  </tr>
@@ -84,12 +84,21 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for pf::ui::ig::ImGuiInterface:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classpf_1_1ui_1_1ig_1_1ImGuiInterface.png" usemap="#pf::ui::ig::ImGuiInterface_map" alt=""/>
-  <map id="pf::ui::ig::ImGuiInterface_map" name="pf::ui::ig::ImGuiInterface_map">
-<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,142,24"/>
-  </map>
-</div></div>
+<div class="center"><img src="classpf_1_1ui_1_1ig_1_1ImGuiInterface__inherit__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1ImGuiInterface_inherit__map" alt="Inheritance graph"/></div>
+<map name="pf_1_1ui_1_1ig_1_1ImGuiInterface_inherit__map" id="pf_1_1ui_1_1ig_1_1ImGuiInterface_inherit__map">
+<area shape="rect" title="Root class of an entire UI tree. Provides an ability to create windows and dialogs." alt="" coords="5,80,184,107"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="17,5,173,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for pf::ui::ig::ImGuiInterface:</div>
+<div class="dyncontent">
+<div class="center"><img src="classpf_1_1ui_1_1ig_1_1ImGuiInterface__coll__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1ImGuiInterface_coll__map" alt="Collaboration graph"/></div>
+<map name="pf_1_1ui_1_1ig_1_1ImGuiInterface_coll__map" id="pf_1_1ui_1_1ig_1_1ImGuiInterface_coll__map">
+<area shape="rect" title="Root class of an entire UI tree. Provides an ability to create windows and dialogs." alt="" coords="5,80,184,107"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="17,5,173,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -100,6 +109,10 @@ ImGuiIO &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getIo</b> ()
 <tr class="separator:aedb353585a211cf60c16ae23c2a27e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac31011c8607eb9e86738731a37e0796a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#ac31011c8607eb9e86738731a37e0796a">createDialog</a> (const std::string &amp;elementName, const std::string &amp;caption, Modal modal=Modal::Yes)</td></tr>
 <tr class="separator:ac31011c8607eb9e86738731a37e0796a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b1afc0e807e43c5cb16abfb9f589e87"><td class="memTemplParams" colspan="2"><a id="a4b1afc0e807e43c5cb16abfb9f589e87"></a>
+template&lt;typename ButtonTypes  = MessageButtons&gt; </td></tr>
+<tr class="memitem:a4b1afc0e807e43c5cb16abfb9f589e87"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">MessageDialog</a>&lt; ButtonTypes &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>createMsgDlg</b> (const std::string &amp;elementName, const std::string &amp;title, const std::string &amp;message, Flags&lt; ButtonTypes &gt; buttons, std::invocable&lt; ButtonTypes &gt; auto &amp;&amp;onDialogDone, Modal modal=Modal::Yes)</td></tr>
+<tr class="separator:a4b1afc0e807e43c5cb16abfb9f589e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54c4e2e22e1b21d237e5ad10498ccc8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a54c4e2e22e1b21d237e5ad10498ccc8e">createWindow</a> (const std::string &amp;windowName, std::string title)</td></tr>
 <tr class="separator:a54c4e2e22e1b21d237e5ad10498ccc8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a391a237fc1e8ca17ad6a580cd1859155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a391a237fc1e8ca17ad6a580cd1859155">removeWindow</a> (const std::string &amp;name)</td></tr>
@@ -126,10 +139,10 @@ ImGuiIO &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getIo</b> ()
 <tr class="separator:ab0215ee5cfd5beae0703f7c962b0b65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a502176a0deb2da5a07632f8792bd8d5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">setStyle</a> (std::invocable&lt; ImGuiStyle &amp; &gt; auto styleSetter)</td></tr>
 <tr class="separator:a502176a0deb2da5a07632f8792bd8d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a586c7a8c65299d4350efb4fc30ed782c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a586c7a8c65299d4350efb4fc30ed782c">openFileDialog</a> (const std::string &amp;caption, const std::vector&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html">FileExtensionSettings</a> &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::string startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
-<tr class="separator:a586c7a8c65299d4350efb4fc30ed782c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72d83202f7d1bcb77b74cd32741658fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a72d83202f7d1bcb77b74cd32741658fb">openDirDialog</a> (const std::string &amp;caption, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::string startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
-<tr class="separator:a72d83202f7d1bcb77b74cd32741658fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3edf6095e6e5b554034f0e4e7b1f2eec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a3edf6095e6e5b554034f0e4e7b1f2eec">openFileDialog</a> (const std::string &amp;caption, const std::vector&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html">FileExtensionSettings</a> &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
+<tr class="separator:a3edf6095e6e5b554034f0e4e7b1f2eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86c30703d2bbad98122d18938ff35a6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a86c30703d2bbad98122d18938ff35a6a">openDirDialog</a> (const std::string &amp;caption, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
+<tr class="separator:a86c30703d2bbad98122d18938ff35a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
 <tr class="memitem:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#ae2ec29074d05defd647369f43ebbeee1">Renderable</a> (std::string name)</td></tr>
 <tr class="separator:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,8 +173,8 @@ ImGuiIO &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getIo</b> ()
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a6f30b13eba5488f9d48ad16b64f744cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a6f30b13eba5488f9d48ad16b64f744cc">renderDialogs</a> ()</td></tr>
-<tr class="separator:a6f30b13eba5488f9d48ad16b64f744cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50847729751f1a10eaf12aa7ae1d5998"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a50847729751f1a10eaf12aa7ae1d5998">renderDialogs</a> ()</td></tr>
+<tr class="separator:a50847729751f1a10eaf12aa7ae1d5998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8f057c2172fc80ea80fe0c1a3fefb2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#af8f057c2172fc80ea80fe0c1a3fefb2c">renderImpl</a> () override</td></tr>
 <tr class="separator:af8f057c2172fc80ea80fe0c1a3fefb2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -182,7 +195,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
 <p>The class has it's own menu bar, which is applied to the entire render window.</p>
 <p>It also takes care of config saving for <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements.">Savable</a> elements.</p>
 <p>For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>: change id type </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>: change id type </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad1a3f8faab46f7519e8c1cae19063c07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad1a3f8faab46f7519e8c1cae19063c07">&#9670;&nbsp;</a></span>ImGuiInterface()</h2>
@@ -451,8 +464,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
 
 </div>
 </div>
-<a id="a72d83202f7d1bcb77b74cd32741658fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72d83202f7d1bcb77b74cd32741658fb">&#9670;&nbsp;</a></span>openDirDialog()</h2>
+<a id="a86c30703d2bbad98122d18938ff35a6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86c30703d2bbad98122d18938ff35a6a">&#9670;&nbsp;</a></span>openDirDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -487,7 +500,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">std::filesystem::path&#160;</td>
           <td class="paramname"><em>startPath</em> = <code>&quot;.&quot;</code>, </td>
         </tr>
         <tr>
@@ -528,12 +541,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
     <tr><td class="paramname">onCancel</td><td>callback for when user cancels selection </td></tr>
     <tr><td class="paramname">size</td><td>size of the dialog </td></tr>
     <tr><td class="paramname">startPath</td><td>path in which the dialog opens </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>: change to std::filesystem::path </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
     <tr><td class="paramname">startName</td><td>default name for selected file/dir </td></tr>
     <tr><td class="paramname">modality</td><td>modality of the dialog </td></tr>
     <tr><td class="paramname">maxSelectedDirs</td><td>maximum amount of selected directories </td></tr>
@@ -543,8 +550,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
 
 </div>
 </div>
-<a id="a586c7a8c65299d4350efb4fc30ed782c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a586c7a8c65299d4350efb4fc30ed782c">&#9670;&nbsp;</a></span>openFileDialog()</h2>
+<a id="a3edf6095e6e5b554034f0e4e7b1f2eec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3edf6095e6e5b554034f0e4e7b1f2eec">&#9670;&nbsp;</a></span>openFileDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -585,7 +592,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">std::filesystem::path&#160;</td>
           <td class="paramname"><em>startPath</em> = <code>&quot;.&quot;</code>, </td>
         </tr>
         <tr>
@@ -633,12 +640,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
     <tr><td class="paramname">onCancel</td><td>callback for when user cancels selection </td></tr>
     <tr><td class="paramname">size</td><td>size of the dialog </td></tr>
     <tr><td class="paramname">startPath</td><td>path in which the dialog opens </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000011">Todo:</a></b></dt><dd>: change to std::filesystem::path </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
     <tr><td class="paramname">startName</td><td>default name for selected file/dir </td></tr>
     <tr><td class="paramname">modality</td><td>modality of the dialog </td></tr>
     <tr><td class="paramname">maxSelectedFiles</td><td>maximum amount of selected files </td></tr>
@@ -672,8 +673,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
 
 </div>
 </div>
-<a id="a6f30b13eba5488f9d48ad16b64f744cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f30b13eba5488f9d48ad16b64f744cc">&#9670;&nbsp;</a></span>renderDialogs()</h2>
+<a id="a50847729751f1a10eaf12aa7ae1d5998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50847729751f1a10eaf12aa7ae1d5998">&#9670;&nbsp;</a></span>renderDialogs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -740,7 +741,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set state from inner config file. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>: save state of ui and reload it using this? </dd></dl>
+<p>Set state from inner config file. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>: save state of ui and reload it using this? </dd></dl>
 
 </div>
 </div>

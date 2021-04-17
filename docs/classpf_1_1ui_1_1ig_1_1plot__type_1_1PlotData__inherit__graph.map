@@ -1,0 +1,14 @@
+<map id="pf::ui::ig::plot_type::PlotData" name="pf::ui::ig::plot_type::PlotData">
+<area shape="rect" id="node1" title="Base class for all types of plot data." alt="" coords="393,235,536,276"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html" title="Base class for plot data wich support data labeling." alt="" coords="584,235,727,276"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="209,242,345,269"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,242,161,269"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Bar.html" title="2D bar plot, which can either be horizontal or vertical." alt="" coords="775,5,917,47"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Digital.html" title="2D plot for digital data." alt="" coords="775,71,917,112"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar.html" title="2D bar plot, which can either be horizontal or vertical. It shows error margin for each bar." alt="" coords="775,136,917,177"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1HeatMap.html" title="2D plot where data is visualised as a heat map." alt="" coords="775,201,917,243"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Line.html" title="2D plot where each sample is connected to their neighbor via shortest line." alt="" coords="775,267,917,308"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Shaded.html" title="2D plot where and area beneath the data set is colored." alt="" coords="775,332,917,373"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Stairs.html" title="2D plot where neighboring values are connected via &#39;stairs&#39;. Example: _ | | _| | | |_" alt="" coords="775,397,917,439"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Stems.html" title="2D graph, where each value is rendered as a stem on X axis." alt="" coords="775,463,917,504"/>
+</map>

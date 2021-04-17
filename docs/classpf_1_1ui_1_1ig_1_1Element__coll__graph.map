@@ -1,0 +1,4 @@
+<map id="pf::ui::ig::Element" name="pf::ui::ig::Element">
+<area shape="rect" id="node1" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+</map>

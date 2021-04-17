@@ -1,0 +1,6 @@
+<map id="pf::ui::ig::Tooltip" name="pf::ui::ig::Tooltip">
+<area shape="rect" id="node1" title="Tooltip to display when hovering over elements." alt="" coords="117,155,242,181"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="176,80,375,107"/>
+</map>

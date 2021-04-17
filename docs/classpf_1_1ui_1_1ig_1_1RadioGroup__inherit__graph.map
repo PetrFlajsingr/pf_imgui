@@ -1,0 +1,8 @@
+<map id="pf::ui::ig::RadioGroup" name="pf::ui::ig::RadioGroup">
+<area shape="rect" id="node1" title="Group of RadioButton." alt="" coords="424,85,583,112"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="225,5,361,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="218,56,367,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="209,107,376,149"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="225,173,360,200"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="pf::ui::ig::Collapsible" name="pf::ui::ig::Collapsible">
+<area shape="rect" id="node1" title="Interface for collapsible elements." alt="" coords="5,80,160,107"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="15,5,150,32"/>
+</map>

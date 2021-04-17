@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.2.3</span>
+   &#160;<span id="projectnumber">0.3.2</span>
    </div>
   </td>
  </tr>
@@ -74,8 +74,8 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 4/13/21.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_SRC_PF_IMGUI_EXCEPTIONS_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_SRC_PF_IMGUI_EXCEPTIONS_H</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_EXCEPTIONS_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_EXCEPTIONS_H</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;pf_common/exceptions/StackTraceException.h&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
@@ -84,16 +84,16 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html">DuplicateIdException</a> : <span class="keyword">public</span> StackTraceException {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html">DuplicateIdException</a>(<span class="keyword">const</span> std::string_view &amp;fmt, <span class="keyword">auto</span> &amp;&amp;...args)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;      : StackTraceException(StackTraceException::fmt(fmt, args...)) {}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;      : StackTraceException(fmt, args...) {}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1IdNotFoundException.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1IdNotFoundException.html">IdNotFoundException</a> : <span class="keyword">public</span> StackTraceException {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1IdNotFoundException.html">IdNotFoundException</a>(<span class="keyword">const</span> std::string_view &amp;fmt, <span class="keyword">auto</span> &amp;&amp;...args)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;      : StackTraceException(StackTraceException::fmt(fmt, args...)) {}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;      : StackTraceException(fmt, args...) {}</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_EXCEPTIONS_H</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_EXCEPTIONS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1IdNotFoundException_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1IdNotFoundException.html">pf::ui::ig::IdNotFoundException</a></div><div class="ttdoc">Exception thrown when a an ID is not present.</div><div class="ttdef"><b>Definition:</b> exceptions.h:23</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DuplicateIdException_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html">pf::ui::ig::DuplicateIdException</a></div><div class="ttdoc">Exception thrown when a duplicate ID is added in the UI tree.</div><div class="ttdef"><b>Definition:</b> exceptions.h:15</div></div>

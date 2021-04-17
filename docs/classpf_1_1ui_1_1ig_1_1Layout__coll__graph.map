@@ -1,0 +1,7 @@
+<map id="pf::ui::ig::Layout" name="pf::ui::ig::Layout">
+<area shape="rect" id="node1" title="Base class for layouts." alt="" coords="104,155,231,181"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="175,80,330,107"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="185,5,320,32"/>
+</map>
