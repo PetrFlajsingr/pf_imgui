@@ -6,6 +6,7 @@
  */
 #ifndef PF_IMGUI_FWD_H
 #define PF_IMGUI_FWD_H
+#include <pf_common/concepts/StringConvertible.h>
 
 namespace pf::ui::ig {
 
@@ -27,6 +28,7 @@ class StretchLayout;
 
 class Button;
 class Checkbox;
+template<ToStringConvertible T>
 class ComboBox;
 class Dialog;
 class Group;
