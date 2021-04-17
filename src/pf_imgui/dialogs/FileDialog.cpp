@@ -38,18 +38,18 @@ void FileDialog::renderImpl() {
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      ImGuiFileDialog::Instance()->OpenModal(getName(), getLabel().c_str(), extCstr, defaultName, maxSelectCount);
+      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, defaultName, maxSelectCount);
       break;
     case Modal::No:
-      ImGuiFileDialog::Instance()->OpenDialog(getName(), getLabel().c_str(), extCstr, defaultName, maxSelectCount);
+      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, defaultName, maxSelectCount);
       break;
   }
   setExtInfos();
 
-  if (ImGuiFileDialog::Instance()->Display(getName(), ImGuiWindowFlags_NoCollapse, getSize())) {
-    if (ImGuiFileDialog::Instance()->IsOk()) {
-      const auto filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-      const auto selection = ImGuiFileDialog::Instance()->GetSelection();
+  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize())) {
+    if (fileDialogInstance.IsOk()) {
+      const auto filePathName = fileDialogInstance.GetFilePathName();
+      const auto selection = fileDialogInstance.GetSelection();
 
       if (!selection.empty()) {
         auto selectionVec = std::vector<std::string>();
@@ -62,13 +62,13 @@ void FileDialog::renderImpl() {
     } else {
       onSelectCanceled();
     }
-    ImGuiFileDialog::Instance()->Close();
+    fileDialogInstance.Close();
   }
   done = true;
 }
 
 void FileDialog::setExtInfos() {
-  for (const auto &[ext, color] : extColors) { ImGuiFileDialog::Instance()->SetExtentionInfos(ext, color); }
+  for (const auto &[ext, color] : extColors) { fileDialogInstance.SetExtentionInfos(ext, color); }
 }
 
 }// namespace pf::ui::ig

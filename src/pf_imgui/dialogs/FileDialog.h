@@ -44,8 +44,6 @@ struct PF_IMGUI_EXPORT FileExtensionSettings {
  * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::openFileDialog(...) or ImGuiInterface::openDirDialog(...).
  *
  * Dialogs are invalidated when isDone() == true.
- *
- * @warning Currently only one instance is supported. @todo: multiple instance support
  */
 class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public Resizable {
  public:
@@ -125,6 +123,8 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
 
   std::function<void(std::vector<std::string>)> onFilesSelected;
   std::function<void()> onSelectCanceled;
+
+  ImGuiFileDialog fileDialogInstance;
 
   bool done = false;
 };
