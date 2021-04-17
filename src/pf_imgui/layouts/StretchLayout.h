@@ -1,7 +1,9 @@
-//
-// Created by petr on 1/25/21.
-//
-
+/**
+ * @file StretchLayout.h
+ * @brief Layout which stretches its child in desired direction.
+ * @author Petr Flajšingr
+ * @date 25.1.21
+ */
 #ifndef PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
 #define PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
 

@@ -1,7 +1,9 @@
-//
-// Created by petr on 10/31/20.
-//
-
+/**
+ * @file elements.h
+ * @brief Convenience include for all elements.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 #ifndef PF_IMGUI_ELEMENTS_H
 #define PF_IMGUI_ELEMENTS_H
 
@@ -31,6 +33,8 @@
 #include "elements/plots.h"
 #include "layouts/layouts.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
+#include "src/pf_imgui/dialogs/MessageDialog.h"
+#include "src/pf_imgui/dialogs/FileDialog.h"
 #include "src/pf_imgui/dialogs/Window.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

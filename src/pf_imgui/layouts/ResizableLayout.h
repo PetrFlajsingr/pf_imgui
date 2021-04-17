@@ -1,6 +1,9 @@
-//
-// Created by petr on 1/24/21.
-//
+/**
+ * @file ResizableLayout.h
+ * @brief Base class for layouts which provide resizing.
+ * @author Petr Flajšingr
+ * @date 24.1.21
+ */
 
 #ifndef PF_IMGUI_LAYOUTS_RESIZABLELAYOUT_H
 #define PF_IMGUI_LAYOUTS_RESIZABLELAYOUT_H

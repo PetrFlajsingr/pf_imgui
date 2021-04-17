@@ -1,6 +1,9 @@
-//
-// Created by petr on 1/24/21.
-//
+/**
+ * @file GridLayout.h
+ * @brief Layout dividing its area into a grid.
+ * @author Petr Flajšingr
+ * @date 24.1.21
+ */
 
 #ifndef PF_IMGUI_LAYOUTS_GRIDLAYOUT_H
 #define PF_IMGUI_LAYOUTS_GRIDLAYOUT_H

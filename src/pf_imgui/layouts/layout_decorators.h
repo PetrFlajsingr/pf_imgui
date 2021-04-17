@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 25.01.2021.
-//
+/**
+ * @file layout_decorators.h
+ * @brief Decorators used in layouts to provide functionality which is not provided by an Element.
+ * @author Petr Flajšingr
+ * @date 25.1.21
+ */
 
 #ifndef PF_IMGUI_LAYOUTS_LAYOUT_DECORATORS_H
 #define PF_IMGUI_LAYOUTS_LAYOUT_DECORATORS_H

@@ -1,6 +1,9 @@
-//
-// Created by petr on 1/24/21.
-//
+/**
+ * @file StackedLayout.h
+ * @brief Layout providing switchable stacks.
+ * @author Petr Flajšingr
+ * @date 24.1.21
+ */
 
 #ifndef PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
 #define PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H

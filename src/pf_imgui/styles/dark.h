@@ -1,6 +1,9 @@
-//
-// Created by petr on 1/5/21.
-//
+/**
+ * @file dark.h
+ * @brief Dark style for imgui.
+ * @author Petr Flajšingr
+ * @date 5.1.21
+ */
 
 #ifndef PF_IMGUI_STYLES_DARK_H
 #define PF_IMGUI_STYLES_DARK_H

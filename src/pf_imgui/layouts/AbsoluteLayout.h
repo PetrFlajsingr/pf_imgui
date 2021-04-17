@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 25.01.2021.
-//
+/**
+ * @file AbsoluteLayout.h
+ * @brief Layout allowing positioning children with absolute position.
+ * @author Petr Flajšingr
+ * @date 25.1.21
+ */
 
 #ifndef PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 #define PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H

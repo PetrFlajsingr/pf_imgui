@@ -1,7 +1,9 @@
-//
-// Created by petr on 1/24/21.
-//
-
+/**
+ * @file BoxLayout.h
+ * @brief Layout boxing children in desired direction.
+ * @author Petr Flajšingr
+ * @date 24.1.21
+ */
 #ifndef PF_IMGUI_LAYOUTS_BOXLAYOUT_H
 #define PF_IMGUI_LAYOUTS_BOXLAYOUT_H
 
