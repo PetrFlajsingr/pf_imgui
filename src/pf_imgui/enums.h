@@ -34,13 +34,13 @@ enum class PlotType { Lines, Histogram };
  * Enum for button type, which changes the shape of a button.
  */
 enum class ButtonType {
-  Normal,     /**< Typical button with label in the clickable area */
-  Invisible,  /**< Invisible button */
-  Small,      /**< Smaller version of a button */
-  ArrowUp,    /**< Button without a label with an up aiming arrow */
-  ArrowLeft,  /**< Button without a label with a left aiming arrow */
-  ArrowRight, /**< Button without a label with a right aiming arrow */
-  ArrowDown   /**< Button without a label with a down aiming arrow */
+  Normal,     /*!< Typical button with label in the clickable area */
+  Invisible,  /*!< Invisible button */
+  Small,      /*!< Smaller version of a button */
+  ArrowUp,    /*!< Button without a label with an up aiming arrow */
+  ArrowLeft,  /*!< Button without a label with a left aiming arrow */
+  ArrowRight, /*!< Button without a label with a right aiming arrow */
+  ArrowDown   /*!< Button without a label with a down aiming arrow */
 };
 /**
  * Enum for marking persistence of Savable elements.
