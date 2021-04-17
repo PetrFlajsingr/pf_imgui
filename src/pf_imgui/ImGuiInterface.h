@@ -154,14 +154,14 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param onSelect callback for when user selects files
    * @param onCancel callback for when user cancels selection
    * @param size size of the dialog
-   * @param startPath path in which the dialog opens @todo: change to std::filesystem::path
+   * @param startPath path in which the dialog opens
    * @param startName default name for selected file/dir
    * @param modality modality of the dialog
    * @param maxSelectedFiles maximum amount of selected files
    */
   void openFileDialog(const std::string &caption, const std::vector<FileExtensionSettings> &extSettings,
                       std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-                      ImVec2 size = {200, 150}, std::string startPath = ".", std::string startName = "",
+                      ImVec2 size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
                       Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, extSettings, onSelect, onCancel,
@@ -174,13 +174,13 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param onSelect callback for when user selects files
    * @param onCancel callback for when user cancels selection
    * @param size size of the dialog
-   * @param startPath path in which the dialog opens @todo: change to std::filesystem::path
+   * @param startPath path in which the dialog opens
    * @param startName default name for selected file/dir
    * @param modality modality of the dialog
    * @param maxSelectedDirs maximum amount of selected directories
    */
   void openDirDialog(const std::string &caption, std::invocable<std::vector<std::string>> auto onSelect,
-                     std::invocable auto onCancel, ImVec2 size = {200, 150}, std::string startPath = ".",
+                     std::invocable auto onCancel, ImVec2 size = {200, 150}, std::filesystem::path startPath = ".",
                      std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,

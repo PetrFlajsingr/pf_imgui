@@ -8,6 +8,8 @@
 
 namespace pf::ui::ig {
 
+PieChart::PieChart(const std::string &name, const std::string &label, const ImVec2 &size)
+    : Element(name), Labellable(label), Resizable(size) {}
 void PieChart::renderImpl() {
   if (dataChanged) {
     dataChanged = false;

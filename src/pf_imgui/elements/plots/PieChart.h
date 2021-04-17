@@ -29,11 +29,16 @@ struct PieChartSample {
  * @brief Typical pie chart.
  *
  * Each sample shows as a percentage in the sum of all sample values.
- *
- * @todo: fix constructor
  */
 class PieChart : public Element, public Labellable, public Resizable {
  public:
+  /**
+   * Construct PieChart.
+   * @param name ID of the chart
+   * @param label text rendered above the chart
+   * @param size size on display
+   */
+  PieChart(const std::string &name, const std::string &label, const ImVec2 &size);
   /**
    * Add a new sample to the graph.
    * @param sample sample to be added

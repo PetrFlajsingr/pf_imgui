@@ -8,6 +8,7 @@
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 #include <string>
+#include <pf_imgui/interface/Observable_impl.h>
 
 namespace pf::ui::ig {
 
@@ -15,8 +16,6 @@ namespace pf::ui::ig {
  * @brief Interface for resizable elements
  *
  * Provides a functionality to manage size for the subclass.
- *
- * @todo: observable part
  */
 class PF_IMGUI_EXPORT Resizable {
  public:
@@ -40,10 +39,17 @@ class PF_IMGUI_EXPORT Resizable {
    */
   virtual void setSize(const ImVec2 &s);
 
+  Subscription addSizeListener(std::invocable<ImVec2> auto listener) {
+    return observableImpl.template addListener(listener);
+  }
+
   virtual ~Resizable() = default;
 
  private:
   ImVec2 size;
+  Observable_impl<ImVec2> observableImpl;
+
+  void notifySizeChanged(ImVec2 newSize);
 };
 
 }// namespace pf::ui::ig

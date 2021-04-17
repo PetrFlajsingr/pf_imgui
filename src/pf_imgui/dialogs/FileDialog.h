@@ -14,6 +14,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <filesystem>
 
 namespace pf::ui::ig {
 
@@ -56,7 +57,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
    * @param onSelect callback for when user selects files
    * @param onCancel callback for when user cancels selection
    * @param size size of the dialog
-   * @param startPath path in which the dialog opens @todo: change to std::filesystem::path
+   * @param startPath path in which the dialog opens
    * @param startName default name for selected file/dir
    * @param modality modality of the dialog
    * @param maxSelectedFiles maximum amount of selected files
@@ -64,7 +65,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
   FileDialog(const std::string &elementName, const std::string &label,
              const std::vector<FileExtensionSettings> &extSettings,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-             ImVec2 size = {200, 150}, std::string startPath = ".", std::string startName = "",
+             ImVec2 size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
       : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
@@ -79,14 +80,14 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
    * @param onSelect callback for when user selects files
    * @param onCancel callback for when user cancels selection
    * @param size size of the dialog
-   * @param startPath path in which the dialog opens @todo: change to std::filesystem::path
+   * @param startPath path in which the dialog opens
    * @param startName default name for selected file/dir
    * @param modality modality of the dialog
    * @param maxSelectedDirs maximum amount of selected directories
    */
   FileDialog(const std::string &elementName, const std::string &label,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-             ImVec2 size = {200, 150}, std::string startPath = ".", std::string startName = "",
+             ImVec2 size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
       : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
@@ -116,7 +117,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
   std::string filters;
   std::vector<std::pair<std::string, ImVec4>> extColors;
 
-  std::string openPath;
+  std::filesystem::path openPath;
   std::string defaultName;
   Modal modal;
   FileType fileType;

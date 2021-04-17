@@ -55,11 +55,11 @@ class DefaultPlotDataSetting {
    * Set new plot data.
    * @param newData new data
    * @tparam type of data to plot
-   * @todo change these to ranges
    * @todo plot data settings (line width etc.)
    */
   template<Plottable T>
-  void setData(const std::vector<XYPlotData<T>> &newData) {
+  void setData(const std::ranges::range auto &newData) requires(
+      std::same_as<std::ranges::range_value_t<decltype(newData)>, XYPlotData<T>>) {
     xData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); })
         | ranges::to_vector;
     const auto extremes = ranges::minmax(xData);
@@ -68,8 +68,7 @@ class DefaultPlotDataSetting {
         | ranges::to_vector;
   }
 
- protected:
-  std::vector<double> xData;
+ protected : std::vector<double> xData;
   std::vector<double> yData;
   double width;
 };

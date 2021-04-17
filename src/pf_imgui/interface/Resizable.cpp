@@ -17,6 +17,12 @@ Resizable &Resizable::operator=(Resizable &&other) noexcept {
 
 const ImVec2 &Resizable::getSize() const { return size; }
 
-void Resizable::setSize(const ImVec2 &s) { size = s; }
+void Resizable::setSize(const ImVec2 &s) {
+  if (size.x != s.x && size.y != s.y) {
+    size = s;
+    notifySizeChanged(size);
+  }
+}
+void Resizable::notifySizeChanged(ImVec2 newSize) { observableImpl.notify(newSize); }
 
 }// namespace pf::ui::ig
