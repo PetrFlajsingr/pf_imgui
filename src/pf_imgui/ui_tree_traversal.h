@@ -1,7 +1,9 @@
-//
-// Created by petr on 11/2/20.
-//
-
+/**
+ * @file ui_tree_traversal.h
+ * @brief Traversal of ui tree.
+ * @author Petr Flajšingr
+ * @date 2.11.20
+ */
 #ifndef PF_IMGUI_UI_TREE_TRAVERSAL_H
 #define PF_IMGUI_UI_TREE_TRAVERSAL_H
 
@@ -13,6 +15,11 @@
 namespace pf::ui::ig {
 
 namespace details {
+/**
+ * Quite an inefficient implementation do the massive use of dynamic_casts.
+ * @param element root
+ * @param callback
+ */
 inline void traverseImGuiTree_impl(Renderable &element, std::invocable<Renderable &> auto callback) {
   callback(element);
   if (auto ptrContainer = dynamic_cast<ElementContainer *>(&element); ptrContainer != nullptr) {

@@ -1,6 +1,9 @@
-//
-// Created by petr on 4/12/21.
-//
+/**
+ * @file meta.h
+ * @brief Meta helpers for pf_imgui.
+ * @author Petr Flajšingr
+ * @date 12.4.21
+ */
 
 #ifndef PF_IMGUI_META_H
 #define PF_IMGUI_META_H

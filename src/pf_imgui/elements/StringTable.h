@@ -28,7 +28,7 @@ using StringTableRow = std::array<std::string, ColumnCount>;
 template<std::size_t ColumnCount>
 struct TableSettings {
   std::optional<StringTableRow<ColumnCount>> header = std::nullopt; /**< Optional header for table. If the header is not provided now header row is present in the table. */
-  TableBorder border = TableBorder::None; /**< Type of border rendering. */
+  Flags<TableBorder> border; /**< Type of border rendering. */
   bool resizableCols = false; /**< Make columns resizable. */
   bool reorderable = false; /**< Make columns reorderable. */
   bool sortable = false; /**< Make rows reorderable via clicking on header. */

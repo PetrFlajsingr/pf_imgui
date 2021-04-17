@@ -1,7 +1,9 @@
-//
-// Created by petr on 11/4/20.
-//
-
+/**
+ * @file fwd.h
+ * @brief Forward declarations.
+ * @author Petr Flajšingr
+ * @date 4.11.20
+ */
 #ifndef PF_IMGUI_FWD_H
 #define PF_IMGUI_FWD_H
 

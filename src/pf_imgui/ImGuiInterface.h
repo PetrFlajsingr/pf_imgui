@@ -1,7 +1,12 @@
 //
 // Created by petr on 10/27/20.
 //
-
+/**
+ * @file ImGuiInterface.h
+ * @brief Main class of the library.
+ * @author Petr Flajšingr
+ * @date 27.10.20
+ */
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 

@@ -1,6 +1,9 @@
-//
-// Created by petr on 4/13/21.
-//
+/**
+ * @file exceptions.h
+ * @brief Exceptions for pf_imgui.
+ * @author Petr Flajšingr
+ * @date 13.4.21
+ */
 
 #ifndef PF_IMGUI_EXCEPTIONS_H
 #define PF_IMGUI_EXCEPTIONS_H

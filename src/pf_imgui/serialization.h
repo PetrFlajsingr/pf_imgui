@@ -1,7 +1,9 @@
-//
-// Created by petr on 11/2/20.
-//
-
+/**
+ * @file serialization.h
+ * @brief Serialization of UI tree to toml.
+ * @author Petr Flajšingr
+ * @date 2.11.20
+ */
 #ifndef PF_IMGUI_SERIALIZATION_H
 #define PF_IMGUI_SERIALIZATION_H
 

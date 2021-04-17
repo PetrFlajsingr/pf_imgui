@@ -1,6 +1,9 @@
-//
-// Created by petr on 11/4/20.
-//
+/**
+ * @file enums.h
+ * @brief Library's enums.
+ * @author Petr Flajšingr
+ * @date 4.11.20
+ */
 
 #ifndef PF_IMGUI_ENUMS_H
 #define PF_IMGUI_ENUMS_H
@@ -82,7 +85,7 @@ enum class TableBorder : uint16_t {
   Full =            0x0F
 };
 // clang-format on
-ENABLE_BIT_MASK_ENUM(TableBorder)
+
 /**
  * Create ImGui flags for table API.
  * @param tableBorder type of rendered border
@@ -92,13 +95,13 @@ ENABLE_BIT_MASK_ENUM(TableBorder)
  * @param hideable
  * @return ImGUi flags
  */
-inline ImGuiTableFlags createFlags(TableBorder tableBorder, bool resizable, bool reorderable, bool sortable,
+inline ImGuiTableFlags createFlags(Flags<TableBorder> tableBorder, bool resizable, bool reorderable, bool sortable,
                                    bool hideable) {
   auto result = ImGuiTableFlags{};
-  if (is(tableBorder, TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
-  if (is(tableBorder, TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
-  if (is(tableBorder, TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
-  if (is(tableBorder, TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }
+  if (tableBorder.is(TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
+  if (tableBorder.is(TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
+  if (tableBorder.is(TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
+  if (tableBorder.is(TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }
   if (resizable) { result |= ImGuiTableFlags_Resizable; }
   if (reorderable) { result |= ImGuiTableFlags_Reorderable; }
   if (sortable) { result |= ImGuiTableFlags_Sortable; }
@@ -109,10 +112,10 @@ inline ImGuiTableFlags createFlags(TableBorder tableBorder, bool resizable, bool
  * Enum for stretch type of StretchLayout.
  */
 enum class Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };
-ENABLE_BIT_MASK_ENUM(Stretch)
 
 /**
  * Enum for anchor type of AnchorLayout.
+ * @todo: AnchorLayout
  */
 // clang-format off
 enum class Anchor : uint8_t {
@@ -129,7 +132,7 @@ enum class Anchor : uint8_t {
   TopBottomLeftRight =  0xFF
 };
 // clang-format oon
-ENABLE_BIT_MASK_ENUM(Anchor)
+
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ENUMS_H
