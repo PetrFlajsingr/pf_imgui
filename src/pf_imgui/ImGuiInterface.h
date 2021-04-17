@@ -193,7 +193,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   /**
    * Render all file dialogs which are currently open.
    */
-  void renderFileDialogs();
+  void renderDialogs();
 
   /**
    * @attention Override this function to provide rendering capabilities.

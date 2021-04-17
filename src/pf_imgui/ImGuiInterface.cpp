@@ -69,11 +69,16 @@ void ImGuiInterface::setStateFromConfig() {
     });
   });
 }
-void ImGuiInterface::renderFileDialogs() {
+void ImGuiInterface::renderDialogs() {
   std::ranges::for_each(fileDialogs, [](auto &dialog) { dialog.render(); });
   if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
       iter != fileDialogs.end()) {
     fileDialogs.erase(iter);
+  }
+  std::ranges::for_each(dialogs, [](auto &dialog) { dialog->render(); });
+  if (const auto iter = std::ranges::find_if(dialogs, [](auto &dialog) { return dialog->isClosed(); });
+      iter != dialogs.end()) {
+    dialogs.erase(iter);
   }
 }
 bool ImGuiInterface::isWindowHovered() const { return io.WantCaptureMouse; }
