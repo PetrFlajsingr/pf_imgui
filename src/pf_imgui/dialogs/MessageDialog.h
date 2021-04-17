@@ -1,6 +1,9 @@
-//
-// Created by petr on 4/17/21.
-//
+/**
+ * @file MessageDialog.h
+ * @brief Simplified Dialog for informing a user and getting his response.
+ * @author Petr Flajšingr
+ * @date 17.4.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
 #define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
@@ -23,6 +26,7 @@ enum class MessageButtons { Ok = 1, Yes = 2, No = 4, All = 7 };
  * @brief Simplified Dialog for showing messages.
  * Button labels are the same as enums being used. User must close the dialog on his own in onDialogDone callbacks.
  * @tparam ButtonTypes values allowed for buttons
+ * @todo: InputDialog
  */
 template<Enum ButtonTypes = MessageButtons>
 class PF_IMGUI_EXPORT MessageDialog : public Dialog {

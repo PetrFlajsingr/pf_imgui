@@ -1,6 +1,9 @@
-//
-// Created by petr on 11/7/20.
-//
+/**
+ * @file FileDialog.h
+ * @brief Dialog for selecting files on disk.
+ * @author Petr Flajšingr
+ * @date 7.11.20
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_FILEDIALOG_H
 #define PF_IMGUI_ELEMENTS_FILEDIALOG_H
