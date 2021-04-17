@@ -63,8 +63,8 @@ void FileDialog::renderImpl() {
       onSelectCanceled();
     }
     fileDialogInstance.Close();
+    done = true;
   }
-  done = true;
 }
 
 void FileDialog::setExtInfos() {
