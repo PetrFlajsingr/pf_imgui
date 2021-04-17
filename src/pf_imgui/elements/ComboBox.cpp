@@ -12,7 +12,7 @@
 #include <utility>
 
 namespace pf::ui::ig {
-
+/*
 ComboBox::ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
                    std::vector<std::string> items, Persistent persistent)
     : ItemElement(elementName), Labellable(label), ValueObservable<std::string_view>(""), Savable(persistent),
@@ -90,5 +90,5 @@ void ComboBox::setSelectedItem(const std::string &item) {
   }
 }
 void ComboBox::cancelSelection() { selectedItemIndex = std::nullopt; }
-
+*/
 }// namespace pf::ui::ig
