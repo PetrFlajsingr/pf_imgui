@@ -13,6 +13,7 @@
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/dialogs/MessageDialog.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <string>
@@ -52,6 +53,17 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @return reference to the created dialog
    */
   Dialog &createDialog(const std::string &elementName, const std::string &caption, Modal modal = Modal::Yes);
+
+  template<typename ButtonTypes = MessageButtons>
+  MessageDialog<ButtonTypes> &createMsgDlg(const std::string &elementName, const std::string &title,
+                                           const std::string &message, Flags<ButtonTypes> buttons,
+                                           std::invocable<ButtonTypes> auto &&onDialogDone, Modal modal = Modal::Yes) {
+    auto dialog = std::make_unique<MessageDialog<ButtonTypes>>(
+        *this, elementName, title, message, buttons, std::forward<decltype(onDialogDone)>(onDialogDone), modal);
+    const auto ptr = dialog.get();
+    dialogs.emplace_back(std::move(dialog));
+    return *ptr;
+  }
 
   /**
    * Create a Window.

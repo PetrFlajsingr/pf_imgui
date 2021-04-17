@@ -72,6 +72,11 @@ CPMAddPackage(
         GITHUB_REPOSITORY marzer/tomlplusplus
         GIT_TAG v2.2.0
 )
+CPMAddPackage(
+        NAME magic_enum
+        GITHUB_REPOSITORY Neargye/magic_enum
+        GIT_TAG v0.6.6
+)
 
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
@@ -159,6 +164,7 @@ set(INCLUDES
         src/pf_imgui/elements/ColorChooser.h
         src/pf_imgui/elements/ComboBox.h
         src/pf_imgui/dialogs/Dialog.h
+        src/pf_imgui/dialogs/MessageDialog.h
         src/pf_imgui/elements/DragInput.h
         src/pf_imgui/elements/Group.h
         src/pf_imgui/elements/Image.h
@@ -260,7 +266,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileFlameGraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
-target_link_libraries(${PROJECT_NAME} PUBLIC pf_common::pf_common range-v3)
+target_link_libraries(${PROJECT_NAME} PUBLIC pf_common::pf_common range-v3 magic_enum)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
@@ -275,7 +281,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY INTERFACE_${PROJECT_NAME}_MAJOR_VER
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPATIBLE_INTERFACE_STRING ${PROJECT_NAME}_MAJOR_VERSION)
 
 
-install(TARGETS ${PROJECT_NAME} pf_common EXPORT ${PROJECT_NAME}Targets
+install(TARGETS ${PROJECT_NAME} pf_common magic_enum EXPORT ${PROJECT_NAME}Targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

@@ -18,8 +18,6 @@ namespace pf::ui::ig {
  * @brief Simple dialog which can be modal. Contains Elements.
  *
  * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::createDialog(...). Closing of the dialog should be managed by user.
- *
- * @todo: convenience message dialog
  */
 class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, public Labellable {
  public:
@@ -38,6 +36,12 @@ class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, publi
    * @warning The dialog should not be accessed after calling close().
    */
   void close();
+
+  /**
+   * Check if the dialog is closed.
+   * @return true if closed false otherwise
+   */
+  [[nodiscard]] bool isClosed() const;
 
  protected:
   void renderImpl() override;
