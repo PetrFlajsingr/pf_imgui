@@ -118,7 +118,7 @@ namespace pf::ui::ig {
  * @todo: optimize for strings
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT GComboBox : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
+class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
  public:
   /**
    * Construct Combobox.
@@ -128,7 +128,7 @@ class PF_IMGUI_EXPORT GComboBox : public ItemElement, public Labellable, public 
    * @param newItems items to use for combobox
    * @param persistent enable state saving to disk
    */
-  GComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
+   ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
             const std::ranges::range auto &newItems,
             Persistent persistent =
                 Persistent::No) requires(std::same_as<std::ranges::range_value_t<decltype(newItems)>, T>
