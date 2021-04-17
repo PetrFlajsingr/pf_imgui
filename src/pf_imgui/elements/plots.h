@@ -1,6 +1,10 @@
-//
-// Created by petr on 11/8/20.
-//
+/**
+ * @file plots.h
+ * @brief Convenience include for all layout types.
+ * @author Petr Flajšingr
+ * @date 8.11.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_H
 #define PF_IMGUI_ELEMENTS_PLOTS_H

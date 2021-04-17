@@ -1,6 +1,10 @@
-//
-// Created by petr on 4/11/21.
-//
+/**
+ * @file StringTable.h
+ * @brief StringTable element.
+ * @author Petr Flajšingr
+ * @date 11.4.21
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_STRINGTABLE_H
 #define PF_IMGUI_ELEMENTS_STRINGTABLE_H

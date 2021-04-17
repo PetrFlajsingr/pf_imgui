@@ -1,6 +1,10 @@
-//
-// Created by petr on 12/8/20.
-//
+/**
+ * @file SliderAngle.h
+ * @brief SliderAngle element.
+ * @author Petr Flajšingr
+ * @date 8.12.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 #define PF_IMGUI_ELEMENTS_SLIDERANGLE_H

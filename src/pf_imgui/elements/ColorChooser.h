@@ -1,6 +1,10 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file ColorChooser.h
+ * @brief ColorChooser element.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_COLORCHOOSER_H
 #define PF_IMGUI_ELEMENTS_COLORCHOOSER_H

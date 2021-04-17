@@ -1,6 +1,10 @@
-//
-// Created by petr on 4/12/21.
-//
+/**
+ * @file Table.h
+ * @brief Table element.
+ * @author Petr Flajšingr
+ * @date 12.4.21
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_TABLE_H
 #define PF_IMGUI_ELEMENTS_TABLE_H

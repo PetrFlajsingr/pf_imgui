@@ -1,6 +1,9 @@
-//
-// Created by petr on 11/8/20.
-//
+/**
+ * @file Shaded.h
+ * @brief Shaded graph data.
+ * @author Petr Flajšingr
+ * @date 8.11.20
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_TYPES_SHADED_H
 #define PF_IMGUI_ELEMENTS_PLOTS_TYPES_SHADED_H

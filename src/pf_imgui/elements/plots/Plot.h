@@ -1,6 +1,10 @@
-//
-// Created by petr on 11/8/20.
-//
+/**
+ * @file Plot.h
+ * @brief Plot element.
+ * @author Petr Flajšingr
+ * @date 8.11.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_PLOT_H
 #define PF_IMGUI_ELEMENTS_PLOTS_PLOT_H

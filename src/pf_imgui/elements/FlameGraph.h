@@ -1,6 +1,10 @@
-//
-// Created by petr on 11/7/20.
-//
+/**
+ * @file FlameGraph.h
+ * @brief FlameGraph element.
+ * @author Petr Flajšingr
+ * @date 7.11.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 #define PF_IMGUI_ELEMENTS_FLAMEGRAPH_H

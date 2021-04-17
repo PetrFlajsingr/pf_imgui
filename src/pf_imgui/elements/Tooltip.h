@@ -1,6 +1,10 @@
-//
-// Created by petr on 1/23/21.
-//
+/**
+ * @file Tooltip.h
+ * @brief Tooltip element.
+ * @author Petr Flajšingr
+ * @date 23.1.21
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_TOOLTIP_H
 #define PF_IMGUI_ELEMENTS_TOOLTIP_H

@@ -1,6 +1,10 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file Slider.h
+ * @brief Slider element.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_SLIDER_H
 #define PF_IMGUI_ELEMENTS_SLIDER_H

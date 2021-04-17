@@ -1,6 +1,10 @@
-//
-// Created by petr on 11/8/20.
-//
+/**
+ * @file PlotDataBase.h
+ * @brief Types for data storage in plots and base class used in most storage types.
+ * @author Petr Flajšingr
+ * @date 8.11.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 #define PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H

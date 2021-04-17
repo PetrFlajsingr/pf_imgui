@@ -1,6 +1,10 @@
-//
-// Created by petr on 11/2/20.
-//
+/**
+ * @file Memo.h
+ * @brief Memo element.
+ * @author Petr Flajšingr
+ * @date 2.11.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_MEMO_H
 #define PF_IMGUI_ELEMENTS_MEMO_H

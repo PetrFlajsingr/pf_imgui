@@ -1,6 +1,10 @@
-//
-// Created by petr on 11/1/20.
-//
+/**
+ * @file MenuBars.h
+ * @brief All types necessary for building menu bars.
+ * @author Petr Flajšingr
+ * @date 1.11.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_MENUBARS_H
 #define PF_IMGUI_ELEMENTS_MENUBARS_H

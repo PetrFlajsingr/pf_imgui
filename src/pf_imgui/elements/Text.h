@@ -1,6 +1,10 @@
-//
-// Created by petr on 10/31/20.
-//
+/**
+ * @file Text.h
+ * @brief Text element.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
+
 
 #ifndef PF_IMGUI_ELEMENTS_TEXT_H
 #define PF_IMGUI_ELEMENTS_TEXT_H
