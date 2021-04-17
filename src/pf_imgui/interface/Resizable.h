@@ -39,6 +39,11 @@ class PF_IMGUI_EXPORT Resizable {
    */
   virtual void setSize(const ImVec2 &s);
 
+  /**
+   * Add a listener for size changes.
+   * @param listener listener called on size change
+   * @return Subscription which allows of erasure of the listener @see Subscription
+   */
   Subscription addSizeListener(std::invocable<ImVec2> auto listener) {
     return observableImpl.template addListener(listener);
   }
