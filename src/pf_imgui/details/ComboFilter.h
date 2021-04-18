@@ -58,26 +58,25 @@ struct ComboFilterState {
 };
 
 static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unused]] int START, const char **ENTRIES, int ENTRY_COUNT) {
-  using namespace ImGui;
   bool clicked = 0;
 
   // Grab the position for the popup
-  ImVec2 pos = GetItemRectMin();
-  pos.y += GetItemRectSize().y;
-  ImVec2 size = ImVec2(GetItemRectSize().x - 60, GetFrameHeightWithSpacing() * 4);
+  ImVec2 pos = ImGui::GetItemRectMin();
+  pos.y += ImGui::GetItemRectSize().y;
+  ImVec2 size = ImVec2(ImGui::GetItemRectSize().x - 60, ImGui::GetFrameHeightWithSpacing() * 4);
 
-  PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
+  ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
 
   ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
       | ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoSavedSettings | 0;//ImGuiWindowFlags_ShowBorders;
 
-  SetNextWindowFocus();
+  ImGui::SetNextWindowFocus();
 
-  SetNextWindowPos(pos);
-  SetNextWindowSize(size);
-  Begin("##combo_filter", nullptr, flags);
+  ImGui::SetNextWindowPos(pos);
+  ImGui::SetNextWindowSize(size);
+  ImGui::Begin("##combo_filter", nullptr, flags);
 
-  PushAllowKeyboardFocus(false);
+  ImGui::PushAllowKeyboardFocus(false);
 
   for (int i = 0; i < ENTRY_COUNT; i++) {
     // Track if we're drawing the active index so we
@@ -87,38 +86,38 @@ static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unuse
     if (isIndexActive) {
       // Draw the currently 'active' item differently
       // ( used appropriate colors for your own style )
-      PushStyleColor(ImGuiCol_Border, ImVec4(1, 1, 0, 1));
+      ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(1, 1, 0, 1));
     }
 
-    PushID(i);
-    if (Selectable(ENTRIES[i], isIndexActive)) {
+    ImGui::PushID(i);
+    if (ImGui::Selectable(ENTRIES[i], isIndexActive)) {
       // And item was clicked, notify the input
       // callback so that it can modify the input buffer
       state.activeIdx = i;
       clicked = 1;
     }
-    if (IsItemFocused() && IsKeyPressed(GetIO().KeyMap[ImGuiKey_Enter])) {
+    if (ImGui::IsItemFocused() && ImGui::IsKeyPressed(ImGui::GetIO().KeyMap[ImGuiKey_Enter])) {
       // Allow ENTER key to select current highlighted item (w/ keyboard navigation)
       state.activeIdx = i;
       clicked = 1;
     }
-    PopID();
+    ImGui::PopID();
 
     if (isIndexActive) {
       if (state.selectionChanged) {
         // Make sure we bring the currently 'active' item into view.
-        SetScrollHereX();
-        SetScrollHereY();
+        ImGui::SetScrollHereX();
+        ImGui::SetScrollHereY();
         state.selectionChanged = false;
       }
 
-      PopStyleColor(1);
+      ImGui::PopStyleColor(1);
     }
   }
 
-  PopAllowKeyboardFocus();
-  End();
-  PopStyleVar(1);
+  ImGui::PopAllowKeyboardFocus();
+  ImGui::End();
+  ImGui::PopStyleVar(1);
 
   return clicked;
 }
@@ -163,9 +162,8 @@ static inline bool ComboFilter(const char *id, char *buffer, int bufferlen, cons
       return best;
     }
   };
-  using namespace ImGui;
   bool done =
-      InputText(id, buffer, bufferlen, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue);
+      ImGui::InputText(id, buffer, bufferlen, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue);
   bool hot = s.activeIdx >= 0 && strcmp(buffer, hints[s.activeIdx]);
   if (hot) {
     int new_idx = fuzzy::search(buffer, num_hints, hints);
