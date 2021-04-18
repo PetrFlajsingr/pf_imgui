@@ -25,7 +25,6 @@ option(ENABLE_STACKTRACE "enable stacktrace in exceptions" OFF)
 if (ENABLE_STACKTRACE)
     add_compile_definitions(STACKTRACE_ENABLE)
 endif ()
-add_compile_definitions(IMGUI_DEFINE_MATH_OPERATORS)
 
 set(CMAKE_CXX_STANDARD 20)
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
