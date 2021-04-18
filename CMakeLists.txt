@@ -101,7 +101,6 @@ set(SOURCES
         src/pf_imgui/elements/Group.cpp
         src/pf_imgui/elements/Image.cpp
         src/pf_imgui/elements/InputText.cpp
-        src/pf_imgui/elements/ListBox.cpp
         src/pf_imgui/elements/Memo.cpp
         src/pf_imgui/elements/MenuBars.cpp
         src/pf_imgui/elements/plots/SimplePlot.cpp

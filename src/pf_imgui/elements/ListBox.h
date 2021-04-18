@@ -5,11 +5,11 @@
  * @date 1.11.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_LISTBOX_H
 #define PF_IMGUI_ELEMENTS_LISTBOX_H
 
 #include <algorithm>
+#include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -18,14 +18,45 @@
 #include <vector>
 
 namespace pf::ui::ig {
+
+namespace details {
+/**
+ * @brief Storage for list box items.
+ * @tparam T type to be stored
+ */
+template<ToStringConvertible T>
+struct ListBoxItemStorage {
+  ListBoxItemStorage(T first) : first(first), second(toString(first)) {}
+  T first;
+  std::string second;
+};
+/**
+ * @brief Specialisation for std::string.
+ * This uses a union so there's no need to change code for this special case, but we don't waste 2 strings neither.
+ */
+template<>
+struct ListBoxItemStorage<std::string> {
+  ListBoxItemStorage(const std::string &first) : first(first) {}
+  ListBoxItemStorage(const ListBoxItemStorage &other) : first(other.first) {}
+  ListBoxItemStorage &operator=(const ListBoxItemStorage &other) {
+    first = other.first;
+    return *this;
+  }
+  ~ListBoxItemStorage() {}
+  union {
+    std::string first;
+    std::string second;
+  };
+};
+}// namespace details
+
 /**
  * @brief Container for strings shown as list box and selectable by user.
  *
  * User selection can be observed via listeners.
- *
- * @todo: generic?
  */
-class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public ValueObservable<std::string_view> {
+template<ToStringConvertible T>
+class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public ValueObservable<T> {
  public:
   /**
    * Construct ListBox.
@@ -35,28 +66,35 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * @param selectedIdx starting selected id
    * @param heightInItems items to show before scroll is enabled - -1 shows all
    */
-  ListBox(const std::string &elementName, const std::string &label, std::vector<std::string> items_ = {},
-          int selectedIdx = 0, int heightInItems = -1);
+  ListBox(const std::string &elementName, const std::string &label,
+          const std::ranges::range auto &newItems = std::vector<T>{}, int selectedIdx = 0,
+          int heightInItems = -1) requires(std::same_as<std::ranges::range_value_t<decltype(newItems)>, T>
+                                               &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(), currentItemIdx(selectedIdx),
+        height(heightInItems) {
+    items.reserve(std::ranges::size(newItems));
+    std::ranges::copy(newItems, std::back_inserter(items));
+  }
 
   /**
    * Add item to the end of the list.
    * @param item item to be added
    */
-  void addItem(std::string item);
+  void addItem(const T &item) { items.emplace_back(item); }
   /**
    * Add items to the end of the list.
    * @param data items to be added
    */
-  void addItems(const std::ranges::range auto &data) requires(
-      std::same_as<std::ranges::range_value_t<decltype(data)>, std::string>) {
+  void
+  addItems(const std::ranges::range auto &data) requires(std::same_as<std::ranges::range_value_t<decltype(data)>, T>) {
     std::ranges::copy(data, std::back_inserter(items));
   }
   /**
    * Overwrite current items with the ones provided.
    * @param data new items
    */
-  void setItems(const std::ranges::range auto &data) requires(
-      std::same_as<std::ranges::range_value_t<decltype(data)>, std::string>) {
+  void
+  setItems(const std::ranges::range auto &data) requires(std::same_as<std::ranges::range_value_t<decltype(data)>, T>) {
     items.clear();
     currentItemIdx = 0;
     std::ranges::copy(data, std::back_inserter(items));
@@ -66,19 +104,42 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * Get and item currently selected by the user.
    * @param data
    */
-  [[nodiscard]] std::string_view getSelectedItem() const;
+  [[nodiscard]] const T &getSelectedItem() const { return items[currentItemIdx].first; }
 
   /**
    * Set selected item by name. If no such item is found nothing happens.
    * @param itemToSelect item to select
    */
-  void selectItem(std::string_view itemToSelect);
+  void setSelectedItem(const T &itemToSelect) {
+    const auto itemAsString = toString(itemToSelect);
+    setSelectedItem(itemAsString);
+  }
+
+  /**
+   * Set selected item by name. If no such item is found nothing happens.
+   * @param itemToSelect string representation of item to select
+   */
+  void setSelectedItem(const std::string &itemAsString) {
+    if (const auto iter =
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+        iter != items.end()) {
+      const auto index = std::distance(items.begin(), iter);
+      currentItemIdx = index;
+    }
+  }
 
  protected:
-  void renderImpl() override;
+  void renderImpl() override {
+    const auto cStrItems =
+        items | ranges::views::transform([](const auto &str) { return str.second.c_str(); }) | ranges::to_vector;
+    if (ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {
+      ValueObservable<T>::setValueInner(items[currentItemIdx]);
+      ValueObservable<T>::notifyValueChanged();
+    }
+  }
 
  private:
-  std::vector<std::string> items;
+  std::vector<details::ListBoxItemStorage<T>> items;
   int currentItemIdx = 0;
   int height = -1;
 };

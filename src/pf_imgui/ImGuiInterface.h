@@ -37,6 +37,7 @@ namespace pf::ui::ig {
  * For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.
  *
  * @todo: change id type
+ * @todo: add converted input element
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:
