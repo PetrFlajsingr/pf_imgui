@@ -34,6 +34,7 @@ class Dialog;
 class Group;
 class Image;
 class InputText;
+template<ToStringConvertible T>
 class ListBox;
 class Memo;
 class MenuContainer;
