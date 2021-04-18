@@ -5,7 +5,6 @@
  * @date 23.1.20
  */
 
-
 #ifndef PF_IMGUI_INTERFACE_HOVERABLE_H
 #define PF_IMGUI_INTERFACE_HOVERABLE_H
 

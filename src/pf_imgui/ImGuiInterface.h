@@ -71,9 +71,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param modal dialog modality
    */
   template<typename ButtonTypes = MessageButtons>
-  void createMsgDlg(const std::string &title, const std::string &message,
-                                           Flags<ButtonTypes> buttons, std::invocable<ButtonTypes> auto &&onDialogDone,
-                                           Modal modal = Modal::Yes) {
+  void createMsgDlg(const std::string &title, const std::string &message, Flags<ButtonTypes> buttons,
+                    std::invocable<ButtonTypes> auto &&onDialogDone, Modal modal = Modal::Yes) {
     using namespace std::string_literals;
     auto dialog = std::make_unique<MessageDialog<ButtonTypes>>(
         *this, "MsgDialog"s + std::to_string(getNext(idGen)), title, message, buttons,

@@ -5,7 +5,6 @@
  * @date 23.1.21
  */
 
-
 #ifndef PF_IMGUI_INTERFACE_RENDERABLE_H
 #define PF_IMGUI_INTERFACE_RENDERABLE_H
 

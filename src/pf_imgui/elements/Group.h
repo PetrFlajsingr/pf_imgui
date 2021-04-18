@@ -5,7 +5,6 @@
  * @date 31.10.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_GROUP_H
 #define PF_IMGUI_ELEMENTS_GROUP_H
 

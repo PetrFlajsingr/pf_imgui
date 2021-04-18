@@ -5,7 +5,6 @@
  * @date 25.1.21
  */
 
-
 #ifndef PF_IMGUI_LAYOUTS_LAYOUT_H
 #define PF_IMGUI_LAYOUTS_LAYOUT_H
 

@@ -29,9 +29,7 @@ void StretchLayout::setStretch(Stretch newStretch) {
   }
 }
 Element &StretchLayout::getChild() {
-  if (child == nullptr) {
-    throw StackTraceException("Child not present");
-  }
+  if (child == nullptr) { throw StackTraceException("Child not present"); }
   return *dynamic_cast<Element *>(child.get());
 }
 void StretchLayout::renderImpl() {
@@ -46,8 +44,6 @@ void StretchLayout::renderImpl() {
   ImGui::EndChild();
 }
 std::vector<Renderable *> StretchLayout::getRenderables() { return {dynamic_cast<Renderable *>(child.get())}; }
-bool StretchLayout::hasChild() const {
-  return child != nullptr;
-}
+bool StretchLayout::hasChild() const { return child != nullptr; }
 
 }// namespace pf::ui::ig

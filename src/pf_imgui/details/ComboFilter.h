@@ -57,7 +57,8 @@ struct ComboFilterState {
   bool selectionChanged;// Flag to help focus the correct item when selecting active item
 };
 
-static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unused]] int START, const char **ENTRIES, int ENTRY_COUNT) {
+static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unused]] int START, const char **ENTRIES,
+                                          int ENTRY_COUNT) {
   bool clicked = 0;
 
   // Grab the position for the popup

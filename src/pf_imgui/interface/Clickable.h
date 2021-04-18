@@ -5,7 +5,6 @@
  * @date 14.11.20
  */
 
-
 #ifndef PF_IMGUI_INTERFACE_CLICKABLE_H
 #define PF_IMGUI_INTERFACE_CLICKABLE_H
 

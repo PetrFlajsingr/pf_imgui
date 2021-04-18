@@ -10,8 +10,8 @@
 
 #include <imgui.h>
 #include <pf_imgui/_export.h>
-#include <string>
 #include <pf_imgui/interface/Observable_impl.h>
+#include <string>
 
 namespace pf::ui::ig {
 

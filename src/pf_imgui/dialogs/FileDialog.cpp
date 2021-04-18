@@ -37,12 +37,8 @@ void FileDialog::renderImpl() {
   if (done) { return; }
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
-    case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, defaultName, maxSelectCount);
-      break;
-    case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, defaultName, maxSelectCount);
-      break;
+    case Modal::Yes: fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, defaultName, maxSelectCount); break;
+    case Modal::No: fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, defaultName, maxSelectCount); break;
   }
   setExtInfos();
 

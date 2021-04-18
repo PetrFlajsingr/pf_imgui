@@ -17,16 +17,14 @@ namespace pf::ui::ig {
  */
 class DuplicateIdException : public StackTraceException {
  public:
-  explicit DuplicateIdException(const std::string_view &fmt, auto &&...args)
-      : StackTraceException(fmt, args...) {}
+  explicit DuplicateIdException(const std::string_view &fmt, auto &&...args) : StackTraceException(fmt, args...) {}
 };
 /**
  * @brief Exception thrown when a an ID is not present.
  */
 class IdNotFoundException : public StackTraceException {
  public:
-  explicit IdNotFoundException(const std::string_view &fmt, auto &&...args)
-      : StackTraceException(fmt, args...) {}
+  explicit IdNotFoundException(const std::string_view &fmt, auto &&...args) : StackTraceException(fmt, args...) {}
 };
 }// namespace pf::ui::ig
 

@@ -5,7 +5,6 @@
  * @date 1.11.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_PLOT_H
 #define PF_IMGUI_ELEMENTS_PLOT_H
 

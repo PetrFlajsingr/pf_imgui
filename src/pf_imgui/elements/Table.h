@@ -5,7 +5,6 @@
  * @date 12.4.21
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_TABLE_H
 #define PF_IMGUI_ELEMENTS_TABLE_H
 
@@ -64,7 +63,7 @@ class PF_IMGUI_EXPORT TableWithFactory : public ItemElement, public Labellable, 
  public:
   constexpr static auto HasFactory = RowFactory<Factory, Cells...>;
   static_assert(HasFactory || std::same_as<Factory, CommonPlaceholder>);
-  using Id = std::size_t; /**< row id */
+  using Id = std::size_t;         /**< row id */
   using Row = TableRow<Cells...>; /**< row storage type */
   constexpr static auto ColumnCount = sizeof...(Cells);
 

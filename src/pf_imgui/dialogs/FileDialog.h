@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_FILEDIALOG_H
 #define PF_IMGUI_ELEMENTS_FILEDIALOG_H
 
+#include <filesystem>
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
@@ -17,7 +18,6 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include <filesystem>
 
 namespace pf::ui::ig {
 

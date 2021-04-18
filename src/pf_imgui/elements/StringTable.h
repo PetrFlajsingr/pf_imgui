@@ -5,7 +5,6 @@
  * @date 11.4.21
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_STRINGTABLE_H
 #define PF_IMGUI_ELEMENTS_STRINGTABLE_H
 
@@ -31,12 +30,13 @@ using StringTableRow = std::array<std::string, ColumnCount>;
  */
 template<std::size_t ColumnCount>
 struct TableSettings {
-  std::optional<StringTableRow<ColumnCount>> header = std::nullopt; /**< Optional header for table. If the header is not provided now header row is present in the table. */
-  Flags<TableBorder> border; /**< Type of border rendering. */
+  std::optional<StringTableRow<ColumnCount>> header = std::
+      nullopt; /**< Optional header for table. If the header is not provided now header row is present in the table. */
+  Flags<TableBorder> border;  /**< Type of border rendering. */
   bool resizableCols = false; /**< Make columns resizable. */
-  bool reorderable = false; /**< Make columns reorderable. */
-  bool sortable = false; /**< Make rows reorderable via clicking on header. */
-  bool hideableCols = false; /**< Allow hiding of columns. */
+  bool reorderable = false;   /**< Make columns reorderable. */
+  bool sortable = false;      /**< Make rows reorderable via clicking on header. */
+  bool hideableCols = false;  /**< Allow hiding of columns. */
   ImVec2 size = ImVec2{0, 0}; /**< Size of the table. */
 };
 
@@ -62,7 +62,8 @@ class PF_IMGUI_EXPORT StringTable : public ItemElement, public Resizable {
    * size(vals) must be equal to ColumnCount, otherwise undefined behavior.
    * @param vals values of cells in the row
    */
-  void addRow(const std::ranges::range auto &vals) requires(ToStringConvertible<std::ranges::range_value_t<decltype(vals)>>) {
+  void addRow(const std::ranges::range auto &vals) requires(
+      ToStringConvertible<std::ranges::range_value_t<decltype(vals)>>) {
     assert(std::ranges::size(vals) == ColumnCount);
     std::ranges::copy(vals, std::back_inserter(rows));
   }

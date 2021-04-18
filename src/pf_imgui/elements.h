@@ -24,6 +24,7 @@
 #include "elements/RadioButton.h"
 #include "elements/RadioGroup.h"
 #include "elements/Slider.h"
+#include "elements/Slider2D.h"
 #include "elements/SliderAngle.h"
 #include "elements/StringTable.h"
 #include "elements/TabBar.h"
@@ -31,11 +32,10 @@
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/plots.h"
-#include "elements/Slider2D.h"
 #include "layouts/layouts.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
-#include "src/pf_imgui/dialogs/MessageDialog.h"
 #include "src/pf_imgui/dialogs/FileDialog.h"
+#include "src/pf_imgui/dialogs/MessageDialog.h"
 #include "src/pf_imgui/dialogs/Window.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

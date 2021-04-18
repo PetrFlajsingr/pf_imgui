@@ -5,7 +5,6 @@
  * @date 8.12.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 #define PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 

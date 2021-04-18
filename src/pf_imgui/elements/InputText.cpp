@@ -41,8 +41,6 @@ void InputText::unserialize_impl(const toml::table &src) {
 
 toml::table InputText::serialize_impl() { return toml::table{{{"text", getText()}}}; }
 
-void InputText::setValue(const std::string_view &newValue) {
-  setText(std::string(newValue));
-}
+void InputText::setValue(const std::string_view &newValue) { setText(std::string(newValue)); }
 
 }// namespace pf::ui::ig

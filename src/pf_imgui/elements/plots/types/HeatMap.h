@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
    */
   HeatMap(const std::string &elementName, const std::string &caption, double minVal = 0.0, double maxVal = 0.0);
 
- /**
+  /**
   * Set new plot data.
   * @param newData new data
   * @tparam type of data to plot

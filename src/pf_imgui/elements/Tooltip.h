@@ -5,7 +5,6 @@
  * @date 23.1.21
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_TOOLTIP_H
 #define PF_IMGUI_ELEMENTS_TOOLTIP_H
 

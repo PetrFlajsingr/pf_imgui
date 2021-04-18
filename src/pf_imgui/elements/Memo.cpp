@@ -92,8 +92,6 @@ void Memo::removeRecordsAboveLimit() {
   }
 }
 std::size_t Memo::size() const { return records.size(); }
-void Memo::cancelRecordLimit() {
-  recordLimit = std::nullopt;
-}
+void Memo::cancelRecordLimit() { recordLimit = std::nullopt; }
 
 }// namespace pf::ui::ig

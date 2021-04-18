@@ -5,7 +5,6 @@
  * @date 2.11.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_MEMO_H
 #define PF_IMGUI_ELEMENTS_MEMO_H
 

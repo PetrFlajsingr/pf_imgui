@@ -5,7 +5,6 @@
  * @date 8.11.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
 #define PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
 
@@ -26,7 +25,7 @@ namespace pf::ui::ig {
 template<plot_type::Plottable T>
 struct PieChartSample {
   std::string label; /**< Text to be rendered next to the data */
-  T value; /**< Sample value */
+  T value;           /**< Sample value */
 };
 
 /**

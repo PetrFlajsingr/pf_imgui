@@ -5,7 +5,6 @@
  * @date 31.10.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_PROGRESSBAR_H
 #define PF_IMGUI_ELEMENTS_PROGRESSBAR_H
 
@@ -49,9 +48,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
               const ImVec2 &size = {-1, 0})
       : Element(elementName),
         ItemElement(elementName), ValueObservable<T>(elementName, value.has_value() ? *value : min), Resizable(size),
-        stepValue(stepValue), min(min), max(max) {
-
-  }
+        stepValue(stepValue), min(min), max(max) {}
 
   /**
    * Set current percentage where min = 0% and max = 100%.

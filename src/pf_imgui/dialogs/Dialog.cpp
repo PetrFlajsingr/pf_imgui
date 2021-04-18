@@ -28,8 +28,6 @@ void Dialog::renderImpl() {
   }
 }
 void Dialog::close() { closed = true; }
-bool Dialog::isClosed() const {
-  return closed;
-}
+bool Dialog::isClosed() const { return closed; }
 
 }// namespace pf::ui::ig
