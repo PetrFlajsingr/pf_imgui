@@ -1,10 +1,10 @@
-<map id="pf::ui::ig::ListBox" name="pf::ui::ig::ListBox">
-<area shape="rect" id="node1" title="Container for strings shown as list box and selectable by user." alt="" coords="366,244,497,271"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="165,162,332,189"/>
+<map id="pf::ui::ig::ListBox&lt; T &gt;" name="pf::ui::ig::ListBox&lt; T &gt;">
+<area shape="rect" id="node1" title="Container for strings shown as list box and selectable by user." alt="" coords="347,229,515,256"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="165,155,332,181"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="175,80,322,107"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="346,80,495,107"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="357,162,506,189"/>
-<area shape="rect" id="node8" title=" " alt="" coords="531,155,697,196"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="357,155,506,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="530,155,701,181"/>
 </map>

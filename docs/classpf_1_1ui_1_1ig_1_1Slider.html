@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.3.2</span>
+   &#160;<span id="projectnumber">0.3.3</span>
    </div>
   </td>
  </tr>
@@ -123,6 +123,14 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>MinMaxType</b> = det
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abf05d4482b39a691a378b57ce69e5c65"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#abf05d4482b39a691a378b57ce69e5c65">Slider</a> (const std::string &amp;elementName, const std::string &amp;label, MinMaxType min, MinMaxType max, T value=T{}, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No, std::string format=details::defaultSliderFormat&lt; MinMaxType &gt;())</td></tr>
 <tr class="separator:abf05d4482b39a691a378b57ce69e5c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed9be5c27520501ed0b46fb5887a792"><td class="memItemLeft" align="right" valign="top">MinMaxType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#aeed9be5c27520501ed0b46fb5887a792">getMin</a> () const</td></tr>
+<tr class="separator:aeed9be5c27520501ed0b46fb5887a792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75574b74f575f718942aa3a3409fe48a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#a75574b74f575f718942aa3a3409fe48a">setMin</a> (MinMaxType min)</td></tr>
+<tr class="separator:a75574b74f575f718942aa3a3409fe48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbae4bb410a936974069bd94747b0ddd"><td class="memItemLeft" align="right" valign="top">MinMaxType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#abbae4bb410a936974069bd94747b0ddd">getMax</a> () const</td></tr>
+<tr class="separator:abbae4bb410a936974069bd94747b0ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8f6004eeacf554214f7885478a3bc18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#ac8f6004eeacf554214f7885478a3bc18">setMax</a> (MinMaxType max)</td></tr>
+<tr class="separator:ac8f6004eeacf554214f7885478a3bc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
 <tr class="memitem:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a1edd037f3e2d9f55121f68ffd6d3cba4">ItemElement</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -331,6 +339,62 @@ template&lt;OneOf&lt; IMGUI_SLIDER_TYPE_LIST &gt; T&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="abbae4bb410a936974069bd94747b0ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbae4bb410a936974069bd94747b0ddd">&#9670;&nbsp;</a></span>getMax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;OneOf&lt; IMGUI_SLIDER_TYPE_LIST &gt; T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MinMaxType <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider</a>&lt; T &gt;::getMax </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get max slider value. </p><dl class="section return"><dt>Returns</dt><dd>max slider value </dd></dl>
+
+</div>
+</div>
+<a id="aeed9be5c27520501ed0b46fb5887a792"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed9be5c27520501ed0b46fb5887a792">&#9670;&nbsp;</a></span>getMin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;OneOf&lt; IMGUI_SLIDER_TYPE_LIST &gt; T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MinMaxType <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider</a>&lt; T &gt;::getMin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get min slider value. </p><dl class="section return"><dt>Returns</dt><dd>min slider value </dd></dl>
+
+</div>
+</div>
 <a id="a7a29e3df5a0ffe1ae292ca2d818a618b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a29e3df5a0ffe1ae292ca2d818a618b">&#9670;&nbsp;</a></span>renderImpl()</h2>
 
@@ -388,6 +452,74 @@ template&lt;OneOf&lt; IMGUI_SLIDER_TYPE_LIST &gt; T&gt; </div>
 <p>Method for subclasses' implementation of serialization. </p><dl class="section return"><dt>Returns</dt><dd>serialized toml data </dd></dl>
 
 <p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#a051194256e4809d425dac7fddabe819a">pf::ui::ig::Savable</a>.</p>
+
+</div>
+</div>
+<a id="ac8f6004eeacf554214f7885478a3bc18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8f6004eeacf554214f7885478a3bc18">&#9670;&nbsp;</a></span>setMax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;OneOf&lt; IMGUI_SLIDER_TYPE_LIST &gt; T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider</a>&lt; T &gt;::setMax </td>
+          <td>(</td>
+          <td class="paramtype">MinMaxType&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set max slider value. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max</td><td>new min slider value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a75574b74f575f718942aa3a3409fe48a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75574b74f575f718942aa3a3409fe48a">&#9670;&nbsp;</a></span>setMin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;OneOf&lt; IMGUI_SLIDER_TYPE_LIST &gt; T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider</a>&lt; T &gt;::setMin </td>
+          <td>(</td>
+          <td class="paramtype">MinMaxType&#160;</td>
+          <td class="paramname"><em>min</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set min slider value. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>new min slider value </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

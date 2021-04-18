@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pf_imgui: pf::ui::ig::ListBox Class Reference</title>
+<title>pf_imgui: pf::ui::ig::ListBox&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.3.2</span>
+   &#160;<span id="projectnumber">0.3.3</span>
    </div>
   </td>
  </tr>
@@ -71,7 +71,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classpf_1_1ui_1_1ig_1_1ListBox-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">pf::ui::ig::ListBox Class Reference</div>  </div>
+<div class="title">pf::ui::ig::ListBox&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -80,50 +80,52 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="ListBox_8h_source.html">ListBox.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for pf::ui::ig::ListBox:</div>
+Inheritance diagram for pf::ui::ig::ListBox&lt; T &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classpf_1_1ui_1_1ig_1_1ListBox__inherit__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1ListBox_inherit__map" alt="Inheritance graph"/></div>
-<map name="pf_1_1ui_1_1ig_1_1ListBox_inherit__map" id="pf_1_1ui_1_1ig_1_1ListBox_inherit__map">
-<area shape="rect" title="Container for strings shown as list box and selectable by user." alt="" coords="366,244,497,271"/>
-<area shape="rect" href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="165,162,332,189"/>
+<div class="center"><img src="classpf_1_1ui_1_1ig_1_1ListBox__inherit__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1ListBox_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="pf_1_1ui_1_1ig_1_1ListBox_3_01T_01_4_inherit__map" id="pf_1_1ui_1_1ig_1_1ListBox_3_01T_01_4_inherit__map">
+<area shape="rect" title="Container for strings shown as list box and selectable by user." alt="" coords="347,229,515,256"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="165,155,332,181"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="175,80,322,107"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="346,80,495,107"/>
-<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="357,162,506,189"/>
-<area shape="rect" title=" " alt="" coords="531,155,697,196"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="357,155,506,181"/>
+<area shape="rect" title=" " alt="" coords="530,155,701,181"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for pf::ui::ig::ListBox:</div>
+Collaboration diagram for pf::ui::ig::ListBox&lt; T &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classpf_1_1ui_1_1ig_1_1ListBox__coll__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1ListBox_coll__map" alt="Collaboration graph"/></div>
-<map name="pf_1_1ui_1_1ig_1_1ListBox_coll__map" id="pf_1_1ui_1_1ig_1_1ListBox_coll__map">
-<area shape="rect" title="Container for strings shown as list box and selectable by user." alt="" coords="366,244,497,271"/>
-<area shape="rect" href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="165,162,332,189"/>
+<div class="center"><img src="classpf_1_1ui_1_1ig_1_1ListBox__coll__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1ListBox_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="pf_1_1ui_1_1ig_1_1ListBox_3_01T_01_4_coll__map" id="pf_1_1ui_1_1ig_1_1ListBox_3_01T_01_4_coll__map">
+<area shape="rect" title="Container for strings shown as list box and selectable by user." alt="" coords="347,229,515,256"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="165,155,332,181"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="175,80,322,107"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="346,80,495,107"/>
-<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="357,162,506,189"/>
-<area shape="rect" title=" " alt="" coords="531,155,697,196"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="357,155,506,181"/>
+<area shape="rect" title=" " alt="" coords="530,155,701,181"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a37439a74e9b3a39362926e203b1e8464"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a37439a74e9b3a39362926e203b1e8464">ListBox</a> (const std::string &amp;elementName, const std::string &amp;label, std::vector&lt; std::string &gt; items_={}, int selectedIdx=0, int heightInItems=-1)</td></tr>
-<tr class="separator:a37439a74e9b3a39362926e203b1e8464"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a388ec905a031d2e0c86492d37529d129"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a388ec905a031d2e0c86492d37529d129">addItem</a> (std::string item)</td></tr>
-<tr class="separator:a388ec905a031d2e0c86492d37529d129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a066540749b526ae7e75dd938c3964a2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a066540749b526ae7e75dd938c3964a2f">addItems</a> (const std::ranges::range auto &amp;data) requires(std</td></tr>
-<tr class="separator:a066540749b526ae7e75dd938c3964a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc011c9bc4ecc0ac556be0f360727ab8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#acc011c9bc4ecc0ac556be0f360727ab8">setItems</a> (const std::ranges::range auto &amp;data) requires(std</td></tr>
-<tr class="separator:acc011c9bc4ecc0ac556be0f360727ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d04328cce3e1b320532aad1a0d573cb"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6d04328cce3e1b320532aad1a0d573cb">getSelectedItem</a> () const</td></tr>
-<tr class="separator:a6d04328cce3e1b320532aad1a0d573cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a328aca9b82a71a602fffe53284f70c6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a328aca9b82a71a602fffe53284f70c6b">setSelectedItem</a> (std::string_view itemToSelect)</td></tr>
-<tr class="separator:a328aca9b82a71a602fffe53284f70c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d8ddec2e1ba216247adf03557cff5a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a8d8ddec2e1ba216247adf03557cff5a1">ListBox</a> (const std::string &amp;elementName, const std::string &amp;label, std::ranges::range auto &amp;&amp;newItems=std::vector&lt; T &gt;{}, int selectedIdx=0, int heightInItems=-1) requires(std</td></tr>
+<tr class="separator:a8d8ddec2e1ba216247adf03557cff5a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6dae764fdb1965ebdc5713fee371a8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ab6dae764fdb1965ebdc5713fee371a8c">addItem</a> (const T &amp;item)</td></tr>
+<tr class="separator:ab6dae764fdb1965ebdc5713fee371a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c14d2352a6d72f590662ddd4ca95956"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a7c14d2352a6d72f590662ddd4ca95956">addItems</a> (std::ranges::range auto &amp;&amp;data) requires(std</td></tr>
+<tr class="separator:a7c14d2352a6d72f590662ddd4ca95956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ddf1325c1ccf880239668405ab9998"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ae1ddf1325c1ccf880239668405ab9998">setItems</a> (std::ranges::range auto &amp;&amp;data) requires(std</td></tr>
+<tr class="separator:ae1ddf1325c1ccf880239668405ab9998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec8ce34524d034adc903c14bb92e9224"><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#aec8ce34524d034adc903c14bb92e9224">getSelectedItem</a> () const</td></tr>
+<tr class="separator:aec8ce34524d034adc903c14bb92e9224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680d84539639ef5b0a6eb6733d0ef27c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">setSelectedItem</a> (const T &amp;itemToSelect)</td></tr>
+<tr class="separator:a680d84539639ef5b0a6eb6733d0ef27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c72c5d5f59814b090f9016e0d4d5be1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">setSelectedItem</a> (const std::string &amp;itemAsString)</td></tr>
+<tr class="separator:a6c72c5d5f59814b090f9016e0d4d5be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
 <tr class="memitem:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a1edd037f3e2d9f55121f68ffd6d3cba4">ItemElement</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,8 +215,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLabelVisible</b> ()
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:afa3b6876e3e1528f09a6eb87ed3b8235"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#afa3b6876e3e1528f09a6eb87ed3b8235">renderImpl</a> () override</td></tr>
-<tr class="separator:afa3b6876e3e1528f09a6eb87ed3b8235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af448c1ffee9bf7435f09dbf7a79f58cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#af448c1ffee9bf7435f09dbf7a79f58cb">renderImpl</a> () override</td></tr>
+<tr class="separator:af448c1ffee9bf7435f09dbf7a79f58cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Focusable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></td></tr>
 <tr class="memitem:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a5e95eaf5fa6175bfa7fe2e86648e1f92">updateFocused</a> (bool focus)</td></tr>
 <tr class="separator:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,18 +225,25 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a6465fd6427653055a8ef5c52bdb4109c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Container for strings shown as list box and selectable by user. </p>
-<p>User selection can be observed via listeners.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>: generic? </dd></dl>
+<div class="textblock"><h3>template&lt;ToStringConvertible T&gt;<br />
+class pf::ui::ig::ListBox&lt; T &gt;</h3>
+
+<p>Container for strings shown as list box and selectable by user. </p>
+<p>User selection can be observed via listeners. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a37439a74e9b3a39362926e203b1e8464"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37439a74e9b3a39362926e203b1e8464">&#9670;&nbsp;</a></span>ListBox()</h2>
+<a id="a8d8ddec2e1ba216247adf03557cff5a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d8ddec2e1ba216247adf03557cff5a1">&#9670;&nbsp;</a></span>ListBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">pf::ui::ig::ListBox::ListBox </td>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::<a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">ListBox</a> </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>elementName</em>, </td>
@@ -248,8 +257,8 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
-          <td class="paramname"><em>items_</em> = <code>{}</code>, </td>
+          <td class="paramtype">std::ranges::range auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>newItems</em> = <code>std::vector&lt;T&gt;{}</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -269,6 +278,11 @@ Protected Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html" title="Container for strings shown as list box and selectable by user.">ListBox</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -284,20 +298,30 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a388ec905a031d2e0c86492d37529d129"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a388ec905a031d2e0c86492d37529d129">&#9670;&nbsp;</a></span>addItem()</h2>
+<a id="ab6dae764fdb1965ebdc5713fee371a8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6dae764fdb1965ebdc5713fee371a8c">&#9670;&nbsp;</a></span>addItem()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void pf::ui::ig::ListBox::addItem </td>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::addItem </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>item</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Add item to the end of the list. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -308,19 +332,21 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a066540749b526ae7e75dd938c3964a2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a066540749b526ae7e75dd938c3964a2f">&#9670;&nbsp;</a></span>addItems()</h2>
+<a id="a7c14d2352a6d72f590662ddd4ca95956"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c14d2352a6d72f590662ddd4ca95956">&#9670;&nbsp;</a></span>addItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void pf::ui::ig::ListBox::addItems </td>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::addItems </td>
           <td>(</td>
-          <td class="paramtype">const std::ranges::range auto &amp;&#160;</td>
+          <td class="paramtype">std::ranges::range auto &amp;&amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
@@ -340,19 +366,29 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6d04328cce3e1b320532aad1a0d573cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d04328cce3e1b320532aad1a0d573cb">&#9670;&nbsp;</a></span>getSelectedItem()</h2>
+<a id="aec8ce34524d034adc903c14bb92e9224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec8ce34524d034adc903c14bb92e9224">&#9670;&nbsp;</a></span>getSelectedItem()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string_view pf::ui::ig::ListBox::getSelectedItem </td>
+          <td class="memname">const T&amp; <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::getSelectedItem </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Get and item currently selected by the user. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -363,17 +399,19 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afa3b6876e3e1528f09a6eb87ed3b8235"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa3b6876e3e1528f09a6eb87ed3b8235">&#9670;&nbsp;</a></span>renderImpl()</h2>
+<a id="af448c1ffee9bf7435f09dbf7a79f58cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af448c1ffee9bf7435f09dbf7a79f58cb">&#9670;&nbsp;</a></span>renderImpl()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void pf::ui::ig::ListBox::renderImpl </td>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::renderImpl </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -381,7 +419,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -391,43 +429,21 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a328aca9b82a71a602fffe53284f70c6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a328aca9b82a71a602fffe53284f70c6b">&#9670;&nbsp;</a></span>setSelectedItem()</h2>
+<a id="ae1ddf1325c1ccf880239668405ab9998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ddf1325c1ccf880239668405ab9998">&#9670;&nbsp;</a></span>setItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void pf::ui::ig::ListBox::setSelectedItem </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>itemToSelect</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Set selected item by name. If no such item is found nothing happens. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">itemToSelect</td><td>item to select </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="acc011c9bc4ecc0ac556be0f360727ab8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc011c9bc4ecc0ac556be0f360727ab8">&#9670;&nbsp;</a></span>setItems()</h2>
-
-<div class="memitem">
-<div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void pf::ui::ig::ListBox::setItems </td>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::setItems </td>
           <td>(</td>
-          <td class="paramtype">const std::ranges::range auto &amp;&#160;</td>
+          <td class="paramtype">std::ranges::range auto &amp;&amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
@@ -447,9 +463,76 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a id="a6c72c5d5f59814b090f9016e0d4d5be1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c72c5d5f59814b090f9016e0d4d5be1">&#9670;&nbsp;</a></span>setSelectedItem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::setSelectedItem </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>itemAsString</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set selected item by name. If no such item is found nothing happens. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">itemToSelect</td><td>string representation of item to select </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a680d84539639ef5b0a6eb6733d0ef27c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a680d84539639ef5b0a6eb6733d0ef27c">&#9670;&nbsp;</a></span>setSelectedItem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a>&lt; T &gt;::setSelectedItem </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>itemToSelect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set selected item by name. If no such item is found nothing happens. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">itemToSelect</td><td>item to select </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/pf_imgui/elements/<a class="el" href="ListBox_8h_source.html">ListBox.h</a></li>
-<li>src/pf_imgui/elements/ListBox.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

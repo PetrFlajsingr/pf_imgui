@@ -29,7 +29,7 @@ endif ()
 set(CMAKE_CXX_STANDARD 20)
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
-        "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits")
+        "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing")
 if (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
@@ -231,7 +231,7 @@ set(INCLUDES
         src/pf_imgui/details/ComboFilter.h
         src/pf_imgui/dialogs/InputDialog.h
         src/include/DearWidgets/dear_widgets.h
-        src/pf_imgui/elements/Slider2D.h src/pf_imgui/elements/Slider3D.h)
+        src/pf_imgui/elements/Slider2D.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

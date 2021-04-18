@@ -1,10 +1,11 @@
 <map id="pf::ui::ig::ElementContainer" name="pf::ui::ig::ElementContainer">
-<area shape="rect" id="node1" title="Interface for objects, which can contain instances of Element." alt="" coords="5,139,204,166"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Dialog.html" title="Simple dialog which can be modal. Contains Elements." alt="" coords="257,13,381,39"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited." alt="" coords="259,63,380,90"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="267,114,371,141"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Tooltip.html" title="Tooltip to display when hovering over elements." alt="" coords="257,165,382,191"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="265,215,374,242"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="252,266,387,293"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used...." alt="" coords="435,5,617,47"/>
+<area shape="rect" id="node1" title="Interface for objects, which can contain instances of Element." alt="" coords="5,161,204,188"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Dialog.html" title="Simple dialog which can be modal. Contains Elements." alt="" coords="257,35,381,61"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited." alt="" coords="259,85,380,112"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="267,136,371,163"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Tooltip.html" title="Tooltip to display when hovering over elements." alt="" coords="257,187,382,213"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="265,237,374,264"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="252,288,387,315"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1InputDialog.html" title="Simplified dialog for user input. It should be created via ImGuiInterface." alt="" coords="447,5,605,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used...." alt="" coords="435,57,617,98"/>
 </map>

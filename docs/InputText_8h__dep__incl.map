@@ -1,4 +1,7 @@
 <map id="src/pf_imgui/elements/InputText.h" name="src/pf_imgui/elements/InputText.h">
-<area shape="rect" id="node1" title="InputText element." alt="" coords="11,5,178,47"/>
-<area shape="rect" id="node2" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,95,184,121"/>
+<area shape="rect" id="node1" title="InputText element." alt="" coords="124,5,291,47"/>
+<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="36,95,189,136"/>
+<area shape="rect" id="node5" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="214,102,393,129"/>
+<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="5,184,220,211"/>
+<area shape="rect" id="node4" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="40,259,185,300"/>
 </map>

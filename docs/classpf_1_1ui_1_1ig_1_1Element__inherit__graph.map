@@ -1,51 +1,51 @@
 <map id="pf::ui::ig::Element" name="pf::ui::ig::Element">
-<area shape="rect" id="node1" title="Interface for all ImGui elements." alt="" coords="209,735,345,761"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1AppMenuBar.html" title="Menu bar belonging to the entire application window." alt="" coords="407,351,572,377"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1FlameGraph.html" title="Graph for visualising stack traces, performance stuff..." alt="" coords="408,401,571,428"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="406,452,573,479"/>
-<area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="426,503,553,529"/>
-<area shape="rect" id="node30" href="$classpf_1_1ui_1_1ig_1_1Memo.html" title="Multiline text overview with basic controls." alt="" coords="428,553,551,580"/>
-<area shape="rect" id="node31" href="$classpf_1_1ui_1_1ig_1_1MenuItem.html" title="An item in SubMenu, which can be clicked. It is basically a popup menu item." alt="" coords="415,604,563,631"/>
-<area shape="rect" id="node32" href="$classpf_1_1ui_1_1ig_1_1PieChart.html" title="Typical pie chart." alt="" coords="421,655,558,681"/>
-<area shape="rect" id="node33" href="$classpf_1_1ui_1_1ig_1_1Plot.html" title="Advanced plot for plotting 2D data." alt="" coords="436,705,543,732"/>
-<area shape="rect" id="node34" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html" title="Base class for all types of plot data." alt="" coords="418,757,561,798"/>
-<area shape="rect" id="node43" href="$classpf_1_1ui_1_1ig_1_1RadioGroup.html" title="Group of RadioButton." alt="" coords="410,823,569,849"/>
-<area shape="rect" id="node44" href="$classpf_1_1ui_1_1ig_1_1SimplePlot.html" title="A simple plot which can visualize float values in 2 ways." alt="" coords="413,873,565,900"/>
-<area shape="rect" id="node45" href="$classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="" coords="418,924,561,951"/>
-<area shape="rect" id="node46" href="$classpf_1_1ui_1_1ig_1_1TabBar.html" title="A bar for containment and switching of tabs." alt="" coords="426,975,553,1001"/>
-<area shape="rect" id="node47" href="$classpf_1_1ui_1_1ig_1_1Tooltip.html" title="Tooltip to display when hovering over elements." alt="" coords="427,1025,552,1052"/>
-<area shape="rect" id="node48" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="435,1076,544,1103"/>
-<area shape="rect" id="node49" href="$classpf_1_1ui_1_1ig_1_1WindowMenuBar.html" title="Menu bar belonging to Window." alt="" coords="393,1127,585,1153"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,735,161,761"/>
+<area shape="rect" id="node1" title="Interface for all ImGui elements." alt="" coords="209,760,345,787"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1AppMenuBar.html" title="Menu bar belonging to the entire application window." alt="" coords="407,376,572,403"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1FlameGraph.html" title="Graph for visualising stack traces, performance stuff..." alt="" coords="408,427,571,453"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="406,477,573,504"/>
+<area shape="rect" id="node24" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="426,528,553,555"/>
+<area shape="rect" id="node31" href="$classpf_1_1ui_1_1ig_1_1Memo.html" title="Multiline text overview with basic controls." alt="" coords="428,579,551,605"/>
+<area shape="rect" id="node32" href="$classpf_1_1ui_1_1ig_1_1MenuItem.html" title="An item in SubMenu, which can be clicked. It is basically a popup menu item." alt="" coords="415,629,563,656"/>
+<area shape="rect" id="node33" href="$classpf_1_1ui_1_1ig_1_1PieChart.html" title="Typical pie chart." alt="" coords="421,680,558,707"/>
+<area shape="rect" id="node34" href="$classpf_1_1ui_1_1ig_1_1Plot.html" title="Advanced plot for plotting 2D data." alt="" coords="436,731,543,757"/>
+<area shape="rect" id="node35" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html" title="Base class for all types of plot data." alt="" coords="418,782,561,823"/>
+<area shape="rect" id="node43" href="$classpf_1_1ui_1_1ig_1_1RadioGroup.html" title="Group of RadioButton." alt="" coords="410,848,569,875"/>
+<area shape="rect" id="node44" href="$classpf_1_1ui_1_1ig_1_1SimplePlot.html" title="A simple plot which can visualize float values in 2 ways." alt="" coords="413,899,565,925"/>
+<area shape="rect" id="node45" href="$classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="" coords="418,949,561,976"/>
+<area shape="rect" id="node46" href="$classpf_1_1ui_1_1ig_1_1TabBar.html" title="A bar for containment and switching of tabs." alt="" coords="426,1000,553,1027"/>
+<area shape="rect" id="node47" href="$classpf_1_1ui_1_1ig_1_1Tooltip.html" title="Tooltip to display when hovering over elements." alt="" coords="427,1051,552,1077"/>
+<area shape="rect" id="node48" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="435,1101,544,1128"/>
+<area shape="rect" id="node49" href="$classpf_1_1ui_1_1ig_1_1WindowMenuBar.html" title="Menu bar belonging to Window." alt="" coords="393,1152,585,1179"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,760,161,787"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Button.html" title="A typical button element." alt="" coords="670,5,795,32"/>
 <area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="659,56,806,83"/>
 <area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="648,107,817,149"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with string items." alt="" coords="656,173,809,200"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with items which can be converted to string." alt="" coords="637,173,828,200"/>
 <area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="641,224,825,251"/>
 <area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited." alt="" coords="672,275,793,301"/>
 <area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. It can serve as a button." alt="" coords="671,325,794,352"/>
 <area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="656,376,809,403"/>
-<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1ListBox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="667,427,798,453"/>
+<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1ListBox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="649,427,817,453"/>
 <area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1ProgressBar.html" title="Progress bar for notifying a user of operation progress." alt="" coords="633,477,832,504"/>
 <area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1RadioButton.html" title="A button similar in function to CheckBox, but it can belong to RadioGroup." alt="" coords="651,528,814,555"/>
 <area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="654,579,811,605"/>
-<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="655,629,811,656"/>
-<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="655,681,810,722"/>
-<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="681,747,785,773"/>
-<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Text.html" title="Simple rendered text. May be colored." alt="" coords="678,797,787,824"/>
-<area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="900,696,1043,723"/>
-<area shape="rect" id="node24" href="$classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="" coords="638,848,827,875"/>
-<area shape="rect" id="node25" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="880,747,1063,773"/>
-<area shape="rect" id="node26" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="896,797,1047,824"/>
-<area shape="rect" id="node27" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="895,848,1048,875"/>
-<area shape="rect" id="node28" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="883,899,1060,925"/>
-<area shape="rect" id="node29" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="885,949,1057,976"/>
-<area shape="rect" id="node35" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html" title="Base class for plot data wich support data labeling." alt="" coords="661,1163,804,1205"/>
-<area shape="rect" id="node36" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Bar.html" title="2D bar plot, which can either be horizontal or vertical." alt="" coords="900,1001,1043,1042"/>
-<area shape="rect" id="node37" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Digital.html" title="2D plot for digital data." alt="" coords="900,1066,1043,1107"/>
-<area shape="rect" id="node38" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar.html" title="2D bar plot, which can either be horizontal or vertical. It shows error margin for each bar." alt="" coords="900,1131,1043,1173"/>
-<area shape="rect" id="node39" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1HeatMap.html" title="2D plot where data is visualised as a heat map." alt="" coords="900,1197,1043,1238"/>
-<area shape="rect" id="node40" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Line.html" title="2D plot where each sample is connected to their neighbor via shortest line." alt="" coords="900,1262,1043,1303"/>
-<area shape="rect" id="node41" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Shaded.html" title="2D plot where and area beneath the data set is colored." alt="" coords="900,1327,1043,1369"/>
-<area shape="rect" id="node42" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Stairs.html" title="2D plot where neighboring values are connected via &#39;stairs&#39;. Example: _ | | _| | | |_" alt="" coords="900,1393,1043,1434"/>
+<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="645,629,820,656"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="655,680,811,707"/>
+<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="655,731,810,773"/>
+<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="681,797,785,824"/>
+<area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1Text.html" title="Simple rendered text. May be colored." alt="" coords="678,848,787,875"/>
+<area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="900,747,1043,773"/>
+<area shape="rect" id="node25" href="$classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="" coords="638,899,827,925"/>
+<area shape="rect" id="node26" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="880,797,1063,824"/>
+<area shape="rect" id="node27" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="896,848,1047,875"/>
+<area shape="rect" id="node28" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="895,899,1048,925"/>
+<area shape="rect" id="node29" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="883,949,1060,976"/>
+<area shape="rect" id="node30" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="885,1000,1057,1027"/>
+<area shape="rect" id="node36" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html" title="Base class for plot data wich support data labeling." alt="" coords="661,1182,804,1223"/>
+<area shape="rect" id="node37" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Bar.html" title="2D bar plot, which can either be horizontal or vertical." alt="" coords="900,1051,1043,1093"/>
+<area shape="rect" id="node38" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Digital.html" title="2D plot for digital data." alt="" coords="900,1117,1043,1158"/>
+<area shape="rect" id="node39" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar.html" title="2D bar plot, which can either be horizontal or vertical. It shows error margin for each bar." alt="" coords="900,1182,1043,1223"/>
+<area shape="rect" id="node40" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1HeatMap.html" title="2D plot where data is visualised as a heat map." alt="" coords="900,1247,1043,1289"/>
+<area shape="rect" id="node41" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Line.html" title="2D plot where each sample is connected to their neighbor via shortest line." alt="" coords="900,1313,1043,1354"/>
+<area shape="rect" id="node42" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Shaded.html" title="2D plot where and area beneath the data set is colored." alt="" coords="900,1378,1043,1419"/>
 </map>

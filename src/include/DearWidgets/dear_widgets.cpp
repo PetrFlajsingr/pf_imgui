@@ -865,7 +865,7 @@ ImU64 FloatToScalar(ImGuiDataType data_type, float f_value) {
     }
     case ImGuiDataType_Float: {
       float value = f_value;
-      return *reinterpret_cast<ImU64 *>(&value);
+      return *reinterpret_cast<ImU64 *>(reinterpret_cast<void *>(&value));
     }
     case ImGuiDataType_Double: {
       double value = static_cast<double>(f_value);
@@ -919,6 +919,7 @@ ImU64 AddScalar(ImGuiDataType data_type, void *p_a, void *p_b) {
       double value = *reinterpret_cast<double *>(p_a) + *static_cast<double *>(p_b);
       result = *reinterpret_cast<ImU64 *>(&value);
     } break;
+    default: throw std::exception();
   }
 
   return result;
@@ -1015,6 +1016,7 @@ ImU64 MulScalar(ImGuiDataType data_type, void *p_a, void *p_b) {
       double value = *reinterpret_cast<double *>(p_a) * *static_cast<double *>(p_b);
       result = *reinterpret_cast<ImU64 *>(&value);
     } break;
+    default: throw std::exception();
   }
 
   return result;
@@ -1063,6 +1065,7 @@ ImU64 DivScalar(ImGuiDataType data_type, void *p_a, void *p_b) {
       double value = *reinterpret_cast<double *>(p_a) / *static_cast<double *>(p_b);
       result = *reinterpret_cast<ImU64 *>(&value);
     } break;
+    default: throw std::exception();
   }
 
   return result;
@@ -2444,8 +2447,8 @@ bool LineSlider(const char *label, ImVec2 start, ImVec2 end, ImU32 lineColor, Im
 
 //////////////////////////////////////////////////////////////////////////
 
-bool Grid2D_AoS_Float(const char *label, float *buffer, int rows, int columns, float minX, float maxX, float minY,
-                      float maxY) {
+bool Grid2D_AoS_Float(const char *label, float *buffer, int rows, int columns, [[maybe_unused]] float minX,
+                      [[maybe_unused]] float maxX, [[maybe_unused]] float minY, [[maybe_unused]] float maxY) {
   assert(minX < maxX);
   assert(minY < maxY);
 
@@ -2533,8 +2536,8 @@ bool Grid2D_AoS_Float(const char *label, float *buffer, int rows, int columns, f
   return false;
 }
 
-bool PlaneMovePoint2D(const char *label, float *buffer_aot, int float2_count, float minX, float maxX, float minY,
-                      float maxY) {
+bool PlaneMovePoint2D(const char *label, float *buffer_aot, int float2_count, [[maybe_unused]] float minX,
+                      [[maybe_unused]] float maxX, [[maybe_unused]] float minY, [[maybe_unused]] float maxY) {
   assert(minX < maxX);
   assert(minY < maxY);
 
