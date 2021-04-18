@@ -25,8 +25,6 @@ namespace pf::ui::ig {
  * @brief Interface for objects, which can contain instances of Element.
  *
  * Allows for creation of child elements directly via templated methods.
- *
- * @todo provide std::ranges::forward_range support?
  */
 class PF_IMGUI_EXPORT ElementContainer {
  public:
@@ -155,6 +153,7 @@ class PF_IMGUI_EXPORT ElementContainer {
    */
   void clear();
 
+
  private:
   /**
    * Main storage of children. Stored as an unordered_map for quick access by ID.
@@ -169,6 +168,7 @@ class PF_IMGUI_EXPORT ElementContainer {
    */
   std::vector<std::string> childrenToRemove;
 };
+
 
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_INTERFACE_CONTAINER_H

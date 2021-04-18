@@ -96,7 +96,6 @@ set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
         src/pf_imgui/elements/Button.cpp
         src/pf_imgui/elements/Checkbox.cpp
-        src/pf_imgui/elements/ComboBox.cpp
         src/pf_imgui/dialogs/Dialog.cpp
         src/pf_imgui/elements/Group.cpp
         src/pf_imgui/elements/Image.cpp
@@ -234,7 +233,7 @@ set(INCLUDES
         src/include/imgui/imstb_rectpack.h
         src/include/imgui/imstb_textedit.h
         src/include/imgui/imstb_truetype.h
-        )
+        src/pf_imgui/details/ComboFilter.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
