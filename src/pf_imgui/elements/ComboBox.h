@@ -82,7 +82,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
     items.reserve(std::ranges::size(newItems));
     std::ranges::copy(newItems, std::back_inserter(items));
     if (textInputEnabled) {
-      std::ranges::sort(items, [](const auto &lhs, const auto &rhs) { return lhs.second < rhs.second; })
+      std::ranges::sort(items, [](const auto &lhs, const auto &rhs) { return lhs.second < rhs.second; });
     }
   }
 
@@ -166,7 +166,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
     items.clear();
     std::ranges::copy(newItems, std::back_inserter(items));
     if (textInputEnabled) {
-      std::ranges::sort(items, [](const auto &lhs, const auto &rhs) { return lhs.second < rhs.second; })
+      std::ranges::sort(items, [](const auto &lhs, const auto &rhs) { return lhs.second < rhs.second; });
     }
   }
 

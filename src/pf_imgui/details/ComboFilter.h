@@ -57,14 +57,14 @@ struct ComboFilterState {
   bool selectionChanged;// Flag to help focus the correct item when selecting active item
 };
 
-static inline bool ComboFilter__DrawPopup(ComboFilterState &state, int START, const char **ENTRIES, int ENTRY_COUNT) {
+static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unused]] int START, const char **ENTRIES, int ENTRY_COUNT) {
   using namespace ImGui;
   bool clicked = 0;
 
   // Grab the position for the popup
   ImVec2 pos = GetItemRectMin();
   pos.y += GetItemRectSize().y;
-  ImVec2 size = ImVec2(GetItemRectSize().x - 60, GetItemsLineHeightWithSpacing() * 4);
+  ImVec2 size = ImVec2(GetItemRectSize().x - 60, GetFrameHeightWithSpacing() * 4);
 
   PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
 
@@ -107,7 +107,8 @@ static inline bool ComboFilter__DrawPopup(ComboFilterState &state, int START, co
     if (isIndexActive) {
       if (state.selectionChanged) {
         // Make sure we bring the currently 'active' item into view.
-        SetScrollHere();
+        SetScrollHereX();
+        SetScrollHereY();
         state.selectionChanged = false;
       }
 
