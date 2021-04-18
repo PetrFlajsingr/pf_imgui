@@ -54,6 +54,7 @@ class Slider2D : public ItemElement,
   void renderImpl() override {
     auto valueChanged = false;
     auto valAddress = ValueObservable<StorageType>::getValueAddress();
+    const auto oldValue = *valAddress;
     if constexpr (std::same_as<T, int>) {
       valueChanged = ImWidgets::Slider2DInt(getLabel().c_str(), &valAddress->x, &valAddress->y, &extremesX.x,
                                             &extremesX.y, &extremesY.x, &extremesY.y);
@@ -62,7 +63,7 @@ class Slider2D : public ItemElement,
       valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &valAddress->x, &valAddress->y, extremesX.x,
                                               extremesX.y, extremesY.x, extremesY.y);
     }
-    if (valueChanged) { ValueObservable<StorageType>::notifyValueChanged(); }
+    if (valueChanged && oldValue != *valAddress) { ValueObservable<StorageType>::notifyValueChanged(); }
   }
 
   void unserialize_impl(const toml::table &src) override {
