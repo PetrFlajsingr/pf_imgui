@@ -9,7 +9,6 @@
 #define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
 
 #include "Dialog.h"
-#include <magic_enum.hpp>
 #include <pf_common/enums.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/Text.h>
@@ -51,7 +50,7 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
     std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
       btnLayout
           .createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
-                               std::string(magic_enum::enum_name(buttonType)))
+                               toString(buttonType))
           .addClickListener([this, buttonType] {
             if (dialogDone(buttonType)) { close(); }
           });
