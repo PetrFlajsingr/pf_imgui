@@ -74,10 +74,10 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * @param persistent enable state saving to disk
    */
   ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
-           const std::ranges::range auto &newItems,
+           std::ranges::range auto &&newItems,
            Persistent persistent =
-           Persistent::No) requires(std::same_as<std::ranges::range_value_t<decltype(newItems)>, T>
-      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
         previewValue(std::move(previewValue)) {
     items.reserve(std::ranges::size(newItems));
@@ -106,7 +106,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       selectedItemIndex = index;
@@ -133,7 +133,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   void removeItem(const std::string &itemAsString) requires(!std::same_as<T, std::string>) {
     using namespace std::string_literals;
     if (const auto iter =
-          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto isAnyItemSelected = selectedItemIndex.has_value();
       const auto selectedItem = isAnyItemSelected ? items[*selectedItemIndex] : ""s;
@@ -159,8 +159,8 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * Set new items, overwriting the old ones.
    * @param newItems items to set
    */
-  void setItems(const std::ranges::range auto &newItems) requires(
-      std::same_as<std::ranges::range_value_t<decltype(newItems)>, T>) {
+  void setItems(std::ranges::range auto &&newItems) requires(
+      std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>) {
     items.clear();
     std::ranges::copy(newItems, std::back_inserter(items));
   }

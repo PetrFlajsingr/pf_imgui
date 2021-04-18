@@ -67,12 +67,11 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * @param heightInItems items to show before scroll is enabled - -1 shows all
    */
   ListBox(const std::string &elementName, const std::string &label,
-          const std::ranges::range auto &newItems = std::vector<T>{}, int selectedIdx = 0,
-          int heightInItems = -1) requires(std::same_as<std::ranges::range_value_t<decltype(newItems)>, T>
+          std::ranges::range auto &&newItems = std::vector<T>{}, int selectedIdx = 0,
+          int heightInItems = -1) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
                                                &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(), currentItemIdx(selectedIdx),
         height(heightInItems) {
-    items.reserve(std::ranges::size(newItems));
     std::ranges::copy(newItems, std::back_inserter(items));
   }
 
@@ -85,16 +84,16 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * Add items to the end of the list.
    * @param data items to be added
    */
-  void
-  addItems(const std::ranges::range auto &data) requires(std::same_as<std::ranges::range_value_t<decltype(data)>, T>) {
+  void addItems(std::ranges::range auto &&data) requires(
+      std::convertible_to<std::ranges::range_value_t<decltype(data)>, T>) {
     std::ranges::copy(data, std::back_inserter(items));
   }
   /**
    * Overwrite current items with the ones provided.
    * @param data new items
    */
-  void
-  setItems(const std::ranges::range auto &data) requires(std::same_as<std::ranges::range_value_t<decltype(data)>, T>) {
+  void setItems(std::ranges::range auto &&data) requires(
+      std::convertible_to<std::ranges::range_value_t<decltype(data)>, T>) {
     items.clear();
     currentItemIdx = 0;
     std::ranges::copy(data, std::back_inserter(items));
@@ -133,7 +132,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
     const auto cStrItems =
         items | ranges::views::transform([](const auto &str) { return str.second.c_str(); }) | ranges::to_vector;
     if (ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {
-      ValueObservable<T>::setValueInner(items[currentItemIdx]);
+      ValueObservable<T>::setValueInner(items[currentItemIdx].first);
       ValueObservable<T>::notifyValueChanged();
     }
   }
