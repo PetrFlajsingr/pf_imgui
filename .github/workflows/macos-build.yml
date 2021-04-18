@@ -1,4 +1,4 @@
-name: macos-tests
+name: macos-build
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
-    - name: run tests
+    - name: run build
       run: |
         cmake . -DCMAKE_CXX_COMPILER=g++-10 -DPF_COMMON_TESTS=ON
         make

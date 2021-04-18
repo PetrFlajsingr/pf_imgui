@@ -1,4 +1,4 @@
-name: ubuntu-tests
+name: ubuntu-build
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         export PATH=/usr/local/bin:$PATH
         cmake --version
 
-    - name: run tests
+    - name: run build
       run: |
         cmake . -DCMAKE_CXX_COMPILER=g++-10 -DPF_COMMON_TESTS=ON
         make
