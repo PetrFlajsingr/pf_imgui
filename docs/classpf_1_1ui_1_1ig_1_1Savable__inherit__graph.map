@@ -1,22 +1,23 @@
 <map id="pf::ui::ig::Savable" name="pf::ui::ig::Savable">
-<area shape="rect" id="node1" title="Interface for savable elements." alt="" coords="5,300,140,327"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="207,56,353,83"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="203,107,357,133"/>
-<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="195,158,365,199"/>
-<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with string items." alt="" coords="203,224,357,251"/>
-<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="188,275,372,301"/>
-<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="203,325,357,352"/>
-<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="209,376,351,403"/>
-<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1RadioGroup.html" title="Group of RadioButton." alt="" coords="201,427,359,453"/>
-<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="201,477,359,504"/>
-<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="202,528,358,555"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited." alt="" coords="427,56,548,83"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="424,107,551,133"/>
-<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="420,157,555,184"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="" coords="603,107,792,133"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="840,5,1023,32"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="856,56,1007,83"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="855,107,1008,133"/>
-<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="843,157,1020,184"/>
-<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="845,208,1017,235"/>
+<area shape="rect" id="node1" title="Interface for savable elements." alt="" coords="5,325,140,352"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="210,56,357,83"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="206,107,361,133"/>
+<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="199,158,368,199"/>
+<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with items which can be converted to string." alt="" coords="188,224,379,251"/>
+<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="191,275,375,301"/>
+<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="207,325,360,352"/>
+<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="212,376,355,403"/>
+<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1RadioGroup.html" title="Group of RadioButton." alt="" coords="204,427,363,453"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="205,477,362,504"/>
+<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="196,528,371,555"/>
+<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="205,579,361,605"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited." alt="" coords="433,56,555,83"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="431,107,557,133"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="427,157,561,184"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="" coords="609,107,799,133"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="847,5,1029,32"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="863,56,1013,83"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="861,107,1015,133"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="849,157,1027,184"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="852,208,1024,235"/>
 </map>

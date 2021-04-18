@@ -1,6 +1,6 @@
 // dear imgui, v1.82
 // (internal structures/api)
-
+#define IMGUI_DEFINE_MATH_OPERATORS
 // You may use this file to debug, understand or extend ImGui features but we don't provide any guarantee of forward compatibility!
 // Set:
 //   #define IMGUI_DEFINE_MATH_OPERATORS

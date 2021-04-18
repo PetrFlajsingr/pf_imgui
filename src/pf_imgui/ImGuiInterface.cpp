@@ -11,12 +11,6 @@
 #include <range/v3/view/addressof.hpp>
 #include <utility>
 
-#include <experimental/array>
-#include <pf_imgui/elements/Button.h>
-#include <pf_imgui/elements/Checkbox.h>
-#include <pf_imgui/elements/Table.h>
-#include <pf_imgui/elements/Text.h>
-
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)

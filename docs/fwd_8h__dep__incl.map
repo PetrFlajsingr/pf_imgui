@@ -1,9 +1,10 @@
 <map id="src/pf_imgui/fwd.h" name="src/pf_imgui/fwd.h">
-<area shape="rect" id="node1" title="Forward declarations." alt="" coords="254,5,395,32"/>
-<area shape="rect" id="node2" href="$Dialog_8h.html" title="Dialog built by a user." alt="" coords="248,80,401,121"/>
-<area shape="rect" id="node5" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="332,259,547,285"/>
-<area shape="rect" id="node7" href="$Memo_8h.html" title="Memo element." alt="" coords="5,169,172,211"/>
-<area shape="rect" id="node3" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="248,169,401,211"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="121,259,299,285"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="367,333,512,375"/>
+<area shape="rect" id="node1" title="Forward declarations." alt="" coords="242,5,383,32"/>
+<area shape="rect" id="node2" href="$Dialog_8h.html" title="Dialog built by a user." alt="" coords="236,80,389,121"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="341,259,556,285"/>
+<area shape="rect" id="node8" href="$Memo_8h.html" title="Memo element." alt="" coords="5,80,172,121"/>
+<area shape="rect" id="node3" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="315,169,468,211"/>
+<area shape="rect" id="node6" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="137,169,291,211"/>
+<area shape="rect" id="node7" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="10,259,189,285"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="376,333,521,375"/>
 </map>

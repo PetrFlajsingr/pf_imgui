@@ -9,7 +9,6 @@
 #define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
 
 #include "Dialog.h"
-#include <magic_enum.hpp>
 #include <pf_common/enums.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/Text.h>
@@ -20,13 +19,12 @@ namespace pf::ui::ig {
 /**
  * Default button type for MessageDialog.
  */
-enum class MessageButtons { Ok = 1, Yes = 2, No = 4, All = 7 };
+enum class MessageButtons { Ok = 1, Yes = 2, No = 4 };
 
 /**
  * @brief Simplified Dialog for showing messages.
  * Button labels are the same as enums being used. User must close the dialog on his own in onDialogDone callbacks.
  * @tparam ButtonTypes values allowed for buttons
- * @todo: InputDialog
  */
 template<Enum ButtonTypes = MessageButtons>
 class PF_IMGUI_EXPORT MessageDialog : public Dialog {
@@ -52,7 +50,7 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
     std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
       btnLayout
           .createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
-                               std::string(magic_enum::enum_name(buttonType)))
+                               toString(buttonType))
           .addClickListener([this, buttonType] {
             if (dialogDone(buttonType)) { close(); }
           });

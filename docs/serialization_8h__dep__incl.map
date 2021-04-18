@@ -1,8 +1,9 @@
 <map id="src/pf_imgui/serialization.h" name="src/pf_imgui/serialization.h">
-<area shape="rect" id="node1" title="Serialization of UI tree to toml." alt="" coords="275,5,473,32"/>
+<area shape="rect" id="node1" title="Serialization of UI tree to toml." alt="" coords="371,5,569,32"/>
 <area shape="rect" id="node2" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="5,80,172,121"/>
 <area shape="rect" id="node4" href="$DragInput_8h.html" title="DragInput element." alt="" coords="196,80,363,121"/>
 <area shape="rect" id="node5" href="$Input_8h.html" title="Input element." alt="" coords="387,80,553,121"/>
 <area shape="rect" id="node6" href="$Slider_8h.html" title="Slider element." alt="" coords="577,80,744,121"/>
-<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="285,169,463,196"/>
+<area shape="rect" id="node7" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="768,80,935,121"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="381,169,559,196"/>
 </map>

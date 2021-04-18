@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.3.2</span>
+   &#160;<span id="projectnumber">0.3.3</span>
    </div>
   </td>
  </tr>
@@ -109,10 +109,9 @@ ImGuiIO &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getIo</b> ()
 <tr class="separator:aedb353585a211cf60c16ae23c2a27e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac31011c8607eb9e86738731a37e0796a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#ac31011c8607eb9e86738731a37e0796a">createDialog</a> (const std::string &amp;elementName, const std::string &amp;caption, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modal=Modal::Yes)</td></tr>
 <tr class="separator:ac31011c8607eb9e86738731a37e0796a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b1afc0e807e43c5cb16abfb9f589e87"><td class="memTemplParams" colspan="2"><a id="a4b1afc0e807e43c5cb16abfb9f589e87"></a>
-template&lt;typename ButtonTypes  = MessageButtons&gt; </td></tr>
-<tr class="memitem:a4b1afc0e807e43c5cb16abfb9f589e87"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">MessageDialog</a>&lt; ButtonTypes &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>createMsgDlg</b> (const std::string &amp;elementName, const std::string &amp;title, const std::string &amp;message, Flags&lt; ButtonTypes &gt; buttons, std::invocable&lt; ButtonTypes &gt; auto &amp;&amp;onDialogDone, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modal=Modal::Yes)</td></tr>
-<tr class="separator:a4b1afc0e807e43c5cb16abfb9f589e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae838f79d1984bde02db11bbe83b67757"><td class="memTemplParams" colspan="2">template&lt;typename ButtonTypes  = MessageButtons&gt; </td></tr>
+<tr class="memitem:ae838f79d1984bde02db11bbe83b67757"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#ae838f79d1984bde02db11bbe83b67757">createMsgDlg</a> (const std::string &amp;title, const std::string &amp;message, Flags&lt; ButtonTypes &gt; buttons, std::invocable&lt; ButtonTypes &gt; auto &amp;&amp;onDialogDone, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modal=Modal::Yes)</td></tr>
+<tr class="separator:ae838f79d1984bde02db11bbe83b67757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54c4e2e22e1b21d237e5ad10498ccc8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a54c4e2e22e1b21d237e5ad10498ccc8e">createWindow</a> (const std::string &amp;windowName, std::string title)</td></tr>
 <tr class="separator:a54c4e2e22e1b21d237e5ad10498ccc8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a391a237fc1e8ca17ad6a580cd1859155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a391a237fc1e8ca17ad6a580cd1859155">removeWindow</a> (const std::string &amp;name)</td></tr>
@@ -143,6 +142,8 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </td></tr>
 <tr class="separator:a3edf6095e6e5b554034f0e4e7b1f2eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86c30703d2bbad98122d18938ff35a6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a86c30703d2bbad98122d18938ff35a6a">openDirDialog</a> (const std::string &amp;caption, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
 <tr class="separator:a86c30703d2bbad98122d18938ff35a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb806abb84d2db333891903059aa3ec0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#afb806abb84d2db333891903059aa3ec0">openInputDialog</a> (const std::string &amp;title, const std::string &amp;message, std::invocable&lt; std::string &gt; auto &amp;&amp;onInput, std::invocable auto &amp;&amp;onCancel, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modal=Modal::No)</td></tr>
+<tr class="separator:afb806abb84d2db333891903059aa3ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
 <tr class="memitem:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#ae2ec29074d05defd647369f43ebbeee1">Renderable</a> (std::string name)</td></tr>
 <tr class="separator:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,7 +196,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
 <p>The class has it's own menu bar, which is applied to the entire render window.</p>
 <p>It also takes care of config saving for <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements.">Savable</a> elements.</p>
 <p>For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>: change id type </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd><p class="startdd">: change id type </p>
+<p class="enddd">: add converted input element </p>
+</dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad1a3f8faab46f7519e8c1cae19063c07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad1a3f8faab46f7519e8c1cae19063c07">&#9670;&nbsp;</a></span>ImGuiInterface()</h2>
@@ -282,6 +285,78 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>reference to the created dialog </dd></dl>
+
+</div>
+</div>
+<a id="ae838f79d1984bde02db11bbe83b67757"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae838f79d1984bde02db11bbe83b67757">&#9670;&nbsp;</a></span>createMsgDlg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::ImGuiInterface::createMsgDlg </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>title</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Flags&lt; ButtonTypes &gt;&#160;</td>
+          <td class="paramname"><em>buttons</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::invocable&lt; ButtonTypes &gt; auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>onDialogDone</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a>&#160;</td>
+          <td class="paramname"><em>modal</em> = <code>Modal::Yes</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create <a class="el" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used....">MessageDialog</a> </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ButtonTypes</td><td>enum type used to represent buttons </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>title of the dialog </td></tr>
+    <tr><td class="paramname">message</td><td>message shown to a user </td></tr>
+    <tr><td class="paramname">buttons</td><td>allowed buttons </td></tr>
+    <tr><td class="paramname">onDialogDone</td><td>callback for user interaction </td></tr>
+    <tr><td class="paramname">modal</td><td>dialog modality </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -649,6 +724,70 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
 
 </div>
 </div>
+<a id="afb806abb84d2db333891903059aa3ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb806abb84d2db333891903059aa3ec0">&#9670;&nbsp;</a></span>openInputDialog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::ImGuiInterface::openInputDialog </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>title</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::invocable&lt; std::string &gt; auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>onInput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::invocable auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>onCancel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a>&#160;</td>
+          <td class="paramname"><em>modal</em> = <code>Modal::No</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create <a class="el" href="classpf_1_1ui_1_1ig_1_1InputDialog.html" title="Simplified dialog for user input. It should be created via ImGuiInterface.">InputDialog</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>title of the dialog </td></tr>
+    <tr><td class="paramname">message</td><td>message shown to a user </td></tr>
+    <tr><td class="paramname">onInput</td><td>callback on user input </td></tr>
+    <tr><td class="paramname">onCancel</td><td>callback on dialog cancel </td></tr>
+    <tr><td class="paramname">modal</td><td>dialog modality </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a391a237fc1e8ca17ad6a580cd1859155"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a391a237fc1e8ca17ad6a580cd1859155">&#9670;&nbsp;</a></span>removeWindow()</h2>
 
@@ -741,7 +880,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set state from inner config file. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>: save state of ui and reload it using this? </dd></dl>
+<p>Set state from inner config file. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>: save state of ui and reload it using this? </dd></dl>
 
 </div>
 </div>

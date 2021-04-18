@@ -11,14 +11,15 @@
 #define PF_IMGUI_IMGUIINTERFACE_H
 
 #include "fwd.h"
-#include "src/pf_imgui/dialogs/Dialog.h"
-#include "src/pf_imgui/dialogs/FileDialog.h"
-#include "src/pf_imgui/dialogs/Window.h"
 #include <imgui.h>
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/dialogs/Dialog.h>
+#include <pf_imgui/dialogs/FileDialog.h>
+#include <pf_imgui/dialogs/InputDialog.h>
 #include <pf_imgui/dialogs/MessageDialog.h>
+#include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <string>
@@ -37,6 +38,7 @@ namespace pf::ui::ig {
  * For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.
  *
  * @todo: change id type
+ * @todo: add converted input element
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:
@@ -59,15 +61,24 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   Dialog &createDialog(const std::string &elementName, const std::string &caption, Modal modal = Modal::Yes);
 
+  /**
+   * Create MessageDialog
+   * @tparam ButtonTypes enum type used to represent buttons
+   * @param title title of the dialog
+   * @param message message shown to a user
+   * @param buttons allowed buttons
+   * @param onDialogDone callback for user interaction
+   * @param modal dialog modality
+   */
   template<typename ButtonTypes = MessageButtons>
-  MessageDialog<ButtonTypes> &createMsgDlg(const std::string &elementName, const std::string &title,
-                                           const std::string &message, Flags<ButtonTypes> buttons,
-                                           std::invocable<ButtonTypes> auto &&onDialogDone, Modal modal = Modal::Yes) {
+  void createMsgDlg(const std::string &title, const std::string &message,
+                                           Flags<ButtonTypes> buttons, std::invocable<ButtonTypes> auto &&onDialogDone,
+                                           Modal modal = Modal::Yes) {
+    using namespace std::string_literals;
     auto dialog = std::make_unique<MessageDialog<ButtonTypes>>(
-        *this, elementName, title, message, buttons, std::forward<decltype(onDialogDone)>(onDialogDone), modal);
-    const auto ptr = dialog.get();
+        *this, "MsgDialog"s + std::to_string(getNext(idGen)), title, message, buttons,
+        std::forward<decltype(onDialogDone)>(onDialogDone), modal);
     dialogs.emplace_back(std::move(dialog));
-    return *ptr;
   }
 
   /**
@@ -190,6 +201,23 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,
                              startPath, startName, modality, maxSelectedFiles);
+  }
+
+  /**
+   * Create InputDialog.
+   * @param title title of the dialog
+   * @param message message shown to a user
+   * @param onInput callback on user input
+   * @param onCancel callback on dialog cancel
+   * @param modal dialog modality
+   */
+  void openInputDialog(const std::string &title, const std::string &message, std::invocable<std::string> auto &&onInput,
+                       std::invocable auto &&onCancel, Modal modal = Modal::No) {
+    using namespace std::string_literals;
+    auto dialog = std::make_unique<InputDialog>(*this, "InputDialog"s + std::to_string(getNext(idGen)), title, message,
+                                                std::forward<decltype(onInput)>(onInput),
+                                                std::forward<decltype(onCancel)>(onCancel), modal);
+    dialogs.emplace_back(std::move(dialog));
   }
 
  protected:
