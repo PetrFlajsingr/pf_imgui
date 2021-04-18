@@ -11,6 +11,7 @@
 #include <pf_imgui/dialogs/Dialog.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/InputText.h>
+#include <pf_imgui/elements/Text.h>
 #include <pf_imgui/layouts/BoxLayout.h>
 
 namespace pf::ui::ig {
@@ -36,6 +37,7 @@ class InputDialog : public Dialog {
               Modal modal = Modal::No)
       : Dialog(parent, elementName, title, modal), inputDone(std::forward<decltype(onInput)>(onInput)),
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
+    createChild<Text>(getName() + "text", message);
     auto &input = createChild<InputText>(getName() + "input", "", "", TextInputType::MultiLine);
     auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, ImVec2{0, 0});
     btnLayout.createChild<Button>(getName() + "_button_ok", "Ok").template addClickListener([this, &input] {
