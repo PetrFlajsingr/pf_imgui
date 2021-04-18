@@ -148,8 +148,7 @@ set(SOURCES
         src/include/imgui/imgui.cpp
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
-        src/include/imgui/imgui_tables.cpp
-        )
+        src/include/imgui/imgui_tables.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -233,7 +232,8 @@ set(INCLUDES
         src/include/imgui/imstb_rectpack.h
         src/include/imgui/imstb_textedit.h
         src/include/imgui/imstb_truetype.h
-        src/pf_imgui/details/ComboFilter.h)
+        src/pf_imgui/details/ComboFilter.h
+        src/pf_imgui/dialogs/InputDialog.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

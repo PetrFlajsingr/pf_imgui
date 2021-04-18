@@ -73,17 +73,14 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * @param persistent enable state saving to disk
    */
   ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
-           std::ranges::range auto &&newItems, bool enableTextInput = false,
+           std::ranges::range auto &&newItems,
            Persistent persistent =
                Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
                                             &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
-        previewValue(std::move(previewValue)), textInputEnabled(enableTextInput) {
+        previewValue(std::move(previewValue)) {
     items.reserve(std::ranges::size(newItems));
     std::ranges::copy(newItems, std::back_inserter(items));
-    if (textInputEnabled) {
-      std::ranges::sort(items, [](const auto &lhs, const auto &rhs) { return lhs.second < rhs.second; });
-    }
   }
 
   /**
@@ -165,9 +162,6 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
       std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>) {
     items.clear();
     std::ranges::copy(newItems, std::back_inserter(items));
-    if (textInputEnabled) {
-      std::ranges::sort(items, [](const auto &lhs, const auto &rhs) { return lhs.second < rhs.second; });
-    }
   }
 
   /**
@@ -199,30 +193,25 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   }
   void renderImpl() override {
     using namespace ranges;
-    if (textInputEnabled) {
-      auto cStrItems = items | views::transform([](const auto &item) { return item.second.c_str(); }) | to_vector;
-      ComboFilter(getLabel().c_str(), buffer, 256, cStrItems.data(), cStrItems.size(), comboFilterState);
-    } else {
-      if (ImGui::BeginCombo(getLabel().c_str(),
-                            selectedItemIndex.has_value() ? items[*selectedItemIndex].second.c_str()
-                                                          : previewValue.c_str())) {
-        auto cStrItems = items | views::transform([](const auto &item) { return item.second.c_str(); });
-        std::ranges::for_each(cStrItems | views::enumerate
-                                  | views::filter([this](auto idxPtr) { return filter(idxPtr.second); }),
-                              [&](auto idxPtr) {
-                                const auto [idx, ptr] = idxPtr;
-                                auto isSelected = selectedItemIndex.has_value() && *selectedItemIndex == idx;
-                                ImGui::Selectable(ptr, &isSelected);
-                                if (isSelected) {
-                                  if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
-                                    ValueObservable<T>::setValueInner(items[idx].first);
-                                    ValueObservable<T>::notifyValueChanged();
-                                  }
-                                  selectedItemIndex = idx;
+    if (ImGui::BeginCombo(getLabel().c_str(),
+                          selectedItemIndex.has_value() ? items[*selectedItemIndex].second.c_str()
+                                                        : previewValue.c_str())) {
+      auto cStrItems = items | views::transform([](const auto &item) { return item.second.c_str(); });
+      std::ranges::for_each(cStrItems | views::enumerate
+                                | views::filter([this](auto idxPtr) { return filter(idxPtr.second); }),
+                            [&](auto idxPtr) {
+                              const auto [idx, ptr] = idxPtr;
+                              auto isSelected = selectedItemIndex.has_value() && *selectedItemIndex == idx;
+                              ImGui::Selectable(ptr, &isSelected);
+                              if (isSelected) {
+                                if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
+                                  ValueObservable<T>::setValueInner(items[idx].first);
+                                  ValueObservable<T>::notifyValueChanged();
                                 }
-                              });
-        ImGui::EndCombo();
-      }
+                                selectedItemIndex = idx;
+                              }
+                            });
+      ImGui::EndCombo();
     }
   }
 
@@ -231,9 +220,6 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   std::string previewValue;
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
   std::function<bool(T)> filter = [](auto) { return true; };
-  bool textInputEnabled;
-  char buffer[256]{};
-  ComboFilterState comboFilterState{0};
 };
 
 }// namespace pf::ui::ig
