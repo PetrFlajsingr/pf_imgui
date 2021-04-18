@@ -1,6 +1,5 @@
 #include <imgui.h>
 
-//#define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui_internal.h>
 
 #include <algorithm>
@@ -271,5 +270,5 @@ namespace ImWidgets {
 	int CurveEditor(const char* label, float* values, int points_count, const ImVec2& editor_size, ImU32 flags, int* new_count);
 #endif
 
-#include <dear_widgets.hpp>
+#include "dear_widgets.hpp"
 }

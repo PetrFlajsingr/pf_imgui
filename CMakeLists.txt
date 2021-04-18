@@ -25,6 +25,7 @@ option(ENABLE_STACKTRACE "enable stacktrace in exceptions" OFF)
 if (ENABLE_STACKTRACE)
     add_compile_definitions(STACKTRACE_ENABLE)
 endif ()
+add_compile_definitions(IMGUI_DEFINE_MATH_OPERATORS)
 
 set(CMAKE_CXX_STANDARD 20)
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
@@ -143,7 +144,8 @@ set(SOURCES
         src/include/imgui/imgui.cpp
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
-        src/include/imgui/imgui_tables.cpp)
+        src/include/imgui/imgui_tables.cpp
+        src/include/DearWidgets/dear_widgets.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -228,7 +230,9 @@ set(INCLUDES
         src/include/imgui/imstb_textedit.h
         src/include/imgui/imstb_truetype.h
         src/pf_imgui/details/ComboFilter.h
-        src/pf_imgui/dialogs/InputDialog.h)
+        src/pf_imgui/dialogs/InputDialog.h
+        src/include/DearWidgets/dear_widgets.h
+        src/pf_imgui/elements/Slider2D.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
