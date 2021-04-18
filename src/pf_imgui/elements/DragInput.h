@@ -5,7 +5,6 @@
  * @date 31.10.20
  */
 
-
 #ifndef PF_IMGUI_ELEMENTS_DRAGINPUT_H
 #define PF_IMGUI_ELEMENTS_DRAGINPUT_H
 
@@ -80,6 +79,37 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>,
             Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
       : ItemElement(elementName), ValueObservable<T>(value), Labellable(label), Savable(persistent), speed(speed),
         min(min), max(max), format(std::move(format)) {}
+
+  /**
+   * Get movement speed.
+   * @return movement speed
+   */
+  [[nodiscard]] ParamType getSpeed() const { return speed; }
+  /**
+   * Set movement speed.
+   * @param speed new speed
+   */
+  void setSpeed(ParamType speed) { DragInput::speed = speed; }
+  /**
+   * Get min drag value.
+   * @return min drag value
+   */
+  [[nodiscard]] ParamType getMin() const { return min; }
+  /**
+   * Set min drag value.
+   * @param min new min drag value
+   */
+  void setMin(ParamType min) { DragInput::min = min; }
+  /**
+   * Get max drag value.
+   * @return max drag value
+   */
+  [[nodiscard]] ParamType getMax() const { return max; }
+  /**
+   * Set max drag value.
+   * @param max new min drag value
+   */
+  void setMax(ParamType max) { DragInput::max = max; }
 
  protected:
   void unserialize_impl(const toml::table &src) override {

@@ -231,7 +231,7 @@ set(INCLUDES
         src/pf_imgui/details/ComboFilter.h
         src/pf_imgui/dialogs/InputDialog.h
         src/include/DearWidgets/dear_widgets.h
-        src/pf_imgui/elements/Slider2D.h)
+        src/pf_imgui/elements/Slider2D.h src/pf_imgui/elements/Slider3D.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

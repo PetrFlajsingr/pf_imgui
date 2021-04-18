@@ -80,10 +80,31 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   }
 
   /**
+   * Get min progress bar value.
+   * @return min progress bar value
+   */
+  [[nodiscard]] T getMin() const { return min; }
+  /**
+   * Set min progress bar value.
+   * @param min min progress bar value
+   */
+  void setMin(T min) { ProgressBar::min = min; }
+  /**
+   * Get max progress bar value.
+   * @return max progress bar value
+   */
+  [[nodiscard]] T getMax() const { return max; }
+  /**
+   * Set max progress bar value.
+   * @param max min progress bar value
+   */
+  void setMax(T max) { ProgressBar::max = max; }
+
+  /**
    * Get step value which is used in step().
    * @return step value
    */
-  T getStep() const { return stepValue; }
+  [[nodiscard]] T getStep() const { return stepValue; }
   /**
    * Set new step value used for step().
    * @param step new step value
