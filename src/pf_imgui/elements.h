@@ -31,6 +31,7 @@
 #include "elements/Text.h"
 #include "elements/Tree.h"
 #include "elements/plots.h"
+#include "elements/Slider2D.h"
 #include "layouts/layouts.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
 #include "src/pf_imgui/dialogs/MessageDialog.h"

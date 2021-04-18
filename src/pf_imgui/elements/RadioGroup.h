@@ -26,6 +26,7 @@ namespace pf::ui::ig {
  * Label of the selected button is observable.
  *
  * @todo: existing button to group addition support
+ * @todo: generic?
  */
 class PF_IMGUI_EXPORT RadioGroup : public Element,
                                    public Labellable,

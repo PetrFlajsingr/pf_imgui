@@ -74,6 +74,27 @@ class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public Val
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent), min(min), max(max),
         format(std::move(format)) {}
 
+  /**
+   * Get min slider value.
+   * @return min slider value
+   */
+  [[nodiscard]] MinMaxType getMin() const { return min; }
+  /**
+   * Set min slider value.
+   * @param min new min slider value
+   */
+  void setMin(MinMaxType min) { Slider::min = min; }
+  /**
+   * Get max slider value.
+   * @return max slider value
+   */
+  [[nodiscard]] MinMaxType getMax() const { return max; }
+  /**
+   * Set max slider value.
+   * @param max new min slider value
+   */
+  void setMax(MinMaxType max) { Slider::max = max; }
+
  protected:
   void unserialize_impl(const toml::table &src) override {
     if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {

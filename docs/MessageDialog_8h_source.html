@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.3.2</span>
+   &#160;<span id="projectnumber">0.3.3</span>
    </div>
   </td>
  </tr>
@@ -75,50 +75,49 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Dialog_8h.html">Dialog.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;magic_enum.hpp&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_common/enums.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Button_8h.html">pf_imgui/elements/Button.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Text_8h.html">pf_imgui/elements/Text.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="BoxLayout_8h.html">pf_imgui/layouts/BoxLayout.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="MessageDialog_8h.html#aab592ed02356ee873519257cc714b038">   23</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="MessageDialog_8h.html#aab592ed02356ee873519257cc714b038">MessageButtons</a> { Ok = 1, Yes = 2, No = 4, All = 7 };</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;Enum ButtonTypes = MessageButtons&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">   32</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">MessageDialog</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html#a5190ca4bbf9cfb257ea2a1fb82ddc4ee">   44</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html#a5190ca4bbf9cfb257ea2a1fb82ddc4ee">MessageDialog</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;parent, <span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;title,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keyword">const</span> std::string &amp;message, Flags&lt;ButtonTypes&gt; buttons, std::invocable&lt;ButtonTypes&gt; <span class="keyword">auto</span> &amp;&amp;onDialogDone,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <a class="code" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modal = Modal::Yes) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(std::is_invocable_r_v&lt;<span class="keywordtype">bool</span>, decltype(onDialogDone), ButtonTypes&gt;)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a>(parent, elementName, title, modal), dialogDone(onDialogDone) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    createChild&lt;Text&gt;(getName() + <span class="stringliteral">&quot;text&quot;</span>, message);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">auto</span> &amp;btnLayout = createChild&lt;BoxLayout&gt;(getName() + <span class="stringliteral">&quot;box_layout&quot;</span>, LayoutDirection::LeftToRight, ImVec2{0, 0});</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">auto</span> enabledButtons = magic_enum::enum_values&lt;ButtonTypes&gt;()</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        | std::views::filter([&amp;buttons](<span class="keyword">auto</span> btnType) { <span class="keywordflow">return</span> buttons.is(btnType); });</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    std::ranges::for_each(enabledButtons, [<span class="keyword">this</span>, &amp;btnLayout](<span class="keyword">auto</span> buttonType) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      btnLayout</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          .createChild&lt;<a class="code" href="classpf_1_1ui_1_1ig_1_1Button.html">Button</a>&gt;(getName() + <span class="stringliteral">&quot;_button&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(buttonType)),</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                               std::string(magic_enum::enum_name(buttonType)))</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;          .addClickListener([<span class="keyword">this</span>, buttonType] {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">if</span> (dialogDone(buttonType)) { close(); }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;          });</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    });</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  std::function&lt;bool(ButtonTypes)&gt; dialogDone;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/enums.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Button_8h.html">pf_imgui/elements/Button.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Text_8h.html">pf_imgui/elements/Text.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="BoxLayout_8h.html">pf_imgui/layouts/BoxLayout.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="MessageDialog_8h.html#aab592ed02356ee873519257cc714b038">   22</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="MessageDialog_8h.html#aab592ed02356ee873519257cc714b038">MessageButtons</a> { Ok = 1, Yes = 2, No = 4 };</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;Enum ButtonTypes = MessageButtons&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">   30</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">MessageDialog</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html#a5190ca4bbf9cfb257ea2a1fb82ddc4ee">   42</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html#a5190ca4bbf9cfb257ea2a1fb82ddc4ee">MessageDialog</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;parent, <span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;title,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keyword">const</span> std::string &amp;message, Flags&lt;ButtonTypes&gt; buttons, std::invocable&lt;ButtonTypes&gt; <span class="keyword">auto</span> &amp;&amp;onDialogDone,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <a class="code" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modal = Modal::Yes) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(std::is_invocable_r_v&lt;<span class="keywordtype">bool</span>, decltype(onDialogDone), ButtonTypes&gt;)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1Dialog.html">Dialog</a>(parent, elementName, title, modal), dialogDone(onDialogDone) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    createChild&lt;Text&gt;(getName() + <span class="stringliteral">&quot;text&quot;</span>, message);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">auto</span> &amp;btnLayout = createChild&lt;BoxLayout&gt;(getName() + <span class="stringliteral">&quot;box_layout&quot;</span>, LayoutDirection::LeftToRight, ImVec2{0, 0});</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">auto</span> enabledButtons = magic_enum::enum_values&lt;ButtonTypes&gt;()</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        | std::views::filter([&amp;buttons](<span class="keyword">auto</span> btnType) { <span class="keywordflow">return</span> buttons.is(btnType); });</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    std::ranges::for_each(enabledButtons, [<span class="keyword">this</span>, &amp;btnLayout](<span class="keyword">auto</span> buttonType) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      btnLayout</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;          .createChild&lt;<a class="code" href="classpf_1_1ui_1_1ig_1_1Button.html">Button</a>&gt;(getName() + <span class="stringliteral">&quot;_button&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(buttonType)),</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                               toString(buttonType))</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          .addClickListener([<span class="keyword">this</span>, buttonType] {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span> (dialogDone(buttonType)) { close(); }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;          });</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    });</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  std::function&lt;bool(ButtonTypes)&gt; dialogDone;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MessageDialog_html_a5190ca4bbf9cfb257ea2a1fb82ddc4ee"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MessageDialog.html#a5190ca4bbf9cfb257ea2a1fb82ddc4ee">pf::ui::ig::MessageDialog::MessageDialog</a></div><div class="ttdeci">MessageDialog(ImGuiInterface &amp;parent, const std::string &amp;elementName, const std::string &amp;title, const std::string &amp;message, Flags&lt; ButtonTypes &gt; buttons, std::invocable&lt; ButtonTypes &gt; auto &amp;&amp;onDialogDone, Modal modal=Modal::Yes) requires(std</div><div class="ttdef"><b>Definition:</b> MessageDialog.h:44</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MessageDialog_html_a5190ca4bbf9cfb257ea2a1fb82ddc4ee"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MessageDialog.html#a5190ca4bbf9cfb257ea2a1fb82ddc4ee">pf::ui::ig::MessageDialog::MessageDialog</a></div><div class="ttdeci">MessageDialog(ImGuiInterface &amp;parent, const std::string &amp;elementName, const std::string &amp;title, const std::string &amp;message, Flags&lt; ButtonTypes &gt; buttons, std::invocable&lt; ButtonTypes &gt; auto &amp;&amp;onDialogDone, Modal modal=Modal::Yes) requires(std</div><div class="ttdef"><b>Definition:</b> MessageDialog.h:42</div></div>
 <div class="ttc" id="aButton_8h_html"><div class="ttname"><a href="Button_8h.html">Button.h</a></div><div class="ttdoc">Button element.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Dialog_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Dialog.html">pf::ui::ig::Dialog</a></div><div class="ttdoc">Simple dialog which can be modal. Contains Elements.</div><div class="ttdef"><b>Definition:</b> Dialog.h:26</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">pf::ui::ig::ImGuiInterface</a></div><div class="ttdoc">Root class of an entire UI tree. Provides an ability to create windows and dialogs.</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:41</div></div>
-<div class="ttc" id="aMessageDialog_8h_html_aab592ed02356ee873519257cc714b038"><div class="ttname"><a href="MessageDialog_8h.html#aab592ed02356ee873519257cc714b038">pf::ui::ig::MessageButtons</a></div><div class="ttdeci">MessageButtons</div><div class="ttdef"><b>Definition:</b> MessageDialog.h:23</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MessageDialog_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">pf::ui::ig::MessageDialog</a></div><div class="ttdoc">Simplified Dialog for showing messages. Button labels are the same as enums being used....</div><div class="ttdef"><b>Definition:</b> MessageDialog.h:32</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">pf::ui::ig::ImGuiInterface</a></div><div class="ttdoc">Root class of an entire UI tree. Provides an ability to create windows and dialogs.</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:43</div></div>
+<div class="ttc" id="aMessageDialog_8h_html_aab592ed02356ee873519257cc714b038"><div class="ttname"><a href="MessageDialog_8h.html#aab592ed02356ee873519257cc714b038">pf::ui::ig::MessageButtons</a></div><div class="ttdeci">MessageButtons</div><div class="ttdef"><b>Definition:</b> MessageDialog.h:22</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MessageDialog_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">pf::ui::ig::MessageDialog</a></div><div class="ttdoc">Simplified Dialog for showing messages. Button labels are the same as enums being used....</div><div class="ttdef"><b>Definition:</b> MessageDialog.h:30</div></div>
 <div class="ttc" id="aenums_8h_html_a1a747318d9e6b20ef92792e0d3fd2ac1"><div class="ttname"><a href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">pf::ui::ig::Modal</a></div><div class="ttdeci">Modal</div><div class="ttdef"><b>Definition:</b> enums.h:24</div></div>
 <div class="ttc" id="aBoxLayout_8h_html"><div class="ttname"><a href="BoxLayout_8h.html">BoxLayout.h</a></div><div class="ttdoc">Layout boxing children in desired direction.</div></div>
 <div class="ttc" id="aDialog_8h_html"><div class="ttname"><a href="Dialog_8h.html">Dialog.h</a></div><div class="ttdoc">Dialog built by a user.</div></div>

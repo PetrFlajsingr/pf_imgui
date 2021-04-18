@@ -40,6 +40,27 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
   SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value = 0.0,
               Persistent persistent = Persistent::No, std::string format = "%.0f deg");
 
+  /**
+   * Get min slider value.
+   * @return min slider value
+   */
+  float getMinDeg() const;
+  /**
+   * Set min slider value.
+   * @param minDeg new min slider value
+   */
+  void setMinDeg(float minDeg);
+  /**
+   * Get max slider value.
+   * @return max slider value
+   */
+  float getMaxDeg() const;
+  /**
+   * Set max slider value.
+   * @param maxDeg new min slider value
+   */
+  void setMaxDeg(float maxDeg);
+
  protected:
   void renderImpl() override;
   void unserialize_impl(const toml::table &src) override;

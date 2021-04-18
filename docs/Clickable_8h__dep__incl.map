@@ -1,12 +1,13 @@
 <map id="src/pf_imgui/interface/Clickable.h" name="src/pf_imgui/interface/Clickable.h">
-<area shape="rect" id="node1" title="Interface for elements which can be clicked." alt="" coords="223,5,387,47"/>
-<area shape="rect" id="node2" href="$Button_8h.html" title="Button element." alt="" coords="317,95,484,136"/>
-<area shape="rect" id="node7" href="$Image_8h.html" title="Image element." alt="" coords="5,184,172,225"/>
-<area shape="rect" id="node8" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="515,95,681,136"/>
-<area shape="rect" id="node10" href="$Table_8h.html" title="Table element." alt="" coords="127,95,293,136"/>
-<area shape="rect" id="node3" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="299,184,452,225"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="229,273,407,300"/>
-<area shape="rect" id="node5" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="497,273,712,300"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="532,348,677,389"/>
-<area shape="rect" id="node9" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="528,184,681,225"/>
+<area shape="rect" id="node1" title="Interface for elements which can be clicked." alt="" coords="532,5,696,47"/>
+<area shape="rect" id="node2" href="$Button_8h.html" title="Button element." alt="" coords="236,95,403,136"/>
+<area shape="rect" id="node8" href="$Image_8h.html" title="Image element." alt="" coords="692,184,859,225"/>
+<area shape="rect" id="node9" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="471,95,637,136"/>
+<area shape="rect" id="node11" href="$Table_8h.html" title="Table element." alt="" coords="799,95,965,136"/>
+<area shape="rect" id="node3" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="5,184,159,225"/>
+<area shape="rect" id="node6" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="183,184,336,225"/>
+<area shape="rect" id="node7" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="493,273,671,300"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="224,273,439,300"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="259,348,404,389"/>
+<area shape="rect" id="node10" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="463,184,616,225"/>
 </map>

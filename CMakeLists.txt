@@ -24,12 +24,12 @@ option(ENABLE_STACKTRACE "enable stacktrace in exceptions" OFF)
 
 if (ENABLE_STACKTRACE)
     add_compile_definitions(STACKTRACE_ENABLE)
-endif()
+endif ()
 
 set(CMAKE_CXX_STANDARD 20)
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
-        "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits")
+        "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing")
 if (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
@@ -56,26 +56,21 @@ if (ENABLE_STACKTRACE)
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.0.4
+            GIT_TAG v1.0.5
             OPTIONS "ENABLE_STACKTRACE ON"
     )
-else()
+else ()
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.0.4
+            GIT_TAG v1.0.5
     )
-endif()
+endif ()
 
 CPMAddPackage(
         NAME toml++
         GITHUB_REPOSITORY marzer/tomlplusplus
         GIT_TAG v2.2.0
-)
-CPMAddPackage(
-        NAME magic_enum
-        GITHUB_REPOSITORY Neargye/magic_enum
-        GIT_TAG v0.6.6
 )
 
 include_directories(src/include/implot)
@@ -96,12 +91,10 @@ set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
         src/pf_imgui/elements/Button.cpp
         src/pf_imgui/elements/Checkbox.cpp
-        src/pf_imgui/elements/ComboBox.cpp
         src/pf_imgui/dialogs/Dialog.cpp
         src/pf_imgui/elements/Group.cpp
         src/pf_imgui/elements/Image.cpp
         src/pf_imgui/elements/InputText.cpp
-        src/pf_imgui/elements/ListBox.cpp
         src/pf_imgui/elements/Memo.cpp
         src/pf_imgui/elements/MenuBars.cpp
         src/pf_imgui/elements/plots/SimplePlot.cpp
@@ -151,7 +144,7 @@ set(SOURCES
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
         src/include/imgui/imgui_tables.cpp
-        )
+        src/include/DearWidgets/dear_widgets.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -235,7 +228,10 @@ set(INCLUDES
         src/include/imgui/imstb_rectpack.h
         src/include/imgui/imstb_textedit.h
         src/include/imgui/imstb_truetype.h
-        )
+        src/pf_imgui/details/ComboFilter.h
+        src/pf_imgui/dialogs/InputDialog.h
+        src/include/DearWidgets/dear_widgets.h
+        src/pf_imgui/elements/Slider2D.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -266,7 +262,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileFlameGraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
-target_link_libraries(${PROJECT_NAME} PUBLIC pf_common::pf_common range-v3 magic_enum)
+target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
@@ -281,7 +277,8 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY INTERFACE_${PROJECT_NAME}_MAJOR_VER
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPATIBLE_INTERFACE_STRING ${PROJECT_NAME}_MAJOR_VERSION)
 
 
-install(TARGETS ${PROJECT_NAME} pf_common magic_enum EXPORT ${PROJECT_NAME}Targets
+install(TARGETS ${PROJECT_NAME} pf_common magic_enum
+        EXPORT ${PROJECT_NAME}Targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -350,6 +347,6 @@ if (BUILD_DOCS)
         doxygen_add_docs(pf_imgui_doc ALL
                 ${CMAKE_SOURCE_DIR}/src/pf_imgui
                 )
-    endif()
+    endif ()
 
-endif()
+endif ()

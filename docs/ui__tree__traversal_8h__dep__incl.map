@@ -1,9 +1,10 @@
 <map id="src/pf_imgui/ui_tree_traversal.h" name="src/pf_imgui/ui_tree_traversal.h">
-<area shape="rect" id="node1" title="Traversal of ui tree." alt="" coords="299,5,449,47"/>
-<area shape="rect" id="node2" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="275,95,473,121"/>
+<area shape="rect" id="node1" title="Traversal of ui tree." alt="" coords="395,5,545,47"/>
+<area shape="rect" id="node2" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="371,95,569,121"/>
 <area shape="rect" id="node3" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="5,169,172,211"/>
 <area shape="rect" id="node5" href="$DragInput_8h.html" title="DragInput element." alt="" coords="196,169,363,211"/>
 <area shape="rect" id="node6" href="$Input_8h.html" title="Input element." alt="" coords="387,169,553,211"/>
 <area shape="rect" id="node7" href="$Slider_8h.html" title="Slider element." alt="" coords="577,169,744,211"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="285,259,463,285"/>
+<area shape="rect" id="node8" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="768,169,935,211"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="381,259,559,285"/>
 </map>

@@ -8,13 +8,14 @@
 #ifndef PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 #define PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 
-#include "BoxLayout.h"
 #include "ResizableLayout.h"
 #include "layout_decorators.h"
 #include <memory>
+#include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Positionable.h>
+#include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <vector>

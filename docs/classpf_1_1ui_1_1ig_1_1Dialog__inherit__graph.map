@@ -1,6 +1,7 @@
 <map id="pf::ui::ig::Dialog" name="pf::ui::ig::Dialog">
 <area shape="rect" id="node1" title="Simple dialog which can be modal. Contains Elements." alt="" coords="223,80,347,107"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used...." alt="" coords="193,155,376,196"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1InputDialog.html" title="Simplified dialog for user input. It should be created via ImGuiInterface." alt="" coords="109,162,266,189"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used...." alt="" coords="291,155,473,196"/>
 <area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="185,5,384,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="407,5,557,32"/>

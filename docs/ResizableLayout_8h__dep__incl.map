@@ -1,14 +1,15 @@
 <map id="src/pf_imgui/layouts/ResizableLayout.h" name="src/pf_imgui/layouts/ResizableLayout.h">
-<area shape="rect" id="node1" title="Base class for layouts which provide resizing." alt="" coords="438,5,593,47"/>
-<area shape="rect" id="node2" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="273,95,427,136"/>
-<area shape="rect" id="node8" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="387,184,542,225"/>
-<area shape="rect" id="node10" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="566,184,721,225"/>
-<area shape="rect" id="node11" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="553,95,707,136"/>
-<area shape="rect" id="node12" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="731,95,886,136"/>
-<area shape="rect" id="node3" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="108,184,261,225"/>
-<area shape="rect" id="node7" href="$Memo_8h.html" title="Memo element." alt="" coords="296,273,463,315"/>
-<area shape="rect" id="node9" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="526,273,681,315"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="290,370,469,397"/>
-<area shape="rect" id="node5" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="5,281,220,307"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="40,363,185,404"/>
+<area shape="rect" id="node1" title="Base class for layouts which provide resizing." alt="" coords="363,5,517,47"/>
+<area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="5,95,160,136"/>
+<area shape="rect" id="node5" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="720,95,875,136"/>
+<area shape="rect" id="node11" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="184,95,339,136"/>
+<area shape="rect" id="node12" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="363,95,517,136"/>
+<area shape="rect" id="node13" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="541,95,696,136"/>
+<area shape="rect" id="node3" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="356,184,511,225"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="529,273,708,300"/>
+<area shape="rect" id="node6" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="903,184,1057,225"/>
+<area shape="rect" id="node9" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="726,184,879,225"/>
+<area shape="rect" id="node10" href="$Memo_8h.html" title="Memo element." alt="" coords="535,184,702,225"/>
+<area shape="rect" id="node7" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="802,273,1017,300"/>
+<area shape="rect" id="node8" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="837,348,982,389"/>
 </map>

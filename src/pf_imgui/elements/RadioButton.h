@@ -19,6 +19,7 @@ namespace pf::ui::ig {
 
 /**
  * @brief A button similar in function to CheckBox, but it can belong to RadioGroup.
+ * @todo: generic?
  */
 class PF_IMGUI_EXPORT RadioButton : public ItemElement, public Labellable, public ValueObservable<bool> {
  public:
