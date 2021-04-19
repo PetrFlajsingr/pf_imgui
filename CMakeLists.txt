@@ -56,14 +56,14 @@ if (ENABLE_STACKTRACE)
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.0.5
+            GIT_TAG master
             OPTIONS "ENABLE_STACKTRACE ON"
     )
 else ()
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.0.5
+            GIT_TAG master
     )
 endif ()
 
