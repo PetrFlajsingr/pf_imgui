@@ -80,7 +80,7 @@ class DefaultPlotDataSetting {
 /**
  * @brief Base class for all types of plot data.
  */
-class PF_IMGUI_EXPORT PlotData : public virtual Element {
+class PF_IMGUI_EXPORT PlotData : public Element {
  public:
   explicit PlotData(const std::string &elementName);
 };
