@@ -196,13 +196,13 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
     if (ImGui::BeginCombo(getLabel().c_str(),
                           selectedItemIndex.has_value() ? items[*selectedItemIndex].second.c_str()
                                                         : previewValue.c_str())) {
-      auto cStrItems = items | views::transform([](const auto &item) { return item.second.c_str(); });
+      auto cStrItems = items | views::transform([](const auto &item) { return std::make_pair(item.first, item.second.c_str()); });
       std::ranges::for_each(cStrItems | views::enumerate
-                                | views::filter([this](auto idxPtr) { return filter(idxPtr.second); }),
+                                | views::filter([this](auto idxPtr) { return filter(idxPtr.second.first); }),
                             [&](auto idxPtr) {
                               const auto [idx, ptr] = idxPtr;
                               auto isSelected = selectedItemIndex.has_value() && *selectedItemIndex == idx;
-                              ImGui::Selectable(ptr, &isSelected);
+                              ImGui::Selectable(ptr.second, &isSelected);
                               if (isSelected) {
                                 if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
                                   ValueObservable<T>::setValueInner(items[idx].first);
