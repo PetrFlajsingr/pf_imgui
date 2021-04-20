@@ -17,10 +17,11 @@ void Tab::renderImpl() {
   }
 }
 
-TabBar::TabBar(const std::string &elementName) : Element(elementName) {}
+TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elementName), isTabListAllowed(allowTabList) {}
 
 void TabBar::renderImpl() {
-  if (ImGui::BeginTabBar(getName().c_str())) {
+  const auto flags = isTabListAllowed ? ImGuiTabBarFlags_TabListPopupButton : ImGuiTabBarFlags{};
+  if (ImGui::BeginTabBar(getName().c_str(), flags)) {
     std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });
     ImGui::EndTabBar();
   }
@@ -35,4 +36,6 @@ void TabBar::removeTab(const std::string &name) {
     tabs.erase(iter);
   }
 }
+bool TabBar::isTabListAllowed1() const { return isTabListAllowed; }
+void TabBar::setTabListAllowed(bool tabListAllowed) { TabBar::isTabListAllowed = tabListAllowed; }
 }// namespace pf::ui::ig

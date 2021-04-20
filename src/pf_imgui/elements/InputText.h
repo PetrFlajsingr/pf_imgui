@@ -23,6 +23,9 @@ namespace pf::ui::ig {
  * @brief Input for text with support for multiline strings.
  *
  * Typical text edit.
+ *
+ * @todo: filtering
+ * @todo: password input
  */
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,

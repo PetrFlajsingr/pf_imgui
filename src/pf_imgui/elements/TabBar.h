@@ -45,8 +45,9 @@ class PF_IMGUI_EXPORT TabBar : public Element {
   /**
    * Construct TabBar.
    * @param elementName ID of the TabBar
+   * @param allowTabList set if tab list on the left side is allowed
    */
-  explicit TabBar(const std::string &elementName);
+  explicit TabBar(const std::string &elementName, bool allowTabList = false);
 
   /**
    * Create a new Tab.
@@ -62,11 +63,23 @@ class PF_IMGUI_EXPORT TabBar : public Element {
    */
   void removeTab(const std::string &name);
 
+  /**
+   * Check if tab list on the left side is allowed.
+   * @return true if allowed
+   */
+  [[nodiscard]] bool isTabListAllowed1() const;
+  /**
+   * Set if tab list on the left side is allowed.
+   * @param isTabListAllowed allowed
+   */
+  void setTabListAllowed(bool isTabListAllowed);
+
  protected:
   void renderImpl() override;
 
  private:
   std::vector<std::unique_ptr<Tab>> tabs;
+  bool isTabListAllowed;
 };
 
 }// namespace pf::ui::ig
