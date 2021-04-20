@@ -25,6 +25,7 @@
 #include "elements/RadioGroup.h"
 #include "elements/Slider.h"
 #include "elements/Slider2D.h"
+#include "elements/Slider3D.h"
 #include "elements/SliderAngle.h"
 #include "elements/StringTable.h"
 #include "elements/TabBar.h"

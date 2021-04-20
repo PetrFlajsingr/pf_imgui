@@ -231,7 +231,7 @@ set(INCLUDES
         src/pf_imgui/details/ComboFilter.h
         src/pf_imgui/dialogs/InputDialog.h
         src/include/DearWidgets/dear_widgets.h
-        src/pf_imgui/elements/Slider2D.h src/pf_imgui/unique_id.h)
+        src/pf_imgui/elements/Slider2D.h src/pf_imgui/unique_id.h src/pf_imgui/elements/Slider3D.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -351,7 +351,7 @@ install(
 if (BUILD_DOCS)
     find_package(Doxygen)
     if (DOXYGEN_FOUND)
-        set(EXAMPLE_PATH ${CMAKE_SOURCE_DIR}/src/examples)
+        set(HTML_DYNAMIC_MENUS YES)
         doxygen_add_docs(pf_imgui_doc ALL
                 ${CMAKE_SOURCE_DIR}/src/pf_imgui
                 )
