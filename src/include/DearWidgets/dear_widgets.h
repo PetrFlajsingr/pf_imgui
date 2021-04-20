@@ -1,3 +1,5 @@
+#ifndef DEAT_WIDGETS_GUARD
+#define DEAT_WIDGETS_GUARD
 #include <imgui.h>
 
 #include <imgui_internal.h>
@@ -272,3 +274,4 @@ namespace ImWidgets {
 
 #include "dear_widgets.hpp"
 }
+#endif
