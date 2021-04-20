@@ -51,6 +51,7 @@ class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, publi
 
  private:
   Modal modal;
+  bool firstRender = true;
   bool closed = false;
   ImGuiInterface &owner;
 };

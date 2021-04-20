@@ -15,7 +15,7 @@ void Dialog::renderImpl() {
     owner.removeDialog(*this);
     return;
   }
-  ImGui::OpenPopup(getLabel().c_str());
+  if (firstRender) { ImGui::OpenPopup(getLabel().c_str()); }
   bool open;
   if (modal == Modal::Yes) {
     open = ImGui::BeginPopupModal(getLabel().c_str());
@@ -26,6 +26,7 @@ void Dialog::renderImpl() {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndPopup();
   }
+  firstRender = false;
 }
 void Dialog::close() { closed = true; }
 bool Dialog::isClosed() const { return closed; }
