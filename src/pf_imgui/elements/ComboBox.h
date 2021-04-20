@@ -82,8 +82,8 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   ComboBox(const std::string &elementName, const std::string &label, std::optional<std::string> previewValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent =
-               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+           Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
         previewValue(std::move(previewValue)), shownItems(showItemCount) {
     items.reserve(std::ranges::size(newItems));
@@ -112,7 +112,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       selectedItemIndex = index;
@@ -139,7 +139,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   void removeItem(const std::string &itemAsString) requires(!std::same_as<T, std::string>) {
     using namespace std::string_literals;
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto isAnyItemSelected = selectedItemIndex.has_value();
       const auto selectedItem = isAnyItemSelected ? items[*selectedItemIndex] : ""s;
@@ -211,8 +211,8 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   }
   void renderImpl() override {
     using namespace ranges;
-    auto flags = previewValue.has_value() ? ImGuiComboFlags_{} : ImGuiComboFlags_NoPreview;
-    flags |= static_cast<uint32_t>(shownItems);
+    auto flags = previewValue.has_value() ? ImGuiComboFlags{} : ImGuiComboFlags_NoPreview;
+    flags |= static_cast<ImGuiComboFlags>(shownItems);
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
       previewPtr = items[*selectedItemIndex].second.c_str();
