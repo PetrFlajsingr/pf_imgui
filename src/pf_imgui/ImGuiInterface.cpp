@@ -11,8 +11,6 @@
 #include <range/v3/view/addressof.hpp>
 #include <utility>
 
-#include <pf_imgui/elements/Bullet.h>
-
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)

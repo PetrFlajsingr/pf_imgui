@@ -70,6 +70,7 @@ constexpr const char *defaultSliderFormat() {
  * @tparam T underlying type
  *
  * @todo: enum support
+ * @todo: vertical sliders
  */
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
