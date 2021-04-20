@@ -46,6 +46,17 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, publ
                T value = T{})
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
 
+  /**
+   * Check if picker appearing on collor btn click is enabled.
+   * @return
+   */
+  [[nodiscard]] bool isPickerEnabled() const { return pickerEnabled; }
+  /**
+   * Enable/disable picker
+   * @param pickerEnabled
+   */
+  void setPickerEnabled(bool enabled) { ColorChooser::pickerEnabled = enabled; }
+
  protected:
   void unserialize_impl(const toml::table &src) override {
     const auto tomlColor = src["color"].as_array();
@@ -60,22 +71,30 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, publ
   }
 
   void renderImpl() override {
+    auto flags = pickerEnabled ? ImGuiColorEditFlags{} : ImGuiColorEditFlags_NoPicker;
     auto valueChanged = false;
     if constexpr (Type == ColorChooserType::Edit) {
       if constexpr (std::same_as<glm::vec3, T>) {
-        valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged =
+            ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress(), flags));
       } else {
-        valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged =
+            ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress(), flags));
       }
     } else {
       if constexpr (std::same_as<glm::vec3, T>) {
-        valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged =
+            ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress(), flags));
       } else {
-        valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+        valueChanged =
+            ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress(), flags));
       }
     }
     if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
+
+ private:
+  bool pickerEnabled = true;
 };
 
 }// namespace pf::ui::ig
