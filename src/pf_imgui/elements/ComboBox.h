@@ -183,6 +183,17 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
     filter = [](auto) { return true; };
   }
 
+  /**
+   * Get count of items shown when the element is unrolled.
+   * @return count of items
+   */
+  [[nodiscard]] ComboBoxCount getShownItemCount() const { return shownItems; }
+  /**
+   * Set count of items shown when the element is unrolled.
+   * @param shownItemCount count of items
+   */
+  void setShownItemCount(ComboBoxCount shownItemCount) { ComboBox::shownItems = shownItemCount; }
+
  protected:
   void unserialize_impl(const toml::table &src) override {
     if (src.contains("selected")) {
