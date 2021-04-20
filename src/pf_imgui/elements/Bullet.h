@@ -30,7 +30,7 @@ class Bullet : public T {
  protected:
   void renderImpl() override {
     ImGui::Bullet();
-    T::render();
+    T::renderImpl();
   }
 
  private:
