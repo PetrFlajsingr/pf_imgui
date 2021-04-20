@@ -34,12 +34,14 @@ class Slider3D : public ItemElement, public Labellable, public ValueObservable<g
    * @param minMaxY extremes on Y axis
    * @param minMaxZ extremes on Z axis
    * @param value starting value
+   * @param scale possible max size will be multiplied by this
    * @param persistent enable state saving to disk
    */
   Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
-           const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value), Savable(persistent), extremesX(minMaxX), extremesY(minMaxY),
-        extremesZ(minMaxZ) {}
+           const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, float scale = 1.0f,
+           Persistent persistent = Persistent::No)
+      : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value), Savable(persistent),
+        extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ), sliderScale(scale) {}
 
  protected:
   void renderImpl() override {
@@ -49,7 +51,7 @@ class Slider3D : public ItemElement, public Labellable, public ValueObservable<g
     if constexpr (std::same_as<T, float>) {
       valueChanged =
           ImWidgets::SliderScalar3D(getLabel().c_str(), &valAddress->x, &valAddress->y, &valAddress->z, extremesX.x,
-                                    extremesX.y, extremesY.x, extremesY.y, extremesZ.x, extremesZ.y);
+                                    extremesX.y, extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, sliderScale);
     }
     if (valueChanged && oldValue != *valAddress) { ValueObservable<glm::vec3>::notifyValueChanged(); }
   }
@@ -67,6 +69,7 @@ class Slider3D : public ItemElement, public Labellable, public ValueObservable<g
   glm::vec2 extremesX;
   glm::vec2 extremesY;
   glm::vec2 extremesZ;
+  float sliderScale;
 };
 }// namespace pf::ui::ig
 
