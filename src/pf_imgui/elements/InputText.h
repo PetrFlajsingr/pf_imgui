@@ -28,6 +28,8 @@ enum class TextFilter : uint32_t {
   Scientific = 1 << 17
 };
 
+enum class TextTrigger { Character, Enter };
+
 /**
  * @brief Input for text with support for multiline strings.
  *
@@ -35,8 +37,6 @@ enum class TextFilter : uint32_t {
  *
  * @todo: custom filter with predicate
  * @todo: password input
- * @todo: input na enter misto change ImGuiInputTextFlags_EnterReturnsTrue
- * @todo: read only ImGuiInputTextFlags_ReadOnly
  */
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,
@@ -53,8 +53,8 @@ class PF_IMGUI_EXPORT InputText : public Text,
    * @param persistent enable state saving to disk
    */
   InputText(const std::string &elementName, std::string label, const std::string &text = "",
-            TextInputType textInputType = TextInputType::SingleLine, Flags<TextFilter> filters = TextFilter::None,
-            Persistent persistent = Persistent::No);
+            TextInputType textInputType = TextInputType::SingleLine, TextTrigger trigger = TextTrigger::Character,
+            Flags<TextFilter> filters = TextFilter::None, Persistent persistent = Persistent::No);
 
   /**
    * Clear text.
@@ -62,6 +62,17 @@ class PF_IMGUI_EXPORT InputText : public Text,
   void clear();
 
   void setValue(const std::string_view &newValue) override;
+
+  /**
+   * Check if the input is read only.
+   * @return true if read only
+   */
+  [[nodiscard]] bool isReadOnly() const;
+  /**
+   * Set if the input is read only.
+   * @param readOnly
+   */
+  void setReadOnly(bool readOnly);
 
  protected:
   void unserialize_impl(const toml::table &src) override;
@@ -73,6 +84,7 @@ class PF_IMGUI_EXPORT InputText : public Text,
   char buffer[256]{};
   TextInputType inputType;
   ImGuiInputTextFlags flags = {};
+  bool readOnly = false;
 };
 
 }// namespace pf::ui::ig

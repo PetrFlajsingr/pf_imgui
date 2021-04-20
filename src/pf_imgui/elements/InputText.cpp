@@ -9,11 +9,14 @@
 
 namespace pf::ui::ig {
 InputText::InputText(const std::string &elementName, std::string label, const std::string &text,
-                     TextInputType textInputType, Flags<TextFilter> filters, Persistent persistent)
+                     TextInputType textInputType, TextTrigger trigger, Flags<TextFilter> filters, Persistent persistent)
     : Text(elementName, text), Labellable(std::move(label)), ValueObservable(""), Savable(persistent),
       inputType(textInputType) {
   setValueInner(text);
   for (auto flag : filters.getSetFlags()) { flags |= static_cast<uint>(flag); }
+  if (trigger == TextTrigger::Enter) {
+    flags |= ImGuiInputTextFlags_EnterReturnsTrue;
+  }
 }
 
 void InputText::renderImpl() {
@@ -43,5 +46,16 @@ void InputText::unserialize_impl(const toml::table &src) {
 toml::table InputText::serialize_impl() { return toml::table{{{"text", getText()}}}; }
 
 void InputText::setValue(const std::string_view &newValue) { setText(std::string(newValue)); }
+
+bool InputText::isReadOnly() const { return readOnly; }
+
+void InputText::setReadOnly(bool isReadOnly) {
+  readOnly = isReadOnly;
+  if (readOnly) {
+    flags |= ImGuiInputTextFlags_ReadOnly;
+  } else {
+    flags &= ~ImGuiInputTextFlags_ReadOnly;
+  }
+}
 
 }// namespace pf::ui::ig
