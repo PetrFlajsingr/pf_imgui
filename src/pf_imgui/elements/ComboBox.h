@@ -53,6 +53,13 @@ struct ComboBoxItemStorage<std::string> {
 };
 }// namespace details
 
+enum class ComboBoxCount {
+  Items4 = 1 << 1,
+  Items8 = 1 << 2,
+  Items20 = 1 << 3,
+  ItemsAll = 1 << 4
+};
+
 /**
  * @brief A typical combobox with items which can be converted to string.
  *
@@ -73,12 +80,12 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * @param persistent enable state saving to disk
    */
   ComboBox(const std::string &elementName, const std::string &label, std::optional<std::string> previewValue,
-           std::ranges::range auto &&newItems,
+           std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent =
                Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
                                             &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
-        previewValue(std::move(previewValue)) {
+        previewValue(std::move(previewValue)), shownItems(showItemCount) {
     items.reserve(std::ranges::size(newItems));
     std::ranges::copy(newItems, std::back_inserter(items));
   }
@@ -193,7 +200,8 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   }
   void renderImpl() override {
     using namespace ranges;
-    const auto flags = previewValue.has_value() ? ImGuiComboFlags_{} : ImGuiComboFlags_NoPreview;
+    auto flags = previewValue.has_value() ? ImGuiComboFlags_{} : ImGuiComboFlags_NoPreview;
+    flags |= static_cast<uint>(shownItems);
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
       previewPtr = items[*selectedItemIndex].second.c_str();
@@ -228,6 +236,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   std::optional<std::string> previewValue;
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
   std::function<bool(T)> filter = [](auto) { return true; };
+  ComboBoxCount shownItems;
 };
 
 }// namespace pf::ui::ig
