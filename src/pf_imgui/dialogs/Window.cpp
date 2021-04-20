@@ -19,7 +19,7 @@ Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
-  auto flags = hasMenuBar() ? ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar : ImGuiWindowFlags_{};
+  auto flags = createWindowFlags();
   if (ImGui::Begin(getLabel().c_str(), nullptr, flags)) {
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
@@ -73,6 +73,16 @@ void Window::setFocus() {
 void Window::setPosition(ImVec2 pos) {
   ImGui::SetWindowPos(getLabel().c_str(), pos);
   Positionable::setPosition(pos);
+}
+ImGuiWindowFlags Window::createWindowFlags() {
+  ImGuiWindowFlags result = hasMenuBar() ? ImGuiWindowFlags_MenuBar : ImGuiWindowFlags{};
+  if (!isCollapsible()) {
+    result |= ImGuiWindowFlags_NoCollapse;
+  }
+  if (getLabel().empty()) {
+    result |= ImGuiWindowFlags_NoTitleBar;
+  }
+  return result;
 }
 
 }// namespace pf::ui::ig

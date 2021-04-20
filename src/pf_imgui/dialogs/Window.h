@@ -80,6 +80,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
  private:
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
+
+  ImGuiWindowFlags createWindowFlags();
 };
 
 }// namespace pf::ui::ig
