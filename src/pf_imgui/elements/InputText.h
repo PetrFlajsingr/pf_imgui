@@ -10,6 +10,7 @@
 
 #include "Text.h"
 #include <functional>
+#include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -19,13 +20,23 @@
 
 namespace pf::ui::ig {
 
+enum class TextFilter : uint32_t {
+  None,
+  Math = 1 << 0,
+  Hexadecimal = 1 << 1,
+  NoWhiteChar = 1 << 3,
+  Scientific = 1 << 17
+};
+
 /**
  * @brief Input for text with support for multiline strings.
  *
  * Typical text edit.
  *
- * @todo: filtering
+ * @todo: custom filter with predicate
  * @todo: password input
+ * @todo: input na enter misto change ImGuiInputTextFlags_EnterReturnsTrue
+ * @todo: read only ImGuiInputTextFlags_ReadOnly
  */
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,
@@ -38,10 +49,12 @@ class PF_IMGUI_EXPORT InputText : public Text,
    * @param label text rendered next to the input
    * @param text starting text in the input
    * @param textInputType singleline or multiline support
+   * @param filters character filters for input
    * @param persistent enable state saving to disk
    */
   InputText(const std::string &elementName, std::string label, const std::string &text = "",
-            TextInputType textInputType = TextInputType::SingleLine, Persistent persistent = Persistent::No);
+            TextInputType textInputType = TextInputType::SingleLine, Flags<TextFilter> filters = TextFilter::None,
+            Persistent persistent = Persistent::No);
 
   /**
    * Clear text.
@@ -59,6 +72,7 @@ class PF_IMGUI_EXPORT InputText : public Text,
  private:
   char buffer[256]{};
   TextInputType inputType;
+  ImGuiInputTextFlags flags = {};
 };
 
 }// namespace pf::ui::ig

@@ -6,6 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_RANGE_H
 
 #include <glm/vec2.hpp>
+#include <utility>
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -59,9 +60,9 @@ class Range : public ItemElement,
    * @param format format for text rendered on the range, printf-like
    */
   Range(const std::string &elementName, const std::string &label, T min, T max, StorageType value = {}, float moveSpeed = 1.0f,
-        Persistent persistent = Persistent::No, const std::string &format = details::defaultRangeFormat<T>())
+        Persistent persistent = Persistent::No, std::string format = details::defaultRangeFormat<T>())
       : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value), Savable(persistent),
-        minVal(min), maxVal(max), format(format), speed(moveSpeed) {}
+        minVal(min), maxVal(max), format(std::move(format)), speed(moveSpeed) {}
 
  protected:
   void renderImpl() override {
