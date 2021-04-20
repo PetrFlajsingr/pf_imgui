@@ -101,7 +101,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   }
   /**
    * Set selected item by its string value. If no such item is found the selection is cancelled.
-   * @param item item to be selected
+   * @param itemAsString item to be selected
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
@@ -127,7 +127,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   }
   /**
    * Remove this item from the Combobox by its string value. If no such item exists nothing happens.
-   * @param item item to be removed
+   * @param itemAsString item to be removed
    */
   void removeItem(const std::string &itemAsString) requires(!std::same_as<T, std::string>) {
     using namespace std::string_literals;

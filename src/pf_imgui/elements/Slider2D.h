@@ -21,6 +21,9 @@
 namespace pf::ui::ig {
 
 namespace details {
+/**
+ * Data storage types for Slider2D.
+ */
 template<OneOf<int, float> T>
 using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2, glm::vec2>;
 }

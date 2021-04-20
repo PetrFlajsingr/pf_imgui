@@ -67,6 +67,9 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
   void toggle();
 
  protected:
+  /**
+   * Type of checkbox.
+   */
   Type type;
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;

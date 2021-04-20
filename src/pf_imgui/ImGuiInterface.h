@@ -49,6 +49,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
 
+  /**
+   * Get ImGuiIO from ImGui::.
+   * @return ImGuiIO
+   */
   [[nodiscard]] ImGuiIO &getIo() const;
 
   /**
@@ -196,10 +200,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   void openDirDialog(const std::string &caption, std::invocable<std::vector<std::string>> auto onSelect,
                      std::invocable auto onCancel, ImVec2 size = {200, 150}, std::filesystem::path startPath = ".",
-                     std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
+                     std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,
-                             startPath, startName, modality, maxSelectedFiles);
+                             startPath, startName, modality, maxSelectedDirs);
   }
 
   /**

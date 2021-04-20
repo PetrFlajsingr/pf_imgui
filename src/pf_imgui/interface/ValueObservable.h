@@ -51,6 +51,7 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
   /**
    * Add a listener, which is called every time the stored value is changed.
    * @param fnc listener for value change event, inner value is passed as a parameter when it is changed
+   * @param callNow if set to true the listener is called right away
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
@@ -61,7 +62,7 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
 
   /**
    * Bind provided references value to the inner value of ValueObservable.
-   * @attetion Don't forget to unsubscribe from this when your value is destroyed.
+   * @attention Don't forget to unsubscribe from this before your value is destroyed.
    * @param toBind value to be bound
    * @return instance of Subscription, which allows to unsubscribe the binding
    * @see Subscription

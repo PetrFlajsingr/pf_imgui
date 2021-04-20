@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['formattedwithoutstep_794',['FormattedWithoutStep',['../Input_8h.html#a9820f4d42e5893fe4304ed36307a1330',1,'pf::ui::ig::details']]],
-  ['formattedwithstep_795',['FormattedWithStep',['../Input_8h.html#abc230fd13e1cbf20226abb1fb2f7c621',1,'pf::ui::ig::details']]]
+  ['extensions_830',['extensions',['../structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html#a5699fa596fdb36ae1535ab51c9058613',1,'pf::ui::ig::FileExtensionSettings']]]
 ];

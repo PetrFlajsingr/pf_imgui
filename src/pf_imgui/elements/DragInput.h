@@ -27,10 +27,25 @@
 
 namespace pf::ui::ig {
 namespace details {
+/**
+ * Types with float as underlying value.
+ */
 #define IMGUI_DRAG_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>
+/**
+ * Types with int as underlying value.
+ */
 #define IMGUI_DRAG_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4, math::Range<int>
+/**
+ * Used glm types.
+ */
 #define IMGUI_DRAG_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
+/**
+ * Used range types.
+ */
 #define IMGUI_DRAG_RANGE_TYPE_LIST math::Range<int>, math::Range<float>
+/**
+ * All allowed types for DragInput
+ */
 #define IMGUI_DRAG_TYPE_LIST IMGUI_DRAG_FLOAT_TYPE_LIST, IMGUI_DRAG_INT_TYPE_LIST
 /**
  * Underlying type of supported types.

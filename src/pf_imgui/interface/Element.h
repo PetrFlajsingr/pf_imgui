@@ -24,6 +24,10 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT Element : public Renderable {
  public:
+  /**
+   * Construct Element.
+   * @param name ID of the element.
+   */
   explicit Element(const std::string &name);
 
   void render() override;

@@ -25,11 +25,29 @@
 
 namespace pf::ui::ig {
 namespace details {
+/**
+ * Underlying types supporting step.
+ */
 #define IMGUI_INPUT_STEP_TYPE_LIST float, double, int
+/**
+ * Types using float as underlying value.
+ */
 #define IMGUI_INPUT_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
+/**
+ * Types using double as underlying value.
+ */
 #define IMGUI_INPUT_DOUBLE_TYPE_LIST double
+/**
+ * Types using int as underlying value.
+ */
 #define IMGUI_INPUT_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
+/**
+ * Supported glm types.
+ */
 #define IMGUI_INPUT_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
+/**
+ * All types supported by Input.
+ */
 #define IMGUI_INPUT_TYPE_LIST IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_INT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST
 
 /**

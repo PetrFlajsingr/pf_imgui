@@ -184,12 +184,14 @@ template&lt;typename T &gt; </div>
 <p>Add a listener, which is called every time the stored value is changed. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fnc</td><td>listener for value change event, inner value is passed as a parameter when it is changed </td></tr>
+    <tr><td class="paramname">callNow</td><td>if set to true the listener is called right away </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>instance of Subscription, which allows to unsubscribe the listener </dd></dl>
 <dl class="section see"><dt>See also</dt><dd>Subscription</dd></dl>
-<p>Bind provided references value to the inner value of ValueObservable. @attetion Don't forget to unsubscribe from this when your value is destroyed. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Bind provided references value to the inner value of ValueObservable. </p><dl class="section attention"><dt>Attention</dt><dd>Don't forget to unsubscribe from this before your value is destroyed. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">toBind</td><td>value to be bound </td></tr>
   </table>

@@ -71,80 +71,80 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="MenuBars_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_MENUBARS_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_MENUBARS_H</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Clickable_8h.html">pf_imgui/interface/Clickable.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Element_8h.html">pf_imgui/interface/Element.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span>SubMenu;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span>MenuItem;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">   29</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a> &amp;addSubmenu(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> std::string &amp;caption);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a> &amp;addItem(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> std::string &amp;caption);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">void</span> removeItem(<span class="keyword">const</span> std::string &amp;name);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">void</span> renderItems();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  std::vector&lt;std::unique_ptr&lt;Element&gt;&gt; items;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">   61</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Clickable.html">Clickable</a> {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">   76</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">   93</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">WindowMenuBar</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">WindowMenuBar</a>(<span class="keyword">const</span> std::string &amp;elementName);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">  109</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">AppMenuBar</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">AppMenuBar</a>(<span class="keyword">const</span> std::string &amp;elementName);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;};</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_MENUBARS_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_MENUBARS_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_MENUBARS_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Clickable_8h.html">pf_imgui/interface/Clickable.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Element_8h.html">pf_imgui/interface/Element.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span>SubMenu;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span>MenuItem;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">   28</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a> &amp;addSubmenu(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> std::string &amp;caption);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a> &amp;addItem(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> std::string &amp;caption);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">void</span> removeItem(<span class="keyword">const</span> std::string &amp;name);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">void</span> renderItems();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  std::vector&lt;std::unique_ptr&lt;Element&gt;&gt; items;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">   60</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Clickable.html">Clickable</a> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuItem.html">MenuItem</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">   75</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1SubMenu.html">SubMenu</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">   92</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">WindowMenuBar</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">WindowMenuBar</a>(<span class="keyword">const</span> std::string &amp;elementName);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;};</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">  108</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">AppMenuBar</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">AppMenuBar</a>(<span class="keyword">const</span> std::string &amp;elementName);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;};</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_MENUBARS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Interface for all ImGui elements.</div><div class="ttdef"><b>Definition:</b> Element.h:26</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Interface for all ImGui elements.</div><div class="ttdef"><b>Definition:</b> Element.h:25</div></div>
 <div class="ttc" id="aClickable_8h_html"><div class="ttname"><a href="Clickable_8h.html">Clickable.h</a></div><div class="ttdoc">Interface for elements which can be clicked.</div></div>
 <div class="ttc" id="aElement_8h_html"><div class="ttname"><a href="Element_8h.html">Element.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MenuContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">pf::ui::ig::MenuContainer</a></div><div class="ttdoc">An item which can contain other menus.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MenuContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">pf::ui::ig::MenuContainer</a></div><div class="ttdoc">An item which can contain other menus.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:28</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:23</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Clickable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Clickable.html">pf::ui::ig::Clickable</a></div><div class="ttdoc">Interface for clickable elements.</div><div class="ttdef"><b>Definition:</b> Clickable.h:26</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SubMenu_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SubMenu.html">pf::ui::ig::SubMenu</a></div><div class="ttdoc">Basically a button for a popup menu, which contains other elements as its items.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:76</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1WindowMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">pf::ui::ig::WindowMenuBar</a></div><div class="ttdoc">Menu bar belonging to Window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:93</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AppMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">pf::ui::ig::AppMenuBar</a></div><div class="ttdoc">Menu bar belonging to the entire application window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:109</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MenuItem_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MenuItem.html">pf::ui::ig::MenuItem</a></div><div class="ttdoc">An item in SubMenu, which can be clicked. It is basically a popup menu item.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:61</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Clickable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Clickable.html">pf::ui::ig::Clickable</a></div><div class="ttdoc">Interface for clickable elements.</div><div class="ttdef"><b>Definition:</b> Clickable.h:25</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SubMenu_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SubMenu.html">pf::ui::ig::SubMenu</a></div><div class="ttdoc">Basically a button for a popup menu, which contains other elements as its items.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:75</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1WindowMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1WindowMenuBar.html">pf::ui::ig::WindowMenuBar</a></div><div class="ttdoc">Menu bar belonging to Window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:92</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AppMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">pf::ui::ig::AppMenuBar</a></div><div class="ttdoc">Menu bar belonging to the entire application window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:108</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MenuItem_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MenuItem.html">pf::ui::ig::MenuItem</a></div><div class="ttdoc">An item in SubMenu, which can be clicked. It is basically a popup menu item.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:60</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
   /**
    * Construct Plot.
    * @param elementName ID of the plot
-   * @param text rendered above the plot
+   * @param label rendered above the plot
    * @param xLabel label of x axis
    * @param yLabel label of y axis
    * @param size size of the element
@@ -72,7 +72,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
 
   /**
    * Remove data storage by ID.
-   * @param ID of the data storage to be removed
+   * @param name ID of the data storage to be removed
    */
   void removeData(const std::string &name);
 

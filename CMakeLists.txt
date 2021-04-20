@@ -351,6 +351,7 @@ install(
 if (BUILD_DOCS)
     find_package(Doxygen)
     if (DOXYGEN_FOUND)
+        set(EXAMPLE_PATH ${CMAKE_SOURCE_DIR}/src/examples)
         doxygen_add_docs(pf_imgui_doc ALL
                 ${CMAKE_SOURCE_DIR}/src/pf_imgui
                 )

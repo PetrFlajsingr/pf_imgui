@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value_809',['value',['../structpf_1_1ui_1_1ig_1_1PieChartSample.html#a0a5bdc13f9043afd34c98dd39100b9ec',1,'pf::ui::ig::PieChartSample']]]
+  ['type_845',['type',['../classpf_1_1ui_1_1ig_1_1Checkbox.html#a66be218d47e617aa44aeeac246a6fde2',1,'pf::ui::ig::Checkbox']]]
 ];

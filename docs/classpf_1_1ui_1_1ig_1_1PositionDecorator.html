@@ -101,9 +101,8 @@ Collaboration diagram for pf::ui::ig::PositionDecorator&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a90df476b80e5d56196987e659115724f"><td class="memTemplParams" colspan="2"><a id="a90df476b80e5d56196987e659115724f"></a>
-template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a90df476b80e5d56196987e659115724f"><td class="memTemplItemLeft" align="right" valign="top">requires std::constructible_from&lt; T, Args... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>PositionDecorator</b> (ImVec2 pos, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:a90df476b80e5d56196987e659115724f"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a90df476b80e5d56196987e659115724f"><td class="memTemplItemLeft" align="right" valign="top">requires std::constructible_from&lt; T, Args... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1PositionDecorator.html#a90df476b80e5d56196987e659115724f">PositionDecorator</a> (ImVec2 pos, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a90df476b80e5d56196987e659115724f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Positionable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Positionable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Positionable.html">pf::ui::ig::Positionable</a></td></tr>
 <tr class="memitem:a7b9e730b18a6360456e6e665c2b221e0 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Positionable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Positionable.html#a7b9e730b18a6360456e6e665c2b221e0">Positionable</a> (const ImVec2 &amp;position)</td></tr>
@@ -127,7 +126,61 @@ class pf::ui::ig::PositionDecorator&lt; T &gt;</h3>
 
 <p>Decorator for non-Positionable elements. </p>
 <p>This decorator adds <a class="el" href="classpf_1_1ui_1_1ig_1_1Positionable.html" title="Interface for positionable elements.">Positionable</a> capabilities to any <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements.">Element</a>. It is used for <a class="el" href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates.">AbsoluteLayout</a>. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a90df476b80e5d56196987e659115724f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90df476b80e5d56196987e659115724f">&#9670;&nbsp;</a></span>PositionDecorator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::derived_from&lt; Element &gt; T&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">requires std::constructible_from&lt;T, Args...&gt; <a class="el" href="classpf_1_1ui_1_1ig_1_1PositionDecorator.html">pf::ui::ig::PositionDecorator</a>&lt; T &gt;::<a class="el" href="classpf_1_1ui_1_1ig_1_1PositionDecorator.html">PositionDecorator</a> </td>
+          <td>(</td>
+          <td class="paramtype">ImVec2&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1PositionDecorator.html" title="Decorator for non-Positionable elements.">PositionDecorator</a>. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>argument types for T's constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>starting position </td></tr>
+    <tr><td class="paramname">args</td><td>arguments for T's constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/pf_imgui/layouts/<a class="el" href="layout__decorators_8h_source.html">layout_decorators.h</a></li>
 </ul>
 </div><!-- contents -->

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['heatmap_415',['HeatMap',['../classpf_1_1ui_1_1ig_1_1plot__type_1_1HeatMap.html',1,'pf::ui::ig::plot_type']]],
-  ['hoverable_416',['Hoverable',['../classpf_1_1ui_1_1ig_1_1Hoverable.html',1,'pf::ui::ig']]]
+  ['heatmap_442',['HeatMap',['../classpf_1_1ui_1_1ig_1_1plot__type_1_1HeatMap.html',1,'pf::ui::ig::plot_type']]],
+  ['hoverable_443',['Hoverable',['../classpf_1_1ui_1_1ig_1_1Hoverable.html',1,'pf::ui::ig']]]
 ];

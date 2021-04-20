@@ -19,6 +19,9 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Sample for flame graph.
+ */
 using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
 /**
  * @brief Graph for visualising stack traces, performance stuff...

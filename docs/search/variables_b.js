@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['unformattedwithoutstep_807',['UnformattedWithoutStep',['../Input_8h.html#ad249083a01336392b8c2aa4564f05188',1,'pf::ui::ig::details']]],
-  ['unformattedwithstep_808',['UnformattedWithStep',['../Input_8h.html#a15ab7c5311c9b727fcc18fc1b6d2a861',1,'pf::ui::ig::details']]]
+  ['selectionchanged_842',['selectionChanged',['../structpf_1_1ui_1_1ig_1_1ComboFilterState.html#a87c56bdfcaf7d00a669a9734df5dcd37',1,'pf::ui::ig::ComboFilterState']]],
+  ['size_843',['size',['../structpf_1_1ui_1_1ig_1_1TableSettings.html#a11d8c4c577783ec167c4975ad77568cf',1,'pf::ui::ig::TableSettings']]],
+  ['sortable_844',['sortable',['../structpf_1_1ui_1_1ig_1_1TableSettings.html#a6c62cbdf4a4ebf57684d657372b91cbf',1,'pf::ui::ig::TableSettings']]]
 ];

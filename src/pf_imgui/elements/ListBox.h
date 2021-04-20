@@ -62,7 +62,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * Construct ListBox.
    * @param elementName ID of the element
    * @param label text rendered at the top of the list
-   * @param items_ starting items in the list
+   * @param newItems starting items in the list
    * @param selectedIdx starting selected id
    * @param heightInItems items to show before scroll is enabled - -1 shows all
    */
@@ -116,7 +116,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
 
   /**
    * Set selected item by name. If no such item is found nothing happens.
-   * @param itemToSelect string representation of item to select
+   * @param itemAsString string representation of item to select
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =

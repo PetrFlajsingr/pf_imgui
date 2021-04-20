@@ -50,8 +50,18 @@ class PF_IMGUI_EXPORT Labellable {
    * @param newVisibility
    */
   void setLabelVisible(Visibility newVisibility);
+  /**
+   * Set label visibility to Invisible.
+   */
   void showLabel();
+  /**
+   * Set label visibility to Visible.
+   */
   void hideLabel();
+  /**
+   * Check label visibility.
+   * @return true if the label is visible, false otherwise
+   */
   [[nodiscard]] bool isLabelVisible() const;
 
   virtual ~Labellable() = default;

@@ -18,17 +18,17 @@
 <area shape="rect" id="node36" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="1207,177,1386,203"/>
 <area shape="rect" id="node37" href="$RadioGroup_8h.html" title="Radio group element." alt="" coords="1156,87,1331,114"/>
 <area shape="rect" id="node38" href="$Slider_8h.html" title="Slider element." alt="" coords="3239,87,3373,114"/>
-<area shape="rect" id="node39" href="$SliderAngle_8h.html" title="SliderAngle element." alt="" coords="2103,177,2277,203"/>
-<area shape="rect" id="node40" href="$StringTable_8h.html" title="StringTable element." alt="" coords="6303,177,6474,203"/>
-<area shape="rect" id="node41" href="$TabBar_8h.html" title="TabBar element." alt="" coords="1461,177,1604,203"/>
-<area shape="rect" id="node42" href="$Table_8h.html" title="Table element." alt="" coords="5335,87,5469,114"/>
-<area shape="rect" id="node43" href="$Tree_8h.html" title="Tree element." alt="" coords="169,177,296,203"/>
-<area shape="rect" id="node44" href="$plots_8h.html" title="Convenience include for all layout types." alt="" coords="5695,87,5826,114"/>
-<area shape="rect" id="node45" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="2722,87,2877,114"/>
+<area shape="rect" id="node39" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="2722,87,2877,114"/>
+<area shape="rect" id="node40" href="$SliderAngle_8h.html" title="SliderAngle element." alt="" coords="2103,177,2277,203"/>
+<area shape="rect" id="node41" href="$StringTable_8h.html" title="StringTable element." alt="" coords="6303,177,6474,203"/>
+<area shape="rect" id="node42" href="$TabBar_8h.html" title="TabBar element." alt="" coords="1461,177,1604,203"/>
+<area shape="rect" id="node43" href="$Table_8h.html" title="Table element." alt="" coords="5335,87,5469,114"/>
+<area shape="rect" id="node44" href="$Tree_8h.html" title="Tree element." alt="" coords="169,177,296,203"/>
+<area shape="rect" id="node45" href="$plots_8h.html" title="Convenience include for all layout types." alt="" coords="5695,87,5826,114"/>
 <area shape="rect" id="node46" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="5851,87,5985,114"/>
 <area shape="rect" id="node47" href="$Dialog_8h.html" title="Dialog built by a user." alt="" coords="675,169,828,211"/>
-<area shape="rect" id="node48" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="692,80,845,121"/>
-<area shape="rect" id="node49" href="$FileDialog_8h.html" title="Dialog for selecting files on disk." alt="" coords="5961,169,6115,211"/>
+<area shape="rect" id="node48" href="$FileDialog_8h.html" title="Dialog for selecting files on disk." alt="" coords="5961,169,6115,211"/>
+<area shape="rect" id="node49" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="692,80,845,121"/>
 <area shape="rect" id="node50" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="941,80,1095,121"/>
 <area shape="rect" id="node3" title=" " alt="" coords="419,348,505,375"/>
 <area shape="rect" id="node4" title=" " alt="" coords="2403,348,2547,375"/>

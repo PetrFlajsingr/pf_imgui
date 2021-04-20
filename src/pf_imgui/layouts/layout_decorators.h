@@ -25,6 +25,12 @@ namespace pf::ui::ig {
 template<std::derived_from<Element> T>
 class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
  public:
+  /**
+   * Construct PositionDecorator.
+   * @tparam Args argument types for T's constructor
+   * @param pos starting position
+   * @param args arguments for T's constructor
+   */
   template<typename... Args>
   requires std::constructible_from<T, Args...>
   explicit PositionDecorator(ImVec2 pos, Args &&...args) : T(std::forward<Args>(args)...), Positionable(pos) {}

@@ -15,6 +15,11 @@ namespace pf::ui::ig {
 namespace details {
 static inline auto generator = iota<std::size_t>();
 
+/**
+ * Generate random string of length. Statically seeded.
+ * @param length desired length
+ * @return random string of desired length
+ */
 std::string random_string(std::size_t length) {
   static auto randGen = std::mt19937{465768687};
   auto randchar = []() -> char {

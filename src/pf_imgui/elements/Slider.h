@@ -26,10 +26,25 @@
 namespace pf::ui::ig {
 
 namespace details {
+/**
+ * Types using float as underlying value.
+ */
 #define IMGUI_SLIDER_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
+/**
+ * Types using int as underlying value.
+ */
 #define IMGUI_SLIDER_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
+/**
+ * Supported glm types.
+ */
 #define IMGUI_SLIDER_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
+/**
+ * All types supported by Slider.
+ */
 #define IMGUI_SLIDER_TYPE_LIST IMGUI_SLIDER_FLOAT_TYPE_LIST, IMGUI_SLIDER_INT_TYPE_LIST
+/**
+ * Detection for underlying type.
+ */
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
 using SliderMinMaxType = std::conditional_t<OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>, float, int>;
 
