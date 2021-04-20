@@ -13,7 +13,7 @@ InputText::InputText(const std::string &elementName, std::string label, const st
     : Text(elementName, text), Labellable(std::move(label)), ValueObservable(""), Savable(persistent),
       inputType(textInputType) {
   setValueInner(text);
-  for (auto flag : filters.getSetFlags()) { flags |= static_cast<uint>(flag); }
+  for (auto flag : filters.getSetFlags()) { flags |= static_cast<uint32_t>(flag); }
   if (trigger == TextTrigger::Enter) {
     flags |= ImGuiInputTextFlags_EnterReturnsTrue;
   }

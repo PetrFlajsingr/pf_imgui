@@ -212,7 +212,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   void renderImpl() override {
     using namespace ranges;
     auto flags = previewValue.has_value() ? ImGuiComboFlags_{} : ImGuiComboFlags_NoPreview;
-    flags |= static_cast<uint>(shownItems);
+    flags |= static_cast<uint32_t>(shownItems);
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
       previewPtr = items[*selectedItemIndex].second.c_str();

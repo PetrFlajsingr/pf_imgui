@@ -114,8 +114,8 @@ Collaboration diagram for pf::ui::ig::ComboBox&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2a04c1ef158c9411964bdd1313455dca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#a2a04c1ef158c9411964bdd1313455dca">ComboBox</a> (const std::string &amp;elementName, const std::string &amp;label, std::optional&lt; std::string &gt; previewValue, std::ranges::range auto &amp;&amp;newItems, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No) requires(std</td></tr>
-<tr class="separator:a2a04c1ef158c9411964bdd1313455dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3954b1f7215bc977ff8dca51031bac6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#ac3954b1f7215bc977ff8dca51031bac6">ComboBox</a> (const std::string &amp;elementName, const std::string &amp;label, std::optional&lt; std::string &gt; previewValue, std::ranges::range auto &amp;&amp;newItems, ComboBoxCount showItemCount=ComboBoxCount::Items8, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No) requires(std</td></tr>
+<tr class="separator:ac3954b1f7215bc977ff8dca51031bac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4bd760a44e982e862c06becd48ab849"><td class="memItemLeft" align="right" valign="top">std::optional&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#ae4bd760a44e982e862c06becd48ab849">getSelectedItem</a> ()</td></tr>
 <tr class="separator:ae4bd760a44e982e862c06becd48ab849"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9eab77532d776779fc170277a88abcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#af9eab77532d776779fc170277a88abcf">setSelectedItem</a> (T &amp;item)</td></tr>
@@ -138,6 +138,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a37963c50670c80d674e2548c7531903c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20a77a9bd6a966b9e4240ec9810ece62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#a20a77a9bd6a966b9e4240ec9810ece62">clearFilter</a> ()</td></tr>
 <tr class="separator:a20a77a9bd6a966b9e4240ec9810ece62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8082d71ef6906ca616e1c65e11682eeb"><td class="memItemLeft" align="right" valign="top">ComboBoxCount&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#a8082d71ef6906ca616e1c65e11682eeb">getShownItemCount</a> () const</td></tr>
+<tr class="separator:a8082d71ef6906ca616e1c65e11682eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae81485082820e683f68558b6b7f05ec3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#ae81485082820e683f68558b6b7f05ec3">setShownItemCount</a> (ComboBoxCount shownItemCount)</td></tr>
+<tr class="separator:ae81485082820e683f68558b6b7f05ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
 <tr class="memitem:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a1edd037f3e2d9f55121f68ffd6d3cba4">ItemElement</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -257,8 +261,8 @@ class pf::ui::ig::ComboBox&lt; T &gt;</h3>
 <p>A combobox filled with string convertible type. The element notifies listeners of changes in selection. It also has a filter functionality, which allows for delimiting shown items without the need to rebuild them.</p>
 <dl class="section warning"><dt>Warning</dt><dd>If there are multiple items which are the same some unexpected behavior may occur. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2a04c1ef158c9411964bdd1313455dca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a04c1ef158c9411964bdd1313455dca">&#9670;&nbsp;</a></span>ComboBox()</h2>
+<a id="ac3954b1f7215bc977ff8dca51031bac6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3954b1f7215bc977ff8dca51031bac6">&#9670;&nbsp;</a></span>ComboBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,6 +295,12 @@ template&lt;ToStringConvertible T&gt; </div>
           <td></td>
           <td class="paramtype">std::ranges::range auto &amp;&amp;&#160;</td>
           <td class="paramname"><em>newItems</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ComboBoxCount&#160;</td>
+          <td class="paramname"><em>showItemCount</em> = <code>ComboBoxCount::Items8</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -467,6 +477,34 @@ template&lt;ToStringConvertible T&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Get currently selected item. </p><dl class="section return"><dt>Returns</dt><dd>if any item is selected return it, otherwise std::nullopt </dd></dl>
+
+</div>
+</div>
+<a id="a8082d71ef6906ca616e1c65e11682eeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8082d71ef6906ca616e1c65e11682eeb">&#9670;&nbsp;</a></span>getShownItemCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ComboBoxCount <a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html">pf::ui::ig::ComboBox</a>&lt; T &gt;::getShownItemCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get count of items shown when the element is unrolled. </p><dl class="section return"><dt>Returns</dt><dd>count of items </dd></dl>
 
 </div>
 </div>
@@ -728,6 +766,40 @@ template&lt;ToStringConvertible T&gt; </div>
 <p>Set selected item. If no such item is found the selection is cancelled. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">item</td><td>item to be selected </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae81485082820e683f68558b6b7f05ec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae81485082820e683f68558b6b7f05ec3">&#9670;&nbsp;</a></span>setShownItemCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ToStringConvertible T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html">pf::ui::ig::ComboBox</a>&lt; T &gt;::setShownItemCount </td>
+          <td>(</td>
+          <td class="paramtype">ComboBoxCount&#160;</td>
+          <td class="paramname"><em>shownItemCount</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set count of items shown when the element is unrolled. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shownItemCount</td><td>count of items </td></tr>
   </table>
   </dd>
 </dl>

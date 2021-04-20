@@ -17,7 +17,7 @@ var searchData=
   ['colorchooser_49',['ColorChooser',['../classpf_1_1ui_1_1ig_1_1ColorChooser.html',1,'pf::ui::ig::ColorChooser&lt; Type, T &gt;'],['../classpf_1_1ui_1_1ig_1_1ColorChooser.html#a2c2f542a853bc19e337f6eb55d32c41a',1,'pf::ui::ig::ColorChooser::ColorChooser()']]],
   ['colorchooser_2eh_50',['ColorChooser.h',['../ColorChooser_8h.html',1,'']]],
   ['colorchoosertype_51',['ColorChooserType',['../enums_8h.html#ab924c066d281e7b7196b2bad4652b4ca',1,'pf::ui::ig']]],
-  ['combobox_52',['ComboBox',['../classpf_1_1ui_1_1ig_1_1ComboBox.html',1,'pf::ui::ig::ComboBox&lt; T &gt;'],['../classpf_1_1ui_1_1ig_1_1ComboBox.html#a2a04c1ef158c9411964bdd1313455dca',1,'pf::ui::ig::ComboBox::ComboBox()']]],
+  ['combobox_52',['ComboBox',['../classpf_1_1ui_1_1ig_1_1ComboBox.html',1,'pf::ui::ig::ComboBox&lt; T &gt;'],['../classpf_1_1ui_1_1ig_1_1ComboBox.html#ac3954b1f7215bc977ff8dca51031bac6',1,'pf::ui::ig::ComboBox::ComboBox()']]],
   ['combobox_2eh_53',['ComboBox.h',['../ComboBox_8h.html',1,'']]],
   ['comboboxitemstorage_54',['ComboBoxItemStorage',['../structpf_1_1ui_1_1ig_1_1details_1_1ComboBoxItemStorage.html',1,'pf::ui::ig::details']]],
   ['comboboxitemstorage_3c_20std_3a_3astring_20_3e_55',['ComboBoxItemStorage&lt; std::string &gt;',['../structpf_1_1ui_1_1ig_1_1details_1_1ComboBoxItemStorage_3_01std_1_1string_01_4.html',1,'pf::ui::ig::details']]],
