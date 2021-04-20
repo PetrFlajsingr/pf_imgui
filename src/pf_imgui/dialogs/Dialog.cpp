@@ -25,6 +25,8 @@ void Dialog::renderImpl() {
   if (open) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndPopup();
+  } else {
+    close();
   }
   firstRender = false;
 }
