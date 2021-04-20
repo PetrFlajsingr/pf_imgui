@@ -68,6 +68,8 @@ constexpr const char *defaultSliderFormat() {
  *
  * If the type is not a scalar, each scalar part of the structure gets its own slider.
  * @tparam T underlying type
+ *
+ * @todo: enum support
  */
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Slider : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {

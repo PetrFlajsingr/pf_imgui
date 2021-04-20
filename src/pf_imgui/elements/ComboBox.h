@@ -68,11 +68,11 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    * Construct Combobox.
    * @param elementName ID of the combobox
    * @param label label drawn next to the element
-   * @param previewValue value shown when no item is selected
+   * @param previewValue value shown when no item is selected, if nullopt then there's no preview state
    * @param newItems items to use for combobox
    * @param persistent enable state saving to disk
    */
-  ComboBox(const std::string &elementName, const std::string &label, std::string previewValue,
+  ComboBox(const std::string &elementName, const std::string &label, std::optional<std::string> previewValue,
            std::ranges::range auto &&newItems,
            Persistent persistent =
                Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
@@ -193,10 +193,18 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   }
   void renderImpl() override {
     using namespace ranges;
-    if (ImGui::BeginCombo(getLabel().c_str(),
-                          selectedItemIndex.has_value() ? items[*selectedItemIndex].second.c_str()
-                                                        : previewValue.c_str())) {
-      auto cStrItems = items | views::transform([](const auto &item) { return std::make_pair(item.first, item.second.c_str()); });
+    const auto flags = previewValue.has_value() ? ImGuiComboFlags_{} : ImGuiComboFlags_NoPreview;
+    const char *previewPtr;
+    if (selectedItemIndex.has_value()) {
+      previewPtr = items[*selectedItemIndex].second.c_str();
+    } else if (previewValue.has_value()) {
+      previewPtr = previewValue->c_str();
+    } else {
+      previewPtr = "";
+    }
+    if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, flags)) {
+      auto cStrItems =
+          items | views::transform([](const auto &item) { return std::make_pair(item.first, item.second.c_str()); });
       std::ranges::for_each(cStrItems | views::enumerate
                                 | views::filter([this](auto idxPtr) { return filter(idxPtr.second.first); }),
                             [&](auto idxPtr) {
@@ -217,7 +225,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
 
  private:
   std::vector<details::ComboBoxItemStorage<T>> items;
-  std::string previewValue;
+  std::optional<std::string> previewValue;
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
   std::function<bool(T)> filter = [](auto) { return true; };
 };

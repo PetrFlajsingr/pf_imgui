@@ -22,6 +22,8 @@ namespace pf::ui::ig {
  * @brief Group of elements which may be visually delimited.
  *
  * Elements are rendered in top-down order.
+ *
+ * @todo: change to something like a collapsing header
  */
 class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, public Labellable, public Collapsible {
  public:

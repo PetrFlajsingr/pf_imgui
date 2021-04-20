@@ -19,6 +19,8 @@ namespace pf::ui::ig {
 
 /**
  * @brief Simple rendered text. May be colored.
+ *
+ * @todo: text wrapping
  */
 class PF_IMGUI_EXPORT Text : public ItemElement {
  public:

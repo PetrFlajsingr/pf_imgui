@@ -25,6 +25,8 @@ constexpr auto IsValueObservable = derived_specialization_of<T, ValueObservable>
 struct CommonPlaceholder {
   using CreateType = int;
 };
+
+struct Dummy{};
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_META_H
