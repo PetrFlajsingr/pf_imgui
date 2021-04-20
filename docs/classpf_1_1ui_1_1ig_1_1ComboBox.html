@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.3.3</span>
+   &#160;<span id="projectnumber">0.3.4</span>
    </div>
   </td>
  </tr>
@@ -114,8 +114,8 @@ Collaboration diagram for pf::ui::ig::ComboBox&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adae96e9ee519456d38a125d81eefe218"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#adae96e9ee519456d38a125d81eefe218">ComboBox</a> (const std::string &amp;elementName, const std::string &amp;label, std::string previewValue, std::ranges::range auto &amp;&amp;newItems, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No) requires(std</td></tr>
-<tr class="separator:adae96e9ee519456d38a125d81eefe218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a04c1ef158c9411964bdd1313455dca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#a2a04c1ef158c9411964bdd1313455dca">ComboBox</a> (const std::string &amp;elementName, const std::string &amp;label, std::optional&lt; std::string &gt; previewValue, std::ranges::range auto &amp;&amp;newItems, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No) requires(std</td></tr>
+<tr class="separator:a2a04c1ef158c9411964bdd1313455dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4bd760a44e982e862c06becd48ab849"><td class="memItemLeft" align="right" valign="top">std::optional&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#ae4bd760a44e982e862c06becd48ab849">getSelectedItem</a> ()</td></tr>
 <tr class="separator:ae4bd760a44e982e862c06becd48ab849"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9eab77532d776779fc170277a88abcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#af9eab77532d776779fc170277a88abcf">setSelectedItem</a> (T &amp;item)</td></tr>
@@ -257,8 +257,8 @@ class pf::ui::ig::ComboBox&lt; T &gt;</h3>
 <p>A combobox filled with string convertible type. The element notifies listeners of changes in selection. It also has a filter functionality, which allows for delimiting shown items without the need to rebuild them.</p>
 <dl class="section warning"><dt>Warning</dt><dd>If there are multiple items which are the same some unexpected behavior may occur. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adae96e9ee519456d38a125d81eefe218"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adae96e9ee519456d38a125d81eefe218">&#9670;&nbsp;</a></span>ComboBox()</h2>
+<a id="a2a04c1ef158c9411964bdd1313455dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a04c1ef158c9411964bdd1313455dca">&#9670;&nbsp;</a></span>ComboBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +283,7 @@ template&lt;ToStringConvertible T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">std::optional&lt; std::string &gt;&#160;</td>
           <td class="paramname"><em>previewValue</em>, </td>
         </tr>
         <tr>
@@ -314,7 +314,7 @@ template&lt;ToStringConvertible T&gt; </div>
   <table class="params">
     <tr><td class="paramname">elementName</td><td>ID of the combobox </td></tr>
     <tr><td class="paramname">label</td><td>label drawn next to the element </td></tr>
-    <tr><td class="paramname">previewValue</td><td>value shown when no item is selected </td></tr>
+    <tr><td class="paramname">previewValue</td><td>value shown when no item is selected, if nullopt then there's no preview state </td></tr>
     <tr><td class="paramname">newItems</td><td>items to use for combobox </td></tr>
     <tr><td class="paramname">persistent</td><td>enable state saving to disk </td></tr>
   </table>

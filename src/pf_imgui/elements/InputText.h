@@ -37,6 +37,7 @@ enum class TextTrigger { Character, Enter };
  *
  * @todo: custom filter with predicate
  * @todo: password input
+ * @todo: hint
  */
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,

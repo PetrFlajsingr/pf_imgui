@@ -1,7 +1,7 @@
 <map id="pf::ui::ig::Focusable" name="pf::ui::ig::Focusable">
-<area shape="rect" id="node1" title="Interface for focusable elements." alt="" coords="5,452,152,479"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="200,427,367,453"/>
-<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="216,477,351,504"/>
+<area shape="rect" id="node1" title="Interface for focusable elements." alt="" coords="5,503,152,529"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="200,477,367,504"/>
+<area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="216,528,351,555"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Button.html" title="A typical button element." alt="" coords="451,5,577,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="441,56,587,83"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="429,107,599,149"/>
@@ -13,11 +13,13 @@
 <area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1ListBox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="430,427,598,453"/>
 <area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1ProgressBar.html" title="Progress bar for notifying a user of operation progress." alt="" coords="415,477,613,504"/>
 <area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1RadioButton.html" title="A button similar in function to CheckBox, but it can belong to RadioGroup." alt="" coords="433,528,595,555"/>
-<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="435,579,593,605"/>
-<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="427,629,601,656"/>
-<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="436,680,592,707"/>
-<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="437,731,591,773"/>
-<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="462,797,566,824"/>
-<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Text.html" title="Simple rendered text. May be colored." alt="" coords="459,848,569,875"/>
-<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="661,848,804,875"/>
+<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1Range.html" title="Range of 2 values." alt="" coords="433,579,595,605"/>
+<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="435,629,593,656"/>
+<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="427,680,601,707"/>
+<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="427,731,601,757"/>
+<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="436,781,592,808"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="437,833,591,874"/>
+<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="462,899,566,925"/>
+<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Text.html" title="Simple rendered text. May be colored." alt="" coords="459,949,569,976"/>
+<area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="661,949,804,976"/>
 </map>

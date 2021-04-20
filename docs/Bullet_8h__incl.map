@@ -1,0 +1,12 @@
+<map id="src/pf_imgui/elements/Bullet.h" name="src/pf_imgui/elements/Bullet.h">
+<area shape="rect" id="node1" title="Decorator adding a bullet to an element." alt="" coords="138,5,305,47"/>
+<area shape="rect" id="node2" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="151,95,292,136"/>
+<area shape="rect" id="node3" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="167,184,275,211"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,259,149,285"/>
+<area shape="rect" id="node10" title=" " alt="" coords="387,259,445,285"/>
+<area shape="rect" id="node4" title=" " alt="" coords="77,333,235,360"/>
+<area shape="rect" id="node6" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="224,259,363,285"/>
+<area shape="rect" id="node7" title=" " alt="" coords="260,333,327,360"/>
+<area shape="rect" id="node8" title=" " alt="" coords="351,333,422,360"/>
+<area shape="rect" id="node9" title=" " alt="" coords="446,333,538,360"/>
+</map>

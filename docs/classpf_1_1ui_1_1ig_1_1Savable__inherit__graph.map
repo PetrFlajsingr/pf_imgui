@@ -1,5 +1,5 @@
 <map id="pf::ui::ig::Savable" name="pf::ui::ig::Savable">
-<area shape="rect" id="node1" title="Interface for savable elements." alt="" coords="5,325,140,352"/>
+<area shape="rect" id="node1" title="Interface for savable elements." alt="" coords="5,376,140,403"/>
 <area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="210,56,357,83"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="206,107,361,133"/>
 <area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="199,158,368,199"/>
@@ -8,9 +8,11 @@
 <area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="207,325,360,352"/>
 <area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="212,376,355,403"/>
 <area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1RadioGroup.html" title="Group of RadioButton." alt="" coords="204,427,363,453"/>
-<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="205,477,362,504"/>
-<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="196,528,371,555"/>
-<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="205,579,361,605"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Range.html" title="Range of 2 values." alt="" coords="203,477,364,504"/>
+<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="205,528,362,555"/>
+<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="196,579,371,605"/>
+<area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="196,629,371,656"/>
+<area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="205,680,361,707"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited." alt="" coords="433,56,555,83"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="431,107,557,133"/>
 <area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="427,157,561,184"/>

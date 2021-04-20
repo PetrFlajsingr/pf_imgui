@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.3.3</span>
+   &#160;<span id="projectnumber">0.3.4</span>
    </div>
   </td>
  </tr>
@@ -86,21 +86,25 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Button.html">   28</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Button.html">Button</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Clickable.html">Clickable</a> {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Button.html">Button</a>(<span class="keyword">const</span> std::string &amp;name, std::string label, <a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> buttonType = ButtonType::Normal,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;         <span class="keyword">const</span> ImVec2 &amp;size = {0, 0});</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  [[nodiscard]] <a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> getType() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">void</span> setType(<a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> type);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> type;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_BUTTON_H</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Button.html">Button</a>(<span class="keyword">const</span> std::string &amp;name, std::string label, <a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> buttonType = ButtonType::Normal, <span class="keywordtype">bool</span> isRepeatable = <span class="keyword">false</span>,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;         <span class="keyword">const</span> ImVec2 &amp;size = {0, 0});</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  [[nodiscard]] <a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> getType() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">void</span> setType(<a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> type);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isRepeatable() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> setRepeatable(<span class="keywordtype">bool</span> repeatable);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> type;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">bool</span> repeatable;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_BUTTON_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
 <div class="ttc" id="aClickable_8h_html"><div class="ttname"><a href="Clickable_8h.html">Clickable.h</a></div><div class="ttdoc">Interface for elements which can be clicked.</div></div>

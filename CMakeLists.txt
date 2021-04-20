@@ -7,7 +7,7 @@ HunterGate(
 )
 
 project(pf_imgui
-        VERSION 0.3.3)
+        VERSION 0.3.4)
 
 set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
 set(CPM_DOWNLOAD_VERSION 0.27.4)
@@ -56,14 +56,14 @@ if (ENABLE_STACKTRACE)
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG master
+            GIT_TAG v1.0.6
             OPTIONS "ENABLE_STACKTRACE ON"
     )
 else ()
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG master
+            GIT_TAG v1.0.6
     )
 endif ()
 

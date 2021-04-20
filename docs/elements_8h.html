@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.3.3</span>
+   &#160;<span id="projectnumber">0.3.4</span>
    </div>
   </td>
  </tr>
@@ -91,13 +91,16 @@ $(function() {
 <code>#include &quot;<a class="el" href="RadioGroup_8h_source.html">elements/RadioGroup.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Slider_8h_source.html">elements/Slider.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Slider2D_8h_source.html">elements/Slider2D.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Slider3D_8h_source.html">elements/Slider3D.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="SliderAngle_8h_source.html">elements/SliderAngle.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="StringTable_8h_source.html">elements/StringTable.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="TabBar_8h_source.html">elements/TabBar.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Table_8h_source.html">elements/Table.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Text_8h_source.html">elements/Text.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Tree_8h_source.html">elements/Tree.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Bullet_8h_source.html">elements/Bullet.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="plots_8h_source.html">elements/plots.h</a>&quot;</code><br />
+<code>#include &quot;elements/Range.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="layouts_8h_source.html">layouts/layouts.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Dialog_8h_source.html">src/pf_imgui/dialogs/Dialog.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FileDialog_8h_source.html">src/pf_imgui/dialogs/FileDialog.h</a>&quot;</code><br />
@@ -108,56 +111,56 @@ Include dependency graph for elements.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="elements_8h__incl.png" border="0" usemap="#src_2pf__imgui_2elements_8h" alt=""/></div>
 <map name="src_2pf__imgui_2elements_8h" id="src_2pf__imgui_2elements_8h">
-<area shape="rect" title="Convenience include for all elements." alt="" coords="2419,5,2598,32"/>
-<area shape="rect" href="Button_8h.html" title="Button element." alt="" coords="508,177,651,203"/>
-<area shape="rect" href="Checkbox_8h.html" title="Checkbox element." alt="" coords="1765,177,1927,203"/>
-<area shape="rect" href="ColorChooser_8h.html" title="ColorChooser element." alt="" coords="4596,87,4781,114"/>
-<area shape="rect" href="ComboBox_8h.html" title="ComboBox element." alt="" coords="5465,177,5635,203"/>
-<area shape="rect" href="DragInput_8h.html" title="DragInput element." alt="" coords="3762,87,3925,114"/>
-<area shape="rect" href="FlameGraph_8h.html" title="FlameGraph element." alt="" coords="6498,177,6677,203"/>
-<area shape="rect" href="Group_8h.html" title="Group element." alt="" coords="2522,177,2661,203"/>
-<area shape="rect" href="Image_8h.html" title="Image element." alt="" coords="5,177,145,203"/>
-<area shape="rect" href="Input_8h.html" title="Input element." alt="" coords="4431,87,4563,114"/>
-<area shape="rect" href="InputText_8h.html" title="InputText element." alt="" coords="1697,87,1856,114"/>
-<area shape="rect" href="Text_8h.html" title="Text element." alt="" coords="1629,177,1690,203"/>
-<area shape="rect" href="ListBox_8h.html" title="ListBox element." alt="" coords="2301,177,2447,203"/>
-<area shape="rect" href="Memo_8h.html" title="Memo element." alt="" coords="6139,177,6279,203"/>
-<area shape="rect" href="MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="320,177,484,203"/>
-<area shape="rect" href="ProgressBar_8h.html" title="ProgressBar element." alt="" coords="5710,177,5886,203"/>
-<area shape="rect" href="RadioButton_8h.html" title="RadioButton element." alt="" coords="1207,177,1386,203"/>
-<area shape="rect" href="RadioGroup_8h.html" title="Radio group element." alt="" coords="1156,87,1331,114"/>
-<area shape="rect" href="Slider_8h.html" title="Slider element." alt="" coords="3239,87,3373,114"/>
-<area shape="rect" href="Slider2D_8h.html" title="Slider2D element." alt="" coords="2722,87,2877,114"/>
-<area shape="rect" href="SliderAngle_8h.html" title="SliderAngle element." alt="" coords="2103,177,2277,203"/>
-<area shape="rect" href="StringTable_8h.html" title="StringTable element." alt="" coords="6303,177,6474,203"/>
-<area shape="rect" href="TabBar_8h.html" title="TabBar element." alt="" coords="1461,177,1604,203"/>
-<area shape="rect" href="Table_8h.html" title="Table element." alt="" coords="5335,87,5469,114"/>
-<area shape="rect" href="Tree_8h.html" title="Tree element." alt="" coords="169,177,296,203"/>
-<area shape="rect" href="plots_8h.html" title="Convenience include for all layout types." alt="" coords="5695,87,5826,114"/>
-<area shape="rect" href="layouts_8h.html" title="Convenience include for all layouts." alt="" coords="5851,87,5985,114"/>
-<area shape="rect" href="Dialog_8h.html" title="Dialog built by a user." alt="" coords="675,169,828,211"/>
-<area shape="rect" href="FileDialog_8h.html" title="Dialog for selecting files on disk." alt="" coords="5961,169,6115,211"/>
-<area shape="rect" href="MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="692,80,845,121"/>
-<area shape="rect" href="Window_8h.html" title="Dialog for building windows." alt="" coords="941,80,1095,121"/>
-<area shape="rect" title=" " alt="" coords="419,348,505,375"/>
-<area shape="rect" title=" " alt="" coords="2403,348,2547,375"/>
-<area shape="rect" href="Clickable_8h.html" title="Interface for elements which can be clicked." alt="" coords="522,259,663,300"/>
-<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="2447,259,2589,300"/>
-<area shape="rect" title=" " alt="" coords="2279,348,2338,375"/>
-<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="2079,259,2221,300"/>
-<area shape="rect" href="Resizable_8h.html" title="Interface for elements which can be resized." alt="" coords="5414,259,5555,300"/>
-<area shape="rect" title=" " alt="" coords="5577,348,5648,375"/>
-<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="3127,259,3269,300"/>
-<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="2675,259,2823,300"/>
-<area shape="rect" title=" " alt="" coords="4168,177,4324,203"/>
-<area shape="rect" title=" " alt="" coords="4348,177,4459,203"/>
-<area shape="rect" title=" " alt="" coords="4033,177,4144,203"/>
-<area shape="rect" title=" " alt="" coords="3644,169,3805,211"/>
-<area shape="rect" href="serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="3445,177,3620,203"/>
-<area shape="rect" title=" " alt="" coords="5092,177,5288,203"/>
-<area shape="rect" title=" " alt="" coords="5926,266,6001,293"/>
-<area shape="rect" title=" " alt="" coords="5025,259,5187,300"/>
-<area shape="rect" href="ComboFilter_8h_source.html" title=" " alt="" coords="5630,266,5851,293"/>
+<area shape="rect" title="Convenience include for all elements." alt="" coords="4656,5,4834,32"/>
+<area shape="rect" href="Button_8h.html" title="Button element." alt="" coords="5835,177,5978,203"/>
+<area shape="rect" href="Checkbox_8h.html" title="Checkbox element." alt="" coords="2956,177,3118,203"/>
+<area shape="rect" href="ColorChooser_8h.html" title="ColorChooser element." alt="" coords="548,87,734,114"/>
+<area shape="rect" href="ComboBox_8h.html" title="ComboBox element." alt="" coords="3142,177,3313,203"/>
+<area shape="rect" href="DragInput_8h.html" title="DragInput element." alt="" coords="1506,87,1669,114"/>
+<area shape="rect" href="FlameGraph_8h.html" title="FlameGraph element." alt="" coords="6582,177,6761,203"/>
+<area shape="rect" href="Group_8h.html" title="Group element." alt="" coords="4161,177,4300,203"/>
+<area shape="rect" href="Image_8h.html" title="Image element." alt="" coords="6179,177,6319,203"/>
+<area shape="rect" href="Input_8h.html" title="Input element." alt="" coords="803,87,935,114"/>
+<area shape="rect" href="InputText_8h.html" title="InputText element." alt="" coords="4666,87,4824,114"/>
+<area shape="rect" href="Text_8h.html" title="Text element." alt="" coords="5498,177,5560,203"/>
+<area shape="rect" href="ListBox_8h.html" title="ListBox element." alt="" coords="4729,177,4876,203"/>
+<area shape="rect" href="Memo_8h.html" title="Memo element." alt="" coords="3490,177,3630,203"/>
+<area shape="rect" href="MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="6343,177,6507,203"/>
+<area shape="rect" href="ProgressBar_8h.html" title="ProgressBar element." alt="" coords="5584,177,5760,203"/>
+<area shape="rect" href="RadioButton_8h.html" title="RadioButton element." alt="" coords="3705,177,3884,203"/>
+<area shape="rect" href="RadioGroup_8h.html" title="Radio group element." alt="" coords="3396,87,3571,114"/>
+<area shape="rect" href="Slider_8h.html" title="Slider element." alt="" coords="2028,87,2163,114"/>
+<area shape="rect" href="Slider2D_8h.html" title="Slider2D element." alt="" coords="2326,87,2481,114"/>
+<area shape="rect" href="Slider3D_8h.html" title="Slider3D element." alt="" coords="2505,87,2660,114"/>
+<area shape="rect" href="SliderAngle_8h.html" title="SliderAngle element." alt="" coords="2708,177,2881,203"/>
+<area shape="rect" href="StringTable_8h.html" title="StringTable element." alt="" coords="7038,177,7209,203"/>
+<area shape="rect" href="TabBar_8h.html" title="TabBar element." alt="" coords="5128,177,5271,203"/>
+<area shape="rect" href="Table_8h.html" title="Table element." alt="" coords="6782,87,6916,114"/>
+<area shape="rect" href="Tree_8h.html" title="Tree element." alt="" coords="4324,177,4451,203"/>
+<area shape="rect" href="Bullet_8h.html" title="Decorator adding a bullet to an element." alt="" coords="5383,87,5520,114"/>
+<area shape="rect" href="plots_8h.html" title="Convenience include for all layout types." alt="" coords="5545,87,5676,114"/>
+<area shape="rect" href="Range_8h_source.html" title=" " alt="" coords="4003,87,4143,114"/>
+<area shape="rect" href="layouts_8h.html" title="Convenience include for all layouts." alt="" coords="5751,87,5886,114"/>
+<area shape="rect" href="Dialog_8h.html" title="Dialog built by a user." alt="" coords="4951,169,5104,211"/>
+<area shape="rect" href="FileDialog_8h.html" title="Dialog for selecting files on disk." alt="" coords="6002,169,6155,211"/>
+<area shape="rect" href="MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="4951,80,5104,121"/>
+<area shape="rect" href="Window_8h.html" title="Dialog for building windows." alt="" coords="6604,80,6758,121"/>
+<area shape="rect" title=" " alt="" coords="5883,348,5970,375"/>
+<area shape="rect" title=" " alt="" coords="4664,348,4808,375"/>
+<area shape="rect" href="Clickable_8h.html" title="Interface for elements which can be clicked." alt="" coords="5936,259,6077,300"/>
+<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="4509,259,4650,300"/>
+<area shape="rect" title=" " alt="" coords="4358,348,4417,375"/>
+<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="4040,259,4181,300"/>
+<area shape="rect" href="Resizable_8h.html" title="Interface for elements which can be resized." alt="" coords="6202,259,6344,300"/>
+<area shape="rect" title=" " alt="" coords="5412,348,5483,375"/>
+<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="2492,259,2633,300"/>
+<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="3126,259,3274,300"/>
+<area shape="rect" title=" " alt="" coords="1042,177,1198,203"/>
+<area shape="rect" title=" " alt="" coords="1676,177,1787,203"/>
+<area shape="rect" title=" " alt="" coords="907,177,1018,203"/>
+<area shape="rect" title=" " alt="" coords="2015,169,2176,211"/>
+<area shape="rect" href="serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="1375,177,1550,203"/>
+<area shape="rect" title=" " alt="" coords="27,177,223,203"/>
 </map>
 </div>
 </div>
