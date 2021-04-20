@@ -33,11 +33,12 @@ class Slider3D : public ItemElement, public Labellable, public ValueObservable<g
    * @param minMaxX extremes on X axis
    * @param minMaxY extremes on Y axis
    * @param minMaxZ extremes on Z axis
+   * @param value starting value
    * @param persistent enable state saving to disk
    */
   Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
-           const glm::vec2 &minMaxZ, Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), Savable(persistent), extremesX(minMaxX), extremesY(minMaxY),
+           const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, Persistent persistent = Persistent::No)
+      : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value), Savable(persistent), extremesX(minMaxX), extremesY(minMaxY),
         extremesZ(minMaxZ) {}
 
  protected:
