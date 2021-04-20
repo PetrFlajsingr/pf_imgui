@@ -32,9 +32,10 @@ class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Res
    * @param name ID of the button
    * @param label label drawn on the button
    * @param buttonType type of the button
+   * @param isRepeatable if set to true the button can repeat it's on click event when a user holds it
    * @param size size of the button
    */
-  Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
+  Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal, bool isRepeatable = false,
          const ImVec2 &size = {0, 0});
 
   /**
@@ -48,11 +49,23 @@ class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Res
    */
   void setType(ButtonType type);
 
+  /**
+   * Check whether the button is repeatable or not
+   * @return
+   */
+  [[nodiscard]] bool isRepeatable() const;
+  /**
+   * Set repeatable. If true then the button can be held by the user to trigger click events.
+   * @param repeatable new state
+   */
+  void setRepeatable(bool repeatable);
+
  protected:
   void renderImpl() override;
 
  private:
   ButtonType type;
+  bool repeatable;
 };
 
 }// namespace pf::ui::ig

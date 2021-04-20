@@ -4,14 +4,17 @@
 
 #include "Button.h"
 #include <imgui.h>
+#include <pf_common/RAII.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
-Button::Button(const std::string &name, std::string label, ButtonType buttonType, const ImVec2 &size)
-    : ItemElement(name), Labellable(std::move(label)), Resizable(size), type(buttonType) {}
+Button::Button(const std::string &name, std::string label, ButtonType buttonType, bool isRepeatable, const ImVec2 &size)
+    : ItemElement(name), Labellable(std::move(label)), Resizable(size), type(buttonType), repeatable(isRepeatable) {}
 
 void Button::renderImpl() {
+  ImGui::PushButtonRepeat(repeatable);
+  auto disableRepeat = RAII{[] { ImGui::PopButtonRepeat(); }};
   auto wasClicked = false;
   switch (type) {
     case ButtonType::Normal: wasClicked = ImGui::Button(getLabel().c_str(), getSize()); break;
@@ -28,5 +31,7 @@ void Button::renderImpl() {
 ButtonType Button::getType() const { return type; }
 
 void Button::setType(ButtonType buttonType) { type = buttonType; }
+bool Button::isRepeatable() const { return repeatable; }
+void Button::setRepeatable(bool repeatable) { Button::repeatable = repeatable; }
 
 }// namespace pf::ui::ig
