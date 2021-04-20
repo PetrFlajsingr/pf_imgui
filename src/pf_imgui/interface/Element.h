@@ -21,6 +21,8 @@ namespace pf::ui::ig {
  *
  * @warning If there are duplicate IDs in the render tree the program may have some undefined behavior for functions which use IDs.
  * @see Renderable
+ *
+ * @todo: custom colors: each derived will have to return std::optional<ImGuiCol> which will give it an option to be , this will be pushed in render over here (and popped as well)
  */
 class PF_IMGUI_EXPORT Element : public Renderable {
  public:
@@ -31,6 +33,8 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   explicit Element(const std::string &name);
 
   void render() override;
+// private:
+  //std::optional<ImVec4> customColor = std::nullopt;
 };
 
 }// namespace pf::ui::ig
