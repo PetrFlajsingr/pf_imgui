@@ -26,7 +26,7 @@ void Text::renderImpl() {
   }
   drag(&getText());
   if (auto drop = dropAccept(); drop.has_value()) {
-
+    setText(*drop);
   }
 }
 

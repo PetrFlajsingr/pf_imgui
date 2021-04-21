@@ -37,7 +37,7 @@ class DragSourceBase {
       if (tooltip.has_value()) { tooltip->render(); }
       ImGui::EndDragDropSource();
       auto payload = ImGui::GetDragDropPayload();
-      return payload != nullptr && ImGui::GetDragDropPayload()->IsDelivery();// check if this detection works
+      return payload != nullptr && payload->IsDelivery();// check if this detection works
     } else {
       dragged = false;
     }
@@ -59,9 +59,11 @@ class DropTargetBase {
  protected:
   [[nodiscard]] inline std::optional<void *> dropAccept_impl() const {
     if (dropAllowed && ImGui::BeginDragDropTarget()) {
-      auto payload = ImGui::AcceptDragDropPayload("");// todo figure out type stuff
-      if (payload != nullptr) { return payload->Data; }
+      auto payload = ImGui::AcceptDragDropPayload(
+          std::string(static_type_info::getTypeName<std::string>()).c_str());// todo type conversions
+      void *result = payload == nullptr ? nullptr : payload->Data;
       ImGui::EndDragDropTarget();
+      if (result != nullptr) { return result; }
     }
     return std::nullopt;
   }
@@ -78,8 +80,9 @@ class DragSource : public details::DragSourceBase {
 
  protected:
   bool drag(const T *sourceData) {
+    const auto ptrPtr = &sourceData;
     return drag_impl(std::string(static_type_info::getTypeName<T>()),
-                     reinterpret_cast<void *>(const_cast<T *>(sourceData)), sizeof(const T *));
+                     reinterpret_cast<void *>(const_cast<T **>(ptrPtr)), sizeof(const T *));
   }
 };
 
@@ -91,7 +94,7 @@ class DropTarget : public details::DropTargetBase {
  protected:
   std::optional<T> dropAccept() {
     const auto dropResult = dropAccept_impl();
-    if (dropResult.has_value()) { return *reinterpret_cast<const T *>(*dropResult); }
+    if (dropResult.has_value()) { return **reinterpret_cast<const T **>(*dropResult); }
     return std::nullopt;
   }
 };
