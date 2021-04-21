@@ -12,6 +12,7 @@
 #include <glm/vec3.hpp>
 #include <include/DearWidgets/dear_widgets.h>
 #include <pf_common/concepts/OneOf.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -24,7 +25,12 @@ namespace pf::ui::ig {
  * @tparam T underlying type
  */
 template<OneOf<float> T>
-class Slider3D : public ItemElement, public Labellable, public ValueObservable<glm::vec3>, public Savable {
+class Slider3D : public ItemElement,
+                 public Labellable,
+                 public ValueObservable<glm::vec3>,
+                 public Savable,
+                 public DragSource<glm::vec3>,
+                 public DropTarget<glm::vec3> {
  public:
   /**
    * Construct Slider3D.
@@ -40,20 +46,26 @@ class Slider3D : public ItemElement, public Labellable, public ValueObservable<g
   Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
            const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, float scale = 1.0f,
            Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value), Savable(persistent),
-        extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ), sliderScale(scale) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value),
+        Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), extremesX(minMaxX),
+        extremesY(minMaxY), extremesZ(minMaxZ), sliderScale(scale) {}
 
  protected:
   void renderImpl() override {
     auto valueChanged = false;
-    auto valAddress = ValueObservable<glm::vec3>::getValueAddress();
-    const auto oldValue = *valAddress;
+    auto address = ValueObservable<glm::vec3>::getValueAddress();
+    const auto oldValue = *address;
     if constexpr (std::same_as<T, float>) {
       valueChanged =
-          ImWidgets::SliderScalar3D(getLabel().c_str(), &valAddress->x, &valAddress->y, &valAddress->z, extremesX.x,
-                                    extremesX.y, extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, sliderScale);
+          ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
+                                    extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, sliderScale);
     }
-    if (valueChanged && oldValue != *valAddress) { ValueObservable<glm::vec3>::notifyValueChanged(); }
+    DragSource<glm::vec3>::drag(address);
+    if (auto drop = DropTarget<glm::vec3>::dropAccept(); drop.has_value()) {
+      ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(*drop);
+      return;
+    }
+    if (valueChanged && oldValue != *address) { ValueObservable<glm::vec3>::notifyValueChanged(); }
   }
   void unserialize_impl(const toml::table &src) override {
     const auto tomlVec = src["value"].as_array();
