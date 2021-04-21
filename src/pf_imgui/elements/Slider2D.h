@@ -11,6 +11,7 @@
 #include <glm/vec2.hpp>
 #include <include/DearWidgets/dear_widgets.h>
 #include <pf_common/concepts/OneOf.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -26,7 +27,7 @@ namespace details {
  */
 template<OneOf<int, float> T>
 using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2, glm::vec2>;
-}
+}// namespace details
 
 /**
  * @brief Slider which covers an area and allows a user to select axis value with better visual cues.
@@ -36,7 +37,9 @@ template<OneOf<int, float> T>
 class Slider2D : public ItemElement,
                  public Labellable,
                  public ValueObservable<details::Slider2DStorageType<T>>,
-                 public Savable {
+                 public Savable,
+                 public DragSource<details::Slider2DStorageType<T>>,
+                 public DropTarget<details::Slider2DStorageType<T>> {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -50,23 +53,29 @@ class Slider2D : public ItemElement,
    */
   Slider2D(const std::string &elementName, const std::string &label, StorageType minMaxX, StorageType minMaxY,
            StorageType value = StorageType{}, Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value), Savable(persistent),
-        extremesX(minMaxX), extremesY(minMaxY) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value),
+        Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), extremesX(minMaxX),
+        extremesY(minMaxY) {}
 
  protected:
   void renderImpl() override {
     auto valueChanged = false;
-    auto valAddress = ValueObservable<StorageType>::getValueAddress();
-    const auto oldValue = *valAddress;
+    auto address = ValueObservable<StorageType>::getValueAddress();
+    const auto oldValue = *address;
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImWidgets::Slider2DInt(getLabel().c_str(), &valAddress->x, &valAddress->y, &extremesX.x,
-                                            &extremesX.y, &extremesY.x, &extremesY.y);
+      valueChanged = ImWidgets::Slider2DInt(getLabel().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
+                                            &extremesY.x, &extremesY.y);
     }
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &valAddress->x, &valAddress->y, extremesX.x,
-                                              extremesX.y, extremesY.x, extremesY.y);
+      valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
+                                              extremesY.x, extremesY.y);
     }
-    if (valueChanged && oldValue != *valAddress) { ValueObservable<StorageType>::notifyValueChanged(); }
+    DragSource<StorageType>::drag(address);
+    if (auto drop = DropTarget<StorageType>::dropAccept(); drop.has_value()) {
+      ValueObservable<StorageType>::setValueAndNotifyIfChanged(*drop);
+      return;
+    }
+    if (valueChanged && oldValue != *address) { ValueObservable<StorageType>::notifyValueChanged(); }
   }
 
   void unserialize_impl(const toml::table &src) override {
