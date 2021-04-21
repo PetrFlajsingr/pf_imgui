@@ -20,7 +20,7 @@ static inline auto generator = iota<std::size_t>();
  * @param length desired length
  * @return random string of desired length
  */
-std::string random_string(std::size_t length) {
+inline std::string random_string(std::size_t length) {
   static auto randGen = std::mt19937{465768687};
   auto randchar = []() -> char {
     const char charset[] = "0123456789"

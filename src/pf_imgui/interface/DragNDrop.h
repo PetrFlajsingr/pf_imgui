@@ -31,8 +31,7 @@ class DragSourceBase {
 
  protected:
   inline bool drag_impl(const std::string &typeName, void *sourceData, std::size_t dataSize) {
-    auto flags = tooltip.has_value() ? ImGuiDragDropFlags{} : ImGuiDragDropFlags_SourceNoPreviewTooltip;
-    flags |= ImGuiDragDropFlags_SourceAllowNullID;
+    auto flags = ImGuiDragDropFlags_SourceAllowNullID;
     if (dragAllowed && ImGui::BeginDragDropSource(flags)) {
       dragged = true;
       ImGui::SetDragDropPayload(typeName.c_str(), sourceData, dataSize);
@@ -59,10 +58,9 @@ class DropTargetBase {
   virtual ~DropTargetBase() = default;
 
  protected:
-  [[nodiscard]] inline std::optional<void *> dropAccept_impl() const {
+  [[nodiscard]] inline std::optional<void *> dropAccept_impl(const std::string &typeName) const {
     if (dropAllowed && ImGui::BeginDragDropTarget()) {
-      auto payload = ImGui::AcceptDragDropPayload(
-          std::string(static_type_info::getTypeName<std::string>()).c_str());// todo type conversions
+      auto payload = ImGui::AcceptDragDropPayload(typeName.c_str());// todo type conversions
       void *result = payload == nullptr ? nullptr : payload->Data;
       ImGui::EndDragDropTarget();
       if (result != nullptr) { return result; }
@@ -83,7 +81,7 @@ class DragSource : public details::DragSourceBase {
  protected:
   bool drag(const T *sourceData) {
     const auto ptrPtr = &sourceData;
-    return drag_impl(std::string(static_type_info::getTypeName<T>()),
+    return drag_impl(std::string(static_type_info::getTypeName<T>().substr(0, 32)),
                      reinterpret_cast<void *>(const_cast<T **>(ptrPtr)), sizeof(const T *));
   }
 };
@@ -95,7 +93,7 @@ class DropTarget : public details::DropTargetBase {
 
  protected:
   std::optional<T> dropAccept() {
-    const auto dropResult = dropAccept_impl();
+    const auto dropResult = dropAccept_impl(std::string(static_type_info::getTypeName<T>().substr(0, 32)));
     if (dropResult.has_value()) { return **reinterpret_cast<const T **>(*dropResult); }
     return std::nullopt;
   }

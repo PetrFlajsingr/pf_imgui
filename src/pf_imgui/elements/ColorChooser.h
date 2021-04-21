@@ -50,7 +50,8 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
    */
   ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
                T value = T{})
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {}
 
   /**
    * Check if picker appearing on collor btn click is enabled.
@@ -79,27 +80,28 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
   void renderImpl() override {
     auto flags = pickerEnabled ? ImGuiColorEditFlags{} : ImGuiColorEditFlags_NoPicker;
     auto valueChanged = false;
+    const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (Type == ColorChooserType::Edit) {
       if constexpr (std::same_as<glm::vec3, T>) {
         valueChanged =
-            ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), flags);
+            ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*address), flags);
       } else {
         valueChanged =
-            ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), flags);
+            ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*address), flags);
       }
     } else {
       if constexpr (std::same_as<glm::vec3, T>) {
         valueChanged =
-            ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), flags);
+            ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*address), flags);
       } else {
         valueChanged =
-            ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), flags);
+            ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*address), flags);
       }
     }
-    DragSource<T>::drag(&ValueObservable<T>::getValueAddress());
-    if (auto drop = DragTarget<T>::dropAccept(); drop.has_value()) {
-        ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
-        return;
+    DragSource<T>::drag(address);
+    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+      return;
     }
     if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
