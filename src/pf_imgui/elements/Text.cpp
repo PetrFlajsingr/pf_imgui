@@ -25,9 +25,7 @@ void Text::renderImpl() {
     ImGui::Text("%s", text.c_str());
   }
   drag(&getText());
-  if (auto drop = dropAccept(); drop.has_value()) {
-    setText(*drop);
-  }
+  if (auto drop = dropAccept(); drop.has_value()) { setText(*drop); }
 }
 
 }// namespace pf::ui::ig

@@ -14,9 +14,7 @@ InputText::InputText(const std::string &elementName, std::string label, const st
       inputType(textInputType) {
   setValueInner(text);
   for (auto flag : filters.getSetFlags()) { flags |= static_cast<uint32_t>(flag); }
-  if (trigger == TextTrigger::Enter) {
-    flags |= ImGuiInputTextFlags_EnterReturnsTrue;
-  }
+  if (trigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
 }
 
 void InputText::renderImpl() {
@@ -31,6 +29,8 @@ void InputText::renderImpl() {
     setValueInner(getText());
     notifyValueChanged();
   }
+  drag(&getText());
+  if (auto drop = dropAccept(); drop.has_value()) { setText(*drop); }
 }
 void InputText::clear() {
   setText("");
