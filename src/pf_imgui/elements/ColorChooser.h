@@ -14,6 +14,7 @@
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -33,12 +34,17 @@ namespace pf::ui::ig {
  * @tparam T inner value of the chooser
  */
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
-class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
+class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
+                                     public Labellable,
+                                     public ValueObservable<T>,
+                                     public Savable,
+                                     public DragSource<T>,
+                                     public DropTarget<T> {
  public:
   /**
    * Construct ColorChooser.
    * @param elementName ID of the element
-   * @param label label next to the interactable parts
+   * @param label label next to the intractable parts
    * @param persistent allow state saving to disk
    * @param value starting value
    */
@@ -89,6 +95,11 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement, public Labellable, publ
         valueChanged =
             ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), flags);
       }
+    }
+    DragSource<T>::drag(&ValueObservable<T>::getValueAddress());
+    if (auto drop = DragTarget<T>::dropAccept(); drop.has_value()) {
+        ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+        return;
     }
     if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }

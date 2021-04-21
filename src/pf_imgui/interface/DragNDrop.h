@@ -16,6 +16,8 @@
 
 namespace pf::ui::ig {
 
+// TODO: type conversions, user customisation
+
 namespace details {
 class DragSourceBase {
  public:
