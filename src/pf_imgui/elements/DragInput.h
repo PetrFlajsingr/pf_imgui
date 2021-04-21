@@ -99,7 +99,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
   DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
             Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
       : ItemElement(elementName), ValueObservable<T>(value), Labellable(label),
-        Savable(persistent), DragInput<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
         format(std::move(format)) {}
 
   /**
