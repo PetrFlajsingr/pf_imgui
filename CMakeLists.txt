@@ -73,6 +73,12 @@ CPMAddPackage(
         GIT_TAG v2.2.0
 )
 
+CPMAddPackage(
+        NAME StaticTypeInfo
+        GIT_TAG v1.3.1
+        GIT_REPOSITORY https://github.com/TheLartians/StaticTypeInfo
+)
+
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
 
@@ -231,7 +237,7 @@ set(INCLUDES
         src/pf_imgui/details/ComboFilter.h
         src/pf_imgui/dialogs/InputDialog.h
         src/include/DearWidgets/dear_widgets.h
-        src/pf_imgui/elements/Slider2D.h src/pf_imgui/unique_id.h src/pf_imgui/elements/Slider3D.h src/pf_imgui/elements/Bullet.h src/pf_imgui/elements/Range.h)
+        src/pf_imgui/elements/Slider2D.h src/pf_imgui/unique_id.h src/pf_imgui/elements/Slider3D.h src/pf_imgui/elements/Bullet.h src/pf_imgui/elements/Range.h src/pf_imgui/interface/DragNDrop.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -269,7 +275,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileFlameGraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
-target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3)
+target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
@@ -284,7 +290,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY INTERFACE_${PROJECT_NAME}_MAJOR_VER
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPATIBLE_INTERFACE_STRING ${PROJECT_NAME}_MAJOR_VERSION)
 
 
-install(TARGETS ${PROJECT_NAME} pf_common magic_enum
+install(TARGETS ${PROJECT_NAME} pf_common magic_enum StaticTypeInfo
         EXPORT ${PROJECT_NAME}Targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

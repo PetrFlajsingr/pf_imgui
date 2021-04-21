@@ -13,6 +13,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -22,7 +23,7 @@ namespace pf::ui::ig {
  *
  * @todo: text wrapping
  */
-class PF_IMGUI_EXPORT Text : public ItemElement {
+class PF_IMGUI_EXPORT Text : public ItemElement, public DragSource<std::string>, public DropTarget<std::string> {
  public:
   /**
    * Construct Text.

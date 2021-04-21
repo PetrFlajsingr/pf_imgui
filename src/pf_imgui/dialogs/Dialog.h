@@ -21,6 +21,8 @@ namespace pf::ui::ig {
  * @brief Simple dialog which can be modal. Contains Elements.
  *
  * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::createDialog(...). Closing of the dialog should be managed by user.
+ *
+ * Non-modal dialog is rendered next to mouse cursor.
  */
 class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, public Labellable {
  public:
