@@ -11,20 +11,12 @@
 #include <range/v3/view/addressof.hpp>
 #include <utility>
 
-#include <pf_imgui/interface/DragNDrop.h>
-
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
     : Renderable("imgui_interface"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
-  DragSource<int>* a = nullptr;
-  DragNDropGroup group{*a};
-  DropTarget<int>* b = nullptr;
-  group.addTarget(*b);
-  group.frame();
-
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImPlot::CreateContext();
