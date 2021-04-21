@@ -15,6 +15,7 @@
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -126,7 +127,12 @@ concept FormattedWithoutStep =
  * @tparam T Underlying type
  */
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
+class PF_IMGUI_EXPORT Input : public ItemElement,
+                              public Labellable,
+                              public ValueObservable<T>,
+                              public Savable,
+                              public DragSource<T>,
+                              public DropTarget<T> {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:
@@ -141,7 +147,13 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
    */
   Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
         Persistent persistent = Persistent::No, T value = T{}) requires details::UnformattedWithStep<T>
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent), data(st, fStep) {}
+      : ItemElement(elementName),
+        Labellable(label),
+        ValueObservable<T>(value),
+        Savable(persistent),
+        DragSource<T>(false),
+        DropTarget<T>(false),
+        data(st, fStep) {}
 
   /**
    * Construct Input.
@@ -159,6 +171,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
                                                                 Labellable(label),
                                                                 ValueObservable<T>(value),
                                                                 Savable(persistent),
+                                                                DragSource<T>(false),
+                                                                DropTarget<T>(false),
                                                                 format(std::move(format)),
                                                                 data(st, fStep) {}
 
@@ -170,8 +184,12 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
    * @param value starting value
    */
   Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
-        T value = T{}) requires details::UnformattedWithoutStep<T>
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent) {}
+        T value = T{}) requires details::UnformattedWithoutStep<T> : ItemElement(elementName),
+                                                                     Labellable(label),
+                                                                     ValueObservable<T>(value),
+                                                                     Savable(persistent),
+                                                                     DragSource<T>(false),
+                                                                     DropTarget<T>(false) {}
 
   /**
    * Construct Input.
@@ -187,6 +205,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
         Labellable(label),
         ValueObservable<T>(value),
         Savable(persistent),
+        DragSource<T>(false),
+        DropTarget<T>(false),
         format(std::move(format)) {}
 
  protected:
@@ -211,35 +231,39 @@ class PF_IMGUI_EXPORT Input : public ItemElement, public Labellable, public Valu
 
   void renderImpl() override {
     auto valueChanged = false;
+    const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::InputFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step,
-                                       data.fastStep, format.c_str());
+      valueChanged = ImGui::InputFloat(getLabel().c_str(), address, data.step, data.fastStep, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      valueChanged = ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*address));
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      valueChanged = ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*address));
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      valueChanged = ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*address));
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged =
-          ImGui::InputInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), data.step, data.fastStep);
+      valueChanged = ImGui::InputInt(getLabel().c_str(), address, data.step, data.fastStep);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      valueChanged = ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*address));
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      valueChanged = ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*address));
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()));
+      valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*address));
     }
     if constexpr (std::same_as<T, double>) {
-      valueChanged = ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
-                                        data.step, data.fastStep, format.c_str());
+      valueChanged =
+          ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*address), data.step, data.fastStep, format.c_str());
+    }
+    DragSource<T>::drag(address);
+    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+      return;
     }
     if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
