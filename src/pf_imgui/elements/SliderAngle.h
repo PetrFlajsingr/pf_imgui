@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -24,7 +25,9 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
                                     public Labellable,
                                     public ValueObservable<float>,
-                                    public Savable {
+                                    public Savable,
+                                    public DragSource<float>,
+                                    public DropTarget<float> {
  public:
   /**
    * Construct SliderAngle.

@@ -9,12 +9,18 @@ namespace pf::ui::ig {
 
 SliderAngle::SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value,
                          Persistent persistent, std::string format)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value), Savable(persistent), minDeg(min),
-      maxDeg(max), format(std::move(format)) {}
+    : ItemElement(elementName), Labellable(label), ValueObservable(value),
+      Savable(persistent), DragSource<float>(false), DropTarget<float>(false), minDeg(min), maxDeg(max),
+      format(std::move(format)) {}
 
 void SliderAngle::renderImpl() {
   if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str())) {
     ValueObservable::notifyValueChanged();
+  }
+  drag(getValueAddress());
+  if (auto drop = dropAccept(); drop.has_value()) {
+    setValueAndNotifyIfChanged(*drop);
+    return;
   }
 }
 
