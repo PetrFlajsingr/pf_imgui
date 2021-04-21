@@ -80,7 +80,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
                                   public ValueObservable<T>,
                                   public Labellable,
                                   public Savable,
-                                  public DragInput<T>,
+                                  public DragSource<T>,
                                   public DropTarget<T> {
  public:
   using ParamType = details::DragInputUnderlyingType<T>;
