@@ -240,7 +240,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
                             });
       ImGui::EndCombo();
     }
-    DragSource<T>::drag(address);
+    if (selectedItemIndex.has_value()) { DragSource<T>::drag(&items[*selectedItemIndex].first); }
   }
 
  private:
