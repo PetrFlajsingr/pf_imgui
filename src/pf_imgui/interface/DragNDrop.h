@@ -18,6 +18,7 @@ namespace pf::ui::ig {
 
 // TODO: type conversions, user customisation
 // TODO: type IDs
+// TODO: some tooltip formatting for transported value
 
 namespace details {
 class DragSourceBase {

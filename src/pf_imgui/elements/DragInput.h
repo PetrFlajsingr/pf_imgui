@@ -17,6 +17,7 @@
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/math/Range.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -75,7 +76,12 @@ constexpr const char *defaultDragFormat() {
  * @tparam T Underlying type
  */
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
-class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>, public Labellable, public Savable {
+class PF_IMGUI_EXPORT DragInput : public ItemElement,
+                                  public ValueObservable<T>,
+                                  public Labellable,
+                                  public Savable,
+                                  public DragInput<T>,
+                                  public DropTarget<T> {
  public:
   using ParamType = details::DragInputUnderlyingType<T>;
 
@@ -92,8 +98,9 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>,
    */
   DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
             Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
-      : ItemElement(elementName), ValueObservable<T>(value), Labellable(label), Savable(persistent), speed(speed),
-        min(min), max(max), format(std::move(format)) {}
+      : ItemElement(elementName), ValueObservable<T>(value), Labellable(label),
+        Savable(persistent), DragInput<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
+        format(std::move(format)) {}
 
   /**
    * Get movement speed.
@@ -156,47 +163,43 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueObservable<T>,
 
   void renderImpl() override {
     bool valueChanged = false;
+    const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
-      valueChanged =
-          ImGui::DragFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
+      valueChanged = ImGui::DragFloat(getLabel().c_str(), address, speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      valueChanged = ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
-                                       speed, min, max, format.c_str());
+      valueChanged = ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      valueChanged = ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
-                                       speed, min, max, format.c_str());
+      valueChanged = ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      valueChanged = ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()),
-                                       speed, min, max, format.c_str());
+      valueChanged = ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged =
-          ImGui::DragInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), speed, min, max, format.c_str());
+      valueChanged = ImGui::DragInt(getLabel().c_str(), address, speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      valueChanged = ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed,
-                                     min, max, format.c_str());
+      valueChanged = ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      valueChanged = ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed,
-                                     min, max, format.c_str());
+      valueChanged = ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      valueChanged = ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*ValueObservable<T>::getValueAddress()), speed,
-                                     min, max, format.c_str());
+      valueChanged = ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, math::Range<int>>) {
       valueChanged =
-          ImGui::DragIntRange2(getLabel().c_str(), reinterpret_cast<int *>(ValueObservable<T>::getValueAddress()),
-                               speed, min, max, format.c_str());
+          ImGui::DragIntRange2(getLabel().c_str(), reinterpret_cast<int *>(address), speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, math::Range<float>>) {
       valueChanged =
-          ImGui::DragFloatRange2(getLabel().c_str(), &ValueObservable<T>::getValueAddress()->start,
-                                 &ValueObservable<T>::getValueAddress()->end, speed, min, max, format.c_str());
+          ImGui::DragFloatRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max, format.c_str());
+    }
+    DragSource<T>::drag(address);
+    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+      return;
     }
     if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
   }
