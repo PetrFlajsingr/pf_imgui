@@ -6,13 +6,14 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_RANGE_H
 
 #include <glm/vec2.hpp>
-#include <utility>
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -45,7 +46,9 @@ template<OneOf<float, int> T>
 class Range : public ItemElement,
               public Labellable,
               public ValueObservable<details::RangeStorageType<T>>,
-              public Savable {
+              public Savable,
+              public DragSource<T>,
+              public DropTarget<T> {
   using StorageType = details::RangeStorageType<T>;
 
  public:
@@ -59,21 +62,28 @@ class Range : public ItemElement,
    * @param value starting value
    * @param format format for text rendered on the range, printf-like
    */
-  Range(const std::string &elementName, const std::string &label, T min, T max, StorageType value = {}, float moveSpeed = 1.0f,
-        Persistent persistent = Persistent::No, std::string format = details::defaultRangeFormat<T>())
-      : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value), Savable(persistent),
-        minVal(min), maxVal(max), format(std::move(format)), speed(moveSpeed) {}
+  Range(const std::string &elementName, const std::string &label, T min, T max, StorageType value = {},
+        float moveSpeed = 1.0f, Persistent persistent = Persistent::No,
+        std::string format = details::defaultRangeFormat<T>())
+      : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value),
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), minVal(min), maxVal(max),
+        format(std::move(format)), speed(moveSpeed) {}
 
  protected:
   void renderImpl() override {
     auto valueChanged = false;
-    const auto valueAddress = ValueObservable<StorageType>::getValueAddress();
+    const auto address = ValueObservable<StorageType>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
-      valueChanged =
-          ImGui::DragFloatRange2(getLabel().c_str(), &valueAddress->x, &valueAddress->y, speed, minVal, maxVal, format.c_str());
+      valueChanged = ImGui::DragFloatRange2(getLabel().c_str(), &address->x, &address->y, speed, minVal,
+                                            maxVal, format.c_str());
     } else {
-      valueChanged =
-          ImGui::DragIntRange2(getLabel().c_str(), &valueAddress->x, &valueAddress->y, speed, minVal, maxVal, format.c_str());
+      valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->x, &address->y, speed, minVal, maxVal,
+                                          format.c_str());
+    }
+    DragSource<T>::drag(address);
+    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+      return;
     }
     if (valueChanged) { ValueObservable<StorageType>::notifyValueChanged(); }
   }
