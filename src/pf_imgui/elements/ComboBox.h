@@ -12,6 +12,7 @@
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/details/ComboFilter.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -53,12 +54,7 @@ struct ComboBoxItemStorage<std::string> {
 };
 }// namespace details
 
-enum class ComboBoxCount {
-  Items4 = 1 << 1,
-  Items8 = 1 << 2,
-  Items20 = 1 << 3,
-  ItemsAll = 1 << 4
-};
+enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, ItemsAll = 1 << 4 };
 
 /**
  * @brief A typical combobox with items which can be converted to string.
@@ -69,7 +65,11 @@ enum class ComboBoxCount {
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
+class PF_IMGUI_EXPORT ComboBox : public ItemElement,
+                                 public Labellable,
+                                 public ValueObservable<T>,
+                                 public Savable,
+                                 public DragSource<T> {
  public:
   /**
    * Construct Combobox.
@@ -82,9 +82,9 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   ComboBox(const std::string &elementName, const std::string &label, std::optional<std::string> previewValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent =
-           Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
+               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent), DragSource<T>(false),
         previewValue(std::move(previewValue)), shownItems(showItemCount) {
     items.reserve(std::ranges::size(newItems));
     std::ranges::copy(newItems, std::back_inserter(items));
@@ -112,7 +112,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       selectedItemIndex = index;
@@ -139,7 +139,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
   void removeItem(const std::string &itemAsString) requires(!std::same_as<T, std::string>) {
     using namespace std::string_literals;
     if (const auto iter =
-          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto isAnyItemSelected = selectedItemIndex.has_value();
       const auto selectedItem = isAnyItemSelected ? items[*selectedItemIndex] : ""s;
@@ -240,6 +240,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement, public Labellable, public V
                             });
       ImGui::EndCombo();
     }
+    DragSource<T>::drag(address);
   }
 
  private:
