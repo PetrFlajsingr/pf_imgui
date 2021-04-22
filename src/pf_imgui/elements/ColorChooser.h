@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
         valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*address), flags);
       }
     }
-    DragSource<T>::drag(address);
+    DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
       return;
