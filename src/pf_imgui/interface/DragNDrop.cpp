@@ -19,7 +19,7 @@ bool details::DragSourceBase::drag_impl(const std::string &typeName, const void 
   auto flags = ImGuiDragDropFlags_SourceAllowNullID;
   if (dragAllowed && ImGui::BeginDragDropSource(flags)) {
     dragged = true;
-    ImGui::SetDragDropPayload(typeName.c_str(), sourceData, dataSize);
+    ImGui::SetDragDropPayload(typeName.c_str(), sourceData, dataSize, ImGuiCond_Once);
     if (tooltip != nullptr) { tooltip->render(); }
     ImGui::EndDragDropSource();
     auto payload = ImGui::GetDragDropPayload();
@@ -78,7 +78,10 @@ std::optional<void *> details::DropTargetBase::dropAccept_impl(const std::string
 void DragNDropGroup::frame() {
   if (std::ranges::any_of(sources, [](auto source) { return source->isDragged(); })) {
     if (!wasDraggedLastFrame) {
-      std::ranges::for_each(targets, [](auto &t) { t.second = t.first->isDropAllowed(); });
+      std::ranges::for_each(targets, [](auto &t) {
+        t.second = t.first->isDropAllowed();
+        t.first->setDropAllowed(true);
+      });
       wasDraggedLastFrame = true;
     }
   } else if (wasDraggedLastFrame) {
