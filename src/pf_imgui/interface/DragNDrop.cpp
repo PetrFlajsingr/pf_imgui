@@ -74,4 +74,16 @@ std::optional<void *> details::DropTargetBase::dropAccept_impl(const std::string
   }
   return std::nullopt;
 }
+
+void DragNDropGroup::frame() {
+  if (std::ranges::any_of(sources, [](auto source) { return source->isDragged(); })) {
+    if (!wasDraggedLastFrame) {
+      std::ranges::for_each(targets, [](auto &t) { t.second = t.first->isDropAllowed(); });
+      wasDraggedLastFrame = true;
+    }
+  } else if (wasDraggedLastFrame) {
+    std::ranges::for_each(targets, [](auto &t) { t.first->setDropAllowed(t.second); });
+    wasDraggedLastFrame = false;
+  }
+}
 }// namespace pf::ui::ig

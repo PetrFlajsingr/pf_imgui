@@ -212,33 +212,49 @@ class DropTarget : public details::DropTargetBase {
   }
 };
 
+/**
+ * @brief Group of components that activate drop accept when drag is started.
+ */
 class DragNDropGroup {
  public:
-  explicit DragNDropGroup(details::DragSourceBase &src) : source(src) {}
-  void frame() {
-    if (source.isDragAllowed() && source.isDragged()) {
-      if (!wasDraggedLastFrame) {
-        std::ranges::for_each(targets, [](auto &t) { t.second = t.first->isDropAllowed(); });
-      }
-    } else if (wasDraggedLastFrame) {
-      std::ranges::for_each(targets, [](auto &t) { t.first->setDropAllowed(t.second); });
-      wasDraggedLastFrame = false;
+  DragNDropGroup() = default;
+  void frame();
+
+  /**
+   * Add elements to the group.
+   * @tparam T type of the first element
+   * @tparam Args other elements
+   * @param arg1
+   * @param args
+   */
+  template<typename T, typename... Args>
+  void add(T &arg1, Args &...args) requires(
+      std::derived_from<T, details::DropTargetBase> || std::derived_from<T, details::DragSourceBase>) {
+    if constexpr (std::derived_from<T, details::DropTargetBase>) { targets.emplace_back(&arg1, false); }
+    if constexpr (std::derived_from<T, details::DragSourceBase>) { sources.emplace_back(&arg1); }
+    if constexpr (sizeof...(Args) > 0) { add(std::forward<Args &>(args)...); }
+  }
+
+  /**
+   * Remove elements from the group.
+   * @tparam T
+   * @tparam Args
+   * @param arg1
+   * @param args
+   */
+  template<typename T, typename... Args>
+  void remove(T &arg1, Args &...args) requires(
+      std::derived_from<T, details::DropTargetBase> || std::derived_from<T, details::DragSourceBase>) {
+    if constexpr (std::derived_from<T, details::DropTargetBase>) {
+      std::ranges::remove_if(targets, [&arg1](const auto &t) { return t.first == &arg1; });
     }
+    if constexpr (std::derived_from<T, details::DragSourceBase>) {
+      std::ranges::remove_if(sources, [&arg1](const auto &s) { return s == &arg1; });
+    }
+    if constexpr (sizeof...(Args) > 0) { remove(std::forward<Args &>(args)...); }
   }
 
-  void addTarget(std::derived_from<details::DropTargetBase> auto &...target) {
-    (targets.emplace_back(&target, false), ...);
-  }
-  void addTargets(std::ranges::range auto &&target) requires(
-      std::derived_from<std::ranges::range_value_t<decltype(target)>, details::DropTargetBase>) {
-    std::ranges::copy(target, std::back_inserter(targets));
-  }
-  void removeTarget(details::DropTargetBase &target) {
-    std::ranges::remove_if(targets, [&target](const auto &t) { return t.first == &target; });
-  }
-
- private:
-  details::DragSourceBase &source;
+ private : std::vector<details::DragSourceBase *> sources;
   std::vector<std::pair<details::DropTargetBase *, bool>> targets;
   bool wasDraggedLastFrame = false;
 };
