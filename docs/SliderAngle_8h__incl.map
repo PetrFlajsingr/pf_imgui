@@ -1,7 +1,7 @@
 <map id="src/pf_imgui/elements/SliderAngle.h" name="src/pf_imgui/elements/SliderAngle.h">
 <area shape="rect" id="node1" title="SliderAngle element." alt="" coords="669,5,835,47"/>
 <area shape="rect" id="node2" title=" " alt="" coords="313,541,457,568"/>
-<area shape="rect" id="node3" href="$DragNDrop_8h_source.html" title=" " alt="" coords="2381,95,2523,136"/>
+<area shape="rect" id="node3" href="$DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="2381,95,2523,136"/>
 <area shape="rect" id="node22" title=" " alt="" coords="1051,541,1109,568"/>
 <area shape="rect" id="node32" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="483,95,624,136"/>
 <area shape="rect" id="node37" href="$Labellable_8h.html" title="Class providing label support." alt="" coords="549,452,691,493"/>

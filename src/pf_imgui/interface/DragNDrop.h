@@ -1,6 +1,9 @@
-//
-// Created by petr on 4/20/21.
-//
+/**
+ * @file DragNDrop.h
+ * @brief Definitions for drag and drop interface.
+ * @author Petr Flajšingr
+ * @date 20.4.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_INTERFACE_DRAGNDROP_H
 #define PF_IMGUI_SRC_PF_IMGUI_INTERFACE_DRAGNDROP_H

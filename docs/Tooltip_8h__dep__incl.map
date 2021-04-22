@@ -1,6 +1,6 @@
 <map id="src/pf_imgui/elements/Tooltip.h" name="src/pf_imgui/elements/Tooltip.h">
 <area shape="rect" id="node1" title="Tooltip element." alt="" coords="1332,5,1499,47"/>
-<area shape="rect" id="node2" href="$DragNDrop_8h_source.html" title=" " alt="" coords="1143,95,1307,136"/>
+<area shape="rect" id="node2" href="$DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="1143,95,1307,136"/>
 <area shape="rect" id="node19" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1714,95,1878,136"/>
 <area shape="rect" id="node3" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="1999,184,2166,225"/>
 <area shape="rect" id="node5" href="$ComboBox_8h.html" title="ComboBox element." alt="" coords="1427,184,1594,225"/>

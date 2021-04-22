@@ -1,6 +1,3 @@
-//
-// Created by petr on 10/27/20.
-//
 /**
  * @file ImGuiInterface.h
  * @brief Main class of the library.
