@@ -22,6 +22,7 @@
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <string>
 #include <toml++/toml.h>
 #include <vector>
@@ -224,6 +225,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
     dialogs.emplace_back(std::move(dialog));
   }
 
+  [[nodiscard]] DragNDropGroup &createDragNDropGroup();
+
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
 
@@ -248,6 +251,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   std::vector<std::unique_ptr<Window>> windows;
 
   toml::table config;
+
+  std::vector<DragNDropGroup> dragNDropGroups;
 
   void removeDialog(Dialog &dialog);
 };

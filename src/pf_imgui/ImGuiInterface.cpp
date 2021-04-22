@@ -102,6 +102,7 @@ Window &ImGuiInterface::windowByName(const std::string &name) {
 
 void ImGuiInterface::renderImpl() {
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
+  std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
 }
 
 void ImGuiInterface::removeDialog(Dialog &dialog) {
@@ -110,5 +111,6 @@ void ImGuiInterface::removeDialog(Dialog &dialog) {
     dialogs.erase(iter);
   }
 }
+DragNDropGroup &ImGuiInterface::createDragNDropGroup() { return dragNDropGroups.emplace_back(); }
 
 }// namespace pf::ui::ig
