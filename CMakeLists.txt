@@ -150,7 +150,7 @@ set(SOURCES
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
         src/include/imgui/imgui_tables.cpp
-        src/include/DearWidgets/dear_widgets.cpp)
+        src/include/DearWidgets/dear_widgets.cpp src/pf_imgui/interface/DragNDrop.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
