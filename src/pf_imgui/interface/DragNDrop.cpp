@@ -44,13 +44,13 @@ void details::DragSourceBase::removeDragTooltip() {
   tooltipTextFmt = std::nullopt;
 }
 bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
-                                            std::string value) {
+                                            const std::string& value) {
   if (!dragged && tooltipTextFmt.has_value()) {
     tooltipTextFmt->second->setText(fmt::format(tooltipTextFmt->first, value));
   }
   return drag_impl(typeName, sourceData, dataSize);
 }
-void details::DragSourceBase::createSimpleTooltip(std::string fmt, bool isValueFmt) {
+void details::DragSourceBase::createSimpleTooltip(const std::string& fmt, bool isValueFmt) {
   auto &tooltipText = createDragTooltip().createChild<Text>(uniqueId(), std::string(fmt));
   if (isValueFmt) {
     tooltipTextFmt = std::make_pair(fmt, &tooltipText);

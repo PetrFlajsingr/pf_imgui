@@ -96,7 +96,8 @@ class DragSourceBase {
    * @param value string to be inserted into simple tooltip
    * @return true if content is being dragged, false otherwise
    */
-  bool drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize, std::string value);
+  bool drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
+                     const std::string &value);
   bool dragAllowed;
 
   /**
@@ -104,7 +105,7 @@ class DragSourceBase {
    * @param fmt text to show/format string in case of isValueFmt
    * @param isValueFmt true if fmt contains {} for formatting
    */
-  void createSimpleTooltip(std::string fmt, bool isValueFmt);
+  void createSimpleTooltip(const std::string &fmt, bool isValueFmt);
 
  private:
   bool dragged = false;
@@ -180,12 +181,11 @@ class DragSource : public details::DragSourceBase {
    * @return true if the value has been transferred
    */
   bool drag(const T &sourceData) {
+    const auto typeID = std::to_string(static_type_info::getTypeIndex<T>());
     if constexpr (ToStringConvertible<T>) {
-      return drag_impl_fmt(std::string(static_type_info::getTypeName<T>().substr(0, 32)),
-                           reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
+      return drag_impl_fmt(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
     } else {
-      return drag_impl(std::string(static_type_info::getTypeName<T>().substr(0, 32)),
-                       reinterpret_cast<const void *>(&sourceData), sizeof(const T));
+      return drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
     }
   }
 };
@@ -209,7 +209,8 @@ class DropTarget : public details::DropTargetBase {
    * @return std::nullopt if no value was accepted, the value otherwise
    */
   std::optional<T> dropAccept() {
-    const auto dropResult = dropAccept_impl(std::string(static_type_info::getTypeName<T>().substr(0, 32)));
+    const auto typeID = std::to_string(static_type_info::getTypeIndex<T>());
+    const auto dropResult = dropAccept_impl(typeID);
     if (dropResult.has_value()) { return *reinterpret_cast<const T *>(*dropResult); }
     return std::nullopt;
   }
