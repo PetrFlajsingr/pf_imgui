@@ -75,48 +75,53 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_SLIDERANGLE_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Savable_8h.html">pf_imgui/interface/Savable.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">   24</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">SliderAngle</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                                    <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                    <span class="keyword">public</span> ValueObservable&lt;float&gt;,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                    <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">SliderAngle</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keywordtype">float</span> min, <span class="keywordtype">float</span> max, <span class="keywordtype">float</span> value = 0.0,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;              <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No, std::string format = <span class="stringliteral">&quot;%.0f deg&quot;</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">float</span> getMinDeg() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">void</span> setMinDeg(<span class="keywordtype">float</span> minDeg);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">float</span> getMaxDeg() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> setMaxDeg(<span class="keywordtype">float</span> maxDeg);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> unserialize_impl(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  toml::table serialize_impl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">float</span> minDeg;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">float</span> maxDeg;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  std::string format;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_SLIDERANGLE_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/interface/DragNDrop.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Savable_8h.html">pf_imgui/interface/Savable.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">   25</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">SliderAngle</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                    <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                    <span class="keyword">public</span> ValueObservable&lt;float&gt;,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                    <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                                    <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html">DragSource</a>&lt;float&gt;,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                                    <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget</a>&lt;float&gt; {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">SliderAngle</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keywordtype">float</span> min, <span class="keywordtype">float</span> max, <span class="keywordtype">float</span> value = 0.0,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;              <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No, std::string format = <span class="stringliteral">&quot;%.0f deg&quot;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">float</span> getMinDeg() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> setMinDeg(<span class="keywordtype">float</span> min);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">float</span> getMaxDeg() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> setMaxDeg(<span class="keywordtype">float</span> max);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> unserialize_impl(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  toml::table serialize_impl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">float</span> minDeg;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">float</span> maxDeg;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  std::string format;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_SLIDERANGLE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
 <div class="ttc" id="aValueObservable_8h_html"><div class="ttname"><a href="ValueObservable_8h.html">ValueObservable.h</a></div><div class="ttdoc">Interface for providing observable support to elements.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:157</div></div>
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:48</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:195</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:23</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SliderAngle_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">pf::ui::ig::SliderAngle</a></div><div class="ttdoc">Special slider for angles.</div><div class="ttdef"><b>Definition:</b> SliderAngle.h:24</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SliderAngle_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SliderAngle.html">pf::ui::ig::SliderAngle</a></div><div class="ttdoc">Special slider for angles.</div><div class="ttdef"><b>Definition:</b> SliderAngle.h:25</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

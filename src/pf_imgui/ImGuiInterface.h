@@ -225,6 +225,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
     dialogs.emplace_back(std::move(dialog));
   }
 
+  /**
+   * Create a group for drag and drop elements.
+   * @return newly created group
+   */
   [[nodiscard]] DragNDropGroup &createDragNDropGroup();
 
  protected:

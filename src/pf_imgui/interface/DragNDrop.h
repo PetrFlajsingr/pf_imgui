@@ -214,10 +214,17 @@ class DropTarget : public details::DropTargetBase {
 
 /**
  * @brief Group of components that activate drop accept when drag is started.
+ *
+ * DragSource elements must have their drag enabled to work. All DragTarget elements will be activated if one of
+ * source elements has their drag action active. Upon completing the drag action their drop enabled status will be
+ * reset to their previous state.
  */
 class DragNDropGroup {
  public:
   DragNDropGroup() = default;
+  /**
+   * Call this on each frame to perform drag group actions.
+   */
   void frame();
 
   /**

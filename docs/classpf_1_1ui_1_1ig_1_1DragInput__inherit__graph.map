@@ -1,11 +1,15 @@
 <map id="pf::ui::ig::DragInput&lt; T &gt;" name="pf::ui::ig::DragInput&lt; T &gt;">
-<area shape="rect" id="node1" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="625,132,809,159"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="409,56,575,83"/>
+<area shape="rect" id="node1" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="649,183,833,209"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="421,56,587,83"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="211,56,357,83"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="209,107,359,133"/>
-<area shape="rect" id="node7" title=" " alt="" coords="407,107,577,133"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="417,157,567,184"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="425,208,559,235"/>
+<area shape="rect" id="node7" title=" " alt="" coords="419,107,589,133"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="429,157,579,184"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="437,208,571,235"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="407,259,601,285"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="215,247,353,289"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title="Target for drag and drop operation." alt="" coords="409,313,599,340"/>
+<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html" title="Base class for templated DropTarget&lt;T&gt;" alt="" coords="217,313,351,354"/>
 </map>
