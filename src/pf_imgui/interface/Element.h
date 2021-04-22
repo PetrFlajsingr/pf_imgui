@@ -33,7 +33,7 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   explicit Element(const std::string &name);
 
   void render() override;
-// private:
+  // private:
   //std::optional<ImVec4> customColor = std::nullopt;
 };
 

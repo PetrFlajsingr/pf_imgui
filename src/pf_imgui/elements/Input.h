@@ -260,7 +260,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
       valueChanged =
           ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*address), data.step, data.fastStep, format.c_str());
     }
-    DragSource<T>::drag(address);
+    DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
       return;

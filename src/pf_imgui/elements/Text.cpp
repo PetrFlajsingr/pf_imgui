@@ -24,7 +24,7 @@ void Text::renderImpl() {
   } else {
     ImGui::Text("%s", text.c_str());
   }
-  drag(&getText());
+  drag(getText());
   if (auto drop = dropAccept(); drop.has_value()) { setText(*drop); }
 }
 

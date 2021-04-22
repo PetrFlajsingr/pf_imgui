@@ -56,8 +56,8 @@ namespace pf::ui::ig {
  * @brief State of combo filter.
  */
 struct ComboFilterState {
-  int activeIdx;        /*!< Index of currently 'active' item by use of up/down keys */
-  bool selectionChanged;/*!< Flag to help focus the correct item when selecting active item */
+  int activeIdx;         /*!< Index of currently 'active' item by use of up/down keys */
+  bool selectionChanged; /*!< Flag to help focus the correct item when selecting active item */
 };
 
 static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unused]] int START, const char **ENTRIES,

@@ -17,7 +17,7 @@ void SliderAngle::renderImpl() {
   if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str())) {
     ValueObservable::notifyValueChanged();
   }
-  drag(getValueAddress());
+  drag(getValue());
   if (auto drop = dropAccept(); drop.has_value()) {
     setValueAndNotifyIfChanged(*drop);
     return;
@@ -30,8 +30,8 @@ void SliderAngle::unserialize_impl(const toml::table &src) {
 
 toml::table SliderAngle::serialize_impl() { return toml::table{{{"value", getValue()}}}; }
 float SliderAngle::getMinDeg() const { return minDeg; }
-void SliderAngle::setMinDeg(float minDeg) { SliderAngle::minDeg = minDeg; }
+void SliderAngle::setMinDeg(float min) { SliderAngle::minDeg = min; }
 float SliderAngle::getMaxDeg() const { return maxDeg; }
-void SliderAngle::setMaxDeg(float maxDeg) { SliderAngle::maxDeg = maxDeg; }
+void SliderAngle::setMaxDeg(float max) { SliderAngle::maxDeg = max; }
 
 }// namespace pf::ui::ig

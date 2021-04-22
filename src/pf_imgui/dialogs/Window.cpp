@@ -76,12 +76,8 @@ void Window::setPosition(ImVec2 pos) {
 }
 ImGuiWindowFlags Window::createWindowFlags() {
   ImGuiWindowFlags result = hasMenuBar() ? ImGuiWindowFlags_MenuBar : ImGuiWindowFlags{};
-  if (!isCollapsible()) {
-    result |= ImGuiWindowFlags_NoCollapse;
-  }
-  if (getLabel().empty()) {
-    result |= ImGuiWindowFlags_NoTitleBar;
-  }
+  if (!isCollapsible()) { result |= ImGuiWindowFlags_NoCollapse; }
+  if (getLabel().empty()) { result |= ImGuiWindowFlags_NoTitleBar; }
   return result;
 }
 

@@ -17,7 +17,8 @@ void Tab::renderImpl() {
   }
 }
 
-TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elementName), isTabListAllowed(allowTabList) {}
+TabBar::TabBar(const std::string &elementName, bool allowTabList)
+    : Element(elementName), isTabListAllowed(allowTabList) {}
 
 void TabBar::renderImpl() {
   const auto flags = isTabListAllowed ? ImGuiTabBarFlags_TabListPopupButton : ImGuiTabBarFlags{};

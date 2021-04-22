@@ -60,7 +60,7 @@ class Slider3D : public ItemElement,
           ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
                                     extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, sliderScale);
     }
-    DragSource<glm::vec3>::drag(address);
+    DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());
     if (auto drop = DropTarget<glm::vec3>::dropAccept(); drop.has_value()) {
       ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(*drop);
       return;

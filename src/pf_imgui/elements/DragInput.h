@@ -196,7 +196,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
       valueChanged =
           ImGui::DragFloatRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max, format.c_str());
     }
-    DragSource<T>::drag(address);
+    DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
       return;

@@ -51,7 +51,7 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
    * Set min slider value.
    * @param minDeg new min slider value
    */
-  void setMinDeg(float minDeg);
+  void setMinDeg(float min);
   /**
    * Get max slider value.
    * @return max slider value
@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
    * Set max slider value.
    * @param maxDeg new min slider value
    */
-  void setMaxDeg(float maxDeg);
+  void setMaxDeg(float max);
 
  protected:
   void renderImpl() override;

@@ -26,7 +26,7 @@ struct CommonPlaceholder {
   using CreateType = int;
 };
 
-struct Dummy{};
+struct Dummy {};
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_META_H

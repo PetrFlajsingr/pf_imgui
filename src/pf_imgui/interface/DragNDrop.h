@@ -84,7 +84,7 @@ class DragSourceBase {
    * @param dataSize size of transferred data
    * @return true if content is being dragged, false otherwise
    */
-  bool drag_impl(const std::string &typeName, void *sourceData, std::size_t dataSize);
+  bool drag_impl(const std::string &typeName, const void *sourceData, std::size_t dataSize);
   /**
    * Run drag source code if allowed. Renders the tooltip as well.
    * @param typeName type of transferred data
@@ -93,7 +93,7 @@ class DragSourceBase {
    * @param value string to be inserted into simple tooltip
    * @return true if content is being dragged, false otherwise
    */
-  bool drag_impl_fmt(const std::string &typeName, void *sourceData, std::size_t dataSize, std::string value);
+  bool drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize, std::string value);
   bool dragAllowed;
 
   /**
@@ -102,6 +102,7 @@ class DragSourceBase {
    * @param isValueFmt true if fmt contains {} for formatting
    */
   void createSimpleTooltip(std::string fmt, bool isValueFmt);
+
  private:
   bool dragged = false;
   std::unique_ptr<Tooltip> tooltip = nullptr;
@@ -175,15 +176,13 @@ class DragSource : public details::DragSourceBase {
    * @param sourceData data to be transferred
    * @return true if the value has been transferred
    */
-  bool drag(const T *sourceData) {
-    const auto ptrPtr = &sourceData;
+  bool drag(const T &sourceData) {
     if constexpr (ToStringConvertible<T>) {
       return drag_impl_fmt(std::string(static_type_info::getTypeName<T>().substr(0, 32)),
-                           reinterpret_cast<void *>(const_cast<T **>(ptrPtr)), sizeof(const T *),
-                           toString(*sourceData));
+                           reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
     } else {
       return drag_impl(std::string(static_type_info::getTypeName<T>().substr(0, 32)),
-                       reinterpret_cast<void *>(const_cast<T **>(ptrPtr)), sizeof(const T *));
+                       reinterpret_cast<const void *>(&sourceData), sizeof(const T));
     }
   }
 };
@@ -208,7 +207,7 @@ class DropTarget : public details::DropTargetBase {
    */
   std::optional<T> dropAccept() {
     const auto dropResult = dropAccept_impl(std::string(static_type_info::getTypeName<T>().substr(0, 32)));
-    if (dropResult.has_value()) { return **reinterpret_cast<const T **>(*dropResult); }
+    if (dropResult.has_value()) { return *reinterpret_cast<const T *>(*dropResult); }
     return std::nullopt;
   }
 };

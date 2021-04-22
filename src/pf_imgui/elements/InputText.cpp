@@ -29,7 +29,7 @@ void InputText::renderImpl() {
     setValueInner(getText());
     notifyValueChanged();
   }
-  drag(&getText());
+  drag(getText());
   if (auto drop = dropAccept(); drop.has_value()) { setText(*drop); }
 }
 void InputText::clear() {

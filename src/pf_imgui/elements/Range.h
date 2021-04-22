@@ -74,13 +74,13 @@ class Range : public ItemElement,
     auto valueChanged = false;
     const auto address = ValueObservable<StorageType>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::DragFloatRange2(getLabel().c_str(), &address->x, &address->y, speed, minVal,
-                                            maxVal, format.c_str());
+      valueChanged =
+          ImGui::DragFloatRange2(getLabel().c_str(), &address->x, &address->y, speed, minVal, maxVal, format.c_str());
     } else {
-      valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->x, &address->y, speed, minVal, maxVal,
-                                          format.c_str());
+      valueChanged =
+          ImGui::DragIntRange2(getLabel().c_str(), &address->x, &address->y, speed, minVal, maxVal, format.c_str());
     }
-    DragSource<T>::drag(address);
+    DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
       return;

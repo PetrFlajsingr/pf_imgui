@@ -15,7 +15,7 @@ void details::DragSourceBase::setDragAllowed(bool allowed) { dragAllowed = allow
 
 bool details::DragSourceBase::isDragged() const { return dragged; }
 
-bool details::DragSourceBase::drag_impl(const std::string &typeName, void *sourceData, std::size_t dataSize) {
+bool details::DragSourceBase::drag_impl(const std::string &typeName, const void *sourceData, std::size_t dataSize) {
   auto flags = ImGuiDragDropFlags_SourceAllowNullID;
   if (dragAllowed && ImGui::BeginDragDropSource(flags)) {
     dragged = true;
@@ -43,9 +43,11 @@ void details::DragSourceBase::removeDragTooltip() {
   tooltip = nullptr;
   tooltipTextFmt = std::nullopt;
 }
-bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, void *sourceData, std::size_t dataSize,
+bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
                                             std::string value) {
-  if (tooltipTextFmt.has_value()) { tooltipTextFmt->second->setText(fmt::format(tooltipTextFmt->first, value)); }
+  if (!dragged && tooltipTextFmt.has_value()) {
+    tooltipTextFmt->second->setText(fmt::format(tooltipTextFmt->first, value));
+  }
   return drag_impl(typeName, sourceData, dataSize);
 }
 void details::DragSourceBase::createSimpleTooltip(std::string fmt, bool isValueFmt) {

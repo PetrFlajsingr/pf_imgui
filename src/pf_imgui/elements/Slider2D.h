@@ -70,7 +70,7 @@ class Slider2D : public ItemElement,
       valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
                                               extremesY.x, extremesY.y);
     }
-    DragSource<StorageType>::drag(address);
+    DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());
     if (auto drop = DropTarget<StorageType>::dropAccept(); drop.has_value()) {
       ValueObservable<StorageType>::setValueAndNotifyIfChanged(*drop);
       return;

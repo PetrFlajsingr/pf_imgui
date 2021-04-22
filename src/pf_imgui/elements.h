@@ -7,6 +7,7 @@
 #ifndef PF_IMGUI_ELEMENTS_H
 #define PF_IMGUI_ELEMENTS_H
 
+#include "elements/Bullet.h"
 #include "elements/Button.h"
 #include "elements/Checkbox.h"
 #include "elements/ColorChooser.h"
@@ -23,6 +24,7 @@
 #include "elements/ProgressBar.h"
 #include "elements/RadioButton.h"
 #include "elements/RadioGroup.h"
+#include "elements/Range.h"
 #include "elements/Slider.h"
 #include "elements/Slider2D.h"
 #include "elements/Slider3D.h"
@@ -32,9 +34,7 @@
 #include "elements/Table.h"
 #include "elements/Text.h"
 #include "elements/Tree.h"
-#include "elements/Bullet.h"
 #include "elements/plots.h"
-#include "elements/Range.h"
 #include "layouts/layouts.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
 #include "src/pf_imgui/dialogs/FileDialog.h"

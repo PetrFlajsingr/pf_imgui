@@ -166,7 +166,7 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
     if constexpr (std::same_as<T, glm::ivec4>) {
       valueChanged = ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str());
     }
-    DragSource<T>::drag(address);
+    DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
       return;
