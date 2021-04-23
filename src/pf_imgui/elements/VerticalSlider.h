@@ -55,7 +55,7 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
    * @param format printf-like format for value
    */
   VerticalSlider(const std::string &elementName, const std::string &label, T minVal, const T maxVal, T value = T{},
-                 Persistent persistent = Persistent::No, std::string format = defaultVSliderFormat<T>())
+                 Persistent persistent = Persistent::No, std::string format = details::defaultVSliderFormat<T>())
       : ItemElement(elementName), Labellable(label), ValueObservable(value), Savable(persistent), DragSource(false),
         DropTarget(false), min(minVal), max(maxVal), format(std::move(format)) {}
 
