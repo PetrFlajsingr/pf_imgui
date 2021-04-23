@@ -34,6 +34,7 @@
 #include "elements/Table.h"
 #include "elements/Text.h"
 #include "elements/Tree.h"
+#include "elements/VerticalSlider.h"
 #include "elements/plots.h"
 #include "layouts/layouts.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
