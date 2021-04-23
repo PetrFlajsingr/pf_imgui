@@ -14,6 +14,7 @@
 #include <imgui.h>
 #include <optional>
 #include <pf_common/concepts/StringConvertible.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/elements/Tooltip.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/Observable_impl.h>
@@ -33,7 +34,7 @@ namespace details {
  *
  * Enables content dragging from this element. Provides an ability to add tooltip to dragged data.
  */
-class DragSourceBase {
+class PF_IMGUI_EXPORT DragSourceBase {
  public:
   /**
    * Construct DragSourceBase.
@@ -120,7 +121,7 @@ class DragSourceBase {
  *
  * Enables content drop from DragSource.
  */
-class DropTargetBase {
+class PF_IMGUI_EXPORT DropTargetBase {
  public:
   /**
    * Construct DropTargetBase.
@@ -161,7 +162,7 @@ class DragNDropGroup;
  *
  */
 template<typename T>
-class DragSource : public details::DragSourceBase {
+class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
  public:
   /**
    * Construct DragSource.
@@ -214,7 +215,7 @@ class DragSource : public details::DragSourceBase {
  * @tparam T type of data which this object accepts
  */
 template<typename T>
-class DropTarget : public details::DropTargetBase {
+class PF_IMGUI_EXPORT DropTarget : public details::DropTargetBase {
  public:
   /**
    * Construct DropTarget.
@@ -258,7 +259,7 @@ class DropTarget : public details::DropTargetBase {
  * source elements has their drag action active. Upon completing the drag action their drop enabled status will be
  * reset to their previous state.
  */
-class DragNDropGroup {
+class PF_IMGUI_EXPORT DragNDropGroup {
  public:
   DragNDropGroup() = default;
   /**
