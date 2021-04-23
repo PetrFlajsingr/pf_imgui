@@ -24,7 +24,7 @@ namespace details {
  */
 template<typename T>
 constexpr const char *defaultVSliderFormat() {
-  if constexpr (std::same_as < T, float >>) {
+  if constexpr (std::same_as<T, float>) {
     return "%.3f";
   } else {
     return "%d";
