@@ -201,7 +201,7 @@ class DragSource : public details::DragSourceBase {
     } else {
       result = drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
     }
-    if (wasDragged != isDragged()) { dragListeners.notify(sourceData); }
+    if (!wasDragged && wasDragged != isDragged()) { dragListeners.notify(sourceData); }
     return result;
   }
 
