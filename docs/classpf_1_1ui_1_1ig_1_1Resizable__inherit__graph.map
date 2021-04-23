@@ -1,19 +1,20 @@
 <map id="pf::ui::ig::Resizable" name="pf::ui::ig::Resizable">
-<area shape="rect" id="node1" title="Interface for resizable elements." alt="" coords="5,259,151,285"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Button.html" title="A typical button element." alt="" coords="235,5,361,32"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1FileDialog.html" title="Dialog for file selection from disk." alt="" coords="225,56,371,83"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1FlameGraph.html" title="Graph for visualising stack traces, performance stuff..." alt="" coords="217,107,379,133"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. It can serve as a button." alt="" coords="237,157,359,184"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1PieChart.html" title="Typical pie chart." alt="" coords="229,208,367,235"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Plot.html" title="Advanced plot for plotting 2D data." alt="" coords="245,259,351,285"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1ProgressBar.html" title="Progress bar for notifying a user of operation progress." alt="" coords="199,309,397,336"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="" coords="203,360,393,387"/>
-<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1SimplePlot.html" title="A simple plot which can visualize float values in 2 ways." alt="" coords="222,411,374,437"/>
-<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="221,462,375,503"/>
-<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="231,528,365,555"/>
-<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="445,259,628,285"/>
-<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="461,309,612,336"/>
-<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="460,360,613,387"/>
-<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="448,411,625,437"/>
-<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="451,461,623,488"/>
+<area shape="rect" id="node1" title="Interface for resizable elements." alt="" coords="5,284,151,311"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Button.html" title="A typical button element." alt="" coords="239,5,365,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1FileDialog.html" title="Dialog for file selection from disk." alt="" coords="229,56,375,83"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1FlameGraph.html" title="Graph for visualising stack traces, performance stuff..." alt="" coords="221,107,383,133"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. It can serve as a button." alt="" coords="241,157,363,184"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1PieChart.html" title="Typical pie chart." alt="" coords="233,208,371,235"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Plot.html" title="Advanced plot for plotting 2D data." alt="" coords="249,259,355,285"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1ProgressBar.html" title="Progress bar for notifying a user of operation progress." alt="" coords="203,309,401,336"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="" coords="207,360,397,387"/>
+<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1SimplePlot.html" title="A simple plot which can visualize float values in 2 ways." alt="" coords="226,411,378,437"/>
+<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="225,462,379,503"/>
+<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="199,528,405,555"/>
+<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="235,579,369,605"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="453,259,636,285"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="469,309,620,336"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="468,360,621,387"/>
+<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="456,411,633,437"/>
+<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="459,461,631,488"/>
 </map>

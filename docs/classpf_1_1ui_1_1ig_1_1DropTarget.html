@@ -84,13 +84,14 @@ Inheritance diagram for pf::ui::ig::DropTarget&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpf_1_1ui_1_1ig_1_1DropTarget__inherit__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1DropTarget_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="pf_1_1ui_1_1ig_1_1DropTarget_3_01T_01_4_inherit__map" id="pf_1_1ui_1_1ig_1_1DropTarget_3_01T_01_4_inherit__map">
-<area shape="rect" title="Target for drag and drop operation." alt="" coords="187,107,377,133"/>
+<area shape="rect" title="Target for drag and drop operation." alt="" coords="187,132,377,159"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="425,5,632,32"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="437,56,621,83"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="452,107,605,133"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Range.html" title="Range of 2 values." alt="" coords="448,157,609,184"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="450,208,607,235"/>
-<area shape="rect" href="classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html" title="Base class for templated DropTarget&lt;T&gt;" alt="" coords="5,99,139,141"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="425,259,632,285"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html" title="Base class for templated DropTarget&lt;T&gt;" alt="" coords="5,125,139,166"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -107,6 +108,8 @@ Collaboration diagram for pf::ui::ig::DropTarget&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0bfa8ebbc5a5447de7b4ad654ebf4e79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1DropTarget.html#a0bfa8ebbc5a5447de7b4ad654ebf4e79">DropTarget</a> (bool dropAllowed)</td></tr>
 <tr class="separator:a0bfa8ebbc5a5447de7b4ad654ebf4e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a7fdfda00c68cd187c9563dc8f677ea"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1DropTarget.html#a4a7fdfda00c68cd187c9563dc8f677ea">addDropListener</a> (std::invocable&lt; T &gt; auto &amp;&amp;listener)</td></tr>
+<tr class="separator:a4a7fdfda00c68cd187c9563dc8f677ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html">pf::ui::ig::details::DropTargetBase</a></td></tr>
 <tr class="memitem:a0d8fb3e896ba386368f22008d57d7c86 inherit pub_methods_classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html#a0d8fb3e896ba386368f22008d57d7c86">DropTargetBase</a> (bool dropAllowed)</td></tr>
 <tr class="separator:a0d8fb3e896ba386368f22008d57d7c86 inherit pub_methods_classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +180,41 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4a7fdfda00c68cd187c9563dc8f677ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a7fdfda00c68cd187c9563dc8f677ea">&#9670;&nbsp;</a></span>addDropListener()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Subscription <a class="el" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a>&lt; T &gt;::addDropListener </td>
+          <td>(</td>
+          <td class="paramtype">std::invocable&lt; T &gt; auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>listener</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Add a listener for when value is dropped to this element. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listener</td><td>listener </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Subscription for listener cancellation </dd></dl>
+
+</div>
+</div>
 <a id="a98e10a5ece2f3b4543d0bcf98b09b9c0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a98e10a5ece2f3b4543d0bcf98b09b9c0">&#9670;&nbsp;</a></span>dropAccept()</h2>
 
