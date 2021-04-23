@@ -11,6 +11,7 @@
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
 #include <utility>
@@ -42,6 +43,7 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
                                        public Labellable,
                                        public ValueObservable<T>,
                                        public Savable,
+                                       public Resizable,
                                        public DragSource<T>,
                                        public DropTarget<T> {
  public:
@@ -55,10 +57,10 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
    * @param persistent enable state saving to disk
    * @param format printf-like format for value
    */
-  VerticalSlider(const std::string &elementName, const std::string &label, T minVal, T maxVal, T value = T{},
+  VerticalSlider(const std::string &elementName, const std::string &label, Imvec2 size, T minVal, T maxVal, T value = T{},
                  Persistent persistent = Persistent::No, std::string format = details::defaultVSliderFormat<T>())
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal),
+        Savable(persistent), Resizable(size), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal),
         format(std::move(format)) {}
 
   /**
@@ -87,10 +89,10 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
     auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::VSliderFloat(getLabel().c_str(), ImVec2{50, 50}, address, min, max, format.c_str());
+      valueChanged = ImGui::VSliderFloat(getLabel().c_str(), getSize(), address, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::VSliderInt(getLabel().c_str(), ImVec2{50, 50}, address, min, max, format.c_str());
+      valueChanged = ImGui::VSliderInt(getLabel().c_str(), getSize(), address, min, max, format.c_str());
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
