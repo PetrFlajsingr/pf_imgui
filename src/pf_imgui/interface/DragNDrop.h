@@ -16,6 +16,7 @@
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/elements/Tooltip.h>
 #include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/unique_id.h>
 #include <ranges>
 #include <static_type_info.h>
@@ -24,7 +25,7 @@
 namespace pf::ui::ig {
 
 // TODO: type conversions, user customisation
-// TODO: type IDs
+// TODO: somehow unify with what imgui uses internally
 
 namespace details {
 /**
@@ -109,6 +110,7 @@ class DragSourceBase {
 
  private:
   bool dragged = false;
+  bool ownsPayload = false;
   std::unique_ptr<Tooltip> tooltip = nullptr;
   std::optional<std::pair<std::string, Text *>> tooltipTextFmt;
 };
@@ -156,6 +158,7 @@ class DragNDropGroup;
  * @tparam T type of transferred data
  *
  * You have to use drag(...) function in order to activate drag source.
+ *
  */
 template<typename T>
 class DragSource : public details::DragSourceBase {
@@ -173,6 +176,14 @@ class DragSource : public details::DragSourceBase {
   void setDragTooltip(std::string_view text) {
     createSimpleTooltip(std::string(text), text.find("{}") != std::string_view::npos);
   }
+  /**
+   * Add a listener for when value is dragged from this element.
+   * @param listener listener
+   * @return Subscription for listener cancellation
+   */
+  Subscription addDragListener(std::invocable<T> auto &&listener) {
+    return dragListeners.template addListener(std::forward<decltype(listener)>(listener));
+  }
 
  protected:
   /**
@@ -182,12 +193,20 @@ class DragSource : public details::DragSourceBase {
    */
   bool drag(const T &sourceData) {
     const auto typeID = std::to_string(static_type_info::getTypeIndex<T>());
+    const auto wasDragged = isDragged();
+    bool result;
     if constexpr (ToStringConvertible<T>) {
-      return drag_impl_fmt(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
+      result =
+          drag_impl_fmt(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
     } else {
-      return drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
+      result = drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
     }
+    if (wasDragged != isDragged()) { dragListeners.notify(sourceData); }
+    return result;
   }
+
+ private:
+  Observable_impl<T> dragListeners;
 };
 
 /**
@@ -203,6 +222,15 @@ class DropTarget : public details::DropTargetBase {
    */
   explicit DropTarget(bool dropAllowed) : DropTargetBase(dropAllowed) {}
 
+  /**
+   * Add a listener for when value is dropped to this element.
+   * @param listener listener
+   * @return Subscription for listener cancellation
+   */
+  Subscription addDropListener(std::invocable<T> auto &&listener) {
+    return dropListeners.template addListener(std::forward<decltype(listener)>(listener));
+  }
+
  protected:
   /**
    * Call this method in order to accept potential transferred data.
@@ -211,9 +239,16 @@ class DropTarget : public details::DropTargetBase {
   std::optional<T> dropAccept() {
     const auto typeID = std::to_string(static_type_info::getTypeIndex<T>());
     const auto dropResult = dropAccept_impl(typeID);
-    if (dropResult.has_value()) { return *reinterpret_cast<const T *>(*dropResult); }
+    if (dropResult.has_value()) {
+      const auto value = *reinterpret_cast<const T *>(*dropResult);
+      dropListeners.notify(value);
+      return value;
+    }
     return std::nullopt;
   }
+
+ private:
+  Observable_impl<T> dropListeners;
 };
 
 /**

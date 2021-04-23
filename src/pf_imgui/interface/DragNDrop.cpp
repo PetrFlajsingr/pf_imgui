@@ -16,18 +16,26 @@ void details::DragSourceBase::setDragAllowed(bool allowed) { dragAllowed = allow
 bool details::DragSourceBase::isDragged() const { return dragged; }
 
 bool details::DragSourceBase::drag_impl(const std::string &typeName, const void *sourceData, std::size_t dataSize) {
+  if (!dragAllowed) { return false; }
+  const auto startPayload = ImGui::GetDragDropPayload();
+  auto didDrop = false;
+  if (dragged && ownsPayload && startPayload == nullptr) {
+    ownsPayload = false;
+    dragged = false;
+    didDrop = true;
+  }
   auto flags = ImGuiDragDropFlags_SourceAllowNullID;
-  if (dragAllowed && ImGui::BeginDragDropSource(flags)) {
+  if (ImGui::BeginDragDropSource(flags)) {
     dragged = true;
+    ownsPayload = true;
     ImGui::SetDragDropPayload(typeName.c_str(), sourceData, dataSize, ImGuiCond_Once);
     if (tooltip != nullptr) { tooltip->render(); }
     ImGui::EndDragDropSource();
-    auto payload = ImGui::GetDragDropPayload();
-    return payload != nullptr && payload->IsDelivery();// check if this detection works
   } else {
-    dragged = false;
+    dragged = dragged && startPayload != nullptr && !startPayload->IsDelivery();
+    ownsPayload = startPayload != nullptr;
   }
-  return false;
+  return didDrop;
 }
 bool details::DragSourceBase::hasDragTooltip() const { return tooltip != nullptr; }
 Tooltip &details::DragSourceBase::getDragTooltip() {
@@ -44,13 +52,13 @@ void details::DragSourceBase::removeDragTooltip() {
   tooltipTextFmt = std::nullopt;
 }
 bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
-                                            const std::string& value) {
+                                            const std::string &value) {
   if (!dragged && tooltipTextFmt.has_value()) {
     tooltipTextFmt->second->setText(fmt::format(tooltipTextFmt->first, value));
   }
   return drag_impl(typeName, sourceData, dataSize);
 }
-void details::DragSourceBase::createSimpleTooltip(const std::string& fmt, bool isValueFmt) {
+void details::DragSourceBase::createSimpleTooltip(const std::string &fmt, bool isValueFmt) {
   auto &tooltipText = createDragTooltip().createChild<Text>(uniqueId(), std::string(fmt));
   if (isValueFmt) {
     tooltipTextFmt = std::make_pair(fmt, &tooltipText);
