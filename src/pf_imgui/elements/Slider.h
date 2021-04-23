@@ -107,7 +107,7 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
    * Set min slider value.
    * @param min new min slider value
    */
-  void setMin(MinMaxType min) { Slider::min = min; }
+  void setMin(MinMaxType newMin) { min = newMin; }
   /**
    * Get max slider value.
    * @return max slider value
@@ -117,7 +117,7 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
    * Set max slider value.
    * @param max new min slider value
    */
-  void setMax(MinMaxType max) { Slider::max = max; }
+  void setMax(MinMaxType newMax) { max = newMax; }
 
  protected:
   void unserialize_impl(const toml::table &src) override {

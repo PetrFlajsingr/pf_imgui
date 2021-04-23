@@ -13,6 +13,8 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
+#include <utility>
+
 namespace pf::ui::ig {
 namespace details {
 /**
@@ -30,6 +32,10 @@ constexpr const char *defaultVSliderFormat() {
 }
 }// namespace details
 
+/**
+ * @brief Slider rendered vertically.
+ * @tparam T inner value type
+ */
 template<OneOf<float, int> T>
 class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
                                        public Labellable,
@@ -38,10 +44,41 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
                                        public DragSource<T>,
                                        public DropTarget<T> {
  public:
+  /**
+   * Construct VerticalSlider.
+   * @param elementName ID of the element
+   * @param label text rendered next to the slider
+   * @param minVal min allowed value
+   * @param maxVal max allowed value
+   * @param value starting value
+   * @param persistent enable state saving to disk
+   * @param format printf-like format for value
+   */
   VerticalSlider(const std::string &elementName, const std::string &label, T minVal, const T maxVal, T value = T{},
-                 Persistent persistent = Persistent::No, const std::string &format = defaultVSliderFormat<T>())
+                 Persistent persistent = Persistent::No, std::string format = defaultVSliderFormat<T>())
       : ItemElement(elementName), Labellable(label), ValueObservable(value), Savable(persistent), DragSource(false),
-        DropTarget(false), min(minVal), max(maxVal), format(format) {}
+        DropTarget(false), min(minVal), max(maxVal), format(std::move(format)) {}
+
+  /**
+   * Get min slider value.
+   * @return min slider value
+   */
+  [[nodiscard]] T getMin() const { return min; }
+  /**
+   * Set min slider value.
+   * @param min new min slider value
+   */
+  void setMin(const T &min) { VerticalSlider::min = min; }
+  /**
+   * Get max slider value.
+   * @return max slider value
+   */
+  [[nodiscard]] T getMax() const { return max; }
+  /**
+   * Set max slider value.
+   * @param max new min slider value
+   */
+  void setMax(const T &max) { VerticalSlider::max = max; }
 
  protected:
   void renderImpl() override {
