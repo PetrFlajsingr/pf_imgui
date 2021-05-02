@@ -118,6 +118,7 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
   bool buttonsEnabled;
   bool filterEnabled;
   bool rebuild = true;
+  bool scrollToBottom = false;
   std::function<bool(std::string_view)> filterFnc = [](auto) { return true; };
   std::optional<std::size_t> recordLimit;
   std::vector<std::string> records;

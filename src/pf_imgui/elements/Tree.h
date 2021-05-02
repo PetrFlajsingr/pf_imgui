@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementCo
    * @param allowCollapse enable/disable user collapse
    * @param persistent enable data saving to disk
    */
-  Tree(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
+  Tree(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse,
        Persistent persistent = Persistent::No);
 
   /**

@@ -4,6 +4,7 @@
 
 #include "Memo.h"
 #include "Button.h"
+#include "Checkbox.h"
 #include "InputText.h"
 #include <range/v3/view/filter.hpp>
 #include <range/v3/view/join.hpp>
@@ -25,6 +26,7 @@ void Memo::renderImpl() {
   ImGui::Text("%s", getLabel().c_str());
   if (controlsLayout != nullptr) { controlsLayout->render(); }
   ImGui::Separator();
+  if (scrollToBottom) { textAreaLayout.setScrollPosition(Layout::ScrollPosition::Bottom); }
   textAreaLayout.render();
   ImGui::Separator();
 }
@@ -65,6 +67,8 @@ void Memo::rebuildPanel() {
             };
           });
     }
+    controlsLayout->createChild<Checkbox>(getName() + "scroll_checkbox", "Scroll to bottom")
+        .addValueListener([this](auto newVal) { scrollToBottom = newVal; });
   }
   textArea = &textAreaLayout.createChild<Text>(getName() + "memo_text", "Memo");
   rebuild = false;
