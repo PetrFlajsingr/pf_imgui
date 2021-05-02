@@ -27,11 +27,19 @@ void BoxLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
+    if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Top) {
+      ImGui::SetScrollHereY(0.0f);
+      nextFrameScrollPosition = std::nullopt;
+    }
     if (renderCollapseButton()) {
       switch (layoutDirection) {
         case LayoutDirection::LeftToRight: renderLeftToRight(); break;
         case LayoutDirection::TopToBottom: renderTopToBottom(); break;
       }
+    }
+    if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Bottom) {
+      ImGui::SetScrollHereY(1.0f);
+      nextFrameScrollPosition = std::nullopt;
     }
   }
   ImGui::EndChild();

@@ -30,5 +30,8 @@ bool Layout::renderCollapseButton() {
   }
   return !isCollapsed();
 }
+void Layout::setScrollPosition(Layout::ScrollPosition position) {
+  nextFrameScrollPosition = position;
+}
 
 }// namespace pf::ui::ig

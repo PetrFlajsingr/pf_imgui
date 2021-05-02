@@ -63,12 +63,31 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
    */
   [[nodiscard]] virtual std::vector<Renderable *> getRenderables() = 0;
 
+  /**
+   * @brief Scroll position within the layout.
+   */
+  enum class ScrollPosition {
+    Top, Bottom
+  };
+
+  /**
+   * Set new scroll position for the next frame.
+   * @param position new scroll position
+   */
+  void setScrollPosition(ScrollPosition position);
+
  protected:
   /**
    * Render collapse button when isCollapsible() == true.
    * @return true if the layout is not collapsed, false otherwise
    */
   [[nodiscard]] bool renderCollapseButton();
+
+  /**
+   * This needs to be used while rendering inherited layouts.
+   * @todo: Implement in all layouts.
+   */
+  std::optional<ScrollPosition> nextFrameScrollPosition = std::nullopt;
 
  private:
   bool drawBorder;
