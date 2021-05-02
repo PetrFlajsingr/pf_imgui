@@ -14,7 +14,9 @@ Memo::Memo(const std::string &elementName, const std::string &label, float textA
            bool filterEnabled, const std::optional<std::size_t> &recordLimit)
     : Element(elementName), Labellable(label),
       textAreaLayout(elementName + "_memo_panel###", LayoutDirection::TopToBottom, ImVec2{0, textAHeight}),
-      buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {}
+      buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {
+  textAreaLayout.setScrollable(true);
+}
 
 void Memo::renderImpl() {
   if (rebuild) { rebuildPanel(); }
