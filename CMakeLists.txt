@@ -7,7 +7,7 @@ HunterGate(
 )
 
 project(pf_imgui
-        VERSION 0.4.0)
+        VERSION 0.4.1)
 
 set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
 set(CPM_DOWNLOAD_VERSION 0.27.4)
