@@ -19,7 +19,7 @@
 namespace pf::ui::ig {
 
 /**
- * @brief Group of elements which may be visually delimited.
+ * @brief Group of elements which is visually delimited with a header.
  *
  * Elements are rendered in top-down order.
  */

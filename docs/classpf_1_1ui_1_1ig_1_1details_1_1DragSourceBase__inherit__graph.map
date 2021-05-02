@@ -4,7 +4,7 @@
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title=" " alt="" coords="224,86,381,127"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title=" " alt="" coords="224,151,381,193"/>
 <area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title=" " alt="" coords="224,217,381,258"/>
-<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="205,393,400,420"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="205,368,400,395"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="479,20,653,47"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="488,93,644,120"/>
 <area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="479,159,653,185"/>
@@ -14,7 +14,6 @@
 <area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with items which can be converted to string." alt="" coords="471,317,661,344"/>
 <area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="474,368,658,395"/>
 <area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="489,419,643,445"/>
-<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Range.html" title="Range of 2 values." alt="" coords="485,469,647,496"/>
-<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="487,520,645,547"/>
-<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="463,571,669,597"/>
+<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="487,469,645,496"/>
+<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="463,520,669,547"/>
 </map>

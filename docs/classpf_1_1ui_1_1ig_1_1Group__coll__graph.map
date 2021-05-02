@@ -1,5 +1,5 @@
 <map id="pf::ui::ig::Group" name="pf::ui::ig::Group">
-<area shape="rect" id="node1" title="Group of elements which may be visually delimited." alt="" coords="653,132,775,159"/>
+<area shape="rect" id="node1" title="Group of elements which is visually delimited with a header." alt="" coords="653,132,775,159"/>
 <area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="423,56,589,83"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>

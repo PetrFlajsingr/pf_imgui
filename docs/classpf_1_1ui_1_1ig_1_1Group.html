@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited.">Group</a> of elements which may be visually delimited.  
+<p><a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header.">Group</a> of elements which is visually delimited with a header.  
  <a href="classpf_1_1ui_1_1ig_1_1Group.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Group_8h_source.html">Group.h</a>&gt;</code></p>
@@ -84,7 +84,7 @@ Inheritance diagram for pf::ui::ig::Group:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpf_1_1ui_1_1ig_1_1Group__inherit__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1Group_inherit__map" alt="Inheritance graph"/></div>
 <map name="pf_1_1ui_1_1ig_1_1Group_inherit__map" id="pf_1_1ui_1_1ig_1_1Group_inherit__map">
-<area shape="rect" title="Group of elements which may be visually delimited." alt="" coords="653,132,775,159"/>
+<area shape="rect" title="Group of elements which is visually delimited with a header." alt="" coords="653,132,775,159"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="423,56,589,83"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
@@ -101,7 +101,7 @@ Collaboration diagram for pf::ui::ig::Group:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpf_1_1ui_1_1ig_1_1Group__coll__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1Group_coll__map" alt="Collaboration graph"/></div>
 <map name="pf_1_1ui_1_1ig_1_1Group_coll__map" id="pf_1_1ui_1_1ig_1_1Group_coll__map">
-<area shape="rect" title="Group of elements which may be visually delimited." alt="" coords="653,132,775,159"/>
+<area shape="rect" title="Group of elements which is visually delimited with a header." alt="" coords="653,132,775,159"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="423,56,589,83"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
@@ -254,6 +254,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a94db9c7341c7fd306af91b240bcab42d inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top"><a id="a94db9c7341c7fd306af91b240bcab42d"></a>
 <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:a94db9c7341c7fd306af91b240bcab42d inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a307b689d8f04ec5c340014cb49afc076 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#a307b689d8f04ec5c340014cb49afc076">isPersistent</a> () const</td></tr>
+<tr class="separator:a307b689d8f04ec5c340014cb49afc076 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed3087d0531e934bc96ec4b33d8fdca9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#aed3087d0531e934bc96ec4b33d8fdca9">unserialize</a> (const toml::table &amp;src)</td></tr>
 <tr class="separator:aed3087d0531e934bc96ec4b33d8fdca9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdb86e68840f189f5c56c7c7cb66c8d9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">std::optional&lt; toml::table &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#afdb86e68840f189f5c56c7c7cb66c8d9">serialize</a> ()</td></tr>
@@ -276,9 +278,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited.">Group</a> of elements which may be visually delimited. </p>
-<p>Elements are rendered in top-down order.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>: change to something like a collapsing header </dd></dl>
+<div class="textblock"><p><a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header.">Group</a> of elements which is visually delimited with a header. </p>
+<p>Elements are rendered in top-down order. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4d0b8ef560981e4f149ffc05c9e3ad66"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d0b8ef560981e4f149ffc05c9e3ad66">&#9670;&nbsp;</a></span>Group() <span class="overload">[1/2]</span></h2>
@@ -317,7 +318,7 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited.">Group</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header.">Group</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">elementName</td><td>ID of the group </td></tr>
     <tr><td class="paramname">label</td><td>text drawn on top of the group </td></tr>
@@ -360,7 +361,7 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which may be visually delimited.">Group</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header.">Group</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">elementName</td><td>ID of the group </td></tr>
     <tr><td class="paramname">label</td><td>text drawn on top of the group </td></tr>
