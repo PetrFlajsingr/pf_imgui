@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param elementName ID of the layout
    * @param size size of the layout
    * @param width width in cells - amount of cells in each row
-   * @param height height in cells - amount of cells in each columnn
+   * @param height height in cells - amount of cells in each column
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */

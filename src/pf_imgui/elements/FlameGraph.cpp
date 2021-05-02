@@ -3,7 +3,6 @@
 //
 
 #include "FlameGraph.h"
-
 #include <utility>
 
 namespace pf::ui::ig {

@@ -10,8 +10,8 @@
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
-#include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
 #include <utility>
@@ -57,10 +57,11 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
    * @param persistent enable state saving to disk
    * @param format printf-like format for value
    */
-  VerticalSlider(const std::string &elementName, const std::string &label, ImVec2 size, T minVal, T maxVal, T value = T{},
-                 Persistent persistent = Persistent::No, std::string format = details::defaultVSliderFormat<T>())
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-        Savable(persistent), Resizable(size), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal),
+  VerticalSlider(const std::string &elementName, const std::string &label, ImVec2 size, T minVal, T maxVal,
+                 T value = T{}, Persistent persistent = Persistent::No,
+                 std::string format = details::defaultVSliderFormat<T>())
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent),
+        Resizable(size), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal),
         format(std::move(format)) {}
 
   /**

@@ -5,11 +5,11 @@
  * @date 17.4.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
-#define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
+#ifndef PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
+#define PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
 
-#include "Dialog.h"
 #include <pf_common/enums.h>
+#include <pf_imgui/dialogs/Dialog.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/Text.h>
 #include <pf_imgui/layouts/BoxLayout.h>
@@ -62,4 +62,4 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
 };
 
 }// namespace pf::ui::ig
-#endif//PF_IMGUI_SRC_PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
+#endif//PF_IMGUI_DIALOGS_MESSAGEDIALOG_H

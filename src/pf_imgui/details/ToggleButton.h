@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_DETAILS_TOGGLEBUTTON_H
 #define PF_IMGUI_SRC_PF_IMGUI_DETAILS_TOGGLEBUTTON_H
 
-#include "imgui_internal.h"
+#include <imgui_internal.h>
 
 namespace pf::ui::ig {
 

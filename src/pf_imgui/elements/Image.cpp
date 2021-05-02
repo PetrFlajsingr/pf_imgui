@@ -3,7 +3,6 @@
 //
 
 #include "Image.h"
-
 #include <utility>
 
 namespace pf::ui::ig {

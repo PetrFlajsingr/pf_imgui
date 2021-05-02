@@ -14,10 +14,17 @@ Tree &Tree::addNode(const std::string &elementName, const std::string &caption) 
 }
 
 void Tree::renderImpl() {
+  if (nextState.has_value()) {
+    ImGui::SetNextItemOpen(*nextState == State::Open);
+    nextState = std::nullopt;
+  }
   if (ImGui::TreeNode(getLabel().c_str())) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::TreePop();
   }
+}
+void Tree::setOpenState(Tree::State state) {
+  nextState = state;
 }
 
 }// namespace pf::ui::ig

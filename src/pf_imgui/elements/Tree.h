@@ -22,6 +22,9 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementContainer {
  public:
+  enum class State {
+    Open, Close
+  };
   /**
    * Construct Tree.
    * @param elementName ID of the node
@@ -37,8 +40,16 @@ class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementCo
    */
   Tree &addNode(const std::string &elementName, const std::string &caption);
 
+  /**
+   * Set node opening state on next frame.
+   */
+  void setOpenState(State state);
+
  protected:
   void renderImpl() override;
+
+ private:
+  std::optional<State> nextState = std::nullopt;
 };
 
 }// namespace pf::ui::ig
