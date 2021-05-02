@@ -15,9 +15,10 @@ Group::Group(const std::string &elementName, const std::string &label, AllowColl
     : Group(elementName, label, Persistent::No, allowCollapse) {}
 
 void Group::renderImpl() {
-  ImGui::SetNextItemOpen(!isCollapsed() || !isCollapsible());
+  const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
+  ImGui::SetNextItemOpen(shouldBeOpen);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
-  setCollapsed(ImGui::CollapsingHeader(getLabel().c_str(), flags));
+  setCollapsed(!ImGui::CollapsingHeader(getLabel().c_str(), flags));
   if (!isCollapsed()) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
   }
