@@ -43,6 +43,12 @@ enum class ButtonType {
   ArrowDown   /*!< Button without a label with a down aiming arrow */
 };
 /**
+ * Enable/disable repeatable behavior.
+ */
+enum class Repeatable {
+  Yes, No
+};
+/**
  * Enum for marking persistence of Savable elements.
  */
 enum class Persistent { Yes, No };

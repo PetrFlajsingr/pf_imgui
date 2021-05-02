@@ -9,8 +9,10 @@
 
 namespace pf::ui::ig {
 
-Button::Button(const std::string &name, std::string label, ButtonType buttonType, bool isRepeatable, const ImVec2 &size)
-    : ItemElement(name), Labellable(std::move(label)), Resizable(size), type(buttonType), repeatable(isRepeatable) {}
+Button::Button(const std::string &name, std::string label, ButtonType buttonType, Repeatable isRepeatable,
+               const ImVec2 &size)
+    : ItemElement(name), Labellable(std::move(label)), Resizable(size), type(buttonType),
+      repeatable(isRepeatable == Repeatable::Yes) {}
 
 void Button::renderImpl() {
   ImGui::PushButtonRepeat(repeatable);
@@ -31,7 +33,9 @@ void Button::renderImpl() {
 ButtonType Button::getType() const { return type; }
 
 void Button::setType(ButtonType buttonType) { type = buttonType; }
+
 bool Button::isRepeatable() const { return repeatable; }
-void Button::setRepeatable(bool repeatable) { Button::repeatable = repeatable; }
+
+void Button::setRepeatable(bool newRepeatable) { repeatable = newRepeatable; }
 
 }// namespace pf::ui::ig
