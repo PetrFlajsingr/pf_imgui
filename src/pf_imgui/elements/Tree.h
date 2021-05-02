@@ -27,6 +27,15 @@ class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementCo
    * Construct Tree.
    * @param elementName ID of the node
    * @param label text rendered on the node
+   * @param persistent enable data saving to disk
+   */
+  Tree(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No);
+  /**
+   * Construct Tree.
+   * @param elementName ID of the node
+   * @param label text rendered on the node
+   * @param allowCollapse enable/disable user collapse
+   * @param persistent enable data saving to disk
    */
   Tree(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
        Persistent persistent = Persistent::No);

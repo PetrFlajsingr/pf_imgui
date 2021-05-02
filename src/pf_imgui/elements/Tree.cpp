@@ -7,13 +7,15 @@
 
 namespace pf::ui::ig {
 
+Tree::Tree(const std::string &elementName, const std::string &label, Persistent persistent)
+    : Tree(elementName, label, AllowCollapse::Yes, persistent) {}
+
 Tree::Tree(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent)
     : Element(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
 
 Tree &Tree::addNode(const std::string &elementName, const std::string &caption, AllowCollapse allowCollapse) {
   return createChild<Tree>(elementName, caption, allowCollapse, isPersistent() ? Persistent::Yes : Persistent::No);
 }
-
 void Tree::renderImpl() {
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
