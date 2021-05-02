@@ -17,7 +17,7 @@ Tree &Tree::addNode(const std::string &elementName, const std::string &caption) 
 void Tree::renderImpl() {
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
-  setCollapsed(ImGui::TreeNode(getLabel().c_str()));
+  setCollapsed(!ImGui::TreeNode(getLabel().c_str()));
   if (!isCollapsed()) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::TreePop();
