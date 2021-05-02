@@ -8,11 +8,11 @@
 #include <toml++/toml_node_view.h>
 namespace pf::ui::ig {
 
-Checkbox::Checkbox(const std::string &elementName, const std::string &label, Persistent persistent, bool value)
-    : Checkbox(elementName, label, Type::Checkbox, persistent, value) {}
+Checkbox::Checkbox(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
+    : Checkbox(elementName, label, Type::Checkbox, value, persistent) {}
 
-Checkbox::Checkbox(const std::string &elementName, const std::string &label, Checkbox::Type checkboxType,
-                   Persistent persistent, bool value)
+Checkbox::Checkbox(const std::string &elementName, const std::string &label, Checkbox::Type checkboxType, bool value,
+                   Persistent persistent)
     : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent), type(checkboxType) {}
 
 void Checkbox::renderImpl() {
@@ -31,9 +31,7 @@ void Checkbox::renderImpl() {
 void Checkbox::unserialize_impl(const toml::table &src) { setValueAndNotifyIfChanged(src["checked"].as_boolean()); }
 
 toml::table Checkbox::serialize_impl() { return toml::table{{{"checked", getValue()}}}; }
-
 void Checkbox::setSelected(bool value) { setValueAndNotifyIfChanged(value); }
-
 bool Checkbox::isSelected() const { return getValue(); }
 void Checkbox::toggle() { setSelected(!isSelected()); }
 

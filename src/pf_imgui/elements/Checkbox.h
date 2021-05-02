@@ -32,14 +32,14 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
     Toggle    /**< Toggle similiar to those on mobile devices */
   };
   /**
-   * Construct Checkbox. Default value is that of Type::Checkbox.
-   * @param elementName ID of the checkbox
-   * @param label label drawn next to the checkbox
-   * @param persistent allow value saving to disk
-   * @param value starting value
-   */
-  Checkbox(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
-           bool value = false);
+ * Construct Checkbox. Default value is that of Type::Checkbox.
+ * @param elementName ID of the checkbox
+ * @param label label drawn next to the checkbox
+ * @param persistent allow value saving to disk
+ * @param value starting value
+ */
+  Checkbox(const std::string &elementName, const std::string &label,
+           bool value = false, Persistent persistent = Persistent::No);
   /**
    * Construct Checkbox.
    * @param elementName ID of the checkbox
@@ -48,9 +48,8 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
    * @param persistent allow state saving to disk
    * @param value starting value
    */
-  Checkbox(const std::string &elementName, const std::string &label, Type checkboxType,
-           Persistent persistent = Persistent::No, bool value = false);
-
+  Checkbox(const std::string &elementName, const std::string &label, Type checkboxType, bool value = false,
+           Persistent persistent = Persistent::No);
   /**
    * Set if the checkbox is selected or not.
    * @param value new value
