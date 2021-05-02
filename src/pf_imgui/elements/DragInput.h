@@ -73,6 +73,8 @@ constexpr const char *defaultDragFormat() {
  *
  * Type of the DragInput is based on underlying types. There is a separate input for each scalar part of type T.
  *
+ * Supported types: int, float, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4, math::Range<int>, math::Range<float>
+ *
  * @tparam T Underlying type
  */
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
@@ -97,7 +99,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
    * @param format format for formatting value to string
    */
   DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
-            Persistent persistent = Persistent::No, T value = T{}, std::string format = details::defaultDragFormat<T>())
+            T value = T{}, Persistent persistent = Persistent::No, std::string format = details::defaultDragFormat<T>())
       : ItemElement(elementName), ValueObservable<T>(value), Labellable(label),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
         format(std::move(format)) {}
@@ -210,6 +212,5 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
   ParamType max;
   std::string format;
 };
-
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_DRAGINPUT_H

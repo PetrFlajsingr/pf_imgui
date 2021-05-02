@@ -67,11 +67,12 @@ constexpr const char *defaultSliderFormat() {
 /**
  * @brief Slider supporting multiple types.
  *
+ * Supported types: int, float, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
+ *
  * If the type is not a scalar, each scalar part of the structure gets its own slider.
  * @tparam T underlying type
  *
  * @todo: enum support
- * @todo: vertical sliders
  */
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Slider : public ItemElement,
@@ -179,6 +180,5 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
   MinMaxType max;
   std::string format;
 };
-
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_SLIDER_H

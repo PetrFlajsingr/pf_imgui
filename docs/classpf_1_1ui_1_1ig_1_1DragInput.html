@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.1</span>
    </div>
   </td>
  </tr>
@@ -129,8 +129,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>ParamType</b> = <a c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad2f762bb529334eaa84c67e3b19e2ea1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad2f762bb529334eaa84c67e3b19e2ea1">DragInput</a> (const std::string &amp;elementName, const std::string &amp;label, ParamType speed, ParamType min, ParamType max, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No, T value=T{}, std::string format=details::defaultDragFormat&lt; T &gt;())</td></tr>
-<tr class="separator:ad2f762bb529334eaa84c67e3b19e2ea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283bdd92877bdbb718485a91632b08a9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a283bdd92877bdbb718485a91632b08a9">DragInput</a> (const std::string &amp;elementName, const std::string &amp;label, ParamType speed, ParamType min, ParamType max, T value=T{}, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No, std::string format=details::defaultDragFormat&lt; T &gt;())</td></tr>
+<tr class="separator:a283bdd92877bdbb718485a91632b08a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fc52ba0efa0aba6e310b539a7ee2681"><td class="memItemLeft" align="right" valign="top">ParamType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a6fc52ba0efa0aba6e310b539a7ee2681">getSpeed</a> () const</td></tr>
 <tr class="separator:a6fc52ba0efa0aba6e310b539a7ee2681"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a834b6c1c38ff19a969963463e4cb5d34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a834b6c1c38ff19a969963463e4cb5d34">setSpeed</a> (ParamType speed)</td></tr>
@@ -323,6 +323,7 @@ class pf::ui::ig::DragInput&lt; T &gt;</h3>
 
 <p>Numeric input supporting either keyboard input or mouse drag. </p>
 <p>Type of the <a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag.">DragInput</a> is based on underlying types. There is a separate input for each scalar part of type T.</p>
+<p>Supported types: int, float, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4, math::Range&lt;int&gt;, math::Range&lt;float&gt;</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Underlying type </td></tr>
@@ -330,8 +331,8 @@ class pf::ui::ig::DragInput&lt; T &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad2f762bb529334eaa84c67e3b19e2ea1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2f762bb529334eaa84c67e3b19e2ea1">&#9670;&nbsp;</a></span>DragInput()</h2>
+<a id="a283bdd92877bdbb718485a91632b08a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a283bdd92877bdbb718485a91632b08a9">&#9670;&nbsp;</a></span>DragInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -374,14 +375,14 @@ template&lt;OneOf&lt; IMGUI_DRAG_TYPE_LIST &gt; T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a>&#160;</td>
-          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>, </td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>value</em> = <code>T{}</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em> = <code>T{}</code>, </td>
+          <td class="paramtype"><a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a>&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

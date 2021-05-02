@@ -124,6 +124,8 @@ concept FormattedWithoutStep =
  *
  * Type of the Input is based on underlying types. There is a separate input for each scalar part of type T.
  *
+ * Supported types are int, float, double, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
+ *
  * @tparam T Underlying type
  */
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
@@ -137,7 +139,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
 
  public:
   /**
-   * Construct Input.
+   * Construct Input. For the following types: int.
    * @param elementName ID of the input
    * @param label text drawn next to the input
    * @param st step
@@ -145,62 +147,62 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
    * @param persistent enable state saving to disk
    * @param value starting value
    */
-  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
-        Persistent persistent = Persistent::No, T value = T{}) requires details::UnformattedWithStep<T>
+  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0, T value = T{},
+        Persistent persistent = Persistent::No) requires details::UnformattedWithStep<T> : ItemElement(elementName),
+                                                                                           Labellable(label),
+                                                                                           ValueObservable<T>(value),
+                                                                                           Savable(persistent),
+                                                                                           DragSource<T>(false),
+                                                                                           DropTarget<T>(false),
+                                                                                           data(st, fStep) {}
+
+  /**
+   * Construct Input. For the following types: float, double.
+   * @param elementName ID of the input
+   * @param label text drawn next to the input
+   * @param st step
+   * @param fStep fast step
+   * @param format format for printing underlying float value
+   * @param persistent enable state saving to disk
+   * @param value starting value
+   */
+  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0, T value = T{},
+        Persistent persistent = Persistent::No,
+        std::string format = decltype(data)::defaultFormat()) requires details::FormattedWithStep<T>
       : ItemElement(elementName),
         Labellable(label),
         ValueObservable<T>(value),
         Savable(persistent),
         DragSource<T>(false),
         DropTarget<T>(false),
-        data(st, fStep) {}
+        data(st, fStep),
+        format(std::move(format)) {}
 
   /**
-   * Construct Input.
-   * @param elementName ID of the input
-   * @param label text drawn next to the input
-   * @param st step
-   * @param fStep fast step
-   * @param format format for printing underlying float value
-   * @param persistent enable state saving to disk
-   * @param value starting value
-   */
-  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0,
-        std::string format = decltype(data)::defaultFormat(), Persistent persistent = Persistent::No,
-        T value = T{}) requires details::FormattedWithStep<T> : ItemElement(elementName),
-                                                                Labellable(label),
-                                                                ValueObservable<T>(value),
-                                                                Savable(persistent),
-                                                                DragSource<T>(false),
-                                                                DropTarget<T>(false),
-                                                                format(std::move(format)),
-                                                                data(st, fStep) {}
-
-  /**
-   * Construct Input.
+   * Construct Input. For the following types: glm::ivec2, glm::ivec3, glm::ivec4.
    * @param elementName ID of the input
    * @param label text drawn next to the input
    * @param persistent enable state saving to disk
    * @param value starting value
    */
-  Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
-        T value = T{}) requires details::UnformattedWithoutStep<T> : ItemElement(elementName),
-                                                                     Labellable(label),
-                                                                     ValueObservable<T>(value),
-                                                                     Savable(persistent),
-                                                                     DragSource<T>(false),
-                                                                     DropTarget<T>(false) {}
+  Input(const std::string &elementName, const std::string &label, T value = T{},
+        Persistent persistent = Persistent::No) requires details::UnformattedWithoutStep<T> : ItemElement(elementName),
+                                                                                              Labellable(label),
+                                                                                              ValueObservable<T>(value),
+                                                                                              Savable(persistent),
+                                                                                              DragSource<T>(false),
+                                                                                              DropTarget<T>(false) {}
 
   /**
-   * Construct Input.
+   * Construct Input. For the following types:  glm::vec2, glm::vec3, glm::vec4.
    * @param elementName ID of the input
    * @param label text drawn next to the input
    * @param persistent enable state saving to disk
    * @param format format for printing underlying float value
    * @param value starting value
    */
-  Input(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
-        std::string format = decltype(data)::defaultFormat(), T value = T{}) requires details::FormattedWithoutStep<T>
+  Input(const std::string &elementName, const std::string &label, T value = T{}, Persistent persistent = Persistent::No,
+        std::string format = decltype(data)::defaultFormat()) requires details::FormattedWithoutStep<T>
       : ItemElement(elementName),
         Labellable(label),
         ValueObservable<T>(value),
@@ -257,8 +259,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
       valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*address));
     }
     if constexpr (std::same_as<T, double>) {
-      valueChanged =
-          ImGui::InputDouble(getLabel().c_str(), glm::value_ptr(*address), data.step, data.fastStep, format.c_str());
+      valueChanged = ImGui::InputDouble(getLabel().c_str(), address, data.step, data.fastStep, format.c_str());
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
