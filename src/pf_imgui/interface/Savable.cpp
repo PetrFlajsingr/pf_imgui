@@ -21,4 +21,7 @@ std::optional<toml::table> Savable::serialize() {
   if (persist) { return serialize_impl(); }
   return std::nullopt;
 }
+bool Savable::isPersistent() const {
+  return persist;
+}
 }// namespace pf::ui::ig

@@ -32,6 +32,12 @@ class PF_IMGUI_EXPORT Savable {
   Savable &operator=(Savable &&other) noexcept;
 
   /**
+   *
+   * @return
+   */
+  [[nodiscard]] bool isPersistent() const;
+
+  /**
    * Load data from toml.
    * @param src source toml data
    */

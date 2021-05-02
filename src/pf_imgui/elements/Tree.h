@@ -37,7 +37,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementCo
    * @param caption text rendered on the node
    * @return reference to the newly created node
    */
-  Tree &addNode(const std::string &elementName, const std::string &caption);
+  Tree &addNode(const std::string &elementName, const std::string &caption,
+                AllowCollapse allowCollapse = AllowCollapse::Yes);
 
  protected:
   void renderImpl() override;
