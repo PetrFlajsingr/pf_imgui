@@ -7,24 +7,21 @@
 
 namespace pf::ui::ig {
 
-Tree::Tree(const std::string &elementName, const std::string &label) : Element(elementName), Labellable(label) {}
+Tree::Tree(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent)
+    : Element(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
 
 Tree &Tree::addNode(const std::string &elementName, const std::string &caption) {
   return createChild<Tree>(elementName, caption);
 }
 
 void Tree::renderImpl() {
-  if (nextState.has_value()) {
-    ImGui::SetNextItemOpen(*nextState == State::Open);
-    nextState = std::nullopt;
-  }
-  if (ImGui::TreeNode(getLabel().c_str())) {
+  const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
+  ImGui::SetNextItemOpen(shouldBeOpen);
+  setCollapsed(ImGui::TreeNode(getLabel().c_str()));
+  if (!isCollapsed()) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::TreePop();
   }
-}
-void Tree::setOpenState(Tree::State state) {
-  nextState = state;
 }
 
 }// namespace pf::ui::ig

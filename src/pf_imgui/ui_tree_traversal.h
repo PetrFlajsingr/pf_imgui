@@ -16,7 +16,7 @@ namespace pf::ui::ig {
 
 namespace details {
 /**
- * Quite an inefficient implementation do the massive use of dynamic_casts.
+ * Quite an inefficient implementation due the massive use of dynamic_casts.
  * @param element root
  * @param callback
  */

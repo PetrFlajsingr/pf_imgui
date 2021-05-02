@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_TREE_H
 
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <string>
@@ -20,17 +21,15 @@ namespace pf::ui::ig {
  *
  * Each node can contain subnodes or any other elements.
  */
-class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementContainer {
+class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementContainer, public Collapsible {
  public:
-  enum class State {
-    Open, Close
-  };
   /**
    * Construct Tree.
    * @param elementName ID of the node
    * @param label text rendered on the node
    */
-  Tree(const std::string &elementName, const std::string &label);
+  Tree(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
+       Persistent persistent = Persistent::No);
 
   /**
    * Create a new subnode.
@@ -40,16 +39,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public Labellable, public ElementCo
    */
   Tree &addNode(const std::string &elementName, const std::string &caption);
 
-  /**
-   * Set node opening state on next frame.
-   */
-  void setOpenState(State state);
-
  protected:
   void renderImpl() override;
-
- private:
-  std::optional<State> nextState = std::nullopt;
 };
 
 }// namespace pf::ui::ig
