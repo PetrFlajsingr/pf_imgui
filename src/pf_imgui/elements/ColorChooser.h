@@ -106,5 +106,11 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
   bool pickerEnabled = true;
 };
 
+template <OneOf<glm::vec3, glm::vec4> T>
+using ColorPicker = ColorChooser<ColorChooserType::Picker, T>;
+
+template <OneOf<glm::vec3, glm::vec4> T>
+using ColorEdit = ColorChooser<ColorChooserType::Edit, T>;
+
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_COLORCHOOSER_H
