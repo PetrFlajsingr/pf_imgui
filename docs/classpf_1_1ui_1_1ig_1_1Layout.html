@@ -67,8 +67,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classpf_1_1ui_1_1ig_1_1Layout-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">pf::ui::ig::Layout Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -110,6 +112,14 @@ Collaboration diagram for pf::ui::ig::Layout:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a2bbf387cad1973dae0d64be0ee32c336"><td class="memItemLeft" align="right" valign="top"><a id="a2bbf387cad1973dae0d64be0ee32c336"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a2bbf387cad1973dae0d64be0ee32c336">ScrollPosition</a> { <b>Top</b>, 
+<b>Bottom</b>
+ }</td></tr>
+<tr class="memdesc:a2bbf387cad1973dae0d64be0ee32c336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll position within the layout. <br /></td></tr>
+<tr class="separator:a2bbf387cad1973dae0d64be0ee32c336"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4780532f31f3ca0095b997c3b0ac2d2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a4780532f31f3ca0095b997c3b0ac2d2b">Layout</a> (const std::string &amp;elementName, <a class="el" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a> allowCollapse, <a class="el" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent)</td></tr>
@@ -124,6 +134,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aac65a255548077eb20754ac2cf526063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cfb628bff5d57c9794f439a21ac6679"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a2cfb628bff5d57c9794f439a21ac6679">getRenderables</a> ()=0</td></tr>
 <tr class="separator:a2cfb628bff5d57c9794f439a21ac6679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6100304edbb55f02b08de36f8f96e54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#af6100304edbb55f02b08de36f8f96e54">setScrollPosition</a> (<a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a2bbf387cad1973dae0d64be0ee32c336">ScrollPosition</a> position)</td></tr>
+<tr class="separator:af6100304edbb55f02b08de36f8f96e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Element')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></td></tr>
 <tr class="memitem:a90b7bca38491872d8192dddaf317f1c7 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html#a90b7bca38491872d8192dddaf317f1c7">Element</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:a90b7bca38491872d8192dddaf317f1c7 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +207,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a2e066658832ba10192ed8d5d98c76d18 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">toml::table&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a387ab8ad61863c8c07a3b0d6302846f5">serialize_impl</a> () override</td></tr>
 <tr class="separator:a387ab8ad61863c8c07a3b0d6302846f5 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a850434fadaf3c21c97a3113822ab883c"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a2bbf387cad1973dae0d64be0ee32c336">ScrollPosition</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a850434fadaf3c21c97a3113822ab883c">nextFrameScrollPosition</a> = std::nullopt</td></tr>
+<tr class="separator:a850434fadaf3c21c97a3113822ab883c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for layouts. </p>
@@ -393,6 +410,54 @@ Protected Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="af6100304edbb55f02b08de36f8f96e54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6100304edbb55f02b08de36f8f96e54">&#9670;&nbsp;</a></span>setScrollPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::Layout::setScrollPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a2bbf387cad1973dae0d64be0ee32c336">Layout::ScrollPosition</a>&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set new scroll position for the next frame. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>new scroll position </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a850434fadaf3c21c97a3113822ab883c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a850434fadaf3c21c97a3113822ab883c">&#9670;&nbsp;</a></span>nextFrameScrollPosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt;<a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a2bbf387cad1973dae0d64be0ee32c336">ScrollPosition</a>&gt; pf::ui::ig::Layout::nextFrameScrollPosition = std::nullopt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This needs to be used while rendering inherited layouts. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>: Implement in all layouts. </dd></dl>
 
 </div>
 </div>

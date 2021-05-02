@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['value_973',['value',['../structpf_1_1ui_1_1ig_1_1PieChartSample.html#a0a5bdc13f9043afd34c98dd39100b9ec',1,'pf::ui::ig::PieChartSample']]]
+  ['unformattedwithoutstep_977',['UnformattedWithoutStep',['../Input_8h.html#ad249083a01336392b8c2aa4564f05188',1,'pf::ui::ig::details']]],
+  ['unformattedwithstep_978',['UnformattedWithStep',['../Input_8h.html#a15ab7c5311c9b727fcc18fc1b6d2a861',1,'pf::ui::ig::details']]]
 ];

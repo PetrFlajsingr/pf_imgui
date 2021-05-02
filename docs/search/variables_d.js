@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['unformattedwithoutstep_971',['UnformattedWithoutStep',['../Input_8h.html#ad249083a01336392b8c2aa4564f05188',1,'pf::ui::ig::details']]],
-  ['unformattedwithstep_972',['UnformattedWithStep',['../Input_8h.html#a15ab7c5311c9b727fcc18fc1b6d2a861',1,'pf::ui::ig::details']]]
+  ['type_976',['type',['../classpf_1_1ui_1_1ig_1_1Checkbox.html#a66be218d47e617aa44aeeac246a6fde2',1,'pf::ui::ig::Checkbox']]]
 ];

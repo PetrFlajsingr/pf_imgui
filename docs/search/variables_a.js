@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['reorderable_964',['reorderable',['../structpf_1_1ui_1_1ig_1_1TableSettings.html#aef4e6dc09a2f9895edd4fd1d4e0dc500',1,'pf::ui::ig::TableSettings']]],
-  ['resizablecols_965',['resizableCols',['../structpf_1_1ui_1_1ig_1_1TableSettings.html#a309919695f1fa7c31a3c8bc0fbcac13b',1,'pf::ui::ig::TableSettings']]],
-  ['rowfactory_966',['RowFactory',['../Table_8h.html#a6e22795b6cf8118d45840598b10a687d',1,'pf::ui::ig']]]
+  ['plottable_968',['Plottable',['../PlotDataBase_8h.html#a3a1453670077c422d6f7ff74d89afbaf',1,'pf::ui::ig::plot_type']]],
+  ['progressbarcompatible_969',['ProgressBarCompatible',['../ProgressBar_8h.html#af446989080956359e834c697114439b1',1,'pf::ui::ig']]]
 ];

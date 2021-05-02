@@ -45,9 +45,7 @@ enum class ButtonType {
 /**
  * Enable/disable repeatable behavior.
  */
-enum class Repeatable {
-  Yes, No
-};
+enum class Repeatable { Yes, No };
 /**
  * Enum for marking persistence of Savable elements.
  */

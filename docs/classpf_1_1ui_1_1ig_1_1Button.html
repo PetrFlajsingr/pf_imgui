@@ -114,8 +114,8 @@ Collaboration diagram for pf::ui::ig::Button:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4eadc60242d6c3e2b198fab0d2b65cc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Button.html#a4eadc60242d6c3e2b198fab0d2b65cc3">Button</a> (const std::string &amp;name, std::string label, <a class="el" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> buttonType=ButtonType::Normal, bool <a class="el" href="classpf_1_1ui_1_1ig_1_1Button.html#a6fcaa0b5b88ef27490e5f1aa964968aa">isRepeatable</a>=false, const ImVec2 &amp;size={0, 0})</td></tr>
-<tr class="separator:a4eadc60242d6c3e2b198fab0d2b65cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a454ead09c69b1183d000412575f00ee0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Button.html#a454ead09c69b1183d000412575f00ee0">Button</a> (const std::string &amp;name, std::string label, <a class="el" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> buttonType=ButtonType::Normal, <a class="el" href="enums_8h.html#aefd67cbf2c122591f22f869ab11023e2">Repeatable</a> <a class="el" href="classpf_1_1ui_1_1ig_1_1Button.html#a6fcaa0b5b88ef27490e5f1aa964968aa">isRepeatable</a>=Repeatable::No, const ImVec2 &amp;size={0, 0})</td></tr>
+<tr class="separator:a454ead09c69b1183d000412575f00ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6675de6455983ede90fb642fb49209c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Button.html#a6675de6455983ede90fb642fb49209c6">getType</a> () const</td></tr>
 <tr class="separator:a6675de6455983ede90fb642fb49209c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf31b4f1501d03e131633ec6347476fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Button.html#adf31b4f1501d03e131633ec6347476fc">setType</a> (<a class="el" href="enums_8h.html#ab9cc2be6f907ac88a6910bfa0a212b50">ButtonType</a> type)</td></tr>
@@ -244,8 +244,8 @@ Protected Member Functions</h2></td></tr>
 <p>A button with a text label and an option to change its render type by using enum ButtonType.</p>
 <dl class="section see"><dt>See also</dt><dd>ButtonType </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4eadc60242d6c3e2b198fab0d2b65cc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4eadc60242d6c3e2b198fab0d2b65cc3">&#9670;&nbsp;</a></span>Button()</h2>
+<a id="a454ead09c69b1183d000412575f00ee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a454ead09c69b1183d000412575f00ee0">&#9670;&nbsp;</a></span>Button()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,8 +271,8 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isRepeatable</em> = <code>false</code>, </td>
+          <td class="paramtype"><a class="el" href="enums_8h.html#aefd67cbf2c122591f22f869ab11023e2">Repeatable</a>&#160;</td>
+          <td class="paramname"><em>isRepeatable</em> = <code>Repeatable::No</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -292,7 +292,7 @@ Protected Member Functions</h2></td></tr>
     <tr><td class="paramname">name</td><td>ID of the button </td></tr>
     <tr><td class="paramname">label</td><td>label drawn on the button </td></tr>
     <tr><td class="paramname">buttonType</td><td>type of the button </td></tr>
-    <tr><td class="paramname">isRepeatable</td><td>if set to true the button can repeat it's on click event when a user holds it </td></tr>
+    <tr><td class="paramname">isRepeatable</td><td>enable/disable button can repeat it's on click event when a user holds it </td></tr>
     <tr><td class="paramname">size</td><td>size of the button </td></tr>
   </table>
   </dd>

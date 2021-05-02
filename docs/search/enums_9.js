@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tableborder_1001',['TableBorder',['../enums_8h.html#aa1deaa97594897949dd442da44711a07',1,'pf::ui::ig']]],
-  ['textinputtype_1002',['TextInputType',['../enums_8h.html#a8b1bc97b9af50a712d2d31773e757c23',1,'pf::ui::ig']]],
-  ['type_1003',['Type',['../classpf_1_1ui_1_1ig_1_1Checkbox.html#a6e2794b0c5e1b765543b7872d9335acf',1,'pf::ui::ig::Checkbox']]]
+  ['scrollposition_1006',['ScrollPosition',['../classpf_1_1ui_1_1ig_1_1Layout.html#a2bbf387cad1973dae0d64be0ee32c336',1,'pf::ui::ig::Layout']]],
+  ['showborder_1007',['ShowBorder',['../enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb',1,'pf::ui::ig']]],
+  ['stretch_1008',['Stretch',['../enums_8h.html#a11ad03c903ef18a35204140d10398cb9',1,'pf::ui::ig']]]
 ];

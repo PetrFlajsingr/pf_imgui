@@ -37,6 +37,8 @@ class PF_IMGUI_EXPORT Savable {
    */
   [[nodiscard]] bool isPersistent() const;
 
+  void setPersistent(bool persistent);
+
   /**
    * Load data from toml.
    * @param src source toml data

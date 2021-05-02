@@ -66,9 +66,7 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
   /**
    * @brief Scroll position within the layout.
    */
-  enum class ScrollPosition {
-    Top, Bottom
-  };
+  enum class ScrollPosition { Top, Bottom };
 
   /**
    * Set new scroll position for the next frame.

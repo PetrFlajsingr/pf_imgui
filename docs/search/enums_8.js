@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['showborder_999',['ShowBorder',['../enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb',1,'pf::ui::ig']]],
-  ['stretch_1000',['Stretch',['../enums_8h.html#a11ad03c903ef18a35204140d10398cb9',1,'pf::ui::ig']]]
+  ['repeatable_1005',['Repeatable',['../enums_8h.html#aefd67cbf2c122591f22f869ab11023e2',1,'pf::ui::ig']]]
 ];
