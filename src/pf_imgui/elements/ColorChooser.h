@@ -48,8 +48,8 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
    * @param persistent allow state saving to disk
    * @param value starting value
    */
-  ColorChooser(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
-               T value = T{})
+  ColorChooser(const std::string &elementName, const std::string &label, T value = T{},
+               Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {}
 
