@@ -15,21 +15,12 @@ Group::Group(const std::string &elementName, const std::string &label, AllowColl
     : Group(elementName, label, Persistent::No, allowCollapse) {}
 
 void Group::renderImpl() {
-  ImGui::BeginGroup();
-  ImGui::Text("%s:", getLabel().c_str());
-  if (isCollapsible()) {
-    ImGui::SameLine(ImGui::GetWindowWidth() - ImGui::GetItemRectSize().x);
-    if (ImGui::ArrowButton((getName() + "collapse_btn").c_str(),
-                           isCollapsed() ? ImGuiDir_::ImGuiDir_Up : ImGuiDir_::ImGuiDir_Down)) {
-      setCollapsed(!isCollapsed());
-    }
-  }
-  ImGui::Separator();
+  ImGui::SetNextItemOpen(!isCollapsed() || !isCollapsible());
+  const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
+  setCollapsed(ImGui::CollapsingHeader(getLabel().c_str(), flags));
   if (!isCollapsed()) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
   }
-  ImGui::Separator();
-  ImGui::EndGroup();
 }
 
 }// namespace pf::ui::ig
