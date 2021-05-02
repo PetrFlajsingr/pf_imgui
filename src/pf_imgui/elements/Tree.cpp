@@ -11,7 +11,9 @@ Tree::Tree(const std::string &elementName, const std::string &label, Persistent 
     : Tree(elementName, label, AllowCollapse::Yes, persistent) {}
 
 Tree::Tree(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent)
-    : Element(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
+    : Element(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {
+  setCollapsed(true);
+}
 
 Tree &Tree::addNode(const std::string &elementName, const std::string &caption, AllowCollapse allowCollapse) {
   return createChild<Tree>(elementName, caption, allowCollapse, isPersistent() ? Persistent::Yes : Persistent::No);
