@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['table_981',['Table',['../Table_8h.html#ad0a06071fb08c0b9c050c94aae1f7546',1,'pf::ui::ig']]],
-  ['tablerow_982',['TableRow',['../Table_8h.html#a18fc556e30c7b488be5c50e30d23adf5',1,'pf::ui::ig']]]
+  ['slider2dstoragetype_984',['Slider2DStorageType',['../Slider2D_8h.html#a35435fe9588aaf9306072e1b03853554',1,'pf::ui::ig::details']]],
+  ['sliderminmaxtype_985',['SliderMinMaxType',['../Slider_8h.html#a8216e45cf825a2827aea37dd5346d35a',1,'pf::ui::ig::details']]],
+  ['stringtablerow_986',['StringTableRow',['../StringTable_8h.html#a08f9b149be62aded1e44b34c2e8542a5',1,'pf::ui::ig']]]
 ];

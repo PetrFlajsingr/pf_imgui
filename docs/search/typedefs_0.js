@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['draginputunderlyingtype_973',['DragInputUnderlyingType',['../DragInput_8h.html#a67e111db925e6c305fb5fa6f0fe36472',1,'pf::ui::ig::details']]]
+  ['coloredit_977',['ColorEdit',['../ColorChooser_8h.html#a80d8616558eabe9179ee04fef3ad913c',1,'pf::ui::ig']]],
+  ['colorpicker_978',['ColorPicker',['../ColorChooser_8h.html#a208f0fc98ece4d3b419b446ceea78ebc',1,'pf::ui::ig']]]
 ];
