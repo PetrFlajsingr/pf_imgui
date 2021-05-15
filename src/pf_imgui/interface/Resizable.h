@@ -15,6 +15,28 @@
 
 namespace pf::ui::ig {
 
+template <typename T>
+struct SizeDimension : public T {
+  explicit SizeDimension(uint32_t value) : T(static_cast<float>(value)) {}
+  static SizeDimension Fill(uint32_t margin) {
+    return {-static_cast<float>(margin)};
+  }
+  static SizeDimension Auto() {
+    return {0};
+  }
+};
+namespace details {
+  struct Width {
+    float width;
+  };
+  struct Height {
+    float height;
+  };
+}
+
+using Width = SizeDimension<details::Width>;
+using Height = SizeDimension<details::Height>;
+
 /**
  * @brief Interface for resizable elements
  *
