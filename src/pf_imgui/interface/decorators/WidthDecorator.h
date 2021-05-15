@@ -30,15 +30,15 @@ requires(!std::derived_from<T, Resizable>) class WidthDecorator : public T {
    */
   template<typename... Args>
   requires std::constructible_from<T, std::string, Args...>
-  explicit WidthDecorator(const std::string &elementName, float elementWidth, Args &&...args)
+  explicit WidthDecorator(const std::string &elementName, Width elementWidth, Args &&...args)
       : T(elementName, std::forward<Args>(args)...), width(elementWidth) {}
 
   /**
    * Get current element width.
    * @return current element width.
    */
-  [[nodiscard]] float getWidth() const { return width; }
-  void setWidth(float newWidth) { width = newWidth; }
+  [[nodiscard]] Width getWidth() const { return width; }
+  void setWidth(Width newWidth) { width = newWidth; }
 
  protected:
   void renderImpl() override {
@@ -47,7 +47,7 @@ requires(!std::derived_from<T, Resizable>) class WidthDecorator : public T {
   }
 
  private:
-  float width{};
+  Width width{};
 };
 }// namespace pf::ui::ig
 
