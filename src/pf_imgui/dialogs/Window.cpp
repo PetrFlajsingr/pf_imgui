@@ -60,7 +60,10 @@ void Window::setSize(const Size &newSize) {
 
 void Window::render() {
   if (getVisibility() == Visibility::Visible) {
-    if (sizeConstraints.has_value()) { ImGui::SetNextWindowSizeConstraints(ImVec2{0, 0}, sizeConstraints->asImVec()); }
+    ImGui::SetNextWindowSizeConstraints(
+        minSizeConstraint.value_or(Size{0, 0}).asImVec(),
+        maxSizeConstraint.value_or(Size{std::numeric_limits<uint32_t>::max(), std::numeric_limits<uint32_t>::max()})
+            .asImVec());
     renderImpl();
   }
 }
@@ -84,9 +87,16 @@ ImGuiWindowFlags Window::createWindowFlags() {
   return result;
 }
 
-const std::optional<Size> &Window::getSizeConstraints() const { return sizeConstraints; }
+const std::optional<Size> &Window::getMinSizeConstraint() const { return minSizeConstraint; }
 
-void Window::setSizeConstraints(const Size &newSizeConstraints) { sizeConstraints = newSizeConstraints; }
-void Window::cancelSizeConstraints() { sizeConstraints = std::nullopt; }
+void Window::setMinSizeConstraint(const Size &newSizeConstraint) { minSizeConstraint = newSizeConstraint; }
+void Window::cancelSizeConstraint() {
+  cancelMinSizeConstraint();
+  cancelMaxSizeConstraint();
+}
+const std::optional<Size> &Window::getMaxSizeConstraint() const { return maxSizeConstraint; }
+void Window::cancelMinSizeConstraint() { minSizeConstraint = std::nullopt; }
+void Window::cancelMaxSizeConstraint() { maxSizeConstraint = std::nullopt; }
+void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstraint = newSizeConstraint; }
 
 }// namespace pf::ui::ig
