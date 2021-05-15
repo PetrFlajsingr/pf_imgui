@@ -24,6 +24,7 @@
 #include "elements/ProgressBar.h"
 #include "elements/RadioButton.h"
 #include "elements/RadioGroup.h"
+#include "elements/Separator.h"
 #include "elements/Slider.h"
 #include "elements/Slider2D.h"
 #include "elements/Slider3D.h"

@@ -111,6 +111,7 @@ set(SOURCES
         src/pf_imgui/elements/SliderAngle.cpp
         src/pf_imgui/elements/Text.cpp
         src/pf_imgui/elements/Tree.cpp
+        src/pf_imgui/elements/Separator.cpp
         src/pf_imgui/dialogs/Window.cpp
         src/pf_imgui/elements/Tooltip.cpp
         src/pf_imgui/dialogs/FileDialog.cpp
@@ -189,6 +190,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/FileDialog.h
         src/pf_imgui/elements/FlameGraph.h
         src/pf_imgui/elements/plots.h
+        src/pf_imgui/elements/Separator.h
         src/pf_imgui/elements/plots/PieChart.h
         src/pf_imgui/elements/plots/types/PlotDataBase.h
         src/pf_imgui/elements/plots/types/Bar.h
