@@ -30,8 +30,7 @@ requires(!std::derived_from<T, Resizable>) class WidthDecorator : public T {
    */
   template<typename... Args>
   requires std::constructible_from<T, Args...>
-  explicit WidthDecorator(float elementWidth, Args &&...args)
-      : T(std::forward<Args>(args)...), Positionable(pos), width(elementWidth) {}
+  explicit WidthDecorator(float elementWidth, Args &&...args) : T(std::forward<Args>(args)...), width(elementWidth) {}
 
   /**
    * Get current element width.
