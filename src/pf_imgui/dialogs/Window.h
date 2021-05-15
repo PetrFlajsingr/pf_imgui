@@ -67,6 +67,19 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    */
   void removeMenuBar();
 
+  /**
+   * Window size constraints.
+   * @return
+   */
+  const std::optional<Size> &getSizeConstraints() const;
+  /**
+   * Size constraints for window - window can't be bigger.
+   * @param sizeConstraints
+   */
+  void setSizeConstraints(const Size &sizeConstraints);
+
+  void cancelSizeConstraints();
+
   void setSize(const Size &size) override;
 
   void render() override;
@@ -80,6 +93,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
  private:
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
+  std::optional<Size> sizeConstraints = std::nullopt;
 
   ImGuiWindowFlags createWindowFlags();
 };

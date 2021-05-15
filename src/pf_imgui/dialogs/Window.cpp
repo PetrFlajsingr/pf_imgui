@@ -59,7 +59,10 @@ void Window::setSize(const Size &newSize) {
 }
 
 void Window::render() {
-  if (getVisibility() == Visibility::Visible) { renderImpl(); }
+  if (getVisibility() == Visibility::Visible) {
+    if (sizeConstraints.has_value()) { ImGui::SetNextWindowSizeConstraints(ImVec2{0, 0}, sizeConstraints->asImVec()); }
+    renderImpl();
+  }
 }
 
 void Window::setCollapsed(bool collapsed) {
@@ -80,5 +83,10 @@ ImGuiWindowFlags Window::createWindowFlags() {
   if (getLabel().empty()) { result |= ImGuiWindowFlags_NoTitleBar; }
   return result;
 }
+
+const std::optional<Size> &Window::getSizeConstraints() const { return sizeConstraints; }
+
+void Window::setSizeConstraints(const Size &newSizeConstraints) { sizeConstraints = newSizeConstraints; }
+void Window::cancelSizeConstraints() { sizeConstraints = std::nullopt; }
 
 }// namespace pf::ui::ig
