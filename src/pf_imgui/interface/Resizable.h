@@ -15,7 +15,6 @@
 
 namespace pf::ui::ig {
 
-
 namespace details {
 template<typename T>
 struct SizeDimension : public T {
