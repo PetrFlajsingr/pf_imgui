@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No,
+  StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
                 ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
   /**
    * Construct StackedLayout.
@@ -41,7 +41,7 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  StackedLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
+  StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
                 Persistent persistent = Persistent::No);
   /**
    * Construct StackedLayout.
@@ -50,7 +50,7 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    * @param allowCollapse enable collapse button
    * @param persistent enable state saving
    */
-  StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+  StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                 Persistent persistent = Persistent::No);
 
   /**

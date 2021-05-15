@@ -15,27 +15,36 @@
 
 namespace pf::ui::ig {
 
-template <typename T>
+template<typename T>
 struct SizeDimension : public T {
-  explicit SizeDimension(uint32_t value) : T(static_cast<float>(value)) {}
-  static SizeDimension Fill(uint32_t margin) {
-    return {-static_cast<float>(margin)};
-  }
-  static SizeDimension Auto() {
-    return {0};
-  }
+  SizeDimension(uint32_t value) : T(static_cast<float>(value)) {}
+  bool operator==(const SizeDimension &other) const { return T::value == other.value; }
+  bool operator!=(const SizeDimension &other) const { return !(*this == other); }
+  static SizeDimension Fill(uint32_t margin = 1) { return {-margin}; }
+  static SizeDimension Auto() { return {0}; }
 };
 namespace details {
-  struct Width {
-    float width;
-  };
-  struct Height {
-    float height;
-  };
-}
+struct Width {
+  float value;
+};
+struct Height {
+  float value;
+};
+}// namespace details
 
 using Width = SizeDimension<details::Width>;
 using Height = SizeDimension<details::Height>;
+struct Size {
+  Size(const Width &width, const Height &height);
+  static Size Auto();
+  static Size Fill();
+  static Size FillWidth();
+  bool operator==(const Size &rhs) const;
+  bool operator!=(const Size &rhs) const;
+  [[nodiscard]] ImVec2 asImVec() const;
+  Width width;
+  Height height;
+};
 
 /**
  * @brief Interface for resizable elements
@@ -46,9 +55,9 @@ class PF_IMGUI_EXPORT Resizable {
  public:
   /**
    * Construct Resizable with the given size
-   * @param size size
+   * @param s size
    */
-  explicit Resizable(const ImVec2 &size);
+  explicit Resizable(const Size &s);
 
   Resizable(Resizable &&other) noexcept;
   Resizable &operator=(Resizable &&other) noexcept;
@@ -57,29 +66,28 @@ class PF_IMGUI_EXPORT Resizable {
    * Get current size.
    * @return current size
    */
-  [[nodiscard]] const ImVec2 &getSize() const;
+  const Size &getSize() const;
   /**
    * Set new size.
    * @param s new size
    */
-  virtual void setSize(const ImVec2 &s);
-
+  virtual void setSize(const Size &s);
   /**
    * Add a listener for size changes.
    * @param listener listener called on size change
    * @return Subscription which allows of erasure of the listener @see Subscription
    */
-  Subscription addSizeListener(std::invocable<ImVec2> auto listener) {
+  Subscription addSizeListener(std::invocable<Size> auto listener) {
     return observableImpl.template addListener(listener);
   }
 
   virtual ~Resizable() = default;
 
  private:
-  ImVec2 size;
-  Observable_impl<ImVec2> observableImpl;
+  Size size;
+  Observable_impl<Size> observableImpl;
 
-  void notifySizeChanged(ImVec2 newSize);
+  void notifySizeChanged(Size newSize);
 };
 
 }// namespace pf::ui::ig

@@ -41,7 +41,7 @@ void FileDialog::renderImpl() {
   }
   setExtInfos();
 
-  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize())) {
+  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize().asImVec())) {
     if (fileDialogInstance.IsOk()) {
       const auto filePathName = fileDialogInstance.GetFilePathName();
       const auto selection = fileDialogInstance.GetSelection();

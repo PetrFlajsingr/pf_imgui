@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
    * @param showBorder draw layouts border
    * @param persistent allow state saving
    */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
+  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
             Persistent persistent = Persistent::No);
   /**
@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
    * @param showBorder draw layouts border
    * @param persistent allow state saving
    */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size, ShowBorder showBorder,
+  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size, ShowBorder showBorder,
             Persistent persistent = Persistent::No);
   /**
    * Construct BoxLayout.
@@ -58,7 +58,7 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
    * @param allowCollapse enable collapse button
    * @param persistent allow state saving
    */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const ImVec2 &size,
+  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
             AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
 
   /**

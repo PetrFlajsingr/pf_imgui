@@ -38,7 +38,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse = AllowCollapse::No,
+  AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
                  ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
   /**
    * Construct AbsoluteLayout.
@@ -47,7 +47,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
+  AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
                  Persistent persistent = Persistent::No);
   /**
    * Construct AbsoluteLayout.
@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    * @param allowCollapse enable collapse button
    * @param persistent enable state saving
    */
-  AbsoluteLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+  AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                  Persistent persistent = Persistent::No);
 
   /**

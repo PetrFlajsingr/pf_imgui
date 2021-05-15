@@ -44,7 +44,7 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
                 Modal modal = Modal::Yes) requires(std::is_invocable_r_v<bool, decltype(onDialogDone), ButtonTypes>)
       : Dialog(parent, elementName, title, modal), dialogDone(onDialogDone) {
     createChild<Text>(getName() + "text", message);
-    auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, ImVec2{0, 0});
+    auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
     auto enabledButtons = magic_enum::enum_values<ButtonTypes>()
         | std::views::filter([&buttons](auto btnType) { return buttons.is(btnType); });
     std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {

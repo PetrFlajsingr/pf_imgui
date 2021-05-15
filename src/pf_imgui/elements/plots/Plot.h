@@ -36,7 +36,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    * @param size size of the element
    */
   Plot(const std::string &elementName, const std::string &label, std::optional<std::string> xLabel = std::nullopt,
-       std::optional<std::string> yLabel = std::nullopt, const ImVec2 &size = ImVec2{-1, 0});
+       std::optional<std::string> yLabel = std::nullopt, const Size &size = Size::FillWidth());
 
   /**
    * Add new set of data.
