@@ -1,0 +1,6 @@
+<map id="src/pf_imgui/interface/decorators/PositionDecorator.h" name="src/pf_imgui/interface/decorators/PositionDecorator.h">
+<area shape="rect" id="node1" title="Decorator for non&#45;positionable elements." alt="" coords="5,5,232,47"/>
+<area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="41,95,196,136"/>
+<area shape="rect" id="node3" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="41,184,196,225"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="29,273,208,300"/>
+</map>

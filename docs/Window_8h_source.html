@@ -104,7 +104,7 @@ $(function() {
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasMenuBar() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> removeMenuBar();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> setSize(<span class="keyword">const</span> ImVec2 &amp;size) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> setSize(<span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;size) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
@@ -126,12 +126,13 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:28</div></div>
 <div class="ttc" id="aFocusable_8h_html"><div class="ttname"><a href="Focusable_8h.html">Focusable.h</a></div><div class="ttdoc">Interface for elements which can hold focus.</div></div>
-<div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:54</div></div>
+<div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:52</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Hoverable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></div><div class="ttdoc">Interface for hoverable elements.</div><div class="ttdef"><b>Definition:</b> Hoverable.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Window_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Window.html">pf::ui::ig::Window</a></div><div class="ttdoc">Main building piece for UI. Persistent element container with plenty of controls.</div><div class="ttdef"><b>Definition:</b> Window.h:29</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Resizable.h:55</div></div>
 <div class="ttc" id="aMenuBars_8h_html"><div class="ttname"><a href="MenuBars_8h.html">MenuBars.h</a></div><div class="ttdoc">All types necessary for building menu bars.</div></div>
 <div class="ttc" id="aResizable_8h_html"><div class="ttname"><a href="Resizable_8h.html">Resizable.h</a></div><div class="ttdoc">Interface for elements which can be resized.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:98</div></div>
 <div class="ttc" id="aCollapsible_8h_html"><div class="ttname"><a href="Collapsible_8h.html">Collapsible.h</a></div><div class="ttdoc">Interface for elements which can be collapsed.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:23</div></div>
 <div class="ttc" id="aElementContainer_8h_html"><div class="ttname"><a href="ElementContainer_8h.html">ElementContainer.h</a></div><div class="ttdoc">Base class for objects which can hold arbitrary elements.</div></div>
@@ -142,7 +143,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></div><div class="ttdoc">Interface for focusable elements.</div><div class="ttdef"><b>Definition:</b> Focusable.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Positionable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Positionable.html">pf::ui::ig::Positionable</a></div><div class="ttdoc">Interface for positionable elements.</div><div class="ttdef"><b>Definition:</b> Positionable.h:21</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Collapsible_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Collapsible.html">pf::ui::ig::Collapsible</a></div><div class="ttdoc">Interface for collapsible elements.</div><div class="ttdef"><b>Definition:</b> Collapsible.h:26</div></div>
-<div class="ttc" id="aenums_8h_html_a9ddf60f30df4e231fc6ee7a52e8cfac3"><div class="ttname"><a href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">pf::ui::ig::AllowCollapse</a></div><div class="ttdeci">AllowCollapse</div><div class="ttdef"><b>Definition:</b> enums.h:74</div></div>
+<div class="ttc" id="aenums_8h_html_a9ddf60f30df4e231fc6ee7a52e8cfac3"><div class="ttname"><a href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">pf::ui::ig::AllowCollapse</a></div><div class="ttdeci">AllowCollapse</div><div class="ttdef"><b>Definition:</b> enums.h:72</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
