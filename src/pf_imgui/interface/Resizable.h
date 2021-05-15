@@ -15,6 +15,36 @@
 
 namespace pf::ui::ig {
 
+struct Width {
+  static Width AlignRight(uint32_t width) {
+    return {static_cast<float>(-width)};
+  }
+  static Width AlignLeft(uint32_t width) {
+    return {static_cast<float>(width)};
+  }
+  static Width Auto() {
+    return {0};
+  }
+  float width;
+};
+
+struct Height {
+  static Height AlignRight(uint32_t width) {
+    return {static_cast<float>(-width)};
+  }
+  static Height AlignLeft(uint32_t width) {
+    return {static_cast<float>(width)};
+  }
+  static Height Auto() {
+    return {0};
+  }
+  float width;
+};
+
+struct Size {
+
+};
+
 /**
  * @brief Interface for resizable elements
  *

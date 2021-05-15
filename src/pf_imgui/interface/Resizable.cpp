@@ -18,7 +18,7 @@ Resizable &Resizable::operator=(Resizable &&other) noexcept {
 const ImVec2 &Resizable::getSize() const { return size; }
 
 void Resizable::setSize(const ImVec2 &s) {
-  if (size.x != s.x && size.y != s.y) {
+  if (size.x != s.x || size.y != s.y) {
     size = s;
     notifySizeChanged(size);
   }
