@@ -1,16 +1,19 @@
 var searchData=
 [
-  ['filedialog_121',['FileDialog',['../classpf_1_1ui_1_1ig_1_1FileDialog.html',1,'pf::ui::ig::FileDialog'],['../classpf_1_1ui_1_1ig_1_1FileDialog.html#af324c5ff0be8d1f74073f9c53d1073e0',1,'pf::ui::ig::FileDialog::FileDialog(const std::string &amp;elementName, const std::string &amp;label, const std::vector&lt; FileExtensionSettings &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)'],['../classpf_1_1ui_1_1ig_1_1FileDialog.html#a7a91192ee2f6c3e29f132d63213f7267',1,'pf::ui::ig::FileDialog::FileDialog(const std::string &amp;elementName, const std::string &amp;label, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, ImVec2 size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedDirs=1)']]],
-  ['filedialog_2eh_122',['FileDialog.h',['../FileDialog_8h.html',1,'']]],
-  ['fileextensionsettings_123',['FileExtensionSettings',['../structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html',1,'pf::ui::ig']]],
-  ['filetype_124',['FileType',['../enums_8h.html#a7cd3168a5ba3eb8f92f5d1ed8c160d8c',1,'pf::ui::ig']]],
-  ['flamegraph_125',['FlameGraph',['../classpf_1_1ui_1_1ig_1_1FlameGraph.html',1,'pf::ui::ig::FlameGraph'],['../classpf_1_1ui_1_1ig_1_1FlameGraph.html#a871af1a4d77126d0f223ba440a90c624',1,'pf::ui::ig::FlameGraph::FlameGraph()']]],
-  ['flamegraph_2eh_126',['FlameGraph.h',['../FlameGraph_8h.html',1,'']]],
-  ['flamegraphsample_127',['FlameGraphSample',['../FlameGraph_8h.html#a6cd48dc807fea5953383a433d77d6e0a',1,'pf::ui::ig']]],
-  ['focusable_128',['Focusable',['../classpf_1_1ui_1_1ig_1_1Focusable.html',1,'pf::ui::ig']]],
-  ['focusable_2eh_129',['Focusable.h',['../Focusable_8h.html',1,'']]],
-  ['formattedwithoutstep_130',['FormattedWithoutStep',['../Input_8h.html#a9820f4d42e5893fe4304ed36307a1330',1,'pf::ui::ig::details']]],
-  ['formattedwithstep_131',['FormattedWithStep',['../Input_8h.html#abc230fd13e1cbf20226abb1fb2f7c621',1,'pf::ui::ig::details']]],
-  ['frame_132',['frame',['../classpf_1_1ui_1_1ig_1_1DragNDropGroup.html#ab5a73ac0af77a0a86a7b23348a622ef4',1,'pf::ui::ig::DragNDropGroup']]],
-  ['fwd_2eh_133',['fwd.h',['../fwd_8h.html',1,'']]]
+  ['filedialog_123',['FileDialog',['../classpf_1_1ui_1_1ig_1_1FileDialog.html',1,'pf::ui::ig::FileDialog'],['../classpf_1_1ui_1_1ig_1_1FileDialog.html#a30af69b42e73e8efbfbba691c9511310',1,'pf::ui::ig::FileDialog::FileDialog(const std::string &amp;elementName, const std::string &amp;label, const std::vector&lt; FileExtensionSettings &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, Size size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedFiles=1)'],['../classpf_1_1ui_1_1ig_1_1FileDialog.html#a0306ba86b6b0f35bfa12d74fd2579070',1,'pf::ui::ig::FileDialog::FileDialog(const std::string &amp;elementName, const std::string &amp;label, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, Size size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, Modal modality=Modal::No, uint32_t maxSelectedDirs=1)']]],
+  ['filedialog_2eh_124',['FileDialog.h',['../FileDialog_8h.html',1,'']]],
+  ['fileextensionsettings_125',['FileExtensionSettings',['../structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html',1,'pf::ui::ig']]],
+  ['filetype_126',['FileType',['../enums_8h.html#a7cd3168a5ba3eb8f92f5d1ed8c160d8c',1,'pf::ui::ig']]],
+  ['fill_127',['Fill',['../structpf_1_1ui_1_1ig_1_1details_1_1SizeDimension.html#a360f5a676947e1e1e965dc23ca26549c',1,'pf::ui::ig::details::SizeDimension::Fill()'],['../structpf_1_1ui_1_1ig_1_1Size.html#a6f31c12ad680ae47a1b3dfb194b27c51',1,'pf::ui::ig::Size::Fill()']]],
+  ['fillheight_128',['FillHeight',['../structpf_1_1ui_1_1ig_1_1Size.html#a9497d592123a29431989602908fc87e4',1,'pf::ui::ig::Size']]],
+  ['fillwidth_129',['FillWidth',['../structpf_1_1ui_1_1ig_1_1Size.html#ad4ddc0a823ca43fe57849d0c260d6c06',1,'pf::ui::ig::Size']]],
+  ['flamegraph_130',['FlameGraph',['../classpf_1_1ui_1_1ig_1_1FlameGraph.html',1,'pf::ui::ig::FlameGraph'],['../classpf_1_1ui_1_1ig_1_1FlameGraph.html#a2f3126df366af748f491cffaafc331a5',1,'pf::ui::ig::FlameGraph::FlameGraph()']]],
+  ['flamegraph_2eh_131',['FlameGraph.h',['../FlameGraph_8h.html',1,'']]],
+  ['flamegraphsample_132',['FlameGraphSample',['../FlameGraph_8h.html#a6cd48dc807fea5953383a433d77d6e0a',1,'pf::ui::ig']]],
+  ['focusable_133',['Focusable',['../classpf_1_1ui_1_1ig_1_1Focusable.html',1,'pf::ui::ig']]],
+  ['focusable_2eh_134',['Focusable.h',['../Focusable_8h.html',1,'']]],
+  ['formattedwithoutstep_135',['FormattedWithoutStep',['../Input_8h.html#a9820f4d42e5893fe4304ed36307a1330',1,'pf::ui::ig::details']]],
+  ['formattedwithstep_136',['FormattedWithStep',['../Input_8h.html#abc230fd13e1cbf20226abb1fb2f7c621',1,'pf::ui::ig::details']]],
+  ['frame_137',['frame',['../classpf_1_1ui_1_1ig_1_1DragNDropGroup.html#ab5a73ac0af77a0a86a7b23348a622ef4',1,'pf::ui::ig::DragNDropGroup']]],
+  ['fwd_2eh_138',['fwd.h',['../fwd_8h.html',1,'']]]
 ];

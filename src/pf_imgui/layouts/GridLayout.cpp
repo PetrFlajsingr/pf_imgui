@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
+GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
                        AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), width(width), height(height) {
   const auto cellCount = width * height;
@@ -16,11 +16,11 @@ GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint3
   std::ranges::fill(cells, nullptr);
 }
 
-GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
+GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
                        ShowBorder showBorder, Persistent persistent)
     : GridLayout(elementName, size, width, height, AllowCollapse::No, showBorder, persistent) {}
 
-GridLayout::GridLayout(const std::string &elementName, const ImVec2 &size, uint32_t width, uint32_t height,
+GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
                        AllowCollapse allowCollapse, Persistent persistent)
     : GridLayout(elementName, size, width, height, allowCollapse, ShowBorder::No, persistent) {}
 
@@ -32,9 +32,9 @@ void GridLayout::renderImpl() {
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
     if (renderCollapseButton()) {
-      const auto xCellSize = getSize().x / width;
-      const auto yCellSize = getSize().y / height;
-      const auto cellSize = ImVec2{xCellSize, yCellSize};
+      const auto xCellSize = getSize().width.value / width;
+      const auto yCellSize = getSize().height.value / height;
+      const auto cellSize = Size{static_cast<uint32_t>(xCellSize), static_cast<uint32_t>(yCellSize)};
       for (uint32_t y = 0; y < height; ++y) {
         for (uint32_t x = 0; x < width; ++x) {
           const auto index = indexForCell(x, y);

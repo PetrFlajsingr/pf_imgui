@@ -174,7 +174,7 @@ class PF_IMGUI_EXPORT TableWithFactory : public ItemElement, public Labellable, 
 
  protected:
   void renderImpl() override {
-    if (ImGui::BeginTable(getName().c_str(), ColumnCount, tableFlags, getSize())) {
+    if (ImGui::BeginTable(getName().c_str(), ColumnCount, tableFlags, getSize().asImVec())) {
       if (header.has_value()) {
         std::ranges::for_each(*header, [](const auto &value) { ImGui::TableSetupColumn(value.c_str()); });
         ImGui::TableHeadersRow();

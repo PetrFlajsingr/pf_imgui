@@ -10,15 +10,15 @@
 
 namespace pf::ui::ig {
 
-StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+StackedLayout::StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                              ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
 
-StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, ShowBorder showBorder,
+StackedLayout::StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
                              Persistent persistent)
     : StackedLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
 
-StackedLayout::StackedLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+StackedLayout::StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                              Persistent persistent)
     : StackedLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
 

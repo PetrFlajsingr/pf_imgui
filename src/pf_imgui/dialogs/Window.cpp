@@ -12,7 +12,7 @@
 namespace pf::ui::ig {
 
 Window::Window(std::string name, std::string label, AllowCollapse allowCollapse, Persistent persistent)
-    : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(ImVec2(0, 0)),
+    : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
       Positionable(ImVec2{}), Labellable(std::move(label)) {}
 
 Window::Window(std::string name, std::string label, Persistent persistent)
@@ -53,9 +53,9 @@ WindowMenuBar &Window::getMenuBar() {
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
 
 void Window::removeMenuBar() { menuBar = nullptr; }
-void Window::setSize(const ImVec2 &newSize) {
+void Window::setSize(const Size &newSize) {
   Resizable::setSize(newSize);
-  ImGui::SetWindowSize(getLabel().c_str(), getSize());
+  ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
 }
 
 void Window::render() {

@@ -36,7 +36,7 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
    * @param filterEnabled enable input for filter
    * @param recordLimit limit rows - if size is bigger than limit then the old rows are erased
    */
-  Memo(const std::string &elementName, const std::string &label, float textAHeight = 0, bool buttonsEnabled = true,
+  Memo(const std::string &elementName, const std::string &label, uint32_t textAHeight = 0, bool buttonsEnabled = true,
        bool filterEnabled = true, const std::optional<std::size_t> &recordLimit = std::nullopt);
 
   /**

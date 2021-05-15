@@ -67,7 +67,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    */
   void removeMenuBar();
 
-  void setSize(const ImVec2 &size) override;
+  void setSize(const Size &size) override;
 
   void render() override;
 

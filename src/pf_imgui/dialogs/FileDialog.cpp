@@ -10,6 +10,8 @@ FileExtensionSettings::FileExtensionSettings(std::vector<std::string> extensions
                                              const std::optional<ImVec4> &color)
     : extensions(std::move(extensions)), description(std::move(description)), color(color) {}
 
+bool FileDialog::isDone() const { return done; }
+
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
   for (const auto &[names, desc, color] : extSettings) {
     if (!desc.empty()) {
@@ -41,7 +43,7 @@ void FileDialog::renderImpl() {
   }
   setExtInfos();
 
-  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize())) {
+  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize().asImVec())) {
     if (fileDialogInstance.IsOk()) {
       const auto filePathName = fileDialogInstance.GetFilePathName();
       const auto selection = fileDialogInstance.GetSelection();
@@ -61,7 +63,6 @@ void FileDialog::renderImpl() {
     done = true;
   }
 }
-
 void FileDialog::setExtInfos() {
   for (const auto &[ext, color] : extColors) { fileDialogInstance.SetExtentionInfos(ext, color); }
 }
