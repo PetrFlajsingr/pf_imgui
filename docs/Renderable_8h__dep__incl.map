@@ -19,7 +19,7 @@
 <area shape="rect" id="node20" href="$PlotDataBase_8h.html" title="Types for data storage in plots and base class used in most storage types." alt="" coords="984,184,1186,225"/>
 <area shape="rect" id="node30" href="$TabBar_8h.html" title="TabBar element." alt="" coords="3242,452,3408,493"/>
 <area shape="rect" id="node31" href="$ResizableLayout_8h.html" title="Base class for layouts which provide resizing." alt="" coords="2960,273,3114,315"/>
-<area shape="rect" id="node37" href="$layout__decorators_8h.html" title="Decorators used in layouts to provide functionality which is not provided by an Element." alt="" coords="3105,184,3260,225"/>
+<area shape="rect" id="node37" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="3090,184,3317,225"/>
 <area shape="rect" id="node38" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="2246,370,2444,397"/>
 <area shape="rect" id="node44" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="2636,184,2800,225"/>
 <area shape="rect" id="node47" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="2491,363,2655,404"/>

@@ -15,34 +15,78 @@
 
 namespace pf::ui::ig {
 
+namespace details {
+template<typename T>
+struct SizeDimension : public T {
+  SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
+  SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
+  SizeDimension(std::same_as<float> auto value) : T(value) {}
+  bool operator==(const SizeDimension &other) const { return T::value == other.value; }
+  bool operator!=(const SizeDimension &other) const { return !(*this == other); }
+  operator float() const {
+    return T::value;
+  }
+  /**
+   * Fill the dimension except for the margin.
+   * @param margin
+   * @return
+   */
+  static SizeDimension Fill(uint32_t margin = 1) { return {-margin}; }
+  /**
+   * Automatic size detection.
+   * @return
+   */
+  static SizeDimension Auto() { return {0}; }
+};
 struct Width {
-  static Width AlignRight(uint32_t width) {
-    return {static_cast<float>(-width)};
-  }
-  static Width AlignLeft(uint32_t width) {
-    return {static_cast<float>(width)};
-  }
-  static Width Auto() {
-    return {0};
-  }
-  float width;
+  float value;
 };
-
 struct Height {
-  static Height AlignRight(uint32_t width) {
-    return {static_cast<float>(-width)};
-  }
-  static Height AlignLeft(uint32_t width) {
-    return {static_cast<float>(width)};
-  }
-  static Height Auto() {
-    return {0};
-  }
-  float width;
+  float value;
 };
+}// namespace details
 
+using Width = details::SizeDimension<details::Width>;
+using Height = details::SizeDimension<details::Height>;
+/**
+ * @brief Size to be used for element sizes.
+ */
 struct Size {
-
+  Size(const Width &width, const Height &height);
+  /**
+   * Conversion constructor.
+   * @param vec size as ImVec2
+   */
+  Size(ImVec2 vec);
+  /**
+   * Automatic size detection.
+   * @return
+   */
+  static Size Auto();
+  /**
+   * Fill.
+   * @return
+   */
+  static Size Fill();
+  /**
+   * Fill on X, auto on Y
+   * @return
+   */
+  static Size FillWidth();
+  /**
+   * Fill on Y, auto on X.
+   * @return
+   */
+  static Size FillHeight();
+  bool operator==(const Size &rhs) const;
+  bool operator!=(const Size &rhs) const;
+  /**
+   * Convert to ImVec, mostly for internal use.
+   * @return size as ImVec
+   */
+  [[nodiscard]] ImVec2 asImVec() const;
+  Width width;
+  Height height;
 };
 
 /**
@@ -54,9 +98,9 @@ class PF_IMGUI_EXPORT Resizable {
  public:
   /**
    * Construct Resizable with the given size
-   * @param size size
+   * @param s size
    */
-  explicit Resizable(const ImVec2 &size);
+  explicit Resizable(const Size &s);
 
   Resizable(Resizable &&other) noexcept;
   Resizable &operator=(Resizable &&other) noexcept;
@@ -65,29 +109,28 @@ class PF_IMGUI_EXPORT Resizable {
    * Get current size.
    * @return current size
    */
-  [[nodiscard]] const ImVec2 &getSize() const;
+  const Size &getSize() const;
   /**
    * Set new size.
    * @param s new size
    */
-  virtual void setSize(const ImVec2 &s);
-
+  virtual void setSize(const Size &s);
   /**
    * Add a listener for size changes.
    * @param listener listener called on size change
    * @return Subscription which allows of erasure of the listener @see Subscription
    */
-  Subscription addSizeListener(std::invocable<ImVec2> auto listener) {
+  Subscription addSizeListener(std::invocable<Size> auto listener) {
     return observableImpl.template addListener(listener);
   }
 
   virtual ~Resizable() = default;
 
  private:
-  ImVec2 size;
-  Observable_impl<ImVec2> observableImpl;
+  Size size;
+  Observable_impl<Size> observableImpl;
 
-  void notifySizeChanged(ImVec2 newSize);
+  void notifySizeChanged(Size newSize);
 };
 
 }// namespace pf::ui::ig

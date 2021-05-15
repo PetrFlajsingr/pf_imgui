@@ -1,7 +1,7 @@
 <map id="src/pf_imgui/interface/Element.h" name="src/pf_imgui/interface/Element.h">
-<area shape="rect" id="node1" title="Base class for objects which can be considered UI elements." alt="" coords="1814,5,1978,47"/>
-<area shape="rect" id="node2" href="$Bullet_8h.html" title="Decorator adding a bullet to an element." alt="" coords="2386,452,2553,493"/>
-<area shape="rect" id="node4" href="$FlameGraph_8h.html" title="FlameGraph element." alt="" coords="2579,452,2746,493"/>
+<area shape="rect" id="node1" title="Base class for objects which can be considered UI elements." alt="" coords="1781,5,1945,47"/>
+<area shape="rect" id="node2" href="$Bullet_8h.html" title="Decorator adding a bullet to an element." alt="" coords="2389,452,2555,493"/>
+<area shape="rect" id="node4" href="$FlameGraph_8h.html" title="FlameGraph element." alt="" coords="2582,452,2749,493"/>
 <area shape="rect" id="node5" href="$Text_8h.html" title="Text element." alt="" coords="675,363,842,404"/>
 <area shape="rect" id="node10" href="$Memo_8h.html" title="Memo element." alt="" coords="1030,452,1197,493"/>
 <area shape="rect" id="node11" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="11,363,178,404"/>
@@ -10,11 +10,11 @@
 <area shape="rect" id="node16" href="$PlotDataBase_8h.html" title="Types for data storage in plots and base class used in most storage types." alt="" coords="3576,95,3779,136"/>
 <area shape="rect" id="node26" href="$TabBar_8h.html" title="TabBar element." alt="" coords="2445,363,2611,404"/>
 <area shape="rect" id="node27" href="$ResizableLayout_8h.html" title="Base class for layouts which provide resizing." alt="" coords="815,184,969,225"/>
-<area shape="rect" id="node33" href="$layout__decorators_8h.html" title="Decorators used in layouts to provide functionality which is not provided by an Element." alt="" coords="509,95,664,136"/>
+<area shape="rect" id="node33" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="487,95,713,136"/>
 <area shape="rect" id="node34" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="1805,281,2003,307"/>
-<area shape="rect" id="node40" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1361,95,1525,136"/>
-<area shape="rect" id="node44" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1438,273,1602,315"/>
-<area shape="rect" id="node50" href="$Layout_8h.html" title="Base class for layouts." alt="" coords="1814,95,1978,136"/>
+<area shape="rect" id="node40" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1359,95,1523,136"/>
+<area shape="rect" id="node44" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1437,273,1601,315"/>
+<area shape="rect" id="node50" href="$Layout_8h.html" title="Base class for layouts." alt="" coords="1781,95,1945,136"/>
 <area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="1508,549,1687,575"/>
 <area shape="rect" id="node6" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="323,541,477,583"/>
 <area shape="rect" id="node8" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="507,452,661,493"/>
@@ -43,9 +43,9 @@
 <area shape="rect" id="node39" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="1821,363,1987,404"/>
 <area shape="rect" id="node41" href="$Dialog_8h.html" title="Dialog built by a user." alt="" coords="866,363,1019,404"/>
 <area shape="rect" id="node42" href="$Group_8h.html" title="Group element." alt="" coords="1095,363,1262,404"/>
-<area shape="rect" id="node43" href="$Tooltip_8h.html" title="Tooltip element." alt="" coords="1435,184,1602,225"/>
-<area shape="rect" id="node48" href="$Tree_8h.html" title="Tree element." alt="" coords="2123,452,2290,493"/>
-<area shape="rect" id="node49" href="$ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="1821,184,1971,225"/>
+<area shape="rect" id="node43" href="$Tooltip_8h.html" title="Tooltip element." alt="" coords="1434,184,1601,225"/>
+<area shape="rect" id="node48" href="$Tree_8h.html" title="Tree element." alt="" coords="2134,452,2301,493"/>
+<area shape="rect" id="node49" href="$ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="1787,184,1938,225"/>
 <area shape="rect" id="node45" href="$Button_8h.html" title="Button element." alt="" coords="305,363,471,404"/>
 <area shape="rect" id="node46" href="$Checkbox_8h.html" title="Checkbox element." alt="" coords="1323,452,1490,493"/>
 <area shape="rect" id="node47" href="$ComboBox_8h.html" title="ComboBox element." alt="" coords="1514,452,1681,493"/>

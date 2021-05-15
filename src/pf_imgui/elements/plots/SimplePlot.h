@@ -41,7 +41,7 @@ class PF_IMGUI_EXPORT SimplePlot : public Element, public Labellable, public Res
   SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
              std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
              const std::optional<std::size_t> &historyLimit = std::nullopt, float scaleLow = FLT_MAX,
-             float scaleHigh = FLT_MAX, ImVec2 size = {0, 0});
+             float scaleHigh = FLT_MAX, Size size = Size::Auto());
   /**
    * Add value to the end of the graph.
    * @param value value to be added

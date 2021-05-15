@@ -6,10 +6,12 @@
 
 namespace pf::ui::ig {
 
-ResizableLayout::ResizableLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
+ResizableLayout::ResizableLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                                  ShowBorder showBorder, Persistent persistent)
     : Layout(elementName, allowCollapse, showBorder, persistent), Resizable(size) {}
 
-ImVec2 ResizableLayout::getSizeIfCollapsed() const { return isCollapsed() ? ImVec2{getSize().x, 20} : getSize(); }
+ImVec2 ResizableLayout::getSizeIfCollapsed() const {
+  return isCollapsed() ? ImVec2{getSize().width.value, 20} : getSize().asImVec();
+}
 
 }// namespace pf::ui::ig

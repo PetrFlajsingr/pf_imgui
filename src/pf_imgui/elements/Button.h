@@ -36,7 +36,7 @@ class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Res
    * @param size size of the button
    */
   [[deprecated]] Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
-                        Repeatable isRepeatable = Repeatable::No, const ImVec2 &size = {0, 0});
+                        Repeatable isRepeatable = Repeatable::No, const Size &size = Size::Auto());
 
   /**
    * Get current type of the button.

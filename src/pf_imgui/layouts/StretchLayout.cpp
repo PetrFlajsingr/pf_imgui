@@ -7,15 +7,15 @@
 
 namespace pf::ui::ig {
 
-StretchLayout::StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch,
+StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
                              AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), stretch(stretch) {}
 
-StretchLayout::StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, ShowBorder showBorder,
+StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, ShowBorder showBorder,
                              Persistent persistent)
     : StretchLayout(elementName, size, stretch, AllowCollapse::No, showBorder, persistent) {}
 
-StretchLayout::StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch,
+StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
                              AllowCollapse allowCollapse, Persistent persistent)
     : StretchLayout(elementName, size, stretch, allowCollapse, ShowBorder::No, persistent) {}
 
@@ -23,9 +23,9 @@ Stretch StretchLayout::getStretch() const { return stretch; }
 void StretchLayout::setStretch(Stretch newStretch) {
   stretch = newStretch;
   switch (stretch) {
-    case Stretch::Width: setSize(ImVec2{0, getSize().y}); break;
-    case Stretch::Height: setSize(ImVec2{getSize().x, 0}); break;
-    case Stretch::All: setSize(ImVec2{0, 0}); break;
+    case Stretch::Width: setSize({Width::Auto(), getSize().height}); break;
+    case Stretch::Height: setSize({getSize().width, Height::Auto()}); break;
+    case Stretch::All: setSize(Size::Auto()); break;
   }
 }
 Element &StretchLayout::getChild() {

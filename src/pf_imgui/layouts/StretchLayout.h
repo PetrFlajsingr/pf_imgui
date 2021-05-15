@@ -28,7 +28,7 @@ class StretchLayout : public ResizableLayout {
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch,
+  StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
                 AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
                 Persistent persistent = Persistent::No);
   /**
@@ -39,7 +39,7 @@ class StretchLayout : public ResizableLayout {
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, ShowBorder showBorder,
+  StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, ShowBorder showBorder,
                 Persistent persistent = Persistent::No);
   /**
    * Construct StretchLayout.
@@ -49,21 +49,8 @@ class StretchLayout : public ResizableLayout {
    * @param allowCollapse enable collapse button
    * @param persistent enable state saving
    */
-  StretchLayout(const std::string &elementName, const ImVec2 &size, Stretch stretch, AllowCollapse allowCollapse,
+  StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, AllowCollapse allowCollapse,
                 Persistent persistent = Persistent::No);
-
-  /**
-  * Create a child and append it to the end of children.
-  *
-  * @tparam T type of created Element
-  * @tparam Args arguments to pass to the Ts constructor after its name
-  * @param name ID of the newly created element
-  * @param position position of the newly created element
-  * @param args arguments to pass to the Ts constructor after its nam
-  * @return reference to the newly created Element
-  *
-  * @throws DuplicateIdException when an ID is already present in the container
-  */
 
   /**
    * Create a child inside the layout. If the layout already contains one it gets overwritten.

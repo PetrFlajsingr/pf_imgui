@@ -31,8 +31,8 @@ class PF_IMGUI_EXPORT ResizableLayout : public Layout, public Resizable {
    * @param showBorder draw layouts border
    * @param persistent allow state saving
    */
-  ResizableLayout(const std::string &elementName, const ImVec2 &size, AllowCollapse allowCollapse,
-                  ShowBorder showBorder, Persistent persistent);
+  ResizableLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse, ShowBorder showBorder,
+                  Persistent persistent);
 
  protected:
   /**

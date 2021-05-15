@@ -190,6 +190,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a94db9c7341c7fd306af91b240bcab42d inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a307b689d8f04ec5c340014cb49afc076 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#a307b689d8f04ec5c340014cb49afc076">isPersistent</a> () const</td></tr>
 <tr class="separator:a307b689d8f04ec5c340014cb49afc076 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad79bed46434afdb038dba8ec2d787a0f inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top"><a id="ad79bed46434afdb038dba8ec2d787a0f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setPersistent</b> (bool persistent)</td></tr>
+<tr class="separator:ad79bed46434afdb038dba8ec2d787a0f inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed3087d0531e934bc96ec4b33d8fdca9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#aed3087d0531e934bc96ec4b33d8fdca9">unserialize</a> (const toml::table &amp;src)</td></tr>
 <tr class="separator:aed3087d0531e934bc96ec4b33d8fdca9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdb86e68840f189f5c56c7c7cb66c8d9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">std::optional&lt; toml::table &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#afdb86e68840f189f5c56c7c7cb66c8d9">serialize</a> ()</td></tr>
@@ -299,7 +302,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get all renderables stored inside the layout. </p><dl class="section return"><dt>Returns</dt><dd>vector of pointers to renderables </dd></dl>
 
-<p>Implemented in <a class="el" href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a738e5fad68338df3bfdf331e3a344a1b">pf::ui::ig::AbsoluteLayout</a>, <a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a175c9361e812ac731c8585d1f7d6f885">pf::ui::ig::GridLayout</a>, <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#aaa74d7f687636b5843237e4b80a40fd6">pf::ui::ig::StackedLayout</a>, <a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a84c8dc65b26c788ea2e37dc3f7624065">pf::ui::ig::StretchLayout</a>, and <a class="el" href="classpf_1_1ui_1_1ig_1_1BoxLayout.html#adf9d55983da92a15a0da294f4c10a3c4">pf::ui::ig::BoxLayout</a>.</p>
+<p>Implemented in <a class="el" href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a738e5fad68338df3bfdf331e3a344a1b">pf::ui::ig::AbsoluteLayout</a>, <a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#a175c9361e812ac731c8585d1f7d6f885">pf::ui::ig::GridLayout</a>, <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#aaa74d7f687636b5843237e4b80a40fd6">pf::ui::ig::StackedLayout</a>, <a class="el" href="classpf_1_1ui_1_1ig_1_1BoxLayout.html#adf9d55983da92a15a0da294f4c10a3c4">pf::ui::ig::BoxLayout</a>, and <a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#a84c8dc65b26c788ea2e37dc3f7624065">pf::ui::ig::StretchLayout</a>.</p>
 
 </div>
 </div>
@@ -336,6 +339,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Check if the layout is scrollable. </p><dl class="section return"><dt>Returns</dt><dd>true if layout is scrollable, false otherwise </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>: turn into an interface? </dd></dl>
 
 </div>
 </div>
@@ -410,6 +414,7 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>: turn into an interface? </dd></dl>
 
 </div>
 </div>
@@ -457,7 +462,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This needs to be used while rendering inherited layouts. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>: Implement in all layouts. </dd></dl>
+<p>This needs to be used while rendering inherited layouts. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>: turn into an interface? </dd></dl>
 
 </div>
 </div>

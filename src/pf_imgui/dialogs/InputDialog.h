@@ -39,7 +39,7 @@ class InputDialog : public Dialog {
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
     createChild<Text>(getName() + "text", message);
     auto &input = createChild<InputText>(getName() + "input", "", "", TextInputType::MultiLine);
-    auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, ImVec2{0, 0});
+    auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
     btnLayout.createChild<Button>(getName() + "_button_ok", "Ok").template addClickListener([this, &input] {
       inputDone(input.getText());
       close();

@@ -37,7 +37,7 @@ struct TableSettings {
   bool reorderable = false;   /**< Make columns reorderable. */
   bool sortable = false;      /**< Make rows reorderable via clicking on header. */
   bool hideableCols = false;  /**< Allow hiding of columns. */
-  ImVec2 size = ImVec2{0, 0}; /**< Size of the table. */
+  Size size = Size::Auto(); /**< Size of the table. */
 };
 
 /**
@@ -121,7 +121,7 @@ class PF_IMGUI_EXPORT StringTable : public ItemElement, public Resizable {
 
  protected:
   void renderImpl() override {
-    if (ImGui::BeginTable(getName().c_str(), ColumnCount, tableFlags, getSize())) {
+    if (ImGui::BeginTable(getName().c_str(), ColumnCount, tableFlags, getSize().asImVec())) {
       if (header.has_value()) {
         std::ranges::for_each(*header, [](const auto &value) { ImGui::TableSetupColumn(value.c_str()); });
         ImGui::TableHeadersRow();
