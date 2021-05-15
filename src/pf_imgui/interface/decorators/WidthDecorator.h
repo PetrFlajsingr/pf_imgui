@@ -29,7 +29,7 @@ requires(!std::derived_from<T, Resizable>) class WidthDecorator : public T {
    * @param args arguments for T's constructor
    */
   template<typename... Args>
-  requires std::constructible_from<T, Args...>
+  requires std::constructible_from<T, std::string, Args...>
   explicit WidthDecorator(const std::string &elementName, float elementWidth, Args &&...args)
       : T(elementName, std::forward<Args>(args)...), width(elementWidth) {}
 
