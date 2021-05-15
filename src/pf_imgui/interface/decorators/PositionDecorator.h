@@ -1,6 +1,6 @@
 /**
- * @file layout_decorators.h
- * @brief Decorators used in layouts to provide functionality which is not provided by an Element.
+ * @file PositionDecorator.h
+ * @brief Decorator for non-positionable elements.
  * @author Petr Flajšingr
  * @date 25.1.21
  */

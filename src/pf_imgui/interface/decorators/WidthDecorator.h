@@ -1,6 +1,9 @@
-//
-// Created by petr on 5/2/21.
-//
+/**
+ * @file WidthDecorator.h
+ * @brief Decorator to enable control of element width.
+ * @author Petr Flajšingr
+ * @date 2.5.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
@@ -12,14 +15,17 @@
 
 namespace pf::ui::ig {
 
-// (so -FLT_MIN always align width to the right side).
+/**
+ * @brief Decorator to change element width.
+ *
+ */
 template<std::derived_from<ItemElement> T>
 requires(!std::derived_from<T, Resizable>) class WidthDecorator : public T {
  public:
   /**
    * Construct WidthDecorator.
    * @tparam Args argument types for T's constructor
-   * @param elementWidth width of the element, >0.0f: width in pixels, <0.0f align xx pixels to the right of window
+   * @param elementWidth width of the element, >0.0f: width in pixels, <0.0f align xx pixels to the right of window - -FLT_MAX aligns to the right
    * @param args arguments for T's constructor
    */
   template<typename... Args>
