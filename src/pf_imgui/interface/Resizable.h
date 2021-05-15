@@ -17,8 +17,9 @@ namespace pf::ui::ig {
 
 template<typename T>
 struct SizeDimension : public T {
-  SizeDimension(uint32_t value) : T(static_cast<float>(value)) {}
-  SizeDimension(float value) : T(value) {}
+  SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
+  SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
+  SizeDimension(std::same_as<float> auto value) : T(value) {}
   bool operator==(const SizeDimension &other) const { return T::value == other.value; }
   bool operator!=(const SizeDimension &other) const { return !(*this == other); }
   operator float() const {
