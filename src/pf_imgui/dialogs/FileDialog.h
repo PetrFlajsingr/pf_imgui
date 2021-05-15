@@ -66,7 +66,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
   FileDialog(const std::string &elementName, const std::string &label,
              const std::vector<FileExtensionSettings> &extSettings,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-             ImVec2 size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
+             Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
       : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
@@ -88,7 +88,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
    */
   FileDialog(const std::string &elementName, const std::string &label,
              std::invocable<std::vector<std::string>> auto onSelect, std::invocable auto onCancel,
-             ImVec2 size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
+             Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
       : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
@@ -98,7 +98,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
    * Check if the dialog has been closed.
    * @return true if selected or canceled, false otherwise
    */
-  [[nodiscard]] bool isDone() const { return done; }
+  [[nodiscard]] bool isDone() const;
 
  protected:
   void renderImpl() override;
