@@ -20,6 +20,9 @@ struct SizeDimension : public T {
   SizeDimension(uint32_t value) : T(static_cast<float>(value)) {}
   bool operator==(const SizeDimension &other) const { return T::value == other.value; }
   bool operator!=(const SizeDimension &other) const { return !(*this == other); }
+  operator float() const {
+    return T::value;
+  }
   static SizeDimension Fill(uint32_t margin = 1) { return {-margin}; }
   static SizeDimension Auto() { return {0}; }
 };
