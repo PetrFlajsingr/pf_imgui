@@ -15,6 +15,8 @@
 
 namespace pf::ui::ig {
 
+
+namespace details {
 template<typename T>
 struct SizeDimension : public T {
   SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
@@ -25,10 +27,18 @@ struct SizeDimension : public T {
   operator float() const {
     return T::value;
   }
+  /**
+   * Fill the dimension except for the margin.
+   * @param margin
+   * @return
+   */
   static SizeDimension Fill(uint32_t margin = 1) { return {-margin}; }
+  /**
+   * Automatic size detection.
+   * @return
+   */
   static SizeDimension Auto() { return {0}; }
 };
-namespace details {
 struct Width {
   float value;
 };
@@ -37,15 +47,44 @@ struct Height {
 };
 }// namespace details
 
-using Width = SizeDimension<details::Width>;
-using Height = SizeDimension<details::Height>;
+using Width = details::SizeDimension<details::Width>;
+using Height = details::SizeDimension<details::Height>;
+/**
+ * @brief Size to be used for element sizes.
+ */
 struct Size {
   Size(const Width &width, const Height &height);
+  /**
+   * Conversion constructor.
+   * @param vec size as ImVec2
+   */
+  Size(ImVec2 vec);
+  /**
+   * Automatic size detection.
+   * @return
+   */
   static Size Auto();
+  /**
+   * Fill.
+   * @return
+   */
   static Size Fill();
+  /**
+   * Fill on X, auto on Y
+   * @return
+   */
   static Size FillWidth();
+  /**
+   * Fill on Y, auto on X.
+   * @return
+   */
+  static Size FillHeight();
   bool operator==(const Size &rhs) const;
   bool operator!=(const Size &rhs) const;
+  /**
+   * Convert to ImVec, mostly for internal use.
+   * @return size as ImVec
+   */
   [[nodiscard]] ImVec2 asImVec() const;
   Width width;
   Height height;
