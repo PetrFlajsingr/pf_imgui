@@ -220,7 +220,8 @@ set(INCLUDES
         src/pf_imgui/layouts/StackedLayout.h
         src/pf_imgui/layouts/AbsoluteLayout.h
         src/pf_imgui/layouts/StretchLayout.h
-        src/pf_imgui/layouts/layout_decorators.h
+        src/pf_imgui/interface/decorators/PositionDecorator.h
+        src/pf_imgui/interface/decorators/WidthDecorator.h
         src/pf_imgui/interface/Layout.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialogConfig.h

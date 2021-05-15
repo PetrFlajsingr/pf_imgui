@@ -9,7 +9,7 @@
 #define PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 
 #include "ResizableLayout.h"
-#include "layout_decorators.h"
+#include "src/pf_imgui/interface/decorators/PositionDecorator.h"
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>

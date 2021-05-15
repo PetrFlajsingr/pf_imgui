@@ -49,11 +49,13 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
   /**
    * Check if the layout is scrollable.
    * @return true if layout is scrollable, false otherwise
+   * @todo: turn into an interface?
    */
   [[nodiscard]] bool isScrollable() const;
   /**
    * Set layout scrollable
    * @param scrollable new value
+   * @todo: turn into an interface?
    */
   void setScrollable(bool scrollable);
 
@@ -83,13 +85,13 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
 
   /**
    * This needs to be used while rendering inherited layouts.
-   * @todo: Implement in all layouts.
+   * @todo: turn into an interface?
    */
   std::optional<ScrollPosition> nextFrameScrollPosition = std::nullopt;
 
  private:
   bool drawBorder;
-  bool scrollable = false;
+  bool scrollable = false;//@todo: turn into an interface?
 };
 
 }// namespace pf::ui::ig
