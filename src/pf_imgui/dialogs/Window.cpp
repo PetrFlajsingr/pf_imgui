@@ -44,7 +44,7 @@ void Window::renderImpl() {
     }
   }
   ImGui::End();
-  if (isNotClosed) {
+  if (!isNotClosed) {
     closeObservableImpl.notify();
     setVisibility(Visibility::Invisible);
   }
