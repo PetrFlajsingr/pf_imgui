@@ -1,5 +1,5 @@
 /**
- * @file Splitter.h
+ * @file Separator.h
  * @brief Visually split UI.
  * @author Petr Flajšingr
  * @date 15.5.21
