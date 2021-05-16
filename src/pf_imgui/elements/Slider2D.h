@@ -32,6 +32,8 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
 /**
  * @brief Slider which covers an area and allows a user to select axis value with better visual cues.
  * @tparam T inner type of slider
+ *
+ * @todo: make Resizable
  */
 template<OneOf<int, float> T>
 class Slider2D : public ItemElement,

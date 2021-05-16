@@ -17,7 +17,7 @@ namespace pf::ui::ig {
 
 namespace details {
 template<typename T>
-struct SizeDimension : public T {
+struct PF_IMGUI_EXPORT SizeDimension : public T {
   SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
   SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
   SizeDimension(std::same_as<float> auto value) : T(value) {}
@@ -38,10 +38,10 @@ struct SizeDimension : public T {
    */
   static SizeDimension Auto() { return {0}; }
 };
-struct Width {
+struct PF_IMGUI_EXPORT Width {
   float value;
 };
-struct Height {
+struct PF_IMGUI_EXPORT Height {
   float value;
 };
 }// namespace details
@@ -51,7 +51,7 @@ using Height = details::SizeDimension<details::Height>;
 /**
  * @brief Size to be used for element sizes.
  */
-struct Size {
+struct PF_IMGUI_EXPORT Size {
   Size(const Width &width, const Height &height);
   /**
    * Conversion constructor.

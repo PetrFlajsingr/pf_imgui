@@ -29,7 +29,7 @@ using StringTableRow = std::array<std::string, ColumnCount>;
  * @tparam ColumnCount static column count of table
  */
 template<std::size_t ColumnCount>
-struct TableSettings {
+struct PF_IMGUI_EXPORT TableSettings {
   std::optional<StringTableRow<ColumnCount>> header = std::
       nullopt; /**< Optional header for table. If the header is not provided now header row is present in the table. */
   Flags<TableBorder> border;  /**< Type of border rendering. */
@@ -37,7 +37,7 @@ struct TableSettings {
   bool reorderable = false;   /**< Make columns reorderable. */
   bool sortable = false;      /**< Make rows reorderable via clicking on header. */
   bool hideableCols = false;  /**< Allow hiding of columns. */
-  Size size = Size::Auto(); /**< Size of the table. */
+  Size size = Size::Auto();   /**< Size of the table. */
 };
 
 /**

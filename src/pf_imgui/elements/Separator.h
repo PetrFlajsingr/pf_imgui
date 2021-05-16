@@ -17,7 +17,7 @@ namespace pf::ui::ig {
  *
  * Automatically detects if it should be horizontal or vertical.
  */
-class Separator : public Element {
+class PF_IMGUI_EXPORT Separator : public Element {
  public:
   /**
    * Construct Separator.

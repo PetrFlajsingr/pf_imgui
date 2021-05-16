@@ -23,6 +23,8 @@ namespace pf::ui::ig {
 /**
  * @brief Slider with 3D space.
  * @tparam T underlying type
+ *
+ * @todo: make Resizable
  */
 template<OneOf<float> T>
 class Slider3D : public ItemElement,

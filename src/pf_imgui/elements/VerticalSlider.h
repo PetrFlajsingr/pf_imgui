@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
    * @param persistent enable state saving to disk
    * @param format printf-like format for value
    */
-  VerticalSlider(const std::string &elementName, const std::string &label, ImVec2 size, T minVal, T maxVal,
+  VerticalSlider(const std::string &elementName, const std::string &label, Size size, T minVal, T maxVal,
                  T value = T{}, Persistent persistent = Persistent::No,
                  std::string format = details::defaultVSliderFormat<T>())
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent),
