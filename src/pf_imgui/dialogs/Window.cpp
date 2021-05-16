@@ -46,6 +46,7 @@ void Window::renderImpl() {
   ImGui::End();
   if (isNotClosed) {
     closeObservableImpl.notify();
+    setVisibility(Visibility::Invisible);
   }
 }
 
@@ -76,14 +77,17 @@ void Window::setCollapsed(bool collapsed) {
   ImGui::SetWindowCollapsed(getLabel().c_str(), collapsed);
   Collapsible::setCollapsed(collapsed);
 }
+
 void Window::setFocus() {
   ImGui::SetWindowFocus(getLabel().c_str());
   Focusable::setFocus();
 }
+
 void Window::setPosition(ImVec2 pos) {
   ImGui::SetWindowPos(getLabel().c_str(), pos);
   Positionable::setPosition(pos);
 }
+
 ImGuiWindowFlags Window::createWindowFlags() {
   ImGuiWindowFlags result = hasMenuBar() ? ImGuiWindowFlags_MenuBar : ImGuiWindowFlags{};
   if (!isCollapsible()) { result |= ImGuiWindowFlags_NoCollapse; }
@@ -94,15 +98,22 @@ ImGuiWindowFlags Window::createWindowFlags() {
 const std::optional<Size> &Window::getMinSizeConstraint() const { return minSizeConstraint; }
 
 void Window::setMinSizeConstraint(const Size &newSizeConstraint) { minSizeConstraint = newSizeConstraint; }
+
 void Window::cancelSizeConstraint() {
   cancelMinSizeConstraint();
   cancelMaxSizeConstraint();
 }
+
 const std::optional<Size> &Window::getMaxSizeConstraint() const { return maxSizeConstraint; }
+
 void Window::cancelMinSizeConstraint() { minSizeConstraint = std::nullopt; }
+
 void Window::cancelMaxSizeConstraint() { maxSizeConstraint = std::nullopt; }
+
 void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstraint = newSizeConstraint; }
+
 bool Window::isCloseable() const { return closeable; }
+
 void Window::setCloseable(bool closeable) { Window::closeable = closeable; }
 
 }// namespace pf::ui::ig

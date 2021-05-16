@@ -14,6 +14,7 @@
 #include <pf_imgui/_export.h>
 #include <unordered_map>
 #include <utility>
+#include <ranges>
 
 namespace pf::ui::ig {
 /**
