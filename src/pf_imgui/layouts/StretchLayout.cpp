@@ -37,7 +37,7 @@ void StretchLayout::renderImpl() {
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
     if (renderCollapseButton()) {
-      child->setSize(getSize());
+      child->setSize(ImGui::GetContentRegionMax());
       renderableChild->render();
     }
   }
