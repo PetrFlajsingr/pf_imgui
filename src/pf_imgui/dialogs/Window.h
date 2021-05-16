@@ -104,6 +104,28 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setCollapsed(bool collapsed) override;
   void setPosition(ImVec2 pos) override;
 
+  /**
+   * Check if the Window can be closed with an X button in top right corner.
+   * @return
+   */
+  [[nodiscard]] bool isCloseable() const;
+  /**
+   * Enable/disable user window closing using an X button in top right corner.
+   * @param closeable
+   */
+  void setCloseable(bool closeable);
+
+  /**
+   * Add a listener for close event.
+   *
+   * This event is triggered when X button is clicked.
+   * @param listener to be called on event
+   * @return Subscription for listener cancelation
+   */
+  Subscription addCloseListener(std::invocable auto listener) {
+    return closeObservableImpl.template addListener(listener);
+  }
+
  protected:
   void renderImpl() override;
 
@@ -111,6 +133,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
   std::optional<Size> minSizeConstraint = std::nullopt;
   std::optional<Size> maxSizeConstraint = std::nullopt;
+  bool closeable = false;
+  Observable_impl<> closeObservableImpl;
 
   ImGuiWindowFlags createWindowFlags();
 };

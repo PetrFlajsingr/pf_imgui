@@ -20,7 +20,8 @@ Window::Window(std::string name, std::string label, Persistent persistent)
 
 void Window::renderImpl() {
   auto flags = createWindowFlags();
-  if (ImGui::Begin(getLabel().c_str(), nullptr, flags)) {
+  auto isNotClosed = true;
+  if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
@@ -43,6 +44,9 @@ void Window::renderImpl() {
     }
   }
   ImGui::End();
+  if (isNotClosed) {
+    closeObservableImpl.notify();
+  }
 }
 
 WindowMenuBar &Window::getMenuBar() {
@@ -98,5 +102,7 @@ const std::optional<Size> &Window::getMaxSizeConstraint() const { return maxSize
 void Window::cancelMinSizeConstraint() { minSizeConstraint = std::nullopt; }
 void Window::cancelMaxSizeConstraint() { maxSizeConstraint = std::nullopt; }
 void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstraint = newSizeConstraint; }
+bool Window::isCloseable() const { return closeable; }
+void Window::setCloseable(bool closeable) { Window::closeable = closeable; }
 
 }// namespace pf::ui::ig
