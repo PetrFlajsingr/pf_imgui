@@ -23,9 +23,7 @@ struct PF_IMGUI_EXPORT SizeDimension : public T {
   SizeDimension(std::same_as<float> auto value) : T(value) {}
   bool operator==(const SizeDimension &other) const { return T::value == other.value; }
   bool operator!=(const SizeDimension &other) const { return !(*this == other); }
-  operator float() const {
-    return T::value;
-  }
+  operator float() const { return T::value; }
   /**
    * Fill the dimension except for the margin.
    * @param margin

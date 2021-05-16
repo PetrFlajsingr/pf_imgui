@@ -29,6 +29,6 @@ class PF_IMGUI_EXPORT Separator : public Element {
   void renderImpl() override;
 };
 
-}
+}// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ELEMENTS_SPLITTER_H
