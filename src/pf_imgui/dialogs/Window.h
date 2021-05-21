@@ -25,8 +25,6 @@ namespace pf::ui::ig {
  * @brief Main building piece for UI. Persistent element container with plenty of controls.
  *
  * May have a menu bar for additional controls.
- *
- * @todo: position set before first render
  */
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
@@ -135,6 +133,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   std::optional<Size> maxSizeConstraint = std::nullopt;
   bool closeable = false;
   Observable_impl<> closeObservableImpl;
+
+  bool firstPass = true;
 
   ImGuiWindowFlags createWindowFlags();
 };

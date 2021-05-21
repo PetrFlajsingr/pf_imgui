@@ -13,7 +13,7 @@ namespace pf::ui::ig {
 
 Window::Window(std::string name, std::string label, AllowCollapse allowCollapse, Persistent persistent)
     : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
-      Positionable(ImVec2{}), Labellable(std::move(label)) {}
+      Positionable(ImVec2{-1, -1}), Labellable(std::move(label)) {}
 
 Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
@@ -22,6 +22,15 @@ void Window::renderImpl() {
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
+    if (firstPass) {
+      firstPass = false;
+      if (getSize() != Size::Auto()) {
+        setSize(getSize());
+      }
+      if (getPosition().x != -1 && getPosition().y != -1) {
+        setPosition(getPosition());
+      }
+    }
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
