@@ -16,6 +16,7 @@
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 #include <vector>
+#include <range/v3/view/addressof.hpp>
 
 namespace pf::ui::ig {
 
@@ -112,7 +113,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * @param data
    */
   [[nodiscard]] std::optional<T> getSelectedItem() const {
-    if (selectedItemIndex.has_value()) { return filteredItems[*selectedItemIndex].first; }
+    if (selectedItemIndex.has_value()) { return filteredItems[*selectedItemIndex]->first; }
     return std::nullopt;
   }
 
@@ -131,7 +132,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-          filteredItems, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       selectedItemIndex = index;
@@ -156,11 +157,11 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
 
  protected:
   void renderImpl() override {
-    const auto cStrItems = filteredItems | ranges::views::transform([](const auto &str) { return str.second.c_str(); })
+    const auto cStrItems = filteredItems | ranges::views::transform([](const auto &str) { return str->second.c_str(); })
         | ranges::to_vector;
     auto currentItemIdx = selectedItemIndex.template value_or(-1);
     if (ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {
-      ValueObservable<T>::setValueInner(filteredItems[currentItemIdx].first);
+      ValueObservable<T>::setValueInner(filteredItems[currentItemIdx]->first);
       ValueObservable<T>::notifyValueChanged();
       selectedItemIndex = currentItemIdx;
     }
@@ -179,7 +180,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
   toml::table serialize_impl() override {
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
-      const auto selectedItem = filteredItems[*selectedItemIndex];
+      const auto selectedItem = *filteredItems[*selectedItemIndex];
       auto itemsWithIndices = ranges::views::enumerate(items) | ranges::to_vector;
       const auto indexInAllItems =
           static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
@@ -192,12 +193,12 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
 
  private:
   void refilterItems() {
-    filteredItems =
-        items | ranges::views::filter([this](const auto &item) { return filter(item.first); }) | ranges::to_vector;
+    filteredItems = items | ranges::views::filter([this](const auto &item) { return filter(item.first); })
+        | ranges::views::addressof | ranges::to_vector;
     selectedItemIndex = std::nullopt;
   }
   std::vector<details::ListBoxItemStorage<T>> items;
-  std::vector<details::ListBoxItemStorage<T>> filteredItems;
+  std::vector<details::ListBoxItemStorage<T> *> filteredItems;
   std::optional<int> selectedItemIndex = std::nullopt;
   int height = -1;
   std::function<bool(const T &)> filter = [](auto) { return true; };
