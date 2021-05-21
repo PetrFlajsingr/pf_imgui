@@ -63,6 +63,9 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  * which allows for delimiting shown items without the need to rebuild them.
  *
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
+ *
+ * @todo Filterable interface?
+ * @todo speedup filter
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT ComboBox : public ItemElement,

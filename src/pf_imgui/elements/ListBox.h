@@ -56,7 +56,7 @@ struct ListBoxItemStorage<std::string> {
  * User selection can be observed via listeners.
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public ValueObservable<T> {
+class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
  public:
   /**
    * Construct ListBox.
@@ -67,19 +67,25 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * @param heightInItems items to show before scroll is enabled - -1 shows all
    */
   ListBox(const std::string &elementName, const std::string &label,
-          std::ranges::range auto &&newItems = std::vector<T>{}, int selectedIdx = 0,
-          int heightInItems = -1) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                               &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(), currentItemIdx(selectedIdx),
-        height(heightInItems) {
+          std::ranges::range auto &&newItems = std::vector<T>{}, std::optional<int> selectedIdx = std::nullopt,
+          int heightInItems = -1,
+          Persistent persistent =
+          Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
+        selectedItemIndex(selectedIdx), height(heightInItems) {
     std::ranges::copy(newItems, std::back_inserter(items));
+    refilterItems();
   }
 
   /**
    * Add item to the end of the list.
    * @param item item to be added
    */
-  void addItem(const T &item) { items.emplace_back(item); }
+  void addItem(const T &item) {
+    items.emplace_back(item);
+    refilterItems();
+  }
   /**
    * Add items to the end of the list.
    * @param data items to be added
@@ -87,6 +93,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
   void addItems(std::ranges::range auto &&data) requires(
       std::convertible_to<std::ranges::range_value_t<decltype(data)>, T>) {
     std::ranges::copy(data, std::back_inserter(items));
+    refilterItems();
   }
   /**
    * Overwrite current items with the ones provided.
@@ -95,15 +102,19 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
   void setItems(std::ranges::range auto &&data) requires(
       std::convertible_to<std::ranges::range_value_t<decltype(data)>, T>) {
     items.clear();
-    currentItemIdx = 0;
+    selectedItemIndex = std::nullopt;
     std::ranges::copy(data, std::back_inserter(items));
+    refilterItems();
   }
 
   /**
    * Get and item currently selected by the user.
    * @param data
    */
-  [[nodiscard]] const T &getSelectedItem() const { return items[currentItemIdx].first; }
+  [[nodiscard]] std::optional<T> getSelectedItem() const {
+    if (selectedItemIndex.has_value()) { return filteredItems[*selectedItemIndex].first; }
+    return std::nullopt;
+  }
 
   /**
    * Set selected item by name. If no such item is found nothing happens.
@@ -119,28 +130,77 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
    * @param itemAsString string representation of item to select
    */
   void setSelectedItem(const std::string &itemAsString) {
-    if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
-        iter != items.end()) {
-      const auto index = std::distance(items.begin(), iter);
-      currentItemIdx = index;
+    if (const auto iter = std::ranges::find_if(
+          filteredItems, [itemAsString](const auto &item) { return item.second == itemAsString; });
+        iter != filteredItems.end()) {
+      const auto index = std::distance(filteredItems.begin(), iter);
+      selectedItemIndex = index;
     }
+  }
+
+  /**
+   * Set a predicate that filters which items are displayed to the user.
+   * @param filterFnc predicate returning true for items which should be shown to the user
+   */
+  void setFilter(std::predicate<const T &> auto filterFnc) {
+    filter = filterFnc;
+    refilterItems();
+  }
+  /**
+   * Remove item filter.
+   */
+  void clearFilter() {
+    filter = [](auto) { return true; };
+    refilterItems();
   }
 
  protected:
   void renderImpl() override {
-    const auto cStrItems =
-        items | ranges::views::transform([](const auto &str) { return str.second.c_str(); }) | ranges::to_vector;
+    const auto cStrItems = filteredItems | ranges::views::transform([](const auto &str) { return str.second.c_str(); })
+        | ranges::to_vector;
+    auto currentItemIdx = selectedItemIndex.template value_or(-1);
     if (ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {
-      ValueObservable<T>::setValueInner(items[currentItemIdx].first);
+      ValueObservable<T>::setValueInner(filteredItems[currentItemIdx].first);
       ValueObservable<T>::notifyValueChanged();
+      selectedItemIndex = currentItemIdx;
     }
   }
 
+  void unserialize_impl(const toml::table &src) override {
+    if (src.contains("selected")) {
+      const auto idx = **src["selected"].as_integer();
+      if (static_cast<std::size_t>(idx) < items.size()) {
+        selectedItemIndex = idx;
+        ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
+      }
+    }
+  }
+
+  toml::table serialize_impl() override {
+    auto result = toml::table{};
+    if (selectedItemIndex.has_value()) {
+      const auto selectedItem = filteredItems[*selectedItemIndex];
+      auto itemsWithIndices = ranges::views::enumerate(items) | ranges::to_vector;
+      const auto indexInAllItems =
+          static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
+            return itemInfo.second.first == selectedItem.first;
+          })->first);
+      result.insert_or_assign("selected", indexInAllItems);
+    }
+    return result;
+  }
+
  private:
+  void refilterItems() {
+    filteredItems =
+        items | ranges::views::filter([this](const auto &item) { return filter(item.first); }) | ranges::to_vector;
+    selectedItemIndex = std::nullopt;
+  }
   std::vector<details::ListBoxItemStorage<T>> items;
-  int currentItemIdx = 0;
+  std::vector<details::ListBoxItemStorage<T>> filteredItems;
+  std::optional<int> selectedItemIndex = std::nullopt;
   int height = -1;
+  std::function<bool(const T &)> filter = [](auto) { return true; };
 };
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_LISTBOX_H
