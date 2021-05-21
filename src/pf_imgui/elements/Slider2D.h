@@ -32,8 +32,6 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
 /**
  * @brief Slider which covers an area and allows a user to select axis value with better visual cues.
  * @tparam T inner type of slider
- *
- * @todo: make Resizable
  */
 template<OneOf<int, float> T>
 class Slider2D : public ItemElement,
@@ -41,7 +39,8 @@ class Slider2D : public ItemElement,
                  public ValueObservable<details::Slider2DStorageType<T>>,
                  public Savable,
                  public DragSource<details::Slider2DStorageType<T>>,
-                 public DropTarget<details::Slider2DStorageType<T>> {
+                 public DropTarget<details::Slider2DStorageType<T>>,
+                 public Resizable {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -54,9 +53,9 @@ class Slider2D : public ItemElement,
    * @param persistent enable state saving to disk
    */
   Slider2D(const std::string &elementName, const std::string &label, StorageType minMaxX, StorageType minMaxY,
-           StorageType value = StorageType{}, Persistent persistent = Persistent::No)
+           StorageType value = StorageType{}, Size size = Size::Auto(), Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value),
-        Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), extremesX(minMaxX),
+        Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(size), extremesX(minMaxX),
         extremesY(minMaxY) {}
 
  protected:
@@ -66,11 +65,11 @@ class Slider2D : public ItemElement,
     const auto oldValue = *address;
     if constexpr (std::same_as<T, int>) {
       valueChanged = ImWidgets::Slider2DInt(getLabel().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
-                                            &extremesY.x, &extremesY.y);
+                                            &extremesY.x, &extremesY.y, getSize().asImVec());
     }
     if constexpr (std::same_as<T, float>) {
       valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
-                                              extremesY.x, extremesY.y);
+                                              extremesY.x, extremesY.y, getSize().asImVec());
     }
     DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());
     if (auto drop = DropTarget<StorageType>::dropAccept(); drop.has_value()) {

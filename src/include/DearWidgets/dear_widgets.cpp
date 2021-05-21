@@ -1853,6 +1853,237 @@ bool RangeSelectVec2(const char *pLabel, ImVec2 *pCurMin, ImVec2 *pCurMax, ImVec
 }
 
 bool Slider2DScalar(char const *pLabel, ImGuiDataType data_type, void *p_valueX, void *p_valueY, void *p_minX,
+                    void *p_maxX, void *p_minY, void *p_maxY, ImVec2 size) {
+  assert(ScalarToFloat(data_type, (ImU64 *) p_minX) < ScalarToFloat(data_type, (ImU64 *) p_maxX));
+  assert(ScalarToFloat(data_type, (ImU64 *) p_minY) < ScalarToFloat(data_type, (ImU64 *) p_maxY));
+
+  ImGuiWindow *window = ImGui::GetCurrentWindow();
+  if (window->SkipItems) return false;
+
+  //ImGuiContext& g = *GImGui;
+  //const ImGuiStyle& style = g.Style;
+  //const ImGuiID id = window->GetID(pLabel);
+
+  ImGuiID const iID = ImGui::GetID(pLabel);
+
+  if (size.x == 0) {
+    ImVec2 const vSizeSubstract = ImGui::CalcTextSize(std::to_string(1.0f).c_str()) * 1.1f;
+    float const vSizeFull = (ImGui::GetContentRegionAvail().x - vSizeSubstract.x);
+    size.x = vSizeFull;
+  }
+  if (size.y == 0) {
+    ImVec2 const vSizeSubstract = ImGui::CalcTextSize(std::to_string(1.0f).c_str()) * 1.1f;
+    float const vSizeFull = (ImGui::GetContentRegionAvail().x - vSizeSubstract.x);
+    size.y = vSizeFull;
+  }
+
+  const auto vSize = size;
+
+  float const fHeightOffset = ImGui::GetTextLineHeight();
+  ImVec2 const vHeightOffset(0.0f, fHeightOffset);
+
+  ImVec2 vPos = ImGui::GetCursorScreenPos();
+  ImRect oRect(vPos + vHeightOffset, vPos + vSize + vHeightOffset);
+
+  ImGui::Text(pLabel);
+
+  ImGui::PushID(iID);
+
+  ImU32 const uFrameCol = ImGui::GetColorU32(ImGuiCol_FrameBg);
+
+  [[maybe_unused]] ImVec2 const vOriginPos = ImGui::GetCursorScreenPos();
+  ImGui::RenderFrame(oRect.Min, oRect.Max, uFrameCol, false, 0.0f);
+
+  ImU64 s_delta_x = SubScalar(data_type, p_maxX, p_minX);
+  ImU64 s_delta_y = SubScalar(data_type, p_maxY, p_minY);
+
+  bool bModified = false;
+  ImVec2 const vSecurity(15.0f, 15.0f);
+  ImRect frame_bb = ImRect(oRect.Min - vSecurity, oRect.Max + vSecurity);
+  //ImGui::PushItemFlag(ImGuiItemFlags_NoNav, true);
+  bool hovered;
+  bool held;
+  [[maybe_unused]] bool pressed = ImGui::ButtonBehavior(frame_bb, ImGui::GetID("##Zone"), &hovered, &held);
+  if (hovered && held) {
+    ImVec2 const vCursorPos = ImGui::GetMousePos() - oRect.Min;
+
+    float fValueX = vCursorPos.x / (oRect.Max.x - oRect.Min.x) * ScalarToFloat(data_type, &s_delta_x)
+        + ScalarToFloat(data_type, (ImU64 *) p_minX);
+    float fValueY = ScalarToFloat(data_type, &s_delta_y)
+        - vCursorPos.y / (oRect.Max.y - oRect.Min.y) * ScalarToFloat(data_type, &s_delta_y)
+        + ScalarToFloat(data_type, (ImU64 *) p_minY);
+
+    ImU64 s_value_x = FloatToScalar(data_type, fValueX);
+    ImU64 s_value_y = FloatToScalar(data_type, fValueY);
+
+    EqualScalar(data_type, (ImU64 *) p_valueX, &s_value_x);
+    EqualScalar(data_type, (ImU64 *) p_valueY, &s_value_y);
+
+    bModified = true;
+  }
+  //ImGui::PopItemFlag();
+
+  ImU64 s_clamped_x = ClampScalar(data_type, p_valueX, p_minX, p_maxX);
+  ImU64 s_clamped_y = ClampScalar(data_type, p_valueY, p_minY, p_maxY);
+  EqualScalar(data_type, (ImU64 *) p_valueX, &s_clamped_x);
+  EqualScalar(data_type, (ImU64 *) p_valueY, &s_clamped_y);
+
+  float const fScaleX = (ScalarToFloat(data_type, (ImU64 *) p_valueX) - ScalarToFloat(data_type, (ImU64 *) p_minX))
+      / ScalarToFloat(data_type, &s_delta_x);
+  float const fScaleY = 1.0f
+      - (ScalarToFloat(data_type, (ImU64 *) p_valueY) - ScalarToFloat(data_type, (ImU64 *) p_minY))
+          / ScalarToFloat(data_type, &s_delta_y);
+
+  constexpr float fCursorOff = 10.0f;
+  float const fXLimit = fCursorOff / oRect.GetWidth();
+  float const fYLimit = fCursorOff / oRect.GetHeight();
+
+  ImVec2 const vCursorPos((oRect.Max.x - oRect.Min.x) * fScaleX + oRect.Min.x,
+                          (oRect.Max.y - oRect.Min.y) * fScaleY + oRect.Min.y);
+
+  ImDrawList *pDrawList = ImGui::GetWindowDrawList();
+
+  ImVec4 const vBlue(70.0f / 255.0f, 102.0f / 255.0f, 230.0f / 255.0f, 1.0f);// TODO: choose from style
+  [[maybe_unused]] ImVec4 const vOrange(255.0f / 255.0f, 128.0f / 255.0f, 64.0f / 255.0f,
+                                        1.0f);// TODO: choose from style
+
+  ImS32 const uBlue = ImGui::GetColorU32(vBlue);
+  ImS32 const uOrange = ImGui::GetColorU32(vOrange);
+
+  constexpr float fBorderThickness = 2.0f;
+  constexpr float fLineThickness = 3.0f;
+  constexpr float fHandleRadius = 7.0f;
+  constexpr float fHandleOffsetCoef = 2.0f;
+
+  // Cursor
+  pDrawList->AddCircleFilled(vCursorPos, 5.0f, uBlue, 16);
+
+  // Vertical Line
+  if (fScaleY > 2.0f * fYLimit)
+    pDrawList->AddLine(ImVec2(vCursorPos.x, oRect.Min.y + fCursorOff), ImVec2(vCursorPos.x, vCursorPos.y - fCursorOff),
+                       uOrange, fLineThickness);
+  if (fScaleY < 1.0f - 2.0f * fYLimit)
+    pDrawList->AddLine(ImVec2(vCursorPos.x, oRect.Max.y - fCursorOff), ImVec2(vCursorPos.x, vCursorPos.y + fCursorOff),
+                       uOrange, fLineThickness);
+
+  // Horizontal Line
+  if (fScaleX > 2.0f * fXLimit)
+    pDrawList->AddLine(ImVec2(oRect.Min.x + fCursorOff, vCursorPos.y), ImVec2(vCursorPos.x - fCursorOff, vCursorPos.y),
+                       uOrange, fLineThickness);
+  if (fScaleX < 1.0f - 2.0f * fYLimit)
+    pDrawList->AddLine(ImVec2(oRect.Max.x - fCursorOff, vCursorPos.y), ImVec2(vCursorPos.x + fCursorOff, vCursorPos.y),
+                       uOrange, fLineThickness);
+
+  std::string formatX = ImGui::DataTypeGetInfo(data_type)->PrintFmt;
+  std::string formatY = ImGui::DataTypeGetInfo(data_type)->PrintFmt;
+
+  if (IsPositiveScalar(data_type, (ImU64 *) p_valueX)) { formatX = " " + formatX; }
+  if (IsPositiveScalar(data_type, (ImU64 *) p_valueY)) { formatY = " " + formatY; }
+
+  char pBufferX[64];
+  char pBufferY[64];
+  /*const char* value_buf_end_x = pBufferX + */ ImGui::DataTypeFormatString(pBufferX, IM_ARRAYSIZE(pBufferX), data_type,
+                                                                            p_valueX, formatX.c_str());
+  /*const char* value_buf_end_y = pBufferX + */ ImGui::DataTypeFormatString(pBufferY, IM_ARRAYSIZE(pBufferY), data_type,
+                                                                            p_valueY, formatY.c_str());
+
+  ImU32 const uTextCol = ImGui::ColorConvertFloat4ToU32(ImGui::GetStyle().Colors[ImGuiCol_Text]);
+
+  ImGui::SetWindowFontScale(0.75f);
+
+  ImVec2 const vXSize = ImGui::CalcTextSize(pBufferX);
+  ImVec2 const vYSize = ImGui::CalcTextSize(pBufferY);
+
+  ImVec2 const vHandlePosX = ImVec2(vCursorPos.x, oRect.Max.y + vYSize.x * 0.5f);
+  ImVec2 const vHandlePosY = ImVec2(oRect.Max.x + fHandleOffsetCoef * fCursorOff + vYSize.x, vCursorPos.y);
+
+  ImRect handle_x_bb = ImRect(vHandlePosX - ImVec2(fHandleRadius, fHandleRadius) - vSecurity,
+                              vHandlePosX + ImVec2(fHandleRadius, fHandleRadius) + vSecurity);
+  ImRect handle_y_bb = ImRect(vHandlePosY - ImVec2(fHandleRadius, fHandleRadius) - vSecurity,
+                              vHandlePosY + ImVec2(fHandleRadius, fHandleRadius) + vSecurity);
+  pressed = ImGui::ButtonBehavior(handle_x_bb, ImGui::GetID("##HandleX"), &hovered, &held);
+  if (hovered && held) {
+    ImVec2 const vCursorPosLocal = ImGui::GetMousePos() - oRect.Min;
+
+    //*fValueX = vCursorPos.x / (oRect.Max.x - oRect.Min.x) * fDeltaX + fMinX;
+    float fValueX = vCursorPosLocal.x / (oRect.Max.x - oRect.Min.x) * ScalarToFloat(data_type, &s_delta_x)
+        + ScalarToFloat(data_type, (ImU64 *) p_minX);
+    ImU64 s_value_x = FloatToScalar(data_type, fValueX);
+    EqualScalar(data_type, (ImU64 *) p_valueX, &s_value_x);
+
+    bModified = true;
+  }
+  pressed = ImGui::ButtonBehavior(handle_y_bb, ImGui::GetID("##HandleX"), &hovered, &held);
+  if (hovered && held) {
+    ImVec2 const vCursorPosLocal = ImGui::GetMousePos() - oRect.Min;
+
+    //*fValueY = fDeltaY - vCursorPos.y / (oRect.Max.y - oRect.Min.y) * fDeltaY + fMinY;
+    float fValueY = ScalarToFloat(data_type, &s_delta_y)
+        - vCursorPosLocal.y / (oRect.Max.y - oRect.Min.y) * ScalarToFloat(data_type, &s_delta_y)
+        + ScalarToFloat(data_type, (ImU64 *) p_minY);
+    ImU64 s_value_y = FloatToScalar(data_type, fValueY);
+    EqualScalar(data_type, (ImU64 *) p_valueY, &s_value_y);
+
+    bModified = true;
+  }
+
+  pDrawList->AddText(ImVec2(ImMin(ImMax(vCursorPos.x - vXSize.x * 0.5f, oRect.Min.x), oRect.Min.x + vSize.x - vXSize.x),
+                            oRect.Max.y + fCursorOff),
+                     uTextCol, pBufferX);
+  pDrawList->AddText(
+      ImVec2(oRect.Max.x + fCursorOff,
+             ImMin(ImMax(vCursorPos.y - vYSize.y * 0.5f, oRect.Min.y), oRect.Min.y + vSize.y - vYSize.y)),
+      uTextCol, pBufferY);
+  ImGui::SetWindowFontScale(1.0f);
+
+  // Borders::Right
+  pDrawList->AddCircleFilled(ImVec2(oRect.Max.x, vCursorPos.y), 2.0f, uOrange, 3);
+  // Handle Right::Y
+  pDrawList->AddNgonFilled(ImVec2(oRect.Max.x + fHandleOffsetCoef * fCursorOff + vYSize.x, vCursorPos.y), fHandleRadius,
+                           uBlue, 4);
+  if (fScaleY > fYLimit)
+    pDrawList->AddLine(ImVec2(oRect.Max.x, oRect.Min.y), ImVec2(oRect.Max.x, vCursorPos.y - fCursorOff), uBlue,
+                       fBorderThickness);
+  if (fScaleY < 1.0f - fYLimit)
+    pDrawList->AddLine(ImVec2(oRect.Max.x, oRect.Max.y), ImVec2(oRect.Max.x, vCursorPos.y + fCursorOff), uBlue,
+                       fBorderThickness);
+  // Borders::Top
+  pDrawList->AddCircleFilled(ImVec2(vCursorPos.x, oRect.Min.y), 2.0f, uOrange, 3);
+  if (fScaleX > fXLimit)
+    pDrawList->AddLine(ImVec2(oRect.Min.x, oRect.Min.y), ImVec2(vCursorPos.x - fCursorOff, oRect.Min.y), uBlue,
+                       fBorderThickness);
+  if (fScaleX < 1.0f - fXLimit)
+    pDrawList->AddLine(ImVec2(oRect.Max.x, oRect.Min.y), ImVec2(vCursorPos.x + fCursorOff, oRect.Min.y), uBlue,
+                       fBorderThickness);
+  // Borders::Left
+  pDrawList->AddCircleFilled(ImVec2(oRect.Min.x, vCursorPos.y), 2.0f, uOrange, 3);
+  if (fScaleY > fYLimit)
+    pDrawList->AddLine(ImVec2(oRect.Min.x, oRect.Min.y), ImVec2(oRect.Min.x, vCursorPos.y - fCursorOff), uBlue,
+                       fBorderThickness);
+  if (fScaleY < 1.0f - fYLimit)
+    pDrawList->AddLine(ImVec2(oRect.Min.x, oRect.Max.y), ImVec2(oRect.Min.x, vCursorPos.y + fCursorOff), uBlue,
+                       fBorderThickness);
+  // Borders::Bottom
+  pDrawList->AddCircleFilled(ImVec2(vCursorPos.x, oRect.Max.y), 2.0f, uOrange, 3);
+  // Handle Bottom::X
+  pDrawList->AddNgonFilled(ImVec2(vCursorPos.x, oRect.Max.y + vXSize.y * 2.0f), fHandleRadius, uBlue, 4);
+  if (fScaleX > fXLimit)
+    pDrawList->AddLine(ImVec2(oRect.Min.x, oRect.Max.y), ImVec2(vCursorPos.x - fCursorOff, oRect.Max.y), uBlue,
+                       fBorderThickness);
+  if (fScaleX < 1.0f - fXLimit)
+    pDrawList->AddLine(ImVec2(oRect.Max.x, oRect.Max.y), ImVec2(vCursorPos.x + fCursorOff, oRect.Max.y), uBlue,
+                       fBorderThickness);
+
+  ImGui::PopID();
+
+  ImGui::Dummy(vHeightOffset);
+  ImGui::Dummy(vHeightOffset);
+  ImGui::Dummy(vSize);
+
+  return bModified;
+}
+
+bool Slider2DScalar(char const *pLabel, ImGuiDataType data_type, void *p_valueX, void *p_valueY, void *p_minX,
                     void *p_maxX, void *p_minY, void *p_maxY, float const fScale /*= 1.0f*/) {
   assert(ScalarToFloat(data_type, (ImU64 *) p_minX) < ScalarToFloat(data_type, (ImU64 *) p_maxX));
   assert(ScalarToFloat(data_type, (ImU64 *) p_minY) < ScalarToFloat(data_type, (ImU64 *) p_maxY));
@@ -2079,15 +2310,27 @@ bool Slider2DInt(char const *pLabel, int *pValueX, int *pValueY, int *p_minX, in
                  float const fScale) {
   return Slider2DScalar(pLabel, ImGuiDataType_S32, pValueX, pValueY, p_minX, p_maxX, p_minY, p_maxY, fScale);
 }
+bool Slider2DInt(char const *pLabel, int *pValueX, int *pValueY, int *p_minX, int *p_maxX, int *p_minY, int *p_maxY,
+                 ImVec2 size) {
+  return Slider2DScalar(pLabel, ImGuiDataType_S32, pValueX, pValueY, p_minX, p_maxX, p_minY, p_maxY, size);
+}
 
 bool Slider2DFloat(char const *pLabel, float *pValueX, float *pValueY, float minX, float maxX, float minY, float maxY,
                    float const fScale) {
   return Slider2DScalar(pLabel, ImGuiDataType_Float, pValueX, pValueY, &minX, &maxX, &minY, &maxY, fScale);
 }
+bool Slider2DFloat(char const *pLabel, float *pValueX, float *pValueY, float minX, float maxX, float minY, float maxY,
+                   ImVec2 size) {
+  return Slider2DScalar(pLabel, ImGuiDataType_Float, pValueX, pValueY, &minX, &maxX, &minY, &maxY, size);
+}
 
 bool Slider2DDouble(char const *pLabel, double *pValueX, double *pValueY, double minX, double maxX, double minY,
                     double maxY, float const fScale) {
   return Slider2DScalar(pLabel, ImGuiDataType_Double, pValueX, pValueY, &minX, &maxX, &minY, &maxY, fScale);
+}
+bool Slider2DDouble(char const *pLabel, double *pValueX, double *pValueY, double minX, double maxX, double minY,
+                    double maxY, ImVec2 size) {
+  return Slider2DScalar(pLabel, ImGuiDataType_Double, pValueX, pValueY, &minX, &maxX, &minY, &maxY, size);
 }
 
 bool SliderScalar3D(char const *pLabel, float *pValueX, float *pValueY, float *pValueZ, float const fMinX,
@@ -3238,7 +3481,7 @@ ImVec2 XYZ2uvp(float X, float Y, float Z) {
 #if 0
 		float const z = 1.0f - x - y;
 
-		float const sum = x + 15.0f * y + 3.0f * z; 
+		float const sum = x + 15.0f * y + 3.0f * z;
 
 		x = 4.0f * x / sum;
 		y = 9.0f * y / sum;
