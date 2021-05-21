@@ -23,8 +23,6 @@ namespace pf::ui::ig {
 /**
  * @brief Slider with 3D space.
  * @tparam T underlying type
- *
- * @todo: make Resizable
  */
 template<OneOf<float> T>
 class Slider3D : public ItemElement,
@@ -42,7 +40,7 @@ class Slider3D : public ItemElement,
    * @param minMaxY extremes on Y axis
    * @param minMaxZ extremes on Z axis
    * @param value starting value
-   * @param scale possible max size will be multiplied by this
+   * @param size size of the rendered area
    * @param persistent enable state saving to disk
    */
   Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
