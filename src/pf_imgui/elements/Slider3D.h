@@ -30,7 +30,8 @@ class Slider3D : public ItemElement,
                  public ValueObservable<glm::vec3>,
                  public Savable,
                  public DragSource<glm::vec3>,
-                 public DropTarget<glm::vec3> {
+                 public DropTarget<glm::vec3>,
+                 public Resizable {
  public:
   /**
    * Construct Slider3D.
@@ -44,11 +45,11 @@ class Slider3D : public ItemElement,
    * @param persistent enable state saving to disk
    */
   Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
-           const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, float scale = 1.0f,
+           const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, Size size = Size::Auto(),
            Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value),
-        Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), extremesX(minMaxX),
-        extremesY(minMaxY), extremesZ(minMaxZ), sliderScale(scale) {}
+        Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size),
+        extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
 
  protected:
   void renderImpl() override {
@@ -58,7 +59,7 @@ class Slider3D : public ItemElement,
     if constexpr (std::same_as<T, float>) {
       valueChanged =
           ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
-                                    extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, sliderScale);
+                                    extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, getSize().asImVec());
     }
     DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());
     if (auto drop = DropTarget<glm::vec3>::dropAccept(); drop.has_value()) {
@@ -81,7 +82,6 @@ class Slider3D : public ItemElement,
   glm::vec2 extremesX;
   glm::vec2 extremesY;
   glm::vec2 extremesZ;
-  float sliderScale;
 };
 }// namespace pf::ui::ig
 
