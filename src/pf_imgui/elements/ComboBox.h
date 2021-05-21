@@ -18,6 +18,7 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <range/v3/view/filter.hpp>
+#include <range/v3/view/addressof.hpp>
 #include <string>
 #include <vector>
 
@@ -65,7 +66,6 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
  *
  * @todo Filterable interface?
- * @todo speedup filter
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT ComboBox : public ItemElement,
@@ -85,12 +85,13 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
   ComboBox(const std::string &elementName, const std::string &label, std::optional<std::string> previewValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent =
-               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+           Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent), DragSource<T>(false),
         previewValue(std::move(previewValue)), shownItems(showItemCount) {
     items.reserve(std::ranges::size(newItems));
     std::ranges::copy(newItems, std::back_inserter(items));
+    refilterItems();
   }
 
   /**
@@ -115,7 +116,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       selectedItemIndex = index;
@@ -134,6 +135,7 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
   void removeItem(const T &item) {
     const auto itemAsString = toString(item);
     removeItem(itemAsString);
+    refilterItems();
   }
   /**
    * Remove this item from the Combobox by its string value. If no such item exists nothing happens.
@@ -142,20 +144,24 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
   void removeItem(const std::string &itemAsString) requires(!std::same_as<T, std::string>) {
     using namespace std::string_literals;
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto isAnyItemSelected = selectedItemIndex.has_value();
       const auto selectedItem = isAnyItemSelected ? items[*selectedItemIndex] : ""s;
       items.erase(iter);
       selectedItemIndex = std::nullopt;
       if (isAnyItemSelected) { setSelectedItem(selectedItem); }
+      refilterItems();
     }
   }
   /**
    * Add a new item to the end of the items.
    * @param item item to be added
    */
-  void addItem(const T &item) { items.template emplace_back(item, toString(item)); }
+  void addItem(const T &item) {
+    items.template emplace_back(item, toString(item));
+    refilterItems();
+  }
 
   /**
    * Get all items.
@@ -172,18 +178,23 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
       std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>) {
     items.clear();
     std::ranges::copy(newItems, std::back_inserter(items));
+    refilterItems();
   }
 
   /**
    * Set a predicate that filters which items are displayed to the user.
    * @param filterFnc predicate returning true for items which should be shown to the user
    */
-  void setFilter(std::predicate<std::string_view> auto filterFnc) { filter = filterFnc; }
+  void setFilter(std::predicate<const T &> auto filterFnc) {
+    filter = filterFnc;
+    refilterItems();
+  }
   /**
    * Remove item filter.
    */
   void clearFilter() {
     filter = [](auto) { return true; };
+    refilterItems();
   }
 
   /**
@@ -218,39 +229,42 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
     flags |= static_cast<ImGuiComboFlags>(shownItems);
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
-      previewPtr = items[*selectedItemIndex].second.c_str();
+      previewPtr = filteredItems[*selectedItemIndex]->second.c_str();
     } else if (previewValue.has_value()) {
       previewPtr = previewValue->c_str();
     } else {
       previewPtr = "";
     }
     if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, flags)) {
-      auto cStrItems =
-          items | views::transform([](const auto &item) { return std::make_pair(item.first, item.second.c_str()); });
-      std::ranges::for_each(cStrItems | views::enumerate
-                                | views::filter([this](auto idxPtr) { return filter(idxPtr.second.first); }),
-                            [&](auto idxPtr) {
-                              const auto [idx, ptr] = idxPtr;
-                              auto isSelected = selectedItemIndex.has_value() && *selectedItemIndex == idx;
-                              ImGui::Selectable(ptr.second, &isSelected);
-                              if (isSelected) {
-                                if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
-                                  ValueObservable<T>::setValueInner(items[idx].first);
-                                  ValueObservable<T>::notifyValueChanged();
-                                }
-                                selectedItemIndex = idx;
-                              }
-                            });
+      auto cStrItems = filteredItems
+          | views::transform([](const auto &item) { return std::make_pair(item->first, item->second.c_str()); });
+      std::ranges::for_each(cStrItems | views::enumerate, [&](auto idxPtr) {
+        const auto [idx, ptr] = idxPtr;
+        auto isSelected = selectedItemIndex.has_value() && *selectedItemIndex == idx;
+        ImGui::Selectable(ptr.second, &isSelected);
+        if (isSelected) {
+          if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
+            ValueObservable<T>::setValueInner(filteredItems[idx]->first);
+            ValueObservable<T>::notifyValueChanged();
+          }
+          selectedItemIndex = idx;
+        }
+      });
       ImGui::EndCombo();
     }
-    if (selectedItemIndex.has_value()) { DragSource<T>::drag(items[*selectedItemIndex].first); }
+    if (selectedItemIndex.has_value()) { DragSource<T>::drag(filteredItems[*selectedItemIndex]->first); }
   }
 
  private:
+  void refilterItems() {
+    filteredItems = items | ranges::views::filter([this](auto &item) { return filter(item.first); })
+        | ranges::views::addressof | ranges::to_vector;
+  }
   std::vector<details::ComboBoxItemStorage<T>> items;
+  std::vector<details::ComboBoxItemStorage<T> *> filteredItems;
   std::optional<std::string> previewValue;
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
-  std::function<bool(T)> filter = [](auto) { return true; };
+  std::function<bool(const T &)> filter = [](auto) { return true; };
   ComboBoxCount shownItems;
 };
 
