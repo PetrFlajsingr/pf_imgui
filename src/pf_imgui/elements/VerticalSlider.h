@@ -36,7 +36,6 @@ constexpr const char *defaultVSliderFormat() {
 /**
  * @brief Slider rendered vertically.
  * @tparam T inner value type
- * @todo: size
  */
 template<OneOf<float, int> T>
 class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
@@ -89,10 +88,10 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
     auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::VSliderFloat(getLabel().c_str(), getSize(), address, min, max, format.c_str());
+      valueChanged = ImGui::VSliderFloat(getLabel().c_str(), getSize().asImVec(), address, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::VSliderInt(getLabel().c_str(), getSize(), address, min, max, format.c_str());
+      valueChanged = ImGui::VSliderInt(getLabel().c_str(), getSize().asImVec(), address, min, max, format.c_str());
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
