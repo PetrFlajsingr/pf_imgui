@@ -57,5 +57,14 @@ void InputText::setReadOnly(bool isReadOnly) {
     flags &= ~ImGuiInputTextFlags_ReadOnly;
   }
 }
+bool InputText::isPassword() const { return password; }
+void InputText::setPassword(bool passwd) {
+  password = passwd;
+  if (password) {
+    flags |= ImGuiInputTextFlags_Password;
+  } else {
+    flags &= ~ImGuiInputTextFlags_Password;
+  }
+}
 
 }// namespace pf::ui::ig

@@ -34,9 +34,6 @@ enum class TextTrigger { Character, Enter };
  * @brief Input for text with support for multiline strings.
  *
  * Typical text edit.
- *
- * @todo: custom filter with predicate
- * @todo: password input
  * @todo: hint
  */
 class PF_IMGUI_EXPORT InputText : public Text,
@@ -75,6 +72,17 @@ class PF_IMGUI_EXPORT InputText : public Text,
    */
   void setReadOnly(bool readOnly);
 
+  /**
+   * Check if the input renders all characters as hidden.
+   * @return
+   */
+  bool isPassword() const;
+  /**
+   * Set if the input renders all characters as hidden;
+   * @param password
+   */
+  void setPassword(bool passwd);
+
  protected:
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
@@ -86,6 +94,7 @@ class PF_IMGUI_EXPORT InputText : public Text,
   TextInputType inputType;
   ImGuiInputTextFlags flags = {};
   bool readOnly = false;
+  bool password = false;
 };
 
 }// namespace pf::ui::ig
