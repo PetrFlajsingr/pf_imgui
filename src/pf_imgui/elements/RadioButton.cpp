@@ -13,7 +13,7 @@ RadioButton::RadioButton(const std::string &elementName, const std::string &labe
 void RadioButton::renderImpl() {
   const auto oldValue = getValue();
   if (ImGui::RadioButton(getLabel().c_str(), getValue())) { setValueInner(true); }
-  if (oldValue != getValue() && getValue()) { notifyValueChanged(); }
+  if (oldValue != getValue()) { notifyValueChanged(); }
 }
 
 bool RadioButton::isSelected() const { return getValue(); }

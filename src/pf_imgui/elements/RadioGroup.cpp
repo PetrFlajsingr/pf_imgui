@@ -28,17 +28,16 @@ void RadioGroup::renderImpl() {
   if (newSelection.has_value()) {
     auto &selectedButton = buttons[*newSelection];
     std::ranges::for_each(buttons, [&](auto &button) {
-      if (&button != &selectedButton) { button.setValueInner(false); }
+      if (&button != &selectedButton) { button.setValueAndNotifyIfChanged(false); }
     });
-    selectedButton.notifyValueChanged();
     setValueInner(selectedButton.getLabel());
     selectedButtonIndex = newSelection;
     notifyValueChanged();
   }
 }
 
-void RadioGroup::addButton(const std::string &elementName, const std::string &caption, bool value) {
-  buttons.emplace_back(elementName, caption, value);
+RadioButton &RadioGroup::addButton(const std::string &elementName, const std::string &caption, bool value) {
+  return buttons.emplace_back(elementName, caption, value);
 }
 
 void RadioGroup::unserialize_impl(const toml::table &src) {

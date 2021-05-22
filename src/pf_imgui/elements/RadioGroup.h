@@ -49,7 +49,7 @@ class PF_IMGUI_EXPORT RadioGroup : public Element,
    * @param caption text rendered next to the button
    * @param value true for selected, false otherwise
    */
-  void addButton(const std::string &elementName, const std::string &caption, bool value = false);
+  RadioButton &addButton(const std::string &elementName, const std::string &caption, bool value = false);
 
  protected:
   void unserialize_impl(const toml::table &src) override;
