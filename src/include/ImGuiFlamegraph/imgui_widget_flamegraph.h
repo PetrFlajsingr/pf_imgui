@@ -29,7 +29,7 @@
 #pragma once
 
 #include <climits>
-
+#include <optional>
 #include <algorithm>
 #include <chrono>
 #include <imgui.h>

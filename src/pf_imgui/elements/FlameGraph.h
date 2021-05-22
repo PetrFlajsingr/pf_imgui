@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 #define PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
 
-#include <include/ImGuiFlamegraph/imgui_widget_flamegraph.h>
+#include <imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>

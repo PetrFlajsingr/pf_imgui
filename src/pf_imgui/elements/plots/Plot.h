@@ -8,7 +8,6 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_PLOT_H
 #define PF_IMGUI_ELEMENTS_PLOTS_PLOT_H
 
-#include <bits/ranges_algo.h>
 #include <memory>
 #include <optional>
 #include <pf_common/exceptions/StackTraceException.h>

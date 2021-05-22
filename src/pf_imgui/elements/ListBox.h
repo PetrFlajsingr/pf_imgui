@@ -55,6 +55,8 @@ struct ListBoxItemStorage<std::string> {
  * @brief Container for strings shown as list box and selectable by user.
  *
  * User selection can be observed via listeners.
+ *
+ * @todo: custom listbox
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
