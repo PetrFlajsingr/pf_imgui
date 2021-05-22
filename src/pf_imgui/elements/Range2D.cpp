@@ -32,8 +32,8 @@ const glm::vec2 &Range2D::getMax() const { return maxRange; }
 void Range2D::setMax(const glm::vec2 &max) { maxRange = max; }
 
 void Range2D::unserialize_impl(const toml::table &src) {
-  const auto tomlStartVec = src["value"]["startValue"].as_array();
-  const auto tomlEndVec = src["value"]["endValue"].as_array();
+  const auto tomlStartVec = src["startValue"].as_array();
+  const auto tomlEndVec = src["endValue"].as_array();
   const auto start = deserializeGlmVec<glm::vec2>(*tomlStartVec);
   const auto end = deserializeGlmVec<glm::vec2>(*tomlEndVec);
   setValueAndNotifyIfChanged({start, end});
