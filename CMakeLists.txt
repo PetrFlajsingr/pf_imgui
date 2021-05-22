@@ -155,7 +155,12 @@ set(SOURCES
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
         src/include/imgui/imgui_tables.cpp
-        src/include/DearWidgets/dear_widgets.cpp src/pf_imgui/interface/DragNDrop.cpp)
+        src/include/DearWidgets/dear_widgets.cpp
+        src/include/ImGuizmo/ImCurveEdit.cpp
+        src/include/ImGuizmo/ImGradient.cpp
+        src/include/ImGuizmo/ImGuizmo.cpp
+        src/include/ImGuizmo/ImSequencer.cpp
+        src/pf_imgui/interface/DragNDrop.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -253,6 +258,11 @@ set(INCLUDES
         src/pf_imgui/elements/Slider3D.h
         src/pf_imgui/elements/Bullet.h
         src/pf_imgui/interface/DragNDrop.h
+        src/include/ImGuizmo/ImCurveEdit.h
+        src/include/ImGuizmo/ImGradient.h
+        src/include/ImGuizmo/ImGuizmo.h
+        src/include/ImGuizmo/ImSequencer.h
+        src/include/ImGuizmo/ImZoomSlider.h
         src/pf_imgui/elements/VerticalSlider.h)
 
 list(APPEND INCLUDES ${toml++_headers})
@@ -291,6 +301,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileFlameGraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_markdown>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuizmo>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo)
 
