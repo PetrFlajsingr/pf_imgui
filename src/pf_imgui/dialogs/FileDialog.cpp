@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-FileExtensionSettings::FileExtensionSettings(std::vector<std::string> extensions, std::string description,
+FileExtensionSettings::FileExtensionSettings(std::vector<std::filesystem::path> extensions, std::string description,
                                              const std::optional<ImVec4> &color)
     : extensions(std::move(extensions)), description(std::move(description)), color(color) {}
 
@@ -18,14 +18,14 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
       filters += desc;
       filters += '{';
       for (const auto &name : names) {
-        filters += name + ',';
+        filters += fmt::format(".{},", name.string());
         if (color.has_value()) { extColors.emplace_back(name, *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
       filters += "},";
     } else {
       for (const auto &name : names) {
-        filters += name + ',';
+        filters += fmt::format("{},", name.string());
         if (color.has_value()) { extColors.emplace_back(name, *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
@@ -49,7 +49,7 @@ void FileDialog::renderImpl() {
       const auto selection = fileDialogInstance.GetSelection();
 
       if (!selection.empty()) {
-        auto selectionVec = std::vector<std::string>();
+        auto selectionVec = std::vector<std::filesystem::path>();
         selectionVec.reserve(selection.size());
         for (auto &[_, path] : selection) { selectionVec.emplace_back(path); }
         onFilesSelected(selectionVec);
@@ -64,7 +64,7 @@ void FileDialog::renderImpl() {
   }
 }
 void FileDialog::setExtInfos() {
-  for (const auto &[ext, color] : extColors) { fileDialogInstance.SetExtentionInfos(ext, color); }
+  for (const auto &[ext, color] : extColors) { fileDialogInstance.SetExtentionInfos(fmt::format(".{}", ext), color); }
 }
 
 }// namespace pf::ui::ig
