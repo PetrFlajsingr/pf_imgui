@@ -81,6 +81,7 @@ CPMAddPackage(
 
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
+include_directories(src/include/imgui_markdown)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -125,6 +126,7 @@ set(SOURCES
         src/pf_imgui/elements/plots/types/Stems.cpp
         src/pf_imgui/elements/plots/types/HeatMap.cpp
         src/pf_imgui/elements/plots/types/Digital.cpp
+        src/pf_imgui/elements/MarkdownText.cpp
         src/pf_imgui/interface/ElementContainer.cpp
         src/pf_imgui/interface/Element.cpp
         src/pf_imgui/interface/Labellable.cpp
@@ -187,6 +189,7 @@ set(INCLUDES
         src/pf_imgui/elements/Table.h
         src/pf_imgui/elements/StringTable.h
         src/pf_imgui/elements/Selectable.h
+        src/pf_imgui/elements/MarkdownText.h
         src/pf_imgui/dialogs/Window.h
         src/pf_imgui/elements/Tooltip.h
         src/pf_imgui/dialogs/FileDialog.h
