@@ -15,7 +15,7 @@ Range2D::Range2D(const std::string &elementName, const std::string &label, const
 void Range2D::renderImpl() {
   auto val = getValueAddress();
   const auto oldVal = getValue();
-  if (ImWidgets::RangeSelect2D(getLabel().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->start.y, minRange.x,
+  if (ImWidgets::RangeSelect2D(getLabel().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
                                minRange.y, maxRange.x, maxRange.y, getSize().asImVec())) {
     if (*val != oldVal) { notifyValueChanged(); }
   }

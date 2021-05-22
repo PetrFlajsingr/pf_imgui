@@ -1,6 +1,9 @@
-//
-// Created by petr on 5/22/21.
-//
+/**
+ * @file Range2D.h
+ * @brief Element for 2D range selection.
+ * @author Petr Flajšingr
+ * @date 22.05.20
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_RANGE2D_H
 #define PF_IMGUI_ELEMENTS_RANGE2D_H
