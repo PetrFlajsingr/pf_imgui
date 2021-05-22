@@ -7,19 +7,27 @@
 
 #include <imgui.h>
 #include <imgui_markdown.h>
+#include <pf_imgui/ImGuiInterface.h>
 #include <pf_imgui/interface/ItemElement.h>
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Markdown text render area.
+ *
+ * @todo: custom font
+ */
 class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
  public:
   /**
    * Construct MarkdownText.
    * @param elementName ID of the element
+   * @param interface for automatic font upload @todo: change this
    * @param markdownSrc markdown source to render
    * @param fontSize size of font
    */
-  explicit MarkdownText(const std::string &elementName, std::string markdownSrc = "", float fontSize = 12.f);
+  explicit MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::string markdownSrc = "",
+                        float fontSize = 12.f);
 
   /**
    * Get currently rendered markdown source.
@@ -58,6 +66,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   } FontData;
 
   ImGui::MarkdownConfig markdownConfig;
+  ImGuiInterface &imGuiInterface;
   std::string markdownSrc;
   float fontSize = 12.f;
 };

@@ -7,8 +7,9 @@
 
 namespace pf::ui::ig {
 
-MarkdownText::MarkdownText(const std::string &elementName, std::string markdownSrc, float fontSize)
-    : ItemElement(elementName), markdownSrc(std::move(markdownSrc)), fontSize(fontSize) {
+MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::string markdownSrc,
+                           float fontSize)
+    : ItemElement(elementName), imGuiInterface(interface), markdownSrc(std::move(markdownSrc)), fontSize(fontSize) {
   loadHeaderFonts();
   configure();
 }
@@ -23,6 +24,7 @@ void MarkdownText::loadHeaderFonts() {
     FontData.fontH2->Scale = fontSize * 1.1f;
     FontData.fontH3 = ImGui::GetIO().Fonts->AddFontDefault();
     FontData.fontH3->Scale = fontSize * 1.05f;
+    imGuiInterface.updateFonts();
   }
 }
 

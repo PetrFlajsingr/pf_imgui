@@ -228,6 +228,11 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   [[nodiscard]] DragNDropGroup &createDragNDropGroup();
 
+  /**
+   * Update fonts atlas using your backend.
+   */
+  virtual void updateFonts() = 0;
+
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
 
