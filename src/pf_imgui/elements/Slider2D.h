@@ -34,7 +34,7 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
  * @tparam T inner type of slider
  */
 template<OneOf<int, float> T>
-class Slider2D : public ItemElement,
+class PF_IMGUI_EXPORT Slider2D : public ItemElement,
                  public Labellable,
                  public ValueObservable<details::Slider2DStorageType<T>>,
                  public Savable,

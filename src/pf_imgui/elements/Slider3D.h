@@ -25,7 +25,7 @@ namespace pf::ui::ig {
  * @tparam T underlying type
  */
 template<OneOf<float> T>
-class Slider3D : public ItemElement,
+class PF_IMGUI_EXPORT Slider3D : public ItemElement,
                  public Labellable,
                  public ValueObservable<glm::vec3>,
                  public Savable,

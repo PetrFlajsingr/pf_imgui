@@ -112,6 +112,7 @@ set(SOURCES
         src/pf_imgui/elements/Text.cpp
         src/pf_imgui/elements/Tree.cpp
         src/pf_imgui/elements/Separator.cpp
+        src/pf_imgui/elements/Selectable.cpp
         src/pf_imgui/dialogs/Window.cpp
         src/pf_imgui/elements/Tooltip.cpp
         src/pf_imgui/dialogs/FileDialog.cpp
@@ -185,6 +186,7 @@ set(INCLUDES
         src/pf_imgui/elements/Tree.h
         src/pf_imgui/elements/Table.h
         src/pf_imgui/elements/StringTable.h
+        src/pf_imgui/elements/Selectable.h
         src/pf_imgui/dialogs/Window.h
         src/pf_imgui/elements/Tooltip.h
         src/pf_imgui/dialogs/FileDialog.h
