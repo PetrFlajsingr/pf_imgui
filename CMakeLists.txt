@@ -238,6 +238,7 @@ set(INCLUDES
         src/include/implot/implot_internal.h
         src/include/imgui/imgui.h
         src/include/imgui/imgui_internal.h
+        src/include/imgui_markdown/imgui_markdown.h
         src/include/imgui/imconfig.h
         src/include/imgui/imstb_rectpack.h
         src/include/imgui/imstb_textedit.h
