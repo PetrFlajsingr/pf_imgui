@@ -26,19 +26,19 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    * @param markdownSrc markdown source to render
    * @param fontSize size of font
    */
-  explicit MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::string markdownSrc = "",
+  explicit MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::u8string markdownSrc = u8"",
                         float fontSize = 12.f);
 
   /**
    * Get currently rendered markdown source.
    * @return currently rendered markdown source
    */
-  [[nodiscard]] const std::string &getMarkdownSrc() const;
+  [[nodiscard]] const std::u8string &getMarkdownSrc() const;
   /**
    * Set markdown source to be rendered
    * @param markdownSrc source to render
    */
-  void setMarkdownSrc(const std::string &markdownSrc);
+  void setMarkdownSrc(const std::u8string &markdownSrc);
   /**
    * Get current font size.
    * @return current font size
@@ -67,7 +67,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
 
   ImGui::MarkdownConfig markdownConfig;
   ImGuiInterface &imGuiInterface;
-  std::string markdownSrc;
+  std::u8string markdownSrc;
   float fontSize = 12.f;
 };
 

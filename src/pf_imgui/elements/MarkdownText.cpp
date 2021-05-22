@@ -7,23 +7,23 @@
 
 namespace pf::ui::ig {
 
-MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::string markdownSrc,
+MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::u8string markdownSrc,
                            float fontSize)
     : ItemElement(elementName), imGuiInterface(interface), markdownSrc(std::move(markdownSrc)), fontSize(fontSize) {
   loadHeaderFonts();
   configure();
 }
 
-void MarkdownText::renderImpl() { ImGui::Markdown(markdownSrc.c_str(), markdownSrc.length(), markdownConfig); }
+void MarkdownText::renderImpl() { ImGui::Markdown(reinterpret_cast<const char *>(markdownSrc.data()), markdownSrc.length(), markdownConfig); }
 
 void MarkdownText::loadHeaderFonts() {
   if (FontData.fontH1 == nullptr) {
     FontData.fontH1 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH1->Scale = fontSize * 1.15f;
+    FontData.fontH1->Scale = fontSize * 1.5f;
     FontData.fontH2 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH2->Scale = fontSize * 1.1f;
+    FontData.fontH2->Scale = fontSize * 1.30f;
     FontData.fontH3 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH3->Scale = fontSize * 1.05f;
+    FontData.fontH3->Scale = fontSize * 1.15f;
     imGuiInterface.updateFonts();
   }
 }
@@ -45,9 +45,9 @@ void MarkdownText::configure() {
   markdownConfig.formatCallback = MarkdownFormatCallback;
 }
 
-const std::string &MarkdownText::getMarkdownSrc() const { return markdownSrc; }
+const std::u8string &MarkdownText::getMarkdownSrc() const { return markdownSrc; }
 
-void MarkdownText::setMarkdownSrc(const std::string &markdown) { markdownSrc = markdown; }
+void MarkdownText::setMarkdownSrc(const std::u8string &markdown) { markdownSrc = markdown; }
 
 float MarkdownText::getFontSize() const { return fontSize; }
 void MarkdownText::setFontSize(float size) {
