@@ -37,6 +37,8 @@
 #include "elements/VerticalSlider.h"
 #include "elements/plots.h"
 #include "elements/Selectable.h"
+#include "elements/MarkdownText.h"
+#include "elements/Range2D.h"
 #include "layouts/layouts.h"
 #include "src/pf_imgui/dialogs/Dialog.h"
 #include "src/pf_imgui/dialogs/FileDialog.h"
