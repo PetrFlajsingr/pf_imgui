@@ -8,13 +8,17 @@
 namespace pf::ui::ig {
 
 MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::u8string markdownSrc,
-                           float fontSize)
-    : ItemElement(elementName), imGuiInterface(interface), markdownSrc(std::move(markdownSrc)), fontSize(fontSize) {
+                           float fontSize,
+                           std::optional<std::function<std::optional<ImTextureID>(std::string_view)>> &&imageLoader)
+    : ItemElement(elementName), imGuiInterface(interface), markdownSrc(std::move(markdownSrc)), fontSize(fontSize),
+      loadImage(imageLoader) {
   loadHeaderFonts();
   configure();
 }
 
-void MarkdownText::renderImpl() { ImGui::Markdown(reinterpret_cast<const char *>(markdownSrc.data()), markdownSrc.length(), markdownConfig); }
+void MarkdownText::renderImpl() {
+  ImGui::Markdown(reinterpret_cast<const char *>(markdownSrc.data()), markdownSrc.length(), markdownConfig);
+}
 
 void MarkdownText::loadHeaderFonts() {
   if (FontData.fontH1 == nullptr) {
@@ -36,7 +40,7 @@ void MarkdownText::MarkdownFormatCallback(const ImGui::MarkdownFormatInfo &markd
 void MarkdownText::configure() {
   markdownConfig.linkCallback = MarkdownLinkCallback;
   markdownConfig.tooltipCallback = nullptr;
-  // TODO: markdownConfig.imageCallback =        ImageCallback;
+  markdownConfig.imageCallback = MarkdownImageCallback;
   // TODO: markdownConfig.linkIcon =             ICON_FA_LINK;
   markdownConfig.headingFormats[0] = {FontData.fontH1, true};
   markdownConfig.headingFormats[1] = {FontData.fontH2, true};
@@ -56,9 +60,40 @@ void MarkdownText::setFontSize(float size) {
   configure();
 }
 void MarkdownText::MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data) {
-  reinterpret_cast<MarkdownText*>(data.userData)->onLinkClicked(std::string_view(data.link, data.linkLength), data.isImage);
+  reinterpret_cast<MarkdownText *>(data.userData)
+      ->onLinkClicked(std::string_view(data.link, data.linkLength), data.isImage);
 }
 void MarkdownText::setOnLinkClicked(const std::function<void(std::string_view, bool)> &linkClicked) {
   onLinkClicked = linkClicked;
+}
+ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data) {
+  auto result = ImGui::MarkdownImageData{};
+  result.useLinkCallback = false;
+  auto self = reinterpret_cast<MarkdownText *>(data.userData);
+  if (!self->loadImage.has_value()) {
+    result.isValid = false;
+    return result;
+  }
+  const auto image = (*self->loadImage)(std::string_view(data.link, data.linkLength));
+  if (!image.has_value()) {
+    result.isValid = false;
+    return result;
+  }
+  result.isValid = true;
+  result.user_texture_id = *image;
+  // TODO: size
+  result.size = ImVec2(40.0f, 20.0f);
+
+  ImVec2 const contentSize = ImGui::GetContentRegionAvail();
+  if (result.size.x > contentSize.x) {
+    float const ratio = result.size.y / result.size.x;
+    result.size.x = contentSize.x;
+    result.size.y = contentSize.x * ratio;
+  }
+
+  return result;
+}
+void MarkdownText::setImageLoader(std::function<std::optional<ImTextureID>(std::string_view)> &&imageLoader) {
+  loadImage = imageLoader;
 }
 }// namespace pf::ui::ig

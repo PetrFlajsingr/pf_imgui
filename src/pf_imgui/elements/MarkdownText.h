@@ -25,9 +25,12 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    * @param interface for automatic font upload @todo: change this
    * @param markdownSrc markdown source to render
    * @param fontSize size of font
+   * @param imageLoader function for image loading & texture creation, arg is path to load
    */
-  explicit MarkdownText(const std::string &elementName, ImGuiInterface &interface, std::u8string markdownSrc = u8"",
-                        float fontSize = 12.f);
+  explicit MarkdownText(
+      const std::string &elementName, ImGuiInterface &interface, std::u8string markdownSrc = u8"",
+      float fontSize = 12.f,
+      std::optional<std::function<std::optional<ImTextureID>(std::string_view)>> &&imageLoader = std::nullopt);
 
   /**
    * Get currently rendered markdown source.
@@ -56,6 +59,12 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    */
   void setOnLinkClicked(const std::function<void(std::string_view, bool)> &onLinkClicked);
 
+  /**
+   * Set function for image loading & texture creation.
+   * @param imageLoader function for image loading & texture creation, arg is path to load
+   */
+  void setImageLoader(std::function<std::optional<ImTextureID>(std::string_view)> &&imageLoader);
+
  protected:
   void renderImpl() override;
 
@@ -65,6 +74,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   void loadHeaderFonts();
   static void MarkdownFormatCallback(const ImGui::MarkdownFormatInfo &markdownFormatInfo, bool start);
   static void MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data);
+  static ImGui::MarkdownImageData MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data);
 
   struct {
     ImFont *fontH1 = nullptr;
@@ -77,6 +87,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   std::u8string markdownSrc;
   float fontSize = 12.f;
   std::function<void(std::string_view, bool)> onLinkClicked = [](auto, auto) {};
+  std::optional<std::function<std::optional<ImTextureID>(std::string_view)>> loadImage = std::nullopt;
 };
 
 }// namespace pf::ui::ig
