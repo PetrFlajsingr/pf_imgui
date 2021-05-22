@@ -32,7 +32,7 @@ namespace pf::ui::ig {
  */
 template<typename T>
 requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_constructible<T>) class PF_IMGUI_EXPORT
-    ValueObservable {
+ValueObservable {
  public:
   /**
    * Construct ValueObservable with starting value.
@@ -41,7 +41,7 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
   explicit ValueObservable(T value = T{}) : value(value) {}
 
   ValueObservable(ValueObservable &&other) noexcept requires(std::is_move_constructible_v<T>)
-      : value(std::move(other.value)) {}
+      : value(std::move(other.value)), observableImpl(std::move(other.observableImpl)) {}
   ValueObservable &operator=(ValueObservable &&other) noexcept requires(std::is_move_assignable_v<T>) {
     value = std::move(other.value);
     observableImpl = std::move(other.observableImpl);
