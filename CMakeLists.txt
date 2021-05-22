@@ -302,6 +302,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileFlameGraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_markdown>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuizmo>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFlamegraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo)
 
