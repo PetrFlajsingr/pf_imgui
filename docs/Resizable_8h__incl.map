@@ -1,12 +1,13 @@
 <map id="src/pf_imgui/interface/Resizable.h" name="src/pf_imgui/interface/Resizable.h">
-<area shape="rect" id="node1" title="Interface for elements which can be resized." alt="" coords="242,5,406,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="159,102,230,129"/>
+<area shape="rect" id="node1" title="Interface for elements which can be resized." alt="" coords="345,5,509,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="262,102,333,129"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,191,149,218"/>
-<area shape="rect" id="node4" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="306,95,454,136"/>
-<area shape="rect" id="node10" title=" " alt="" coords="479,102,537,129"/>
+<area shape="rect" id="node4" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="409,95,557,136"/>
+<area shape="rect" id="node11" title=" " alt="" coords="581,102,640,129"/>
 <area shape="rect" id="node5" title=" " alt="" coords="173,191,259,218"/>
 <area shape="rect" id="node6" title=" " alt="" coords="283,191,477,218"/>
 <area shape="rect" id="node7" title=" " alt="" coords="501,184,672,225"/>
 <area shape="rect" id="node8" title=" " alt="" coords="697,191,821,218"/>
 <area shape="rect" id="node9" title=" " alt="" coords="845,191,905,218"/>
+<area shape="rect" id="node10" title=" " alt="" coords="929,191,996,218"/>
 </map>

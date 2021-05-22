@@ -68,6 +68,9 @@ $(function() {
 <li>Savable()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#ac79821fa0060c61aeaa38c74054c70ad">pf::ui::ig::Savable</a>
 </li>
+<li>Selectable()
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1Selectable.html#a0032f9874d7e1d8bd5cea3d2712a7630">pf::ui::ig::Selectable</a>
+</li>
 <li>Separator()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1Separator.html#ab4972cef143461d3074a173a3639840b">pf::ui::ig::Separator</a>
 </li>
@@ -82,8 +85,11 @@ $(function() {
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html#a0956b538052dd8fe49b60fd8e2074f2b">pf::ui::ig::DragInput&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Input.html#a0cfb59de4d57d83ff6baea07fdb5b8d5">pf::ui::ig::Input&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1InputText.html#aea9f175820a6b4b5942120adfd64bc1f">pf::ui::ig::InputText</a>
+, <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#aa77ecb2819d999de6684e44c67d05ae7">pf::ui::ig::ListBox&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html#ac2316910dbf92cafb2dabc116674a311">pf::ui::ig::RadioGroup</a>
+, <a class="el" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a823ead90251781caca956b9c72742241">pf::ui::ig::Range2D</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#a051194256e4809d425dac7fddabe819a">pf::ui::ig::Savable</a>
+, <a class="el" href="classpf_1_1ui_1_1ig_1_1Selectable.html#a5edfb5ae715eee0d1dab2f08d0130122">pf::ui::ig::Selectable</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider2D.html#a50fa41fdc587b9708b885e3dd5eefb1c">pf::ui::ig::Slider2D&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider3D.html#a860292d7558c4f193a8005232eced85c">pf::ui::ig::Slider3D&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#ae52e89afb1e7bcfb1378bea366f18aef">pf::ui::ig::Slider&lt; T &gt;</a>
@@ -130,7 +136,8 @@ $(function() {
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a15edd6bdbb7f00ab46463cac159c34fc">pf::ui::ig::Renderable</a>
 </li>
 <li>setFilter()
-: <a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#a37963c50670c80d674e2548c7531903c">pf::ui::ig::ComboBox&lt; T &gt;</a>
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#a984132d029471da934fa45f796761b48">pf::ui::ig::ComboBox&lt; T &gt;</a>
+, <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a04f44df191a3935c55f52c0d877360cf">pf::ui::ig::ListBox&lt; T &gt;</a>
 </li>
 <li>setFilterEnabled()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1Memo.html#a5ab4a36e4f548426fa5bfea7a9d8c567">pf::ui::ig::Memo</a>
@@ -140,8 +147,14 @@ $(function() {
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a8b3eaacffd38c10c2a86f40ec7b229de">pf::ui::ig::ItemElement</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html#ab6bfee852daabedfc1e37e7ec1cd6219">pf::ui::ig::Window</a>
 </li>
+<li>setFontSize()
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#a7feb00a45de7cc7cce0eb10930f6e45b">pf::ui::ig::MarkdownText</a>
+</li>
 <li>setHovered()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#a6465fd6427653055a8ef5c52bdb4109c">pf::ui::ig::Hoverable</a>
+</li>
+<li>setImageLoader()
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#a8ba818c4eb3aaf42a27de389bfc2b06c">pf::ui::ig::MarkdownText</a>
 </li>
 <li>setIndex()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a5bfc2a877ed3cd9b1e0f84245a9a7589">pf::ui::ig::StackedLayout</a>
@@ -162,9 +175,13 @@ $(function() {
 <li>setLayoutForCell()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1GridLayout.html#ae44881c61e6e8b5a46385cd10308ecb3">pf::ui::ig::GridLayout</a>
 </li>
+<li>setMarkdownSrc()
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#a3b5ca57d0c13de42603803cad12ea968">pf::ui::ig::MarkdownText</a>
+</li>
 <li>setMax()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html#acd55ac8413355a9ebb6cced8018fe901">pf::ui::ig::DragInput&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1ProgressBar.html#a59cb0f075aaafeca86ff2dec1d313e9e">pf::ui::ig::ProgressBar&lt; T &gt;</a>
+, <a class="el" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a55ae9ecaab03fca3f697662d5c9c4122">pf::ui::ig::Range2D</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#ad47e4d3e242cc627442e0badf8ee7783">pf::ui::ig::Slider&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1VerticalSlider.html#aa261452aee40138d04aad9065b9cb22e">pf::ui::ig::VerticalSlider&lt; T &gt;</a>
 </li>
@@ -177,6 +194,7 @@ $(function() {
 <li>setMin()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1DragInput.html#ad3e68c5c319444799d91ff803b01daec">pf::ui::ig::DragInput&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1ProgressBar.html#addec829c82ecb816b4f452dcd5572580">pf::ui::ig::ProgressBar&lt; T &gt;</a>
+, <a class="el" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a6652c469b695892a7cc7cac99281cac5">pf::ui::ig::Range2D</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#a3a6f46cfe9945a20b405646fc7bbd80d">pf::ui::ig::Slider&lt; T &gt;</a>
 , <a class="el" href="classpf_1_1ui_1_1ig_1_1VerticalSlider.html#ac17932d66963089a6e8503fddfad1bd5">pf::ui::ig::VerticalSlider&lt; T &gt;</a>
 </li>
@@ -186,8 +204,14 @@ $(function() {
 <li>setMinSizeConstraint()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html#afddcb8d8a64bd00fa2105552cbc37ef2">pf::ui::ig::Window</a>
 </li>
+<li>setOnLinkClicked()
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#a0d51bb377eb8e109d9b288562b348522">pf::ui::ig::MarkdownText</a>
+</li>
 <li>setOverlay()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1FlameGraph.html#af6d8f2d4632ec73b0f0d368dee304704">pf::ui::ig::FlameGraph</a>
+</li>
+<li>setPassword()
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1InputText.html#abd72c239ad28119c47dcfef9e90c0e7a">pf::ui::ig::InputText</a>
 </li>
 <li>setPercentage()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1ProgressBar.html#a2c55fbdb184e7e4ddc00be1944ae6f9e">pf::ui::ig::ProgressBar&lt; T &gt;</a>
@@ -222,7 +246,7 @@ $(function() {
 </li>
 <li>setSelectedItem()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#af9eab77532d776779fc170277a88abcf">pf::ui::ig::ComboBox&lt; T &gt;</a>
-, <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">pf::ui::ig::ListBox&lt; T &gt;</a>
+, <a class="el" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">pf::ui::ig::ListBox&lt; T &gt;</a>
 </li>
 <li>setShownItemCount()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html#ae81485082820e683f68558b6b7f05ec3">pf::ui::ig::ComboBox&lt; T &gt;</a>
@@ -289,16 +313,16 @@ $(function() {
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html#abf05d4482b39a691a378b57ce69e5c65">pf::ui::ig::Slider&lt; T &gt;</a>
 </li>
 <li>Slider2D()
-: <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider2D.html#a1054034379735827a2109bb20bc34190">pf::ui::ig::Slider2D&lt; T &gt;</a>
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider2D.html#ada3a49249c939677ebfadd316fe4a3b1">pf::ui::ig::Slider2D&lt; T &gt;</a>
 </li>
 <li>Slider3D()
-: <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider3D.html#af62fc41deef3cc7f8e34e33940dc2194">pf::ui::ig::Slider3D&lt; T &gt;</a>
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider3D.html#aaf75a0f77c6c542655905ac79dd3d17f">pf::ui::ig::Slider3D&lt; T &gt;</a>
 </li>
 <li>SliderAngle()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1SliderAngle.html#a84ca5e04c5d466b33523f6fc72984325">pf::ui::ig::SliderAngle</a>
 </li>
 <li>StackedLayout()
-: <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#ab62febc2447b4e0daa7d9c754c3d08de">pf::ui::ig::StackedLayout</a>
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html#a1669d3f176b68c9b9bbac02d4545ab1e">pf::ui::ig::StackedLayout</a>
 </li>
 <li>Stairs()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1Stairs.html#a26b7d80da57c0e7dd66929fa30d8b11a">pf::ui::ig::plot_type::Stairs</a>
@@ -310,7 +334,7 @@ $(function() {
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1ProgressBar.html#a793b7bb8e6dcc165ebfed41c2760bdb4">pf::ui::ig::ProgressBar&lt; T &gt;</a>
 </li>
 <li>StretchLayout()
-: <a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#ad740c4d1373ff669ab51d7c91e2082a0">pf::ui::ig::StretchLayout</a>
+: <a class="el" href="classpf_1_1ui_1_1ig_1_1StretchLayout.html#aad0bf92ea2bbb5d17dd922b5fc723a3d">pf::ui::ig::StretchLayout</a>
 </li>
 <li>StringTable()
 : <a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html#a720d26299e0db97f0c7022824dba2a16">pf::ui::ig::StringTable&lt; ColumnCount &gt;</a>

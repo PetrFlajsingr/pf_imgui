@@ -104,10 +104,10 @@ Collaboration diagram for pf::ui::ig::FileDialog:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a30af69b42e73e8efbfbba691c9511310"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1FileDialog.html#a30af69b42e73e8efbfbba691c9511310">FileDialog</a> (const std::string &amp;elementName, const std::string &amp;label, const std::vector&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html">FileExtensionSettings</a> &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
-<tr class="separator:a30af69b42e73e8efbfbba691c9511310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0306ba86b6b0f35bfa12d74fd2579070"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1FileDialog.html#a0306ba86b6b0f35bfa12d74fd2579070">FileDialog</a> (const std::string &amp;elementName, const std::string &amp;label, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedDirs=1)</td></tr>
-<tr class="separator:a0306ba86b6b0f35bfa12d74fd2579070"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fb01cf6ed0a29d8205182d7c7692123"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1FileDialog.html#a5fb01cf6ed0a29d8205182d7c7692123">FileDialog</a> (const std::string &amp;elementName, const std::string &amp;label, const std::vector&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html">FileExtensionSettings</a> &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
+<tr class="separator:a5fb01cf6ed0a29d8205182d7c7692123"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a492280b442a86cc5e7d74edd4a8129b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1FileDialog.html#a492280b442a86cc5e7d74edd4a8129b6">FileDialog</a> (const std::string &amp;elementName, const std::string &amp;label, std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedDirs=1)</td></tr>
+<tr class="separator:a492280b442a86cc5e7d74edd4a8129b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab23df9cbe9f423d0f9440a6e221660c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1FileDialog.html#ab23df9cbe9f423d0f9440a6e221660c0">isDone</a> () const</td></tr>
 <tr class="separator:ab23df9cbe9f423d0f9440a6e221660c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
@@ -184,8 +184,8 @@ Protected Member Functions</h2></td></tr>
 <p>This dialog is shown on top of the other windows. It should be created via ImGuiInterface::openFileDialog(...) or ImGuiInterface::openDirDialog(...).</p>
 <p>Dialogs are invalidated when <a class="el" href="classpf_1_1ui_1_1ig_1_1FileDialog.html#ab23df9cbe9f423d0f9440a6e221660c0">isDone()</a> == true. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a30af69b42e73e8efbfbba691c9511310"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30af69b42e73e8efbfbba691c9511310">&#9670;&nbsp;</a></span>FileDialog() <span class="overload">[1/2]</span></h2>
+<a id="a5fb01cf6ed0a29d8205182d7c7692123"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb01cf6ed0a29d8205182d7c7692123">&#9670;&nbsp;</a></span>FileDialog() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -214,7 +214,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto&#160;</td>
+          <td class="paramtype">std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto&#160;</td>
           <td class="paramname"><em>onSelect</em>, </td>
         </tr>
         <tr>
@@ -289,8 +289,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0306ba86b6b0f35bfa12d74fd2579070"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0306ba86b6b0f35bfa12d74fd2579070">&#9670;&nbsp;</a></span>FileDialog() <span class="overload">[2/2]</span></h2>
+<a id="a492280b442a86cc5e7d74edd4a8129b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a492280b442a86cc5e7d74edd4a8129b6">&#9670;&nbsp;</a></span>FileDialog() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -313,7 +313,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto&#160;</td>
+          <td class="paramtype">std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto&#160;</td>
           <td class="paramname"><em>onSelect</em>, </td>
         </tr>
         <tr>

@@ -1,8 +1,9 @@
 <map id="src/pf_imgui/elements/Button.h" name="src/pf_imgui/elements/Button.h">
-<area shape="rect" id="node1" title="Button element." alt="" coords="176,5,343,47"/>
-<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="5,95,159,136"/>
-<area shape="rect" id="node5" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="183,95,336,136"/>
-<area shape="rect" id="node6" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="266,184,445,211"/>
-<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="9,184,224,211"/>
-<area shape="rect" id="node4" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="44,259,189,300"/>
+<area shape="rect" id="node1" title="Button element." alt="" coords="237,5,404,47"/>
+<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="67,95,220,136"/>
+<area shape="rect" id="node6" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="244,95,397,136"/>
+<area shape="rect" id="node7" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="327,184,506,211"/>
+<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="71,184,285,211"/>
+<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="5,259,172,300"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="196,259,341,300"/>
 </map>

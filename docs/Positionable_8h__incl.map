@@ -1,11 +1,12 @@
 <map id="src/pf_imgui/interface/Positionable.h" name="src/pf_imgui/interface/Positionable.h">
-<area shape="rect" id="node1" title="Interface for elements which can be positioned." alt="" coords="493,5,657,47"/>
-<area shape="rect" id="node2" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="437,95,581,121"/>
-<area shape="rect" id="node9" title=" " alt="" coords="606,95,677,121"/>
+<area shape="rect" id="node1" title="Interface for elements which can be positioned." alt="" coords="583,5,747,47"/>
+<area shape="rect" id="node2" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="528,95,672,121"/>
+<area shape="rect" id="node10" title=" " alt="" coords="697,95,767,121"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,177,91,203"/>
 <area shape="rect" id="node4" title=" " alt="" coords="115,177,309,203"/>
 <area shape="rect" id="node5" title=" " alt="" coords="333,169,504,211"/>
 <area shape="rect" id="node6" title=" " alt="" coords="528,177,672,203"/>
 <area shape="rect" id="node7" title=" " alt="" coords="697,177,821,203"/>
 <area shape="rect" id="node8" title=" " alt="" coords="845,177,905,203"/>
+<area shape="rect" id="node9" title=" " alt="" coords="929,177,996,203"/>
 </map>

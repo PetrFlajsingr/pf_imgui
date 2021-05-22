@@ -1,37 +1,37 @@
 <map id="src/pf_imgui/elements/RadioGroup.h" name="src/pf_imgui/elements/RadioGroup.h">
-<area shape="rect" id="node1" title="Radio group element." alt="" coords="2011,5,2178,47"/>
-<area shape="rect" id="node2" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="1987,95,2101,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="621,623,765,650"/>
-<area shape="rect" id="node12" title=" " alt="" coords="1961,623,2020,650"/>
-<area shape="rect" id="node27" title=" " alt="" coords="195,445,258,471"/>
-<area shape="rect" id="node28" href="$Labellable_8h.html" title="Class providing label support." alt="" coords="2180,527,2321,568"/>
-<area shape="rect" id="node34" href="$Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="2345,527,2487,568"/>
-<area shape="rect" id="node4" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1009,169,1151,211"/>
-<area shape="rect" id="node30" href="$ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="1253,437,1401,479"/>
-<area shape="rect" id="node5" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="1425,445,1513,471"/>
-<area shape="rect" id="node13" href="$Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="1087,445,1185,471"/>
-<area shape="rect" id="node20" href="$Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="473,445,575,471"/>
-<area shape="rect" id="node21" href="$Tooltip_8h.html" title="Tooltip element." alt="" coords="814,259,981,300"/>
-<area shape="rect" id="node23" title=" " alt="" coords="985,445,1063,471"/>
-<area shape="rect" id="node6" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="1794,534,1902,561"/>
-<area shape="rect" id="node7" title=" " alt="" coords="1794,705,1953,732"/>
-<area shape="rect" id="node8" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="2044,623,2183,650"/>
-<area shape="rect" id="node9" title=" " alt="" coords="2033,705,2100,732"/>
-<area shape="rect" id="node10" title=" " alt="" coords="2125,705,2195,732"/>
-<area shape="rect" id="node11" title=" " alt="" coords="1609,705,1701,732"/>
-<area shape="rect" id="node14" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="1015,534,1159,561"/>
-<area shape="rect" id="node15" title=" " alt="" coords="1023,623,1108,650"/>
-<area shape="rect" id="node16" title=" " alt="" coords="1132,623,1327,650"/>
-<area shape="rect" id="node17" title=" " alt="" coords="1351,616,1521,657"/>
-<area shape="rect" id="node18" title=" " alt="" coords="790,623,914,650"/>
-<area shape="rect" id="node19" title=" " alt="" coords="938,623,998,650"/>
-<area shape="rect" id="node22" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="820,348,975,389"/>
-<area shape="rect" id="node24" href="$exceptions_8h.html" title="Exceptions for pf_imgui." alt="" coords="282,445,449,471"/>
-<area shape="rect" id="node26" title=" " alt="" coords="599,445,809,471"/>
-<area shape="rect" id="node25" title=" " alt="" coords="278,527,453,568"/>
-<area shape="rect" id="node29" title=" " alt="" coords="2207,623,2313,650"/>
-<area shape="rect" id="node31" title=" " alt="" coords="1689,534,1769,561"/>
-<area shape="rect" id="node32" title=" " alt="" coords="1437,534,1523,561"/>
-<area shape="rect" id="node33" title=" " alt="" coords="1548,534,1615,561"/>
-<area shape="rect" id="node35" title=" " alt="" coords="2356,623,2476,650"/>
+<area shape="rect" id="node1" title="Radio group element." alt="" coords="1987,5,2154,47"/>
+<area shape="rect" id="node2" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="1785,95,1900,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="1042,623,1186,650"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1864,623,1922,650"/>
+<area shape="rect" id="node28" title=" " alt="" coords="1944,445,2007,471"/>
+<area shape="rect" id="node29" href="$Labellable_8h.html" title="Class providing label support." alt="" coords="2076,527,2217,568"/>
+<area shape="rect" id="node34" href="$Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="2241,527,2382,568"/>
+<area shape="rect" id="node4" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1641,169,1782,211"/>
+<area shape="rect" id="node31" href="$ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="278,437,426,479"/>
+<area shape="rect" id="node5" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="1781,445,1869,471"/>
+<area shape="rect" id="node13" href="$Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="776,445,874,471"/>
+<area shape="rect" id="node21" href="$Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="600,445,701,471"/>
+<area shape="rect" id="node22" href="$Tooltip_8h.html" title="Tooltip element." alt="" coords="1387,259,1554,300"/>
+<area shape="rect" id="node24" title=" " alt="" coords="1629,445,1706,471"/>
+<area shape="rect" id="node6" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="1736,534,1844,561"/>
+<area shape="rect" id="node7" title=" " alt="" coords="1782,705,1940,732"/>
+<area shape="rect" id="node8" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="2077,623,2216,650"/>
+<area shape="rect" id="node9" title=" " alt="" coords="2160,705,2226,732"/>
+<area shape="rect" id="node10" title=" " alt="" coords="2064,705,2135,732"/>
+<area shape="rect" id="node11" title=" " alt="" coords="831,705,923,732"/>
+<area shape="rect" id="node14" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="528,534,672,561"/>
+<area shape="rect" id="node15" title=" " alt="" coords="37,623,122,650"/>
+<area shape="rect" id="node16" title=" " alt="" coords="146,623,341,650"/>
+<area shape="rect" id="node17" title=" " alt="" coords="365,616,536,657"/>
+<area shape="rect" id="node18" title=" " alt="" coords="735,623,859,650"/>
+<area shape="rect" id="node19" title=" " alt="" coords="651,623,711,650"/>
+<area shape="rect" id="node20" title=" " alt="" coords="560,623,626,650"/>
+<area shape="rect" id="node23" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1393,348,1548,389"/>
+<area shape="rect" id="node25" href="$exceptions_8h.html" title="Exceptions for pf_imgui." alt="" coords="1387,445,1554,471"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1101,445,1312,471"/>
+<area shape="rect" id="node26" title=" " alt="" coords="1384,527,1559,568"/>
+<area shape="rect" id="node30" title=" " alt="" coords="1947,623,2052,650"/>
+<area shape="rect" id="node32" title=" " alt="" coords="312,534,392,561"/>
+<area shape="rect" id="node33" title=" " alt="" coords="416,534,503,561"/>
+<area shape="rect" id="node35" title=" " alt="" coords="2252,623,2372,650"/>
 </map>

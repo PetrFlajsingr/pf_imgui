@@ -2,5 +2,6 @@
 <area shape="rect" id="node1" title="Dialog for building windows." alt="" coords="129,5,282,47"/>
 <area shape="rect" id="node2" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,95,184,121"/>
 <area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="209,95,423,121"/>
-<area shape="rect" id="node4" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="243,169,389,211"/>
+<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="142,169,309,211"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="333,169,478,211"/>
 </map>

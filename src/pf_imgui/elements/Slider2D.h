@@ -35,12 +35,12 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
  */
 template<OneOf<int, float> T>
 class PF_IMGUI_EXPORT Slider2D : public ItemElement,
-                 public Labellable,
-                 public ValueObservable<details::Slider2DStorageType<T>>,
-                 public Savable,
-                 public DragSource<details::Slider2DStorageType<T>>,
-                 public DropTarget<details::Slider2DStorageType<T>>,
-                 public Resizable {
+                                 public Labellable,
+                                 public ValueObservable<details::Slider2DStorageType<T>>,
+                                 public Savable,
+                                 public DragSource<details::Slider2DStorageType<T>>,
+                                 public DropTarget<details::Slider2DStorageType<T>>,
+                                 public Resizable {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -55,8 +55,8 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
   Slider2D(const std::string &elementName, const std::string &label, StorageType minMaxX, StorageType minMaxY,
            StorageType value = StorageType{}, Size size = Size::Auto(), Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value),
-        Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(size), extremesX(minMaxX),
-        extremesY(minMaxY) {}
+        Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(size),
+        extremesX(minMaxX), extremesY(minMaxY) {}
 
  protected:
   void renderImpl() override {

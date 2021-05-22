@@ -82,105 +82,165 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>details {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">   28</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>(T first) : first(first), second(toString(first)) {}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  T first;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  std::string second;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage_3_01std_1_1string_01_4.html">   38</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>&lt;std::string&gt; {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>(<span class="keyword">const</span> std::string &amp;first) : first(first) {}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>(<span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> &amp;other) : first(other.first) {}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> &amp;operator=(<span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> &amp;other) {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    first = other.first;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  ~<a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>() {}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::string first;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::string second;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  };</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}<span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html">   59</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html">ListBox</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt; {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a8d8ddec2e1ba216247adf03557cff5a1">   69</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a8d8ddec2e1ba216247adf03557cff5a1">ListBox</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;          std::ranges::range <span class="keyword">auto</span> &amp;&amp;newItems = std::vector&lt;T&gt;{}, <span class="keywordtype">int</span> selectedIdx = 0,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;          <span class="keywordtype">int</span> heightInItems = -1) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(std::convertible_to&lt;std::ranges::range_value_t&lt;decltype(newItems)&gt;, T&gt;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                               &amp;&amp;std::is_default_constructible_v&lt;T&gt; &amp;&amp;std::copy_constructible&lt;T&gt;)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), ValueObservable&lt;T&gt;(), currentItemIdx(selectedIdx),</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        height(heightInItems) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::ranges::copy(newItems, std::back_inserter(items));</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ab6dae764fdb1965ebdc5713fee371a8c">   82</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ab6dae764fdb1965ebdc5713fee371a8c">addItem</a>(<span class="keyword">const</span> T &amp;item) { items.emplace_back(item); }</div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a7c14d2352a6d72f590662ddd4ca95956">   87</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a7c14d2352a6d72f590662ddd4ca95956">addItems</a>(std::ranges::range <span class="keyword">auto</span> &amp;&amp;data) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      std::convertible_to&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, T&gt;) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  }</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ae1ddf1325c1ccf880239668405ab9998">   95</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ae1ddf1325c1ccf880239668405ab9998">setItems</a>(std::ranges::range <span class="keyword">auto</span> &amp;&amp;data) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      std::convertible_to&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, T&gt;) {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    items.clear();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    currentItemIdx = 0;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#aec8ce34524d034adc903c14bb92e9224">  106</a></span>&#160;  [[nodiscard]] <span class="keyword">const</span> T &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#aec8ce34524d034adc903c14bb92e9224">getSelectedItem</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> items[currentItemIdx].first; }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">  112</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">setSelectedItem</a>(<span class="keyword">const</span> T &amp;itemToSelect) {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itemAsString = toString(itemToSelect);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    setSelectedItem(itemAsString);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  }</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">  121</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">setSelectedItem</a>(<span class="keyword">const</span> std::string &amp;itemAsString) {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter =</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            std::ranges::find_if(items, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item.second == itemAsString; });</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        iter != items.end()) {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> index = std::distance(items.begin(), iter);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      currentItemIdx = index;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#af448c1ffee9bf7435f09dbf7a79f58cb">  131</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#af448c1ffee9bf7435f09dbf7a79f58cb">renderImpl</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> cStrItems =</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        items | ranges::views::transform([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;str) { <span class="keywordflow">return</span> str.second.c_str(); }) | ranges::to_vector;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">if</span> (ImGui::ListBox(getLabel().c_str(), &amp;currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      ValueObservable&lt;T&gt;::setValueInner(items[currentItemIdx].first);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      ValueObservable&lt;T&gt;::notifyValueChanged();</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  std::vector&lt;details::ListBoxItemStorage&lt;T&gt;&gt; items;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keywordtype">int</span> currentItemIdx = 0;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <span class="keywordtype">int</span> height = -1;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;};</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_LISTBOX_H</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;range/v3/view/addressof.hpp&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>details {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">   29</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>(T first) : first(first), second(toString(first)) {}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  T first;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  std::string second;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage_3_01std_1_1string_01_4.html">   39</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>&lt;std::string&gt; {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>(<span class="keyword">const</span> std::string &amp;first) : first(first) {}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>(<span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> &amp;other) : first(other.first) {}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> &amp;operator=(<span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a> &amp;other) {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    first = other.first;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  ~<a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">ListBoxItemStorage</a>() {}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::string first;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::string second;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  };</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}<span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html">   60</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html">ListBox</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> ValueObservable&lt;T&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a83e11ee97340f403c25bf865dce577db">   70</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a83e11ee97340f403c25bf865dce577db">ListBox</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;          std::ranges::range <span class="keyword">auto</span> &amp;&amp;newItems = std::vector&lt;T&gt;{}, std::optional&lt;int&gt; selectedIdx = std::nullopt,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;          <span class="keywordtype">int</span> heightInItems = -1,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;          <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent =</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;          Persistent::No) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(std::convertible_to&lt;std::ranges::range_value_t&lt;decltype(newItems)&gt;, T&gt;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      &amp;&amp;std::is_default_constructible_v&lt;T&gt; &amp;&amp;std::copy_constructible&lt;T&gt;)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>(label), ValueObservable&lt;T&gt;(), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent),</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        selectedItemIndex(selectedIdx), height(heightInItems) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    std::ranges::copy(newItems, std::back_inserter(items));</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    refilterItems();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ab6dae764fdb1965ebdc5713fee371a8c">   86</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ab6dae764fdb1965ebdc5713fee371a8c">addItem</a>(<span class="keyword">const</span> T &amp;item) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    items.emplace_back(item);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    refilterItems();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a7c14d2352a6d72f590662ddd4ca95956">   94</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a7c14d2352a6d72f590662ddd4ca95956">addItems</a>(std::ranges::range <span class="keyword">auto</span> &amp;&amp;data) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      std::convertible_to&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, T&gt;) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    refilterItems();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ae1ddf1325c1ccf880239668405ab9998">  103</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ae1ddf1325c1ccf880239668405ab9998">setItems</a>(std::ranges::range <span class="keyword">auto</span> &amp;&amp;data) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      std::convertible_to&lt;std::ranges::range_value_t&lt;decltype(data)&gt;, T&gt;) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    items.clear();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    selectedItemIndex = std::nullopt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::ranges::copy(data, std::back_inserter(items));</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    refilterItems();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a3c7efa138469b70081b008e539ffb7e4">  115</a></span>&#160;  [[nodiscard]] std::optional&lt;T&gt; <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a3c7efa138469b70081b008e539ffb7e4">getSelectedItem</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">if</span> (selectedItemIndex.has_value()) { <span class="keywordflow">return</span> filteredItems[*selectedItemIndex]-&gt;first; }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">  124</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">setSelectedItem</a>(<span class="keyword">const</span> T &amp;itemToSelect) {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itemAsString = toString(itemToSelect);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    setSelectedItem(itemAsString);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">  133</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">setSelectedItem</a>(<span class="keyword">const</span> std::string &amp;itemAsString) {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter = std::ranges::find_if(</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;          filteredItems, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item-&gt;second == itemAsString; });</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        iter != filteredItems.end()) {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> index = std::distance(filteredItems.begin(), iter);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;      selectedItemIndex = index;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a04f44df191a3935c55f52c0d877360cf">  146</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a04f44df191a3935c55f52c0d877360cf">setFilter</a>(std::predicate&lt;const T &amp;&gt; <span class="keyword">auto</span> filterFnc) {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    filter = filterFnc;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    refilterItems();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  }</div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ad4cd806f8697f0f4dda40b2db02789fb">  153</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#ad4cd806f8697f0f4dda40b2db02789fb">clearFilter</a>() {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    filter = [](<span class="keyword">auto</span>) { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    refilterItems();</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#af448c1ffee9bf7435f09dbf7a79f58cb">  159</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#af448c1ffee9bf7435f09dbf7a79f58cb">renderImpl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> cStrItems = filteredItems | ranges::views::transform([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;str) { <span class="keywordflow">return</span> str-&gt;second.c_str(); })</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        | ranges::to_vector;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">auto</span> currentItemIdx = selectedItemIndex.template value_or(-1);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">if</span> (ImGui::ListBox(getLabel().c_str(), &amp;currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      ValueObservable&lt;T&gt;::setValueInner(filteredItems[currentItemIdx]-&gt;first);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      ValueObservable&lt;T&gt;::notifyValueChanged();</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      selectedItemIndex = currentItemIdx;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  }</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a711bc52c82436d13635acf8fd36cc97b">  170</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#a711bc52c82436d13635acf8fd36cc97b">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">if</span> (src.contains(<span class="stringliteral">&quot;selected&quot;</span>)) {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> idx = *src[<span class="stringliteral">&quot;selected&quot;</span>].value&lt;<span class="keywordtype">int</span>&gt;();</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(idx) &lt; items.size()) {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        selectedItemIndex = idx;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(items[idx].first);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ListBox.html#aa77ecb2819d999de6684e44c67d05ae7">  180</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1ListBox.html#aa77ecb2819d999de6684e44c67d05ae7">serialize_impl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keyword">auto</span> result = toml::table{};</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> selectedItem = *filteredItems[*selectedItemIndex];</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      <span class="keyword">auto</span> itemsWithIndices = ranges::views::enumerate(items) | ranges::to_vector;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> indexInAllItems =</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;          <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(std::ranges::find_if(itemsWithIndices, [selectedItem](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;itemInfo) {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            <span class="keywordflow">return</span> itemInfo.second.first == selectedItem.first;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;          })-&gt;first);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;      result.insert_or_assign(<span class="stringliteral">&quot;selected&quot;</span>, indexInAllItems);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  }</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="keywordtype">void</span> refilterItems() {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    filteredItems = items | ranges::views::filter([<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> filter(item.first); })</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        | ranges::views::addressof | ranges::to_vector;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    selectedItemIndex = std::nullopt;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  std::vector&lt;details::ListBoxItemStorage&lt;T&gt;&gt; items;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  std::vector&lt;details::ListBoxItemStorage&lt;T&gt; *&gt; filteredItems;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  std::optional&lt;int&gt; selectedItemIndex = std::nullopt;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordtype">int</span> height = -1;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  std::function&lt;bool(<span class="keyword">const</span> T &amp;)&gt; filter = [](<span class="keyword">auto</span>) { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;};</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_LISTBOX_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a8d8ddec2e1ba216247adf03557cff5a1"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a8d8ddec2e1ba216247adf03557cff5a1">pf::ui::ig::ListBox::ListBox</a></div><div class="ttdeci">ListBox(const std::string &amp;elementName, const std::string &amp;label, std::ranges::range auto &amp;&amp;newItems=std::vector&lt; T &gt;{}, int selectedIdx=0, int heightInItems=-1) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:69</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_ad4cd806f8697f0f4dda40b2db02789fb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#ad4cd806f8697f0f4dda40b2db02789fb">pf::ui::ig::ListBox::clearFilter</a></div><div class="ttdeci">void clearFilter()</div><div class="ttdef"><b>Definition:</b> ListBox.h:153</div></div>
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a711bc52c82436d13635acf8fd36cc97b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a711bc52c82436d13635acf8fd36cc97b">pf::ui::ig::ListBox::unserialize_impl</a></div><div class="ttdeci">void unserialize_impl(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> ListBox.h:170</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a3c7efa138469b70081b008e539ffb7e4"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a3c7efa138469b70081b008e539ffb7e4">pf::ui::ig::ListBox::getSelectedItem</a></div><div class="ttdeci">std::optional&lt; T &gt; getSelectedItem() const</div><div class="ttdef"><b>Definition:</b> ListBox.h:115</div></div>
 <div class="ttc" id="aValueObservable_8h_html"><div class="ttname"><a href="ValueObservable_8h.html">ValueObservable.h</a></div><div class="ttdoc">Interface for providing observable support to elements.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_ab6dae764fdb1965ebdc5713fee371a8c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#ab6dae764fdb1965ebdc5713fee371a8c">pf::ui::ig::ListBox::addItem</a></div><div class="ttdeci">void addItem(const T &amp;item)</div><div class="ttdef"><b>Definition:</b> ListBox.h:82</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_ae1ddf1325c1ccf880239668405ab9998"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#ae1ddf1325c1ccf880239668405ab9998">pf::ui::ig::ListBox::setItems</a></div><div class="ttdeci">void setItems(std::ranges::range auto &amp;&amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:95</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a680d84539639ef5b0a6eb6733d0ef27c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">pf::ui::ig::ListBox::setSelectedItem</a></div><div class="ttdeci">void setSelectedItem(const T &amp;itemToSelect)</div><div class="ttdef"><b>Definition:</b> ListBox.h:112</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a7c14d2352a6d72f590662ddd4ca95956"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a7c14d2352a6d72f590662ddd4ca95956">pf::ui::ig::ListBox::addItems</a></div><div class="ttdeci">void addItems(std::ranges::range auto &amp;&amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:87</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a6c72c5d5f59814b090f9016e0d4d5be1"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">pf::ui::ig::ListBox::setSelectedItem</a></div><div class="ttdeci">void setSelectedItem(const std::string &amp;itemAsString)</div><div class="ttdef"><b>Definition:</b> ListBox.h:121</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_ab6dae764fdb1965ebdc5713fee371a8c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#ab6dae764fdb1965ebdc5713fee371a8c">pf::ui::ig::ListBox::addItem</a></div><div class="ttdeci">void addItem(const T &amp;item)</div><div class="ttdef"><b>Definition:</b> ListBox.h:86</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a04f44df191a3935c55f52c0d877360cf"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a04f44df191a3935c55f52c0d877360cf">pf::ui::ig::ListBox::setFilter</a></div><div class="ttdeci">void setFilter(std::predicate&lt; const T &amp; &gt; auto filterFnc)</div><div class="ttdef"><b>Definition:</b> ListBox.h:146</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_ae1ddf1325c1ccf880239668405ab9998"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#ae1ddf1325c1ccf880239668405ab9998">pf::ui::ig::ListBox::setItems</a></div><div class="ttdeci">void setItems(std::ranges::range auto &amp;&amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:103</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a680d84539639ef5b0a6eb6733d0ef27c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a680d84539639ef5b0a6eb6733d0ef27c">pf::ui::ig::ListBox::setSelectedItem</a></div><div class="ttdeci">void setSelectedItem(const T &amp;itemToSelect)</div><div class="ttdef"><b>Definition:</b> ListBox.h:124</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a7c14d2352a6d72f590662ddd4ca95956"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a7c14d2352a6d72f590662ddd4ca95956">pf::ui::ig::ListBox::addItems</a></div><div class="ttdeci">void addItems(std::ranges::range auto &amp;&amp;data) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:94</div></div>
+<div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:52</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a6c72c5d5f59814b090f9016e0d4d5be1"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a6c72c5d5f59814b090f9016e0d4d5be1">pf::ui::ig::ListBox::setSelectedItem</a></div><div class="ttdeci">void setSelectedItem(const std::string &amp;itemAsString)</div><div class="ttdef"><b>Definition:</b> ListBox.h:133</div></div>
 <div class="ttc" id="aValueObservable_8h_html_a5699ba5fecff67701a5e29a0938fb046"><div class="ttname"><a href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">pf::ui::ig::requires</a></div><div class="ttdeci">requires(std::equality_comparable&lt; T &gt; &amp;&amp;std::is_assignable_v&lt; T &amp;, T &gt; &amp;&amp;std::copy_constructible&lt; T &gt;) class PF_IMGUI_EXPORT ValueObservable</div><div class="ttdoc">Interface for elements with observable values.</div><div class="ttdef"><b>Definition:</b> ValueObservable.h:34</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_af448c1ffee9bf7435f09dbf7a79f58cb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#af448c1ffee9bf7435f09dbf7a79f58cb">pf::ui::ig::ListBox::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> ListBox.h:131</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_af448c1ffee9bf7435f09dbf7a79f58cb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#af448c1ffee9bf7435f09dbf7a79f58cb">pf::ui::ig::ListBox::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> ListBox.h:159</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:23</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a></div><div class="ttdoc">Container for strings shown as list box and selectable by user.</div><div class="ttdef"><b>Definition:</b> ListBox.h:59</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_aec8ce34524d034adc903c14bb92e9224"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#aec8ce34524d034adc903c14bb92e9224">pf::ui::ig::ListBox::getSelectedItem</a></div><div class="ttdeci">const T &amp; getSelectedItem() const</div><div class="ttdef"><b>Definition:</b> ListBox.h:106</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html">pf::ui::ig::ListBox</a></div><div class="ttdoc">Container for strings shown as list box and selectable by user.</div><div class="ttdef"><b>Definition:</b> ListBox.h:60</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_aa77ecb2819d999de6684e44c67d05ae7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#aa77ecb2819d999de6684e44c67d05ae7">pf::ui::ig::ListBox::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> ListBox.h:180</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ListBox_html_a83e11ee97340f403c25bf865dce577db"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ListBox.html#a83e11ee97340f403c25bf865dce577db">pf::ui::ig::ListBox::ListBox</a></div><div class="ttdeci">ListBox(const std::string &amp;elementName, const std::string &amp;label, std::ranges::range auto &amp;&amp;newItems=std::vector&lt; T &gt;{}, std::optional&lt; int &gt; selectedIdx=std::nullopt, int heightInItems=-1, Persistent persistent=Persistent::No) requires(std</div><div class="ttdef"><b>Definition:</b> ListBox.h:70</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">pf::ui::ig::details::ListBoxItemStorage</a></div><div class="ttdoc">Storage for list box items.</div><div class="ttdef"><b>Definition:</b> ListBox.h:28</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1details_1_1ListBoxItemStorage.html">pf::ui::ig::details::ListBoxItemStorage</a></div><div class="ttdoc">Storage for list box items.</div><div class="ttdef"><b>Definition:</b> ListBox.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:23</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

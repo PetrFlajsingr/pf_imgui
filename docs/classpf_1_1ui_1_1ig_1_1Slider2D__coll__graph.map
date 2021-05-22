@@ -1,5 +1,5 @@
 <map id="pf::ui::ig::Slider2D&lt; T &gt;" name="pf::ui::ig::Slider2D&lt; T &gt;">
-<area shape="rect" id="node1" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="679,195,853,221"/>
+<area shape="rect" id="node1" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="679,224,853,251"/>
 <area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="435,56,602,83"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
@@ -12,4 +12,5 @@
 <area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="215,282,353,323"/>
 <area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title=" " alt="" coords="407,355,631,411"/>
 <area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html" title="Base class for templated DropTarget&lt;T&gt;" alt="" coords="217,362,351,403"/>
+<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="446,435,591,461"/>
 </map>

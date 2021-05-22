@@ -1,10 +1,11 @@
 <map id="src/pf_imgui/interface/Positionable.h" name="src/pf_imgui/interface/Positionable.h">
-<area shape="rect" id="node1" title="Interface for elements which can be positioned." alt="" coords="215,5,379,47"/>
-<area shape="rect" id="node2" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="5,95,159,136"/>
-<area shape="rect" id="node6" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="183,95,410,136"/>
-<area shape="rect" id="node7" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="290,184,445,225"/>
-<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="83,363,262,389"/>
-<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="51,191,265,218"/>
-<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="85,273,231,315"/>
-<area shape="rect" id="node8" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="273,273,427,315"/>
+<area shape="rect" id="node1" title="Interface for elements which can be positioned." alt="" coords="265,5,429,47"/>
+<area shape="rect" id="node2" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="55,95,209,136"/>
+<area shape="rect" id="node7" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="233,95,460,136"/>
+<area shape="rect" id="node8" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="403,184,557,225"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="152,363,331,389"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="42,191,257,218"/>
+<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="42,273,209,315"/>
+<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="233,273,378,315"/>
+<area shape="rect" id="node9" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="403,273,557,315"/>
 </map>

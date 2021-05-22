@@ -56,14 +56,14 @@ if (ENABLE_STACKTRACE)
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.0.6
+            GIT_TAG v1.0.7
             OPTIONS "ENABLE_STACKTRACE ON"
     )
 else ()
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.0.6
+            GIT_TAG v1.0.7
     )
 endif ()
 
@@ -114,6 +114,7 @@ set(SOURCES
         src/pf_imgui/elements/Tree.cpp
         src/pf_imgui/elements/Separator.cpp
         src/pf_imgui/elements/Selectable.cpp
+        src/pf_imgui/elements/Range2D.cpp
         src/pf_imgui/dialogs/Window.cpp
         src/pf_imgui/elements/Tooltip.cpp
         src/pf_imgui/dialogs/FileDialog.cpp
@@ -196,6 +197,7 @@ set(INCLUDES
         src/pf_imgui/elements/FlameGraph.h
         src/pf_imgui/elements/plots.h
         src/pf_imgui/elements/Separator.h
+        src/pf_imgui/elements/Range2D.h
         src/pf_imgui/elements/plots/PieChart.h
         src/pf_imgui/elements/plots/types/PlotDataBase.h
         src/pf_imgui/elements/plots/types/Bar.h

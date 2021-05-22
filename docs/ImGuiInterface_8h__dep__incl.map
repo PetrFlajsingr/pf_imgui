@@ -1,4 +1,5 @@
 <map id="src/pf_imgui/ImGuiInterface.h" name="src/pf_imgui/ImGuiInterface.h">
-<area shape="rect" id="node1" title="Main class of the library." alt="" coords="5,5,220,32"/>
-<area shape="rect" id="node2" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="40,80,185,121"/>
+<area shape="rect" id="node1" title="Main class of the library." alt="" coords="71,5,285,32"/>
+<area shape="rect" id="node2" href="$MarkdownText_8h_source.html" title=" " alt="" coords="5,80,172,121"/>
+<area shape="rect" id="node3" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="196,80,341,121"/>
 </map>

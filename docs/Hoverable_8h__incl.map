@@ -1,10 +1,11 @@
 <map id="src/pf_imgui/interface/Hoverable.h" name="src/pf_imgui/interface/Hoverable.h">
-<area shape="rect" id="node1" title="Interface for elements which can be hovered." alt="" coords="563,5,727,47"/>
-<area shape="rect" id="node2" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="519,95,663,121"/>
-<area shape="rect" id="node6" title=" " alt="" coords="761,177,905,203"/>
+<area shape="rect" id="node1" title="Interface for elements which can be hovered." alt="" coords="621,5,785,47"/>
+<area shape="rect" id="node2" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="576,95,720,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="852,177,996,203"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,177,91,203"/>
 <area shape="rect" id="node4" title=" " alt="" coords="115,177,309,203"/>
 <area shape="rect" id="node5" title=" " alt="" coords="333,169,504,211"/>
 <area shape="rect" id="node7" title=" " alt="" coords="529,177,653,203"/>
 <area shape="rect" id="node8" title=" " alt="" coords="677,177,737,203"/>
+<area shape="rect" id="node9" title=" " alt="" coords="761,177,828,203"/>
 </map>

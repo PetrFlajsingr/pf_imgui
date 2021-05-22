@@ -1,40 +1,41 @@
 <map id="src/pf_imgui/layouts/layouts.h" name="src/pf_imgui/layouts/layouts.h">
-<area shape="rect" id="node1" title="Convenience include for all layouts." alt="" coords="1016,5,1171,47"/>
-<area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="1026,95,1161,121"/>
-<area shape="rect" id="node34" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="1689,95,1792,121"/>
-<area shape="rect" id="node35" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="2093,95,2198,121"/>
-<area shape="rect" id="node36" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="640,95,769,121"/>
-<area shape="rect" id="node38" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="492,95,616,121"/>
-<area shape="rect" id="node3" href="$ResizableLayout_8h.html" title="Base class for layouts which provide resizing." alt="" coords="483,177,624,203"/>
-<area shape="rect" id="node4" title=" " alt="" coords="703,519,847,546"/>
-<area shape="rect" id="node12" title=" " alt="" coords="71,519,130,546"/>
-<area shape="rect" id="node24" title=" " alt="" coords="913,355,976,382"/>
-<area shape="rect" id="node25" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="1555,259,1782,300"/>
-<area shape="rect" id="node27" href="$Positionable_8h.html" title="Interface for elements which can be positioned." alt="" coords="1687,348,1828,389"/>
-<area shape="rect" id="node28" title=" " alt="" coords="1302,266,1379,293"/>
-<area shape="rect" id="node29" title=" " alt="" coords="1284,177,1469,203"/>
-<area shape="rect" id="node30" href="$exceptions_8h.html" title="Exceptions for pf_imgui." alt="" coords="1857,266,2024,293"/>
-<area shape="rect" id="node32" title=" " alt="" coords="1493,177,1702,203"/>
-<area shape="rect" id="node33" title=" " alt="" coords="1067,266,1278,293"/>
-<area shape="rect" id="node5" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="268,348,410,389"/>
-<area shape="rect" id="node13" href="$Layout_8h.html" title="Base class for layouts." alt="" coords="483,259,624,300"/>
-<area shape="rect" id="node23" href="$Resizable_8h.html" title="Interface for elements which can be resized." alt="" coords="725,348,889,389"/>
-<area shape="rect" id="node6" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="290,437,398,464"/>
-<area shape="rect" id="node7" title=" " alt="" coords="1625,601,1784,628"/>
-<area shape="rect" id="node8" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="275,519,414,546"/>
-<area shape="rect" id="node9" title=" " alt="" coords="259,601,326,628"/>
-<area shape="rect" id="node10" title=" " alt="" coords="964,601,1034,628"/>
-<area shape="rect" id="node11" title=" " alt="" coords="350,601,442,628"/>
-<area shape="rect" id="node14" href="$Collapsible_8h.html" title="Interface for elements which can be collapsed." alt="" coords="485,348,649,389"/>
-<area shape="rect" id="node15" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="1418,437,1562,464"/>
-<area shape="rect" id="node21" href="$Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="422,437,509,464"/>
-<area shape="rect" id="node16" title=" " alt="" coords="1684,519,1770,546"/>
-<area shape="rect" id="node17" title=" " alt="" coords="1186,519,1380,546"/>
-<area shape="rect" id="node18" title=" " alt="" coords="1404,512,1575,553"/>
-<area shape="rect" id="node19" title=" " alt="" coords="1037,519,1161,546"/>
-<area shape="rect" id="node20" title=" " alt="" coords="1600,519,1660,546"/>
-<area shape="rect" id="node22" title=" " alt="" coords="488,519,608,546"/>
-<area shape="rect" id="node26" title=" " alt="" coords="2052,355,2132,382"/>
-<area shape="rect" id="node31" title=" " alt="" coords="1853,348,2028,389"/>
-<area shape="rect" id="node37" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="800,169,955,211"/>
+<area shape="rect" id="node1" title="Convenience include for all layouts." alt="" coords="1186,5,1341,47"/>
+<area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="714,95,848,121"/>
+<area shape="rect" id="node35" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="1212,95,1315,121"/>
+<area shape="rect" id="node36" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="1339,95,1444,121"/>
+<area shape="rect" id="node37" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="1468,95,1598,121"/>
+<area shape="rect" id="node39" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="384,95,508,121"/>
+<area shape="rect" id="node3" href="$ResizableLayout_8h.html" title="Base class for layouts which provide resizing." alt="" coords="1242,177,1384,203"/>
+<area shape="rect" id="node4" title=" " alt="" coords="1458,519,1602,546"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1229,519,1288,546"/>
+<area shape="rect" id="node25" title=" " alt="" coords="1914,355,1976,382"/>
+<area shape="rect" id="node26" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="202,259,429,300"/>
+<area shape="rect" id="node28" href="$Positionable_8h.html" title="Interface for elements which can be positioned." alt="" coords="86,348,228,389"/>
+<area shape="rect" id="node29" title=" " alt="" coords="554,266,632,293"/>
+<area shape="rect" id="node30" title=" " alt="" coords="779,177,964,203"/>
+<area shape="rect" id="node31" href="$exceptions_8h.html" title="Exceptions for pf_imgui." alt="" coords="1614,266,1780,293"/>
+<area shape="rect" id="node33" title=" " alt="" coords="546,177,755,203"/>
+<area shape="rect" id="node34" title=" " alt="" coords="858,266,1069,293"/>
+<area shape="rect" id="node5" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="1190,348,1332,389"/>
+<area shape="rect" id="node13" href="$Layout_8h.html" title="Base class for layouts." alt="" coords="1093,259,1234,300"/>
+<area shape="rect" id="node24" href="$Resizable_8h.html" title="Interface for elements which can be resized." alt="" coords="502,348,666,389"/>
+<area shape="rect" id="node6" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="1207,437,1315,464"/>
+<area shape="rect" id="node7" title=" " alt="" coords="1674,601,1832,628"/>
+<area shape="rect" id="node8" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="922,519,1061,546"/>
+<area shape="rect" id="node9" title=" " alt="" coords="906,601,973,628"/>
+<area shape="rect" id="node10" title=" " alt="" coords="87,601,158,628"/>
+<area shape="rect" id="node11" title=" " alt="" coords="998,601,1090,628"/>
+<area shape="rect" id="node14" href="$Collapsible_8h.html" title="Interface for elements which can be collapsed." alt="" coords="764,348,928,389"/>
+<area shape="rect" id="node15" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="392,437,536,464"/>
+<area shape="rect" id="node22" href="$Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="892,437,979,464"/>
+<area shape="rect" id="node16" title=" " alt="" coords="664,519,749,546"/>
+<area shape="rect" id="node17" title=" " alt="" coords="160,519,354,546"/>
+<area shape="rect" id="node18" title=" " alt="" coords="378,512,549,553"/>
+<area shape="rect" id="node19" title=" " alt="" coords="774,519,898,546"/>
+<area shape="rect" id="node20" title=" " alt="" coords="24,519,84,546"/>
+<area shape="rect" id="node21" title=" " alt="" coords="573,519,640,546"/>
+<area shape="rect" id="node23" title=" " alt="" coords="1085,519,1205,546"/>
+<area shape="rect" id="node27" title=" " alt="" coords="382,355,462,382"/>
+<area shape="rect" id="node32" title=" " alt="" coords="1634,348,1808,389"/>
+<area shape="rect" id="node38" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1408,169,1562,211"/>
 </map>

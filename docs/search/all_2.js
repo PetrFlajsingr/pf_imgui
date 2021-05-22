@@ -6,7 +6,7 @@ var searchData=
   ['checkbox_2eh_44',['Checkbox.h',['../Checkbox_8h.html',1,'']]],
   ['childbyname_45',['childByName',['../classpf_1_1ui_1_1ig_1_1ElementContainer.html#aa479bcdfbcdbd9b6e6dbbdf3c4c5bdda',1,'pf::ui::ig::ElementContainer']]],
   ['clear_46',['clear',['../classpf_1_1ui_1_1ig_1_1InputText.html#a1697b47d29c5047d0ea71c3ac1386964',1,'pf::ui::ig::InputText::clear()'],['../classpf_1_1ui_1_1ig_1_1SimplePlot.html#a3512844bf04e2ebaf439f0904701562e',1,'pf::ui::ig::SimplePlot::clear()'],['../classpf_1_1ui_1_1ig_1_1ElementContainer.html#ab19d0be250ed459dc48476712dfeeebc',1,'pf::ui::ig::ElementContainer::clear()']]],
-  ['clearfilter_47',['clearFilter',['../classpf_1_1ui_1_1ig_1_1ComboBox.html#a20a77a9bd6a966b9e4240ec9810ece62',1,'pf::ui::ig::ComboBox']]],
+  ['clearfilter_47',['clearFilter',['../classpf_1_1ui_1_1ig_1_1ComboBox.html#a20a77a9bd6a966b9e4240ec9810ece62',1,'pf::ui::ig::ComboBox::clearFilter()'],['../classpf_1_1ui_1_1ig_1_1ListBox.html#ad4cd806f8697f0f4dda40b2db02789fb',1,'pf::ui::ig::ListBox::clearFilter()']]],
   ['clearrecords_48',['clearRecords',['../classpf_1_1ui_1_1ig_1_1Memo.html#a1e4c5abe88ea823996dda4f1a8baf15e',1,'pf::ui::ig::Memo']]],
   ['clickable_49',['Clickable',['../classpf_1_1ui_1_1ig_1_1Clickable.html',1,'pf::ui::ig']]],
   ['clickable_2eh_50',['Clickable.h',['../Clickable_8h.html',1,'']]],

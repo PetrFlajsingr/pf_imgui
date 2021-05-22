@@ -1,11 +1,12 @@
 <map id="src/pf_imgui/interface/Clickable.h" name="src/pf_imgui/interface/Clickable.h">
-<area shape="rect" id="node1" title="Interface for elements which can be clicked." alt="" coords="482,5,646,47"/>
-<area shape="rect" id="node2" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="437,95,581,121"/>
+<area shape="rect" id="node1" title="Interface for elements which can be clicked." alt="" coords="531,5,695,47"/>
+<area shape="rect" id="node2" href="$Observable__impl_8h.html" title="Implementation of observable." alt="" coords="487,95,631,121"/>
 <area shape="rect" id="node4" title=" " alt="" coords="5,177,200,203"/>
 <area shape="rect" id="node5" title=" " alt="" coords="224,169,395,211"/>
-<area shape="rect" id="node6" title=" " alt="" coords="613,177,757,203"/>
-<area shape="rect" id="node7" title=" " alt="" coords="782,177,906,203"/>
-<area shape="rect" id="node9" title=" " alt="" coords="707,95,794,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="704,177,848,203"/>
+<area shape="rect" id="node7" title=" " alt="" coords="873,177,997,203"/>
+<area shape="rect" id="node10" title=" " alt="" coords="757,95,843,121"/>
 <area shape="rect" id="node3" title=" " alt="" coords="419,177,504,203"/>
 <area shape="rect" id="node8" title=" " alt="" coords="529,177,589,203"/>
+<area shape="rect" id="node9" title=" " alt="" coords="613,177,680,203"/>
 </map>

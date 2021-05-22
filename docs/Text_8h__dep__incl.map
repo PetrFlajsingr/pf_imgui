@@ -1,9 +1,10 @@
 <map id="src/pf_imgui/elements/Text.h" name="src/pf_imgui/elements/Text.h">
 <area shape="rect" id="node1" title="Text element." alt="" coords="135,5,301,47"/>
 <area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="5,184,159,225"/>
-<area shape="rect" id="node5" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="317,95,471,136"/>
-<area shape="rect" id="node6" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="183,191,362,218"/>
-<area shape="rect" id="node7" href="$InputText_8h.html" title="InputText element." alt="" coords="75,95,241,136"/>
+<area shape="rect" id="node6" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="317,95,471,136"/>
+<area shape="rect" id="node7" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="183,191,362,218"/>
+<area shape="rect" id="node8" href="$InputText_8h.html" title="InputText element." alt="" coords="75,95,241,136"/>
 <area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="133,273,348,300"/>
-<area shape="rect" id="node4" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="168,348,313,389"/>
+<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="68,348,235,389"/>
+<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="259,348,404,389"/>
 </map>

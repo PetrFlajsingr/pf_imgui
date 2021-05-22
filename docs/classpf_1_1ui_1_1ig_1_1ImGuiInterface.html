@@ -73,7 +73,7 @@ $(function() {
 <a href="#friends">Friends</a> &#124;
 <a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">pf::ui::ig::ImGuiInterface Class Reference</div>  </div>
+<div class="title">pf::ui::ig::ImGuiInterface Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -137,14 +137,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab0215ee5cfd5beae0703f7c962b0b65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a502176a0deb2da5a07632f8792bd8d5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">setStyle</a> (std::invocable&lt; ImGuiStyle &amp; &gt; auto styleSetter)</td></tr>
 <tr class="separator:a502176a0deb2da5a07632f8792bd8d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7833f349b803991fb3ba1f34120f2469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7833f349b803991fb3ba1f34120f2469">openFileDialog</a> (const std::string &amp;caption, const std::vector&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html">FileExtensionSettings</a> &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
-<tr class="separator:a7833f349b803991fb3ba1f34120f2469"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71cca93205bc51b8a1f61526d1bfe71e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a71cca93205bc51b8a1f61526d1bfe71e">openDirDialog</a> (const std::string &amp;caption, std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedDirs=1)</td></tr>
-<tr class="separator:a71cca93205bc51b8a1f61526d1bfe71e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bae9587911ec426877c90bc94abedf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a9bae9587911ec426877c90bc94abedf6">openFileDialog</a> (const std::string &amp;caption, const std::vector&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1FileExtensionSettings.html">FileExtensionSettings</a> &gt; &amp;extSettings, std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedFiles=1)</td></tr>
+<tr class="separator:a9bae9587911ec426877c90bc94abedf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74ab283e7fd574dc224960ac9a3ccc46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a74ab283e7fd574dc224960ac9a3ccc46">openDirDialog</a> (const std::string &amp;caption, std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto onSelect, std::invocable auto onCancel, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size={200, 150}, std::filesystem::path startPath=&quot;.&quot;, std::string startName=&quot;&quot;, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modality=Modal::No, uint32_t maxSelectedDirs=1)</td></tr>
+<tr class="separator:a74ab283e7fd574dc224960ac9a3ccc46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb806abb84d2db333891903059aa3ec0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#afb806abb84d2db333891903059aa3ec0">openInputDialog</a> (const std::string &amp;title, const std::string &amp;message, std::invocable&lt; std::string &gt; auto &amp;&amp;onInput, std::invocable auto &amp;&amp;onCancel, <a class="el" href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">Modal</a> modal=Modal::No)</td></tr>
 <tr class="separator:afb806abb84d2db333891903059aa3ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af148f13bcb0dbc92d5a5eb8d606741a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1DragNDropGroup.html">DragNDropGroup</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#af148f13bcb0dbc92d5a5eb8d606741a7">createDragNDropGroup</a> ()</td></tr>
 <tr class="separator:af148f13bcb0dbc92d5a5eb8d606741a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb612664927970434072bc32713b69e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#afcb612664927970434072bc32713b69e">updateFonts</a> ()=0</td></tr>
+<tr class="separator:afcb612664927970434072bc32713b69e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
 <tr class="memitem:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#ae2ec29074d05defd647369f43ebbeee1">Renderable</a> (std::string name)</td></tr>
 <tr class="separator:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,7 +199,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Dialog</b></td></tr>
 <p>The class has it's own menu bar, which is applied to the entire render window.</p>
 <p>It also takes care of config saving for <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements.">Savable</a> elements.</p>
 <p>For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd><p class="startdd">: change id type </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd><p class="startdd">: change id type </p>
 <p class="interdd">: add converted input element </p>
 <p class="enddd">: selectables </p>
 </dd></dl>
@@ -577,8 +579,8 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
 
 </div>
 </div>
-<a id="a71cca93205bc51b8a1f61526d1bfe71e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71cca93205bc51b8a1f61526d1bfe71e">&#9670;&nbsp;</a></span>openDirDialog()</h2>
+<a id="a74ab283e7fd574dc224960ac9a3ccc46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74ab283e7fd574dc224960ac9a3ccc46">&#9670;&nbsp;</a></span>openDirDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -595,7 +597,7 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto&#160;</td>
+          <td class="paramtype">std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto&#160;</td>
           <td class="paramname"><em>onSelect</em>, </td>
         </tr>
         <tr>
@@ -663,8 +665,8 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
 
 </div>
 </div>
-<a id="a7833f349b803991fb3ba1f34120f2469"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7833f349b803991fb3ba1f34120f2469">&#9670;&nbsp;</a></span>openFileDialog()</h2>
+<a id="a9bae9587911ec426877c90bc94abedf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bae9587911ec426877c90bc94abedf6">&#9670;&nbsp;</a></span>openFileDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -687,7 +689,7 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::invocable&lt; std::vector&lt; std::string &gt;&gt; auto&#160;</td>
+          <td class="paramtype">std::invocable&lt; std::vector&lt; std::filesystem::path &gt;&gt; auto&#160;</td>
           <td class="paramname"><em>onSelect</em>, </td>
         </tr>
         <tr>
@@ -918,7 +920,7 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set state from inner config file. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>: save state of ui and reload it using this? </dd></dl>
+<p>Set state from inner config file. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000011">Todo:</a></b></dt><dd>: save state of ui and reload it using this? </dd></dl>
 
 </div>
 </div>
@@ -970,6 +972,32 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
 </div><div class="memdoc">
 <p>Collect data from the UI tree and save serialized values into toml table.</p>
 <p>Use <a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a5739827ae4f401e5d30d5608535ecd81">getConfig()</a> to collect saved data. </p>
+
+</div>
+</div>
+<a id="afcb612664927970434072bc32713b69e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb612664927970434072bc32713b69e">&#9670;&nbsp;</a></span>updateFonts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void pf::ui::ig::ImGuiInterface::updateFonts </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Update fonts atlas using your backend. </p>
 
 </div>
 </div>

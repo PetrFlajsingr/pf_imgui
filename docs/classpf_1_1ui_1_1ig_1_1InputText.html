@@ -135,6 +135,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</b> (const s
 <tr class="separator:a6b6513b64a01f7ff51a5eebd290046b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a850e3f8d500a416154cc52577e1c8d09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InputText.html#a850e3f8d500a416154cc52577e1c8d09">setReadOnly</a> (bool readOnly)</td></tr>
 <tr class="separator:a850e3f8d500a416154cc52577e1c8d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22bae4f03c18769a539d40799765b19b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InputText.html#a22bae4f03c18769a539d40799765b19b">isPassword</a> () const</td></tr>
+<tr class="separator:a22bae4f03c18769a539d40799765b19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd72c239ad28119c47dcfef9e90c0e7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InputText.html#abd72c239ad28119c47dcfef9e90c0e7a">setPassword</a> (bool passwd)</td></tr>
+<tr class="separator:abd72c239ad28119c47dcfef9e90c0e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Text"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Text')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Text.html">pf::ui::ig::Text</a></td></tr>
 <tr class="memitem:ad92b52750f17e58521ee0efdbaadc0e8 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Text"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Text.html#ad92b52750f17e58521ee0efdbaadc0e8">Text</a> (const std::string &amp;elementName, std::string text)</td></tr>
 <tr class="separator:ad92b52750f17e58521ee0efdbaadc0e8 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Text"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,11 +332,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>dropAllowed</b></td><
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types.">Input</a> for text with support for multiline strings. </p>
-<p>Typical text edit.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><p class="startdd">: custom filter with predicate </p>
-<p class="interdd">: password input </p>
-<p class="enddd">: hint </p>
-</dd></dl>
+<p>Typical text edit. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>: hint </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1e1d353e546b8503577b7075d3f06bd9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e1d353e546b8503577b7075d3f06bd9">&#9670;&nbsp;</a></span>InputText()</h2>
@@ -422,6 +422,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>dropAllowed</b></td><
 
 </div>
 </div>
+<a id="a22bae4f03c18769a539d40799765b19b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22bae4f03c18769a539d40799765b19b">&#9670;&nbsp;</a></span>isPassword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pf::ui::ig::InputText::isPassword </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check if the input renders all characters as hidden. </p><dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <a id="a6b6513b64a01f7ff51a5eebd290046b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b6513b64a01f7ff51a5eebd290046b0">&#9670;&nbsp;</a></span>isReadOnly()</h2>
 
@@ -493,6 +511,30 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>dropAllowed</b></td><
 <p>Method for subclasses' implementation of serialization. </p><dl class="section return"><dt>Returns</dt><dd>serialized toml data </dd></dl>
 
 <p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#a051194256e4809d425dac7fddabe819a">pf::ui::ig::Savable</a>.</p>
+
+</div>
+</div>
+<a id="abd72c239ad28119c47dcfef9e90c0e7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd72c239ad28119c47dcfef9e90c0e7a">&#9670;&nbsp;</a></span>setPassword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::InputText::setPassword </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>passwd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set if the input renders all characters as hidden; </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">password</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
