@@ -16,7 +16,7 @@ MarkdownText::MarkdownText(const std::string &elementName, std::string markdownS
 void MarkdownText::renderImpl() { ImGui::Markdown(markdownSrc.c_str(), markdownSrc.length(), markdownConfig); }
 
 void MarkdownText::loadHeaderFonts() {
-  if (FontData.fontH1 != nullptr) {
+  if (FontData.fontH1 == nullptr) {
     FontData.fontH1 = ImGui::GetIO().Fonts->AddFontDefault();
     FontData.fontH1->Scale = fontSize * 1.15f;
     FontData.fontH2 = ImGui::GetIO().Fonts->AddFontDefault();
