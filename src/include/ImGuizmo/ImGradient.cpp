@@ -17,7 +17,7 @@ namespace ImGradient
 
    static int DrawPoint(ImDrawList* draw_list, ImVec4 color, const ImVec2 size, bool editing, ImVec2 pos)
    {
-      int ret = 0;
+     [[maybe_unused]] int ret = 0;
       ImGuiIO& io = ImGui::GetIO();
 
       ImVec2 p1 = ImLerp(pos, ImVec2(pos + ImVec2(size.x - size.y, 0.f)), color.w) + ImVec2(3, 3);
@@ -67,7 +67,7 @@ namespace ImGradient
       }
       for (size_t i = 0; i < delegate.GetPointCount(); i++)
       {
-         int ptSel = DrawPoint(draw_list, pts[i], size, i == currentSelection, offset);
+         int ptSel = DrawPoint(draw_list, pts[i], size, i == static_cast<std::size_t>(currentSelection), offset);
          if (ptSel == 2)
          {
             currentSelection = int(i);

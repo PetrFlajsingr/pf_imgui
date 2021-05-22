@@ -56,7 +56,7 @@ namespace ImZoomSlider
       static float saveViewHigher;
 
       const bool isVertical = flags & ImGuiZoomSliderFlags_Vertical;
-      const ImVec2 canvasPos = ImGui::GetCursorScreenPos();
+      [[maybe_unused]] const ImVec2 canvasPos = ImGui::GetCursorScreenPos();
       const ImVec2 canvasSize = ImGui::GetContentRegionAvail();
       const float canvasSizeLength = isVertical ? ImGui::GetItemRectSize().y : canvasSize.x;
       const ImVec2 scrollBarSize = isVertical ? ImVec2(14.f, canvasSizeLength) : ImVec2(canvasSizeLength, 14.f);
@@ -65,7 +65,7 @@ namespace ImZoomSlider
       const ImGuiID currentId = ImGui::GetID(controlName);
 
       const bool usingEditingId = currentId == editingId;
-      const bool canUseControl = usingEditingId || editingId == -1;
+      const bool canUseControl = usingEditingId || static_cast<int>(editingId) == -1;
       const bool movingScrollBar = usingEditingId ? movingScrollBarSvg : false;
       const bool sizingRBar = usingEditingId ? sizingRBarSvg : false;
       const bool sizingLBar = usingEditingId ? sizingLBarSvg : false;

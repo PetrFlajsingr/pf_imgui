@@ -316,6 +316,10 @@ namespace ImGuizmo
       };
 
       matrix_t(const matrix_t& other) { memcpy(&m16[0], &other.m16[0], sizeof(float) * 16); }
+      matrix_t &operator=(const matrix_t &other) {
+        memcpy(&m16[0], &other.m16[0], sizeof(float) * 16);
+        return *this;
+      }
       matrix_t() {}
 
       operator float* () { return m16; }
@@ -1202,7 +1206,7 @@ namespace ImGuizmo
 
          float angleStart = atan2f(cameraToModelNormalized[(4 - axis) % 3], cameraToModelNormalized[(3 - axis) % 3]) + ZPI * 0.5f;
 
-         for (unsigned int i = 0; i < circleMul * halfCircleSegmentCount + 1; i++)
+         for (unsigned int i = 0; i < static_cast<unsigned int>(circleMul * halfCircleSegmentCount + 1); i++)
          {
             float ng = angleStart + circleMul * ZPI * ((float)i / (float)halfCircleSegmentCount);
             vec_t axisPos = makeVect(cosf(ng), sinf(ng), 0.f);
@@ -2711,4 +2715,4 @@ namespace ImGuizmo
       // restore view/projection because it was used to compute ray
       ComputeContext(svgView.m16, svgProjection.m16, gContext.mModelSource.m16, gContext.mMode);
    }
-};
+}

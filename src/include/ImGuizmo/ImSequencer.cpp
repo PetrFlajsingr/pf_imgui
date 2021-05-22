@@ -79,7 +79,7 @@ namespace ImSequencer
       ImVector<CustomDraw> customDraws;
       ImVector<CustomDraw> compactCustomDraws;
       // zoom in/out
-      int frameOverCursor = 0;
+     [[maybe_unused]] int frameOverCursor = 0;
       const int visibleFrameCount = (int)floorf((canvas_size.x - legendWidth) / framePixelWidth);
       const float barWidthRatio = ImMin(visibleFrameCount / (float)frameCount, 1.f);
       const float barWidthInPixels = barWidthRatio * (canvas_size.x - legendWidth);
@@ -226,7 +226,7 @@ namespace ImSequencer
 
          };
 
-         auto drawLineContent = [&](int i, int regionHeight) {
+         auto drawLineContent = [&](int i, [[maybe_unused]] int regionHeight) {
             int px = (int)canvas_pos.x + int(i * framePixelWidth) + legendWidth - int(firstFrameUsed * framePixelWidth);
             int tiretStart = int(contentMin.y);
             int tiretEnd = int(contentMax.y);
@@ -511,7 +511,7 @@ namespace ImSequencer
             ImVec2 scrollBarD(scrollBarMin.x + legendWidth + barWidthInPixels + startFrameOffset, scrollBarMax.y - 2);
             draw_list->AddRectFilled(scrollBarC, scrollBarD, (inScrollBar || MovingScrollBar) ? 0xFF606060 : 0xFF505050, 6);
 
-            float handleRadius = (scrollBarMax.y - scrollBarMin.y) / 2;
+           [[maybe_unused]] float handleRadius = (scrollBarMax.y - scrollBarMin.y) / 2;
             ImRect barHandleLeft(scrollBarC, ImVec2(scrollBarC.x + 14, scrollBarD.y));
             ImRect barHandleRight(ImVec2(scrollBarD.x - 14, scrollBarC.y), scrollBarD);
 
