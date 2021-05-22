@@ -169,7 +169,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
 
   void unserialize_impl(const toml::table &src) override {
     if (src.contains("selected")) {
-      const auto idx = **src["selected"].as_integer();
+      const auto idx = *src["selected"].value<int>();
       if (static_cast<std::size_t>(idx) < items.size()) {
         selectedItemIndex = idx;
         ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);

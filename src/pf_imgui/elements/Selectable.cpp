@@ -14,7 +14,7 @@ void Selectable::renderImpl() {
   if (ImGui::Selectable(getLabel().c_str(), getValueAddress(), 0, getSize().asImVec())) { notifyValueChanged(); }
 }
 
-void Selectable::unserialize_impl(const toml::table &src) { setValueAndNotifyIfChanged(src["selected"].as_boolean()); }
+void Selectable::unserialize_impl(const toml::table &src) { setValueAndNotifyIfChanged(*src["selected"].value<bool>()); }
 
 toml::table Selectable::serialize_impl() { return toml::table{{{"selected", getValue()}}}; }
 

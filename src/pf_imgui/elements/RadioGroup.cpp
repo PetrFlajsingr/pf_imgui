@@ -42,7 +42,7 @@ RadioButton &RadioGroup::addButton(const std::string &elementName, const std::st
 
 void RadioGroup::unserialize_impl(const toml::table &src) {
   if (src.contains("selected")) {
-    const auto idx = **src["selected"].as_integer();
+    const auto idx = *src["selected"].value<int>();
     if (static_cast<std::size_t>(idx) < buttons.size()) {
       selectedButtonIndex = idx;
       auto &selectedButton = buttons[idx];

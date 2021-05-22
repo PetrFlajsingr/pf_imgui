@@ -28,7 +28,7 @@ void Checkbox::renderImpl() {
   if (valueChanged) { notifyValueChanged(); }
 }
 
-void Checkbox::unserialize_impl(const toml::table &src) { setValueAndNotifyIfChanged(src["checked"].as_boolean()); }
+void Checkbox::unserialize_impl(const toml::table &src) { setValueAndNotifyIfChanged(*src["checked"].value<bool>()); }
 
 toml::table Checkbox::serialize_impl() { return toml::table{{{"checked", getValue()}}}; }
 void Checkbox::setSelected(bool value) { setValueAndNotifyIfChanged(value); }
