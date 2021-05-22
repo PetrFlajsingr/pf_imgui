@@ -50,6 +50,12 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    */
   void setFontSize(float fontSize);
 
+  /**
+   * Set callback for user clicking a link.
+   * @param onLinkClicked callback - first argument is link itself, second is true if it is an image
+   */
+  void setOnLinkClicked(const std::function<void(std::string_view, bool)> &onLinkClicked);
+
  protected:
   void renderImpl() override;
 
@@ -58,6 +64,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
 
   void loadHeaderFonts();
   static void MarkdownFormatCallback(const ImGui::MarkdownFormatInfo &markdownFormatInfo, bool start);
+  static void MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data);
 
   struct {
     ImFont *fontH1 = nullptr;
@@ -69,6 +76,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   ImGuiInterface &imGuiInterface;
   std::u8string markdownSrc;
   float fontSize = 12.f;
+  std::function<void(std::string_view, bool)> onLinkClicked = [](auto, auto) {};
 };
 
 }// namespace pf::ui::ig

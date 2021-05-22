@@ -34,14 +34,14 @@ void MarkdownText::MarkdownFormatCallback(const ImGui::MarkdownFormatInfo &markd
 }
 
 void MarkdownText::configure() {
-  // TODO: markdownConfig.linkCallback =         LinkCallback;
+  markdownConfig.linkCallback = MarkdownLinkCallback;
   markdownConfig.tooltipCallback = nullptr;
   // TODO: markdownConfig.imageCallback =        ImageCallback;
   // TODO: markdownConfig.linkIcon =             ICON_FA_LINK;
   markdownConfig.headingFormats[0] = {FontData.fontH1, true};
   markdownConfig.headingFormats[1] = {FontData.fontH2, true};
   markdownConfig.headingFormats[2] = {FontData.fontH3, false};
-  markdownConfig.userData = nullptr;
+  markdownConfig.userData = this;
   markdownConfig.formatCallback = MarkdownFormatCallback;
 }
 
@@ -54,5 +54,11 @@ void MarkdownText::setFontSize(float size) {
   fontSize = size;
   loadHeaderFonts();
   configure();
+}
+void MarkdownText::MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data) {
+  reinterpret_cast<MarkdownText*>(data.userData)->onLinkClicked(std::string_view(data.link, data.linkLength), data.isImage);
+}
+void MarkdownText::setOnLinkClicked(const std::function<void(std::string_view, bool)> &linkClicked) {
+  onLinkClicked = linkClicked;
 }
 }// namespace pf::ui::ig
