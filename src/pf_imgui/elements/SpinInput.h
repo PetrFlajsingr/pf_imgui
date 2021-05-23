@@ -41,25 +41,31 @@ class SpinInput : public ItemElement,
    */
   SpinInput(const std::string &elementName, const std::string &label, const T &value = T{}, const T &step = T{1},
             const T &stepFast = T{100}, Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable(value), Savable(persistent), DragSource(false),
-        DropTarget(false), step(step), stepFast(stepFast) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), step(step), stepFast(stepFast) {}
 
  protected:
   void renderImpl() override {
-    const auto oldVal = getValue();
-    if constexpr (std::same_as<T, int>) { ImGui::SpinInt(getLabel().c_str(), getValueAddress(), step, stepFast); }
-    if constexpr (std::same_as<T, float>) { ImGui::SpinFloat(getLabel().c_str(), getValueAddress(), step, stepFast); }
-    if (getValue() != oldVal) { notifyValueChanged(); }
-    drag(getValue());
-    if (auto drop = dropAccept(); drop.has_value()) {
-      setValueAndNotifyIfChanged(*drop);
+    const auto oldVal = ValueObservable<T>::getValue();
+    if constexpr (std::same_as<T, int>) {
+      ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
+    }
+    if constexpr (std::same_as<T, float>) {
+      ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
+    }
+    if (ValueObservable<T>::getValue() != oldVal) { ValueObservable<T>::notifyValueChanged(); }
+    DragSource<T>::drag(ValueObservable<T>::getValue());
+    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
       return;
     }
   }
 
-  void unserialize_impl(const toml::table &src) override { setValueAndNotifyIfChanged(*src["value"].value<T>()); }
+  void unserialize_impl(const toml::table &src) override {
+    ValueObservable<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+  }
 
-  toml::table serialize_impl() override { return toml::table{{{"value", getValue()}}}; }
+  toml::table serialize_impl() override { return toml::table{{{"value", ValueObservable<T>::getValue()}}}; }
 
  private:
   T step;
