@@ -61,7 +61,7 @@ class SpinInput : public ItemElement,
       valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
     }
     if (valueChanged) {
-      ValueObservable<T>::setValueInner(std::clamp(getValue(), min, max));
+      ValueObservable<T>::setValueInner(std::clamp(ValueObservable<T>::getValue(), min, max));
       ValueObservable<T>::notifyValueChanged();
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());
