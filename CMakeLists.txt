@@ -82,6 +82,7 @@ CPMAddPackage(
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
 include_directories(src/include/imgui_markdown)
+include_directories(src/include/imgui_memory_editor)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -213,6 +214,7 @@ set(INCLUDES
         src/pf_imgui/elements/plots/types/Stems.h
         src/pf_imgui/elements/plots/types/HeatMap.h
         src/pf_imgui/elements/plots/types/Digital.h
+        src/pf_imgui/elements/MemoryEditor.h
         src/pf_imgui/interface/ElementContainer.h
         src/pf_imgui/interface/Element.h
         src/pf_imgui/interface/Labellable.h
@@ -303,6 +305,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_markdown>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuizmo>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFlamegraph>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_memory_editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo)
 
