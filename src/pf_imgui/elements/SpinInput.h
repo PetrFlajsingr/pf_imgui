@@ -46,14 +46,14 @@ class SpinInput : public ItemElement,
 
  protected:
   void renderImpl() override {
-    const auto oldVal = ValueObservable<T>::getValue();
+    auto valueChanged = false;
     if constexpr (std::same_as<T, int>) {
-      ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
+      valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
     }
     if constexpr (std::same_as<T, float>) {
-      ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
+      valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
     }
-    if (ValueObservable<T>::getValue() != oldVal) { ValueObservable<T>::notifyValueChanged(); }
+    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
