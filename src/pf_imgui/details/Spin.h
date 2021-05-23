@@ -6,6 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_DETAILS_SPIN_H
 
 #include <imgui.h>
+#include <imgui_internal.h>
 
 namespace ImGui
 {
