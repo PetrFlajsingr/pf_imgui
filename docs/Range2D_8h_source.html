@@ -70,57 +70,54 @@ $(function() {
 <div class="title">Range2D.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by petr on 5/22/21.</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_RANGE2D_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_RANGE2D_H</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;glm/vec2.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;include/DearWidgets/dear_widgets.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;pf_common/math/Range.h&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="DragNDrop_8h.html">pf_imgui/interface/DragNDrop.h</a>&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Resizable_8h.html">pf_imgui/interface/Resizable.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Savable_8h.html">pf_imgui/interface/Savable.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Range2D.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html">Range2D</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="keyword">public</span> ValueObservable&lt;math::Range&lt;glm::vec2&gt;&gt;,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a>,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html">DragSource</a>&lt;math::Range&lt;glm::vec2&gt;&gt;,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget</a>&lt;math::Range&lt;glm::vec2&gt;&gt; {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#ada07250510729469f612ce33723f544a">Range2D</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keyword">const</span> glm::vec2 &amp;minRange,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;          <span class="keyword">const</span> glm::vec2 &amp;maxRange, <span class="keyword">const</span> math::Range&lt;glm::vec2&gt; &amp;value = math::Range&lt;glm::vec2&gt;{},</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;          <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;s = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>(), <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  [[nodiscard]] <span class="keyword">const</span> glm::vec2 &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a53167f9d176890cf75fcb2b3c797de16">getMin</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a6652c469b695892a7cc7cac99281cac5">setMin</a>(<span class="keyword">const</span> glm::vec2 &amp;minRange);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  [[nodiscard]] <span class="keyword">const</span> glm::vec2 &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a49efbf3d925bc9bb00f66d8fcc80a19d">getMax</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a55ae9ecaab03fca3f697662d5c9c4122">setMax</a>(<span class="keyword">const</span> glm::vec2 &amp;maxRange);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a798f5ede91aad01ba77381e90e55fb62">renderImpl</a>() <span class="keyword">override</span>;</div>
+<a href="Range2D_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_RANGE2D_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_RANGE2D_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;glm/vec2.hpp&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;include/DearWidgets/dear_widgets.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_common/math/Range.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="DragNDrop_8h.html">pf_imgui/interface/DragNDrop.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Resizable_8h.html">pf_imgui/interface/Resizable.h</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Savable_8h.html">pf_imgui/interface/Savable.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Range2D.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html">Range2D</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keyword">public</span> ValueObservable&lt;math::Range&lt;glm::vec2&gt;&gt;,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html">DragSource</a>&lt;math::Range&lt;glm::vec2&gt;&gt;,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget</a>&lt;math::Range&lt;glm::vec2&gt;&gt; {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#ada07250510729469f612ce33723f544a">Range2D</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keyword">const</span> glm::vec2 &amp;minRange,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;          <span class="keyword">const</span> glm::vec2 &amp;maxRange, <span class="keyword">const</span> math::Range&lt;glm::vec2&gt; &amp;value = math::Range&lt;glm::vec2&gt;{},</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;          <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;s = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>(), <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  [[nodiscard]] <span class="keyword">const</span> glm::vec2 &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a53167f9d176890cf75fcb2b3c797de16">getMin</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a6652c469b695892a7cc7cac99281cac5">setMin</a>(<span class="keyword">const</span> glm::vec2 &amp;minRange);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  [[nodiscard]] <span class="keyword">const</span> glm::vec2 &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a49efbf3d925bc9bb00f66d8fcc80a19d">getMax</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a55ae9ecaab03fca3f697662d5c9c4122">setMax</a>(<span class="keyword">const</span> glm::vec2 &amp;maxRange);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a7d968cb303cf15eeeb4f405d3070717e">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a823ead90251781caca956b9c72742241">serialize_impl</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a798f5ede91aad01ba77381e90e55fb62">renderImpl</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  glm::vec2 minRange;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  glm::vec2 maxRange;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_RANGE2D_H</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a7d968cb303cf15eeeb4f405d3070717e">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Range2D.html#a823ead90251781caca956b9c72742241">serialize_impl</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  glm::vec2 minRange;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  glm::vec2 maxRange;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_RANGE2D_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Range2D_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Range2D.html">pf::ui::ig::Range2D</a></div><div class="ttdoc">Allows for selection of a 2D area - axis aligned.</div><div class="ttdef"><b>Definition:</b> Range2D.h:23</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Range2D_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Range2D.html">pf::ui::ig::Range2D</a></div><div class="ttdoc">Allows for selection of a 2D area - axis aligned.</div><div class="ttdef"><b>Definition:</b> Range2D.h:26</div></div>
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Range2D_html_a49efbf3d925bc9bb00f66d8fcc80a19d"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Range2D.html#a49efbf3d925bc9bb00f66d8fcc80a19d">pf::ui::ig::Range2D::getMax</a></div><div class="ttdeci">const glm::vec2 &amp; getMax() const</div><div class="ttdef"><b>Definition:</b> Range2D.cpp:30</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>

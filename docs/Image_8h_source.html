@@ -94,20 +94,29 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      });</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isButton() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">void</span> setTextureId(ImTextureID imTextureId);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">bool</span> isButton_;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  ImTextureID textureId;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  UvMappingProvider uvMappingProvider;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_IMAGE_H</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">// * Check if a tooltip activated by pressing shift while hovering an image is active.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// * @return</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">// */</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">//[[nodiscard]] bool isPixelInspectionTooltipEnabled() const;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span>  <span class="comment">// * Enable/disable a tooltip activated by pressing shift while hovering an image.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">// * @param enabled</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">// */</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">//void setPixelInspectionTooltipEnabled(bool enabled);</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordtype">void</span> setTextureId(ImTextureID imTextureId);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">bool</span> isButton_;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  ImTextureID textureId;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  UvMappingProvider uvMappingProvider;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">//bool pixelInspectionTooltipEnabled = false;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_IMAGE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Image_html_a5415ba99cc15f4a1eabc7aa41085d242"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Image.html#a5415ba99cc15f4a1eabc7aa41085d242">pf::ui::ig::Image::UvMappingProvider</a></div><div class="ttdeci">std::function&lt; std::pair&lt; ImVec2, ImVec2 &gt;()&gt; UvMappingProvider</div><div class="ttdef"><b>Definition:</b> Image.h:30</div></div>
 <div class="ttc" id="aClickable_8h_html"><div class="ttname"><a href="Clickable_8h.html">Clickable.h</a></div><div class="ttdoc">Interface for elements which can be clicked.</div></div>

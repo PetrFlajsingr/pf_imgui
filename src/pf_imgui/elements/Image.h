@@ -48,6 +48,16 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Click
    * @return true of image is a button, false otherwise
    */
   [[nodiscard]] bool isButton() const;
+  ///**
+  // * Check if a tooltip activated by pressing shift while hovering an image is active.
+  // * @return
+  // */
+  //[[nodiscard]] bool isPixelInspectionTooltipEnabled() const;
+  ///**
+  // * Enable/disable a tooltip activated by pressing shift while hovering an image.
+  // * @param enabled
+  // */
+  //void setPixelInspectionTooltipEnabled(bool enabled);
 
   /**
    * Change texture ID.
@@ -62,6 +72,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Click
   bool isButton_;
   ImTextureID textureId;
   UvMappingProvider uvMappingProvider;
+  //bool pixelInspectionTooltipEnabled = false;
 };
 
 }// namespace pf::ui::ig

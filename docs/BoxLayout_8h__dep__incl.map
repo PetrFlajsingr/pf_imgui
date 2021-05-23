@@ -1,11 +1,11 @@
 <map id="src/pf_imgui/layouts/BoxLayout.h" name="src/pf_imgui/layouts/BoxLayout.h">
-<area shape="rect" id="node1" title="Layout boxing children in desired direction." alt="" coords="299,5,454,47"/>
-<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="31,95,184,136"/>
-<area shape="rect" id="node6" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="208,95,361,136"/>
-<area shape="rect" id="node8" href="$Memo_8h.html" title="Memo element." alt="" coords="385,95,552,136"/>
-<area shape="rect" id="node9" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="577,95,731,136"/>
-<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="71,184,285,211"/>
-<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="5,259,172,300"/>
-<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="196,259,341,300"/>
-<area shape="rect" id="node7" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="379,184,558,211"/>
+<area shape="rect" id="node1" title="Layout boxing children in desired direction." alt="" coords="366,5,521,47"/>
+<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="132,95,285,136"/>
+<area shape="rect" id="node7" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="309,95,463,136"/>
+<area shape="rect" id="node8" href="$Memo_8h.html" title="Memo element." alt="" coords="417,184,584,225"/>
+<area shape="rect" id="node9" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="609,184,763,225"/>
+<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="113,191,328,218"/>
+<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="5,273,172,315"/>
+<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="196,273,341,315"/>
+<area shape="rect" id="node5" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="350,363,529,389"/>
 </map>

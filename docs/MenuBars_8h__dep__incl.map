@@ -1,8 +1,8 @@
 <map id="src/pf_imgui/elements/MenuBars.h" name="src/pf_imgui/elements/MenuBars.h">
-<area shape="rect" id="node1" title="All types necessary for building menu bars." alt="" coords="122,5,289,47"/>
-<area shape="rect" id="node2" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="129,95,282,136"/>
-<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,184,184,211"/>
-<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="210,184,425,211"/>
-<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="145,259,311,300"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="335,259,481,300"/>
+<area shape="rect" id="node1" title="All types necessary for building menu bars." alt="" coords="167,5,333,47"/>
+<area shape="rect" id="node2" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="59,95,212,136"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="18,348,197,375"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="85,184,300,211"/>
+<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="24,259,191,300"/>
+<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="215,259,360,300"/>
 </map>

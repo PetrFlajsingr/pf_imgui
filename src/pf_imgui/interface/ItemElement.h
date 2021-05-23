@@ -64,6 +64,11 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
    */
   void setTooltip(std::string_view text);
   /**
+   * Assign a tooltip created elsewhere.
+   * @param newTooltip new tooltip
+   */
+  void setTooltip(std::unique_ptr<Tooltip> &&newTooltip);
+  /**
    * Create an instance of tooltip to be filled with element by the user.
    * @return reference to the newly created tooltip
    */

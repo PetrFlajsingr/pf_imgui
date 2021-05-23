@@ -1,5 +1,5 @@
 <map id="pf::ui::ig::Labellable" name="pf::ui::ig::Labellable">
-<area shape="rect" id="node1" title="Interface for labellable elements." alt="" coords="5,781,155,808"/>
+<area shape="rect" id="node1" title="Interface for labellable elements." alt="" coords="5,811,155,837"/>
 <area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Button.html" title="A typical button element." alt="" coords="243,5,369,32"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="233,56,379,83"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="221,107,391,149"/>
@@ -26,11 +26,12 @@
 <area shape="rect" id="node35" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="219,1203,393,1229"/>
 <area shape="rect" id="node36" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="219,1253,393,1280"/>
 <area shape="rect" id="node37" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="228,1304,384,1331"/>
-<area shape="rect" id="node38" href="$classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="" coords="235,1355,377,1381"/>
-<area shape="rect" id="node39" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="254,1405,358,1432"/>
-<area shape="rect" id="node40" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="251,1456,361,1483"/>
-<area shape="rect" id="node41" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="203,1507,409,1533"/>
-<area shape="rect" id="node42" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="239,1557,373,1584"/>
+<area shape="rect" id="node38" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="215,1355,397,1381"/>
+<area shape="rect" id="node39" href="$classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="" coords="235,1405,377,1432"/>
+<area shape="rect" id="node40" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="254,1456,358,1483"/>
+<area shape="rect" id="node41" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="251,1507,361,1533"/>
+<area shape="rect" id="node42" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="203,1557,409,1584"/>
+<area shape="rect" id="node43" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="239,1608,373,1635"/>
 <area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1InputDialog.html" title="Simplified dialog for user input. It should be created via ImGuiInterface." alt="" coords="470,195,627,221"/>
 <area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used...." alt="" coords="457,246,640,287"/>
 <area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1Bar.html" title="2D bar plot, which can either be horizontal or vertical." alt="" coords="477,603,620,645"/>

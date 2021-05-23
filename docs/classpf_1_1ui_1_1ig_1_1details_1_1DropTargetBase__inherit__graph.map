@@ -5,7 +5,7 @@
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title=" " alt="" coords="225,151,378,193"/>
 <area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title=" " alt="" coords="187,217,416,258"/>
 <area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title=" " alt="" coords="225,282,378,323"/>
-<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title="Target for drag and drop operation." alt="" coords="206,408,397,435"/>
+<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title="Target for drag and drop operation." alt="" coords="206,433,397,460"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="480,20,655,47"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="489,93,645,120"/>
 <area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="480,159,655,185"/>
@@ -16,5 +16,6 @@
 <area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="475,383,659,409"/>
 <area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="491,433,644,460"/>
 <area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="489,484,646,511"/>
-<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="464,535,671,561"/>
+<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="477,535,658,561"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="464,585,671,612"/>
 </map>

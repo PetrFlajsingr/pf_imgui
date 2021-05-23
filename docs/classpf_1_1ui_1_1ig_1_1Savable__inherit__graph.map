@@ -1,5 +1,5 @@
 <map id="pf::ui::ig::Savable" name="pf::ui::ig::Savable">
-<area shape="rect" id="node1" title="Interface for savable elements." alt="" coords="5,477,140,504"/>
+<area shape="rect" id="node1" title="Interface for savable elements." alt="" coords="5,503,140,529"/>
 <area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="218,81,365,108"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="214,132,369,159"/>
 <area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="207,183,376,225"/>
@@ -15,7 +15,8 @@
 <area shape="rect" id="node24" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="204,705,379,732"/>
 <area shape="rect" id="node25" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="204,756,379,783"/>
 <area shape="rect" id="node26" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="213,807,369,833"/>
-<area shape="rect" id="node27" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="188,857,395,884"/>
+<area shape="rect" id="node27" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="201,857,382,884"/>
+<area shape="rect" id="node28" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="188,908,395,935"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header." alt="" coords="449,56,571,83"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="447,107,573,133"/>
 <area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="455,157,565,184"/>

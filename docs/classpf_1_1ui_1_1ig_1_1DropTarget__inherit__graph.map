@@ -1,9 +1,10 @@
 <map id="pf::ui::ig::DropTarget&lt; T &gt;" name="pf::ui::ig::DropTarget&lt; T &gt;">
-<area shape="rect" id="node1" title="Target for drag and drop operation." alt="" coords="187,107,377,133"/>
+<area shape="rect" id="node1" title="Target for drag and drop operation." alt="" coords="187,132,377,159"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="425,5,632,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="437,56,621,83"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="452,107,605,133"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="450,157,607,184"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="425,208,632,235"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html" title="Base class for templated DropTarget&lt;T&gt;" alt="" coords="5,99,139,141"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="438,208,619,235"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="425,259,632,285"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html" title="Base class for templated DropTarget&lt;T&gt;" alt="" coords="5,125,139,166"/>
 </map>
