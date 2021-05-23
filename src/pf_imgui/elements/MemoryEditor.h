@@ -1,6 +1,9 @@
-//
-// Created by petr on 5/23/21.
-//
+/**
+ * @file MemoryEditor.h
+ * @brief Raw memory editor.
+ * @author Petr Flajšingr
+ * @date 23.5.21
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_MEMORYEDITOR_H
 #define PF_IMGUI_ELEMENTS_MEMORYEDITOR_H
