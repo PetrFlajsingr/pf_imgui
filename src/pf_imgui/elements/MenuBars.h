@@ -19,7 +19,7 @@
 #include <vector>
 
 namespace pf::ui::ig {
-
+// todo: different item types - separator, checkbox... custom?
 class SubMenu;
 class MenuItem;
 /**

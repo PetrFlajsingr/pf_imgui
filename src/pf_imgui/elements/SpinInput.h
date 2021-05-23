@@ -21,6 +21,7 @@ namespace pf::ui::ig {
  * @brief Spinner for numeric types.
  * @tparam T inner type
  * @todo: format for float
+ * @todo: min and max vals
  */
 template<OneOf<int, float> T>
 class SpinInput : public ItemElement,
@@ -39,10 +40,16 @@ class SpinInput : public ItemElement,
    * @param stepFast fast spin step
    * @param persistent enable/disable state saving od disk
    */
-  SpinInput(const std::string &elementName, const std::string &label, const T &value = T{}, const T &step = T{1},
+  SpinInput(const std::string &elementName, const std::string &label, T minVal, T maxVal, T value = T{}, T step = T{1},
             const T &stepFast = T{100}, Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), step(step), stepFast(stepFast) {}
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), step(step), stepFast(stepFast), min(minVal),
+        max(maxVal) {}
+
+  [[nodiscard]] const T &getMin() const { return min; }
+  void setMin(const T &minVal) { min = minVal; }
+  [[nodiscard]] const T &getMax() const { return max; }
+  void setMax(const T &maxVal) { max = maxVal; }
 
  protected:
   void renderImpl() override {
@@ -53,10 +60,14 @@ class SpinInput : public ItemElement,
     if constexpr (std::same_as<T, float>) {
       valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
     }
-    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+    if (valueChanged) {
+      ValueObservable<T>::setValueInner(std::clamp(getValue(), min, max));
+      ValueObservable<T>::notifyValueChanged();
+    }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+      const auto value = std::clamp(*drop, min, max);
+      ValueObservable<T>::setValueAndNotifyIfChanged(value);
       return;
     }
   }
@@ -70,6 +81,8 @@ class SpinInput : public ItemElement,
  private:
   T step;
   T stepFast;
+  T min;
+  T max;
 };
 }// namespace pf::ui::ig
 

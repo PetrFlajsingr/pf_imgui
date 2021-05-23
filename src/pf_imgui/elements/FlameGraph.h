@@ -52,14 +52,14 @@ class PF_IMGUI_EXPORT FlameGraph : public Element, public Labellable, public Res
    * Set samples from which the flame graph will be drawn.
    * @param newSamples samples
    */
-  void setSamples(const std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> &newSamples);
+  void setSamples(const std::vector<FlameGraphSample> &newSamples);
 
  protected:
   void renderImpl() override;
 
  private:
   std::optional<std::string> overlay;
-  std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> samples;
+  std::vector<FlameGraphSample> samples;
 };
 
 }// namespace pf::ui::ig
