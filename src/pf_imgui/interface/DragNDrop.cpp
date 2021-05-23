@@ -57,7 +57,7 @@ void details::DragSourceBase::removeDragTooltip() {
 
 bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
                                             const std::string &value) {
-  if (!dragged && tooltipTextFmt.has_value()) {
+  if (!dragged && tooltipTextFmt.has_value()) { // TODO: check this condition
     tooltipTextFmt->second->setText(fmt::format(tooltipTextFmt->first, value));
   }
   return drag_impl(typeName, sourceData, dataSize);

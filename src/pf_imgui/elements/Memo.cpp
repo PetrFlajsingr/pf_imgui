@@ -6,8 +6,6 @@
 #include "Button.h"
 #include "Checkbox.h"
 #include "InputText.h"
-#include <range/v3/view/filter.hpp>
-#include <range/v3/view/join.hpp>
 
 namespace pf::ui::ig {
 
@@ -17,12 +15,12 @@ Memo::Memo(const std::string &elementName, const std::string &label, uint32_t te
       textAreaLayout(elementName + "_memo_panel###", LayoutDirection::TopToBottom, Size{Width::Auto(), textAHeight}),
       buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {
   textAreaLayout.setScrollable(true);
+  rebuildPanel();
 }
 
 void Memo::renderImpl() {
   if (rebuild) { rebuildPanel(); }
   removeRecordsAboveLimit();
-  textArea->setText(getText());
   ImGui::Text("%s", getLabel().c_str());
   if (controlsLayout != nullptr) { controlsLayout->render(); }
   ImGui::Separator();
@@ -33,18 +31,23 @@ void Memo::renderImpl() {
 
 const std::vector<std::string> &Memo::getRecords() const { return records; }
 
-std::string Memo::getText() const {
-  return records | ranges::views::filter(filterFnc) | ranges::views::join('\n') | ranges::to<std::string>();
-}
+const std::string &Memo::getText() const { return textArea->getText(); }
 
-void Memo::addRecord(std::string_view record) { records.emplace_back(std::string(record)); }
+void Memo::addRecord(std::string_view record) {
+  records.emplace_back(std::string(record));
+  rebuildText();
+}
 
 void Memo::removeRecord(std::size_t index) {
   if (index >= records.size()) { throw InvalidArgumentException{"Index out of bounds"}; }
   records.erase(records.begin() + index);
+  rebuildText();
 }
 
-void Memo::clearRecords() { records.clear(); }
+void Memo::clearRecords() {
+  records.clear();
+  rebuildText();
+}
 
 void Memo::rebuildPanel() {
   if (buttonsEnabled || filterEnabled) {
@@ -71,6 +74,7 @@ void Memo::rebuildPanel() {
         .addValueListener([this](auto newVal) { scrollToBottom = newVal; });
   }
   textArea = &textAreaLayout.createChild<Text>(getName() + "memo_text", "Memo");
+  rebuildText();
   rebuild = false;
 }
 bool Memo::isButtonsEnabled() const { return buttonsEnabled; }
@@ -95,9 +99,13 @@ void Memo::removeRecordsAboveLimit() {
   if (recordLimit.has_value() && *recordLimit < records.size()) {
     const auto cntToRemove = records.size() - *recordLimit;
     records.erase(records.begin(), records.begin() + cntToRemove);
+    rebuildText();
   }
 }
 std::size_t Memo::size() const { return records.size(); }
+
 void Memo::cancelRecordLimit() { recordLimit = std::nullopt; }
+
+void Memo::rebuildText() { textArea->setText(getTextView() | ranges::to<std::string>()); }
 
 }// namespace pf::ui::ig

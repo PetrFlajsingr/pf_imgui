@@ -15,6 +15,8 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/layouts/BoxLayout.h>
+#include <range/v3/view/filter.hpp>
+#include <range/v3/view/join.hpp>
 #include <string>
 #include <vector>
 
@@ -53,7 +55,7 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
    * Get all records concatenated using '\n'.
    * @return all records as one string
    */
-  [[nodiscard]] std::string getText() const;
+  [[nodiscard]] const std::string &getText() const;
 
   /**
    * Add new row to the memo.
@@ -113,11 +115,14 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
   void rebuildPanel();
   void removeRecordsAboveLimit();
 
+  void rebuildText();
+  auto getTextView() { return records | ranges::views::filter(filterFnc) | ranges::views::join('\n'); }
+
   std::unique_ptr<BoxLayout> controlsLayout = nullptr;
   BoxLayout textAreaLayout;
   bool buttonsEnabled;
   bool filterEnabled;
-  bool rebuild = true;
+  bool rebuild = false;
   bool scrollToBottom = false;
   std::function<bool(std::string_view)> filterFnc = [](auto) { return true; };
   std::optional<std::size_t> recordLimit;

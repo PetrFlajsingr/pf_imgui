@@ -421,8 +421,8 @@ struct Emphasis {
     RIGHT,
   };
   EmphasisState state = NONE;
-  TextBlock text;
-  char sym;
+  TextBlock text{};
+  char sym{};
 };
 
 inline void UnderLine(ImColor col_) {
