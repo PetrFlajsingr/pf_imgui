@@ -9,11 +9,13 @@
 
 namespace pf::ui::ig {
 
-MenuItem::MenuItem(const std::string &elementName, const std::string &label)
-    : Element(elementName), Labellable(label) {}
+MenuItem::MenuItem(const std::string &name, const std::string &label) : Element(name), Labellable(label) {}
 
-void MenuItem::renderImpl() {
-  if (ImGui::MenuItem(getLabel().c_str())) { notifyOnClick(); }
+MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string &label)
+    : MenuItem(elementName, label) {}
+
+void MenuButtonItem::renderImpl() {
+  if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
 }
 
 void SubMenu::renderImpl() {
@@ -23,16 +25,16 @@ void SubMenu::renderImpl() {
   }
 }
 
-SubMenu::SubMenu(const std::string &elementName, const std::string &label) : Element(elementName), Labellable(label) {}
+SubMenu::SubMenu(const std::string &elementName, const std::string &label) : MenuItem(elementName, label) {}
 
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
-
 void WindowMenuBar::renderImpl() {
   if (ImGui::BeginMenuBar()) {
     renderItems();
     ImGui::EndMenuBar();
   }
 }
+
 AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void AppMenuBar::renderImpl() {
@@ -43,17 +45,15 @@ void AppMenuBar::renderImpl() {
 }
 
 SubMenu &MenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
-  auto newSubMenu = std::make_unique<SubMenu>(name, caption);
-  const auto ptr = newSubMenu.get();
-  items.emplace_back(std::move(newSubMenu));
-  return *ptr;
+  return addItem<SubMenu>(name, caption);
 }
 
-MenuItem &MenuContainer::addItem(const std::string &name, const std::string &caption) {
-  auto newItem = std::make_unique<MenuItem>(name, caption);
-  const auto ptr = newItem.get();
-  items.emplace_back(std::move(newItem));
-  return *ptr;
+MenuButtonItem &MenuContainer::addButtonItem(const std::string &name, const std::string &caption) {
+  return addItem<MenuButtonItem>(name, caption);
+}
+
+MenuCheckboxItem &MenuContainer::addCheckboxItem(const std::string &name, const std::string &caption, bool value) {
+  return addItem<MenuCheckboxItem>(name, caption, value);
 }
 
 void MenuContainer::removeItem(const std::string &name) {
@@ -62,9 +62,12 @@ void MenuContainer::removeItem(const std::string &name) {
     items.erase(iter);
   }
 }
-
 void MenuContainer::renderItems() {
   std::ranges::for_each(items, [](auto &item) { item->render(); });
 }
-
+MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value)
+    : MenuItem(elementName, label), ValueObservable(value) {}
+void MenuCheckboxItem::renderImpl() {
+  if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
+}
 }// namespace pf::ui::ig
