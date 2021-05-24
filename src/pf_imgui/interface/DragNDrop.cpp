@@ -71,6 +71,9 @@ void details::DragSourceBase::createSimpleTooltip(const std::string &fmt, bool i
     tooltipTextFmt = std::nullopt;
   }
 }
+bool details::DragSourceBase::hasFmtTooltip() const {
+  return tooltipTextFmt.has_value();
+}
 
 details::DropTargetBase::DropTargetBase(bool dropAllowed) : dropAllowed(dropAllowed) {}
 

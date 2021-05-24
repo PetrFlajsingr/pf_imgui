@@ -109,6 +109,8 @@ class PF_IMGUI_EXPORT DragSourceBase {
    */
   void createSimpleTooltip(const std::string &fmt, bool isValueFmt);
 
+  [[nodiscard]] bool hasFmtTooltip() const;
+
  private:
   bool dragged = false;
   bool ownsPayload = false;
@@ -197,8 +199,12 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
     const auto wasDragged = isDragged();
     bool result;
     if constexpr (ToStringConvertible<T>) {
-      result =
-          drag_impl_fmt(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
+      if (hasFmtTooltip()) {
+        result =
+            drag_impl_fmt(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
+      } else {
+        result = drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
+      }
     } else {
       result = drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
     }
