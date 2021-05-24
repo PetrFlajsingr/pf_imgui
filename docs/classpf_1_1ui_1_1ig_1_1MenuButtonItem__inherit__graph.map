@@ -1,0 +1,8 @@
+<map id="pf::ui::ig::MenuButtonItem" name="pf::ui::ig::MenuButtonItem">
+<area shape="rect" id="node1" title="An item, which can be clicked. It is basically a popup menu item." alt="" coords="161,229,352,256"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1MenuItem.html" title=" " alt="" coords="9,155,157,181"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="182,155,331,181"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Clickable.html" title="Interface for clickable elements." alt="" coords="355,155,497,181"/>
+</map>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['heatmap_571',['HeatMap',['../classpf_1_1ui_1_1ig_1_1plot__type_1_1HeatMap.html',1,'pf::ui::ig::plot_type']]],
-  ['height_572',['Height',['../structpf_1_1ui_1_1ig_1_1details_1_1Height.html',1,'pf::ui::ig::details']]],
-  ['hoverable_573',['Hoverable',['../classpf_1_1ui_1_1ig_1_1Hoverable.html',1,'pf::ui::ig']]]
+  ['heatmap_578',['HeatMap',['../classpf_1_1ui_1_1ig_1_1plot__type_1_1HeatMap.html',1,'pf::ui::ig::plot_type']]],
+  ['height_579',['Height',['../structpf_1_1ui_1_1ig_1_1details_1_1Height.html',1,'pf::ui::ig::details']]],
+  ['hoverable_580',['Hoverable',['../classpf_1_1ui_1_1ig_1_1Hoverable.html',1,'pf::ui::ig']]]
 ];

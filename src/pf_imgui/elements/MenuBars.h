@@ -22,14 +22,15 @@
 namespace pf::ui::ig {
 // todo: different item types - separator, checkbox... custom?
 class SubMenu;
-class PF_IMGUI_EXPORT MenuItem : public Element, public Labellable {
+class PF_IMGUI_EXPORT MenuItem : public Element {
  public:
-  MenuItem(const std::string &name, const std::string &label);
+  MenuItem(const std::string &name);
 
  private:
 };
 class MenuButtonItem;
 class MenuCheckboxItem;
+class MenuSeparatorItem;
 /**
  * @brief An item which can contain other menus.
  */
@@ -57,6 +58,12 @@ class PF_IMGUI_EXPORT MenuContainer {
    * @return reference to the created MenuButtonItem
    */
   MenuCheckboxItem &addCheckboxItem(const std::string &name, const std::string &caption, bool value = false);
+  /**
+   * Create an instance of MenuSeparatorItem and add it to the end of children/
+   * @param name ID of the MenuSeparatorItem
+   * @return reference to the created MenuSeparatorItem
+   */
+  MenuSeparatorItem &addSeparator(const std::string &name);
 
   template<std::derived_from<MenuItem> T, typename... Args>
   T &addItem(Args &&...args) requires std::constructible_from<T, Args...> {
@@ -79,9 +86,9 @@ class PF_IMGUI_EXPORT MenuContainer {
   std::vector<std::unique_ptr<MenuItem>> items;
 };
 /**
- * @brief An item in SubMenu, which can be clicked. It is basically a popup menu item.
+ * @brief An item, which can be clicked. It is basically a popup menu item.
  */
-class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
+class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, public Clickable {
  public:
   /**
    * Construct MenuButtonItem.
@@ -94,10 +101,10 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
   void renderImpl() override;
 };
 /**
- * @brief An item in SubMenu, which can be clicked and it toggles its inner value.
+ * @brief An item, which can be clicked and it toggles its inner value.
  * @todo: persistence
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable<bool> {
+class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public Labellable, public ValueObservable<bool> {
  public:
   /**
    * Construct MenuCheckboxItem.
@@ -111,9 +118,23 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable
   void renderImpl() override;
 };
 /**
+ * @brief An item, which divides menus.
+ */
+class PF_IMGUI_EXPORT MenuSeparatorItem : public MenuItem {
+ public:
+  /**
+   * Construct MenuSeparatorItem.
+   * @param elementName ID of the element
+   */
+  MenuSeparatorItem(const std::string &elementName);
+
+ protected:
+  void renderImpl() override;
+};
+/**
  * @brief Basically a button for a popup menu, which contains other elements as its items.
  */
-class PF_IMGUI_EXPORT SubMenu : public MenuItem, public MenuContainer {
+class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuContainer {
  public:
   /**
    * Construct SubMenu.

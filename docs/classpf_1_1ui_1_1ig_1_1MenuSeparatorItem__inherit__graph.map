@@ -1,0 +1,6 @@
+<map id="pf::ui::ig::MenuSeparatorItem" name="pf::ui::ig::MenuSeparatorItem">
+<area shape="rect" id="node1" title="An item, which divides menus." alt="" coords="5,229,216,256"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1MenuItem.html" title=" " alt="" coords="37,155,185,181"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="43,80,179,107"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="33,5,189,32"/>
+</map>

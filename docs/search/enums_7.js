@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['persistent_1105',['Persistent',['../enums_8h.html#aec88ef01b4aef44ac4396703cc96205e',1,'pf::ui::ig']]],
-  ['plottype_1106',['PlotType',['../enums_8h.html#a3414795f0b7476b7a3e04233bf866fe1',1,'pf::ui::ig']]]
+  ['persistent_1121',['Persistent',['../enums_8h.html#aec88ef01b4aef44ac4396703cc96205e',1,'pf::ui::ig']]],
+  ['plottype_1122',['PlotType',['../enums_8h.html#a3414795f0b7476b7a3e04233bf866fe1',1,'pf::ui::ig']]]
 ];

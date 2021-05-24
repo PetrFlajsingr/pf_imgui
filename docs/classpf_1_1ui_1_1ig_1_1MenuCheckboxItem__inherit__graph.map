@@ -1,0 +1,8 @@
+<map id="pf::ui::ig::MenuCheckboxItem" name="pf::ui::ig::MenuCheckboxItem">
+<area shape="rect" id="node1" title="An item, which can be clicked and it toggles its inner value." alt="" coords="151,229,363,256"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1MenuItem.html" title=" " alt="" coords="9,155,157,181"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="182,155,331,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="356,155,547,181"/>
+</map>
