@@ -17,7 +17,7 @@ bool MenuItem::isCloseMenuOnInteract() const { return closeOnInteract; }
 void MenuItem::setCloseOnInteract(bool close) { closeOnInteract = close; }
 
 void MenuItem::render() {
-  ImGui::PushItemFlag(ImGuiItemFlags_SelectableDontClosePopup, true);
+  ImGui::PushItemFlag(ImGuiItemFlags_SelectableDontClosePopup, closeOnInteract);
   Element::render();
   ImGui::PopItemFlag();
 }
