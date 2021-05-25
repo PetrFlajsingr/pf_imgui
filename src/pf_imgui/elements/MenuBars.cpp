@@ -5,11 +5,22 @@
 #include "MenuBars.h"
 #include <algorithm>
 #include <imgui.h>
+#include <imgui_internal.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
 MenuItem::MenuItem(const std::string &name) : Element(name) {}
+
+bool MenuItem::isCloseMenuOnInteract() const { return closeOnInteract; }
+
+void MenuItem::setCloseOnInteract(bool close) { closeOnInteract = close; }
+
+void MenuItem::render() {
+  ImGui::PushItemFlag(ImGuiItemFlags_SelectableDontClosePopup, true);
+  Element::render();
+  ImGui::PopItemFlag();
+}
 
 MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string &label)
     : MenuItem(elementName), Labellable(label) {}

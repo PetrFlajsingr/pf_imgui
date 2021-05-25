@@ -24,9 +24,23 @@ namespace pf::ui::ig {
 class SubMenu;
 class PF_IMGUI_EXPORT MenuItem : public Element {
  public:
-  MenuItem(const std::string &name);
+  explicit MenuItem(const std::string &name);
+
+  /**
+   * Set if the parent menu is closed on interact - the menu might still get closed in some cases.
+   * @param close true if the menu should close, false if not
+   */
+  void setCloseOnInteract(bool close);
+  /**
+   * Check if parent menu is closed on interact.
+   * @return true if the menu closes, false if not
+   */
+  [[nodiscard]] bool isCloseMenuOnInteract() const;
+
+  void render() override;
 
  private:
+  bool closeOnInteract = true;
 };
 class MenuButtonItem;
 class MenuCheckboxItem;
