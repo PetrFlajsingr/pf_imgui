@@ -163,7 +163,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
     assert(index < items.size());
     if (index != selectedItemIndex) {
       selectedItemIndex = index;
-      ValueObservable<T>::setValueInner(filteredItems[currentItemIdx]->first);
+      ValueObservable<T>::setValueInner(filteredItems[index]->first);
       ValueObservable<T>::notifyValueChanged();
     }
   }
