@@ -131,7 +131,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
    * Set selected item by name. If no such item is found nothing happens.
    * @param itemToSelect item to select
    */
-  void setSelectedItem(const T &itemToSelect) {
+  void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
               filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
