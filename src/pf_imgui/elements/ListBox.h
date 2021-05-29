@@ -57,7 +57,7 @@ struct ListBoxItemStorage<std::string> {
  *
  * User selection can be observed via listeners.
  *
- * @todo: custom listbox
+ * @todo: custom listbox - custom listbox will be a basic interface without drag support
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT ListBox : public ItemElement,

@@ -35,8 +35,8 @@ class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Res
    * @param isRepeatable enable/disable button can repeat it's on click event when a user holds it
    * @param size size of the button
    */
-  [[deprecated]] Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
-                        Repeatable isRepeatable = Repeatable::No, const Size &size = Size::Auto());
+  Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
+         Repeatable isRepeatable = Repeatable::No, const Size &size = Size::Auto());
 
   /**
    * Get current type of the button.

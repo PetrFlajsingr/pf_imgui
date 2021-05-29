@@ -25,7 +25,6 @@ void AbsoluteLayout::renderImpl() {
     if (renderCollapseButton()) {
       std::ranges::for_each(children, [](auto &childPair) {
         auto &[child, positionable] = childPair;
-        [[maybe_unused]] auto hihi = positionable->getPosition();
         ImGui::SetCursorPos(positionable->getPosition());
         child->render();
       });
