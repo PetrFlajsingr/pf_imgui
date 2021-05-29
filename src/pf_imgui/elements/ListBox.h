@@ -132,8 +132,17 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
    * @param itemToSelect item to select
    */
   void setSelectedItem(const T &itemToSelect) {
-    const auto itemAsString = toString(itemToSelect);
-    setSelectedItem(itemAsString);
+    if constexpr(std::equality_comparable<T>) {
+      if (const auto iter = std::ranges::find_if(
+            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+          iter != filteredItems.end()) {
+        const auto index = std::distance(filteredItems.begin(), iter);
+        selectedItemIndex = index;
+      }
+    } else {
+      const auto itemAsString = toString(itemToSelect);
+      setSelectedItem(itemAsString);
+    }
   }
 
   /**
