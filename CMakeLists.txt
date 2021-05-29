@@ -157,6 +157,7 @@ set(SOURCES
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
         src/include/imgui/imgui_tables.cpp
+        src/include/imgui/imgui_demo.cpp
         src/include/DearWidgets/dear_widgets.cpp
         src/include/ImGuizmo/ImCurveEdit.cpp
         src/include/ImGuizmo/ImGradient.cpp
