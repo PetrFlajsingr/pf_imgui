@@ -11,12 +11,13 @@
 #include <algorithm>
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <range/v3/view/addressof.hpp>
 #include <string>
 #include <vector>
-#include <range/v3/view/addressof.hpp>
 
 namespace pf::ui::ig {
 
@@ -59,7 +60,12 @@ struct ListBoxItemStorage<std::string> {
  * @todo: custom listbox
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public ValueObservable<T>, public Savable {
+class PF_IMGUI_EXPORT ListBox : public ItemElement,
+                                public Labellable,
+                                public ValueObservable<T>,
+                                public Savable,
+                                public DragSource<T>,
+                                public DropTarget<T> {
  public:
   /**
    * Construct ListBox.
@@ -75,8 +81,9 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
           Persistent persistent =
           Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
       &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(), Savable(persistent),
-        selectedItemIndex(selectedIdx), height(heightInItems) {
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(),
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx),
+        height(heightInItems) {
     std::ranges::copy(newItems, std::back_inserter(items));
     refilterItems();
   }
@@ -167,6 +174,8 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement, public Labellable, public Va
       ValueObservable<T>::notifyValueChanged();
       selectedItemIndex = currentItemIdx;
     }
+    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { addItem(*drop); }
+    if (selectedItemIndex.has_value()) { DragSource<T>::drag(filteredItems[*selectedItemIndex]->first); }
   }
 
   void unserialize_impl(const toml::table &src) override {
