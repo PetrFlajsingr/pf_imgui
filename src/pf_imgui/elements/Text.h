@@ -50,11 +50,13 @@ class PF_IMGUI_EXPORT Text : public ItemElement, public DragSource<std::string>,
    * @param args values to insert into text using fmt::format
    */
   void setText(const std::string &fmt, auto &&...args) {
-    text = fmt::format(fmt, std::forward<decltype(args)>(args)...);
+    setTextInner(fmt::format(fmt, std::forward<decltype(args)>(args)...));
   }
 
  protected:
   void renderImpl() override;
+
+  virtual void setTextInner(std::string txt);
 
  private:
   std::string text;

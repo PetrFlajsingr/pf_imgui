@@ -12,7 +12,7 @@ InputText::InputText(const std::string &elementName, std::string label, const st
                      TextInputType textInputType, TextTrigger trigger, Flags<TextFilter> filters, Persistent persistent)
     : Text(elementName, text), Labellable(std::move(label)), ValueObservable(""), Savable(persistent),
       inputType(textInputType) {
-  setValueInner(text);
+  setTextInner(text);
   for (auto flag : filters.getSetFlags()) { flags |= static_cast<uint32_t>(flag); }
   if (trigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
 }
@@ -25,7 +25,7 @@ void InputText::renderImpl() {
     valueChanged = ImGui::InputTextMultiline(getLabel().c_str(), buffer, 256, ImVec2(0, 0), flags);
   }
   if (valueChanged && strcmp(buffer, getText().c_str()) != 0) {
-    setText(buffer);
+    setTextInner(buffer);
     setValueInner(getText());
     notifyValueChanged();
   }
@@ -65,6 +65,11 @@ void InputText::setPassword(bool passwd) {
   } else {
     flags &= ~ImGuiInputTextFlags_Password;
   }
+}
+void InputText::setTextInner(std::string txt) {
+  Text::setTextInner(txt);
+  std::ranges::copy(txt, buffer);
+  buffer[txt.size()] = '\0';
 }
 
 }// namespace pf::ui::ig

@@ -89,6 +89,8 @@ class PF_IMGUI_EXPORT InputText : public Text,
 
   void renderImpl() override;
 
+  void setTextInner(std::string txt) override;
+
  private:
   char buffer[256]{};
   TextInputType inputType;
