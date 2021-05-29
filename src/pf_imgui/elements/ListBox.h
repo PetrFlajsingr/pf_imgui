@@ -57,7 +57,7 @@ struct ListBoxItemStorage<std::string> {
  *
  * User selection can be observed via listeners.
  *
- * @todo: custom listbox - custom listbox will be a basic interface without drag support
+ * @todo: custom listbox
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT ListBox : public ItemElement,
@@ -161,6 +161,49 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
    */
   void clearFilter() {
     filter = [](auto) { return true; };
+    refilterItems();
+  }
+
+  /**
+   * Get all items in ListBox.
+   * @return all items in ListBox
+   */
+  [[nodiscard]] auto getItems() {
+    return items | std::views::transform([](auto &item) -> T & { return item.first; });
+  }
+  /**
+   * Get all items in ListBox.
+   * @return all items in ListBox
+   */
+  [[nodiscard]] auto getItems() const {
+    return items | std::views::transform([](auto &item) -> const T & { return item.first; });
+  }
+
+  /**
+   * Remove item by value.
+   * @param itemToRemove item to remove
+   */
+  void removeItem(const T &itemToRemove) requires(std::equality_comparable<T> && !std::same_as<T, std::string>) {
+    std::erase_if(items, [itemToRemove](const auto &item) { return item.first == itemToRemove; });
+    reloadItems();
+  }
+
+  /**
+   * Remove item by string representation
+   * @param itemToRemove string representation of item to remove
+   */
+  void removeItem(const std::string &itemToRemove) {
+    std::erase_if(items, [itemToRemove](const auto &item) { return itemToRemove == item.first; });
+    reloadItems();
+  }
+
+  /**
+   * Reload items. This should be used after external change, for example when changing items via getItems().
+   */
+  void reloadItems() {
+    auto oldItems = items;
+    items.clear();
+    std::ranges::for_each(oldItems, [this](auto &item) { items.emplace_back(item); });
     refilterItems();
   }
 
