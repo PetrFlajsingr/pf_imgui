@@ -15,6 +15,10 @@
 
 namespace pf::ui::ig {
 /**
+ * Enum for selection.
+ */
+enum class Selected { Yes, No };
+/**
  * Enum for visibility of various types.
  */
 enum class Visibility { Visible, Invisible };

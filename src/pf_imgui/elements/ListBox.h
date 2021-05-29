@@ -93,9 +93,10 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
    * Add item to the end of the list.
    * @param item item to be added
    */
-  void addItem(const T &item) {
+  void addItem(const T &item, Selected selected = Selected::No) {
     items.emplace_back(item);
     refilterItems();
+    if (selected == Selected::Yes) { setSelectedItem(item); }
   }
   /**
    * Add items to the end of the list.
