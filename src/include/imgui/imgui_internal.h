@@ -36,8 +36,9 @@ Index of this file:
 */
 
 #pragma once
-#ifndef IMGUI_DISABLE
 
+#ifndef IMGUI_DISABLE
+#define IMGUI_DEFINE_MATH_OPERATORS
 //-----------------------------------------------------------------------------
 // [SECTION] Header mess
 //-----------------------------------------------------------------------------

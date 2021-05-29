@@ -46,6 +46,7 @@ Index of this file:
 #include "imconfig.h"
 #endif
 
+#define IMGUI_DEFINE_MATH_OPERATORS
 #ifndef IMGUI_DISABLE
 
 //-----------------------------------------------------------------------------
