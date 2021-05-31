@@ -80,8 +80,8 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
           std::ranges::range auto &&newItems = std::vector<T>{}, std::optional<int> selectedIdx = std::nullopt,
           int heightInItems = -1,
           Persistent persistent =
-              Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                           &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+          Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx),
         height(heightInItems) {
@@ -137,7 +137,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
   void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != filteredItems.end()) {
         const auto index = std::distance(filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -154,7 +154,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-            filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
+          filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
@@ -166,6 +166,7 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
     if (index != selectedItemIndex) {
       selectedItemIndex = index;
       ValueObservable<T>::setValueInner(filteredItems[index]->first);
+      selectedItemIndex = index;
       ValueObservable<T>::notifyValueChanged();
     }
   }
@@ -260,8 +261,8 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
       auto itemsWithIndices = ranges::views::enumerate(items) | ranges::to_vector;
       const auto indexInAllItems =
           static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
-                             return itemInfo.second.first == selectedItem.first;
-                           })->first);
+            return itemInfo.second.first == selectedItem.first;
+          })->first);
       result.insert_or_assign("selected", indexInAllItems);
     }
     return result;
