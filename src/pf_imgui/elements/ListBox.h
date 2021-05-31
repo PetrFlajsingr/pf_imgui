@@ -158,7 +158,6 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
-      selectedItemIndex = index;
     }
   }
 

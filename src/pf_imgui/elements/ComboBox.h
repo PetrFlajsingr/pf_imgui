@@ -243,9 +243,9 @@ class PF_IMGUI_EXPORT ComboBox : public ItemElement,
         auto isSelected = selectedItemIndex.has_value() && *selectedItemIndex == idx;
         ImGui::Selectable(ptr.second, &isSelected);
         if (isSelected) {
-          selectedItemIndex = idx;
           if (!selectedItemIndex.has_value() || *selectedItemIndex != idx) {
             ValueObservable<T>::setValueInner(filteredItems[idx]->first);
+            selectedItemIndex = idx;
             ValueObservable<T>::notifyValueChanged();
           }
         }
