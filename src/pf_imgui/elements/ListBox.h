@@ -57,7 +57,7 @@ struct ListBoxItemStorage<std::string> {
  *
  * User selection can be observed via listeners.
  *
- * @todo: custom listbox
+ * @todo: custom listbox - change to BeginListBox/EndListBox - CustomListBox<Renderable> with ListBox<T> being derived from CustomListBox<Selectable>
  * @todo: handle pointers as values
  */
 template<ToStringConvertible T>
@@ -92,6 +92,8 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
   /**
    * Add item to the end of the list.
    * @param item item to be added
+   * @param selected when selected the item is activated in the same way as if the user clicked on it
+   * and observers are notified
    */
   void addItem(const T &item, Selected selected = Selected::No) {
     items.emplace_back(item);
@@ -235,8 +237,8 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
     auto currentItemIdx = selectedItemIndex.template value_or(-1);
     if (ImGui::ListBox(getLabel().c_str(), &currentItemIdx, cStrItems.data(), cStrItems.size(), height)) {
       ValueObservable<T>::setValueInner(filteredItems[currentItemIdx]->first);
-      ValueObservable<T>::notifyValueChanged();
       selectedItemIndex = currentItemIdx;
+      ValueObservable<T>::notifyValueChanged();
     }
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { addItem(*drop); }
     if (selectedItemIndex.has_value()) { DragSource<T>::drag(filteredItems[*selectedItemIndex]->first); }
