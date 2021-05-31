@@ -17,5 +17,5 @@ jobs:
     
     - name: run build
       run: |
-        cmake . -DCMAKE_CXX_COMPILER=g++-11 -DPF_COMMON_TESTS=ON
+        cmake . -DCMAKE_CXX_COMPILER=g++-11
         cmake --build . --target pf_common_tests
