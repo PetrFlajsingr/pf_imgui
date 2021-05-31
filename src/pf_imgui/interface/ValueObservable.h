@@ -29,6 +29,8 @@ namespace pf::ui::ig {
  * Provides storage and functionality to notify listeners of value changes.
  *
  * @tparam type of stored data
+ *
+ * @todo: drop the copy constructible requirement
  */
 template<typename T>
 requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_constructible<T>) class PF_IMGUI_EXPORT

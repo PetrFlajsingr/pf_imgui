@@ -26,6 +26,9 @@ if (ENABLE_STACKTRACE)
     add_compile_definitions(STACKTRACE_ENABLE)
 endif ()
 
+
+add_compile_definitions(PF_ENUM_OUT)
+
 set(CMAKE_CXX_STANDARD 20)
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
