@@ -18,4 +18,4 @@ jobs:
     - name: run build
       run: |
         cmake . -DCMAKE_CXX_COMPILER=g++-11
-        cmake --build . --target pf_common_tests
+        make
