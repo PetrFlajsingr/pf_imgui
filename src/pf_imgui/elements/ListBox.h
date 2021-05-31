@@ -203,27 +203,29 @@ class PF_IMGUI_EXPORT ListBox : public ItemElement,
   }
 
   /**
-   * Remove item by value -- all matching items will be removed.
+   * Remove item by value.
    * @param itemToRemove item to remove
    */
   void removeItem(const T &itemToRemove) requires(std::equality_comparable<T> && !std::same_as<T, std::string>) {
-    removeItemIf([itemToRemove](const auto &item) { return item.first == itemToRemove; });
+    std::erase_if(items, [itemToRemove](const auto &item) { return item.first == itemToRemove; });
+    reloadItems();
   }
 
   /**
-   * Remove item by string representation - all matching items will be removed
+   * Remove item by string representation
    * @param itemToRemove string representation of item to remove
    */
   void removeItem(const std::string &itemToRemove) {
-    removeItemIf([itemToRemove](const auto &item) { return itemToRemove == item.first; });
+    std::erase_if(items, [itemToRemove](const auto &item) { return itemToRemove == item.first; });
+    reloadItems();
   }
-
   /**
    * Remove item by a predicate - all matching items will be removed.
    * @param predicate predicate returning true for items which will be removed
    */
   void removeItemIf(std::predicate<const T &> auto &&predicate) {
-    std::erase_if(items, std::forward<decltype(predicate)>(predicate));
+    std::erase_if(items,
+                  [p = std::forward<decltype(predicate)>(predicate)](const auto &item) { return p(item.first); });
     reloadItems();
   }
 
