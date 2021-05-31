@@ -30,58 +30,42 @@ class MemoryEditor : public ItemElement {
    * Check if editor is read only.
    * @return
    */
-  [[nodiscard]] bool isReadOnly() const {
-    return memoryEditor.ReadOnly;
-  }
+  [[nodiscard]] bool isReadOnly() const { return memoryEditor.ReadOnly; }
   /**
    * Set editor to read only.
    * @param readOnly
    */
-  void setReadOnly(bool readOnly) {
-    memoryEditor.ReadOnly = readOnly;
-  }
+  void setReadOnly(bool readOnly) { memoryEditor.ReadOnly = readOnly; }
   /**
    * Check if options button is enabled.
    * @return
    */
-  [[nodiscard]] bool isShowOptions() const {
-    return memoryEditor.OptShowOptions;
-  }
+  [[nodiscard]] bool isShowOptions() const { return memoryEditor.OptShowOptions; }
   /**
    * Enable/disable options button.
    * @param showOptions
    */
-  void setShowOptions(bool showOptions) {
-    memoryEditor.OptShowOptions = showOptions;
-  }
+  void setShowOptions(bool showOptions) { memoryEditor.OptShowOptions = showOptions; }
   /**
    * Check if panel for previewing data in different formats is enabled.
    * @return
    */
-  [[nodiscard]] bool isDataPreview() const {
-    return memoryEditor.OptShowDataPreview;
-  }
+  [[nodiscard]] bool isDataPreview() const { return memoryEditor.OptShowDataPreview; }
   /**
    * Enable/disable data preview panel
    * @param dataPreview
    */
-  void setDataPreview(bool dataPreview) {
-    memoryEditor.OptShowDataPreview = dataPreview;
-  }
+  void setDataPreview(bool dataPreview) { memoryEditor.OptShowDataPreview = dataPreview; }
   /**
    * Get an amount of rendered values on a row.
    * @return an amount of rendered values on a row
    */
-  [[nodiscard]] unsigned int getColumnCount() const {
-    return memoryEditor.Cols;
-  }
+  [[nodiscard]] unsigned int getColumnCount() const { return memoryEditor.Cols; }
   /**
    * Set an amount of rendered values on a row.
    * @param count new column count
    */
-  void setColumnCount(unsigned int count) {
-    memoryEditor.Cols = count;
-  }
+  void setColumnCount(unsigned int count) { memoryEditor.Cols = count; }
 
   [[nodiscard]] R &getRange() const { return range; }
   void setRange(R &newRange) { range = newRange; }

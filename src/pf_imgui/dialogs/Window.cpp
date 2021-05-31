@@ -24,12 +24,8 @@ void Window::renderImpl() {
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
     if (firstPass) {
       firstPass = false;
-      if (getSize() != Size::Auto()) {
-        setSize(getSize());
-      }
-      if (getPosition().x != -1 && getPosition().y != -1) {
-        setPosition(getPosition());
-      }
+      if (getSize() != Size::Auto()) { setSize(getSize()); }
+      if (getPosition().x != -1 && getPosition().y != -1) { setPosition(getPosition()); }
     }
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);

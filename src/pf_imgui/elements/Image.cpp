@@ -25,15 +25,14 @@ void Image::renderImpl() {
   //  auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
   //  ImVec2 mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
   //  mouseUVCoord.y = 1.f - mouseUVCoord.y;
-//
+  //
   //  if (io.KeyShift && io.MouseDown[0] && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f) {
   //    int width = getSize().width;
   //    int height = getSize().height;
-//
+  //
   //    imageInspect(width, height, pickerImage.GetBits(), mouseUVCoord, displayedTextureSize);
   //  }
   //}
-
 }
 
 void Image::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }

@@ -7,8 +7,8 @@
 
 namespace pf::ui::ig {
 
-Range2D::Range2D(const std::string &elementName, const std::string &label, const glm::vec2 &min,
-                 const glm::vec2 &max, const math::Range<glm::vec2> &value, const Size &s, Persistent persistent)
+Range2D::Range2D(const std::string &elementName, const std::string &label, const glm::vec2 &min, const glm::vec2 &max,
+                 const math::Range<glm::vec2> &value, const Size &s, Persistent persistent)
     : ItemElement(elementName), Labellable(label), ValueObservable(value), Resizable(s), Savable(persistent),
       DragSource(false), DropTarget(false), minRange(min), maxRange(max) {}
 

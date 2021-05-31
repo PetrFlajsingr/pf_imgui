@@ -57,7 +57,7 @@ void details::DragSourceBase::removeDragTooltip() {
 
 bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
                                             const std::string &value) {
-  if (!dragged && tooltipTextFmt.has_value()) { // TODO: check this condition
+  if (!dragged && tooltipTextFmt.has_value()) {// TODO: check this condition
     tooltipTextFmt->second->setText(fmt::format(tooltipTextFmt->first, value));
   }
   return drag_impl(typeName, sourceData, dataSize);
@@ -71,9 +71,7 @@ void details::DragSourceBase::createSimpleTooltip(const std::string &fmt, bool i
     tooltipTextFmt = std::nullopt;
   }
 }
-bool details::DragSourceBase::hasFmtTooltip() const {
-  return tooltipTextFmt.has_value();
-}
+bool details::DragSourceBase::hasFmtTooltip() const { return tooltipTextFmt.has_value(); }
 
 details::DropTargetBase::DropTargetBase(bool dropAllowed) : dropAllowed(dropAllowed) {}
 

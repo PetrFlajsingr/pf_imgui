@@ -26,12 +26,12 @@ namespace pf::ui::ig {
  */
 template<OneOf<float> T>
 class PF_IMGUI_EXPORT Slider3D : public ItemElement,
-                 public Labellable,
-                 public ValueObservable<glm::vec3>,
-                 public Savable,
-                 public DragSource<glm::vec3>,
-                 public DropTarget<glm::vec3>,
-                 public Resizable {
+                                 public Labellable,
+                                 public ValueObservable<glm::vec3>,
+                                 public Savable,
+                                 public DragSource<glm::vec3>,
+                                 public DropTarget<glm::vec3>,
+                                 public Resizable {
  public:
   /**
    * Construct Slider3D.

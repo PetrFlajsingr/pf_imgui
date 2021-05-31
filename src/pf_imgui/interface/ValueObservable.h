@@ -34,7 +34,7 @@ namespace pf::ui::ig {
  */
 template<typename T>
 requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_constructible<T>) class PF_IMGUI_EXPORT
-ValueObservable {
+    ValueObservable {
  public:
   /**
    * Construct ValueObservable with starting value.
