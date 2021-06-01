@@ -26,13 +26,13 @@ namespace pf::ui::ig {
 namespace details {
 template<ToStringConvertible T>
 struct ListboxRowFactory {
-  cppcoro::generator<std::size_t> idGenerator = iota<std::size_t>();
+  static inline cppcoro::generator<std::size_t> idGenerator = iota<std::size_t>();
   const std::string idStart = uniqueId();
   std::unique_ptr<Selectable> operator()(const T &item) {
-    return std::make_unique<Selectable>(idStart + std::to_string(getNext(idGenerator), toString(item)));
+    return std::make_unique<Selectable>(idStart + std::to_string(getNext(idGenerator)), toString(item));
   }
 };
-static_assert(CustomListboxRowFactory<ListboxRowFactory<int>>);
+static_assert(CustomListboxRowFactory<ListboxRowFactory<int>, int, Selectable>);
 }// namespace details
 
 /**
@@ -41,13 +41,27 @@ static_assert(CustomListboxRowFactory<ListboxRowFactory<int>>);
  * User selection can be observed via listeners.
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT Listbox2 : public CustomListBox<T>,
+class PF_IMGUI_EXPORT Listbox2 : public CustomListbox<T, Selectable>,
                                  public ValueObservable<T>,
                                  public Savable,
                                  public DragSource<T>,
                                  public DropTarget<T> {
+  using CustomListbox<T, Selectable>::filteredItems;
+  using CustomListbox<T, Selectable>::items;
+
  public:
   using Factory = details::ListboxRowFactory<T>;
+  using CustomListbox<T, Selectable>::getName;
+  using CustomListbox<T, Selectable>::getLabel;
+  using CustomListbox<T, Selectable>::getSize;
+  using CustomListbox<T, Selectable>::setItems;
+  using CustomListbox<T, Selectable>::addItem;
+  using CustomListbox<T, Selectable>::addItems;
+  using CustomListbox<T, Selectable>::removeItem;
+  using CustomListbox<T, Selectable>::removeItemIf;
+  using CustomListbox<T, Selectable>::setFilter;
+  using CustomListbox<T, Selectable>::clearFilter;
+  using CustomListbox<T, Selectable>::getItems;
   /**
    * Construct Listbox.
    * @param elementName ID of the element
@@ -56,15 +70,13 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListBox<T>,
    * @param selectedIdx starting selected id
    * @param heightInItems items to show before scroll is enabled - -1 shows all
    */
-  Listbox2(const std::string &elementName, const std::string &label,
+  Listbox2(const std::string &elementName, const std::string &label, Size s = Size::Auto(),
            std::ranges::range auto &&newItems = std::vector<T>{}, std::optional<int> selectedIdx = std::nullopt,
-           int heightInItems = -1,
            Persistent persistent =
-               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomListBox<T>(elementName, label, Factory{}), ValueObservable<T>(),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx),
-        height(heightInItems) {
+           Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+      : CustomListbox<T, Selectable>(elementName, label, Factory{}, s), ValueObservable<T>(),
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {
     setItems(newItems);
   }
 
@@ -95,7 +107,7 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListBox<T>,
   void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != filteredItems.end()) {
         const auto index = std::distance(filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -112,7 +124,7 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListBox<T>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-            filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
+          filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
@@ -122,9 +134,9 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListBox<T>,
   void setSelectedItemByIndex(std::size_t index) {
     assert(index < items.size());
     if (index != selectedItemIndex) {
-      if (selectedItemIndex.has_value()) { filteredItems[*selectedItemIndex]->setValue(false); }
+      if (selectedItemIndex.has_value()) { filteredItems[*selectedItemIndex]->second->setValue(false); }
       selectedItemIndex = index;
-      filteredItems[*selectedItemIndex]->setValue(true);
+      filteredItems[*selectedItemIndex]->second->setValue(true);
       ValueObservable<T>::setValueInner(filteredItems[index]->first);
       ValueObservable<T>::notifyValueChanged();
     }
@@ -132,13 +144,11 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListBox<T>,
 
  protected:
   void renderImpl() override {
-    if (ImGui::BeginListBox(getName().c_str(), getSize().asImVec())) {
-      std::ranges::for_each(items | ranges::views::enumerate, [this](auto &itemIdx) {
+    if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
+      std::ranges::for_each(items | ranges::views::enumerate, [this](const auto &itemIdx) {
         const auto &[idx, item] = itemIdx;
         item.second->render();
-        if (item->getValue()) {
-          setSelectedItemByIndex(idx);
-        }
+        if (item.second->getValue()) { setSelectedItemByIndex(idx); }
       });
       ImGui::EndListBox();
     }
@@ -159,12 +169,12 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListBox<T>,
   toml::table serialize_impl() override {
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
-      const auto selectedItem = *filteredItems[*selectedItemIndex];
-      auto itemsWithIndices = ranges::views::enumerate(items) | ranges::to_vector;
+      const auto selectedItem = filteredItems[*selectedItemIndex];
+      auto itemsWithIndices = items | ranges::views::addressof | ranges::views::enumerate | ranges::to_vector;
       const auto indexInAllItems =
           static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
-                             return itemInfo.second.first == selectedItem.first;
-                           })->first);
+            return itemInfo.second->second.get() == selectedItem->second.get();
+          })->first);
       result.insert_or_assign("selected", indexInAllItems);
     }
     return result;

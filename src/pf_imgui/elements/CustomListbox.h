@@ -26,30 +26,29 @@ class PF_IMGUI_EXPORT CustomListbox : public ItemElement, public Labellable, pub
         factory(std::forward<decltype(rowFactory)>(rowFactory)) {}
 
   R &addItem(const T &item) {
-    auto &result = *items.template emplace_back(item, factory(item))->second.get();
+    auto &result = *items.template emplace_back(item, factory(item)).second.get();
     refilterItems();
     return result;
   }
 
   std::vector<std::reference_wrapper<R>> addItems(std::ranges::range auto &&newItems) requires(
-      std::convertible_to<std::ranges::range_value_t<decltype(items)>, T>) {
+      std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>) {
     auto result = std::vector<std::reference_wrapper<R>>{};
-    std::ranges::for_each(newItems, [this](const auto &newItem) {
-      result.template emplace_back(*items.template emplace_back(item, factory(item))->second.get());
+    std::ranges::for_each(newItems, [this, &result](const auto &newItem) {
+      result.template emplace_back(*items.template emplace_back(newItem, factory(newItem)).second.get());
     });
     refilterItems();
     return result;
   }
 
-  void setItems(std::ranges::range auto &&newItems) requires(
-      std::convertible_to<std::ranges::range_value_t<decltype(data)>, T>) {
+  std::vector<std::reference_wrapper<R>> setItems(std::ranges::range auto &&newItems) requires(
+      std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>) {
     items.clear();
-    std::ranges::copy(newItems, std::back_inserter(items));
-    refilterItems();
+    return addItems(std::forward<decltype(newItems)>(newItems));
   }
 
   void removeItem(const T &itemToRemove) requires(std::equality_comparable<T>) {
-    std::erase_if(items, [this](const auto &item) { return item.first == itemToRemove; });
+    std::erase_if(items, [this, &itemToRemove](const auto &item) { return item.first == itemToRemove; });
     refilterItems();
   }
   void removeItemIf(std::predicate<const T &> auto &&predicate) {
@@ -78,19 +77,20 @@ class PF_IMGUI_EXPORT CustomListbox : public ItemElement, public Labellable, pub
  protected:
   void refilterItems() {
     filteredItems = items | std::views::filter([this](auto &item) { return filter(item.first); })
-        | std::views::transform([](auto &item) { return item.second.get(); }) | ranges::to_vector;
+        | std::views::transform([](auto &item) { return &item; }) | ranges::to_vector;
   }
 
   void renderImpl() override {
-    if (ImGui::BeginListBox(getName().c_str(), getSize().asImVec())) {
+    if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
       std::ranges::for_each(items, [](auto &item) { item.second->render(); });
       ImGui::EndListBox();
     }
   }
 
-  std::vector<std::pair<T, std::unique_ptr<R>>> items;
-  std::vector<R *> filteredItems;
-  std::std::function<std::unique_ptr<R>(const T &)> > factory;
+  using Item = std::pair<T, std::unique_ptr<R>>;
+  std::vector<Item> items;
+  std::vector<Item *> filteredItems;
+  std::function<std::unique_ptr<R>(const T &)> factory;
   std::function<bool(const T &)> filter = [](const auto &) { return true; };
 };
 }// namespace pf::ui::ig
