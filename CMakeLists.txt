@@ -166,7 +166,8 @@ set(SOURCES
         src/include/ImGuizmo/ImGradient.cpp
         src/include/ImGuizmo/ImGuizmo.cpp
         src/include/ImGuizmo/ImSequencer.cpp
-        src/pf_imgui/interface/DragNDrop.cpp)
+        src/pf_imgui/interface/DragNDrop.cpp
+        )
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -186,6 +187,7 @@ set(INCLUDES
         src/pf_imgui/elements/Input.h
         src/pf_imgui/elements/InputText.h
         src/pf_imgui/elements/ListBox.h
+        src/pf_imgui/elements/ListBox2.h
         src/pf_imgui/elements/Memo.h
         src/pf_imgui/elements/MenuBars.h
         src/pf_imgui/elements/plots/SimplePlot.h
@@ -271,7 +273,8 @@ set(INCLUDES
         src/include/ImGuizmo/ImGuizmo.h
         src/include/ImGuizmo/ImSequencer.h
         src/include/ImGuizmo/ImZoomSlider.h
-        src/pf_imgui/elements/VerticalSlider.h)
+        src/pf_imgui/elements/VerticalSlider.h
+        src/pf_imgui/elements/CustomListbox.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
