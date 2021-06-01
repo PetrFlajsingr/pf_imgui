@@ -7,6 +7,7 @@
 #include <string>
 
 #include <vector>
+#pragma GCC diagnostic ignored "-Warray-bounds"
 
 namespace ImWidgets {
 //////////////////////////////////////////////////////////////////////////

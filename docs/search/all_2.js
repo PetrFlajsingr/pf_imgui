@@ -6,7 +6,7 @@ var searchData=
   ['checkbox_2eh_47',['Checkbox.h',['../Checkbox_8h.html',1,'']]],
   ['childbyname_48',['childByName',['../classpf_1_1ui_1_1ig_1_1ElementContainer.html#aa479bcdfbcdbd9b6e6dbbdf3c4c5bdda',1,'pf::ui::ig::ElementContainer']]],
   ['clear_49',['clear',['../classpf_1_1ui_1_1ig_1_1InputText.html#a1697b47d29c5047d0ea71c3ac1386964',1,'pf::ui::ig::InputText::clear()'],['../classpf_1_1ui_1_1ig_1_1SimplePlot.html#a3512844bf04e2ebaf439f0904701562e',1,'pf::ui::ig::SimplePlot::clear()'],['../classpf_1_1ui_1_1ig_1_1ElementContainer.html#ab19d0be250ed459dc48476712dfeeebc',1,'pf::ui::ig::ElementContainer::clear()']]],
-  ['clearfilter_50',['clearFilter',['../classpf_1_1ui_1_1ig_1_1ComboBox.html#a20a77a9bd6a966b9e4240ec9810ece62',1,'pf::ui::ig::ComboBox::clearFilter()'],['../classpf_1_1ui_1_1ig_1_1ListBox.html#ad4cd806f8697f0f4dda40b2db02789fb',1,'pf::ui::ig::ListBox::clearFilter()']]],
+  ['clearfilter_50',['clearFilter',['../classpf_1_1ui_1_1ig_1_1ComboBox.html#a20a77a9bd6a966b9e4240ec9810ece62',1,'pf::ui::ig::ComboBox::clearFilter()'],['../classpf_1_1ui_1_1ig_1_1CustomListbox.html#abb5791474f6f73c0f12fa1a9ba874f95',1,'pf::ui::ig::CustomListbox::clearFilter()']]],
   ['clearrecords_51',['clearRecords',['../classpf_1_1ui_1_1ig_1_1Memo.html#a1e4c5abe88ea823996dda4f1a8baf15e',1,'pf::ui::ig::Memo']]],
   ['clickable_52',['Clickable',['../classpf_1_1ui_1_1ig_1_1Clickable.html',1,'pf::ui::ig']]],
   ['clickable_2eh_53',['Clickable.h',['../Clickable_8h.html',1,'']]],
@@ -35,5 +35,7 @@ var searchData=
   ['createmsgdlg_76',['createMsgDlg',['../classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#ae838f79d1984bde02db11bbe83b67757',1,'pf::ui::ig::ImGuiInterface']]],
   ['createsimpletooltip_77',['createSimpleTooltip',['../classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html#a8c14569064db94af860ab76912bf5ded',1,'pf::ui::ig::details::DragSourceBase']]],
   ['createtooltip_78',['createTooltip',['../classpf_1_1ui_1_1ig_1_1ItemElement.html#a5b227e30ebec80c756a7baa588d0b5bd',1,'pf::ui::ig::ItemElement']]],
-  ['createwindow_79',['createWindow',['../classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a54c4e2e22e1b21d237e5ad10498ccc8e',1,'pf::ui::ig::ImGuiInterface']]]
+  ['createwindow_79',['createWindow',['../classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a54c4e2e22e1b21d237e5ad10498ccc8e',1,'pf::ui::ig::ImGuiInterface']]],
+  ['customlistbox_80',['CustomListbox',['../classpf_1_1ui_1_1ig_1_1CustomListbox.html',1,'pf::ui::ig::CustomListbox&lt; T, R &gt;'],['../classpf_1_1ui_1_1ig_1_1CustomListbox.html#a0fb5d922b19adee713142af9a1dd1fb2',1,'pf::ui::ig::CustomListbox::CustomListbox()']]],
+  ['customlistbox_3c_20t_2c_20selectable_20_3e_81',['CustomListbox&lt; T, Selectable &gt;',['../classpf_1_1ui_1_1ig_1_1CustomListbox.html',1,'pf::ui::ig']]]
 ];
