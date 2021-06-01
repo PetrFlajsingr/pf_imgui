@@ -39,13 +39,14 @@ static_assert(CustomListboxRowFactory<ListboxRowFactory<int>, int, Selectable>);
  * @brief Container for strings shown as list box and selectable by user.
  *
  * User selection can be observed via listeners.
+ * @todo: relax requires
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT Listbox2 : public CustomListbox<T, Selectable>,
-                                 public ValueObservable<T>,
-                                 public Savable,
-                                 public DragSource<T>,
-                                 public DropTarget<T> {
+class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
+                                public ValueObservable<T>,
+                                public Savable,
+                                public DragSource<T>,
+                                public DropTarget<T> {
   using CustomListbox<T, Selectable>::filteredItems;
   using CustomListbox<T, Selectable>::items;
 
@@ -70,11 +71,10 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListbox<T, Selectable>,
    * @param selectedIdx starting selected id
    * @param persistent enable/disable state saving to disk
    */
-  Listbox2(const std::string &elementName, const std::string &label, Size s = Size::Auto(),
-           std::optional<int> selectedIdx = std::nullopt,
-           Persistent persistent =
-               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+  Listbox(
+      const std::string &elementName, const std::string &label, Size s = Size::Auto(),
+      std::optional<int> selectedIdx = std::nullopt,
+      Persistent persistent = Persistent::No) requires(std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : CustomListbox<T, Selectable>(elementName, label, Factory{}, s), ValueObservable<T>(),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {}
 
