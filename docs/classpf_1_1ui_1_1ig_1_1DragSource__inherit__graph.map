@@ -1,11 +1,12 @@
 <map id="pf::ui::ig::DragSource&lt; T &gt;" name="pf::ui::ig::DragSource&lt; T &gt;">
-<area shape="rect" id="node1" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="191,157,385,184"/>
+<area shape="rect" id="node1" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="191,183,385,209"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="433,5,640,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with items which can be converted to string." alt="" coords="441,56,632,83"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="445,107,629,133"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="460,157,613,184"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="458,208,615,235"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="446,259,627,285"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="433,309,640,336"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="5,150,143,191"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Listbox2.html" title="Container for strings shown as list box and selectable by user." alt="" coords="449,208,624,235"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="458,259,615,285"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="446,309,627,336"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="433,360,640,387"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="5,175,143,217"/>
 </map>

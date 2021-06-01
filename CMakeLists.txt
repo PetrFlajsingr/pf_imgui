@@ -186,8 +186,7 @@ set(INCLUDES
         src/pf_imgui/elements/Image.h
         src/pf_imgui/elements/Input.h
         src/pf_imgui/elements/InputText.h
-        src/pf_imgui/elements/ListBox.h
-        src/pf_imgui/elements/ListBox2.h
+        src/pf_imgui/elements/Listbox.h
         src/pf_imgui/elements/Memo.h
         src/pf_imgui/elements/MenuBars.h
         src/pf_imgui/elements/plots/SimplePlot.h

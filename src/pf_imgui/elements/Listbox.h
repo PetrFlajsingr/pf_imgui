@@ -66,19 +66,17 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListbox<T, Selectable>,
    * Construct Listbox.
    * @param elementName ID of the element
    * @param label text rendered at the top of the list
-   * @param newItems starting items in the list
+   * @param s size of the element
    * @param selectedIdx starting selected id
-   * @param heightInItems items to show before scroll is enabled - -1 shows all
+   * @param persistent enable/disable state saving to disk
    */
   Listbox2(const std::string &elementName, const std::string &label, Size s = Size::Auto(),
-           std::ranges::range auto &&newItems = std::vector<T>{}, std::optional<int> selectedIdx = std::nullopt,
+           std::optional<int> selectedIdx = std::nullopt,
            Persistent persistent =
-           Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : CustomListbox<T, Selectable>(elementName, label, Factory{}, s), ValueObservable<T>(),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {
-    setItems(newItems);
-  }
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {}
 
   /**
    * Add item to the end of the list.
@@ -107,7 +105,7 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListbox<T, Selectable>,
   void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != filteredItems.end()) {
         const auto index = std::distance(filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -124,13 +122,17 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListbox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-          filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
+            filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
     }
   }
 
+  /**
+   * Select item by its index.
+   * @param index index to select
+   */
   void setSelectedItemByIndex(std::size_t index) {
     assert(index < items.size());
     if (index != selectedItemIndex) {
@@ -173,8 +175,8 @@ class PF_IMGUI_EXPORT Listbox2 : public CustomListbox<T, Selectable>,
       auto itemsWithIndices = items | ranges::views::addressof | ranges::views::enumerate | ranges::to_vector;
       const auto indexInAllItems =
           static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
-            return itemInfo.second->second.get() == selectedItem->second.get();
-          })->first);
+                             return itemInfo.second->second.get() == selectedItem->second.get();
+                           })->first);
       result.insert_or_assign("selected", indexInAllItems);
     }
     return result;
