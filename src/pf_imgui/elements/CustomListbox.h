@@ -133,7 +133,7 @@ class PF_IMGUI_EXPORT CustomListbox : public ItemElement, public Labellable, pub
   }
 
  protected:
-  void refilterItems() {
+  virtual void refilterItems() {
     filteredItems = items | std::views::filter([this](auto &item) { return filter(item.first); })
         | std::views::transform([](auto &item) { return &item; }) | ranges::to_vector;
   }

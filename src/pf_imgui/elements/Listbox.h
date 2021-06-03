@@ -50,6 +50,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
                                 public DropTarget<T> {
   using CustomListbox<T, Selectable>::filteredItems;
   using CustomListbox<T, Selectable>::items;
+  using CustomListbox<T, Selectable>::filter;
 
  public:
   using Factory = details::ListboxRowFactory<T>;
@@ -157,6 +158,21 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     }
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { addItem(*drop); }
     if (selectedItemIndex.has_value()) { DragSource<T>::drag(filteredItems[*selectedItemIndex]->first); }
+  }
+
+  void refilterItems() override {
+    auto origItem = selectedItemIndex.has_value() ? filteredItems[*selectedItemIndex] : nullptr;
+    filteredItems = items | std::views::filter([this](auto &item) { return filter(item.first); })
+        | std::views::transform([](auto &item) { return &item; }) | ranges::to_vector;
+    selectedItemIndex = std::nullopt;
+    if (origItem != nullptr) {
+      for (const auto &[idx, item] : filteredItems | ranges::views::enumerate) {
+        if (item == origItem) {
+          selectedItemIndex = idx;
+          break;
+        }
+      }
+    }
   }
 
   void unserialize_impl(const toml::table &src) override {
