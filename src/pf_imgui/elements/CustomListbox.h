@@ -140,7 +140,7 @@ class PF_IMGUI_EXPORT CustomListbox : public ItemElement, public Labellable, pub
 
   void renderImpl() override {
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
-      std::ranges::for_each(items, [](auto &item) { item.second->render(); });
+      std::ranges::for_each(filteredItems, [](auto &item) { item->second->render(); });
       ImGui::EndListBox();
     }
   }

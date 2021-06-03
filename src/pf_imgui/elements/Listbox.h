@@ -40,6 +40,7 @@ static_assert(CustomListboxRowFactory<ListboxRowFactory<int>, int, Selectable>);
  *
  * User selection can be observed via listeners.
  * @todo: relax requires
+ * @todo: handle pointers as if references
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
@@ -105,7 +106,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != filteredItems.end()) {
         const auto index = std::distance(filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -122,7 +123,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-            filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
+          filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
@@ -147,10 +148,10 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
  protected:
   void renderImpl() override {
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
-      std::ranges::for_each(items | ranges::views::enumerate, [this](const auto &itemIdx) {
+      std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
         const auto &[idx, item] = itemIdx;
-        item.second->render();
-        if (item.second->getValue()) { setSelectedItemByIndex(idx); }
+        item->second->render();
+        if (item->second->getValue()) { setSelectedItemByIndex(idx); }
       });
       ImGui::EndListBox();
     }
@@ -175,8 +176,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
       auto itemsWithIndices = items | ranges::views::addressof | ranges::views::enumerate | ranges::to_vector;
       const auto indexInAllItems =
           static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
-                             return itemInfo.second->second.get() == selectedItem->second.get();
-                           })->first);
+            return itemInfo.second->second.get() == selectedItem->second.get();
+          })->first);
       result.insert_or_assign("selected", indexInAllItems);
     }
     return result;
