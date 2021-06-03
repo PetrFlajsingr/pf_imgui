@@ -95,7 +95,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * Get and item currently selected by the user.
    * @param data
    */
-  [[nodiscard]] std::optional<T> getSelectedItem() const {
+  [[nodiscard]] std::optional<std::reference_wrapper<T>> getSelectedItem() const {
     if (selectedItemIndex.has_value()) { return filteredItems[*selectedItemIndex]->first; }
     return std::nullopt;
   }
