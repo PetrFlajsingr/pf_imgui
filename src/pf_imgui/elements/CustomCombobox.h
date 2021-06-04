@@ -33,6 +33,14 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
 template<typename T, std::derived_from<Renderable> R>
 class PF_IMGUI_EXPORT CustomCombobox : public ItemElement, public Labellable {
  public:
+  /**
+   * Construct CustomCombobox.
+   * @param elementName ID of the element
+   * @param label text rendered next to the element
+   * @param rowFactory factory for renderable rows
+   * @param prevValue preview value
+   * @param showItemCount amount of items shown when open
+   */
   CustomCombobox(const std::string &elementName, const std::string &label,
                  CustomComboboxRowFactory<T, R> auto &&rowFactory, std::string prevValue = "",
                  ComboBoxCount showItemCount = ComboBoxCount::Items8)
@@ -148,7 +156,15 @@ class PF_IMGUI_EXPORT CustomCombobox : public ItemElement, public Labellable {
     flags |= static_cast<ImGuiComboFlags_>(shownItemCount);
   }
 
+  /**
+   * Close the Combobox in the next render loop.
+   */
+  void close() { shouldClose = true; }
+
  protected:
+  /**
+   * Recreate filteredItems.
+   */
   virtual void refilterItems() {
     filteredItems = items | std::views::filter([this](auto &item) { return filter(item.first); })
         | std::views::transform([](auto &item) { return &item; }) | ranges::to_vector;
@@ -157,10 +173,27 @@ class PF_IMGUI_EXPORT CustomCombobox : public ItemElement, public Labellable {
   void renderImpl() override {
     const char *previewPtr = previewValue.c_str();
     if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+      checkClose();
       std::ranges::for_each(filteredItems, [](auto item) { item->second->render(); });
       ImGui::EndCombo();
     }
   }
+
+  /**
+   * Call closing impl now.
+   */
+  void closeNow() { ImGui::CloseCurrentPopup(); }
+
+  /**
+   * Check for closing during rendering.
+   */
+  void checkClose() {
+    if (shouldClose) {
+      closeNow();
+      shouldClose = false;
+    }
+  }
+
   using Item = std::pair<T, std::unique_ptr<R>>;
   std::vector<Item> items;
   std::vector<Item *> filteredItems;
@@ -171,6 +204,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public ItemElement, public Labellable {
 
  private:
   std::string previewValue{};
+  bool shouldClose = false;
 };
 }// namespace pf::ui::ig
 

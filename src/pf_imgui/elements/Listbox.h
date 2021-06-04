@@ -186,7 +186,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     }
   }
 
-  toml::table serialize_impl() override {
+  toml::table serialize_impl() override {//FIXME: save string representation of selected item
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];

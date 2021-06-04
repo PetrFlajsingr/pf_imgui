@@ -3,11 +3,11 @@
 <area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="218,81,365,108"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="214,132,369,159"/>
 <area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="207,183,376,225"/>
-<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with items which can be converted to string." alt="" coords="196,249,387,276"/>
+<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1Combobox.html" title="A typical combobox with items which can be converted to string." alt="" coords="196,249,387,276"/>
 <area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="199,300,383,327"/>
 <area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="215,351,368,377"/>
 <area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="220,401,363,428"/>
-<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Listbox2.html" title="Container for strings shown as list box and selectable by user." alt="" coords="204,452,379,479"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Listbox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="208,452,375,479"/>
 <area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1RadioGroup.html" title="Group of RadioButton." alt="" coords="212,503,371,529"/>
 <area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Range2D.html" title="Allows for selection of a 2D area &#45; axis aligned." alt="" coords="221,553,362,580"/>
 <area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1Selectable.html" title="A labeled area which can be de/selected." alt="" coords="216,604,367,631"/>

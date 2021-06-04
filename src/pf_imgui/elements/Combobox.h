@@ -63,6 +63,16 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomCombobox<T, Selectable>::setShownItemCount;
   using CustomCombobox<T, Selectable>::getLabel;
   using CustomCombobox<T, Selectable>::getName;
+  using CustomCombobox<T, Selectable>::checkClose;
+  /**
+   * Construct Combobox.
+   * @param elementName ID of the element
+   * @param label text rendered next to the element
+   * @param prevValue preview value
+   * @param newItems items to be converted and rendered
+   * @param showItemCount amount of items shown when open
+   * @param persistent enable/disable disk state saving
+   */
   Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent =
@@ -140,7 +150,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
       }
     }
   }
-  toml::table serialize_impl() override {
+  toml::table serialize_impl() override {//FIXME: save string representation of selected item
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];
@@ -161,6 +171,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
       previewPtr = getPreviewValue().c_str();
     }
     if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+      checkClose();
       std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
         const auto &[idx, item] = itemIdx;
         item->second->render();

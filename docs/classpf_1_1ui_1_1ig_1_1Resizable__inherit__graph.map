@@ -18,7 +18,7 @@
 <area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="225,797,379,839"/>
 <area shape="rect" id="node24" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="199,863,405,890"/>
 <area shape="rect" id="node25" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="235,914,369,941"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Listbox2.html" title="Container for strings shown as list box and selectable by user." alt="" coords="457,13,632,39"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Listbox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="461,13,628,39"/>
 <area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="453,442,636,469"/>
 <area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="469,493,620,519"/>
 <area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="468,543,621,570"/>
