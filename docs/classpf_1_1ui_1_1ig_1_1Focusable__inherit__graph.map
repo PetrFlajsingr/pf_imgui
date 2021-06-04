@@ -1,32 +1,34 @@
 <map id="pf::ui::ig::Focusable" name="pf::ui::ig::Focusable">
-<area shape="rect" id="node1" title="Interface for focusable elements." alt="" coords="5,686,152,713"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="200,661,367,687"/>
-<area shape="rect" id="node30" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="216,711,351,738"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title=" " alt="" coords="432,5,611,47"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Button.html" title="A typical button element." alt="" coords="459,71,584,98"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="448,122,595,149"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="437,173,606,215"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1ComboBox.html" title="A typical combobox with items which can be converted to string." alt="" coords="426,239,617,266"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title="Listbox where rows can be whatever is provided by the user." alt="" coords="432,291,611,332"/>
-<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="429,357,613,383"/>
-<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header." alt="" coords="461,407,582,434"/>
-<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. It can serve as a button." alt="" coords="460,458,583,485"/>
-<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="445,509,598,535"/>
-<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1MarkdownText.html" title="Markdown text render area." alt="" coords="433,559,610,586"/>
-<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1MemoryEditor.html" title="Hex memory editor." alt="" coords="415,610,628,637"/>
-<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1ProgressBar.html" title="Progress bar for notifying a user of operation progress." alt="" coords="422,661,621,687"/>
-<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1RadioButton.html" title="A button similar in function to CheckBox, but it can belong to RadioGroup." alt="" coords="440,711,603,738"/>
-<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1Range2D.html" title="Allows for selection of a 2D area &#45; axis aligned." alt="" coords="451,762,592,789"/>
-<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Selectable.html" title="A labeled area which can be de/selected." alt="" coords="446,813,597,839"/>
-<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="443,863,600,890"/>
-<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="434,914,609,941"/>
-<area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="434,965,609,991"/>
-<area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="443,1015,599,1042"/>
-<area shape="rect" id="node24" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="431,1066,612,1093"/>
-<area shape="rect" id="node25" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="444,1117,599,1159"/>
-<area shape="rect" id="node26" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="469,1183,573,1210"/>
-<area shape="rect" id="node27" href="$classpf_1_1ui_1_1ig_1_1Text.html" title="Simple rendered text. May be colored." alt="" coords="467,1234,576,1261"/>
-<area shape="rect" id="node29" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="418,1285,625,1311"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Listbox2.html" title="Container for strings shown as list box and selectable by user." alt="" coords="676,13,851,39"/>
-<area shape="rect" id="node28" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="692,1234,835,1261"/>
+<area shape="rect" id="node1" title="Interface for focusable elements." alt="" coords="5,739,152,766"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="200,714,367,741"/>
+<area shape="rect" id="node32" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="216,765,351,791"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title=" " alt="" coords="420,5,623,47"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title=" " alt="" coords="432,71,611,112"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Button.html" title="A typical button element." alt="" coords="459,137,584,163"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Checkbox.html" title="A typical checkbox or a toggle." alt="" coords="448,187,595,214"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1ColorChooser.html" title="An element allowing for selecting a color intuitively." alt="" coords="437,239,606,280"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title="Combobox where rows can be whatever is provided by the user." alt="" coords="420,304,623,345"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title="Listbox where rows can be whatever is provided by the user." alt="" coords="432,369,611,411"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1DragInput.html" title="Numeric input supporting either keyboard input or mouse drag." alt="" coords="429,435,613,462"/>
+<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header." alt="" coords="461,486,582,513"/>
+<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. It can serve as a button." alt="" coords="460,537,583,563"/>
+<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1Input.html" title="Keyboard input for numeric types." alt="" coords="445,587,598,614"/>
+<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1MarkdownText.html" title="Markdown text render area." alt="" coords="433,638,610,665"/>
+<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1MemoryEditor.html" title="Hex memory editor." alt="" coords="415,689,628,715"/>
+<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1ProgressBar.html" title="Progress bar for notifying a user of operation progress." alt="" coords="422,739,621,766"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1RadioButton.html" title="A button similar in function to CheckBox, but it can belong to RadioGroup." alt="" coords="440,790,603,817"/>
+<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Range2D.html" title="Allows for selection of a 2D area &#45; axis aligned." alt="" coords="451,841,592,867"/>
+<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1Selectable.html" title="A labeled area which can be de/selected." alt="" coords="446,891,597,918"/>
+<area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1Slider.html" title="Slider supporting multiple types." alt="" coords="443,942,600,969"/>
+<area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1Slider2D.html" title="Slider which covers an area and allows a user to select axis value with better visual cues." alt="" coords="434,993,609,1019"/>
+<area shape="rect" id="node24" href="$classpf_1_1ui_1_1ig_1_1Slider3D.html" title="Slider with 3D space." alt="" coords="434,1043,609,1070"/>
+<area shape="rect" id="node25" href="$classpf_1_1ui_1_1ig_1_1SliderAngle.html" title="Special slider for angles." alt="" coords="443,1094,599,1121"/>
+<area shape="rect" id="node26" href="$classpf_1_1ui_1_1ig_1_1SpinInput.html" title="Spinner for numeric types." alt="" coords="431,1145,612,1171"/>
+<area shape="rect" id="node27" href="$classpf_1_1ui_1_1ig_1_1StringTable.html" title="Table using strings as cell values." alt="" coords="444,1196,599,1237"/>
+<area shape="rect" id="node28" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="469,1262,573,1289"/>
+<area shape="rect" id="node29" href="$classpf_1_1ui_1_1ig_1_1Text.html" title="Simple rendered text. May be colored." alt="" coords="467,1313,576,1339"/>
+<area shape="rect" id="node31" href="$classpf_1_1ui_1_1ig_1_1VerticalSlider.html" title="Slider rendered vertically." alt="" coords="418,1363,625,1390"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Combobox.html" title="A typical combobox with items which can be converted to string." alt="" coords="676,13,867,39"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Listbox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="688,78,855,105"/>
+<area shape="rect" id="node30" href="$classpf_1_1ui_1_1ig_1_1InputText.html" title="Input for text with support for multiline strings." alt="" coords="700,1313,843,1339"/>
 </map>

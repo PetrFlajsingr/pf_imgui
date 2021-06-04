@@ -11,7 +11,7 @@
 #include "elements/Button.h"
 #include "elements/Checkbox.h"
 #include "elements/ColorChooser.h"
-#include "elements/ComboBox.h"
+#include "elements/Combobox.h"
 #include "elements/DragInput.h"
 #include "elements/FlameGraph.h"
 #include "elements/Group.h"
