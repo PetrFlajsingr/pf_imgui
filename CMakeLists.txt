@@ -274,7 +274,7 @@ set(INCLUDES
         src/pf_imgui/elements/VerticalSlider.h
         src/pf_imgui/elements/CustomListbox.h
         src/pf_imgui/elements/CustomCombobox.h
-        src/pf_imgui/elements/Combobox.h)
+        src/pf_imgui/elements/Combobox.h src/pf_imgui/elements/CustomItemBox.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
