@@ -35,13 +35,13 @@ static_assert(CustomComboboxRowFactory<ComboboxRowFactory<int>, int, Selectable>
  *
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT ComboBox : public CustomCombobox<T, Selectable>,
-                                 public ValueObservable<T>,
-                                 public Savable,
-                                 public DragSource<T> {
+class PF_IMGUI_EXPORT Combobox2 : public CustomCombobox<T, Selectable>,
+                                  public ValueObservable<T>,
+                                  public Savable,
+                                  public DragSource<T> {
  public:
-  ComboBox(const std::string &elementName, const std::string &label, const std::string &prevValue,
-           std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8)
+  Combobox2(const std::string &elementName, const std::string &label, const std::string &prevValue,
+            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8)
       : CustomCombobox(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount) requires(
           std::convertible_to<std::ranges::range_value_t<decltype(newItems)>,
                               T> && std::is_default_constructible_v<T> && std::copy_constructible<T>) {
