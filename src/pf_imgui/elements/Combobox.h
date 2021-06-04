@@ -2,10 +2,14 @@
 // Created by petr on 6/4/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX2_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX2_H
+#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
+#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 
 #include <pf_imgui/elements/CustomCombobox.h>
+#include <pf_imgui/elements/Selectable.h>
+#include <pf_imgui/interface/DragNDrop.h>
+#include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {
 
@@ -35,16 +39,36 @@ static_assert(CustomComboboxRowFactory<ComboboxRowFactory<int>, int, Selectable>
  *
  */
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT Combobox2 : public CustomCombobox<T, Selectable>,
+class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
                                   public ValueObservable<T>,
                                   public Savable,
                                   public DragSource<T> {
+  using CustomCombobox<T, Selectable>::items;
+  using CustomCombobox<T, Selectable>::filteredItems;
+  using CustomCombobox<T, Selectable>::flags;
+
  public:
-  Combobox2(const std::string &elementName, const std::string &label, const std::string &prevValue,
-            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8)
-      : CustomCombobox(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount) requires(
-          std::convertible_to<std::ranges::range_value_t<decltype(newItems)>,
-                              T> && std::is_default_constructible_v<T> && std::copy_constructible<T>) {
+  using CustomCombobox<T, Selectable>::addItem;
+  using CustomCombobox<T, Selectable>::addItems;
+  using CustomCombobox<T, Selectable>::setItems;
+  using CustomCombobox<T, Selectable>::removeItem;
+  using CustomCombobox<T, Selectable>::removeItemIf;
+  using CustomCombobox<T, Selectable>::setFilter;
+  using CustomCombobox<T, Selectable>::clearFilter;
+  using CustomCombobox<T, Selectable>::getItems;
+  using CustomCombobox<T, Selectable>::setPreviewValue;
+  using CustomCombobox<T, Selectable>::getPreviewValue;
+  using CustomCombobox<T, Selectable>::getShownItemCount;
+  using CustomCombobox<T, Selectable>::setShownItemCount;
+  using CustomCombobox<T, Selectable>::getLabel;
+  using CustomCombobox<T, Selectable>::getName;
+  Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
+            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
+            Persistent persistent =
+            Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+      : CustomCombobox<T, Selectable>(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
+        ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
   }
   /**
@@ -59,10 +83,10 @@ class PF_IMGUI_EXPORT Combobox2 : public CustomCombobox<T, Selectable>,
    * Set selected item. If no such item is found the selection is cancelled.
    * @param item item to be selected
    */
-  void setSelectedItem(T &item) {
+  void setSelectedItem(T &itemToSelect) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != filteredItems.end()) {
         const auto index = std::distance(filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -78,7 +102,7 @@ class PF_IMGUI_EXPORT Combobox2 : public CustomCombobox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       setSelectedItemByIndex(index);
@@ -123,9 +147,9 @@ class PF_IMGUI_EXPORT Combobox2 : public CustomCombobox<T, Selectable>,
   void renderImpl() override {
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
-      previewPtr = filteredItems[*selectedItemIndex]->second->getLabel();
+      previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();
     } else {
-      previewPtr = getPreviewValue()->c_str();
+      previewPtr = getPreviewValue().c_str();
     }
     if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
       std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
@@ -135,7 +159,6 @@ class PF_IMGUI_EXPORT Combobox2 : public CustomCombobox<T, Selectable>,
       });
       ImGui::EndCombo();
     }
-    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { addItem(*drop); }
     if (selectedItemIndex.has_value()) { DragSource<T>::drag(filteredItems[*selectedItemIndex]->first); }
   }
 
@@ -145,4 +168,4 @@ class PF_IMGUI_EXPORT Combobox2 : public CustomCombobox<T, Selectable>,
 
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX2_H
+#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H

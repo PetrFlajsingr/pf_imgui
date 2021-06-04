@@ -178,7 +178,6 @@ set(INCLUDES
         src/pf_imgui/elements/Button.h
         src/pf_imgui/elements/Checkbox.h
         src/pf_imgui/elements/ColorChooser.h
-        src/pf_imgui/elements/ComboBox.h
         src/pf_imgui/dialogs/Dialog.h
         src/pf_imgui/dialogs/MessageDialog.h
         src/pf_imgui/elements/DragInput.h
@@ -273,7 +272,9 @@ set(INCLUDES
         src/include/ImGuizmo/ImSequencer.h
         src/include/ImGuizmo/ImZoomSlider.h
         src/pf_imgui/elements/VerticalSlider.h
-        src/pf_imgui/elements/CustomListbox.h src/pf_imgui/elements/CustomCombobox.h src/pf_imgui/elements/Combobox2.h)
+        src/pf_imgui/elements/CustomListbox.h
+        src/pf_imgui/elements/CustomCombobox.h
+        src/pf_imgui/elements/Combobox.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

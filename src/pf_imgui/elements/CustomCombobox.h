@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public ItemElement, public Labellable {
                  CustomComboboxRowFactory<T, R> auto &&rowFactory, std::string prevValue = "",
                  ComboBoxCount showItemCount = ComboBoxCount::Items8)
       : ItemElement(elementName), Labellable(label), factory(std::forward<decltype(rowFactory)>(rowFactory)),
-        previewValue(std::move(prevValue)), flags(static_cast<ImGuiComboFlags_>(shownItems)) {
+        flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
     if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
   }
 
@@ -137,13 +137,16 @@ class PF_IMGUI_EXPORT CustomCombobox : public ItemElement, public Labellable {
    * @return count of items
    */
   [[nodiscard]] ComboBoxCount getShownItemCount() const {// FIXME
-    return (shownItems & ImGuiComboFlags_::ImGuiComboFlags_HeightMask_).getSetFlags()[0];
+    return static_cast<ComboBoxCount>(*(flags & ImGuiComboFlags_::ImGuiComboFlags_HeightMask_));
   }
   /**
    * Set count of items shown when the element is unrolled.
    * @param shownItemCount count of items
    */
-  void setShownItemCount(ComboBoxCount shownItemCount) { ComboBox::shownItems = shownItemCount; }
+  void setShownItemCount(ComboBoxCount shownItemCount) {
+    flags &= static_cast<ImGuiComboFlags_>(~ImGuiComboFlags_::ImGuiComboFlags_HeightMask_);
+    flags |= static_cast<ImGuiComboFlags_>(shownItemCount);
+  }
 
  protected:
   virtual void refilterItems() {
@@ -164,9 +167,10 @@ class PF_IMGUI_EXPORT CustomCombobox : public ItemElement, public Labellable {
   std::function<std::unique_ptr<R>(const T &)> factory;
   std::function<bool(const T &)> filter = [](const auto &) { return true; };
 
+  Flags<ImGuiComboFlags_> flags{};
+
  private:
   std::string previewValue{};
-  Flags<ImGuiComboFlags_> flags{};
 };
 }// namespace pf::ui::ig
 
