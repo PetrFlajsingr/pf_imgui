@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomItemBox.h>
+#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <vector>
 
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Resizable {
+class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labellable, public Resizable {
  public:
   /**
    * Create CustomListbox
@@ -33,14 +34,15 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Resizab
    * @param rowFactory factory for row creation
    * @param s size of the element
    */
-  CustomListbox(const std::string &elementName, const std::string &label,
-                CustomListboxRowFactory<T, R> auto &&rowFactory, Size s = Size::Auto())
-      : CustomItemBox<T, R>(elementName, label, std::forward<decltype(rowFactory)>(rowFactory)), Resizable(s) {}
+  CustomListbox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
+                Size s = Size::Auto())
+      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
+        Resizable(s) {}
 
  protected:
   void renderImpl() override {
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
-      std::ranges::for_each(CustomListboxRowFactory<T, R>::filteredItems, [](auto &item) { item->second->render(); });
+      std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto &item) { item->second->render(); });
       ImGui::EndListBox();
     }
   }

@@ -9,6 +9,7 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomItemBox.h>
+#include <pf_imgui/interface/Labellable.h>
 
 namespace pf::ui::ig {
 
@@ -22,7 +23,7 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
+class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labellable {
  public:
   /**
    * Construct CustomCombobox.
@@ -32,9 +33,9 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
    * @param prevValue preview value
    * @param showItemCount amount of items shown when open
    */
-  CustomCombobox(const std::string &elementName, const std::string &label, CustomItemBox<T, R> auto &&rowFactory,
+  CustomCombobox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
                  std::string prevValue = "", ComboBoxCount showItemCount = ComboBoxCount::Items8)
-      : CustomItemBox<T, R>(elementName, label, std::forward<decltype(rowFactory)>(rowFactory)),
+      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
         flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
     if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
   }
@@ -71,7 +72,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
     const char *previewPtr = previewValue.c_str();
     if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
       checkClose();
-      std::ranges::for_each(filteredItems, [](auto item) { item->second->render(); });
+      std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });
       ImGui::EndCombo();
     }
   }
