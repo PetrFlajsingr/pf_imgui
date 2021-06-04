@@ -10,6 +10,7 @@
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <range/v3/view/addressof.hpp>
 
 namespace pf::ui::ig {
 
@@ -40,9 +41,9 @@ static_assert(CustomComboboxRowFactory<ComboboxRowFactory<int>, int, Selectable>
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
-                                  public ValueObservable<T>,
-                                  public Savable,
-                                  public DragSource<T> {
+                                 public ValueObservable<T>,
+                                 public Savable,
+                                 public DragSource<T> {
   using CustomCombobox<T, Selectable>::items;
   using CustomCombobox<T, Selectable>::filteredItems;
   using CustomCombobox<T, Selectable>::flags;
@@ -63,10 +64,10 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomCombobox<T, Selectable>::getLabel;
   using CustomCombobox<T, Selectable>::getName;
   Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
-            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
-            Persistent persistent =
-            Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+           std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
+           Persistent persistent =
+               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : CustomCombobox<T, Selectable>(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
         ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
@@ -86,7 +87,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   void setSelectedItem(T &itemToSelect) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != filteredItems.end()) {
         const auto index = std::distance(filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -102,7 +103,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       setSelectedItemByIndex(index);
@@ -141,7 +142,15 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   }
   toml::table serialize_impl() override {
     auto result = toml::table{};
-    if (selectedItemIndex.has_value()) { result.insert_or_assign("selected", *selectedItemIndex); }
+    if (selectedItemIndex.has_value()) {
+      const auto selectedItem = filteredItems[*selectedItemIndex];
+      auto itemsWithIndices = items | ranges::views::addressof | ranges::views::enumerate | ranges::to_vector;
+      const auto indexInAllItems =
+          static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
+                             return itemInfo.second->second.get() == selectedItem->second.get();
+                           })->first);
+      result.insert_or_assign("selected", indexInAllItems);
+    }
     return result;
   }
   void renderImpl() override {
