@@ -1,6 +1,9 @@
-//
-// Created by petr on 6/4/21.
-//
+/**
+ * @file CustomItemBox.h
+ * @brief Customizable item container.
+ * @author Petr Flajšingr
+ * @date 4.6.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H

@@ -1,6 +1,9 @@
-//
-// Created by petr on 6/4/21.
-//
+/**
+ * @file CustomCombobox.h
+ * @brief Customizable combobox.
+ * @author Petr Flajšingr
+ * @date 4.6.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
