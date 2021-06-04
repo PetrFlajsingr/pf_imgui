@@ -65,7 +65,6 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  *
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
  *
- * @todo: custom combobox - change to BeginCombobox/EndCombobox - CustomCombobox<derived from Renderable> with Combobox<T> being derived from CustomCombobox<Selectable>
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT ComboBox : public ItemElement,

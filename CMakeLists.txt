@@ -273,7 +273,7 @@ set(INCLUDES
         src/include/ImGuizmo/ImSequencer.h
         src/include/ImGuizmo/ImZoomSlider.h
         src/pf_imgui/elements/VerticalSlider.h
-        src/pf_imgui/elements/CustomListbox.h)
+        src/pf_imgui/elements/CustomListbox.h src/pf_imgui/elements/CustomCombobox.h src/pf_imgui/elements/Combobox2.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
