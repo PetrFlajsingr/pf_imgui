@@ -46,8 +46,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
    */
   ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
               const Size &size = Size::FillWidth())
-      : Element(elementName),
-        ItemElement(elementName), ValueObservable<T>(elementName, value.has_value() ? *value : min), Resizable(size),
+      : ItemElement(elementName), ValueObservable<T>(value.has_value() ? *value : min), Resizable(size),
         stepValue(stepValue), min(min), max(max) {}
 
   /**
@@ -83,9 +82,9 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   [[nodiscard]] T getMin() const { return min; }
   /**
    * Set min progress bar value.
-   * @param min min progress bar value
+   * @param newMin min progress bar value
    */
-  void setMin(T min) { ProgressBar::min = min; }
+  void setMin(T newMin) { min = newMin; }
   /**
    * Get max progress bar value.
    * @return max progress bar value
@@ -93,9 +92,9 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   [[nodiscard]] T getMax() const { return max; }
   /**
    * Set max progress bar value.
-   * @param max min progress bar value
+   * @param newMax min progress bar value
    */
-  void setMax(T max) { ProgressBar::max = max; }
+  void setMax(T newMax) { max = newMax; }
 
   /**
    * Get step value which is used in step().
@@ -118,7 +117,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   }
 
  protected:
-  void renderImpl() override { ImGui::ProgressBar(getCurrentPercentage(), getSize()); }
+  void renderImpl() override { ImGui::ProgressBar(getCurrentPercentage(), getSize().asImVec()); }
 
  private:
   T stepValue;
