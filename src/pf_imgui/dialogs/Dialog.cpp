@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 Dialog::Dialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label, Modal modal)
-    : Renderable(elementName), Labellable(label), modal(modal), owner(parent) {}
+    : Renderable(elementName), Labellable(label), Resizable(Size::Auto()), modal(modal), owner(parent) {}
 
 void Dialog::renderImpl() {
   if (closed) {
@@ -30,7 +30,14 @@ void Dialog::renderImpl() {
   }
   firstRender = false;
 }
+
 void Dialog::close() { closed = true; }
+
 bool Dialog::isClosed() const { return closed; }
+
+void Dialog::setSize(const Size &newSize) {
+  Resizable::setSize(newSize);//FIXME change this to SetNextWindowSize, add Positionable
+  ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
+}
 
 }// namespace pf::ui::ig

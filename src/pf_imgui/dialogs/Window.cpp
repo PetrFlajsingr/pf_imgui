@@ -64,7 +64,7 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 
 void Window::removeMenuBar() { menuBar = nullptr; }
 void Window::setSize(const Size &newSize) {
-  Resizable::setSize(newSize);
+  Resizable::setSize(newSize);//FIXME change this to SetNextWindowSize
   ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
 }
 

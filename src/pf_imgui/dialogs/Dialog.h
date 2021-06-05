@@ -13,6 +13,7 @@
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
  *
  * Non-modal dialog is rendered next to mouse cursor.
  */
-class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, public Labellable {
+class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, public Labellable, public Resizable {
  public:
   /**
    * Create Dialog with given name and label.
@@ -47,6 +48,8 @@ class PF_IMGUI_EXPORT Dialog : public Renderable, public ElementContainer, publi
    * @return true if closed false otherwise
    */
   [[nodiscard]] bool isClosed() const;
+
+  void setSize(const Size &newSize) override;
 
  protected:
   void renderImpl() override;
