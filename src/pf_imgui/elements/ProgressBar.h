@@ -45,7 +45,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
    * @param size size of the progress bar
    */
   ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
-              const Size &size = Size::FillWidth())
+              const Size &size = Size::Auto())
       : ItemElement(elementName), ValueObservable<T>(value.has_value() ? *value : min), Resizable(size),
         stepValue(stepValue), min(min), max(max) {}
 
