@@ -76,8 +76,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent =
-           Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-      &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : CustomCombobox<T, Selectable>(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
         ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
@@ -97,7 +97,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   void setSelectedItem(T &itemToSelect) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-            filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != filteredItems.end()) {
         const auto index = std::distance(filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -113,7 +113,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-          std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       setSelectedItemByIndex(index);
@@ -143,26 +143,27 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
  protected:
   void unserialize_impl(const toml::table &src) override {
     if (src.contains("selected")) {
-      const auto idx = **src["selected"].as_integer();
-      if (static_cast<std::size_t>(idx) < items.size()) {
-        selectedItemIndex = idx;
-        ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
+      const auto selectedItemAsString = *src["selected"].value<std::string>();
+      for (const auto &[idx, item] : items | ranges::views::enumerate) {
+        if (item.second->getLabel() == selectedItemAsString) {
+          selectedItemIndex = idx;
+          items[idx].second->setValue(true);
+          ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
+          break;
+        }
       }
     }
   }
-  toml::table serialize_impl() override {//FIXME: save string representation of selected item
+
+  toml::table serialize_impl() override {
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];
-      auto itemsWithIndices = items | ranges::views::addressof | ranges::views::enumerate | ranges::to_vector;
-      const auto indexInAllItems =
-          static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
-            return itemInfo.second->second.get() == selectedItem->second.get();
-          })->first);
-      result.insert_or_assign("selected", indexInAllItems);
+      result.insert_or_assign("selected", selectedItem->second->getLabel());
     }
     return result;
   }
+
   void renderImpl() override {
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
