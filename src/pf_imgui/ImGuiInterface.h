@@ -37,8 +37,8 @@ namespace pf::ui::ig {
  *
  * @todo: change id type
  * @todo: add converted input element
- * @todo: selectables
  * @todo: localization
+ * @todo: fonts
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:
