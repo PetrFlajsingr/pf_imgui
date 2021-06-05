@@ -178,24 +178,23 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
 
   void unserialize_impl(const toml::table &src) override {
     if (src.contains("selected")) {
-      const auto idx = *src["selected"].value<int>();
-      if (static_cast<std::size_t>(idx) < items.size()) {
-        selectedItemIndex = idx;
-        ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
+      const auto selectedItemAsString = *src["selected"].value<std::string>();
+      for (const auto &[idx, item] : items | ranges::views::enumerate) {
+        if (item.second->getLabel() == selectedItemAsString) {
+          selectedItemIndex = idx;
+          items[idx].second->setValue(true);
+          ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
+          break;
+        }
       }
     }
   }
 
-  toml::table serialize_impl() override {//FIXME: save string representation of selected item
+  toml::table serialize_impl() override {
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];
-      auto itemsWithIndices = items | ranges::views::addressof | ranges::views::enumerate | ranges::to_vector;
-      const auto indexInAllItems =
-          static_cast<int>(std::ranges::find_if(itemsWithIndices, [selectedItem](const auto &itemInfo) {
-            return itemInfo.second->second.get() == selectedItem->second.get();
-          })->first);
-      result.insert_or_assign("selected", indexInAllItems);
+      result.insert_or_assign("selected", selectedItem->second->getLabel());
     }
     return result;
   }

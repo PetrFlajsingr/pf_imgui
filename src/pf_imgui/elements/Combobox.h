@@ -37,9 +37,6 @@ static_assert(CustomItemBoxFactory<ComboboxRowFactory<int>, int, Selectable>);
  *
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
  *
- * @todo: combine CustomCombobox and Customlistbox to a base class:
- *  CustomElementContainer -> CustomCombobox/CustomListbox
- *  Selectable or smt
  *
  */
 template<ToStringConvertible T>
