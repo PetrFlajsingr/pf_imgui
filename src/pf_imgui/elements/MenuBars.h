@@ -14,6 +14,7 @@
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 #include <variant>
@@ -116,9 +117,11 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, publi
 };
 /**
  * @brief An item, which can be clicked and it toggles its inner value.
- * @todo: persistence
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public Labellable, public ValueObservable<bool> {
+class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
+                                         public Labellable,
+                                         public ValueObservable<bool>,
+                                         public Savable {
  public:
   /**
    * Construct MenuCheckboxItem.
@@ -126,10 +129,13 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public Labellable, pub
    * @param label text rendered on the button
    * @param value starting value
    */
-  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value = false);
+  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value = false,
+                   Persistent persistent = Persistent::No);
 
  protected:
   void renderImpl() override;
+  void unserialize_impl(const toml::table &src) override;
+  toml::table serialize_impl() override;
 };
 /**
  * @brief An item, which divides menus.

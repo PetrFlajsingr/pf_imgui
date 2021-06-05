@@ -79,12 +79,17 @@ void MenuContainer::renderItems() {
   std::ranges::for_each(items, [](auto &item) { item->render(); });
 }
 
-MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value)
-    : MenuItem(elementName), Labellable(label), ValueObservable(value) {}
+MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
+                                   Persistent persistent)
+    : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
 
 void MenuCheckboxItem::renderImpl() {
   if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
+void MenuCheckboxItem::unserialize_impl(const toml::table &src) {
+  setValueAndNotifyIfChanged(*src["checked"].value<bool>());
+}
+toml::table MenuCheckboxItem::serialize_impl() { return toml::table{{{"checked", getValue()}}}; }
 
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 

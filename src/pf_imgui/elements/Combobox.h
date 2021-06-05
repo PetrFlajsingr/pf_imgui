@@ -37,7 +37,7 @@ static_assert(CustomItemBoxFactory<ComboboxRowFactory<int>, int, Selectable>);
  *
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
  *
- *
+ * @TODO: combine this with Listbox for common base class
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
