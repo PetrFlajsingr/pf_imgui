@@ -119,6 +119,6 @@ void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstr
 
 bool Window::isCloseable() const { return closeable; }
 
-void Window::setCloseable(bool closeable) { Window::closeable = closeable; }
+void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 }// namespace pf::ui::ig
