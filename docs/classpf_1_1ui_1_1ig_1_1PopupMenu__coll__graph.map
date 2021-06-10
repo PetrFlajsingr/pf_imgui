@@ -1,0 +1,6 @@
+<map id="pf::ui::ig::PopupMenu" name="pf::ui::ig::PopupMenu">
+<area shape="rect" id="node1" title="Popup menu to be used for example when right clicking an element." alt="" coords="95,155,253,181"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1MenuContainer.html" title="An item which can contain other menus." alt="" coords="175,80,357,107"/>
+</map>

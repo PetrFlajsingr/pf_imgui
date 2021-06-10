@@ -1,0 +1,8 @@
+<map id="src/pf_imgui/elements/CustomItemBox.h" name="src/pf_imgui/elements/CustomItemBox.h">
+<area shape="rect" id="node1" title="Customizable item container." alt="" coords="100,5,267,47"/>
+<area shape="rect" id="node2" href="$CustomCombobox_8h.html" title="Customizable combobox." alt="" coords="5,95,172,136"/>
+<area shape="rect" id="node5" href="$CustomListbox_8h_source.html" title=" " alt="" coords="196,95,363,136"/>
+<area shape="rect" id="node3" href="$Combobox_8h.html" title="Selectable combobox." alt="" coords="5,184,172,225"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="94,273,273,300"/>
+<area shape="rect" id="node6" href="$Listbox_8h_source.html" title=" " alt="" coords="196,184,363,225"/>
+</map>

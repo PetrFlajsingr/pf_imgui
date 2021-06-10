@@ -1,14 +1,15 @@
 <map id="pf::ui::ig::Combobox&lt; T &gt;" name="pf::ui::ig::Combobox&lt; T &gt;">
-<area shape="rect" id="node1" title="A typical combobox with items which can be converted to string." alt="" coords="872,165,1063,192"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title=" " alt="" coords="621,74,824,115"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="407,56,573,83"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="211,56,357,83"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="209,107,359,133"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="415,107,565,133"/>
-<area shape="rect" id="node9" title=" " alt="" coords="637,140,808,167"/>
-<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="655,191,790,217"/>
-<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="625,241,820,268"/>
-<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="421,234,559,275"/>
+<area shape="rect" id="node1" title="A typical combobox with items which can be converted to string." alt="" coords="1107,169,1297,196"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title=" " alt="" coords="856,78,1059,119"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1CustomItemBox.html" title="Box containing items provided by user based on stored type." alt="" coords="621,49,808,90"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="407,56,573,83"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="211,56,357,83"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="209,107,359,133"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="640,115,789,141"/>
+<area shape="rect" id="node10" title=" " alt="" coords="872,144,1043,171"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="890,195,1025,221"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="860,245,1055,272"/>
+<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="646,238,783,279"/>
 </map>

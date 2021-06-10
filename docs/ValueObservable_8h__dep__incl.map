@@ -1,30 +1,32 @@
 <map id="src/pf_imgui/interface/ValueObservable.h" name="src/pf_imgui/interface/ValueObservable.h">
-<area shape="rect" id="node1" title="Interface for providing observable support to elements." alt="" coords="1224,5,1388,47"/>
-<area shape="rect" id="node2" href="$Checkbox_8h.html" title="Checkbox element." alt="" coords="2223,273,2389,315"/>
-<area shape="rect" id="node4" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="5,273,172,315"/>
-<area shape="rect" id="node5" href="$Combobox_8h_source.html" title=" " alt="" coords="299,184,465,225"/>
-<area shape="rect" id="node6" href="$DragInput_8h.html" title="DragInput element." alt="" coords="171,363,337,404"/>
-<area shape="rect" id="node7" href="$Input_8h.html" title="Input element." alt="" coords="248,273,415,315"/>
-<area shape="rect" id="node8" href="$InputText_8h.html" title="InputText element." alt="" coords="777,95,944,136"/>
+<area shape="rect" id="node1" title="Interface for providing observable support to elements." alt="" coords="1287,5,1451,47"/>
+<area shape="rect" id="node2" href="$Checkbox_8h.html" title="Checkbox element." alt="" coords="2261,273,2428,315"/>
+<area shape="rect" id="node4" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="5,363,172,404"/>
+<area shape="rect" id="node5" href="$Combobox_8h.html" title="Selectable combobox." alt="" coords="299,184,465,225"/>
+<area shape="rect" id="node6" href="$DragInput_8h.html" title="DragInput element." alt="" coords="127,273,293,315"/>
+<area shape="rect" id="node7" href="$Input_8h.html" title="Input element." alt="" coords="248,363,415,404"/>
+<area shape="rect" id="node8" href="$InputText_8h.html" title="InputText element." alt="" coords="732,184,899,225"/>
 <area shape="rect" id="node13" href="$Listbox_8h_source.html" title=" " alt="" coords="541,184,708,225"/>
-<area shape="rect" id="node14" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="1009,95,1176,136"/>
-<area shape="rect" id="node16" href="$ProgressBar_8h.html" title="ProgressBar element." alt="" coords="1124,363,1291,404"/>
-<area shape="rect" id="node17" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="1293,273,1460,315"/>
-<area shape="rect" id="node19" href="$Range2D_8h.html" title="Element for 2D range selection." alt="" coords="1344,184,1511,225"/>
-<area shape="rect" id="node20" href="$Selectable_8h.html" title="Selectable element." alt="" coords="492,95,659,136"/>
-<area shape="rect" id="node21" href="$Slider_8h.html" title="Slider element." alt="" coords="1537,273,1704,315"/>
-<area shape="rect" id="node22" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="1660,363,1827,404"/>
-<area shape="rect" id="node23" href="$Slider3D_8h.html" title="Slider3D element." alt="" coords="1637,184,1804,225"/>
-<area shape="rect" id="node24" href="$SliderAngle_8h.html" title="SliderAngle element." alt="" coords="1832,273,1999,315"/>
-<area shape="rect" id="node25" href="$SpinInput_8h.html" title="Spinner element." alt="" coords="1929,95,2096,136"/>
-<area shape="rect" id="node26" href="$VerticalSlider_8h_source.html" title=" " alt="" coords="1739,95,1905,136"/>
-<area shape="rect" id="node27" href="$meta_8h.html" title="Meta helpers for pf_imgui." alt="" coords="2121,102,2273,129"/>
-<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="1118,452,1297,479"/>
-<area shape="rect" id="node9" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="784,184,937,225"/>
-<area shape="rect" id="node10" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="833,281,1048,307"/>
-<area shape="rect" id="node11" href="$MarkdownText_8h_source.html" title=" " alt="" coords="712,363,879,404"/>
-<area shape="rect" id="node12" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="903,363,1048,404"/>
-<area shape="rect" id="node15" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="1064,184,1217,225"/>
-<area shape="rect" id="node18" href="$RadioGroup_8h.html" title="Radio group element." alt="" coords="1367,363,1533,404"/>
-<area shape="rect" id="node28" href="$Table_8h.html" title="Table element." alt="" coords="2091,363,2257,404"/>
+<area shape="rect" id="node14" href="$MenuItems_8h.html" title="Items to be used in menu bars and popup menu." alt="" coords="1113,95,1280,136"/>
+<area shape="rect" id="node18" href="$ProgressBar_8h.html" title="ProgressBar element." alt="" coords="1109,452,1276,493"/>
+<area shape="rect" id="node19" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="1283,363,1449,404"/>
+<area shape="rect" id="node21" href="$Range2D_8h.html" title="Element for 2D range selection." alt="" coords="1404,273,1571,315"/>
+<area shape="rect" id="node22" href="$Selectable_8h.html" title="Selectable element." alt="" coords="420,95,587,136"/>
+<area shape="rect" id="node23" href="$Slider_8h.html" title="Slider element." alt="" coords="1525,363,1692,404"/>
+<area shape="rect" id="node24" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="1645,452,1812,493"/>
+<area shape="rect" id="node25" href="$Slider3D_8h.html" title="Slider3D element." alt="" coords="1697,273,1864,315"/>
+<area shape="rect" id="node26" href="$SliderAngle_8h.html" title="SliderAngle element." alt="" coords="1819,363,1985,404"/>
+<area shape="rect" id="node27" href="$SpinInput_8h.html" title="Spinner element." alt="" coords="1989,95,2156,136"/>
+<area shape="rect" id="node28" href="$VerticalSlider_8h_source.html" title=" " alt="" coords="1799,95,1965,136"/>
+<area shape="rect" id="node29" href="$meta_8h.html" title="Meta helpers for pf_imgui." alt="" coords="2181,102,2333,129"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="1103,541,1282,568"/>
+<area shape="rect" id="node9" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="647,273,800,315"/>
+<area shape="rect" id="node10" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="819,370,1033,397"/>
+<area shape="rect" id="node11" href="$MarkdownText_8h_source.html" title=" " alt="" coords="697,452,864,493"/>
+<area shape="rect" id="node12" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="888,452,1033,493"/>
+<area shape="rect" id="node15" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="1113,184,1280,225"/>
+<area shape="rect" id="node17" href="$PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="923,184,1089,225"/>
+<area shape="rect" id="node16" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="995,273,1148,315"/>
+<area shape="rect" id="node20" href="$RadioGroup_8h.html" title="Radio group element." alt="" coords="1352,452,1519,493"/>
+<area shape="rect" id="node30" href="$Table_8h.html" title="Table element." alt="" coords="2113,452,2280,493"/>
 </map>

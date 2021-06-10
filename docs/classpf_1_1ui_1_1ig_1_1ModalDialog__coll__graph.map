@@ -1,0 +1,8 @@
+<map id="pf::ui::ig::ModalDialog" name="pf::ui::ig::ModalDialog">
+<area shape="rect" id="node1" title="Simple modal dialog which can be modal. Contains Elements." alt="" coords="252,107,416,133"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="27,5,183,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="5,56,204,83"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="30,107,179,133"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="32,157,177,184"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Positionable.html" title="Interface for positionable elements." alt="" coords="23,208,186,235"/>
+</map>

@@ -1,6 +1,7 @@
 <map id="pf::ui::ig::MenuContainer" name="pf::ui::ig::MenuContainer">
-<area shape="rect" id="node1" title="An item which can contain other menus." alt="" coords="176,5,357,32"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1AppMenuBar.html" title="Menu bar belonging to the entire application window." alt="" coords="5,80,171,107"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="" coords="195,80,338,107"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1WindowMenuBar.html" title="Menu bar belonging to Window." alt="" coords="363,80,555,107"/>
+<area shape="rect" id="node1" title="An item which can contain other menus." alt="" coords="5,81,187,108"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1AppMenuBar.html" title="Menu bar belonging to the entire application window." alt="" coords="248,5,413,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1PopupMenu.html" title="Popup menu to be used for example when right clicking an element." alt="" coords="251,56,410,83"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="" coords="259,107,402,133"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1WindowMenuBar.html" title="Menu bar belonging to Window." alt="" coords="235,157,427,184"/>
 </map>

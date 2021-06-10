@@ -1,0 +1,14 @@
+<map id="pf::ui::ig::CustomItemBox&lt; T, R &gt;" name="pf::ui::ig::CustomItemBox&lt; T, R &gt;">
+<area shape="rect" id="node1" title="Box containing items provided by user based on stored type." alt="" coords="621,93,808,135"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title=" " alt="" coords="888,5,1057,47"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title=" " alt="" coords="856,71,1089,98"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title="Combobox where rows can be whatever is provided by the user." alt="" coords="871,123,1074,164"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title="Listbox where rows can be whatever is provided by the user." alt="" coords="883,188,1062,229"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="407,101,573,127"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,50,352,77"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,50,161,77"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="211,101,357,127"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="209,151,359,178"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Combobox.html" title="A typical combobox with items which can be converted to string." alt="" coords="1137,13,1328,39"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1Listbox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="1149,71,1316,98"/>
+</map>

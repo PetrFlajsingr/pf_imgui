@@ -99,7 +99,7 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> std::make_unique&lt;Selectable&gt;(idStart + std::to_string(getNext(idGenerator)), toString(item));</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  }</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;static_assert(CustomListboxRowFactory&lt;<a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListboxRowFactory.html">ListboxRowFactory&lt;int&gt;</a>, <span class="keywordtype">int</span>, <a class="code" href="classpf_1_1ui_1_1ig_1_1Selectable.html">Selectable</a>&gt;);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;static_assert(CustomItemBoxFactory&lt;<a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1ListboxRowFactory.html">ListboxRowFactory&lt;int&gt;</a>, <span class="keywordtype">int</span>, <a class="code" href="classpf_1_1ui_1_1ig_1_1Selectable.html">Selectable</a>&gt;);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}<span class="comment">// namespace details</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
@@ -145,7 +145,7 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Listbox.html#aabfc864077a3b62bbcf4ce1a59783570">  108</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Listbox.html#aabfc864077a3b62bbcf4ce1a59783570">setSelectedItem</a>(<span class="keyword">const</span> T &amp;itemToSelect) <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a>(!std::same_as&lt;T, std::string&gt;) {</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">if</span> constexpr (std::equality_comparable&lt;T&gt;) {</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter = std::ranges::find_if(</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;              filteredItems, [&amp;itemToSelect](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item-&gt;first == itemToSelect; });</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            filteredItems, [&amp;itemToSelect](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item-&gt;first == itemToSelect; });</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;          iter != filteredItems.end()) {</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> index = std::distance(filteredItems.begin(), iter);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        setSelectedItemByIndex(index);</div>
@@ -158,7 +158,7 @@ $(function() {
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Listbox.html#afd8da0758f501d697a1aa090628460d8">  126</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Listbox.html#afd8da0758f501d697a1aa090628460d8">setSelectedItem</a>(<span class="keyword">const</span> std::string &amp;itemAsString) {</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter = std::ranges::find_if(</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            filteredItems, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item-&gt;second == itemAsString; });</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;          filteredItems, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item-&gt;second == itemAsString; });</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        iter != filteredItems.end()) {</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> index = std::distance(filteredItems.begin(), iter);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      setSelectedItemByIndex(index);</div>
@@ -207,43 +207,42 @@ $(function() {
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
 <div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Listbox.html#ab3e56763fe6ab65b77e9e464840634b4">  179</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Listbox.html#ab3e56763fe6ab65b77e9e464840634b4">unserialize_impl</a>(<span class="keyword">const</span> toml::table &amp;src)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">if</span> (src.contains(<span class="stringliteral">&quot;selected&quot;</span>)) {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> idx = *src[<span class="stringliteral">&quot;selected&quot;</span>].value&lt;<span class="keywordtype">int</span>&gt;();</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(idx) &lt; items.size()) {</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        selectedItemIndex = idx;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(items[idx].first);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      }</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  }</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Listbox.html#aa67289196726028249a71e7c095532e9">  189</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Listbox.html#aa67289196726028249a71e7c095532e9">serialize_impl</a>()<span class="keyword"> override </span>{<span class="comment">//FIXME: save string representation of selected item</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keyword">auto</span> result = toml::table{};</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> selectedItem = filteredItems[*selectedItemIndex];</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      <span class="keyword">auto</span> itemsWithIndices = items | ranges::views::addressof | ranges::views::enumerate | ranges::to_vector;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> indexInAllItems =</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;          <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(std::ranges::find_if(itemsWithIndices, [selectedItem](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;itemInfo) {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                             <span class="keywordflow">return</span> itemInfo.second-&gt;second.get() == selectedItem-&gt;second.get();</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                           })-&gt;first);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;      result.insert_or_assign(<span class="stringliteral">&quot;selected&quot;</span>, indexInAllItems);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    }</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  }</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  std::optional&lt;int&gt; selectedItemIndex = std::nullopt;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;};</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_LISTBOX_H</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> selectedItemAsString = *src[<span class="stringliteral">&quot;selected&quot;</span>].value&lt;std::string&gt;();</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;[idx, item] : items | ranges::views::enumerate) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordflow">if</span> (item.second-&gt;getLabel() == selectedItemAsString) {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;          selectedItemIndex = idx;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;          items[idx].second-&gt;setValue(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;          ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(items[idx].first);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;      }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Listbox.html#aa67289196726028249a71e7c095532e9">  193</a></span>&#160;  toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Listbox.html#aa67289196726028249a71e7c095532e9">serialize_impl</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keyword">auto</span> result = toml::table{};</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> selectedItem = filteredItems[*selectedItemIndex];</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;      result.insert_or_assign(<span class="stringliteral">&quot;selected&quot;</span>, selectedItem-&gt;second-&gt;getLabel());</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  std::optional&lt;int&gt; selectedItemIndex = std::nullopt;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;};</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_LISTBOX_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aunique__id_8h_html"><div class="ttname"><a href="unique__id_8h.html">unique_id.h</a></div><div class="ttdoc">Unique id generator for elements.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Listbox_html_aa67289196726028249a71e7c095532e9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Listbox.html#aa67289196726028249a71e7c095532e9">pf::ui::ig::Listbox::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> Listbox.h:189</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Listbox_html_aa67289196726028249a71e7c095532e9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Listbox.html#aa67289196726028249a71e7c095532e9">pf::ui::ig::Listbox::serialize_impl</a></div><div class="ttdeci">toml::table serialize_impl() override</div><div class="ttdef"><b>Definition:</b> Listbox.h:193</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Selectable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Selectable.html">pf::ui::ig::Selectable</a></div><div class="ttdoc">A labeled area which can be de/selected.</div><div class="ttdef"><b>Definition:</b> Selectable.h:24</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Listbox_html_a043a51241c51576c8d530b8521081c14"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Listbox.html#a043a51241c51576c8d530b8521081c14">pf::ui::ig::Listbox::addItem</a></div><div class="ttdeci">Selectable &amp; addItem(const T &amp;item, Selected selected)</div><div class="ttdef"><b>Definition:</b> Listbox.h:90</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Listbox_html_a5d6dd52546212ebdf14ef9ee2551f7dc"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Listbox.html#a5d6dd52546212ebdf14ef9ee2551f7dc">pf::ui::ig::Listbox::setSelectedItemByIndex</a></div><div class="ttdeci">void setSelectedItemByIndex(std::size_t index)</div><div class="ttdef"><b>Definition:</b> Listbox.h:139</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Listbox_html_aa64791126e9704a70a802f956dce8868"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Listbox.html#aa64791126e9704a70a802f956dce8868">pf::ui::ig::Listbox::getSelectedItem</a></div><div class="ttdeci">std::optional&lt; std::reference_wrapper&lt; T &gt; &gt; getSelectedItem() const</div><div class="ttdef"><b>Definition:</b> Listbox.h:99</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Listbox_html_aabfc864077a3b62bbcf4ce1a59783570"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Listbox.html#aabfc864077a3b62bbcf4ce1a59783570">pf::ui::ig::Listbox::setSelectedItem</a></div><div class="ttdeci">void setSelectedItem(const T &amp;itemToSelect) requires(!std</div><div class="ttdef"><b>Definition:</b> Listbox.h:108</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomListbox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomListbox.html">pf::ui::ig::CustomListbox</a></div><div class="ttdoc">Listbox where rows can be whatever is provided by the user.</div><div class="ttdef"><b>Definition:</b> CustomListbox.h:37</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomListbox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomListbox.html">pf::ui::ig::CustomListbox</a></div><div class="ttdoc">Listbox where rows can be whatever is provided by the user.</div><div class="ttdef"><b>Definition:</b> CustomListbox.h:28</div></div>
 <div class="ttc" id="aValueObservable_8h_html"><div class="ttname"><a href="ValueObservable_8h.html">ValueObservable.h</a></div><div class="ttdoc">Interface for providing observable support to elements.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1details_1_1ListboxRowFactory_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1details_1_1ListboxRowFactory.html">pf::ui::ig::details::ListboxRowFactory</a></div><div class="ttdef"><b>Definition:</b> Listbox.h:29</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:167</div></div>

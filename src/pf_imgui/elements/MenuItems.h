@@ -1,7 +1,9 @@
-//
-// Created by petr on 6/10/21.
-//
-
+/**
+ * @file MenuItems.h
+ * @brief Items to be used in menu bars and popup menu.
+ * @author Petr Flajšingr
+ * @date 10.6.21
+ */
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
 

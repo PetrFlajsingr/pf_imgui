@@ -1,8 +1,9 @@
 <map id="pf::ui::ig::MenuCheckboxItem" name="pf::ui::ig::MenuCheckboxItem">
-<area shape="rect" id="node1" title="An item, which can be clicked and it toggles its inner value." alt="" coords="151,229,363,256"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1MenuItem.html" title=" " alt="" coords="9,155,157,181"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node1" title="An item, which can be clicked and it toggles its inner value." alt="" coords="632,81,844,108"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1MenuItem.html" title=" " alt="" coords="415,5,563,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="209,5,345,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="182,155,331,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="356,155,547,181"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="414,56,563,83"/>
+<area shape="rect" id="node6" title=" " alt="" coords="393,107,584,133"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="421,157,556,184"/>
 </map>

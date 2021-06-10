@@ -1,0 +1,10 @@
+<map id="src/pf_imgui/elements/MenuItems.h" name="src/pf_imgui/elements/MenuItems.h">
+<area shape="rect" id="node1" title="Items to be used in menu bars and popup menu." alt="" coords="261,5,428,47"/>
+<area shape="rect" id="node2" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="167,95,333,136"/>
+<area shape="rect" id="node8" href="$PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="357,95,524,136"/>
+<area shape="rect" id="node3" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="59,184,212,225"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="18,437,197,464"/>
+<area shape="rect" id="node5" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="85,273,300,300"/>
+<area shape="rect" id="node6" href="$MarkdownText_8h_source.html" title=" " alt="" coords="24,348,191,389"/>
+<area shape="rect" id="node7" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="215,348,360,389"/>
+</map>

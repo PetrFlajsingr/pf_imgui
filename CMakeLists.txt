@@ -168,6 +168,7 @@ set(SOURCES
         src/include/ImGuizmo/ImSequencer.cpp
         src/pf_imgui/interface/DragNDrop.cpp
         src/pf_imgui/elements/MenuItems.cpp
+        src/pf_imgui/elements/PopupMenu.cpp
         )
 
 set(INCLUDES
@@ -277,7 +278,9 @@ set(INCLUDES
         src/pf_imgui/elements/CustomCombobox.h
         src/pf_imgui/elements/Combobox.h
         src/pf_imgui/elements/CustomItemBox.h
-        src/pf_imgui/elements/MenuItems.h)
+        src/pf_imgui/elements/MenuItems.h
+        src/pf_imgui/elements/PopupMenu.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 
