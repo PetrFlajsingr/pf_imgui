@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_DIALOGS_INPUTDIALOG_H
 #define PF_IMGUI_DIALOGS_INPUTDIALOG_H
 
-#include <pf_imgui/dialogs/Dialog.h>
+#include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/elements/Text.h>
@@ -20,7 +20,7 @@ namespace pf::ui::ig {
  * @brief Simplified dialog for user input.
  * It should be created via ImGuiInterface.
  */
-class InputDialog : public Dialog {
+class InputDialog : public ModalDialog {
  public:
   /**
    * Construct InputDialog.
@@ -33,9 +33,8 @@ class InputDialog : public Dialog {
    * @param modal dialog modality
    */
   InputDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
-              const std::string &message, std::invocable<std::string> auto &&onInput, std::invocable auto &&onCancel,
-              Modal modal = Modal::No)
-      : Dialog(parent, elementName, title, modal), inputDone(std::forward<decltype(onInput)>(onInput)),
+              const std::string &message, std::invocable<std::string> auto &&onInput, std::invocable auto &&onCancel)
+      : ModalDialog(parent, elementName, title), inputDone(std::forward<decltype(onInput)>(onInput)),
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
     createChild<Text>(getName() + "text", message);
     auto &input = createChild<InputText>(getName() + "input", "", "", TextInputType::MultiLine);

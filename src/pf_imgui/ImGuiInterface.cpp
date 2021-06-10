@@ -4,7 +4,7 @@
 
 #include "ImGuiInterface.h"
 #include "serialization.h"
-#include "src/pf_imgui/dialogs/Dialog.h"
+#include "src/pf_imgui/dialogs/ModalDialog.h"
 #include <imgui_internal.h>
 #include <implot.h>
 #include <pf_common/algorithms.h>
@@ -28,8 +28,8 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
-Dialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption, Modal modal) {
-  auto dialog = std::make_unique<Dialog>(*this, elementName, caption, modal);
+ModalDialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption) {
+  auto dialog = std::make_unique<ModalDialog>(*this, elementName, caption);
   const auto ptr = dialog.get();
   dialogs.emplace_back(std::move(dialog));
   return *ptr;
@@ -105,7 +105,7 @@ void ImGuiInterface::renderImpl() {
   std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
 }
 
-void ImGuiInterface::removeDialog(Dialog &dialog) {
+void ImGuiInterface::removeDialog(ModalDialog &dialog) {
   if (const auto iter = std::ranges::find_if(dialogs, [&dialog](const auto &ptr) { return ptr.get() == &dialog; });
       iter != dialogs.end()) {
     dialogs.erase(iter);

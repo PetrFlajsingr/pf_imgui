@@ -1,6 +1,6 @@
 /**
- * @file Dialog.h
- * @brief Dialog built by a user.
+ * @file ModalDialog.h
+ * @brief Modal dialog built by a user.
  * @author Petr Flajšingr
  * @date 31.10.20
  */
@@ -20,13 +20,13 @@
 namespace pf::ui::ig {
 
 /**
- * @brief Simple dialog which can be modal. Contains Elements.
+ * @brief Simple modal dialog which can be modal. Contains Elements.
  *
  * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::createDialog(...). Closing of the dialog should be managed by user.
  *
  * Non-modal dialog is rendered next to mouse cursor.
  */
-class PF_IMGUI_EXPORT Dialog : public Renderable,
+class PF_IMGUI_EXPORT ModalDialog : public Renderable,
                                public ElementContainer,
                                public Labellable,
                                public Resizable,
@@ -39,7 +39,7 @@ class PF_IMGUI_EXPORT Dialog : public Renderable,
    * @param label title
    * @param modal modality
    */
-  Dialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label, Modal modal = Modal::Yes);
+  ModalDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label);
 
   /**
    * Set flag for closing the dialog, which invalidates the dialog.
@@ -61,7 +61,6 @@ class PF_IMGUI_EXPORT Dialog : public Renderable,
   void renderImpl() override;
 
  private:
-  Modal modal;
   bool firstRender = true;
   bool closed = false;
   ImGuiInterface &owner;

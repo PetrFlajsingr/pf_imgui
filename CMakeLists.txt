@@ -103,7 +103,7 @@ set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
         src/pf_imgui/elements/Button.cpp
         src/pf_imgui/elements/Checkbox.cpp
-        src/pf_imgui/dialogs/Dialog.cpp
+        src/pf_imgui/dialogs/ModalDialog.cpp
         src/pf_imgui/elements/Group.cpp
         src/pf_imgui/elements/Image.cpp
         src/pf_imgui/elements/InputText.cpp
@@ -178,7 +178,7 @@ set(INCLUDES
         src/pf_imgui/elements/Button.h
         src/pf_imgui/elements/Checkbox.h
         src/pf_imgui/elements/ColorChooser.h
-        src/pf_imgui/dialogs/Dialog.h
+        src/pf_imgui/dialogs/ModalDialog.h
         src/pf_imgui/dialogs/MessageDialog.h
         src/pf_imgui/elements/DragInput.h
         src/pf_imgui/elements/Group.h

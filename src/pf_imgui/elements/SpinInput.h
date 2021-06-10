@@ -21,7 +21,6 @@ namespace pf::ui::ig {
  * @brief Spinner for numeric types.
  * @tparam T inner type
  * @todo: format for float
- * @todo: min and max vals
  */
 template<OneOf<int, float> T>
 class SpinInput : public ItemElement,

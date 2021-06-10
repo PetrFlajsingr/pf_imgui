@@ -41,9 +41,9 @@
 #include "elements/VerticalSlider.h"
 #include "elements/plots.h"
 #include "layouts/layouts.h"
-#include "src/pf_imgui/dialogs/Dialog.h"
 #include "src/pf_imgui/dialogs/FileDialog.h"
 #include "src/pf_imgui/dialogs/MessageDialog.h"
+#include "src/pf_imgui/dialogs/ModalDialog.h"
 #include "src/pf_imgui/dialogs/Window.h"
 
 #endif//PF_IMGUI_ELEMENTS_H

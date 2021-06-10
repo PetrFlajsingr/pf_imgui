@@ -30,7 +30,7 @@ class Button;
 class Checkbox;
 template<ToStringConvertible T>
 class ComboBox;
-class Dialog;
+class ModalDialog;
 class Group;
 class Image;
 class InputText;

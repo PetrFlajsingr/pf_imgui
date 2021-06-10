@@ -12,10 +12,10 @@
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/dialogs/Dialog.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
 #include <pf_imgui/dialogs/MessageDialog.h>
+#include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/DragNDrop.h>
@@ -60,10 +60,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * The dialog should be built by the user.
    * @param elementName ID of the dialog
    * @param caption title
-   * @param modal dialog modality
    * @return reference to the created dialog
    */
-  Dialog &createDialog(const std::string &elementName, const std::string &caption, Modal modal = Modal::Yes);
+  ModalDialog &createDialog(const std::string &elementName, const std::string &caption);
 
   /**
    * Create MessageDialog
@@ -72,15 +71,14 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param message message shown to a user
    * @param buttons allowed buttons
    * @param onDialogDone callback for user interaction
-   * @param modal dialog modality
    */
   template<typename ButtonTypes = MessageButtons>
   void createMsgDlg(const std::string &title, const std::string &message, Flags<ButtonTypes> buttons,
-                    std::invocable<ButtonTypes> auto &&onDialogDone, Modal modal = Modal::Yes) {
+                    std::invocable<ButtonTypes> auto &&onDialogDone) {
     using namespace std::string_literals;
-    auto dialog = std::make_unique<MessageDialog<ButtonTypes>>(
-        *this, "MsgDialog"s + std::to_string(getNext(idGen)), title, message, buttons,
-        std::forward<decltype(onDialogDone)>(onDialogDone), modal);
+    auto dialog = std::make_unique<MessageDialog<ButtonTypes>>(*this, "MsgDialog"s + std::to_string(getNext(idGen)),
+                                                               title, message, buttons,
+                                                               std::forward<decltype(onDialogDone)>(onDialogDone));
     dialogs.emplace_back(std::move(dialog));
   }
 
@@ -156,7 +154,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   void updateConfig();
   /**
    * Set state from inner config file.
-   * @todo: save state of ui and reload it using this?
    */
   void setStateFromConfig();
 
@@ -212,14 +209,13 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param message message shown to a user
    * @param onInput callback on user input
    * @param onCancel callback on dialog cancel
-   * @param modal dialog modality
    */
   void openInputDialog(const std::string &title, const std::string &message, std::invocable<std::string> auto &&onInput,
-                       std::invocable auto &&onCancel, Modal modal = Modal::No) {
+                       std::invocable auto &&onCancel) {
     using namespace std::string_literals;
     auto dialog = std::make_unique<InputDialog>(*this, "InputDialog"s + std::to_string(getNext(idGen)), title, message,
                                                 std::forward<decltype(onInput)>(onInput),
-                                                std::forward<decltype(onCancel)>(onCancel), modal);
+                                                std::forward<decltype(onCancel)>(onCancel));
     dialogs.emplace_back(std::move(dialog));
   }
 
@@ -248,8 +244,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   void renderImpl() override;
 
  private:
-  friend class Dialog;
-  std::vector<std::unique_ptr<Dialog>> dialogs;
+  friend class ModalDialog;
+  std::vector<std::unique_ptr<ModalDialog>> dialogs;
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
   std::vector<FileDialog> fileDialogs;
@@ -261,7 +257,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
 
   std::vector<DragNDropGroup> dragNDropGroups;
 
-  void removeDialog(Dialog &dialog);
+  void removeDialog(ModalDialog &dialog);
 };
 
 }// namespace pf::ui::ig

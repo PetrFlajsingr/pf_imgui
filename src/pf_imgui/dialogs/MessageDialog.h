@@ -9,7 +9,7 @@
 #define PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
 
 #include <pf_common/enums.h>
-#include <pf_imgui/dialogs/Dialog.h>
+#include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/Text.h>
 #include <pf_imgui/layouts/BoxLayout.h>
@@ -27,7 +27,7 @@ enum class MessageButtons { Ok = 1, Yes = 2, No = 4 };
  * @tparam ButtonTypes values allowed for buttons
  */
 template<Enum ButtonTypes = MessageButtons>
-class PF_IMGUI_EXPORT MessageDialog : public Dialog {
+class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
  public:
   /**
    * Construct MessageDialog.
@@ -40,9 +40,10 @@ class PF_IMGUI_EXPORT MessageDialog : public Dialog {
    * @param modal dialog modality
    */
   MessageDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
-                const std::string &message, Flags<ButtonTypes> buttons, std::invocable<ButtonTypes> auto &&onDialogDone,
-                Modal modal = Modal::Yes) requires(std::is_invocable_r_v<bool, decltype(onDialogDone), ButtonTypes>)
-      : Dialog(parent, elementName, title, modal), dialogDone(onDialogDone) {
+                const std::string &message, Flags<ButtonTypes> buttons,
+                std::invocable<ButtonTypes> auto
+                    &&onDialogDone) requires(std::is_invocable_r_v<bool, decltype(onDialogDone), ButtonTypes>)
+      : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
     createChild<Text>(getName() + "text", message);
     auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
     auto enabledButtons = magic_enum::enum_values<ButtonTypes>()
