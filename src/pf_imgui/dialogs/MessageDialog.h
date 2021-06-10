@@ -25,6 +25,8 @@ enum class MessageButtons { Ok = 1, Yes = 2, No = 4 };
  * @brief Simplified Dialog for showing messages.
  * Button labels are the same as enums being used. User must close the dialog on his own in onDialogDone callbacks.
  * @tparam ButtonTypes values allowed for buttons
+ *
+ * @todo: type of message - info, warning, error, debug with some sort of graphic
  */
 template<Enum ButtonTypes = MessageButtons>
 class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {

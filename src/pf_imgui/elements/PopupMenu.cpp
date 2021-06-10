@@ -23,6 +23,7 @@ void PopupMenu::renderImpl() {
       firstRender = false;
     } else {
       firstRender = true;
+      opened = false;
     }
   }
 }
