@@ -26,6 +26,10 @@ void ItemElement::render() {
   if (tooltip != nullptr) {
     if (getVisibility() == Visibility::Visible && isHovered()) { tooltip->render(); }
   }
+  if (popupMenu != nullptr) {
+    if (isHovered() && ImGui::GetIO().MouseClicked[1]) { popupMenu->open(); }
+    popupMenu->render();
+  }
 }
 
 bool ItemElement::hasTooltip() const { return tooltip != nullptr; }
@@ -36,18 +40,34 @@ void ItemElement::setTooltip(std::string_view text) {
   tooltip = std::make_unique<Tooltip>(getName() + "_tooltip");
   tooltip->createChild<Text>(tooltip->getName() + "_text", std::string(text));
 }
+
 Tooltip &ItemElement::createTooltip() {
   tooltip = std::make_unique<Tooltip>(getName() + "_tooltip");
   return *tooltip;
 }
+
 void ItemElement::setFocus() {
   ImGui::SetKeyboardFocusHere();
   Focusable::setFocus();
 }
+
 Tooltip &ItemElement::getTooltip() {
   if (tooltip == nullptr) { throw StackTraceException("Tooltip doesn't exist in {}", getName()); }
   return *tooltip;
 }
+
 void ItemElement::setTooltip(std::unique_ptr<Tooltip> &&newTooltip) { tooltip = std::move(newTooltip); }
+
+PopupMenu &ItemElement::createPopupMenu() {
+  popupMenu = std::make_unique<PopupMenu>(getName() + "_popup_menu");
+  return *popupMenu;
+}
+
+PopupMenu &ItemElement::getPopupMenu() {
+  if (tooltip == nullptr) { throw StackTraceException("Popup menu doesn't exist in {}", getName()); }
+  return *popupMenu;
+}
+
+bool ItemElement::hasPopupMenu() const { return popupMenu != nullptr; }
 
 }// namespace pf::ui::ig

@@ -11,9 +11,10 @@
 #include "Element.h"
 #include "Focusable.h"
 #include "Hoverable.h"
-#include "src/pf_imgui/elements/Tooltip.h"
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/PopupMenu.h>
+#include <pf_imgui/elements/Tooltip.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -75,12 +76,31 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
   [[nodiscard]] Tooltip &createTooltip();
 
   /**
+   * Check if this item has an active tooltip.
+   * @return true if the tooltip is active, false otherwise
+   */
+  [[nodiscard]] bool hasPopupMenu() const;
+  /**
+   * Get the tooltip if it exists.
+   * @return tooltip of this item
+   *
+   * @throws StacktraceException if the tooltip doesn't exist
+   */
+  [[nodiscard]] PopupMenu &getPopupMenu();
+  /**
+   * Create an instance of popup menu to be filled with elements by the user.
+   * @return reference to the newly created PopupMenu
+   */
+  [[nodiscard]] PopupMenu &createPopupMenu();
+
+  /**
    * Set focus state and keyboard focus for this item.
    */
   void setFocus() override;
 
  private:
   std::unique_ptr<Tooltip> tooltip = nullptr;
+  std::unique_ptr<PopupMenu> popupMenu = nullptr;
 };
 
 }// namespace pf::ui::ig
