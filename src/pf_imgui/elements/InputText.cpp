@@ -9,8 +9,10 @@
 
 namespace pf::ui::ig {
 InputText::InputText(const std::string &elementName, std::string label, const std::string &text,
-                     TextInputType textInputType, TextTrigger trigger, Flags<TextFilter> filters, Persistent persistent)
+                     TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
+                     Flags<TextFilter> filters, Persistent persistent)
     : Text(elementName, text), Labellable(std::move(label)), ValueObservable(""), Savable(persistent),
+      buffer(std::unique_ptr<char[]>(new char[inputLengthLimit + 1])), bufferLength(inputLengthLimit),
       inputType(textInputType) {
   setTextInner(text);
   for (auto flag : filters.getSetFlags()) { flags |= static_cast<uint32_t>(flag); }
@@ -20,12 +22,12 @@ InputText::InputText(const std::string &elementName, std::string label, const st
 void InputText::renderImpl() {
   auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
-    valueChanged = ImGui::InputText(getLabel().c_str(), buffer, 256, flags);
+    valueChanged = ImGui::InputText(getLabel().c_str(), buffer.get(), 256, flags);
   } else {
-    valueChanged = ImGui::InputTextMultiline(getLabel().c_str(), buffer, 256, ImVec2(0, 0), flags);
+    valueChanged = ImGui::InputTextMultiline(getLabel().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
   }
-  if (valueChanged && strcmp(buffer, getText().c_str()) != 0) {
-    setTextInner(buffer);
+  if (valueChanged && strcmp(buffer.get(), getText().c_str()) != 0) {
+    setTextInner(buffer.get());
     setValueInner(getText());
     notifyValueChanged();
   }
@@ -40,7 +42,7 @@ void InputText::clear() {
 void InputText::unserialize_impl(const toml::table &src) {
   setText(**src["text"].as_string());
   setValueAndNotifyIfChanged(getText());
-  std::snprintf(buffer, getText().size(), "%s", getText().c_str());
+  std::snprintf(buffer.get(), getText().size(), "%s", getText().c_str());
 }
 
 toml::table InputText::serialize_impl() { return toml::table{{{"text", getText()}}}; }
@@ -67,8 +69,11 @@ void InputText::setPassword(bool passwd) {
   }
 }
 void InputText::setTextInner(std::string txt) {
+  if (txt.size() > bufferLength) {
+    txt = txt.substr(bufferLength);
+  }
   Text::setTextInner(txt);
-  std::ranges::copy(txt, buffer);
+  std::ranges::copy(txt, buffer.get());
   buffer[txt.size()] = '\0';
 }
 

@@ -51,8 +51,9 @@ class PF_IMGUI_EXPORT InputText : public Text,
    * @param persistent enable state saving to disk
    */
   InputText(const std::string &elementName, std::string label, const std::string &text = "",
-            TextInputType textInputType = TextInputType::SingleLine, TextTrigger trigger = TextTrigger::Character,
-            Flags<TextFilter> filters = TextFilter::None, Persistent persistent = Persistent::No);
+            TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
+            TextTrigger trigger = TextTrigger::Character, Flags<TextFilter> filters = TextFilter::None,
+            Persistent persistent = Persistent::No);
 
   /**
    * Clear text.
@@ -92,7 +93,8 @@ class PF_IMGUI_EXPORT InputText : public Text,
   void setTextInner(std::string txt) override;
 
  private:
-  char buffer[256]{};
+  std::unique_ptr<char[]> buffer;
+  std::size_t bufferLength;
   TextInputType inputType;
   ImGuiInputTextFlags flags = {};
   bool readOnly = false;
