@@ -90,13 +90,13 @@ void ImGuiInterface::removeWindow(const std::string &name) {
     windows.erase(iter);
   }
 }
-Window &ImGuiInterface::windowByName(const std::string &name) {
+std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &name) {
   if (auto window = findIf(getWindows() | ranges::views::addressof,
                            [name](const auto &window) { return window->getName() == name; });
       window.has_value()) {
     return **window;
   } else {
-    throw IdNotFoundException("Child not found: {}", name);
+    return std::nullopt;
   }
 }
 

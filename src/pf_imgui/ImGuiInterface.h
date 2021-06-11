@@ -100,9 +100,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * Find Window by its ID.
    * @param name ID of the window
    * @throws IdNotFoundException when the Window of given ID is not present
-   * @return reference to the searched for Window
+   * @return reference to the searched for Window or nullopt if no such window exists
    */
-  Window &windowByName(const std::string &name);
+  std::optional<std::reference_wrapper<Window>> windowByName(const std::string &name);
 
   /**
    * Get all windows present in the UI.
