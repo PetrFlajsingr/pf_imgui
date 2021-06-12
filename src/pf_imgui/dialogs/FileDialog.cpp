@@ -5,7 +5,7 @@
 #include "FileDialog.h"
 
 namespace pf::ui::ig {
-
+// TODO: fix multi dir selection - when using GetSelection() it returns invalid path
 FileExtensionSettings::FileExtensionSettings(std::vector<std::filesystem::path> extensions, std::string description,
                                              const std::optional<ImVec4> &color)
     : extensions(std::move(extensions)), description(std::move(description)), color(color) {}
@@ -38,8 +38,8 @@ void FileDialog::renderImpl() {
   if (done) { return; }
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
-    case Modal::Yes: fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, defaultName, maxSelectCount); break;
-    case Modal::No: fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, defaultName, maxSelectCount); break;
+    case Modal::Yes: fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, openPath, defaultName, maxSelectCount); break;
+    case Modal::No: fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, openPath, defaultName, maxSelectCount); break;
   }
   setExtInfos();
 
@@ -48,7 +48,7 @@ void FileDialog::renderImpl() {
       const auto filePathName = fileDialogInstance.GetFilePathName();
       const auto selection = fileDialogInstance.GetSelection();
 
-      if (!selection.empty()) {
+      if (!selection.empty() && fileType != FileType::Directory) {
         auto selectionVec = std::vector<std::filesystem::path>();
         selectionVec.reserve(selection.size());
         for (auto &[_, path] : selection) { selectionVec.emplace_back(path); }
