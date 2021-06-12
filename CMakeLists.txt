@@ -87,6 +87,7 @@ include_directories(src/include/imgui)
 include_directories(src/include/imgui_markdown)
 include_directories(src/include/imgui_memory_editor)
 include_directories(src/include/imgInspect)
+include_directories(src/include/ImGuiIcons)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -280,7 +281,7 @@ set(INCLUDES
         src/pf_imgui/elements/CustomItemBox.h
         src/pf_imgui/elements/MenuItems.h
         src/pf_imgui/elements/PopupMenu.h
-        )
+        src/pf_imgui/icons.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -322,6 +323,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFlamegraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_memory_editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgInspect>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiIcons>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo)
 

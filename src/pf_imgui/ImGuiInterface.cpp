@@ -16,6 +16,20 @@ namespace pf::ui::ig {
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
     : Renderable("imgui_interface"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
 
+ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, Flags<IconPack> enabledIconPacks,
+                               const std::filesystem::path &iconFontDirectory, float iconSize)
+    : ImGuiInterface(flags, std::move(tomlConfig)) {
+  getIo().Fonts->AddFontDefault();
+  std::ranges::for_each(enabledIconPacks.getSetFlags(), [&](const auto iconPack) {
+    const auto fileNames = fontFileNamesForIconPack(iconPack);
+    std::ranges::for_each(fileNames, [&](const auto fileName) {
+      const auto fontConfig = fontConfigForIconPack(iconPack);
+      const auto fontPath = iconFontDirectory / fileName;
+      getIo().Fonts->AddFontFromFileTTF(fontPath.string().c_str(), iconSize, &fontConfig.config, fontConfig.iconRange);
+    });
+  });
+}
+
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -43,10 +57,13 @@ bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() {
-  config.clear();
+  //config.clear();
   std::ranges::for_each(windows, [this](auto &window) {
     auto serialised = serializeImGuiTree(*window);
-    config.insert(serialised.begin(), serialised.end());
+    for (const auto &item : serialised) {
+      config.insert_or_assign(item.first, item.second);
+    }
+    //config.insert(serialised.begin(), serialised.end());
   });
 }
 

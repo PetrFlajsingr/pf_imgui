@@ -18,6 +18,7 @@
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/icons.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <string>
@@ -38,7 +39,7 @@ namespace pf::ui::ig {
  * @todo: change id type
  * @todo: add converted input element
  * @todo: localization
- * @todo: fonts
+ * @todo: fonts and icon fonts - custom sizes
  * @todo: key bindings?
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
@@ -49,6 +50,14 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param tomlConfig config containing data of Savable elements
    */
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
+
+  /**
+   * Construct ImGuiInterface with given flags.
+   * @param flags
+   * @param tomlConfig config containing data of Savable elements
+   */
+  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, Flags<IconPack> enabledIconPacks,
+                          const std::filesystem::path &iconFontDirectory = ".", float iconSize = 16.f);
 
   /**
    * Get ImGuiIO from ImGui::.
