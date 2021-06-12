@@ -36,10 +36,10 @@ namespace pf::ui::ig {
  *
  * For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.
  *
- * @todo: change id type
  * @todo: add converted input element
  * @todo: localization
  * @todo: fonts and icon fonts - custom sizes
+ * @todo: custom icon fonts
  * @todo: key bindings?
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
