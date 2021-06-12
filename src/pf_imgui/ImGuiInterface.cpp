@@ -16,6 +16,20 @@ namespace pf::ui::ig {
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
     : Renderable("imgui_interface"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
 
+ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, Flags<IconPack> enabledIconPacks,
+                               const std::filesystem::path &fontDirectory)
+    : ImGuiInterface(flags, std::move(tomlConfig)) {
+  std::ranges::for_each(enabledIconPacks.getSetFlags(), [&](const auto iconPack) {
+    const auto fileNames = fontFileNamesForIconPack(iconPack);
+    std::ranges::for_each(fileNames, [&](const auto fileName) {
+      const auto fontConfig = fontConfigForIconPack(iconPack);
+      const auto fontPath = fontDirectory / fileName;
+      getIo().Fonts->AddFontFromFileTTF(fontPath.string().c_str(), 16.0f, &fontConfig.config,
+                                        fontConfig.iconRange.data());
+    });
+  });
+}
+
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();

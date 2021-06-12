@@ -11,6 +11,7 @@
 #include <imgui.h>
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
+#include <pf_imgui/icons.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
@@ -49,6 +50,14 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param tomlConfig config containing data of Savable elements
    */
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
+
+  /**
+   * Construct ImGuiInterface with given flags.
+   * @param flags
+   * @param tomlConfig config containing data of Savable elements
+   */
+  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, Flags<IconPack> enabledIconPacks,
+                          const std::filesystem::path &fontDirectory = ".");
 
   /**
    * Get ImGuiIO from ImGui::.
