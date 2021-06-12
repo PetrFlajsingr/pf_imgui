@@ -57,10 +57,13 @@ bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() {
-  config.clear();
+  //config.clear();
   std::ranges::for_each(windows, [this](auto &window) {
     auto serialised = serializeImGuiTree(*window);
-    config.insert(serialised.begin(), serialised.end());
+    for (const auto &item : serialised) {
+      config.insert_or_assign(item.first, item.second);
+    }
+    //config.insert(serialised.begin(), serialised.end());
   });
 }
 
