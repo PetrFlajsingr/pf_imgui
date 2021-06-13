@@ -29,7 +29,7 @@ struct PF_IMGUI_EXPORT SizeDimension : public T {
    * @param margin
    * @return
    */
-  static SizeDimension Fill(uint32_t margin = 1) { return {-margin}; }
+  static SizeDimension Fill(uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
   /**
    * Automatic size detection.
    * @return

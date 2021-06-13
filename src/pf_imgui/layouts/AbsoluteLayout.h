@@ -9,12 +9,11 @@
 #define PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 
 #include "ResizableLayout.h"
-#include "src/pf_imgui/interface/decorators/PositionDecorator.h"
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
-#include <pf_imgui/interface/Positionable.h>
+#include <pf_imgui/interface/decorators/PositionDecorator.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>

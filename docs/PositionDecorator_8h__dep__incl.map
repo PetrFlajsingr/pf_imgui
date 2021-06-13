@@ -1,6 +1,7 @@
 <map id="src/pf_imgui/interface/decorators/PositionDecorator.h" name="src/pf_imgui/interface/decorators/PositionDecorator.h">
-<area shape="rect" id="node1" title="Decorator for non&#45;positionable elements." alt="" coords="5,5,232,47"/>
-<area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="41,95,196,136"/>
-<area shape="rect" id="node3" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="41,184,196,225"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="29,273,208,300"/>
+<area shape="rect" id="node1" title="Decorator for non&#45;positionable elements." alt="" coords="71,5,297,47"/>
+<area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="17,95,172,136"/>
+<area shape="rect" id="node5" href="$AnchorLayout_8h.html" title="Layout where each element&#39;s size or position is automatically changed based on anchors." alt="" coords="196,95,351,136"/>
+<area shape="rect" id="node3" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="17,184,172,225"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,273,184,300"/>
 </map>

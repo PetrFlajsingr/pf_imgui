@@ -171,6 +171,7 @@ set(SOURCES
         src/pf_imgui/elements/MenuItems.cpp
         src/pf_imgui/elements/PopupMenu.cpp
         src/pf_imgui/FontManager.cpp
+        src/pf_imgui/layouts/AnchorLayout.cpp
         )
 
 set(INCLUDES
@@ -283,7 +284,8 @@ set(INCLUDES
         src/pf_imgui/elements/MenuItems.h
         src/pf_imgui/elements/PopupMenu.h
         src/pf_imgui/icons.h
-        src/pf_imgui/FontManager.h)
+        src/pf_imgui/FontManager.h
+        src/pf_imgui/layouts/AnchorLayout.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

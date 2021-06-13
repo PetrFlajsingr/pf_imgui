@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['xyerrorplotdata_565',['XYErrorPlotData',['../structpf_1_1ui_1_1ig_1_1plot__type_1_1XYErrorPlotData.html',1,'pf::ui::ig::plot_type']]],
-  ['xyplotdata_566',['XYPlotData',['../structpf_1_1ui_1_1ig_1_1plot__type_1_1XYPlotData.html',1,'pf::ui::ig::plot_type']]]
+  ['xyerrorplotdata_567',['XYErrorPlotData',['../structpf_1_1ui_1_1ig_1_1plot__type_1_1XYErrorPlotData.html',1,'pf::ui::ig::plot_type']]],
+  ['xyplotdata_568',['XYPlotData',['../structpf_1_1ui_1_1ig_1_1plot__type_1_1XYPlotData.html',1,'pf::ui::ig::plot_type']]]
 ];

@@ -1,52 +1,52 @@
 <map id="src/pf_imgui/exceptions.h" name="src/pf_imgui/exceptions.h">
-<area shape="rect" id="node1" title="Exceptions for pf_imgui." alt="" coords="1069,5,1259,32"/>
-<area shape="rect" id="node2" href="$Plot_8h.html" title="Plot element." alt="" coords="3050,80,3217,121"/>
-<area shape="rect" id="node5" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="756,80,911,121"/>
-<area shape="rect" id="node7" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="1087,169,1241,211"/>
-<area shape="rect" id="node14" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="960,80,1115,121"/>
-<area shape="rect" id="node15" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1534,80,1698,121"/>
-<area shape="rect" id="node3" href="$plots_8h.html" title="Convenience include for all layout types." alt="" coords="4270,616,4437,657"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="1836,795,2015,821"/>
-<area shape="rect" id="node6" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="5,259,160,300"/>
-<area shape="rect" id="node8" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="3470,527,3623,568"/>
-<area shape="rect" id="node12" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="3647,527,3801,568"/>
-<area shape="rect" id="node13" href="$Memo_8h.html" title="Memo element." alt="" coords="183,705,350,747"/>
-<area shape="rect" id="node9" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="3731,623,3946,650"/>
-<area shape="rect" id="node10" href="$MarkdownText_8h_source.html" title=" " alt="" coords="3199,705,3366,747"/>
-<area shape="rect" id="node11" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="3766,705,3911,747"/>
-<area shape="rect" id="node16" href="$ModalDialog_8h.html" title="Modal dialog built by a user." alt="" coords="3927,437,4081,479"/>
-<area shape="rect" id="node17" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="4029,527,4182,568"/>
-<area shape="rect" id="node18" href="$Group_8h.html" title="Group element." alt="" coords="165,348,331,389"/>
-<area shape="rect" id="node19" href="$TabBar_8h.html" title="TabBar element." alt="" coords="355,348,522,389"/>
-<area shape="rect" id="node20" href="$Tooltip_8h.html" title="Tooltip element." alt="" coords="1630,169,1797,211"/>
-<area shape="rect" id="node47" href="$Tree_8h.html" title="Tree element." alt="" coords="4079,616,4246,657"/>
-<area shape="rect" id="node48" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="859,169,1013,211"/>
-<area shape="rect" id="node49" href="$ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="1443,169,1594,211"/>
-<area shape="rect" id="node21" href="$DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="2615,259,2779,300"/>
-<area shape="rect" id="node36" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1631,259,1795,300"/>
-<area shape="rect" id="node22" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="1615,348,1782,389"/>
-<area shape="rect" id="node23" href="$Combobox_8h.html" title="Selectable combobox." alt="" coords="2175,437,2342,479"/>
-<area shape="rect" id="node24" href="$DragInput_8h.html" title="DragInput element." alt="" coords="1806,348,1973,389"/>
-<area shape="rect" id="node25" href="$Input_8h.html" title="Input element." alt="" coords="546,348,713,389"/>
-<area shape="rect" id="node26" href="$Text_8h.html" title="Text element." alt="" coords="3634,348,3801,389"/>
-<area shape="rect" id="node28" href="$Listbox_8h_source.html" title=" " alt="" coords="2418,437,2585,479"/>
-<area shape="rect" id="node29" href="$Range2D_8h.html" title="Element for 2D range selection." alt="" coords="1997,348,2163,389"/>
-<area shape="rect" id="node30" href="$Slider_8h.html" title="Slider element." alt="" coords="1234,348,1401,389"/>
-<area shape="rect" id="node31" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="1425,348,1591,389"/>
-<area shape="rect" id="node32" href="$Slider3D_8h.html" title="Slider3D element." alt="" coords="2614,348,2781,389"/>
-<area shape="rect" id="node33" href="$SliderAngle_8h.html" title="SliderAngle element." alt="" coords="2805,348,2971,389"/>
-<area shape="rect" id="node34" href="$SpinInput_8h.html" title="Spinner element." alt="" coords="3341,348,3507,389"/>
-<area shape="rect" id="node35" href="$VerticalSlider_8h_source.html" title=" " alt="" coords="3047,348,3214,389"/>
-<area shape="rect" id="node27" href="$InputText_8h.html" title="InputText element." alt="" coords="3098,437,3265,479"/>
-<area shape="rect" id="node37" href="$Button_8h.html" title="Button element." alt="" coords="3365,437,3531,479"/>
-<area shape="rect" id="node38" href="$Checkbox_8h.html" title="Checkbox element." alt="" coords="597,527,763,568"/>
-<area shape="rect" id="node39" href="$Image_8h.html" title="Image element." alt="" coords="670,616,837,657"/>
-<area shape="rect" id="node40" href="$MemoryEditor_8h.html" title="Raw memory editor." alt="" coords="791,705,958,747"/>
-<area shape="rect" id="node41" href="$ProgressBar_8h.html" title="ProgressBar element." alt="" coords="890,527,1057,568"/>
-<area shape="rect" id="node42" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="1034,616,1201,657"/>
-<area shape="rect" id="node43" href="$Selectable_8h.html" title="Selectable element." alt="" coords="2187,348,2354,389"/>
-<area shape="rect" id="node44" href="$StringTable_8h.html" title="StringTable element." alt="" coords="991,348,1158,389"/>
-<area shape="rect" id="node45" href="$Table_8h.html" title="Table element." alt="" coords="1277,437,1443,479"/>
-<area shape="rect" id="node46" href="$WidthDecorator_8h.html" title="Decorator to enable control of element width." alt="" coords="2378,348,2590,389"/>
-<area shape="rect" id="node50" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="1409,266,1607,293"/>
+<area shape="rect" id="node1" title="Exceptions for pf_imgui." alt="" coords="1263,5,1453,32"/>
+<area shape="rect" id="node2" href="$Plot_8h.html" title="Plot element." alt="" coords="1540,80,1707,121"/>
+<area shape="rect" id="node5" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="799,80,954,121"/>
+<area shape="rect" id="node7" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="1055,169,1210,211"/>
+<area shape="rect" id="node14" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="1003,80,1158,121"/>
+<area shape="rect" id="node15" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1352,80,1516,121"/>
+<area shape="rect" id="node50" href="$AnchorLayout_8h.html" title="Layout where each element&#39;s size or position is automatically changed based on anchors." alt="" coords="1731,80,1886,121"/>
+<area shape="rect" id="node3" href="$plots_8h.html" title="Convenience include for all layout types." alt="" coords="4067,616,4233,657"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="1874,795,2053,821"/>
+<area shape="rect" id="node6" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="325,259,479,300"/>
+<area shape="rect" id="node8" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="3164,527,3317,568"/>
+<area shape="rect" id="node12" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="2987,527,3140,568"/>
+<area shape="rect" id="node13" href="$Memo_8h.html" title="Memo element." alt="" coords="47,705,213,747"/>
+<area shape="rect" id="node9" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="3248,623,3463,650"/>
+<area shape="rect" id="node10" href="$MarkdownText_8h_source.html" title=" " alt="" coords="2447,705,2613,747"/>
+<area shape="rect" id="node11" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="3283,705,3428,747"/>
+<area shape="rect" id="node16" href="$ModalDialog_8h.html" title="Modal dialog built by a user." alt="" coords="3495,437,3648,479"/>
+<area shape="rect" id="node17" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="3825,527,3979,568"/>
+<area shape="rect" id="node18" href="$Group_8h.html" title="Group element." alt="" coords="99,348,265,389"/>
+<area shape="rect" id="node19" href="$TabBar_8h.html" title="TabBar element." alt="" coords="289,348,456,389"/>
+<area shape="rect" id="node20" href="$Tooltip_8h.html" title="Tooltip element." alt="" coords="1556,169,1723,211"/>
+<area shape="rect" id="node46" href="$Tree_8h.html" title="Tree element." alt="" coords="3876,616,4043,657"/>
+<area shape="rect" id="node47" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="827,169,982,211"/>
+<area shape="rect" id="node48" href="$ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="1359,169,1509,211"/>
+<area shape="rect" id="node21" href="$DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="2312,259,2476,300"/>
+<area shape="rect" id="node36" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1557,259,1721,300"/>
+<area shape="rect" id="node22" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="1167,348,1333,389"/>
+<area shape="rect" id="node23" href="$Combobox_8h.html" title="Selectable combobox." alt="" coords="2052,437,2219,479"/>
+<area shape="rect" id="node24" href="$DragInput_8h.html" title="DragInput element." alt="" coords="1357,348,1524,389"/>
+<area shape="rect" id="node25" href="$Input_8h.html" title="Input element." alt="" coords="976,348,1143,389"/>
+<area shape="rect" id="node26" href="$Text_8h.html" title="Text element." alt="" coords="2948,348,3115,389"/>
+<area shape="rect" id="node28" href="$Listbox_8h_source.html" title=" " alt="" coords="2295,437,2461,479"/>
+<area shape="rect" id="node29" href="$Range2D_8h.html" title="Element for 2D range selection." alt="" coords="1929,348,2096,389"/>
+<area shape="rect" id="node30" href="$Slider_8h.html" title="Slider element." alt="" coords="1548,348,1715,389"/>
+<area shape="rect" id="node31" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="1739,348,1905,389"/>
+<area shape="rect" id="node32" href="$Slider3D_8h.html" title="Slider3D element." alt="" coords="2311,348,2477,389"/>
+<area shape="rect" id="node33" href="$SliderAngle_8h.html" title="SliderAngle element." alt="" coords="3139,348,3305,389"/>
+<area shape="rect" id="node34" href="$SpinInput_8h.html" title="Spinner element." alt="" coords="2655,348,2821,389"/>
+<area shape="rect" id="node35" href="$VerticalSlider_8h_source.html" title=" " alt="" coords="3329,348,3496,389"/>
+<area shape="rect" id="node27" href="$InputText_8h.html" title="InputText element." alt="" coords="2744,437,2911,479"/>
+<area shape="rect" id="node37" href="$Button_8h.html" title="Button element." alt="" coords="2553,437,2720,479"/>
+<area shape="rect" id="node38" href="$Checkbox_8h.html" title="Checkbox element." alt="" coords="340,527,507,568"/>
+<area shape="rect" id="node39" href="$CustomItemBox_8h.html" title="Customizable item container." alt="" coords="785,348,952,389"/>
+<area shape="rect" id="node40" href="$Image_8h.html" title="Image element." alt="" coords="391,616,557,657"/>
+<area shape="rect" id="node41" href="$MemoryEditor_8h.html" title="Raw memory editor." alt="" coords="512,705,679,747"/>
+<area shape="rect" id="node42" href="$ProgressBar_8h.html" title="ProgressBar element." alt="" coords="633,527,800,568"/>
+<area shape="rect" id="node43" href="$RadioButton_8h.html" title="RadioButton element." alt="" coords="755,616,921,657"/>
+<area shape="rect" id="node44" href="$Selectable_8h.html" title="Selectable element." alt="" coords="2120,348,2287,389"/>
+<area shape="rect" id="node45" href="$StringTable_8h.html" title="StringTable element." alt="" coords="989,705,1156,747"/>
+<area shape="rect" id="node49" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="1335,266,1533,293"/>
 </map>

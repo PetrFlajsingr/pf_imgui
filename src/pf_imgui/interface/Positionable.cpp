@@ -11,7 +11,7 @@ Positionable::Positionable(const ImVec2 &position) : position(position) {}
 ImVec2 Positionable::getPosition() const { return position; }
 
 void Positionable::setPosition(ImVec2 pos) {
-  if (pos.x != position.x || pos.y != pos.y) {
+  if (pos.x != position.x || pos.y != position.y) {
     position = pos;
     notifyPositionChanged(position);
   }
