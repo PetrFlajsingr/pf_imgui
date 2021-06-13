@@ -11,9 +11,9 @@ Element::Element(const std::string &name) : Renderable(name) {}
 
 void Element::render() {
   ImGui::PushID(getName().c_str());
-  ImGui::PushFont(font);
+  if (font != nullptr) { ImGui::PushFont(font); }
   Renderable::render();
-  ImGui::PopFont();
+  if (font != nullptr) { ImGui::PopFont(); }
   ImGui::PopID();
 }
 

@@ -33,6 +33,10 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   explicit Element(const std::string &name);
 
   void render() override;
+  /**
+   * Set font for Element and all elements inside - except for those that have their own font.
+   * @param fontPtr new font
+   */
   void setFont(ImFont *fontPtr);
 
  protected:

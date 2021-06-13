@@ -48,6 +48,7 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
   auto fontConfig = ImFontConfig{};
   fontConfig.SizePixels = builder.fontSize;
   fontConfig.GlyphExtraSpacing = ImVec2{builder.extraHorizontalSpacing, 0};
+  fontConfig.FontNo = builder.indexInTTF;
   auto font = std::visit<ImFont *>(
       Visitor{[&, this](const std::filesystem::path &src) {
                 return interface->getIo().Fonts->AddFontFromFileTTF(src.string().c_str(), builder.fontSize,
@@ -62,6 +63,8 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
     auto subfontConfig = ImFontConfig{};
     subfontConfig.SizePixels = subfontBuilder.fontSize;
     subfontConfig.GlyphExtraSpacing = ImVec2{subfontBuilder.extraHorizontalSpacing, 0};
+    subfontConfig.MergeMode = true;
+    subfontConfig.FontNo = subfontBuilder.indexInTTF;
     auto glyphRangePtr = glyphRangeInfos.emplace_back(subfontBuilder.glyphRange).data();
     subfontConfig.GlyphRanges = glyphRangePtr;
     font = std::visit<ImFont *>(Visitor{[&, this](const std::filesystem::path &src) {

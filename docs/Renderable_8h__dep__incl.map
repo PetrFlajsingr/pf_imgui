@@ -1,52 +1,52 @@
 <map id="src/pf_imgui/interface/Renderable.h" name="src/pf_imgui/interface/Renderable.h">
-<area shape="rect" id="node1" title="Base class for renderables." alt="" coords="4090,5,4254,47"/>
-<area shape="rect" id="node2" href="$FileDialog_8h.html" title="Dialog for selecting files on disk." alt="" coords="4686,452,4840,493"/>
-<area shape="rect" id="node7" href="$ModalDialog_8h.html" title="Modal dialog built by a user." alt="" coords="3466,363,3620,404"/>
-<area shape="rect" id="node10" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="2445,95,2609,136"/>
-<area shape="rect" id="node48" href="$ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="4140,273,4290,315"/>
-<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="3494,720,3672,747"/>
-<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="3296,549,3510,575"/>
-<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="3440,631,3606,672"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="3270,631,3416,672"/>
-<area shape="rect" id="node8" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="3352,452,3505,493"/>
-<area shape="rect" id="node9" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="3072,452,3225,493"/>
-<area shape="rect" id="node11" href="$Bullet_8h.html" title="Decorator adding a bullet to an element." alt="" coords="2306,541,2473,583"/>
-<area shape="rect" id="node12" href="$FlameGraph_8h.html" title="FlameGraph element." alt="" coords="4777,541,4944,583"/>
-<area shape="rect" id="node13" href="$Text_8h.html" title="Text element." alt="" coords="3345,273,3512,315"/>
-<area shape="rect" id="node15" href="$Memo_8h.html" title="Memo element." alt="" coords="1994,452,2161,493"/>
-<area shape="rect" id="node16" href="$MenuItems_8h.html" title="Items to be used in menu bars and popup menu." alt="" coords="2096,184,2262,225"/>
-<area shape="rect" id="node18" href="$PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="2045,273,2212,315"/>
-<area shape="rect" id="node19" href="$PieChart_8h.html" title="PieChart element." alt="" coords="29,273,196,315"/>
-<area shape="rect" id="node21" href="$SimplePlot_8h.html" title="SimplePlot element." alt="" coords="112,184,278,225"/>
-<area shape="rect" id="node22" href="$PlotDataBase_8h.html" title="Types for data storage in plots and base class used in most storage types." alt="" coords="964,184,1167,225"/>
-<area shape="rect" id="node32" href="$Separator_8h.html" title="Visually split UI." alt="" coords="1961,631,2128,672"/>
-<area shape="rect" id="node33" href="$TabBar_8h.html" title="TabBar element." alt="" coords="2518,273,2685,315"/>
-<area shape="rect" id="node34" href="$ResizableLayout_8h.html" title="Base class for layouts which provide resizing." alt="" coords="2760,273,2915,315"/>
-<area shape="rect" id="node40" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="2338,184,2564,225"/>
-<area shape="rect" id="node41" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="4106,370,4305,397"/>
-<area shape="rect" id="node47" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="3004,184,3168,225"/>
-<area shape="rect" id="node49" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="3782,184,3946,225"/>
-<area shape="rect" id="node50" href="$Layout_8h.html" title="Base class for layouts." alt="" coords="3988,184,4152,225"/>
-<area shape="rect" id="node14" href="$InputText_8h.html" title="InputText element." alt="" coords="3644,363,3810,404"/>
-<area shape="rect" id="node17" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="2185,452,2352,493"/>
-<area shape="rect" id="node20" href="$plots_8h.html" title="Convenience include for all layout types." alt="" coords="886,363,1053,404"/>
-<area shape="rect" id="node23" href="$Plot_8h.html" title="Plot element." alt="" coords="982,273,1149,315"/>
-<area shape="rect" id="node24" href="$Bar_8h.html" title="Bar graph data." alt="" coords="1173,273,1340,315"/>
-<area shape="rect" id="node25" href="$Digital_8h.html" title="Digital graph data." alt="" coords="1364,273,1530,315"/>
-<area shape="rect" id="node26" href="$ErrorBar_8h.html" title="ErrorBar graph data." alt="" coords="1554,273,1721,315"/>
-<area shape="rect" id="node27" href="$HeatMap_8h.html" title="HeatMap graph data." alt="" coords="1746,273,1919,315"/>
-<area shape="rect" id="node28" href="$Line_8h.html" title="Line graph data." alt="" coords="220,273,386,315"/>
-<area shape="rect" id="node29" href="$Shaded_8h.html" title="Shaded graph data." alt="" coords="410,273,577,315"/>
-<area shape="rect" id="node30" href="$Stairs_8h.html" title="Stairs graph data." alt="" coords="601,273,768,315"/>
-<area shape="rect" id="node31" href="$Stems_8h.html" title="Stem graph data." alt="" coords="792,273,958,315"/>
-<area shape="rect" id="node35" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="2319,363,2474,404"/>
-<area shape="rect" id="node36" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="2727,363,2882,404"/>
-<area shape="rect" id="node37" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="2906,363,3060,404"/>
-<area shape="rect" id="node38" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="2548,363,2703,404"/>
-<area shape="rect" id="node39" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="3084,363,3239,404"/>
-<area shape="rect" id="node42" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="3924,452,4090,493"/>
-<area shape="rect" id="node43" href="$DragInput_8h.html" title="DragInput element." alt="" coords="4114,452,4281,493"/>
-<area shape="rect" id="node44" href="$Input_8h.html" title="Input element." alt="" coords="4305,452,4472,493"/>
-<area shape="rect" id="node45" href="$Slider_8h.html" title="Slider element." alt="" coords="4496,452,4662,493"/>
-<area shape="rect" id="node46" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="3733,452,3900,493"/>
+<area shape="rect" id="node1" title="Base class for renderables." alt="" coords="3728,5,3892,47"/>
+<area shape="rect" id="node2" href="$FileDialog_8h.html" title="Dialog for selecting files on disk." alt="" coords="3809,631,3963,672"/>
+<area shape="rect" id="node7" href="$ModalDialog_8h.html" title="Modal dialog built by a user." alt="" coords="2757,541,2911,583"/>
+<area shape="rect" id="node10" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="2620,95,2784,136"/>
+<area shape="rect" id="node49" href="$ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="3516,273,3667,315"/>
+<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="3021,899,3199,925"/>
+<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="2723,727,2937,754"/>
+<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="2876,809,3043,851"/>
+<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="2707,809,2852,851"/>
+<area shape="rect" id="node8" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="2769,631,2923,672"/>
+<area shape="rect" id="node9" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="2592,631,2745,672"/>
+<area shape="rect" id="node11" href="$Bullet_8h.html" title="Decorator adding a bullet to an element." alt="" coords="3655,720,3821,761"/>
+<area shape="rect" id="node12" href="$FlameGraph_8h.html" title="FlameGraph element." alt="" coords="3912,720,4079,761"/>
+<area shape="rect" id="node13" href="$Text_8h.html" title="Text element." alt="" coords="2588,452,2755,493"/>
+<area shape="rect" id="node15" href="$Memo_8h.html" title="Memo element." alt="" coords="2108,631,2275,672"/>
+<area shape="rect" id="node16" href="$MenuItems_8h.html" title="Items to be used in menu bars and popup menu." alt="" coords="2319,184,2485,225"/>
+<area shape="rect" id="node18" href="$PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="3007,273,3173,315"/>
+<area shape="rect" id="node19" href="$ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="3319,363,3483,404"/>
+<area shape="rect" id="node25" href="$TabBar_8h.html" title="TabBar element." alt="" coords="2108,452,2275,493"/>
+<area shape="rect" id="node26" href="$PieChart_8h.html" title="PieChart element." alt="" coords="1729,273,1896,315"/>
+<area shape="rect" id="node28" href="$SimplePlot_8h.html" title="SimplePlot element." alt="" coords="1815,184,1981,225"/>
+<area shape="rect" id="node29" href="$PlotDataBase_8h.html" title="Types for data storage in plots and base class used in most storage types." alt="" coords="949,184,1151,225"/>
+<area shape="rect" id="node39" href="$Separator_8h.html" title="Visually split UI." alt="" coords="1865,809,2032,851"/>
+<area shape="rect" id="node40" href="$ResizableLayout_8h.html" title="Base class for layouts which provide resizing." alt="" coords="2827,273,2982,315"/>
+<area shape="rect" id="node46" href="$PositionDecorator_8h.html" title="Decorator for non&#45;positionable elements." alt="" coords="2698,184,2925,225"/>
+<area shape="rect" id="node47" href="$serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="3507,370,3705,397"/>
+<area shape="rect" id="node48" href="$ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="2509,184,2673,225"/>
+<area shape="rect" id="node50" href="$Layout_8h.html" title="Base class for layouts." alt="" coords="3335,184,3499,225"/>
+<area shape="rect" id="node14" href="$InputText_8h.html" title="InputText element." alt="" coords="2935,541,3101,583"/>
+<area shape="rect" id="node17" href="$MenuBars_8h.html" title="All types necessary for building menu bars." alt="" coords="2299,631,2465,672"/>
+<area shape="rect" id="node20" href="$ColorChooser_8h.html" title="ColorChooser element." alt="" coords="2983,452,3149,493"/>
+<area shape="rect" id="node21" href="$DragInput_8h.html" title="DragInput element." alt="" coords="3173,452,3340,493"/>
+<area shape="rect" id="node22" href="$Input_8h.html" title="Input element." alt="" coords="3364,452,3531,493"/>
+<area shape="rect" id="node23" href="$Slider_8h.html" title="Slider element." alt="" coords="3555,452,3721,493"/>
+<area shape="rect" id="node24" href="$Slider2D_8h.html" title="Slider2D element." alt="" coords="3745,452,3912,493"/>
+<area shape="rect" id="node27" href="$plots_8h.html" title="Convenience include for all layout types." alt="" coords="1063,363,1229,404"/>
+<area shape="rect" id="node30" href="$Plot_8h.html" title="Plot element." alt="" coords="1157,273,1324,315"/>
+<area shape="rect" id="node31" href="$Bar_8h.html" title="Bar graph data." alt="" coords="1348,273,1515,315"/>
+<area shape="rect" id="node32" href="$Digital_8h.html" title="Digital graph data." alt="" coords="1539,273,1705,315"/>
+<area shape="rect" id="node33" href="$ErrorBar_8h.html" title="ErrorBar graph data." alt="" coords="5,273,172,315"/>
+<area shape="rect" id="node34" href="$HeatMap_8h.html" title="HeatMap graph data." alt="" coords="197,273,370,315"/>
+<area shape="rect" id="node35" href="$Line_8h.html" title="Line graph data." alt="" coords="395,273,561,315"/>
+<area shape="rect" id="node36" href="$Shaded_8h.html" title="Shaded graph data." alt="" coords="585,273,752,315"/>
+<area shape="rect" id="node37" href="$Stairs_8h.html" title="Stairs graph data." alt="" coords="776,273,943,315"/>
+<area shape="rect" id="node38" href="$Stems_8h.html" title="Stem graph data." alt="" coords="967,273,1133,315"/>
+<area shape="rect" id="node41" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="2681,363,2835,404"/>
+<area shape="rect" id="node42" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="2477,541,2631,583"/>
+<area shape="rect" id="node43" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="3089,363,3243,404"/>
+<area shape="rect" id="node44" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="2502,363,2657,404"/>
+<area shape="rect" id="node45" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="2910,363,3065,404"/>
 </map>

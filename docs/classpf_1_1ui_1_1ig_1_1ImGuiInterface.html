@@ -102,8 +102,8 @@ Collaboration diagram for pf::ui::ig::ImGuiInterface:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad1a3f8faab46f7519e8c1cae19063c07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#ad1a3f8faab46f7519e8c1cae19063c07">ImGuiInterface</a> (ImGuiConfigFlags flags, toml::table tomlConfig)</td></tr>
-<tr class="separator:ad1a3f8faab46f7519e8c1cae19063c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a262d994a37a66e566e399801df2959d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a262d994a37a66e566e399801df2959d4">ImGuiInterface</a> (ImGuiConfigFlags flags, toml::table tomlConfig, const std::filesystem::path &amp;iconFontDirectory=&quot;.&quot;, Flags&lt; IconPack &gt; enabledIconPacks=Flags&lt; IconPack &gt;{}, float iconSize=16.f)</td></tr>
+<tr class="separator:a262d994a37a66e566e399801df2959d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedb353585a211cf60c16ae23c2a27e3f"><td class="memItemLeft" align="right" valign="top">ImGuiIO &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#aedb353585a211cf60c16ae23c2a27e3f">getIo</a> () const</td></tr>
 <tr class="separator:aedb353585a211cf60c16ae23c2a27e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae50e0751f185d2eced28d3484c2a6419"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1ModalDialog.html">ModalDialog</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#ae50e0751f185d2eced28d3484c2a6419">createDialog</a> (const std::string &amp;elementName, const std::string &amp;caption)</td></tr>
@@ -115,8 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54c4e2e22e1b21d237e5ad10498ccc8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a391a237fc1e8ca17ad6a580cd1859155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a391a237fc1e8ca17ad6a580cd1859155">removeWindow</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:a391a237fc1e8ca17ad6a580cd1859155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a809d4cb2ec717db09904fc37fb767f2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a809d4cb2ec717db09904fc37fb767f2f">windowByName</a> (const std::string &amp;name)</td></tr>
-<tr class="separator:a809d4cb2ec717db09904fc37fb767f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e3f2acc66502b8084be0b7de212d0f"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::reference_wrapper&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a98e3f2acc66502b8084be0b7de212d0f">windowByName</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a98e3f2acc66502b8084be0b7de212d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7047a5ad8a32e1cb96101a29f8c24831"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">getWindows</a> ()</td></tr>
 <tr class="separator:a7047a5ad8a32e1cb96101a29f8c24831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15f8a8241912e4184754da4fda8bf9e5"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">getWindows</a> () const</td></tr>
@@ -147,6 +147,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af148f13bcb0dbc92d5a5eb8d606741a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcb612664927970434072bc32713b69e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#afcb612664927970434072bc32713b69e">updateFonts</a> ()=0</td></tr>
 <tr class="separator:afcb612664927970434072bc32713b69e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b5dc0a3bc38275c2c119469b76c5fd0"><td class="memItemLeft" align="right" valign="top"><a id="a0b5dc0a3bc38275c2c119469b76c5fd0"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1FontManager.html">FontManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getFontManager</b> ()</td></tr>
+<tr class="separator:a0b5dc0a3bc38275c2c119469b76c5fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
 <tr class="memitem:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#ae2ec29074d05defd647369f43ebbeee1">Renderable</a> (std::string name)</td></tr>
 <tr class="separator:ae2ec29074d05defd647369f43ebbeee1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,26 +190,33 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ae172e6b42ce2623829994958e44944c4"><td class="memItemLeft" align="right" valign="top"><a id="ae172e6b42ce2623829994958e44944c4"></a>
 std::unique_ptr&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">AppMenuBar</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>menuBar</b> = nullptr</td></tr>
 <tr class="separator:ae172e6b42ce2623829994958e44944c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44c4a31b64afb60fa8a2d8ef26002937"><td class="memItemLeft" align="right" valign="top"><a id="a44c4a31b64afb60fa8a2d8ef26002937"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>shouldUpdateFontAtlas</b> = false</td></tr>
+<tr class="separator:a44c4a31b64afb60fa8a2d8ef26002937"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a50383b6aae2d1a45cde101c0e4a2586b"><td class="memItemLeft" align="right" valign="top"><a id="a50383b6aae2d1a45cde101c0e4a2586b"></a>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>ModalDialog</b></td></tr>
 <tr class="separator:a50383b6aae2d1a45cde101c0e4a2586b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03f7887adc0b982b1900a4b92370f917"><td class="memItemLeft" align="right" valign="top"><a id="a03f7887adc0b982b1900a4b92370f917"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>FontManager</b></td></tr>
+<tr class="separator:a03f7887adc0b982b1900a4b92370f917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Root class of an entire UI tree. Provides an ability to create windows and dialogs. </p>
 <p>The class has it's own menu bar, which is applied to the entire render window.</p>
 <p>It also takes care of config saving for <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements.">Savable</a> elements.</p>
 <p>For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd><p class="startdd">: change id type </p>
-<p class="interdd">: add converted input element </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd><p class="startdd">: add converted input element </p>
 <p class="interdd">: localization </p>
-<p class="enddd">: fonts </p>
+<p class="interdd">: fonts and icon fonts - custom sizes </p>
+<p class="interdd">: custom icon fonts </p>
+<p class="enddd">: key bindings? </p>
 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad1a3f8faab46f7519e8c1cae19063c07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1a3f8faab46f7519e8c1cae19063c07">&#9670;&nbsp;</a></span>ImGuiInterface()</h2>
+<a id="a262d994a37a66e566e399801df2959d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a262d994a37a66e566e399801df2959d4">&#9670;&nbsp;</a></span>ImGuiInterface()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,7 +234,25 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ModalDialog</b></td>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">toml::table&#160;</td>
-          <td class="paramname"><em>tomlConfig</em>&#160;</td>
+          <td class="paramname"><em>tomlConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
+          <td class="paramname"><em>iconFontDirectory</em> = <code>&quot;.&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Flags&lt; IconPack &gt;&#160;</td>
+          <td class="paramname"><em>enabledIconPacks</em> = <code>Flags&lt;IconPack&gt;{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>iconSize</em> = <code>16.f</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -981,14 +1009,14 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
 
 </div>
 </div>
-<a id="a809d4cb2ec717db09904fc37fb767f2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a809d4cb2ec717db09904fc37fb767f2f">&#9670;&nbsp;</a></span>windowByName()</h2>
+<a id="a98e3f2acc66502b8084be0b7de212d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98e3f2acc66502b8084be0b7de212d0f">&#9670;&nbsp;</a></span>windowByName()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &amp; pf::ui::ig::ImGuiInterface::windowByName </td>
+          <td class="memname">std::optional&lt; std::reference_wrapper&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html">Window</a> &gt; &gt; pf::ui::ig::ImGuiInterface::windowByName </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -1008,7 +1036,7 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>reference to the searched for <a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls.">Window</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the searched for <a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls.">Window</a> or nullopt if no such window exists </dd></dl>
 
 </div>
 </div>

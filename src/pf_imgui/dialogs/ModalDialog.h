@@ -25,6 +25,7 @@ namespace pf::ui::ig {
  * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::createDialog(...). Closing of the dialog should be managed by user.
  *
  * Non-modal dialog is rendered next to mouse cursor.
+ * @todo: fonts
  */
 class PF_IMGUI_EXPORT ModalDialog : public Renderable,
                                     public ElementContainer,
@@ -56,6 +57,11 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
 
   void setSize(const Size &newSize) override;
   void setPosition(ImVec2 pos) override;
+  /**
+   * Set font for ModalDialog and all elements inside - except for those that have their own font.
+   * @param fontPtr new font
+   */
+  void setFont(ImFont *fontPtr);
 
  protected:
   void renderImpl() override;
@@ -64,6 +70,7 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
   bool firstRender = true;
   bool closed = false;
   ImGuiInterface &owner;
+  ImFont* font = nullptr;
 };
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_DIALOG_H
