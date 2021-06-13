@@ -131,13 +131,13 @@ enum class Anchor : uint8_t {
   Left =                0x2,
   Bottom =              0x4,
   Right =               0x8,
-  TopLeft =             0x1 | 0x2,
-  TopRight =            0x1 | 0x8,
-  BottomLeft =          0x4 | 0x2,
-  BottomRight =         0x4 | 0x8,
-  TopBottomLeft =       0x1 | 0x2 | 0x4,
-  TopBottomRight =      0x1 | 0x4 | 0x8,
-  TopBottomLeftRight =  0x1 | 0x2 | 0x4 | 0x8
+  TopLeft =             Top | Left,
+  TopRight =            Top | Right,
+  BottomLeft =          Bottom | Left,
+  BottomRight =         Bottom | Right,
+  TopBottomLeft =       Top | Left | Bottom,
+  TopBottomRight =      Top | Right | Bottom,
+  TopBottomLeftRight =  Top | Left | Bottom | Right
 };
 // clang-format oon
 
