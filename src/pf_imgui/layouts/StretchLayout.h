@@ -65,7 +65,7 @@ class StretchLayout : public ResizableLayout {
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, std::string,
                                                                                                        Args...>
-      T &createChild(std::string name, Args &&...args) {
+  T &createChild(std::string name, Args &&...args) {
     auto origChild = std::make_unique<T>(name, std::forward<Args>(args)...);
     auto childPtr = origChild.get();
     child = std::move(origChild);
@@ -114,6 +114,7 @@ class StretchLayout : public ResizableLayout {
   Stretch stretch;
   std::unique_ptr<Resizable> child = nullptr;
   Renderable *renderableChild = nullptr;
+  ImVec2 previousSize;
 };
 }// namespace pf::ui::ig
 

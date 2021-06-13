@@ -26,7 +26,7 @@ std::vector<Renderable *> AnchorLayout::getRenderables() {
 }
 void AnchorLayout::setChildPosition(const std::string &name, ImVec2 position) {
   if (auto child =
-          findIf(children | ranges::views::addressof, [name](auto child) { return child->element->getName() == name; });
+        findIf(children | ranges::views::addressof, [name](auto child) { return child->element->getName() == name; });
       child.has_value()) {
     child.value()->positionable->setPosition(position);
   } else {
@@ -35,7 +35,7 @@ void AnchorLayout::setChildPosition(const std::string &name, ImVec2 position) {
 }
 void AnchorLayout::removeChild(const std::string &name) {
   if (auto iter =
-          std::ranges::find_if(children, [name](const auto &child) { return child.element->getName() == name; });
+        std::ranges::find_if(children, [name](const auto &child) { return child.element->getName() == name; });
       iter != children.end()) {
     children.erase(iter);
   }
@@ -47,14 +47,16 @@ void AnchorLayout::setSize(const Size &s) {
   std::ranges::for_each(children, [&](auto &childData) {
     auto &[child, positionable, anchor, addWidth, addHeight] = childData;
     const auto anchorFlags = Flags{anchor};
-    if (!anchorFlags.is(Anchor::Left)) {
+    if (anchorFlags.is(Anchor::Left)) {
+      if (anchorFlags.is(Anchor::Right)) { addWidth(deltaWidth); }
+    } else if (anchorFlags.is(Anchor::Right)) {
       positionable->setPosition(positionable->getPosition() + ImVec2{deltaWidth, 0});
     }
-    if (anchorFlags.is(Anchor::Right)) { addWidth(deltaWidth); }
-    if (!anchorFlags.is(Anchor::Top)) {
+    if (anchorFlags.is(Anchor::Top)) {
+      if (anchorFlags.is(Anchor::Bottom)) { addHeight(deltaHeight); }
+    } else if (anchorFlags.is(Anchor::Bottom)) {
       positionable->setPosition(positionable->getPosition() + ImVec2{0, deltaHeight});
     }
-    if (anchorFlags.is(Anchor::Bottom)) { addHeight(deltaHeight); }
   });
   Resizable::setSize(s);
 }

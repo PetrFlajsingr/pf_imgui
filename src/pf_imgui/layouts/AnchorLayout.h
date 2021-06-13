@@ -69,21 +69,32 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
   auto &createChild(const std::string &name, ImVec2 position, Flags<Anchor> anchors, Args &&...args) {
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
-          return child->getName() == name;
-        }).has_value()) {
+      return child->getName() == name;
+    }).has_value()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
     auto child = std::make_unique<CreateType>(position, name, std::forward<Args>(args)...);
     const auto ptr = child.get();
-    auto addToHeight = [](float) {};
-    auto addToWidth = [](float) {};
-    if constexpr (std::derived_from<T, WidthDecorator<T>>) {
-      addToWidth = [ptr = child.get()](float d) { ptr->setWidth(ptr->getWidth() + d); };
-    } else if constexpr (std::derived_from<T, Resizable>) {
-      addToWidth = [ptr = child.get()](float d) { ptr->setSize(ptr->getSize() + ImVec2{d, 0}); };
-      addToHeight = [ptr = child.get()](float d) { ptr->setSize(ptr->getSize() + ImVec2{0, d}); };
+    std::function<void(float)> addToHeight = [](float) {};
+    std::function<void(float)> addToWidth = [](float) {};
+    if constexpr (std::derived_from<T, Resizable>) {
+      addToWidth = [ptr = child.get()](float d) {
+        auto size = ptr->getSize();
+        size.width = std::clamp(size.width + d, 0.f, std::numeric_limits<float>::max());
+        ptr->setSize(size);
+      };
+      addToHeight = [ptr = child.get()](float d) {
+        auto size = ptr->getSize();
+        size.height = std::clamp(size.height + d, 0.f, std::numeric_limits<float>::max());
+        ptr->setSize(size);
+      };
+    } else if constexpr (std::derived_from<T, WidthDecorator<T>>) {
+      addToWidth = [ptr = child.get()](float d) {
+        const auto width = std::clamp(ptr->getWidth() + d, 0.f, std::numeric_limits<float>::max());
+        ptr->setWidth(width);
+      };
     }
     children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr), static_cast<Anchor>(*anchors),
                                    addToWidth, addToHeight);
