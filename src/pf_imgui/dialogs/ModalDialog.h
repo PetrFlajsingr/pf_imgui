@@ -27,10 +27,10 @@ namespace pf::ui::ig {
  * Non-modal dialog is rendered next to mouse cursor.
  */
 class PF_IMGUI_EXPORT ModalDialog : public Renderable,
-                               public ElementContainer,
-                               public Labellable,
-                               public Resizable,
-                               public Positionable {
+                                    public ElementContainer,
+                                    public Labellable,
+                                    public Resizable,
+                                    public Positionable {
  public:
   /**
    * Create Dialog with given name and label.
