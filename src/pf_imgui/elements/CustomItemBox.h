@@ -8,6 +8,16 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
 
+#include <concepts>
+#include <functional>
+#include <memory>
+#include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Renderable.h>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <vector>
+
 namespace pf::ui::ig {
 
 /**
