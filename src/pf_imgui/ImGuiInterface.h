@@ -258,9 +258,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   friend class FontManager;
 
   std::vector<std::unique_ptr<ModalDialog>> dialogs;
-  FontManager fontManager;
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
+  FontManager fontManager;
   std::vector<FileDialog> fileDialogs;
   cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
 

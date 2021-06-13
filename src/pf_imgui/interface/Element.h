@@ -34,6 +34,8 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   explicit Element(const std::string &name);
 
   void render() override;
+  void setFont(const std::string &fontName);
+  void setFont(ImFont *fontPtr);
  private:
   friend class ImGuiInterface;
   ImFont* font = nullptr;
