@@ -1,6 +1,9 @@
-//
-// Created by petr on 6/13/21.
-//
+/**
+ * @file AnchorLayout.h
+ * @brief Layout where each element's size or position is automatically changed based on anchors.
+ * @author Petr Flajšingr
+ * @date 13.6.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
 #define PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
