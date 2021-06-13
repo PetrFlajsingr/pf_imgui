@@ -136,7 +136,7 @@ enum class Anchor : uint8_t {
   BottomLeft =          Bottom | Left,
   BottomRight =         Bottom | Right,
   TopLeftRight =        Top | Left | Right,
-  BottomLeftRight =     Bottom | Left | Right;
+  BottomLeftRight =     Bottom | Left | Right,
   TopBottomLeft =       Top | Left | Bottom,
   TopBottomRight =      Top | Right | Bottom,
   TopBottomLeftRight =  Top | Left | Bottom | Right
