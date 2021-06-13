@@ -35,12 +35,9 @@ namespace pf::ui::ig {
  *
  * It also takes care of config saving for Savable elements.
  *
- * For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.
- *
- * @todo: add converted input element
+ * @attention: For actual use it needs to be inherited from and render_impl should be reimplemented with your own rendering logic.
+ * You also need to update fonts when required based on variable shouldUpdateFontAtlas.
  * @todo: localization
- * @todo: fonts and icon fonts - custom sizes
- * @todo: custom icon fonts
  * @todo: key bindings?
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {

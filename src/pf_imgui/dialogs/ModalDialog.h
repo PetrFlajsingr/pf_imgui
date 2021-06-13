@@ -25,7 +25,6 @@ namespace pf::ui::ig {
  * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::createDialog(...). Closing of the dialog should be managed by user.
  *
  * Non-modal dialog is rendered next to mouse cursor.
- * @todo: fonts
  */
 class PF_IMGUI_EXPORT ModalDialog : public Renderable,
                                     public ElementContainer,
