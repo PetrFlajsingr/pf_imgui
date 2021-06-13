@@ -8,8 +8,9 @@
 #ifndef PF_IMGUI_INTERFACE_ELEMENT_H
 #define PF_IMGUI_INTERFACE_ELEMENT_H
 
-#include "Renderable.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/Renderable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -32,8 +33,14 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   explicit Element(const std::string &name);
 
   void render() override;
-  // private:
-  //std::optional<ImVec4> customColor = std::nullopt;
+  /**
+   * Set font for Element and all elements inside - except for those that have their own font.
+   * @param fontPtr new font
+   */
+  void setFont(ImFont *fontPtr);
+
+ protected:
+  ImFont *font = nullptr;
 };
 
 }// namespace pf::ui::ig

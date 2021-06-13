@@ -25,6 +25,7 @@ namespace pf::ui::ig {
  * @brief Main building piece for UI. Persistent element container with plenty of controls.
  *
  * May have a menu bar for additional controls.
+ * @todo: fonts
  */
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
@@ -124,6 +125,12 @@ class PF_IMGUI_EXPORT Window : public Renderable,
     return closeObservableImpl.template addListener(listener);
   }
 
+  /**
+   * Set font for Window and all elements inside - except for those that have their own font.
+   * @param fontPtr new font
+   */
+  void setFont(ImFont *fontPtr);
+
  protected:
   void renderImpl() override;
 
@@ -137,6 +144,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool firstPass = true;
 
   ImGuiWindowFlags createWindowFlags();
+  ImFont *font = nullptr;
 };
 
 }// namespace pf::ui::ig

@@ -69,9 +69,7 @@ void InputText::setPassword(bool passwd) {
   }
 }
 void InputText::setTextInner(std::string txt) {
-  if (txt.size() > bufferLength) {
-    txt = txt.substr(bufferLength);
-  }
+  if (txt.size() > bufferLength) { txt = txt.substr(bufferLength); }
   Text::setTextInner(txt);
   std::ranges::copy(txt, buffer.get());
   buffer[txt.size()] = '\0';

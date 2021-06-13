@@ -102,37 +102,39 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                  <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1InputText.html">InputText</a>(<span class="keyword">const</span> std::string &amp;elementName, std::string label, <span class="keyword">const</span> std::string &amp;text = <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="enums_8h.html#a8b1bc97b9af50a712d2d31773e757c23">TextInputType</a> textInputType = TextInputType::SingleLine, TextTrigger trigger = TextTrigger::Character,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            Flags&lt;TextFilter&gt; filters = TextFilter::None, <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> clear();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> std::string_view &amp;newValue) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isReadOnly() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">void</span> setReadOnly(<span class="keywordtype">bool</span> readOnly);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">bool</span> isPassword() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordtype">void</span> setPassword(<span class="keywordtype">bool</span> passwd);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keywordtype">void</span> unserialize_impl(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  toml::table serialize_impl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">void</span> setTextInner(std::string txt) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">char</span> buffer[256]{};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <a class="code" href="enums_8h.html#a8b1bc97b9af50a712d2d31773e757c23">TextInputType</a> inputType;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  ImGuiInputTextFlags flags = {};</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordtype">bool</span> readOnly = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordtype">bool</span> password = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_INPUTTEXT_H</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="enums_8h.html#a8b1bc97b9af50a712d2d31773e757c23">TextInputType</a> textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            TextTrigger trigger = TextTrigger::Character, Flags&lt;TextFilter&gt; filters = TextFilter::None,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> std::string_view &amp;newValue) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isReadOnly() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> setReadOnly(<span class="keywordtype">bool</span> readOnly);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordtype">bool</span> isPassword() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordtype">void</span> setPassword(<span class="keywordtype">bool</span> passwd);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordtype">void</span> unserialize_impl(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  toml::table serialize_impl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">void</span> setTextInner(std::string txt) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  std::unique_ptr&lt;char[]&gt; buffer;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  std::size_t bufferLength;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="enums_8h.html#a8b1bc97b9af50a712d2d31773e757c23">TextInputType</a> inputType;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  ImGuiInputTextFlags flags = {};</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">bool</span> readOnly = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">bool</span> password = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;};</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_INPUTTEXT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>

@@ -13,22 +13,11 @@
 
 namespace pf::ui::ig {
 
-ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig)
-    : Renderable("imgui_interface"), io(baseInit(flags)), config(std::move(tomlConfig)) {}
-
-ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, Flags<IconPack> enabledIconPacks,
-                               const std::filesystem::path &iconFontDirectory, float iconSize)
-    : ImGuiInterface(flags, std::move(tomlConfig)) {
-  getIo().Fonts->AddFontDefault();
-  std::ranges::for_each(enabledIconPacks.getSetFlags(), [&](const auto iconPack) {
-    const auto fileNames = fontFileNamesForIconPack(iconPack);
-    std::ranges::for_each(fileNames, [&](const auto fileName) {
-      const auto fontConfig = fontConfigForIconPack(iconPack);
-      const auto fontPath = iconFontDirectory / fileName;
-      getIo().Fonts->AddFontFromFileTTF(fontPath.string().c_str(), iconSize, &fontConfig.config, fontConfig.iconRange);
-    });
-  });
-}
+ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig,
+                               const std::filesystem::path &iconFontDirectory, Flags<IconPack> enabledIconPacks,
+                               float iconSize)
+    : Renderable("imgui_interface"), io(baseInit(flags)),
+      fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
@@ -60,9 +49,7 @@ void ImGuiInterface::updateConfig() {
   //config.clear();
   std::ranges::for_each(windows, [this](auto &window) {
     auto serialised = serializeImGuiTree(*window);
-    for (const auto &item : serialised) {
-      config.insert_or_assign(item.first, item.second);
-    }
+    for (const auto &item : serialised) { config.insert_or_assign(item.first, item.second); }
     //config.insert(serialised.begin(), serialised.end());
   });
 }
@@ -129,5 +116,7 @@ void ImGuiInterface::removeDialog(ModalDialog &dialog) {
   }
 }
 DragNDropGroup &ImGuiInterface::createDragNDropGroup() { return dragNDropGroups.emplace_back(); }
+
+FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
 }// namespace pf::ui::ig

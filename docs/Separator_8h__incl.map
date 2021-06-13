@@ -1,12 +1,14 @@
 <map id="src/pf_imgui/elements/Separator.h" name="src/pf_imgui/elements/Separator.h">
-<area shape="rect" id="node1" title="Visually split UI." alt="" coords="138,5,305,47"/>
-<area shape="rect" id="node2" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="151,95,292,136"/>
-<area shape="rect" id="node3" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="167,184,275,211"/>
-<area shape="rect" id="node5" title=" " alt="" coords="5,259,149,285"/>
-<area shape="rect" id="node10" title=" " alt="" coords="387,259,445,285"/>
-<area shape="rect" id="node4" title=" " alt="" coords="77,333,235,360"/>
-<area shape="rect" id="node6" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="224,259,363,285"/>
-<area shape="rect" id="node7" title=" " alt="" coords="260,333,327,360"/>
-<area shape="rect" id="node8" title=" " alt="" coords="351,333,422,360"/>
-<area shape="rect" id="node9" title=" " alt="" coords="446,333,538,360"/>
+<area shape="rect" id="node1" title="Visually split UI." alt="" coords="291,5,457,47"/>
+<area shape="rect" id="node2" href="$Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="303,95,445,136"/>
+<area shape="rect" id="node3" title=" " alt="" coords="191,281,335,307"/>
+<area shape="rect" id="node4" href="$fwd_8h.html" title="Forward declarations." alt="" coords="95,191,213,218"/>
+<area shape="rect" id="node6" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="358,184,499,225"/>
+<area shape="rect" id="node12" title=" " alt="" coords="573,281,631,307"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,273,167,315"/>
+<area shape="rect" id="node7" title=" " alt="" coords="499,363,657,389"/>
+<area shape="rect" id="node8" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="359,281,498,307"/>
+<area shape="rect" id="node9" title=" " alt="" coords="197,363,263,389"/>
+<area shape="rect" id="node10" title=" " alt="" coords="288,363,359,389"/>
+<area shape="rect" id="node11" title=" " alt="" coords="383,363,475,389"/>
 </map>

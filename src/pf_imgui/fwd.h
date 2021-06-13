@@ -7,10 +7,11 @@
 #ifndef PF_IMGUI_FWD_H
 #define PF_IMGUI_FWD_H
 #include <pf_common/concepts/StringConvertible.h>
-
+// TODO: add missing, use where possible to improve compilation times
 namespace pf::ui::ig {
 
 class ImGuiInterface;
+class FontManager;
 
 class Element;
 class ElementContainer;

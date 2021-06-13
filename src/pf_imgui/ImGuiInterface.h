@@ -11,6 +11,7 @@
 #include <imgui.h>
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
+#include <pf_imgui/FontManager.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
@@ -49,15 +50,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param flags
    * @param tomlConfig config containing data of Savable elements
    */
-  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig);
-
-  /**
-   * Construct ImGuiInterface with given flags.
-   * @param flags
-   * @param tomlConfig config containing data of Savable elements
-   */
-  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, Flags<IconPack> enabledIconPacks,
-                          const std::filesystem::path &iconFontDirectory = ".", float iconSize = 16.f);
+  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig,
+                          const std::filesystem::path &iconFontDirectory = ".",
+                          Flags<IconPack> enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
 
   /**
    * Get ImGuiIO from ImGui::.
@@ -240,6 +235,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   virtual void updateFonts() = 0;
 
+  FontManager &getFontManager();
+
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
 
@@ -253,11 +250,17 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   void renderImpl() override;
 
+  // @warning you need to update font atlas manually when this value is set
+  bool shouldUpdateFontAtlas = false;
+
  private:
   friend class ModalDialog;
+  friend class FontManager;
+
   std::vector<std::unique_ptr<ModalDialog>> dialogs;
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
+  FontManager fontManager;
   std::vector<FileDialog> fileDialogs;
   cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
 

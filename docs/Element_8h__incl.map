@@ -1,11 +1,13 @@
 <map id="src/pf_imgui/interface/Element.h" name="src/pf_imgui/interface/Element.h">
-<area shape="rect" id="node1" title="Base class for objects which can be considered UI elements." alt="" coords="139,5,303,47"/>
-<area shape="rect" id="node2" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="167,95,275,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,169,149,196"/>
-<area shape="rect" id="node9" title=" " alt="" coords="387,169,445,196"/>
-<area shape="rect" id="node3" title=" " alt="" coords="77,244,235,271"/>
-<area shape="rect" id="node5" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="224,169,363,196"/>
-<area shape="rect" id="node6" title=" " alt="" coords="260,244,327,271"/>
-<area shape="rect" id="node7" title=" " alt="" coords="351,244,422,271"/>
-<area shape="rect" id="node8" title=" " alt="" coords="446,244,538,271"/>
+<area shape="rect" id="node1" title="Base class for objects which can be considered UI elements." alt="" coords="292,5,456,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="191,191,335,218"/>
+<area shape="rect" id="node3" href="$fwd_8h.html" title="Forward declarations." alt="" coords="95,102,213,129"/>
+<area shape="rect" id="node5" href="$Renderable_8h.html" title="Base class for renderables." alt="" coords="358,95,499,136"/>
+<area shape="rect" id="node11" title=" " alt="" coords="573,191,631,218"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,184,167,225"/>
+<area shape="rect" id="node6" title=" " alt="" coords="499,273,657,300"/>
+<area shape="rect" id="node7" href="$enums_8h.html" title="Library&#39;s enums." alt="" coords="359,191,498,218"/>
+<area shape="rect" id="node8" title=" " alt="" coords="197,273,263,300"/>
+<area shape="rect" id="node9" title=" " alt="" coords="288,273,359,300"/>
+<area shape="rect" id="node10" title=" " alt="" coords="383,273,475,300"/>
 </map>

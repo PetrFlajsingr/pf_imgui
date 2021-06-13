@@ -16,6 +16,7 @@ void ModalDialog::renderImpl() {
     owner.removeDialog(*this);
     return;
   }
+  if (font != nullptr) { ImGui::PushFont(font); }
   if (firstRender) { ImGui::OpenPopup(getLabel().c_str()); }
   if (ImGui::BeginPopupModal(getLabel().c_str())) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
@@ -23,6 +24,7 @@ void ModalDialog::renderImpl() {
   } else {
     close();
   }
+  if (font != nullptr) { ImGui::PopFont(); }
   firstRender = false;
 }
 
@@ -38,5 +40,6 @@ void ModalDialog::setPosition(ImVec2 pos) {
   ImGui::SetWindowPos(getLabel().c_str(), pos);
   Positionable::setPosition(pos);
 }
+void ModalDialog::setFont(ImFont *fontPtr) { font = fontPtr; }
 
 }// namespace pf::ui::ig

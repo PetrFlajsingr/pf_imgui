@@ -70,11 +70,13 @@ void Window::setSize(const Size &newSize) {
 
 void Window::render() {
   if (getVisibility() == Visibility::Visible) {
+    if (font != nullptr) { ImGui::PushFont(font); }
     ImGui::SetNextWindowSizeConstraints(
         minSizeConstraint.value_or(Size{0, 0}).asImVec(),
         maxSizeConstraint.value_or(Size{std::numeric_limits<uint32_t>::max(), std::numeric_limits<uint32_t>::max()})
             .asImVec());
     renderImpl();
+    if (font != nullptr) { ImGui::PopFont(); }
   }
 }
 
@@ -120,5 +122,7 @@ void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstr
 bool Window::isCloseable() const { return closeable; }
 
 void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
+
+void Window::setFont(ImFont *fontPtr) { font = fontPtr; }
 
 }// namespace pf::ui::ig
