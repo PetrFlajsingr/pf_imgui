@@ -50,15 +50,11 @@ void AnchorLayout::setSize(const Size &s) {
     if (!anchorFlags.is(Anchor::Left)) {
       positionable->setPosition(positionable->getPosition() + ImVec2{deltaWidth, 0});
     }
-    if (anchorFlags.is(Anchor::Right)) {
-      addWidth(deltaWidth);
-    }
+    if (anchorFlags.is(Anchor::Right)) { addWidth(deltaWidth); }
     if (!anchorFlags.is(Anchor::Top)) {
       positionable->setPosition(positionable->getPosition() + ImVec2{0, deltaHeight});
     }
-    if (!anchorFlags.is(Anchor::Bottom)) {
-      addHeight(deltaHeight);
-    }
+    if (anchorFlags.is(Anchor::Bottom)) { addHeight(deltaHeight); }
   });
   Resizable::setSize(s);
 }
