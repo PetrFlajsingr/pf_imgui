@@ -123,7 +123,6 @@ enum class Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };
 
 /**
  * Enum for anchor type of AnchorLayout.
- * @todo: AnchorLayout
  */
 // clang-format off
 enum class Anchor : uint8_t {
