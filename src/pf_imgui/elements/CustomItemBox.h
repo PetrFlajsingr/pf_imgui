@@ -142,8 +142,7 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
   }
 
   std::vector<Renderable *> getRenderables() override {
-    return items | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); })
-        | ranges::to_vector;
+    return items | std::views::transform([](auto &child) -> Renderable * { return child.second.get(); }) | ranges::to_vector;
   }
 
  protected:
