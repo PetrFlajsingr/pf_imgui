@@ -28,15 +28,11 @@ class StackedLayout;
 class StretchLayout;
 
 class Button;
-class Checkbox;
-template<ToStringConvertible T>
 class ComboBox;
 class ModalDialog;
 class Group;
 class Image;
 class InputText;
-template<ToStringConvertible T>
-class ListBox;
 class Memo;
 class MenuContainer;
 class MenuItem;
