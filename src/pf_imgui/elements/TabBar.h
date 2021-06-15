@@ -40,7 +40,7 @@ class PF_IMGUI_EXPORT Tab : public ItemElement, public Labellable, public Elemen
  *
  * TabBar contains only Bars, elements are inside the Tabs created by addTab().
  */
-class PF_IMGUI_EXPORT TabBar : public Element {
+class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
  public:
   /**
    * Construct TabBar.
@@ -73,6 +73,8 @@ class PF_IMGUI_EXPORT TabBar : public Element {
    * @param isTabListAllowed allowed
    */
   void setTabListAllowed(bool isTabListAllowed);
+
+  std::vector<Renderable *> getRenderables() override;
 
  protected:
   void renderImpl() override;

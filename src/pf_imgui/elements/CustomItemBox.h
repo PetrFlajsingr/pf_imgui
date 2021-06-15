@@ -37,7 +37,7 @@ concept CustomItemBoxFactory = std::is_invocable_r_v<std::unique_ptr<R>, F, T>;
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomItemBox : public ItemElement {
+class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesContainer {
  public:
   /**
 * Construct CustomItemBox
@@ -139,6 +139,11 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement {
  */
   void setItemFactory(CustomItemBoxFactory<T, R> auto &&rowFactory) {
     factory = std::forward<decltype(rowFactory)>(rowFactory);
+  }
+
+  std::vector<Renderable *> getRenderables() override {
+    return items | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); })
+        | ranges::to_vector;
   }
 
  protected:

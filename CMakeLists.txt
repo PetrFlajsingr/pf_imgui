@@ -285,7 +285,7 @@ set(INCLUDES
         src/pf_imgui/elements/PopupMenu.h
         src/pf_imgui/icons.h
         src/pf_imgui/FontManager.h
-        src/pf_imgui/layouts/AnchorLayout.h)
+        src/pf_imgui/layouts/AnchorLayout.h src/pf_imgui/interface/RenderablesContainer.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

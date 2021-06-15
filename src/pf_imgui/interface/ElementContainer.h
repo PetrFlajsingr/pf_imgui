@@ -11,8 +11,9 @@
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/RenderablesContainer.h>
 #include <range/v3/view/transform.hpp>
-#include <src/pf_imgui/interface/Element.h>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -25,7 +26,7 @@ namespace pf::ui::ig {
  *
  * Allows for creation of child elements directly via templated methods.
  */
-class PF_IMGUI_EXPORT ElementContainer {
+class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  public:
   ElementContainer() = default;
 
@@ -151,6 +152,8 @@ class PF_IMGUI_EXPORT ElementContainer {
    * Remove all children from the container.
    */
   void clear();
+
+  std::vector<Renderable *> getRenderables() override;
 
  private:
   /**

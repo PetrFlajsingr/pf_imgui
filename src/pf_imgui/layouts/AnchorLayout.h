@@ -72,8 +72,8 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
   auto &createChild(const std::string &name, ImVec2 position, Flags<Anchor> anchors, Args &&...args) {
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
-      return child->getName() == name;
-    }).has_value()) {
+          return child->getName() == name;
+        }).has_value()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;

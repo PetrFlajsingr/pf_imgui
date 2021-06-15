@@ -11,6 +11,7 @@
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
@@ -43,7 +44,7 @@ class MenuSeparatorItem;
 /**
  * @brief An item which can contain other menus.
  */
-class PF_IMGUI_EXPORT MenuContainer {
+class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
  public:
   /**
      * Create an instance of SubMenu and add it to the end if children.
@@ -87,6 +88,8 @@ class PF_IMGUI_EXPORT MenuContainer {
      * @param name ID of the item to be removed
      */
   void removeItem(const std::string &name);
+
+  std::vector<Renderable *> getRenderables() override;
 
  protected:
   void renderItems();

@@ -38,5 +38,11 @@ void TabBar::removeTab(const std::string &name) {
   }
 }
 bool TabBar::isTabListAllowed1() const { return isTabListAllowed; }
+
 void TabBar::setTabListAllowed(bool tabListAllowed) { TabBar::isTabListAllowed = tabListAllowed; }
+
+std::vector<Renderable *> TabBar::getRenderables() {
+  return tabs | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
+}
+
 }// namespace pf::ui::ig

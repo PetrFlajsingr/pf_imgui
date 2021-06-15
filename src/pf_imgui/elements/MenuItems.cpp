@@ -5,6 +5,8 @@
 #include "MenuItems.h"
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <range/v3/range/conversion.hpp>
+#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 
@@ -58,6 +60,9 @@ void MenuContainer::removeItem(const std::string &name) {
 }
 void MenuContainer::renderItems() {
   std::ranges::for_each(items, [](auto &item) { item->render(); });
+}
+std::vector<Renderable *> MenuContainer::getRenderables() {
+  return items | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
 }
 
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,

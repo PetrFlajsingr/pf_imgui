@@ -22,12 +22,9 @@ namespace details {
  */
 inline void traverseImGuiTree_impl(Renderable &element, std::invocable<Renderable &> auto callback) {
   callback(element);
-  if (auto ptrContainer = dynamic_cast<ElementContainer *>(&element); ptrContainer != nullptr) {
-    std::ranges::for_each(ptrContainer->getChildren(),
-                          [&callback](auto &child) { traverseImGuiTree_impl(child, callback); });
-  } else if (auto ptrLayout = dynamic_cast<Layout *>(&element); ptrLayout != nullptr) {
-    std::ranges::for_each(ptrLayout->getRenderables(),
-                          [&callback](auto child) { traverseImGuiTree_impl(*child, callback); });
+  if (auto ptrContainer = dynamic_cast<RenderablesContainer *>(&element); ptrContainer != nullptr) {
+    std::ranges::for_each(ptrContainer->getRenderables(),
+                          [&callback](auto &child) { traverseImGuiTree_impl(*child, callback); });
   }
 }
 }// namespace details
