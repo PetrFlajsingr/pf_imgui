@@ -117,3 +117,18 @@ imgui->openFileDialog("Title",
 ```
 ![img.png](img/filedialog.png)
 
+### Button
+```cpp
+auto &button = window.createChild<Button>("button_id", "Click me");
+button.addClickListener([] {
+  print("button clicked");
+});
+```
+![img.png](img/button.png)
+
+### Bullet
+A CRTP decorator which adds a bullet to the left of the inner element.
+```cpp
+auto &button = window.createChild<Bullet<Button>>("button_id", "Click me");
+```
+![img.png](img/bullet_button.png)
