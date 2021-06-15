@@ -28,7 +28,6 @@ class StackedLayout;
 class StretchLayout;
 
 class Button;
-class ComboBox;
 class ModalDialog;
 class Group;
 class Image;
