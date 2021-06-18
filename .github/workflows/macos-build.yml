@@ -17,5 +17,5 @@ jobs:
       run: |
         cmake . -DCMAKE_CXX_COMPILER=g++-11
         make
-        cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON
-        make
+#        cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON
+#        make
