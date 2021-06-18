@@ -7,6 +7,7 @@
 
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <pf_common/algorithms.h>
 
 namespace pf::ui::ig::style {
 
@@ -66,7 +67,8 @@ enum class ColorOf : int {
   ModalWindowDimBackground = ImGuiCol_ModalWindowDimBg,
 };
 
-enum class StyleFloat : int {
+enum class Style : int {
+  //float:
   Alpha = ImGuiStyleVar_Alpha,
   WindowRounding = ImGuiStyleVar_WindowRounding,
   WindowBorderSize = ImGuiStyleVar_WindowBorderSize,
@@ -82,9 +84,7 @@ enum class StyleFloat : int {
   GrabMinSize = ImGuiStyleVar_GrabMinSize,
   GrabRounding = ImGuiStyleVar_GrabRounding,
   TabRounding = ImGuiStyleVar_TabRounding,
-};
-
-enum class StyleImVec : int {
+  //ImVec2
   WindowPadding = ImGuiStyleVar_WindowPadding,
   WindowMinSize = ImGuiStyleVar_WindowMinSize,
   WindowTitleAlign = ImGuiStyleVar_WindowTitleAlign,
@@ -95,6 +95,14 @@ enum class StyleImVec : int {
   ButtonTextAlign = ImGuiStyleVar_ButtonTextAlign,
   SelectableTextAlign = ImGuiStyleVar_SelectableTextAlign,
 };
+
+constexpr bool isFloatStyle(Style style) {
+  return isIn(style,
+              std::array<Style, 15>{Style::Alpha, Style::WindowRounding, Style::WindowBorderSize, Style::ChildRounding,
+                          Style::ChildBorderSize, Style::PopupRounding, Style::PopupBorderSize, Style::FrameRounding,
+                          Style::FrameBorderSize, Style::IndentSpacing, Style::ScrollbarSize, Style::ScrollbarRounding,
+                          Style::GrabMinSize, Style::GrabRounding, Style::TabRounding});
+}
 
 }// namespace pf::ui::ig::style
 

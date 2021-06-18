@@ -16,6 +16,7 @@ Button::Button(const std::string &name, std::string label, ButtonType buttonType
 
 void Button::renderImpl() {
   auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   ImGui::PushButtonRepeat(repeatable);
   auto disableRepeat = RAII{[] { ImGui::PopButtonRepeat(); }};
   auto wasClicked = false;
