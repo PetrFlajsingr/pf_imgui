@@ -9,8 +9,6 @@ on:
 
 jobs:
   build:
-    env:
-      CPM_SOURCE_CACHE: /Users/runner/cpm_cache
     runs-on: windows-latest
 
     steps:
@@ -18,7 +16,6 @@ jobs:
     
     - name: run build
       run: |
-        mkdir /Users/runner/cpm_cache
         cmake .
         make
         cmake . -DENABLE_STYLES=ON

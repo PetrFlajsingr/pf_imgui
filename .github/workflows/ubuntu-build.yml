@@ -8,8 +8,6 @@ on:
 
 jobs:
   build:
-    env:
-      CPM_SOURCE_CACHE: /home/runner/cpm_cache
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +23,6 @@ jobs:
 
     - name: run build
       run: |
-        mkdir /home/runner/cpm_cache
         cmake . -DCMAKE_CXX_COMPILER=g++-11
         make
         cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON

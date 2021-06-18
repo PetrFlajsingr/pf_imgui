@@ -8,9 +8,6 @@ on:
 
 jobs:
   build:
-    env:
-      CPM_SOURCE_CACHE: /Users/runner/cpm_cache
-
     runs-on: macos-latest
 
     steps:
@@ -18,7 +15,6 @@ jobs:
     
     - name: run build
       run: |
-        mkdir /Users/runner/cpm_cache
         cmake . -DCMAKE_CXX_COMPILER=g++-11
         make
         cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON
