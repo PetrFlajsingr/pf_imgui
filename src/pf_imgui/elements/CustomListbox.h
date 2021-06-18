@@ -40,7 +40,11 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
         Resizable(s) {}
 
  protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
       std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto &item) { item->second->render(); });
       ImGui::EndListBox();

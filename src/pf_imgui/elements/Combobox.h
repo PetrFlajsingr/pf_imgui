@@ -141,6 +141,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   void cancelSelection() { selectedItemIndex = std::nullopt; }
 
  protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
   void unserialize_impl(const toml::table &src) override {
     if (src.contains("selected")) {
       const auto selectedItemAsString = *src["selected"].value<std::string>();
@@ -165,6 +167,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   }
 
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
       previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();

@@ -26,6 +26,8 @@ MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string
     : MenuItem(elementName), Labellable(label) {}
 
 void MenuButtonItem::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
 }
 
@@ -70,6 +72,8 @@ MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::st
     : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
 
 void MenuCheckboxItem::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 void MenuCheckboxItem::unserialize_impl(const toml::table &src) {
@@ -79,6 +83,9 @@ toml::table MenuCheckboxItem::serialize_impl() { return toml::table{{{"checked",
 
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 
-void MenuSeparatorItem::renderImpl() { ImGui::Separator(); }
+void MenuSeparatorItem::renderImpl() {
+  auto colorStyle = setColorStack();
+  ImGui::Separator();
+}
 
 }// namespace pf::ui::ig

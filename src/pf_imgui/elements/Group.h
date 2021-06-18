@@ -23,7 +23,10 @@ namespace pf::ui::ig {
  *
  * Elements are rendered in top-down order.
  */
-class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, public Labellable, public Collapsible {
+class PF_IMGUI_EXPORT Group : public ItemElement,
+                              public ElementContainer,
+                              public Labellable,
+                              public Collapsible {
  public:
   /**
    * Construct Group.

@@ -1,12 +1,13 @@
 <map id="pf::ui::ig::Text" name="pf::ui::ig::Text">
-<area shape="rect" id="node1" title="Simple rendered text. May be colored." alt="" coords="621,165,731,192"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="407,81,573,108"/>
+<area shape="rect" id="node1" title="Simple rendered text. May be colored." alt="" coords="665,199,775,225"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="429,81,595,108"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="211,56,357,83"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="209,107,359,133"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title=" " alt="" coords="411,158,569,199"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1DragSource.html" title=" " alt="" coords="433,158,591,199"/>
 <area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="215,158,353,199"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title=" " alt="" coords="413,223,567,265"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1DropTarget.html" title=" " alt="" coords="435,223,589,265"/>
 <area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1details_1_1DropTargetBase.html" title="Base class for templated DropTarget&lt;T&gt;" alt="" coords="217,223,351,265"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title=" " alt="" coords="407,289,617,359"/>
 </map>

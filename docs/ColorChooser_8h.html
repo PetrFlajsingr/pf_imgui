@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.5.1</span>
    </div>
   </td>
  </tr>
@@ -82,6 +82,7 @@ $(function() {
 <code>#include &lt;imgui.h&gt;</code><br />
 <code>#include &lt;pf_common/concepts/OneOf.h&gt;</code><br />
 <code>#include &lt;pf_imgui/_export.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="Customizable_8h_source.html">pf_imgui/interface/Customizable.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="DragNDrop_8h_source.html">pf_imgui/interface/DragNDrop.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="ItemElement_8h_source.html">pf_imgui/interface/ItemElement.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="Labellable_8h_source.html">pf_imgui/interface/Labellable.h</a>&gt;</code><br />
@@ -95,56 +96,56 @@ Include dependency graph for ColorChooser.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="ColorChooser_8h__incl.png" border="0" usemap="#src_2pf__imgui_2elements_2ColorChooser_8h" alt=""/></div>
 <map name="src_2pf__imgui_2elements_2ColorChooser_8h" id="src_2pf__imgui_2elements_2ColorChooser_8h">
-<area shape="rect" title="ColorChooser element." alt="" coords="713,5,880,47"/>
-<area shape="rect" title=" " alt="" coords="5,102,161,129"/>
-<area shape="rect" title=" " alt="" coords="185,102,296,129"/>
-<area shape="rect" title=" " alt="" coords="320,102,431,129"/>
-<area shape="rect" title=" " alt="" coords="708,616,779,643"/>
-<area shape="rect" title=" " alt="" coords="2953,95,3115,136"/>
-<area shape="rect" title=" " alt="" coords="1599,534,1743,561"/>
-<area shape="rect" href="DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="2787,95,2929,136"/>
-<area shape="rect" title=" " alt="" coords="1005,534,1063,561"/>
-<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1649,95,1790,136"/>
-<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="506,437,647,479"/>
-<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="711,348,853,389"/>
-<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="2432,348,2580,389"/>
-<area shape="rect" href="serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="885,102,1060,129"/>
-<area shape="rect" title=" " alt="" coords="3139,102,3335,129"/>
-<area shape="rect" title=" " alt="" coords="2490,534,2575,561"/>
-<area shape="rect" title=" " alt="" coords="2874,445,2954,471"/>
-<area shape="rect" title=" " alt="" coords="3231,184,3346,211"/>
-<area shape="rect" title=" " alt="" coords="3370,184,3445,211"/>
-<area shape="rect" title=" " alt="" coords="3208,527,3369,568"/>
-<area shape="rect" href="Tooltip_8h.html" title="Tooltip element." alt="" coords="1983,184,2186,211"/>
-<area shape="rect" href="fwd_8h.html" title="Forward declarations." alt="" coords="3181,445,3300,471"/>
-<area shape="rect" title=" " alt="" coords="1640,355,1703,382"/>
-<area shape="rect" href="Observable__impl_8h.html" title="Implementation of observable." alt="" coords="2397,437,2545,479"/>
-<area shape="rect" title=" " alt="" coords="2794,534,2861,561"/>
-<area shape="rect" href="unique__id_8h.html" title="Unique id generator for elements." alt="" coords="2947,184,3105,211"/>
-<area shape="rect" title=" " alt="" coords="3469,184,3607,211"/>
-<area shape="rect" href="ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1805,259,1959,300"/>
-<area shape="rect" title=" " alt="" coords="1930,355,2007,382"/>
-<area shape="rect" href="Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="1248,348,1412,389"/>
-<area shape="rect" title=" " alt="" coords="2039,534,2163,561"/>
-<area shape="rect" title=" " alt="" coords="2187,534,2247,561"/>
-<area shape="rect" href="Renderable_8h.html" title="Base class for renderables." alt="" coords="1018,437,1159,479"/>
-<area shape="rect" href="enums_8h.html" title="Library&#39;s enums." alt="" coords="721,534,859,561"/>
-<area shape="rect" title=" " alt="" coords="803,616,870,643"/>
-<area shape="rect" title=" " alt="" coords="1896,616,1988,643"/>
-<area shape="rect" title=" " alt="" coords="2271,534,2466,561"/>
-<area shape="rect" title=" " alt="" coords="2599,527,2770,568"/>
-<area shape="rect" title=" " alt="" coords="2946,266,3018,293"/>
-<area shape="rect" href="Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="2082,355,2181,382"/>
-<area shape="rect" href="Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="2205,355,2306,382"/>
-<area shape="rect" href="PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="1228,184,1464,211"/>
-<area shape="rect" href="MenuItems_8h.html" title="Items to be used in menu bars and popup menu." alt="" coords="1128,266,1361,293"/>
-<area shape="rect" title=" " alt="" coords="524,534,629,561"/>
-<area shape="rect" title=" " alt="" coords="722,445,842,471"/>
-<area shape="rect" title=" " alt="" coords="2184,445,2271,471"/>
-<area shape="rect" href="ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="1538,184,1682,211"/>
-<area shape="rect" href="Layout_8h.html" title="Base class for layouts." alt="" coords="1538,259,1679,300"/>
-<area shape="rect" title=" " alt="" coords="893,184,1052,211"/>
-<area shape="rect" title=" " alt="" coords="709,184,869,211"/>
+<area shape="rect" title="ColorChooser element." alt="" coords="1435,5,1602,47"/>
+<area shape="rect" title=" " alt="" coords="5,95,163,121"/>
+<area shape="rect" title=" " alt="" coords="187,95,298,121"/>
+<area shape="rect" title=" " alt="" coords="322,95,433,121"/>
+<area shape="rect" title=" " alt="" coords="1477,355,1547,382"/>
+<area shape="rect" title=" " alt="" coords="593,259,754,300"/>
+<area shape="rect" title=" " alt="" coords="1729,445,1873,471"/>
+<area shape="rect" href="Customizable_8h.html" title="Interface to provide customization functionality to its descendants." alt="" coords="544,169,685,211"/>
+<area shape="rect" href="DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="829,259,971,300"/>
+<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1448,169,1589,211"/>
+<area shape="rect" title=" " alt="" coords="3012,445,3071,471"/>
+<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="2533,169,2675,211"/>
+<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="1832,169,1973,211"/>
+<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="2637,259,2787,300"/>
+<area shape="rect" href="serialization_8h.html" title="Serialization of UI tree to toml." alt="" coords="1815,95,1990,121"/>
+<area shape="rect" title=" " alt="" coords="3271,95,3467,121"/>
+<area shape="rect" title=" " alt="" coords="121,355,196,382"/>
+<area shape="rect" title=" " alt="" coords="203,266,344,293"/>
+<area shape="rect" title=" " alt="" coords="369,266,517,293"/>
+<area shape="rect" href="styles_2enums_8h_source.html" title=" " alt="" coords="1046,266,1229,293"/>
+<area shape="rect" title=" " alt="" coords="1324,355,1452,382"/>
+<area shape="rect" title=" " alt="" coords="2352,445,2437,471"/>
+<area shape="rect" title=" " alt="" coords="1839,355,1919,382"/>
+<area shape="rect" title=" " alt="" coords="599,355,713,382"/>
+<area shape="rect" title=" " alt="" coords="427,527,589,568"/>
+<area shape="rect" href="Tooltip_8h.html" title="Tooltip element." alt="" coords="220,355,423,382"/>
+<area shape="rect" href="fwd_8h.html" title="Forward declarations." alt="" coords="498,445,617,471"/>
+<area shape="rect" href="Observable__impl_8h.html" title="Implementation of observable." alt="" coords="2247,348,2395,389"/>
+<area shape="rect" title=" " alt="" coords="2261,445,2328,471"/>
+<area shape="rect" href="unique__id_8h.html" title="Unique id generator for elements." alt="" coords="901,355,1059,382"/>
+<area shape="rect" title=" " alt="" coords="737,355,876,382"/>
+<area shape="rect" title=" " alt="" coords="1186,355,1249,382"/>
+<area shape="rect" title=" " alt="" coords="2547,445,2741,471"/>
+<area shape="rect" title=" " alt="" coords="2067,437,2237,479"/>
+<area shape="rect" title=" " alt="" coords="2766,445,2890,471"/>
+<area shape="rect" title=" " alt="" coords="2462,445,2522,471"/>
+<area shape="rect" href="Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="1623,348,1764,389"/>
+<area shape="rect" href="Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="2107,266,2205,293"/>
+<area shape="rect" href="Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="1981,266,2083,293"/>
+<area shape="rect" title=" " alt="" coords="1512,266,1589,293"/>
+<area shape="rect" href="PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="1253,266,1489,293"/>
+<area shape="rect" title=" " alt="" coords="3039,266,3145,293"/>
+<area shape="rect" href="enums_8h.html" title="Library&#39;s enums." alt="" coords="2373,266,2512,293"/>
+<area shape="rect" title=" " alt="" coords="2419,355,2511,382"/>
+<area shape="rect" title=" " alt="" coords="2229,266,2349,293"/>
+<area shape="rect" title=" " alt="" coords="2841,355,2927,382"/>
+<area shape="rect" href="ui__tree__traversal_8h.html" title="Traversal of ui tree." alt="" coords="2365,177,2509,203"/>
+<area shape="rect" href="Layout_8h.html" title="Base class for layouts." alt="" coords="1765,259,1907,300"/>
+<area shape="rect" title=" " alt="" coords="1998,177,2157,203"/>
+<area shape="rect" title=" " alt="" coords="2181,177,2341,203"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">

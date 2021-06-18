@@ -11,6 +11,7 @@
 #include <functional>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -25,7 +26,16 @@ namespace pf::ui::ig {
  *
  * @see ButtonType
  */
-class PF_IMGUI_EXPORT Button : public ItemElement, public Labellable, public Resizable, public Clickable {
+class PF_IMGUI_EXPORT Button
+    : public ItemElement,
+      public Labellable,
+      public Resizable,
+      public Clickable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
+                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                               style::Style::ButtonTextAlign> {
  public:
   /**
    * Construct Button.

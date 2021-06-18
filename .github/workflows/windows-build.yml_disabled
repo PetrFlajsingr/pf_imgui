@@ -9,13 +9,14 @@ on:
 
 jobs:
   build:
-
-    runs-on: macos-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v1
     
     - name: run build
       run: |
-        cmake . -DCMAKE_CXX_COMPILER=g++-11
+        cmake .
+        make
+        cmake . -DENABLE_STYLES=ON
         make

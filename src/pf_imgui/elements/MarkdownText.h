@@ -16,6 +16,7 @@ namespace pf::ui::ig {
  * @brief Markdown text render area.
  *
  * @todo: custom font
+ * @todo: style?
  */
 class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
  public:

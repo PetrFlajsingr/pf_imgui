@@ -19,6 +19,8 @@ AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size,
     : AbsoluteLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
 
 void AbsoluteLayout::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {

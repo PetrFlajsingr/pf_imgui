@@ -1,12 +1,14 @@
 <map id="pf::ui::ig::Selectable" name="pf::ui::ig::Selectable">
-<area shape="rect" id="node1" title="A labeled area which can be de/selected." alt="" coords="645,157,796,184"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="419,56,585,83"/>
+<area shape="rect" id="node1" title="A labeled area which can be de/selected." alt="" coords="783,208,933,235"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="487,56,654,83"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="211,56,357,83"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="209,107,359,133"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="427,107,577,133"/>
-<area shape="rect" id="node8" title=" " alt="" coords="407,157,597,184"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="429,208,575,235"/>
-<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="435,259,569,285"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="496,107,645,133"/>
+<area shape="rect" id="node8" title=" " alt="" coords="475,157,666,184"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="498,208,643,235"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="503,259,638,285"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title=" " alt="" coords="407,309,735,453"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title=" " alt="" coords="445,477,696,563"/>
 </map>

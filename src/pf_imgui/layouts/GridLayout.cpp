@@ -28,6 +28,8 @@ void GridLayout::setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr
   cells[indexForCell(column, row)] = std::move(layout);
 }
 void GridLayout::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {

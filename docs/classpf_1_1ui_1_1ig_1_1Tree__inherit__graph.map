@@ -1,9 +1,12 @@
 <map id="pf::ui::ig::Tree" name="pf::ui::ig::Tree">
-<area shape="rect" id="node1" title="Structure for organising UI elements in a tree." alt="" coords="456,81,565,108"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="241,5,377,32"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="234,56,383,83"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="209,107,408,133"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="231,157,386,184"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="16,157,151,184"/>
+<area shape="rect" id="node1" title="Structure for organising UI elements in a tree." alt="" coords="737,81,847,108"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="522,5,658,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="251,5,407,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="515,56,665,83"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="491,107,689,133"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1RenderablesContainer.html" title=" " alt="" coords="216,107,443,133"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="" coords="5,81,168,108"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="" coords="6,132,167,159"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="" coords="513,157,667,184"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="" coords="262,157,397,184"/>
 </map>

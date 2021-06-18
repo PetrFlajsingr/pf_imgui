@@ -16,6 +16,8 @@ RadioGroup::RadioGroup(const std::string &elementName, const std::string &label,
       buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
 
 void RadioGroup::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   ImGui::Text("%s:", getLabel().c_str());
   std::ranges::for_each(buttons, [](auto &button) { button.renderImpl(); });
   std::optional<std::size_t> newSelection = std::nullopt;

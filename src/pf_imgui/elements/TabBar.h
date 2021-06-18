@@ -13,6 +13,7 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <string>
 #include <vector>

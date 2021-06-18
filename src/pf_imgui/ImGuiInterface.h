@@ -39,6 +39,7 @@ namespace pf::ui::ig {
  * You also need to update fonts when required based on variable shouldUpdateFontAtlas.
  * @todo: localization
  * @todo: key bindings?
+ * @todo: styles
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:

@@ -75,12 +75,19 @@ constexpr const char *defaultSliderFormat() {
  * @todo: ToStringConvertible support
  */
 template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Slider : public ItemElement,
-                               public Labellable,
-                               public ValueObservable<T>,
-                               public Savable,
-                               public DragSource<T>,
-                               public DropTarget<T> {
+class PF_IMGUI_EXPORT Slider
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<T>,
+      public Savable,
+      public DragSource<T>,
+      public DropTarget<T>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
+                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
+                               style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   using MinMaxType = details::SliderMinMaxType<T>;
   /**
@@ -141,6 +148,8 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
   }
 
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
