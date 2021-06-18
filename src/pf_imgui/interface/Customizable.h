@@ -28,7 +28,11 @@ consteval std::size_t indexForColorOf() {
 template<style::ColorOf Head, style::ColorOf... Tail>
 constexpr style::ColorOf colorOfForIndex(std::size_t index, std::size_t currIndex = 0) {
   if (currIndex == index) { return Head; }
-  return colorOfForIndex<Tail...>(index, currIndex + 1);
+  if constexpr (sizeof...(Tail) == 0) {
+    return static_cast<style::ColorOf>(-1);
+  } else {
+    return colorOfForIndex<Tail...>(index, currIndex + 1);
+  }
 }
 
 }// namespace details
@@ -46,11 +50,9 @@ class ColorCustomizable {
           ++index;
         },
         colorValues);
-    return RAII{
-        [] {
-          for (std::size_t i = 0; i < sizeof...(SupportedColorTypes); ++i) { ImGui::PopStyleColor(); }
-        }
-    };
+    return RAII{[] {
+      for (std::size_t i = 0; i < sizeof...(SupportedColorTypes); ++i) { ImGui::PopStyleColor(); }
+    }};
   }
 
   template<style::ColorOf ColorType>
