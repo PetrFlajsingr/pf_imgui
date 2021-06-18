@@ -16,6 +16,8 @@ void ModalDialog::renderImpl() {
     owner.removeDialog(*this);
     return;
   }
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (font != nullptr) { ImGui::PushFont(font); }
   if (firstRender) { ImGui::OpenPopup(getLabel().c_str()); }
   if (ImGui::BeginPopupModal(getLabel().c_str())) {

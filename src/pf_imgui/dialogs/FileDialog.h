@@ -12,6 +12,7 @@
 #include <include/ImGuiFileDialog/ImGuiFileDialog.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -48,7 +49,11 @@ struct PF_IMGUI_EXPORT FileExtensionSettings {
  *
  * Dialogs are invalidated when isDone() == true.
  */
-class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT FileDialog : public Renderable,
+                                   public Labellable,
+                                   public Resizable,
+                                   public AllColorCustomizable,
+                                   public AllStyleCustomizable {
  public:
   /**
    * Construct FileDialog for files
