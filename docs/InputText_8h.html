@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.5.1</span>
    </div>
   </td>
  </tr>
@@ -84,58 +84,63 @@ $(function() {
 <code>#include &lt;<a class="el" href="Labellable_8h_source.html">pf_imgui/interface/Labellable.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="Savable_8h_source.html">pf_imgui/interface/Savable.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="ValueObservable_8h_source.html">pf_imgui/interface/ValueObservable.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="Customizable_8h_source.html">pf_imgui/interface/Customizable.h</a>&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for InputText.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="InputText_8h__incl.png" border="0" usemap="#src_2pf__imgui_2elements_2InputText_8h" alt=""/></div>
 <map name="src_2pf__imgui_2elements_2InputText_8h" id="src_2pf__imgui_2elements_2InputText_8h">
-<area shape="rect" title="InputText element." alt="" coords="2135,5,2302,47"/>
-<area shape="rect" href="Text_8h.html" title="Text element." alt="" coords="1789,95,1851,121"/>
-<area shape="rect" title=" " alt="" coords="1933,609,2077,635"/>
-<area shape="rect" title=" " alt="" coords="2038,691,2197,717"/>
-<area shape="rect" title=" " alt="" coords="2877,609,2936,635"/>
-<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="1989,169,2131,211"/>
-<area shape="rect" title=" " alt="" coords="1478,519,1565,546"/>
-<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="2677,512,2819,553"/>
-<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="2512,512,2653,553"/>
-<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="755,423,903,464"/>
-<area shape="rect" title=" " alt="" coords="21,691,91,717"/>
-<area shape="rect" title=" " alt="" coords="1537,259,1612,285"/>
-<area shape="rect" href="DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="635,169,776,211"/>
-<area shape="rect" href="Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="2377,423,2541,464"/>
-<area shape="rect" title=" " alt="" coords="617,609,703,635"/>
-<area shape="rect" title=" " alt="" coords="491,519,571,546"/>
-<area shape="rect" title=" " alt="" coords="648,259,763,285"/>
-<area shape="rect" title=" " alt="" coords="159,601,321,643"/>
-<area shape="rect" href="Tooltip_8h.html" title="Tooltip element." alt="" coords="1809,259,2012,285"/>
-<area shape="rect" href="fwd_8h.html" title="Forward declarations." alt="" coords="195,519,314,546"/>
-<area shape="rect" title=" " alt="" coords="617,430,679,457"/>
-<area shape="rect" href="Observable__impl_8h.html" title="Implementation of observable." alt="" coords="849,512,997,553"/>
-<area shape="rect" title=" " alt="" coords="527,609,593,635"/>
-<area shape="rect" href="unique__id_8h.html" title="Unique id generator for elements." alt="" coords="414,259,573,285"/>
-<area shape="rect" title=" " alt="" coords="888,259,1027,285"/>
-<area shape="rect" href="ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1767,333,1921,375"/>
-<area shape="rect" title=" " alt="" coords="2021,430,2099,457"/>
-<area shape="rect" href="exceptions_8h.html" title="Exceptions for pf_imgui." alt="" coords="1729,430,1895,457"/>
-<area shape="rect" title=" " alt="" coords="1227,430,1437,457"/>
-<area shape="rect" title=" " alt="" coords="1009,609,1133,635"/>
-<area shape="rect" title=" " alt="" coords="729,609,789,635"/>
-<area shape="rect" title=" " alt="" coords="1742,512,1917,553"/>
-<area shape="rect" href="Renderable_8h.html" title="Base class for renderables." alt="" coords="2296,512,2437,553"/>
-<area shape="rect" href="enums_8h.html" title="Library&#39;s enums." alt="" coords="2299,609,2437,635"/>
-<area shape="rect" title=" " alt="" coords="2335,691,2401,717"/>
-<area shape="rect" title=" " alt="" coords="2427,691,2519,717"/>
-<area shape="rect" title=" " alt="" coords="1157,609,1352,635"/>
-<area shape="rect" title=" " alt="" coords="813,601,984,643"/>
-<area shape="rect" title=" " alt="" coords="491,341,563,367"/>
-<area shape="rect" href="Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="928,430,1027,457"/>
-<area shape="rect" href="Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="1051,430,1152,457"/>
-<area shape="rect" href="PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="2243,259,2479,285"/>
-<area shape="rect" href="MenuItems_8h.html" title="Items to be used in menu bars and popup menu." alt="" coords="2257,341,2490,367"/>
-<area shape="rect" href="Clickable_8h.html" title="Interface for elements which can be clicked." alt="" coords="1461,423,1603,464"/>
-<area shape="rect" title=" " alt="" coords="2695,609,2801,635"/>
-<area shape="rect" title=" " alt="" coords="2155,609,2275,635"/>
+<area shape="rect" title="InputText element." alt="" coords="2081,5,2247,47"/>
+<area shape="rect" href="Text_8h.html" title="Text element." alt="" coords="1408,95,1469,121"/>
+<area shape="rect" title=" " alt="" coords="1693,609,1837,635"/>
+<area shape="rect" href="Customizable_8h.html" title="Interface to provide customization functionality to its descendants." alt="" coords="505,423,647,464"/>
+<area shape="rect" title=" " alt="" coords="1845,691,2003,717"/>
+<area shape="rect" title=" " alt="" coords="2104,609,2163,635"/>
+<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="2371,169,2512,211"/>
+<area shape="rect" title=" " alt="" coords="2782,519,2869,546"/>
+<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="1283,512,1424,553"/>
+<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="1117,512,1259,553"/>
+<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="3124,423,3273,464"/>
+<area shape="rect" title=" " alt="" coords="725,691,795,717"/>
+<area shape="rect" title=" " alt="" coords="775,519,849,546"/>
+<area shape="rect" href="DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="1368,169,1509,211"/>
+<area shape="rect" href="Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="1837,423,1979,464"/>
+<area shape="rect" title=" " alt="" coords="251,519,392,546"/>
+<area shape="rect" title=" " alt="" coords="417,512,578,553"/>
+<area shape="rect" title=" " alt="" coords="602,519,750,546"/>
+<area shape="rect" href="styles_2enums_8h_source.html" title=" " alt="" coords="43,519,226,546"/>
+<area shape="rect" title=" " alt="" coords="56,609,184,635"/>
+<area shape="rect" title=" " alt="" coords="209,609,394,635"/>
+<area shape="rect" title=" " alt="" coords="3588,609,3673,635"/>
+<area shape="rect" title=" " alt="" coords="2627,519,2707,546"/>
+<area shape="rect" title=" " alt="" coords="1177,259,1292,285"/>
+<area shape="rect" title=" " alt="" coords="933,601,1094,643"/>
+<area shape="rect" href="Tooltip_8h.html" title="Tooltip element." alt="" coords="1681,259,1884,285"/>
+<area shape="rect" href="fwd_8h.html" title="Forward declarations." alt="" coords="975,519,1094,546"/>
+<area shape="rect" title=" " alt="" coords="1446,430,1509,457"/>
+<area shape="rect" href="Observable__impl_8h.html" title="Implementation of observable." alt="" coords="3046,512,3194,553"/>
+<area shape="rect" title=" " alt="" coords="3497,609,3564,635"/>
+<area shape="rect" href="unique__id_8h.html" title="Unique id generator for elements." alt="" coords="2169,259,2327,285"/>
+<area shape="rect" title=" " alt="" coords="1316,259,1455,285"/>
+<area shape="rect" href="ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="2232,333,2387,375"/>
+<area shape="rect" title=" " alt="" coords="2323,430,2400,457"/>
+<area shape="rect" title=" " alt="" coords="2565,609,2689,635"/>
+<area shape="rect" title=" " alt="" coords="3413,609,3473,635"/>
+<area shape="rect" href="Renderable_8h.html" title="Base class for renderables." alt="" coords="1853,512,1995,553"/>
+<area shape="rect" href="enums_8h.html" title="Library&#39;s enums." alt="" coords="1284,609,1423,635"/>
+<area shape="rect" title=" " alt="" coords="1320,691,1387,717"/>
+<area shape="rect" title=" " alt="" coords="1570,691,1662,717"/>
+<area shape="rect" title=" " alt="" coords="3023,609,3217,635"/>
+<area shape="rect" title=" " alt="" coords="2789,601,2960,643"/>
+<area shape="rect" title=" " alt="" coords="2035,341,2107,367"/>
+<area shape="rect" href="Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="2525,430,2624,457"/>
+<area shape="rect" href="Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="2648,430,2749,457"/>
+<area shape="rect" href="PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="1909,259,2145,285"/>
+<area shape="rect" href="MenuItems_8h.html" title="Items to be used in menu bars and popup menu." alt="" coords="1625,341,1858,367"/>
+<area shape="rect" href="Clickable_8h.html" title="Interface for elements which can be clicked." alt="" coords="2824,423,2965,464"/>
+<area shape="rect" title=" " alt="" coords="1447,609,1553,635"/>
+<area shape="rect" title=" " alt="" coords="1128,609,1248,635"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">

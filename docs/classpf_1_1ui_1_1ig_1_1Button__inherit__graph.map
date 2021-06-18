@@ -1,11 +1,13 @@
 <map id="pf::ui::ig::Button" name="pf::ui::ig::Button">
-<area shape="rect" id="node1" title="A typical button element." alt="" coords="621,132,747,159"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="407,56,573,83"/>
+<area shape="rect" id="node1" title="A typical button element." alt="" coords="753,183,879,209"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="" coords="473,56,639,83"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="216,5,352,32"/>
 <area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
 <area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="" coords="211,56,357,83"/>
 <area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="" coords="209,107,359,133"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="415,107,565,133"/>
-<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="417,157,563,184"/>
-<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Clickable.html" title="Interface for clickable elements." alt="" coords="419,208,561,235"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="481,107,631,133"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="483,157,629,184"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Clickable.html" title="Interface for clickable elements." alt="" coords="485,208,627,235"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title=" " alt="" coords="407,259,705,389"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title=" " alt="" coords="443,413,669,499"/>
 </map>

@@ -1,0 +1,6 @@
+<map id="pf::ui::ig::ElementContainer" name="pf::ui::ig::ElementContainer">
+<area shape="rect" id="node1" title="Interface for objects, which can contain instances of Element." alt="" coords="81,155,279,181"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1RenderablesContainer.html" title=" " alt="" coords="67,80,293,107"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="" coords="5,5,168,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="" coords="193,5,354,32"/>
+</map>

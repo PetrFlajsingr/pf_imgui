@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['plottable_1165',['Plottable',['../PlotDataBase_8h.html#a3a1453670077c422d6f7ff74d89afbaf',1,'pf::ui::ig::plot_type']]],
-  ['progressbarcompatible_1166',['ProgressBarCompatible',['../ProgressBar_8h.html#af446989080956359e834c697114439b1',1,'pf::ui::ig']]]
+  ['nextframescrollposition_1217',['nextFrameScrollPosition',['../classpf_1_1ui_1_1ig_1_1Layout.html#a850434fadaf3c21c97a3113822ab883c',1,'pf::ui::ig::Layout']]]
 ];

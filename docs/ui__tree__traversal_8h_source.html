@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.5.1</span>
    </div>
   </td>
  </tr>
@@ -84,31 +84,27 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>details {</div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="ui__tree__traversal_8h.html#a4f86dc2af67c1d052ff222302af7ac26">   23</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="ui__tree__traversal_8h.html#a4f86dc2af67c1d052ff222302af7ac26">traverseImGuiTree_impl</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> &amp;element, std::invocable&lt;Renderable &amp;&gt; <span class="keyword">auto</span> callback) {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  callback(element);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> ptrContainer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> *<span class="keyword">&gt;</span>(&amp;element); ptrContainer != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::ranges::for_each(ptrContainer-&gt;getChildren(),</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                          [&amp;callback](<span class="keyword">auto</span> &amp;child) { traverseImGuiTree_impl(child, callback); });</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> ptrLayout = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classpf_1_1ui_1_1ig_1_1Layout.html">Layout</a> *<span class="keyword">&gt;</span>(&amp;element); ptrLayout != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::ranges::for_each(ptrLayout-&gt;getRenderables(),</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                          [&amp;callback](<span class="keyword">auto</span> child) { traverseImGuiTree_impl(*child, callback); });</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}<span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="ui__tree__traversal_8h.html#a260a4d2fb48c215a8ab4644504d0c94e">   40</a></span>&#160;PF_IMGUI_EXPORT <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="ui__tree__traversal_8h.html#a260a4d2fb48c215a8ab4644504d0c94e">traverseImGuiTree</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> &amp;root, std::invocable&lt;Renderable &amp;&gt; <span class="keyword">auto</span> callback) {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  details::traverseImGuiTree_impl(root, callback);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_UI_TREE_TRAVERSAL_H</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> ptrContainer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html">RenderablesContainer</a> *<span class="keyword">&gt;</span>(&amp;element); ptrContainer != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::ranges::for_each(ptrContainer-&gt;getRenderables(),</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                          [&amp;callback](<span class="keyword">auto</span> &amp;child) { traverseImGuiTree_impl(*child, callback); });</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}<span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="ui__tree__traversal_8h.html#a260a4d2fb48c215a8ab4644504d0c94e">   37</a></span>&#160;PF_IMGUI_EXPORT <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="ui__tree__traversal_8h.html#a260a4d2fb48c215a8ab4644504d0c94e">traverseImGuiTree</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> &amp;root, std::invocable&lt;Renderable &amp;&gt; <span class="keyword">auto</span> callback) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  details::traverseImGuiTree_impl(root, callback);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_UI_TREE_TRAVERSAL_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:28</div></div>
 <div class="ttc" id="aRenderable_8h_html"><div class="ttname"><a href="Renderable_8h.html">Renderable.h</a></div><div class="ttdoc">Base class for renderables.</div></div>
 <div class="ttc" id="aLayout_8h_html"><div class="ttname"><a href="Layout_8h.html">Layout.h</a></div><div class="ttdoc">Base class for layouts.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1RenderablesContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html">pf::ui::ig::RenderablesContainer</a></div><div class="ttdef"><b>Definition:</b> RenderablesContainer.h:12</div></div>
 <div class="ttc" id="aElementContainer_8h_html"><div class="ttname"><a href="ElementContainer_8h.html">ElementContainer.h</a></div><div class="ttdoc">Base class for objects which can hold arbitrary elements.</div></div>
 <div class="ttc" id="aui__tree__traversal_8h_html_a4f86dc2af67c1d052ff222302af7ac26"><div class="ttname"><a href="ui__tree__traversal_8h.html#a4f86dc2af67c1d052ff222302af7ac26">pf::ui::ig::details::traverseImGuiTree_impl</a></div><div class="ttdeci">void traverseImGuiTree_impl(Renderable &amp;element, std::invocable&lt; Renderable &amp; &gt; auto callback)</div><div class="ttdef"><b>Definition:</b> ui_tree_traversal.h:23</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:25</div></div>
-<div class="ttc" id="aui__tree__traversal_8h_html_a260a4d2fb48c215a8ab4644504d0c94e"><div class="ttname"><a href="ui__tree__traversal_8h.html#a260a4d2fb48c215a8ab4644504d0c94e">pf::ui::ig::traverseImGuiTree</a></div><div class="ttdeci">PF_IMGUI_EXPORT void traverseImGuiTree(Renderable &amp;root, std::invocable&lt; Renderable &amp; &gt; auto callback)</div><div class="ttdef"><b>Definition:</b> ui_tree_traversal.h:40</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Layout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></div><div class="ttdoc">Base class for layouts.</div><div class="ttdef"><b>Definition:</b> Layout.h:27</div></div>
+<div class="ttc" id="aui__tree__traversal_8h_html_a260a4d2fb48c215a8ab4644504d0c94e"><div class="ttname"><a href="ui__tree__traversal_8h.html#a260a4d2fb48c215a8ab4644504d0c94e">pf::ui::ig::traverseImGuiTree</a></div><div class="ttdeci">PF_IMGUI_EXPORT void traverseImGuiTree(Renderable &amp;root, std::invocable&lt; Renderable &amp; &gt; auto callback)</div><div class="ttdef"><b>Definition:</b> ui_tree_traversal.h:37</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

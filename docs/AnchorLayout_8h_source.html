@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.5.1</span>
    </div>
   </td>
  </tr>
@@ -98,8 +98,8 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">requires</a> std::derived_from&lt;T, Element&gt; &amp;&amp; std::constructible_from&lt;T, std::string, Args...&gt;</div>
 <div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html#a843ed7f8fecbead783e440536d72c7cc">   73</a></span>&#160;  <span class="keyword">auto</span> &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html#a843ed7f8fecbead783e440536d72c7cc">createChild</a>(<span class="keyword">const</span> std::string &amp;name, ImVec2 position, Flags&lt;Anchor&gt; anchors, Args &amp;&amp;...args) {</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> (findIf(getChildren() | ranges::views::addressof, [name](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;child) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">return</span> child-&gt;getName() == name;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }).has_value()) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;          <span class="keywordflow">return</span> child-&gt;getName() == name;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        }).has_value()) {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DuplicateIdException.html">DuplicateIdException</a>(<span class="stringliteral">&quot;{} already present in ui&quot;</span>, name);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    constexpr <span class="keyword">auto</span> IsPositionable = std::derived_from&lt;T, Positionable&gt;;</div>
@@ -168,7 +168,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ResizableLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ResizableLayout.html">pf::ui::ig::ResizableLayout</a></div><div class="ttdoc">An interface for Layouts, which support changing their size.</div><div class="ttdef"><b>Definition:</b> ResizableLayout.h:24</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AnchorLayout_html_ad59764512a8386fe4503d5e3a1940dee"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html#ad59764512a8386fe4503d5e3a1940dee">pf::ui::ig::AnchorLayout::getChildren</a></div><div class="ttdeci">auto getChildren()</div><div class="ttdef"><b>Definition:</b> AnchorLayout.h:112</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Interface for all ImGui elements.</div><div class="ttdef"><b>Definition:</b> Element.h:27</div></div>
-<div class="ttc" id="aenums_8h_html_af4587c31d0bdffdd51e49105d50f0372"><div class="ttname"><a href="enums_8h.html#af4587c31d0bdffdd51e49105d50f0372">pf::ui::ig::Anchor</a></div><div class="ttdeci">Anchor</div><div class="ttdef"><b>Definition:</b> enums.h:129</div></div>
+<div class="ttc" id="aenums_8h_html_af4587c31d0bdffdd51e49105d50f0372"><div class="ttname"><a href="enums_8h.html#af4587c31d0bdffdd51e49105d50f0372">pf::ui::ig::Anchor</a></div><div class="ttdeci">Anchor</div><div class="ttdef"><b>Definition:</b> enums.h:128</div></div>
 <div class="ttc" id="aenums_8h_html_a8bbe7dfc4a6fb580f03f46237d91dadb"><div class="ttname"><a href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">pf::ui::ig::ShowBorder</a></div><div class="ttdeci">ShowBorder</div><div class="ttdef"><b>Definition:</b> enums.h:80</div></div>
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:56</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Resizable.h:52</div></div>

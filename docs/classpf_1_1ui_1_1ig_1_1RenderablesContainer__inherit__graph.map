@@ -1,0 +1,36 @@
+<map id="pf::ui::ig::RenderablesContainer" name="pf::ui::ig::RenderablesContainer">
+<area shape="rect" id="node1" title=" " alt="" coords="216,583,443,610"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1CustomItemBox.html" title="Box containing items provided by user based on stored type." alt="" coords="497,123,683,164"/>
+<area shape="rect" id="node11" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="491,406,689,433"/>
+<area shape="rect" id="node20" href="$classpf_1_1ui_1_1ig_1_1Layout.html" title="Base class for layouts." alt="" coords="527,558,653,585"/>
+<area shape="rect" id="node28" href="$classpf_1_1ui_1_1ig_1_1Memo.html" title="Multiline text overview with basic controls." alt="" coords="529,609,651,635"/>
+<area shape="rect" id="node29" href="$classpf_1_1ui_1_1ig_1_1MenuContainer.html" title="An item which can contain other menus." alt="" coords="499,659,681,686"/>
+<area shape="rect" id="node34" href="$classpf_1_1ui_1_1ig_1_1TabBar.html" title="A bar for containment and switching of tabs." alt="" coords="527,710,653,737"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="" coords="5,558,168,585"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="" coords="6,609,167,635"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title=" " alt="" coords="769,5,939,47"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title=" " alt="" coords="737,71,971,98"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1CustomCombobox.html" title="Combobox where rows can be whatever is provided by the user." alt="" coords="753,123,955,164"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1CustomListbox.html" title="Listbox where rows can be whatever is provided by the user." alt="" coords="765,188,943,229"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Combobox.html" title="A typical combobox with items which can be converted to string." alt="" coords="1019,13,1209,39"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Listbox.html" title="Container for strings shown as list box and selectable by user." alt="" coords="1031,71,1197,98"/>
+<area shape="rect" id="node12" href="$classpf_1_1ui_1_1ig_1_1Group.html" title="Group of elements which is visually delimited with a header." alt="" coords="793,254,915,281"/>
+<area shape="rect" id="node13" href="$classpf_1_1ui_1_1ig_1_1ModalDialog.html" title="Simple modal dialog which can be modal. Contains Elements." alt="" coords="772,305,936,331"/>
+<area shape="rect" id="node16" href="$classpf_1_1ui_1_1ig_1_1Tab.html" title="Par of TabBar, when clicked it switches to the selected sub&#45;layout." alt="" coords="802,355,906,382"/>
+<area shape="rect" id="node17" href="$classpf_1_1ui_1_1ig_1_1Tooltip.html" title="Tooltip to display when hovering over elements." alt="" coords="791,406,917,433"/>
+<area shape="rect" id="node18" href="$classpf_1_1ui_1_1ig_1_1Tree.html" title="Structure for organising UI elements in a tree." alt="" coords="799,457,909,483"/>
+<area shape="rect" id="node19" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="787,507,921,534"/>
+<area shape="rect" id="node14" href="$classpf_1_1ui_1_1ig_1_1InputDialog.html" title="Simplified dialog for user input. It should be created via ImGuiInterface." alt="" coords="1035,275,1193,302"/>
+<area shape="rect" id="node15" href="$classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used...." alt="" coords="1023,327,1205,368"/>
+<area shape="rect" id="node21" href="$classpf_1_1ui_1_1ig_1_1ResizableLayout.html" title="An interface for Layouts, which support changing their size." alt="" coords="759,558,949,585"/>
+<area shape="rect" id="node22" href="$classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html" title="A layout which positions it&#39;s children in their given coordinates." alt="" coords="1023,431,1205,458"/>
+<area shape="rect" id="node23" href="$classpf_1_1ui_1_1ig_1_1AnchorLayout.html" title="Layout containing elements which can be placed in custom location and their size is changed based on ..." alt="" coords="1029,482,1199,509"/>
+<area shape="rect" id="node24" href="$classpf_1_1ui_1_1ig_1_1BoxLayout.html" title="A layout which positions it&#39;s children from left to right or top to bottom, based on the settings." alt="" coords="1039,533,1189,559"/>
+<area shape="rect" id="node25" href="$classpf_1_1ui_1_1ig_1_1GridLayout.html" title="A layout which positions it&#39;s children in a grid." alt="" coords="1037,583,1191,610"/>
+<area shape="rect" id="node26" href="$classpf_1_1ui_1_1ig_1_1StackedLayout.html" title="A layout that uses stacks to show different &#39;pages&#39;, of which only one can be shown." alt="" coords="1025,634,1203,661"/>
+<area shape="rect" id="node27" href="$classpf_1_1ui_1_1ig_1_1StretchLayout.html" title="A layout which stretches to the available area in desired direction." alt="" coords="1028,685,1200,711"/>
+<area shape="rect" id="node30" href="$classpf_1_1ui_1_1ig_1_1AppMenuBar.html" title="Menu bar belonging to the entire application window." alt="" coords="771,609,937,635"/>
+<area shape="rect" id="node31" href="$classpf_1_1ui_1_1ig_1_1PopupMenu.html" title="Popup menu to be used for example when right clicking an element." alt="" coords="775,659,933,686"/>
+<area shape="rect" id="node32" href="$classpf_1_1ui_1_1ig_1_1SubMenu.html" title="Basically a button for a popup menu, which contains other elements as its items." alt="" coords="783,710,925,737"/>
+<area shape="rect" id="node33" href="$classpf_1_1ui_1_1ig_1_1WindowMenuBar.html" title="Menu bar belonging to Window." alt="" coords="758,761,950,787"/>
+</map>
