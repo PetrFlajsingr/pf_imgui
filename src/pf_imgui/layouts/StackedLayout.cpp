@@ -23,6 +23,8 @@ StackedLayout::StackedLayout(const std::string &elementName, const Size &size, A
     : StackedLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
 
 void StackedLayout::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {

@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_RADIOBUTTON_H
 
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -19,7 +20,13 @@ namespace pf::ui::ig {
 /**
  * @brief A button similar in function to CheckBox, but it can belong to RadioGroup.
  */
-class PF_IMGUI_EXPORT RadioButton : public ItemElement, public Labellable, public ValueObservable<bool> {
+class PF_IMGUI_EXPORT RadioButton
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<bool>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   friend class RadioGroup;
   /**

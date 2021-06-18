@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_CHECKBOX_H
 
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -22,7 +23,13 @@ namespace pf::ui::ig {
  *
  * A checkbox which saves it's state and provides it to listeners.
  */
-class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool>, public Labellable, public Savable {
+class PF_IMGUI_EXPORT Checkbox
+    : public ItemElement,
+      public ValueObservable<bool>,
+      public Labellable,
+      public Savable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::CheckMark>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Type of the checkbox.

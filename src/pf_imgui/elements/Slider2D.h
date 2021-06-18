@@ -34,13 +34,17 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
  * @tparam T inner type of slider
  */
 template<OneOf<int, float> T>
-class PF_IMGUI_EXPORT Slider2D : public ItemElement,
-                                 public Labellable,
-                                 public ValueObservable<details::Slider2DStorageType<T>>,
-                                 public Savable,
-                                 public DragSource<details::Slider2DStorageType<T>>,
-                                 public DropTarget<details::Slider2DStorageType<T>>,
-                                 public Resizable {
+class PF_IMGUI_EXPORT Slider2D
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<details::Slider2DStorageType<T>>,
+      public Savable,
+      public DragSource<details::Slider2DStorageType<T>>,
+      public DropTarget<details::Slider2DStorageType<T>>,
+      public Resizable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
+                               style::ColorOf::FrameBackgroundActive>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -60,6 +64,8 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
 
  protected:
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     auto valueChanged = false;
     auto address = ValueObservable<StorageType>::getValueAddress();
     const auto oldValue = *address;

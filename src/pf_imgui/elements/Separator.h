@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_SPLITTER_H
 #define PF_IMGUI_ELEMENTS_SPLITTER_H
 
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 
 namespace pf::ui::ig {
@@ -17,7 +18,9 @@ namespace pf::ui::ig {
  *
  * Automatically detects if it should be horizontal or vertical.
  */
-class PF_IMGUI_EXPORT Separator : public Element {
+class PF_IMGUI_EXPORT Separator : public Element,
+                                  public ColorCustomizable<style::ColorOf::Separator, style::ColorOf::SeparatorHovered,
+                                                           style::ColorOf::SeparatorActive> {
  public:
   /**
    * Construct Separator.

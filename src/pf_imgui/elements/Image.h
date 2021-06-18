@@ -11,6 +11,7 @@
 #include <functional>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
@@ -22,7 +23,11 @@ namespace pf::ui::ig {
  *
  * Image rendering should be handled by the use when descending from ImGuiInterface.
  */
-class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Clickable {
+class PF_IMGUI_EXPORT Image
+    : public ItemElement,
+      public Resizable,
+      public Clickable,
+      public ColorCustomizable<style::ColorOf::Button, style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive> {
  public:
   /**
    * Provider of UV mapping for textures. First is left upper corner, right is right lower.

@@ -25,6 +25,7 @@ namespace pf::ui::ig {
 using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
 /**
  * @brief Graph for visualising stack traces, performance stuff...
+ * @todo: style
  */
 class PF_IMGUI_EXPORT FlameGraph : public Element, public Labellable, public Resizable {
  public:

@@ -14,6 +14,8 @@ SliderAngle::SliderAngle(const std::string &elementName, const std::string &labe
       format(std::move(format)) {}
 
 void SliderAngle::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str())) {
     ValueObservable::notifyValueChanged();
   }

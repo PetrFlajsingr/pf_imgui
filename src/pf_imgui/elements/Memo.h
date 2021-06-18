@@ -14,6 +14,7 @@
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/layouts/BoxLayout.h>
 #include <range/v3/view/filter.hpp>
 #include <range/v3/view/join.hpp>
@@ -27,7 +28,7 @@ namespace pf::ui::ig {
  *
  * User can add text by rows. Rows can be filtered using an Input. Copy and clear buttons can be enabled.
  */
-class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
+class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public RenderablesContainer {
  public:
   /**
    * Construct Memo.
@@ -107,6 +108,8 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable {
    * Cancel record limit.
    */
   void cancelRecordLimit();
+
+  std::vector<Renderable *> getRenderables() override;
 
  protected:
   void renderImpl() override;

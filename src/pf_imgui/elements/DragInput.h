@@ -78,12 +78,17 @@ constexpr const char *defaultDragFormat() {
  * @tparam T Underlying type
  */
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
-class PF_IMGUI_EXPORT DragInput : public ItemElement,
-                                  public ValueObservable<T>,
-                                  public Labellable,
-                                  public Savable,
-                                  public DragSource<T>,
-                                  public DropTarget<T> {
+class PF_IMGUI_EXPORT DragInput
+    : public ItemElement,
+      public ValueObservable<T>,
+      public Labellable,
+      public Savable,
+      public DragSource<T>,
+      public DropTarget<T>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
+                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
+                               style::ColorOf::FrameBackgroundActive>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   using ParamType = details::DragInputUnderlyingType<T>;
 
@@ -164,6 +169,8 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
   }
 
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     bool valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {

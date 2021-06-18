@@ -25,13 +25,17 @@ namespace pf::ui::ig {
  * @tparam T underlying type
  */
 template<OneOf<float> T>
-class PF_IMGUI_EXPORT Slider3D : public ItemElement,
-                                 public Labellable,
-                                 public ValueObservable<glm::vec3>,
-                                 public Savable,
-                                 public DragSource<glm::vec3>,
-                                 public DropTarget<glm::vec3>,
-                                 public Resizable {
+class PF_IMGUI_EXPORT Slider3D
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<glm::vec3>,
+      public Savable,
+      public DragSource<glm::vec3>,
+      public DropTarget<glm::vec3>,
+      public Resizable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
+                               style::ColorOf::FrameBackgroundActive>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct Slider3D.
@@ -53,6 +57,8 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
 
  protected:
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     auto valueChanged = false;
     auto address = ValueObservable<glm::vec3>::getValueAddress();
     const auto oldValue = *address;

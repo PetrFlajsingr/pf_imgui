@@ -12,6 +12,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <string>
 #include <vector>
 
@@ -29,7 +30,10 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT RadioGroup : public Element,
                                    public Labellable,
                                    public ValueObservable<std::string_view>,
-                                   public Savable {
+                                   public Savable,
+                                   public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
+                                                            style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
+                                   public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>  {
  public:
   /**
    * Construct RadioGroup.

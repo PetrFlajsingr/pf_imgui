@@ -129,6 +129,16 @@ class StyleCustomizable {
  private:
   std::tuple<std::optional<details::TypeForStyle<SupportedStyles>>...> styleValues;
 };
+
+using AllStyleCustomizable =
+    StyleCustomizable<style::Style::Alpha, style::Style::WindowRounding, style::Style::WindowBorderSize,
+                      style::Style::ChildRounding, style::Style::ChildBorderSize, style::Style::PopupRounding,
+                      style::Style::PopupBorderSize, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                      style::Style::IndentSpacing, style::Style::ScrollbarSize, style::Style::ScrollbarRounding,
+                      style::Style::GrabMinSize, style::Style::GrabRounding, style::Style::TabRounding,
+                      style::Style::WindowPadding, style::Style::WindowMinSize, style::Style::WindowTitleAlign,
+                      style::Style::FramePadding, style::Style::ItemSpacing, style::Style::ItemInnerSpacing,
+                      style::Style::CellPadding, style::Style::ButtonTextAlign, style::Style::SelectableTextAlign>;
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H

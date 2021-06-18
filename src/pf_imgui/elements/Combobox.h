@@ -165,6 +165,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   }
 
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
       previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();

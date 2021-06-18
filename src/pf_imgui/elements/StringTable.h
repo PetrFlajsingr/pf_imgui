@@ -43,6 +43,8 @@ struct PF_IMGUI_EXPORT TableSettings {
 /**
  * @brief Table using strings as cell values.
  * @tparam ColumnCount static column count
+ *
+ * @todo: merge this with table and change it overall
  */
 template<std::size_t ColumnCount>
 class PF_IMGUI_EXPORT StringTable : public ItemElement, public Resizable {

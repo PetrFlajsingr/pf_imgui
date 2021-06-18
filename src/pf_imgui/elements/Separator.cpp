@@ -7,4 +7,7 @@
 
 pf::ui::ig::Separator::Separator(const std::string &name) : Element(name) {}
 
-void pf::ui::ig::Separator::renderImpl() { ImGui::Separator(); }
+void pf::ui::ig::Separator::renderImpl() {
+  auto colorStyle = setColorStack();
+  ImGui::Separator();
+}

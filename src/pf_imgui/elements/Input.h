@@ -15,6 +15,7 @@
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -129,12 +130,17 @@ concept FormattedWithoutStep =
  * @tparam T Underlying type
  */
 template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Input : public ItemElement,
-                              public Labellable,
-                              public ValueObservable<T>,
-                              public Savable,
-                              public DragSource<T>,
-                              public DropTarget<T> {
+class PF_IMGUI_EXPORT Input
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<T>,
+      public Savable,
+      public DragSource<T>,
+      public DropTarget<T>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
+                               style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
   details::InputData<details::InputUnderlyingType<T>> data;
 
  public:
@@ -232,6 +238,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
   }
 
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {

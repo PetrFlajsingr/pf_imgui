@@ -10,6 +10,7 @@
 
 #include <imgui.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -33,7 +34,13 @@ concept ProgressBarCompatible = requires(T t, float f) {
  * @tparam T type storing the progress value
  */
 template<ProgressBarCompatible T>
-class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T>, public Resizable {
+class PF_IMGUI_EXPORT ProgressBar
+    : public ItemElement,
+      public ValueObservable<T>,
+      public Resizable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct ProgressBar.
@@ -117,7 +124,11 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   }
 
  protected:
-  void renderImpl() override { ImGui::ProgressBar(getCurrentPercentage(), getSize().asImVec()); }
+  void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
+    ImGui::ProgressBar(getCurrentPercentage(), getSize().asImVec());
+  }
 
  private:
   T stepValue;

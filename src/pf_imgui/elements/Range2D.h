@@ -29,7 +29,10 @@ class Range2D : public ItemElement,
                 public Resizable,
                 public Savable,
                 public DragSource<math::Range<glm::vec2>>,
-                public DropTarget<math::Range<glm::vec2>> {
+                public DropTarget<math::Range<glm::vec2>>,
+                public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground,
+                                         style::ColorOf::Border, style::ColorOf::FrameBackgroundActive>,
+                public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct Range2D.

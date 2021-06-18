@@ -10,6 +10,8 @@ namespace pf::ui::ig {
 Tooltip::Tooltip(const std::string &elementName) : Element(elementName) {}
 
 void Tooltip::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   ImGui::BeginTooltip();
   std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
   ImGui::EndTooltip();
