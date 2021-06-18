@@ -19,7 +19,7 @@ using ColorOfAsImVec4 = ImVec4;
 template<style::Style Style>
 using TypeForStyle = std::conditional_t<style::isFloatStyle(Style), float, ImVec2>;
 
-// TODO: move this to pf_common/tuple.h
+// TODO: move this to pf_common
 template<auto Needle, auto HaystackStart, auto... Haystack>
 consteval std::size_t indexInVarArgList() {
   if (Needle == HaystackStart) {
@@ -47,14 +47,15 @@ constexpr auto varArgValueForIndex(std::size_t index, std::size_t currIndex = 0)
 template<style::ColorOf... SupportedColorTypes>
 class ColorCustomizable {
  public:
+#ifdef PF_IMGUI_ENABLE_STYLES
   template<style::ColorOf ColorType>
   requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(ImVec4 color) {
-
     std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = color;
   }
-
+#endif
  protected:
   [[nodiscard]] RAII setColorStack() {
+#ifdef PF_IMGUI_ENABLE_STYLES
     auto index = std::size_t{};
     iterateTuple(
         [&index](const auto &value) {
@@ -72,10 +73,15 @@ class ColorCustomizable {
           },
           colorValues);
     }};
+#else
+    return RAII{[] {}};
+#endif
   }
 
- private:
+#ifdef PF_IMGUI_ENABLE_STYLES
+  private:
   std::tuple<std::optional<details::ColorOfAsImVec4<SupportedColorTypes>>...> colorValues;
+#endif
 };
 
 using AllColorCustomizable = ColorCustomizable<
@@ -100,6 +106,7 @@ using AllColorCustomizable = ColorCustomizable<
 template<style::Style... SupportedStyles>
 class StyleCustomizable {
  public:
+#ifdef PF_IMGUI_ENABLE_STYLES
   template<style::Style Style>
   requires(OneOfValues_v<Style, SupportedStyles...> &&style::isFloatStyle(Style)) void setStyle(float value) {
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
@@ -108,9 +115,10 @@ class StyleCustomizable {
   requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style)) void setStyle(ImVec2 value) {
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
-
+#endif
  protected:
   [[nodiscard]] RAII setStyleStack() {
+#ifdef PF_IMGUI_ENABLE_STYLES
     auto index = std::size_t{};
     iterateTuple(
         [&index](const auto &value) {
@@ -127,21 +135,25 @@ class StyleCustomizable {
           },
           styleValues);
     }};
-  }
-
- private:
+#else
+    return RAII{[] {}};
+#endif
+  };
+#ifdef PF_IMGUI_ENABLE_STYLES
+  private:
   std::tuple<std::optional<details::TypeForStyle<SupportedStyles>>...> styleValues;
+#endif
 };
 
 using AllStyleCustomizable =
-    StyleCustomizable<style::Style::Alpha, style::Style::WindowRounding, style::Style::WindowBorderSize,
-                      style::Style::ChildRounding, style::Style::ChildBorderSize, style::Style::PopupRounding,
-                      style::Style::PopupBorderSize, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                      style::Style::IndentSpacing, style::Style::ScrollbarSize, style::Style::ScrollbarRounding,
-                      style::Style::GrabMinSize, style::Style::GrabRounding, style::Style::TabRounding,
-                      style::Style::WindowPadding, style::Style::WindowMinSize, style::Style::WindowTitleAlign,
-                      style::Style::FramePadding, style::Style::ItemSpacing, style::Style::ItemInnerSpacing,
-                      style::Style::CellPadding, style::Style::ButtonTextAlign, style::Style::SelectableTextAlign>;
+StyleCustomizable<style::Style::Alpha, style::Style::WindowRounding, style::Style::WindowBorderSize,
+                  style::Style::ChildRounding, style::Style::ChildBorderSize, style::Style::PopupRounding,
+                  style::Style::PopupBorderSize, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                  style::Style::IndentSpacing, style::Style::ScrollbarSize, style::Style::ScrollbarRounding,
+                  style::Style::GrabMinSize, style::Style::GrabRounding, style::Style::TabRounding,
+                  style::Style::WindowPadding, style::Style::WindowMinSize, style::Style::WindowTitleAlign,
+                  style::Style::FramePadding, style::Style::ItemSpacing, style::Style::ItemInnerSpacing,
+                  style::Style::CellPadding, style::Style::ButtonTextAlign, style::Style::SelectableTextAlign>;
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
