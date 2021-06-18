@@ -22,7 +22,11 @@ consteval std::size_t indexForColorOf() {
   if (Needle == HaystackStart) {
     return 0;
   } else {
-    return 1 + indexForColorOf<Needle, Haystack...>();
+    if constexpr (sizeof...(Haystack) == 0) {
+      return -1;
+    } else {
+      return 1 + indexForColorOf<Needle, Haystack...>();
+    }
   }
 }
 template<style::ColorOf Head, style::ColorOf... Tail>
@@ -50,14 +54,18 @@ class ColorCustomizable {
           ++index;
         },
         colorValues);
-    return RAII{[] {
-      for (std::size_t i = 0; i < sizeof...(SupportedColorTypes); ++i) { ImGui::PopStyleColor(); }
+    return RAII{[this] {
+      iterateTuple(
+          [](const auto &value) {
+            if (value.has_value()) { ImGui::PopStyleColor(); }
+          },
+          colorValues);
     }};
   }
 
   template<style::ColorOf ColorType>
   requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(ImVec4 color) {
-    std::get<details::indexForColorOf<ColorType, SupportedColorTypes...>>(colorValues) = color;
+    std::get<details::indexForColorOf<ColorType, SupportedColorTypes...>()>(colorValues) = color;
   }
 
  private:
