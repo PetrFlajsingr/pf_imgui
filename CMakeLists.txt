@@ -26,6 +26,12 @@ if (ENABLE_STACKTRACE)
     add_compile_definitions(STACKTRACE_ENABLE)
 endif ()
 
+option(ENABLE_STYLES "enable style settings for each element" OFF)
+
+if (ENABLE_STYLES)
+    add_compile_definitions(PF_IMGUI_ENABLE_STYLES)
+endif ()
+
 
 add_compile_definitions(PF_ENUM_OUT)
 
