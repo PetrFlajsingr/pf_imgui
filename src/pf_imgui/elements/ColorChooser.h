@@ -42,9 +42,10 @@ class PF_IMGUI_EXPORT ColorChooser
       public Savable,
       public DragSource<T>,
       public DropTarget<T>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::CheckMark,
-                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
+                               style::ColorOf::DragDropTarget, style::ColorOf::NavHighlight, style::ColorOf::Border,
+                               style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**

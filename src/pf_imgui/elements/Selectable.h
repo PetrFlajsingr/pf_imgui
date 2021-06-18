@@ -28,8 +28,9 @@ class PF_IMGUI_EXPORT Selectable
       public Resizable,
       public Savable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::Header,
-                               style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive>,
+                               style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive,
+                               style::ColorOf::Header, style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive,
+                               style::ColorOf::NavHighlight>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::SelectableTextAlign> {
  public:

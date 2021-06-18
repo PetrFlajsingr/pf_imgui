@@ -87,7 +87,9 @@ class PF_IMGUI_EXPORT DragInput
       public DropTarget<T>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
                                style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                               style::ColorOf::FrameBackgroundActive>,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::NavHighlight,
+                               style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::SliderGrab,
+                               style::ColorOf::SliderGrabActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   using ParamType = details::DragInputUnderlyingType<T>;

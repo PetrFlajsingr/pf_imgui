@@ -39,7 +39,8 @@ class PF_IMGUI_EXPORT ProgressBar
       public ValueObservable<T>,
       public Resizable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
+                               style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**

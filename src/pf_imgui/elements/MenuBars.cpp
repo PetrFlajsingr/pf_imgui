@@ -12,6 +12,8 @@ namespace pf::ui::ig {
 
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 void WindowMenuBar::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::BeginMenuBar()) {
     renderItems();
     ImGui::EndMenuBar();
@@ -21,6 +23,8 @@ void WindowMenuBar::renderImpl() {
 AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void AppMenuBar::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::BeginMainMenuBar()) {
     renderItems();
     ImGui::EndMainMenuBar();

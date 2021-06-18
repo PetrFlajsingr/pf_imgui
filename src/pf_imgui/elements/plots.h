@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_H
 #define PF_IMGUI_ELEMENTS_PLOTS_H
 
-// @todo plot style
+
 #include "plots/PieChart.h"
 #include "plots/Plot.h"
 #include "plots/SimplePlot.h"

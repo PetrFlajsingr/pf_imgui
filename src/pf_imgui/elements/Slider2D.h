@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT Slider2D
       public DropTarget<details::Slider2DStorageType<T>>,
       public Resizable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
-                               style::ColorOf::FrameBackgroundActive>,
+                               style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   using StorageType = details::Slider2DStorageType<T>;

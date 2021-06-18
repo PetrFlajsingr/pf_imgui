@@ -106,7 +106,9 @@ class PF_IMGUI_EXPORT MenuButtonItem
       public Labellable,
       public Clickable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
-                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive>,
+                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow,
+                               style::ColorOf::Header, style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:
@@ -128,7 +130,10 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
       public Labellable,
       public ValueObservable<bool>,
       public Savable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::CheckMark>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::CheckMark,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::NavHighlight,
+                               style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**

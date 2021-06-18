@@ -139,7 +139,7 @@ class PF_IMGUI_EXPORT Input
       public DropTarget<T>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground>,
+                               style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground, style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
   details::InputData<details::InputUnderlyingType<T>> data;
 

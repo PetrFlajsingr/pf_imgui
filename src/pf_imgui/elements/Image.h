@@ -27,7 +27,8 @@ class PF_IMGUI_EXPORT Image
     : public ItemElement,
       public Resizable,
       public Clickable,
-      public ColorCustomizable<style::ColorOf::Button, style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive> {
+      public ColorCustomizable<style::ColorOf::Button, style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow> {
  public:
   /**
    * Provider of UV mapping for textures. First is left upper corner, right is right lower.

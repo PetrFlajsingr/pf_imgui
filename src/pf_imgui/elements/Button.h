@@ -32,7 +32,8 @@ class PF_IMGUI_EXPORT Button
       public Resizable,
       public Clickable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
-                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive>,
+                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:

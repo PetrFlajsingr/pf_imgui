@@ -11,6 +11,7 @@
 #include <imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -27,7 +28,13 @@ using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
  * @brief Graph for visualising stack traces, performance stuff...
  * @todo: style
  */
-class PF_IMGUI_EXPORT FlameGraph : public Element, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT FlameGraph
+    : public Element,
+      public Labellable,
+      public Resizable,
+      public ColorCustomizable<style::ColorOf::PlotHistogram, style::ColorOf::PlotHistogramHovered,
+                               style::ColorOf::FrameBackground, style::ColorOf::Border, style::ColorOf::BorderShadow,
+                               style::ColorOf::Text> {
  public:
   /**
    * Construct FlameGraph.

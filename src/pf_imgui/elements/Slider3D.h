@@ -34,7 +34,7 @@ class PF_IMGUI_EXPORT Slider3D
       public DropTarget<glm::vec3>,
       public Resizable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
-                               style::ColorOf::FrameBackgroundActive>,
+                               style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**

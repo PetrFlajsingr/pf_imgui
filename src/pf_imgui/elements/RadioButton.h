@@ -25,7 +25,9 @@ class PF_IMGUI_EXPORT RadioButton
       public Labellable,
       public ValueObservable<bool>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::CheckMark, style::ColorOf::Border,
+                               style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   friend class RadioGroup;

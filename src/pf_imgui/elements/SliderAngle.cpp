@@ -31,9 +31,13 @@ void SliderAngle::unserialize_impl(const toml::table &src) {
 }
 
 toml::table SliderAngle::serialize_impl() { return toml::table{{{"value", getValue()}}}; }
+
 float SliderAngle::getMinDeg() const { return minDeg; }
+
 void SliderAngle::setMinDeg(float min) { SliderAngle::minDeg = min; }
+
 float SliderAngle::getMaxDeg() const { return maxDeg; }
+
 void SliderAngle::setMaxDeg(float max) { SliderAngle::maxDeg = max; }
 
 }// namespace pf::ui::ig
