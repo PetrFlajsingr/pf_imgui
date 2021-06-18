@@ -11,7 +11,7 @@ jobs:
   build:
     env:
       CPM_SOURCE_CACHE: /Users/runner/cpm_cache
-    runs-on: macos-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v1
