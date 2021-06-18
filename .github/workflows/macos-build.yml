@@ -11,11 +11,19 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: run build
-      run: |
-        cmake . -DCMAKE_CXX_COMPILER=g++-11
-        make
-#        cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON
-#        make
+      - uses: actions/checkout@v1
+
+      - name: run build
+        run: |
+          cmake . -DCMAKE_CXX_COMPILER=g++-11
+          make
+  build_styles:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: run build
+        run: |
+          cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON
+          make
