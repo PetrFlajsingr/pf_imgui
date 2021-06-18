@@ -1,6 +1,10 @@
-//
-// Created by petr on 6/18/21.
-//
+/**
+ * @file Customizable.h
+ * @brief Interface to provide customization functionality to its descendants.
+ * @author Petr Flajšingr
+ * @date 18.6.21
+ */
+
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
@@ -44,16 +48,28 @@ constexpr auto varArgValueForIndex(std::size_t index, std::size_t currIndex = 0)
 
 }// namespace details
 
+/**
+ * @brief An interface to allow for changing color style. It also provides functionality to apply these styles.
+ * @tparam SupportedColorTypes list of types which are supported
+ */
 template<style::ColorOf... SupportedColorTypes>
 class ColorCustomizable {
  public:
 #ifdef PF_IMGUI_ENABLE_STYLES
+  /**
+   * Set color for given type.
+   * @tparam ColorType type to set color for
+   */
   template<style::ColorOf ColorType>
   requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(ImVec4 color) {
     std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = color;
   }
 #endif
  protected:
+  /**
+   * Add color options on imgui stack and return an instance of RAII which resets it.
+   * @return RAII resetting the stack
+   */
   [[nodiscard]] RAII setColorStack() {
 #ifdef PF_IMGUI_ENABLE_STYLES
     auto index = std::size_t{};
@@ -103,20 +119,38 @@ using AllColorCustomizable = ColorCustomizable<
     style::ColorOf::DragDropTarget, style::ColorOf::NavHighlight, style::ColorOf::NavWindowingHighlight,
     style::ColorOf::NavWindowingDimBackground, style::ColorOf::ModalWindowDimBackground>;
 
+/**
+ * @brief An interface to allow for changing style. It also provides functionality to apply these styles.
+ * @tparam SupportedStyles list of types which are supported
+ */
 template<style::Style... SupportedStyles>
 class StyleCustomizable {
  public:
 #ifdef PF_IMGUI_ENABLE_STYLES
+  /**
+   * Set value for given type.
+   * @tparam Style type to set value for
+   * @param value value to set
+   */
   template<style::Style Style>
   requires(OneOfValues_v<Style, SupportedStyles...> &&style::isFloatStyle(Style)) void setStyle(float value) {
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
+  /**
+   * Set value for given type.
+   * @tparam Style type to set value for
+   * @param value value to set
+   */
   template<style::Style Style>
   requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style)) void setStyle(ImVec2 value) {
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
 #endif
  protected:
+  /**
+   * Add style options on imgui stack and return an instance of RAII which resets it.
+   * @return RAII resetting the stack
+   */
   [[nodiscard]] RAII setStyleStack() {
 #ifdef PF_IMGUI_ENABLE_STYLES
     auto index = std::size_t{};
