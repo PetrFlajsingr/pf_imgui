@@ -47,6 +47,13 @@ constexpr auto varArgValueForIndex(std::size_t index, std::size_t currIndex = 0)
 template<style::ColorOf... SupportedColorTypes>
 class ColorCustomizable {
  public:
+  template<style::ColorOf ColorType>
+  requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(ImVec4 color) {
+
+    std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = color;
+  }
+
+ protected:
   [[nodiscard]] RAII setColorStack() {
     auto index = std::size_t{};
     iterateTuple(
@@ -65,11 +72,6 @@ class ColorCustomizable {
           },
           colorValues);
     }};
-  }
-
-  template<style::ColorOf ColorType>
-  requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(ImVec4 color) {
-    std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = color;
   }
 
  private:
@@ -98,6 +100,16 @@ using AllColorCustomizable = ColorCustomizable<
 template<style::Style... SupportedStyles>
 class StyleCustomizable {
  public:
+  template<style::Style Style>
+  requires(OneOfValues_v<Style, SupportedStyles...> &&style::isFloatStyle(Style)) void setStyle(float value) {
+    std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
+  }
+  template<style::Style Style>
+  requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style)) void setStyle(ImVec2 value) {
+    std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
+  }
+
+ protected:
   [[nodiscard]] RAII setStyleStack() {
     auto index = std::size_t{};
     iterateTuple(
@@ -115,15 +127,6 @@ class StyleCustomizable {
           },
           styleValues);
     }};
-  }
-
-  template<style::Style Style>
-  requires(OneOfValues_v<Style, SupportedStyles...> &&style::isFloatStyle(Style)) void setStyle(float value) {
-    std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
-  }
-  template<style::Style Style>
-  requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style)) void setStyle(ImVec2 value) {
-    std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
 
  private:
