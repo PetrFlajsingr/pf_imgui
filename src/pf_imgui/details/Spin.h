@@ -42,7 +42,7 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     // Step buttons
     const ImVec2 backup_frame_padding = style.FramePadding;
     style.FramePadding.x = style.FramePadding.y;
-    ImGuiButtonFlags button_flags = ImGuiButtonFlags_Refpeat | ImGuiButtonFlags_DontClosePopups;
+    ImGuiButtonFlags button_flags = ImGuiButtonFlags_Repeat | ImGuiButtonFlags_DontClosePopups;
     if (flags & ImGuiInputTextFlags_ReadOnly) button_flags |= ImGuiButtonFlags_Disabled;
     SameLine(0, style.ItemInnerSpacing.x);
 
