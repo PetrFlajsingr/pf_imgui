@@ -71,6 +71,8 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
   void close() { shouldClose = true; }
 
  protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();

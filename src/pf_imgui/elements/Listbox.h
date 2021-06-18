@@ -148,6 +148,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   }
 
  protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();

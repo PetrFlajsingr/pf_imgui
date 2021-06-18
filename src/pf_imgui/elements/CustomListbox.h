@@ -40,6 +40,8 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
         Resizable(s) {}
 
  protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();

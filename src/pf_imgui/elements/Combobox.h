@@ -141,6 +141,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   void cancelSelection() { selectedItemIndex = std::nullopt; }
 
  protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
   void unserialize_impl(const toml::table &src) override {
     if (src.contains("selected")) {
       const auto selectedItemAsString = *src["selected"].value<std::string>();
