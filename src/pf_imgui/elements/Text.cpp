@@ -19,6 +19,7 @@ Text::Text(const std::string &elementName, std::string text, ImVec4 textColor)
 const std::string &Text::getText() const { return text; }
 
 void Text::renderImpl() {
+  auto colorStyle = setColorStack();
   if (color.has_value()) {
     ImGui::TextColored(*color, "%s", text.c_str());
   } else {

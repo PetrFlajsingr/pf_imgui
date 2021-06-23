@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.5.1</span>
    </div>
   </td>
  </tr>
@@ -67,56 +67,65 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Member <a class="el" href="enums_8h.html#af4587c31d0bdffdd51e49105d50f0372">pf::ui::ig::Anchor</a>  </dt>
-<dd><a class="anchor" id="_todo000014"></a>: <a class="el" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html" title="Layout containing elements which can be placed in custom location and their size is changed based on ...">AnchorLayout</a>  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">pf::ui::ig::AnchorLayout</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000021"></a>: combine this with absolute layout </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000022"></a>: combine this with absolute layout </p>
 <p class="enddd">: layouts can't see they were resized  </p>
 </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1BoxLayout.html">pf::ui::ig::BoxLayout</a>  </dt>
-<dd><a class="anchor" id="_todo000022"></a>: allow reordering  </dd>
+<dd><a class="anchor" id="_todo000023"></a>: allow reordering  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1Combobox.html">pf::ui::ig::Combobox&lt; T &gt;</a>  </dt>
 <dd><a class="anchor" id="_todo000002"></a>: keyboard controls on focus  </dd>
+<dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1FlameGraph.html">pf::ui::ig::FlameGraph</a>  </dt>
+<dd><a class="anchor" id="_todo000003"></a>: style  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">pf::ui::ig::ImGuiInterface</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000015"></a>: localization </p>
-<p class="enddd">: key bindings?  </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000016"></a>: localization </p>
+<p class="interdd">: key bindings? </p>
+<p class="enddd">: styles  </p>
 </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1InputText.html">pf::ui::ig::InputText</a>  </dt>
-<dd><a class="anchor" id="_todo000003"></a>: hint  </dd>
+<dd><p class="startdd"><a class="anchor" id="_todo000004"></a>: hint </p>
+<p class="enddd">: decouple from <a class="el" href="classpf_1_1ui_1_1ig_1_1Text.html" title="Simple rendered text. May be colored.">Text</a>, styles  </p>
+</dd>
 <dt>Member <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#ad17b89f7ae5940e5ec1fc9bf1e840023">pf::ui::ig::Layout::isScrollable</a>  () const</dt>
-<dd><a class="anchor" id="_todo000017"></a>: turn into an interface?  </dd>
-<dt>Member <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a850434fadaf3c21c97a3113822ab883c">pf::ui::ig::Layout::nextFrameScrollPosition</a>  </dt>
-<dd><a class="anchor" id="_todo000019"></a>: turn into an interface?  </dd>
-<dt>Member <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#aac65a255548077eb20754ac2cf526063">pf::ui::ig::Layout::setScrollable</a>  (bool scrollable)</dt>
 <dd><a class="anchor" id="_todo000018"></a>: turn into an interface?  </dd>
+<dt>Member <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#a850434fadaf3c21c97a3113822ab883c">pf::ui::ig::Layout::nextFrameScrollPosition</a>  </dt>
+<dd><a class="anchor" id="_todo000020"></a>: turn into an interface?  </dd>
+<dt>Member <a class="el" href="classpf_1_1ui_1_1ig_1_1Layout.html#aac65a255548077eb20754ac2cf526063">pf::ui::ig::Layout::setScrollable</a>  (bool scrollable)</dt>
+<dd><a class="anchor" id="_todo000019"></a>: turn into an interface?  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1Listbox.html">pf::ui::ig::Listbox&lt; T &gt;</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000004"></a>: relax requires </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>: relax requires </p>
 <p class="enddd">: handle pointers as if references  </p>
 </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">pf::ui::ig::MarkdownText</a>  </dt>
-<dd><a class="anchor" id="_todo000005"></a>: custom font  </dd>
+<dd><p class="startdd"><a class="anchor" id="_todo000006"></a>: custom font </p>
+<p class="enddd">: style?  </p>
+</dd>
 <dt>Member <a class="el" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#adc575a90c90ce292e25ce486c7c8b0a9">pf::ui::ig::MarkdownText::MarkdownText</a>  (const std::string &amp;elementName, <a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html" title="Root class of an entire UI tree. Provides an ability to create windows and dialogs.">ImGuiInterface</a> &amp;interface, std::u8string markdownSrc=u8"", float fontSize=12.f, std::optional&lt; std::function&lt; std::optional&lt; ImTextureID &gt;(std::string_view)&gt;&gt; &amp;&amp;imageLoader=std::nullopt)</dt>
-<dd><a class="anchor" id="_todo000006"></a>: change this  </dd>
+<dd><a class="anchor" id="_todo000007"></a>: change this  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1MemoryEditor.html">pf::ui::ig::MemoryEditor&lt; R &gt;</a>  </dt>
-<dd><a class="anchor" id="_todo000007"></a>: more options  </dd>
+<dd><p class="startdd"><a class="anchor" id="_todo000008"></a>: more options </p>
+<p class="enddd">: change this so it's not templated - use std::span&lt;std::byte&gt; to pass data  </p>
+</dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1MessageDialog.html">pf::ui::ig::MessageDialog&lt; ButtonTypes &gt;</a>  </dt>
 <dd><a class="anchor" id="_todo000001"></a>: type of message - info, warning, error, debug with some sort of graphic  </dd>
 <dt>Member <a class="el" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1details_1_1DefaultPlotDataSetting.html#aa3f311ce4a855532a931cad64207e031">pf::ui::ig::plot_type::details::DefaultPlotDataSetting::setData</a>  (const std::ranges::range auto &amp;newData) requires(std</dt>
-<dd><a class="anchor" id="_todo000008"></a>plot data settings (line width etc.)  </dd>
+<dd><a class="anchor" id="_todo000009"></a>plot data settings (line width etc.)  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1PositionDecorator.html">pf::ui::ig::PositionDecorator&lt; T &gt;</a>  </dt>
-<dd><a class="anchor" id="_todo000016"></a>: custom position struct  </dd>
+<dd><a class="anchor" id="_todo000017"></a>: custom position struct  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">pf::ui::ig::RadioGroup</a>  </dt>
-<dd><a class="anchor" id="_todo000009"></a>: non-visual group  </dd>
+<dd><a class="anchor" id="_todo000010"></a>: non-visual group  </dd>
 <dt>Member <a class="el" href="ValueObservable_8h.html#a5699ba5fecff67701a5e29a0938fb046">pf::ui::ig::requires</a>  (std::equality_comparable&lt; T &gt; &amp;&amp;std::is_assignable_v&lt; T &amp;, T &gt; &amp;&amp;std::copy_constructible&lt; T &gt;) class PF_IMGUI_EXPORT ValueObservable</dt>
-<dd><a class="anchor" id="_todo000020"></a>: drop the copy constructible requirement  </dd>
+<dd><a class="anchor" id="_todo000021"></a>: drop the copy constructible requirement  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider&lt; T &gt;</a>  </dt>
-<dd><a class="anchor" id="_todo000010"></a>: ToStringConvertible support  </dd>
+<dd><a class="anchor" id="_todo000011"></a>: ToStringConvertible support  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1SpinInput.html">pf::ui::ig::SpinInput&lt; T &gt;</a>  </dt>
-<dd><a class="anchor" id="_todo000011"></a>: format for float  </dd>
+<dd><a class="anchor" id="_todo000012"></a>: format for float  </dd>
+<dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1StringTable.html">pf::ui::ig::StringTable&lt; ColumnCount &gt;</a>  </dt>
+<dd><a class="anchor" id="_todo000013"></a>: merge this with table and change it overall  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1TableWithFactory.html">pf::ui::ig::TableWithFactory&lt; Factory, Cells &gt;</a>  </dt>
-<dd><a class="anchor" id="_todo000012"></a>: row insert, remove  </dd>
+<dd><a class="anchor" id="_todo000014"></a>: row insert, remove  </dd>
 <dt>Class <a class="el" href="classpf_1_1ui_1_1ig_1_1Text.html">pf::ui::ig::Text</a>  </dt>
-<dd><a class="anchor" id="_todo000013"></a>: text wrapping </dd>
+<dd><a class="anchor" id="_todo000015"></a>: text wrapping </dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

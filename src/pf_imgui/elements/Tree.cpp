@@ -19,6 +19,8 @@ Tree &Tree::addNode(const std::string &elementName, const std::string &caption, 
   return createChild<Tree>(elementName, caption, allowCollapse, isPersistent() ? Persistent::Yes : Persistent::No);
 }
 void Tree::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
   setCollapsed(!ImGui::TreeNode(getLabel().c_str()));

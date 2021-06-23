@@ -16,19 +16,27 @@
 #include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {
-
 /**
  * @brief Spinner for numeric types.
  * @tparam T inner type
  * @todo: format for float
  */
 template<OneOf<int, float> T>
-class SpinInput : public ItemElement,
-                  public Labellable,
-                  public ValueObservable<T>,
-                  public Savable,
-                  public DragSource<T>,
-                  public DropTarget<T> {
+class SpinInput
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<T>,
+      public Savable,
+      public DragSource<T>,
+      public DropTarget<T>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
+                               style::ColorOf::Button, style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow,
+                               style::ColorOf::TextSelectedBackground>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                               style::Style::ButtonTextAlign> {
  public:
   /**
    * Construct SpinInput.
@@ -52,6 +60,8 @@ class SpinInput : public ItemElement,
 
  protected:
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     auto valueChanged = false;
     if constexpr (std::same_as<T, int>) {
       valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
@@ -83,6 +93,8 @@ class SpinInput : public ItemElement,
   T min;
   T max;
 };
+extern template class SpinInput<int>;
+extern template class SpinInput<float>;
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ELEMENTS_SPININPUT_H

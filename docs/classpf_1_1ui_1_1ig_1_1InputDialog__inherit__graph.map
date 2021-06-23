@@ -1,9 +1,12 @@
 <map id="pf::ui::ig::InputDialog" name="pf::ui::ig::InputDialog">
-<area shape="rect" id="node1" title="Simplified dialog for user input. It should be created via ImGuiInterface." alt="" coords="464,107,621,133"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ModalDialog.html" title="Simple modal dialog which can be modal. Contains Elements." alt="" coords="252,107,416,133"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="27,5,183,32"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="5,56,204,83"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="30,107,179,133"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="32,157,177,184"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1Positionable.html" title="Interface for positionable elements." alt="" coords="23,208,186,235"/>
+<area shape="rect" id="node1" title="Simplified dialog for user input. It should be created via ImGuiInterface." alt="" coords="949,107,1107,133"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ModalDialog.html" title="Simple modal dialog which can be modal. Contains Elements." alt="" coords="737,107,901,133"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="512,5,668,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="" coords="491,56,689,83"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1RenderablesContainer.html" title=" " alt="" coords="216,56,443,83"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="" coords="5,31,168,57"/>
+<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="" coords="6,81,167,108"/>
+<area shape="rect" id="node8" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="515,107,665,133"/>
+<area shape="rect" id="node9" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="517,157,663,184"/>
+<area shape="rect" id="node10" href="$classpf_1_1ui_1_1ig_1_1Positionable.html" title="Interface for positionable elements." alt="" coords="509,208,671,235"/>
 </map>

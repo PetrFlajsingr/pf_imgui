@@ -19,6 +19,8 @@ Memo::Memo(const std::string &elementName, const std::string &label, uint32_t te
 }
 
 void Memo::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (rebuild) { rebuildPanel(); }
   removeRecordsAboveLimit();
   ImGui::Text("%s", getLabel().c_str());
@@ -107,5 +109,10 @@ std::size_t Memo::size() const { return records.size(); }
 void Memo::cancelRecordLimit() { recordLimit = std::nullopt; }
 
 void Memo::rebuildText() { textArea->setText(getTextView() | ranges::to<std::string>()); }
+
+std::vector<Renderable *> Memo::getRenderables() {
+  // TODO: implement this
+  return {};
+}
 
 }// namespace pf::ui::ig

@@ -16,6 +16,8 @@ void PopupMenu::close() {
 }
 void PopupMenu::renderImpl() {
   if (opened) {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     if (firstRender) { ImGui::OpenPopup(getName().c_str()); }
     if (ImGui::BeginPopup(getName().c_str())) {
       renderItems();

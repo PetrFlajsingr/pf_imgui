@@ -14,6 +14,8 @@ SliderAngle::SliderAngle(const std::string &elementName, const std::string &labe
       format(std::move(format)) {}
 
 void SliderAngle::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str())) {
     ValueObservable::notifyValueChanged();
   }
@@ -29,9 +31,13 @@ void SliderAngle::unserialize_impl(const toml::table &src) {
 }
 
 toml::table SliderAngle::serialize_impl() { return toml::table{{{"value", getValue()}}}; }
+
 float SliderAngle::getMinDeg() const { return minDeg; }
+
 void SliderAngle::setMinDeg(float min) { SliderAngle::minDeg = min; }
+
 float SliderAngle::getMaxDeg() const { return maxDeg; }
+
 void SliderAngle::setMaxDeg(float max) { SliderAngle::maxDeg = max; }
 
 }// namespace pf::ui::ig

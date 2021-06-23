@@ -9,8 +9,10 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
@@ -43,7 +45,7 @@ class MenuSeparatorItem;
 /**
  * @brief An item which can contain other menus.
  */
-class PF_IMGUI_EXPORT MenuContainer {
+class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
  public:
   /**
      * Create an instance of SubMenu and add it to the end if children.
@@ -88,6 +90,8 @@ class PF_IMGUI_EXPORT MenuContainer {
      */
   void removeItem(const std::string &name);
 
+  std::vector<Renderable *> getRenderables() override;
+
  protected:
   void renderItems();
 
@@ -97,7 +101,16 @@ class PF_IMGUI_EXPORT MenuContainer {
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.
  */
-class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, public Clickable {
+class PF_IMGUI_EXPORT MenuButtonItem
+    : public MenuItem,
+      public Labellable,
+      public Clickable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
+                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow,
+                               style::ColorOf::Header, style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                               style::Style::ButtonTextAlign> {
  public:
   /**
  * Construct MenuButtonItem.
@@ -112,10 +125,16 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, publi
 /**
  * @brief An item, which can be clicked and it toggles its inner value.
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
-                                         public Labellable,
-                                         public ValueObservable<bool>,
-                                         public Savable {
+class PF_IMGUI_EXPORT MenuCheckboxItem
+    : public MenuItem,
+      public Labellable,
+      public ValueObservable<bool>,
+      public Savable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::CheckMark,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::NavHighlight,
+                               style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
  * Construct MenuCheckboxItem.
@@ -134,7 +153,10 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
 /**
  * @brief An item, which divides menus.
  */
-class PF_IMGUI_EXPORT MenuSeparatorItem : public MenuItem {
+class PF_IMGUI_EXPORT MenuSeparatorItem
+    : public MenuItem,
+      public ColorCustomizable<style::ColorOf::Separator, style::ColorOf::SeparatorHovered,
+                               style::ColorOf::SeparatorActive> {
  public:
   /**
  * Construct MenuSeparatorItem.

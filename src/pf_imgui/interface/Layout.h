@@ -9,6 +9,7 @@
 #define PF_IMGUI_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/RenderablesContainer.h>
 #include <src/pf_imgui/interface/Collapsible.h>
 #include <src/pf_imgui/interface/Element.h>
 #include <src/pf_imgui/interface/Resizable.h>
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
  *
  * Provides basic functionality for layouts - border drawing and scrolling.
  */
-class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
+class PF_IMGUI_EXPORT Layout : public Element, public Collapsible, public RenderablesContainer {
  public:
   /**
    * Construct a layout.
@@ -59,12 +60,6 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible {
    * @todo: turn into an interface?
    */
   void setScrollable(bool scrollable);
-
-  /**
-   * Get all renderables stored inside the layout.
-   * @return vector of pointers to renderables
-   */
-  [[nodiscard]] virtual std::vector<Renderable *> getRenderables() = 0;
 
   /**
    * @brief Scroll position within the layout.

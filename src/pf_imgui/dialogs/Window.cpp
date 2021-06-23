@@ -19,6 +19,8 @@ Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {

@@ -1,7 +1,8 @@
 <map id="pf::ui::ig::SimplePlot" name="pf::ui::ig::SimplePlot">
-<area shape="rect" id="node1" title="A simple plot which can visualize float values in 2 ways." alt="" coords="174,155,326,181"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
+<area shape="rect" id="node1" title="A simple plot which can visualize float values in 2 ways." alt="" coords="603,81,755,108"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="314,5,450,32"/>
 <area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="175,80,325,107"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="349,80,495,107"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="307,56,457,83"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="309,107,455,133"/>
+<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title=" " alt="" coords="209,158,555,287"/>
 </map>

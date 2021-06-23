@@ -5,6 +5,8 @@
 #include "MenuItems.h"
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <range/v3/range/conversion.hpp>
+#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 
@@ -24,6 +26,8 @@ MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string
     : MenuItem(elementName), Labellable(label) {}
 
 void MenuButtonItem::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
 }
 
@@ -59,12 +63,17 @@ void MenuContainer::removeItem(const std::string &name) {
 void MenuContainer::renderItems() {
   std::ranges::for_each(items, [](auto &item) { item->render(); });
 }
+std::vector<Renderable *> MenuContainer::getRenderables() {
+  return items | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
+}
 
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
                                    Persistent persistent)
     : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
 
 void MenuCheckboxItem::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 void MenuCheckboxItem::unserialize_impl(const toml::table &src) {
@@ -74,6 +83,9 @@ toml::table MenuCheckboxItem::serialize_impl() { return toml::table{{{"checked",
 
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 
-void MenuSeparatorItem::renderImpl() { ImGui::Separator(); }
+void MenuSeparatorItem::renderImpl() {
+  auto colorStyle = setColorStack();
+  ImGui::Separator();
+}
 
 }// namespace pf::ui::ig

@@ -28,11 +28,15 @@ void StretchLayout::setStretch(Stretch newStretch) {
     case Stretch::All: setSize(Size::Auto()); break;
   }
 }
+
 Element &StretchLayout::getChild() {
   if (child == nullptr) { throw StackTraceException("Child not present"); }
   return *dynamic_cast<Element *>(child.get());
 }
+
 void StretchLayout::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
@@ -47,7 +51,9 @@ void StretchLayout::renderImpl() {
   }
   ImGui::EndChild();
 }
+
 std::vector<Renderable *> StretchLayout::getRenderables() { return {dynamic_cast<Renderable *>(child.get())}; }
+
 bool StretchLayout::hasChild() const { return child != nullptr; }
 
 }// namespace pf::ui::ig

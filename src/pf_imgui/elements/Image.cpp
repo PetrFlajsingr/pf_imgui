@@ -14,6 +14,7 @@ Image::Image(const std::string &elementName, ImTextureID imTextureId, const Size
       uvMappingProvider(std::move(uvTextureMappingProvider)) {}
 
 void Image::renderImpl() {
+  auto colorStyle = setColorStack();
   const auto [uvStart, uvEnd] = uvMappingProvider();
   if (isButton_) {
     if (ImGui::ImageButton(textureId, getSize().asImVec(), uvStart, uvEnd)) { notifyOnClick(); }

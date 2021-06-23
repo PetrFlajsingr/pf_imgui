@@ -36,6 +36,8 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
 
 void FileDialog::renderImpl() {
   if (done) { return; }
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:

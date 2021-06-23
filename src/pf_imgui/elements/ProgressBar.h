@@ -10,13 +10,13 @@
 
 #include <imgui.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 
 namespace pf::ui::ig {
-
 /**
  * Required operations for type to be usable as ProgressBar value.
  * @tparam T
@@ -33,7 +33,14 @@ concept ProgressBarCompatible = requires(T t, float f) {
  * @tparam T type storing the progress value
  */
 template<ProgressBarCompatible T>
-class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T>, public Resizable {
+class PF_IMGUI_EXPORT ProgressBar
+    : public ItemElement,
+      public ValueObservable<T>,
+      public Resizable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
+                               style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct ProgressBar.
@@ -117,12 +124,18 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   }
 
  protected:
-  void renderImpl() override { ImGui::ProgressBar(getCurrentPercentage(), getSize().asImVec()); }
+  void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
+    ImGui::ProgressBar(getCurrentPercentage(), getSize().asImVec());
+  }
 
  private:
   T stepValue;
   T min;
   T max;
 };
+extern template class ProgressBar<float>;
+extern template class ProgressBar<int>;
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_PROGRESSBAR_H

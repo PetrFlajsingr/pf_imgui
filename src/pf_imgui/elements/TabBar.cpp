@@ -11,6 +11,8 @@ namespace pf::ui::ig {
 Tab::Tab(const std::string &elementName, const std::string &label) : ItemElement(elementName), Labellable(label) {}
 
 void Tab::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGui::BeginTabItem(getLabel().c_str())) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndTabItem();
@@ -21,6 +23,8 @@ TabBar::TabBar(const std::string &elementName, bool allowTabList)
     : Element(elementName), isTabListAllowed(allowTabList) {}
 
 void TabBar::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto flags = isTabListAllowed ? ImGuiTabBarFlags_TabListPopupButton : ImGuiTabBarFlags{};
   if (ImGui::BeginTabBar(getName().c_str(), flags)) {
     std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });
@@ -38,5 +42,11 @@ void TabBar::removeTab(const std::string &name) {
   }
 }
 bool TabBar::isTabListAllowed1() const { return isTabListAllowed; }
+
 void TabBar::setTabListAllowed(bool tabListAllowed) { TabBar::isTabListAllowed = tabListAllowed; }
+
+std::vector<Renderable *> TabBar::getRenderables() {
+  return tabs | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
+}
+
 }// namespace pf::ui::ig

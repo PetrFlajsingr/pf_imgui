@@ -8,21 +8,38 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: install updates
-      run: |
-        sudo apt install g++-11
-        wget -O cmake.sh https://cmake.org/files/v3.20/cmake-3.20.1-linux-x86_64.sh
-        sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
-        export PATH=/usr/local/bin:$PATH
-        cmake --version
+      - uses: actions/checkout@v1
 
-    - name: run build
-      run: |
-        cmake . -DCMAKE_CXX_COMPILER=g++-11
-        make
+      - name: install updates
+        run: |
+          sudo apt install g++-11
+          wget -O cmake.sh https://cmake.org/files/v3.20/cmake-3.20.1-linux-x86_64.sh
+          sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
+          export PATH=/usr/local/bin:$PATH
+          cmake --version
+
+      - name: run build
+        run: |
+          cmake . -DCMAKE_CXX_COMPILER=g++-11
+          make
+  build_styles:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: install updates
+        run: |
+          sudo apt install g++-11
+          wget -O cmake.sh https://cmake.org/files/v3.20/cmake-3.20.1-linux-x86_64.sh
+          sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
+          export PATH=/usr/local/bin:$PATH
+          cmake --version
+
+      - name: run build
+        run: |
+          cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON
+          make

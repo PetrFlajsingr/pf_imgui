@@ -38,13 +38,20 @@ constexpr const char *defaultVSliderFormat() {
  * @tparam T inner value type
  */
 template<OneOf<float, int> T>
-class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
-                                       public Labellable,
-                                       public ValueObservable<T>,
-                                       public Savable,
-                                       public Resizable,
-                                       public DragSource<T>,
-                                       public DropTarget<T> {
+class PF_IMGUI_EXPORT VerticalSlider
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<T>,
+      public Savable,
+      public Resizable,
+      public DragSource<T>,
+      public DropTarget<T>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
+                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
+                               style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct VerticalSlider.
@@ -85,6 +92,8 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
 
  protected:
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (std::same_as<T, float>) {
@@ -113,6 +122,8 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
   std::string format;
 };
 
+extern template class VerticalSlider<int>;
+extern template class VerticalSlider<float>;
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H

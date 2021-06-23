@@ -26,7 +26,7 @@ std::vector<Renderable *> AnchorLayout::getRenderables() {
 }
 void AnchorLayout::setChildPosition(const std::string &name, ImVec2 position) {
   if (auto child =
-        findIf(children | ranges::views::addressof, [name](auto child) { return child->element->getName() == name; });
+          findIf(children | ranges::views::addressof, [name](auto child) { return child->element->getName() == name; });
       child.has_value()) {
     child.value()->positionable->setPosition(position);
   } else {
@@ -35,7 +35,7 @@ void AnchorLayout::setChildPosition(const std::string &name, ImVec2 position) {
 }
 void AnchorLayout::removeChild(const std::string &name) {
   if (auto iter =
-        std::ranges::find_if(children, [name](const auto &child) { return child.element->getName() == name; });
+          std::ranges::find_if(children, [name](const auto &child) { return child.element->getName() == name; });
       iter != children.end()) {
     children.erase(iter);
   }
@@ -62,6 +62,8 @@ void AnchorLayout::setSize(const Size &s) {
 }
 
 void AnchorLayout::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {

@@ -108,9 +108,9 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
-          iter != filteredItems.end()) {
-        const auto index = std::distance(filteredItems.begin(), iter);
+              items, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+          iter != items.end()) {
+        const auto index = std::distance(items.begin(), iter);
         setSelectedItemByIndex(index);
       }
     } else {
@@ -125,7 +125,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-            filteredItems, [itemAsString](const auto &item) { return item->second == itemAsString; });
+            filteredItems, [itemAsString](const auto &item) { return item->second->getLabel()  == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
@@ -148,7 +148,11 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   }
 
  protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
       std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
         const auto &[idx, item] = itemIdx;
@@ -202,5 +206,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
  private:
   std::optional<int> selectedItemIndex = std::nullopt;
 };
+
+extern template class Listbox<std::string>;
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_LISTBOX_H

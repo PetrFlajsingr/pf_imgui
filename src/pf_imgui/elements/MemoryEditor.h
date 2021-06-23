@@ -10,6 +10,7 @@
 
 #include <imgui_memory_editor.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <ranges>
 
 namespace pf::ui::ig {
@@ -20,9 +21,10 @@ namespace pf::ui::ig {
  * Editor holds the provided range as a reference.
  *
  * @todo: more options
+ * @todo: change this so it's not templated - use std::span<std::byte> to pass data
  */
 template<std::ranges::contiguous_range R>
-class MemoryEditor : public ItemElement {
+class MemoryEditor : public ItemElement, public AllColorCustomizable, public AllStyleCustomizable {
  public:
   MemoryEditor(const std::string &elementName, R &data) : ItemElement(elementName), range(data) {}
 
@@ -72,6 +74,8 @@ class MemoryEditor : public ItemElement {
 
  protected:
   void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     memoryEditor.DrawContents(std::ranges::data(range),
                               std::ranges::size(range) * sizeof(std::ranges::range_value_t<R>));
   }

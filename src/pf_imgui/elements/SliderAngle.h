@@ -22,12 +22,19 @@ namespace pf::ui::ig {
  *
  * Angles are in radians.
  */
-class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
-                                    public Labellable,
-                                    public ValueObservable<float>,
-                                    public Savable,
-                                    public DragSource<float>,
-                                    public DropTarget<float> {
+class PF_IMGUI_EXPORT SliderAngle
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<float>,
+      public Savable,
+      public DragSource<float>,
+      public DropTarget<float>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
+                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
+                               style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct SliderAngle.

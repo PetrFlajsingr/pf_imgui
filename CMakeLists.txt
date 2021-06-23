@@ -7,10 +7,10 @@ HunterGate(
 )
 
 project(pf_imgui
-        VERSION 0.4.2)
+        VERSION 0.6.0)
 
 set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
-set(CPM_DOWNLOAD_VERSION 0.27.4)
+set(CPM_DOWNLOAD_VERSION 0.32.2)
 
 if (NOT (EXISTS ${CPM_DOWNLOAD_LOCATION} AND CPM_VERSION STREQUAL CPM_DOWNLOAD_VERSION))
     message(STATUS "Downloading CPM.cmake")
@@ -24,6 +24,12 @@ option(ENABLE_STACKTRACE "enable stacktrace in exceptions" OFF)
 
 if (ENABLE_STACKTRACE)
     add_compile_definitions(STACKTRACE_ENABLE)
+endif ()
+
+option(ENABLE_STYLES "enable style settings for each element" OFF)
+
+if (ENABLE_STYLES)
+    add_compile_definitions(PF_IMGUI_ENABLE_STYLES)
 endif ()
 
 
@@ -80,6 +86,12 @@ CPMAddPackage(
         NAME StaticTypeInfo
         GIT_TAG v1.3.1
         GIT_REPOSITORY https://github.com/TheLartians/StaticTypeInfo
+)
+
+CPMAddPackage(
+        NAME magic_enum
+        GITHUB_REPOSITORY Neargye/magic_enum
+        GIT_TAG v0.6.6
 )
 
 include_directories(src/include/implot)
@@ -172,6 +184,7 @@ set(SOURCES
         src/pf_imgui/elements/PopupMenu.cpp
         src/pf_imgui/FontManager.cpp
         src/pf_imgui/layouts/AnchorLayout.cpp
+        src/pf_imgui/details/template_instantiations.cpp
         )
 
 set(INCLUDES
@@ -285,7 +298,10 @@ set(INCLUDES
         src/pf_imgui/elements/PopupMenu.h
         src/pf_imgui/icons.h
         src/pf_imgui/FontManager.h
-        src/pf_imgui/layouts/AnchorLayout.h)
+        src/pf_imgui/layouts/AnchorLayout.h
+        src/pf_imgui/interface/RenderablesContainer.h
+        src/pf_imgui/styles/enums.h
+        src/pf_imgui/interface/Customizable.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -329,7 +345,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgInspect>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiIcons>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
-target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo)
+target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
