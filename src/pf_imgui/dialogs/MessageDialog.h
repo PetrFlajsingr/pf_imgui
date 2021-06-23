@@ -64,5 +64,7 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
   std::function<bool(ButtonTypes)> dialogDone;
 };
 
+extern template class MessageDialog<MessageButtons>;
+
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_DIALOGS_MESSAGEDIALOG_H

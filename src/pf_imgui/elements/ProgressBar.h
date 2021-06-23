@@ -17,7 +17,6 @@
 #include <string>
 
 namespace pf::ui::ig {
-
 /**
  * Required operations for type to be usable as ProgressBar value.
  * @tparam T
@@ -136,5 +135,7 @@ class PF_IMGUI_EXPORT ProgressBar
   T min;
   T max;
 };
+extern template class ProgressBar<float>;
+extern template class ProgressBar<int>;
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_PROGRESSBAR_H

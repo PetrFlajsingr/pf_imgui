@@ -19,7 +19,6 @@
 #include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {
-
 /**
  * @brief Slider with 3D space.
  * @tparam T underlying type
@@ -89,6 +88,7 @@ class PF_IMGUI_EXPORT Slider3D
   glm::vec2 extremesY;
   glm::vec2 extremesZ;
 };
+extern template class Slider3D<float>;
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ELEMENTS_SLIDER3D_H

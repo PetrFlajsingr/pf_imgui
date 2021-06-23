@@ -189,5 +189,14 @@ class PF_IMGUI_EXPORT Slider
   MinMaxType max;
   std::string format;
 };
+
+extern template class Slider<int>;
+extern template class Slider<glm::ivec2>;
+extern template class Slider<glm::ivec3>;
+extern template class Slider<glm::ivec4>;
+extern template class Slider<float>;
+extern template class Slider<glm::vec2>;
+extern template class Slider<glm::vec3>;
+extern template class Slider<glm::vec4>;
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_SLIDER_H

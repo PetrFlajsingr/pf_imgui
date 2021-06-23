@@ -139,7 +139,8 @@ class PF_IMGUI_EXPORT Input
       public DropTarget<T>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground, style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+                               style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
   details::InputData<details::InputUnderlyingType<T>> data;
 
@@ -280,6 +281,16 @@ class PF_IMGUI_EXPORT Input
  private:
   std::string format;
 };
+
+extern template class Input<float>;
+extern template class Input<glm::vec2>;
+extern template class Input<glm::vec3>;
+extern template class Input<glm::vec4>;
+extern template class Input<double>;
+extern template class Input<int>;
+extern template class Input<glm::ivec2>;
+extern template class Input<glm::ivec3>;
+extern template class Input<glm::ivec4>;
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ELEMENTS_INPUT_H
