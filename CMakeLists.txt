@@ -184,6 +184,7 @@ set(SOURCES
         src/pf_imgui/elements/PopupMenu.cpp
         src/pf_imgui/FontManager.cpp
         src/pf_imgui/layouts/AnchorLayout.cpp
+        src/pf_imgui/details/template_instantiations.cpp
         )
 
 set(INCLUDES
