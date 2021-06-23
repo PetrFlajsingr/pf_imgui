@@ -16,7 +16,6 @@
 #include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {
-
 /**
  * @brief Spinner for numeric types.
  * @tparam T inner type
@@ -94,6 +93,8 @@ class SpinInput
   T min;
   T max;
 };
+extern template class SpinInput<int>;
+extern template class SpinInput<float>;
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ELEMENTS_SPININPUT_H

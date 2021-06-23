@@ -27,6 +27,7 @@
 #include <utility>
 
 namespace pf::ui::ig {
+
 namespace details {
 /**
  * Types with float as underlying value.
@@ -120,7 +121,7 @@ class PF_IMGUI_EXPORT DragInput
    * Set movement speed.
    * @param speed new speed
    */
-  void setSpeed(ParamType speed) { DragInput::speed = speed; }
+  void setSpeed(ParamType newSpeed) { speed = newSpeed; }
   /**
    * Get min drag value.
    * @return min drag value
@@ -130,7 +131,7 @@ class PF_IMGUI_EXPORT DragInput
    * Set min drag value.
    * @param min new min drag value
    */
-  void setMin(ParamType min) { DragInput::min = min; }
+  void setMin(ParamType newMin) { min = newMin; }
   /**
    * Get max drag value.
    * @return max drag value
@@ -140,7 +141,7 @@ class PF_IMGUI_EXPORT DragInput
    * Set max drag value.
    * @param max new min drag value
    */
-  void setMax(ParamType max) { DragInput::max = max; }
+  void setMax(ParamType newMax) { max = newMax; }
 
  protected:
   void unserialize_impl(const toml::table &src) override {
@@ -201,7 +202,7 @@ class PF_IMGUI_EXPORT DragInput
     }
     if constexpr (std::same_as<T, math::Range<int>>) {
       valueChanged =
-          ImGui::DragIntRange2(getLabel().c_str(), reinterpret_cast<int *>(address), speed, min, max, format.c_str());
+          ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max, format.c_str());
     }
     if constexpr (std::same_as<T, math::Range<float>>) {
       valueChanged =
@@ -221,5 +222,16 @@ class PF_IMGUI_EXPORT DragInput
   ParamType max;
   std::string format;
 };
+
+extern template class DragInput<float>;
+extern template class DragInput<glm::vec2>;
+extern template class DragInput<glm::vec3>;
+extern template class DragInput<glm::vec4>;
+extern template class DragInput<math::Range<float>>;
+extern template class DragInput<int>;
+extern template class DragInput<glm::ivec2>;
+extern template class DragInput<glm::ivec3>;
+extern template class DragInput<glm::ivec4>;
+extern template class DragInput<math::Range<int>>;
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_DRAGINPUT_H

@@ -97,9 +97,9 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   void setSelectedItem(T &itemToSelect) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
-              filteredItems, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
-          iter != filteredItems.end()) {
-        const auto index = std::distance(filteredItems.begin(), iter);
+              items, [&itemToSelect](const auto &item) { return item.first == itemToSelect; });
+          iter != items.end()) {
+        const auto index = std::distance(items.begin(), iter);
         setSelectedItemByIndex(index);
       }
     } else {
@@ -113,7 +113,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second == itemAsString; });
+            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second->getLabel() == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       setSelectedItemByIndex(index);
@@ -190,6 +190,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
  private:
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
 };
+
+extern template class Combobox<std::string>;
 
 }// namespace pf::ui::ig
 
