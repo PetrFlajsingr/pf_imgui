@@ -33,7 +33,7 @@ sliderTarget.setDropAllowed(true);
 Only the default font is created upon `ImGuiInterface` creation. You can call its constructor with `IconPack` enum to add support for icons. These are used as follows:
 ```cpp
 // imgui created with IconPack::ForkAwesome
-imgui->createChild<Text>("text_id", ICON_FK_FILE_O " Open file");
+window.createChild<Text>("text_id", ICON_FK_FILE_O " Open file");
 ```
 
 New fonts can be loaded via `FontManager`:
@@ -141,6 +141,14 @@ auto &checkbox = imgui->createChild<Checkbox>("id", "Checkbox");
 checkbox.addValueListener([](bool isChecked){});
 // ...
 checkbox.setValue(false);
+```
+
+## Decorators
+### WidthDecorator
+This decorator can be applied to elements derived from `ItemElement` to control their width.
+```cpp
+auto &inputText = imgui->createChild<WidthDecorator<InputText>>("id", Width::Auto(), "Text");
+inputText.setWidth(100);
 ```
 
 ## Dialogs
@@ -261,4 +269,64 @@ auto &button = window.createChild<Bullet<Button>>("button_id", "Click me");
 ```
 ![img.png](img/bullet_button.png)
 
+### Checkbox
+```cpp
+auto &checkbox = window.createChild<Checkbox>("checkbox_id", "Check me", false);
+checkbox.addValueListener([](bool selected) {
+  print("Selected: {}", selected);
+});
+```
+![img.png](img/checkbox.png)
+
+### ColorChooser
+For selection of colors. It supports 3 or 4 component colors and there are two types available:
+* `ColorChooserType::Edit` - slider for each component
+* `ColorChooserType::Picker` - slider for each component and a paletter
+![img.png](img/colorchooser.png)
+  
+
+TODO:
+### CustomCombobox
+### Combobox
+### CustomListbox
+### Listbox
+### DragInput
+### FlameGraph
+### Group
+### Image
+### Input
+### InputText
+### MarkdownText
+### Memo
+### MemoryEditor
+### Menus
+#### details
+### ProgressBar
+### RadioButton/group
+### Range2D
+### Selectable
+### Separator
+### Slider
+### Slider2D
+### Slider3D
+### SliderAngle
+### VerticalSlider
+### SpinInput
+### TabBar
+### Table
+### StringTable
+### Text
+### Tooltip
+### Tree
+
+
+## Plots
+
+
 ## Layouts
+### AbsoluteLayout
+### AnchorLayout
+### BoxLayout
+### GridLayout
+### StackedLayout
+### StretchLayout
