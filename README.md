@@ -17,6 +17,133 @@ In these examples `imgui` is an instance of `std::unique_ptr<ImGuiInterface>`. E
 ### ImGuiInterface
 `ImGuiInterface` needs to be subclassed with a custom rendering backend. It must also provide functionality to update font atlas when requested. This request is marked via a `protected` member variable `shouldUpdateFontAtlas`.
 
+## Common interfaces
+All of the functions which register an observer return an instance of `Subscription` which can be used to cancel the observer.
+### Drag and drop
+Many elements provide drag and drop capabilities. For now, elements can only accept a payload of the same type as the source.
+```cpp
+auto &sliderSource = imgui->createChild<Slider<float>>(...);
+auto &sliderTarget = imgui->createChild<Slider<float>>(...);
+sliderSource.setDragAllowed(true);
+sliderSource.setDragTooltip("Value: {}"); // if the stored value type is pf::ToStringConvertible, the {} will be replaced with its string representation
+sliderTarget.setDropAllowed(true);
+```
+
+### Fonts
+Only the default font is created upon `ImGuiInterface` creation. You can call its constructor with `IconPack` enum to add support for icons. These are used as follows:
+```cpp
+// imgui created with IconPack::ForkAwesome
+imgui->createChild<Text>("text_id", ICON_FK_FILE_O " Open file");
+```
+
+New fonts can be loaded via `FontManager`:
+```cpp
+auto fontBuilder = imgui->getFontManager().fontBuilder("font name", "path/to/ttf/file");
+auto newFont = fontBuilder
+                  .setFontSize(16)
+                  .addSubfont("path/to/ttf/file") // this allows you to add custom fonts which will be baked inside the master one
+                    .setGlyphRange({0xFFFF, 0xFFFF}) // range which will get replaced in the master font
+                  .endSubfont();
+                  .build();
+```
+
+If a font is set to an element it'll be used in its children as well, unless you explicitly set a different font for them.
+
+```cpp
+auto font = imgui->getFontManager().fontByName("arial11");
+if (font.has_value()) {
+  myTextElement.setFont(*font);
+}
+```
+
+### Clickable
+An element which is derived from clickable allows you to add an observer to its click event.
+```cpp
+auto &button = window.createChild<Button>("button_id", "Click me");
+auto subscription = button.addClickListener([] {
+  print("button clicked");
+});
+// ...
+if (something) {
+  subscription.unsubscribe(); // cancel the observer
+}
+```
+
+### Collapsible
+Elements derived from this interface allow itself to be collapsed. You can also observe this event.
+```cpp
+auto &window = imgui->createWindow("window_id", "Window name");
+// enables a button to collapse the window, clicking the button makes it collapse and the following callback is called
+window.setCollapsible(true); 
+window.addCollapseListener([](bool collapsed) { 
+  print("Window collapsed: {}", collapsed); 
+});
+// ...
+window.setCollapsed(true);
+```
+
+### Customizable
+This interface allows its derived classes to apply certain style/color changes. You can see which styles/colors can be modified in the base class list of the element you are to use.
+```cpp
+auto &button = window.createChild<Button>("button_id", "Click me");
+button.setColor<styles::ColorOf::Button>(ImVec4{1, 0, 0, 1});
+button.setColor<styles::ColorOf::ButtonHovered>(ImVec4{0, 1, 0, 1});
+```
+
+### ItemElement
+ItemElement is an element which can receive focus and hover events. It can also have a tooltip and popup menu.
+```cpp
+auto &button = window.createChild<Button>("button_id", "Click me");
+button.setTooltip("This is a button"); // create a simple text tooltip
+button.createTooltip().createChild<Image>(...); // create a tooltip with an image
+auto &buttonPopupMenu = button.createPopupMenu();
+buttonPopupMenu.addButonItem("item1", "Remove");
+buttonPopupMenu.addButonItem("item2", "Duplicate");
+buttonPopupMenu.addCheckboxItem("item3", "Enabled");
+
+button.addFocusListener([] (bool isFocused) {});
+button.addHoverListener([] (bool isHovered) {});
+```
+
+### Labellable
+An element which provides some sort of label.
+```cpp
+auto &button = window.createChild<Button>("button_id", "THIS IS A LABEL");
+button.setLabel("NEW LABEL");
+```
+
+### Positionable
+Elements deriving from this interface provide an observable interface for their position. You can also change their position programmatically.
+```cpp
+auto &window = imgui->createWindow("window_id", "Window name");
+window.addPositionListener([](ImVec2 newPosition));
+window.setPosition(ImVec2{100, 100});
+```
+
+### Resizable
+These elements can have both their width and height controlled. Not many elements can actually provide this capability.
+```cpp
+auto &window = imgui->createWindow("window_id", "Window name");
+window.addSizeListener([] (Size newSize) {});
+window.setSize(Size{Width::Auto(), 100});
+```
+
+### Savable
+Elements derived from this interface can be serialized to `toml` (and deserialized from it as well). This is used to save their state to a config file.
+```cpp
+auto &checkbox = imgui->createChild<Checkbox>("id", "Checkbox", Checkbox::Type::Toggle, false, Persistent::Yes);
+```
+
+### ValueObservable
+This interface is being derived from in each element, which holds an inner value.
+```cpp
+auto &checkbox = imgui->createChild<Checkbox>("id", "Checkbox");
+checkbox.addValueListener([](bool isChecked){});
+// ...
+checkbox.setValue(false);
+```
+
+## Dialogs
 ### Window
 ```cpp
 auto &window = imgui->createWindow("window_id", "Window name");
@@ -117,6 +244,7 @@ imgui->openFileDialog("Title",
 ```
 ![img.png](img/filedialog.png)
 
+## Elements
 ### Button
 ```cpp
 auto &button = window.createChild<Button>("button_id", "Click me");
@@ -132,3 +260,5 @@ A CRTP decorator which adds a bullet to the left of the inner element.
 auto &button = window.createChild<Bullet<Button>>("button_id", "Click me");
 ```
 ![img.png](img/bullet_button.png)
+
+## Layouts
