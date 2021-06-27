@@ -1,6 +1,9 @@
 #ifndef DEAT_WIDGETS_GUARD
 #define DEAT_WIDGETS_GUARD
 #include <imgui.h>
+#ifndef IMGUI_DEFINE_MATH_OPERATORS
+#define IMGUI_DEFINE_MATH_OPERATORS
+#endif
 
 #include <imgui_internal.h>
 

@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param flags
    * @param tomlConfig config containing data of Savable elements
    */
-  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig,
+  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
                           const std::filesystem::path &iconFontDirectory = ".",
                           Flags<IconPack> enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
 

@@ -101,6 +101,7 @@ ImGuiWindowFlags Window::createWindowFlags() {
   ImGuiWindowFlags result = hasMenuBar() ? ImGuiWindowFlags_MenuBar : ImGuiWindowFlags{};
   if (!isCollapsible()) { result |= ImGuiWindowFlags_NoCollapse; }
   if (getLabel().empty()) { result |= ImGuiWindowFlags_NoTitleBar; }
+  if (!isDockArea) { result |= ImGuiWindowFlags_NoDocking; }
   return result;
 }
 
@@ -126,5 +127,7 @@ bool Window::isCloseable() const { return closeable; }
 void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 void Window::setFont(ImFont *fontPtr) { font = fontPtr; }
+bool Window::isDockable() const { return isDockArea; }
+void Window::setIsDockable(bool dockable) { isDockArea = dockable; }
 
 }// namespace pf::ui::ig

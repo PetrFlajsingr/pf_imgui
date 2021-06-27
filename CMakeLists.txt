@@ -185,6 +185,8 @@ set(SOURCES
         src/pf_imgui/FontManager.cpp
         src/pf_imgui/layouts/AnchorLayout.cpp
         src/pf_imgui/details/template_instantiations.cpp
+        src/pf_imgui/elements/DockSpace.cpp
+
         )
 
 set(INCLUDES
@@ -301,7 +303,9 @@ set(INCLUDES
         src/pf_imgui/layouts/AnchorLayout.h
         src/pf_imgui/interface/RenderablesContainer.h
         src/pf_imgui/styles/enums.h
-        src/pf_imgui/interface/Customizable.h)
+        src/pf_imgui/interface/Customizable.h
+        src/pf_imgui/elements/DockSpace.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 

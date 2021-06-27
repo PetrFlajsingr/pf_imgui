@@ -25,6 +25,9 @@ namespace pf::ui::ig {
  * @brief Main building piece for UI. Persistent element container with plenty of controls.
  *
  * May have a menu bar for additional controls.
+ *
+ * @TODO: ImGui::GetWindowDockId()-> need to have a getter for that and somehow change that to Dock name
+ * @TODO: ImGui::IsWindowDocked()
  */
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
@@ -103,6 +106,18 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setPosition(ImVec2 pos) override;
 
   /**
+   *
+   * @return true if the window serves as a docking area and can be docked itself
+   */
+  [[nodiscard]] bool isDockable() const;
+
+  /**
+   * If true the window can be used as a dock for other windows or can be docked itself.
+   * @param isArea
+   */
+  void setIsDockable(bool dockable);
+
+  /**
    * Check if the Window can be closed with an X button in top right corner.
    * @return
    */
@@ -139,6 +154,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   std::optional<Size> maxSizeConstraint = std::nullopt;
   bool closeable = false;
   Observable_impl<> closeObservableImpl;
+  bool isDockArea = false;
 
   bool firstPass = true;
 
