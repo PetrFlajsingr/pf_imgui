@@ -22,7 +22,7 @@ void Checkbox::renderImpl() {
   switch (type) {
     case Type::Checkbox: valueChanged = ImGui::Checkbox(getLabel().c_str(), getValueAddress()); break;
     case Type::Toggle:
-      ImGui::Text(getLabel().c_str());
+      ImGui::Text("%s", getLabel().c_str());
       ImGui::SameLine();
       valueChanged = ToggleButton(getLabel().c_str(), getValueAddress());
       break;

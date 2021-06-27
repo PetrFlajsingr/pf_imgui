@@ -2257,7 +2257,7 @@ bool Slider2DScalar(char const *pLabel, ImGuiDataType data_type, void *p_valueX,
   ImVec2 vPos = ImGui::GetCursorScreenPos();
   ImRect oRect(vPos + vHeightOffset, vPos + vSize + vHeightOffset);
 
-  ImGui::Text(pLabel);
+  ImGui::Text("%s", pLabel);
 
   ImGui::PushID(iID);
 
@@ -2480,7 +2480,7 @@ bool Slider2DScalar(char const *pLabel, ImGuiDataType data_type, void *p_valueX,
   ImVec2 vPos = ImGui::GetCursorScreenPos();
   ImRect oRect(vPos + vHeightOffset, vPos + vSize + vHeightOffset);
 
-  ImGui::Text(pLabel);
+  ImGui::Text("%s", pLabel);
 
   ImGui::PushID(iID);
 
@@ -2735,7 +2735,7 @@ bool SliderScalar3D(char const *pLabel, float *pValueX, float *pValueY, float *p
   ImVec2 vPos = ImGui::GetCursorScreenPos();
   ImRect oRect(vPos + vHeightOffset, vPos + vSize + vHeightOffset);
 
-  ImGui::Text(pLabel);
+  ImGui::Text("%s", pLabel);
 
   ImGui::PushID(iID);
 
@@ -3021,7 +3021,7 @@ bool SliderScalar3D(char const *pLabel, float *pValueX, float *pValueY, float *p
   ImVec2 vPos = ImGui::GetCursorScreenPos();
   ImRect oRect(vPos + vHeightOffset, vPos + vSize + vHeightOffset);
 
-  ImGui::Text(pLabel);
+  ImGui::Text("%s", pLabel);
 
   ImGui::PushID(iID);
 
@@ -3718,7 +3718,7 @@ void HueSelectorEx(char const *label, ImVec2 const size, float *hueCenter, float
   ImGuiID const iID = ImGui::GetID(label);
   ImGui::PushID(iID);
 
-  ImGui::Text(label);
+  ImGui::Text("%s", label);
   ImVec2 curPos = ImGui::GetCursorScreenPos();
   ImDrawList *pDrawList = ImGui::GetWindowDrawList();
   DrawHueBand(pDrawList, curPos, size, division, alpha, 1.0f, offset);
