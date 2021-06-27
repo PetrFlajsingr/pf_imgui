@@ -104,15 +104,15 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   /**
    *
-   * @return true if the window serves as a docking area
+   * @return true if the window serves as a docking area and can be docked itself
    */
-  [[nodiscard]] bool isDockingArea() const;
+  [[nodiscard]] bool isDockable() const;
 
   /**
-   * If true the window can be used as a dock for other windows.
+   * If true the window can be used as a dock for other windows or can be docked itself.
    * @param isArea
    */
-  void setIsDockingArea(bool isArea);
+  void setIsDockable(bool dockable);
 
   /**
    * Check if the Window can be closed with an X button in top right corner.
