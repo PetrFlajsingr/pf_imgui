@@ -25,6 +25,9 @@ namespace pf::ui::ig {
  * @brief Main building piece for UI. Persistent element container with plenty of controls.
  *
  * May have a menu bar for additional controls.
+ *
+ * @TODO: ImGui::GetWindowDockId()-> need to have a getter for that and somehow change that to Dock name
+ * @TODO: ImGui::IsWindowDocked()
  */
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
