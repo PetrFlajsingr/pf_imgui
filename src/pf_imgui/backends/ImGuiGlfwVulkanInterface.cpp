@@ -7,16 +7,44 @@
 #include <include/backends/imgui_impl_vulkan.h>
 
 namespace pf::ui::ig {
+namespace details {
+void checkVkResult(VkResult err) {
+  if (err == 0) { return; }
+  if (err < 0) { throw std::runtime_error("Error: VkResult = " + std::to_string(err)); }
+}
+}// namespace details
+
 ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config)
     : ImGuiInterface(config.flags, std::move(config.config), config.enableMultiViewport, config.pathToIconFolder,
                      config.enabledIconPacks, config.defaultFontSize),
-      config(std::move(config)) {}
+      config(std::move(config)) {
+  setupDescriptorPool();
+  ImGui_ImplGlfw_InitForVulkan(config.handle, true);
+  auto init_info = ImGui_ImplVulkan_InitInfo();
+  init_info.Instance = config.instance;
+  init_info.PhysicalDevice = config.physicalDevice;
+  init_info.Device = config.device;
+  const auto graphFamilyIdx = findGraphicsFamilyIndex();
+  if (!graphFamilyIdx.has_value()) { throw std::runtime_error("Couldn't find graphics family queue index"); }
+  init_info.QueueFamily = *graphFamilyIdx;
+  init_info.Queue = config.presentQueue;
+  init_info.PipelineCache = VK_NULL_HANDLE;
+  init_info.DescriptorPool = descriptorPool;
+  init_info.Allocator = nullptr;
+  init_info.MinImageCount = config.swapchainImageCount;
+  init_info.ImageCount = config.swapchainImageCount;
+  init_info.CheckVkResultFn = details::checkVkResult;
+  ImGui_ImplVulkan_Init(&init_info, config.renderPass);
+
+  updateFonts();
+}
 
 ImGuiGlfwVulkanInterface::~ImGuiGlfwVulkanInterface() {
   vkDeviceWaitIdle(config.device);
   ImGui_ImplVulkan_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
+  vkDestroyDescriptorPool(config.device, descriptorPool, nullptr);
 }
 
 void ImGuiGlfwVulkanInterface::updateFonts() {
@@ -122,6 +150,30 @@ void ImGuiGlfwVulkanInterface::renderImpl() {
   if (hasMenuBar()) { menuBar->render(); }
   ImGuiInterface::renderImpl();
   renderDialogs();
+}
+void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
+  constexpr auto DESCRIPTOR_COUNT = 1000;
+  auto descPoolConfig = VkDescriptorPoolCreateInfo{};
+  descPoolConfig.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+  auto poolSizes = std::vector<VkDescriptorPoolSize>{};
+  poolSizes = {{VK_DESCRIPTOR_TYPE_SAMPLER, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, DESCRIPTOR_COUNT},
+               {VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, DESCRIPTOR_COUNT}};;
+  descPoolConfig.poolSizeCount = poolSizes.size();
+  descPoolConfig.pPoolSizes = poolSizes.data();
+  descPoolConfig.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
+  descPoolConfig.maxSets = DESCRIPTOR_COUNT * poolSizes.size();
+  if (vkCreateDescriptorPool(config.device, &descPoolConfig, nullptr, &descriptorPool) != VK_SUCCESS) {
+    throw std::runtime_error("failed to create descriptor pool!");
+  }
 }
 
 }// namespace pf::ui::ig

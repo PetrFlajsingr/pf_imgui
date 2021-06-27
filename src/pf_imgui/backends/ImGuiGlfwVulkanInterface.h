@@ -12,12 +12,15 @@
 
 namespace pf::ui::ig {
 struct ImGuiVulkanGlfwConfig {
+  VkInstance instance;
   VkPhysicalDevice physicalDevice;
   VkDevice device;
   VkRenderPass renderPass;
   VkSurfaceKHR surface;
   VkSwapchainKHR swapchain;
   VkQueue graphicsQueue;
+  VkQueue presentQueue;
+  std::uint32_t swapchainImageCount;
   GLFWwindow *handle;
   ImGuiConfigFlags flags = {};
   bool enableMultiViewport = false;
@@ -41,6 +44,7 @@ class ImGuiGlfwVulkanInterface : public ImGuiInterface {
  private:
   std::optional<std::uint32_t> findGraphicsFamilyIndex();
   void setupDescriptorPool();
+  VkDescriptorPool descriptorPool;
   ImGuiVulkanGlfwConfig config;
 };
 }// namespace pf::ui::ig
