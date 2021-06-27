@@ -103,6 +103,18 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setPosition(ImVec2 pos) override;
 
   /**
+   *
+   * @return true if the window serves as a docking area
+   */
+  [[nodiscard]] bool isDockingArea() const;
+
+  /**
+   * If true the window can be used as a dock for other windows.
+   * @param isArea
+   */
+  void setIsDockingArea(bool isArea);
+
+  /**
    * Check if the Window can be closed with an X button in top right corner.
    * @return
    */
@@ -139,6 +151,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   std::optional<Size> maxSizeConstraint = std::nullopt;
   bool closeable = false;
   Observable_impl<> closeObservableImpl;
+  bool isDockArea = false;
 
   bool firstPass = true;
 
