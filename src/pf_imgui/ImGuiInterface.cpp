@@ -13,10 +13,11 @@
 
 namespace pf::ui::ig {
 
-ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig,
+ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
                                const std::filesystem::path &iconFontDirectory, Flags<IconPack> enabledIconPacks,
                                float iconSize)
-    : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable)),
+    : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable
+                                                     | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0))),
       fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
