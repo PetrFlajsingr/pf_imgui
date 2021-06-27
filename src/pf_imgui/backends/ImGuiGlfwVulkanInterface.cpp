@@ -63,7 +63,8 @@ void ImGuiGlfwVulkanInterface::updateFonts() {
   auto cmdBufferConfig = VkCommandBufferAllocateInfo{};
   cmdBufferConfig.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
   cmdBufferConfig.commandBufferCount = 1;
-  cmdBufferConfig.level = VkCommandBufferLevel::VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+  cmdBufferConfig.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+  cmdBufferConfig.commandPool = commandPool;
   auto commandBuffer = VkCommandBuffer{};
   if (vkAllocateCommandBuffers(config.device, &cmdBufferConfig, &commandBuffer) != VK_SUCCESS) {
     throw std::runtime_error("failed to allocate command buffers!");
