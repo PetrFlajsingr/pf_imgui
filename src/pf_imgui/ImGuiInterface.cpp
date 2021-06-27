@@ -16,7 +16,7 @@ namespace pf::ui::ig {
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig,
                                const std::filesystem::path &iconFontDirectory, Flags<IconPack> enabledIconPacks,
                                float iconSize)
-    : Renderable("imgui_interface"), io(baseInit(flags)),
+    : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable)),
       fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
