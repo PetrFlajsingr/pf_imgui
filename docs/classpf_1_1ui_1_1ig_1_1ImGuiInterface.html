@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.5.1</span>
+   &#160;<span id="projectnumber">0.6.0</span>
    </div>
   </td>
  </tr>
@@ -86,8 +86,9 @@ Inheritance diagram for pf::ui::ig::ImGuiInterface:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpf_1_1ui_1_1ig_1_1ImGuiInterface__inherit__graph.png" border="0" usemap="#pf_1_1ui_1_1ig_1_1ImGuiInterface_inherit__map" alt="Inheritance graph"/></div>
 <map name="pf_1_1ui_1_1ig_1_1ImGuiInterface_inherit__map" id="pf_1_1ui_1_1ig_1_1ImGuiInterface_inherit__map">
-<area shape="rect" title="Root class of an entire UI tree. Provides an ability to create windows and dialogs." alt="" coords="5,80,184,107"/>
-<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="17,5,173,32"/>
+<area shape="rect" title="Root class of an entire UI tree. Provides an ability to create windows and dialogs." alt="" coords="14,80,193,107"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1ImGuiGlfwVulkanInterface.html" title=" " alt="" coords="5,155,201,196"/>
+<area shape="rect" href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="25,5,181,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -102,8 +103,8 @@ Collaboration diagram for pf::ui::ig::ImGuiInterface:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a262d994a37a66e566e399801df2959d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a262d994a37a66e566e399801df2959d4">ImGuiInterface</a> (ImGuiConfigFlags flags, toml::table tomlConfig, const std::filesystem::path &amp;iconFontDirectory=&quot;.&quot;, Flags&lt; IconPack &gt; enabledIconPacks=Flags&lt; IconPack &gt;{}, float iconSize=16.f)</td></tr>
-<tr class="separator:a262d994a37a66e566e399801df2959d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69b2d319b9f984eecbdcb56e385d0742"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a69b2d319b9f984eecbdcb56e385d0742">ImGuiInterface</a> (ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport, const std::filesystem::path &amp;iconFontDirectory=&quot;.&quot;, Flags&lt; IconPack &gt; enabledIconPacks=Flags&lt; IconPack &gt;{}, float iconSize=16.f)</td></tr>
+<tr class="separator:a69b2d319b9f984eecbdcb56e385d0742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedb353585a211cf60c16ae23c2a27e3f"><td class="memItemLeft" align="right" valign="top">ImGuiIO &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#aedb353585a211cf60c16ae23c2a27e3f">getIo</a> () const</td></tr>
 <tr class="separator:aedb353585a211cf60c16ae23c2a27e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae50e0751f185d2eced28d3484c2a6419"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1ModalDialog.html">ModalDialog</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#ae50e0751f185d2eced28d3484c2a6419">createDialog</a> (const std::string &amp;elementName, const std::string &amp;caption)</td></tr>
@@ -213,8 +214,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>FontManager</b></td>
 <p class="enddd">: styles </p>
 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a262d994a37a66e566e399801df2959d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a262d994a37a66e566e399801df2959d4">&#9670;&nbsp;</a></span>ImGuiInterface()</h2>
+<a id="a69b2d319b9f984eecbdcb56e385d0742"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69b2d319b9f984eecbdcb56e385d0742">&#9670;&nbsp;</a></span>ImGuiInterface()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,6 +234,12 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>FontManager</b></td>
           <td></td>
           <td class="paramtype">toml::table&#160;</td>
           <td class="paramname"><em>tomlConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enableMultiViewport</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1004,6 +1011,8 @@ template&lt;typename ButtonTypes  = MessageButtons&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Update fonts atlas using your backend. </p>
+
+<p>Implemented in <a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiGlfwVulkanInterface.html#a3172a9472b746b24c14d735eca493cf4">pf::ui::ig::ImGuiGlfwVulkanInterface</a>.</p>
 
 </div>
 </div>

@@ -11,6 +11,7 @@
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Focusable.h>
@@ -140,6 +141,18 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   }
 
   /**
+   *
+   * @return true if this window is docked in some sort of dockable area
+   */
+  [[nodiscard]] bool isDocked() const;
+
+  /**
+   * Move the window to a dockable area in next frame.
+   * @param dockName name of the area
+   */
+  void moveToDock(DockSpace::Id dockSpaceId);
+
+  /**
    * Set font for Window and all elements inside - except for those that have their own font.
    * @param fontPtr new font
    */
@@ -160,6 +173,9 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   ImGuiWindowFlags createWindowFlags();
   ImFont *font = nullptr;
+
+  std::optional<ImGuiID> dockInto = std::nullopt;
+  bool isWindowDocked = false;
 };
 
 }// namespace pf::ui::ig

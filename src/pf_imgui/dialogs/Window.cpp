@@ -24,6 +24,7 @@ void Window::renderImpl() {
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
+    isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
       if (getSize() != Size::Auto()) { setSize(getSize()); }
@@ -77,6 +78,10 @@ void Window::render() {
         minSizeConstraint.value_or(Size{0, 0}).asImVec(),
         maxSizeConstraint.value_or(Size{std::numeric_limits<uint32_t>::max(), std::numeric_limits<uint32_t>::max()})
             .asImVec());
+    if (dockInto.has_value()) {
+      ImGui::SetNextWindowDockID(*dockInto);
+      dockInto = std::nullopt;
+    }
     renderImpl();
     if (font != nullptr) { ImGui::PopFont(); }
   }
@@ -129,5 +134,11 @@ void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 void Window::setFont(ImFont *fontPtr) { font = fontPtr; }
 bool Window::isDockable() const { return isDockArea; }
 void Window::setIsDockable(bool dockable) { isDockArea = dockable; }
+bool Window::isDocked() const {
+  return isWindowDocked;
+}
+void Window::moveToDock(DockSpace::Id dockSpaceId) {
+  dockInto = dockSpaceId;
+}
 
 }// namespace pf::ui::ig

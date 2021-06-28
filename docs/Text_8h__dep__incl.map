@@ -1,10 +1,11 @@
 <map id="src/pf_imgui/elements/Text.h" name="src/pf_imgui/elements/Text.h">
-<area shape="rect" id="node1" title="Text element." alt="" coords="244,5,411,47"/>
-<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="99,184,252,225"/>
-<area shape="rect" id="node5" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="182,437,361,464"/>
-<area shape="rect" id="node7" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="276,184,429,225"/>
-<area shape="rect" id="node8" href="$InputText_8h.html" title="InputText element." alt="" coords="92,95,259,136"/>
-<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="116,273,331,300"/>
-<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="43,348,209,389"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="233,348,379,389"/>
+<area shape="rect" id="node1" title="Text element." alt="" coords="428,5,595,47"/>
+<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="410,184,563,225"/>
+<area shape="rect" id="node6" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="493,437,672,464"/>
+<area shape="rect" id="node8" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="232,184,386,225"/>
+<area shape="rect" id="node9" href="$InputText_8h.html" title="InputText element." alt="" coords="490,95,656,136"/>
+<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="235,273,450,300"/>
+<area shape="rect" id="node4" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="34,348,245,389"/>
+<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="439,348,606,389"/>
+<area shape="rect" id="node7" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="270,348,415,389"/>
 </map>

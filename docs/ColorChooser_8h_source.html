@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.5.1</span>
+   &#160;<span id="projectnumber">0.6.0</span>
    </div>
   </td>
  </tr>
@@ -164,8 +164,13 @@ $(function() {
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;glm::vec3, glm::vec4&gt; T&gt;</div>
 <div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="ColorChooser_8h.html#a80d8616558eabe9179ee04fef3ad913c">  128</a></span>&#160;<span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorEdit</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorChooser&lt;ColorChooserType::Edit, T&gt;</a>;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorChooser&lt;ColorChooserType::Edit, glm::vec3&gt;</a>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorChooser&lt;ColorChooserType::Edit, glm::vec4&gt;</a>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorChooser&lt;ColorChooserType::Picker, glm::vec3&gt;</a>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1ColorChooser.html">ColorChooser&lt;ColorChooserType::Picker, glm::vec4&gt;</a>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_ELEMENTS_COLORCHOOSER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorChooser_html_adda146c3db9fcd3389b1af14751a5344"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorChooser.html#adda146c3db9fcd3389b1af14751a5344">pf::ui::ig::ColorChooser::ColorChooser</a></div><div class="ttdeci">ColorChooser(const std::string &amp;elementName, const std::string &amp;label, T value=T{}, Persistent persistent=Persistent::No)</div><div class="ttdef"><b>Definition:</b> ColorChooser.h:58</div></div>
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>

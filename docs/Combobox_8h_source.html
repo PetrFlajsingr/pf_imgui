@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.5.1</span>
+   &#160;<span id="projectnumber">0.6.0</span>
    </div>
   </td>
  </tr>
@@ -136,9 +136,9 @@ $(function() {
 <div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a7868a8ce82f5dc9458f58732da56bb5c">   97</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a7868a8ce82f5dc9458f58732da56bb5c">setSelectedItem</a>(T &amp;itemToSelect) {</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> constexpr (std::equality_comparable&lt;T&gt;) {</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter = std::ranges::find_if(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;              filteredItems, [&amp;itemToSelect](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item-&gt;first == itemToSelect; });</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          iter != filteredItems.end()) {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> index = std::distance(filteredItems.begin(), iter);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;              items, [&amp;itemToSelect](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item.first == itemToSelect; });</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          iter != items.end()) {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> index = std::distance(items.begin(), iter);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        setSelectedItemByIndex(index);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    } <span class="keywordflow">else</span> {</div>
@@ -148,7 +148,7 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  }</div>
 <div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a3bbfd08c1f194d73ddb9c7d7f38a740c">  114</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a3bbfd08c1f194d73ddb9c7d7f38a740c">setSelectedItem</a>(<span class="keyword">const</span> std::string &amp;itemAsString) {</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter =</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            std::ranges::find_if(items, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item.second == itemAsString; });</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            std::ranges::find_if(items, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item.second-&gt;getLabel() == itemAsString; });</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        iter != items.end()) {</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> index = std::distance(items.begin(), iter);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      setSelectedItemByIndex(index);</div>
@@ -219,9 +219,11 @@ $(function() {
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  std::optional&lt;unsigned int&gt; selectedItemIndex = std::nullopt;</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;};</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>Combobox&lt;std::string&gt;;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;}<span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="preprocessor">#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Selectable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Selectable.html">pf::ui::ig::Selectable</a></div><div class="ttdoc">A labeled area which can be de/selected.</div><div class="ttdef"><b>Definition:</b> Selectable.h:24</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleCustomizable_html_abf5429b381aecff52fae22bb516719cb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#abf5429b381aecff52fae22bb516719cb">pf::ui::ig::StyleCustomizable::setStyleStack</a></div><div class="ttdeci">RAII setStyleStack()</div><div class="ttdef"><b>Definition:</b> Customizable.h:154</div></div>

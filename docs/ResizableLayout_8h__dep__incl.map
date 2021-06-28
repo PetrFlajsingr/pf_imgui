@@ -1,17 +1,18 @@
 <map id="src/pf_imgui/layouts/ResizableLayout.h" name="src/pf_imgui/layouts/ResizableLayout.h">
 <area shape="rect" id="node1" title="Base class for layouts which provide resizing." alt="" coords="452,5,607,47"/>
 <area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="5,95,160,136"/>
-<area shape="rect" id="node5" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="720,95,875,136"/>
-<area shape="rect" id="node12" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="184,95,339,136"/>
-<area shape="rect" id="node13" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="363,95,517,136"/>
-<area shape="rect" id="node14" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="541,95,696,136"/>
-<area shape="rect" id="node15" href="$AnchorLayout_8h.html" title="Layout where each element&#39;s size or position is automatically changed based on anchors." alt="" coords="899,95,1053,136"/>
-<area shape="rect" id="node3" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="348,184,503,225"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="576,452,755,479"/>
-<area shape="rect" id="node6" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="557,184,710,225"/>
-<area shape="rect" id="node10" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="734,184,887,225"/>
-<area shape="rect" id="node11" href="$Memo_8h.html" title="Memo element." alt="" coords="849,273,1015,315"/>
-<area shape="rect" id="node7" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="542,281,757,307"/>
-<area shape="rect" id="node8" href="$MarkdownText_8h_source.html" title=" " alt="" coords="437,363,603,404"/>
-<area shape="rect" id="node9" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="627,363,773,404"/>
+<area shape="rect" id="node5" href="$AnchorLayout_8h.html" title="Layout where each element&#39;s size or position is automatically changed based on anchors." alt="" coords="184,95,339,136"/>
+<area shape="rect" id="node6" href="$BoxLayout_8h.html" title="Layout boxing children in desired direction." alt="" coords="899,95,1053,136"/>
+<area shape="rect" id="node14" href="$GridLayout_8h.html" title="Layout dividing its area into a grid." alt="" coords="363,95,517,136"/>
+<area shape="rect" id="node15" href="$StackedLayout_8h.html" title="Layout providing switchable stacks." alt="" coords="541,95,696,136"/>
+<area shape="rect" id="node16" href="$StretchLayout_8h.html" title="Layout which stretches its child in desired direction." alt="" coords="720,95,875,136"/>
+<area shape="rect" id="node3" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="452,184,607,225"/>
+<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="884,452,1063,479"/>
+<area shape="rect" id="node7" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="810,184,963,225"/>
+<area shape="rect" id="node12" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="987,184,1141,225"/>
+<area shape="rect" id="node13" href="$Memo_8h.html" title="Memo element." alt="" coords="1157,273,1323,315"/>
+<area shape="rect" id="node8" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="779,281,994,307"/>
+<area shape="rect" id="node9" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="511,363,721,404"/>
+<area shape="rect" id="node10" href="$MarkdownText_8h_source.html" title=" " alt="" coords="745,363,911,404"/>
+<area shape="rect" id="node11" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="935,363,1081,404"/>
 </map>

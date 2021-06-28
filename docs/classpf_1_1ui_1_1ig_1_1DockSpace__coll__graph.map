@@ -1,0 +1,7 @@
+<map id="pf::ui::ig::DockSpace" name="pf::ui::ig::DockSpace">
+<area shape="rect" id="node1" title="An area to which dockable windows can be docked." alt="" coords="524,56,679,83"/>
+<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="275,5,411,32"/>
+<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="270,56,415,83"/>
+<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title=" " alt="" coords="209,107,476,163"/>
+</map>
