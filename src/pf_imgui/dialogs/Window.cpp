@@ -23,10 +23,6 @@ void Window::renderImpl() {
   auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
-  if (dockInto.has_value()) {
-    ImGui::SetNextWindowDockID(*dockInto);
-    dockInto = std::nullopt;
-  }
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
@@ -82,6 +78,10 @@ void Window::render() {
         minSizeConstraint.value_or(Size{0, 0}).asImVec(),
         maxSizeConstraint.value_or(Size{std::numeric_limits<uint32_t>::max(), std::numeric_limits<uint32_t>::max()})
             .asImVec());
+    if (dockInto.has_value()) {
+      ImGui::SetNextWindowDockID(*dockInto);
+      dockInto = std::nullopt;
+    }
     renderImpl();
     if (font != nullptr) { ImGui::PopFont(); }
   }
@@ -137,9 +137,8 @@ void Window::setIsDockable(bool dockable) { isDockArea = dockable; }
 bool Window::isDocked() const {
   return isWindowDocked;
 }
-void Window::moveToDock(const std::string &dockName) {
-  const auto dockId = ImGui::GetID(dockName.c_str());
-  dockInto = dockId;
+void Window::moveToDock(DockSpace::Id dockSpaceId) {
+  dockInto = dockSpaceId;
 }
 
 }// namespace pf::ui::ig
