@@ -1,0 +1,8 @@
+<map id="ImGuiViewportDataVulkan" name="ImGuiViewportDataVulkan">
+<area shape="rect" id="node1" title=" " alt="" coords="829,85,1024,112"/>
+<area shape="rect" id="node2" href="$structImGui__ImplVulkanH__Window.html" title=" " alt="" coords="473,56,684,83"/>
+<area shape="rect" id="node3" href="$structImGui__ImplVulkanH__FrameSemaphores.html" title=" " alt="" coords="5,5,287,32"/>
+<area shape="rect" id="node4" href="$structImGui__ImplVulkanH__Frame.html" title=" " alt="" coords="46,56,246,83"/>
+<area shape="rect" id="node5" href="$structImGui__ImplVulkanH__WindowRenderBuffers.html" title=" " alt="" coords="473,107,684,149"/>
+<area shape="rect" id="node6" href="$structImGui__ImplVulkanH__FrameRenderBuffers.html" title=" " alt="" coords="23,107,269,149"/>
+</map>

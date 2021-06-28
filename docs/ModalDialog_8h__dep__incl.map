@@ -1,9 +1,10 @@
 <map id="src/pf_imgui/dialogs/ModalDialog.h" name="src/pf_imgui/dialogs/ModalDialog.h">
-<area shape="rect" id="node1" title="Modal dialog built by a user." alt="" coords="138,5,291,47"/>
-<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="227,95,381,136"/>
-<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="197,184,411,211"/>
-<area shape="rect" id="node5" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,348,184,375"/>
-<area shape="rect" id="node7" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="50,95,203,136"/>
-<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="302,259,469,300"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="133,259,278,300"/>
+<area shape="rect" id="node1" title="Modal dialog built by a user." alt="" coords="416,5,569,47"/>
+<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="244,95,397,136"/>
+<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="271,184,485,211"/>
+<area shape="rect" id="node6" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="525,348,703,375"/>
+<area shape="rect" id="node8" href="$MessageDialog_8h.html" title="Simplified Dialog for informing a user and getting his response." alt="" coords="473,95,627,136"/>
+<area shape="rect" id="node4" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="175,259,386,300"/>
+<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="409,259,576,300"/>
+<area shape="rect" id="node7" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="5,259,151,300"/>
 </map>

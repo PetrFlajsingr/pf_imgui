@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.5.1</span>
+   &#160;<span id="projectnumber">0.6.0</span>
    </div>
   </td>
  </tr>
@@ -159,6 +159,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>cancelMaxSizeConstrai
 <tr class="separator:a8538078d1167e64b62c3fd438494fd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a330ab6e41b6e05e5cb380fc9ed73190b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html#a330ab6e41b6e05e5cb380fc9ed73190b">setPosition</a> (ImVec2 pos) override</td></tr>
 <tr class="separator:a330ab6e41b6e05e5cb380fc9ed73190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac108670da309e330554793ae9666ff4d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html#ac108670da309e330554793ae9666ff4d">isDockable</a> () const</td></tr>
+<tr class="separator:ac108670da309e330554793ae9666ff4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56be7e84899abd41957d8fbf4620e3ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html#a56be7e84899abd41957d8fbf4620e3ac">setIsDockable</a> (bool dockable)</td></tr>
+<tr class="separator:a56be7e84899abd41957d8fbf4620e3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7a1c10256a6f61fbeae7229c4adea0c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html#aa7a1c10256a6f61fbeae7229c4adea0c">isCloseable</a> () const</td></tr>
 <tr class="separator:aa7a1c10256a6f61fbeae7229c4adea0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9395bea715921c5c0c178a0c226205bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html#a9395bea715921c5c0c178a0c226205bc">setCloseable</a> (bool closeable)</td></tr>
@@ -337,7 +341,8 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main building piece for UI. Persistent element container with plenty of controls. </p>
-<p>May have a menu bar for additional controls. </p>
+<p>May have a menu bar for additional controls.</p>
+<p>@TODO: ImGui::GetWindowDockId()-&gt; need to have a getter for that and somehow change that to Dock name @TODO: ImGui::IsWindowDocked() </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9b6dd1606d333b1127c0b8f1575abd14"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b6dd1606d333b1127c0b8f1575abd14">&#9670;&nbsp;</a></span>Window() <span class="overload">[1/2]</span></h2>
@@ -555,6 +560,24 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac108670da309e330554793ae9666ff4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac108670da309e330554793ae9666ff4d">&#9670;&nbsp;</a></span>isDockable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pf::ui::ig::Window::isDockable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>true if the window serves as a docking area and can be docked itself </dd></dl>
+
+</div>
+</div>
 <a id="a91c63eb18cc1eab06f0da92dbd962258"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91c63eb18cc1eab06f0da92dbd962258">&#9670;&nbsp;</a></span>removeMenuBar()</h2>
 
@@ -736,6 +759,30 @@ Protected Member Functions</h2></td></tr>
 <p>Set font for <a class="el" href="classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls.">Window</a> and all elements inside - except for those that have their own font. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fontPtr</td><td>new font </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a56be7e84899abd41957d8fbf4620e3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56be7e84899abd41957d8fbf4620e3ac">&#9670;&nbsp;</a></span>setIsDockable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::Window::setIsDockable </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dockable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>If true the window can be used as a dock for other windows or can be docked itself. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isArea</td><td></td></tr>
   </table>
   </dd>
 </dl>

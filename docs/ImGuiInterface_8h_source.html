@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.5.1</span>
+   &#160;<span id="projectnumber">0.6.0</span>
    </div>
   </td>
  </tr>
@@ -97,7 +97,7 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">   44</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a>(ImGuiConfigFlags flags, toml::table tomlConfig,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a>(ImGuiConfigFlags flags, toml::table tomlConfig, <span class="keywordtype">bool</span> enableMultiViewport,</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                          <span class="keyword">const</span> std::filesystem::path &amp;iconFontDirectory = <span class="stringliteral">&quot;.&quot;</span>,</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                          Flags&lt;IconPack&gt; enabledIconPacks = Flags&lt;IconPack&gt;{}, <span class="keywordtype">float</span> iconSize = 16.f);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
@@ -215,7 +215,7 @@ $(function() {
 <div class="ttc" id="aWindow_8h_html"><div class="ttname"><a href="Window_8h.html">Window.h</a></div><div class="ttdoc">Dialog for building windows.</div></div>
 <div class="ttc" id="aenums_8h_html_a1a747318d9e6b20ef92792e0d3fd2ac1"><div class="ttname"><a href="enums_8h.html#a1a747318d9e6b20ef92792e0d3fd2ac1">pf::ui::ig::Modal</a></div><div class="ttdeci">Modal</div><div class="ttdef"><b>Definition:</b> enums.h:28</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a8149749a47c8c34d87c0c9f6009d0028"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a8149749a47c8c34d87c0c9f6009d0028">pf::ui::ig::ImGuiInterface::createMsgDlg</a></div><div class="ttdeci">void createMsgDlg(const std::string &amp;title, const std::string &amp;message, Flags&lt; ButtonTypes &gt; buttons, std::invocable&lt; ButtonTypes &gt; auto &amp;&amp;onDialogDone)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:79</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Window_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Window.html">pf::ui::ig::Window</a></div><div class="ttdoc">Main building piece for UI. Persistent element container with plenty of controls.</div><div class="ttdef"><b>Definition:</b> Window.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Window_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Window.html">pf::ui::ig::Window</a></div><div class="ttdoc">Main building piece for UI. Persistent element container with plenty of controls.</div><div class="ttdef"><b>Definition:</b> Window.h:32</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Resizable.h:52</div></div>
 <div class="ttc" id="aMenuBars_8h_html"><div class="ttname"><a href="MenuBars_8h.html">MenuBars.h</a></div><div class="ttdoc">All types necessary for building menu bars.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a15f8a8241912e4184754da4fda8bf9e5"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a15f8a8241912e4184754da4fda8bf9e5">pf::ui::ig::ImGuiInterface::getWindows</a></div><div class="ttdeci">auto getWindows() const</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:120</div></div>
