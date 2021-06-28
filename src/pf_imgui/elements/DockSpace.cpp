@@ -13,6 +13,7 @@ DockSpace::DockSpace(const std::string &name, const Size &s, Flags<DockType> doc
 
 void DockSpace::render() {
   if (getVisibility() == Visibility::Visible) {
+    auto colorSet = setColorStack();
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
       ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);

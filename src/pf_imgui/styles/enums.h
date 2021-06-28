@@ -66,6 +66,8 @@ enum class ColorOf : int {
   NavWindowingHighlight = ImGuiCol_NavWindowingHighlight,
   NavWindowingDimBackground = ImGuiCol_NavWindowingDimBg,
   ModalWindowDimBackground = ImGuiCol_ModalWindowDimBg,
+  DockingPreview = ImGuiCol_DockingPreview,
+  DockingBackground = ImGuiCol_DockingEmptyBg,
 };
 
 enum class Style : int {

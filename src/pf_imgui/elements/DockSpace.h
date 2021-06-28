@@ -9,6 +9,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
 
 #include <imgui.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 
@@ -19,14 +20,15 @@ enum class DockType {
   DisableAreaResize = 1 << 5,
   AutoHideTabBar = 1 << 6
 };
-// TODO: viewport
 // TODO: ImGui::SetNextWindowDockID - assign a window to a certain dock
-// TODO: styles
+// TODO: somehow keep this alive when the parent is collapsed/invisible -
 /**
  * @brief An area to which dockable windows can be docked.
  * @warning DockSpace HAS TO BE RENDERED AS SOON AS POSSIBLE OTHERWISE YOU WON'T BE ABLE TO DOCK ANYTHING
  */
-class DockSpace : public Element, public Resizable {
+class DockSpace : public Element,
+                  public Resizable,
+                  public ColorCustomizable<style::ColorOf::DockingPreview, style::ColorOf::DockingBackground> {
  public:
   /**
    * Construct DockSpace
