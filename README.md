@@ -9,7 +9,7 @@
 
 [Documentation](https://petrflajsingr.github.io/pf_imgui/)
 
-This library is a wrapper around [DearImGui](https://github.com/ocornut/imgui).
+This library is a wrapper of [DearImGui](https://github.com/ocornut/imgui).
 
 # Examples
 In these examples `imgui` is an instance of `std::unique_ptr<ImGuiInterface>`. Examples only show basic usage, the classes usually have more functionality.
