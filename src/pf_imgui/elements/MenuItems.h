@@ -68,7 +68,7 @@ class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
      * @param value starting value
      * @return reference to the created MenuButtonItem
      */
-  MenuCheckboxItem &addCheckboxItem(const std::string &name, const std::string &caption, bool value = false);
+  MenuCheckboxItem &addCheckboxItem(const std::string &name, const std::string &caption, bool value = false, Persistent persistent = Persistent::No);
   /**
      * Create an instance of MenuSeparatorItem and add it to the end of children/
      * @param name ID of the MenuSeparatorItem
