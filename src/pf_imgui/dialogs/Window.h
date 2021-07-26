@@ -158,6 +158,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    */
   void setFont(ImFont *fontPtr);
 
+  std::vector<Renderable *> getRenderables() override;
+
  protected:
   void renderImpl() override;
 

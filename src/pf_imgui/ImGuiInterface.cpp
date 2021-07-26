@@ -17,7 +17,7 @@ ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, b
                                const std::filesystem::path &iconFontDirectory, Flags<IconPack> enabledIconPacks,
                                float iconSize)
     : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable
-                                                     | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0))),
+                                                 | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0))),
       fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), config(std::move(tomlConfig)) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
@@ -43,21 +43,27 @@ AppMenuBar &ImGuiInterface::getMenuBar() {
   if (menuBar == nullptr) { menuBar = std::make_unique<AppMenuBar>("app_menu_bar"); }
   return *menuBar;
 }
+
 bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
+
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() {
   //config.clear();
   std::ranges::for_each(windows, [this](auto &window) {
-    auto serialised = serializeImGuiTree(*window);
-    for (const auto &item : serialised) { config.insert_or_assign(item.first, item.second); }
+    auto serialisedTree = serializeImGuiTree(*window);
+    for (const auto &item : serialisedTree) { config.insert_or_assign(item.first, item.second); }
+    if (menuBar != nullptr) {
+      auto serialisedAppBar = serializeImGuiTree(*menuBar);
+      for (const auto &item : serialisedAppBar) { config.insert_or_assign(item.first, item.second); }
+    }
     //config.insert(serialised.begin(), serialised.end());
   });
 }
 
 void ImGuiInterface::setStateFromConfig() {
-  std::ranges::for_each(windows, [this](auto &window) {
-    traverseImGuiTree(*window, [this](Renderable &renderable) {
+  const auto serialiseSubtree = [this](Renderable &root) {
+    traverseImGuiTree(root, [this](Renderable &renderable) {
       if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
         if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
           if (config.contains(ptrElement->getName())) {
@@ -66,7 +72,9 @@ void ImGuiInterface::setStateFromConfig() {
         }
       }
     });
-  });
+  };
+  if (menuBar != nullptr) { serialiseSubtree(*menuBar); }
+  std::ranges::for_each(windows, [this, &serialiseSubtree](auto &window) { serialiseSubtree(*window); });
 }
 void ImGuiInterface::renderDialogs() {
   std::ranges::for_each(fileDialogs, [](auto &dialog) { dialog.render(); });

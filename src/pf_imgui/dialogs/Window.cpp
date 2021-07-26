@@ -132,13 +132,19 @@ bool Window::isCloseable() const { return closeable; }
 void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 void Window::setFont(ImFont *fontPtr) { font = fontPtr; }
+
 bool Window::isDockable() const { return isDockArea; }
+
 void Window::setIsDockable(bool dockable) { isDockArea = dockable; }
-bool Window::isDocked() const {
-  return isWindowDocked;
-}
-void Window::moveToDock(DockSpace::Id dockSpaceId) {
-  dockInto = dockSpaceId;
+
+bool Window::isDocked() const { return isWindowDocked; }
+
+void Window::moveToDock(DockSpace::Id dockSpaceId) { dockInto = dockSpaceId; }
+
+std::vector<Renderable *> Window::getRenderables() {
+  auto result = ElementContainer::getRenderables();
+  if (menuBar != nullptr) { result.emplace_back(menuBar.get()); }
+  return result;
 }
 
 }// namespace pf::ui::ig
