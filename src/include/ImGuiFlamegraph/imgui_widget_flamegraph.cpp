@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 #include <imgui_widget_flamegraph.h>
+#include <functional>
 
 #include "imgui.h"
 #ifndef IMGUI_DEFINE_MATH_OPERATORS

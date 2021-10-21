@@ -19,14 +19,14 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
       filters += '{';
       for (const auto &name : names) {
         filters += fmt::format(".{},", name.string());
-        if (color.has_value()) { extColors.emplace_back(name, *color); }
+        if (color.has_value()) { extColors.emplace_back(name.string(), *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
       filters += "},";
     } else {
       for (const auto &name : names) {
         filters += fmt::format("{},", name.string());
-        if (color.has_value()) { extColors.emplace_back(name, *color); }
+        if (color.has_value()) { extColors.emplace_back(name.string(), *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
     }
@@ -41,10 +41,10 @@ void FileDialog::renderImpl() {
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, openPath, defaultName, maxSelectCount);
+      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, openPath, defaultName, maxSelectCount);
+      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
   }
   setExtInfos();

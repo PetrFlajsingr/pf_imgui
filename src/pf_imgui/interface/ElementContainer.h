@@ -122,9 +122,13 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   [[nodiscard]] T &childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
+#ifndef _MSC_VER // TODO: MSVC internal error
       throw IdNotFoundException("Wrong type for child: '{}'", name);
+#endif
     }
+#ifndef _MSC_VER // TODO: MSVC internal error
     throw IdNotFoundException("Child not found: '{}'", name);
+#endif
   }
 
   /**

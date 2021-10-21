@@ -17,6 +17,7 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <ranges>
 
 namespace pf::ui::ig {
 
@@ -55,7 +56,7 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * @return reference to the Renderable representing the newly created row
    */
   R &addItem(const T &item) {
-    auto &result = *items.template emplace_back(item, factory(item)).second.get();
+    auto &result = *items.emplace_back(item, factory(item)).second.get();
     refilterItems();
     return result;
   }

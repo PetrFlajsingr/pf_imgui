@@ -11,7 +11,7 @@
 namespace pf::ui::ig {
 
 FontManager::FontManager(ImGuiInterface &imGuiInterface, std::filesystem::path iconFontDir)
-    : interface(std::experimental::make_observer(&imGuiInterface)), iconDir(std::move(iconFontDir)) {
+    : interface(&imGuiInterface), iconDir(std::move(iconFontDir)) {
   glyphRangeInfos.reserve(100);
   auto defaultFont = interface->getIo().Fonts->AddFontDefault();
   fonts.emplace("default", defaultFont);

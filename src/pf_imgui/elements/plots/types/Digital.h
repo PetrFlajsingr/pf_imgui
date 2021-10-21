@@ -10,6 +10,7 @@
 
 #include <implot.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
+#include <list>
 #include <string>
 
 namespace pf::ui::ig::plot_type {

@@ -71,11 +71,13 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
   auto &createChild(const std::string &name, ImVec2 position, Flags<Anchor> anchors, Args &&...args) {
+#ifndef _MSC_VER // TODO: MSVC c3779
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
+#endif
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
     auto child = std::make_unique<CreateType>(position, name, std::forward<Args>(args)...);

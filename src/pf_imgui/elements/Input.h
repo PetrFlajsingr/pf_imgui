@@ -71,6 +71,7 @@ template<>
 struct InputData<int> {
   int step;
   int fastStep;
+  static constexpr const char *defaultFormat() { return "%d"; }
 };
 /**
  * @brief Storage structure for float based types.

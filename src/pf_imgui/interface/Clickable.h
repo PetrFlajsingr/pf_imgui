@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT Clickable {
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
-  Subscription addClickListener(std::invocable auto fnc) { return observableImpl.template addListener(fnc); }
+  Subscription addClickListener(std::invocable auto fnc) { return observableImpl.addListener(fnc); }
 
   virtual ~Clickable() = default;
 

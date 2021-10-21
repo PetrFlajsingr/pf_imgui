@@ -76,14 +76,14 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
  * Get all children of the layout as references.
  * @return view to references of children in the layout
  */
-  inline auto getChildren() {
+  [[nodiscard]] inline auto getChildren() {
     return children | ranges::views::transform([](auto &child) -> Element & { return *child; });
   }
   /**
    * Get all children of the layout as references.
    * @return view to const references of children in the layout
    */
-  inline auto getChildren() const {
+  [[nodiscard]] inline auto getChildren() const {
     return children | ranges::views::transform([](auto &child) -> const Element & { return *child; });
   }
 
@@ -118,16 +118,19 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @param args arguments to pass to the Ts constructor after its nam
     * @return reference to the newly created Element
     *
+    * @remark Duplicate check is disabled for MSVC
     * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChild(std::string name, Args &&...args) {
+#ifndef _MSC_VER // disabled because of C3779 error
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
+#endif
     auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
     const auto ptr = child.get();
     pushChild(std::move(child));
@@ -143,16 +146,20 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @param args arguments to pass to the Ts constructor after its nam
     * @return reference to the newly created Element
     *
+    * @remark Duplicate check is disabled for MSVC
+    *
     * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
+#ifndef _MSC_VER // disabled because of C3779 error
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
+#endif
     auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
     const auto ptr = child.get();
     insertChild(std::move(child), index);

@@ -7,7 +7,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
 #define PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
 
-#include <experimental/memory>
+#include <memory>
 #include <filesystem>
 #include <functional>
 #include <imgui.h>
@@ -205,7 +205,7 @@ class FontManager {
   friend class FontBuilder;
   ImFont *addFont(FontBuilder &builder);
 
-  std::experimental::observer_ptr<ImGuiInterface> interface;
+  ImGuiInterface *interface;
   std::filesystem::path iconDir;
   std::unordered_map<std::string, ImFont *> fonts;
   std::vector<std::array<ImWchar, 3>> glyphRangeInfos;

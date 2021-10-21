@@ -41,7 +41,9 @@ void Memo::addRecord(std::string_view record) {
 }
 
 void Memo::removeRecord(std::size_t index) {
+#ifndef _MSC_VER // TODO: MSVC internal compiler error
   if (index >= records.size()) { throw InvalidArgumentException{"Index out of bounds"}; }
+#endif
   records.erase(records.begin() + index);
   rebuildText();
 }

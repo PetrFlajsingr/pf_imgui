@@ -33,12 +33,15 @@ if (ENABLE_STYLES)
 endif ()
 
 
-add_compile_definitions(PF_ENUM_OUT)
-
 set(CMAKE_CXX_STANDARD 20)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+   # list(APPEND flags "/std:c++latest" "/Wall")
+else()
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
         "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing")
+endif()
+
 if (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
@@ -65,21 +68,21 @@ if (ENABLE_STACKTRACE)
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.1.0
+            GIT_TAG master
             OPTIONS "ENABLE_STACKTRACE ON"
     )
 else ()
     CPMAddPackage(
             NAME pf_common
             GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG v1.1.0
+            GIT_TAG master
     )
 endif ()
 
 CPMAddPackage(
         NAME toml++
         GITHUB_REPOSITORY marzer/tomlplusplus
-        GIT_TAG v2.2.0
+        GIT_TAG v2.5.0
 )
 
 CPMAddPackage(
