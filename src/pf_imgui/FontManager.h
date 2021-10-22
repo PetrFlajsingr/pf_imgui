@@ -205,7 +205,7 @@ class FontManager {
   friend class FontBuilder;
   ImFont *addFont(FontBuilder &builder);
 
-  ImGuiInterface *interface;
+  ImGuiInterface *imguiInterface;
   std::filesystem::path iconDir;
   std::unordered_map<std::string, ImFont *> fonts;
   std::vector<std::array<ImWchar, 3>> glyphRangeInfos;
