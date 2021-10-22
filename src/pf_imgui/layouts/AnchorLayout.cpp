@@ -30,7 +30,9 @@ void AnchorLayout::setChildPosition(const std::string &name, ImVec2 position) {
       child.has_value()) {
     child.value()->positionable->setPosition(position);
   } else {
+#ifndef _MSC_VER // TODO: MSVC internal error
     throw IdNotFoundException("Child not found: {}", name);
+#endif
   }
 }
 void AnchorLayout::removeChild(const std::string &name) {
