@@ -23,13 +23,13 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   /**
    * Construct MarkdownText.
    * @param elementName ID of the element
-   * @param interface for automatic font upload @todo: change this
+   * @param imguiInterface for automatic font upload @todo: change this
    * @param markdownSrc markdown source to render
    * @param fontSize size of font
    * @param imageLoader function for image loading & texture creation, arg is path to load
    */
   explicit MarkdownText(
-      const std::string &elementName, ImGuiInterface &interface, std::u8string markdownSrc = u8"",
+      const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdownSrc = u8"",
       float fontSize = 12.f,
       std::optional<std::function<std::optional<ImTextureID>(std::string_view)>> &&imageLoader = std::nullopt);
 
