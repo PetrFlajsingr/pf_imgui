@@ -13,9 +13,9 @@
 namespace pf::ui::ig {
 /**
  * Dark style, mostly shades of gray, with some orange elements.
- * @param interface
+ * @param imguiInterface
  */
-inline void setDarkStyle(ImGuiInterface &interface) {
+inline void setDarkStyle(ImGuiInterface &imguiInterface) {
   auto styleSetter = [](ImGuiStyle &style) {
     ImVec4 *colors = style.Colors;
 
@@ -79,7 +79,7 @@ inline void setDarkStyle(ImGuiInterface &interface) {
     style.TabRounding = 0.0f;
     style.WindowRounding = 4.0f;
   };
-  interface.setStyle(styleSetter);
+  imguiInterface.setStyle(styleSetter);
 }
 }// namespace pf::ui::ig
 
