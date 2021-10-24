@@ -10,9 +10,9 @@
 
 #include "RadioButton.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <string>
 #include <vector>
 
@@ -27,13 +27,14 @@ namespace pf::ui::ig {
  *
  * @todo: non-visual group
  */
-class PF_IMGUI_EXPORT RadioGroup : public Element,
-                                   public Labellable,
-                                   public ValueObservable<std::string_view>,
-                                   public Savable,
-                                   public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                                                            style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
-                                   public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>  {
+class PF_IMGUI_EXPORT RadioGroup
+    : public Element,
+      public Labellable,
+      public ValueObservable<std::string_view>,
+      public Savable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
+                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct RadioGroup.
@@ -43,7 +44,8 @@ class PF_IMGUI_EXPORT RadioGroup : public Element,
    * @param selectedButtonIndex index of selected button
    * @param persistent enable state saving to disk
    */
-  RadioGroup(const std::string &elementName, const std::string &label, std::vector<RadioButton> buttons = {},
+  RadioGroup(const std::string &elementName, const std::string &label,
+             std::vector<std::unique_ptr<RadioButton>> buttons = {},
              const std::optional<std::size_t> &selectedButtonIndex = std::nullopt,
              Persistent persistent = Persistent::No);
 
@@ -61,7 +63,7 @@ class PF_IMGUI_EXPORT RadioGroup : public Element,
   void renderImpl() override;
 
  private:
-  std::vector<RadioButton> buttons;
+  std::vector<std::unique_ptr<RadioButton>> buttons;
   std::optional<std::size_t> selectedButtonIndex = std::nullopt;
 };
 }// namespace pf::ui::ig
