@@ -121,9 +121,10 @@ class PF_IMGUI_EXPORT VerticalSlider
   T max;
   std::string format;
 };
-
+#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class VerticalSlider<int>;
 extern template class VerticalSlider<float>;
+#endif
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H

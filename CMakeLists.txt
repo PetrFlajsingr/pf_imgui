@@ -21,9 +21,13 @@ endif ()
 include(${CPM_DOWNLOAD_LOCATION})
 
 option(ENABLE_STACKTRACE "enable stacktrace in exceptions" OFF)
+option(ENABLE_EXTERN_TEMPLATE "enable extern templates" ON)
 
 if (ENABLE_STACKTRACE)
     add_compile_definitions(STACKTRACE_ENABLE)
+endif ()
+if (ENABLE_EXTERN_TEMPLATE)
+    add_compile_definitions(PF_IMGUI_ENABLE_EXTERN_TEMPLATE)
 endif ()
 
 option(ENABLE_STYLES "enable style settings for each element" OFF)

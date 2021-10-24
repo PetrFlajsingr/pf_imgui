@@ -93,8 +93,10 @@ class SpinInput
   T min;
   T max;
 };
+#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class SpinInput<int>;
 extern template class SpinInput<float>;
+#endif
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_ELEMENTS_SPININPUT_H

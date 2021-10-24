@@ -135,7 +135,9 @@ class PF_IMGUI_EXPORT ProgressBar
   T min;
   T max;
 };
+#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class ProgressBar<float>;
 extern template class ProgressBar<int>;
+#endif
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_PROGRESSBAR_H

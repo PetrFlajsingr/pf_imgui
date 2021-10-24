@@ -191,8 +191,9 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
 };
 
+#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class Combobox<std::string>;
-
+#endif
 }// namespace pf::ui::ig
 
 #endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
