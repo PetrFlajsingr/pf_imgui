@@ -12,8 +12,15 @@
 #include <imgui.h>
 #include <pf_common/enums.h>
 #include <type_traits>
+#include <imgui_notify.h>
 
 namespace pf::ui::ig {
+enum class NotificationType {
+  Success = ImGuiToastType_Success,
+  Warning = ImGuiToastType_Warning,
+  Error = ImGuiToastType_Error,
+  Info = ImGuiToastType_Info
+};
 /**
  * Enum for selection.
  */
@@ -142,7 +149,7 @@ enum class Anchor : uint8_t {
   TopBottomRight =      Top | Right | Bottom,
   TopBottomLeftRight =  Top | Left | Bottom | Right
 };
-// clang-format oon
+// clang-format on
 
 }// namespace pf::ui::ig
 
