@@ -1,9 +1,9 @@
-// dear imgui, v1.86 WIP
+// dear imgui, v1.85
 // (internal structures/api)
 
 // You may use this file to debug, understand or extend ImGui features but we don't provide any guarantee of forward compatibility!
 // Set:
-//   #define IMGUI_DEFINE_MATH_OPERATORS
+   #define IMGUI_DEFINE_MATH_OPERATORS
 // To implement maths operators for ImVec2 (disabled by default to not collide with using IM_VEC2_CLASS_EXTRA along with your own math types+operators)
 
 /*
@@ -1813,9 +1813,9 @@ struct ImGuiContext
 
     // Table
     ImGuiTable*                     CurrentTable;
-    int                             TablesTempDataStacked;      // Temporary table data size (because we leave previous instances undestructed, we generally don't use TablesTempData.Size)
-    ImVector<ImGuiTableTempData>    TablesTempData;             // Temporary table data (buffers reused/shared across instances, support nesting)
-    ImPool<ImGuiTable>              Tables;                     // Persistent table data
+    int                             CurrentTableStackIdx;
+    ImPool<ImGuiTable>              Tables;
+    ImVector<ImGuiTableTempData>    TablesTempDataStack;
     ImVector<float>                 TablesLastTimeActive;       // Last used timestamp of each tables (SOA, for efficient GC)
     ImVector<ImDrawChannel>         DrawChannelsTempMergeBuffer;
 
@@ -2012,7 +2012,7 @@ struct ImGuiContext
         memset(DragDropPayloadBufLocal, 0, sizeof(DragDropPayloadBufLocal));
 
         CurrentTable = NULL;
-        TablesTempDataStacked = 0;
+        CurrentTableStackIdx = -1;
         CurrentTabBar = NULL;
 
         TempInputId = 0;
@@ -2418,7 +2418,7 @@ struct ImGuiTableCellData
 };
 
 // FIXME-TABLE: more transient data could be stored in a per-stacked table structure: DrawSplitter, SortSpecs, incoming RowData
-struct IMGUI_API ImGuiTable
+struct ImGuiTable
 {
     ImGuiID                     ID;
     ImGuiTableFlags             Flags;
@@ -2524,14 +2524,14 @@ struct IMGUI_API ImGuiTable
     bool                        MemoryCompacted;
     bool                        HostSkipItems;              // Backup of InnerWindow->SkipItem at the end of BeginTable(), because we will overwrite InnerWindow->SkipItem on a per-column basis
 
-    ImGuiTable()                { memset(this, 0, sizeof(*this)); LastFrameActive = -1; }
-    ~ImGuiTable()               { IM_FREE(RawData); }
+    IMGUI_API ImGuiTable()      { memset(this, 0, sizeof(*this)); LastFrameActive = -1; }
+    IMGUI_API ~ImGuiTable()     { IM_FREE(RawData); }
 };
 
 // Transient data that are only needed between BeginTable() and EndTable(), those buffers are shared (1 per level of stacked table).
 // - Accessing those requires chasing an extra pointer so for very frequently used data we leave them in the main table structure.
 // - We also leave out of this structure data that tend to be particularly useful for debugging/metrics.
-struct IMGUI_API ImGuiTableTempData
+struct ImGuiTableTempData
 {
     int                         TableIndex;                 // Index in g.Tables.Buf[] pool
     float                       LastTimeActive;             // Last timestamp this structure was used
@@ -2548,7 +2548,7 @@ struct IMGUI_API ImGuiTableTempData
     float                       HostBackupItemWidth;        // Backup of OuterWindow->DC.ItemWidth at the end of BeginTable()
     int                         HostBackupItemWidthStackSize;//Backup of OuterWindow->DC.ItemWidthStack.Size at the end of BeginTable()
 
-    ImGuiTableTempData()        { memset(this, 0, sizeof(*this)); LastTimeActive = -1.0f; }
+    IMGUI_API ImGuiTableTempData() { memset(this, 0, sizeof(*this)); LastTimeActive = -1.0f; }
 };
 
 // sizeof() ~ 12

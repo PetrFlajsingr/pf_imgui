@@ -77,7 +77,6 @@
 // The only purpose of this define is if you want force compilation of the stb_truetype backend ALONG with the FreeType backend.
 //#define IMGUI_ENABLE_STB_TRUETYPE
 
-#define IMGUI_DEFINE_MATH_OPERATORS
 //---- Define constructor and implicit cast operators to convert back<>forth between your math types and ImVec2/ImVec4.
 // This will be inlined as part of ImVec2 and ImVec4 class declarations.
 /*

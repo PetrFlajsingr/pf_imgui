@@ -1405,8 +1405,8 @@ bool DragFloatLog(const char *label, float *data, float v_speed, [[maybe_unused]
 
   // Draw frame
   const ImU32 frame_col = ImGui::GetColorU32(g.ActiveId == id        ? ImGuiCol_FrameBgActive
-                                                                     : g.HoveredId == id ? ImGuiCol_FrameBgHovered
-                                                                                         : ImGuiCol_FrameBg);
+                                                 : g.HoveredId == id ? ImGuiCol_FrameBgHovered
+                                                                     : ImGuiCol_FrameBg);
   ImGui::RenderNavHighlight(frame_bb, id);
   ImGui::RenderFrame(frame_bb.Min, frame_bb.Max, frame_col, true, style.FrameRounding);
 
@@ -3291,7 +3291,7 @@ bool LineSlider(const char *label, ImVec2 start, ImVec2 end, ImU32 lineColor, Im
   ImGuiID iID = ImGui::GetID(label);
   ImGui::PushID(iID);
   ImRect oRect(ImVec2(ImMin(start.x, end.x), ImMin(start.y, end.y)),
-  ImVec2(ImMax(start.x, end.x), ImMax(start.y, end.y)));
+               ImVec2(ImMax(start.x, end.x), ImMax(start.y, end.y)));
 
   [[maybe_unused]] ImVec2 curPos = ImGui::GetCursorScreenPos();
   ImDrawList *pDrawList = ImGui::GetWindowDrawList();
