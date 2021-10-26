@@ -107,6 +107,7 @@ include_directories(src/include/imgui_markdown)
 include_directories(src/include/imgui_memory_editor)
 include_directories(src/include/imgInspect)
 include_directories(src/include/ImGuiIcons)
+include_directories(src/include/imgui_notify)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"

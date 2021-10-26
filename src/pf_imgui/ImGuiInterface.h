@@ -9,6 +9,7 @@
 
 #include "fwd.h"
 #include <imgui.h>
+#include <imgui_notify.h>
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/FontManager.h>
@@ -223,6 +224,25 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   }
 
   /**
+   * Show a temporary notification with custom text.
+   * @param type type of notification - different icons
+   * @param message message to show to the user
+   * @param dismissTime after this time the notification will disappear
+   */
+  void showNotification(NotificationType type, std::string_view message,
+                        std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
+
+  /**
+   * Show a temporary notification with custom text.
+   * @param type type of notification - different icons
+   * @param title custom notification title
+   * @param message message to show to the user
+   * @param dismissTime after this time the notification will disappear
+   */
+  void showNotification(NotificationType type, std::string_view title, std::string_view message,
+                        std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
+
+  /**
    * Create a group for drag and drop elements.
    * @return newly created group
    */
@@ -267,6 +287,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   toml::table config;
 
   std::vector<DragNDropGroup> dragNDropGroups;
+  std::vector<ImGuiToast> notifications;
 
   void removeDialog(ModalDialog &dialog);
 };
