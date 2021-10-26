@@ -143,9 +143,6 @@ extern int triangleDrawCur;
 // Layout
 IMGUI_API void CenterNextItem(ImVec2 nextItemSize);
 
-// Numbers, Scalar
-IMGUI_API bool DragFloatLog(const char* label, float* data, float v_speed, float log_basis = 10.0f, const void* p_min = NULL, const void* p_max = NULL, ImGuiSliderFlags flags = 0);
-
 IMGUI_API bool DragLengthScalar(const char* label, ImGuiDataType data_type, void* p_data, ImWidgetsLengthUnit* p_defaultUnit, float v_speed, const void* p_min = NULL, const void* p_max = NULL, ImGuiSliderFlags flags = 0);
 
 IMGUI_API bool Slider2DScalar(char const* pLabel, ImGuiDataType data_type, void* pValueX, void* pValueY, void* p_minX, void* p_maxX, void* p_minY, void* p_maxY, float const fScale = 1.0f);
