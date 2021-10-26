@@ -20,7 +20,9 @@ pf::ui::ig::ImGuiGlfwOpenGLInterface::~ImGuiGlfwOpenGLInterface() {
   ImGui::DestroyContext();
 }
 
-void pf::ui::ig::ImGuiGlfwOpenGLInterface::updateFonts() {}
+void pf::ui::ig::ImGuiGlfwOpenGLInterface::updateFonts() {
+  // TODO: implement this
+}
 
 void pf::ui::ig::ImGuiGlfwOpenGLInterface::render() {
   if (shouldUpdateFontAtlas) {
