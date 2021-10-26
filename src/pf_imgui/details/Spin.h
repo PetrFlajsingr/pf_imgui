@@ -43,7 +43,7 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     const ImVec2 backup_frame_padding = style.FramePadding;
     style.FramePadding.x = style.FramePadding.y;
     ImGuiButtonFlags button_flags = ImGuiButtonFlags_Repeat | ImGuiButtonFlags_DontClosePopups;
-    if (flags & ImGuiInputTextFlags_ReadOnly) button_flags |= ImGuiButtonFlags_Disabled;
+    // FIXME if (flags & ImGuiInputTextFlags_ReadOnly) button_flags |= ImGuiButtonFlags_Disabled;
     SameLine(0, style.ItemInnerSpacing.x);
 
     // start diffs
@@ -88,7 +88,7 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     if (InputText(label, buf, IM_ARRAYSIZE(buf), flags))
       value_changed = DataTypeApplyOpFromText(buf, g.InputTextState.InitialTextA.Data, data_type, data_ptr, format);
   }
-  if (value_changed) MarkItemEdited(window->DC.LastItemId);
+  if (value_changed) MarkItemEdited(GImGui->LastItemData.ID); // TODO: check
 
   return value_changed;
 }

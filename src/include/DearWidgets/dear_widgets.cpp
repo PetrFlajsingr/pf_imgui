@@ -1373,13 +1373,13 @@ bool DragFloatLog(const char *label, float *data, float v_speed, [[maybe_unused]
     const bool focus_requested = temp_input_allowed && ImGui::FocusableItemRegister(window, id);
     const bool clicked = (hovered && g.IO.MouseClicked[0]);
     const bool double_clicked = (hovered && g.IO.MouseDoubleClicked[0]);
-    if (focus_requested || clicked || double_clicked || g.NavActivateId == id || g.NavInputId == id) {
+    if (focus_requested || clicked || double_clicked || g.NavActivateId == id || g.NavActivateInputId == id) {
       ImGui::SetActiveID(id, window);
       ImGui::SetFocusID(id, window);
       ImGui::FocusWindow(window);
       g.ActiveIdUsingNavDirMask = (1 << ImGuiDir_Left) | (1 << ImGuiDir_Right);
       if (temp_input_allowed
-          && (focus_requested || (clicked && g.IO.KeyCtrl) || double_clicked || g.NavInputId == id)) {
+          && (focus_requested || (clicked && g.IO.KeyCtrl) || double_clicked || g.NavActivateInputId == id)) {
         temp_input_is_active = true;
         ImGui::FocusableItemUnregister(window);
       }
@@ -1389,7 +1389,7 @@ bool DragFloatLog(const char *label, float *data, float v_speed, [[maybe_unused]
     if (g.IO.ConfigDragClickToInputText && temp_input_allowed && !temp_input_is_active)
       if (g.ActiveId == id && hovered && g.IO.MouseReleased[0]
           && !ImGui::IsMouseDragPastThreshold(0, g.IO.MouseDragThreshold * 0.5f /*DRAG_MOUSE_THRESHOLD_FACTOR*/)) {
-        g.NavInputId = id;
+        g.NavActivateInputId = id;
         temp_input_is_active = true;
         ImGui::FocusableItemUnregister(window);
       }
