@@ -32,8 +32,29 @@ class PF_IMGUI_EXPORT Tab : public ItemElement, public Labellable, public Elemen
    */
   Tab(const std::string &elementName, const std::string &label);
 
+  /**
+   * Called when a Tab's contents are in/visible.
+   * @param listener
+   */
+  void addOpenListener(std::invocable<bool> auto &&listener) {
+    openObservable.addListener(std::forward<decltype(listener)>(listener));
+  }
+
+  /**
+   *
+   * @return true if the Tab is currently open
+   */
+  [[nodiscard]] bool isOpen() const;
+
+  void setOpen();
+
  protected:
   void renderImpl() override;
+
+ private:
+  Observable_impl<bool> openObservable;
+  bool open = false;
+  bool setOpenInNextFrame = false;
 };
 
 /**
@@ -63,6 +84,18 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
    * @param name ID of the tab to be removed
    */
   void removeTab(const std::string &name);
+
+  /**
+   * Get currently open Tab.
+   * @return
+   */
+  [[nodiscard]] Tab &getOpenTab();
+
+  /**
+   * Set selected tab as open. If a Tab with this name is not found nothing happens.
+   * @param tabName name of the tab to open
+   */
+  void setOpenTab(std::string_view tabName);
 
   /**
    * Check if tab list on the left side is allowed.

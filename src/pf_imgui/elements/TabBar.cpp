@@ -13,10 +13,24 @@ Tab::Tab(const std::string &elementName, const std::string &label) : ItemElement
 void Tab::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  if (ImGui::BeginTabItem(getLabel().c_str())) {
+
+  const auto wasOpen = open;
+  const auto flags = setOpenInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None;
+  if (ImGui::BeginTabItem(getLabel().c_str(), &open, flags)) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndTabItem();
   }
+  if (open != wasOpen) {
+    openObservable.notify(open);
+  }
+}
+
+bool Tab::isOpen() const {
+  return open;
+}
+
+void Tab::setOpen() {
+  setOpenInNextFrame = true;
 }
 
 TabBar::TabBar(const std::string &elementName, bool allowTabList)
@@ -31,16 +45,31 @@ void TabBar::renderImpl() {
     ImGui::EndTabBar();
   }
 }
+
 Tab &TabBar::addTab(const std::string &name, const std::string &caption) {
   tabs.emplace_back(std::make_unique<Tab>(name, caption));
   return *tabs.back();
 }
+
 void TabBar::removeTab(const std::string &name) {
   if (const auto iter = std::ranges::find_if(tabs, [name](const auto &tab) { return tab->getName() == name; });
       iter != tabs.cend()) {
     tabs.erase(iter);
   }
 }
+
+Tab &TabBar::getOpenTab() {
+  return **std::ranges::find_if(tabs, [] (const auto &tab) { return tab->isOpen(); });
+}
+
+void TabBar::setOpenTab(std::string_view tabName) {
+  if (const auto iter = std::ranges::find_if(tabs, [tabName](auto &tab) {
+        return tab->getName() == tabName;
+      }); iter != tabs.end()) {
+    (*iter)->setOpen();
+  }
+}
+
 bool TabBar::isTabListAllowed1() const { return isTabListAllowed; }
 
 void TabBar::setTabListAllowed(bool tabListAllowed) { TabBar::isTabListAllowed = tabListAllowed; }
