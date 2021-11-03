@@ -43,8 +43,8 @@ void TabBar::renderImpl() {
   }
 }
 
-Tab &TabBar::addTab(const std::string &name, const std::string &caption) {
-  tabs.emplace_back(std::make_unique<Tab>(name, caption));
+Tab &TabBar::addTab(const std::string &name, const std::string &caption, bool closeable) {
+  tabs.emplace_back(std::make_unique<Tab>(name, caption, closeable));
   return *tabs.back();
 }
 

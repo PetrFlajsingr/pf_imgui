@@ -79,7 +79,7 @@ public:
   * @param caption text rendered on the Tab
   * @return reference to the newly created Tab
   */
- Tab &addTab(const std::string &name, const std::string &caption);
+ Tab &addTab(const std::string &name, const std::string &caption, bool closeable = false);
  /**
   * Remove a tab with the given ID.
   * If no such Tab exists nothing happens.
