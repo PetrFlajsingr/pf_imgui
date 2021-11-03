@@ -1,9 +1,9 @@
 /**
- * @file TabBar.h
- * @brief TabBar element.
- * @author Petr Flajšingr
- * @date 2.11.20
- */
+* @file TabBar.h
+* @brief TabBar element.
+* @author Petr Flajšingr
+* @date 2.11.20
+*/
 
 #ifndef PF_IMGUI_ELEMENTS_TABBAR_H
 #define PF_IMGUI_ELEMENTS_TABBAR_H
@@ -21,101 +21,103 @@
 namespace pf::ui::ig {
 
 /**
- * @brief Par of TabBar, when clicked it switches to the selected sub-layout.
- */
+* @brief Par of TabBar, when clicked it switches to the selected sub-layout.
+*/
 class PF_IMGUI_EXPORT Tab : public ItemElement, public Labellable, public ElementContainer {
- public:
-  /**
-   * Construct Tab.
-   * @param elementName ID of the Tab
-   * @param label text rendered on the Tab
-   */
-  Tab(const std::string &elementName, const std::string &label);
+public:
+ /**
+  * Construct Tab.
+  * @param elementName ID of the Tab
+  * @param label text rendered on the Tab
+  */
+ Tab(const std::string &elementName, const std::string &label, bool closeable = false);
 
-  /**
-   * Called when a Tab's contents are in/visible.
-   * @param listener
-   */
-  void addOpenListener(std::invocable<bool> auto &&listener) {
-    openObservable.addListener(std::forward<decltype(listener)>(listener));
-  }
+ virtual ~Tab();
 
-  /**
-   *
-   * @return true if the Tab is currently open
-   */
-  [[nodiscard]] bool isOpen() const;
+ /**
+  * Called when a Tab's contents are in/visible.
+  * @param listener
+  */
+ void addOpenListener(std::invocable<bool> auto &&listener) {
+   openObservable.addListener(std::forward<decltype(listener)>(listener));
+ }
 
-  void setOpen();
+ /**
+  *
+  * @return true if the Tab is currently open
+  */
+ [[nodiscard]] bool isOpen() const;
 
- protected:
-  void renderImpl() override;
+ void setOpen();
 
- private:
-  Observable_impl<bool> openObservable;
-  bool open = false;
-  bool setOpenInNextFrame = false;
+protected:
+ void renderImpl() override;
+
+private:
+ Observable_impl<bool> openObservable;
+ bool* open;
+ bool setOpenInNextFrame = false;
 };
 
 /**
- * @brief A bar for containment and switching of tabs.
- *
- * TabBar contains only Bars, elements are inside the Tabs created by addTab().
- */
+* @brief A bar for containment and switching of tabs.
+*
+* TabBar contains only Bars, elements are inside the Tabs created by addTab().
+*/
 class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
- public:
-  /**
-   * Construct TabBar.
-   * @param elementName ID of the TabBar
-   * @param allowTabList set if tab list on the left side is allowed
-   */
-  explicit TabBar(const std::string &elementName, bool allowTabList = false);
+public:
+ /**
+  * Construct TabBar.
+  * @param elementName ID of the TabBar
+  * @param allowTabList set if tab list on the left side is allowed
+  */
+ explicit TabBar(const std::string &elementName, bool allowTabList = false);
 
-  /**
-   * Create a new Tab.
-   * @param name ID of the Tab
-   * @param caption text rendered on the Tab
-   * @return reference to the newly created Tab
-   */
-  Tab &addTab(const std::string &name, const std::string &caption);
-  /**
-   * Remove a tab with the given ID.
-   * If no such Tab exists nothing happens.
-   * @param name ID of the tab to be removed
-   */
-  void removeTab(const std::string &name);
+ /**
+  * Create a new Tab.
+  * @param name ID of the Tab
+  * @param caption text rendered on the Tab
+  * @return reference to the newly created Tab
+  */
+ Tab &addTab(const std::string &name, const std::string &caption);
+ /**
+  * Remove a tab with the given ID.
+  * If no such Tab exists nothing happens.
+  * @param name ID of the tab to be removed
+  */
+ void removeTab(const std::string &name);
 
-  /**
-   * Get currently open Tab.
-   * @return
-   */
-  [[nodiscard]] Tab &getOpenTab();
+ /**
+  * Get currently open Tab.
+  * @return
+  */
+ [[nodiscard]] Tab &getOpenTab();
 
-  /**
-   * Set selected tab as open. If a Tab with this name is not found nothing happens.
-   * @param tabName name of the tab to open
-   */
-  void setOpenTab(std::string_view tabName);
+ /**
+  * Set selected tab as open. If a Tab with this name is not found nothing happens.
+  * @param tabName name of the tab to open
+  */
+ void setOpenTab(std::string_view tabName);
 
-  /**
-   * Check if tab list on the left side is allowed.
-   * @return true if allowed
-   */
-  [[nodiscard]] bool isTabListAllowed1() const;
-  /**
-   * Set if tab list on the left side is allowed.
-   * @param isTabListAllowed allowed
-   */
-  void setTabListAllowed(bool isTabListAllowed);
+ /**
+  * Check if tab list on the left side is allowed.
+  * @return true if allowed
+  */
+ [[nodiscard]] bool isTabListAllowed1() const;
+ /**
+  * Set if tab list on the left side is allowed.
+  * @param isTabListAllowed allowed
+  */
+ void setTabListAllowed(bool isTabListAllowed);
 
-  std::vector<Renderable *> getRenderables() override;
+ std::vector<Renderable *> getRenderables() override;
 
- protected:
-  void renderImpl() override;
+protected:
+ void renderImpl() override;
 
- private:
-  std::vector<std::unique_ptr<Tab>> tabs;
-  bool isTabListAllowed;
+private:
+ std::vector<std::unique_ptr<Tab>> tabs;
+ bool isTabListAllowed;
 };
 
 }// namespace pf::ui::ig

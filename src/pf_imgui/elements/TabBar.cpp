@@ -8,30 +8,27 @@
 
 namespace pf::ui::ig {
 
-Tab::Tab(const std::string &elementName, const std::string &label) : ItemElement(elementName), Labellable(label) {}
+Tab::Tab(const std::string &elementName, const std::string &label, bool closeable)
+    : ItemElement(elementName), Labellable(label), open(closeable ? new bool{true} : nullptr) {}
+
+Tab::~Tab() { delete open; }
 
 void Tab::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
 
-  const auto wasOpen = open;
+  const auto wasOpen = isOpen();
   const auto flags = setOpenInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None;
-  if (ImGui::BeginTabItem(getLabel().c_str(), &open, flags)) {
+  if (ImGui::BeginTabItem(getLabel().c_str(), open, flags)) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndTabItem();
   }
-  if (open != wasOpen) {
-    openObservable.notify(open);
-  }
+  if (open != nullptr && *open != wasOpen) { openObservable.notify(*open); }
 }
 
-bool Tab::isOpen() const {
-  return open;
-}
+bool Tab::isOpen() const { return open == nullptr || *open; }
 
-void Tab::setOpen() {
-  setOpenInNextFrame = true;
-}
+void Tab::setOpen() { setOpenInNextFrame = true; }
 
 TabBar::TabBar(const std::string &elementName, bool allowTabList)
     : Element(elementName), isTabListAllowed(allowTabList) {}
@@ -59,13 +56,12 @@ void TabBar::removeTab(const std::string &name) {
 }
 
 Tab &TabBar::getOpenTab() {
-  return **std::ranges::find_if(tabs, [] (const auto &tab) { return tab->isOpen(); });
+  return **std::ranges::find_if(tabs, [](const auto &tab) { return tab->isOpen(); });
 }
 
 void TabBar::setOpenTab(std::string_view tabName) {
-  if (const auto iter = std::ranges::find_if(tabs, [tabName](auto &tab) {
-        return tab->getName() == tabName;
-      }); iter != tabs.end()) {
+  if (const auto iter = std::ranges::find_if(tabs, [tabName](auto &tab) { return tab->getName() == tabName; });
+      iter != tabs.end()) {
     (*iter)->setOpen();
   }
 }
