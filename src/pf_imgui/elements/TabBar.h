@@ -22,6 +22,8 @@ namespace pf::ui::ig {
 
 /**
 * @brief Par of TabBar, when clicked it switches to the selected sub-layout.
+ *
+ * @todo: close & selected persistence
 */
 class PF_IMGUI_EXPORT Tab : public ItemElement, public Labellable, public ElementContainer {
 public:
@@ -69,6 +71,7 @@ private:
 * @brief A bar for containment and switching of tabs.
 *
 * TabBar contains only Bars, elements are inside the Tabs created by addTab().
+*
 */
 class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
 public:

@@ -27,6 +27,7 @@ void Tab::renderImpl() {
   }
   if (open != nullptr && *open != wasOpen) { openObservable.notify(*open); }
   if (wasSelected != selected) { selectedObservable.notify(selected); }
+  setSelectedInNextFrame = false;
 }
 
 bool Tab::isOpen() const { return open == nullptr || *open; }
