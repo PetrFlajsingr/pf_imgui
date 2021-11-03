@@ -48,15 +48,21 @@ public:
   */
  [[nodiscard]] bool isOpen() const;
 
+ [[nodiscard]] bool isSelected() const;
+
  void setOpen();
+
+ void setSelected();
 
 protected:
  void renderImpl() override;
 
 private:
  Observable_impl<bool> openObservable;
+ Observable_impl<bool> selectedObservable;
  bool* open;
- bool setOpenInNextFrame = false;
+ bool selected = false;
+ bool setSelectedInNextFrame = false;
 };
 
 /**
@@ -88,16 +94,16 @@ public:
  void removeTab(const std::string &name);
 
  /**
-  * Get currently open Tab.
+  * Get currently selected Tab.
   * @return
   */
- [[nodiscard]] Tab &getOpenTab();
+ [[nodiscard]] Tab &getSelectedTab();
 
  /**
-  * Set selected tab as open. If a Tab with this name is not found nothing happens.
+  * Set Tab as selected. If a Tab with this name is not found nothing happens.
   * @param tabName name of the tab to open
   */
- void setOpenTab(std::string_view tabName);
+ void setSelectedTab(std::string_view tabName);
 
  /**
   * Check if tab list on the left side is allowed.
