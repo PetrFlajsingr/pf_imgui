@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * Set selected item. If no such item is found the selection is cancelled.
    * @param item item to be selected
    */
-  void setSelectedItem(T &&itemToSelect) {
+  void setSelectedItem(const T &itemToSelect) {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter = std::ranges::find_if(
               items, [&itemToSelect](const auto &item) { return item.first == itemToSelect; });
