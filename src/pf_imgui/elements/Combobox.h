@@ -94,10 +94,10 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * Set selected item. If no such item is found the selection is cancelled.
    * @param item item to be selected
    */
-  void setSelectedItem(const T &itemToSelect) {
+  void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
-      if (const auto iter = std::ranges::find_if(
-              items, [&itemToSelect](const auto &item) { return item.first == itemToSelect; });
+      if (const auto iter =
+              std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item.first == itemToSelect; });
           iter != items.end()) {
         const auto index = std::distance(items.begin(), iter);
         setSelectedItemByIndex(index);
@@ -112,8 +112,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * @param itemAsString item to be selected
    */
   void setSelectedItem(const std::string &itemAsString) {
-    if (const auto iter =
-            std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second->getLabel() == itemAsString; });
+    if (const auto iter = std::ranges::find_if(
+            items, [itemAsString](const auto &item) { return item.second->getLabel() == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       setSelectedItemByIndex(index);
