@@ -192,7 +192,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    * @return Subscription for listener cancelation
    */
   Subscription addCloseListener(std::invocable auto listener) {
-    return closeObservableImpl.template addListener(listener);
+    return closeObservableImpl.addListener(listener);
   }
 
   /**
