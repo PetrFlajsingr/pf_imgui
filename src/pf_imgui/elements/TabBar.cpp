@@ -8,8 +8,17 @@
 
 namespace pf::ui::ig {
 
-Tab::Tab(const std::string &elementName, const std::string &label, bool closeable)
-    : ItemElement(elementName), Labellable(label), open(closeable ? new bool{true} : nullptr) {}
+TabButton::TabButton(const std::string &elementName, const std::string &label, Flags<TabMod> mods)
+    : ItemElement(elementName), Labellable(label), flags(*mods) {}
+
+void TabButton::renderImpl() {
+  if (ImGui::TabItemButton(getLabel().c_str(), flags)) { notifyOnClick(); }
+}
+
+void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
+
+Tab::Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods, bool closeable)
+    : TabButton(elementName, label, mods), open(closeable ? new bool{true} : nullptr) {}
 
 Tab::~Tab() { delete open; }
 
@@ -26,7 +35,10 @@ void Tab::renderImpl() {
     ImGui::EndTabItem();
   }
   if (open != nullptr && *open != wasOpen) { openObservable.notify(*open); }
-  if (wasSelected != selected) { selectedObservable.notify(selected); }
+  if (wasSelected != selected) {
+    selectedObservable.notify(selected);
+    notifyOnClick();
+  }
   setSelectedInNextFrame = false;
 }
 
@@ -36,29 +48,30 @@ void Tab::setOpen() {
   if (open != nullptr) { *open = true; }
 }
 
-bool Tab::isSelected() const {
-  return selected;
-}
+bool Tab::isSelected() const { return selected; }
 
-void Tab::setSelected() {
-  setSelectedInNextFrame = true;
-}
+void Tab::setSelected() { setSelectedInNextFrame = true; }
 
 TabBar::TabBar(const std::string &elementName, bool allowTabList)
-    : Element(elementName), isTabListAllowed(allowTabList) {}
+    : Element(elementName), tabListAllowed(allowTabList) {}
 
 void TabBar::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  const auto flags = isTabListAllowed ? ImGuiTabBarFlags_TabListPopupButton : ImGuiTabBarFlags{};
+  const auto flags = tabListAllowed ? ImGuiTabBarFlags_TabListPopupButton : ImGuiTabBarFlags{};
   if (ImGui::BeginTabBar(getName().c_str(), flags)) {
     std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });
     ImGui::EndTabBar();
   }
 }
 
-Tab &TabBar::addTab(const std::string &name, const std::string &caption, bool closeable) {
-  tabs.emplace_back(std::make_unique<Tab>(name, caption, closeable));
+Tab &TabBar::addTab(const std::string &name, const std::string &caption, const Flags<TabMod> &mods, bool closeable) {
+  tabs.emplace_back(std::make_unique<Tab>(name, caption, mods, closeable));
+  return dynamic_cast<Tab &>(*tabs.back());
+}
+
+TabButton &TabBar::addTabButton(const std::string &name, const std::string &caption, const Flags<TabMod> &mods) {
+  tabs.emplace_back(std::make_unique<TabButton>(name, caption, mods));
   return *tabs.back();
 }
 
@@ -70,19 +83,22 @@ void TabBar::removeTab(const std::string &name) {
 }
 
 Tab &TabBar::getSelectedTab() {
-  return **std::ranges::find_if(tabs, [](const auto &tab) { return tab->isSelected(); });
+  return dynamic_cast<Tab &>(**std::ranges::find_if(tabs, [](const auto &tab) {
+    if (auto t = dynamic_cast<Tab *>(tab.get()); t != nullptr) { return t->isSelected(); }
+    return false;
+  }));
 }
 
 void TabBar::setSelectedTab(std::string_view tabName) {
   if (const auto iter = std::ranges::find_if(tabs, [tabName](auto &tab) { return tab->getName() == tabName; });
       iter != tabs.end()) {
-    (*iter)->setSelected();
+    if (auto t = dynamic_cast<Tab *>((*iter).get()); t != nullptr) { t->setSelected(); }
   }
 }
 
-bool TabBar::isTabListAllowed1() const { return isTabListAllowed; }
+bool TabBar::isTabListAllowed() const { return tabListAllowed; }
 
-void TabBar::setTabListAllowed(bool tabListAllowed) { TabBar::isTabListAllowed = tabListAllowed; }
+void TabBar::setTabListAllowed(bool listAllowed) { tabListAllowed = listAllowed; }
 
 std::vector<Renderable *> TabBar::getRenderables() {
   return tabs | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
