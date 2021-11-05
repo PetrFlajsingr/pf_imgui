@@ -29,8 +29,8 @@ enum class MessageButtons { Ok = 1, Yes = 2, No = 4 };
 * @todo: type of message - info, warning, error, debug with some sort of graphic
 */
 class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
-public:
- /**
+ public:
+  /**
   * Construct MessageDialog.
   * @param parent owner
   * @param elementName ID of the dialog
@@ -40,26 +40,26 @@ public:
   * @param onDialogDone callback for buttons being pressed, If returns true then the dialog is closed
   * @param modal dialog modality
   */
- MessageDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
-               const std::string &message, const Flags<MessageButtons> &buttons,
-               std::invocable<MessageButtons> auto
-                   &&onDialogDone) requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
-     : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
-   createChild<Text>(getName() + "text", message);
-   auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
-   auto enabledButtons = buttons.getSetFlags();
-   std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
-     btnLayout
-         .createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
-                              toString(buttonType))
-         .addClickListener([this, buttonType] {
-           if (dialogDone(buttonType)) { close(); }
-         });
-   });
- }
+  MessageDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
+                const std::string &message, const Flags<MessageButtons> &buttons,
+                std::invocable<MessageButtons> auto
+                    &&onDialogDone) requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
+      : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
+    createChild<Text>(getName() + "text", message);
+    auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
+    auto enabledButtons = buttons.getSetFlags();
+    std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
+      btnLayout
+          .createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
+                               toString(buttonType))
+          .addClickListener([this, buttonType] {
+            if (dialogDone(buttonType)) { close(); }
+          });
+    });
+  }
 
-private:
- std::function<bool(MessageButtons)> dialogDone;
+ private:
+  std::function<bool(MessageButtons)> dialogDone;
 };
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 //extern template class MessageDialog<MessageButtons>;
