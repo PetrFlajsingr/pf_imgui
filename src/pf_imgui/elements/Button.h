@@ -42,7 +42,7 @@ class PF_IMGUI_EXPORT Button
    * @param name ID of the button
    * @param label label drawn on the button
    * @param buttonType type of the button
-   * @param isRepeatable enable/disable button can repeat it's on click event when a user holds it
+   * @param isRepeatable enable/disable button can repeat its on click event when a user holds it
    * @param size size of the button
    */
   Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
@@ -76,6 +76,41 @@ class PF_IMGUI_EXPORT Button
  private:
   ButtonType type;
   bool repeatable;
+};
+
+/**
+ * @brief A button which is not rendered, can be used as a part of a new component for click&hover etc. detection.
+ */
+class PF_IMGUI_EXPORT InvisibleButton : public ItemElement, public Resizable, public Clickable {
+ public:
+  /**
+   * Create InvisibleButton.
+   * @param elementName unique name
+   * @param s size on screen
+   * @param clickButton mouse button to register as a click
+   * @param isRepeatable enable/disable button can repeat its on click event when a user holds it
+   */
+  explicit InvisibleButton(const std::string &elementName, const Size &s = Size::Auto(),
+                  MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
+
+ protected:
+  /**
+   * Check whether the button is repeatable or not
+   * @return
+   */
+  [[nodiscard]] bool isRepeatable() const;
+  /**
+   * Set repeatable. If true then the button can be held by the user to trigger click events.
+   * @param repeatable new state
+   */
+  void setRepeatable(bool repeatable);
+
+ protected:
+  void renderImpl() override;
+
+ private:
+  bool repeatable = false;
+  MouseButton clickBtn;
 };
 
 }// namespace pf::ui::ig

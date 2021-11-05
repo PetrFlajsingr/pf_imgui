@@ -15,6 +15,11 @@
 #include <imgui_notify.h>
 
 namespace pf::ui::ig {
+enum class MouseButton {
+  Left = ImGuiMouseButton_::ImGuiMouseButton_Left,
+  Right = ImGuiMouseButton_::ImGuiMouseButton_Right,
+  Middle = ImGuiMouseButton_::ImGuiMouseButton_Middle
+};
 enum class NotificationType {
   Success = ImGuiToastType_Success,
   Warning = ImGuiToastType_Warning,
@@ -46,7 +51,6 @@ enum class PlotType { Lines, Histogram };
  */
 enum class ButtonType {
   Normal,     /*!< Typical button with label in the clickable area */
-  Invisible,  /*!< Invisible button */
   Small,      /*!< Smaller version of a button */
   ArrowUp,    /*!< Button without a label with an up aiming arrow */
   ArrowLeft,  /*!< Button without a label with a left aiming arrow */

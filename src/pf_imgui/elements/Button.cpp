@@ -27,7 +27,6 @@ void Button::renderImpl() {
     case ButtonType::ArrowLeft: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Left); break;
     case ButtonType::ArrowRight: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Right); break;
     case ButtonType::ArrowDown: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Down); break;
-    case ButtonType::Invisible: wasClicked = ImGui::InvisibleButton(getLabel().c_str(), getSize().asImVec()); break;
   }
   if (wasClicked) { notifyOnClick(); }
 }
@@ -39,5 +38,19 @@ void Button::setType(ButtonType buttonType) { type = buttonType; }
 bool Button::isRepeatable() const { return repeatable; }
 
 void Button::setRepeatable(bool newRepeatable) { repeatable = newRepeatable; }
+
+InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, MouseButton clickButton,
+                                 Repeatable isRepeatable)
+    : ItemElement(elementName), Resizable(s), repeatable(isRepeatable == Repeatable::Yes), clickBtn(clickButton) {}
+
+bool InvisibleButton::isRepeatable() const { return false; }
+
+void InvisibleButton::setRepeatable(bool repeatable) {}
+
+void InvisibleButton::renderImpl() {
+  ImGui::PushButtonRepeat(repeatable);
+  auto disableRepeat = RAII{[] { ImGui::PopButtonRepeat(); }};
+  if (ImGui::InvisibleButton(getName().c_str(), getSize().asImVec(), static_cast<int>(clickBtn))) { notifyOnClick(); }
+}
 
 }// namespace pf::ui::ig
