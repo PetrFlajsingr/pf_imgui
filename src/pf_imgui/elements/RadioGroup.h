@@ -26,6 +26,7 @@ namespace pf::ui::ig {
  * Label of the selected button is observable.
  *
  * @todo: non-visual group
+ * @todo: fix this up so it can look normal
  */
 class PF_IMGUI_EXPORT RadioGroup
     : public Element,

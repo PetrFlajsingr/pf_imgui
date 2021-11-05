@@ -28,6 +28,10 @@
 
 namespace pf::ui::ig {
 
+// TODO:
+// ImGuiSliderFlags_Logarithmic
+// ImGuiSliderFlags_NoRoundToFormat
+
 namespace details {
 /**
  * Types with float as underlying value.
@@ -176,37 +180,44 @@ class PF_IMGUI_EXPORT DragInput
     auto style = setStyleStack();
     bool valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
+    const auto flags = ImGuiSliderFlags_AlwaysClamp;
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::DragFloat(getLabel().c_str(), address, speed, min, max, format.c_str());
+      valueChanged = ImGui::DragFloat(getLabel().c_str(), address, speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      valueChanged = ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      valueChanged = ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      valueChanged = ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::DragInt(getLabel().c_str(), address, speed, min, max, format.c_str());
+      valueChanged = ImGui::DragInt(getLabel().c_str(), address, speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      valueChanged = ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      valueChanged = ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      valueChanged = ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str());
+      valueChanged =
+          ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, math::Range<int>>) {
-      valueChanged =
-          ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max, format.c_str());
+      valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max,
+                                          format.c_str(), nullptr, flags);
     }
     if constexpr (std::same_as<T, math::Range<float>>) {
-      valueChanged =
-          ImGui::DragFloatRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max, format.c_str());
+      valueChanged = ImGui::DragFloatRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max,
+                                            format.c_str(), nullptr, flags);
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {

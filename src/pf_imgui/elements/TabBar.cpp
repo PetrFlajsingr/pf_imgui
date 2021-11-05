@@ -55,13 +55,13 @@ bool Tab::isSelected() const { return selected; }
 
 void Tab::setSelected() { setSelectedInNextFrame = true; }
 
-TabBar::TabBar(const std::string &elementName, bool allowTabList)
-    : Element(elementName), tabListAllowed(allowTabList) {}
+TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elementName) {
+  setTabListAllowed(allowTabList);
+}
 
 void TabBar::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  const auto flags = tabListAllowed ? ImGuiTabBarFlags_TabListPopupButton : ImGuiTabBarFlags{};
   if (ImGui::BeginTabBar(getName().c_str(), flags)) {
     std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });
     ImGui::EndTabBar();
@@ -103,9 +103,43 @@ void TabBar::setSelectedTab(std::string_view tabName) {
   }
 }
 
-bool TabBar::isTabListAllowed() const { return tabListAllowed; }
+bool TabBar::isTabListAllowed() const { return flags & ImGuiTabBarFlags_TabListPopupButton; }
 
-void TabBar::setTabListAllowed(bool listAllowed) { tabListAllowed = listAllowed; }
+void TabBar::setTabListAllowed(bool listAllowed) {
+  if (listAllowed) {
+    flags |= ImGuiTabBarFlags_TabListPopupButton;
+  } else {
+    flags &= ~ImGuiTabBarFlags_TabListPopupButton;
+  }
+}
+
+bool TabBar::isReorderable() const { return flags & ImGuiTabBarFlags_Reorderable; }
+
+void TabBar::setReorderable(bool reorderable) {
+  if (reorderable) {
+    flags |= ImGuiTabBarFlags_Reorderable;
+  } else {
+    flags &= ~ImGuiTabBarFlags_Reorderable;
+  }
+}
+
+bool TabBar::isCloseMidMouseButton() const { return flags & ImGuiTabBarFlags_NoCloseWithMiddleMouseButton; }
+
+void TabBar::setCloseMidMouseButton(bool allowedClose) {
+  if (allowedClose) {
+    flags |= ImGuiTabBarFlags_NoCloseWithMiddleMouseButton;
+  } else {
+    flags &= ~ImGuiTabBarFlags_NoCloseWithMiddleMouseButton;
+  }
+}
+
+Flags<TabBar::ResizePolicy> TabBar::getResizePolicy() const {
+  return static_cast<ResizePolicy>(flags & ImGuiTabBarFlags_FittingPolicyMask_);
+}
+
+void TabBar::setResizePolicy(const Flags<TabBar::ResizePolicy> &newPolicy) {
+  flags = flags & ~ImGuiTabBarFlags_FittingPolicyMask_ | *newPolicy;
+}
 
 std::vector<Renderable *> TabBar::getRenderables() {
   return tabs | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;

@@ -108,6 +108,10 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
 */
 class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
  public:
+  enum class ResizePolicy {
+    ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown,
+    Scroll = ImGuiTabBarFlags_FittingPolicyScroll
+  };
   /**
   * Construct TabBar.
   * @param elementName ID of the TabBar
@@ -169,6 +173,42 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
   */
   void setTabListAllowed(bool listAllowed);
 
+  /**
+   * Check if tab reordering is allowed.
+   * @return  true if allowd
+   */
+  [[nodiscard]] bool isReorderable() const;
+
+  /**
+   * Enable/disable user tab reodering
+   * @param reorderable
+   */
+  void setReorderable(bool reorderable);
+
+  /**
+   * Check if the user can close tabs with middle mouse button.
+   * @return
+   */
+  [[nodiscard]] bool isCloseMidMouseButton() const;
+
+  /**
+   * Enable/disable tab closing with middle mouse button.
+   * @param allowedClose
+   */
+  void setCloseMidMouseButton(bool allowedClose);
+
+  /**
+   * Get resizing policy, which is used when tabs can no longer fit in their default form.
+   * @return
+   */
+  [[nodiscard]] Flags<ResizePolicy> getResizePolicy() const;
+
+  /**
+   * Set resizing policy, which controls how tabs get resized when there's no available space.
+   * @param newPolicy
+   */
+  void setResizePolicy(const Flags<ResizePolicy> &newPolicy);
+
   std::vector<Renderable *> getRenderables() override;
 
  protected:
@@ -176,7 +216,7 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
 
  private:
   std::vector<std::unique_ptr<TabButton>> tabs;
-  bool tabListAllowed;
+  ImGuiTabBarFlags flags = 0;
 };
 
 }// namespace pf::ui::ig

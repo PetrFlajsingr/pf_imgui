@@ -58,16 +58,27 @@ class SpinInput
   [[nodiscard]] const T &getMax() const { return max; }
   void setMax(const T &maxVal) { max = maxVal; }
 
+  [[nodiscard]] bool isReadOnly() const { return readOnly; }
+
+  void setReadOnly(bool isReadOnly) {
+    readOnly = isReadOnly;
+    if (readOnly) {
+      flags |= ImGuiInputTextFlags_ReadOnly;
+    } else {
+      flags &= ~ImGuiInputTextFlags_ReadOnly;
+    }
+  }
+
  protected:
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
     auto valueChanged = false;
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
+      valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
     }
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast);
+      valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast,  "%.3f", flags); // TODO: user provided format
     }
     if (valueChanged) {
       ValueObservable<T>::setValueInner(std::clamp(ValueObservable<T>::getValue(), min, max));
@@ -92,6 +103,9 @@ class SpinInput
   T stepFast;
   T min;
   T max;
+
+  bool readOnly = false;
+  ImGuiInputTextFlags flags = {};
 };
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class SpinInput<int>;

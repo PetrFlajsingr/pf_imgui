@@ -26,6 +26,7 @@
 #include <utility>
 
 namespace pf::ui::ig {
+
 namespace details {
 /**
 * Underlying types supporting step.
@@ -220,6 +221,17 @@ public:
        DropTarget<T>(false),
        format(std::move(format)) {}
 
+ [[nodiscard]] bool isReadOnly() const { return readOnly; }
+
+ void setReadOnly(bool isReadOnly) {
+   readOnly = isReadOnly;
+   if (readOnly) {
+     flags |= ImGuiInputTextFlags_ReadOnly;
+   } else {
+     flags &= ~ImGuiInputTextFlags_ReadOnly;
+   }
+ }
+
 protected:
  void unserialize_impl(const toml::table &src) override {
    if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
@@ -246,31 +258,31 @@ protected:
    auto valueChanged = false;
    const auto address = ValueObservable<T>::getValueAddress();
    if constexpr (std::same_as<T, float>) {
-     valueChanged = ImGui::InputFloat(getLabel().c_str(), address, data.step, data.fastStep, format.c_str());
+     valueChanged = ImGui::InputFloat(getLabel().c_str(), address, data.step, data.fastStep, format.c_str(), flags);
    }
    if constexpr (std::same_as<T, glm::vec2>) {
-     valueChanged = ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*address));
+     valueChanged = ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*address), format.c_str(), flags);
    }
    if constexpr (std::same_as<T, glm::vec3>) {
-     valueChanged = ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*address));
+     valueChanged = ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*address), format.c_str(), flags);
    }
    if constexpr (std::same_as<T, glm::vec4>) {
-     valueChanged = ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*address));
+     valueChanged = ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*address), format.c_str(), flags);
    }
    if constexpr (std::same_as<T, int>) {
      valueChanged = ImGui::InputInt(getLabel().c_str(), address, data.step, data.fastStep);
    }
    if constexpr (std::same_as<T, glm::ivec2>) {
-     valueChanged = ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*address));
+     valueChanged = ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*address), flags);
    }
    if constexpr (std::same_as<T, glm::ivec3>) {
-     valueChanged = ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*address));
+     valueChanged = ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*address), flags);
    }
    if constexpr (std::same_as<T, glm::ivec4>) {
-     valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*address));
+     valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*address), flags);
    }
    if constexpr (std::same_as<T, double>) {
-     valueChanged = ImGui::InputDouble(getLabel().c_str(), address, data.step, data.fastStep, format.c_str());
+     valueChanged = ImGui::InputDouble(getLabel().c_str(), address, data.step, data.fastStep, format.c_str(), flags);
    }
    DragSource<T>::drag(ValueObservable<T>::getValue());
    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
@@ -282,6 +294,8 @@ protected:
 
 private:
  std::string format;
+ bool readOnly = false;
+ ImGuiInputTextFlags flags = {};
 };
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class Input<float>;

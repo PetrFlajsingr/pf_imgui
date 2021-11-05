@@ -83,7 +83,7 @@ class PF_IMGUI_EXPORT InputText : public Text,
    * Check if the input renders all characters as hidden.
    * @return
    */
-  bool isPassword() const;
+  [[nodiscard]] bool isPassword() const;
   /**
    * Set if the input renders all characters as hidden;
    * @param password

@@ -16,6 +16,7 @@
 
 namespace pf::ui::ig {
 
+// TODO: flags
 /**
  * @brief Structure for organising UI elements in a tree.
  *

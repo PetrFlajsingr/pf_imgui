@@ -18,6 +18,11 @@ namespace pf::ui::ig {
 
 enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, ItemsAll = 1 << 4 };
 
+// TODO:
+// ImGuiComboFlags_PopupAlignLeft
+// ImGuiComboFlags_NoArrowButton
+// ImGuiComboFlags_NoPreview
+
 /**
  * @brief Combobox where rows can be whatever is provided by the user.
  *

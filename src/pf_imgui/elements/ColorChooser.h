@@ -26,6 +26,13 @@
 
 namespace pf::ui::ig {
 
+// TODO:
+// ImGuiColorEditFlags_NoSmallPreview
+// ImGuiColorEditFlags_NoInputs
+// ImGuiColorEditFlags_NoLabel
+// ImGuiColorEditFlags_NoSidePreview
+//
+
 /**
  * @brief An element allowing for selecting a color intuitively.
  *
