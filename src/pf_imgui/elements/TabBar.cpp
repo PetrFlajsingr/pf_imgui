@@ -28,8 +28,8 @@ void Tab::renderImpl() {
 
   const auto wasOpen = isOpen();
   const auto wasSelected = selected;
-  const auto flags = setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None;
-  selected = ImGui::BeginTabItem(getLabel().c_str(), open, flags);
+  const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
+  selected = ImGui::BeginTabItem(getLabel().c_str(), open, frameFlags);
   if (selected) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
     ImGui::EndTabItem();
