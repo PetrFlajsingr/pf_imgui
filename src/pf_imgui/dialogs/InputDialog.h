@@ -39,11 +39,11 @@ class InputDialog : public ModalDialog {
     createChild<Text>(getName() + "text", message);
     auto &input = createChild<InputText>(getName() + "input", "", "", TextInputType::MultiLine);
     auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
-    btnLayout.createChild<Button>(getName() + "_button_ok", "Ok").template addClickListener([this, &input] {
+    btnLayout.createChild<Button>(getName() + "_button_ok", "Ok").addClickListener([this, &input] {
       inputDone(input.getText());
       close();
     });
-    btnLayout.createChild<Button>(getName() + "_button_cancel", "Cancel").template addClickListener([this] {
+    btnLayout.createChild<Button>(getName() + "_button_cancel", "Cancel").addClickListener([this] {
       cancelClicked();
       close();
     });
