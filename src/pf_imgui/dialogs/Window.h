@@ -10,8 +10,8 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/elements/DockSpace.h>
+#include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Focusable.h>
@@ -75,12 +75,12 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    * Window min size constraints.
    * @return
    */
-  const std::optional<Size> &getMinSizeConstraint() const;
+  [[nodiscard]] const std::optional<Size> &getMinSizeConstraint() const;
   /**
    * Window max size constraints.
    * @return
    */
-  const std::optional<Size> &getMaxSizeConstraint() const;
+  [[nodiscard]] const std::optional<Size> &getMaxSizeConstraint() const;
   /**
    * Min size constraints for window - window can't be smaller.
    * @param sizeConstraints
@@ -105,6 +105,61 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setFocus() override;
   void setCollapsed(bool collapsed) override;
   void setPosition(ImVec2 pos) override;
+
+  /**
+   * Check if user can resize the window.
+   * @return true if resizable
+   */
+  [[nodiscard]] bool isUserResizable() const;
+  /**
+   * Enable/disable user resizing the window.
+   * @param resizable
+   */
+  void setUserResizable(bool resizable);
+
+  /**
+   * Check if the user can move the window.
+   * @return  true if movable
+   */
+  [[nodiscard]] bool isUserMovable() const;
+  /**
+   * Enable/disable user moving the window.
+   * @param movable
+   */
+  void setUserMovable(bool movable);
+
+  /**
+   * Check if the window auto resizes to fix its content.
+   * @return
+   */
+  [[nodiscard]] bool isAutoResize() const;
+  /**
+   * Enable/disable window auto resizing to fit its content.
+   * @param autoResize
+   */
+  void setAutoResize(bool autoResize);
+
+  /**
+   * Check if horizontal scroll is allowed when content is bigger than the window.
+   * @return
+   */
+  [[nodiscard]] bool isHorizontalScrollEnabled() const;
+  /**
+   * Enable/disable horizontal scroll when the content is bigger than the window.
+   * @param horizontalScroll
+   */
+  void setHorizontalScrollEnabled(bool horizontalScroll);
+
+  /**
+   * Check if a dot is displayed in the top bar of the window.
+   * @return
+   */
+  [[nodiscard]] bool isDisplayDot() const;
+  /**
+   * Enable/disable displaying a dot in the top bar of the window.
+   * @param display
+   */
+  void setDisplayDot(bool display);
 
   /**
    *
@@ -174,10 +229,16 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool firstPass = true;
 
   ImGuiWindowFlags createWindowFlags();
+
   ImFont *font = nullptr;
 
   std::optional<ImGuiID> dockInto = std::nullopt;
   bool isWindowDocked = false;
+  bool userResizable = true;
+  bool userMovable = true;
+  bool autoResizeToContent = false;
+  bool enableHorizontalScroll = true;
+  bool displayDot = false;
 };
 
 }// namespace pf::ui::ig
