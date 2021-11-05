@@ -20,6 +20,9 @@ void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
 Tab::Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods, bool closeable)
     : TabButton(elementName, label, mods), open(closeable ? new bool{true} : nullptr) {}
 
+Tab::Tab(const std::string &elementName, const std::string &label, bool closeable)
+    : Tab(elementName, label, Flags<TabMod>{}, closeable) {}
+
 Tab::~Tab() { delete open; }
 
 void Tab::renderImpl() {
@@ -68,6 +71,10 @@ void TabBar::renderImpl() {
 Tab &TabBar::addTab(const std::string &name, const std::string &caption, const Flags<TabMod> &mods, bool closeable) {
   tabs.emplace_back(std::make_unique<Tab>(name, caption, mods, closeable));
   return dynamic_cast<Tab &>(*tabs.back());
+}
+
+Tab &TabBar::addTab(const std::string &name, const std::string &caption, bool closeable) {
+  return addTab(name, caption, Flags<TabMod>{}, closeable);
 }
 
 TabButton &TabBar::addTabButton(const std::string &name, const std::string &caption, const Flags<TabMod> &mods) {

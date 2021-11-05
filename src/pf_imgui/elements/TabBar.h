@@ -55,10 +55,17 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   /**
   * Construct Tab.
   * @param elementName ID of the Tab
+  * @param mods modifiers
   * @param label text rendered on the Tab
   */
   Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{},
       bool closeable = false);
+  /**
+  * Construct Tab.
+  * @param elementName ID of the Tab
+  * @param label text rendered on the Tab
+  */
+  Tab(const std::string &elementName, const std::string &label, bool closeable = false);
 
   ~Tab() override;
 
@@ -112,10 +119,18 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
   * Create a new Tab.
   * @param name ID of the Tab
   * @param caption text rendered on the Tab
+  * @param mods modifiers
   * @return reference to the newly created Tab
   */
   Tab &addTab(const std::string &name, const std::string &caption, const Flags<TabMod> &mods = Flags<TabMod>{},
               bool closeable = false);
+  /**
+  * Create a new Tab.
+  * @param name ID of the Tab
+  * @param caption text rendered on the Tab
+  * @return reference to the newly created Tab
+  */
+  Tab &addTab(const std::string &name, const std::string &caption, bool closeable = false);
   /**
   * Create a new TabButton.
   * @param name ID of the TabButton
