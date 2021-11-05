@@ -134,7 +134,7 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
   * @param caption text rendered on the Tab
   * @return reference to the newly created Tab
   */
-  Tab &addTab(const std::string &name, const std::string &caption, bool closeable = false);
+  Tab &addTab(const std::string &name, const std::string &caption, bool closeable);
   /**
   * Create a new TabButton.
   * @param name ID of the TabButton
