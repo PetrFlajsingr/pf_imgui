@@ -209,6 +209,15 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
    */
   void setResizePolicy(const Flags<ResizePolicy> &newPolicy);
 
+  [[nodiscard]] inline auto getTabButtons() const {
+    return tabs | std::views::transform([](auto &btn) -> TabButton & { return *btn; });
+  }
+
+  [[nodiscard]] inline auto getTabs() const {
+    return tabs | std::views::filter([](auto &tabButton) { return dynamic_cast<Tab *>(tabButton.get()) != nullptr; })
+        | std::views::transform([](auto &tab) -> Tab & { return *dynamic_cast<Tab *>(tab.get()); });
+  }
+
   std::vector<Renderable *> getRenderables() override;
 
  protected:
