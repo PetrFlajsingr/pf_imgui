@@ -85,7 +85,7 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
 
   [[nodiscard]] bool isSelected() const;
 
-  void setOpen();
+  void setOpen(bool newOpen);
 
   void setSelected();
 

@@ -47,8 +47,8 @@ void Tab::renderImpl() {
 
 bool Tab::isOpen() const { return open == nullptr || *open; }
 
-void Tab::setOpen() {
-  if (open != nullptr) { *open = true; }
+void Tab::setOpen(bool newOpen) {
+  if (open != nullptr) { *open = newOpen; }
 }
 
 bool Tab::isSelected() const { return selected; }
