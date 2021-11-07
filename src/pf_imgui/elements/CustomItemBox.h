@@ -102,6 +102,13 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
     refilterItems();
   }
   /**
+   * Remove all items.
+   */
+  void clearItems() {
+    items.clear();
+    refilterItems();
+  }
+  /**
   * Set filter by which shown items are filtered.
   * @param filterFnc
   */
