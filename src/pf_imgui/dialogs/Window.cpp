@@ -171,5 +171,11 @@ std::vector<Renderable *> Window::getRenderables() {
   if (menuBar != nullptr) { result.emplace_back(menuBar.get()); }
   return result;
 }
+bool Window::isTitleBarVisible() const {
+  return titleBarVisible;
+}
+void Window::setTitleBarVisible(bool visible) {
+  titleBarVisible = visible;
+}
 
 }// namespace pf::ui::ig

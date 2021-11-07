@@ -188,16 +188,12 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    *
    * @return true if the top bar of the window is being rendered
    */
-  [[nodiscard]] bool isTitleBarVisible() const {
-    return titleBarVisible;
-  }
+  [[nodiscard]] bool isTitleBarVisible() const;
   /**
    * Set visibility of top bar of the window.
    * @param visible
    */
-  void setTitleBarVisible(bool visible) {
-      titleBarVisible = visible;
-  }
+  void setTitleBarVisible(bool visible);
 
   /**
    * Add a listener for close event.
