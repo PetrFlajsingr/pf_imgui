@@ -185,6 +185,21 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setCloseable(bool closeable);
 
   /**
+   *
+   * @return true if the top bar of the window is being rendered
+   */
+  [[nodiscard]] bool isTitleBarVisible() const {
+    return titleBarVisible;
+  }
+  /**
+   * Set visibility of top bar of the window.
+   * @param visible
+   */
+  void setTitleBarVisible(bool visible) {
+      titleBarVisible = visible;
+  }
+
+  /**
    * Add a listener for close event.
    *
    * This event is triggered when X button is clicked.
@@ -239,6 +254,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool autoResizeToContent = false;
   bool enableHorizontalScroll = true;
   bool displayDot = false;
+  bool titleBarVisible = true;
 };
 
 }// namespace pf::ui::ig

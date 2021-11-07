@@ -125,7 +125,7 @@ void Window::setDisplayDot(bool display) { displayDot = display; }
 ImGuiWindowFlags Window::createWindowFlags() {
   ImGuiWindowFlags result = hasMenuBar() ? ImGuiWindowFlags_MenuBar : ImGuiWindowFlags{};
   if (!isCollapsible()) { result |= ImGuiWindowFlags_NoCollapse; }
-  if (getLabel().empty()) { result |= ImGuiWindowFlags_NoTitleBar; }
+  if (!titleBarVisible) { result |= ImGuiWindowFlags_NoTitleBar; }
   if (!isDockArea) { result |= ImGuiWindowFlags_NoDocking; }
   if (!userResizable) { result |= ImGuiWindowFlags_NoResize; }
   if (!userMovable) { result |= ImGuiWindowFlags_NoMove; }
