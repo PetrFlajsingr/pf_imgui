@@ -27,6 +27,9 @@ template<typename... Args>
 class PF_IMGUI_EXPORT Observable_impl {
  public:
   Observable_impl() = default;
+  Observable_impl(const Observable_impl &) = delete;
+  Observable_impl &operator=(const Observable_impl &) = delete;
+
   Observable_impl(Observable_impl &&other) noexcept
       : listeners(std::move(other.listeners)), idGenerator(std::move(other.idGenerator)) {}
   Observable_impl &operator=(Observable_impl &&rhs) noexcept {
@@ -34,6 +37,8 @@ class PF_IMGUI_EXPORT Observable_impl {
     idGenerator = std::move(rhs.idGenerator);
     return *this;
   }
+
+  virtual ~Observable_impl() { *exists = false; }
 
   /**
    * Add a listener and return a Subscription object which can be used to unregister it.
@@ -44,7 +49,10 @@ class PF_IMGUI_EXPORT Observable_impl {
   Subscription addListener(std::invocable<const Args &...> auto fnc) {
     const auto id = generateListenerId();
     listeners[id] = fnc;
-    return Subscription([id, this] { listeners.erase(id); });
+    return Subscription([id, this, observableExists = exists] {
+      if (!*observableExists) { return; }
+      listeners.erase(id);
+    });
   }
 
   /**
@@ -63,6 +71,7 @@ class PF_IMGUI_EXPORT Observable_impl {
 
   std::unordered_map<ListenerId, Callback> listeners{};
   cppcoro::generator<ListenerId> idGenerator = iota<ListenerId>();
+  std::shared_ptr<bool> exists = std::make_shared<bool>(true);
 };
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
