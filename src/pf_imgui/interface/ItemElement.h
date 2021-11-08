@@ -94,6 +94,15 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
   [[nodiscard]] PopupMenu &createPopupMenu();
 
   /**
+   * Add a listener to mouse position. Returned value is distance from upper left corner of the element area.
+   * @param listener
+   * @return Subscription to allow for listener removal
+   */
+  Subscription addMousePositionListener(std::invocable<ImVec2> auto &&listener) {
+    return mousePositionObservable.addListener(std::forward<decltype(listener)>(listener));
+  }
+
+  /**
    * Set focus state and keyboard focus for this item.
    */
   void setFocus() override;
@@ -101,6 +110,9 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
  private:
   std::unique_ptr<Tooltip> tooltip = nullptr;
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
+
+  ImVec2 lastMousePosition{-1, -1};
+  Observable_impl<ImVec2> mousePositionObservable;
 };
 
 }// namespace pf::ui::ig
