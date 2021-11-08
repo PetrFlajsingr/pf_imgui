@@ -34,8 +34,8 @@ void Tab::renderImpl() {
   const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
   selected = ImGui::BeginTabItem(getLabel().c_str(), open, frameFlags);
   if (selected) {
+    RAII end{[] { ImGui::EndTabItem(); }};
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
-    ImGui::EndTabItem();
   }
   if (open != nullptr && *open != wasOpen) { openObservable.notify(*open); }
   if (wasSelected != selected) {
@@ -63,8 +63,8 @@ void TabBar::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   if (ImGui::BeginTabBar(getName().c_str(), flags)) {
+    RAII end{[] { ImGui::EndTabBar(); }};
     std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });
-    ImGui::EndTabBar();
   }
 }
 

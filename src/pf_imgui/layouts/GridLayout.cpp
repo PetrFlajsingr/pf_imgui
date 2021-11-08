@@ -32,6 +32,7 @@ void GridLayout::renderImpl() {
   auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  RAII end{[&] { ImGui::EndChild(); }};
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
     if (renderCollapseButton()) {
       const auto xCellSize = getSize().width.value / width;
@@ -49,7 +50,6 @@ void GridLayout::renderImpl() {
       }
     }
   }
-  ImGui::EndChild();
 }
 uint32_t GridLayout::indexForCell(uint32_t column, uint32_t row) const { return row * width + column; }
 ResizableLayout &GridLayout::getCellLayout(uint32_t column, uint32_t row) {
