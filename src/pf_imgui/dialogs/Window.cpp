@@ -23,6 +23,7 @@ void Window::renderImpl() {
   auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
+  RAII endPopup{[] { ImGui::End(); }};
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
@@ -51,7 +52,6 @@ void Window::renderImpl() {
       }
     }
   }
-  ImGui::End();
   if (!isNotClosed) {
     closeObservableImpl.notify();
     setVisibility(Visibility::Invisible);
