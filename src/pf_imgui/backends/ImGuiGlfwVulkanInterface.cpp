@@ -128,6 +128,13 @@ void ImGuiGlfwVulkanInterface::render() {
   ImGui_ImplVulkan_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
+  RAII endFrameRAII{[&] {
+    ImGui::Render();
+    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+      ImGui::UpdatePlatformWindows();
+      ImGui::RenderPlatformWindowsDefault();
+    }
+  }};
   if (getVisibility() == Visibility::Visible) {
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
@@ -140,11 +147,6 @@ void ImGuiGlfwVulkanInterface::render() {
     } else {
       renderImpl();
     }
-  }
-  ImGui::Render();
-  if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-    ImGui::UpdatePlatformWindows();
-    ImGui::RenderPlatformWindowsDefault();
   }
 }
 void ImGuiGlfwVulkanInterface::renderImpl() {

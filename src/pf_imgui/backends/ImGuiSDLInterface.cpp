@@ -5,8 +5,8 @@
 #include "ImGuiSDLInterface.h"
 
 pf::ui::ig::ImGuiSDLInterface::ImGuiSDLInterface(const pf::ui::ig::ImGuiSDLConfig &config)
-    : ImGuiInterface(config.flags, config.config, config.enableMultiViewport,
-                     config.pathToIconFolder, config.enabledIconPacks, config.defaultFontSize) {
+    : ImGuiInterface(config.flags, config.config, config.enableMultiViewport, config.pathToIconFolder,
+                     config.enabledIconPacks, config.defaultFontSize) {
   ImGui_ImplSDL2_InitForSDLRenderer(config.windowHandle);
   ImGui_ImplSDLRenderer_Init(config.renderer);
   updateFonts();
@@ -29,6 +29,14 @@ void pf::ui::ig::ImGuiSDLInterface::render() {
   ImGui_ImplSDLRenderer_NewFrame();
   ImGui_ImplSDL2_NewFrame();
   ImGui::NewFrame();
+  RAII endFrameRAII{[&] {
+    ImGui::Render();
+    ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+      ImGui::UpdatePlatformWindows();
+      ImGui::RenderPlatformWindowsDefault();
+    }
+  }};
   if (getVisibility() == Visibility::Visible) {
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
@@ -41,12 +49,6 @@ void pf::ui::ig::ImGuiSDLInterface::render() {
     } else {
       renderImpl();
     }
-  }
-  ImGui::Render();
-  ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
-  if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-    ImGui::UpdatePlatformWindows();
-    ImGui::RenderPlatformWindowsDefault();
   }
 }
 

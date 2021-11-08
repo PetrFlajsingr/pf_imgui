@@ -1,5 +1,4 @@
 ### TODO
-* add RAII(finally) to all paired calls (BeginChild etc)
 * Check the icon stuff in ImguiFileDialog. 
 * Property editor for structs? -- https://gist.github.com/PetrFlajsingr/563f16764be0781572cded1a0e0405a3
 * ImGui-WS
