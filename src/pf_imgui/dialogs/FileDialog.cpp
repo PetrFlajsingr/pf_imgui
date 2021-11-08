@@ -41,15 +41,18 @@ void FileDialog::renderImpl() {
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, openPath.string(), defaultName, static_cast<int>(maxSelectCount));
+      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, openPath.string(), defaultName,
+                                   static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, openPath.string(), defaultName, static_cast<int>(maxSelectCount));
+      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, openPath.string(), defaultName,
+                                    static_cast<int>(maxSelectCount));
       break;
   }
   setExtInfos();
 
   if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize().asImVec())) {
+    RAII end{[&] { fileDialogInstance.Close(); }};
     if (fileDialogInstance.IsOk()) {
       const auto filePathName = fileDialogInstance.GetFilePathName();
       const auto selection = fileDialogInstance.GetSelection();
@@ -65,7 +68,6 @@ void FileDialog::renderImpl() {
     } else {
       onSelectCanceled();
     }
-    fileDialogInstance.Close();
     done = true;
   }
 }

@@ -7,10 +7,10 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
 #define PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
 
-#include <memory>
 #include <filesystem>
 #include <functional>
 #include <imgui.h>
+#include <memory>
 #include <optional>
 #include <pf_common/enums.h>
 #include <pf_imgui/icons.h>

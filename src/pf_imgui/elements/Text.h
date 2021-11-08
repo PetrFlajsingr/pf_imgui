@@ -25,48 +25,48 @@ namespace pf::ui::ig {
 * @todo: text wrapping
 */
 class PF_IMGUI_EXPORT Text
-   : public ItemElement,
-     public DragSource<std::string>,
-     public DropTarget<std::string>,
-     public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget> {
-public:
- /**
+    : public ItemElement,
+      public DragSource<std::string>,
+      public DropTarget<std::string>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget> {
+ public:
+  /**
   * Construct Text.
   * @param elementName ID of the element
   * @param text text to be rendered
   */
- Text(const std::string &elementName, std::string text);
- /**
+  Text(const std::string &elementName, std::string text);
+  /**
   * Construct Text.
   * @param elementName ID of the element
   * @param text text to be rendered
   * @param textColor color of the text RGBA
   */
- Text(const std::string &elementName, std::string text, ImVec4 textColor);
+  Text(const std::string &elementName, std::string text, ImVec4 textColor);
 
- /**
+  /**
   * Get rendered text.
   * @return text
   */
- [[nodiscard]] const std::string &getText() const;
- /**
+  [[nodiscard]] const std::string &getText() const;
+  /**
   * Set new text for rendering
   * @param text new text to set
   * @param args values to insert into text using fmt::format
   */
- template<typename... Args>
- void setText(const std::string &fmt, Args &&...args) {
-   setTextInner(fmt::format(fmt, std::forward<Args>(args)...));
- }
+  template<typename... Args>
+  void setText(const std::string &fmt, Args &&...args) {
+    setTextInner(fmt::format(fmt, std::forward<Args>(args)...));
+  }
 
-protected:
- void renderImpl() override;
+ protected:
+  void renderImpl() override;
 
- virtual void setTextInner(std::string txt);
+  virtual void setTextInner(std::string txt);
 
-private:
- std::string text;
- std::optional<ImVec4> color;
+ private:
+  std::string text;
+  std::optional<ImVec4> color;
 };
 
 }// namespace pf::ui::ig

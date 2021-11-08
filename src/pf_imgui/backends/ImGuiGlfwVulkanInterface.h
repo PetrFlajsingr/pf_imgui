@@ -6,9 +6,9 @@
 #define PF_IMGUI_SRC_PF_IMGUI_BACKENDS_IMGUIGLFWVULKANINTERFACE_H
 
 #include <GLFW/glfw3.h>
+#include <optional>
 #include <pf_imgui/ImGuiInterface.h>
 #include <vulkan/vulkan.h>
-#include <optional>
 
 namespace pf::ui::ig {
 struct ImGuiVulkanGlfwConfig {

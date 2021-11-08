@@ -102,9 +102,10 @@ enum class Style : int {
 constexpr bool isFloatStyle(Style style) {
   return isIn(style,
               std::array<Style, 15>{Style::Alpha, Style::WindowRounding, Style::WindowBorderSize, Style::ChildRounding,
-                          Style::ChildBorderSize, Style::PopupRounding, Style::PopupBorderSize, Style::FrameRounding,
-                          Style::FrameBorderSize, Style::IndentSpacing, Style::ScrollbarSize, Style::ScrollbarRounding,
-                          Style::GrabMinSize, Style::GrabRounding, Style::TabRounding});
+                                    Style::ChildBorderSize, Style::PopupRounding, Style::PopupBorderSize,
+                                    Style::FrameRounding, Style::FrameBorderSize, Style::IndentSpacing,
+                                    Style::ScrollbarSize, Style::ScrollbarRounding, Style::GrabMinSize,
+                                    Style::GrabRounding, Style::TabRounding});
 }
 
 }// namespace pf::ui::ig::style

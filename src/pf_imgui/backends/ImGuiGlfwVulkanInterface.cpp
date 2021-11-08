@@ -169,7 +169,8 @@ void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
                {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, DESCRIPTOR_COUNT},
                {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, DESCRIPTOR_COUNT},
                {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, DESCRIPTOR_COUNT},
-               {VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, DESCRIPTOR_COUNT}};;
+               {VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, DESCRIPTOR_COUNT}};
+  ;
   descPoolConfig.poolSizeCount = poolSizes.size();
   descPoolConfig.pPoolSizes = poolSizes.data();
   descPoolConfig.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;

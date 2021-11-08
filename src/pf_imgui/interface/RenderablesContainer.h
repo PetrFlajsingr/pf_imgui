@@ -17,6 +17,7 @@ class RenderablesContainer : public AllColorCustomizable, public AllStyleCustomi
    */
   virtual std::vector<Renderable *> getRenderables() = 0;
   virtual ~RenderablesContainer() = default;
+
  protected:
   using AllColorCustomizable::setColorStack;
   using AllStyleCustomizable::setStyleStack;

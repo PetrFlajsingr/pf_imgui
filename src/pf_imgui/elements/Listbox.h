@@ -107,8 +107,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
     if constexpr (std::equality_comparable<T>) {
-      if (const auto iter = std::ranges::find_if(
-              items, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
+      if (const auto iter =
+              std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != items.end()) {
         const auto index = std::distance(items.begin(), iter);
         setSelectedItemByIndex(index);
@@ -125,7 +125,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-            filteredItems, [itemAsString](const auto &item) { return item->second->getLabel()  == itemAsString; });
+            filteredItems, [itemAsString](const auto &item) { return item->second->getLabel() == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);

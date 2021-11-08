@@ -9,8 +9,8 @@
 #define PF_IMGUI_ELEMENTS_MEMORYEDITOR_H
 
 #include <imgui_memory_editor.h>
-#include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Customizable.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <ranges>
 
 namespace pf::ui::ig {

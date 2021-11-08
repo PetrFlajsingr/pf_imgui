@@ -48,7 +48,8 @@ MenuButtonItem &MenuContainer::addButtonItem(const std::string &name, const std:
   return addItem<MenuButtonItem>(name, caption);
 }
 
-MenuCheckboxItem &MenuContainer::addCheckboxItem(const std::string &name, const std::string &caption, bool value, Persistent persistent) {
+MenuCheckboxItem &MenuContainer::addCheckboxItem(const std::string &name, const std::string &caption, bool value,
+                                                 Persistent persistent) {
   return addItem<MenuCheckboxItem>(name, caption, value, persistent);
 }
 

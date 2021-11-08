@@ -40,7 +40,7 @@ bool details::DragSourceBase::drag_impl(const std::string &typeName, const void 
 
 bool details::DragSourceBase::hasDragTooltip() const { return tooltip != nullptr; }
 Tooltip &details::DragSourceBase::getDragTooltip() {
-#ifndef _MSC_VER // TODO: MSVC internal error
+#ifndef _MSC_VER// TODO: MSVC internal error
   if (tooltip == nullptr) { throw StackTraceException("Drag tooltip doesn't exist."); }
 #endif
   return *tooltip;

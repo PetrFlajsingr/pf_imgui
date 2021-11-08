@@ -10,22 +10,22 @@
 
 #include <cstdint>
 #include <imgui.h>
+#include <imgui_notify.h>
 #include <pf_common/enums.h>
 #include <type_traits>
-#include <imgui_notify.h>
 
 // TODO: add convenience operators for some enums
 namespace pf::ui::ig {
 enum class MouseButton {
- Left = ImGuiMouseButton_::ImGuiMouseButton_Left,
- Right = ImGuiMouseButton_::ImGuiMouseButton_Right,
- Middle = ImGuiMouseButton_::ImGuiMouseButton_Middle
+  Left = ImGuiMouseButton_::ImGuiMouseButton_Left,
+  Right = ImGuiMouseButton_::ImGuiMouseButton_Right,
+  Middle = ImGuiMouseButton_::ImGuiMouseButton_Middle
 };
 enum class NotificationType {
- Success = ImGuiToastType_Success,
- Warning = ImGuiToastType_Warning,
- Error = ImGuiToastType_Error,
- Info = ImGuiToastType_Info
+  Success = ImGuiToastType_Success,
+  Warning = ImGuiToastType_Warning,
+  Error = ImGuiToastType_Error,
+  Info = ImGuiToastType_Info
 };
 /**
 * Enum for selection.
@@ -36,7 +36,7 @@ enum class Selected { Yes, No };
 */
 enum class Visibility { Visible, Invisible };
 inline Visibility operator!(Visibility visibility) {
- return visibility == Visibility::Visible ? Visibility::Invisible : Visibility::Visible;
+  return visibility == Visibility::Visible ? Visibility::Invisible : Visibility::Visible;
 }
 /**
 * Enum for modality of dialogs.
@@ -54,12 +54,12 @@ enum class PlotType { Lines, Histogram };
 * Enum for button type, which changes the shape of a button.
 */
 enum class ButtonType {
- Normal,     /*!< Typical button with label in the clickable area */
- Small,      /*!< Smaller version of a button */
- ArrowUp,    /*!< Button without a label with an up aiming arrow */
- ArrowLeft,  /*!< Button without a label with a left aiming arrow */
- ArrowRight, /*!< Button without a label with a right aiming arrow */
- ArrowDown   /*!< Button without a label with a down aiming arrow */
+  Normal,     /*!< Typical button with label in the clickable area */
+  Small,      /*!< Smaller version of a button */
+  ArrowUp,    /*!< Button without a label with an up aiming arrow */
+  ArrowLeft,  /*!< Button without a label with a left aiming arrow */
+  ArrowRight, /*!< Button without a label with a right aiming arrow */
+  ArrowDown   /*!< Button without a label with a down aiming arrow */
 };
 /**
 * Enable/disable repeatable behavior.
@@ -119,17 +119,17 @@ enum class TableBorder : uint16_t {
 * @return ImGUi flags
 */
 inline ImGuiTableFlags createFlags(Flags<TableBorder> tableBorder, bool resizable, bool reorderable, bool sortable,
-                                  bool hideable) {
- auto result = ImGuiTableFlags{};
- if (tableBorder.is(TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
- if (tableBorder.is(TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
- if (tableBorder.is(TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
- if (tableBorder.is(TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }
- if (resizable) { result |= ImGuiTableFlags_Resizable; }
- if (reorderable) { result |= ImGuiTableFlags_Reorderable; }
- if (sortable) { result |= ImGuiTableFlags_Sortable; }
- if (hideable) { result |= ImGuiTableFlags_Hideable; }
- return result;
+                                   bool hideable) {
+  auto result = ImGuiTableFlags{};
+  if (tableBorder.is(TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
+  if (tableBorder.is(TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
+  if (tableBorder.is(TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
+  if (tableBorder.is(TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }
+  if (resizable) { result |= ImGuiTableFlags_Resizable; }
+  if (reorderable) { result |= ImGuiTableFlags_Reorderable; }
+  if (sortable) { result |= ImGuiTableFlags_Sortable; }
+  if (hideable) { result |= ImGuiTableFlags_Hideable; }
+  return result;
 }
 /**
 * Enum for stretch type of StretchLayout.

@@ -65,7 +65,7 @@ void BoxLayout::renderLeftToRight() {
 
 void BoxLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
 void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
-#ifndef _MSC_VER // TODO: MSVC internal error
+#ifndef _MSC_VER// TODO: MSVC internal error
   if (index > children.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
 #endif
   children.insert(children.begin() + index, std::move(child));

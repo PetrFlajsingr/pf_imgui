@@ -202,9 +202,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    * @param listener to be called on event
    * @return Subscription for listener cancelation
    */
-  Subscription addCloseListener(std::invocable auto listener) {
-    return closeObservableImpl.addListener(listener);
-  }
+  Subscription addCloseListener(std::invocable auto listener) { return closeObservableImpl.addListener(listener); }
 
   /**
    *
