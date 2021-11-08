@@ -1070,6 +1070,7 @@ namespace IGFD
 	private:
 		FileDialogInternal prFileDialogInternal;
 		ImGuiListClipper prFileListClipper;
+        bool endCalled = false;
 
 	public:
 		bool puAnyWindowsHovered = false;							// not remember why haha :) todo : to check if we can remove
