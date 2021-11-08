@@ -23,6 +23,7 @@ void AbsoluteLayout::renderImpl() {
   auto style = setStyleStack();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  RAII end{[&] { ImGui::EndChild(); }};
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
     if (renderCollapseButton()) {
       std::ranges::for_each(children, [](auto &childPair) {
@@ -32,7 +33,6 @@ void AbsoluteLayout::renderImpl() {
       });
     }
   }
-  ImGui::EndChild();
 }
 void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) {
   if (auto child =
@@ -40,7 +40,7 @@ void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) 
       child.has_value()) {
     child.value()->second->setPosition(position);
   } else {
-#ifndef _MSC_VER // TODO: MSVC internal compiler error
+#ifndef _MSC_VER// TODO: MSVC internal compiler error
     throw IdNotFoundException("Child not found: {}", name);
 #endif
   }

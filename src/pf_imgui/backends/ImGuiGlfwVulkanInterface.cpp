@@ -128,6 +128,13 @@ void ImGuiGlfwVulkanInterface::render() {
   ImGui_ImplVulkan_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
+  RAII endFrameRAII{[&] {
+    ImGui::Render();
+    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+      ImGui::UpdatePlatformWindows();
+      ImGui::RenderPlatformWindowsDefault();
+    }
+  }};
   if (getVisibility() == Visibility::Visible) {
     if (getEnabled() == Enabled::No) {
       ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
@@ -140,11 +147,6 @@ void ImGuiGlfwVulkanInterface::render() {
     } else {
       renderImpl();
     }
-  }
-  ImGui::Render();
-  if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-    ImGui::UpdatePlatformWindows();
-    ImGui::RenderPlatformWindowsDefault();
   }
 }
 void ImGuiGlfwVulkanInterface::renderImpl() {
@@ -167,7 +169,8 @@ void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
                {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, DESCRIPTOR_COUNT},
                {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, DESCRIPTOR_COUNT},
                {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, DESCRIPTOR_COUNT},
-               {VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, DESCRIPTOR_COUNT}};;
+               {VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, DESCRIPTOR_COUNT}};
+  ;
   descPoolConfig.poolSizeCount = poolSizes.size();
   descPoolConfig.pPoolSizes = poolSizes.data();
   descPoolConfig.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;

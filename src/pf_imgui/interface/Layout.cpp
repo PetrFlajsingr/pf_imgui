@@ -25,8 +25,8 @@ bool Layout::renderCollapseButton() {
     const auto btnDir = isCollapsed() ? ImGuiDir_::ImGuiDir_Down : ImGuiDir_::ImGuiDir_Up;
     const auto origDrawPos = ImGui::GetCursorPos();
     ImGui::SetCursorPos(btnPos);
+    RAII resetCursorPos{[&] { ImGui::SetCursorPos(origDrawPos); }};
     if (ImGui::ArrowButton((getName() + "_collapse_btn").c_str(), btnDir)) { setCollapsed(!isCollapsed()); }
-    ImGui::SetCursorPos(origDrawPos);
   }
   return !isCollapsed();
 }

@@ -30,7 +30,7 @@ void StretchLayout::setStretch(Stretch newStretch) {
 }
 
 Element &StretchLayout::getChild() {
-#ifndef _MSC_VER // TODO: MSVC internal error
+#ifndef _MSC_VER// TODO: MSVC internal error
   if (child == nullptr) { throw StackTraceException("Child not present"); }
 #endif
   return *dynamic_cast<Element *>(child.get());
@@ -41,6 +41,7 @@ void StretchLayout::renderImpl() {
   auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  RAII end{[&] { ImGui::EndChild(); }};
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
     if (renderCollapseButton()) {
       const auto newSize = ImGui::GetContentRegionMax();
@@ -51,7 +52,6 @@ void StretchLayout::renderImpl() {
       renderableChild->render();
     }
   }
-  ImGui::EndChild();
 }
 
 std::vector<Renderable *> StretchLayout::getRenderables() { return {dynamic_cast<Renderable *>(child.get())}; }

@@ -88,7 +88,7 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     if (InputText(label, buf, IM_ARRAYSIZE(buf), flags))
       value_changed = DataTypeApplyOpFromText(buf, g.InputTextState.InitialTextA.Data, data_type, data_ptr, format);
   }
-  if (value_changed) MarkItemEdited(GImGui->LastItemData.ID); // TODO: check
+  if (value_changed) MarkItemEdited(GImGui->LastItemData.ID);// TODO: check
 
   return value_changed;
 }

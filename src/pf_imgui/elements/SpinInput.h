@@ -78,7 +78,8 @@ class SpinInput
       valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
     }
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast,  "%.3f", flags); // TODO: user provided format
+      valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
+                                      flags);// TODO: user provided format
     }
     if (valueChanged) {
       ValueObservable<T>::setValueInner(std::clamp(ValueObservable<T>::getValue(), min, max));

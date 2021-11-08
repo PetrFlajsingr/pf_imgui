@@ -5,7 +5,7 @@
 * Combobox/Listbox etc with elements as Element*(dynamic)
 * RadioGroup better layout, template
 * mouse move event? implemented in Image
-* 
+* On ImGuiFileDialog update RAII for Begin needs to be added
 
 # pf_imgui
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/99e9063c82c943bcb5425edd46173ee5)](https://app.codacy.com/gh/PetrFlajsingr/pf_imgui?utm_source=github.com&utm_medium=referral&utm_content=PetrFlajsingr/pf_imgui&utm_campaign=Badge_Grade_Settings)

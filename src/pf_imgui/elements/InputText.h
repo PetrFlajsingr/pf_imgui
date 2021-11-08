@@ -12,11 +12,11 @@
 #include <functional>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -41,11 +41,12 @@ enum class TextTrigger { Character, Enter };
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,
                                   public ValueObservable<std::string_view>,
-                                  public Savable/*,
+                                  public Savable /*,
                                   public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
                                                            style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
                                                            style::ColorOf::FrameBackgroundActive, style::ColorOf::TextSelectedBackground>,
-                                  public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> */{
+                                  public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> */
+{
  public:
   /**
    * Construct InputText.

@@ -23,6 +23,7 @@ void Window::renderImpl() {
   auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
+  RAII endPopup{[] { ImGui::End(); }};
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
@@ -51,7 +52,6 @@ void Window::renderImpl() {
       }
     }
   }
-  ImGui::End();
   if (!isNotClosed) {
     closeObservableImpl.notify();
     setVisibility(Visibility::Invisible);
@@ -171,11 +171,7 @@ std::vector<Renderable *> Window::getRenderables() {
   if (menuBar != nullptr) { result.emplace_back(menuBar.get()); }
   return result;
 }
-bool Window::isTitleBarVisible() const {
-  return titleBarVisible;
-}
-void Window::setTitleBarVisible(bool visible) {
-  titleBarVisible = visible;
-}
+bool Window::isTitleBarVisible() const { return titleBarVisible; }
+void Window::setTitleBarVisible(bool visible) { titleBarVisible = visible; }
 
 }// namespace pf::ui::ig

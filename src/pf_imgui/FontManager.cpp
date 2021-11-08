@@ -5,9 +5,9 @@
 #include "FontManager.h"
 #include <pf_common/Visitor.h>
 #include <pf_imgui/ImGuiInterface.h>
+#include <ranges>
 #include <utility>
 #include <variant>
-#include <ranges>
 
 namespace pf::ui::ig {
 
@@ -27,7 +27,7 @@ FontManager::FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::
       const auto fontConfig = fontConfigForIconPack(iconPack);
       const auto fontPath = iconDir / fileName;
       imguiInterface->getIo().Fonts->AddFontFromFileTTF(fontPath.string().c_str(), iconSize, &fontConfig.config,
-                                                   fontConfig.iconRange);
+                                                        fontConfig.iconRange);
     });
   });
 }
@@ -53,11 +53,11 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
   auto font = std::visit<ImFont *>(
       Visitor{[&, this](const std::filesystem::path &src) {
                 return imguiInterface->getIo().Fonts->AddFontFromFileTTF(src.string().c_str(), builder.fontSize,
-                                                                    &fontConfig);
+                                                                         &fontConfig);
               },
               [&, this](std::vector<std::byte> &src) {
-                return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(reinterpret_cast<void *>(src.data()), src.size(),
-                                                                      builder.fontSize, &fontConfig);
+                return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(reinterpret_cast<void *>(src.data()),
+                                                                           src.size(), builder.fontSize, &fontConfig);
               }},
       builder.source);
   for (auto &subfontBuilder : builder.subfonts) {
@@ -86,7 +86,7 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
       const auto fontConfig = fontConfigForIconPack(iconPack);
       const auto fontPath = iconDir / fileName;
       imguiInterface->getIo().Fonts->AddFontFromFileTTF(fontPath.string().c_str(), iconSize, &fontConfig.config,
-                                                   fontConfig.iconRange);
+                                                        fontConfig.iconRange);
     });
   });
   fonts.emplace(builder.name, font);

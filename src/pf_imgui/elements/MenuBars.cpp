@@ -15,8 +15,8 @@ void WindowMenuBar::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   if (ImGui::BeginMenuBar()) {
+    RAII end{[] { ImGui::EndMenuBar(); }};
     renderItems();
-    ImGui::EndMenuBar();
   }
 }
 
@@ -26,8 +26,8 @@ void AppMenuBar::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   if (ImGui::BeginMainMenuBar()) {
+    RAII end{[] { ImGui::EndMainMenuBar(); }};
     renderItems();
-    ImGui::EndMainMenuBar();
   }
 }
 

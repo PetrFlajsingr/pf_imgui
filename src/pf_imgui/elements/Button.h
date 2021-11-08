@@ -91,7 +91,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ItemElement, public Resizable, pu
    * @param isRepeatable enable/disable button can repeat its on click event when a user holds it
    */
   explicit InvisibleButton(const std::string &elementName, const Size &s = Size::Auto(),
-                  MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
+                           MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
 
  protected:
   /**

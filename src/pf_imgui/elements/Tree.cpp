@@ -25,8 +25,8 @@ void Tree::renderImpl() {
   ImGui::SetNextItemOpen(shouldBeOpen);
   setCollapsed(!ImGui::TreeNode(getLabel().c_str()));
   if (!isCollapsed()) {
+    RAII end{[] { ImGui::TreePop(); }};
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
-    ImGui::TreePop();
   }
 }
 

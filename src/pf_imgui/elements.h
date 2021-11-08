@@ -7,11 +7,16 @@
 #ifndef PF_IMGUI_ELEMENTS_H
 #define PF_IMGUI_ELEMENTS_H
 
+#include <pf_imgui/dialogs/FileDialog.h>
+#include <pf_imgui/dialogs/MessageDialog.h>
+#include <pf_imgui/dialogs/ModalDialog.h>
+#include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/Bullet.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/Checkbox.h>
 #include <pf_imgui/elements/ColorChooser.h>
 #include <pf_imgui/elements/Combobox.h>
+#include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/DragInput.h>
 #include <pf_imgui/elements/FlameGraph.h>
 #include <pf_imgui/elements/Group.h>
@@ -40,11 +45,6 @@
 #include <pf_imgui/elements/Tree.h>
 #include <pf_imgui/elements/VerticalSlider.h>
 #include <pf_imgui/elements/plots.h>
-#include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/layouts/layouts.h>
-#include <pf_imgui/dialogs/FileDialog.h>
-#include <pf_imgui/dialogs/MessageDialog.h>
-#include <pf_imgui/dialogs/ModalDialog.h>
-#include <pf_imgui/dialogs/Window.h>
 
 #endif//PF_IMGUI_ELEMENTS_H
