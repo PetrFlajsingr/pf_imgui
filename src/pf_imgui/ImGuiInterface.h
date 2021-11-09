@@ -51,7 +51,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
                           const std::filesystem::path &iconFontDirectory = ".",
-                          Flags<IconPack> enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
+                          const Flags<IconPack>& enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
 
   /**
    * Get ImGuiIO from ImGui::.
