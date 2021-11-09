@@ -145,7 +145,7 @@ class ImGuiToast {
       case ImGuiToastType_Warning: return {255, 255, 0, 255};// Yellow
       case ImGuiToastType_Error: return {255, 0, 0, 255};    // Error
       case ImGuiToastType_Info: return {0, 157, 255, 255};   // Blue
-      default: assert(false && "This should not be possible to reach"); break;
+      default: assert(false && "This should not be possible to reach"); return {};
     }
   }
 
@@ -156,7 +156,7 @@ class ImGuiToast {
       case ImGuiToastType_Warning: return ICON_FA_EXCLAMATION_TRIANGLE;
       case ImGuiToastType_Error: return ICON_FA_TIMES_CIRCLE;
       case ImGuiToastType_Info: return ICON_FA_INFO_CIRCLE;
-      default: assert(false && "This should not be possible to reach"); break;
+      default: assert(false && "This should not be possible to reach"); return {};
     }
   }
 
