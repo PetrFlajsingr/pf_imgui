@@ -84,6 +84,12 @@ Index of this file:
 #pragma GCC diagnostic ignored "-Wclass-memaccess"                  // [__GNUC__ >= 8] warning: 'memset/memcpy' clearing/writing an object of type 'xxxx' with no trivial copy-assignment; use assignment or value-initialization instead
 #endif
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wall"
+#pragma GCC diagnostic ignored "-Wextra"
+#pragma GCC diagnostic ignored "-Wformat-security"
+#pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion"
+
 //-------------------------------------------------------------------------
 // Data
 //-------------------------------------------------------------------------
@@ -8354,5 +8360,6 @@ void ImGui::TabItemLabelAndCloseButton(ImDrawList* draw_list, const ImRect& bb, 
         *out_just_closed = close_button_pressed;
 }
 
+#pragma GCC diagnostic pop
 
 #endif // #ifndef IMGUI_DISABLE

@@ -9,6 +9,7 @@
 #define PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
 
 #include <algorithm>
+#include <memory>
 #include <pf_common/Subscription.h>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>

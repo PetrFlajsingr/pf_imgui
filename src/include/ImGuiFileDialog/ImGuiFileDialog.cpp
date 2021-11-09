@@ -97,6 +97,13 @@ SOFTWARE.
 #include "stb/stb_image_resize.h"
 #endif // USE_THUMBNAILS
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wall"
+#pragma GCC diagnostic ignored "-Wextra"
+#pragma GCC diagnostic ignored "-Wformat-security"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wformat-zero-length"
+
 namespace IGFD
 {
 // float comparisons
@@ -4820,3 +4827,6 @@ IMGUIFILEDIALOG_API void ManageGPUThumbnails(ImGuiFileDialog* vContext)
   }
 }
 #endif // USE_THUMBNAILS
+
+
+#pragma GCC diagnostic pop

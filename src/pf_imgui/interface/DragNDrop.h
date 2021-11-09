@@ -195,7 +195,7 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
    * @return true if the value has been transferred
    */
   bool drag(const T &sourceData) {
-#ifdef STATIC_TYPE_INFO_USE_MEMBER_POINTER
+#if STATIC_TYPE_INFO_USE_MEMBER_POINTER == true
     const auto typeID = std::to_string(reinterpret_cast<std::uint32_t>(static_type_info::getTypeIndex<T>()));
 #else
     const auto typeID = std::to_string(static_type_info::getTypeIndex<T>());
@@ -248,7 +248,7 @@ class PF_IMGUI_EXPORT DropTarget : public details::DropTargetBase {
    * @return std::nullopt if no value was accepted, the value otherwise
    */
   std::optional<T> dropAccept() {
-#ifdef STATIC_TYPE_INFO_USE_MEMBER_POINTER
+#if STATIC_TYPE_INFO_USE_MEMBER_POINTER == true
     const auto typeID = std::to_string(reinterpret_cast<std::uint32_t>(static_type_info::getTypeIndex<T>()));
 #else
     const auto typeID = std::to_string(static_type_info::getTypeIndex<T>());

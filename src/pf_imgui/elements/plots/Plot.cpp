@@ -12,11 +12,12 @@ namespace pf::ui::ig {
 Plot::Plot(const std::string &elementName, const std::string &label, std::optional<std::string> xLabel,
            std::optional<std::string> yLabel, const Size &size)
     : Element(elementName), Labellable(label), Resizable(size), xLabel(std::move(xLabel)), yLabel(std::move(yLabel)) {}
-
+// TODO: flags
 void Plot::renderImpl() {
-  if (ImPlot::BeginPlot(getLabel().c_str(), xLabel.has_value() ? xLabel->c_str() : nullptr,
-                        yLabel.has_value() ? yLabel->c_str() : nullptr, getSize().asImVec())) {
+  if (ImPlot::BeginPlot(getLabel().c_str(), getSize().asImVec())) {
     RAII endPopup{[] { ImPlot::EndPlot(); }};
+    ImPlot::SetupAxis(ImAxis_X1, xLabel.has_value() ? xLabel->c_str() : nullptr);
+    ImPlot::SetupAxis(ImAxis_Y1, yLabel.has_value() ? yLabel->c_str() : nullptr);
     std::ranges::for_each(datas, [](auto &data) { data->render(); });
   }
 }

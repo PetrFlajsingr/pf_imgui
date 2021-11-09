@@ -45,7 +45,7 @@ InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, 
 
 bool InvisibleButton::isRepeatable() const { return false; }
 
-void InvisibleButton::setRepeatable(bool repeatable) {}
+void InvisibleButton::setRepeatable(bool isRepeatable) { repeatable = isRepeatable; }
 
 void InvisibleButton::renderImpl() {
   ImGui::PushButtonRepeat(repeatable);

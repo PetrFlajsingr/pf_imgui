@@ -47,7 +47,7 @@ class PF_IMGUI_EXPORT Image
   */
   Image(
       const std::string &elementName, ImTextureID imTextureId, const Size &size, IsButton isBtn = IsButton::No,
-      bool detectMousePositionEnabled = false, UvMappingProvider uvTextureMappingProvider = [] {
+      UvMappingProvider uvTextureMappingProvider = [] {
         return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
       });
 
