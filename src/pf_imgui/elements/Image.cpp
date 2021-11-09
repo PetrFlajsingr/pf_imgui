@@ -12,19 +12,12 @@ namespace pf::ui::ig {
 Image::Image(const std::string &elementName, ImTextureID imTextureId, const Size &size, IsButton isBtn,
              bool detectMousePositionEnabled, Image::UvMappingProvider uvTextureMappingProvider)
     : ItemElement(elementName), Resizable(size), isButton_(isBtn == IsButton::Yes), textureId(imTextureId),
-      uvMappingProvider(std::move(uvTextureMappingProvider)), detectMousePosition(detectMousePositionEnabled) {}
+      uvMappingProvider(std::move(uvTextureMappingProvider)) {}
 
 void Image::renderImpl() {
   auto colorStyle = setColorStack();
   const auto [uvStart, uvEnd] = uvMappingProvider();
 
-  if (detectMousePosition && isHovered()) {
-    const auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
-    if (newMousePos.x != lastMousePosition.x && newMousePos.y != lastMousePosition.y) {
-      lastMousePosition = newMousePos;
-      mousePositionObservable.notify(lastMousePosition);
-    }
-  }
   if (isButton_) {
     if (ImGui::ImageButton(textureId, getSize().asImVec(), uvStart, uvEnd)) { notifyOnClick(); }
   } else {
@@ -48,8 +41,6 @@ void Image::renderImpl() {
 void Image::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
 
 bool Image::isButton() const { return isButton_; }
-
-void Image::setMousePositionDetection(bool enabled) { detectMousePosition = enabled; }
 
 //bool Image::isPixelInspectionTooltipEnabled() const {
 //  return pixelInspectionTooltipEnabled;

@@ -73,12 +73,6 @@ class PF_IMGUI_EXPORT Image
   */
   void setTextureId(ImTextureID imTextureId);
 
-  Subscription addMousePositionListener(std::invocable<ImVec2> auto &&listener) {
-    return mousePositionObservable.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  void setMousePositionDetection(bool enabled);
-
  protected:
   void renderImpl() override;
 
@@ -86,9 +80,6 @@ class PF_IMGUI_EXPORT Image
   bool isButton_;
   ImTextureID textureId;
   UvMappingProvider uvMappingProvider;
-  bool detectMousePosition;
-  ImVec2 lastMousePosition{-1, -1};
-  Observable_impl<ImVec2> mousePositionObservable;
   //bool pixelInspectionTooltipEnabled = false;
 };
 

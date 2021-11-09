@@ -23,6 +23,15 @@ void ItemElement::render() {
   Element::render();
   setHovered(ImGui::IsItemHovered());
   updateFocused(ImGui::IsItemFocused());
+
+  if (isHovered()) {
+    auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
+    if (newMousePos.x != lastMousePosition.x && newMousePos.y != lastMousePosition.y) {
+      lastMousePosition = newMousePos;
+      mousePositionObservable.notify(lastMousePosition);
+    }
+  }
+
   if (tooltip != nullptr) {
     if (getVisibility() == Visibility::Visible && isHovered()) { tooltip->render(); }
   }

@@ -21,7 +21,7 @@
 #define NOTIFY_OPACITY 1.0f// 0-1 Toast opacity
 #define NOTIFY_TOAST_FLAGS                                                                                             \
   ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoInputs                        \
-      | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing
+      | ImGuiWindowFlags_NoNav/* | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing*/
 // Comment out if you don't want any separator between title and content
 #define NOTIFY_USE_SEPARATOR
 
@@ -251,6 +251,7 @@ NOTIFY_INLINE void RenderNotifications(std::vector<ImGuiToast> &notifications) {
     SetNextWindowBgAlpha(opacity);
     SetNextWindowPos(ImVec2(vp_size.x - NOTIFY_PADDING_X, vp_size.y - NOTIFY_PADDING_Y - height), ImGuiCond_Always,
                      ImVec2(1.0f, 1.0f));
+    SetNextWindowFocus();
     Begin(window_name, nullptr, NOTIFY_TOAST_FLAGS);
 
     // Here we render the toast content
