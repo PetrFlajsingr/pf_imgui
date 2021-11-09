@@ -34,24 +34,7 @@
 
 
 #include <fmt/format.h>
-
-#ifdef __GNUC__
-#define NOTIFY_FORMAT(fn, format, ...)                                                                                 \
-  if (format) {                                                                                                        \
-    va_list args;                                                                                                      \
-    va_start(args, format);                                                                                            \
-    fn(format, ##__VA_ARGS__);                                                                                     \
-    va_end(args);                                                                                                 \
-  }
-#else
-#define NOTIFY_FORMAT(fn, format, ...)                                                                                 \
-  if (format) {                                                                                                        \
-    va_list args;                                                                                                      \
-    va_start(args, format);                                                                                            \
-    fn(format, args);                                                                                     \
-    va_end(args);                                                                                                 \
-  }
-#endif
+#include <string>
 
 
 typedef int ImGuiToastType;
@@ -89,28 +72,22 @@ enum ImGuiToastPos_ {
 class ImGuiToast {
 private:
     ImGuiToastType type = ImGuiToastType_None;
-    char title[NOTIFY_MAX_MSG_LENGTH];
-    char content[NOTIFY_MAX_MSG_LENGTH];
+    std::string title{};
+    std::string content{};
     int dismiss_time = NOTIFY_DEFAULT_DISMISS;
     std::chrono::time_point<std::chrono::steady_clock> creation_time;
 
 private:
     // Setters
 
-    NOTIFY_INLINE auto set_title(const char *format, va_list args) {
-        vsnprintf(this->title, sizeof(this->title), format, args);
-    }
-
-    NOTIFY_INLINE auto set_content(const char *format, va_list args) {
-        vsnprintf(this->content, sizeof(this->content), format, args);
-    }
-
 public:
-    NOTIFY_INLINE auto set_title(const char *format, ...) -> void {
-        NOTIFY_FORMAT(this->set_title, format);
+    NOTIFY_INLINE auto set_title(const char *format, auto &&...args) -> void {
+        title = fmt::format(format, std::forward<decltype(args)>(args)...);
     }
 
-    NOTIFY_INLINE auto set_content(const char *format, ...) -> void { NOTIFY_FORMAT(this->set_content, format); }
+    NOTIFY_INLINE auto set_content(const char *format, auto &&...args) -> void {
+        content = fmt::format(format, std::forward<decltype(args)>(args)...);
+    }
 
     NOTIFY_INLINE auto set_type(const ImGuiToastType &type) -> void {
         IM_ASSERT(type < ImGuiToastType_COUNT);
@@ -120,10 +97,10 @@ public:
 public:
     // Getters
 
-    NOTIFY_INLINE auto get_title() -> char * { return this->title; };
+    NOTIFY_INLINE auto get_title() -> const char * { return this->title.c_str(); };
 
     NOTIFY_INLINE auto get_default_title() -> const char * {
-        if (!strlen(this->title)) {
+        if (!this->title.empty()) {
             switch (this->type) {
                 case ImGuiToastType_None: return nullptr;
                 case ImGuiToastType_Success: return "Success";
@@ -133,7 +110,7 @@ public:
             }
         }
 
-        return this->title;
+        return this->title.c_str();
     };
 
     NOTIFY_INLINE auto get_type() const -> const ImGuiToastType & { return this->type; };
@@ -160,7 +137,7 @@ public:
         }
     }
 
-    NOTIFY_INLINE auto get_content() -> char * { return this->content; };
+    NOTIFY_INLINE auto get_content() -> const char * { return this->content.c_str(); };
 
     NOTIFY_INLINE auto get_elapsed_time() {
         return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now()
@@ -206,17 +183,14 @@ public:
         this->type = type;
         this->dismiss_time = dismiss_time;
         this->creation_time = std::chrono::steady_clock::now();
-
-        memset(this->title, 0, sizeof(this->title));
-        memset(this->content, 0, sizeof(this->content));
     }
 
-    ImGuiToast(ImGuiToastType type, const char *format, ...) : ImGuiToast(type) {
-        NOTIFY_FORMAT(this->set_content, format);
+    ImGuiToast(ImGuiToastType type, const char *format, auto &&...args) : ImGuiToast(type) {
+        set_content(format, std::forward<decltype(args)>(args)...);
     }
 
-    ImGuiToast(ImGuiToastType type, int dismiss_time, const char *format, ...) : ImGuiToast(type, dismiss_time) {
-        NOTIFY_FORMAT(this->set_content, format);
+    ImGuiToast(ImGuiToastType type, int dismiss_time, const char *format, auto &&...args) : ImGuiToast(type, dismiss_time) {
+        set_content(format, std::forward<decltype(args)>(args)...);
     }
 };
 
