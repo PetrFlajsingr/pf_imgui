@@ -6,11 +6,10 @@
 #include <imgui_internal.h>
 #include <utility>
 
-#include <iostream>
 namespace pf::ui::ig {
 
 Image::Image(const std::string &elementName, ImTextureID imTextureId, const Size &size, IsButton isBtn,
-             bool detectMousePositionEnabled, Image::UvMappingProvider uvTextureMappingProvider)
+             Image::UvMappingProvider uvTextureMappingProvider)
     : ItemElement(elementName), Resizable(size), isButton_(isBtn == IsButton::Yes), textureId(imTextureId),
       uvMappingProvider(std::move(uvTextureMappingProvider)) {}
 

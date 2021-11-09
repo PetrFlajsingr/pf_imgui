@@ -138,7 +138,7 @@ Flags<TabBar::ResizePolicy> TabBar::getResizePolicy() const {
 }
 
 void TabBar::setResizePolicy(const Flags<TabBar::ResizePolicy> &newPolicy) {
-  flags = flags & ~ImGuiTabBarFlags_FittingPolicyMask_ | *newPolicy;
+  flags = (flags & ~ImGuiTabBarFlags_FittingPolicyMask_) | *newPolicy;
 }
 
 std::vector<Renderable *> TabBar::getRenderables() {

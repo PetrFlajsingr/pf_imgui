@@ -10,6 +10,10 @@
 #include <chrono>
 #include <string>
 #include <vector>
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wall"
+#pragma GCC diagnostic ignored "-Wextra"
+#pragma GCC diagnostic ignored "-Wformat-security"
 
 #define NOTIFY_MAX_MSG_LENGTH 4096   // Max message content length
 #define NOTIFY_PADDING_X 20.f        // Bottom-left X padding
@@ -26,14 +30,29 @@
 #define NOTIFY_USE_SEPARATOR
 
 #define NOTIFY_INLINE inline
-#define NOTIFY_NULL_OR_EMPTY(str) (!str || !strlen(str))
+#define NOTIFY_NULL_OR_EMPTY(str) (!(str) || !strlen(str))
+
+
+#include <fmt/format.h>
+
+#ifdef __GNUC__
 #define NOTIFY_FORMAT(fn, format, ...)                                                                                 \
   if (format) {                                                                                                        \
     va_list args;                                                                                                      \
     va_start(args, format);                                                                                            \
-    fn(format, args, __VA_ARGS__);                                                                                     \
-    va_end(args);                                                                                                      \
+    fn(format, ##__VA_ARGS__);                                                                                     \
+    va_end(args);                                                                                                 \
   }
+#else
+#define NOTIFY_FORMAT(fn, format, ...)                                                                                 \
+  if (format) {                                                                                                        \
+    va_list args;                                                                                                      \
+    va_start(args, format);                                                                                            \
+    fn(format, __VA_ARGS__);                                                                                     \
+    va_end(args);                                                                                                 \
+  }
+#endif
+
 
 typedef int ImGuiToastType;
 typedef int ImGuiToastPhase;
@@ -87,7 +106,9 @@ class ImGuiToast {
   }
 
  public:
-  NOTIFY_INLINE auto set_title(const char *format, ...) -> void { NOTIFY_FORMAT(this->set_title, format); }
+  NOTIFY_INLINE auto set_title(const char *format, ...) -> void {
+    NOTIFY_FORMAT(this->set_title, format);
+  }
 
   NOTIFY_INLINE auto set_content(const char *format, ...) -> void { NOTIFY_FORMAT(this->set_content, format); }
 
@@ -124,6 +145,7 @@ class ImGuiToast {
       case ImGuiToastType_Warning: return {255, 255, 0, 255};// Yellow
       case ImGuiToastType_Error: return {255, 0, 0, 255};    // Error
       case ImGuiToastType_Info: return {0, 157, 255, 255};   // Blue
+      default: assert(false && "This should not be possible to reach"); return {};
     }
   }
 
@@ -134,6 +156,7 @@ class ImGuiToast {
       case ImGuiToastType_Warning: return ICON_FA_EXCLAMATION_TRIANGLE;
       case ImGuiToastType_Error: return ICON_FA_TIMES_CIRCLE;
       case ImGuiToastType_Info: return ICON_FA_INFO_CIRCLE;
+      default: assert(false && "This should not be possible to reach"); return {};
     }
   }
 
@@ -223,7 +246,7 @@ NOTIFY_INLINE void RenderNotifications(std::vector<ImGuiToast> &notifications) {
 
   float height = 0.f;
 
-  for (auto i = 0; i < notifications.size(); i++) {
+  for (std::size_t i = 0; i < notifications.size(); i++) {
     auto *current_toast = &notifications[i];
 
     // Remove toast if expired
@@ -245,7 +268,7 @@ NOTIFY_INLINE void RenderNotifications(std::vector<ImGuiToast> &notifications) {
 
     // Generate new unique name for this toast
     char window_name[50];
-    sprintf_s(window_name, "##TOAST%d", i);
+    sprintf(window_name, "##TOAST%d", static_cast<int>(i));
 
     //PushStyleColor(ImGuiCol_Text, text_color);
     SetNextWindowBgAlpha(opacity);
@@ -326,4 +349,5 @@ NOTIFY_INLINE void MergeIconsWithLatestFont(float font_size, bool FontDataOwnedB
 }
 }// namespace ImGui
 
+#pragma GCC diagnostic pop
 #endif
