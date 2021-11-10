@@ -40,62 +40,62 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public Labellable {
  public:
   /**
-         * Construct Window.
-         * @param name ID of the window
-         * @param label title
-         * @param allowCollapse
-         * @param persistent saving state to disk
-         */
+    * Construct Window.
+    * @param name ID of the window
+    * @param label title
+    * @param allowCollapse
+    * @param persistent saving state to disk
+    */
   Window(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No,
          Persistent persistent = Persistent::No);
 
   /**
-         * Construct Window.
-         * @param name ID of the window
-         * @param label title
-         * @param persistent saving state to disk
-         */
+    * Construct Window.
+    * @param name ID of the window
+    * @param label title
+    * @param persistent saving state to disk
+    */
   Window(std::string name, std::string label, Persistent persistent);
 
   /**
-         * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
-         * @return Windows menu bar
-         */
+    * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
+    * @return Windows menu bar
+    */
   [[nodiscard]] WindowMenuBar &getMenuBar();
 
   /**
-         * Check if the menu bar exists.
-         * @return true if menu bar exists, false otherwise
-         */
+    * Check if the menu bar exists.
+    * @return true if menu bar exists, false otherwise
+    */
   [[nodiscard]] bool hasMenuBar() const;
 
   /**
-         * Remove menu bar from the window - must be rebuilt when created again, use menuBar.setVisible... for temporary removal.
-         */
+    * Remove menu bar from the window - must be rebuilt when created again, use menuBar.setVisible... for temporary removal.
+    */
   void removeMenuBar();
 
   /**
-         * Window min size constraints.
-         * @return
-         */
+    * Window min size constraints.
+    * @return
+    */
   [[nodiscard]] const std::optional<Size> &getMinSizeConstraint() const;
 
   /**
-         * Window max size constraints.
-         * @return
-         */
+    * Window max size constraints.
+    * @return
+    */
   [[nodiscard]] const std::optional<Size> &getMaxSizeConstraint() const;
 
   /**
-         * Min size constraints for window - window can't be smaller.
-         * @param sizeConstraints
-         */
+    * Min size constraints for window - window can't be smaller.
+    * @param sizeConstraints
+    */
   void setMinSizeConstraint(const Size &newSizeConstraint);
 
   /**
-         * Max size constraints for window - window can't be bigger.
-         * @param sizeConstraints
-         */
+    * Max size constraints for window - window can't be bigger.
+    * @param sizeConstraints
+    */
   void setMaxSizeConstraint(const Size &newSizeConstraint);
 
   void cancelSizeConstraint();
@@ -115,140 +115,127 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setPosition(ImVec2 pos) override;
 
   /**
-         * Check if user can resize the window.
-         * @return true if resizable
-         */
+    * Check if user can resize the window.
+    * @return true if resizable
+    */
   [[nodiscard]] bool isUserResizable() const;
 
   /**
-         * Enable/disable user resizing the window.
-         * @param resizable
-         */
+    * Enable/disable user resizing the window.
+    * @param resizable
+    */
   void setUserResizable(bool resizable);
 
   /**
-         * Check if the user can move the window.
-         * @return  true if movable
-         */
+    * Check if the user can move the window.
+    * @return  true if movable
+    */
   [[nodiscard]] bool isUserMovable() const;
 
   /**
-         * Enable/disable user moving the window.
-         * @param movable
-         */
+    * Enable/disable user moving the window.
+    * @param movable
+    */
   void setUserMovable(bool movable);
 
   /**
-         * Check if the window auto resizes to fix its content.
-         * @return
-         */
+    * Check if the window auto resizes to fix its content.
+    * @return
+    */
   [[nodiscard]] bool isAutoResize() const;
 
   /**
-         * Enable/disable window auto resizing to fit its content.
-         * @param autoResize
-         */
+    * Enable/disable window auto resizing to fit its content.
+    * @param autoResize
+    */
   void setAutoResize(bool autoResize);
 
   /**
-         * Check if horizontal scroll is allowed when content is bigger than the window.
-         * @return
-         */
+    * Check if horizontal scroll is allowed when content is bigger than the window.
+    * @return
+    */
   [[nodiscard]] bool isHorizontalScrollEnabled() const;
 
   /**
-         * Enable/disable horizontal scroll when the content is bigger than the window.
-         * @param horizontalScroll
-         */
+    * Enable/disable horizontal scroll when the content is bigger than the window.
+    * @param horizontalScroll
+    */
   void setHorizontalScrollEnabled(bool horizontalScroll);
 
   /**
-         * Check if a dot is displayed in the top bar of the window.
-         * @return
-         */
+    * Check if a dot is displayed in the top bar of the window.
+    * @return
+    */
   [[nodiscard]] bool isDisplayDot() const;
 
   /**
-         * Enable/disable displaying a dot in the top bar of the window.
-         * @param display
-         */
+    * Enable/disable displaying a dot in the top bar of the window.
+    * @param display
+    */
   void setDisplayDot(bool display);
 
   /**
-         *
-         * @return true if the window serves as a docking area and can be docked itself
-         */
+    *
+    * @return true if the window serves as a docking area and can be docked itself
+    */
   [[nodiscard]] bool isDockable() const;
 
   /**
-         * If true the window can be used as a dock for other windows or can be docked itself.
-         * @param isArea
-         */
+    * If true the window can be used as a dock for other windows or can be docked itself.
+    * @param isArea
+    */
   void setIsDockable(bool dockable);
 
   /**
-         * Check if the Window can be closed with an X button in top right corner.
-         * @return
-         */
+    * Check if the Window can be closed with an X button in top right corner.
+    * @return
+    */
   [[nodiscard]] bool isCloseable() const;
 
   /**
-         * Enable/disable user window closing using an X button in top right corner.
-         * @param closeable
-         */
+    * Enable/disable user window closing using an X button in top right corner.
+    * @param closeable
+    */
   void setCloseable(bool closeable);
 
   /**
-         *
-         * @return true if the top bar of the window is being rendered
-         */
+    *
+    * @return true if the top bar of the window is being rendered
+    */
   [[nodiscard]] bool isTitleBarVisible() const;
 
   /**
-         * Set visibility of top bar of the window.
-         * @param visible
-         */
+    * Set visibility of top bar of the window.
+    * @param visible
+    */
   void setTitleBarVisible(bool visible);
 
   /**
-         * Add a listener for close event.
-         *
-         * This event is triggered when X button is clicked.
-         * @param listener to be called on event
-         * @return Subscription for listener cancellation
-         */
+    * Add a listener for close event.
+    *
+    * This event is triggered when X button is clicked.
+    * @param listener to be called on event
+    * @return Subscription for listener cancellation
+    */
   Subscription addCloseListener(std::invocable auto listener) { return closeObservableImpl.addListener(listener); }
 
   /**
-         *
-         * @return true if this window is docked in some sort of dockable area
-         */
+    *
+    * @return true if this window is docked in some sort of dockable area
+    */
   [[nodiscard]] bool isDocked() const;
 
   /**
-         * Move the window to a dockable area in next frame.
-         * @param dockName name of the area
-         */
+    * Move the window to a dockable area in next frame.
+    * @param dockName name of the area
+    */
   void moveToDock(DockSpace::Id dockSpaceId);
 
   /**
-         * Set font for Window and all elements inside - except for those that have their own font.
-         * @param fontPtr new font
-         */
+    * Set font for Window and all elements inside - except for those that have their own font.
+    * @param fontPtr new font
+    */
   void setFont(ImFont *fontPtr);
-
-  /**
-         *
-         * @return true if the window is supposed to be always on top
-         */
-  [[nodiscard]] bool isAlwaysOnTop() const;
-
-  /**
-         * Set if window should be always on top. Setting this to true may cause issues with repeated focus on other components,
-         * since they will be unfocused.
-         * @param onTop
-         */
-  void setAlwaysOnTop(bool onTop);
 
   std::vector<Renderable *> getRenderables() override;
 
@@ -277,7 +264,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool enableHorizontalScroll = true;
   bool displayDot = false;
   bool titleBarVisible = true;
-  bool alwaysOnTop = false;
 };
 
 }// namespace pf::ui::ig

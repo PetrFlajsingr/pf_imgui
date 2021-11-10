@@ -23,7 +23,6 @@ void Window::renderImpl() {
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   RAII endPopup{[] { ImGui::End(); }};
-  if (alwaysOnTop) { ImGui::SetNextWindowFocus(); }
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
@@ -177,8 +176,5 @@ bool Window::isTitleBarVisible() const { return titleBarVisible; }
 
 void Window::setTitleBarVisible(bool visible) { titleBarVisible = visible; }
 
-bool Window::isAlwaysOnTop() const { return alwaysOnTop; }
-
-void Window::setAlwaysOnTop(bool onTop) { alwaysOnTop = onTop; }
 
 }// namespace pf::ui::ig
