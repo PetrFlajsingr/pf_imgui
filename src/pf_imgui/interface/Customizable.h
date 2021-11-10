@@ -16,6 +16,7 @@
 
 namespace pf::ui::ig {
 
+// TODO: style pops can be done by calculating pop count on push
 namespace details {
 template<style::ColorOf ColorType>
 using ColorOfAsImVec4 = ImVec4;
