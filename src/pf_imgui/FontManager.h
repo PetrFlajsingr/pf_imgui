@@ -88,17 +88,22 @@ class SubFontBuilder {
 class FontBuilder {
  public:
   /**
+   * Construct FontBuilder. Using default font as base.
+   * @param manager font manager
+   */
+  FontBuilder(FontManager &manager, std::string fontName);
+  /**
    * Construct FontBuilder.
    * @param manager font manager
    * @param ttfPath path to file containing ttf data
    */
-  explicit FontBuilder(FontManager &manager, std::string fontName, std::filesystem::path ttfPath);
+  FontBuilder(FontManager &manager, std::string fontName, std::filesystem::path ttfPath);
   /**
    * Construct FontBuilder.
    * @param manager font manager
    * @param data raw ttf font data
    */
-  explicit FontBuilder(FontManager &manager, std::string fontName, std::vector<std::byte> data);
+  FontBuilder(FontManager &manager, std::string fontName, std::vector<std::byte> data);
   /**
    * Create a SubFontBuilder.
    * @param ttfPath path to ttf data
@@ -117,7 +122,7 @@ class FontBuilder {
    * @param size font size
    * @return self
    */
-  FontBuilder &addIconSubfont(const Flags<IconPack>& iconPack, float size);
+  FontBuilder &addIconSubfont(const Flags<IconPack> &iconPack, float size);
   /**
    * Set index of font.
    * @param index index of font in ttf data
@@ -144,11 +149,12 @@ class FontBuilder {
   ImFont *build();
 
  private:
+  struct DefaultFontTag {};
   friend class FontManager;
   friend class SubFontBuilder;
   FontManager &parent;
   std::string name;
-  std::variant<std::filesystem::path, std::vector<std::byte>> source;
+  std::variant<std::filesystem::path, std::vector<std::byte>, DefaultFontTag> source;
   float fontSize = 13.f;
   int indexInTTF{};
   float extraHorizontalSpacing{};
@@ -177,7 +183,7 @@ class FontManager {
    * @param iconSize size of icons
    */
   explicit FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::path &iconFontDir,
-                       const Flags<IconPack>& iconPacks, float iconSize);
+                       const Flags<IconPack> &iconPacks, float iconSize);
 
   /**
    * Get font by name.
@@ -200,6 +206,12 @@ class FontManager {
    * @return builder for font
    */
   [[nodiscard]] FontBuilder fontBuilder(const std::string &name, std::vector<std::byte> data);
+  /**
+   * Build a font based on default font.
+   * @param name name of the font
+   * @return builder for font
+   */
+  [[nodiscard]] FontBuilder fontBuilder(const std::string &name);
 
  private:
   friend class FontBuilder;

@@ -19,7 +19,7 @@ FontManager::FontManager(ImGuiInterface &imGuiInterface, std::filesystem::path i
 }
 
 FontManager::FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::path &iconFontDir,
-                         const Flags<IconPack>& iconPacks, float iconSize)
+                         const Flags<IconPack> &iconPacks, float iconSize)
     : FontManager(imGuiInterface, iconFontDir) {
   std::ranges::for_each(iconPacks.getSetFlags(), [&](const auto iconPack) {
     const auto fileNames = fontFileNamesForIconPack(iconPack);
@@ -45,21 +45,26 @@ FontBuilder FontManager::fontBuilder(const std::string &name, std::vector<std::b
   return FontBuilder(*this, name, std::move(data));
 }
 
+FontBuilder FontManager::fontBuilder(const std::string &name) { return FontBuilder(*this, name); }
+
 ImFont *FontManager::addFont(FontBuilder &builder) {
   auto fontConfig = ImFontConfig{};
   fontConfig.SizePixels = builder.fontSize;
   fontConfig.GlyphExtraSpacing = ImVec2{builder.extraHorizontalSpacing, 0};
   fontConfig.FontNo = builder.indexInTTF;
-  auto font = std::visit<ImFont *>(
-      Visitor{[&, this](const std::filesystem::path &src) {
-                return imguiInterface->getIo().Fonts->AddFontFromFileTTF(src.string().c_str(), builder.fontSize,
-                                                                         &fontConfig);
-              },
-              [&, this](std::vector<std::byte> &src) {
-                return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(reinterpret_cast<void *>(src.data()),
-                                                                           static_cast<int>(src.size()), builder.fontSize, &fontConfig);
-              }},
-      builder.source);
+  auto font = std::visit<ImFont *>(Visitor{[&, this](const std::filesystem::path &src) {
+                                             return imguiInterface->getIo().Fonts->AddFontFromFileTTF(
+                                                 src.string().c_str(), builder.fontSize, &fontConfig);
+                                           },
+                                           [&, this](std::vector<std::byte> &src) {
+                                             return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(
+                                                 reinterpret_cast<void *>(src.data()), static_cast<int>(src.size()),
+                                                 builder.fontSize, &fontConfig);
+                                           },
+                                           [&, this](FontBuilder::DefaultFontTag) {
+                                             return imguiInterface->getIo().Fonts->AddFontDefault(&fontConfig);
+                                           }},
+                                   builder.source);
   for (auto &subfontBuilder : builder.subfonts) {
     auto subfontConfig = ImFontConfig{};
     subfontConfig.SizePixels = subfontBuilder.fontSize;
@@ -74,8 +79,8 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
                                         },
                                         [&, this](std::vector<std::byte> &src) {
                                           return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(
-                                              reinterpret_cast<void *>(src.data()), static_cast<int>(src.size()), subfontBuilder.fontSize,
-                                              &subfontConfig);
+                                              reinterpret_cast<void *>(src.data()), static_cast<int>(src.size()),
+                                              subfontBuilder.fontSize, &subfontConfig);
                                         }},
                                 subfontBuilder.source);
   }
@@ -124,6 +129,9 @@ FontBuilder &SubFontBuilder::endSubfont() {
   return parent;
 }
 
+FontBuilder::FontBuilder(FontManager &manager, std::string fontName)
+    : parent(manager), name(std::move(fontName)), source(FontBuilder::DefaultFontTag{}) {}
+
 FontBuilder::FontBuilder(FontManager &manager, std::string fontName, std::filesystem::path ttfPath)
     : parent(manager), name(std::move(fontName)), source(ttfPath) {}
 
@@ -151,7 +159,7 @@ FontBuilder &FontBuilder::setExtraHorizontalSpacing(float spacing) {
 
 ImFont *FontBuilder::build() { return parent.addFont(*this); }
 
-FontBuilder &FontBuilder::addIconSubfont(const Flags<IconPack>& iconPack, float size) {
+FontBuilder &FontBuilder::addIconSubfont(const Flags<IconPack> &iconPack, float size) {
   iconPacks = iconPack.getSetFlags()
       | std::views::transform([size](const auto pack) { return std::make_pair(pack, size); }) | ranges::to_vector;
   return *this;
