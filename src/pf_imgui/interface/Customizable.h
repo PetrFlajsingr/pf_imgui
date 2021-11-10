@@ -17,6 +17,7 @@
 namespace pf::ui::ig {
 
 // TODO: style pops can be done by calculating pop count on push
+// TODO: call only if changed
 namespace details {
 template<style::ColorOf ColorType>
 using ColorOfAsImVec4 = ImVec4;
@@ -76,23 +77,20 @@ class ColorCustomizable {
    */
   [[nodiscard]] RAII setColorStack() {
 #ifdef PF_IMGUI_ENABLE_STYLES
+    std::size_t popCount = 0;
     auto index = std::size_t{};
     iterateTuple(
-        [&index](const auto &value) {
+        [&index, &popCount](const auto &value) {
           if (value.has_value()) {
             ImGui::PushStyleColor(static_cast<int>(details::varArgValueForIndex<SupportedColorTypes...>(index)),
                                   *value);
+            ++popCount;
           }
           ++index;
         },
         colorValues);
-    return RAII{[this] {
-      iterateTuple(
-          [](const auto &value) {
-            if (value.has_value()) { ImGui::PopStyleColor(); }
-          },
-          colorValues);
-    }};
+
+    return RAII{[popCount] { ImGui::PopStyleColor(popCount); }};
 #else
     return RAII{[] {}};
 #endif
@@ -157,22 +155,18 @@ class StyleCustomizable {
    */
   [[nodiscard]] RAII setStyleStack() {
 #ifdef PF_IMGUI_ENABLE_STYLES
+    std::size_t popCount = 0;
     auto index = std::size_t{};
     iterateTuple(
-        [&index](const auto &value) {
+        [&index, &popCount](const auto &value) {
           if (value.has_value()) {
             ImGui::PushStyleVar(static_cast<int>(details::varArgValueForIndex<SupportedStyles...>(index)), *value);
+            ++popCount;
           }
           ++index;
         },
         styleValues);
-    return RAII{[this] {
-      iterateTuple(
-          [](const auto &value) {
-            if (value.has_value()) { ImGui::PopStyleVar(); }
-          },
-          styleValues);
-    }};
+    return RAII{[popCount] { ImGui::PopStyleVar(popCount); }};
 #else
     return RAII{[] {}};
 #endif
