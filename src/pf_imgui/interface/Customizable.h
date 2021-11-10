@@ -19,8 +19,12 @@ namespace pf::ui::ig {
 namespace details {
 template<style::ColorOf ColorType>
 using ColorOfAsImVec4 = ImVec4;
+template<style::ColorOf ColorType>
+using ColorOfAsOptionalImVec4 = std::optional<ColorOfAsImVec4<ColorType>>;
 template<style::Style Style>
 using TypeForStyle = std::conditional_t<style::isFloatStyle(Style), float, ImVec2>;
+template<style::Style Style>
+using OptionalTypeForStyle = std::optional<TypeForStyle<Style>>;
 
 // TODO: move this to pf_common
 template<auto Needle, auto HaystackStart, auto... Haystack>
@@ -95,7 +99,7 @@ class ColorCustomizable {
 
 #ifdef PF_IMGUI_ENABLE_STYLES
  private:
-  std::tuple<std::optional<details::ColorOfAsImVec4<SupportedColorTypes>>...> colorValues;
+  std::tuple<details::ColorOfAsOptionalImVec4<SupportedColorTypes>...> colorValues;
 #endif
 };
 
@@ -174,7 +178,7 @@ class StyleCustomizable {
   };
 #ifdef PF_IMGUI_ENABLE_STYLES
  private:
-  std::tuple<std::optional<details::TypeForStyle<SupportedStyles>>...> styleValues;
+  std::tuple<details::OptionalTypeForStyle<SupportedStyles>...> styleValues;
 #endif
 };
 
