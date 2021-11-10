@@ -13,6 +13,7 @@
 #include <pf_imgui/interface/Savable.h>
 #include <toml++/toml_array.h>
 #include <toml++/toml_table.h>
+#include <ranges>
 
 namespace pf::ui::ig {
 

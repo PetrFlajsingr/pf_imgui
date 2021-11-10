@@ -35,7 +35,7 @@ enum class TabMod {
  */
 class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public Clickable {
  public:
-  TabButton(const std::string &elementName, const std::string &label, Flags<TabMod> mods = Flags<TabMod>{});
+  TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod>& mods = Flags<TabMod>{});
 
   void setMods(const Flags<TabMod> &mods);
 

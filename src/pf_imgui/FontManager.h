@@ -117,7 +117,7 @@ class FontBuilder {
    * @param size font size
    * @return self
    */
-  FontBuilder &addIconSubfont(Flags<IconPack> iconPack, float size);
+  FontBuilder &addIconSubfont(const Flags<IconPack>& iconPack, float size);
   /**
    * Set index of font.
    * @param index index of font in ttf data
@@ -177,7 +177,7 @@ class FontManager {
    * @param iconSize size of icons
    */
   explicit FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::path &iconFontDir,
-                       Flags<IconPack> iconPacks, float iconSize);
+                       const Flags<IconPack>& iconPacks, float iconSize);
 
   /**
    * Get font by name.

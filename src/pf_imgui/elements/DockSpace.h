@@ -37,7 +37,7 @@ class DockSpace : public Element,
    * @param s size of the area
    * @param dockFlags f;ags
    */
-  DockSpace(const std::string &name, const Size &s, Flags<DockType> dockFlags = Flags<DockType>{});
+  DockSpace(const std::string &name, const Size &s, const Flags<DockType>& dockFlags = Flags<DockType>{});
 
   void render() override;
 
@@ -45,14 +45,14 @@ class DockSpace : public Element,
    * @attention Call this only after the first render.
    * @return id to be used for docking windows into the area
    */
-  Id getDockId() const;
+  [[nodiscard]] Id getDockId() const;
 
  protected:
   void renderImpl() override;
 
  private:
   ImGuiDockNodeFlags flags;
-  Id id;
+  Id id{};
 };
 }// namespace pf::ui::ig
 

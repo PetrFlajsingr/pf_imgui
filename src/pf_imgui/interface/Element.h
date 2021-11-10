@@ -39,7 +39,7 @@ class PF_IMGUI_EXPORT Element : public Renderable {
    */
   void setFont(ImFont *fontPtr);
 
-  ImFont *getFont() const;
+  [[nodiscard]] ImFont *getFont() const;
 
  protected:
   ImFont *font = nullptr;

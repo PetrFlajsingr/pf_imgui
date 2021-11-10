@@ -3,8 +3,6 @@
 //
 
 #include "Clickable.h"
-#include <algorithm>
-#include <ranges>
 
 namespace pf::ui::ig {
 

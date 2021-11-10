@@ -22,6 +22,8 @@ Size Size::FillWidth() { return {Width::Fill(), Height::Auto()}; }
 
 Size::Size(ImVec2 vec) : width(vec.x), height(vec.y) {}
 
+Size Size::FillHeight() { return Size(Width::Auto(), Height::Fill()); }
+
 Resizable::Resizable(const Size &s) : size(s) {}
 
 Resizable::Resizable(Resizable &&other) noexcept : size(other.size) {}

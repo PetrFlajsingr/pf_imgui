@@ -44,7 +44,7 @@ void Memo::removeRecord(std::size_t index) {
 #ifndef _MSC_VER// TODO: MSVC internal compiler error
   if (index >= records.size()) { throw InvalidArgumentException{"Index out of bounds"}; }
 #endif
-  records.erase(records.begin() + index);
+  records.erase(records.begin() + static_cast<long long>(index));
   rebuildText();
 }
 
@@ -102,7 +102,7 @@ void Memo::setRecordLimit(std::size_t limit) { recordLimit = limit; }
 void Memo::removeRecordsAboveLimit() {
   if (recordLimit.has_value() && *recordLimit < records.size()) {
     const auto cntToRemove = records.size() - *recordLimit;
-    records.erase(records.begin(), records.begin() + cntToRemove);
+    records.erase(records.begin(), records.begin() + static_cast<long long>(cntToRemove));
     rebuildText();
   }
 }

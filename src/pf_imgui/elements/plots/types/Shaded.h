@@ -31,4 +31,4 @@ class PF_IMGUI_EXPORT Shaded : public LabeledPlotData, public details::DefaultPl
 };
 }// namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_SHADED_H
+#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_SHADED_H

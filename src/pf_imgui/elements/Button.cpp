@@ -43,7 +43,7 @@ InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, 
                                  Repeatable isRepeatable)
     : ItemElement(elementName), Resizable(s), repeatable(isRepeatable == Repeatable::Yes), clickBtn(clickButton) {}
 
-bool InvisibleButton::isRepeatable() const { return false; }
+bool InvisibleButton::isRepeatable() const { return repeatable; }
 
 void InvisibleButton::setRepeatable(bool isRepeatable) { repeatable = isRepeatable; }
 

@@ -118,7 +118,7 @@ enum class TableBorder : uint16_t {
 * @param hideable
 * @return ImGUi flags
 */
-inline ImGuiTableFlags createFlags(Flags<TableBorder> tableBorder, bool resizable, bool reorderable, bool sortable,
+inline ImGuiTableFlags createFlags(const Flags<TableBorder>& tableBorder, bool resizable, bool reorderable, bool sortable,
                                    bool hideable) {
   auto result = ImGuiTableFlags{};
   if (tableBorder.is(TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }

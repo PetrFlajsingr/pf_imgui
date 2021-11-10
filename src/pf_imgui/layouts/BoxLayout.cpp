@@ -68,7 +68,7 @@ void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
 #ifndef _MSC_VER// TODO: MSVC internal error
   if (index > children.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
 #endif
-  children.insert(children.begin() + index, std::move(child));
+  children.insert(children.begin() + static_cast<long long>(index), std::move(child));
 }
 void BoxLayout::removeChild(const std::string &name) {
   if (auto iter = std::ranges::find_if(children, [name](const auto &child) { return child->getName() == name; });

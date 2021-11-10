@@ -215,7 +215,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
          *
          * This event is triggered when X button is clicked.
          * @param listener to be called on event
-         * @return Subscription for listener cancelation
+         * @return Subscription for listener cancellation
          */
   Subscription addCloseListener(std::invocable auto listener) { return closeObservableImpl.addListener(listener); }
 

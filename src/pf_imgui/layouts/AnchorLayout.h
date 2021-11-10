@@ -70,7 +70,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
     */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
-  auto &createChild(const std::string &name, ImVec2 position, Flags<Anchor> anchors, Args &&...args) {
+  auto &createChild(const std::string &name, ImVec2 position, const Flags<Anchor>& anchors, Args &&...args) {
 #ifndef _MSC_VER// TODO: MSVC c3779
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
@@ -118,7 +118,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
    * Get all children of the layout as references.
    * @return view to const references of children in the layout
    */
-  inline auto getChildren() const {
+  [[nodiscard]] inline auto getChildren() const {
     return children | ranges::views::transform([](auto &child) -> const Element & { return *child.element; });
   }
 

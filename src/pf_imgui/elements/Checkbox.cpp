@@ -5,7 +5,7 @@
 #include "Checkbox.h"
 #include <imgui.h>
 #include <pf_imgui/details/ToggleButton.h>
-#include <toml++/toml_node_view.h>
+
 namespace pf::ui::ig {
 
 Checkbox::Checkbox(const std::string &elementName, const std::string &label, bool value, Persistent persistent)

@@ -4,7 +4,6 @@
 
 #include "AnchorLayout.h"
 #include <algorithm>
-#include <imgui_internal.h>
 
 namespace pf::ui::ig {
 

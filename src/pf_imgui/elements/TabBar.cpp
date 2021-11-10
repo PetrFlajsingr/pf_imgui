@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-TabButton::TabButton(const std::string &elementName, const std::string &label, Flags<TabMod> mods)
+TabButton::TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod>& mods)
     : ItemElement(elementName), Labellable(label), flags(*mods) {}
 
 void TabButton::renderImpl() {

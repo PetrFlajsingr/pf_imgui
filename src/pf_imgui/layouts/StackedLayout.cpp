@@ -3,8 +3,6 @@
 //
 
 #include "StackedLayout.h"
-#include <pf_common/exceptions/StackTraceException.h>
-#include <range/v3/view/addressof.hpp>
 #include <range/v3/view/join.hpp>
 #include <utility>
 
@@ -51,12 +49,12 @@ void StackedLayout::removeStack(std::size_t index) {
 #ifndef _MSC_VER// TODO: MSVC internal compiler error
   if (index >= stacks.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
 #endif
-  stacks.erase(stacks.begin() + index);
+  stacks.erase(stacks.begin() + static_cast<long long>(index));
 }
 void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
   auto stack = std::move(stacks[srcIndex]);
-  stacks.erase(stacks.begin() + srcIndex);
-  stacks.insert(stacks.begin() + dstIndex, std::move(stack));
+  stacks.erase(stacks.begin() + static_cast<long long>(srcIndex));
+  stacks.insert(stacks.begin() + static_cast<long long>(dstIndex), std::move(stack));
 }
 
 std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }

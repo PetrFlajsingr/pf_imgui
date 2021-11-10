@@ -147,4 +147,4 @@ class PF_IMGUI_EXPORT StringTable : public ItemElement, public Resizable {
 
 }// namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_STRINGTABLE_H
+#endif//PF_IMGUI_ELEMENTS_STRINGTABLE_H

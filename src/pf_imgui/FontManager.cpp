@@ -19,7 +19,7 @@ FontManager::FontManager(ImGuiInterface &imGuiInterface, std::filesystem::path i
 }
 
 FontManager::FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::path &iconFontDir,
-                         Flags<IconPack> iconPacks, float iconSize)
+                         const Flags<IconPack>& iconPacks, float iconSize)
     : FontManager(imGuiInterface, iconFontDir) {
   std::ranges::for_each(iconPacks.getSetFlags(), [&](const auto iconPack) {
     const auto fileNames = fontFileNamesForIconPack(iconPack);
@@ -57,7 +57,7 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
               },
               [&, this](std::vector<std::byte> &src) {
                 return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(reinterpret_cast<void *>(src.data()),
-                                                                           src.size(), builder.fontSize, &fontConfig);
+                                                                           static_cast<int>(src.size()), builder.fontSize, &fontConfig);
               }},
       builder.source);
   for (auto &subfontBuilder : builder.subfonts) {
@@ -74,7 +74,7 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
                                         },
                                         [&, this](std::vector<std::byte> &src) {
                                           return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(
-                                              reinterpret_cast<void *>(src.data()), src.size(), subfontBuilder.fontSize,
+                                              reinterpret_cast<void *>(src.data()), static_cast<int>(src.size()), subfontBuilder.fontSize,
                                               &subfontConfig);
                                         }},
                                 subfontBuilder.source);
@@ -105,7 +105,7 @@ SubFontBuilder &SubFontBuilder::setFontSize(float size) {
 }
 
 SubFontBuilder &SubFontBuilder::setIndexInTTF(uint32_t index) {
-  indexInTTF = index;
+  indexInTTF = static_cast<int>(index);
   return *this;
 }
 
@@ -140,7 +140,7 @@ FontBuilder &FontBuilder::setFontSize(float size) {
 }
 
 FontBuilder &FontBuilder::setIndexInTTF(uint32_t index) {
-  indexInTTF = index;
+  indexInTTF = static_cast<int>(index);
   return *this;
 }
 
@@ -151,7 +151,7 @@ FontBuilder &FontBuilder::setExtraHorizontalSpacing(float spacing) {
 
 ImFont *FontBuilder::build() { return parent.addFont(*this); }
 
-FontBuilder &FontBuilder::addIconSubfont(Flags<IconPack> iconPack, float size) {
+FontBuilder &FontBuilder::addIconSubfont(const Flags<IconPack>& iconPack, float size) {
   iconPacks = iconPack.getSetFlags()
       | std::views::transform([size](const auto pack) { return std::make_pair(pack, size); }) | ranges::to_vector;
   return *this;

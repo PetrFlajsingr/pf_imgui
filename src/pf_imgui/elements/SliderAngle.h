@@ -53,7 +53,7 @@ class PF_IMGUI_EXPORT SliderAngle
    * Get min slider value.
    * @return min slider value
    */
-  float getMinDeg() const;
+  [[nodiscard]] float getMinDeg() const;
   /**
    * Set min slider value.
    * @param minDeg new min slider value
@@ -63,7 +63,7 @@ class PF_IMGUI_EXPORT SliderAngle
    * Get max slider value.
    * @return max slider value
    */
-  float getMaxDeg() const;
+  [[nodiscard]] float getMaxDeg() const;
   /**
    * Set max slider value.
    * @param maxDeg new min slider value

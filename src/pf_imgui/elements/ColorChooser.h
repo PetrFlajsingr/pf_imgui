@@ -68,7 +68,7 @@ class PF_IMGUI_EXPORT ColorChooser
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {}
 
   /**
-   * Check if picker appearing on collor btn click is enabled.
+   * Check if picker appearing on color btn click is enabled.
    * @return
    */
   [[nodiscard]] bool isPickerEnabled() const { return pickerEnabled; }

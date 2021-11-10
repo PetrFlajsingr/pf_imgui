@@ -95,4 +95,4 @@ class PF_IMGUI_EXPORT LabeledPlotData : public PlotData, public Labellable {
 
 }// namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
+#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H

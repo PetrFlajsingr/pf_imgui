@@ -39,4 +39,4 @@ class PF_IMGUI_EXPORT Stems : public LabeledPlotData, public details::DefaultPlo
 };
 }// namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_PLOTS_TYPES_STEMS_H
+#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_STEMS_H

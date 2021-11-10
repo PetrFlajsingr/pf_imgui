@@ -4,11 +4,7 @@
 
 #include "ImGuiInterface.h"
 #include "serialization.h"
-#include "src/pf_imgui/dialogs/ModalDialog.h"
-#include <imgui_internal.h>
 #include <implot.h>
-#include <pf_common/algorithms.h>
-#include <range/v3/view/addressof.hpp>
 #include <utility>
 
 namespace pf::ui::ig {

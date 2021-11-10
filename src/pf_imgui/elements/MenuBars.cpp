@@ -3,10 +3,7 @@
 //
 
 #include "MenuBars.h"
-#include <algorithm>
 #include <imgui.h>
-#include <imgui_internal.h>
-#include <utility>
 
 namespace pf::ui::ig {
 

@@ -18,12 +18,12 @@ namespace pf::ui::ig {
 namespace details {
 template<typename T>
 struct PF_IMGUI_EXPORT SizeDimension : public T {
-  SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
-  SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
-  SizeDimension(std::same_as<float> auto value) : T(value) {}
+  explicit(false) SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
+  explicit(false) SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
+  explicit(false) SizeDimension(std::same_as<float> auto value) : T(value) {}
   bool operator==(const SizeDimension &other) const { return T::value == other.value; }
   bool operator!=(const SizeDimension &other) const { return !(*this == other); }
-  operator float() const { return T::value; }
+  explicit(false) operator float() const { return T::value; }
   /**
    * Fill the dimension except for the margin.
    * @param margin
@@ -55,7 +55,7 @@ struct PF_IMGUI_EXPORT Size {
    * Conversion constructor.
    * @param vec size as ImVec2
    */
-  Size(ImVec2 vec);
+  explicit(false) Size(ImVec2 vec);
   /**
    * Automatic size detection.
    * @return
@@ -107,7 +107,7 @@ class PF_IMGUI_EXPORT Resizable {
    * Get current size.
    * @return current size
    */
-  const Size &getSize() const;
+  [[nodiscard]] const Size &getSize() const;
   /**
    * Set new size.
    * @param s new size

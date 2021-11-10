@@ -40,7 +40,7 @@ static ImWchar iconRangeFAD[] = {ICON_MIN_FAD, ICON_MAX_FAD, 0};
 
 struct IconFontConfig {
   ImFontConfig config;
-  const ImWchar *iconRange;
+  const ImWchar *iconRange{};
 };
 
 inline IconFontConfig fontConfigForIconPack(IconPack iconPack) {
@@ -48,9 +48,7 @@ inline IconFontConfig fontConfigForIconPack(IconPack iconPack) {
   icons_config.MergeMode = true;
   icons_config.PixelSnapH = true;
   switch (iconPack) {
-    case IconPack::FontAwesome5Regular: {
-      return {icons_config, details::iconRangeFA};
-    }
+    case IconPack::FontAwesome5Regular: [[fallthrough]];
     case IconPack::FontAwesome5Solid: {
       return {icons_config, details::iconRangeFA};
     }

@@ -117,7 +117,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * Get all windows present in the UI.
    * @return view to const references of all windows
    */
-  inline auto getWindows() const {
+  [[nodiscard]] inline auto getWindows() const {
     return windows | ranges::views::transform([](const auto &window) -> const Window & { return *window; });
   }
 

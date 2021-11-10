@@ -18,12 +18,12 @@ void SimplePlot::renderImpl() {
   auto colorStyle = setColorStack();
   switch (plotType) {
     case PlotType::Lines:
-      ImGui::PlotLines(getLabel().c_str(), values.data(), values.size(), 0,
+      ImGui::PlotLines(getLabel().c_str(), values.data(), static_cast<int>(values.size()), 0,
                        overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
                        getSize().asImVec());
       break;
     case PlotType::Histogram:
-      ImGui::PlotHistogram(getLabel().c_str(), values.data(), values.size(), 0,
+      ImGui::PlotHistogram(getLabel().c_str(), values.data(), static_cast<int>(values.size()), 0,
                            overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
                            getSize().asImVec());
       break;

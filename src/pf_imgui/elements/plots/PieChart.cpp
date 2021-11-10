@@ -3,7 +3,6 @@
 //
 
 #include "PieChart.h"
-#include <algorithm>
 #include <implot.h>
 #include <pf_common/RAII.h>
 
@@ -20,7 +19,7 @@ void PieChart::renderImpl() {
   }
   if (ImPlot::BeginPlot(getLabel().c_str(), getSize().asImVec())) {
     RAII endPopup{[] { ImPlot::EndPlot(); }};
-    ImPlot::PlotPieChart(labelsCstr.data(), values.data(), values.size(), 0.5, 0.5, 0.4, true);
+    ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4, true);
   }
 }
 }// namespace pf::ui::ig

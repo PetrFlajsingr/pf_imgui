@@ -69,7 +69,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    * Get all children of the layout as references.
    * @return view to const references of children in the layout
    */
-  inline auto getChildren() const {
+  [[nodiscard]] inline auto getChildren() const {
     return children | ranges::views::transform([](auto &child) -> const Element & { return *child.first; });
   }
 

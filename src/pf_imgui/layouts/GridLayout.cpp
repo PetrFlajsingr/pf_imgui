@@ -3,7 +3,6 @@
 //
 
 #include "GridLayout.h"
-#include <pf_common/exceptions/StackTraceException.h>
 #include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
@@ -35,15 +34,15 @@ void GridLayout::renderImpl() {
   RAII end{[&] { ImGui::EndChild(); }};
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
     if (renderCollapseButton()) {
-      const auto xCellSize = getSize().width.value / width;
-      const auto yCellSize = getSize().height.value / height;
+      const auto xCellSize = getSize().width.value / static_cast<float>(width);
+      const auto yCellSize = getSize().height.value / static_cast<float>(height);
       const auto cellSize = Size{static_cast<uint32_t>(xCellSize), static_cast<uint32_t>(yCellSize)};
       for (uint32_t y = 0; y < height; ++y) {
         for (uint32_t x = 0; x < width; ++x) {
           const auto index = indexForCell(x, y);
           if (cells[index] != nullptr) {
             cells[index]->setSize(cellSize);
-            ImGui::SetCursorPos(ImVec2{xCellSize * x, yCellSize * y});
+            ImGui::SetCursorPos(ImVec2{xCellSize * static_cast<float>(x), yCellSize * static_cast<float>(y)});
             cells[index]->render();
           }
         }
