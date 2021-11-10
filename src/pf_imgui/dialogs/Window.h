@@ -237,6 +237,17 @@ class PF_IMGUI_EXPORT Window : public Renderable,
     */
   void setFont(ImFont *fontPtr);
 
+  /**
+   *
+   * @return true if the window doesn't bring itself on top of others on focus
+   */
+  [[nodiscard]] bool isStayInBackground() const;
+  /**
+   * Set if the window stays in background even if it's focused;
+   * @param stayInBackground
+   */
+  void setStayInBackground(bool stayInBackground);
+
   std::vector<Renderable *> getRenderables() override;
 
  protected:
@@ -264,6 +275,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool enableHorizontalScroll = true;
   bool displayDot = false;
   bool titleBarVisible = true;
+  bool stayInBackground = false;
+  // TODO: change flags so they are not computed every frame
 };
 
 }// namespace pf::ui::ig

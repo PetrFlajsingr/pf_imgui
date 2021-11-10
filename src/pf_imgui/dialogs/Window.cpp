@@ -132,6 +132,7 @@ ImGuiWindowFlags Window::createWindowFlags() {
   if (autoResizeToContent) { result |= ImGuiWindowFlags_AlwaysAutoResize; }
   if (enableHorizontalScroll) { result |= ImGuiWindowFlags_HorizontalScrollbar; }
   if (displayDot) { result |= ImGuiWindowFlags_UnsavedDocument; }
+  if (stayInBackground) { result |= ImGuiWindowFlags_NoBringToFrontOnFocus; }
   return result;
 }
 
@@ -176,5 +177,8 @@ bool Window::isTitleBarVisible() const { return titleBarVisible; }
 
 void Window::setTitleBarVisible(bool visible) { titleBarVisible = visible; }
 
+bool Window::isStayInBackground() const { return stayInBackground; }
+
+void Window::setStayInBackground(bool stayInBackground) { Window::stayInBackground = stayInBackground; }
 
 }// namespace pf::ui::ig
