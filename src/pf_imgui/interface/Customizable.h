@@ -16,8 +16,6 @@
 
 namespace pf::ui::ig {
 
-// TODO: style pops can be done by calculating pop count on push
-// TODO: call only if changed
 namespace details {
 template<style::ColorOf ColorType>
 using ColorOfAsImVec4 = ImVec4;
@@ -67,6 +65,7 @@ class ColorCustomizable {
    */
   template<style::ColorOf ColorType>
   requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(ImVec4 color) {
+    modified = true;
     std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = color;
   }
 #endif
@@ -77,6 +76,9 @@ class ColorCustomizable {
    */
   [[nodiscard]] RAII setColorStack() {
 #ifdef PF_IMGUI_ENABLE_STYLES
+    if (!modified) {
+      return RAII{[] {}};
+    }
     std::size_t popCount = 0;
     auto index = std::size_t{};
     iterateTuple(
@@ -99,6 +101,7 @@ class ColorCustomizable {
 #ifdef PF_IMGUI_ENABLE_STYLES
  private:
   std::tuple<details::ColorOfAsOptionalImVec4<SupportedColorTypes>...> colorValues;
+  bool modified = false;
 #endif
 };
 
@@ -136,6 +139,7 @@ class StyleCustomizable {
    */
   template<style::Style Style>
   requires(OneOfValues_v<Style, SupportedStyles...> &&style::isFloatStyle(Style)) void setStyle(float value) {
+    modified = true;
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
   /**
@@ -145,6 +149,7 @@ class StyleCustomizable {
    */
   template<style::Style Style>
   requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style)) void setStyle(ImVec2 value) {
+    modified = true;
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
 #endif
@@ -155,6 +160,9 @@ class StyleCustomizable {
    */
   [[nodiscard]] RAII setStyleStack() {
 #ifdef PF_IMGUI_ENABLE_STYLES
+    if (!modified) {
+      return RAII{[] {}};
+    }
     std::size_t popCount = 0;
     auto index = std::size_t{};
     iterateTuple(
@@ -174,6 +182,7 @@ class StyleCustomizable {
 #ifdef PF_IMGUI_ENABLE_STYLES
  private:
   std::tuple<details::OptionalTypeForStyle<SupportedStyles>...> styleValues;
+  bool modified = false;
 #endif
 };
 
