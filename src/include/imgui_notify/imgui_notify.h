@@ -215,6 +215,7 @@ namespace ImGui {
 /// <summary>
 /// Render toasts, call at the end of your rendering!
 /// </summary>
+// TODO: modify this so the notification can be rendered in a corner selected by the user - use default corner in ImGuiInterface
     NOTIFY_INLINE void RenderNotifications(std::vector<ImGuiToast> &notifications) {
         const auto vp_size = GetMainViewport()->Size;
 

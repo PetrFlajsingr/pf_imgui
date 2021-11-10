@@ -24,6 +24,7 @@ void Window::renderImpl() {
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   RAII endPopup{[] { ImGui::End(); }};
+  if (alwaysOnTop) { ImGui::SetNextWindowFocus(); }
   if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
@@ -66,6 +67,7 @@ WindowMenuBar &Window::getMenuBar() {
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
 
 void Window::removeMenuBar() { menuBar = nullptr; }
+
 void Window::setSize(const Size &newSize) {
   Resizable::setSize(newSize);//FIXME change this to SetNextWindowSize
   ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
@@ -171,7 +173,13 @@ std::vector<Renderable *> Window::getRenderables() {
   if (menuBar != nullptr) { result.emplace_back(menuBar.get()); }
   return result;
 }
+
 bool Window::isTitleBarVisible() const { return titleBarVisible; }
+
 void Window::setTitleBarVisible(bool visible) { titleBarVisible = visible; }
+
+bool Window::isAlwaysOnTop() const { return alwaysOnTop; }
+
+void Window::setAlwaysOnTop(bool onTop) { alwaysOnTop = onTop; }
 
 }// namespace pf::ui::ig
