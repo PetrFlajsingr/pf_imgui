@@ -6,7 +6,7 @@
 #include <cmath>
 #include <imgui_internal.h>
 
-void ImGui::Spinner(const char *label, float radius, int thickness, const ImU32 &color) {
+void ImGui::Spinner(const char *label, float radius, int thickness) {
   ImGuiWindow *window = GetCurrentWindow();
   if (window->SkipItems) return;
 
@@ -38,5 +38,5 @@ void ImGui::Spinner(const char *label, float radius, int thickness, const ImU32 
         ImVec2(centre.x + ImCos(a + g.Time * 8) * radius, centre.y + ImSin(a + g.Time * 8) * radius));
   }
 
-  window->DrawList->PathStroke(color, false, thickness);
+  window->DrawList->PathStroke(GetColorU32(ImGuiCol_PlotHistogram), false, thickness);
 }

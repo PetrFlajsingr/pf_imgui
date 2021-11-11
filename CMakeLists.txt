@@ -196,7 +196,9 @@ set(SOURCES
         src/pf_imgui/elements/DockSpace.cpp
         src/pf_imgui/details/PieMenu.cpp
         src/pf_imgui/elements/PieMenu.cpp
-        src/pf_imgui/details/Spinner.cpp)
+        src/pf_imgui/details/Spinner.cpp
+        src/pf_imgui/elements/Spinner.cpp
+        )
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -316,7 +318,9 @@ set(INCLUDES
         src/pf_imgui/elements/DockSpace.h
         src/pf_imgui/details/PieMenu.h
         src/pf_imgui/elements/PieMenu.h
-        src/pf_imgui/details/Spinner.h)
+        src/pf_imgui/details/Spinner.h
+        src/pf_imgui/elements/Spinner.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 

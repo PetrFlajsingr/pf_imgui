@@ -12,7 +12,7 @@
 #include <pf_imgui/unique_id.h>
 
 namespace pf::ui::ig {
-
+// TODO: customizable
 /**
  * @brief A utility type for storing pie menu items.
  */
