@@ -118,6 +118,7 @@ void ImGuiInterface::renderImpl() {
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
   renderDialogs();
+  std::ranges::for_each(test, [](auto &pieMenu) { pieMenu->render(); });
   ImGui::RenderNotifications(notifications);
 }
 
