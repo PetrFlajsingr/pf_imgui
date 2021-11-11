@@ -12,7 +12,7 @@
 #include <pf_imgui/unique_id.h>
 
 namespace pf::ui::ig {
-// TODO: customizable
+
 /**
  * @brief A utility type for storing pie menu items.
  */
@@ -28,7 +28,11 @@ class PieItem : public Element {
 /**
  * @brief A pie menu item functioning as a button and a leaf of the menu tree.
  */
-class PieMenuButton : public PieItem, public Labellable, public Clickable {
+class PieMenuButton : public PieItem,
+                      public Labellable,
+                      public Clickable,
+                      public AllStyleCustomizable,
+                      public AllColorCustomizable {
  public:
   /**
    *

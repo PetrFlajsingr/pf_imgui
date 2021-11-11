@@ -14,6 +14,8 @@ PieItem::PieItem(const std::string &name) : Element(name) {}
 PieMenuButton::PieMenuButton(const std::string &name, const std::string &label) : PieItem(name), Labellable(label) {}
 
 void PieMenuButton::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGuiPie::PieMenuItem(getLabel().c_str()), getEnabled() == Enabled::Yes) { notifyOnClick(); }
 }
 
@@ -25,6 +27,8 @@ std::vector<Renderable *> PieSubMenu::getRenderables() {
 PieSubMenu::PieSubMenu(const std::string &name, const std::string &label) : PieItem(name), Labellable(label) {}
 
 void PieSubMenu::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (ImGuiPie::BeginPieMenu(getLabel().c_str(), getEnabled() == Enabled::Yes)) {
     RAII end{[] { ImGuiPie::EndPieMenu(); }};
     std::ranges::for_each(subItems, [](auto &subItem) { subItem->render(); });
@@ -53,6 +57,8 @@ void PieMenu::renderImpl() {
     open_ = false;
   }
   if (open_) {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
     if (ImGuiPie::BeginPiePopup(getName().c_str(), getEnabled() == Enabled::Yes)) {
       RAII end{[] { ImGuiPie::EndPiePopup(); }};
       PieSubMenu::renderImpl();
