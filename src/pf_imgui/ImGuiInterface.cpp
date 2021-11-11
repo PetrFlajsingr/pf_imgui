@@ -118,7 +118,6 @@ void ImGuiInterface::renderImpl() {
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
   renderDialogs();
-  std::ranges::for_each(pieMenus, [](auto &pieMenu) { pieMenu->render(); });
   ImGui::RenderNotifications(notifications);
 }
 
@@ -142,26 +141,6 @@ void ImGuiInterface::showNotification(NotificationType type, std::string_view ti
   ImGuiToast toast{static_cast<int>(type), std::string(message).c_str(), dismissTime.count()};
   toast.set_title(std::string{title}.c_str());
   ImGui::InsertNotification(toast, notifications);
-}
-
-PieMenu &ImGuiInterface::createPieMenu(const std::string &name) {
-  return *pieMenus.emplace_back(std::make_unique<PieMenu>(name));
-}
-
-std::optional<std::reference_wrapper<PieMenu>> ImGuiInterface::getPieMenu(const std::string &name) {
-  if (const auto iter = std::ranges::find(pieMenus, name, [](const auto &pieMenu) { return pieMenu->getName(); });
-      iter != pieMenus.end()) {
-    return **iter;
-  }
-  return std::nullopt;
-}
-
-void ImGuiInterface::removePieMenu(const std::string &name) {
-  pieMenus.erase(std::ranges::find(pieMenus, name, [](const auto &pieMenu) { return pieMenu->getName(); }));
-}
-
-void ImGuiInterface::removePieMenu(const PieMenu &pieMenu) {
-  pieMenus.erase(std::ranges::find(pieMenus, &pieMenu, [](const auto &pieMenu) { return pieMenu.get(); }));
 }
 
 }// namespace pf::ui::ig
