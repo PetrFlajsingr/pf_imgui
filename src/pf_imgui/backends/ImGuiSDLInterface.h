@@ -31,9 +31,6 @@ class ImGuiSDLInterface : public ImGuiInterface {
   void updateFonts() override;
 
   void render() override;
-
- protected:
-  void renderImpl() override;
 };
 
 }// namespace pf::ui::ig

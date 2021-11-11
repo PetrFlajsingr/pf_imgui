@@ -103,6 +103,7 @@ void ImGuiGlfwVulkanInterface::updateFonts() {
   vkDestroyFence(config.device, fence, nullptr);
   vkDestroyCommandPool(config.device, commandPool, nullptr);
 }
+
 std::optional<std::uint32_t> ImGuiGlfwVulkanInterface::findGraphicsFamilyIndex() {
   uint32_t queueFamilyCount = 0;
   vkGetPhysicalDeviceQueueFamilyProperties(config.physicalDevice, &queueFamilyCount, nullptr);
@@ -117,9 +118,11 @@ std::optional<std::uint32_t> ImGuiGlfwVulkanInterface::findGraphicsFamilyIndex()
 
   return std::nullopt;
 }
+
 void ImGuiGlfwVulkanInterface::addToCommandBuffer(VkCommandBuffer commandBuffer) {
   ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
 }
+
 void ImGuiGlfwVulkanInterface::render() {
   if (shouldUpdateFontAtlas) {
     shouldUpdateFontAtlas = false;
@@ -149,11 +152,7 @@ void ImGuiGlfwVulkanInterface::render() {
     }
   }
 }
-void ImGuiGlfwVulkanInterface::renderImpl() {
-  if (hasMenuBar()) { menuBar->render(); }
-  ImGuiInterface::renderImpl();
-  renderDialogs();
-}
+
 void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
   constexpr auto DESCRIPTOR_COUNT = 1000;
   auto descPoolConfig = VkDescriptorPoolCreateInfo{};

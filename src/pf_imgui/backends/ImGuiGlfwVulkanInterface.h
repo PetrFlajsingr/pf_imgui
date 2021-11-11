@@ -38,9 +38,6 @@ class ImGuiGlfwVulkanInterface : public ImGuiInterface {
   void addToCommandBuffer(VkCommandBuffer commandBuffer);
   void render() override;
 
- protected:
-  void renderImpl() override;
-
  private:
   std::optional<std::uint32_t> findGraphicsFamilyIndex();
   void setupDescriptorPool();

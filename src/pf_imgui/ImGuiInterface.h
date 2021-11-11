@@ -7,7 +7,6 @@
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 
-#include "fwd.h"
 #include <imgui.h>
 #include <imgui_notify.h>
 #include <memory>
@@ -20,6 +19,8 @@
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/elements/PieMenu.h>
+#include <pf_imgui/fwd.h>
 #include <pf_imgui/icons.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ElementContainer.h>
@@ -42,7 +43,7 @@ namespace pf::ui::ig {
  * @todo: key bindings?
  * @todo: styles
  */
-class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
+class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomizable, public AllColorCustomizable {
  public:
   /**
    * Construct ImGuiInterface with given flags.
@@ -51,7 +52,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    */
   explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
                           const std::filesystem::path &iconFontDirectory = ".",
-                          const Flags<IconPack>& enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
+                          const Flags<IconPack> &enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
 
   /**
    * Get ImGuiIO from ImGui::.
@@ -97,6 +98,11 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
    * @param name ID of the window to remove
    */
   void removeWindow(const std::string &name);
+  /**
+   * Remove the window from UI. This invalidates any references to the window.
+   * @param name ID of the window to remove
+   */
+  void removeWindow(const Window &window);
 
   /**
    * Find Window by its ID.
@@ -242,6 +248,32 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
                         std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
 
   /**
+   * Create a new empty PieMenu.
+   * @param name unique name of the element
+   * @return reference to the newly created PieMenu instance
+   */
+  [[nodiscard]] PieMenu &createPieMenu(const std::string &name);
+
+  /**
+   * Find existing PieMenu by name.
+   * @param name name of the searched for element
+   * @return reference to the requested PieMenu or std::nullopt if no such item exists
+   */
+  [[nodiscard]] std::optional<std::reference_wrapper<PieMenu>> getPieMenu(const std::string &name);
+
+  /**
+   * Remove PieMenu by its name if it exists.
+   * @param name name of the element to remove
+   */
+  void removePieMenu(const std::string &name);
+
+  /**
+   * Remove pie menu if it exists. The menu had to be provided by createPieMenu.
+   * @param pieMenu PieMenu to remove
+   */
+  void removePieMenu(const PieMenu &pieMenu);
+
+  /**
    * Create a group for drag and drop elements.
    * @return newly created group
    */
@@ -287,6 +319,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
 
   std::vector<DragNDropGroup> dragNDropGroups;
   std::vector<ImGuiToast> notifications;
+  std::vector<std::unique_ptr<PieMenu>> pieMenus;
 
   void removeDialog(ModalDialog &dialog);
 };

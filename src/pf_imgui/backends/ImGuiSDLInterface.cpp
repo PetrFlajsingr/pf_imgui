@@ -18,7 +18,7 @@ pf::ui::ig::ImGuiSDLInterface::~ImGuiSDLInterface() {
 }
 
 void pf::ui::ig::ImGuiSDLInterface::updateFonts() {
-  //TODO implement this
+  // no need to implement this for SDL
 }
 
 void pf::ui::ig::ImGuiSDLInterface::render() {
@@ -50,10 +50,4 @@ void pf::ui::ig::ImGuiSDLInterface::render() {
       renderImpl();
     }
   }
-}
-
-void pf::ui::ig::ImGuiSDLInterface::renderImpl() {
-  if (hasMenuBar()) { menuBar->render(); }
-  ImGuiInterface::renderImpl();
-  renderDialogs();
 }

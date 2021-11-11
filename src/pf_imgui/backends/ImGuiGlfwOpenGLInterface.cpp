@@ -21,7 +21,7 @@ pf::ui::ig::ImGuiGlfwOpenGLInterface::~ImGuiGlfwOpenGLInterface() {
 }
 
 void pf::ui::ig::ImGuiGlfwOpenGLInterface::updateFonts() {
-  // TODO: implement this
+  // no need to implement this for OpenGL
 }
 
 void pf::ui::ig::ImGuiGlfwOpenGLInterface::render() {
@@ -53,10 +53,4 @@ void pf::ui::ig::ImGuiGlfwOpenGLInterface::render() {
       renderImpl();
     }
   }
-}
-
-void pf::ui::ig::ImGuiGlfwOpenGLInterface::renderImpl() {
-  if (hasMenuBar()) { menuBar->render(); }
-  ImGuiInterface::renderImpl();
-  renderDialogs();
 }

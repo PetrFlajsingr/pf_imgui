@@ -28,9 +28,6 @@ class ImGuiGlfwOpenGLInterface : public ImGuiInterface {
   void updateFonts() override;
   void render() override;
 
- protected:
-  void renderImpl() override;
-
  private:
 };
 

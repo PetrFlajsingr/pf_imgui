@@ -10,7 +10,7 @@
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
-                               const std::filesystem::path &iconFontDirectory, const Flags<IconPack>& enabledIconPacks,
+                               const std::filesystem::path &iconFontDirectory, const Flags<IconPack> &enabledIconPacks,
                                float iconSize)
     : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable
                                                  | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0))),
@@ -94,11 +94,13 @@ Window &ImGuiInterface::createWindow(const std::string &windowName, std::string 
 }
 
 void ImGuiInterface::removeWindow(const std::string &name) {
-  if (auto iter = std::ranges::find_if(windows, [name](const auto &window) { return window->getName() == name; });
-      iter != windows.end()) {
-    windows.erase(iter);
-  }
+  windows.erase(std::ranges::find(windows, name, [](const auto &window) { return window->getName(); }));
 }
+
+void ImGuiInterface::removeWindow(const Window &window) {
+  windows.erase(std::ranges::find(windows, &window, [](const auto &window) { return window.get(); }));
+}
+
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &name) {
   if (auto window = findIf(getWindows() | ranges::views::addressof,
                            [name](const auto &window) { return window->getName() == name; });
@@ -110,8 +112,12 @@ std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const
 }
 
 void ImGuiInterface::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  if (hasMenuBar()) { menuBar->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
+  renderDialogs();
   ImGui::RenderNotifications(notifications);
 }
 
@@ -135,6 +141,26 @@ void ImGuiInterface::showNotification(NotificationType type, std::string_view ti
   ImGuiToast toast{static_cast<int>(type), std::string(message).c_str(), dismissTime.count()};
   toast.set_title(std::string{title}.c_str());
   ImGui::InsertNotification(toast, notifications);
+}
+
+PieMenu &ImGuiInterface::createPieMenu(const std::string &name) {
+  return *pieMenus.emplace_back(std::make_unique<PieMenu>(name));
+}
+
+std::optional<std::reference_wrapper<PieMenu>> ImGuiInterface::getPieMenu(const std::string &name) {
+  if (const auto iter = std::ranges::find(pieMenus, name, [](const auto &pieMenu) { return pieMenu->getName(); });
+      iter != pieMenus.end()) {
+    return **iter;
+  }
+  return std::nullopt;
+}
+
+void ImGuiInterface::removePieMenu(const std::string &name) {
+  pieMenus.erase(std::ranges::find(pieMenus, name, [](const auto &pieMenu) { return pieMenu->getName(); }));
+}
+
+void ImGuiInterface::removePieMenu(const PieMenu &pieMenu) {
+  pieMenus.erase(std::ranges::find(pieMenus, &pieMenu, [](const auto &pieMenu) { return pieMenu.get(); }));
 }
 
 }// namespace pf::ui::ig
