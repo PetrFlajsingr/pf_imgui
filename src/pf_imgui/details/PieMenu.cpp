@@ -1,7 +1,8 @@
 #include "PieMenu.h"
 #include <imgui.h>
 #include <imgui_internal.h>
-
+#include <pf_common/RAII.h>
+namespace ImGuiPie {
 struct PieMenuContext {
   static const int c_iMaxPieMenuStack = 8;
   static const int c_iMaxPieItemCount = 12;
@@ -78,6 +79,15 @@ bool BeginPiePopup(const char *pName, int iMouseButton) {
 
     ImGui::SetNextWindowPos(ImVec2(-100.f, -100.f), ImGuiCond_Appearing);
     bool bOpened = ImGui::BeginPopup(pName, ImGuiWindowFlags_NoBackground);
+    pf::RAII end{[&] {
+      if (bOpened) {
+        BeginPieMenuEx();
+      } else {
+        ImGui::End();
+        ImGui::PopStyleColor(2);
+        ImGui::PopStyleVar(2);
+      }
+    }};
     if (bOpened) {
       int iCurrentFrame = ImGui::GetFrameCount();
       if (s_oPieMenuContext.m_iLastFrame < (iCurrentFrame - 1)) {
@@ -86,13 +96,8 @@ bool BeginPiePopup(const char *pName, int iMouseButton) {
       s_oPieMenuContext.m_iLastFrame = iCurrentFrame;
 
       s_oPieMenuContext.m_iMaxIndex = -1;
-      BeginPieMenuEx();
 
       return true;
-    } else {
-      ImGui::End();
-      ImGui::PopStyleColor(2);
-      ImGui::PopStyleVar(2);
     }
   }
   return false;
@@ -325,3 +330,4 @@ bool PieMenuItem(const char *pName, bool bEnabled) {
   if (bActive) s_oPieMenuContext.m_bClose = true;
   return bActive;
 }
+}// namespace ImGuiPie

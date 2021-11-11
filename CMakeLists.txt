@@ -194,7 +194,9 @@ set(SOURCES
         src/pf_imgui/layouts/AnchorLayout.cpp
         src/pf_imgui/details/template_instantiations.cpp
         src/pf_imgui/elements/DockSpace.cpp
-        src/pf_imgui/details/PieMenu.cpp)
+        src/pf_imgui/details/PieMenu.cpp
+        src/pf_imgui/elements/PieMenu.cpp
+        )
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -312,7 +314,9 @@ set(INCLUDES
         src/pf_imgui/styles/enums.h
         src/pf_imgui/interface/Customizable.h
         src/pf_imgui/elements/DockSpace.h
-        src/pf_imgui/details/PieMenu.h)
+        src/pf_imgui/details/PieMenu.h
+        src/pf_imgui/elements/PieMenu.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 
