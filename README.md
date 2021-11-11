@@ -17,6 +17,8 @@ In these examples `imgui` is an instance of `std::unique_ptr<ImGuiInterface>`. E
 ### ImGuiInterface
 `ImGuiInterface` needs to be subclassed with a custom rendering backend. It must also provide functionality to update font atlas when requested. This request is marked via a `protected` member variable `shouldUpdateFontAtlas`.
 
+There are some backend implementations in `pf_imgui/backends`.
+
 ## Common interfaces
 All of the functions which register an observer return an instance of `Subscription` which can be used to cancel the observer.
 ### Drag and drop
