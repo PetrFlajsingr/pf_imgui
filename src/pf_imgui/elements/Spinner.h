@@ -10,10 +10,19 @@
 #include <pf_imgui/styles/enums.h>
 
 namespace pf::ui::ig {
+/**
+ * @brief A spinner notifying the user of an operation in progress.
+ */
 class Spinner : public ItemElement,
                 public ColorCustomizable<style::ColorOf::PlotHistogram>,
                 public StyleCustomizable<style::Style::FramePadding> {
  public:
+  /**
+   *
+   * @param elementName unique element name
+   * @param radius radius of the spin circle
+   * @param thickness thickness of the spin line
+   */
   Spinner(const std::string &elementName, float radius, int thickness);
 
  protected:
