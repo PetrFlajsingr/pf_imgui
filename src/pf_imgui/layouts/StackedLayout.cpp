@@ -8,6 +8,10 @@
 
 namespace pf::ui::ig {
 
+StackedLayout::Stack::Stack(StackedLayout &parent) : parent(parent) {}
+
+void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
+
 StackedLayout::StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                              ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
@@ -30,16 +34,13 @@ void StackedLayout::renderImpl() {
     if (renderCollapseButton()) {
       if (selectedIndex.has_value()) {
         auto &activeStack = stacks[*selectedIndex];
-        std::ranges::for_each(activeStack.getChildren(), [](auto &child) { child.render(); });
+        std::ranges::for_each(activeStack->getChildren(), [](auto &child) { child.render(); });
       }
     }
   }
 }
 
-StackedLayout::Stack &StackedLayout::pushStack() {
-  stacks.emplace_back();
-  return stacks.back();
-}
+StackedLayout::Stack &StackedLayout::pushStack() { return *stacks.emplace_back(std::make_unique<Stack>(*this)); }
 
 void StackedLayout::popStack() {
   if (!stacks.empty()) { stacks.erase(stacks.end() - 1); }
@@ -64,16 +65,25 @@ void StackedLayout::setIndex(std::size_t index) {
 #endif
   selectedIndex = index;
 }
-StackedLayout::Stack &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
+StackedLayout::Stack &StackedLayout::getCurrentStack() { return *stacks[*selectedIndex]; }
 
-StackedLayout::Stack &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
+StackedLayout::Stack &StackedLayout::getStackAtIndex(std::size_t index) { return *stacks[index]; }
 
 std::vector<Renderable *> StackedLayout::getRenderables() {
-  return stacks | ranges::views::transform([](auto &stack) { return stack.getChildren() | ranges::views::all; })
+  return stacks | ranges::views::transform([](auto &stack) { return stack->getChildren() | ranges::views::all; })
       | ranges::views::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
       | ranges::to_vector;
 }
 
 std::size_t StackedLayout::size() const { return stacks.size(); }
+
+void StackedLayout::setStackActive(StackedLayout::Stack &stack) {
+  for (const auto &[id, s] : ranges::views::enumerate(stacks)) {
+    if (s.get() == &stack) {
+      setIndex(id);
+      break;
+    }
+  }
+}
 
 }// namespace pf::ui::ig

@@ -21,7 +21,14 @@ namespace pf::ui::ig {
  * This layout serves as a multi-page layout.
  */
 class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
-  struct Stack : public ElementContainer {};
+  class Stack : public ElementContainer {
+   public:
+    Stack(StackedLayout &parent);
+    void setActive();
+
+   private:
+    StackedLayout &parent;
+  };
 
  public:
   /**
@@ -105,6 +112,12 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    */
   [[nodiscard]] Stack &getStackAtIndex(std::size_t index);
 
+  /**
+   * Set active stack;
+   * @param stack stack to activate
+   */
+  void setStackActive(Stack &stack);
+
   std::vector<Renderable *> getRenderables() override;
 
  protected:
@@ -112,7 +125,7 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
 
  private:
   std::optional<std::size_t> selectedIndex = std::nullopt;
-  std::vector<Stack> stacks;
+  std::vector<std::unique_ptr<Stack>> stacks;
 };
 }// namespace pf::ui::ig
 
