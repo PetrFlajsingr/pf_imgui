@@ -21,6 +21,10 @@ namespace pf::ui::ig {
  * This layout serves as a multi-page layout.
  */
 class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
+ public:
+  /**
+   * @brief A container for data within the layout.
+   */
   class Stack : public ElementContainer {
    public:
     Stack(StackedLayout &parent);
@@ -29,8 +33,6 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    private:
     StackedLayout &parent;
   };
-
- public:
   /**
    * Construct StackedLayout.
    * @param elementName ID of the layout
