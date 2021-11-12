@@ -44,7 +44,6 @@ class RadioButton;
 class Tab;
 class TabBar;
 class Text;
-class Tree;
 class Window;
 class Tooltip;
 class PieMenu;

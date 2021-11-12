@@ -13,7 +13,7 @@ namespace pf::ui::ig {
 /**
  * @brief A spinner notifying the user of an operation in progress.
  */
-class Spinner : public ItemElement,
+class PF_IMGUI_EXPORT Spinner : public ItemElement,
                 public ColorCustomizable<style::ColorOf::PlotHistogram>,
                 public StyleCustomizable<style::Style::FramePadding> {
  public:
