@@ -36,7 +36,7 @@ void StackedLayout::renderImpl() {
   }
 }
 
-StackedLayout::StackContainer &StackedLayout::pushStack() {
+StackedLayout::Stack &StackedLayout::pushStack() {
   stacks.emplace_back();
   return stacks.back();
 }
@@ -64,9 +64,9 @@ void StackedLayout::setIndex(std::size_t index) {
 #endif
   selectedIndex = index;
 }
-StackedLayout::StackContainer &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
+StackedLayout::Stack &StackedLayout::getCurrentStack() { return stacks[*selectedIndex]; }
 
-StackedLayout::StackContainer &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
+StackedLayout::Stack &StackedLayout::getStackAtIndex(std::size_t index) { return stacks[index]; }
 
 std::vector<Renderable *> StackedLayout::getRenderables() {
   return stacks | ranges::views::transform([](auto &stack) { return stack.getChildren() | ranges::views::all; })

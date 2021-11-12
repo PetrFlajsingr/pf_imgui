@@ -21,7 +21,7 @@ namespace pf::ui::ig {
  * This layout serves as a multi-page layout.
  */
 class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
-  struct StackContainer : public ElementContainer {};
+  struct Stack : public ElementContainer {};
 
  public:
   /**
@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    * Push a new element container to the last index.
    * @return reference to the newly added stack
    */
-  StackContainer &pushStack();
+  Stack &pushStack();
   /**
    * Remove the last element container. If the layout is empty nothing happens.
    */
@@ -97,13 +97,13 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    * Get currently active stack.
    * @return reference to the currently active stack
    */
-  [[nodiscard]] StackContainer &getCurrentStack();
+  [[nodiscard]] Stack &getCurrentStack();
   /**
    * Get stack at the selected index.
    * @param index index of the stack
    * @return reference to the selected stack
    */
-  [[nodiscard]] StackContainer &getStackAtIndex(std::size_t index);
+  [[nodiscard]] Stack &getStackAtIndex(std::size_t index);
 
   std::vector<Renderable *> getRenderables() override;
 
@@ -112,7 +112,7 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
 
  private:
   std::optional<std::size_t> selectedIndex = std::nullopt;
-  std::vector<StackContainer> stacks;
+  std::vector<Stack> stacks;
 };
 }// namespace pf::ui::ig
 
