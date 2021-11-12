@@ -20,7 +20,13 @@
 #include <string>
 
 namespace pf::ui::ig {
+/**
+ * @brief Type of marker rendered in tree nodes.
+ */
 enum class TreeNodeMarker { Bullet, Arrow };
+/**
+ * @brief Type of tree. Simple supports only other tree elements, Advanced allows to add any other element.
+ */
 enum class TreeType { Simple, Advanced };
 
 class PF_IMGUI_EXPORT TreeLeaf;
@@ -29,26 +35,23 @@ class PF_IMGUI_EXPORT TreeNode;
 template<TreeType treeType>
 class PF_IMGUI_EXPORT Tree;
 
-// TODO: drag drop source/target
-// TODO: limit selection - only one leaf active at a time, basically a selection group - maybe a generic class for groups of ValueObservable<bool>?
-// TODO: comments
 namespace details {
 struct PF_IMGUI_EXPORT TreeSelectionLimiter {
- TreeLeaf *selected = nullptr;
+  TreeLeaf *selected = nullptr;
 };
 
 class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
- friend class TreeNode<TreeType::Simple>;
- friend class TreeNode<TreeType::Advanced>;
- friend class Tree<TreeType::Simple>;
- friend class Tree<TreeType::Advanced>;
+  friend class TreeNode<TreeType::Simple>;
+  friend class TreeNode<TreeType::Advanced>;
+  friend class Tree<TreeType::Simple>;
+  friend class Tree<TreeType::Advanced>;
 
-public:
- TreeRecord(const std::string &elementName, const std::string &label, Flags<ImGuiTreeNodeFlags_> defaultFlags);
+ public:
+  TreeRecord(const std::string &elementName, const std::string &label, Flags<ImGuiTreeNodeFlags_> defaultFlags);
 
-protected:
- Flags<ImGuiTreeNodeFlags_> flags{};
- TreeSelectionLimiter *limiter = nullptr;
+ protected:
+  Flags<ImGuiTreeNodeFlags_> flags{};
+  TreeSelectionLimiter *limiter = nullptr;
 };
 
 template<TreeType treeType>
@@ -56,201 +59,313 @@ void traverseTree(TreeRecord &tree, std::invocable<details::TreeRecord &> auto c
 
 }// namespace details
 
+/**
+ * @brief Leaf of Tree. Behaves as Selectable.
+ */
 class PF_IMGUI_EXPORT TreeLeaf
-   : public details::TreeRecord,
-     public ValueObservable<bool>,
-     public Savable,
-     public StyleCustomizable<style::Style::FramePadding, style::Style::ItemSpacing, style::Style::FrameRounding>,
-     public ColorCustomizable<style::ColorOf::Text, style::ColorOf::HeaderActive, style::ColorOf::HeaderHovered,
-                              style::ColorOf::Header> {
-public:
- TreeLeaf(const std::string &elementName, const std::string &label, bool selected = false,
-          Persistent persistent = Persistent::No);
+    : public details::TreeRecord,
+      public ValueObservable<bool>,
+      public Savable,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::ItemSpacing, style::Style::FrameRounding>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::HeaderActive, style::ColorOf::HeaderHovered,
+                               style::ColorOf::Header> {
+ public:
+  /**
+  * Create TreeLeaf.
+  * @param elementName unique name of the element
+  * @param label label rendered on the element
+  * @param selected
+  * @param persistent enable/disable disk saving
+  */
+  TreeLeaf(const std::string &elementName, const std::string &label, bool selected = false,
+           Persistent persistent = Persistent::No);
 
- void setValue(const bool &newValue) override;
+  void setValue(const bool &newValue) override;
 
-protected:
- void renderImpl() override;
- void unserialize_impl(const toml::table &src) override;
- toml::table serialize_impl() override;
+ protected:
+  void renderImpl() override;
+  void unserialize_impl(const toml::table &src) override;
+  toml::table serialize_impl() override;
 };
 
+/**
+ * @brief A Tree node containing other nodes or leaves.
+ */
 template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
-   : public details::TreeRecord, public RenderablesContainer, public Collapsible {
-public:
- TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
-          Persistent persistent = Persistent::No)
-     : TreeNode(elementName, label, allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
+    : public details::TreeRecord, public RenderablesContainer, public Collapsible {
+ public:
+  /**
+  * Construct TreeNode.
+  * @param elementName unique name of the element
+  * @param label label rendered on the element
+  * @param allowCollapse enable/disable user collapsing the node
+  * @param persistent enable/disable disk saving
+  */
+  TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
+           Persistent persistent = Persistent::No)
+      : TreeNode(elementName, label, allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
 
- TreeNode<TreeType::Simple> &addNode(const std::string &name, const std::string &label,
-                                     AllowCollapse allowCollapse = AllowCollapse::Yes) {
-   auto &node = elementContainer.createChild<TreeNode<TreeType::Simple>>(
-       name, label, allowCollapse, isPersistent() ? Persistent::Yes : Persistent::No);
-   node.limiter = limiter;
-   return node;
- }
+  /**
+  * Create a new child node.
+  * @param name unique name of the element
+  * @param label label rendered on the element
+  * @param allowCollapse enable/disable user collapsing the node
+  * @return reference to the newly created node
+  */
+  TreeNode<TreeType::Simple> &addNode(const std::string &name, const std::string &label,
+                                      AllowCollapse allowCollapse = AllowCollapse::Yes) {
+    auto &node = elementContainer.createChild<TreeNode<TreeType::Simple>>(
+        name, label, allowCollapse, isPersistent() ? Persistent::Yes : Persistent::No);
+    node.limiter = limiter;
+    return node;
+  }
 
- TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
-   auto &leaf = elementContainer.createChild<TreeLeaf>(name, label, selected,
-                                                       isPersistent() ? Persistent::Yes : Persistent::No);
-   leaf.limiter = limiter;
-   return leaf;
- }
- [[nodiscard]] std::vector<Renderable *> getRenderables() override { return elementContainer.getRenderables(); }
+  /**
+  * Create a new leaf node.
+  * @param name unique name of the element
+  * @param label label rendered on the element
+  * @param selected
+  * @return reference to the newly created leaf
+  */
+  TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
+    auto &leaf = elementContainer.createChild<TreeLeaf>(name, label, selected,
+                                                        isPersistent() ? Persistent::Yes : Persistent::No);
+    leaf.limiter = limiter;
+    return leaf;
+  }
+  [[nodiscard]] std::vector<Renderable *> getRenderables() override { return elementContainer.getRenderables(); }
 
- void setNodeMarker(TreeNodeMarker marker) {
-   switch (marker) {
-     case TreeNodeMarker::Arrow: flags |= ImGuiTreeNodeFlags_Bullet; break;
-     case TreeNodeMarker::Bullet: flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Bullet); break;
-   }
- }
+  /**
+  * Set what kind of marker is being rendered on the left part of the node.
+  * @param marker
+  */
+  void setNodeMarker(TreeNodeMarker marker) {
+    switch (marker) {
+      case TreeNodeMarker::Arrow: flags |= ImGuiTreeNodeFlags_Bullet; break;
+      case TreeNodeMarker::Bullet: flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Bullet); break;
+    }
+  }
 
-protected:
- TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent,
-          const Flags<ImGuiTreeNodeFlags_> &flags)
-     : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, persistent) {
-   setCollapsed(true);
- }
+ protected:
+  TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent,
+           const Flags<ImGuiTreeNodeFlags_> &flags)
+      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, persistent) {
+    setCollapsed(true);
+  }
 
- void renderImpl() override {
-   auto colorStyle = setColorStack();
-   auto style = setStyleStack();
-   setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
-   RAII end{[this] {
-     if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
-   }};
-   if (!isCollapsed()) {
-     std::ranges::for_each(elementContainer.getChildren(), [](auto &child) { child.render(); });
-   }
- }
+  void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
+    setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
+    RAII end{[this] {
+      if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
+    }};
+    if (!isCollapsed()) {
+      std::ranges::for_each(elementContainer.getChildren(), [](auto &child) { child.render(); });
+    }
+  }
 
-private:
- ElementContainer elementContainer;
+ private:
+  ElementContainer elementContainer;
 };
 
+/**
+ * @brief A Tree node containing other nodes or leaves.
+ */
 template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
-   : public details::TreeRecord, public ElementContainer, public Collapsible {
-public:
- TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
-          Persistent persistent = Persistent::No)
-     : TreeNode(elementName, label, allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
+    : public details::TreeRecord, public ElementContainer, public Collapsible {
+ public:
+  /**
+   * Construct TreeNode.
+   * @param elementName unique name of the element
+   * @param label label rendered on the element
+   * @param allowCollapse enable/disable user collapsing the node
+   * @param persistent enable/disable disk saving
+   */
+  TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
+           Persistent persistent = Persistent::No)
+      : TreeNode(elementName, label, allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
 
- TreeNode<TreeType::Advanced> &addNode(const std::string &name, const std::string &label,
-                                       AllowCollapse allowCollapse = AllowCollapse::Yes) {
-   auto &node = createChild<TreeNode<TreeType::Advanced>>(name, label, allowCollapse,
-                                                          isPersistent() ? Persistent::Yes : Persistent::No);
-   node.limiter = limiter;
-   return node;
- }
+  /**
+   * Create a new child node.
+   * @param name unique name of the element
+   * @param label label rendered on the element
+   * @param allowCollapse enable/disable user collapsing the node
+   * @return reference to the newly created node
+   */
+  TreeNode<TreeType::Advanced> &addNode(const std::string &name, const std::string &label,
+                                        AllowCollapse allowCollapse = AllowCollapse::Yes) {
+    auto &node = createChild<TreeNode<TreeType::Advanced>>(name, label, allowCollapse,
+                                                           isPersistent() ? Persistent::Yes : Persistent::No);
+    node.limiter = limiter;
+    return node;
+  }
 
- TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
-   auto &leaf = createChild<TreeLeaf>(name, label, selected, isPersistent() ? Persistent::Yes : Persistent::No);
-   leaf.limiter = limiter;
-   return leaf;
- }
+  /**
+   * Create a new leaf node.
+   * @param name unique name of the element
+   * @param label label rendered on the element
+   * @param selected
+   * @return reference to the newly created leaf
+   */
+  TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
+    auto &leaf = createChild<TreeLeaf>(name, label, selected, isPersistent() ? Persistent::Yes : Persistent::No);
+    leaf.limiter = limiter;
+    return leaf;
+  }
 
- void setNodeMarker(TreeNodeMarker marker) {
-   switch (marker) {
-     case TreeNodeMarker::Arrow: flags |= ImGuiTreeNodeFlags_Bullet; break;
-     case TreeNodeMarker::Bullet: flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Bullet); break;
-   }
- }
+  /**
+   * Set what kind of marker is being rendered on the left part of the node.
+   * @param marker
+   */
+  void setNodeMarker(TreeNodeMarker marker) {
+    switch (marker) {
+      case TreeNodeMarker::Arrow: flags |= ImGuiTreeNodeFlags_Bullet; break;
+      case TreeNodeMarker::Bullet: flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Bullet); break;
+    }
+  }
 
-protected:
- TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent,
-          const Flags<ImGuiTreeNodeFlags_> &flags)
-     : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, persistent) {
-   setCollapsed(true);
- }
+ protected:
+  TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent,
+           const Flags<ImGuiTreeNodeFlags_> &flags)
+      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, persistent) {
+    setCollapsed(true);
+  }
 
- void renderImpl() override {
-   auto colorStyle = setColorStack();
-   auto style = setStyleStack();
-   setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
-   RAII end{[this] {
-     if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
-   }};
-   if (!isCollapsed()) {
-     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
-   }
- }
+  void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
+    setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
+    RAII end{[this] {
+      if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
+    }};
+    if (!isCollapsed()) {
+      std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+    }
+  }
 };
 
+/**
+ * @brief A Tree node which has a distinct background and doesn't offset its child nodes to the right.
+ * @tparam treeType
+ */
 template<TreeType treeType>
 class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
-public:
- TreeHeaderNode(const std::string &elementName, const std::string &label,
-                AllowCollapse allowCollapse = AllowCollapse::Yes, Persistent persistent = Persistent::No)
-     : TreeNode<treeType>(elementName, label, allowCollapse, persistent, ImGuiTreeNodeFlags_CollapsingHeader) {}
+ public:
+  /**
+   * Construct TreeHeaderNode.
+   * @param elementName unique name of the element
+   * @param label label rendered on the element
+   * @param allowCollapse enable/disable user collapsing the node
+   * @param persistent enable/disable disk saving
+   */
+  TreeHeaderNode(const std::string &elementName, const std::string &label,
+                 AllowCollapse allowCollapse = AllowCollapse::Yes, Persistent persistent = Persistent::No)
+      : TreeNode<treeType>(elementName, label, allowCollapse, persistent, ImGuiTreeNodeFlags_CollapsingHeader) {}
 };
 
+/**
+ * @brief A structure containing tree nodes and leaves.
+ * @tparam treeType
+ */
 template<TreeType treeType>
 class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
-public:
- Tree(const std::string &name, const Size &size, Persistent persistent = Persistent::No)
-     : Element(name), persistent(persistent), layout(name + "_layout", LayoutDirection::TopToBottom, size) {}
+ public:
+  /**
+   * Construct tree.
+   * @param name unique name of the element
+   * @param size size of the element
+   * @param persistent enable/disable disk saving
+   */
+  Tree(const std::string &name, const Size &size, Persistent persistent = Persistent::No)
+      : Element(name), persistent(persistent), layout(name + "_layout", LayoutDirection::TopToBottom, size) {}
 
- TreeNode<treeType> &addNode(const std::string &name, const std::string &label,
-                             AllowCollapse allowCollapse = AllowCollapse::Yes) {
-   auto &node = layout.createChild<TreeNode<treeType>>(name, label, allowCollapse, persistent);
-   node.limiter = &limiter;
-   return node;
- }
+  /**
+   * Create a new child node.
+   * @param name unique name of the element
+   * @param label label rendered on the element
+   * @param allowCollapse enable/disable user collapsing the node
+   * @return reference to the newly created node
+   */
+  TreeNode<treeType> &addNode(const std::string &name, const std::string &label,
+                              AllowCollapse allowCollapse = AllowCollapse::Yes) {
+    auto &node = layout.createChild<TreeNode<treeType>>(name, label, allowCollapse, persistent);
+    node.limiter = &limiter;
+    return node;
+  }
 
- TreeHeaderNode<treeType> &addHeaderNode(const std::string &name, const std::string &label,
-                                         AllowCollapse allowCollapse = AllowCollapse::Yes) {
-   auto &node = layout.createChild<TreeHeaderNode<treeType>>(name, label, allowCollapse, persistent);
-   node.limiter = &limiter;
-   return node;
- }
+  /**
+   * Create a new child header node.
+   * @param name unique name of the element
+   * @param label label rendered on the element
+   * @param allowCollapse enable/disable user collapsing the node
+   * @return reference to the newly created node
+   */
+  TreeHeaderNode<treeType> &addHeaderNode(const std::string &name, const std::string &label,
+                                          AllowCollapse allowCollapse = AllowCollapse::Yes) {
+    auto &node = layout.createChild<TreeHeaderNode<treeType>>(name, label, allowCollapse, persistent);
+    node.limiter = &limiter;
+    return node;
+  }
 
- TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
-   auto &leaf = layout.createChild<TreeLeaf>(name, label, selected, persistent);
-   leaf.limiter = &limiter;
-   return leaf;
- }
+  /**
+   * Create a new leaf node.
+   * @param name unique name of the element
+   * @param label label rendered on the element
+   * @param selected
+   * @return reference to the newly created leaf
+   */
+  TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
+    auto &leaf = layout.createChild<TreeLeaf>(name, label, selected, persistent);
+    leaf.limiter = &limiter;
+    return leaf;
+  }
 
- [[nodiscard]] std::vector<Renderable *> getRenderables() override { return layout.getRenderables(); }
+  [[nodiscard]] std::vector<Renderable *> getRenderables() override { return layout.getRenderables(); }
 
- void setLimitSelectionToOne(bool limit) {
-   auto leafLimiter = limit ? &limiter : nullptr;
-   traverse([leafLimiter](details::TreeRecord &record) {
-     if (auto ptr = dynamic_cast<TreeLeaf *>(&record); ptr != nullptr) { ptr->limiter = leafLimiter; }
-   });
- }
+  /**
+   * Enable/disable limiting leaf nodes to have only one selected.
+   * @param limit
+   */
+  void setLimitSelectionToOne(bool limit) {
+    auto leafLimiter = limit ? &limiter : nullptr;
+    traverse([leafLimiter](details::TreeRecord &record) {
+      if (auto ptr = dynamic_cast<TreeLeaf *>(&record); ptr != nullptr) { ptr->limiter = leafLimiter; }
+    });
+  }
 
-protected:
- void renderImpl() override { layout.render(); }
+ protected:
+  void renderImpl() override { layout.render(); }
 
-private:
- Persistent persistent;
- BoxLayout layout;
- details::TreeSelectionLimiter limiter;
+ private:
+  Persistent persistent;
+  BoxLayout layout;
+  details::TreeSelectionLimiter limiter;
 
- inline void traverse(std::invocable<details::TreeRecord &> auto fnc) {
-   std::ranges::for_each(getRenderables(), [&](auto &renderable) {
-     if (auto record = dynamic_cast<details::TreeRecord *>(renderable); record != nullptr) {
-       details::traverseTree<treeType>(*record, fnc);
-     }
-   });
- }
+  inline void traverse(std::invocable<details::TreeRecord &> auto fnc) {
+    std::ranges::for_each(getRenderables(), [&](auto &renderable) {
+      if (auto record = dynamic_cast<details::TreeRecord *>(renderable); record != nullptr) {
+        details::traverseTree<treeType>(*record, fnc);
+      }
+    });
+  }
 };
 
 template<TreeType treeType>
 void details::traverseTree(details::TreeRecord &tree, std::invocable<details::TreeRecord &> auto callable) {
- callable(tree);
- if (auto node = dynamic_cast<TreeNode<treeType> *>(&tree); node != nullptr) {
-   std::ranges::for_each(node->getRenderables(), [&](auto &renderable) {
-     if (auto record = dynamic_cast<details::TreeRecord *>(renderable); record != nullptr) {
-       callable(*record);
-       if (auto node = dynamic_cast<TreeNode<treeType> *>(record); node != nullptr) {
-         traverseTree<treeType>(*node, callable);
-       }
-     }
-   });
- }
+  callable(tree);
+  if (auto node = dynamic_cast<TreeNode<treeType> *>(&tree); node != nullptr) {
+    std::ranges::for_each(node->getRenderables(), [&](auto &renderable) {
+      if (auto record = dynamic_cast<details::TreeRecord *>(renderable); record != nullptr) {
+        callable(*record);
+        if (auto node = dynamic_cast<TreeNode<treeType> *>(record); node != nullptr) {
+          traverseTree<treeType>(*node, callable);
+        }
+      }
+    });
+  }
 }
 
 }// namespace pf::ui::ig
