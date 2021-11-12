@@ -293,10 +293,9 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * @param showBorder render a border around the tree area
    * @param persistent enable/disable disk saving
    */
-  Tree(const std::string &name, const Size &size, ShowBorder showBorder = ShowBorder::No,
-       Persistent persistent = Persistent::No)
+  Tree(const std::string &name, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No)
       : Element(name), persistent(persistent),
-        layout(name + "_layout", LayoutDirection::TopToBottom, size, showBorder) {}
+        layout(name + "_layout", LayoutDirection::TopToBottom, Size::Auto(), showBorder) {}
 
   /**
    * Create a new child node.
@@ -357,8 +356,6 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
       if (auto ptr = dynamic_cast<TreeLeaf *>(&record); ptr != nullptr) { ptr->limiter = leafLimiter; }
     });
   }
-
-  void setWidth(float width) { layout.setSize(Size{width, layout.getSize().width}); }
 
  protected:
   void renderImpl() override { layout.render(); }
