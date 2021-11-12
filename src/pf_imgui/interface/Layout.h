@@ -72,10 +72,24 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible, public Render
    */
   void setScrollPosition(ScrollPosition position);
 
+  /**
+    * Check if horizontal scroll is allowed when content is bigger than the window.
+    * @return
+    */
+  [[nodiscard]] bool isHorizontalScrollEnabled() const;
+
+  /**
+    * Enable/disable horizontal scroll when the content is bigger than the window.
+    * @param horizontalScroll
+    * @todo implement
+    */
+  void setHorizontalScrollEnabled(bool horizontalScroll);
+
  protected:
   /**
    * Render collapse button when isCollapsible() == true.
    * @return true if the layout is not collapsed, false otherwise
+   * @todo implement
    */
   [[nodiscard]] bool renderCollapseButton();
 
@@ -88,6 +102,7 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible, public Render
  private:
   bool drawBorder;
   bool scrollable = false;//@todo: turn into an interface?
+  bool horizontalScrollEnabled = false;
 };
 
 }// namespace pf::ui::ig
