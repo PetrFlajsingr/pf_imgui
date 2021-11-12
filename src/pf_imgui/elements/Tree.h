@@ -20,6 +20,7 @@
 #include <string>
 
 namespace pf::ui::ig {
+// TODO: simplify this
 /**
  * @brief Type of marker rendered in tree nodes.
  */
@@ -136,6 +137,12 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   }
   [[nodiscard]] std::vector<Renderable *> getRenderables() override { return elementContainer.getRenderables(); }
 
+  [[nodiscard]] auto getTreeNodes() {
+    return elementContainer.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
+             return dynamic_cast<details::TreeRecord &>(child);
+           });
+  }
+
   /**
   * Set what kind of marker is being rendered on the left part of the node.
   * @param marker
@@ -227,6 +234,12 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     }
   }
 
+  [[nodiscard]] auto getTreeNodes() {
+    return getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
+             return dynamic_cast<details::TreeRecord &>(child);
+           });
+  }
+
  protected:
   TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent,
            const Flags<ImGuiTreeNodeFlags_> &flags)
@@ -280,8 +293,10 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * @param showBorder render a border around the tree area
    * @param persistent enable/disable disk saving
    */
-  Tree(const std::string &name, const Size &size, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No)
-      : Element(name), persistent(persistent), layout(name + "_layout", LayoutDirection::TopToBottom, size, showBorder) {}
+  Tree(const std::string &name, const Size &size, ShowBorder showBorder = ShowBorder::No,
+       Persistent persistent = Persistent::No)
+      : Element(name), persistent(persistent),
+        layout(name + "_layout", LayoutDirection::TopToBottom, size, showBorder) {}
 
   /**
    * Create a new child node.
@@ -325,6 +340,12 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   }
 
   [[nodiscard]] std::vector<Renderable *> getRenderables() override { return layout.getRenderables(); }
+
+  [[nodiscard]] auto getTreeNodes() {
+    return layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
+             return dynamic_cast<details::TreeRecord &>(child);
+           });
+  }
 
   /**
    * Enable/disable limiting leaf nodes to have only one selected.
