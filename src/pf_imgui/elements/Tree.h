@@ -376,7 +376,7 @@ void details::traverseTree(details::TreeRecord &tree, std::invocable<details::Tr
   if (auto node = dynamic_cast<TreeNode<treeType> *>(&tree); node != nullptr) {
     std::ranges::for_each(node->getTreeNodes(), [&](auto &record) {
       callable(record);
-      if (auto node = dynamic_cast<TreeNode<treeType> *>(record); node != nullptr) {
+      if (auto node = dynamic_cast<TreeNode<treeType> *>(&record); node != nullptr) {
         traverseTree<treeType>(*node, callable);
       }
     });
