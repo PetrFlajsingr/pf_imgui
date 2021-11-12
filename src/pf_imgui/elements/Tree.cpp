@@ -21,11 +21,13 @@ TreeLeaf::TreeLeaf(const std::string &elementName, const std::string &label, boo
 }
 
 void TreeLeaf::setValue(const bool &newValue) {
+  if (newValue == getValue()) { return; }
   if (newValue) {
     flags |= ImGuiTreeNodeFlags_Selected;
   } else {
     flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
   }
+  if (limiter != nullptr && newValue) { limiter->selected = this; }
   ValueObservable::setValue(newValue);
 }
 
@@ -36,7 +38,10 @@ void TreeLeaf::renderImpl() {
   RAII end{[pop] {
     if (pop) { ImGui::TreePop(); }
   }};
-  if (ImGui::IsItemClicked()) { setValue(!getValue()); }
+  if (ImGui::IsItemClicked()) {
+    setValue(!getValue());
+  }
+  if (limiter != nullptr && limiter->selected != this) { setValue(false); }
 }
 
 void TreeLeaf::unserialize_impl(const toml::table &src) { setValue(src["value"].value_or(false)); }
