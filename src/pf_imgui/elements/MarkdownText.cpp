@@ -23,11 +23,11 @@ void MarkdownText::renderImpl() {
 void MarkdownText::loadHeaderFonts() {
   if (FontData.fontH1 == nullptr) {
     FontData.fontH1 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH1->Scale = fontSize * 1.5f;
+    FontData.fontH1->Scale = 1.5f;
     FontData.fontH2 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH2->Scale = fontSize * 1.30f;
+    FontData.fontH2->Scale = 1.30f;
     FontData.fontH3 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH3->Scale = fontSize * 1.15f;
+    FontData.fontH3->Scale = 1.15f;
     imGuiInterface.updateFonts();
   }
 }
