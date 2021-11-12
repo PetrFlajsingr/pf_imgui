@@ -367,10 +367,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   details::TreeSelectionLimiter limiter;
 
   inline void traverse(std::invocable<details::TreeRecord &> auto fnc) {
-    std::ranges::for_each(getRenderables(), [&](auto &renderable) {
-      if (auto record = dynamic_cast<details::TreeRecord *>(renderable); record != nullptr) {
-        details::traverseTree<treeType>(*record, fnc);
-      }
+    std::ranges::for_each(getTreeNodes(), [&](auto &node) {
+        details::traverseTree<treeType>(node, fnc);
     });
   }
 };
@@ -379,13 +377,11 @@ template<TreeType treeType>
 void details::traverseTree(details::TreeRecord &tree, std::invocable<details::TreeRecord &> auto callable) {
   callable(tree);
   if (auto node = dynamic_cast<TreeNode<treeType> *>(&tree); node != nullptr) {
-    std::ranges::for_each(node->getRenderables(), [&](auto &renderable) {
-      if (auto record = dynamic_cast<details::TreeRecord *>(renderable); record != nullptr) {
-        callable(*record);
-        if (auto node = dynamic_cast<TreeNode<treeType> *>(record); node != nullptr) {
+    std::ranges::for_each(node->getTreeNodes(), [&](auto &record) {
+        callable(record);
+        if (auto node = dynamic_cast<TreeNode<treeType> *>(&record); node != nullptr) {
           traverseTree<treeType>(*node, callable);
         }
-      }
     });
   }
 }
