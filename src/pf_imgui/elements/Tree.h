@@ -277,10 +277,11 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * Construct tree.
    * @param name unique name of the element
    * @param size size of the element
+   * @param showBorder render a border around the tree area
    * @param persistent enable/disable disk saving
    */
-  Tree(const std::string &name, const Size &size, Persistent persistent = Persistent::No)
-      : Element(name), persistent(persistent), layout(name + "_layout", LayoutDirection::TopToBottom, size) {}
+  Tree(const std::string &name, const Size &size, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No)
+      : Element(name), persistent(persistent), layout(name + "_layout", LayoutDirection::TopToBottom, size, showBorder) {}
 
   /**
    * Create a new child node.
