@@ -17,9 +17,17 @@ namespace pf::ui::ig {
  *
  * @todo: custom font
  * @todo: style?
+ * @todo: link icon by user
+ * @todo: tooltip callback
  */
 class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
  public:
+  struct ImageData {
+    ImTextureID textureId;
+    Size size;
+  };
+  using ImageLoader = std::function<std::optional<ImageData>(std::string_view)>;
+  struct FontDefault;
   /**
    * Construct MarkdownText.
    * @param elementName ID of the element
@@ -28,10 +36,9 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    * @param fontSize size of font
    * @param imageLoader function for image loading & texture creation, arg is path to load
    */
-  explicit MarkdownText(
-      const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdownSrc = u8"",
-      float fontSize = 12.f,
-      std::optional<std::function<std::optional<ImTextureID>(std::string_view)>> &&imageLoader = std::nullopt);
+  explicit MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface,
+                        std::u8string markdownSrc = u8"", float fontSize = 12.f,
+                        std::optional<ImageLoader> imageLoader = std::nullopt);
 
   /**
    * Get currently rendered markdown source.
@@ -64,7 +71,9 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    * Set function for image loading & texture creation.
    * @param imageLoader function for image loading & texture creation, arg is path to load
    */
-  void setImageLoader(std::function<std::optional<ImTextureID>(std::string_view)> &&imageLoader);
+  void setImageLoader(ImageLoader imageLoader);
+
+  // TODO: static void SetFont(ImFont *font, ImGuiInterface &imGuiInterface);
 
  protected:
   void renderImpl() override;
@@ -77,7 +86,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   static void MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data);
   static ImGui::MarkdownImageData MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data);
 
-  struct {
+  static inline struct {
     ImFont *fontH1 = nullptr;
     ImFont *fontH2 = nullptr;
     ImFont *fontH3 = nullptr;
@@ -88,7 +97,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   std::u8string markdownSrc;
   float fontSize = 12.f;
   std::function<void(std::string_view, bool)> onLinkClicked = [](auto, auto) {};
-  std::optional<std::function<std::optional<ImTextureID>(std::string_view)>> loadImage = std::nullopt;
+  std::optional<ImageLoader> loadImage = std::nullopt;
 };
 
 }// namespace pf::ui::ig

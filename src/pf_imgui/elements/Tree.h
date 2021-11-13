@@ -358,7 +358,11 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   }
 
  protected:
-  void renderImpl() override { layout.render(); }
+  void renderImpl() override {
+    auto colorStyle = setColorStack();
+    auto style = setStyleStack();
+    layout.render();
+  }
 
  private:
   Persistent persistent;

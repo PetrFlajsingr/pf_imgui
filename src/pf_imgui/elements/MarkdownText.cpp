@@ -8,8 +8,7 @@
 namespace pf::ui::ig {
 
 MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdownSrc,
-                           float fontSize,
-                           std::optional<std::function<std::optional<ImTextureID>(std::string_view)>> &&imageLoader)
+                           float fontSize, std::optional<ImageLoader> imageLoader)
     : ItemElement(elementName), imGuiInterface(imguiInterface), markdownSrc(std::move(markdownSrc)), fontSize(fontSize),
       loadImage(imageLoader) {
   loadHeaderFonts();
@@ -34,7 +33,7 @@ void MarkdownText::loadHeaderFonts() {
 
 void MarkdownText::MarkdownFormatCallback(const ImGui::MarkdownFormatInfo &markdownFormatInfo, bool start) {
   ImGui::defaultMarkdownFormatCallback(markdownFormatInfo, start);
-  // TODO: custom formatting by user
+  // TODO: custom formatting by user for HEADING for example
 }
 
 void MarkdownText::configure() {
@@ -54,18 +53,22 @@ const std::u8string &MarkdownText::getMarkdownSrc() const { return markdownSrc; 
 void MarkdownText::setMarkdownSrc(const std::u8string &markdown) { markdownSrc = markdown; }
 
 float MarkdownText::getFontSize() const { return fontSize; }
+
 void MarkdownText::setFontSize(float size) {
   fontSize = size;
   loadHeaderFonts();
   configure();
 }
+
 void MarkdownText::MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data) {
   reinterpret_cast<MarkdownText *>(data.userData)
       ->onLinkClicked(std::string_view(data.link, data.linkLength), data.isImage);
 }
+
 void MarkdownText::setOnLinkClicked(const std::function<void(std::string_view, bool)> &linkClicked) {
   onLinkClicked = linkClicked;
 }
+
 ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data) {
   auto result = ImGui::MarkdownImageData{};
   result.useLinkCallback = false;
@@ -74,15 +77,15 @@ ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLink
     result.isValid = false;
     return result;
   }
-  const auto image = (*self->loadImage)(std::string_view(data.link, data.linkLength));
-  if (!image.has_value()) {
+  const auto imageData = (*self->loadImage)(std::string_view(data.link, data.linkLength));
+  if (!imageData.has_value()) {
     result.isValid = false;
     return result;
   }
   result.isValid = true;
-  result.user_texture_id = *image;
-  // TODO: size
-  result.size = ImVec2(40.0f, 20.0f);
+  result.user_texture_id = imageData->textureId;
+
+  result.size = imageData->size.asImVec();
 
   ImVec2 const contentSize = ImGui::GetContentRegionAvail();
   if (result.size.x > contentSize.x) {
@@ -93,7 +96,17 @@ ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLink
 
   return result;
 }
-void MarkdownText::setImageLoader(std::function<std::optional<ImTextureID>(std::string_view)> &&imageLoader) {
-  loadImage = imageLoader;
-}
+
+void MarkdownText::setImageLoader(ImageLoader imageLoader) { loadImage = imageLoader; }
+/* TODO
+void MarkdownText::SetFont(ImFont *font, ImGuiInterface &imGuiInterface) {
+  FontData.fontH1 = font;
+  FontData.fontH1->Scale = 1.5f;
+  FontData.fontH2 = font;
+  FontData.fontH2->Scale = 1.30f;
+  FontData.fontH3 = font;
+  FontData.fontH3->Scale = 1.15f;
+  imGuiInterface.updateFonts();
+}*/
+
 }// namespace pf::ui::ig
