@@ -362,15 +362,15 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   // node, depth
   // return true to continue deeper into the tree, false if not
   // DFS
-  void traverse(std::invocable<std::variant<TreeLeaf *, TreeNode<treeType>>, std::size_t> auto &&callable) requires(
-      std::same_as<std::invoke_result_t<decltype(callable)>, bool>) {
+  void traverse(std::invocable<std::variant<TreeLeaf *, TreeNode<treeType>>, std::size_t> auto &&callable) {
     std::ranges::for_each(layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
                             return dynamic_cast<details::TreeRecord &>(child);
                           }),
                           [&](auto &record) { traverseImpl(record, callable, 0); });
   }
 
- protected : void renderImpl() override {
+ protected:
+  void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
     layout.render();
