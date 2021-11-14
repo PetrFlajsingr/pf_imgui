@@ -352,7 +352,11 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    */
   void setLimitSelectionToOne(bool limit) {
     auto leafLimiter = limit ? &limiter : nullptr;
-    traverse(Visitor{[&](TreeLeaf *leaf, auto) { leaf->limiter = leafLimiter; }, [](auto, auto) {}});
+    traverse(Visitor{[&](TreeLeaf *leaf, auto) {
+                       leaf->limiter = leafLimiter;
+                       return true;
+                     },
+                     [](auto, auto) { return true; }});
   }
 
   // node, depth
