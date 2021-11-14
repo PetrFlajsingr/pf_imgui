@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_TREE_H
 #define PF_IMGUI_ELEMENTS_TREE_H
 
+#include <iostream>
 #include <pf_common/Visitor.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
@@ -307,7 +308,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   TreeNode<treeType> &addNode(const std::string &name, const std::string &label,
                               AllowCollapse allowCollapse = AllowCollapse::Yes) {
     auto &node = layout.createChild<TreeNode<treeType>>(name, label, allowCollapse, persistent);
-    node.limiter = &limiter;
+    node.limiter = limiter.get();
     return node;
   }
 
@@ -321,7 +322,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   TreeHeaderNode<treeType> &addHeaderNode(const std::string &name, const std::string &label,
                                           AllowCollapse allowCollapse = AllowCollapse::Yes) {
     auto &node = layout.createChild<TreeHeaderNode<treeType>>(name, label, allowCollapse, persistent);
-    node.limiter = &limiter;
+    node.limiter = limiter.get();
     return node;
   }
 
@@ -334,7 +335,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    */
   TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
     auto &leaf = layout.createChild<TreeLeaf>(name, label, selected, persistent);
-    leaf.limiter = &limiter;
+    leaf.limiter = limiter.get();
     return leaf;
   }
 
@@ -351,7 +352,12 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * @param limit
    */
   void setLimitSelectionToOne(bool limit) {
-    auto leafLimiter = limit ? &limiter : nullptr;
+    if (limit && limiter == nullptr) {
+      limiter = std::make_unique<details::TreeSelectionLimiter>();
+    } else if (!limit) {
+      limiter = nullptr;
+    }
+    auto leafLimiter = limiter.get();
     traverse(Visitor{[&](TreeLeaf *leaf, auto) {
                        leaf->limiter = leafLimiter;
                        return true;
@@ -362,7 +368,9 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   // node, depth
   // return true to continue deeper into the tree, false if not
   // DFS
-  void traverse(std::invocable<std::variant<TreeLeaf *, TreeNode<treeType>>, std::size_t> auto &&callable) {
+  template<typename F>
+  requires(std::invocable<F, TreeLeaf *, std::size_t>
+               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traverse(F &&callable) {
     std::ranges::for_each(layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
                             return dynamic_cast<details::TreeRecord &>(child);
                           }),
@@ -379,11 +387,13 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
  private:
   Persistent persistent;
   BoxLayout layout;
-  details::TreeSelectionLimiter limiter;
+  std::unique_ptr<details::TreeSelectionLimiter> limiter = nullptr;
 
-  void traverseImpl(details::TreeRecord &node,
-                    std::invocable<std::variant<TreeLeaf *, TreeNode<treeType>>, std::size_t> auto &&callable,
-                    std::size_t depth) {
+  template<typename F>
+  requires(std::invocable<F, TreeLeaf *, std::size_t>
+               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traverseImpl(details::TreeRecord &node,
+                                                                                         F &&callable,
+                                                                                         std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
       if (!callable(nodePtr, depth)) { return; }
       std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traverseImpl(record, callable, depth + 1); });
