@@ -39,7 +39,7 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 20)
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    list(APPEND flags "/std:c++latest") # TODO warning flags
+    list(APPEND flags "/std:c++latest" "/W1" "/WX") # TODO warning flags
 else()
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"

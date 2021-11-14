@@ -7,8 +7,9 @@
 #include <string>
 
 #include <vector>
+#ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Warray-bounds"
-
+#endif
 namespace ImWidgets {
 //////////////////////////////////////////////////////////////////////////
 // Data

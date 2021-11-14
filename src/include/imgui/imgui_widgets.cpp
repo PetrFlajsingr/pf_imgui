@@ -83,13 +83,13 @@ Index of this file:
 #pragma GCC diagnostic ignored "-Wformat-nonliteral"                // warning: format not a string literal, format string not checked
 #pragma GCC diagnostic ignored "-Wclass-memaccess"                  // [__GNUC__ >= 8] warning: 'memset/memcpy' clearing/writing an object of type 'xxxx' with no trivial copy-assignment; use assignment or value-initialization instead
 #endif
-
+#ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wall"
 #pragma GCC diagnostic ignored "-Wextra"
 #pragma GCC diagnostic ignored "-Wformat-security"
 #pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion"
-
+#endif
 //-------------------------------------------------------------------------
 // Data
 //-------------------------------------------------------------------------
@@ -8359,7 +8359,7 @@ void ImGui::TabItemLabelAndCloseButton(ImDrawList* draw_list, const ImRect& bb, 
     if (out_just_closed)
         *out_just_closed = close_button_pressed;
 }
-
+#ifdef __GNUC__
 #pragma GCC diagnostic pop
-
+#endif
 #endif // #ifndef IMGUI_DISABLE

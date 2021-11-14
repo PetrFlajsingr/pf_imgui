@@ -140,7 +140,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     assert(index < items.size());
     if (index != selectedItemIndex) {
       if (selectedItemIndex.has_value()) { filteredItems[*selectedItemIndex]->second->setValue(false); }
-      selectedItemIndex = index;
+      selectedItemIndex = static_cast<int>(index);
       filteredItems[*selectedItemIndex]->second->setValue(true);
       ValueObservable<T>::setValueInner(filteredItems[index]->first);
       ValueObservable<T>::notifyValueChanged();
@@ -173,7 +173,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     if (origItem != nullptr) {
       for (const auto &[idx, item] : filteredItems | ranges::views::enumerate) {
         if (item == origItem) {
-          selectedItemIndex = idx;
+          selectedItemIndex = static_cast<int>(idx);
           break;
         }
       }
@@ -185,7 +185,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
       const auto selectedItemAsString = *src["selected"].value<std::string>();
       for (const auto &[idx, item] : items | ranges::views::enumerate) {
         if (item.second->getLabel() == selectedItemAsString) {
-          selectedItemIndex = idx;
+          selectedItemIndex = static_cast<int>(idx);
           items[idx].second->setValue(true);
           ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
           break;

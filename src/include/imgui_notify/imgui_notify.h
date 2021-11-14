@@ -10,10 +10,12 @@
 #include <chrono>
 #include <string>
 #include <vector>
+#ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wall"
 #pragma GCC diagnostic ignored "-Wextra"
 #pragma GCC diagnostic ignored "-Wformat-security"
+#endif
 
 #define NOTIFY_MAX_MSG_LENGTH 4096   // Max message content length
 #define NOTIFY_PADDING_X 20.f        // Bottom-left X padding
@@ -326,6 +328,7 @@ NOTIFY_INLINE void MergeIconsWithLatestFont(float font_size, bool FontDataOwnedB
                                       icons_ranges);
 }
 }// namespace ImGui
-
+#ifdef __GNUC__
 #pragma GCC diagnostic pop
+#endif
 #endif
