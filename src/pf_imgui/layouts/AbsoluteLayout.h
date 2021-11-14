@@ -105,18 +105,18 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
 
   /**
    * Set position by elements' ID.
-   * @param name ID of the child
+   * @param childName ID of the child
    * @param position new position
    * @throws IdNotFoundException when the child is not present in the layout
    */
-  void setChildPosition(const std::string &name, ImVec2 position);
+  void setChildPosition(const std::string &childName, ImVec2 position);
 
   /**
    * Remove child by ID.
    * If the child is not present nothing happens/
-   * @param name ID of the element
+   * @param childName ID of the element
    */
-  void removeChild(const std::string &name);
+  void removeChild(const std::string &childName);
 
   std::vector<Renderable *> getRenderables() override;
 

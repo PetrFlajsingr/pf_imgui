@@ -94,9 +94,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   Window &createWindow(const std::string &windowName, std::string title);
   /**
    * Remove the window from UI. This invalidates any references to the window.
-   * @param name ID of the window to remove
+   * @param windowName ID of the window to remove
    */
-  void removeWindow(const std::string &name);
+  void removeWindow(const std::string &windowName);
   /**
    * Remove the window from UI. This invalidates any references to the window.
    * @param name ID of the window to remove
@@ -105,11 +105,11 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   /**
    * Find Window by its ID.
-   * @param name ID of the window
+   * @param windowName ID of the window
    * @throws IdNotFoundException when the Window of given ID is not present
    * @return reference to the searched for Window or nullopt if no such window exists
    */
-  std::optional<std::reference_wrapper<Window>> windowByName(const std::string &name);
+  std::optional<std::reference_wrapper<Window>> windowByName(const std::string &windowName);
 
   /**
    * Get all windows present in the UI.

@@ -10,7 +10,7 @@
 namespace pf::ui::ig {
 InputText::InputText(const std::string &elementName, std::string label, const std::string &text,
                      TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
-                     const Flags<TextFilter>& filters, Persistent persistent)
+                     const Flags<TextFilter> &filters, Persistent persistent)
     : Text(elementName, text), Labellable(std::move(label)), ValueObservable(""), Savable(persistent),
       buffer(std::unique_ptr<char[]>(new char[inputLengthLimit + 1])), bufferLength(inputLengthLimit),
       inputType(textInputType) {

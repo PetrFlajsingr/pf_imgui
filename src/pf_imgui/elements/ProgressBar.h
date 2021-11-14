@@ -26,7 +26,8 @@ concept ProgressBarCompatible = requires(T t, float f) {
   {t + t};
   {t *= f};
   { std::clamp(t, t, t) } -> std::convertible_to<T>;
-} && std::convertible_to<float, T>;
+}
+&&std::convertible_to<float, T>;
 
 /**
  * @brief Progress bar for notifying a user of operation progress.
@@ -119,8 +120,8 @@ class PF_IMGUI_EXPORT ProgressBar
    * @return current percentage of the progress bar <0.0f-1.0f>
    */
   float getCurrentPercentage() {
-    const auto size = max - min;
-    return (ValueObservable<T>::getValue() - min) / static_cast<float>(size);
+    const auto diff = max - min;
+    return (ValueObservable<T>::getValue() - min) / static_cast<float>(diff);
   }
 
  protected:

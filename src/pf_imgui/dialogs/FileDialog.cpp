@@ -13,20 +13,20 @@ FileExtensionSettings::FileExtensionSettings(std::vector<std::filesystem::path> 
 bool FileDialog::isDone() const { return done; }
 
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
-  for (const auto &[names, desc, color] : extSettings) {
+  for (const auto &[extNames, desc, color] : extSettings) {
     if (!desc.empty()) {
       filters += desc;
       filters += '{';
-      for (const auto &name : names) {
-        filters += fmt::format(".{},", name.string());
-        if (color.has_value()) { extColors.emplace_back(name.string(), *color); }
+      for (const auto &extName : extNames) {
+        filters += fmt::format(".{},", extName.string());
+        if (color.has_value()) { extColors.emplace_back(extName.string(), *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
       filters += "},";
     } else {
-      for (const auto &name : names) {
-        filters += fmt::format("{},", name.string());
-        if (color.has_value()) { extColors.emplace_back(name.string(), *color); }
+      for (const auto &extName : extNames) {
+        filters += fmt::format("{},", extName.string());
+        if (color.has_value()) { extColors.emplace_back(extName.string(), *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
     }

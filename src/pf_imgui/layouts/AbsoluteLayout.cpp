@@ -34,9 +34,9 @@ void AbsoluteLayout::renderImpl() {
     }
   }
 }
-void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) {
-  if (auto child =
-          findIf(children | ranges::views::addressof, [name](auto child) { return child->first->getName() == name; });
+void AbsoluteLayout::setChildPosition(const std::string &childName, ImVec2 position) {
+  if (auto child = findIf(children | ranges::views::addressof,
+                          [childName](auto child) { return child->first->getName() == childName; });
       child.has_value()) {
     child.value()->second->setPosition(position);
   } else {
@@ -45,8 +45,9 @@ void AbsoluteLayout::setChildPosition(const std::string &name, ImVec2 position) 
 #endif
   }
 }
-void AbsoluteLayout::removeChild(const std::string &name) {
-  if (auto iter = std::ranges::find_if(children, [name](const auto &child) { return child.first->getName() == name; });
+void AbsoluteLayout::removeChild(const std::string &childName) {
+  if (auto iter = std::ranges::find_if(children,
+                                       [childName](const auto &child) { return child.first->getName() == childName; });
       iter != children.end()) {
     children.erase(iter);
   }

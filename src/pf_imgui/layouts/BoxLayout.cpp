@@ -53,11 +53,11 @@ void BoxLayout::renderTopToBottom() {
 
 void BoxLayout::renderLeftToRight() {
   if (!children.empty()) {
-    const auto size = children.size();
+    const auto childrenSize = children.size();
     auto idx = 0u;
     std::ranges::for_each(children, [&](auto &child) {
       child->render();
-      if (idx != size - 1) { ImGui::SameLine(); }
+      if (idx != childrenSize - 1) { ImGui::SameLine(); }
       ++idx;
     });
   }
@@ -70,8 +70,9 @@ void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
 #endif
   children.insert(children.begin() + static_cast<long long>(index), std::move(child));
 }
-void BoxLayout::removeChild(const std::string &name) {
-  if (auto iter = std::ranges::find_if(children, [name](const auto &child) { return child->getName() == name; });
+void BoxLayout::removeChild(const std::string &childName) {
+  if (auto iter =
+          std::ranges::find_if(children, [childName](const auto &child) { return child->getName() == childName; });
       iter != children.end()) {
     children.erase(iter);
   }

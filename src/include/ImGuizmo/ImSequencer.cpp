@@ -7,6 +7,9 @@
 #include "imgui_internal.h"
 #include <cstdlib>
 
+#ifdef _MSC_VER
+#pragma warning( disable : 4505 )
+#endif
 namespace ImSequencer
 {
 #ifndef IMGUI_DEFINE_MATH_OPERATORS
@@ -670,3 +673,7 @@ namespace ImSequencer
       return ret;
    }
 }
+
+#ifdef _MSC_VER
+#pragma warning( default : 4505 )
+#endif

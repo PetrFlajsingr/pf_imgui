@@ -70,7 +70,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
     */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
-  auto &createChild(const std::string &name, ImVec2 position, const Flags<Anchor>& anchors, Args &&...args) {
+  auto &createChild(const std::string &name, ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
 #ifndef _MSC_VER// TODO: MSVC c3779
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
@@ -125,17 +125,17 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
   /**
    * Remove child by ID.
    * If the child is not present nothing happens/
-   * @param name ID of the element
+   * @param childName ID of the element
    */
-  void removeChild(const std::string &name);
+  void removeChild(const std::string &childName);
 
   /**
    * Set position by elements' ID.
-   * @param name ID of the child
+   * @param childName ID of the child
    * @param position new position
    * @throws IdNotFoundException when the child is not present in the layout
    */
-  void setChildPosition(const std::string &name, ImVec2 position);
+  void setChildPosition(const std::string &childName, ImVec2 position);
 
   std::vector<Renderable *> getRenderables() override;
 

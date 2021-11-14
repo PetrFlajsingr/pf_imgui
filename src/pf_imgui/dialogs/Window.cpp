@@ -87,9 +87,9 @@ void Window::render() {
   }
 }
 
-void Window::setCollapsed(bool collapsed) {
-  ImGui::SetWindowCollapsed(getLabel().c_str(), collapsed);
-  Collapsible::setCollapsed(collapsed);
+void Window::setCollapsed(bool collapse) {
+  ImGui::SetWindowCollapsed(getLabel().c_str(), collapse);
+  Collapsible::setCollapsed(collapse);
 }
 
 void Window::setFocus() {
@@ -179,6 +179,6 @@ void Window::setTitleBarVisible(bool visible) { titleBarVisible = visible; }
 
 bool Window::isStayInBackground() const { return stayInBackground; }
 
-void Window::setStayInBackground(bool stayInBackground) { Window::stayInBackground = stayInBackground; }
+void Window::setStayInBackground(bool stay) { stayInBackground = stay; }
 
 }// namespace pf::ui::ig

@@ -18,6 +18,7 @@
 #endif
 #ifdef _MSC_VER
 #pragma warning( disable : 4996 )
+#pragma warning( disable : 4458 )
 #endif
 
 #define NOTIFY_MAX_MSG_LENGTH 4096   // Max message content length
@@ -335,4 +336,10 @@ NOTIFY_INLINE void MergeIconsWithLatestFont(float font_size, bool FontDataOwnedB
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
+
+#ifdef _MSC_VER
+#pragma warning( default : 4996 )
+#pragma warning( default : 4458 )
+#endif
+
 #endif

@@ -27,6 +27,8 @@ namespace pf::ui::ig {
  * @brief Multiline text overview with basic controls.
  *
  * User can add text by rows. Rows can be filtered using an Input. Copy and clear buttons can be enabled.
+ *
+ * @todo: rewrite this, there are some issues with button panel placement
  */
 class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public RenderablesContainer {
  public:
@@ -81,9 +83,9 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public Renderabl
   [[nodiscard]] bool isButtonsEnabled() const;
   /**
    * Set copy and clear buttons being enabled.
-   * @param buttonsEnabled
+   * @param btnEnabled
    */
-  void setButtonsEnabled(bool buttonsEnabled);
+  void setButtonsEnabled(bool btnEnabled);
   /**
    * Check if filter is enabled.
    * @return true if filter is enabled, false otherwise
@@ -91,9 +93,9 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public Renderabl
   [[nodiscard]] bool isFilterEnabled() const;
   /**
    * Set filter being enabled.
-   * @param filterEnabled
+   * @param filtEnabled
    */
-  void setFilterEnabled(bool filterEnabled);
+  void setFilterEnabled(bool filtEnabled);
   /**
    * Get current record count limit.
    * @return current record count limit

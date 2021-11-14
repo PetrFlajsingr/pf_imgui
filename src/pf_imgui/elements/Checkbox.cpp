@@ -33,8 +33,11 @@ void Checkbox::renderImpl() {
 void Checkbox::unserialize_impl(const toml::table &src) { setValueAndNotifyIfChanged(*src["checked"].value<bool>()); }
 
 toml::table Checkbox::serialize_impl() { return toml::table{{{"checked", getValue()}}}; }
-void Checkbox::setSelected(bool value) { setValueAndNotifyIfChanged(value); }
+
+void Checkbox::setSelected(bool selected) { setValueAndNotifyIfChanged(selected); }
+
 bool Checkbox::isSelected() const { return getValue(); }
+
 void Checkbox::toggle() { setSelected(!isSelected()); }
 
 }// namespace pf::ui::ig

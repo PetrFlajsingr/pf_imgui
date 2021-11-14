@@ -1,4 +1,8 @@
 ﻿#include <cmath>
+
+#ifdef _MSC_VER
+#pragma warning( disable : 4456 )
+#endif
 //////////////////////////////////////////////////////////////////////////
 // Helpers
 template<typename Type>
@@ -338,3 +342,7 @@ inline bool DensityPlotEx(const char *label, FuncType func, int resX, int resY, 
 
   return false;
 }
+
+#ifdef _MSC_VER
+#pragma warning( default : 4456 )
+#endif

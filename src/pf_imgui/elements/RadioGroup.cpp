@@ -37,8 +37,8 @@ void RadioGroup::renderImpl() {
   }
 }
 
-RadioButton &RadioGroup::addButton(const std::string &elementName, const std::string &caption, bool value) {
-  return *buttons.emplace_back(std::make_unique<RadioButton>(elementName, caption, value));
+RadioButton &RadioGroup::addButton(const std::string &elementName, const std::string &caption, bool initValue) {
+  return *buttons.emplace_back(std::make_unique<RadioButton>(elementName, caption, initValue));
 }
 
 void RadioGroup::unserialize_impl(const toml::table &src) {

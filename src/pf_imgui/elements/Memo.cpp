@@ -83,16 +83,16 @@ void Memo::rebuildPanel() {
 }
 bool Memo::isButtonsEnabled() const { return buttonsEnabled; }
 
-void Memo::setButtonsEnabled(bool enabled) {
+void Memo::setButtonsEnabled(bool btnEnabled) {
   rebuild = true;
-  buttonsEnabled = enabled;
+  buttonsEnabled = btnEnabled;
 }
 
 bool Memo::isFilterEnabled() const { return filterEnabled; }
 
-void Memo::setFilterEnabled(bool enabled) {
+void Memo::setFilterEnabled(bool filtEnabled) {
   rebuild = true;
-  filterEnabled = enabled;
+  filterEnabled = filtEnabled;
 }
 
 const std::optional<std::size_t> &Memo::getRecordLimit() const { return recordLimit; }

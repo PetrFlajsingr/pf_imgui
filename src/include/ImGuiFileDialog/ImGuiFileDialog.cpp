@@ -106,6 +106,7 @@ SOFTWARE.
 #endif
 #ifdef _MSC_VER
 #pragma warning( disable : 4996 )
+#pragma warning( disable : 4100 )
 #endif
 namespace IGFD
 {
@@ -4833,4 +4834,13 @@ IMGUIFILEDIALOG_API void ManageGPUThumbnails(ImGuiFileDialog* vContext)
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
+#endif
+
+#ifdef _MSC_VER
+#pragma warning( default : 4996 )
+#pragma warning( default : 4100 )
+#endif
+#ifdef _MSC_VER
+#pragma warning( default : 4996 )
+#pragma warning( default : 4100 )
 #endif

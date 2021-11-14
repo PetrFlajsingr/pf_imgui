@@ -76,7 +76,7 @@ class PF_IMGUI_EXPORT ColorChooser
    * Enable/disable picker
    * @param pickerEnabled
    */
-  void setPickerEnabled(bool enabled) { ColorChooser::pickerEnabled = enabled; }
+  void setPickerEnabled(bool value) { pickerEnabled = value; }
 
  protected:
   void unserialize_impl(const toml::table &src) override {

@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-TabButton::TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod>& mods)
+TabButton::TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods)
     : ItemElement(elementName), Labellable(label), flags(*mods) {}
 
 void TabButton::renderImpl() {
@@ -68,22 +68,22 @@ void TabBar::renderImpl() {
   }
 }
 
-Tab &TabBar::addTab(const std::string &name, const std::string &caption, const Flags<TabMod> &mods, bool closeable) {
-  tabs.emplace_back(std::make_unique<Tab>(name, caption, mods, closeable));
+Tab &TabBar::addTab(const std::string &tabName, const std::string &caption, const Flags<TabMod> &mods, bool closeable) {
+  tabs.emplace_back(std::make_unique<Tab>(tabName, caption, mods, closeable));
   return dynamic_cast<Tab &>(*tabs.back());
 }
 
-Tab &TabBar::addTab(const std::string &name, const std::string &caption, bool closeable) {
-  return addTab(name, caption, Flags<TabMod>{}, closeable);
+Tab &TabBar::addTab(const std::string &tabName, const std::string &caption, bool closeable) {
+  return addTab(tabName, caption, Flags<TabMod>{}, closeable);
 }
 
-TabButton &TabBar::addTabButton(const std::string &name, const std::string &caption, const Flags<TabMod> &mods) {
-  tabs.emplace_back(std::make_unique<TabButton>(name, caption, mods));
+TabButton &TabBar::addTabButton(const std::string &buttonName, const std::string &caption, const Flags<TabMod> &mods) {
+  tabs.emplace_back(std::make_unique<TabButton>(buttonName, caption, mods));
   return *tabs.back();
 }
 
-void TabBar::removeTab(const std::string &name) {
-  if (const auto iter = std::ranges::find_if(tabs, [name](const auto &tab) { return tab->getName() == name; });
+void TabBar::removeTab(const std::string &tabName) {
+  if (const auto iter = std::ranges::find_if(tabs, [tabName](const auto &tab) { return tab->getName() == tabName; });
       iter != tabs.cend()) {
     tabs.erase(iter);
   }

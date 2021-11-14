@@ -107,28 +107,28 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
 
   /**
   * Create a new child node.
-  * @param name unique name of the element
+  * @param nodeName unique name of the element
   * @param label label rendered on the element
   * @param allowCollapse enable/disable user collapsing the node
   * @return reference to the newly created node
   */
-  TreeNode<TreeType::Simple> &addNode(const std::string &name, const std::string &label,
+  TreeNode<TreeType::Simple> &addNode(const std::string &nodeName, const std::string &label,
                                       AllowCollapse allowCollapse = AllowCollapse::Yes) {
     auto &node = elementContainer.createChild<TreeNode<TreeType::Simple>>(
-        name, label, allowCollapse, isPersistent() ? Persistent::Yes : Persistent::No);
+        nodeName, label, allowCollapse, isPersistent() ? Persistent::Yes : Persistent::No);
     node.limiter = limiter;
     return node;
   }
 
   /**
   * Create a new leaf node.
-  * @param name unique name of the element
+  * @param leafName unique name of the element
   * @param label label rendered on the element
   * @param selected
   * @return reference to the newly created leaf
   */
-  TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
-    auto &leaf = elementContainer.createChild<TreeLeaf>(name, label, selected,
+  TreeLeaf &addLeaf(const std::string &leafName, const std::string &label, bool selected = false) {
+    auto &leaf = elementContainer.createChild<TreeLeaf>(leafName, label, selected,
                                                         isPersistent() ? Persistent::Yes : Persistent::No);
     leaf.limiter = limiter;
     return leaf;
@@ -196,14 +196,14 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
 
   /**
    * Create a new child node.
-   * @param name unique name of the element
+   * @param nodeName unique name of the element
    * @param label label rendered on the element
    * @param allowCollapse enable/disable user collapsing the node
    * @return reference to the newly created node
    */
-  TreeNode<TreeType::Advanced> &addNode(const std::string &name, const std::string &label,
+  TreeNode<TreeType::Advanced> &addNode(const std::string &nodeName, const std::string &label,
                                         AllowCollapse allowCollapse = AllowCollapse::Yes) {
-    auto &node = createChild<TreeNode<TreeType::Advanced>>(name, label, allowCollapse,
+    auto &node = createChild<TreeNode<TreeType::Advanced>>(nodeName, label, allowCollapse,
                                                            isPersistent() ? Persistent::Yes : Persistent::No);
     node.limiter = limiter;
     return node;
@@ -211,13 +211,13 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
 
   /**
    * Create a new leaf node.
-   * @param name unique name of the element
+   * @param leafName unique name of the element
    * @param label label rendered on the element
    * @param selected
    * @return reference to the newly created leaf
    */
-  TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
-    auto &leaf = createChild<TreeLeaf>(name, label, selected, isPersistent() ? Persistent::Yes : Persistent::No);
+  TreeLeaf &addLeaf(const std::string &leafName, const std::string &label, bool selected = false) {
+    auto &leaf = createChild<TreeLeaf>(leafName, label, selected, isPersistent() ? Persistent::Yes : Persistent::No);
     leaf.limiter = limiter;
     return leaf;
   }

@@ -228,6 +228,9 @@ ___
 
 #include <stdint.h>
 
+#ifdef _MSC_VER
+#pragma warning( disable : 4189 )
+#endif
 namespace ImGui
 {
 //-----------------------------------------------------------------------------
@@ -1004,3 +1007,6 @@ inline void defaultMarkdownFormatCallback( const MarkdownFormatInfo& markdownFor
 }
 
 }
+#ifdef _MSC_VER
+#pragma warning( default : 4189 )
+#endif

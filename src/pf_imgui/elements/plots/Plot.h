@@ -71,9 +71,9 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
 
   /**
    * Remove data storage by ID.
-   * @param name ID of the data storage to be removed
+   * @param dataName ID of the data storage to be removed
    */
-  void removeData(const std::string &name);
+  void removeData(const std::string &dataName);
 
  protected:
   void renderImpl() override;

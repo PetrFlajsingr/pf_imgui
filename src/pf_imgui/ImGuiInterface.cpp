@@ -93,17 +93,17 @@ Window &ImGuiInterface::createWindow(const std::string &windowName, std::string 
   return *windows.back();
 }
 
-void ImGuiInterface::removeWindow(const std::string &name) {
-  windows.erase(std::ranges::find(windows, name, [](const auto &window) { return window->getName(); }));
+void ImGuiInterface::removeWindow(const std::string &windowName) {
+  windows.erase(std::ranges::find(windows, windowName, [](const auto &window) { return window->getName(); }));
 }
 
 void ImGuiInterface::removeWindow(const Window &window) {
   windows.erase(std::ranges::find(windows, &window, [](const auto &window) { return window.get(); }));
 }
 
-std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &name) {
+std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
   if (auto window = findIf(getWindows() | ranges::views::addressof,
-                           [name](const auto &window) { return window->getName() == name; });
+                           [windowName](const auto &window) { return window->getName() == windowName; });
       window.has_value()) {
     return **window;
   } else {

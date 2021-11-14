@@ -35,7 +35,7 @@ enum class TabMod {
  */
 class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public Clickable {
  public:
-  TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod>& mods = Flags<TabMod>{});
+  TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{});
 
   void setMods(const Flags<TabMod> &mods);
 
@@ -121,34 +121,34 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
 
   /**
   * Create a new Tab.
-  * @param name ID of the Tab
+  * @param tabName ID of the Tab
   * @param caption text rendered on the Tab
   * @param mods modifiers
   * @return reference to the newly created Tab
   */
-  Tab &addTab(const std::string &name, const std::string &caption, const Flags<TabMod> &mods = Flags<TabMod>{},
+  Tab &addTab(const std::string &tabName, const std::string &caption, const Flags<TabMod> &mods = Flags<TabMod>{},
               bool closeable = false);
   /**
   * Create a new Tab.
-  * @param name ID of the Tab
+  * @param tabName ID of the Tab
   * @param caption text rendered on the Tab
   * @return reference to the newly created Tab
   */
-  Tab &addTab(const std::string &name, const std::string &caption, bool closeable);
+  Tab &addTab(const std::string &tabName, const std::string &caption, bool closeable);
   /**
   * Create a new TabButton.
-  * @param name ID of the TabButton
+  * @param buttonName ID of the TabButton
   * @param caption text rendered on the TabButton
   * @return reference to the newly created TabButton
   */
-  TabButton &addTabButton(const std::string &name, const std::string &caption,
+  TabButton &addTabButton(const std::string &buttonName, const std::string &caption,
                           const Flags<TabMod> &mods = Flags<TabMod>{});
   /**
   * Remove a tab with the given ID.
   * If no such Tab exists nothing happens.
-  * @param name ID of the tab to be removed
+  * @param tabName ID of the tab to be removed
   */
-  void removeTab(const std::string &name);
+  void removeTab(const std::string &tabName);
 
   /**
   * Get currently selected Tab.

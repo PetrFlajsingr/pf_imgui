@@ -218,3 +218,6 @@ void PlotFlame(
 }
 
 }// namespace ImGuiWidgetFlameGraph
+#ifdef _MSC_VER
+#pragma warning( default : 4244 )
+#endif

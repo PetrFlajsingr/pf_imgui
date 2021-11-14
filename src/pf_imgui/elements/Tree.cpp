@@ -38,9 +38,7 @@ void TreeLeaf::renderImpl() {
   RAII end{[pop] {
     if (pop) { ImGui::TreePop(); }
   }};
-  if (ImGui::IsItemClicked()) {
-    setValue(!getValue());
-  }
+  if (ImGui::IsItemClicked()) { setValue(!getValue()); }
   if (limiter != nullptr && limiter->selected != this) { setValue(false); }
 }
 

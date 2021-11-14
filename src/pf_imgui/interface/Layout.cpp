@@ -32,12 +32,8 @@ bool Layout::renderCollapseButton() {
 }
 void Layout::setScrollPosition(Layout::ScrollPosition position) { nextFrameScrollPosition = position; }
 
-bool Layout::isHorizontalScrollEnabled() const {
-  return horizontalScrollEnabled;
-}
+bool Layout::isHorizontalScrollEnabled() const { return horizontalScrollEnabled; }
 
-void Layout::setHorizontalScrollEnabled(bool horizontalScroll) {
-  horizontalScrollEnabled = horizontalScroll;
-}
+void Layout::setHorizontalScrollEnabled(bool horizontalScroll) { horizontalScrollEnabled = horizontalScroll; }
 
 }// namespace pf::ui::ig

@@ -14,8 +14,8 @@ namespace pf::ui::ig {
  * @brief A spinner notifying the user of an operation in progress.
  */
 class PF_IMGUI_EXPORT Spinner : public ItemElement,
-                public ColorCustomizable<style::ColorOf::PlotHistogram>,
-                public StyleCustomizable<style::Style::FramePadding> {
+                                public ColorCustomizable<style::ColorOf::PlotHistogram>,
+                                public StyleCustomizable<style::Style::FramePadding> {
  public:
   /**
    *

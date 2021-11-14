@@ -32,6 +32,9 @@
 #include <malloc.h>
 #endif
 
+#ifdef _MSC_VER
+#pragma warning( disable : 4505 )
+#endif
 // includes patches for multiview from
 // https://github.com/CedricGuillemet/ImGuizmo/issues/15
 
@@ -2716,3 +2719,7 @@ namespace ImGuizmo
       ComputeContext(svgView.m16, svgProjection.m16, gContext.mModelSource.m16, gContext.mMode);
    }
 }
+
+#ifdef _MSC_VER
+#pragma warning( default : 4505 )
+#endif

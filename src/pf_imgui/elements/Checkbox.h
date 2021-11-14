@@ -62,9 +62,9 @@ class PF_IMGUI_EXPORT Checkbox
            Persistent persistent = Persistent::No);
   /**
    * Set if the checkbox is selected or not.
-   * @param value new value
+   * @param selected new value
    */
-  void setSelected(bool value);
+  void setSelected(bool selected);
   /**
    * Check if the checkbox is selected.
    * @return true if the checkbox is selected, false otherwise

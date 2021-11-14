@@ -42,8 +42,8 @@ void Range2D::unserialize_impl(const toml::table &src) {
 }
 
 toml::table Range2D::serialize_impl() {
-  const auto value = getValue();
-  return toml::table{{{"startValue", serializeGlmVec(value.start)}, {"endValue", serializeGlmVec(value.end)}}};
+  const auto val = getValue();
+  return toml::table{{{"startValue", serializeGlmVec(val.start)}, {"endValue", serializeGlmVec(val.end)}}};
 }
 
 }// namespace pf::ui::ig

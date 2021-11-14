@@ -110,7 +110,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   void setFocus() override;
 
-  void setCollapsed(bool collapsed) override;
+  void setCollapsed(bool collapse) override;
 
   void setPosition(ImVec2 pos) override;
 
@@ -244,9 +244,9 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   [[nodiscard]] bool isStayInBackground() const;
   /**
    * Set if the window stays in background even if it's focused;
-   * @param stayInBackground
+   * @param stay
    */
-  void setStayInBackground(bool stayInBackground);
+  void setStayInBackground(bool stay);
 
   std::vector<Renderable *> getRenderables() override;
 

@@ -105,9 +105,9 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
 
   /**
    * Remove child by ID.
-   * @param name ID to be removed
+   * @param childName ID to be removed
    */
-  void removeChild(const std::string &name);
+  void removeChild(const std::string &childName);
 
   /**
     * Create a child and append it to the end of children.

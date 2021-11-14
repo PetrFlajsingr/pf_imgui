@@ -25,7 +25,8 @@ namespace pf::ui::ig {
  *
  * Label of the selected button is observable.
  *
- * @todo: non-visual group
+ * @todo: non-visual group - maybe just let the user place buttons as he wishes and let him add it to a ValueObservable<bool> group,
+ * where only one value can be true
  * @todo: fix this up so it can look normal
  */
 class PF_IMGUI_EXPORT RadioGroup
@@ -54,9 +55,9 @@ class PF_IMGUI_EXPORT RadioGroup
    * Create a new button and add it to the group.
    * @param elementName ID of the button
    * @param caption text rendered next to the button
-   * @param value true for selected, false otherwise
+   * @param initValue true for selected, false otherwise
    */
-  RadioButton &addButton(const std::string &elementName, const std::string &caption, bool value = false);
+  RadioButton &addButton(const std::string &elementName, const std::string &caption, bool initValue = false);
 
  protected:
   void unserialize_impl(const toml::table &src) override;
