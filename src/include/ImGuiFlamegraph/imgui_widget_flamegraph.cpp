@@ -29,6 +29,10 @@
 #endif
 #include "imgui_internal.h"
 
+#ifdef _MSC_VER
+#pragma warning( disable : 4244 )
+#endif
+
 namespace ImGuiWidgetFlameGraph {
 FlameGraphSample::FlameGraphSample(pf::math::Range<std::chrono::microseconds> sampleTime, std::string sampleCaption, uint8_t sampleLevel)
     : time(sampleTime), level(sampleLevel), caption(std::move(sampleCaption)) {}

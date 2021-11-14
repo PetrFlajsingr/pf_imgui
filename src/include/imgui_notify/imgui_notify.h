@@ -16,6 +16,9 @@
 #pragma GCC diagnostic ignored "-Wextra"
 #pragma GCC diagnostic ignored "-Wformat-security"
 #endif
+#ifdef _MSC_VER
+#pragma warning( disable : 4996 )
+#endif
 
 #define NOTIFY_MAX_MSG_LENGTH 4096   // Max message content length
 #define NOTIFY_PADDING_X 20.f        // Bottom-left X padding
@@ -218,6 +221,7 @@ NOTIFY_INLINE void RemoveNotification(int index, std::vector<ImGuiToast> &notifi
 /// Render toasts, call at the end of your rendering!
 /// </summary>
 // TODO: modify this so the notification can be rendered in a corner selected by the user - use default corner in ImGuiInterface
+// TODO: style controls for notifications
 NOTIFY_INLINE void RenderNotifications(std::vector<ImGuiToast> &notifications) {
   const auto vp_size = GetMainViewport()->Size;
 
@@ -228,7 +232,7 @@ NOTIFY_INLINE void RenderNotifications(std::vector<ImGuiToast> &notifications) {
 
     // Remove toast if expired
     if (current_toast->get_phase() == ImGuiToastPhase_Expired) {
-      RemoveNotification(i, notifications);
+      RemoveNotification(static_cast<int>(i), notifications);
       continue;
     }
 

@@ -45,10 +45,11 @@ template<typename T>
 PF_IMGUI_EXPORT T deserializeGlmVec(const toml::array &arr) {
   auto result = T{};
   for (auto i : std::views::iota(0, T::length())) {
-    if constexpr (std::same_as<typename T::value_type, float>) {
-      result[i] = **arr.get(i)->as_floating_point();
+    //if constexpr (std::same_as<typename T::value_type, float>) {
+    if constexpr (std::is_floating_point_v<typename T::value_type>) {
+      result[i] = static_cast<typename T::value_type>(**arr.get(i)->as_floating_point());
     } else {
-      result[i] = **arr.get(i)->as_integer();
+      result[i] = static_cast<typename T::value_type>(**arr.get(i)->as_integer());
     }
   }
   return result;

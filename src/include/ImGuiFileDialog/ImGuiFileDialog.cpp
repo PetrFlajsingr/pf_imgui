@@ -104,6 +104,9 @@ SOFTWARE.
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wformat-zero-length"
 #endif
+#ifdef _MSC_VER
+#pragma warning( disable : 4996 )
+#endif
 namespace IGFD
 {
 // float comparisons

@@ -10,6 +10,9 @@
 #ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Warray-bounds"
 #endif
+#ifdef _MSC_VER
+#pragma warning( disable : 4101 )
+#endif
 namespace ImWidgets {
 //////////////////////////////////////////////////////////////////////////
 // Data

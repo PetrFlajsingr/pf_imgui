@@ -92,7 +92,7 @@ class ColorCustomizable {
         },
         colorValues);
 
-    return RAII{[popCount] { ImGui::PopStyleColor(popCount); }};
+    return RAII{[popCount] { ImGui::PopStyleColor(static_cast<int>(popCount)); }};
 #else
     return RAII{[] {}};
 #endif
@@ -174,7 +174,7 @@ class StyleCustomizable {
           ++index;
         },
         styleValues);
-    return RAII{[popCount] { ImGui::PopStyleVar(popCount); }};
+    return RAII{[popCount] { ImGui::PopStyleVar(static_cast<int>(popCount)); }};
 #else
     return RAII{[] {}};
 #endif

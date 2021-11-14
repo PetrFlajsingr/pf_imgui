@@ -6,6 +6,10 @@
 #include <cmath>
 #include <imgui_internal.h>
 
+#ifdef _MSC_VER
+#pragma warning( disable : 4244 )
+#endif
+
 void ImGui::Spinner(const char *label, float radius, int thickness) {
   ImGuiWindow *window = GetCurrentWindow();
   if (window->SkipItems) return;
