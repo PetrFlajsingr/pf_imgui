@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_TREE_H
 #define PF_IMGUI_ELEMENTS_TREE_H
 
+#include <pf_common/Visitor.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Collapsible.h>
@@ -18,6 +19,7 @@
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/layouts/BoxLayout.h>
 #include <string>
+#include <variant>
 
 namespace pf::ui::ig {
 // TODO: simplify this
@@ -54,10 +56,6 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
   Flags<ImGuiTreeNodeFlags_> flags{};
   TreeSelectionLimiter *limiter = nullptr;
 };
-
-template<TreeType treeType>
-void traverseTree(TreeRecord &tree, std::invocable<details::TreeRecord &> auto callable);
-
 }// namespace details
 
 /**
@@ -164,6 +162,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
+    ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
       if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
@@ -250,6 +249,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
+    ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
       if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
@@ -352,9 +352,15 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    */
   void setLimitSelectionToOne(bool limit) {
     auto leafLimiter = limit ? &limiter : nullptr;
-    traverse([leafLimiter](details::TreeRecord &record) {
-      if (auto ptr = dynamic_cast<TreeLeaf *>(&record); ptr != nullptr) { ptr->limiter = leafLimiter; }
-    });
+    traverse(Visitor{[&](TreeLeaf *leaf, auto) { leaf->limiter = leafLimiter; }, [](auto, auto) {}});
+  }
+
+  // node, depth
+  void traverse(std::invocable<std::variant<TreeLeaf *, TreeNode<treeType>>, std::size_t> auto &&callable) {
+    std::ranges::for_each(layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
+                            return dynamic_cast<details::TreeRecord &>(child);
+                          }),
+                          [&](auto &record) { traverseImpl(record, callable, 0); });
   }
 
  protected:
@@ -369,23 +375,17 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   BoxLayout layout;
   details::TreeSelectionLimiter limiter;
 
-  inline void traverse(std::invocable<details::TreeRecord &> auto fnc) {
-    std::ranges::for_each(getTreeNodes(), [&](auto &node) { details::traverseTree<treeType>(node, fnc); });
+  void traverseImpl(details::TreeRecord &node,
+                    std::invocable<std::variant<TreeLeaf *, TreeNode<treeType>>, std::size_t> auto &&callable,
+                    std::size_t depth) {
+    if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
+      callable(nodePtr, depth);
+      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traverseImpl(record, callable, depth + 1); });
+    } else if (auto leafPtr = dynamic_cast<TreeLeaf *>(&node); leafPtr != nullptr) {
+      callable(leafPtr, depth);
+    }
   }
 };
-
-template<TreeType treeType>
-void details::traverseTree(details::TreeRecord &tree, std::invocable<details::TreeRecord &> auto callable) {
-  callable(tree);
-  if (auto node = dynamic_cast<TreeNode<treeType> *>(&tree); node != nullptr) {
-    std::ranges::for_each(node->getTreeNodes(), [&](auto &record) {
-      callable(record);
-      if (auto node = dynamic_cast<TreeNode<treeType> *>(&record); node != nullptr) {
-        traverseTree<treeType>(*node, callable);
-      }
-    });
-  }
-}
 
 }// namespace pf::ui::ig
 #endif//PF_IMGUI_ELEMENTS_TREE_H
