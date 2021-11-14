@@ -358,23 +358,32 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
       limiter = nullptr;
     }
     auto leafLimiter = limiter.get();
-    traverse(Visitor{[&](TreeLeaf *leaf, auto) {
-                       leaf->limiter = leafLimiter;
-                       return true;
-                     },
-                     [](auto, auto) { return true; }});
+    traversePreOrder(Visitor{[&](TreeLeaf *leaf, auto) {
+                               leaf->limiter = leafLimiter;
+                               return true;
+                             },
+                             [](auto, auto) { return true; }});
   }
 
   // node, depth
   // return true to continue deeper into the tree, false if not
-  // DFS
+  // in order
   template<typename F>
   requires(std::invocable<F, TreeLeaf *, std::size_t>
-               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traverse(F &&callable) {
+               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePreOrder(F &&callable) {
     std::ranges::for_each(layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
                             return dynamic_cast<details::TreeRecord &>(child);
                           }),
-                          [&](auto &record) { traverseImpl(record, callable, 0); });
+                          [&](auto &record) { traversePreOrderImpl(record, callable, 0); });
+  }
+
+  template<typename F>
+  requires(std::invocable<F, TreeLeaf *, std::size_t>
+               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePostOrder(F &&callable) {
+    std::ranges::for_each(layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
+                            return dynamic_cast<details::TreeRecord &>(child);
+                          }),
+                          [&](auto &record) { traversePosOrderImpl(record, callable, 0); });
   }
 
  protected:
@@ -391,12 +400,24 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
 
   template<typename F>
   requires(std::invocable<F, TreeLeaf *, std::size_t>
-               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traverseImpl(details::TreeRecord &node,
-                                                                                         F &&callable,
-                                                                                         std::size_t depth) {
+               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePreOrderImpl(details::TreeRecord &node,
+                                                                                                 F &&callable,
+                                                                                                 std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
       if (!callable(nodePtr, depth)) { return; }
-      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traverseImpl(record, callable, depth + 1); });
+      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traversePreOrderImpl(record, callable, depth + 1); });
+    } else if (auto leafPtr = dynamic_cast<TreeLeaf *>(&node); leafPtr != nullptr) {
+      callable(leafPtr, depth);
+    }
+  }
+  template<typename F>
+  requires(std::invocable<F, TreeLeaf *, std::size_t>
+               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePosOrderImpl(details::TreeRecord &node,
+                                                                                                 F &&callable,
+                                                                                                 std::size_t depth) {
+    if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
+      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traversePosOrderImpl(record, callable, depth + 1); });
+      callable(nodePtr, depth);
     } else if (auto leafPtr = dynamic_cast<TreeLeaf *>(&node); leafPtr != nullptr) {
       callable(leafPtr, depth);
     }
