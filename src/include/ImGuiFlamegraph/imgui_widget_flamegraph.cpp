@@ -115,13 +115,13 @@ void PlotFlame(
         return a.getTime().start < b.getTime().start;
       });
         min != samples.end()) {
-      v_min = min->getTime().start.count();
+      v_min = static_cast<float>(min->getTime().start.count());
     }
     if (const auto max = std::ranges::max_element(samples, [](const auto &a, const auto &b) {
         return a.getTime().end < b.getTime().end;
       });
         max != samples.end()) {
-      v_max = max->getTime().end.count();
+      v_max = static_cast<float>(max->getTime().end.count());
     }
     if (scale_min == FLT_MAX)
       scale_min = v_min;

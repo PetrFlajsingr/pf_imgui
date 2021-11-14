@@ -26,7 +26,7 @@ concept ProgressBarCompatible = requires(T t, float f) {
   {t + t};
   {t *= f};
   { std::clamp(t, t, t) } -> std::convertible_to<T>;
-};
+} && std::convertible_to<float, T>;
 
 /**
  * @brief Progress bar for notifying a user of operation progress.
@@ -65,9 +65,9 @@ class PF_IMGUI_EXPORT ProgressBar
     percentage = std::clamp(percentage, 0.f, 1.f);
     const auto oldValue = ValueObservable<T>::getValue();
     const auto newValue = min + (max - min) * percentage;
-    ValueObservable<T>::setValueInner(newValue);
+    ValueObservable<T>::setValueInner(static_cast<T>(newValue));
     if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
-    return newValue;
+    return ValueObservable<T>::getValue();
   }
 
   /**

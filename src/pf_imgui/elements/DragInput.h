@@ -197,22 +197,22 @@ class PF_IMGUI_EXPORT DragInput
           ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::DragInt(getLabel().c_str(), address, speed, min, max, format.c_str(), flags);
+      valueChanged = ImGui::DragInt(getLabel().c_str(), address, static_cast<float>(speed), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
       valueChanged =
-          ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
+          ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*address), static_cast<float>(speed), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
       valueChanged =
-          ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
+          ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*address), static_cast<float>(speed), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
       valueChanged =
-          ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
+          ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*address), static_cast<float>(speed), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, math::Range<int>>) {
-      valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max,
+      valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, static_cast<float>(speed), min, max,
                                           format.c_str(), nullptr, flags);
     }
     if constexpr (std::same_as<T, math::Range<float>>) {

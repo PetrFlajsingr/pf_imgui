@@ -25,7 +25,7 @@ void ImGui::Spinner(const char *label, float radius, int thickness) {
   window->DrawList->PathClear();
 
   int num_segments = 30;
-  int start = std::abs(ImSin(g.Time * 1.8f) * (num_segments - 5));
+  int start = static_cast<int>(std::abs(ImSin(g.Time * 1.8f) * (num_segments - 5)));
 
   const float a_min = IM_PI * 2.0f * ((float) start) / (float) num_segments;
   const float a_max = IM_PI * 2.0f * ((float) num_segments - 3) / (float) num_segments;
@@ -38,5 +38,5 @@ void ImGui::Spinner(const char *label, float radius, int thickness) {
         ImVec2(centre.x + ImCos(a + g.Time * 8) * radius, centre.y + ImSin(a + g.Time * 8) * radius));
   }
 
-  window->DrawList->PathStroke(GetColorU32(ImGuiCol_PlotHistogram), false, thickness);
+  window->DrawList->PathStroke(GetColorU32(ImGuiCol_PlotHistogram), false, static_cast<float>(thickness));
 }

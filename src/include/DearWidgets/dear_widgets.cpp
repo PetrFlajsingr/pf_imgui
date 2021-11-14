@@ -622,8 +622,8 @@ static ImVec2 s_WhitePoints_Values[][2] = {
     3450.0f, 2940.0f, 6350.0f, 4150.0f, 6500.0f, 5000.0f, 4150.0f, 5000.0f, 4000.0f, 3000.0f};
 
 // Color Space
-static float s_ColorSpace_XYZ2RGB_AdobeRGB[] = {2.0413690f, -0.5649464f, -0.3446944,  -0.9692660f, 1.8760108f,
-                                                0.0415560,  0.0134474f,  -0.1183897f, 1.0154096f};
+static float s_ColorSpace_XYZ2RGB_AdobeRGB[] = {2.0413690f, -0.5649464f, -0.3446944f,  -0.9692660f, 1.8760108f,
+                                                0.0415560f,  0.0134474f,  -0.1183897f, 1.0154096f};
 static float s_ColorSpace_XYZ2RGB_AppleRGB[] = {2.9515373f, -1.2894116f, -0.4738445f, -1.0851093f, 1.9908566f,
                                                 0.0372026f, 0.0854934f,  -0.2694964f, 1.0912975f};
 static float s_ColorSpace_XYZ2RGB_Best[] = {1.7552599f, -0.4836786f, -0.2530000f, -0.5441336f, 1.5068789f,
@@ -641,7 +641,7 @@ static float s_ColorSpace_XYZ2RGB_DonRGB4[] = {1.7603902f, -0.4881198f, -0.25361
 static float s_ColorSpace_XYZ2RGB_ECI[] = {1.7827618f,  -0.4969847f, -0.2690101f, -0.9593623f, 1.9477962f,
                                            -0.0275807f, 0.0859317f,  -0.1744674f, 1.3228273f};
 static float s_ColorSpace_XYZ2RGB_EktaSpacePS5[] = {2.0043819f, -0.7304844f, -0.2450052f, -0.7110285f, 1.6202126f,
-                                                    0.0792227f, 0.0381263f,  -0.0868780f, 1.2725438};
+                                                    0.0792227f, 0.0381263f,  -0.0868780f, 1.2725438f};
 static float s_ColorSpace_XYZ2RGB_NTSC[] = {1.9099961f,  -0.5324542f, -0.2882091f, -0.9846663f, 1.9991710f,
                                             -0.0283082f, 0.0583056f,  -0.1183781f, 0.8975535f};
 static float s_ColorSpace_XYZ2RGB_PAL_SECAM[] = {3.0628971f, -1.3931791f, -0.4757517f, -0.9692660f, 1.8760108f,
