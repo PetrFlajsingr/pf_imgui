@@ -17,6 +17,7 @@ Window::Window(std::string name, std::string label, AllowCollapse allowCollapse,
 Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
+// TODO: fix up Begin, to use LABEL##NAME
 void Window::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();

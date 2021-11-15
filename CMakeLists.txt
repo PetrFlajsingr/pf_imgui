@@ -196,6 +196,7 @@ set(SOURCES
         src/pf_imgui/elements/DockSpace.cpp
         src/pf_imgui/details/Spinner.cpp
         src/pf_imgui/elements/Spinner.cpp
+        src/pf_imgui/elements/StatusBar.cpp
         )
 
 set(INCLUDES
@@ -316,6 +317,7 @@ set(INCLUDES
         src/pf_imgui/elements/DockSpace.h
         src/pf_imgui/details/Spinner.h
         src/pf_imgui/elements/Spinner.h
+        src/pf_imgui/elements/StatusBar.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
