@@ -43,16 +43,11 @@ AppMenuBar &ImGuiInterface::getMenuBar() {
 bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 
 AppStatusBar &ImGuiInterface::createStatusBar(const std::string &barName, float height) {
-  return *statusBars.emplace_back(std::make_unique<AppStatusBar>(barName, height));
+  statusBar = std::make_unique<AppStatusBar>(barName, height);
+  return *statusBar;
 }
 
-void ImGuiInterface::removeStatusBar(const std::string &barName) {
-  statusBars.erase(std::ranges::find(statusBars, barName, [](const auto &bar) { return bar->getName(); }));
-}
-
-void ImGuiInterface::removeStatusBar(const AppStatusBar &statusBar) {
-  statusBars.erase(std::ranges::find(statusBars, &statusBar, &std::unique_ptr<AppStatusBar>::get));
-}
+void ImGuiInterface::removeStatusBar() { statusBar = nullptr; }
 
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
@@ -129,7 +124,7 @@ void ImGuiInterface::renderImpl() {
   if (hasMenuBar()) { menuBar->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
-  std::ranges::for_each(statusBars, [](auto &bar) { bar->render(); });
+  if (statusBar != nullptr) { statusBar->render(); }
   renderDialogs();
   ImGui::RenderNotifications(notifications);
 }

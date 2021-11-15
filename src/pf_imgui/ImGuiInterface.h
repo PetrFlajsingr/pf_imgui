@@ -138,11 +138,18 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    */
   [[nodiscard]] bool hasMenuBar() const;
 
+  /**
+   * Create a status bar or replace the existing one.
+   * @param barName unique name of the element
+   * @param height height
+   * @return
+   */
   [[nodiscard]] AppStatusBar &createStatusBar(const std::string &barName, float height = ImGui::GetFrameHeight());
 
-  void removeStatusBar(const std::string &barName);
-
-  void removeStatusBar(const AppStatusBar &statusBar);
+  /**
+   * Remove status bar.
+   */
+  void removeStatusBar();
 
   /**
    * Get config, which contains data of Savable elements.
@@ -294,7 +301,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
 
   std::vector<std::unique_ptr<Window>> windows;
-  std::vector<std::unique_ptr<AppStatusBar>> statusBars;
+  std::unique_ptr<AppStatusBar> statusBar = nullptr;
 
   toml::table config;
 
