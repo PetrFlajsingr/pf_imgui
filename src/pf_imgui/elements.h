@@ -39,6 +39,7 @@
 #include <pf_imgui/elements/Slider3D.h>
 #include <pf_imgui/elements/SliderAngle.h>
 #include <pf_imgui/elements/Spinner.h>
+#include <pf_imgui/elements/StatusBar.h>
 #include <pf_imgui/elements/StringTable.h>
 #include <pf_imgui/elements/TabBar.h>
 #include <pf_imgui/elements/Table.h>
