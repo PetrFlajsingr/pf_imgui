@@ -39,14 +39,17 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 20)
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    list(APPEND flags "/std:c++latest" "/W4" "/WX" "/wd4201") # TODO warning flags
+    list(APPEND flags "/std:c++latest" "/W4" "/wd4201")
 else()
 list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
         "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
         "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing")
 endif()
-
-if (CMAKE_BUILD_TYPE MATCHES Release)
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        list(APPEND flags "/WX")
+    endif()
+elseif (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
     list(APPEND flags "-fno-omit-frame-pointer" "-fsanitize=address")
