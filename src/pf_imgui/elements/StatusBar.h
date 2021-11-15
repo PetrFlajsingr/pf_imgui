@@ -21,9 +21,14 @@ class AppStatusBar : public Element, public ElementContainer {
    */
   explicit AppStatusBar(const std::string &name);
 
+  [[nodiscard]] float getHeight() const;
+
  protected:
   void renderImpl() override;
+
+ private:
+  float height = 0.f;
 };
 
-}
+}// namespace pf::ui::ig
 #endif//PF_IMGUI_STATUSBAR_H

@@ -13,7 +13,7 @@ void AppStatusBar::renderImpl() {
   auto *viewport = (ImGuiViewportP *) (void *) ImGui::GetMainViewport();
   ImGuiWindowFlags window_flags =
       ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar;
-  const auto height = ImGui::GetFrameHeight();
+  height = ImGui::GetFrameHeight();
   if (ImGui::BeginViewportSideBar(fmt::format("##{}", getName()).c_str(), viewport, ImGuiDir_Down, height,
                                   window_flags)) {
     if (ImGui::BeginMenuBar()) {
@@ -23,5 +23,6 @@ void AppStatusBar::renderImpl() {
     ImGui::End();
   }
 }
+float AppStatusBar::getHeight() const { return height; }
 
 }// namespace pf::ui::ig
