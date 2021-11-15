@@ -141,10 +141,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   /**
    * Create a status bar or replace the existing one.
    * @param barName unique name of the element
-   * @param height height
-   * @return
+   * @return reference to the created status bar
    */
-  [[nodiscard]] AppStatusBar &createStatusBar(const std::string &barName, float height = ImGui::GetFrameHeight());
+  [[nodiscard]] AppStatusBar &createStatusBar(const std::string &barName);
 
   /**
    * Remove status bar.

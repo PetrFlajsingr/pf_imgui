@@ -42,8 +42,8 @@ AppMenuBar &ImGuiInterface::getMenuBar() {
 
 bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 
-AppStatusBar &ImGuiInterface::createStatusBar(const std::string &barName, float height) {
-  statusBar = std::make_unique<AppStatusBar>(barName, height);
+AppStatusBar &ImGuiInterface::createStatusBar(const std::string &barName) {
+  statusBar = std::make_unique<AppStatusBar>(barName);
   return *statusBar;
 }
 

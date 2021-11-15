@@ -18,15 +18,11 @@ class AppStatusBar : public Element, public ElementContainer {
   /**
    * Construct AppStatusBar.
    * @param name unique name of the element
-   * @param height height of the status bar
    */
-  explicit AppStatusBar(const std::string &name, float height = ImGui::GetFrameHeight());
+  explicit AppStatusBar(const std::string &name);
 
  protected:
   void renderImpl() override;
-
- private:
-  float height;
 };
 
 }
