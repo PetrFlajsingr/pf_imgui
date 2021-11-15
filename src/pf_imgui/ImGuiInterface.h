@@ -19,6 +19,7 @@
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/elements/StatusBar.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/icons.h>
 #include <pf_imgui/interface/DragNDrop.h>
@@ -40,7 +41,7 @@ namespace pf::ui::ig {
  * You also need to update fonts when required based on variable shouldUpdateFontAtlas.
  * @todo: localization
  * @todo: key bindings?
- * @todo: styles
+ * @todo: icon loading from memory not just from file - implement that in backends as well
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomizable, public AllColorCustomizable {
  public:
@@ -136,6 +137,12 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @return true if menu bar is present, false otherwise
    */
   [[nodiscard]] bool hasMenuBar() const;
+
+  [[nodiscard]] AppStatusBar &createStatusBar(const std::string &barName, float height = ImGui::GetFrameHeight());
+
+  void removeStatusBar(const std::string &barName);
+
+  void removeStatusBar(const AppStatusBar &statusBar);
 
   /**
    * Get config, which contains data of Savable elements.
@@ -287,11 +294,12 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
 
   std::vector<std::unique_ptr<Window>> windows;
+  std::vector<std::unique_ptr<AppStatusBar>> statusBars;
 
   toml::table config;
 
   std::vector<DragNDropGroup> dragNDropGroups;
-  std::vector<ImGuiToast> notifications;
+  std::vector<ImGuiToast> notifications;// TODO: change this so the user can create their own
 
   void removeDialog(ModalDialog &dialog);
 };
