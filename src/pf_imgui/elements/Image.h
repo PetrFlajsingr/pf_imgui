@@ -19,7 +19,6 @@
 
 namespace pf::ui::ig {
 
-// TODO: implemented mouse position check, move it into ItemElement? low performance
 /**
 * @brief Image rendered from a texture. It can serve as a button.
 *
