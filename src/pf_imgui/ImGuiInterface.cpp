@@ -14,7 +14,8 @@ ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, b
                                float iconSize)
     : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable
                                                  | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0))),
-      fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), config(std::move(tomlConfig)) {}
+      fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), config(std::move(tomlConfig)),
+      notificationManager(fontManager) {}
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();

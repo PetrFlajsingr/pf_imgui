@@ -30,8 +30,10 @@ void Notification::renderImpl() {
     RAII endTextWrap{[] { ImGui::PopTextWrapPos(); }};
 
     if (icon != nullptr) {
-      ImGui::PushFont(iconFont);
-      RAII endFont{[] { ImGui::PopFont(); }};
+      if (iconFont != nullptr) { ImGui::PushFont(iconFont); }
+      RAII endFont{[&] {
+        if (iconFont != nullptr) { ImGui::PopFont(); }
+      }};
       ImGui::TextColored(*iconColor, icon);
       ImGui::SameLine();
     }
