@@ -74,9 +74,12 @@ class PF_IMGUI_EXPORT Slider3D
     if (valueChanged && oldValue != *address) { ValueObservable<glm::vec3>::notifyValueChanged(); }
   }
   void unserialize_impl(const toml::table &src) override {
-    const auto tomlVec = src["value"].as_array();
-    const auto vec = deserializeGlmVec<glm::vec3>(*tomlVec);
-    ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(vec);
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<glm::vec3>(*newVal);
+        if (vecValue.has_value()) { ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(vecValue.value()); }
+      }
+    }
   }
   toml::table serialize_impl() override {
     const auto val = ValueObservable<glm::vec3>::getValue();

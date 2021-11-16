@@ -235,11 +235,18 @@ class PF_IMGUI_EXPORT Input
  protected:
   void unserialize_impl(const toml::table &src) override {
     if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
-      const auto tomlVec = src["value"].as_array();
-      const auto vec = deserializeGlmVec<T>(*tomlVec);
-      ValueObservable<T>::setValueAndNotifyIfChanged(vec);
+      if (auto newValIter = src.find("value"); newValIter != src.end()) {
+        if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+          const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
+          if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+        }
+      }
     } else {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+      if (auto newValIter = src.find("value"); newValIter != src.end()) {
+        if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+          ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+        }
+      }
     }
   }
 

@@ -70,8 +70,10 @@ void ImGuiInterface::setStateFromConfig() {
     traverseImGuiTree(root, [this](Renderable &renderable) {
       if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
         if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
-          if (config.contains(ptrElement->getName())) {
-            ptrSavable->unserialize(*config[ptrElement->getName()].as_table());
+          if (auto elemDataIter = config.find(ptrElement->getName()); elemDataIter != config.end()) {
+            if (auto elemData = elemDataIter->second.as_table(); elemData != nullptr) {
+              ptrSavable->unserialize(*elemData);
+            }
           }
         }
       }

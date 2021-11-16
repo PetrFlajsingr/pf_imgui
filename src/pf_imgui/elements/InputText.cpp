@@ -42,8 +42,13 @@ void InputText::clear() {
 }
 
 void InputText::unserialize_impl(const toml::table &src) {
-  setText(**src["text"].as_string());
-  setValueAndNotifyIfChanged(getText());
+  if (auto newValIter = src.find("text"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {
+      setText(*newVal);
+      setValueAndNotifyIfChanged(getText());
+    }
+  }
+
   std::snprintf(buffer.get(), getText().size(), "%s", getText().c_str());
 }
 

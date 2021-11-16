@@ -10,6 +10,7 @@ namespace pf::ui::ig {
 
 PieChart::PieChart(const std::string &name, const std::string &label, const Size &size)
     : Element(name), Labellable(label), Resizable(size) {}
+
 void PieChart::renderImpl() {
   if (dataChanged) {
     dataChanged = false;
@@ -22,4 +23,5 @@ void PieChart::renderImpl() {
     ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4, true);
   }
 }
+
 }// namespace pf::ui::ig

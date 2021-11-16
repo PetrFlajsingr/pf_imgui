@@ -80,9 +80,12 @@ class PF_IMGUI_EXPORT ColorChooser
 
  protected:
   void unserialize_impl(const toml::table &src) override {
-    const auto tomlColor = src["color"].as_array();
-    const auto color = deserializeGlmVec<T>(*tomlColor);
-    ValueObservable<T>::setValueAndNotifyIfChanged(color);
+    if (auto newValIter = src.find("color"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
+        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+      }
+    }
   }
 
   toml::table serialize_impl() override {

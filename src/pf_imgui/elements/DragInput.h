@@ -150,17 +150,32 @@ class PF_IMGUI_EXPORT DragInput
  protected:
   void unserialize_impl(const toml::table &src) override {
     if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
-      auto range = T{};
-      const auto tomlRange = src["value"].as_array();
-      range.start = *tomlRange->get(0)->template value<ParamType>();
-      range.end = *tomlRange->get(1)->template value<ParamType>();
-      ValueObservable<T>::setValueAndNotifyIfChanged(range);
+      if (auto newValIter = src.find("value"); newValIter != src.end()) {
+        if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+          if (newVal->size() != 2) { return; }
+          auto range = T{};
+          if (auto newRangeStart = newVal->get(0)->value<ParamType>(); newRangeStart.has_value()) {
+            range.start = newRangeStart.value();
+          }
+          if (auto newRangeEnd = newVal->get(1)->value<ParamType>(); newRangeEnd.has_value()) {
+            range.end = newRangeEnd.value();
+          }
+          ValueObservable<T>::setValueAndNotifyIfChanged(range);
+        }
+      }
     } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
-      const auto tomlVec = src["value"].as_array();
-      const auto vec = deserializeGlmVec<T>(*tomlVec);
-      ValueObservable<T>::setValueAndNotifyIfChanged(vec);
+      if (auto newValIter = src.find("value"); newValIter != src.end()) {
+        if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+          const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
+          if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+        }
+      }
     } else {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+      if (auto newValIter = src.find("value"); newValIter != src.end()) {
+        if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+          ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+        }
+      }
     }
   }
 

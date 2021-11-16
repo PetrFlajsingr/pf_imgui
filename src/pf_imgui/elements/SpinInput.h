@@ -94,7 +94,11 @@ class SpinInput
   }
 
   void unserialize_impl(const toml::table &src) override {
-    ValueObservable<T>::setValueAndNotifyIfChanged(*src["value"].value<T>());
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+      }
+    }
   }
 
   toml::table serialize_impl() override { return toml::table{{{"value", ValueObservable<T>::getValue()}}}; }

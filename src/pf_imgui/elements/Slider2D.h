@@ -86,9 +86,12 @@ class PF_IMGUI_EXPORT Slider2D
   }
 
   void unserialize_impl(const toml::table &src) override {
-    const auto tomlVec = src["value"].as_array();
-    const auto vec = deserializeGlmVec<StorageType>(*tomlVec);
-    ValueObservable<StorageType>::setValueAndNotifyIfChanged(vec);
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<StorageType>(*newVal);
+        if (vecValue.has_value()) { ValueObservable<StorageType>::setValueAndNotifyIfChanged(vecValue.value()); }
+      }
+    }
   }
 
   toml::table serialize_impl() override {
