@@ -8,6 +8,7 @@
 namespace pf::ui::ig {
 
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
+
 void WindowMenuBar::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();

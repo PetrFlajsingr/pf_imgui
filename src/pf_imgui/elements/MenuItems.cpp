@@ -77,9 +77,13 @@ void MenuCheckboxItem::renderImpl() {
   auto style = setStyleStack();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
+
 void MenuCheckboxItem::unserialize_impl(const toml::table &src) {
-  setValueAndNotifyIfChanged(*src["checked"].value<bool>());
+  if (auto newValIter = src.find("checked"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+  }
 }
+
 toml::table MenuCheckboxItem::serialize_impl() { return toml::table{{{"checked", getValue()}}}; }
 
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
