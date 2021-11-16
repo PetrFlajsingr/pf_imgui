@@ -10,6 +10,8 @@ Notification::Notification(const std::string &name, const std::string &label, st
     : Renderable(name), Labellable(label), dismissDuration(duration) {}
 
 void Notification::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
   if (firstRender) {
     firstRender = false;
     ImGui::SetNextWindowFocus();
