@@ -22,7 +22,11 @@ bool Collapsible::isCollapsible() const { return collapsible; }
 
 void Collapsible::setCollapsible(bool newCollapsible) { collapsible = newCollapsible; }
 
-void Collapsible::unserialize_impl(const toml::table &src) { setCollapsed(*src["collapsed"].value<bool>()); }
+void Collapsible::unserialize_impl(const toml::table &src) {
+  if (auto newValIter = src.find("collapsed"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setCollapsed(*newVal); }
+  }
+}
 
 toml::table Collapsible::serialize_impl() { return toml::table{{{"collapsed", isCollapsed()}}}; }
 
