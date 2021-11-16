@@ -17,7 +17,9 @@ void Selectable::renderImpl() {
 }
 
 void Selectable::unserialize_impl(const toml::table &src) {
-  setValueAndNotifyIfChanged(*src["selected"].value<bool>());
+  if (auto newValIter = src.find("selected"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+  }
 }
 
 toml::table Selectable::serialize_impl() { return toml::table{{{"selected", getValue()}}}; }
