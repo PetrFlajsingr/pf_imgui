@@ -28,7 +28,11 @@ void SliderAngle::renderImpl() {
 }
 
 void SliderAngle::unserialize_impl(const toml::table &src) {
-  ValueObservable::setValueAndNotifyIfChanged(*src["value"].value<float>());
+  if (auto newValIter = src.find("value"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<float>(); newVal.has_value()) {
+      ValueObservable<float>::setValueAndNotifyIfChanged(*newVal);
+    }
+  }
 }
 
 toml::table SliderAngle::serialize_impl() { return toml::table{{{"value", getValue()}}}; }
