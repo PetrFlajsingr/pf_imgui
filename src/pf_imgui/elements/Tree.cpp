@@ -42,7 +42,11 @@ void TreeLeaf::renderImpl() {
   if (limiter != nullptr && limiter->selected != this) { setValue(false); }
 }
 
-void TreeLeaf::unserialize_impl(const toml::table &src) { setValue(src["value"].value_or(false)); }
+void TreeLeaf::unserialize_impl(const toml::table &src) {
+  if (auto newValIter = src.find("value"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValue(*newVal); }
+  }
+}
 
 toml::table TreeLeaf::serialize_impl() { return toml::table{{{"value", getValue()}}}; }
 
