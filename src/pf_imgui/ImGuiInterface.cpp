@@ -126,7 +126,8 @@ void ImGuiInterface::renderImpl() {
   std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
   if (statusBar != nullptr) { statusBar->render(); }
   renderDialogs();
-  ImGui::RenderNotifications(notifications);
+  notificationManager.renderNotifications();
+  //ImGui::RenderNotifications(notifications);
 }
 
 void ImGuiInterface::removeDialog(ModalDialog &dialog) {
@@ -139,6 +140,8 @@ DragNDropGroup &ImGuiInterface::createDragNDropGroup() { return dragNDropGroups.
 
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
+NotificationManager &ImGuiInterface::getNotificationManager() { return notificationManager; }
+/*
 void ImGuiInterface::showNotification(NotificationType type, std::string_view message,
                                       std::chrono::milliseconds dismissTime) {
   ImGui::InsertNotification({static_cast<int>(type), std::string(message).c_str(), dismissTime.count()}, notifications);
@@ -149,6 +152,6 @@ void ImGuiInterface::showNotification(NotificationType type, std::string_view ti
   ImGuiToast toast{static_cast<int>(type), std::string(message).c_str(), dismissTime.count()};
   toast.set_title(std::string{title}.c_str());
   ImGui::InsertNotification(toast, notifications);
-}
+}*/
 
 }// namespace pf::ui::ig
