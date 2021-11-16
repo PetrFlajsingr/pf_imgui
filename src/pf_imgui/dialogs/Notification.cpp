@@ -25,9 +25,8 @@ void Notification::renderImpl() {
   const auto opacity = getOpacity();
   ImGui::SetNextWindowBgAlpha(opacity);
 
-  auto isNotClosed = true;
   RAII end{[] { ImGui::End(); }};
-  if (ImGui::Begin(fmt::format("##{}", getName()).c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
+  if (ImGui::Begin(fmt::format("##{}", getName()).c_str(), nullptr, flags)) {
     ImGui::PushTextWrapPos(vp_size.x / 3.f);
     RAII endTextWrap{[] { ImGui::PopTextWrapPos(); }};
 
@@ -47,10 +46,6 @@ void Notification::renderImpl() {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
   }
   height += ImGui::GetWindowHeight() + PADDING_MESSAGE_Y;
-  if (!isNotClosed) {
-    notifyClosed();
-    currentPhase = NotificationPhase::Expired;
-  }
 }
 
 void Notification::setIcon(const char *newIcon, ImFont *font) {
@@ -61,7 +56,6 @@ void Notification::setIcon(const char *newIcon, ImFont *font) {
 void Notification::setIconColor(const ImVec4 &newColor) { Notification::iconColor = newColor; }
 
 void Notification::checkPhase() {
-  if (currentPhase == NotificationPhase::Expired) { return; }
   const auto timeElapsed =
       std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - creationTime);
   if (timeElapsed > FADE_IN_TIME + FADE_OUT_TIME + dismissDuration) {

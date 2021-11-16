@@ -6,17 +6,17 @@
 #define PF_IMGUI_NOTIFICATION_H
 
 #include <chrono>
+#include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/interface/Closeable.h>
 
 namespace pf::ui::ig {
 
 enum class NotificationPhase { FadeIn, Wait, FadeOut, Expired };
 
-class Notification : public Renderable, public ElementContainer, public Labellable, public Closeable {
+class Notification : public Renderable, public ElementContainer, public Labellable {
   friend class NotificationManager;
   constexpr static inline std::chrono::milliseconds DEFAULT_DURATION{3000};
   constexpr static inline std::chrono::milliseconds FADE_IN_TIME{150};
@@ -38,7 +38,6 @@ class Notification : public Renderable, public ElementContainer, public Labellab
 
  private:
   float height = 0.f;
-  ;
   NotificationPhase currentPhase = NotificationPhase::FadeIn;
 
   const char *icon = nullptr;
