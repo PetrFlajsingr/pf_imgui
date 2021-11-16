@@ -27,9 +27,11 @@ void DockSpace::render() {
     }
   }
 }
+
 void DockSpace::renderImpl() {
   id = ImGui::GetID(getName().c_str());
   ImGui::DockSpace(id, getSize().asImVec(), flags);
 }
+
 DockSpace::Id DockSpace::getDockId() const { return id; }
 }// namespace pf::ui::ig
