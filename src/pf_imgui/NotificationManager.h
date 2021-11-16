@@ -27,6 +27,7 @@ class NotificationManager {
 
  private:
   std::vector<std::unique_ptr<Notification>> notifications;
+  std::vector<std::unique_ptr<Notification>> newNotifications;
 };
 
 }// namespace pf::ui::ig

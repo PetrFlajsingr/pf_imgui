@@ -7,11 +7,14 @@
 namespace pf::ui::ig {
 
 Notification &NotificationManager::createNotification(const std::string &name, const std::string &label,
-                                                     std::chrono::milliseconds duration) {
-  return *notifications.emplace_back(std::make_unique<Notification>(name, label, duration));
+                                                      std::chrono::milliseconds duration) {
+  return *newNotifications.emplace_back(std::make_unique<Notification>(name, label, duration));
 }
 
 void NotificationManager::renderNotifications() {
+  notifications.insert(notifications.end(), std::make_move_iterator(newNotifications.begin()),
+                       std::make_move_iterator(newNotifications.end()));
+  newNotifications.clear();
   float height = 0.f;
   std::ranges::for_each(notifications, [&](auto &notification) {
     notification->height = height;
@@ -23,6 +26,5 @@ void NotificationManager::renderNotifications() {
                                              [](const auto &notification) { return notification->currentPhase; })),
       std::ranges::end(notifications));
 }
-
 
 }// namespace pf::ui::ig

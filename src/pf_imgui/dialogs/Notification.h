@@ -49,8 +49,8 @@ class Notification : public Renderable, public ElementContainer, public Labellab
 
   bool firstRender = true;
 
-  const ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration
-      | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoNav;
+  const ImGuiWindowFlags flags =
+      ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoNav;
 
   void checkPhase();
 
