@@ -528,7 +528,7 @@ inline void RenderLine( const char* markdown_, Line& line_, TextRegion& textRegi
 inline void Markdown( const char* markdown_, size_t markdownLength_, const MarkdownConfig& mdConfig_ )
 {
   static const char* linkHoverStart = NULL; // we need to preserve status of link hovering between frames
-  ImGuiStyle& style = ImGui::GetStyle();
+  [[maybe_unused]] ImGuiStyle& style = ImGui::GetStyle();
   Line        line;
   Link        link;
   Emphasis    em;
@@ -731,6 +731,7 @@ inline void Markdown( const char* markdown_, size_t markdownLength_, const Markd
           em.state = Emphasis::RIGHT;
           em.text.stop = i;
           // pass through to case Emphasis::RIGHT
+          [[fallthrough]];
         }
         else
         {

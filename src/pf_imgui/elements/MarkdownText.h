@@ -86,7 +86,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   static void MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data);
   static ImGui::MarkdownImageData MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data);
 
-  static inline struct {
+  static struct FontData {
     ImFont *fontH1 = nullptr;
     ImFont *fontH2 = nullptr;
     ImFont *fontH3 = nullptr;

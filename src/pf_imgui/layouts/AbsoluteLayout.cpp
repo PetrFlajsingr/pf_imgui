@@ -41,7 +41,7 @@ void AbsoluteLayout::setChildPosition(const std::string &childName, ImVec2 posit
     child.value()->second->setPosition(position);
   } else {
 #ifndef _MSC_VER// TODO: MSVC internal compiler error
-    throw IdNotFoundException("Child not found: {}", name);
+    throw IdNotFoundException("Child not found: {}", childName);
 #endif
   }
 }
