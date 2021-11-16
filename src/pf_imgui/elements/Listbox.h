@@ -181,15 +181,9 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   }
 
   void unserialize_impl(const toml::table &src) override {
-    if (src.contains("selected")) {
-      const auto selectedItemAsString = *src["selected"].value<std::string>();
-      for (const auto &[idx, item] : items | ranges::views::enumerate) {
-        if (item.second->getLabel() == selectedItemAsString) {
-          selectedItemIndex = static_cast<int>(idx);
-          items[idx].second->setValue(true);
-          ValueObservable<T>::setValueAndNotifyIfChanged(items[idx].first);
-          break;
-        }
+    if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
+      if (auto selectedVal = selectedValIter->second.value<std::string>(); selectedVal.has_value()) {
+        setSelectedItem(selectedVal.value());
       }
     }
   }

@@ -37,6 +37,7 @@ enum class TextTrigger { Character, Enter };
  * Typical text edit.
  * @todo: hint
  * @todo: decouple from Text, styles
+ * @todo simplify constructor
  */
 class PF_IMGUI_EXPORT InputText : public Text,
                                   public Labellable,
