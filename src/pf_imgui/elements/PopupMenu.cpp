@@ -14,6 +14,7 @@ void PopupMenu::close() {
   opened = false;
   firstRender = true;
 }
+
 void PopupMenu::renderImpl() {
   if (opened) {
     auto colorStyle = setColorStack();

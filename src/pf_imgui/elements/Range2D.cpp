@@ -34,11 +34,21 @@ const glm::vec2 &Range2D::getMax() const { return maxRange; }
 void Range2D::setMax(const glm::vec2 &max) { maxRange = max; }
 
 void Range2D::unserialize_impl(const toml::table &src) {
-  const auto tomlStartVec = src["startValue"].as_array();
-  const auto tomlEndVec = src["endValue"].as_array();
-  const auto start = deserializeGlmVec<glm::vec2>(*tomlStartVec);
-  const auto end = deserializeGlmVec<glm::vec2>(*tomlEndVec);
-  setValueAndNotifyIfChanged({start, end});
+  if (auto newValStartIter = src.find("startValue"); newValStartIter != src.end()) {
+    if (auto newValStart = newValStartIter->second.as_array(); newValStart != nullptr) {
+      if (newValStart->size() != 2) { return; }
+      const auto start = safeDeserializeGlmVec<glm::vec2>(*newValStart);
+      if (!start.has_value()) { return; }
+      if (auto newValEndIter = src.find("startValue"); newValEndIter != src.end()) {
+        if (auto newValEnd = newValEndIter->second.as_array(); newValEnd != nullptr) {
+          if (newValEnd->size() != 2) { return; }
+          const auto end = safeDeserializeGlmVec<glm::vec2>(*newValEnd);
+          if (!end.has_value()) { return; }
+          setValueAndNotifyIfChanged({*start, *end});
+        }
+      }
+    }
+  }
 }
 
 toml::table Range2D::serialize_impl() {
