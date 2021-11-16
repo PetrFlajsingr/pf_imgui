@@ -202,8 +202,7 @@ set(SOURCES
         src/pf_imgui/elements/StatusBar.cpp
         src/pf_imgui/dialogs/Notification.cpp
         src/pf_imgui/NotificationManager.cpp
-        src/pf_imgui/NotificationManager.h
-        src/pf_imgui/interface/Closeable.h)
+        src/pf_imgui/interface/Closeable.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
