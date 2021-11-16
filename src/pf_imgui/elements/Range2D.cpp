@@ -39,7 +39,7 @@ void Range2D::unserialize_impl(const toml::table &src) {
       if (newValStart->size() != 2) { return; }
       const auto start = safeDeserializeGlmVec<glm::vec2>(*newValStart);
       if (!start.has_value()) { return; }
-      if (auto newValEndIter = src.find("startValue"); newValEndIter != src.end()) {
+      if (auto newValEndIter = src.find("endValue"); newValEndIter != src.end()) {
         if (auto newValEnd = newValEndIter->second.as_array(); newValEnd != nullptr) {
           if (newValEnd->size() != 2) { return; }
           const auto end = safeDeserializeGlmVec<glm::vec2>(*newValEnd);
