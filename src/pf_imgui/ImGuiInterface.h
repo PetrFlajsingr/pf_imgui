@@ -8,10 +8,10 @@
 #define PF_IMGUI_IMGUIINTERFACE_H
 
 #include <imgui.h>
-#include <imgui_notify.h>
 #include <memory>
 #include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/FontManager.h>
+#include <pf_imgui/NotificationManager.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
@@ -240,24 +240,24 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
     dialogs.emplace_back(std::move(dialog));
   }
 
-  /**
-   * Show a temporary notification with custom text.
-   * @param type type of notification - different icons
-   * @param message message to show to the user
-   * @param dismissTime after this time the notification will disappear
-   */
-  void showNotification(NotificationType type, std::string_view message,
-                        std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
+ ///**
+ // * Show a temporary notification with custom text.
+ // * @param type type of notification - different icons
+ // * @param message message to show to the user
+ // * @param dismissTime after this time the notification will disappear
+ // */
+ //void showNotification(NotificationType type, std::string_view message,
+ //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
 
-  /**
-   * Show a temporary notification with custom text.
-   * @param type type of notification - different icons
-   * @param title custom notification title
-   * @param message message to show to the user
-   * @param dismissTime after this time the notification will disappear
-   */
-  void showNotification(NotificationType type, std::string_view title, std::string_view message,
-                        std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
+ ///**
+ // * Show a temporary notification with custom text.
+ // * @param type type of notification - different icons
+ // * @param title custom notification title
+ // * @param message message to show to the user
+ // * @param dismissTime after this time the notification will disappear
+ // */
+ //void showNotification(NotificationType type, std::string_view title, std::string_view message,
+ //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
 
   /**
    * Create a group for drag and drop elements.
@@ -270,7 +270,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    */
   virtual void updateFonts() = 0;
 
-  FontManager &getFontManager();
+  [[nodiscard]] FontManager &getFontManager();
+  [[nodiscard]] NotificationManager &getNotificationManager();
 
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
@@ -296,6 +297,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
   FontManager fontManager;
+  NotificationManager notificationManager;
   std::vector<FileDialog> fileDialogs;
   cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
 
@@ -305,7 +307,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   toml::table config;
 
   std::vector<DragNDropGroup> dragNDropGroups;
-  std::vector<ImGuiToast> notifications;// TODO: change this so the user can create their own
+  //std::vector<ImGuiToast> notifications;// TODO: change this so the user can create their own
 
   void removeDialog(ModalDialog &dialog);
 };

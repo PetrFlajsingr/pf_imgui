@@ -24,7 +24,7 @@ void Window::renderImpl() {
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   RAII endPopup{[] { ImGui::End(); }};
-  if (ImGui::Begin(getLabel().c_str(), (closeable ? &isNotClosed : nullptr), flags)) {
+  if (ImGui::Begin(getLabel().c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
@@ -53,7 +53,7 @@ void Window::renderImpl() {
     }
   }
   if (!isNotClosed) {
-    closeObservableImpl.notify();
+    notifyClosed();
     setVisibility(Visibility::Invisible);
   }
 }
@@ -153,10 +153,6 @@ void Window::cancelMinSizeConstraint() { minSizeConstraint = std::nullopt; }
 void Window::cancelMaxSizeConstraint() { maxSizeConstraint = std::nullopt; }
 
 void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstraint = newSizeConstraint; }
-
-bool Window::isCloseable() const { return closeable; }
-
-void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 void Window::setFont(ImFont *fontPtr) { font = fontPtr; }
 

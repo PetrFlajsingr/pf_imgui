@@ -10,7 +10,6 @@
 
 #include <cstdint>
 #include <imgui.h>
-#include <imgui_notify.h>
 #include <pf_common/enums.h>
 #include <type_traits>
 
@@ -20,12 +19,6 @@ enum class MouseButton {
   Left = ImGuiMouseButton_::ImGuiMouseButton_Left,
   Right = ImGuiMouseButton_::ImGuiMouseButton_Right,
   Middle = ImGuiMouseButton_::ImGuiMouseButton_Middle
-};
-enum class NotificationType {
-  Success = ImGuiToastType_Success,
-  Warning = ImGuiToastType_Warning,
-  Error = ImGuiToastType_Error,
-  Info = ImGuiToastType_Info
 };
 /**
 * Enum for selection.

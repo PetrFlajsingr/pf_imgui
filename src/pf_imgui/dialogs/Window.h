@@ -12,6 +12,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Focusable.h>
@@ -37,7 +38,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public Collapsible,
                                public Resizable,
                                public Positionable,
-                               public Labellable {
+                               public Labellable,
+                               public Closeable {
  public:
   /**
     * Construct Window.
@@ -187,18 +189,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setIsDockable(bool dockable);
 
   /**
-    * Check if the Window can be closed with an X button in top right corner.
-    * @return
-    */
-  [[nodiscard]] bool isCloseable() const;
-
-  /**
-    * Enable/disable user window closing using an X button in top right corner.
-    * @param closeable
-    */
-  void setCloseable(bool closeable);
-
-  /**
     *
     * @return true if the top bar of the window is being rendered
     */
@@ -209,15 +199,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
     * @param visible
     */
   void setTitleBarVisible(bool visible);
-
-  /**
-    * Add a listener for close event.
-    *
-    * This event is triggered when X button is clicked.
-    * @param listener to be called on event
-    * @return Subscription for listener cancellation
-    */
-  Subscription addCloseListener(std::invocable auto listener) { return closeObservableImpl.addListener(listener); }
 
   /**
     *
@@ -257,8 +238,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
   std::optional<Size> minSizeConstraint = std::nullopt;
   std::optional<Size> maxSizeConstraint = std::nullopt;
-  bool closeable = false;
-  Observable_impl<> closeObservableImpl;
   bool isDockArea = false;
 
   bool firstPass = true;

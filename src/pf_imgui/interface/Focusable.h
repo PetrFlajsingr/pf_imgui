@@ -25,7 +25,7 @@ class PF_IMGUI_EXPORT Focusable {
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
-  Subscription addFocusListener(std::invocable<bool> auto fnc) { return observableImpl.template addListener(fnc); }
+  Subscription addFocusListener(std::invocable<bool> auto fnc) { return observableImpl.addListener(fnc); }
 
   /**
    * Check if element is currently focused.
