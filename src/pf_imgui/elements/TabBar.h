@@ -49,6 +49,7 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public 
 * @brief Par of TabBar, when clicked it switches to the selected sub-layout.
  *
  * @todo: close & selected persistence
+ * @todo: Closeable
 */
 class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  public:
