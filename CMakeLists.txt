@@ -202,7 +202,9 @@ set(SOURCES
         src/pf_imgui/elements/StatusBar.cpp
         src/pf_imgui/dialogs/Notification.cpp
         src/pf_imgui/NotificationManager.cpp
-        src/pf_imgui/interface/Closeable.cpp)
+        src/pf_imgui/interface/Closeable.cpp
+        src/pf_imgui/details/GroupBox.cpp
+        src/pf_imgui/elements/GroupBox.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -325,7 +327,9 @@ set(INCLUDES
         src/pf_imgui/elements/StatusBar.h
         src/pf_imgui/dialogs/Notification.h
         src/pf_imgui/NotificationManager.h
-        src/pf_imgui/interface/Closeable.h)
+        src/pf_imgui/interface/Closeable.h
+        src/pf_imgui/details/GroupBox.h
+        src/pf_imgui/elements/GroupBox.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

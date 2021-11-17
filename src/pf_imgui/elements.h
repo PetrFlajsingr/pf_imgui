@@ -20,6 +20,7 @@
 #include <pf_imgui/elements/DragInput.h>
 #include <pf_imgui/elements/FlameGraph.h>
 #include <pf_imgui/elements/Group.h>
+#include <pf_imgui/elements/GroupBox.h>
 #include <pf_imgui/elements/Image.h>
 #include <pf_imgui/elements/Input.h>
 #include <pf_imgui/elements/InputText.h>
