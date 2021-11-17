@@ -19,6 +19,7 @@
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/DragInput.h>
 #include <pf_imgui/elements/FlameGraph.h>
+#include <pf_imgui/elements/Gizmo3D.h>
 #include <pf_imgui/elements/Group.h>
 #include <pf_imgui/elements/GroupBox.h>
 #include <pf_imgui/elements/Image.h>
