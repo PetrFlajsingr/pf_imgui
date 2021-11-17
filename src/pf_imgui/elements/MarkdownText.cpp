@@ -20,13 +20,13 @@ void MarkdownText::renderImpl() {
 }
 
 void MarkdownText::loadHeaderFonts() {
-  if (FontData.fontH1 == nullptr) {
-    FontData.fontH1 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH1->Scale = 1.5f;
-    FontData.fontH2 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH2->Scale = 1.30f;
-    FontData.fontH3 = ImGui::GetIO().Fonts->AddFontDefault();
-    FontData.fontH3->Scale = 1.15f;
+  if (details::DefaultFontData.fontH1 == nullptr) {
+    details::DefaultFontData.fontH1 = ImGui::GetIO().Fonts->AddFontDefault();
+    details::DefaultFontData.fontH1->Scale = 1.5f;
+    details::DefaultFontData.fontH2 = ImGui::GetIO().Fonts->AddFontDefault();
+    details::DefaultFontData.fontH2->Scale = 1.30f;
+    details::DefaultFontData.fontH3 = ImGui::GetIO().Fonts->AddFontDefault();
+    details::DefaultFontData.fontH3->Scale = 1.15f;
     imGuiInterface.updateFonts();
   }
 }
@@ -41,9 +41,9 @@ void MarkdownText::configure() {
   markdownConfig.tooltipCallback = nullptr;
   markdownConfig.imageCallback = MarkdownImageCallback;
   // TODO: markdownConfig.linkIcon =             ICON_FA_LINK;
-  markdownConfig.headingFormats[0] = {FontData.fontH1, true};
-  markdownConfig.headingFormats[1] = {FontData.fontH2, true};
-  markdownConfig.headingFormats[2] = {FontData.fontH3, false};
+  markdownConfig.headingFormats[0] = {details::DefaultFontData.fontH1, true};
+  markdownConfig.headingFormats[1] = {details::DefaultFontData.fontH2, true};
+  markdownConfig.headingFormats[2] = {details::DefaultFontData.fontH3, false};
   markdownConfig.userData = this;
   markdownConfig.formatCallback = MarkdownFormatCallback;
 }
@@ -100,12 +100,12 @@ ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLink
 void MarkdownText::setImageLoader(ImageLoader imageLoader) { loadImage = imageLoader; }
 /* TODO
 void MarkdownText::SetFont(ImFont *font, ImGuiInterface &imGuiInterface) {
-  FontData.fontH1 = font;
-  FontData.fontH1->Scale = 1.5f;
-  FontData.fontH2 = font;
-  FontData.fontH2->Scale = 1.30f;
-  FontData.fontH3 = font;
-  FontData.fontH3->Scale = 1.15f;
+  details::DefaultFontData.fontH1 = font;
+  details::DefaultFontData.fontH1->Scale = 1.5f;
+  details::DefaultFontData.fontH2 = font;
+  details::DefaultFontData.fontH2->Scale = 1.30f;
+  details::DefaultFontData.fontH3 = font;
+  details::DefaultFontData.fontH3->Scale = 1.15f;
   imGuiInterface.updateFonts();
 }*/
 

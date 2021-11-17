@@ -11,6 +11,14 @@
 #include <pf_imgui/interface/ItemElement.h>
 
 namespace pf::ui::ig {
+namespace details {
+struct FontData {
+  ImFont *fontH1 = nullptr;
+  ImFont *fontH2 = nullptr;
+  ImFont *fontH3 = nullptr;
+};
+static inline FontData DefaultFontData;
+}
 
 /**
  * @brief Markdown text render area.
@@ -85,12 +93,6 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   static void MarkdownFormatCallback(const ImGui::MarkdownFormatInfo &markdownFormatInfo, bool start);
   static void MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data);
   static ImGui::MarkdownImageData MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data);
-
-  static struct FontData {
-    ImFont *fontH1 = nullptr;
-    ImFont *fontH2 = nullptr;
-    ImFont *fontH3 = nullptr;
-  } FontData;
 
   ImGui::MarkdownConfig markdownConfig;
   ImGuiInterface &imGuiInterface;

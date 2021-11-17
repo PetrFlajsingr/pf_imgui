@@ -596,7 +596,6 @@ inline void Markdown( const char* markdown_, size_t markdownLength_, const Markd
         }
       }
     }
-
     // Test to see if we have a link
     switch( link.state )
     {
@@ -688,6 +687,11 @@ inline void Markdown( const char* markdown_, size_t markdownLength_, const Markd
         }
     }
 
+
+
+#ifdef _MSC_VER
+#pragma warning( disable : 4468 )
+#endif
     // Test to see if we have emphasis styling
     switch( em.state )
     {
@@ -782,6 +786,9 @@ inline void Markdown( const char* markdown_, size_t markdownLength_, const Markd
         break;
     }
 
+#ifdef _MSC_VER
+#pragma warning( default : 4468 )
+#endif
     // handle end of line (render)
     if( c == '\n' )
     {
