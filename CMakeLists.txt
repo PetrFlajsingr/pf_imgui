@@ -186,10 +186,7 @@ set(SOURCES
         src/include/imgui/imgui_tables.cpp
         src/include/imgui/imgui_demo.cpp
         src/include/DearWidgets/dear_widgets.cpp
-        src/include/ImGuizmo/ImCurveEdit.cpp
-        src/include/ImGuizmo/ImGradient.cpp
-        src/include/ImGuizmo/ImGuizmo.cpp
-        src/include/ImGuizmo/ImSequencer.cpp
+        src/include/imGuIZMO.quat/imGuIZMOquat.cpp
         src/pf_imgui/interface/DragNDrop.cpp
         src/pf_imgui/elements/MenuItems.cpp
         src/pf_imgui/elements/PopupMenu.cpp
@@ -303,11 +300,11 @@ set(INCLUDES
         src/pf_imgui/elements/Slider3D.h
         src/pf_imgui/elements/Bullet.h
         src/pf_imgui/interface/DragNDrop.h
-        src/include/ImGuizmo/ImCurveEdit.h
-        src/include/ImGuizmo/ImGradient.h
-        src/include/ImGuizmo/ImGuizmo.h
-        src/include/ImGuizmo/ImSequencer.h
-        src/include/ImGuizmo/ImZoomSlider.h
+        src/include/imGuIZMO.quat/imGuIZMOquat.h
+        src/include/imGuIZMO.quat/vgConfig.h
+        src/include/imGuIZMO.quat/vGizmo.h
+        src/include/imGuIZMO.quat/vGizmoMath.h
+        src/include/imGuIZMO.quat/vgMath.h
         src/pf_imgui/elements/VerticalSlider.h
         src/pf_imgui/elements/CustomListbox.h
         src/pf_imgui/elements/CustomCombobox.h
@@ -367,7 +364,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileFlameGraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_markdown>)
-target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuizmo>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imGuIZMO.quat>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFlamegraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_memory_editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgInspect>)
