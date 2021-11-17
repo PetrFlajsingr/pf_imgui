@@ -61,7 +61,7 @@ PF_IMGUI_EXPORT T deserializeGlmVec(const toml::array &arr) {
  */
 template<typename T>
 PF_IMGUI_EXPORT std::optional<T> safeDeserializeGlmVec(const toml::array &arr) {
-  if (T::length() != arr.size()) { return std::nullopt; }
+  if (static_cast<std::size_t>(T::length()) != arr.size()) { return std::nullopt; }
   auto result = T{};
   for (auto i : std::views::iota(0, T::length())) {
     if constexpr (std::is_floating_point_v<typename T::value_type>) {

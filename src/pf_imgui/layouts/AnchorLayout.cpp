@@ -31,7 +31,7 @@ void AnchorLayout::setChildPosition(const std::string &childName, ImVec2 positio
     child.value()->positionable->setPosition(position);
   } else {
 #ifndef _MSC_VER// TODO: MSVC internal error
-    throw IdNotFoundException("Child not found: {}", name);
+    throw IdNotFoundException("Child not found: {}", childName);
 #endif
   }
 }
