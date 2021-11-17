@@ -201,7 +201,8 @@ set(SOURCES
         src/pf_imgui/NotificationManager.cpp
         src/pf_imgui/interface/Closeable.cpp
         src/pf_imgui/details/GroupBox.cpp
-        src/pf_imgui/elements/GroupBox.cpp)
+        src/pf_imgui/elements/GroupBox.cpp
+        )
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -326,7 +327,8 @@ set(INCLUDES
         src/pf_imgui/NotificationManager.h
         src/pf_imgui/interface/Closeable.h
         src/pf_imgui/details/GroupBox.h
-        src/pf_imgui/elements/GroupBox.h)
+        src/pf_imgui/elements/GroupBox.h
+        src/pf_imgui/elements/Gizmo3D.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
