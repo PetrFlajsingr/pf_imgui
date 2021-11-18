@@ -16,6 +16,10 @@
 #pragma warning( disable : 4244 )
 #pragma warning( disable : 4305 )
 #endif
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wparentheses"
+#endif
 ImVector<vec3> imguiGizmo::sphereVtx;
 ImVector<int>  imguiGizmo::sphereTess;
 ImVector<vec3> imguiGizmo::arrowVtx[4];
@@ -1043,6 +1047,9 @@ void imguiGizmo::buildCylinder(const float x0, const float x1, const float radiu
 }
 
 
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
 
 #ifdef _MSC_VER
 #pragma warning( default : 4244 )

@@ -19,6 +19,11 @@
 #pragma warning( disable : 4458 )
 #endif
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wreorder"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 #ifdef VGM_USES_TEMPLATE
     #define VGIZMO_BASE_CLASS virtualGizmoBaseClass<T>
     #define imGuIZMO_BASE_CLASS virtualGizmoBaseClass<float>
@@ -573,4 +578,8 @@ private:
 #ifdef _MSC_VER
 #pragma warning( default : 4100 )
 #pragma warning( default : 4458 )
+#endif
+
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
 #endif
