@@ -140,7 +140,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     assert(index < items.size());
     if (index != selectedItemIndex) {
       if (selectedItemIndex.has_value()) { filteredItems[*selectedItemIndex]->second->setValue(false); }
-      selectedItemIndex = static_cast<int>(index);
+      selectedItemIndex = index;
       filteredItems[*selectedItemIndex]->second->setValue(true);
       ValueObservable<T>::setValueInner(filteredItems[index]->first);
       ValueObservable<T>::notifyValueChanged();
@@ -198,7 +198,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   }
 
  private:
-  std::optional<int> selectedItemIndex = std::nullopt;
+  std::optional<std::size_t> selectedItemIndex = std::nullopt;
 };
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class Listbox<std::string>;
