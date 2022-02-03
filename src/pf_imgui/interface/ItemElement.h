@@ -18,7 +18,7 @@
 #include <string>
 
 namespace pf::ui::ig {
-
+// TODO: move position struct somewhere else and use it here for mouse pos
 /**
  * @brief Interface for elements, which are 'leaves' in the UI tree.
  *
