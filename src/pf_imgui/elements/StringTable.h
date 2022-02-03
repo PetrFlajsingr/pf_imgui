@@ -18,6 +18,7 @@
 
 namespace pf::ui::ig {
 
+// TODO: delete this and rewrite it like a normal person
 /**
  * @brief Statically sized row for StringTable.
  */
