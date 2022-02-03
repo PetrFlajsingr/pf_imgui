@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.17)
 
 include("cmake/HunterGate.cmake")
 HunterGate(
-        URL "https://github.com/cpp-pm/hunter/archive/v0.23.283.tar.gz"
-        SHA1 "f445fbb4716e5485e83f6acf110b51d3b8916b2c"
+        URL "https://github.com/cpp-pm/hunter/archive/v0.23.321.tar.gz"
+        SHA1 "5e53cbb0429037ea8e2592bfd92704b8ff3ab492"
 )
 
 project(pf_imgui
@@ -35,9 +35,6 @@ option(ENABLE_STYLES "enable style settings for each element" OFF)
 if (ENABLE_STYLES)
     add_compile_definitions(PF_IMGUI_ENABLE_STYLES)
 endif ()
-
-
-set(CMAKE_CXX_STANDARD 20)
 
 if (MSVC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.29.30129 AND CMAKE_VERSION VERSION_GREATER 3.20.3)
     set(CMAKE_CXX_STANDARD 23) # /std:c++latest - unlocks the non stable cpp20 features. For new 16.11 versions
