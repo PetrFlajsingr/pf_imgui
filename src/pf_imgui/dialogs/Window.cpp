@@ -12,7 +12,7 @@ namespace pf::ui::ig {
 
 Window::Window(std::string name, std::string label, AllowCollapse allowCollapse, Persistent persistent)
     : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
-      Positionable(ImVec2{-1, -1}), Labellable(std::move(label)) {}
+      Positionable(Position{-1, -1}), Labellable(std::move(label)) {}
 
 Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
@@ -45,7 +45,7 @@ void Window::renderImpl() {
       setHovered(ImGui::IsWindowHovered());
       Collapsible::setCollapsed(ImGui::IsWindowCollapsed());
       updateFocused(ImGui::IsWindowFocused());
-      updatePosition(ImGui::GetWindowPos());
+      updatePosition(Position{ImGui::GetWindowPos()});
       if (!isCollapsed()) {
         if (hasMenuBar()) { menuBar->render(); }
         std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
@@ -98,8 +98,8 @@ void Window::setFocus() {
   Focusable::setFocus();
 }
 
-void Window::setPosition(ImVec2 pos) {
-  ImGui::SetWindowPos(getLabel().c_str(), pos);
+void Window::setPosition(Position pos) {
+  ImGui::SetWindowPos(getLabel().c_str(), pos.asImVec());
   Positionable::setPosition(pos);
 }
 

@@ -28,13 +28,13 @@ void AbsoluteLayout::renderImpl() {
     if (renderCollapseButton()) {
       std::ranges::for_each(children, [](auto &childPair) {
         auto &[child, positionable] = childPair;
-        ImGui::SetCursorPos(positionable->getPosition());
+        ImGui::SetCursorPos(positionable->getPosition().asImVec());
         child->render();
       });
     }
   }
 }
-void AbsoluteLayout::setChildPosition(const std::string &childName, ImVec2 position) {
+void AbsoluteLayout::setChildPosition(const std::string &childName, Position position) {
   if (auto child = findIf(children | ranges::views::addressof,
                           [childName](auto child) { return child->first->getName() == childName; });
       child.has_value()) {

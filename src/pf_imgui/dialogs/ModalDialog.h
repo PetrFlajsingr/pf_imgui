@@ -55,7 +55,7 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
   [[nodiscard]] bool isClosed() const;
 
   void setSize(const Size &newSize) override;
-  void setPosition(ImVec2 pos) override;
+  void setPosition(Position pos) override;
   /**
    * Set font for ModalDialog and all elements inside - except for those that have their own font.
    * @param fontPtr new font

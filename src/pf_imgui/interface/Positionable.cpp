@@ -6,18 +6,28 @@
 
 namespace pf::ui::ig {
 
-Positionable::Positionable(const ImVec2 &position) : position(position) {}
+Position::Position(float x, float y) : x(x), y(y) {}
 
-ImVec2 Positionable::getPosition() const { return position; }
+Position::Position(ImVec2 pos) : x(pos.x), y(pos.y) {}
 
-void Positionable::setPosition(ImVec2 pos) {
+Position Position::LeftTop() { return {0.f, 0.f}; }
+
+ImVec2 Position::asImVec() const { return {x, y}; }
+
+Position Position::moveDelta(float deltaX, float deltaY) const { return {x + deltaX, y + deltaY}; }
+
+Positionable::Positionable(const Position &position) : position(position) {}
+
+Position Positionable::getPosition() const { return position; }
+
+void Positionable::setPosition(Position pos) {
   if (pos.x != position.x || pos.y != position.y) {
     position = pos;
     notifyPositionChanged(position);
   }
 }
-void Positionable::updatePosition(ImVec2 pos) { position = pos; }
+void Positionable::updatePosition(Position pos) { position = pos; }
 
-void Positionable::notifyPositionChanged(ImVec2 pos) { observableImpl.notify(pos); }
+void Positionable::notifyPositionChanged(Position pos) { observableImpl.notify(pos); }
 
 }// namespace pf::ui::ig

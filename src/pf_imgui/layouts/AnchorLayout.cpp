@@ -24,7 +24,7 @@ std::vector<Renderable *> AnchorLayout::getRenderables() {
       | ranges::to_vector;
 }
 
-void AnchorLayout::setChildPosition(const std::string &childName, ImVec2 position) {
+void AnchorLayout::setChildPosition(const std::string &childName, Position position) {
   if (auto child = findIf(children | ranges::views::addressof,
                           [childName](auto child) { return child->element->getName() == childName; });
       child.has_value()) {
@@ -52,12 +52,12 @@ void AnchorLayout::setSize(const Size &s) {
     if (anchorFlags.is(Anchor::Left)) {
       if (anchorFlags.is(Anchor::Right)) { addWidth(deltaWidth); }
     } else if (anchorFlags.is(Anchor::Right)) {
-      positionable->setPosition(positionable->getPosition() + ImVec2{deltaWidth, 0});
+      positionable->setPosition(positionable->getPosition().moveDelta(deltaWidth, 0));
     }
     if (anchorFlags.is(Anchor::Top)) {
       if (anchorFlags.is(Anchor::Bottom)) { addHeight(deltaHeight); }
     } else if (anchorFlags.is(Anchor::Bottom)) {
-      positionable->setPosition(positionable->getPosition() + ImVec2{0, deltaHeight});
+      positionable->setPosition(positionable->getPosition().moveDelta(0, deltaHeight));
     }
   });
   Resizable::setSize(s);
@@ -73,7 +73,7 @@ void AnchorLayout::renderImpl() {
     if (renderCollapseButton()) {
       std::ranges::for_each(children, [](auto &childData) {
         auto &[child, positionable, anchor, _1, _2] = childData;
-        ImGui::SetCursorPos(positionable->getPosition());
+        ImGui::SetCursorPos(positionable->getPosition().asImVec());
         child->render();
       });
     }

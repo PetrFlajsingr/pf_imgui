@@ -135,7 +135,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
    * @param position new position
    * @throws IdNotFoundException when the child is not present in the layout
    */
-  void setChildPosition(const std::string &childName, ImVec2 position);
+  void setChildPosition(const std::string &childName, Position position);
 
   std::vector<Renderable *> getRenderables() override;
 

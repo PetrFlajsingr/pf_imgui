@@ -13,6 +13,23 @@
 
 namespace pf::ui::ig {
 
+struct Position {
+  Position() = default;
+  Position(float x, float y);
+  explicit Position(ImVec2 pos);
+
+  [[nodiscard]] static Position LeftTop();
+
+  [[nodiscard]] Position moveDelta(float deltaX, float deltaY) const;
+
+  float x;
+  float y;
+
+  auto operator<=>(const Position &) const = default;
+
+  [[nodiscard]] ImVec2 asImVec() const;
+};
+
 /**
  * @brief Interface for positionable elements
  *
@@ -24,7 +41,7 @@ class Positionable {
    * Construct Positionable with starting position.
    * @param position starting position
    */
-  explicit Positionable(const ImVec2 &position);
+  explicit Positionable(const Position &position);
 
   /**
    * Add a listener, which is called every time the elements' position is changed.
@@ -32,20 +49,20 @@ class Positionable {
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
-  Subscription addPositionListener(std::invocable<ImVec2> auto listener) {
-    return observableImpl.template addListener(listener);
+  Subscription addPositionListener(std::invocable<Position> auto listener) {
+    return observableImpl.addListener(listener);
   }
 
   /**
    * Get current position.
    * @return current position
    */
-  [[nodiscard]] ImVec2 getPosition() const;
+  [[nodiscard]] Position getPosition() const;
   /**
    * Set new position.
    * @param pos new position
    */
-  virtual void setPosition(ImVec2 pos);
+  virtual void setPosition(Position pos);
 
   virtual ~Positionable() = default;
 
@@ -54,17 +71,17 @@ class Positionable {
    * Checks if the new position is different from the current one. If it is, listeners are notified of this change.
    * @param pos new position
    */
-  void updatePosition(ImVec2 pos);
+  void updatePosition(Position pos);
 
  private:
-  ImVec2 position;
-  Observable_impl<ImVec2> observableImpl;
+  Position position;
+  Observable_impl<Position> observableImpl;
 
   /**
    * Notify listeners of position change.
    * @param pos position to used as a parameter
    */
-  void notifyPositionChanged(ImVec2 pos);
+  void notifyPositionChanged(Position pos);
 };
 }// namespace pf::ui::ig
 

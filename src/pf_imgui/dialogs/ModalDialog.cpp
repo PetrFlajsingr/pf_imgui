@@ -8,8 +8,8 @@
 
 namespace pf::ui::ig {
 ModalDialog::ModalDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label)
-    : Renderable(elementName), Labellable(label), Resizable(Size::Auto()), Positionable(ImVec2{-1, -1}), owner(parent) {
-}
+    : Renderable(elementName), Labellable(label), Resizable(Size::Auto()), Positionable(Position{-1, -1}),
+      owner(parent) {}
 
 void ModalDialog::renderImpl() {
   if (closed) {
@@ -38,8 +38,8 @@ void ModalDialog::setSize(const Size &newSize) {
   Resizable::setSize(newSize);//FIXME change this to SetNextWindowSize
   ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
 }
-void ModalDialog::setPosition(ImVec2 pos) {
-  ImGui::SetWindowPos(getLabel().c_str(), pos);
+void ModalDialog::setPosition(Position pos) {
+  ImGui::SetWindowPos(getLabel().c_str(), pos.asImVec());
   Positionable::setPosition(pos);
 }
 void ModalDialog::setFont(ImFont *fontPtr) { font = fontPtr; }

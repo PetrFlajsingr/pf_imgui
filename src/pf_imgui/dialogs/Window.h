@@ -114,7 +114,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   void setCollapsed(bool collapse) override;
 
-  void setPosition(ImVec2 pos) override;
+  void setPosition(Position pos) override;
 
   /**
     * Check if user can resize the window.

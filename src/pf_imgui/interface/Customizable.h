@@ -19,10 +19,13 @@ namespace pf::ui::ig {
 namespace details {
 template<style::ColorOf ColorType>
 using ColorOfAsImVec4 = ImVec4;
+
 template<style::ColorOf ColorType>
 using ColorOfAsOptionalImVec4 = std::optional<ColorOfAsImVec4<ColorType>>;
+
 template<style::Style Style>
 using TypeForStyle = std::conditional_t<style::isFloatStyle(Style), float, ImVec2>;
+
 template<style::Style Style>
 using OptionalTypeForStyle = std::optional<TypeForStyle<Style>>;
 
