@@ -24,7 +24,6 @@ namespace pf::ui::ig {
  * @brief A layout which positions it's children from left to right or top to bottom, based on the settings.
  *
  * All children are positioned in the way they are added or inserted.
- * @todo: allow reordering
  */
 class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
  public:

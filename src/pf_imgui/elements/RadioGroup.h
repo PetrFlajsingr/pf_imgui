@@ -25,7 +25,7 @@ namespace pf::ui::ig {
  *
  * Label of the selected button is observable.
  *
- * @todo: non-visual group - maybe just let the user place buttons as he wishes and let him add it to a ValueObservable<bool> group,
+ * @todo: non-visual group - maybe just let the user place buttons as he wishes and let them add it to a ValueObservable<bool> group,
  * where only one value can be true
  * @todo: fix this up so it can look normal
  */

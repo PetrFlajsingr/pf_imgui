@@ -33,14 +33,14 @@ class InputDialog : public ModalDialog {
    * @param modal dialog modality
    */
   InputDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
-              const std::string &message, std::invocable<std::string> auto &&onInput, std::invocable auto &&onCancel)
+              const std::string &message, std::invocable<std::string_view> auto &&onInput, std::invocable auto &&onCancel)
       : ModalDialog(parent, elementName, title), inputDone(std::forward<decltype(onInput)>(onInput)),
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
     createChild<Text>(getName() + "text", message);
     auto &input = createChild<InputText>(getName() + "input", "", "", TextInputType::MultiLine);
     auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
     btnLayout.createChild<Button>(getName() + "_button_ok", "Ok").addClickListener([this, &input] {
-      inputDone(input.getText());
+      inputDone(input.getValue());
       close();
     });
     btnLayout.createChild<Button>(getName() + "_button_cancel", "Cancel").addClickListener([this] {
@@ -50,7 +50,7 @@ class InputDialog : public ModalDialog {
   }
 
  private:
-  std::function<void(std::string)> inputDone;
+  std::function<void(std::string_view)> inputDone;
   std::function<void()> cancelClicked;
 };
 

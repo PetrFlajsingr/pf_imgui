@@ -15,7 +15,7 @@
 #include <pf_imgui/styles/enums.h>
 
 namespace pf::ui::ig {
-
+// TODO: change colors to glm::vec4
 namespace details {
 template<style::ColorOf ColorType>
 using ColorOfAsImVec4 = ImVec4;

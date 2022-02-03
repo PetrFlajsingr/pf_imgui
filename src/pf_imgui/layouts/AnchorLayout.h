@@ -23,7 +23,6 @@ namespace pf::ui::ig {
 /**
  * @brief Layout containing elements which can be placed in custom location and their size is changed based on anchors.
  *
- * @todo: combine this with absolute layout
  * @todo: layouts can't see they were resized
  */
 class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {

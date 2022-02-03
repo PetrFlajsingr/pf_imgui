@@ -240,24 +240,24 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
     dialogs.emplace_back(std::move(dialog));
   }
 
- ///**
- // * Show a temporary notification with custom text.
- // * @param type type of notification - different icons
- // * @param message message to show to the user
- // * @param dismissTime after this time the notification will disappear
- // */
- //void showNotification(NotificationType type, std::string_view message,
- //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
+  ///**
+  // * Show a temporary notification with custom text.
+  // * @param type type of notification - different icons
+  // * @param message message to show to the user
+  // * @param dismissTime after this time the notification will disappear
+  // */
+  //void showNotification(NotificationType type, std::string_view message,
+  //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
 
- ///**
- // * Show a temporary notification with custom text.
- // * @param type type of notification - different icons
- // * @param title custom notification title
- // * @param message message to show to the user
- // * @param dismissTime after this time the notification will disappear
- // */
- //void showNotification(NotificationType type, std::string_view title, std::string_view message,
- //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
+  ///**
+  // * Show a temporary notification with custom text.
+  // * @param type type of notification - different icons
+  // * @param title custom notification title
+  // * @param message message to show to the user
+  // * @param dismissTime after this time the notification will disappear
+  // */
+  //void showNotification(NotificationType type, std::string_view title, std::string_view message,
+  //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
 
   /**
    * Create a group for drag and drop elements.

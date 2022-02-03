@@ -11,7 +11,6 @@
 
 namespace pf::ui::ig::style {
 
-// TODO: add more to proper elements
 enum class ColorOf : int {
   Text = ImGuiCol_Text,
   TextDisabled = ImGuiCol_TextDisabled,

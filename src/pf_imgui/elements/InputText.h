@@ -36,17 +36,18 @@ enum class TextTrigger { Character, Enter };
  *
  * Typical text edit.
  * @todo: hint
- * @todo: decouple from Text, styles
  * @todo simplify constructor
  */
-class PF_IMGUI_EXPORT InputText : public Text,
+class PF_IMGUI_EXPORT InputText : public ItemElement,
                                   public Labellable,
                                   public ValueObservable<std::string_view>,
-                                  public Savable /*,
+                                  public Savable,
+                                  public DragSource<std::string>,
+                                  public DropTarget<std::string>,
                                   public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
                                                            style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
                                                            style::ColorOf::FrameBackgroundActive, style::ColorOf::TextSelectedBackground>,
-                                  public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> */
+                                  public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>
 {
  public:
   /**
@@ -98,9 +99,10 @@ class PF_IMGUI_EXPORT InputText : public Text,
 
   void renderImpl() override;
 
-  void setTextInner(std::string txt) override;
+  void setTextInner(std::string txt);
 
  private:
+  std::string text;
   std::unique_ptr<char[]> buffer;
   std::size_t bufferLength;
   TextInputType inputType;
