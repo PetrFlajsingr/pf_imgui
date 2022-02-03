@@ -31,6 +31,7 @@ void InputText::renderImpl() {
     valueChanged = ImGui::InputTextMultiline(getLabel().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
   }
   if (valueChanged && strcmp(buffer.get(), text.c_str()) != 0) {
+    text = buffer.get();
     setTextInner(buffer.get());
     setValueInner(text);
     notifyValueChanged();
