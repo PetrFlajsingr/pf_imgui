@@ -239,7 +239,6 @@ set(INCLUDES
         src/pf_imgui/elements/Text.h
         src/pf_imgui/elements/Tree.h
         src/pf_imgui/elements/Table.h
-        src/pf_imgui/elements/StringTable.h
         src/pf_imgui/elements/Selectable.h
         src/pf_imgui/elements/MarkdownText.h
         src/pf_imgui/dialogs/Window.h

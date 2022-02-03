@@ -89,41 +89,27 @@ enum class ShowBorder { Yes, No };
 /**
 * Enum for selection of which borders to render in a table. Functions as a bit mask.
 */
-// clang-format off
-enum class TableBorder : uint16_t {
- None =            0x00,
- HorizontalInner = 0x01,
- VerticalInner =   0x02,
- Inner =           0x03,
- HorizontalOuter = 0x04,
- VerticalOuter =   0x08,
- Outer =           0x0C,
- Full =            0x0F
+enum class TableBorder : int {
+  None = 0x00,
+  HorizontalInner = ImGuiTableFlags_BordersInnerH,
+  VerticalInner = ImGuiTableFlags_BordersInnerV,
+  Inner = ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_BordersInnerV,
+  HorizontalOuter = ImGuiTableFlags_BordersOuterH,
+  VerticalOuter = ImGuiTableFlags_BordersOuterV,
+  Outer = ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_BordersOuterV,
+  Full = ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_BordersOuterV
 };
-// clang-format on
-
 /**
-* Create ImGui flags for table API.
-* @param tableBorder type of rendered border
-* @param resizable resizable table
-* @param reorderable table may be ordered by moving header
-* @param sortable table may be sorted by clicking header
-* @param hideable
-* @return ImGUi flags
+* Enum for options of interaction with a table
 */
-inline ImGuiTableFlags createFlags(const Flags<TableBorder> &tableBorder, bool resizable, bool reorderable,
-                                   bool sortable, bool hideable) {
-  auto result = ImGuiTableFlags{};
-  if (tableBorder.is(TableBorder::HorizontalInner)) { result |= ImGuiTableFlags_BordersInnerH; }
-  if (tableBorder.is(TableBorder::VerticalInner)) { result |= ImGuiTableFlags_BordersInnerV; }
-  if (tableBorder.is(TableBorder::HorizontalOuter)) { result |= ImGuiTableFlags_BordersOuterH; }
-  if (tableBorder.is(TableBorder::VerticalOuter)) { result |= ImGuiTableFlags_BordersOuterV; }
-  if (resizable) { result |= ImGuiTableFlags_Resizable; }
-  if (reorderable) { result |= ImGuiTableFlags_Reorderable; }
-  if (sortable) { result |= ImGuiTableFlags_Sortable; }
-  if (hideable) { result |= ImGuiTableFlags_Hideable; }
-  return result;
-}
+enum class TableOptions : int {
+  None = 0,
+  Resizable = ImGuiTableFlags_Resizable,
+  Reorderable = ImGuiTableFlags_Reorderable,
+  Sortable = ImGuiTableFlags_Sortable,
+  Hideable = ImGuiTableFlags_Hideable
+};
+
 /**
 * Enum for stretch type of StretchLayout.
 */
