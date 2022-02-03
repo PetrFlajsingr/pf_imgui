@@ -27,7 +27,7 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    */
   class Stack : public ElementContainer {
    public:
-    Stack(StackedLayout &parent);
+    explicit Stack(StackedLayout &parent);
     void setActive();
 
    private:

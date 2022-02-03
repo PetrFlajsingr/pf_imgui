@@ -38,14 +38,14 @@ std::optional<ImFont *> FontManager::fontByName(const std::string &name) const {
 }
 
 FontBuilder FontManager::fontBuilder(const std::string &name, const std::filesystem::path &path) {
-  return FontBuilder(*this, name, path);
+  return {*this, name, path};
 }
 
 FontBuilder FontManager::fontBuilder(const std::string &name, std::vector<std::byte> data) {
-  return FontBuilder(*this, name, std::move(data));
+  return {*this, name, std::move(data)};
 }
 
-FontBuilder FontManager::fontBuilder(const std::string &name) { return FontBuilder(*this, name); }
+FontBuilder FontManager::fontBuilder(const std::string &name) { return {*this, name}; }
 
 ImFont *FontManager::addFont(FontBuilder &builder) {
   auto fontConfig = ImFontConfig{};
@@ -100,9 +100,10 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
 }
 
 SubFontBuilder::SubFontBuilder(FontBuilder &builder, std::filesystem::path ttfPath)
-    : parent(builder), source(ttfPath) {}
+    : parent(builder), source(std::move(ttfPath)) {}
 
-SubFontBuilder::SubFontBuilder(FontBuilder &builder, std::vector<std::byte> data) : parent(builder), source(data) {}
+SubFontBuilder::SubFontBuilder(FontBuilder &builder, std::vector<std::byte> data)
+    : parent(builder), source(std::move(data)) {}
 
 SubFontBuilder &SubFontBuilder::setFontSize(float size) {
   fontSize = size;

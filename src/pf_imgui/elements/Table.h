@@ -14,6 +14,7 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <range/v3/range/conversion.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
 
@@ -22,9 +23,9 @@ namespace pf::ui::ig {
 template<std::size_t ColumnCount>
 struct TableSettings {
   std::optional<std::array<std::string, ColumnCount>> header = std::nullopt;
-  Flags<TableBorder> border; /**< Type of border rendering. */
+  Flags<TableBorder> border;   /**< Type of border rendering. */
   Flags<TableOptions> options; /**< Interaction options. */
-  Size size = Size::Auto(); /**< Size of the table. */
+  Size size = Size::Auto();    /**< Size of the table. */
 };
 
 /**
