@@ -45,6 +45,7 @@
 #include <pf_imgui/elements/TabBar.h>
 #include <pf_imgui/elements/Table.h>
 #include <pf_imgui/elements/Text.h>
+#include <pf_imgui/elements/TextEditor.h>
 #include <pf_imgui/elements/Tree.h>
 #include <pf_imgui/elements/VerticalSlider.h>
 #include <pf_imgui/elements/plots.h>

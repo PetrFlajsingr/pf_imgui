@@ -196,6 +196,7 @@ set(SOURCES
         src/pf_imgui/interface/Closeable.cpp
         src/pf_imgui/details/GroupBox.cpp
         src/pf_imgui/elements/GroupBox.cpp
+        src/pf_imgui/elements/TextEditor.cpp
         )
 
 set(INCLUDES
@@ -323,6 +324,7 @@ set(INCLUDES
         src/pf_imgui/elements/GroupBox.h
         src/pf_imgui/elements/Gizmo3D.h
         src/include/ImGuiColorTextEdit/TextEditor.h
+        src/pf_imgui/elements/TextEditor.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
