@@ -180,7 +180,7 @@ set(SOURCES
         src/include/imgui/imgui_demo.cpp
         src/include/DearWidgets/dear_widgets.cpp
         src/include/imGuIZMO.quat/imGuIZMOquat.cpp
-        src/include/ImGuiColorTextEdit/TextEditor.cpp
+        src/include/ImGuiColorTextEdit/ImGuiColorTextEditor.cpp
         src/pf_imgui/interface/DragNDrop.cpp
         src/pf_imgui/elements/MenuItems.cpp
         src/pf_imgui/elements/PopupMenu.cpp
@@ -323,7 +323,7 @@ set(INCLUDES
         src/pf_imgui/details/GroupBox.h
         src/pf_imgui/elements/GroupBox.h
         src/pf_imgui/elements/Gizmo3D.h
-        src/include/ImGuiColorTextEdit/TextEditor.h
+        src/include/ImGuiColorTextEdit/ImGuiColorTextEditor.h
         src/pf_imgui/elements/TextEditor.h
         )
 

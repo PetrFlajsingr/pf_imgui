@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_TEXTEDITOR_H
 #define PF_IMGUI_TEXTEDITOR_H
 
-#include <TextEditor.h>
+#include <ImGuiColorTextEditor.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
