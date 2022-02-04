@@ -17,7 +17,7 @@ void Savable::unserialize(const toml::table &src) {
   if (persist) { unserialize_impl(src); }
 }
 
-std::optional<toml::table> Savable::serialize() {
+std::optional<toml::table> Savable::serialize() const {
   if (persist) { return serialize_impl(); }
   return std::nullopt;
 }

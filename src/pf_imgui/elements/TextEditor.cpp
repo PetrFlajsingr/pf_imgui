@@ -27,6 +27,6 @@ void TextEditor::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table TextEditor::serialize_impl() { return toml::table{{{"text", editor.GetText()}}}; }
+toml::table TextEditor::serialize_impl() const { return toml::table{{{"text", editor.GetText()}}}; }
 
 }// namespace pf::ui::ig

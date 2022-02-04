@@ -72,7 +72,7 @@ void RadioGroup::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table RadioGroup::serialize_impl() {
+toml::table RadioGroup::serialize_impl() const {
   auto result = toml::table{};
   if (selectedButtonIndex.has_value()) { result.insert_or_assign("selected", static_cast<int>(*selectedButtonIndex)); }
   return result;

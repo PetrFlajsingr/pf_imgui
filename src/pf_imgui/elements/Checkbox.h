@@ -81,7 +81,7 @@ class PF_IMGUI_EXPORT Checkbox
    */
   Type type;
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() override;
+  toml::table serialize_impl() const override;
 
   void renderImpl() override;
 };

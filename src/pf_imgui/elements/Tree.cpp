@@ -48,6 +48,6 @@ void TreeLeaf::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table TreeLeaf::serialize_impl() { return toml::table{{{"value", getValue()}}}; }
+toml::table TreeLeaf::serialize_impl() const { return toml::table{{{"value", getValue()}}}; }
 
 }// namespace pf::ui::ig

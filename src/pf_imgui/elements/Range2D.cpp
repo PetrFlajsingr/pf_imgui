@@ -51,7 +51,7 @@ void Range2D::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table Range2D::serialize_impl() {
+toml::table Range2D::serialize_impl() const {
   const auto val = getValue();
   return toml::table{{{"startValue", serializeGlmVec(val.start)}, {"endValue", serializeGlmVec(val.end)}}};
 }

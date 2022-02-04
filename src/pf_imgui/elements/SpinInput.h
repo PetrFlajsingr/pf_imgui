@@ -101,7 +101,7 @@ class SpinInput
     }
   }
 
-  toml::table serialize_impl() override { return toml::table{{{"value", ValueObservable<T>::getValue()}}}; }
+  toml::table serialize_impl() const override { return toml::table{{{"value", ValueObservable<T>::getValue()}}}; }
 
  private:
   T step;
