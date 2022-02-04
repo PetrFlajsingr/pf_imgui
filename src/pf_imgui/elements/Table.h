@@ -113,8 +113,7 @@ class Table : public Element, public RenderablesContainer, public Resizable {
       std::ranges::for_each(rows | ranges::views::transform(&Row::cells), [](auto &row) {
         ImGui::TableNextRow();
         std::ranges::for_each(row, [](auto &cell) {
-          ImGui::TableNextColumn();
-          cell->render();
+          if (ImGui::TableNextColumn()) { cell->render(); }
         });
       });
     }
