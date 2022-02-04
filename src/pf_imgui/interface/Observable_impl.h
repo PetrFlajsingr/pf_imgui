@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <memory>
 #include <pf_common/Subscription.h>
-#include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/_export.h>
 #include <ranges>
 #include <unordered_map>
@@ -32,10 +31,10 @@ class PF_IMGUI_EXPORT Observable_impl {
   Observable_impl &operator=(const Observable_impl &) = delete;
 
   Observable_impl(Observable_impl &&other) noexcept
-      : listeners(std::move(other.listeners)), idGenerator(std::move(other.idGenerator)) {}
+      : listeners(std::move(other.listeners)), idCounter(idCounter) {}
   Observable_impl &operator=(Observable_impl &&rhs) noexcept {
     listeners = std::move(rhs.listeners);
-    idGenerator = std::move(rhs.idGenerator);
+    idCounter = rhs.idCounter;
     return *this;
   }
 
@@ -68,10 +67,10 @@ class PF_IMGUI_EXPORT Observable_impl {
  private:
   using ListenerId = uint32_t;
   using Callback = std::function<void(const Args &...)>;
-  ListenerId generateListenerId() { return getNext(idGenerator); }
+  ListenerId generateListenerId() { return idCounter++; }
 
   std::unordered_map<ListenerId, Callback> listeners{};
-  cppcoro::generator<ListenerId> idGenerator = iota<ListenerId>();
+  ListenerId idCounter{};
   std::shared_ptr<bool> exists = std::make_shared<bool>(true);
 };
 }// namespace pf::ui::ig

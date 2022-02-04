@@ -8,12 +8,11 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_UNIQUE_ID_H
 #define PF_IMGUI_SRC_PF_IMGUI_UNIQUE_ID_H
 
-#include <pf_common/coroutines/Sequence.h>
 #include <random>
 
 namespace pf::ui::ig {
 namespace details {
-static inline auto generator = iota<std::size_t>();
+static inline std::size_t uniqueIdCounter{};
 
 /**
  * Generate random string of length. Statically seeded.
@@ -40,7 +39,7 @@ inline std::string random_string(std::size_t length) {
  * @return ID
  */
 inline std::string uniqueId(std::size_t length = 10) {
-  return details::random_string(length) + std::to_string(getNext(details::generator));
+  return details::random_string(length) + std::to_string(details::uniqueIdCounter++);
 }
 }// namespace pf::ui::ig
 

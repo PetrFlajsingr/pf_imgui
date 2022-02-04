@@ -35,10 +35,10 @@ void Notification::renderImpl() {
       RAII endFont{[&] {
         if (iconFont != nullptr) { ImGui::PopFont(); }
       }};
-      ImGui::TextColored(*iconColor, icon);
+      ImGui::TextColored(*iconColor, "%s", icon);
       ImGui::SameLine();
     }
-    ImGui::Text(getLabel().c_str());
+    ImGui::Text("%s", getLabel().c_str());
     /*if (was_title_rendered && !NOTIFY_NULL_OR_EMPTY(content)) {
         SetCursorPosY(GetCursorPosY() + 5.f);// Must be a better way to do this!!!!
       }*/

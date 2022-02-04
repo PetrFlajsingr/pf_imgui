@@ -9,7 +9,6 @@
 
 #include <imgui.h>
 #include <memory>
-#include <pf_common/coroutines/Sequence.h>
 #include <pf_imgui/FontManager.h>
 #include <pf_imgui/NotificationManager.h>
 #include <pf_imgui/_export.h>
@@ -81,7 +80,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void createMsgDlg(const std::string &title, const std::string &message, Flags<ButtonTypes> buttons,
                     std::invocable<ButtonTypes> auto &&onDialogDone) {
     using namespace std::string_literals;
-    auto dialog = std::make_unique<MessageDialog>(*this, "MsgDialog"s + std::to_string(getNext(idGen)), title, message,
+    auto dialog = std::make_unique<MessageDialog>(*this, "MsgDialog"s + std::to_string(idCounter++), title, message,
                                                   buttons, std::forward<decltype(onDialogDone)>(onDialogDone));
     dialogs.emplace_back(std::move(dialog));
   }
@@ -209,7 +208,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
                  Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
                  Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
     using namespace std::string_literals;
-    fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, extSettings, onSelect, onCancel,
+    fileDialogs.emplace_back("FileDialog"s + std::to_string(idCounter++), caption, extSettings, onSelect, onCancel,
                              size, startPath, startName, modality, maxSelectedFiles);
   }
 
@@ -229,7 +228,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
                 std::invocable auto onCancel, Size size = {200, 150}, std::filesystem::path startPath = ".",
                 std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1) {
     using namespace std::string_literals;
-    fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,
+    fileDialogs.emplace_back("FileDialog"s + std::to_string(idCounter++), caption, onSelect, onCancel, size,
                              startPath, startName, modality, maxSelectedDirs);
   }
 
@@ -256,7 +255,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void openInputDialog(const std::string &title, const std::string &message, std::invocable<std::string> auto &&onInput,
                        std::invocable auto &&onCancel) {
     using namespace std::string_literals;
-    auto dialog = std::make_unique<InputDialog>(*this, "InputDialog"s + std::to_string(getNext(idGen)), title, message,
+    auto dialog = std::make_unique<InputDialog>(*this, "InputDialog"s + std::to_string(idCounter++), title, message,
                                                 std::forward<decltype(onInput)>(onInput),
                                                 std::forward<decltype(onCancel)>(onCancel));
     dialogs.emplace_back(std::move(dialog));
@@ -298,20 +297,20 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   friend class ModalDialog;
   friend class FontManager;
 
-  std::vector<std::unique_ptr<ModalDialog>> dialogs;
+  std::vector<std::unique_ptr<ModalDialog>> dialogs{};
   static ImGuiIO &baseInit(ImGuiConfigFlags flags);
   ImGuiIO &io;
   FontManager fontManager;
   NotificationManager notificationManager;
-  std::vector<FileDialog> fileDialogs;
-  cppcoro::generator<std::size_t> idGen = iota<std::size_t>();
+  std::vector<FileDialog> fileDialogs{};
+  std::size_t idCounter{};
 
-  std::vector<std::unique_ptr<Window>> windows;
+  std::vector<std::unique_ptr<Window>> windows{};
   std::unique_ptr<AppStatusBar> statusBar = nullptr;
 
   toml::table config;
 
-  std::vector<DragNDropGroup> dragNDropGroups;
+  std::vector<DragNDropGroup> dragNDropGroups{};
 
   void removeDialog(ModalDialog &dialog);
 };

@@ -51,7 +51,7 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
   friend class Tree<TreeType::Advanced>;
 
  public:
-  TreeRecord(const std::string &elementName, const std::string &label, Flags<ImGuiTreeNodeFlags_> defaultFlags);
+  TreeRecord(const std::string &elementName, const std::string &label, const Flags<ImGuiTreeNodeFlags_>& defaultFlags);
 
  protected:
   Flags<ImGuiTreeNodeFlags_> flags{};

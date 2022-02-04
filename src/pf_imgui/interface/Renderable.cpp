@@ -4,9 +4,7 @@
 
 #include "Renderable.h"
 #include <imgui.h>
-#include <imgui_internal.h>
 #include <pf_common/RAII.h>
-
 #include <utility>
 
 namespace pf::ui::ig {

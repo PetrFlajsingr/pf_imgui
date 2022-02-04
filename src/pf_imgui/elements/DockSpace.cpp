@@ -3,7 +3,6 @@
 //
 
 #include "DockSpace.h"
-#include <imgui_internal.h>
 #include <pf_common/RAII.h>
 
 namespace pf::ui::ig {

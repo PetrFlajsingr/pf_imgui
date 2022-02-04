@@ -3,7 +3,6 @@
 //
 
 #include "Separator.h"
-#include <pf_common/exceptions/StackTraceException.h>
 
 pf::ui::ig::Separator::Separator(const std::string &name) : Element(name) {}
 
