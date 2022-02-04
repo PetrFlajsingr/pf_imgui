@@ -32,14 +32,12 @@ void Window::renderImpl() {
       if (getPosition().x != -1 && getPosition().y != -1) { setPosition(getPosition()); }
     }
     if (getEnabled() == Enabled::No) {
-      ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-      ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+      ImGui::BeginDisabled();
     }
     {
       auto raiiEnabled = pf::RAII([this] {
         if (getEnabled() == Enabled::No) {
-          ImGui::PopItemFlag();
-          ImGui::PopStyleVar();
+          ImGui::EndDisabled();
         }
       });
       setHovered(ImGui::IsWindowHovered());
