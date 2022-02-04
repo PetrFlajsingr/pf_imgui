@@ -65,10 +65,6 @@ void MarkdownText::MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data) {
       ->onLinkClicked(std::string_view(data.link, data.linkLength), data.isImage);
 }
 
-void MarkdownText::setOnLinkClicked(const std::function<void(std::string_view, bool)> &linkClicked) {
-  onLinkClicked = linkClicked;
-}
-
 ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data) {
   auto result = ImGui::MarkdownImageData{};
   result.useLinkCallback = false;

@@ -111,6 +111,13 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @return reference to the searched for Window or nullopt if no such window exists
    */
   std::optional<std::reference_wrapper<Window>> windowByName(const std::string &windowName);
+  /**
+   * Find Window by its ID.
+   * @param windowName ID of the window
+   * @throws IdNotFoundException when the Window of given ID is not present
+   * @return reference to the searched for Window or nullopt if no such window exists
+   */
+  std::optional<std::reference_wrapper<const Window>> windowByName(const std::string &windowName) const;
 
   /**
    * Get all windows present in the UI.
@@ -196,10 +203,11 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param modality modality of the dialog
    * @param maxSelectedFiles maximum amount of selected files
    */
-  [[deprecated]] void openFileDialog(const std::string &caption, const std::vector<FileExtensionSettings> &extSettings,
-                      std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
-                      Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
-                      Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
+  [[deprecated("Use buildFileDialog")]] void
+  openFileDialog(const std::string &caption, const std::vector<FileExtensionSettings> &extSettings,
+                 std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
+                 Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
+                 Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, extSettings, onSelect, onCancel,
                              size, startPath, startName, modality, maxSelectedFiles);
@@ -216,16 +224,26 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param modality modality of the dialog
    * @param maxSelectedDirs maximum amount of selected directories
    */
-  [[deprecated]] void openDirDialog(const std::string &caption, std::invocable<std::vector<std::filesystem::path>> auto onSelect,
-                     std::invocable auto onCancel, Size size = {200, 150}, std::filesystem::path startPath = ".",
-                     std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1) {
+  [[deprecated("Use buildFileDialog")]] void
+  openDirDialog(const std::string &caption, std::invocable<std::vector<std::filesystem::path>> auto onSelect,
+                std::invocable auto onCancel, Size size = {200, 150}, std::filesystem::path startPath = ".",
+                std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,
                              startPath, startName, modality, maxSelectedDirs);
   }
 
+  /**
+   * Create a builder for FileDialog.
+   * @param type type of files to be selected
+   * @return builder
+   */
   [[nodiscard]] FileDialogBuilder buildFileDialog(FileDialogType type);
 
+  /**
+   * Add a separately created FileDialog, which will be destroyed upon closing.
+   * @param dialog
+   */
   void addFileDialog(FileDialog &&dialog);
 
   /**
@@ -244,25 +262,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
     dialogs.emplace_back(std::move(dialog));
   }
 
-  ///**
-  // * Show a temporary notification with custom text.
-  // * @param type type of notification - different icons
-  // * @param message message to show to the user
-  // * @param dismissTime after this time the notification will disappear
-  // */
-  //void showNotification(NotificationType type, std::string_view message,
-  //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
-
-  ///**
-  // * Show a temporary notification with custom text.
-  // * @param type type of notification - different icons
-  // * @param title custom notification title
-  // * @param message message to show to the user
-  // * @param dismissTime after this time the notification will disappear
-  // */
-  //void showNotification(NotificationType type, std::string_view title, std::string_view message,
-  //                      std::chrono::milliseconds dismissTime = std::chrono::milliseconds{NOTIFY_DEFAULT_DISMISS});
-
   /**
    * Create a group for drag and drop elements.
    * @return newly created group
@@ -275,7 +274,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   virtual void updateFonts() = 0;
 
   [[nodiscard]] FontManager &getFontManager();
+  [[nodiscard]] const FontManager &getFontManager() const;
   [[nodiscard]] NotificationManager &getNotificationManager();
+  [[nodiscard]] const NotificationManager &getNotificationManager() const;
 
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
@@ -311,7 +312,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   toml::table config;
 
   std::vector<DragNDropGroup> dragNDropGroups;
-  //std::vector<ImGuiToast> notifications;// TODO: change this so the user can create their own
 
   void removeDialog(ModalDialog &dialog);
 };

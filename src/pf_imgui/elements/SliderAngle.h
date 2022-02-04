@@ -73,7 +73,7 @@ class PF_IMGUI_EXPORT SliderAngle
  protected:
   void renderImpl() override;
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() override;
+  [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
   float minDeg;

@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT Slider2D
     }
   }
 
-  toml::table serialize_impl() override {
+  [[nodiscard]] toml::table serialize_impl() const override {
     const auto value = ValueObservable<StorageType>::getValue();
     return toml::table{{{"value", serializeGlmVec(value)}}};
   }

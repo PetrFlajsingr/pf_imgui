@@ -58,7 +58,7 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public Renderabl
    * Get all records concatenated using '\n'.
    * @return all records as one string
    */
-  [[nodiscard]] const std::string &getText() const;
+  [[nodiscard]] std::string_view getText() const;
 
   /**
    * Add new row to the memo.

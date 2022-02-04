@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-DockSpace::DockSpace(const std::string &name, const Size &s, const Flags<DockType> &dockFlags)
+DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
     : Element(name), Resizable(s), flags(*dockFlags) {}
 
 void DockSpace::render() {
@@ -16,9 +16,7 @@ void DockSpace::render() {
     auto colorSet = setColorStack();
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
-      auto raiiEnabled = RAII([] {
-        ImGui::EndDisabled();
-      });
+      auto raiiEnabled = RAII([] { ImGui::EndDisabled(); });
       renderImpl();
     } else {
       renderImpl();

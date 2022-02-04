@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 
-GroupBox::GroupBox(const std::string &name, const std::string &label, const Size &s)
+GroupBox::GroupBox(const std::string &name, const std::string &label, Size s)
     : Element(name), Labellable(label), Resizable(s) {}
 
 void GroupBox::renderImpl() {

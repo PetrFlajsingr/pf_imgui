@@ -21,6 +21,8 @@ namespace pf::ui::ig {
  * Traverse UI tree and serialize all Savable elements.
  * @param root root node of the tree
  * @return toml data containing serialized data
+ *
+ * @todo: constify this
  */
 PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Renderable &root) {
   auto result = toml::table();

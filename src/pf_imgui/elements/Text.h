@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT Text
   * Get rendered text.
   * @return text
   */
-  [[nodiscard]] const std::string &getText() const;
+  [[nodiscard]] std::string_view getText() const;
   /**
   * Set new text for rendering
   * @param text new text to set

@@ -26,7 +26,7 @@ class GroupBox : public Element, public ElementContainer, public Labellable, pub
    * @param label label rendered on the top of the groupbox
    * @param s size of the groupbox
    */
-  GroupBox(const std::string &name, const std::string &label, const Size &s);
+  GroupBox(const std::string &name, const std::string &label, Size s);
 
  protected:
   void renderImpl() override;

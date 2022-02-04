@@ -29,6 +29,8 @@ class PopupMenu : public Element, public MenuContainer {
    * Make the menu render.
    */
   void open();
+
+  [[nodiscard]] bool isOpen() const;
   /**
    * Make the menu stop rendering.
    */

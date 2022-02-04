@@ -55,6 +55,7 @@ class SpinInput
 
   [[nodiscard]] const T &getMin() const { return min; }
   void setMin(const T &minVal) { min = minVal; }
+
   [[nodiscard]] const T &getMax() const { return max; }
   void setMax(const T &maxVal) { max = maxVal; }
 
@@ -101,7 +102,9 @@ class SpinInput
     }
   }
 
-  toml::table serialize_impl() override { return toml::table{{{"value", ValueObservable<T>::getValue()}}}; }
+  [[nodiscard]] toml::table serialize_impl() const override {
+    return toml::table{{{"value", ValueObservable<T>::getValue()}}};
+  }
 
  private:
   T step;

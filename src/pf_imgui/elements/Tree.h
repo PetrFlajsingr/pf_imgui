@@ -85,7 +85,7 @@ class PF_IMGUI_EXPORT TreeLeaf
  protected:
   void renderImpl() override;
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() override;
+  [[nodiscard]] toml::table serialize_impl() const override;
 };
 
 /**
@@ -399,24 +399,24 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   std::unique_ptr<details::TreeSelectionLimiter> limiter = nullptr;
 
   template<typename F>
-  requires(std::invocable<F, TreeLeaf *, std::size_t>
-               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePreOrderImpl(details::TreeRecord &node,
-                                                                                                 F &&callable,
-                                                                                                 std::size_t depth) {
+  requires(std::invocable<F, TreeLeaf *, std::size_t> &&std::invocable<
+           F, TreeNode<treeType> *, std::size_t>) void traversePreOrderImpl(details::TreeRecord &node, F &&callable,
+                                                                            std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
       if (!callable(nodePtr, depth)) { return; }
-      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traversePreOrderImpl(record, callable, depth + 1); });
+      std::ranges::for_each(nodePtr->getTreeNodes(),
+                            [&](auto &record) { traversePreOrderImpl(record, callable, depth + 1); });
     } else if (auto leafPtr = dynamic_cast<TreeLeaf *>(&node); leafPtr != nullptr) {
       callable(leafPtr, depth);
     }
   }
   template<typename F>
-  requires(std::invocable<F, TreeLeaf *, std::size_t>
-               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePosOrderImpl(details::TreeRecord &node,
-                                                                                                 F &&callable,
-                                                                                                 std::size_t depth) {
+  requires(std::invocable<F, TreeLeaf *, std::size_t> &&std::invocable<
+           F, TreeNode<treeType> *, std::size_t>) void traversePosOrderImpl(details::TreeRecord &node, F &&callable,
+                                                                            std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
-      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traversePosOrderImpl(record, callable, depth + 1); });
+      std::ranges::for_each(nodePtr->getTreeNodes(),
+                            [&](auto &record) { traversePosOrderImpl(record, callable, depth + 1); });
       callable(nodePtr, depth);
     } else if (auto leafPtr = dynamic_cast<TreeLeaf *>(&node); leafPtr != nullptr) {
       callable(leafPtr, depth);

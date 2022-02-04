@@ -10,6 +10,8 @@ PopupMenu::PopupMenu(const std::string &name) : Element(name) {}
 
 void PopupMenu::open() { opened = true; }
 
+bool PopupMenu::isOpen() const { return opened; }
+
 void PopupMenu::close() {
   opened = false;
   firstRender = true;

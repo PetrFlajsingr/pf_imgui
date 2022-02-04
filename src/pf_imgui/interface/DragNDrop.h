@@ -70,6 +70,13 @@ class PF_IMGUI_EXPORT DragSourceBase {
    */
   [[nodiscard]] Tooltip &getDragTooltip();
   /**
+   * Get the drag tooltip if it exists.
+   * @return tooltip of drag
+   *
+   * @throws StacktraceException if the tooltip doesn't exist
+   */
+  [[nodiscard]] const Tooltip &getDragTooltip() const;
+  /**
    * Create an instance of tooltip for drag to be filled with elements by the user.
    * @return reference to the newly created tooltip
    */

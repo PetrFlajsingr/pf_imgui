@@ -33,7 +33,8 @@ class InputDialog : public ModalDialog {
    * @param modal dialog modality
    */
   InputDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
-              const std::string &message, std::invocable<std::string_view> auto &&onInput, std::invocable auto &&onCancel)
+              const std::string &message, std::invocable<std::string_view> auto &&onInput,
+              std::invocable auto &&onCancel)
       : ModalDialog(parent, elementName, title), inputDone(std::forward<decltype(onInput)>(onInput)),
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
     createChild<Text>(getName() + "text", message);

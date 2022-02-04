@@ -149,7 +149,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
  protected:
   void renderImpl() override;
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() override;
+  [[nodiscard]] toml::table serialize_impl() const override;
 };
 /**
  * @brief An item, which divides menus.

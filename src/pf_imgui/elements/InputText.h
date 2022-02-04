@@ -38,17 +38,17 @@ enum class TextTrigger { Character, Enter };
  * @todo: hint
  * @todo simplify constructor
  */
-class PF_IMGUI_EXPORT InputText : public ItemElement,
-                                  public Labellable,
-                                  public ValueObservable<std::string_view>,
-                                  public Savable,
-                                  public DragSource<std::string>,
-                                  public DropTarget<std::string>,
-                                  public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
-                                                           style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                                                           style::ColorOf::FrameBackgroundActive, style::ColorOf::TextSelectedBackground>,
-                                  public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>
-{
+class PF_IMGUI_EXPORT InputText
+    : public ItemElement,
+      public Labellable,
+      public ValueObservable<std::string_view>,
+      public Savable,
+      public DragSource<std::string>,
+      public DropTarget<std::string>,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
+                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
+                               style::ColorOf::FrameBackgroundActive, style::ColorOf::TextSelectedBackground>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
    * Construct InputText.
@@ -95,7 +95,7 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
 
  protected:
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() override;
+  [[nodiscard]] toml::table serialize_impl() const override;
 
   void renderImpl() override;
 

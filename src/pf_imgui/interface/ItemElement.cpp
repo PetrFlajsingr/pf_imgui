@@ -67,6 +67,13 @@ Tooltip &ItemElement::getTooltip() {
   return *tooltip;
 }
 
+const Tooltip &ItemElement::getTooltip() const {
+#ifndef _MSC_VER// TODO: MSVC internal error
+  if (tooltip == nullptr) { throw StackTraceException("Tooltip doesn't exist in {}", getName()); }
+#endif
+  return *tooltip;
+}
+
 void ItemElement::setTooltip(std::unique_ptr<Tooltip> &&newTooltip) { tooltip = std::move(newTooltip); }
 
 PopupMenu &ItemElement::createPopupMenu() {

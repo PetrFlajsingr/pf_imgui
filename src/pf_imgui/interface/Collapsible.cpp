@@ -28,6 +28,6 @@ void Collapsible::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table Collapsible::serialize_impl() { return toml::table{{{"collapsed", isCollapsed()}}}; }
+toml::table Collapsible::serialize_impl() const { return toml::table{{{"collapsed", isCollapsed()}}}; }
 
 }// namespace pf::ui::ig

@@ -31,7 +31,12 @@ class PF_IMGUI_EXPORT Focusable {
    * Check if element is currently focused.
    * @return true if element is focused, false otherwise
    */
-  [[nodiscard]] bool isFocused() const;
+  [[deprecated("use hasFocus instead")]] [[nodiscard]] bool isFocused() const;
+  /**
+   * Check if element is currently focused.
+   * @return true if element is focused, false otherwise
+   */
+  [[nodiscard]] bool hasFocus() const;
   /**
    * Set this object as focused.
    *

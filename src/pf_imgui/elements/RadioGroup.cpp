@@ -45,9 +45,7 @@ void RadioGroup::unserialize_impl(const toml::table &src) {
   if (auto newValIter = src.find("selected"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.value<int>(); newVal.has_value()) {
       const auto idx = newVal.value();
-      if (static_cast<std::size_t>(idx) >= buttons.size()) {
-        return;
-      }
+      if (static_cast<std::size_t>(idx) >= buttons.size()) { return; }
       selectedButtonIndex = idx;
       auto &selectedButton = buttons[idx];
       selectedButton->setValueInner(true);
@@ -72,7 +70,7 @@ void RadioGroup::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table RadioGroup::serialize_impl() {
+toml::table RadioGroup::serialize_impl() const {
   auto result = toml::table{};
   if (selectedButtonIndex.has_value()) { result.insert_or_assign("selected", static_cast<int>(*selectedButtonIndex)); }
   return result;

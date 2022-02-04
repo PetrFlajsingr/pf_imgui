@@ -149,7 +149,7 @@ class PF_IMGUI_EXPORT Slider
     }
   }
 
-  toml::table serialize_impl() override {
+  [[nodiscard]] toml::table serialize_impl() const override {
     const auto value = ValueObservable<T>::getValue();
     if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
       return toml::table{{{"value", serializeGlmVec(value)}}};

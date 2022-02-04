@@ -56,6 +56,13 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
    */
   [[nodiscard]] Tooltip &getTooltip();
   /**
+   * Get the tooltip if it exists.
+   * @return tooltip of this item
+   *
+   * @throws StacktraceException if the tooltip doesn't exist
+   */
+  [[nodiscard]] const Tooltip &getTooltip() const;
+  /**
    * Removes tooltip if it is assigned. If the tooltip doesn't exist, nothing happens.
    */
   void removeTooltip();

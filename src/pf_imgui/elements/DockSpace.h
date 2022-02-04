@@ -37,7 +37,8 @@ class DockSpace : public Element,
    * @param s size of the area
    * @param dockFlags f;ags
    */
-  DockSpace(const std::string &name, const Size &s, const Flags<DockType> &dockFlags = Flags<DockType>{});
+  explicit DockSpace(const std::string &name, Size s = Size::Auto(),
+                     const Flags<DockType> &dockFlags = Flags<DockType>{});
 
   void render() override;
 
