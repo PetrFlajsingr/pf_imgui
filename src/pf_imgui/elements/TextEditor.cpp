@@ -29,4 +29,28 @@ void TextEditor::unserialize_impl(const toml::table &src) {
 
 toml::table TextEditor::serialize_impl() const { return toml::table{{{"text", editor.GetText()}}}; }
 
+void TextEditor::setHighlighting(TextEditor::Highlight language) {
+  switch (language) {
+    case Highlight::GLSL:
+      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::GLSL());
+      break;
+    case Highlight::HLSL:
+      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::HLSL());
+      break;
+    case Highlight::AngelScript:
+      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::AngelScript());
+      break;
+    case Highlight::Lua:
+      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::Lua());
+      break;
+    case Highlight::C: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::C()); break;
+    case Highlight::CPP:
+      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::CPlusPlus());
+      break;
+    case Highlight::SQL:
+      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::SQL());
+      break;
+  }
+}
+
 }// namespace pf::ui::ig

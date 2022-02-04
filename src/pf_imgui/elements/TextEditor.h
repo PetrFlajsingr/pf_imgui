@@ -15,6 +15,7 @@ namespace pf::ui::ig {
 
 class TextEditor : public Element, public Savable, public Resizable {
  public:
+  enum class Highlight { GLSL, HLSL, AngelScript, Lua, C, CPP, SQL };
   TextEditor(const std::string &name, const std::string &value, Size s = Size::Auto(),
              Persistent persistent = Persistent::No);
 
@@ -23,6 +24,8 @@ class TextEditor : public Element, public Savable, public Resizable {
 
   [[nodiscard]] std::string getText() const;
   void setText(const std::string &text);
+
+  void setHighlighting(Highlight language);
 
  protected:
   void renderImpl() override;
