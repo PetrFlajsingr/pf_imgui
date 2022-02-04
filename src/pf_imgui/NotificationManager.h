@@ -16,6 +16,7 @@ enum class NotificationType { Success, Warning, Error, Info };
 class NotificationManager {
  public:
   explicit NotificationManager(FontManager &fontManager);
+
   [[nodiscard]] Notification &createNotification(const std::string &name, const std::string &label,
                                                  std::chrono::milliseconds duration = Notification::DEFAULT_DURATION);
 

@@ -12,6 +12,7 @@
 
 namespace pf::ui::ig {
 
+//@todo: get rid of the backward stuff/stacktrace
 /**
  * @brief Exception thrown when a duplicate ID is added in the UI tree.
  */

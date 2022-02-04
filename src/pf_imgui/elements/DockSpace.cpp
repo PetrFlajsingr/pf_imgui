@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-DockSpace::DockSpace(const std::string &name, const Size &s, const Flags<DockType> &dockFlags)
+DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
     : Element(name), Resizable(s), flags(*dockFlags) {}
 
 void DockSpace::render() {

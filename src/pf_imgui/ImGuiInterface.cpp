@@ -83,13 +83,9 @@ void ImGuiInterface::setStateFromConfig() {
   std::ranges::for_each(windows, [this, &serialiseSubtree](auto &window) { serialiseSubtree(*window); });
 }
 
-void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
-  fileDialogs.push_back(std::move(dialog));
-}
+void ImGuiInterface::addFileDialog(FileDialog &&dialog) { fileDialogs.push_back(std::move(dialog)); }
 
-FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) {
-  return FileDialogBuilder(this, type);
-}
+FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) { return FileDialogBuilder(this, type); }
 
 void ImGuiInterface::renderDialogs() {
   std::ranges::for_each(fileDialogs, [](auto &dialog) { dialog.render(); });
@@ -131,6 +127,16 @@ std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const
   }
 }
 
+std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName(const std::string &windowName) const {
+  if (auto window = findIf(getWindows() | ranges::views::addressof,
+                           [windowName](const auto &window) { return window->getName() == windowName; });
+      window.has_value()) {
+    return **window;
+  } else {
+    return std::nullopt;
+  }
+}
+
 void ImGuiInterface::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
@@ -153,7 +159,10 @@ DragNDropGroup &ImGuiInterface::createDragNDropGroup() { return dragNDropGroups.
 
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
+const FontManager &ImGuiInterface::getFontManager() const { return fontManager; }
+
 NotificationManager &ImGuiInterface::getNotificationManager() { return notificationManager; }
 
+const NotificationManager &ImGuiInterface::getNotificationManager() const { return notificationManager; }
 
 }// namespace pf::ui::ig

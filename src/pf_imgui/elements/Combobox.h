@@ -86,7 +86,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * Get currently selected item.
    * @return if any item is selected return it, otherwise std::nullopt
    */
-  [[nodiscard]] std::optional<T> getSelectedItem() {
+  [[nodiscard]] std::optional<T> getSelectedItem() const {
     if (selectedItemIndex.has_value()) { return items[*selectedItemIndex].first; }
     return std::nullopt;
   }
@@ -151,7 +151,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     }
   }
 
-  toml::table serialize_impl() const override {
+  [[nodiscard]] toml::table serialize_impl() const override {
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];
