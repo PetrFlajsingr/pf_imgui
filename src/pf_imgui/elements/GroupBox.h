@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 17.11.2021.
-//
+/**
+ * @file GroupBox.h
+ * @brief GroupBox element.
+ * @author Petr Flajšingr
+ * @date 17.11.21
+ */
 
 #ifndef PF_IMGUI_GROUPBOX_H
 #define PF_IMGUI_GROUPBOX_H

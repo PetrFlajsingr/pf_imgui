@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 17.11.2021.
-//
+/**
+ * @file Gizmo3D.h
+ * @brief Gizmo3D element.
+ * @author Petr Flajšingr
+ * @date 17.11.21
+ */
 
 #ifndef PF_IMGUI_GIZMO3D_H
 #define PF_IMGUI_GIZMO3D_H
