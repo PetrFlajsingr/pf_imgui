@@ -196,7 +196,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param modality modality of the dialog
    * @param maxSelectedFiles maximum amount of selected files
    */
-  void openFileDialog(const std::string &caption, const std::vector<FileExtensionSettings> &extSettings,
+  [[deprecated]] void openFileDialog(const std::string &caption, const std::vector<FileExtensionSettings> &extSettings,
                       std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
                       Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
                       Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
@@ -216,13 +216,17 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param modality modality of the dialog
    * @param maxSelectedDirs maximum amount of selected directories
    */
-  void openDirDialog(const std::string &caption, std::invocable<std::vector<std::filesystem::path>> auto onSelect,
+  [[deprecated]] void openDirDialog(const std::string &caption, std::invocable<std::vector<std::filesystem::path>> auto onSelect,
                      std::invocable auto onCancel, Size size = {200, 150}, std::filesystem::path startPath = ".",
                      std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(getNext(idGen)), caption, onSelect, onCancel, size,
                              startPath, startName, modality, maxSelectedDirs);
   }
+
+  [[nodiscard]] FileDialogBuilder buildFileDialog(FileDialogType type);
+
+  void addFileDialog(FileDialog &&dialog);
 
   /**
    * Create InputDialog.

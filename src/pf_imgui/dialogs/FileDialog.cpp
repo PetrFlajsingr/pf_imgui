@@ -3,12 +3,10 @@
 //
 
 #include "FileDialog.h"
+#include <pf_imgui/ImGuiInterface.h>
 
 namespace pf::ui::ig {
 // TODO: fix multi dir selection - when using GetSelection() it returns invalid path
-FileExtensionSettings::FileExtensionSettings(std::vector<std::filesystem::path> extensions, std::string description,
-                                             const std::optional<ImVec4> &color)
-    : extensions(std::move(extensions)), description(std::move(description)), color(color) {}
 
 bool FileDialog::isDone() const { return done; }
 
@@ -71,8 +69,64 @@ void FileDialog::renderImpl() {
     done = true;
   }
 }
+
 void FileDialog::setExtInfos() {
   for (const auto &[ext, color] : extColors) { fileDialogInstance.SetExtentionInfos(fmt::format(".{}", ext), color); }
 }
+
+FileDialogBuilder::FileDialogBuilder(ImGuiInterface *parent, FileDialogType dialogType)
+    : imguiInterface(parent), type(dialogType) {}
+
+FileDialogBuilder &FileDialogBuilder::label(std::string dialogLabel) {
+  label_ = std::move(dialogLabel);
+  return *this;
+}
+
+FileDialogBuilder &FileDialogBuilder::extension(FileExtensionSettings extensionSettings) {
+  extensionSettings_.push_back(std::move(extensionSettings));
+  return *this;
+}
+
+FileDialogBuilder &FileDialogBuilder::size(Size dialogSize) {
+  size_ = dialogSize;
+  return *this;
+}
+
+FileDialogBuilder &FileDialogBuilder::startPath(std::filesystem::path path) {
+  startPath_ = std::move(path);
+  return *this;
+}
+
+FileDialogBuilder &FileDialogBuilder::defaultFilename(std::string filename) {
+  defaultFilename_ = std::move(filename);
+  return *this;
+}
+
+FileDialogBuilder &FileDialogBuilder::maxFilesSelected(std::uint32_t max) {
+  maxFilesSelected_ = max;
+  return *this;
+}
+
+FileDialogBuilder &FileDialogBuilder::modal() {
+  modal_ = Modal::Yes;
+  return *this;
+}
+
+void FileDialogBuilder::build() {
+  using namespace std::string_literals;
+  switch (type) {
+    case FileDialogType::Dir:
+      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), label_, onSelect_,
+                                               onCancel_, size_, startPath_, defaultFilename_, modal_,
+                                               maxFilesSelected_});
+      break;
+    case FileDialogType::File:
+      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), label_, extensionSettings_,
+                                               onSelect_, onCancel_, size_, startPath_, defaultFilename_, modal_,
+                                               maxFilesSelected_});
+      break;
+  }
+}
+
 
 }// namespace pf::ui::ig

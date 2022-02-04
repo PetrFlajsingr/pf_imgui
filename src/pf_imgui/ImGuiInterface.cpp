@@ -82,6 +82,15 @@ void ImGuiInterface::setStateFromConfig() {
   if (menuBar != nullptr) { serialiseSubtree(*menuBar); }
   std::ranges::for_each(windows, [this, &serialiseSubtree](auto &window) { serialiseSubtree(*window); });
 }
+
+void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
+  fileDialogs.push_back(std::move(dialog));
+}
+
+FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) {
+  return FileDialogBuilder(this, type);
+}
+
 void ImGuiInterface::renderDialogs() {
   std::ranges::for_each(fileDialogs, [](auto &dialog) { dialog.render(); });
   if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
@@ -94,6 +103,7 @@ void ImGuiInterface::renderDialogs() {
     dialogs.erase(iter);
   }
 }
+
 bool ImGuiInterface::isWindowHovered() const { return io.WantCaptureMouse; }
 
 bool ImGuiInterface::isKeyboardCaptured() const { return io.WantCaptureKeyboard; }
@@ -144,17 +154,6 @@ DragNDropGroup &ImGuiInterface::createDragNDropGroup() { return dragNDropGroups.
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
 NotificationManager &ImGuiInterface::getNotificationManager() { return notificationManager; }
-/*
-void ImGuiInterface::showNotification(NotificationType type, std::string_view message,
-                                      std::chrono::milliseconds dismissTime) {
-  ImGui::InsertNotification({static_cast<int>(type), std::string(message).c_str(), dismissTime.count()}, notifications);
-}
 
-void ImGuiInterface::showNotification(NotificationType type, std::string_view title, std::string_view message,
-                                      std::chrono::milliseconds dismissTime) {
-  ImGuiToast toast{static_cast<int>(type), std::string(message).c_str(), dismissTime.count()};
-  toast.set_title(std::string{title}.c_str());
-  ImGui::InsertNotification(toast, notifications);
-}*/
 
 }// namespace pf::ui::ig
