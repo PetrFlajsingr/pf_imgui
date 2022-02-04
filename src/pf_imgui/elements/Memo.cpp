@@ -33,7 +33,7 @@ void Memo::renderImpl() {
 
 const std::vector<std::string> &Memo::getRecords() const { return records; }
 
-const std::string &Memo::getText() const { return textArea->getText(); }
+std::string_view Memo::getText() const { return textArea->getText(); }
 
 void Memo::addRecord(std::string_view record) {
   records.emplace_back(std::string(record));
@@ -62,7 +62,7 @@ void Memo::rebuildPanel() {
         clearRecords();
       });
       controlsLayout->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
-        ImGui::SetClipboardText(getText().c_str());
+        ImGui::SetClipboardText(std::string{getText()}.c_str());
       });
     }
     if (filterEnabled) {

@@ -25,7 +25,7 @@ void Text::renderImpl() {
   } else {
     ImGui::Text("%s", text.c_str());
   }
-  drag(getText());
+  drag(text);
   if (auto drop = dropAccept(); drop.has_value()) { setText(*drop); }
 }
 void Text::setTextInner(std::string txt) { text = std::move(txt); }
