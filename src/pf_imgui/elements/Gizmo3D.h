@@ -56,7 +56,7 @@ class Gizmo3D : public Element, public Resizable, public ValueObservable<details
    */
   void setMidObject(GizmoMid newObject) requires(Type != GizmoType::Direction) { mid = newObject; }
 
-  void setSize(const Size &s) override {
+  void setSize(Size s) override {
     const auto min = std::min(s.width.value, s.height.value);
     Resizable::setSize(Size{min, min});
   }

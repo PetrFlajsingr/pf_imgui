@@ -74,7 +74,7 @@ class Range2D
   void renderImpl() override;
 
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() const override;
+  [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
   glm::vec2 minRange;

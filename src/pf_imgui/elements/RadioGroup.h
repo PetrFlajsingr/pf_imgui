@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT RadioGroup
 
  protected:
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() const override;
+  [[nodiscard]] toml::table serialize_impl() const override;
   void renderImpl() override;
 
  private:

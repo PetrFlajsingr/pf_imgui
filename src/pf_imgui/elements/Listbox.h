@@ -27,7 +27,7 @@ namespace pf::ui::ig {
 namespace details {
 template<ToStringConvertible T>
 struct ListboxRowFactory {
-  static inline cppcoro::generator<std::size_t> idGenerator = iota<std::size_t>();
+  static inline cppcoro::generator<std::size_t> idGenerator = iota<std::size_t>(); // TODO: get rid of these generators and replace them with simple counter
   const std::string idStart = uniqueId();
   std::unique_ptr<Selectable> operator()(const T &item) {
     return std::make_unique<Selectable>(idStart + std::to_string(getNext(idGenerator)), toString(item));
@@ -188,7 +188,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     }
   }
 
-  toml::table serialize_impl() const override {
+  [[nodiscard]] toml::table serialize_impl() const override {
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];

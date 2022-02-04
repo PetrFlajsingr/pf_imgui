@@ -45,7 +45,7 @@ class PF_IMGUI_EXPORT Image
   * @param uvTextureMappingProvider provider of UV coordinates
   */
   Image(
-      const std::string &elementName, ImTextureID imTextureId, const Size &size, IsButton isBtn = IsButton::No,
+      const std::string &elementName, ImTextureID imTextureId, Size size = Size::Auto(), IsButton isBtn = IsButton::No,
       UvMappingProvider uvTextureMappingProvider = [] {
         return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
       });

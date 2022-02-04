@@ -16,7 +16,7 @@ Text::Text(const std::string &elementName, std::string text, ImVec4 textColor)
     : ItemElement(elementName), DragSource<std::string>(false), DropTarget<std::string>(false), text(std::move(text)),
       color(textColor) {}
 
-const std::string &Text::getText() const { return text; }
+std::string_view Text::getText() const { return text; }
 
 void Text::renderImpl() {
   auto colorStyle = setColorStack();

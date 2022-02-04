@@ -9,6 +9,7 @@
 #include <imgui_markdown.h>
 #include <pf_imgui/ImGuiInterface.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <string>
 
 namespace pf::ui::ig {
 namespace details {
@@ -18,7 +19,7 @@ struct FontData {
   ImFont *fontH3 = nullptr;
 };
 static inline FontData DefaultFontData;
-}
+}// namespace details
 
 /**
  * @brief Markdown text render area.
@@ -71,9 +72,11 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
 
   /**
    * Set callback for user clicking a link.
-   * @param onLinkClicked callback - first argument is link itself, second is true if it is an image
+   * @param callback callback - first argument is link itself, second is true if it is an image
    */
-  void setOnLinkClicked(const std::function<void(std::string_view, bool)> &onLinkClicked);
+  void setOnLinkClicked(std::invocable<std::string_view, bool> auto &&callback) {
+    onLinkClicked = std::forward<decltype(callback)>(callback);
+  }
 
   /**
    * Set function for image loading & texture creation.

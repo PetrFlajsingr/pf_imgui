@@ -42,13 +42,13 @@ class PF_IMGUI_EXPORT Selectable
    * @param s size of the element
    * @param persistent allow value saving to disk
    */
-  Selectable(const std::string &elementName, const std::string &label, bool value = false, const Size &s = Size::Auto(),
+  Selectable(const std::string &elementName, const std::string &label, bool value = false, Size s = Size::Auto(),
              Persistent persistent = Persistent::No);
 
  protected:
   void renderImpl() override;
   void unserialize_impl(const toml::table &src) override;
-  toml::table serialize_impl() const override;
+  [[nodiscard]] toml::table serialize_impl() const override;
 };
 
 }// namespace pf::ui::ig

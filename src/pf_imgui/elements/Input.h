@@ -250,7 +250,7 @@ class PF_IMGUI_EXPORT Input
     }
   }
 
-  toml::table serialize_impl() const override {
+  [[nodiscard]] toml::table serialize_impl() const override {
     const auto value = ValueObservable<T>::getValue();
     if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
       return toml::table{{{"value", serializeGlmVec(value)}}};

@@ -119,7 +119,7 @@ class PF_IMGUI_EXPORT ProgressBar
    * Get current percentage of the progress bar <0.0f-1.0f>.
    * @return current percentage of the progress bar <0.0f-1.0f>
    */
-  float getCurrentPercentage() {
+  [[nodiscard]] float getCurrentPercentage() const {
     const auto diff = max - min;
     return (ValueObservable<T>::getValue() - min) / static_cast<float>(diff);
   }
