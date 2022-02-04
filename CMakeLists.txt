@@ -180,6 +180,7 @@ set(SOURCES
         src/include/imgui/imgui_demo.cpp
         src/include/DearWidgets/dear_widgets.cpp
         src/include/imGuIZMO.quat/imGuIZMOquat.cpp
+        src/include/ImGuiColorTextEdit/TextEditor.cpp
         src/pf_imgui/interface/DragNDrop.cpp
         src/pf_imgui/elements/MenuItems.cpp
         src/pf_imgui/elements/PopupMenu.cpp
@@ -320,7 +321,9 @@ set(INCLUDES
         src/pf_imgui/interface/Closeable.h
         src/pf_imgui/details/GroupBox.h
         src/pf_imgui/elements/GroupBox.h
-        src/pf_imgui/elements/Gizmo3D.h)
+        src/pf_imgui/elements/Gizmo3D.h
+        src/include/ImGuiColorTextEdit/TextEditor.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -356,6 +359,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_memory_editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgInspect>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiIcons>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiColorTextEdit>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
 
