@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-TextEditor::TextEditor(const std::string &name, std::string_view value, Persistent persistent, Size s)
+TextEditor::TextEditor(const std::string &name, std::string_view value, Size s, Persistent persistent)
     : Element(name), Savable(persistent), Resizable(s) {
   editor.SetText(std::string{value});
 }

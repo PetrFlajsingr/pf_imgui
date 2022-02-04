@@ -15,7 +15,7 @@ namespace pf::ui::ig {
 
 class TextEditor : public Element, public Savable, public Resizable {
  public:
-  TextEditor(const std::string &name, std::string_view value, Persistent persistent, Size s = Size::Auto());
+  TextEditor(const std::string &name, std::string_view value, Size s = Size::Auto(), Persistent persistent = Persistent::No);
 
   [[nodiscard]] ImGuiColorTextEdit::TextEditor &getEditor();
   [[nodiscard]] const ImGuiColorTextEdit::TextEditor &getEditor() const;
@@ -25,6 +25,7 @@ class TextEditor : public Element, public Savable, public Resizable {
 
  protected:
   void renderImpl() override;
+
   void unserialize_impl(const toml::table &src) override;
   toml::table serialize_impl() override;
 
