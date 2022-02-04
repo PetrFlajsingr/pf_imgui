@@ -46,6 +46,13 @@ Tooltip &details::DragSourceBase::getDragTooltip() {
   return *tooltip;
 }
 
+const Tooltip &details::DragSourceBase::getDragTooltip() const {
+#ifndef _MSC_VER// TODO: MSVC internal error
+  if (tooltip == nullptr) { throw StackTraceException("Drag tooltip doesn't exist."); }
+#endif
+  return *tooltip;
+}
+
 Tooltip &details::DragSourceBase::createDragTooltip() {
   tooltip = std::make_unique<Tooltip>(uniqueId());
   tooltipTextFmt = std::nullopt;

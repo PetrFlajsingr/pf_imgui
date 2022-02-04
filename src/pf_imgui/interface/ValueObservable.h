@@ -44,6 +44,7 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
 
   ValueObservable(ValueObservable &&other) noexcept requires(std::is_move_constructible_v<T>)
       : value(std::move(other.value)), observableImpl(std::move(other.observableImpl)) {}
+
   ValueObservable &operator=(ValueObservable &&other) noexcept requires(std::is_move_assignable_v<T>) {
     value = std::move(other.value);
     observableImpl = std::move(other.observableImpl);

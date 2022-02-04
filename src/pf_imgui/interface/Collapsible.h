@@ -65,7 +65,7 @@ class PF_IMGUI_EXPORT Collapsible : public Savable {
  protected:
   void unserialize_impl(const toml::table &src) override;
 
-  toml::table serialize_impl() const override;
+  [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
   /**

@@ -136,6 +136,28 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   }
 
   /**
+  * Find a child by its name.
+  *
+  * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
+  * @param name name of the searched for child
+  * @return reference to the searched for child
+  *
+  * @throws IdNotFoundException when the child is not found or when it doesn't match the desired type
+  */
+  template<std::derived_from<Element> T>
+  [[nodiscard]] const T &childByName(const std::string &name) const {
+    if (const auto iter = children.find(name); iter != children.end()) {
+      if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
+#ifndef _MSC_VER// TODO: MSVC internal error
+      throw IdNotFoundException("Wrong type for child: '{}'", name);
+#endif
+    }
+#ifndef _MSC_VER// TODO: MSVC internal error
+    throw IdNotFoundException("Child not found: '{}'", name);
+#endif
+  }
+
+  /**
   * Get all children.
   *
   * @details Upon calling this method, all children enqueued for removal are removed first.

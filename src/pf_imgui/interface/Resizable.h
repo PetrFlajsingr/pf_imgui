@@ -18,23 +18,23 @@ namespace pf::ui::ig {
 namespace details {
 template<typename T>
 struct PF_IMGUI_EXPORT SizeDimension : public T {
-  explicit(false) SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
-  explicit(false) SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
-  explicit(false) SizeDimension(std::same_as<float> auto value) : T(value) {}
-  bool operator==(const SizeDimension &other) const { return T::value == other.value; }
-  bool operator!=(const SizeDimension &other) const { return !(*this == other); }
-  explicit(false) operator float() const { return T::value; }
+  constexpr explicit(false) SizeDimension(std::same_as<uint32_t> auto value) : T(static_cast<float>(value)) {}
+  constexpr explicit(false) SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
+  constexpr explicit(false) SizeDimension(std::same_as<float> auto value) : T(value) {}
+  constexpr bool operator==(const SizeDimension &other) const { return T::value == other.value; }
+  constexpr bool operator!=(const SizeDimension &other) const { return !(*this == other); }
+  constexpr explicit(false) operator float() const { return T::value; }
   /**
    * Fill the dimension except for the margin.
    * @param margin
    * @return
    */
-  static SizeDimension Fill(uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
+  constexpr static SizeDimension Fill(uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
   /**
    * Automatic size detection.
    * @return
    */
-  static SizeDimension Auto() { return {0}; }
+  constexpr static SizeDimension Auto() { return {0}; }
 };
 struct PF_IMGUI_EXPORT Width {
   float value;

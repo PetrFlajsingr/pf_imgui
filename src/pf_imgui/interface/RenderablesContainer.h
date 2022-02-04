@@ -15,7 +15,7 @@ class RenderablesContainer : public AllColorCustomizable, public AllStyleCustomi
    * Get all renderables stored inside the container.
    * @return vector of pointers to renderables
    */
-  virtual std::vector<Renderable *> getRenderables() = 0;
+  [[nodiscard]] virtual std::vector<Renderable *> getRenderables() = 0;
   virtual ~RenderablesContainer() = default;
 
  protected:
