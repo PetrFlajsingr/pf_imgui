@@ -20,12 +20,8 @@ endif ()
 
 include(${CPM_DOWNLOAD_LOCATION})
 
-option(ENABLE_STACKTRACE "enable stacktrace in exceptions" OFF)
 option(ENABLE_EXTERN_TEMPLATE "enable extern templates" ON)
 
-if (ENABLE_STACKTRACE)
-    add_compile_definitions(STACKTRACE_ENABLE)
-endif ()
 if (ENABLE_EXTERN_TEMPLATE)
     add_compile_definitions(PF_IMGUI_ENABLE_EXTERN_TEMPLATE)
 endif ()
@@ -76,20 +72,12 @@ endif ()
 set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
 set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
 
-if (ENABLE_STACKTRACE)
-    CPMAddPackage(
-            NAME pf_common
-            GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG master
-            OPTIONS "ENABLE_STACKTRACE ON"
-    )
-else ()
-    CPMAddPackage(
-            NAME pf_common
-            GITHUB_REPOSITORY PetrFlajsingr/pf_common
-            GIT_TAG master
-    )
-endif ()
+
+CPMAddPackage(
+        NAME pf_common
+        GITHUB_REPOSITORY PetrFlajsingr/pf_common
+        GIT_TAG master
+)
 
 CPMAddPackage(
         NAME toml++
@@ -345,15 +333,8 @@ SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windo
 SET(CMAKE_RELWITHDEBINFO_POSTFIX "rd" CACHE STRING "add a postfix, usually empty on windows")
 SET(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on windows")
 
-if (ENABLE_STACKTRACE)
-    add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDES} ${BACKWARD_ENABLE})
-else ()
-    add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDES})
-endif ()
+add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDES})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
-if (ENABLE_STACKTRACE)
-    add_backward(${PROJECT_NAME})
-endif ()
 
 target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
 
