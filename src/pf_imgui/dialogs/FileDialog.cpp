@@ -128,5 +128,4 @@ void FileDialogBuilder::build() {
   }
 }
 
-
 }// namespace pf::ui::ig

@@ -27,7 +27,8 @@ namespace pf::ui::ig {
 namespace details {
 template<ToStringConvertible T>
 struct ListboxRowFactory {
-  static inline cppcoro::generator<std::size_t> idGenerator = iota<std::size_t>(); // TODO: get rid of these generators and replace them with simple counter
+  static inline cppcoro::generator<std::size_t> idGenerator =
+      iota<std::size_t>();// TODO: get rid of these generators and replace them with simple counter
   const std::string idStart = uniqueId();
   std::unique_ptr<Selectable> operator()(const T &item) {
     return std::make_unique<Selectable>(idStart + std::to_string(getNext(idGenerator)), toString(item));

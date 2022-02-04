@@ -21,7 +21,7 @@ static inline auto generator = iota<std::size_t>();
  * @return random string of desired length
  */
 inline std::string random_string(std::size_t length) {
-  static auto randGen = std::minstd_rand{465768687}; // NOLINT(cert-msc51-cpp)
+  static auto randGen = std::minstd_rand{465768687};// NOLINT(cert-msc51-cpp)
   auto randchar = []() -> char {
     const char charset[] = "0123456789"
                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

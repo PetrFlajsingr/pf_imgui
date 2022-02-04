@@ -31,14 +31,10 @@ void Window::renderImpl() {
       if (getSize() != Size::Auto()) { setSize(getSize()); }
       if (getPosition().x != -1 && getPosition().y != -1) { setPosition(getPosition()); }
     }
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-    }
+    if (getEnabled() == Enabled::No) { ImGui::BeginDisabled(); }
     {
       auto raiiEnabled = pf::RAII([this] {
-        if (getEnabled() == Enabled::No) {
-          ImGui::EndDisabled();
-        }
+        if (getEnabled() == Enabled::No) { ImGui::EndDisabled(); }
       });
       setHovered(ImGui::IsWindowHovered());
       Collapsible::setCollapsed(ImGui::IsWindowCollapsed());

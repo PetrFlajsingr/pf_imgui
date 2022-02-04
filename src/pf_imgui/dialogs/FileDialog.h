@@ -40,9 +40,7 @@ struct PF_IMGUI_EXPORT FileExtensionSettings {
   std::optional<ImVec4> color = std::nullopt;
 };
 
-enum class FileDialogType {
-  Dir, File
-};
+enum class FileDialogType { Dir, File };
 
 /**
  * @brief Dialog for file selection from disk.
@@ -221,7 +219,7 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
   std::string label_;
   std::vector<FileExtensionSettings> extensionSettings_;
   std::function<void(std::vector<std::filesystem::path>)> onSelect_;
-  std::function<void()> onCancel_ = []{};
+  std::function<void()> onCancel_ = [] {};
   Size size_ = {500, 400};
   std::filesystem::path startPath_ = ".";
   std::string defaultFilename_{};
@@ -230,7 +228,6 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
 
   static inline std::uint32_t IdCounter = 0;
 };
-
 
 }// namespace pf::ui::ig
 

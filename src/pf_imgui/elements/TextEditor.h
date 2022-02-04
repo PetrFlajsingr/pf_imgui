@@ -15,7 +15,8 @@ namespace pf::ui::ig {
 
 class TextEditor : public Element, public Savable, public Resizable {
  public:
-  TextEditor(const std::string &name, const std::string& value, Size s = Size::Auto(), Persistent persistent = Persistent::No);
+  TextEditor(const std::string &name, const std::string &value, Size s = Size::Auto(),
+             Persistent persistent = Persistent::No);
 
   [[nodiscard]] ImGuiColorTextEdit::TextEditor &getEditor();
   [[nodiscard]] const ImGuiColorTextEdit::TextEditor &getEditor() const;
