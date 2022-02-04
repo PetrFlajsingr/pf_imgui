@@ -49,8 +49,8 @@ class Positionable {
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
-  Subscription addPositionListener(std::invocable<Position> auto listener) {
-    return observableImpl.addListener(listener);
+  Subscription addPositionListener(std::invocable<Position> auto &&listener) {
+    return observableImpl.addListener(std::forward<decltype(listener)>(listener));
   }
 
   /**

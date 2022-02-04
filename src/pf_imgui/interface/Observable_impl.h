@@ -46,9 +46,9 @@ class PF_IMGUI_EXPORT Observable_impl {
    * @return Subscription for unregistration purposes
    * @see Subscription
    */
-  Subscription addListener(std::invocable<const Args &...> auto fnc) {
+  Subscription addListener(std::invocable<const Args &...> auto &&fnc) {
     const auto id = generateListenerId();
-    listeners[id] = fnc;
+    listeners[id] = std::forward<decltype(fnc)>(fnc);
     return Subscription([id, this, observableExists = exists] {
       if (!*observableExists) { return; }
       listeners.erase(id);

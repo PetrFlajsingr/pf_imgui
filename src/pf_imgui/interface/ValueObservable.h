@@ -57,9 +57,9 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
-  Subscription addValueListener(std::invocable<const T &> auto fnc, bool callNow = false) {
+  Subscription addValueListener(std::invocable<const T &> auto &&fnc, bool callNow = false) {
     if (callNow) { fnc(value); }
-    return observableImpl.addListener(fnc);
+    return observableImpl.addListener(std::forward<decltype(fnc)>(fnc));
   }
 
   /**

@@ -38,7 +38,9 @@ class PF_IMGUI_EXPORT Closeable {
     * @param listener to be called on event
     * @return Subscription for listener cancellation
     */
-  Subscription addCloseListener(std::invocable auto listener) { return closeObservableImpl.addListener(listener); }
+  Subscription addCloseListener(std::invocable auto &&listener) {
+    return closeObservableImpl.addListener(std::forward<decltype(listener)>(listener));
+  }
 
  protected:
   void notifyClosed();

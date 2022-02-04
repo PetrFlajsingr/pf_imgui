@@ -118,8 +118,8 @@ class PF_IMGUI_EXPORT Resizable {
    * @param listener listener called on size change
    * @return Subscription which allows of erasure of the listener @see Subscription
    */
-  Subscription addSizeListener(std::invocable<Size> auto listener) {
-    return observableImpl.template addListener(listener);
+  Subscription addSizeListener(std::invocable<Size> auto &&listener) {
+    return observableImpl.addListener(std::forward<decltype(listener)>(listener));
   }
 
   virtual ~Resizable() = default;

@@ -25,7 +25,9 @@ class PF_IMGUI_EXPORT Hoverable {
    * @return instance of Subscription, which allows to unsubscribe the listener
    * @see Subscription
    */
-  Subscription addHoverListener(std::invocable<bool> auto fnc) { return observableImpl.addListener(fnc); }
+  Subscription addHoverListener(std::invocable<bool> auto &&fnc) {
+    return observableImpl.addListener(std::forward<decltype(fnc)>(fnc));
+  }
 
   /**
    * Check if the element is hovered.

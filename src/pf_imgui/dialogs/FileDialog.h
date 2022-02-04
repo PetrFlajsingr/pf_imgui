@@ -70,12 +70,13 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
    */
   FileDialog(const std::string &elementName, const std::string &label,
              const std::vector<FileExtensionSettings> &extSettings,
-             std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
+             std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
              Size size = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
       : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
-        onFilesSelected(onSelect), onSelectCanceled(onCancel) {
+        onFilesSelected(std::forward<decltype(onSelect)>(onSelect)),
+        onSelectCanceled(std::forward<decltype(onCancel)>(onCancel)) {
     prepareExtInfos(extSettings);
   }
 

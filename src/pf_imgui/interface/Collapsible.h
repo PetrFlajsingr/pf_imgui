@@ -38,7 +38,9 @@ class PF_IMGUI_EXPORT Collapsible : public Savable {
   * @return instance of Subscription, which allows to unsubscribe the listener
   * @see Subscription
   */
-  Subscription addCollapseListener(std::invocable<bool> auto listener) { return observableImpl.addListener(listener); }
+  Subscription addCollapseListener(std::invocable<bool> auto &&listener) {
+    return observableImpl.addListener(std::forward<decltype(listener)>(listener));
+  }
 
   /**
   * Check if element is currently collapsed.
