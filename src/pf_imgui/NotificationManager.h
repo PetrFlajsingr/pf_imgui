@@ -20,11 +20,11 @@ class PF_IMGUI_EXPORT NotificationManager {
  public:
   explicit NotificationManager(FontManager &fontManager);
 
-  [[nodiscard]] Notification &createNotification(const std::string &name, const std::string &label,
+  [[nodiscard]] Notification &createNotification(const std::string &name, std::unique_ptr<Resource<std::string>> label,
                                                  std::chrono::milliseconds duration = Notification::DEFAULT_DURATION);
 
   [[nodiscard]] Notification &createNotification(NotificationType notificationType, const std::string &name,
-                                                 const std::string &label,
+                                                 std::unique_ptr<Resource<std::string>> label,
                                                  std::chrono::milliseconds duration = Notification::DEFAULT_DURATION);
 
   void renderNotifications();

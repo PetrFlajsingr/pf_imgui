@@ -7,13 +7,13 @@
 
 namespace pf::ui::ig {
 
-FlameGraph::FlameGraph(const std::string &elementName, const std::string &label, const Size &size,
+FlameGraph::FlameGraph(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const Size &size,
                        std::optional<std::string> overlay)
-    : Element(elementName), Labellable(label), Resizable(size), overlay(std::move(overlay)) {}
+    : Element(elementName), Labellable(std::move(label)), Resizable(size), overlay(std::move(overlay)) {}
 
 void FlameGraph::renderImpl() {
   auto colorStyle = setColorStack();
-  ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples, overlay, FLT_MAX, FLT_MAX, getSize().asImVec());
+  ImGuiWidgetFlameGraph::PlotFlame(getLabel().get().c_str(), samples, overlay, FLT_MAX, FLT_MAX, getSize().asImVec());
 }
 
 void FlameGraph::setOverlay(std::string text) { overlay = std::move(text); }

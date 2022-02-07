@@ -10,11 +10,12 @@
 
 #include <optional>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/resources/Resource.h>
 #include <ranges>
-#include <src/pf_imgui/interface/Customizable.h>
-#include <src/pf_imgui/interface/Element.h>
-#include <src/pf_imgui/interface/Labellable.h>
-#include <src/pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
 
@@ -47,7 +48,7 @@ class PF_IMGUI_EXPORT SimplePlot
    * @param scaleHigh max value
    * @param size size of the element
    */
-  SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
+  SimplePlot(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, PlotType plotType,
              std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
              const std::optional<std::size_t> &historyLimit = std::nullopt, float scaleLow = FLT_MAX,
              float scaleHigh = FLT_MAX, Size size = Size::Auto());

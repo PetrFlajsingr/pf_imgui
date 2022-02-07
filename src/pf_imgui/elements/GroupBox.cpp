@@ -8,11 +8,11 @@
 
 namespace pf::ui::ig {
 
-GroupBox::GroupBox(const std::string &name, const std::string &label, Size s)
-    : Element(name), Labellable(label), Resizable(s) {}
+GroupBox::GroupBox(const std::string &name, std::unique_ptr<Resource<std::string>> label, Size s)
+    : Element(name), Labellable(std::move(label)), Resizable(s) {}
 
 void GroupBox::renderImpl() {
-  ImGui::BeginGroupPanel(getLabel().c_str(), getSize().asImVec());
+  ImGui::BeginGroupPanel(getLabel().get().c_str(), getSize().asImVec());
   pf::RAII end{[] { ImGui::EndGroupPanel(); }};
   std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
 }

@@ -39,7 +39,7 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
    * @param label title
    * @param modal modality
    */
-  ModalDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label);
+  ModalDialog(ImGuiInterface &parent, const std::string &elementName, std::unique_ptr<Resource<std::string>> label);
 
   /**
    * Set flag for closing the dialog, which invalidates the dialog.

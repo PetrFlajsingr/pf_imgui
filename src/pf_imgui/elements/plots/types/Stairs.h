@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT Stairs : public LabeledPlotData, public details::DefaultPl
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  Stairs(const std::string &elementName, const std::string &caption);
+  Stairs(const std::string &elementName, std::unique_ptr<Resource<std::string>> label);
 
  protected:
   void renderImpl() override;

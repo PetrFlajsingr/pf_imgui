@@ -10,9 +10,9 @@
 
 namespace pf::ui::ig {
 
-Memo::Memo(const std::string &elementName, const std::string &label, uint32_t textAHeight, bool buttonsEnabled,
+Memo::Memo(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, uint32_t textAHeight, bool buttonsEnabled,
            bool filterEnabled, const std::optional<std::size_t> &recordLimit)
-    : Element(elementName), Labellable(label),
+    : Element(elementName), Labellable(std::move(label)),
       textAreaLayout(elementName + "_memo_panel###", LayoutDirection::TopToBottom, Size{Width::Auto(), textAHeight}),
       buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {
   textAreaLayout.setScrollable(true);
@@ -24,7 +24,7 @@ void Memo::renderImpl() {
   auto style = setStyleStack();
   if (rebuild) { rebuildPanel(); }
   removeRecordsAboveLimit();
-  ImGui::Text("%s", getLabel().c_str());
+  ImGui::Text("%s", getLabel().get().c_str());
   if (controlsLayout != nullptr) { controlsLayout->render(); }
   ImGui::Separator();
   if (scrollToBottom) { textAreaLayout.setScrollPosition(Layout::ScrollPosition::Bottom); }

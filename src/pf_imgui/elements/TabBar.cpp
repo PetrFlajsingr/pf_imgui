@@ -9,20 +9,20 @@
 
 namespace pf::ui::ig {
 
-TabButton::TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods)
-    : ItemElement(elementName), Labellable(label), flags(*mods) {}
+TabButton::TabButton(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const Flags<TabMod> &mods)
+    : ItemElement(elementName), Labellable(std::move(label)), flags(*mods) {}
 
 void TabButton::renderImpl() {
-  if (ImGui::TabItemButton(getLabel().c_str(), flags)) { notifyOnClick(); }
+  if (ImGui::TabItemButton(getLabel().get().c_str(), flags)) { notifyOnClick(); }
 }
 
 void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
 
-Tab::Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods, bool closeable)
-    : TabButton(elementName, label, mods), open(closeable ? new bool{true} : nullptr) {}
+Tab::Tab(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const Flags<TabMod> &mods, bool closeable)
+    : TabButton(elementName, std::move(label), mods), open(closeable ? new bool{true} : nullptr) {}
 
-Tab::Tab(const std::string &elementName, const std::string &label, bool closeable)
-    : Tab(elementName, label, Flags<TabMod>{}, closeable) {}
+Tab::Tab(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool closeable)
+    : Tab(elementName, std::move(label), Flags<TabMod>{}, closeable) {}
 
 Tab::~Tab() { delete open; }
 
@@ -33,7 +33,7 @@ void Tab::renderImpl() {
   const auto wasOpen = isOpen();
   const auto wasSelected = selected;
   const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
-  selected = ImGui::BeginTabItem(getLabel().c_str(), open, frameFlags);
+  selected = ImGui::BeginTabItem(getLabel().get().c_str(), open, frameFlags);
   if (selected) {
     RAII end{[] { ImGui::EndTabItem(); }};
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
@@ -69,17 +69,17 @@ void TabBar::renderImpl() {
   }
 }
 
-Tab &TabBar::addTab(const std::string &tabName, const std::string &caption, const Flags<TabMod> &mods, bool closeable) {
-  tabs.emplace_back(std::make_unique<Tab>(tabName, caption, mods, closeable));
+Tab &TabBar::addTab(const std::string &tabName, std::unique_ptr<Resource<std::string>> label, const Flags<TabMod> &mods, bool closeable) {
+  tabs.emplace_back(std::make_unique<Tab>(tabName, std::move(label), mods, closeable));
   return dynamic_cast<Tab &>(*tabs.back());
 }
 
-Tab &TabBar::addTab(const std::string &tabName, const std::string &caption, bool closeable) {
-  return addTab(tabName, caption, Flags<TabMod>{}, closeable);
+Tab &TabBar::addTab(const std::string &tabName, std::unique_ptr<Resource<std::string>> label, bool closeable) {
+  return addTab(tabName, std::move(label), Flags<TabMod>{}, closeable);
 }
 
-TabButton &TabBar::addTabButton(const std::string &buttonName, const std::string &caption, const Flags<TabMod> &mods) {
-  tabs.emplace_back(std::make_unique<TabButton>(buttonName, caption, mods));
+TabButton &TabBar::addTabButton(const std::string &buttonName, std::unique_ptr<Resource<std::string>> label, const Flags<TabMod> &mods) {
+  tabs.emplace_back(std::make_unique<TabButton>(buttonName, std::move(label), mods));
   return *tabs.back();
 }
 

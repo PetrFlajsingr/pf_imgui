@@ -78,7 +78,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * @param showItemCount amount of items shown when open
    * @param persistent enable/disable disk state saving
    */
-  Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
+  Combobox(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const std::string &prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent =
                Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
@@ -170,11 +170,11 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     auto style = setStyleStack();
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
-      previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();
+      previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().get().c_str();
     } else {
       previewPtr = getPreviewValue().c_str();
     }
-    if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+    if (ImGui::BeginCombo(getLabel().get().c_str(), previewPtr, *flags)) {
       RAII end{[] { ImGui::EndCombo(); }};
       checkClose();
       std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {

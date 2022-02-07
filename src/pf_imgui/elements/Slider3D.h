@@ -48,10 +48,10 @@ class PF_IMGUI_EXPORT Slider3D
    * @param size size of the rendered area
    * @param persistent enable state saving to disk
    */
-  Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
+  Slider3D(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
            const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, Size size = Size::Auto(),
            Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value),
+      : ItemElement(elementName), Labellable(std::move(label)), ValueObservable<glm::vec3>(value),
         Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size),
         extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
 
@@ -64,7 +64,7 @@ class PF_IMGUI_EXPORT Slider3D
     const auto oldValue = *address;
     if constexpr (std::same_as<T, float>) {
       valueChanged =
-          ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
+          ImWidgets::SliderScalar3D(getLabel().get().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
                                     extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, getSize().asImVec());
     }
     DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());

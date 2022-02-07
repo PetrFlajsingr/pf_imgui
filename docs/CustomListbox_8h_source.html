@@ -97,7 +97,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomListbox.html#adc4ea5c0c280404c66475b3152c85da8">   45</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomListbox.html#adc4ea5c0c280404c66475b3152c85da8">renderImpl</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">auto</span> colorStyle = setColorStack();</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">auto</span> style = setStyleStack();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginListBox(getLabel().get().c_str(), getSize().asImVec())) {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      std::ranges::for_each(<a class="code" href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">CustomItemBox&lt;T, R&gt;::filteredItems</a>, [](<span class="keyword">auto</span> &amp;item) { item-&gt;second-&gt;<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">render</a>(); });</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      ImGui::EndListBox();</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>

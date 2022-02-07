@@ -24,35 +24,35 @@ void MenuItem::render() {
   ImGui::PopItemFlag();
 }
 
-MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string &label)
-    : MenuItem(elementName), Labellable(label) {}
+MenuButtonItem::MenuButtonItem(const std::string &elementName, std::unique_ptr<Resource<std::string>> label)
+    : MenuItem(elementName), Labellable(std::move(label)) {}
 
 void MenuButtonItem::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
+  if (ImGui::MenuItem(getLabel().get().c_str(), nullptr)) { notifyOnClick(); }
 }
 
 void SubMenu::renderImpl() {
-  if (ImGui::BeginMenu(getLabel().c_str())) {
+  if (ImGui::BeginMenu(getLabel().get().c_str())) {
     RAII end{[] { ImGui::EndMenu(); }};
     renderItems();
   }
 }
 
-SubMenu::SubMenu(const std::string &elementName, const std::string &label) : MenuItem(elementName), Labellable(label) {}
+SubMenu::SubMenu(const std::string &elementName, std::unique_ptr<Resource<std::string>> label) : MenuItem(elementName), Labellable(std::move(label)) {}
 
-SubMenu &MenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
-  return addItem<SubMenu>(name, caption);
+SubMenu &MenuContainer::addSubmenu(const std::string &name, std::unique_ptr<Resource<std::string>> label) {
+  return addItem<SubMenu>(name, std::move(label));
 }
 
-MenuButtonItem &MenuContainer::addButtonItem(const std::string &name, const std::string &caption) {
-  return addItem<MenuButtonItem>(name, caption);
+MenuButtonItem &MenuContainer::addButtonItem(const std::string &name, std::unique_ptr<Resource<std::string>> label) {
+  return addItem<MenuButtonItem>(name, std::move(label));
 }
 
-MenuCheckboxItem &MenuContainer::addCheckboxItem(const std::string &name, const std::string &caption, bool value,
+MenuCheckboxItem &MenuContainer::addCheckboxItem(const std::string &name, std::unique_ptr<Resource<std::string>> label, bool value,
                                                  Persistent persistent) {
-  return addItem<MenuCheckboxItem>(name, caption, value, persistent);
+  return addItem<MenuCheckboxItem>(name, std::move(label), value, persistent);
 }
 
 MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return addItem<MenuSeparatorItem>(name); }
@@ -70,14 +70,14 @@ std::vector<Renderable *> MenuContainer::getRenderables() {
   return items | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
 }
 
-MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
+MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value,
                                    Persistent persistent)
-    : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
+    : MenuItem(elementName), Labellable(std::move(label)), ValueObservable(value), Savable(persistent) {}
 
 void MenuCheckboxItem::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
+  if (ImGui::MenuItem(getLabel().get().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 
 void MenuCheckboxItem::unserialize_impl(const toml::table &src) {

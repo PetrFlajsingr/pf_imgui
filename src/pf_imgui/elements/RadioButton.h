@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT RadioButton
    * @param label text rendered next to the button
    * @param value starting value of the button
    */
-  RadioButton(const std::string &elementName, const std::string &label, bool value = false);
+  RadioButton(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value = false);
 
   /**
    * Check if the button is selected.

@@ -7,14 +7,14 @@
 
 namespace pf::ui::ig {
 
-RadioButton::RadioButton(const std::string &elementName, const std::string &label, bool value)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value) {}
+RadioButton::RadioButton(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value)
+    : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(value) {}
 
 void RadioButton::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   const auto oldValue = getValue();
-  if (ImGui::RadioButton(getLabel().c_str(), getValue())) { setValueInner(true); }
+  if (ImGui::RadioButton(getLabel().get().c_str(), getValue())) { setValueInner(true); }
   if (oldValue != getValue()) { notifyValueChanged(); }
 }
 

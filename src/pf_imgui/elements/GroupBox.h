@@ -28,7 +28,7 @@ class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public
    * @param label label rendered on the top of the groupbox
    * @param s size of the groupbox
    */
-  GroupBox(const std::string &name, const std::string &label, Size s);
+  GroupBox(const std::string &name, std::unique_ptr<Resource<std::string>> label, Size s);
 
  protected:
   void renderImpl() override;

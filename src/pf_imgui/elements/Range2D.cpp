@@ -8,9 +8,9 @@
 
 namespace pf::ui::ig {
 
-Range2D::Range2D(const std::string &elementName, const std::string &label, const glm::vec2 &min, const glm::vec2 &max,
+Range2D::Range2D(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const glm::vec2 &min, const glm::vec2 &max,
                  const math::Range<glm::vec2> &value, const Size &s, Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value), Resizable(s), Savable(persistent),
+    : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(value), Resizable(s), Savable(persistent),
       DragSource(false), DropTarget(false), minRange(min), maxRange(max) {}
 
 void Range2D::renderImpl() {
@@ -18,7 +18,7 @@ void Range2D::renderImpl() {
   auto style = setStyleStack();
   auto val = getValueAddress();
   const auto oldVal = getValue();
-  if (ImWidgets::RangeSelect2D(getLabel().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
+  if (ImWidgets::RangeSelect2D(getLabel().get().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
                                minRange.y, maxRange.x, maxRange.y, getSize().asImVec())) {
     if (*val != oldVal) { notifyValueChanged(); }
   }

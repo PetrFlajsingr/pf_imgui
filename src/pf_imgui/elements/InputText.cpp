@@ -10,7 +10,7 @@
 
 namespace pf::ui::ig {
 
-InputText::InputText(const std::string &elementName, std::string label, const std::string &text,
+InputText::InputText(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const std::string &text,
                      TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
                      const Flags<TextFilter> &filters, Persistent persistent)
     : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(""),
@@ -27,9 +27,9 @@ void InputText::renderImpl() {
   auto style = setStyleStack();
   auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
-    valueChanged = ImGui::InputText(getLabel().c_str(), buffer.get(), 256, flags);
+    valueChanged = ImGui::InputText(getLabel().get().c_str(), buffer.get(), 256, flags);
   } else {
-    valueChanged = ImGui::InputTextMultiline(getLabel().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
+    valueChanged = ImGui::InputTextMultiline(getLabel().get().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
   }
   if (valueChanged && strcmp(buffer.get(), text.c_str()) != 0) {
     text = buffer.get();

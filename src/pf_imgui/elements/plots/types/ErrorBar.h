@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  ErrorBar(const std::string &elementName, const std::string &caption) : LabeledPlotData(elementName, caption) {}
+  ErrorBar(const std::string &elementName, std::unique_ptr<Resource<std::string>> label) : LabeledPlotData(elementName, std::move(label)) {}
 
   /**
    * Set new plot data.
@@ -48,9 +48,9 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
 
  protected : void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
-      ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());
+      ImPlot::PlotErrorBars(getLabel().get().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     } else {
-      ImPlot::PlotErrorBarsH(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());
+      ImPlot::PlotErrorBarsH(getLabel().get().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     }
   }
 

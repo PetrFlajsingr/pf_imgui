@@ -7,12 +7,12 @@
 
 namespace pf::ui::ig {
 
-Group::Group(const std::string &elementName, const std::string &label, Persistent persistent,
+Group::Group(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Persistent persistent,
              AllowCollapse allowCollapse)
-    : ItemElement(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
+    : ItemElement(elementName), Labellable(std::move(label)), Collapsible(allowCollapse, persistent) {}
 
-Group::Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse)
-    : Group(elementName, label, Persistent::No, allowCollapse) {}
+Group::Group(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse)
+    : Group(elementName, std::move(label), Persistent::No, allowCollapse) {}
 
 void Group::renderImpl() {
   auto colorStyle = setColorStack();
@@ -20,7 +20,7 @@ void Group::renderImpl() {
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
-  setCollapsed(!ImGui::CollapsingHeader(getLabel().c_str(), flags));
+  setCollapsed(!ImGui::CollapsingHeader(getLabel().get().c_str(), flags));
   if (!isCollapsed()) {
     std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
   }

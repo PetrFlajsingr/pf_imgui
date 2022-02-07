@@ -167,28 +167,28 @@ $(function() {
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> address = ValueObservable&lt;T&gt;::getValueAddress();</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;      valueChanged = ImGui::SliderFloat(getLabel().c_str(), address, min, max, format.c_str());</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;      valueChanged = ImGui::SliderFloat(getLabel().get().c_str(), address, min, max, format.c_str());</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    }</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec2&gt;) {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      valueChanged = ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      valueChanged = ImGui::SliderFloat2(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec3&gt;) {</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      valueChanged = ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      valueChanged = ImGui::SliderFloat3(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::vec4&gt;) {</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      valueChanged = ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      valueChanged = ImGui::SliderFloat4(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    }</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, int&gt;) {</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;      valueChanged = ImGui::SliderInt(getLabel().c_str(), address, min, max, format.c_str());</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;      valueChanged = ImGui::SliderInt(getLabel().get().c_str(), address, min, max, format.c_str());</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    }</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec2&gt;) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      valueChanged = ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      valueChanged = ImGui::SliderInt2(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    }</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec3&gt;) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      valueChanged = ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      valueChanged = ImGui::SliderInt3(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    }</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, glm::ivec4&gt;) {</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;      valueChanged = ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;      valueChanged = ImGui::SliderInt4(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str());</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(ValueObservable&lt;T&gt;::getValue());</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> drop = <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget&lt;T&gt;::dropAccept</a>(); drop.has_value()) {</div>

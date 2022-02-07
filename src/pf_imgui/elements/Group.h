@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, publi
    * @param persistent enable state saving to disk
    * @param allowCollapse show button for collapsing the group
    */
-  Group(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
+  Group(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Persistent persistent = Persistent::No,
         AllowCollapse allowCollapse = AllowCollapse::No);
   /**
    * Construct Group.
@@ -40,7 +40,7 @@ class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, publi
    * @param label text drawn on top of the group
    * @param allowCollapse show button for collapsing the group
    */
-  Group(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse);
+  Group(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse);
 
  protected:
   void renderImpl() override;

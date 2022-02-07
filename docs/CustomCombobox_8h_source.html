@@ -117,7 +117,7 @@ $(function() {
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">auto</span> colorStyle = setColorStack();</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">auto</span> style = setStyleStack();</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *previewPtr = previewValue.c_str();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginCombo(getLabel().get().c_str(), previewPtr, *flags)) {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      checkClose();</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      std::ranges::for_each(<a class="code" href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">CustomItemBox&lt;T, R&gt;::filteredItems</a>, [](<span class="keyword">auto</span> item) { item-&gt;second-&gt;<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">render</a>(); });</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      ImGui::EndCombo();</div>

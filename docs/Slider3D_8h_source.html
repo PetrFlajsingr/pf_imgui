@@ -114,7 +114,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> oldValue = *address;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      valueChanged =</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;          ImWidgets::SliderScalar3D(getLabel().c_str(), &amp;address-&gt;x, &amp;address-&gt;y, &amp;address-&gt;z, extremesX.x, extremesX.y,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;          ImWidgets::SliderScalar3D(getLabel().get().c_str(), &amp;address-&gt;x, &amp;address-&gt;y, &amp;address-&gt;z, extremesX.x, extremesX.y,</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                    extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, getSize().asImVec());</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;glm::vec3&gt;::drag</a>(ValueObservable&lt;glm::vec3&gt;::getValue());</div>

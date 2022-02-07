@@ -8,8 +8,8 @@
 
 namespace pf::ui::ig {
 
-PieChart::PieChart(const std::string &name, const std::string &label, const Size &size)
-    : Element(name), Labellable(label), Resizable(size) {}
+PieChart::PieChart(const std::string &name, std::unique_ptr<Resource<std::string>> label, const Size &size)
+    : Element(name), Labellable(std::move(label)), Resizable(size) {}
 
 void PieChart::renderImpl() {
   if (dataChanged) {
@@ -18,7 +18,7 @@ void PieChart::renderImpl() {
         data | ranges::views::transform([](const auto &pair) { return pair.first.c_str(); }) | ranges::to_vector;
     values = data | ranges::views::transform([](const auto &pair) { return pair.second; }) | ranges::to_vector;
   }
-  if (ImPlot::BeginPlot(getLabel().c_str(), getSize().asImVec())) {
+  if (ImPlot::BeginPlot(getLabel().get().c_str(), getSize().asImVec())) {
     RAII endPopup{[] { ImPlot::EndPlot(); }};
     ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4, true);
   }

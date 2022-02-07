@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
   constexpr static inline float PADDING_MESSAGE_Y = 10.f;
 
  public:
-  Notification(const std::string &name, const std::string &label,
+  Notification(const std::string &name, std::unique_ptr<Resource<std::string>> label,
                std::chrono::milliseconds duration = DEFAULT_DURATION);
 
   void setIcon(const char *icon, ImFont *font = nullptr);

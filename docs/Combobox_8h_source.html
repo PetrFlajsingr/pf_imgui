@@ -199,11 +199,11 @@ $(function() {
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">auto</span> style = setStyleStack();</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *previewPtr;</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      previewPtr = filteredItems[*selectedItemIndex]-&gt;second-&gt;getLabel().c_str();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      previewPtr = filteredItems[*selectedItemIndex]-&gt;second-&gt;getLabel().get().c_str();</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      previewPtr = getPreviewValue().c_str();</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginCombo(getLabel().get().c_str(), previewPtr, *flags)) {</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;      checkClose();</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;      std::ranges::for_each(filteredItems | ranges::views::enumerate, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;itemIdx) {</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> &amp;[idx, item] = itemIdx;</div>

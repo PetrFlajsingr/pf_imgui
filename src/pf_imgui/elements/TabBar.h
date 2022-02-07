@@ -36,7 +36,7 @@ enum class TabMod {
  */
 class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public Clickable {
  public:
-  TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{});
+  TabButton(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const Flags<TabMod> &mods = Flags<TabMod>{});
 
   void setMods(const Flags<TabMod> &mods);
 
@@ -60,14 +60,14 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   * @param mods modifiers
   * @param label text rendered on the Tab
   */
-  Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{},
+  Tab(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const Flags<TabMod> &mods = Flags<TabMod>{},
       bool closeable = false);
   /**
   * Construct Tab.
   * @param elementName ID of the Tab
   * @param label text rendered on the Tab
   */
-  Tab(const std::string &elementName, const std::string &label, bool closeable = false);
+  Tab(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool closeable = false);
 
   ~Tab() override;
 
@@ -128,7 +128,7 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
   * @param mods modifiers
   * @return reference to the newly created Tab
   */
-  Tab &addTab(const std::string &tabName, const std::string &caption, const Flags<TabMod> &mods = Flags<TabMod>{},
+  Tab &addTab(const std::string &tabName, std::unique_ptr<Resource<std::string>> label, const Flags<TabMod> &mods = Flags<TabMod>{},
               bool closeable = false);
   /**
   * Create a new Tab.
@@ -136,14 +136,14 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
   * @param caption text rendered on the Tab
   * @return reference to the newly created Tab
   */
-  Tab &addTab(const std::string &tabName, const std::string &caption, bool closeable);
+  Tab &addTab(const std::string &tabName, std::unique_ptr<Resource<std::string>> label, bool closeable);
   /**
   * Create a new TabButton.
   * @param buttonName ID of the TabButton
   * @param caption text rendered on the TabButton
   * @return reference to the newly created TabButton
   */
-  TabButton &addTabButton(const std::string &buttonName, const std::string &caption,
+  TabButton &addTabButton(const std::string &buttonName, std::unique_ptr<Resource<std::string>> label,
                           const Flags<TabMod> &mods = Flags<TabMod>{});
   /**
   * Remove a tab with the given ID.

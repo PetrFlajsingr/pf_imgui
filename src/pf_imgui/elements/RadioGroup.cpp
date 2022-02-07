@@ -10,16 +10,16 @@
 
 namespace pf::ui::ig {
 
-RadioGroup::RadioGroup(const std::string &elementName, const std::string &label,
+RadioGroup::RadioGroup(const std::string &elementName, std::unique_ptr<Resource<std::string>> label,
                        std::vector<std::unique_ptr<RadioButton>> buttons,
                        const std::optional<std::size_t> &selectedButtonIndex, Persistent persistent)
-    : Element(elementName), Labellable(label), ValueObservable<std::string_view>(""), Savable(persistent),
+    : Element(elementName), Labellable(std::move(label)), ValueObservable<std::string_view>(""), Savable(persistent),
       buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
 
 void RadioGroup::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  ImGui::Text("%s:", getLabel().c_str());
+  ImGui::Text("%s:", getLabel().get().c_str());
   std::ranges::for_each(buttons, [](auto &button) { button->renderImpl(); });
   std::optional<std::size_t> newSelection = std::nullopt;
   std::ranges::for_each(buttons | ranges::views::enumerate, [&](auto idxBtn) {
@@ -39,8 +39,8 @@ void RadioGroup::renderImpl() {
   }
 }
 
-RadioButton &RadioGroup::addButton(const std::string &elementName, const std::string &caption, bool initValue) {
-  return *buttons.emplace_back(std::make_unique<RadioButton>(elementName, caption, initValue));
+RadioButton &RadioGroup::addButton(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool initValue) {
+  return *buttons.emplace_back(std::make_unique<RadioButton>(elementName, std::move(label), initValue));
 }
 
 void RadioGroup::unserialize_impl(const toml::table &src) {

@@ -6,11 +6,11 @@
 
 namespace pf::ui::ig::plot_type {
 
-HeatMap::HeatMap(const std::string &elementName, const std::string &caption, double minVal, double maxVal)
-    : LabeledPlotData(elementName, caption), min(minVal), max(maxVal) {}
+HeatMap::HeatMap(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, double minVal, double maxVal)
+    : LabeledPlotData(elementName, std::move(label)), min(minVal), max(maxVal) {}
 
 void HeatMap::renderImpl() {
-  ImPlot::PlotHeatmap(getLabel().c_str(), data.data(), static_cast<int>(rowSize), static_cast<int>(recordCount), min,
+  ImPlot::PlotHeatmap(getLabel().get().c_str(), data.data(), static_cast<int>(rowSize), static_cast<int>(recordCount), min,
                       max);
 }
 

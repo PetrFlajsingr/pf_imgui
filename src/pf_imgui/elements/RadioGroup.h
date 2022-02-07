@@ -47,7 +47,7 @@ class PF_IMGUI_EXPORT RadioGroup
    * @param selectedButtonIndex index of selected button
    * @param persistent enable state saving to disk
    */
-  RadioGroup(const std::string &elementName, const std::string &label,
+  RadioGroup(const std::string &elementName, std::unique_ptr<Resource<std::string>> label,
              std::vector<std::unique_ptr<RadioButton>> buttons = {},
              const std::optional<std::size_t> &selectedButtonIndex = std::nullopt,
              Persistent persistent = Persistent::No);
@@ -58,7 +58,7 @@ class PF_IMGUI_EXPORT RadioGroup
    * @param caption text rendered next to the button
    * @param initValue true for selected, false otherwise
    */
-  RadioButton &addButton(const std::string &elementName, const std::string &caption, bool initValue = false);
+  RadioButton &addButton(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool initValue = false);
 
  protected:
   void unserialize_impl(const toml::table &src) override;

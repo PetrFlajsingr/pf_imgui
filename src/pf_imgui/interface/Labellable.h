@@ -11,6 +11,7 @@
 #include <fmt/format.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/resources/Resource.h>
 #include <string>
 #include <utility>
 
@@ -27,7 +28,7 @@ class PF_IMGUI_EXPORT Labellable {
    * Construct Labellable with given label
    * @param label label to be displayed
    */
-  explicit Labellable(std::string label);
+  explicit Labellable(std::unique_ptr<Resource<std::string>> label);
 
   Labellable(Labellable &&other) noexcept;
   Labellable &operator=(Labellable &&other) noexcept;
@@ -36,15 +37,13 @@ class PF_IMGUI_EXPORT Labellable {
    * Get current label
    * @return label
    */
-  [[nodiscard]] const std::string &getLabel() const;
+  [[nodiscard]] const Resource<std::string> &getLabel() const;
   /**
    * Set new label with formatting bz fmt::format
    * @param fmt format string
    * @param args arguments for format string
    */
-  void setLabel(const std::string &fmt, auto &&...args) {
-    label_ = fmt::format(fmt, std::forward<decltype(args)>(args)...);
-  }
+  void setLabel(std::unique_ptr<Resource<std::string>> newLabel);
 
   /**
    * Set visibility of the label
@@ -68,8 +67,7 @@ class PF_IMGUI_EXPORT Labellable {
   virtual ~Labellable() = default;
 
  private:
-  inline static std::string EMPTY_LABEL;
-  std::string label_;
+  std::unique_ptr<Resource<std::string>> label_;
   Visibility visibility = Visibility::Visible;
 };
 

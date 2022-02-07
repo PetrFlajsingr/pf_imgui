@@ -134,10 +134,10 @@ $(function() {
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> address = ValueObservable&lt;T&gt;::getValueAddress();</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      valueChanged = ImGui::VSliderFloat(getLabel().c_str(), getSize().asImVec(), address, min, max, format.c_str());</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      valueChanged = ImGui::VSliderFloat(getLabel().get().c_str(), getSize().asImVec(), address, min, max, format.c_str());</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, int&gt;) {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      valueChanged = ImGui::VSliderInt(getLabel().c_str(), getSize().asImVec(), address, min, max, format.c_str());</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      valueChanged = ImGui::VSliderInt(getLabel().get().c_str(), getSize().asImVec(), address, min, max, format.c_str());</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(ValueObservable&lt;T&gt;::getValue());</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> drop = <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget&lt;T&gt;::dropAccept</a>(); drop.has_value()) {</div>

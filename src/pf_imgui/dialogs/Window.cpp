@@ -11,11 +11,11 @@
 
 namespace pf::ui::ig {
 
-Window::Window(std::string name, std::string label, AllowCollapse allowCollapse, Persistent persistent)
+Window::Window(std::string name, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse, Persistent persistent)
     : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
       Positionable(Position{-1, -1}), Labellable(std::move(label)) {}
 
-Window::Window(std::string name, std::string label, Persistent persistent)
+Window::Window(std::string name, std::unique_ptr<Resource<std::string>> label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
 // TODO: fix up Begin, to use LABEL##NAME
@@ -25,7 +25,7 @@ void Window::renderImpl() {
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   RAII endPopup{[] { ImGui::End(); }};
-  if (ImGui::Begin(getLabel().c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
+  if (ImGui::Begin(getLabel().get().c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
@@ -64,7 +64,7 @@ void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::setSize(const Size &newSize) {
   Resizable::setSize(newSize);  //FIXME change this to SetNextWindowSize
-  ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
+  ImGui::SetWindowSize(getLabel().get().c_str(), getSize().asImVec());
 }
 
 void Window::render() {
@@ -84,17 +84,17 @@ void Window::render() {
 }
 
 void Window::setCollapsed(bool collapse) {
-  ImGui::SetWindowCollapsed(getLabel().c_str(), collapse);
+  ImGui::SetWindowCollapsed(getLabel().get().c_str(), collapse);
   Collapsible::setCollapsed(collapse);
 }
 
 void Window::setFocus() {
-  ImGui::SetWindowFocus(getLabel().c_str());
+  ImGui::SetWindowFocus(getLabel().get().c_str());
   Focusable::setFocus();
 }
 
 void Window::setPosition(Position pos) {
-  ImGui::SetWindowPos(getLabel().c_str(), pos.asImVec());
+  ImGui::SetWindowPos(getLabel().get().c_str(), pos.asImVec());
   Positionable::setPosition(pos);
 }
 

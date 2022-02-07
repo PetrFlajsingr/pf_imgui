@@ -182,7 +182,7 @@ $(function() {
 <div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Listbox.html#ac1fc8256e9e13af00d982093bfc2bec5">  153</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Listbox.html#ac1fc8256e9e13af00d982093bfc2bec5">renderImpl</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">auto</span> colorStyle = setColorStack();</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">auto</span> style = setStyleStack();</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordflow">if</span> (ImGui::BeginListBox(getLabel().get().c_str(), getSize().asImVec())) {</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;      std::ranges::for_each(filteredItems | ranges::views::enumerate, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;itemIdx) {</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> &amp;[idx, item] = itemIdx;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        item-&gt;second-&gt;render();</div>

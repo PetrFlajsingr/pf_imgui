@@ -61,9 +61,9 @@ class PF_IMGUI_EXPORT ColorChooser
    * @param persistent allow state saving to disk
    * @param value starting value
    */
-  ColorChooser(const std::string &elementName, const std::string &label, T value = T{},
+  ColorChooser(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, T value = T{},
                Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+      : ItemElement(elementName), Labellable(std::move(label)), ValueObservable<T>(value),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {}
 
   /**
@@ -101,15 +101,15 @@ class PF_IMGUI_EXPORT ColorChooser
     const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (Type == ColorChooserType::Edit) {
       if constexpr (std::same_as<glm::vec3, T>) {
-        valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*address), flags);
+        valueChanged = ImGui::ColorEdit3(getLabel().get().c_str(), glm::value_ptr(*address), flags);
       } else {
-        valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*address), flags);
+        valueChanged = ImGui::ColorEdit4(getLabel().get().c_str(), glm::value_ptr(*address), flags);
       }
     } else {
       if constexpr (std::same_as<glm::vec3, T>) {
-        valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*address), flags);
+        valueChanged = ImGui::ColorPicker3(getLabel().get().c_str(), glm::value_ptr(*address), flags);
       } else {
-        valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*address), flags);
+        valueChanged = ImGui::ColorPicker4(getLabel().get().c_str(), glm::value_ptr(*address), flags);
       }
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());

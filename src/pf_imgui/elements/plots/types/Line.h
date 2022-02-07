@@ -24,7 +24,7 @@ class PF_IMGUI_EXPORT Line : public LabeledPlotData, public details::DefaultPlot
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  Line(const std::string &elementName, const std::string &caption);
+  Line(const std::string &elementName, std::unique_ptr<Resource<std::string>> label);
 
  protected:
   void renderImpl() override;

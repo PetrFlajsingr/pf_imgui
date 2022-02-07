@@ -91,7 +91,7 @@ class PF_IMGUI_EXPORT PlotData : public Element {
  */
 class PF_IMGUI_EXPORT LabeledPlotData : public PlotData, public Labellable {
  public:
-  LabeledPlotData(const std::string &elementName, const std::string &caption);
+  LabeledPlotData(const std::string &elementName, std::unique_ptr<Resource<std::string>> label);
 };
 
 }  // namespace pf::ui::ig::plot_type

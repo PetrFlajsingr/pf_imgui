@@ -49,7 +49,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
     * @param allowCollapse
     * @param persistent saving state to disk
     */
-  Window(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No,
+  Window(std::string name, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse = AllowCollapse::No,
          Persistent persistent = Persistent::No);
 
   /**
@@ -58,7 +58,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
     * @param label title
     * @param persistent saving state to disk
     */
-  Window(std::string name, std::string label, Persistent persistent);
+  Window(std::string name, std::unique_ptr<Resource<std::string>> label, Persistent persistent);
 
   /**
     * Provides Windows menu bar. If the menu bar doesn't exist new one is created.

@@ -8,14 +8,14 @@
 
 namespace pf::ui::ig {
 
-Selectable::Selectable(const std::string &elementName, const std::string &label, bool value, Size s,
+Selectable::Selectable(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value, Size s,
                        Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value), Resizable(s), Savable(persistent) {}
+    : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(value), Resizable(s), Savable(persistent) {}
 
 void Selectable::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  if (ImGui::Selectable(getLabel().c_str(), getValueAddress(), 0, getSize().asImVec())) { notifyValueChanged(); }
+  if (ImGui::Selectable(getLabel().get().c_str(), getValueAddress(), 0, getSize().asImVec())) { notifyValueChanged(); }
 }
 
 void Selectable::unserialize_impl(const toml::table &src) {

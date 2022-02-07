@@ -8,23 +8,23 @@
 
 namespace pf::ui::ig {
 
-Checkbox::Checkbox(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
-    : Checkbox(elementName, label, Type::Checkbox, value, persistent) {}
+Checkbox::Checkbox(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value, Persistent persistent)
+    : Checkbox(elementName, std::move(label), Type::Checkbox, value, persistent) {}
 
-Checkbox::Checkbox(const std::string &elementName, const std::string &label, Checkbox::Type checkboxType, bool value,
+Checkbox::Checkbox(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Checkbox::Type checkboxType, bool value,
                    Persistent persistent)
-    : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent), type(checkboxType) {}
+    : ItemElement(elementName), ValueObservable(value), Labellable(std::move(label)), Savable(persistent), type(checkboxType) {}
 
 void Checkbox::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   bool valueChanged = false;
   switch (type) {
-    case Type::Checkbox: valueChanged = ImGui::Checkbox(getLabel().c_str(), getValueAddress()); break;
+    case Type::Checkbox: valueChanged = ImGui::Checkbox(getLabel().get().c_str(), getValueAddress()); break;
     case Type::Toggle:
-      ImGui::Text("%s", getLabel().c_str());
+      ImGui::Text("%s", getLabel().get().c_str());
       ImGui::SameLine();
-      valueChanged = ToggleButton(getLabel().c_str(), getValueAddress());
+      valueChanged = ToggleButton(getLabel().get().c_str(), getValueAddress());
       break;
   }
   if (valueChanged) { notifyValueChanged(); }

@@ -8,9 +8,9 @@
 
 namespace pf::ui::ig {
 
-SliderAngle::SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value,
+SliderAngle::SliderAngle(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, float min, float max, float value,
                          Persistent persistent, std::string format)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value),
+    : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(value),
       Savable(persistent), DragSource<float>(false), DropTarget<float>(false), minDeg(min), maxDeg(max),
       format(std::move(format)) {}
 
@@ -18,7 +18,7 @@ void SliderAngle::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
-  if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str(), flags)) {
+  if (ImGui::SliderAngle(getLabel().get().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str(), flags)) {
     ValueObservable::notifyValueChanged();
   }
   drag(getValue());

@@ -41,7 +41,7 @@ class PF_IMGUI_EXPORT PieChart : public Element, public Labellable, public Resiz
    * @param label text rendered above the chart
    * @param size size on display
    */
-  PieChart(const std::string &name, const std::string &label, const Size &size);
+  PieChart(const std::string &name, std::unique_ptr<Resource<std::string>> label, const Size &size);
   /**
    * Add a new sample to the graph.
    * @param sample sample to be added

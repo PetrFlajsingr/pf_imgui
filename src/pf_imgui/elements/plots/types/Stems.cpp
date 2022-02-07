@@ -6,10 +6,10 @@
 
 namespace pf::ui::ig::plot_type {
 
-Stems::Stems(const std::string &elementName, const std::string &caption) : LabeledPlotData(elementName, caption) {}
+Stems::Stems(const std::string &elementName, std::unique_ptr<Resource<std::string>> label) : LabeledPlotData(elementName, std::move(label)) {}
 
 void Stems::renderImpl() {
-  ImPlot::PlotStems(getLabel().c_str(), xData.data(), yData.data(), static_cast<int>(xData.size()));
+  ImPlot::PlotStems(getLabel().get().c_str(), xData.data(), yData.data(), static_cast<int>(xData.size()));
 }
 
 }  // namespace pf::ui::ig::plot_type

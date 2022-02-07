@@ -36,9 +36,9 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
    * @param rowFactory factory for row creation
    * @param s size of the element
    */
-  CustomListbox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
+  CustomListbox(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, CustomItemBoxFactory<T, R> auto &&rowFactory,
                 Size s = Size::Auto())
-      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
+      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(std::move(label)),
         Resizable(s) {}
 
  protected:
@@ -47,7 +47,7 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
-    if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
+    if (ImGui::BeginListBox(getLabel().get().c_str(), getSize().asImVec())) {
       RAII end{[] { ImGui::EndListBox(); }};
       std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
     }

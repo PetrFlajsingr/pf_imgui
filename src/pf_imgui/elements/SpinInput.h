@@ -50,9 +50,9 @@ class PF_IMGUI_EXPORT SpinInput
    * @param stepFast fast spin step
    * @param persistent enable/disable state saving od disk
    */
-  SpinInput(const std::string &elementName, const std::string &label, T minVal, T maxVal, T value = T{}, T step = T{1},
+  SpinInput(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, T minVal, T maxVal, T value = T{}, T step = T{1},
             const T &stepFast = T{100}, Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+      : ItemElement(elementName), Labellable(std::move(label)), ValueObservable<T>(value),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), step(step), stepFast(stepFast), min(minVal),
         max(maxVal) {}
 
@@ -79,10 +79,10 @@ class PF_IMGUI_EXPORT SpinInput
     auto style = setStyleStack();
     auto valueChanged = false;
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
+      valueChanged = ImGui::SpinInt(getLabel().get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
     }
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
+      valueChanged = ImGui::SpinFloat(getLabel().get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
                                       flags);  // TODO: user provided format
     }
     if (valueChanged) {

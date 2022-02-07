@@ -12,7 +12,7 @@ NotificationManager::NotificationManager(FontManager &fontManager)
     : defaultFont(
         fontManager.fontBuilder("def_icon_notif").addIconSubfont(IconPack::FontAwesome5Regular, 13.f).build()) {}
 
-Notification &NotificationManager::createNotification(const std::string &name, const std::string &label,
+Notification &NotificationManager::createNotification(const std::string &name, std::unique_ptr<Resource<std::string>> label,
                                                       std::chrono::milliseconds duration) {
   return *newNotifications.emplace_back(std::make_unique<Notification>(name, label, duration));
 }
@@ -34,7 +34,7 @@ void NotificationManager::renderNotifications() {
 }
 
 Notification &NotificationManager::createNotification(NotificationType notificationType, const std::string &name,
-                                                      const std::string &label, std::chrono::milliseconds duration) {
+                                                      std::unique_ptr<Resource<std::string>> label, std::chrono::milliseconds duration) {
   auto &notification = *newNotifications.emplace_back(std::make_unique<Notification>(name, label, duration));
   const char *icon = nullptr;
   ImVec4 color;

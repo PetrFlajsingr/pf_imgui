@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT FlameGraph
    * @param size size of the graph
    * @param overlay text render on top of the graph
    */
-  FlameGraph(const std::string &elementName, const std::string &label, const Size &size = Size::Auto(),
+  FlameGraph(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const Size &size = Size::Auto(),
              std::optional<std::string> overlay = std::nullopt);
 
   /**

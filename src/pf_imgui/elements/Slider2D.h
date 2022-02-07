@@ -56,9 +56,9 @@ class PF_IMGUI_EXPORT Slider2D
    * @param value starting value
    * @param persistent enable state saving to disk
    */
-  Slider2D(const std::string &elementName, const std::string &label, StorageType minMaxX, StorageType minMaxY,
+  Slider2D(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, StorageType minMaxX, StorageType minMaxY,
            StorageType value = StorageType{}, Size size = Size::Auto(), Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value),
+      : ItemElement(elementName), Labellable(std::move(label)), ValueObservable<StorageType>(value),
         Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(size),
         extremesX(minMaxX), extremesY(minMaxY) {}
 
@@ -70,11 +70,11 @@ class PF_IMGUI_EXPORT Slider2D
     auto address = ValueObservable<StorageType>::getValueAddress();
     const auto oldValue = *address;
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImWidgets::Slider2DInt(getLabel().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
+      valueChanged = ImWidgets::Slider2DInt(getLabel().get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
                                             &extremesY.x, &extremesY.y, getSize().asImVec());
     }
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
+      valueChanged = ImWidgets::Slider2DFloat(getLabel().get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
                                               extremesY.x, extremesY.y, getSize().asImVec());
     }
     DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());

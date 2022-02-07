@@ -89,9 +89,9 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1Bar.html#a2ee787032946535c32a9452ba14a794d">   33</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1Bar.html#a2ee787032946535c32a9452ba14a794d">renderImpl</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> constexpr (Type == BarType::Vertical) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      ImPlot::PlotBars(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      ImPlot::PlotBars(getLabel().get().c_str(), xData.data(), yData.data(), xData.size(), 0.67);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      ImPlot::PlotBarsH(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      ImPlot::PlotBarsH(getLabel().get().c_str(), xData.data(), yData.data(), xData.size(), 0.67);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  }</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>

@@ -7,8 +7,8 @@
 
 namespace pf::ui::ig {
 
-Notification::Notification(const std::string &name, const std::string &label, std::chrono::milliseconds duration)
-    : Renderable(name), Labellable(label), dismissDuration(duration) {}
+Notification::Notification(const std::string &name, std::unique_ptr<Resource<std::string>> label, std::chrono::milliseconds duration)
+    : Renderable(name), Labellable(std::move(label)), dismissDuration(duration) {}
 
 void Notification::renderImpl() {
   auto colorStyle = setColorStack();
@@ -39,7 +39,7 @@ void Notification::renderImpl() {
       ImGui::TextColored(*iconColor, "%s", icon);
       ImGui::SameLine();
     }
-    ImGui::Text("%s", getLabel().c_str());
+    ImGui::Text("%s", getLabel().get().c_str());
     /*if (was_title_rendered && !NOTIFY_NULL_OR_EMPTY(content)) {
         SetCursorPosY(GetCursorPosY() + 5.f);// Must be a better way to do this!!!!
       }*/

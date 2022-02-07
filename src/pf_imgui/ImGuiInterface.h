@@ -67,7 +67,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param caption title
    * @return reference to the created dialog
    */
-  ModalDialog &createDialog(const std::string &elementName, const std::string &caption);
+  ModalDialog &createDialog(const std::string &elementName, std::unique_ptr<Resource<std::string>> label);
 
   /**
    * Create MessageDialog

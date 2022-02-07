@@ -34,7 +34,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    * @param yLabel label of y axis
    * @param size size of the element
    */
-  Plot(const std::string &elementName, const std::string &label, std::optional<std::string> xLabel = std::nullopt,
+  Plot(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, std::optional<std::string> xLabel = std::nullopt,
        std::optional<std::string> yLabel = std::nullopt, const Size &size = Size::FillWidth());
 
   /**

@@ -63,9 +63,9 @@ class PF_IMGUI_EXPORT VerticalSlider
    * @param persistent enable state saving to disk
    * @param format printf-like format for value
    */
-  VerticalSlider(const std::string &elementName, const std::string &label, Size size, T minVal, T maxVal, T value = T{},
+  VerticalSlider(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Size size, T minVal, T maxVal, T value = T{},
                  Persistent persistent = Persistent::No, std::string format = details::defaultVSliderFormat<T>())
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent),
+      : ItemElement(elementName), Labellable(std::move(label)), ValueObservable<T>(value), Savable(persistent),
         Resizable(size), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal),
         format(std::move(format)) {}
 
@@ -99,11 +99,11 @@ class PF_IMGUI_EXPORT VerticalSlider
     const auto flags = ImGuiSliderFlags_AlwaysClamp;
     if constexpr (std::same_as<T, float>) {
       valueChanged =
-          ImGui::VSliderFloat(getLabel().c_str(), getSize().asImVec(), address, min, max, format.c_str(), flags);
+          ImGui::VSliderFloat(getLabel().get().c_str(), getSize().asImVec(), address, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, int>) {
       valueChanged =
-          ImGui::VSliderInt(getLabel().c_str(), getSize().asImVec(), address, min, max, format.c_str(), flags);
+          ImGui::VSliderInt(getLabel().get().c_str(), getSize().asImVec(), address, min, max, format.c_str(), flags);
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {

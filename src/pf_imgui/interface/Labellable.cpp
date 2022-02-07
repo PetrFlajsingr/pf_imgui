@@ -7,7 +7,7 @@
 #include <utility>
 
 namespace pf::ui::ig {
-Labellable::Labellable(std::string label_) : label_(std::move(label_)) {}
+Labellable::Labellable(std::unique_ptr<Resource<std::string>> label_) : label_(std::move(label_)) {}
 
 Labellable::Labellable(Labellable &&other) noexcept : label_(std::move(other.label_)) {}
 
@@ -16,9 +16,12 @@ Labellable &Labellable::operator=(Labellable &&other) noexcept {
   return *this;
 }
 
-const std::string &Labellable::getLabel() const {
-  if (isLabelVisible()) { return label_; }
-  return EMPTY_LABEL;
+const Resource<std::string> &Labellable::getLabel() const {
+  return *label_;
+}
+
+void Labellable::setLabel(std::unique_ptr<Resource<std::string>> newLabel) {
+  label_ = std::move(newLabel);
 }
 
 void Labellable::setLabelVisible(Visibility newVisibility) { visibility = newVisibility; }

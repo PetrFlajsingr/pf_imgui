@@ -43,9 +43,9 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
    * @param prevValue preview value
    * @param showItemCount amount of items shown when open
    */
-  CustomCombobox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
+  CustomCombobox(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, CustomItemBoxFactory<T, R> auto &&rowFactory,
                  std::string prevValue = "", ComboBoxCount showItemCount = ComboBoxCount::Items8)
-      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
+      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(std::move(label)),
         flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
     if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
   }
@@ -84,7 +84,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
     const char *previewPtr = previewValue.c_str();
-    if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+    if (ImGui::BeginCombo(getLabel().get().c_str(), previewPtr, *flags)) {
       RAII end{[] { ImGui::EndCombo(); }};
       checkClose();
       std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });

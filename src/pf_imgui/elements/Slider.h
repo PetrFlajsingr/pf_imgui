@@ -104,9 +104,9 @@ class PF_IMGUI_EXPORT Slider
    * @param persistent enable state saving to disk
    * @param format printf-like format for rendering value over slider
    */
-  Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
+  Slider(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, MinMaxType min, MinMaxType max, T value = T{},
          Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>())
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+      : ItemElement(elementName), Labellable(std::move(label)), ValueObservable<T>(value),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), min(min), max(max), format(std::move(format)) {
   }
 
@@ -165,28 +165,28 @@ class PF_IMGUI_EXPORT Slider
     const auto address = ValueObservable<T>::getValueAddress();
     const auto flags = ImGuiSliderFlags_AlwaysClamp;
     if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::SliderFloat(getLabel().c_str(), address, min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderFloat(getLabel().get().c_str(), address, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::vec2>) {
-      valueChanged = ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderFloat2(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::vec3>) {
-      valueChanged = ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderFloat3(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::vec4>) {
-      valueChanged = ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderFloat4(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::SliderInt(getLabel().c_str(), address, min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderInt(getLabel().get().c_str(), address, min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec2>) {
-      valueChanged = ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderInt2(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec3>) {
-      valueChanged = ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderInt3(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
     }
     if constexpr (std::same_as<T, glm::ivec4>) {
-      valueChanged = ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
+      valueChanged = ImGui::SliderInt4(getLabel().get().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
     }
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {

@@ -57,14 +57,14 @@ class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
     * @param caption text of the SubMenu
     * @return reference to the created SubMenu
     */
-  SubMenu &addSubmenu(const std::string &name, const std::string &caption);
+  SubMenu &addSubmenu(const std::string &name, std::unique_ptr<Resource<std::string>> label);
   /**
     * Create an instance of MenuButtonItem and add it to the end of children/
     * @param name ID of the MenuButtonItem
     * @param caption text of the MenuButtonItem
     * @return reference to the created MenuButtonItem
     */
-  MenuButtonItem &addButtonItem(const std::string &name, const std::string &caption);
+  MenuButtonItem &addButtonItem(const std::string &name, std::unique_ptr<Resource<std::string>> label);
   /**
     * Create an instance of MenuCheckboxItem and add it to the end of children/
     * @param name ID of the MenuCheckboxItem
@@ -72,7 +72,7 @@ class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
     * @param value starting value
     * @return reference to the created MenuButtonItem
     */
-  MenuCheckboxItem &addCheckboxItem(const std::string &name, const std::string &caption, bool value = false,
+  MenuCheckboxItem &addCheckboxItem(const std::string &name, std::unique_ptr<Resource<std::string>> label, bool value = false,
                                     Persistent persistent = Persistent::No);
   /**
     * Create an instance of MenuSeparatorItem and add it to the end of children/
@@ -122,7 +122,7 @@ class PF_IMGUI_EXPORT MenuButtonItem
    * @param elementName ID of the element
    * @param label text rendered on the button
    */
-  MenuButtonItem(const std::string &elementName, const std::string &label);
+  MenuButtonItem(const std::string &elementName, std::unique_ptr<Resource<std::string>> label);
 
  protected:
   void renderImpl() override;
@@ -147,7 +147,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
    * @param label text rendered on the button
    * @param value starting value
    */
-  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value = false,
+  MenuCheckboxItem(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value = false,
                    Persistent persistent = Persistent::No);
 
  protected:
@@ -182,7 +182,7 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuC
    * @param elementName ID of the element
    * @param label text rendered on the button
    */
-  SubMenu(const std::string &elementName, const std::string &label);
+  SubMenu(const std::string &elementName, std::unique_ptr<Resource<std::string>> label);
 
  protected:
   void renderImpl() override;

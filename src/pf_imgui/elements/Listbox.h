@@ -75,7 +75,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param persistent enable/disable state saving to disk
    */
   Listbox(
-      const std::string &elementName, const std::string &label, Size s = Size::Auto(),
+      const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Size s = Size::Auto(),
       std::optional<int> selectedIdx = std::nullopt,
       Persistent persistent = Persistent::No) requires(std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : CustomListbox<T, Selectable>(elementName, label, Factory{}, s), ValueObservable<T>(),
@@ -153,7 +153,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
-    if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
+    if (ImGui::BeginListBox(getLabel().get().c_str(), getSize().asImVec())) {
       RAII end{[] { ImGui::EndListBox(); }};
       std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
         const auto &[idx, item] = itemIdx;

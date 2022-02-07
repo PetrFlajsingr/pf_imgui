@@ -26,14 +26,14 @@ class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotD
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  Bar(const std::string &elementName, const std::string &caption) : LabeledPlotData(elementName, caption) {}
+  Bar(const std::string &elementName, std::unique_ptr<Resource<std::string>> label) : LabeledPlotData(elementName, std::move(label)) {}
 
  protected:
   void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
-      ImPlot::PlotBars(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
+      ImPlot::PlotBars(getLabel().get().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
     } else {
-      ImPlot::PlotBarsH(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
+      ImPlot::PlotBarsH(getLabel().get().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
     }
   }
 };

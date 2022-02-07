@@ -7,11 +7,11 @@
 
 namespace pf::ui::ig {
 
-details::TreeRecord::TreeRecord(const std::string &elementName, const std::string &label,
+details::TreeRecord::TreeRecord(const std::string &elementName, std::unique_ptr<Resource<std::string>> label,
                                 const Flags<ImGuiTreeNodeFlags_> &defaultFlags)
-    : ItemElement(elementName), Labellable(label), flags(defaultFlags) {}
+    : ItemElement(elementName), Labellable(std::move(label)), flags(defaultFlags) {}
 
-TreeLeaf::TreeLeaf(const std::string &elementName, const std::string &label, bool selected, Persistent persistent)
+TreeLeaf::TreeLeaf(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool selected, Persistent persistent)
     : TreeRecord(elementName, label, ImGuiTreeNodeFlags_Leaf), ValueObservable(selected), Savable(persistent) {
   if (selected) {
     flags |= ImGuiTreeNodeFlags_Selected;
@@ -34,7 +34,7 @@ void TreeLeaf::setValue(const bool &newValue) {
 void TreeLeaf::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  const auto pop = ImGui::TreeNodeEx(getLabel().c_str(), *flags);
+  const auto pop = ImGui::TreeNodeEx(getLabel().get().c_str(), *flags);
   RAII end{[pop] {
     if (pop) { ImGui::TreePop(); }
   }};
