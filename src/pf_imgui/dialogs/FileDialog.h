@@ -215,8 +215,8 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
   void build();
 
  private:
-  FileDialogType type;
   class ImGuiInterface *imguiInterface;
+  FileDialogType type;
   std::string label_;
   std::vector<FileExtensionSettings> extensionSettings_;
   std::function<void(std::vector<std::filesystem::path>)> onSelect_;

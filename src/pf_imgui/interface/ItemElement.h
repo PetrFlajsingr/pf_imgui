@@ -53,14 +53,14 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
    * Get the tooltip if it exists.
    * @return tooltip of this item
    *
-   * @throws StacktraceException if the tooltip doesn't exist
+   * @throws Exception if the tooltip doesn't exist
    */
   [[nodiscard]] Tooltip &getTooltip();
   /**
    * Get the tooltip if it exists.
    * @return tooltip of this item
    *
-   * @throws StacktraceException if the tooltip doesn't exist
+   * @throws Exception if the tooltip doesn't exist
    */
   [[nodiscard]] const Tooltip &getTooltip() const;
   /**
@@ -92,7 +92,7 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
    * Get the tooltip if it exists.
    * @return tooltip of this item
    *
-   * @throws StacktraceException if the tooltip doesn't exist
+   * @throws Exception if the tooltip doesn't exist
    */
   [[nodiscard]] PopupMenu &getPopupMenu();
   /**

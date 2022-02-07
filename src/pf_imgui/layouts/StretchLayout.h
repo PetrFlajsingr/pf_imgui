@@ -91,7 +91,7 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
   /**
    * Get child of the layout.
    * @return reference to the child
-   * @throws StackTraceException when no child is present inside the layout
+   * @throws Exception when no child is present inside the layout
    */
   [[nodiscard]] Element &getChild();
   /**

@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    * @param name ID of the data storage
    * @return reference to data storage
    * @throws IdNotFoundException when no such data storage exists
-   * @throw StackTraceException when desired type doesn't match the storage data type
+   * @throw Exception when desired type doesn't match the storage data type
    */
   template<std::derived_from<plot_type::PlotData> T>
   T &dataByName(const std::string &name) {

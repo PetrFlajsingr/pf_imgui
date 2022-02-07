@@ -32,7 +32,7 @@ void StretchLayout::setStretch(Stretch newStretch) {
 
 Element &StretchLayout::getChild() {
 #ifndef _MSC_VER  // TODO: MSVC internal error
-  if (child == nullptr) { throw StackTraceException("Child not present"); }
+  if (child == nullptr) { throw Exception("Child not present"); }
 #endif
   return *dynamic_cast<Element *>(child.get());
 }
