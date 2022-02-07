@@ -19,6 +19,8 @@ namespace pf::ui::ig {
 
 /**
  * @brief A group of elements with a border and a label.
+ *
+ * @todo: rename to expander and make a proper group box?
  */
 class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public Labellable, public Resizable {
  public:
