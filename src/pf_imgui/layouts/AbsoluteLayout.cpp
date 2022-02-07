@@ -3,6 +3,7 @@
 //
 
 #include "AbsoluteLayout.h"
+#include <range/v3/range/conversion.hpp>
 
 namespace pf::ui::ig {
 

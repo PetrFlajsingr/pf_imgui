@@ -10,7 +10,7 @@
 
 #include <memory>
 #include <optional>
-#include <pf_common/exceptions/StackTraceException.h>
+#include <pf_common/exceptions/Exceptions.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
 #include <pf_imgui/exceptions.h>
@@ -64,7 +64,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
     if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
         iter != datas.end()) {
       if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }
-      throw StackTraceException("Wrong type for data: '{}' in '{}'", name, getName());
+      throw Exception("Wrong type for data: '{}' in '{}'", name, getName());
     }
     throw IdNotFoundException("Data not found: '{}' in '{}'", name, getName());
   }

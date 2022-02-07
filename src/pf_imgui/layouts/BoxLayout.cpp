@@ -5,6 +5,7 @@
 #include "BoxLayout.h"
 #include <imgui.h>
 #include <numeric>
+#include <range/v3/range/conversion.hpp>
 #include <utility>
 
 namespace pf::ui::ig {

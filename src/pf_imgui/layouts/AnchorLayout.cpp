@@ -4,6 +4,7 @@
 
 #include "AnchorLayout.h"
 #include <algorithm>
+#include <range/v3/range/conversion.hpp>
 
 namespace pf::ui::ig {
 

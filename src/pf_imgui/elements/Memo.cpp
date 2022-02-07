@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "Checkbox.h"
 #include "InputText.h"
+#include <range/v3/range/conversion.hpp>
 
 namespace pf::ui::ig {
 

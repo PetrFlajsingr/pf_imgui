@@ -3,6 +3,7 @@
 //
 
 #include "ElementContainer.h"
+#include <range/v3/range/conversion.hpp>
 #include <utility>
 
 namespace pf::ui::ig {

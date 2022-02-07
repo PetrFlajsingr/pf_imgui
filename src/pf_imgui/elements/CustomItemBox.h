@@ -13,6 +13,7 @@
 #include <memory>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <range/v3/range/conversion.hpp>
 #include <ranges>
 #include <string>
 #include <type_traits>

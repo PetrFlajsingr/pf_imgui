@@ -11,7 +11,7 @@
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_common/enums.h>
-#include <pf_common/exceptions/StackTraceException.h>
+#include <pf_common/exceptions/Exceptions.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Resizable.h>

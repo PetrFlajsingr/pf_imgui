@@ -5,6 +5,7 @@
 #include "RadioGroup.h"
 #include <imgui.h>
 #include <memory>
+#include <range/v3/view/enumerate.hpp>
 #include <utility>
 
 namespace pf::ui::ig {

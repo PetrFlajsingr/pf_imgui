@@ -4,7 +4,9 @@
 
 #include "StackedLayout.h"
 #include <memory>
+#include <range/v3/range/conversion.hpp>
 #include <range/v3/view/join.hpp>
+#include <range/v3/view/enumerate.hpp>
 #include <string>
 #include <utility>
 

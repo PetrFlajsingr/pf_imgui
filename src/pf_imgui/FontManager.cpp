@@ -5,6 +5,7 @@
 #include "FontManager.h"
 #include <pf_common/Visitor.h>
 #include <pf_imgui/ImGuiInterface.h>
+#include <range/v3/range/conversion.hpp>
 #include <ranges>
 #include <string>
 #include <utility>

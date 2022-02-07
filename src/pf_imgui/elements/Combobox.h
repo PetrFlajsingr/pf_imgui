@@ -16,6 +16,7 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <range/v3/view/addressof.hpp>
+#include <range/v3/view/enumerate.hpp>
 #include <string>
 #include <utility>
 
