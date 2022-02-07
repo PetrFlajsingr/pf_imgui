@@ -329,6 +329,10 @@ class TextEditor {
   bool mCursorPositionChanged;
   int mColorRangeMin, mColorRangeMax;
   SelectionMode mSelectionMode;
+
+  bool mCheckComments;
+  float mLastClick;
+
   bool mHandleKeyboardInputs;
   bool mHandleMouseInputs;
   bool mIgnoreImGuiChild;
@@ -339,7 +343,6 @@ class TextEditor {
   LanguageDefinition mLanguageDefinition;
   RegexList mRegexList;
 
-  bool mCheckComments;
   Breakpoints mBreakpoints;
   ErrorMarkers mErrorMarkers;
   ImVec2 mCharAdvance;
@@ -347,6 +350,5 @@ class TextEditor {
   std::string mLineBuffer;
   uint64_t mStartTime;
 
-  float mLastClick;
 };
 }
