@@ -71,8 +71,8 @@ void Notification::checkPhase() {
 }
 
 float Notification::getOpacity() const {
-  const auto timeElapsed =
-      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - creationTime);
+  using namespace std::chrono;
+  const auto timeElapsed = duration_cast<milliseconds>(steady_clock::now() - creationTime);
   switch (currentPhase) {
     case NotificationPhase::FadeIn:
       return (static_cast<float>(timeElapsed.count()) / static_cast<float>(FADE_IN_TIME.count()));

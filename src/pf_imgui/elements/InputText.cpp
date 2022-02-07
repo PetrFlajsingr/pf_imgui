@@ -3,6 +3,7 @@
 //
 
 #include "InputText.h"
+#include <algorithm>
 #include <imgui.h>
 #include <memory>
 #include <utility>
@@ -17,7 +18,7 @@ InputText::InputText(const std::string &elementName, std::string label, const st
       buffer(std::unique_ptr<char[]>(new char[inputLengthLimit + 1])), bufferLength(inputLengthLimit),
       inputType(textInputType) {
   setTextInner(text);
-  for (auto flag : filters.getSetFlags()) { flags |= static_cast<ImGuiInputTextFlags>(flag); }
+  flags |= static_cast<ImGuiInputTextFlags>(*filters);
   if (trigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
 }
 
