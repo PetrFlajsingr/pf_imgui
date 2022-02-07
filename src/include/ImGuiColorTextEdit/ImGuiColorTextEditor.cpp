@@ -392,7 +392,7 @@ int TextEditor::GetCharacterIndex(const Coordinates &aCoordinates) const {
       ++c;
     i += UTF8CharLength(line[i].mChar);
   }
-  return i;
+  return static_cast<int>(i);
 }
 
 int TextEditor::GetCharacterColumn(int aLine, int aIndex) const {
