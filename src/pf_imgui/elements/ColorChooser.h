@@ -22,7 +22,6 @@
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
 #include <string>
-#include <toml++/toml_node_view.h>
 
 namespace pf::ui::ig {
 

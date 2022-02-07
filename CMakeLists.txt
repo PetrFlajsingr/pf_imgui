@@ -7,7 +7,7 @@ HunterGate(
 )
 
 project(pf_imgui
-        VERSION 0.6.2)
+        VERSION 0.7.0)
 
 set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
 set(CPM_DOWNLOAD_VERSION 0.32.2)
@@ -76,25 +76,19 @@ set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
 CPMAddPackage(
         NAME pf_common
         GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG master
+        GIT_TAG v1.2.0
 )
 
 CPMAddPackage(
         NAME toml++
         GITHUB_REPOSITORY marzer/tomlplusplus
-        GIT_TAG v2.5.0
+        GIT_TAG v3.0.1
 )
 
 CPMAddPackage(
         NAME StaticTypeInfo
         GIT_TAG v1.3.1
         GIT_REPOSITORY https://github.com/TheLartians/StaticTypeInfo
-)
-
-CPMAddPackage(
-        NAME magic_enum
-        GITHUB_REPOSITORY Neargye/magic_enum
-        GIT_TAG v0.6.6
 )
 
 include_directories(src/include/implot)

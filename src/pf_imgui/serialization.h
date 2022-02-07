@@ -12,8 +12,7 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/ui_tree_traversal.h>
 #include <ranges>
-#include <toml++/toml_array.h>
-#include <toml++/toml_table.h>
+#include <toml++/toml.h>
 
 namespace pf::ui::ig {
 
