@@ -8,13 +8,14 @@
 #ifndef PF_IMGUI_INTERFACE_POSITIONABLE_H
 #define PF_IMGUI_INTERFACE_POSITIONABLE_H
 
-#include "Observable_impl.h"
 #include <imgui.h>
+#include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Observable_impl.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
-struct Position {
+struct PF_IMGUI_EXPORT Position {
   Position() = default;
   Position(float x, float y);
   explicit Position(ImVec2 pos);
@@ -36,7 +37,7 @@ struct Position {
  *
  * Provides a functionality to manage and observe position for the subclass.
  */
-class Positionable {
+class PF_IMGUI_EXPORT Positionable {
  public:
   /**
    * Construct Positionable with starting position.

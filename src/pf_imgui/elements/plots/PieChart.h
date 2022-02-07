@@ -23,7 +23,7 @@ namespace pf::ui::ig {
  * @brief Data storage for PieChart samples.
  */
 template<plot_type::Plottable T>
-struct PieChartSample {
+struct PF_IMGUI_EXPORT PieChartSample {
   std::string label; /**< Text to be rendered next to the data */
   T value;           /**< Sample value */
 };
@@ -33,7 +33,7 @@ struct PieChartSample {
  *
  * Each sample shows as a percentage in the sum of all sample values.
  */
-class PieChart : public Element, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT PieChart : public Element, public Labellable, public Resizable {
  public:
   /**
    * Construct PieChart.

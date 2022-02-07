@@ -9,6 +9,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
 
 #include <imgui.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -27,16 +28,17 @@ enum class DockType {
  * @brief An area to which dockable windows can be docked.
  * @warning DockSpace HAS TO BE RENDERED AS SOON AS POSSIBLE OTHERWISE YOU WON'T BE ABLE TO DOCK ANYTHING
  */
-class DockSpace : public Element,
-                  public Resizable,
-                  public ColorCustomizable<style::ColorOf::DockingPreview, style::ColorOf::DockingBackground> {
+class PF_IMGUI_EXPORT DockSpace
+    : public Element,
+      public Resizable,
+      public ColorCustomizable<style::ColorOf::DockingPreview, style::ColorOf::DockingBackground> {
  public:
   using Id = ImGuiID;
   /**
    * Construct DockSpace
    * @param name ID of the element
    * @param s size of the area
-   * @param dockFlags f;ags
+   * @param dockFlags flags
    */
   explicit DockSpace(const std::string &name, Size s = Size::Auto(),
                      const Flags<DockType> &dockFlags = Flags<DockType>{});

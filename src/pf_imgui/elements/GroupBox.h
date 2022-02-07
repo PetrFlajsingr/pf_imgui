@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_GROUPBOX_H
 #define PF_IMGUI_GROUPBOX_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -19,7 +20,7 @@ namespace pf::ui::ig {
 /**
  * @brief A group of elements with a border and a label.
  */
-class GroupBox : public Element, public ElementContainer, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public Labellable, public Resizable {
  public:
   /**
    * Construct GroupBox.

@@ -26,7 +26,7 @@ namespace pf::ui::ig {
 
 namespace details {
 template<ToStringConvertible T>
-struct ListboxRowFactory {
+struct PF_IMGUI_EXPORT ListboxRowFactory {
   static inline std::size_t idCounter{};
   const std::string idStart = uniqueId();
   std::unique_ptr<Selectable> operator()(const T &item) {

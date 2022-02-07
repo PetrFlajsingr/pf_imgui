@@ -5,12 +5,13 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_INTERFACE_RENDERABLESCONTAINER_H
 #define PF_IMGUI_SRC_PF_IMGUI_INTERFACE_RENDERABLESCONTAINER_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <vector>
 
 namespace pf::ui::ig {
-class RenderablesContainer : public AllColorCustomizable, public AllStyleCustomizable {
+class PF_IMGUI_EXPORT RenderablesContainer : public AllColorCustomizable, public AllStyleCustomizable {
  public:
   /**
    * Get all renderables stored inside the container.

@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <pf_imgui/FontManager.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/Notification.h>
 #include <string>
 #include <vector>
@@ -15,7 +16,7 @@ namespace pf::ui::ig {
 
 enum class NotificationType { Success, Warning, Error, Info };
 
-class NotificationManager {
+class PF_IMGUI_EXPORT NotificationManager {
  public:
   explicit NotificationManager(FontManager &fontManager);
 

@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_MEMORYEDITOR_H
 
 #include <imgui_memory_editor.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <ranges>
@@ -25,7 +26,7 @@ namespace pf::ui::ig {
  * @todo: change this so it's not templated - use std::span<std::byte> to pass data
  */
 template<std::ranges::contiguous_range R>
-class MemoryEditor : public ItemElement, public AllColorCustomizable, public AllStyleCustomizable {
+class PF_IMGUI_EXPORT MemoryEditor : public ItemElement, public AllColorCustomizable, public AllStyleCustomizable {
  public:
   MemoryEditor(const std::string &elementName, R &data) : ItemElement(elementName), range(data) {}
 

@@ -10,6 +10,7 @@
 
 #include <fmt/format.h>
 #include <imGuIZMOquat.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -39,7 +40,9 @@ using GizmoValueType =
  * @tparam Type
  */
 template<GizmoType Type>
-class Gizmo3D : public Element, public Resizable, public ValueObservable<details::GizmoValueType<Type>> {
+class PF_IMGUI_EXPORT Gizmo3D : public Element,
+                                public Resizable,
+                                public ValueObservable<details::GizmoValueType<Type>> {
   using ValueType = details::GizmoValueType<Type>;
 
  public:

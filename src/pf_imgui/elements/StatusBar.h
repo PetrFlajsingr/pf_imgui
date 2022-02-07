@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_STATUSBAR_H
 #define PF_IMGUI_STATUSBAR_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <string>
@@ -14,7 +15,7 @@ namespace pf::ui::ig {
 /**
  * @brief A status bar rendered on the bottom of the main window.
  */
-class AppStatusBar : public Element, public ElementContainer {
+class PF_IMGUI_EXPORT AppStatusBar : public Element, public ElementContainer {
  public:
   /**
    * Construct AppStatusBar.

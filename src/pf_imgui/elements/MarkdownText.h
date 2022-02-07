@@ -14,7 +14,7 @@
 
 namespace pf::ui::ig {
 namespace details {
-struct FontData {
+struct PF_IMGUI_EXPORT FontData {
   ImFont *fontH1 = nullptr;
   ImFont *fontH2 = nullptr;
   ImFont *fontH3 = nullptr;

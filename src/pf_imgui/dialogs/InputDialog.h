@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_DIALOGS_INPUTDIALOG_H
 #define PF_IMGUI_DIALOGS_INPUTDIALOG_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/InputText.h>
@@ -22,7 +23,7 @@ namespace pf::ui::ig {
  * @brief Simplified dialog for user input.
  * It should be created via ImGuiInterface.
  */
-class InputDialog : public ModalDialog {
+class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
  public:
   /**
    * Construct InputDialog.

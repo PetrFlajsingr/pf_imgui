@@ -25,7 +25,7 @@
 namespace pf::ui::ig {
 
 template<std::size_t ColumnCount>
-struct TableSettings {
+struct PF_IMGUI_EXPORT TableSettings {
   std::optional<std::array<std::string, ColumnCount>> header = std::nullopt;
   Flags<TableBorder> border;   /**< Type of border rendering. */
   Flags<TableOptions> options; /**< Interaction options. */
@@ -38,7 +38,7 @@ struct TableSettings {
  * @tparam ColumnCount static column count of the table
  */
 template<std::size_t ColumnCount>
-class Table : public Element, public RenderablesContainer, public Resizable {
+class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, public Resizable {
   using Cells = std::array<std::unique_ptr<Renderable>, ColumnCount>;
   struct Row {
     const std::size_t id;

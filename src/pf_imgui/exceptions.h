@@ -9,6 +9,7 @@
 #define PF_IMGUI_EXCEPTIONS_H
 
 #include <pf_common/exceptions/StackTraceException.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
@@ -16,14 +17,14 @@ namespace pf::ui::ig {
 /**
  * @brief Exception thrown when a duplicate ID is added in the UI tree.
  */
-class DuplicateIdException : public StackTraceException {
+class PF_IMGUI_EXPORT DuplicateIdException : public StackTraceException {
  public:
   explicit DuplicateIdException(const std::string_view &fmt, auto &&...args) : StackTraceException(fmt, args...) {}
 };
 /**
  * @brief Exception thrown when a an ID is not present.
  */
-class IdNotFoundException : public StackTraceException {
+class PF_IMGUI_EXPORT IdNotFoundException : public StackTraceException {
  public:
   explicit IdNotFoundException(const std::string_view &fmt, auto &&...args) : StackTraceException(fmt, args...) {}
 };

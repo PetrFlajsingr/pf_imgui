@@ -64,12 +64,12 @@ using InputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_L
 * @tparam T underlying type
 */
 template<typename T>
-struct InputData {};
+struct PF_IMGUI_EXPORT InputData {};
 /**
 * @brief Storage structure for integer based types.
 */
 template<>
-struct InputData<int> {
+struct PF_IMGUI_EXPORT InputData<int> {
   int step;
   int fastStep;
   static constexpr const char *defaultFormat() { return "%d"; }
@@ -78,7 +78,7 @@ struct InputData<int> {
 * @brief Storage structure for float based types.
 */
 template<>
-struct InputData<float> {
+struct PF_IMGUI_EXPORT InputData<float> {
   float step;
   float fastStep;
   static constexpr const char *defaultFormat() { return "%.3f"; }
@@ -87,7 +87,7 @@ struct InputData<float> {
 * @brief Storage structure for double based types.
 */
 template<>
-struct InputData<double> {
+struct PF_IMGUI_EXPORT InputData<double> {
   double step;
   double fastStep;
   static constexpr const char *defaultFormat() { return "%.6f"; }

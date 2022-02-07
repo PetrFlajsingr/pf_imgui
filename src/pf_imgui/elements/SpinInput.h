@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_SPININPUT_H
 
 #include <algorithm>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/details/Spin.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
  * @todo: format for float
  */
 template<OneOf<int, float> T>
-class SpinInput
+class PF_IMGUI_EXPORT SpinInput
     : public ItemElement,
       public Labellable,
       public ValueObservable<T>,

@@ -11,6 +11,7 @@
 #include <glm/vec2.hpp>
 #include <include/DearWidgets/dear_widgets.h>
 #include <pf_common/math/Range.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
 /**
  * @brief Allows for selection of a 2D area - axis aligned.
  */
-class Range2D
+class PF_IMGUI_EXPORT Range2D
     : public ItemElement,
       public Labellable,
       public ValueObservable<math::Range<glm::vec2>>,

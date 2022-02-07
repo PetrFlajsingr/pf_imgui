@@ -12,6 +12,7 @@
 #include <pf_common/RAII.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/tuple.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/styles/enums.h>
 #include <tuple>
 
@@ -60,7 +61,7 @@ constexpr auto varArgValueForIndex(std::size_t index, std::size_t currIndex = 0)
 * @tparam SupportedColorTypes list of types which are supported
 */
 template<style::ColorOf... SupportedColorTypes>
-class ColorCustomizable {
+class PF_IMGUI_EXPORT ColorCustomizable {
  public:
 #ifdef PF_IMGUI_ENABLE_STYLES
   /**
@@ -156,7 +157,7 @@ using AllColorCustomizable = ColorCustomizable<
 * @tparam SupportedStyles list of types which are supported
 */
 template<style::Style... SupportedStyles>
-class StyleCustomizable {
+class PF_IMGUI_EXPORT StyleCustomizable {
  public:
 #ifdef PF_IMGUI_ENABLE_STYLES
   /**

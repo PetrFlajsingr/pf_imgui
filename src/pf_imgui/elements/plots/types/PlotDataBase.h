@@ -31,7 +31,7 @@ concept Plottable = std::convertible_to<T, double>;
  * @brief Simple 2D data sample.
  */
 template<Plottable T>
-struct XYPlotData {
+struct PF_IMGUI_EXPORT XYPlotData {
   T x;
   T y;
 };
@@ -40,7 +40,7 @@ struct XYPlotData {
  * @brief 2D data sample with an error marker.
  */
 template<Plottable T>
-struct XYErrorPlotData : XYPlotData<T> {
+struct PF_IMGUI_EXPORT XYErrorPlotData : XYPlotData<T> {
   T error;
 };
 
@@ -53,7 +53,7 @@ namespace details {
 /**
  * @brief Default setter for data storage.
  */
-class DefaultPlotDataSetting {
+class PF_IMGUI_EXPORT DefaultPlotDataSetting {
  public:
   /**
    * Set new plot data.

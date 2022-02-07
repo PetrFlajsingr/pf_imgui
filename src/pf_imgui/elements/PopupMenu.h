@@ -18,7 +18,7 @@ namespace pf::ui::ig {
 /**
  * @brief Popup menu to be used for example when right clicking an element.
  */
-class PopupMenu : public Element, public MenuContainer {
+class PF_IMGUI_EXPORT PopupMenu : public Element, public MenuContainer {
  public:
   /**
    * Construct PopupMenu.

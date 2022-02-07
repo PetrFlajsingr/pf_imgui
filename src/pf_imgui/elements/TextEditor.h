@@ -6,6 +6,7 @@
 #define PF_IMGUI_TEXTEDITOR_H
 
 #include <ImGuiColorTextEditor.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -14,7 +15,7 @@
 namespace pf::ui::ig {
 // TODO: styles/colors
 
-class TextEditor : public Element, public Savable, public Resizable {
+class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resizable {
  public:
   enum class Highlight { GLSL, HLSL, AngelScript, Lua, C, CPP, SQL };
   TextEditor(const std::string &name, const std::string &value, Size s = Size::Auto(),

@@ -10,6 +10,7 @@
 
 #include <imgui.h>
 #include <pf_common/exceptions/StackTraceException.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <string>
 #include <utility>
@@ -21,7 +22,7 @@ namespace pf::ui::ig {
  *
  */
 template<std::derived_from<ItemElement> T>
-requires(!std::derived_from<T, Resizable>) class WidthDecorator : public T {
+requires(!std::derived_from<T, Resizable>) class PF_IMGUI_EXPORT WidthDecorator : public T {
  public:
   /**
    * Construct WidthDecorator.

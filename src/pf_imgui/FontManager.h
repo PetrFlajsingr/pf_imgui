@@ -13,6 +13,7 @@
 #include <memory>
 #include <optional>
 #include <pf_common/enums.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/icons.h>
 #include <span>
 #include <string>
@@ -31,7 +32,7 @@ class FontBuilder;
 /**
  * @brief Builder for fonts which are merged into another font.
  */
-class SubFontBuilder {
+class PF_IMGUI_EXPORT SubFontBuilder {
  public:
   /**
    * Construct SubFontBuilder.
@@ -88,7 +89,7 @@ class SubFontBuilder {
 /**
  * @brief Builder for fonts.
  */
-class FontBuilder {
+class PF_IMGUI_EXPORT FontBuilder {
  public:
   /**
    * Construct FontBuilder. Using default font as base.
@@ -170,7 +171,7 @@ class FontBuilder {
  *
  * @warning: this'll get messed up after 100 fonts, cause glyphRangeInfos will realloc and pointers will be lost
  */
-class FontManager {
+class PF_IMGUI_EXPORT FontManager {
  public:
   /**
    * Construct font manager with a 'default' font.

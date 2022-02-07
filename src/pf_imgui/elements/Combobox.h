@@ -9,6 +9,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 
 #include <memory>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomCombobox.h>
 #include <pf_imgui/elements/Selectable.h>
 #include <pf_imgui/interface/DragNDrop.h>
@@ -22,7 +23,7 @@ namespace pf::ui::ig {
 
 namespace details {
 template<ToStringConvertible T>
-struct ComboboxRowFactory {
+struct PF_IMGUI_EXPORT ComboboxRowFactory {
   static inline std::size_t idCounter{};
   const std::string idStart = uniqueId();
   std::unique_ptr<Selectable> operator()(const T &item) {

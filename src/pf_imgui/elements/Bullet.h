@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <utility>
 
@@ -18,7 +19,7 @@ namespace pf::ui::ig {
  * @tparam T element rendered next to the bullet
  */
 template<std::derived_from<Element> T>
-class Bullet : public T {
+class PF_IMGUI_EXPORT Bullet : public T {
  public:
   /**
    * Construct Bullet.

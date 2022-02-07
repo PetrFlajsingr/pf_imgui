@@ -10,6 +10,7 @@
 #include <IconsForkAwesome.h>
 #include <IconsKenney.h>
 #include <filesystem>
+#include <pf_imgui/_export.h>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -39,7 +40,7 @@ static ImWchar iconRangeKI[] = {ICON_MIN_KI, ICON_MAX_KI, 0};
 static ImWchar iconRangeFAD[] = {ICON_MIN_FAD, ICON_MAX_FAD, 0};
 }  // namespace details
 
-struct IconFontConfig {
+struct PF_IMGUI_EXPORT IconFontConfig {
   ImFontConfig config;
   const ImWchar *iconRange{};
 };
