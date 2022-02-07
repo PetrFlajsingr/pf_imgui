@@ -9,6 +9,7 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
+#include <string>
 
 namespace pf::ui::ig {
 // TODO: styles/colors
@@ -37,6 +38,6 @@ class TextEditor : public Element, public Savable, public Resizable {
   ImGuiColorTextEdit::TextEditor editor;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_TEXTEDITOR_H
+#endif  // PF_IMGUI_TEXTEDITOR_H

@@ -46,7 +46,7 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChild(std::string name, Args &&...args) {
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
     if (const auto iter = children.find(name); iter != children.end()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
@@ -73,7 +73,7 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
     if (const auto iter = children.find(name); iter != children.end()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
@@ -126,11 +126,11 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   [[nodiscard]] T &childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
       throw IdNotFoundException("Wrong type for child: '{}'", name);
 #endif
     }
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
     throw IdNotFoundException("Child not found: '{}'", name);
 #endif
   }
@@ -148,11 +148,11 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   [[nodiscard]] const T &childByName(const std::string &name) const {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
       throw IdNotFoundException("Wrong type for child: '{}'", name);
 #endif
     }
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
     throw IdNotFoundException("Child not found: '{}'", name);
 #endif
   }
@@ -200,5 +200,5 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   std::vector<std::string> childrenToRemove;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_CONTAINER_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_INTERFACE_CONTAINER_H

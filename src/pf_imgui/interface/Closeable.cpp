@@ -11,4 +11,4 @@ bool Closeable::isCloseable() const { return closeable; }
 void Closeable::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 void Closeable::notifyClosed() { closeObservableImpl.notify(); }
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

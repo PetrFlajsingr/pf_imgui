@@ -15,4 +15,5 @@ void Hoverable::setHovered(bool hover) {
     notifyHovered(hovered);
   }
 }
-}// namespace pf::ui::ig
+
+}  // namespace pf::ui::ig

@@ -8,6 +8,7 @@
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/styles/enums.h>
+#include <string>
 
 namespace pf::ui::ig {
 /**
@@ -33,6 +34,6 @@ class PF_IMGUI_EXPORT Spinner : public ItemElement,
   int thickness;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SPINNER_H
+#endif  // PF_IMGUI_SPINNER_H

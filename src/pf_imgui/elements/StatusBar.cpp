@@ -3,6 +3,7 @@
 //
 
 #include "StatusBar.h"
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -25,4 +26,4 @@ void AppStatusBar::renderImpl() {
 }
 float AppStatusBar::getHeight() const { return height; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

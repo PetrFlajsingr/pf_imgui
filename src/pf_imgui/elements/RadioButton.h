@@ -49,5 +49,5 @@ class PF_IMGUI_EXPORT RadioButton
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_RADIOBUTTON_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_RADIOBUTTON_H

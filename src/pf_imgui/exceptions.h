@@ -12,7 +12,7 @@
 
 namespace pf::ui::ig {
 
-//@todo: get rid of the backward stuff/stacktrace
+// @todo: get rid of the backward stuff/stacktrace
 /**
  * @brief Exception thrown when a duplicate ID is added in the UI tree.
  */
@@ -27,6 +27,6 @@ class IdNotFoundException : public StackTraceException {
  public:
   explicit IdNotFoundException(const std::string_view &fmt, auto &&...args) : StackTraceException(fmt, args...) {}
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_EXCEPTIONS_H
+#endif  // PF_IMGUI_EXCEPTIONS_H

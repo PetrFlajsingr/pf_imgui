@@ -59,12 +59,12 @@ class PF_IMGUI_EXPORT Image
   // * Check if a tooltip activated by pressing shift while hovering an image is active.
   // * @return
   // */
-  //[[nodiscard]] bool isPixelInspectionTooltipEnabled() const;
+  // [[nodiscard]] bool isPixelInspectionTooltipEnabled() const;
   ///**
   // * Enable/disable a tooltip activated by pressing shift while hovering an image.
   // * @param enabled
   // */
-  //void setPixelInspectionTooltipEnabled(bool enabled);
+  // void setPixelInspectionTooltipEnabled(bool enabled);
 
   /**
   * Change texture ID.
@@ -82,5 +82,6 @@ class PF_IMGUI_EXPORT Image
   //bool pixelInspectionTooltipEnabled = false;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_IMAGE_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_ELEMENTS_IMAGE_H

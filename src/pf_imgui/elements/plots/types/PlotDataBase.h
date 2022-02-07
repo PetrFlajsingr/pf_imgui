@@ -17,6 +17,7 @@
 #include <range/v3/core.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
+#include <string>
 #include <vector>
 
 namespace pf::ui::ig::plot_type {
@@ -75,7 +76,7 @@ class DefaultPlotDataSetting {
   std::vector<double> yData;
   double width;
 };
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Base class for all types of plot data.
@@ -93,6 +94,6 @@ class PF_IMGUI_EXPORT LabeledPlotData : public PlotData, public Labellable {
   LabeledPlotData(const std::string &elementName, const std::string &caption);
 };
 
-}// namespace pf::ui::ig::plot_type
+}  // namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H

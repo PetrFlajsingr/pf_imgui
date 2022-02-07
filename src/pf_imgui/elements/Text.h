@@ -16,6 +16,7 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -69,5 +70,5 @@ class PF_IMGUI_EXPORT Text
   std::optional<ImVec4> color;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_TEXT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_TEXT_H

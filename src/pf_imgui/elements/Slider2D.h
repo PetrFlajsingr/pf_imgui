@@ -27,7 +27,7 @@ namespace details {
  */
 template<OneOf<int, float> T>
 using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2, glm::vec2>;
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Slider which covers an area and allows a user to select axis value with better visual cues.
@@ -107,6 +107,6 @@ class PF_IMGUI_EXPORT Slider2D
 extern template class Slider2D<int>;
 extern template class Slider2D<float>;
 #endif
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H

@@ -105,4 +105,4 @@ void MarkdownText::SetFont(ImFont *font, ImGuiInterface &imGuiInterface) {
   imGuiInterface.updateFonts();
 }*/
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

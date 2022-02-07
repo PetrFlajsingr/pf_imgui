@@ -25,6 +25,7 @@
 #include <pf_imgui/interface/ElementContainer.h>
 #include <string>
 #include <toml++/toml.h>
+#include <utility>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -116,7 +117,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @throws IdNotFoundException when the Window of given ID is not present
    * @return reference to the searched for Window or nullopt if no such window exists
    */
-  std::optional<std::reference_wrapper<const Window>> windowByName(const std::string &windowName) const;
+  [[nodiscard]] std::optional<std::reference_wrapper<const Window>> windowByName(const std::string &windowName) const;
 
   /**
    * Get all windows present in the UI.
@@ -209,7 +210,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
                  Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
     using namespace std::string_literals;
     fileDialogs.emplace_back("FileDialog"s + std::to_string(idCounter++), caption, extSettings, onSelect, onCancel,
-                             size, startPath, startName, modality, maxSelectedFiles);
+                             size, std::move(startPath), std::move(startName), modality, maxSelectedFiles);
   }
 
   /**
@@ -228,8 +229,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
                 std::invocable auto onCancel, Size size = {200, 150}, std::filesystem::path startPath = ".",
                 std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1) {
     using namespace std::string_literals;
-    fileDialogs.emplace_back("FileDialog"s + std::to_string(idCounter++), caption, onSelect, onCancel, size,
-                             startPath, startName, modality, maxSelectedDirs);
+    fileDialogs.emplace_back("FileDialog"s + std::to_string(idCounter++), caption, onSelect, onCancel, size, startPath,
+                             startName, modality, maxSelectedDirs);
   }
 
   /**
@@ -315,5 +316,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void removeDialog(ModalDialog &dialog);
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_IMGUIINTERFACE_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_IMGUIINTERFACE_H

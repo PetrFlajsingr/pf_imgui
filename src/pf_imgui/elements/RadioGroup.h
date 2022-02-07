@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_RADIOGROUP_H
 
 #include "RadioButton.h"
+#include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -68,6 +69,6 @@ class PF_IMGUI_EXPORT RadioGroup
   std::vector<std::unique_ptr<RadioButton>> buttons;
   std::optional<std::size_t> selectedButtonIndex = std::nullopt;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_RADIOGROUP_H
+#endif  // PF_IMGUI_ELEMENTS_RADIOGROUP_H

@@ -4,6 +4,7 @@
 
 #include "RadioGroup.h"
 #include <imgui.h>
+#include <memory>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -21,7 +22,7 @@ void RadioGroup::renderImpl() {
   std::ranges::for_each(buttons, [](auto &button) { button->renderImpl(); });
   std::optional<std::size_t> newSelection = std::nullopt;
   std::ranges::for_each(buttons | ranges::views::enumerate, [&](auto idxBtn) {
-    auto &[idx, btn] = idxBtn;
+    const auto &[idx, btn] = idxBtn;
     if (btn->isSelected()) {
       if (!selectedButtonIndex.has_value() || idx != *selectedButtonIndex) { newSelection = idx; }
     }
@@ -76,4 +77,4 @@ toml::table RadioGroup::serialize_impl() const {
   return result;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -24,10 +24,10 @@ inline void traverseImGuiTree_impl(Renderable &element, std::invocable<Renderabl
   callback(element);
   if (auto ptrContainer = dynamic_cast<RenderablesContainer *>(&element); ptrContainer != nullptr) {
     std::ranges::for_each(ptrContainer->getRenderables(),
-                          [&callback](auto &child) { traverseImGuiTree_impl(*child, callback); });
+                          [&callback](const auto &child) { traverseImGuiTree_impl(*child, callback); });
   }
 }
-}// namespace details
+}  // namespace details
 
 /**
  * Traverse UI tree in a BFS way. Call callback for each node.
@@ -38,5 +38,5 @@ PF_IMGUI_EXPORT inline void traverseImGuiTree(Renderable &root, std::invocable<R
   details::traverseImGuiTree_impl(root, callback);
 }
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_UI_TREE_TRAVERSAL_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_UI_TREE_TRAVERSAL_H

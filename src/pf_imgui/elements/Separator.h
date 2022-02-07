@@ -10,6 +10,7 @@
 
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -32,6 +33,6 @@ class PF_IMGUI_EXPORT Separator : public Element,
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_SPLITTER_H
+#endif  // PF_IMGUI_ELEMENTS_SPLITTER_H

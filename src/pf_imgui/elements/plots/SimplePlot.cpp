@@ -29,11 +29,14 @@ void SimplePlot::renderImpl() {
       break;
   }
 }
+
 void SimplePlot::addValue(float value) {
   values.emplace_back(value);
   if (historyLimit.has_value() && *historyLimit < values.size()) { values.erase(values.begin()); }
 }
+
 void SimplePlot::clear() { values.clear(); }
+
 void SimplePlot::setValues(const std::vector<float> &vals) { values = vals; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -33,6 +33,6 @@ class ImGuiSDLInterface : public ImGuiInterface {
   void render() override;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//IMGUI_SW_RENDERER__IMGUISDLINTERFACE_H
+#endif  //IMGUI_SW_RENDERER__IMGUISDLINTERFACE_H

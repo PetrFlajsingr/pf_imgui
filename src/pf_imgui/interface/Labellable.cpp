@@ -29,4 +29,4 @@ void Labellable::hideLabel() { setLabelVisible(Visibility::Invisible); }
 
 bool Labellable::isLabelVisible() const { return visibility == Visibility::Visible; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

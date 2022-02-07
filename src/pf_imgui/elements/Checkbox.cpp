@@ -44,4 +44,4 @@ bool Checkbox::isSelected() const { return getValue(); }
 
 void Checkbox::toggle() { setSelected(!isSelected()); }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

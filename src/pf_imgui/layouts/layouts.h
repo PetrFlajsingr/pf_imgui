@@ -14,4 +14,4 @@
 #include "StackedLayout.h"
 #include "StretchLayout.h"
 
-#endif//PF_IMGUI_LAYOUTS_LAYOUTS_H
+#endif  // PF_IMGUI_LAYOUTS_LAYOUTS_H

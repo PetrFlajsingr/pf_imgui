@@ -7,6 +7,7 @@
 
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -30,5 +31,5 @@ class AppStatusBar : public Element, public ElementContainer {
   float height = 0.f;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_STATUSBAR_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_STATUSBAR_H

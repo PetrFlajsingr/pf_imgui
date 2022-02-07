@@ -2,9 +2,9 @@
 // Created by petr on 10/27/20.
 //
 
-#include "ImGuiInterface.h"
-#include "serialization.h"
 #include <implot.h>
+#include <pf_imgui/ImGuiInterface.h>
+#include <pf_imgui/serialization.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -53,15 +53,15 @@ void ImGuiInterface::removeStatusBar() { statusBar = nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() {
-  //config.clear();
-  std::ranges::for_each(windows, [this](auto &window) {
+  // config.clear();
+  std::ranges::for_each(windows, [this](const auto &window) {
     auto serialisedTree = serializeImGuiTree(*window);
     for (const auto &item : serialisedTree) { config.insert_or_assign(item.first, item.second); }
     if (menuBar != nullptr) {
       auto serialisedAppBar = serializeImGuiTree(*menuBar);
       for (const auto &item : serialisedAppBar) { config.insert_or_assign(item.first, item.second); }
     }
-    //config.insert(serialised.begin(), serialised.end());
+    // config.insert(serialised.begin(), serialised.end());
   });
 }
 
@@ -146,7 +146,6 @@ void ImGuiInterface::renderImpl() {
   if (statusBar != nullptr) { statusBar->render(); }
   renderDialogs();
   notificationManager.renderNotifications();
-  //ImGui::RenderNotifications(notifications);
 }
 
 void ImGuiInterface::removeDialog(ModalDialog &dialog) {
@@ -165,4 +164,4 @@ NotificationManager &ImGuiInterface::getNotificationManager() { return notificat
 
 const NotificationManager &ImGuiInterface::getNotificationManager() const { return notificationManager; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

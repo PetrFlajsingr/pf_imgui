@@ -80,6 +80,6 @@ class PF_IMGUI_EXPORT SliderAngle
   float maxDeg;
   std::string format;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_SLIDERANGLE_H
+#endif  // PF_IMGUI_ELEMENTS_SLIDERANGLE_H

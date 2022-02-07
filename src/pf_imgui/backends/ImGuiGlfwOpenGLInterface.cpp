@@ -43,9 +43,7 @@ void pf::ui::ig::ImGuiGlfwOpenGLInterface::render() {
   if (getVisibility() == Visibility::Visible) {
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
-      auto raiiEnabled = pf::RAII([] {
-        ImGui::EndDisabled();
-      });
+      auto raiiEnabled = pf::RAII([] { ImGui::EndDisabled(); });
       renderImpl();
     } else {
       renderImpl();

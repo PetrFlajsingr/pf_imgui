@@ -7,6 +7,7 @@
 
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <vector>
 
 namespace pf::ui::ig {
 class RenderablesContainer : public AllColorCustomizable, public AllStyleCustomizable {
@@ -22,6 +23,6 @@ class RenderablesContainer : public AllColorCustomizable, public AllStyleCustomi
   using AllColorCustomizable::setColorStack;
   using AllStyleCustomizable::setStyleStack;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_INTERFACE_RENDERABLESCONTAINER_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_INTERFACE_RENDERABLESCONTAINER_H

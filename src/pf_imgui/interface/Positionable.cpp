@@ -30,4 +30,4 @@ void Positionable::updatePosition(Position pos) { position = pos; }
 
 void Positionable::notifyPositionChanged(Position pos) { observableImpl.notify(pos); }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

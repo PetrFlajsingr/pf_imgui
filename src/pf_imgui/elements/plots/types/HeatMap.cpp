@@ -13,4 +13,5 @@ void HeatMap::renderImpl() {
   ImPlot::PlotHeatmap(getLabel().c_str(), data.data(), static_cast<int>(rowSize), static_cast<int>(recordCount), min,
                       max);
 }
-}// namespace pf::ui::ig::plot_type
+
+}  // namespace pf::ui::ig::plot_type

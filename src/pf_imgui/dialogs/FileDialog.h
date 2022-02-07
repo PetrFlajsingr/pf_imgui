@@ -230,6 +230,6 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
   static inline std::uint32_t IdCounter = 0;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_FILEDIALOG_H
+#endif  // PF_IMGUI_ELEMENTS_FILEDIALOG_H

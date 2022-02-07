@@ -7,6 +7,7 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Observable_impl.h>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -50,5 +51,5 @@ class PF_IMGUI_EXPORT Closeable {
   Observable_impl<> closeObservableImpl;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_CLOSEABLE_H
+}  // namespace pf::ui::ig
+#endif  //PF_IMGUI_CLOSEABLE_H

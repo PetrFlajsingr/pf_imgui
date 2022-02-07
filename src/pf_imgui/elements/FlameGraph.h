@@ -70,6 +70,6 @@ class PF_IMGUI_EXPORT FlameGraph
   std::vector<FlameGraphSample> samples;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_FLAMEGRAPH_H
+#endif  // PF_IMGUI_ELEMENTS_FLAMEGRAPH_H

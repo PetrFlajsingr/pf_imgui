@@ -24,4 +24,4 @@ void FlameGraph::setSamples(const std::vector<ImGuiWidgetFlameGraph::FlameGraphS
   samples = newSamples;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

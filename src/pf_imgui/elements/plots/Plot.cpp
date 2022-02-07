@@ -31,4 +31,4 @@ void Plot::removeData(const std::string &dataName) {
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

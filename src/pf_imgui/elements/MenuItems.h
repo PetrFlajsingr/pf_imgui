@@ -7,6 +7,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
 
+#include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -15,6 +16,9 @@
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <string>
+#include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -24,14 +28,14 @@ class PF_IMGUI_EXPORT MenuItem : public Element {
   explicit MenuItem(const std::string &name);
 
   /**
- * Set if the parent menu is closed on interact - the menu might still get closed in some cases.
- * @param close true if the menu should close, false if not
- */
+   * Set if the parent menu is closed on interact - the menu might still get closed in some cases.
+   * @param close true if the menu should close, false if not
+   */
   void setCloseOnInteract(bool close);
   /**
- * Check if parent menu is closed on interact.
- * @return true if the menu closes, false if not
- */
+   * Check if parent menu is closed on interact.
+   * @return true if the menu closes, false if not
+   */
   [[nodiscard]] bool isCloseMenuOnInteract() const;
 
   void render() override;
@@ -48,33 +52,33 @@ class MenuSeparatorItem;
 class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
  public:
   /**
-     * Create an instance of SubMenu and add it to the end if children.
-     * @param name ID of the SubMenu
-     * @param caption text of the SubMenu
-     * @return reference to the created SubMenu
-     */
+    * Create an instance of SubMenu and add it to the end if children.
+    * @param name ID of the SubMenu
+    * @param caption text of the SubMenu
+    * @return reference to the created SubMenu
+    */
   SubMenu &addSubmenu(const std::string &name, const std::string &caption);
   /**
-     * Create an instance of MenuButtonItem and add it to the end of children/
-     * @param name ID of the MenuButtonItem
-     * @param caption text of the MenuButtonItem
-     * @return reference to the created MenuButtonItem
-     */
+    * Create an instance of MenuButtonItem and add it to the end of children/
+    * @param name ID of the MenuButtonItem
+    * @param caption text of the MenuButtonItem
+    * @return reference to the created MenuButtonItem
+    */
   MenuButtonItem &addButtonItem(const std::string &name, const std::string &caption);
   /**
-     * Create an instance of MenuCheckboxItem and add it to the end of children/
-     * @param name ID of the MenuCheckboxItem
-     * @param caption text of the MenuButtonItem
-     * @param value starting value
-     * @return reference to the created MenuButtonItem
-     */
+    * Create an instance of MenuCheckboxItem and add it to the end of children/
+    * @param name ID of the MenuCheckboxItem
+    * @param caption text of the MenuButtonItem
+    * @param value starting value
+    * @return reference to the created MenuButtonItem
+    */
   MenuCheckboxItem &addCheckboxItem(const std::string &name, const std::string &caption, bool value = false,
                                     Persistent persistent = Persistent::No);
   /**
-     * Create an instance of MenuSeparatorItem and add it to the end of children/
-     * @param name ID of the MenuSeparatorItem
-     * @return reference to the created MenuSeparatorItem
-     */
+    * Create an instance of MenuSeparatorItem and add it to the end of children/
+    * @param name ID of the MenuSeparatorItem
+    * @return reference to the created MenuSeparatorItem
+    */
   MenuSeparatorItem &addSeparator(const std::string &name);
 
   template<std::derived_from<MenuItem> T, typename... Args>
@@ -86,9 +90,9 @@ class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
   }
 
   /**
-     * Remove item by ID.
-     * @param name ID of the item to be removed
-     */
+    * Remove item by ID.
+    * @param name ID of the item to be removed
+    */
   void removeItem(const std::string &name);
 
   std::vector<Renderable *> getRenderables() override;
@@ -114,10 +118,10 @@ class PF_IMGUI_EXPORT MenuButtonItem
                                style::Style::ButtonTextAlign> {
  public:
   /**
- * Construct MenuButtonItem.
- * @param elementName ID of the element
- * @param label text rendered on the button
- */
+   * Construct MenuButtonItem.
+   * @param elementName ID of the element
+   * @param label text rendered on the button
+   */
   MenuButtonItem(const std::string &elementName, const std::string &label);
 
  protected:
@@ -138,11 +142,11 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
- * Construct MenuCheckboxItem.
- * @param elementName ID of the element
- * @param label text rendered on the button
- * @param value starting value
- */
+   * Construct MenuCheckboxItem.
+   * @param elementName ID of the element
+   * @param label text rendered on the button
+   * @param value starting value
+   */
   MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value = false,
                    Persistent persistent = Persistent::No);
 
@@ -160,9 +164,9 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
                                style::ColorOf::SeparatorActive> {
  public:
   /**
- * Construct MenuSeparatorItem.
- * @param elementName ID of the element
- */
+   * Construct MenuSeparatorItem.
+   * @param elementName ID of the element
+   */
   explicit MenuSeparatorItem(const std::string &elementName);
 
  protected:
@@ -174,15 +178,15 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
 class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuContainer {
  public:
   /**
- * Construct SubMenu.
- * @param elementName ID of the element
- * @param label text rendered on the button
- */
+   * Construct SubMenu.
+   * @param elementName ID of the element
+   * @param label text rendered on the button
+   */
   SubMenu(const std::string &elementName, const std::string &label);
 
  protected:
   void renderImpl() override;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H

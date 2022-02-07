@@ -5,7 +5,9 @@
 #include "Window.h"
 #include <algorithm>
 #include <imgui.h>
+#include <limits>
 #include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -61,7 +63,7 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::setSize(const Size &newSize) {
-  Resizable::setSize(newSize);//FIXME change this to SetNextWindowSize
+  Resizable::setSize(newSize);  //FIXME change this to SetNextWindowSize
   ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
 }
 
@@ -171,4 +173,4 @@ bool Window::isStayInBackground() const { return stayInBackground; }
 
 void Window::setStayInBackground(bool stay) { stayInBackground = stay; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

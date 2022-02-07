@@ -12,6 +12,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -42,7 +43,7 @@ struct PF_IMGUI_EXPORT Width {
 struct PF_IMGUI_EXPORT Height {
   float value;
 };
-}// namespace details
+}  // namespace details
 
 using Width = details::SizeDimension<details::Width>;
 using Height = details::SizeDimension<details::Height>;
@@ -131,5 +132,5 @@ class PF_IMGUI_EXPORT Resizable {
   void notifySizeChanged(Size newSize);
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_RESIZABLEELEMENT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_INTERFACE_RESIZABLEELEMENT_H

@@ -12,6 +12,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
 #include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -72,5 +73,5 @@ class PF_IMGUI_EXPORT Labellable {
   Visibility visibility = Visibility::Visible;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_CAPTIONEDELEMENT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_INTERFACE_CAPTIONEDELEMENT_H

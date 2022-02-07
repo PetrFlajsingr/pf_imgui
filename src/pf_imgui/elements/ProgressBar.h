@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_PROGRESSBAR_H
 #define PF_IMGUI_ELEMENTS_PROGRESSBAR_H
 
+#include <algorithm>
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -23,7 +24,7 @@ namespace pf::ui::ig {
  */
 template<typename T>
 concept ProgressBarCompatible = requires(T t, float f) {
-  {t + t};
+  { t + t } -> std::same_as<T>;
   {t *= f};
   { std::clamp(t, t, t) } -> std::convertible_to<T>;
 }
@@ -140,5 +141,5 @@ class PF_IMGUI_EXPORT ProgressBar
 extern template class ProgressBar<float>;
 extern template class ProgressBar<int>;
 #endif
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_PROGRESSBAR_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_PROGRESSBAR_H

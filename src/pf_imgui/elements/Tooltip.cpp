@@ -4,6 +4,7 @@
 
 #include "Tooltip.h"
 #include <imgui.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -17,4 +18,4 @@ void Tooltip::renderImpl() {
   std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

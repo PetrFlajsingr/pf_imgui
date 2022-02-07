@@ -22,4 +22,4 @@ void Focusable::setFocus() {
   focused = true;
   notifyFocusChanged(focused);
 }
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

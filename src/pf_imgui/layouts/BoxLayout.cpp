@@ -5,6 +5,7 @@
 #include "BoxLayout.h"
 #include <imgui.h>
 #include <numeric>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -65,7 +66,7 @@ void BoxLayout::renderLeftToRight() {
 
 void BoxLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
 void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
   if (index > children.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
 #endif
   children.insert(children.begin() + static_cast<long long>(index), std::move(child));
@@ -82,4 +83,4 @@ std::vector<Renderable *> BoxLayout::getRenderables() {
       | ranges::to_vector;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

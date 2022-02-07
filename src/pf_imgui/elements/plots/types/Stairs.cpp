@@ -12,4 +12,4 @@ void Stairs::renderImpl() {
   ImPlot::PlotStairs(getLabel().c_str(), xData.data(), yData.data(), static_cast<int>(xData.size()));
 }
 
-}// namespace pf::ui::ig::plot_type
+}  // namespace pf::ui::ig::plot_type

@@ -6,6 +6,7 @@
 #include <pf_common/Visitor.h>
 #include <pf_imgui/ImGuiInterface.h>
 #include <ranges>
+#include <string>
 #include <utility>
 #include <variant>
 
@@ -166,4 +167,4 @@ FontBuilder &FontBuilder::addIconSubfont(const Flags<IconPack> &iconPack, float 
   return *this;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

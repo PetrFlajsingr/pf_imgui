@@ -73,5 +73,5 @@ class PF_IMGUI_EXPORT Observable_impl {
   ListenerId idCounter{};
   std::shared_ptr<bool> exists = std::make_shared<bool>(true);
 };
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H

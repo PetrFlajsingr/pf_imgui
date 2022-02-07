@@ -8,4 +8,4 @@ namespace pf::ui::ig {
 
 void Clickable::notifyOnClick() { observableImpl.notify(); }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

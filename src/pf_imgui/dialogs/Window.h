@@ -20,6 +20,7 @@
 #include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -258,5 +259,5 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   // TODO: change flags so they are not computed every frame
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_WINDOW_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_WINDOW_H

@@ -13,6 +13,7 @@
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/Text.h>
 #include <pf_imgui/layouts/BoxLayout.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -62,7 +63,7 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
   std::function<bool(MessageButtons)> dialogDone;
 };
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
-//extern template class MessageDialog<MessageButtons>;
+// extern template class MessageDialog<MessageButtons>;
 #endif
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_DIALOGS_MESSAGEDIALOG_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_DIALOGS_MESSAGEDIALOG_H

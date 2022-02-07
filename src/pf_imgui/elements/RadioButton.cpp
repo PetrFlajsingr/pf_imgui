@@ -20,4 +20,4 @@ void RadioButton::renderImpl() {
 
 bool RadioButton::isSelected() const { return getValue(); }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

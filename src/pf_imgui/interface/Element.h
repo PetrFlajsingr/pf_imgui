@@ -45,5 +45,6 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   ImFont *font = nullptr;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_ELEMENT_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_INTERFACE_ELEMENT_H

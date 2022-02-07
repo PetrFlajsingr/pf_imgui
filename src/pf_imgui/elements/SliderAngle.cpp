@@ -4,6 +4,7 @@
 
 #include "SliderAngle.h"
 #include <imgui.h>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -45,4 +46,4 @@ float SliderAngle::getMaxDeg() const { return maxDeg; }
 
 void SliderAngle::setMaxDeg(float max) { SliderAngle::maxDeg = max; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

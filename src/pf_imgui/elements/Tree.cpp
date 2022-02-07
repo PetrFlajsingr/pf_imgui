@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 details::TreeRecord::TreeRecord(const std::string &elementName, const std::string &label,
-                                const Flags<ImGuiTreeNodeFlags_>& defaultFlags)
+                                const Flags<ImGuiTreeNodeFlags_> &defaultFlags)
     : ItemElement(elementName), Labellable(label), flags(defaultFlags) {}
 
 TreeLeaf::TreeLeaf(const std::string &elementName, const std::string &label, bool selected, Persistent persistent)
@@ -50,4 +50,4 @@ void TreeLeaf::unserialize_impl(const toml::table &src) {
 
 toml::table TreeLeaf::serialize_impl() const { return toml::table{{{"value", getValue()}}}; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -13,6 +13,8 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomItemBox.h>
 #include <pf_imgui/interface/Labellable.h>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -110,6 +112,6 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
   std::string previewValue{};
   bool shouldClose = false;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H

@@ -3,10 +3,15 @@
 //
 
 #include "Separator.h"
+#include <string>
 
-pf::ui::ig::Separator::Separator(const std::string &name) : Element(name) {}
+namespace pf::ui::ig {
 
-void pf::ui::ig::Separator::renderImpl() {
+Separator::Separator(const std::string &name) : Element(name) {}
+
+void Separator::renderImpl() {
   auto colorStyle = setColorStack();
   ImGui::Separator();
 }
+
+}  // namespace pf::ui::ig

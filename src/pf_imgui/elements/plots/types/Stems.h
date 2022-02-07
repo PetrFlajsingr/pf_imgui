@@ -37,6 +37,6 @@ class PF_IMGUI_EXPORT Stems : public LabeledPlotData, public details::DefaultPlo
  protected:
   void renderImpl() override;
 };
-}// namespace pf::ui::ig::plot_type
+}  // namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_STEMS_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_STEMS_H

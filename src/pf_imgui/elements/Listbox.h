@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_LISTBOX_H
 
 #include <algorithm>
+#include <memory>
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomListbox.h>
@@ -33,7 +34,7 @@ struct ListboxRowFactory {
   }
 };
 static_assert(CustomItemBoxFactory<ListboxRowFactory<int>, int, Selectable>);
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Container for strings shown as list box and selectable by user.
@@ -202,5 +203,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class Listbox<std::string>;
 #endif
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_LISTBOX_H
+
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_ELEMENTS_LISTBOX_H

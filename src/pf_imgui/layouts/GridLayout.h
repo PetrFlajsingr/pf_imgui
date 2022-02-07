@@ -15,6 +15,8 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
+#include <string>
+#include <utility>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -132,5 +134,7 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    */
   [[nodiscard]] uint32_t indexForCell(uint32_t column, uint32_t row) const;
 };
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_LAYOUTS_GRIDLAYOUT_H
+
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_LAYOUTS_GRIDLAYOUT_H

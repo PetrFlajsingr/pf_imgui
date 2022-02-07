@@ -4,6 +4,7 @@
 
 #include "GroupBox.h"
 #include <pf_imgui/details/GroupBox.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -16,4 +17,4 @@ void GroupBox::renderImpl() {
   std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

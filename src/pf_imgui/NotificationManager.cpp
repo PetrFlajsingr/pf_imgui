@@ -3,6 +3,8 @@
 //
 
 #include "NotificationManager.h"
+#include <memory>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -59,4 +61,4 @@ Notification &NotificationManager::createNotification(NotificationType notificat
   return notification;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

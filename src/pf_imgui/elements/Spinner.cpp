@@ -4,6 +4,7 @@
 
 #include "Spinner.h"
 #include <pf_imgui/details/Spinner.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -16,4 +17,4 @@ void Spinner::renderImpl() {
   ImGui::Spinner(getName().c_str(), radius, thickness);
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

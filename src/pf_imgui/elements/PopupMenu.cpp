@@ -3,6 +3,7 @@
 //
 
 #include "PopupMenu.h"
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -33,4 +34,4 @@ void PopupMenu::renderImpl() {
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

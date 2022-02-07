@@ -84,6 +84,6 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
 
   std::vector<std::unique_ptr<plot_type::PlotData>> datas;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_PLOTS_PLOT_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_PLOT_H

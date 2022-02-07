@@ -66,7 +66,7 @@ constexpr const char *defaultSliderFormat() {
     return "%d";
   }
 }
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Slider supporting multiple types.
@@ -211,5 +211,6 @@ extern template class Slider<glm::vec2>;
 extern template class Slider<glm::vec3>;
 extern template class Slider<glm::vec4>;
 #endif
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_SLIDER_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_ELEMENTS_SLIDER_H

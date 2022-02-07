@@ -17,6 +17,7 @@
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -80,6 +81,6 @@ class Range2D
   glm::vec2 minRange;
   glm::vec2 maxRange;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_RANGE2D_H
+#endif  // PF_IMGUI_ELEMENTS_RANGE2D_H

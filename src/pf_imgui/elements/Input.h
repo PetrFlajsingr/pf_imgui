@@ -120,7 +120,7 @@ concept FormattedWithStep =
 template<typename T>
 concept FormattedWithoutStep =
     !OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
-}// namespace details
+}  // namespace details
 
 /**
 * @brief Keyboard input for numeric types.
@@ -315,6 +315,6 @@ extern template class Input<glm::ivec2>;
 extern template class Input<glm::ivec3>;
 extern template class Input<glm::ivec4>;
 #endif
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_INPUT_H
+#endif  // PF_IMGUI_ELEMENTS_INPUT_H

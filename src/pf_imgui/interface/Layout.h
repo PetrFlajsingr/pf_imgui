@@ -13,6 +13,7 @@
 #include <src/pf_imgui/interface/Collapsible.h>
 #include <src/pf_imgui/interface/Element.h>
 #include <src/pf_imgui/interface/Resizable.h>
+#include <string>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -101,10 +102,10 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible, public Render
 
  private:
   bool drawBorder;
-  bool scrollable = false;//@todo: turn into an interface?
+  bool scrollable = false;  // @todo: turn into an interface?
   bool horizontalScrollEnabled = false;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_LAYOUTS_LAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_LAYOUT_H

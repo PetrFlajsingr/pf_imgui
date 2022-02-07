@@ -10,6 +10,7 @@
 
 #include "Observable_impl.h"
 #include <pf_imgui/_export.h>
+#include <utility>
 
 namespace pf::ui::ig {
 /**
@@ -65,6 +66,6 @@ class PF_IMGUI_EXPORT Focusable {
   Observable_impl<bool> observableImpl;
   bool focused = false;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_INTERFACE_FOCUSABLE_H
+#endif  // PF_IMGUI_INTERFACE_FOCUSABLE_H

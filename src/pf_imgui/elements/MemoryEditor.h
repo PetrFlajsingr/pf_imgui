@@ -12,6 +12,7 @@
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <ranges>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -70,7 +71,7 @@ class MemoryEditor : public ItemElement, public AllColorCustomizable, public All
   void setColumnCount(unsigned int count) { memoryEditor.Cols = count; }
 
   [[nodiscard]] R &getRange() const { return range; }
-  void setRange(R &newRange) { range = newRange; }
+  void setRange(const R &newRange) { range = newRange; }
 
  protected:
   void renderImpl() override {
@@ -84,6 +85,6 @@ class MemoryEditor : public ItemElement, public AllColorCustomizable, public All
   ImGui::MemoryEditor memoryEditor{};
   R &range;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_MEMORYEDITOR_H
+#endif  // PF_IMGUI_ELEMENTS_MEMORYEDITOR_H

@@ -29,4 +29,5 @@ void DockSpace::renderImpl() {
 }
 
 DockSpace::Id DockSpace::getDockId() const { return id; }
-}// namespace pf::ui::ig
+
+}  // namespace pf::ui::ig

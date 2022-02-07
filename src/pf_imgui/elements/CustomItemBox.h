@@ -163,6 +163,6 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
   std::function<std::unique_ptr<R>(const T &)> factory;
   std::function<bool(const T &)> filter = [](const auto &) { return true; };
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H

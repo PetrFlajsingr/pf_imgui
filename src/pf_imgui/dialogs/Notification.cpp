@@ -3,6 +3,7 @@
 //
 
 #include "Notification.h"
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -84,4 +85,4 @@ float Notification::getOpacity() const {
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

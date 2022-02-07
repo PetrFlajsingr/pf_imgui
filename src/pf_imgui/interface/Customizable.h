@@ -13,6 +13,7 @@
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/tuple.h>
 #include <pf_imgui/styles/enums.h>
+#include <tuple>
 
 namespace pf::ui::ig {
 // TODO: change colors to glm::vec4
@@ -52,7 +53,7 @@ constexpr auto varArgValueForIndex(std::size_t index, std::size_t currIndex = 0)
   }
 }
 
-}// namespace details
+}  // namespace details
 
 /**
 * @brief An interface to allow for changing color style. It also provides functionality to apply these styles.
@@ -93,6 +94,7 @@ class ColorCustomizable {
     iterateTuple([](auto &value) { value = std::nullopt; }, colorValues);
   }
 #endif
+
  protected:
   /**
   * Add color options on imgui stack and return an instance of RAII which resets it.
@@ -123,6 +125,7 @@ class ColorCustomizable {
   }
 
 #ifdef PF_IMGUI_ENABLE_STYLES
+
  private:
   std::tuple<details::ColorOfAsOptionalImVec4<SupportedColorTypes>...> colorValues;
   bool modified = false;
@@ -191,6 +194,7 @@ class StyleCustomizable {
     iterateTuple([](auto &value) { value = std::nullopt; }, styleValues);
   }
 #endif
+
  protected:
   /**
   * Add style options on imgui stack and return an instance of RAII which resets it.
@@ -216,8 +220,9 @@ class StyleCustomizable {
 #else
     return RAII{[] {}};
 #endif
-  };
+  }
 #ifdef PF_IMGUI_ENABLE_STYLES
+
  private:
   std::tuple<details::OptionalTypeForStyle<SupportedStyles>...> styleValues;
   bool modified = false;
@@ -233,6 +238,6 @@ using AllStyleCustomizable =
                       style::Style::WindowPadding, style::Style::WindowMinSize, style::Style::WindowTitleAlign,
                       style::Style::FramePadding, style::Style::ItemSpacing, style::Style::ItemInnerSpacing,
                       style::Style::CellPadding, style::Style::ButtonTextAlign, style::Style::SelectableTextAlign>;
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H

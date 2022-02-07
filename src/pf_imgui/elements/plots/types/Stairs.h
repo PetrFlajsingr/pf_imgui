@@ -36,6 +36,6 @@ class PF_IMGUI_EXPORT Stairs : public LabeledPlotData, public details::DefaultPl
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig::plot_type
+}  // namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_STAIRS_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_STAIRS_H

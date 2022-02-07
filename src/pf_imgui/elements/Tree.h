@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_TREE_H
 
 #include <iostream>
+#include <memory>
 #include <pf_common/Visitor.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
@@ -21,6 +22,7 @@
 #include <pf_imgui/layouts/BoxLayout.h>
 #include <string>
 #include <variant>
+#include <vector>
 
 namespace pf::ui::ig {
 // TODO: simplify this
@@ -51,13 +53,13 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
   friend class Tree<TreeType::Advanced>;
 
  public:
-  TreeRecord(const std::string &elementName, const std::string &label, const Flags<ImGuiTreeNodeFlags_>& defaultFlags);
+  TreeRecord(const std::string &elementName, const std::string &label, const Flags<ImGuiTreeNodeFlags_> &defaultFlags);
 
  protected:
   Flags<ImGuiTreeNodeFlags_> flags{};
   TreeSelectionLimiter *limiter = nullptr;
 };
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Leaf of Tree. Behaves as Selectable.
@@ -424,5 +426,5 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   }
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_TREE_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_TREE_H

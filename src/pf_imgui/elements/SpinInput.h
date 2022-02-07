@@ -8,12 +8,14 @@
 #ifndef PF_IMGUI_ELEMENTS_SPININPUT_H
 #define PF_IMGUI_ELEMENTS_SPININPUT_H
 
+#include <algorithm>
 #include <pf_imgui/details/Spin.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <string>
 
 namespace pf::ui::ig {
 /**
@@ -80,7 +82,7 @@ class SpinInput
     }
     if constexpr (std::same_as<T, float>) {
       valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
-                                      flags);// TODO: user provided format
+                                      flags);  // TODO: user provided format
     }
     if (valueChanged) {
       ValueObservable<T>::setValueInner(std::clamp(ValueObservable<T>::getValue(), min, max));
@@ -119,6 +121,6 @@ class SpinInput
 extern template class SpinInput<int>;
 extern template class SpinInput<float>;
 #endif
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_SPININPUT_H
+#endif  // PF_IMGUI_ELEMENTS_SPININPUT_H

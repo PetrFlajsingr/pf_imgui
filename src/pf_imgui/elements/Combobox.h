@@ -8,12 +8,15 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 
+#include <memory>
 #include <pf_imgui/elements/CustomCombobox.h>
 #include <pf_imgui/elements/Selectable.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <range/v3/view/addressof.hpp>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -27,7 +30,7 @@ struct ComboboxRowFactory {
   }
 };
 static_assert(CustomItemBoxFactory<ComboboxRowFactory<int>, int, Selectable>);
-}// namespace details
+}  // namespace details
 
 /**
  * @brief A typical combobox with items which can be converted to string.
@@ -188,6 +191,6 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class Combobox<std::string>;
 #endif
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H

@@ -113,5 +113,5 @@ class PF_IMGUI_EXPORT InvisibleButton : public ItemElement, public Resizable, pu
   MouseButton clickBtn;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_BUTTON_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_BUTTON_H

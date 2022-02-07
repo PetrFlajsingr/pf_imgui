@@ -10,6 +10,7 @@
 #include <pf_imgui/ImGuiInterface.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 namespace details {
@@ -19,7 +20,7 @@ struct FontData {
   ImFont *fontH3 = nullptr;
 };
 static inline FontData DefaultFontData;
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Markdown text render area.
@@ -105,5 +106,5 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
   std::optional<ImageLoader> loadImage = std::nullopt;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_MARKDOWNTEXT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_MARKDOWNTEXT_H

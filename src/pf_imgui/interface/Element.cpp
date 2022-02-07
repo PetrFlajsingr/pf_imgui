@@ -24,4 +24,4 @@ void Element::setFont(ImFont *fontPtr) { font = fontPtr; }
 
 ImFont *Element::getFont() const { return font; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

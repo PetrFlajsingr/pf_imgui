@@ -11,6 +11,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/MenuItems.h>
 #include <pf_imgui/interface/Element.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -44,6 +45,6 @@ class PopupMenu : public Element, public MenuContainer {
   bool firstRender = true;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H

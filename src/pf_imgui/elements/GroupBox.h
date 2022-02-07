@@ -12,6 +12,7 @@
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -32,6 +33,6 @@ class GroupBox : public Element, public ElementContainer, public Labellable, pub
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_GROUPBOX_H
+#endif  // PF_IMGUI_GROUPBOX_H

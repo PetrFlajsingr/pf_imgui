@@ -86,5 +86,5 @@ class PF_IMGUI_EXPORT Checkbox
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_CHECKBOX_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_CHECKBOX_H

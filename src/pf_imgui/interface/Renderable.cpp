@@ -39,4 +39,4 @@ void Renderable::render() {
 }
 const std::string &Renderable::getName() const { return name; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

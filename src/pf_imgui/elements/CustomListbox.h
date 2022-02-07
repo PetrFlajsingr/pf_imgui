@@ -13,6 +13,8 @@
 #include <pf_imgui/elements/CustomItemBox.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <string>
+#include <utility>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -47,10 +49,10 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
     auto style = setStyleStack();
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
       RAII end{[] { ImGui::EndListBox(); }};
-      std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto &item) { item->second->render(); });
+      std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
     }
   }
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H

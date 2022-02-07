@@ -3,6 +3,8 @@
 //
 
 #include "StretchLayout.h"
+#include <string>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -29,7 +31,7 @@ void StretchLayout::setStretch(Stretch newStretch) {
 }
 
 Element &StretchLayout::getChild() {
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
   if (child == nullptr) { throw StackTraceException("Child not present"); }
 #endif
   return *dynamic_cast<Element *>(child.get());
@@ -57,4 +59,4 @@ std::vector<Renderable *> StretchLayout::getRenderables() { return {dynamic_cast
 
 bool StretchLayout::hasChild() const { return child != nullptr; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

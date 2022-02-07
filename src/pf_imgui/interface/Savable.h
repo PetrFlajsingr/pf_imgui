@@ -68,5 +68,5 @@ class PF_IMGUI_EXPORT Savable {
   bool persist;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_SAVABLEELEMENT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_INTERFACE_SAVABLEELEMENT_H

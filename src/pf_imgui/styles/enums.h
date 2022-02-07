@@ -1,6 +1,9 @@
-//
-// Created by petr on 6/18/21.
-//
+/**
+ * @file enums.h
+ * @brief Enumerations for UI styling.
+ * @author Petr Flajšingr
+ * @date 18.6.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_STYLES_ENUMS_H
 #define PF_IMGUI_SRC_PF_IMGUI_STYLES_ENUMS_H
@@ -70,7 +73,7 @@ enum class ColorOf : int {
 };
 
 enum class Style : int {
-  //float:
+  // float:
   Alpha = ImGuiStyleVar_Alpha,
   WindowRounding = ImGuiStyleVar_WindowRounding,
   WindowBorderSize = ImGuiStyleVar_WindowBorderSize,
@@ -86,7 +89,7 @@ enum class Style : int {
   GrabMinSize = ImGuiStyleVar_GrabMinSize,
   GrabRounding = ImGuiStyleVar_GrabRounding,
   TabRounding = ImGuiStyleVar_TabRounding,
-  //ImVec2
+  // ImVec2
   WindowPadding = ImGuiStyleVar_WindowPadding,
   WindowMinSize = ImGuiStyleVar_WindowMinSize,
   WindowTitleAlign = ImGuiStyleVar_WindowTitleAlign,
@@ -107,6 +110,6 @@ constexpr bool isFloatStyle(Style style) {
                                     Style::GrabRounding, Style::TabRounding});
 }
 
-}// namespace pf::ui::ig::style
+}  // namespace pf::ui::ig::style
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_STYLES_ENUMS_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_STYLES_ENUMS_H

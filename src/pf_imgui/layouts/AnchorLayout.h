@@ -9,6 +9,8 @@
 #define PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
 
 #include "ResizableLayout.h"
+#include <limits>
+#include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
@@ -16,7 +18,10 @@
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
+#include <string>
 #include <tuple>
+#include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -70,7 +75,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
   auto &createChild(const std::string &name, ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
-#ifndef _MSC_VER// TODO: MSVC c3779
+#ifndef _MSC_VER  // TODO: MSVC c3779
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {
@@ -152,6 +157,6 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
   std::vector<AnchoredChild> children;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
+#endif  //PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H

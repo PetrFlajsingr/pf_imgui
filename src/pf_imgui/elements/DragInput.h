@@ -71,7 +71,7 @@ constexpr const char *defaultDragFormat() {
     return "%d";
   }
 }
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Numeric input supporting either keyboard input or mouse drag.
@@ -261,5 +261,5 @@ extern template class DragInput<glm::ivec3>;
 extern template class DragInput<glm::ivec4>;
 extern template class DragInput<math::Range<int>>;
 #endif
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_DRAGINPUT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_DRAGINPUT_H

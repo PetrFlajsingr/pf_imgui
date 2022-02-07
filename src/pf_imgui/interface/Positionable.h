@@ -10,6 +10,7 @@
 
 #include "Observable_impl.h"
 #include <imgui.h>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -83,6 +84,6 @@ class Positionable {
    */
   void notifyPositionChanged(Position pos);
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_INTERFACE_POSITIONABLE_H
+#endif  // PF_IMGUI_INTERFACE_POSITIONABLE_H

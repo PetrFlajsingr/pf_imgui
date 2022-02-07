@@ -4,8 +4,10 @@
 
 #include "Selectable.h"
 #include <imgui.h>
+#include <string>
 
 namespace pf::ui::ig {
+
 Selectable::Selectable(const std::string &elementName, const std::string &label, bool value, Size s,
                        Persistent persistent)
     : ItemElement(elementName), Labellable(label), ValueObservable(value), Resizable(s), Savable(persistent) {}
@@ -24,4 +26,4 @@ void Selectable::unserialize_impl(const toml::table &src) {
 
 toml::table Selectable::serialize_impl() const { return toml::table{{{"selected", getValue()}}}; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

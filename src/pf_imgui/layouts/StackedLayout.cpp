@@ -3,7 +3,9 @@
 //
 
 #include "StackedLayout.h"
+#include <memory>
 #include <range/v3/view/join.hpp>
+#include <string>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -47,7 +49,7 @@ void StackedLayout::popStack() {
 }
 
 void StackedLayout::removeStack(std::size_t index) {
-#ifndef _MSC_VER// TODO: MSVC internal compiler error
+#ifndef _MSC_VER  // TODO: MSVC internal compiler error
   if (index >= stacks.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
 #endif
   stacks.erase(stacks.begin() + static_cast<long long>(index));
@@ -60,7 +62,7 @@ void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
 
 std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
 void StackedLayout::setIndex(std::size_t index) {
-#ifndef _MSC_VER// TODO: MSVC internal compiler error
+#ifndef _MSC_VER  // TODO: MSVC internal compiler error
   if (index >= stacks.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
 #endif
   selectedIndex = index;
@@ -86,4 +88,4 @@ void StackedLayout::setStackActive(StackedLayout::Stack &stack) {
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

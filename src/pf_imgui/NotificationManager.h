@@ -5,8 +5,10 @@
 #ifndef PF_IMGUI_NOTIFICATIONMANAGER_H
 #define PF_IMGUI_NOTIFICATIONMANAGER_H
 
+#include <memory>
 #include <pf_imgui/FontManager.h>
 #include <pf_imgui/dialogs/Notification.h>
+#include <string>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -32,5 +34,5 @@ class NotificationManager {
   ImFont *defaultFont = nullptr;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_NOTIFICATIONMANAGER_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_NOTIFICATIONMANAGER_H

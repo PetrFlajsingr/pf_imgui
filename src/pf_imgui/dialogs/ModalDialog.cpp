@@ -35,7 +35,7 @@ void ModalDialog::close() { closed = true; }
 bool ModalDialog::isClosed() const { return closed; }
 
 void ModalDialog::setSize(const Size &newSize) {
-  Resizable::setSize(newSize);//FIXME change this to SetNextWindowSize
+  Resizable::setSize(newSize);  // FIXME change this to SetNextWindowSize
   ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
 }
 void ModalDialog::setPosition(Position pos) {
@@ -44,4 +44,4 @@ void ModalDialog::setPosition(Position pos) {
 }
 void ModalDialog::setFont(ImFont *fontPtr) { font = fontPtr; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -17,6 +17,7 @@
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <string>
 
 namespace pf::ui::ig {
 /**
@@ -94,6 +95,6 @@ class PF_IMGUI_EXPORT Slider3D
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class Slider3D<float>;
 #endif
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_SLIDER3D_H
+#endif  // PF_IMGUI_ELEMENTS_SLIDER3D_H

@@ -31,6 +31,6 @@ class PF_IMGUI_EXPORT Digital : public LabeledPlotData, public details::DefaultP
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig::plot_type
+}  // namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_DIGITAL_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_DIGITAL_H

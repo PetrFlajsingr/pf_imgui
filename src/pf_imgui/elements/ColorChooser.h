@@ -142,5 +142,5 @@ extern template class ColorChooser<ColorChooserType::Edit, glm::vec4>;
 extern template class ColorChooser<ColorChooserType::Picker, glm::vec3>;
 extern template class ColorChooser<ColorChooserType::Picker, glm::vec4>;
 #endif
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_COLORCHOOSER_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_COLORCHOOSER_H

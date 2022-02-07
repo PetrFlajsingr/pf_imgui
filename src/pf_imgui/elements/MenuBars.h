@@ -51,6 +51,6 @@ class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_MENUBARS_H
+#endif  // PF_IMGUI_ELEMENTS_MENUBARS_H

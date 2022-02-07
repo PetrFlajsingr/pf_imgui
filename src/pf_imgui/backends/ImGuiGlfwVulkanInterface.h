@@ -44,5 +44,5 @@ class ImGuiGlfwVulkanInterface : public ImGuiInterface {
   VkDescriptorPool descriptorPool;
   ImGuiVulkanGlfwConfig config;
 };
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_SRC_PF_IMGUI_BACKENDS_IMGUIGLFWVULKANINTERFACE_H
+}  // namespace pf::ui::ig
+#endif  //PF_IMGUI_SRC_PF_IMGUI_BACKENDS_IMGUIGLFWVULKANINTERFACE_H

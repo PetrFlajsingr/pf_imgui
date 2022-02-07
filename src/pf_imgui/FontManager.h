@@ -15,6 +15,9 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/icons.h>
 #include <span>
+#include <string>
+#include <unordered_map>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -191,7 +194,7 @@ class FontManager {
    * @return std::nullopt if no font is found, otherwise a pointer to it
    */
   [[nodiscard]] std::optional<ImFont *> fontByName(const std::string &name) const;
-  //void removeFontByName(const std::string &name) const;
+
   /**
    * Build a font from ttf file.
    * @param name name of the font
@@ -223,5 +226,5 @@ class FontManager {
   std::vector<std::array<ImWchar, 3>> glyphRangeInfos;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H

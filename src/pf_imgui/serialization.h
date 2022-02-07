@@ -7,10 +7,10 @@
 #ifndef PF_IMGUI_SERIALIZATION_H
 #define PF_IMGUI_SERIALIZATION_H
 
-#include "ui_tree_traversal.h"
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/ui_tree_traversal.h>
 #include <ranges>
 #include <toml++/toml_array.h>
 #include <toml++/toml_table.h>
@@ -95,6 +95,6 @@ PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &vec) {
   return result;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SERIALIZATION_H
+#endif  // PF_IMGUI_SERIALIZATION_H

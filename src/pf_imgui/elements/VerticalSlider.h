@@ -13,7 +13,7 @@
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
-
+#include <string>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -31,7 +31,7 @@ constexpr const char *defaultVSliderFormat() {
     return "%d";
   }
 }
-}// namespace details
+}  // namespace details
 
 /**
  * @brief Slider rendered vertically.
@@ -134,6 +134,6 @@ class PF_IMGUI_EXPORT VerticalSlider
 extern template class VerticalSlider<int>;
 extern template class VerticalSlider<float>;
 #endif
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H

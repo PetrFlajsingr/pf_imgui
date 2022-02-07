@@ -27,6 +27,6 @@ struct CommonPlaceholder {
 };
 
 struct Dummy {};
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_META_H
+#endif  // PF_IMGUI_META_H

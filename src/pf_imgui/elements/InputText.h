@@ -10,6 +10,7 @@
 
 #include "Text.h"
 #include <functional>
+#include <memory>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -111,5 +112,6 @@ class PF_IMGUI_EXPORT InputText
   bool password = false;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_INPUTTEXT_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_ELEMENTS_INPUTTEXT_H

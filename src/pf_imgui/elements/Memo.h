@@ -134,5 +134,7 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public Renderabl
   std::vector<std::string> records;
   Text *textArea = nullptr;
 };
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_MEMO_H
+
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_ELEMENTS_MEMO_H

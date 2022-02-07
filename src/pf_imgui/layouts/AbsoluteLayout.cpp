@@ -40,7 +40,7 @@ void AbsoluteLayout::setChildPosition(const std::string &childName, Position pos
       child.has_value()) {
     child.value()->second->setPosition(position);
   } else {
-#ifndef _MSC_VER// TODO: MSVC internal compiler error
+#ifndef _MSC_VER  // TODO: MSVC internal compiler error
     throw IdNotFoundException("Child not found: {}", childName);
 #endif
   }
@@ -56,4 +56,4 @@ std::vector<Renderable *> AbsoluteLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.first.get(); })
       | ranges::to_vector;
 }
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -8,10 +8,11 @@
 #ifndef PF_IMGUI_INTERFACE_COLLAPSIBLE_H
 #define PF_IMGUI_INTERFACE_COLLAPSIBLE_H
 
-#include "Observable_impl.h"
-#include "Savable.h"
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/interface/Savable.h>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -85,6 +86,6 @@ class PF_IMGUI_EXPORT Collapsible : public Savable {
   bool collapsible;
   Observable_impl<bool> observableImpl;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_INTERFACE_COLLAPSIBLE_H
+#endif  // PF_IMGUI_INTERFACE_COLLAPSIBLE_H

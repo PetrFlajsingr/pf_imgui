@@ -84,5 +84,6 @@ class PF_IMGUI_EXPORT SimplePlot
   std::optional<std::string> overlayText = std::nullopt;
   std::optional<std::size_t> historyLimit = std::nullopt;
 };
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_PLOT_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_ELEMENTS_PLOT_H

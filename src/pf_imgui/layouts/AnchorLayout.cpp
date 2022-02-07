@@ -30,7 +30,7 @@ void AnchorLayout::setChildPosition(const std::string &childName, Position posit
       child.has_value()) {
     child.value()->positionable->setPosition(position);
   } else {
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
     throw IdNotFoundException("Child not found: {}", childName);
 #endif
   }
@@ -79,4 +79,4 @@ void AnchorLayout::renderImpl() {
     }
   }
 }
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

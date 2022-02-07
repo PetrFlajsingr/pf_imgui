@@ -118,5 +118,5 @@ requires(std::equality_comparable<T> &&std::is_assignable_v<T &, T> &&std::copy_
   Observable_impl<T> observableImpl;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H

@@ -3,6 +3,7 @@
 //
 
 #include "TextEditor.h"
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -40,17 +41,13 @@ void TextEditor::setHighlighting(TextEditor::Highlight language) {
     case Highlight::AngelScript:
       editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::AngelScript());
       break;
-    case Highlight::Lua:
-      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::Lua());
-      break;
+    case Highlight::Lua: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::Lua()); break;
     case Highlight::C: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::C()); break;
     case Highlight::CPP:
       editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::CPlusPlus());
       break;
-    case Highlight::SQL:
-      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::SQL());
-      break;
+    case Highlight::SQL: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::SQL()); break;
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

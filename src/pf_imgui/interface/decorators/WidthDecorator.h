@@ -11,7 +11,8 @@
 #include <imgui.h>
 #include <pf_common/exceptions/StackTraceException.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -49,6 +50,6 @@ requires(!std::derived_from<T, Resizable>) class WidthDecorator : public T {
  private:
   Width width{};
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H

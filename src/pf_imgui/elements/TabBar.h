@@ -17,6 +17,7 @@
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -229,5 +230,5 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
   ImGuiTabBarFlags flags = 0;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_TABBAR_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_TABBAR_H

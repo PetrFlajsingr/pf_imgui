@@ -13,6 +13,7 @@
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -51,6 +52,6 @@ class PF_IMGUI_EXPORT Selectable
   [[nodiscard]] toml::table serialize_impl() const override;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SELECTABLE_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SELECTABLE_H

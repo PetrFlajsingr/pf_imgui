@@ -4,6 +4,8 @@
 
 #include "GridLayout.h"
 #include <range/v3/view/transform.hpp>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -53,7 +55,7 @@ void GridLayout::renderImpl() {
 uint32_t GridLayout::indexForCell(uint32_t column, uint32_t row) const { return row * width + column; }
 ResizableLayout &GridLayout::getCellLayout(uint32_t column, uint32_t row) {
   const auto index = indexForCell(column, row);
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
   if (index >= cells.size()) { throw InvalidArgumentException("Indices out of bounds: {}x{}", column, row); }
 #endif
   return *cells[index];
@@ -63,10 +65,10 @@ std::vector<Renderable *> GridLayout::getRenderables() {
 }
 bool GridLayout::hasLayoutAt(uint32_t column, uint32_t row) {
   const auto index = indexForCell(column, row);
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
   if (index >= cells.size()) { throw InvalidArgumentException("Indices out of bounds: {}x{}", column, row); }
 #endif
   return cells[index] != nullptr;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

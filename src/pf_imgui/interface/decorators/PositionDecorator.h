@@ -37,6 +37,6 @@ class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
   explicit PositionDecorator(Position pos, Args &&...args) : T(std::forward<Args>(args)...), Positionable(pos) {}
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_LAYOUTS_LAYOUT_DECORATORS_H
+#endif  // PF_IMGUI_LAYOUTS_LAYOUT_DECORATORS_H

@@ -4,6 +4,7 @@
 
 #include "InputText.h"
 #include <imgui.h>
+#include <memory>
 #include <toml++/toml_node_view.h>
 #include <utility>
 
@@ -98,4 +99,4 @@ void InputText::setTextInner(std::string txt) {
   buffer[txt.size()] = '\0';
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

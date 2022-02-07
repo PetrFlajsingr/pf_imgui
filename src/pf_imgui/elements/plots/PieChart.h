@@ -61,6 +61,6 @@ class PieChart : public Element, public Labellable, public Resizable {
   std::vector<double> values;
   bool dataChanged = false;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H

@@ -14,4 +14,4 @@ ImVec2 ResizableLayout::getSizeIfCollapsed() const {
   return isCollapsed() ? ImVec2{getSize().width.value, 20} : getSize().asImVec();
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

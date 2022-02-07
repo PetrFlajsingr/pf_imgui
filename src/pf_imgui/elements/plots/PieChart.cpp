@@ -24,4 +24,4 @@ void PieChart::renderImpl() {
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

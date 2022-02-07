@@ -16,6 +16,8 @@
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <range/v3/view/addressof.hpp>
+#include <string>
+#include <utility>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -123,7 +125,7 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChild(std::string name, Args &&...args) {
-#ifndef _MSC_VER// disabled because of C3779 error
+#ifndef _MSC_VER  // disabled because of C3779 error
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {
@@ -152,7 +154,7 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
   createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
-#ifndef _MSC_VER// disabled because of C3779 error
+#ifndef _MSC_VER  // disabled because of C3779 error
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
         }).has_value()) {
@@ -176,6 +178,6 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   void renderLeftToRight();
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_LAYOUTS_BOXLAYOUT_H
+#endif  //PF_IMGUI_LAYOUTS_BOXLAYOUT_H

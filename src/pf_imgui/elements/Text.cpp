@@ -30,4 +30,4 @@ void Text::renderImpl() {
 }
 void Text::setTextInner(std::string txt) { text = std::move(txt); }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

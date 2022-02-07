@@ -43,5 +43,5 @@ class PF_IMGUI_EXPORT ResizableLayout : public Layout, public Resizable {
   [[nodiscard]] ImVec2 getSizeIfCollapsed() const;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_LAYOUTS_RESIZABLELAYOUT_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_LAYOUTS_RESIZABLELAYOUT_H

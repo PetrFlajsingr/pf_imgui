@@ -48,4 +48,4 @@ bool Image::isButton() const { return isButton_; }
 //  pixelInspectionTooltipEnabled = enabled;
 //}
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

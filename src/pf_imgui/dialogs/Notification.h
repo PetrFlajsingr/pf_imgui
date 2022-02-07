@@ -11,6 +11,7 @@
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -57,5 +58,5 @@ class Notification : public Renderable, public ElementContainer, public Labellab
   [[nodiscard]] float getOpacity() const;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_NOTIFICATION_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_NOTIFICATION_H

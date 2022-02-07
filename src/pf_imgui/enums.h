@@ -139,6 +139,6 @@ enum class Anchor : uint8_t {
 };
 // clang-format on
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ENUMS_H
+#endif  // PF_IMGUI_ENUMS_H

@@ -89,6 +89,6 @@ class PF_IMGUI_EXPORT Renderable {
   std::string name;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_INTERFACE_RENDERABLE_H
+#endif  // PF_IMGUI_INTERFACE_RENDERABLE_H

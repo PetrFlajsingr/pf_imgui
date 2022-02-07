@@ -71,5 +71,5 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
   ImGuiInterface &owner;
   ImFont *font = nullptr;
 };
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_DIALOG_H
+}  // namespace pf::ui::ig
+#endif  // PF_IMGUI_ELEMENTS_DIALOG_H

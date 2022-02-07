@@ -3,7 +3,10 @@
 //
 
 #include "DragNDrop.h"
+#include <memory>
 #include <pf_imgui/elements/Text.h>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -40,14 +43,14 @@ bool details::DragSourceBase::drag_impl(const std::string &typeName, const void 
 
 bool details::DragSourceBase::hasDragTooltip() const { return tooltip != nullptr; }
 Tooltip &details::DragSourceBase::getDragTooltip() {
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
   if (tooltip == nullptr) { throw StackTraceException("Drag tooltip doesn't exist."); }
 #endif
   return *tooltip;
 }
 
 const Tooltip &details::DragSourceBase::getDragTooltip() const {
-#ifndef _MSC_VER// TODO: MSVC internal error
+#ifndef _MSC_VER  // TODO: MSVC internal error
   if (tooltip == nullptr) { throw StackTraceException("Drag tooltip doesn't exist."); }
 #endif
   return *tooltip;
@@ -91,7 +94,7 @@ void details::DropTargetBase::setDropAllowed(bool allowed) { dropAllowed = allow
 std::optional<void *> details::DropTargetBase::dropAccept_impl(const std::string &typeName) const {
   if (dropAllowed && ImGui::BeginDragDropTarget()) {
     RAII end{[] { ImGui::EndDragDropTarget(); }};
-    auto payload = ImGui::AcceptDragDropPayload(typeName.c_str());// todo type conversions
+    auto payload = ImGui::AcceptDragDropPayload(typeName.c_str());  // todo type conversions
     void *result = payload == nullptr ? nullptr : payload->Data;
     if (result != nullptr) { return result; }
   }
@@ -112,4 +115,5 @@ void DragNDropGroup::frame() {
     wasDraggedLastFrame = false;
   }
 }
-}// namespace pf::ui::ig
+
+}  // namespace pf::ui::ig

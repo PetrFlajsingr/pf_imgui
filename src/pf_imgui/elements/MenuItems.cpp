@@ -7,6 +7,8 @@
 #include <imgui_internal.h>
 #include <range/v3/range/conversion.hpp>
 #include <range/v3/view/transform.hpp>
+#include <string>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -93,4 +95,4 @@ void MenuSeparatorItem::renderImpl() {
   ImGui::Separator();
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -4,6 +4,7 @@
 
 #include "Range2D.h"
 #include <pf_imgui/serialization.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -56,4 +57,4 @@ toml::table Range2D::serialize_impl() const {
   return toml::table{{{"startValue", serializeGlmVec(val.start)}, {"endValue", serializeGlmVec(val.end)}}};
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -3,6 +3,7 @@
 //
 
 #include "Layout.h"
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -36,4 +37,4 @@ bool Layout::isHorizontalScrollEnabled() const { return horizontalScrollEnabled;
 
 void Layout::setHorizontalScrollEnabled(bool horizontalScroll) { horizontalScrollEnabled = horizontalScroll; }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

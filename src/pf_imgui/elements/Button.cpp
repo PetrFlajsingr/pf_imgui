@@ -53,4 +53,4 @@ void InvisibleButton::renderImpl() {
   if (ImGui::InvisibleButton(getName().c_str(), getSize().asImVec(), static_cast<int>(clickBtn))) { notifyOnClick(); }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

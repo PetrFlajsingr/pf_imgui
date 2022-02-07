@@ -12,7 +12,7 @@ void checkVkResult(VkResult err) {
   if (err == 0) { return; }
   if (err < 0) { throw std::runtime_error("Error: VkResult = " + std::to_string(err)); }
 }
-}// namespace details
+}  // namespace details
 
 ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config)
     : ImGuiInterface(config.flags, std::move(config.config), config.enableMultiViewport, config.pathToIconFolder,
@@ -141,9 +141,7 @@ void ImGuiGlfwVulkanInterface::render() {
   if (getVisibility() == Visibility::Visible) {
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
-      auto raiiEnabled = pf::RAII([] {
-        ImGui::EndDisabled();
-      });
+      auto raiiEnabled = pf::RAII([] { ImGui::EndDisabled(); });
       renderImpl();
     } else {
       renderImpl();
@@ -176,4 +174,4 @@ void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

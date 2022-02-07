@@ -10,6 +10,7 @@
 #include <IconsForkAwesome.h>
 #include <IconsKenney.h>
 #include <filesystem>
+#include <vector>
 
 namespace pf::ui::ig {
 enum class IconPack {
@@ -36,7 +37,7 @@ static ImWchar iconRangeFA[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
 static ImWchar iconRangeFK[] = {ICON_MIN_FK, ICON_MAX_FK, 0};
 static ImWchar iconRangeKI[] = {ICON_MIN_KI, ICON_MAX_KI, 0};
 static ImWchar iconRangeFAD[] = {ICON_MIN_FAD, ICON_MAX_FAD, 0};
-}// namespace details
+}  // namespace details
 
 struct IconFontConfig {
   ImFontConfig config;
@@ -64,6 +65,6 @@ inline IconFontConfig fontConfigForIconPack(IconPack iconPack) {
   }
   return {};
 }
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_ICONS_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ICONS_H

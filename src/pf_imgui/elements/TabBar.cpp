@@ -145,4 +145,4 @@ std::vector<Renderable *> TabBar::getRenderables() {
   return tabs | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

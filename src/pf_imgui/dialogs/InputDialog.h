@@ -13,6 +13,8 @@
 #include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/elements/Text.h>
 #include <pf_imgui/layouts/BoxLayout.h>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -55,6 +57,6 @@ class InputDialog : public ModalDialog {
   std::function<void()> cancelClicked;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_DIALOGS_INPUTDIALOG_H
+#endif  // PF_IMGUI_DIALOGS_INPUTDIALOG_H

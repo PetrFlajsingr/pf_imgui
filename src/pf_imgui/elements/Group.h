@@ -46,5 +46,6 @@ class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, publi
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_ELEMENTS_GROUP_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_ELEMENTS_GROUP_H

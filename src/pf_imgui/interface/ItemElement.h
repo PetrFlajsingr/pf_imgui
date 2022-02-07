@@ -16,6 +16,7 @@
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/elements/Tooltip.h>
 #include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 // TODO: move position struct somewhere else and use it here for mouse pos
@@ -122,5 +123,6 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
   Observable_impl<ImVec2> mousePositionObservable;
 };
 
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_INTERFACE_ITEMELEMENT_H
+}  // namespace pf::ui::ig
+
+#endif  // PF_IMGUI_INTERFACE_ITEMELEMENT_H

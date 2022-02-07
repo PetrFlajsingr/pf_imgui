@@ -9,8 +9,10 @@
 #define PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
 
 #include "ResizableLayout.h"
+#include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <string>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -129,6 +131,6 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
   std::optional<std::size_t> selectedIndex = std::nullopt;
   std::vector<std::unique_ptr<Stack>> stacks;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H

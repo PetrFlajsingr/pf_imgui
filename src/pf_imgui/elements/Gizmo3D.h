@@ -13,6 +13,8 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <string>
+#include <utility>
 
 namespace pf::ui::ig {
 enum class GizmoType {
@@ -87,5 +89,5 @@ class Gizmo3D : public Element, public Resizable, public ValueObservable<details
  private:
   GizmoMid mid = GizmoMid::None;
 };
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_GIZMO3D_H
+}  // namespace pf::ui::ig
+#endif  //PF_IMGUI_GIZMO3D_H

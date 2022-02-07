@@ -13,6 +13,7 @@
 #include <pf_common/Subscription.h>
 #include <pf_imgui/_export.h>
 #include <unordered_map>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -22,29 +23,29 @@ namespace pf::ui::ig {
 * Provides the ability to add multiple observers and also remove them via Subscription.
 */
 class PF_IMGUI_EXPORT Clickable {
-public:
- /**
+ public:
+  /**
   * Add a parameterless listener, which is called every time the item is clicked.
   * @param fnc listener for click event
   * @return instance of Subscription, which allows to unsubscribe the listener
   * @see Subscription
   */
- Subscription addClickListener(std::invocable auto &&fnc) {
-   return observableImpl.addListener(std::forward<decltype(fnc)>(fnc));
- }
+  Subscription addClickListener(std::invocable auto &&fnc) {
+    return observableImpl.addListener(std::forward<decltype(fnc)>(fnc));
+  }
 
- virtual ~Clickable() = default;
+  virtual ~Clickable() = default;
 
-protected:
- /**
+ protected:
+  /**
   * Call all listeners.
   */
- void notifyOnClick();
+  void notifyOnClick();
 
-private:
- Observable_impl<> observableImpl;
+ private:
+  Observable_impl<> observableImpl;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_INTERFACE_CLICKABLE_H
+#endif  // PF_IMGUI_INTERFACE_CLICKABLE_H

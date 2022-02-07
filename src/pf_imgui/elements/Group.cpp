@@ -26,4 +26,4 @@ void Group::renderImpl() {
   }
 }
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

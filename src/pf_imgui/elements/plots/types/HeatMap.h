@@ -62,6 +62,6 @@ class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
   double min;
   double max;
 };
-}// namespace pf::ui::ig::plot_type
+}  // namespace pf::ui::ig::plot_type
 
-#endif//PF_IMGUI_ELEMENTS_PLOTS_TYPES_HEATMAP_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_HEATMAP_H

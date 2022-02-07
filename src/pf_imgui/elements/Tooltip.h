@@ -10,6 +10,7 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <string>
 
 namespace pf::ui::ig {
 
@@ -30,6 +31,6 @@ class PF_IMGUI_EXPORT Tooltip : public Element, public ElementContainer {
   void renderImpl() override;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_TOOLTIP_H
+#endif  // PF_IMGUI_ELEMENTS_TOOLTIP_H

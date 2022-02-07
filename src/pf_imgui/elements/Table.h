@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_TABLE_H
 
 #include <imgui.h>
+#include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/Element.h>
@@ -17,6 +18,9 @@
 #include <range/v3/range/conversion.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
+#include <string>
+#include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 
@@ -132,6 +136,6 @@ class Table : public Element, public RenderablesContainer, public Resizable {
   std::size_t idCounter = 0;
 };
 
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_ELEMENTS_TABLE_H
+#endif  // PF_IMGUI_ELEMENTS_TABLE_H

@@ -10,6 +10,9 @@
 #include "ResizableLayout.h"
 #include <memory>
 #include <pf_imgui/enums.h>
+#include <string>
+#include <utility>
+#include <vector>
 
 namespace pf::ui::ig {
 /**
@@ -116,6 +119,6 @@ class StretchLayout : public ResizableLayout {
   Renderable *renderableChild = nullptr;
   ImVec2 previousSize;
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H

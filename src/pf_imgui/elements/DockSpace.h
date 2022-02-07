@@ -12,6 +12,7 @@
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <string>
 
 namespace pf::ui::ig {
 enum class DockType {
@@ -55,6 +56,6 @@ class DockSpace : public Element,
   ImGuiDockNodeFlags flags;
   Id id{};
 };
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
