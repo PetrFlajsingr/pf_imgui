@@ -84,7 +84,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
     const char *previewPtr = previewValue.c_str();
-    if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+    if (ImGui::BeginCombo(getLabel().get().c_str(), previewPtr, *flags)) {
       RAII end{ImGui::EndCombo};
       checkClose();
       std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });

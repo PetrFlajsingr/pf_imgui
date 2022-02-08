@@ -7,12 +7,12 @@
 
 namespace pf::ui::ig {
 
-Expander::Expander(const std::string &elementName, const std::string &label, Persistent persistent,
+Expander::Expander(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Persistent persistent,
                    AllowCollapse allowCollapse)
-    : ItemElement(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
+    : ItemElement(elementName), Labellable(std::move(label)), Collapsible(allowCollapse, persistent) {}
 
-Expander::Expander(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse)
-    : Expander(elementName, label, Persistent::No, allowCollapse) {}
+Expander::Expander(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse)
+    : Expander(elementName, std::move(label), Persistent::No, allowCollapse) {}
 
 void Expander::renderImpl() {
   auto colorStyle = setColorStack();
@@ -20,7 +20,7 @@ void Expander::renderImpl() {
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
-  setCollapsed(!ImGui::CollapsingHeader(getLabel().c_str(), flags));
+  setCollapsed(!ImGui::CollapsingHeader(getLabel().get().c_str(), flags));
   if (!isCollapsed()) { std::ranges::for_each(getChildren(), &Renderable::render); }
 }
 

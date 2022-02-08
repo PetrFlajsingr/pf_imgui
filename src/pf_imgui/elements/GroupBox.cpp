@@ -12,7 +12,7 @@ GroupBox::GroupBox(const std::string &name, std::unique_ptr<Resource<std::string
     : Element(name), Labellable(std::move(label)), Resizable(s) {}
 
 void GroupBox::renderImpl() {
-  ImGui::BeginGroupPanel(getLabel().c_str(), getSize().asImVec());
+  ImGui::BeginGroupPanel(getLabel().get().c_str(), getSize().asImVec());
   RAII end{ImGui::EndGroupPanel};
   std::ranges::for_each(getChildren(), &Renderable::render);
 }
