@@ -194,6 +194,8 @@ set(SOURCES
         src/pf_imgui/details/GroupBox.cpp
         src/pf_imgui/elements/GroupBox.cpp
         src/pf_imgui/elements/TextEditor.cpp
+        src/pf_imgui/dialogs/CommandPaletteWindow.cpp
+        src/pf_imgui/elements/CommandPalette.cpp
         )
 
 set(INCLUDES
@@ -324,6 +326,8 @@ set(INCLUDES
         src/pf_imgui/elements/TextEditor.h
         src/include/imgui-command-palette/imcmd_command_palette.h
         src/include/imgui-command-palette/imcmd_fuzzy_search.h
+        src/pf_imgui/dialogs/CommandPaletteWindow.h
+        src/pf_imgui/elements/CommandPalette.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
