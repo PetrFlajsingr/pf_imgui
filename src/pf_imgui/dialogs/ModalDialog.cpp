@@ -19,10 +19,10 @@ void ModalDialog::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   if (font != nullptr) { ImGui::PushFont(font); }
-  if (firstRender) { ImGui::OpenPopup(getLabel().get().c_str()); }
-  if (ImGui::BeginPopupModal(getLabel().get().c_str())) {
-    RAII endPopup{[] { ImGui::EndPopup(); }};
-    std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+  if (firstRender) { ImGui::OpenPopup(getLabel().c_str()); }
+  if (ImGui::BeginPopupModal(getLabel().c_str())) {
+    RAII endPopup{ImGui::EndPopup};
+    std::ranges::for_each(getChildren(), &Renderable::render);
   } else {
     close();
   }

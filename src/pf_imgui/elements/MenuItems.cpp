@@ -34,8 +34,8 @@ void MenuButtonItem::renderImpl() {
 }
 
 void SubMenu::renderImpl() {
-  if (ImGui::BeginMenu(getLabel().get().c_str())) {
-    RAII end{[] { ImGui::EndMenu(); }};
+  if (ImGui::BeginMenu(getLabel().c_str())) {
+    RAII end{ImGui::EndMenu};
     renderItems();
   }
 }

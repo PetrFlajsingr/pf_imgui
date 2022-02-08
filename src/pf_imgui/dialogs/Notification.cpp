@@ -26,10 +26,10 @@ void Notification::renderImpl() {
   const auto opacity = getOpacity();
   ImGui::SetNextWindowBgAlpha(opacity);
 
-  RAII end{[] { ImGui::End(); }};
+  RAII end{ImGui::End};
   if (ImGui::Begin(fmt::format("##{}", getName()).c_str(), nullptr, flags)) {
     ImGui::PushTextWrapPos(vp_size.x / 3.f);
-    RAII endTextWrap{[] { ImGui::PopTextWrapPos(); }};
+    RAII endTextWrap{ImGui::PopTextWrapPos};
 
     if (icon != nullptr) {
       if (iconFont != nullptr) { ImGui::PushFont(iconFont); }
@@ -44,7 +44,7 @@ void Notification::renderImpl() {
         SetCursorPosY(GetCursorPosY() + 5.f);// Must be a better way to do this!!!!
       }*/
     ImGui::Separator();
-    std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+    std::ranges::for_each(getChildren(), &Renderable::render);
   }
   height += ImGui::GetWindowHeight() + PADDING_MESSAGE_Y;
 }

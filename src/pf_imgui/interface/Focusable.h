@@ -29,12 +29,6 @@ class PF_IMGUI_EXPORT Focusable {
   Subscription addFocusListener(std::invocable<bool> auto &&fnc) {
     return observableImpl.addListener(std::forward<decltype(fnc)>(fnc));
   }
-
-  /**
-   * Check if element is currently focused.
-   * @return true if element is focused, false otherwise
-   */
-  [[deprecated("use hasFocus instead")]] [[nodiscard]] bool isFocused() const;
   /**
    * Check if element is currently focused.
    * @return true if element is focused, false otherwise

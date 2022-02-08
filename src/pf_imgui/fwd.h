@@ -29,7 +29,7 @@ class StretchLayout;
 
 class Button;
 class ModalDialog;
-class Group;
+class Expander;
 class Image;
 class InputText;
 class Memo;

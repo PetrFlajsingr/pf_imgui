@@ -98,6 +98,7 @@ include_directories(src/include/imgui_memory_editor)
 include_directories(src/include/imgInspect)
 include_directories(src/include/ImGuiIcons)
 include_directories(src/include/imgui_notify)
+include_directories(src/include/imgui-command-palette)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -115,7 +116,7 @@ set(SOURCES
         src/pf_imgui/elements/Button.cpp
         src/pf_imgui/elements/Checkbox.cpp
         src/pf_imgui/dialogs/ModalDialog.cpp
-        src/pf_imgui/elements/Group.cpp
+        src/pf_imgui/elements/Expander.cpp
         src/pf_imgui/elements/Image.cpp
         src/pf_imgui/elements/InputText.cpp
         src/pf_imgui/elements/Memo.cpp
@@ -175,6 +176,8 @@ set(SOURCES
         src/include/DearWidgets/dear_widgets.cpp
         src/include/imGuIZMO.quat/imGuIZMOquat.cpp
         src/include/ImGuiColorTextEdit/ImGuiColorTextEditor.cpp
+        src/include/imgui-command-palette/imcmd_command_palette.cpp
+        src/include/imgui-command-palette/imcmd_fuzzy_search.cpp
         src/pf_imgui/interface/DragNDrop.cpp
         src/pf_imgui/elements/MenuItems.cpp
         src/pf_imgui/elements/PopupMenu.cpp
@@ -191,6 +194,8 @@ set(SOURCES
         src/pf_imgui/details/GroupBox.cpp
         src/pf_imgui/elements/GroupBox.cpp
         src/pf_imgui/elements/TextEditor.cpp
+        src/pf_imgui/dialogs/CommandPaletteWindow.cpp
+        src/pf_imgui/elements/CommandPalette.cpp
         )
 
 set(INCLUDES
@@ -205,7 +210,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/ModalDialog.h
         src/pf_imgui/dialogs/MessageDialog.h
         src/pf_imgui/elements/DragInput.h
-        src/pf_imgui/elements/Group.h
+        src/pf_imgui/elements/Expander.h
         src/pf_imgui/elements/Image.h
         src/pf_imgui/elements/Input.h
         src/pf_imgui/elements/InputText.h
@@ -319,7 +324,11 @@ set(INCLUDES
         src/pf_imgui/elements/Gizmo3D.h
         src/include/ImGuiColorTextEdit/ImGuiColorTextEditor.h
         src/pf_imgui/elements/TextEditor.h
-        src/pf_imgui/resources/Resource.h src/pf_imgui/resources/LocalisationResource.h src/pf_imgui/resources/ResourceFactory.h)
+        src/include/imgui-command-palette/imcmd_command_palette.h
+        src/include/imgui-command-palette/imcmd_fuzzy_search.h
+        src/pf_imgui/dialogs/CommandPaletteWindow.h
+        src/pf_imgui/elements/CommandPalette.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -356,6 +365,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgInspect>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiIcons>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiColorTextEdit>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-command-palette>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
 

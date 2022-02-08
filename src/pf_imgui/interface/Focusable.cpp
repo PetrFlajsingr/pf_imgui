@@ -8,8 +8,6 @@ namespace pf::ui::ig {
 
 void Focusable::notifyFocusChanged(bool focus) { observableImpl.notify(focus); }
 
-bool Focusable::isFocused() const { return hasFocus(); }
-
 bool Focusable::hasFocus() const { return focused; }
 
 void Focusable::updateFocused(bool focus) {

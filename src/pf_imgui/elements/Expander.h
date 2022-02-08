@@ -23,24 +23,24 @@ namespace pf::ui::ig {
  *
  * Elements are rendered in top-down order.
  */
-class PF_IMGUI_EXPORT Group : public ItemElement, public ElementContainer, public Labellable, public Collapsible {
+class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, public Labellable, public Collapsible {
  public:
   /**
-   * Construct Group.
+   * Construct Expander.
    * @param elementName ID of the group
-   * @param label text drawn on top of the group
+   * @param label text drawn on top of the Expander
    * @param persistent enable state saving to disk
-   * @param allowCollapse show button for collapsing the group
+   * @param allowCollapse show button for collapsing the Expander
    */
-  Group(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Persistent persistent = Persistent::No,
-        AllowCollapse allowCollapse = AllowCollapse::No);
+  Expander(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
+           AllowCollapse allowCollapse = AllowCollapse::Yes);
   /**
    * Construct Group.
    * @param elementName ID of the group
    * @param label text drawn on top of the group
    * @param allowCollapse show button for collapsing the group
    */
-  Group(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse);
+  Expander(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse);
 
  protected:
   void renderImpl() override;

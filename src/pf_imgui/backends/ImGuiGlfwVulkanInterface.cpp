@@ -141,7 +141,7 @@ void ImGuiGlfwVulkanInterface::render() {
   if (getVisibility() == Visibility::Visible) {
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
-      auto raiiEnabled = pf::RAII([] { ImGui::EndDisabled(); });
+      RAII raiiEnabled{ImGui::EndDisabled};
       renderImpl();
     } else {
       renderImpl();

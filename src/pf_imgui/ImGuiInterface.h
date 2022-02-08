@@ -12,6 +12,7 @@
 #include <pf_imgui/FontManager.h>
 #include <pf_imgui/NotificationManager.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/dialogs/CommandPaletteWindow.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
 #include <pf_imgui/dialogs/MessageDialog.h>
@@ -100,9 +101,26 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void removeWindow(const std::string &windowName);
   /**
    * Remove the window from UI. This invalidates any references to the window.
-   * @param name ID of the window to remove
+   * @param window window to remove
    */
   void removeWindow(const Window &window);
+
+  /**
+   * Create a CommandPaletteWindow
+   * @param windowName unique name of the window
+   * @return reference to the created window
+   */
+  CommandPaletteWindow &createCommandPalette(const std::string &windowName);
+  /**
+   * Remove palette window from UI. This invalidates references to the destroyed window.
+   * @param windowName unique name of the window to remove
+   */
+  void removePaletteWindow(const std::string &windowName);
+  /**
+   * Remove palette window from UI. This invalidates any references to it.
+   * @param window window to remove
+   */
+  void removePaletteWindow(const CommandPaletteWindow &window);
 
   /**
    * Find Window by its ID.
@@ -192,48 +210,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void setStyle(std::invocable<ImGuiStyle &> auto styleSetter) { styleSetter(ImGui::GetStyle()); }
 
   /**
-   * Create and open a file selection dialog. @see FileDialog
-   * @param caption Title
-   * @param extSettings extension settings @see FileExtensionSettings
-   * @param onSelect callback for when user selects files
-   * @param onCancel callback for when user cancels selection
-   * @param size size of the dialog
-   * @param startPath path in which the dialog opens
-   * @param startName default name for selected file/dir
-   * @param modality modality of the dialog
-   * @param maxSelectedFiles maximum amount of selected files
-   */
-  [[deprecated("Use buildFileDialog")]] void
-  openFileDialog(const std::string &caption, const std::vector<FileExtensionSettings> &extSettings,
-                 std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
-                 Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
-                 Modal modality = Modal::No, uint32_t maxSelectedFiles = 1) {
-    using namespace std::string_literals;
-    fileDialogs.emplace_back("FileDialog"s + std::to_string(idCounter++), caption, extSettings, onSelect, onCancel,
-                             size, std::move(startPath), std::move(startName), modality, maxSelectedFiles);
-  }
-
-  /**
-   * Create and open a directory selection dialog. @see FileDialog
-   * @param caption Title
-   * @param onSelect callback for when user selects files
-   * @param onCancel callback for when user cancels selection
-   * @param size size of the dialog
-   * @param startPath path in which the dialog opens
-   * @param startName default name for selected file/dir
-   * @param modality modality of the dialog
-   * @param maxSelectedDirs maximum amount of selected directories
-   */
-  [[deprecated("Use buildFileDialog")]] void
-  openDirDialog(const std::string &caption, std::invocable<std::vector<std::filesystem::path>> auto onSelect,
-                std::invocable auto onCancel, Size size = {200, 150}, std::filesystem::path startPath = ".",
-                std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1) {
-    using namespace std::string_literals;
-    fileDialogs.emplace_back("FileDialog"s + std::to_string(idCounter++), caption, onSelect, onCancel, size, startPath,
-                             startName, modality, maxSelectedDirs);
-  }
-
-  /**
    * Create a builder for FileDialog.
    * @param type type of files to be selected
    * @return builder
@@ -312,6 +288,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   toml::table config;
 
   std::vector<DragNDropGroup> dragNDropGroups{};
+
+  std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes{};
 
   void removeDialog(ModalDialog &dialog);
 };

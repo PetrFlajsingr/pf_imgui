@@ -108,9 +108,9 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
     if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, getSize().asImVec())) {
-      RAII end{[] { ImGui::EndTable(); }};
+      RAII end{ImGui::EndTable};
       if (header.has_value()) {
-        std::ranges::for_each(*header, [](const auto &value) { ImGui::TableSetupColumn(value.c_str()); });
+        std::ranges::for_each(*header, ImGui::TableSetupColumn, &std::string::c_str);
         ImGui::TableHeadersRow();
       }
 

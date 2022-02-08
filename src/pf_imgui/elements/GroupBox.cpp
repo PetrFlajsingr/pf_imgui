@@ -12,9 +12,9 @@ GroupBox::GroupBox(const std::string &name, std::unique_ptr<Resource<std::string
     : Element(name), Labellable(std::move(label)), Resizable(s) {}
 
 void GroupBox::renderImpl() {
-  ImGui::BeginGroupPanel(getLabel().get().c_str(), getSize().asImVec());
-  pf::RAII end{[] { ImGui::EndGroupPanel(); }};
-  std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+  ImGui::BeginGroupPanel(getLabel().c_str(), getSize().asImVec());
+  RAII end{ImGui::EndGroupPanel};
+  std::ranges::for_each(getChildren(), &Renderable::render);
 }
 
 }  // namespace pf::ui::ig

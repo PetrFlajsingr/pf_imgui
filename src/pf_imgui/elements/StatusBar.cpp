@@ -17,11 +17,11 @@ void AppStatusBar::renderImpl() {
   height = ImGui::GetFrameHeight();
   if (ImGui::BeginViewportSideBar(fmt::format("##{}", getName()).c_str(), viewport, ImGuiDir_Down, height,
                                   window_flags)) {
+    RAII end{ImGui::End};
     if (ImGui::BeginMenuBar()) {
-      std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
-      ImGui::EndMenuBar();
+      RAII endMenu{ImGui::EndMenuBar};
+      std::ranges::for_each(getChildren(), &Renderable::render);
     }
-    ImGui::End();
   }
 }
 float AppStatusBar::getHeight() const { return height; }
