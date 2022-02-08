@@ -11,6 +11,8 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui_internal.h>
 
+#include <optional>
+
 namespace ImCmd
 {
 // =================================================================
@@ -150,7 +152,7 @@ struct Context
 
   struct
   {
-    const char* NewSearchText = nullptr;
+    std::optional<std::string> NewSearchText = std::nullopt;
     bool FocusSearchBox = false;
   } NextCommandPaletteActions;
 
@@ -492,10 +494,9 @@ void ClearStyleColor(ImCmdTextType type)
   gContext->HasFontColorOverride[type] = false;
 }
 
-void SetNextCommandPaletteSearch(const char* text)
+void SetNextCommandPaletteSearch(const std::string &text)
 {
   IM_ASSERT(gContext != nullptr);
-  IM_ASSERT(text != nullptr);
   gContext->NextCommandPaletteActions.NewSearchText = text;
 }
 
@@ -534,12 +535,13 @@ void CommandPalette(const char* name)
   bool refresh_search = gi.PendingActions.RefreshSearch;
   refresh_search |= gg.CommitOps();
 
-  if (auto text = gg.NextCommandPaletteActions.NewSearchText) {
+  if (gg.NextCommandPaletteActions.NewSearchText.has_value()) {
+    auto text = gg.NextCommandPaletteActions.NewSearchText.value();
     refresh_search = false;
-    if (text[0] == '\0') {
+    if (text.empty()) {
       gi.Search.ClearSearchText();
     } else {
-      gi.Search.SetSearchText(text);
+      gi.Search.SetSearchText(text.c_str());
     }
   } else if (gi.PendingActions.ClearSearch) {
     refresh_search = false;
