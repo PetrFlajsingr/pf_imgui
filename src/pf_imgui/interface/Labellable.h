@@ -39,7 +39,7 @@ class PF_IMGUI_EXPORT Labellable {
    */
   [[nodiscard]] const Resource<std::string> &getLabel() const;
   /**
-   * Set new label with formatting bz fmt::format
+   * Set new label
    * @param fmt format string
    * @param args arguments for format string
    */
