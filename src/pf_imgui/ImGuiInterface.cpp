@@ -19,7 +19,7 @@ ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, b
 
 ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
+  ImGui::CreateContext(); // TODO: fix this up so there can actually be multiple interfaces instances in one application
   ImPlot::CreateContext();
   auto &imguiIo = ImGui::GetIO();
   imguiIo.ConfigFlags |= flags;
