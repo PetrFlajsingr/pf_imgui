@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 Expander::Expander(const std::string &elementName, const std::string &label, Persistent persistent,
-             AllowCollapse allowCollapse)
+                   AllowCollapse allowCollapse)
     : ItemElement(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
 
 Expander::Expander(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse)
@@ -21,9 +21,7 @@ void Expander::renderImpl() {
   ImGui::SetNextItemOpen(shouldBeOpen);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
   setCollapsed(!ImGui::CollapsingHeader(getLabel().c_str(), flags));
-  if (!isCollapsed()) {
-    std::ranges::for_each(getChildren(), &Renderable::render);
-  }
+  if (!isCollapsed()) { std::ranges::for_each(getChildren(), &Renderable::render); }
 }
 
 }  // namespace pf::ui::ig

@@ -604,7 +604,7 @@ void CommandPalette(const char* name)
     item_count = gi.Session.GetItemCount();
   }
 
-  if (gi.ExtraData.size() < item_count) {
+  if (static_cast<int>(gi.ExtraData.size()) < item_count) {
     gi.ExtraData.resize(item_count);
   }
 

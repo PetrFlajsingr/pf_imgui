@@ -6,7 +6,8 @@
 
 namespace pf::ui::ig {
 
-CommandPaletteWindow::CommandPaletteWindow(const std::string &name) : Renderable(name), context(ImCmd::CreateContext()) {
+CommandPaletteWindow::CommandPaletteWindow(const std::string &name)
+    : Renderable(name), context(ImCmd::CreateContext()) {
   setCloseable(true);
 }
 

@@ -117,6 +117,20 @@ void ImGuiInterface::removeWindow(const Window &window) {
   windows.erase(std::ranges::find(windows, &window, [](const auto &window) { return window.get(); }));
 }
 
+CommandPaletteWindow &ImGuiInterface::createCommandPalette(const std::string &windowName) {
+  return *commandPalettes.emplace_back(std::make_unique<CommandPaletteWindow>(windowName));
+}
+
+void ImGuiInterface::removePaletteWindow(const std::string &windowName) {
+  auto remove = std::ranges::remove(commandPalettes, windowName, [](const auto &window) { return window->getName(); });
+  commandPalettes.erase(remove.begin());
+}
+
+void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
+  auto remove = std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
+  commandPalettes.erase(remove.begin());
+}
+
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
   if (auto window = findIf(getWindows() | ranges::views::addressof,
                            [windowName](const auto &window) { return window->getName() == windowName; });
@@ -142,6 +156,7 @@ void ImGuiInterface::renderImpl() {
   auto style = setStyleStack();
   if (hasMenuBar()) { menuBar->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
+  std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });
   std::ranges::for_each(dragNDropGroups, &DragNDropGroup::frame);
   if (statusBar != nullptr) { statusBar->render(); }
   renderDialogs();
