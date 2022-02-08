@@ -43,7 +43,6 @@ ImGuiGlfwVulkanInterface::~ImGuiGlfwVulkanInterface() {
   vkDeviceWaitIdle(config.device);
   ImGui_ImplVulkan_Shutdown();
   ImGui_ImplGlfw_Shutdown();
-  ImGui::DestroyContext();
   vkDestroyDescriptorPool(config.device, descriptorPool, nullptr);
 }
 

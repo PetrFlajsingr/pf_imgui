@@ -55,6 +55,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
                           const std::filesystem::path &iconFontDirectory = ".",
                           const Flags<IconPack> &enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
 
+  ~ImGuiInterface() override;
+
   /**
    * Get ImGuiIO from ImGui::.
    * @return ImGuiIO
@@ -275,7 +277,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   friend class FontManager;
 
   std::vector<std::unique_ptr<ModalDialog>> dialogs{};
-  static ImGuiIO &baseInit(ImGuiConfigFlags flags);
+
+  ImGuiContext *imguiContext = nullptr;
+  struct ImPlotContext *imPlotContext = nullptr;
   ImGuiIO &io;
   FontManager fontManager;
   NotificationManager notificationManager;

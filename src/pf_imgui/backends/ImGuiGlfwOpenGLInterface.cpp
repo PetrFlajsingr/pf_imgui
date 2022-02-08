@@ -17,7 +17,6 @@ pf::ui::ig::ImGuiGlfwOpenGLInterface::ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLCo
 pf::ui::ig::ImGuiGlfwOpenGLInterface::~ImGuiGlfwOpenGLInterface() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
-  ImGui::DestroyContext();
 }
 
 void pf::ui::ig::ImGuiGlfwOpenGLInterface::updateFonts() {

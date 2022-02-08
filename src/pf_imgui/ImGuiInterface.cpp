@@ -12,20 +12,28 @@ namespace pf::ui::ig {
 ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
                                const std::filesystem::path &iconFontDirectory, const Flags<IconPack> &enabledIconPacks,
                                float iconSize)
-    : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable
-                                                 | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0))),
-      fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), notificationManager(fontManager),
-      config(std::move(tomlConfig)) {}
+    : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()),
+      io(ImGui::GetIO()), fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize),
+      notificationManager(fontManager), config(std::move(tomlConfig)) {
+  io.ConfigFlags |=
+      (flags | ImGuiConfigFlags_DockingEnable | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0));
+  ImGui::StyleColorsDark();
+}
 
-ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
+ImGuiInterface::~ImGuiInterface() {
+  ImGui::DestroyContext(imguiContext);
+  ImPlot::DestroyContext(imPlotContext);
+}
+
+/*ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
   IMGUI_CHECKVERSION();
-  ImGui::CreateContext(); // TODO: fix this up so there can actually be multiple interfaces instances in one application
+  ImGui::CreateContext();
   ImPlot::CreateContext();
   auto &imguiIo = ImGui::GetIO();
   imguiIo.ConfigFlags |= flags;
   ImGui::StyleColorsDark();
   return imguiIo;
-}
+}*/
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
