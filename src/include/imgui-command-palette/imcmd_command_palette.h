@@ -49,7 +49,7 @@ void SetStyleColor(ImCmdTextType type, ImU32 color);
 void ClearStyleColor(ImCmdTextType type); //< Clear the style color for the given type, defaulting to ImGuiCol_Text
 
 // Command palette widget
-void SetNextCommandPaletteSearch(const char* text);
+void SetNextCommandPaletteSearch(const std::string &text);
 void SetNextCommandPaletteSearchBoxFocused();
 void CommandPalette(const char* name);
 bool IsAnyItemSelected();
