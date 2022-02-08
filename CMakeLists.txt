@@ -115,7 +115,7 @@ set(SOURCES
         src/pf_imgui/elements/Button.cpp
         src/pf_imgui/elements/Checkbox.cpp
         src/pf_imgui/dialogs/ModalDialog.cpp
-        src/pf_imgui/elements/Group.cpp
+        src/pf_imgui/elements/Expander.cpp
         src/pf_imgui/elements/Image.cpp
         src/pf_imgui/elements/InputText.cpp
         src/pf_imgui/elements/Memo.cpp
@@ -189,7 +189,7 @@ set(SOURCES
         src/pf_imgui/NotificationManager.cpp
         src/pf_imgui/interface/Closeable.cpp
         src/pf_imgui/details/GroupBox.cpp
-        src/pf_imgui/elements/Expander.cpp
+        src/pf_imgui/elements/GroupBox.cpp
         src/pf_imgui/elements/TextEditor.cpp
         )
 
@@ -205,7 +205,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/ModalDialog.h
         src/pf_imgui/dialogs/MessageDialog.h
         src/pf_imgui/elements/DragInput.h
-        src/pf_imgui/elements/Group.h
+        src/pf_imgui/elements/Expander.h
         src/pf_imgui/elements/Image.h
         src/pf_imgui/elements/Input.h
         src/pf_imgui/elements/InputText.h
@@ -315,7 +315,7 @@ set(INCLUDES
         src/pf_imgui/NotificationManager.h
         src/pf_imgui/interface/Closeable.h
         src/pf_imgui/details/GroupBox.h
-        src/pf_imgui/elements/Expander.h
+        src/pf_imgui/elements/GroupBox.h
         src/pf_imgui/elements/Gizmo3D.h
         src/include/ImGuiColorTextEdit/ImGuiColorTextEditor.h
         src/pf_imgui/elements/TextEditor.h

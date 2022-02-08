@@ -1,20 +1,29 @@
 //
-// Created by xflajs00 on 17.11.2021.
+// Created by petr on 10/31/20.
 //
 
 #include "Expander.h"
-#include <pf_imgui/details/GroupBox.h>
-#include <string>
+#include <imgui.h>
 
 namespace pf::ui::ig {
 
-Expander::Expander(const std::string &name, const std::string &label, Size s)
-    : Element(name), Labellable(label), Resizable(s) {}
+Expander::Expander(const std::string &elementName, const std::string &label, Persistent persistent,
+             AllowCollapse allowCollapse)
+    : ItemElement(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
+
+Expander::Expander(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse)
+    : Expander(elementName, label, Persistent::No, allowCollapse) {}
 
 void Expander::renderImpl() {
-  ImGui::BeginGroupPanel(getLabel().c_str(), getSize().asImVec());
-  pf::RAII end{[] { ImGui::EndGroupPanel(); }};
-  std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
+  ImGui::SetNextItemOpen(shouldBeOpen);
+  const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
+  setCollapsed(!ImGui::CollapsingHeader(getLabel().c_str(), flags));
+  if (!isCollapsed()) {
+    std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+  }
 }
 
 }  // namespace pf::ui::ig

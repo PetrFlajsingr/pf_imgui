@@ -2,35 +2,45 @@
  * @file Expander.h
  * @brief Expander element.
  * @author Petr Flajšingr
- * @date 17.11.21
+ * @date 31.10.20
  */
 
-#ifndef PF_IMGUI_EXPANDER_H
-#define PF_IMGUI_EXPANDER_H
+#ifndef PF_IMGUI_ELEMENTS_GROUP_H
+#define PF_IMGUI_ELEMENTS_GROUP_H
 
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/interface/Savable.h>
 #include <string>
 
 namespace pf::ui::ig {
 
 /**
- * @brief A group of elements with a border and a label.
+ * @brief Group of elements which is visually delimited with a header.
  *
- * @todo: rename to expander and make a proper group box?
+ * Elements are rendered in top-down order.
  */
-class PF_IMGUI_EXPORT Expander : public Element, public ElementContainer, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, public Labellable, public Collapsible {
  public:
   /**
    * Construct Expander.
-   * @param name unique name of the element
-   * @param label label rendered on the top of the Expander
-   * @param s size of the Expander
+   * @param elementName ID of the group
+   * @param label text drawn on top of the Expander
+   * @param persistent enable state saving to disk
+   * @param allowCollapse show button for collapsing the Expander
    */
-  Expander(const std::string &name, const std::string &label, Size s);
+  Expander(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
+        AllowCollapse allowCollapse = AllowCollapse::No);
+  /**
+   * Construct Group.
+   * @param elementName ID of the group
+   * @param label text drawn on top of the group
+   * @param allowCollapse show button for collapsing the group
+   */
+  Expander(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse);
 
  protected:
   void renderImpl() override;
@@ -38,4 +48,4 @@ class PF_IMGUI_EXPORT Expander : public Element, public ElementContainer, public
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_EXPANDER_H
+#endif  // PF_IMGUI_ELEMENTS_GROUP_H
