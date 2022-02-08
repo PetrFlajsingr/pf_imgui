@@ -14,8 +14,8 @@ void Tooltip::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   ImGui::BeginTooltip();
-  RAII end{[] { ImGui::EndTooltip(); }};
-  std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
+  RAII end{ImGui::EndTooltip};
+  std::ranges::for_each(getChildren(), &Renderable::render);
 }
 
 }  // namespace pf::ui::ig

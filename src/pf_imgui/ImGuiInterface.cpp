@@ -80,7 +80,7 @@ void ImGuiInterface::setStateFromConfig() {
     });
   };
   if (menuBar != nullptr) { serialiseSubtree(*menuBar); }
-  std::ranges::for_each(windows, [this, &serialiseSubtree](auto &window) { serialiseSubtree(*window); });
+  std::ranges::for_each(windows, [&serialiseSubtree](auto &window) { serialiseSubtree(*window); });
 }
 
 void ImGuiInterface::addFileDialog(FileDialog &&dialog) { fileDialogs.push_back(std::move(dialog)); }
@@ -88,7 +88,7 @@ void ImGuiInterface::addFileDialog(FileDialog &&dialog) { fileDialogs.push_back(
 FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) { return FileDialogBuilder(this, type); }
 
 void ImGuiInterface::renderDialogs() {
-  std::ranges::for_each(fileDialogs, [](auto &dialog) { dialog.render(); });
+  std::ranges::for_each(fileDialogs, &FileDialog::render);
   if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
       iter != fileDialogs.end()) {
     fileDialogs.erase(iter);
@@ -142,7 +142,7 @@ void ImGuiInterface::renderImpl() {
   auto style = setStyleStack();
   if (hasMenuBar()) { menuBar->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
-  std::ranges::for_each(dragNDropGroups, [](auto &group) { group.frame(); });
+  std::ranges::for_each(dragNDropGroups, &DragNDropGroup::frame);
   if (statusBar != nullptr) { statusBar->render(); }
   renderDialogs();
   notificationManager.renderNotifications();

@@ -24,7 +24,7 @@ void PopupMenu::renderImpl() {
     auto style = setStyleStack();
     if (firstRender) { ImGui::OpenPopup(getName().c_str()); }
     if (ImGui::BeginPopup(getName().c_str())) {
-      RAII end{[] { ImGui::EndPopup(); }};
+      RAII end{ImGui::EndPopup};
       renderItems();
       firstRender = false;
     } else {

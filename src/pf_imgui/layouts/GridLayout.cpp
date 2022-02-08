@@ -34,7 +34,7 @@ void GridLayout::renderImpl() {
   auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-  RAII end{[&] { ImGui::EndChild(); }};
+  RAII end{ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
     if (renderCollapseButton()) {
       const auto xCellSize = getSize().width.value / static_cast<float>(width);

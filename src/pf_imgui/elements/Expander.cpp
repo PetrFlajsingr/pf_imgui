@@ -22,7 +22,7 @@ void Expander::renderImpl() {
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
   setCollapsed(!ImGui::CollapsingHeader(getLabel().c_str(), flags));
   if (!isCollapsed()) {
-    std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+    std::ranges::for_each(getChildren(), &Renderable::render);
   }
 }
 
