@@ -24,6 +24,7 @@ void pf::ui::ig::ImGuiGlfwOpenGLInterface::updateFonts() {
 }
 
 void pf::ui::ig::ImGuiGlfwOpenGLInterface::render() {
+  // todo: move most of this into ImGuiInterface which'll make context switching easier too
   if (shouldUpdateFontAtlas) {
     shouldUpdateFontAtlas = false;
     updateFonts();

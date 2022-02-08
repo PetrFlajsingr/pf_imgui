@@ -25,16 +25,6 @@ ImGuiInterface::~ImGuiInterface() {
   ImPlot::DestroyContext(imPlotContext);
 }
 
-/*ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
-  ImPlot::CreateContext();
-  auto &imguiIo = ImGui::GetIO();
-  imguiIo.ConfigFlags |= flags;
-  ImGui::StyleColorsDark();
-  return imguiIo;
-}*/
-
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
 ModalDialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption) {
