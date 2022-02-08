@@ -33,7 +33,7 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
    * @param allowCollapse show button for collapsing the Expander
    */
   Expander(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No,
-        AllowCollapse allowCollapse = AllowCollapse::No);
+        AllowCollapse allowCollapse = AllowCollapse::Yes);
   /**
    * Construct Group.
    * @param elementName ID of the group
