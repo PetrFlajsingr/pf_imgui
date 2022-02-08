@@ -37,7 +37,7 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     SetNextItemWidth(ImMax(1.0f, CalcItemWidth() - (button_size + style.ItemInnerSpacing.x) * 2));
     if (InputText("", buf, IM_ARRAYSIZE(buf),
                   flags))// PushId(label) + "" gives us the expected ID from outside point of view
-      value_changed = DataTypeApplyOpFromText(buf, g.InputTextState.InitialTextA.Data, data_type, data_ptr, format);
+      value_changed = DataTypeApplyFromText(buf, data_type, data_ptr, format);
 
     // Step buttons
     const ImVec2 backup_frame_padding = style.FramePadding;
@@ -86,7 +86,7 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     EndGroup();
   } else {
     if (InputText(label, buf, IM_ARRAYSIZE(buf), flags))
-      value_changed = DataTypeApplyOpFromText(buf, g.InputTextState.InitialTextA.Data, data_type, data_ptr, format);
+      value_changed = DataTypeApplyFromText(buf, data_type, data_ptr, format);
   }
   if (value_changed) MarkItemEdited(GImGui->LastItemData.ID);// TODO: check
 
