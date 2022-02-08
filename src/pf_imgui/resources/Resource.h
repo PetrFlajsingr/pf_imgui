@@ -8,28 +8,24 @@
 namespace pf::ui::ig {
 class BaseResource {
  public:
-  virtual ~BaseResource() = 0;
+  virtual ~BaseResource() = default;
 };
 
-BaseResource::~BaseResource() {}
 
 template<typename T>
 class Resource : public BaseResource {
  public:
   [[nodiscard]] virtual const T &get() const = 0;
 
-  virtual ~Resource() = 0;
+  virtual ~Resource() = default;
 };
-
-template<typename T>
-Resource<T>::~Resource() {}
 
 template<typename T>
 class ConstResource : public Resource<T> {
  public:
   ConstResource(T value) : value(value) {}
   ~ConstResource() override = default;
-  const T &get() const override { return value; }
+  inline const T &get() const override { return value; }
 
  private:
   T value;

@@ -29,8 +29,9 @@ ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
-ModalDialog &ImGuiInterface::createDialog(const std::string &elementName, std::unique_ptr<Resource<std::string>> label) {
-  auto dialog = std::make_unique<ModalDialog>(*this, elementName, caption);
+ModalDialog &ImGuiInterface::createDialog(const std::string &elementName,
+                                          std::unique_ptr<Resource<std::string>> label) {
+  auto dialog = std::make_unique<ModalDialog>(*this, elementName, std::move(label));
   const auto ptr = dialog.get();
   dialogs.emplace_back(std::move(dialog));
   return *ptr;
@@ -104,8 +105,8 @@ bool ImGuiInterface::isWindowHovered() const { return io.WantCaptureMouse; }
 
 bool ImGuiInterface::isKeyboardCaptured() const { return io.WantCaptureKeyboard; }
 
-Window &ImGuiInterface::createWindow(const std::string &windowName, std::string title) {
-  windows.emplace_back(std::make_unique<Window>(windowName, std::move(title)));
+Window &ImGuiInterface::createWindow(const std::string &windowName, std::unique_ptr<Resource<std::string>> label) {
+  windows.emplace_back(std::make_unique<Window>(windowName, std::move(label)));
   return *windows.back();
 }
 

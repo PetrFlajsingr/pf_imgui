@@ -14,9 +14,9 @@ namespace pf::ui::ig {
 class LocalisationResource : public Resource<std::string> {
  public:
 
-  [[nodiscard]] const std::string &get() const override { return value; }
+  [[nodiscard]] inline const std::string &get() const override { return value; }
 
-  void setLocale(const std::string &locale) {
+  inline void setLocale(const std::string &locale) {
     value = getValueForLocale(locale).value_or(key);
   }
 

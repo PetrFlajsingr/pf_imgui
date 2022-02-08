@@ -155,7 +155,7 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
    * @param dialogLabel
    * @return builder
    */
-  FileDialogBuilder &label(std::string dialogLabel);
+  FileDialogBuilder &label(std::unique_ptr<Resource<std::string>> dialogLabel);
   /**
    * Add allowed extension for file selection
    * @param extensionSettings
@@ -217,7 +217,7 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
  private:
   class ImGuiInterface *imguiInterface;
   FileDialogType type;
-  std::string label_;
+  std::unique_ptr<Resource<std::string>> label_ = nullptr;
   std::vector<FileExtensionSettings> extensionSettings_;
   std::function<void(std::vector<std::filesystem::path>)> onSelect_;
   std::function<void()> onCancel_ = [] {};

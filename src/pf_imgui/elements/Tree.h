@@ -53,7 +53,8 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
   friend class Tree<TreeType::Advanced>;
 
  public:
-  TreeRecord(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, const Flags<ImGuiTreeNodeFlags_> &defaultFlags);
+  TreeRecord(const std::string &elementName, std::unique_ptr<Resource<std::string>> label,
+             const Flags<ImGuiTreeNodeFlags_> &defaultFlags);
 
  protected:
   Flags<ImGuiTreeNodeFlags_> flags{};
@@ -104,8 +105,8 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   * @param allowCollapse enable/disable user collapsing the node
   * @param persistent enable/disable disk saving
   */
-  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse = AllowCollapse::Yes,
-           Persistent persistent = Persistent::No)
+  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label,
+           AllowCollapse allowCollapse = AllowCollapse::Yes, Persistent persistent = Persistent::No)
       : TreeNode(elementName, std::move(label), allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
 
   /**
@@ -156,9 +157,9 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   }
 
  protected:
-  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse, Persistent persistent,
-           const Flags<ImGuiTreeNodeFlags_> &flags)
-      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, persistent) {
+  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse,
+           Persistent persistent, const Flags<ImGuiTreeNodeFlags_> &flags)
+      : TreeRecord(elementName, std::move(label), flags), Collapsible(allowCollapse, persistent) {
     setCollapsed(true);
   }
 
@@ -193,9 +194,9 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @param allowCollapse enable/disable user collapsing the node
    * @param persistent enable/disable disk saving
    */
-  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse = AllowCollapse::Yes,
-           Persistent persistent = Persistent::No)
-      : TreeNode(elementName, label, allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
+  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label,
+           AllowCollapse allowCollapse = AllowCollapse::Yes, Persistent persistent = Persistent::No)
+      : TreeNode(elementName, std::move(label), allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
 
   /**
    * Create a new child node.
@@ -206,7 +207,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    */
   TreeNode<TreeType::Advanced> &addNode(const std::string &nodeName, std::unique_ptr<Resource<std::string>> label,
                                         AllowCollapse allowCollapse = AllowCollapse::Yes) {
-    auto &node = createChild<TreeNode<TreeType::Advanced>>(nodeName, label, allowCollapse,
+    auto &node = createChild<TreeNode<TreeType::Advanced>>(nodeName, std::move(label), allowCollapse,
                                                            isPersistent() ? Persistent::Yes : Persistent::No);
     node.limiter = limiter;
     return node;
@@ -220,7 +221,8 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @return reference to the newly created leaf
    */
   TreeLeaf &addLeaf(const std::string &leafName, std::unique_ptr<Resource<std::string>> label, bool selected = false) {
-    auto &leaf = createChild<TreeLeaf>(leafName, label, selected, isPersistent() ? Persistent::Yes : Persistent::No);
+    auto &leaf =
+        createChild<TreeLeaf>(leafName, std::move(label), selected, isPersistent() ? Persistent::Yes : Persistent::No);
     leaf.limiter = limiter;
     return leaf;
   }
@@ -243,9 +245,9 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
   }
 
  protected:
-  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse, Persistent persistent,
-           const Flags<ImGuiTreeNodeFlags_> &flags)
-      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, persistent) {
+  TreeNode(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, AllowCollapse allowCollapse,
+           Persistent persistent, const Flags<ImGuiTreeNodeFlags_> &flags)
+      : TreeRecord(elementName, std::move(label), flags), Collapsible(allowCollapse, persistent) {
     setCollapsed(true);
   }
 
@@ -336,7 +338,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * @return reference to the newly created leaf
    */
   TreeLeaf &addLeaf(const std::string &name, std::unique_ptr<Resource<std::string>> label, bool selected = false) {
-    auto &leaf = layout.createChild<TreeLeaf>(name, label, selected, persistent);
+    auto &leaf = layout.createChild<TreeLeaf>(name, std::move(label), selected, persistent);
     leaf.limiter = limiter.get();
     return leaf;
   }

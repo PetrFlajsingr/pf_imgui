@@ -10,7 +10,8 @@ namespace pf::ui::ig {
 
 Selectable::Selectable(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value, Size s,
                        Persistent persistent)
-    : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(value), Resizable(s), Savable(persistent) {}
+    : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(value), Resizable(s),
+      Savable(persistent) {}
 
 void Selectable::renderImpl() {
   auto colorStyle = setColorStack();

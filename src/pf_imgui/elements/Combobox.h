@@ -118,7 +118,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-            items, [itemAsString](const auto &item) { return item.second->getLabel() == itemAsString; });
+            items, [itemAsString](const auto &item) { return item.second->getLabel().get() == itemAsString; });
         iter != items.end()) {
       const auto index = std::distance(items.begin(), iter);
       setSelectedItemByIndex(index);
@@ -160,7 +160,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];
-      result.insert_or_assign("selected", selectedItem->second->getLabel());
+      result.insert_or_assign("selected", selectedItem->second->getLabel().get());
     }
     return result;
   }

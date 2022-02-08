@@ -25,7 +25,7 @@ InputText::InputText(const std::string &elementName, std::unique_ptr<Resource<st
 void InputText::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  auto valueChanged = false;
+  bool valueChanged;
   if (inputType == TextInputType::SingleLine) {
     valueChanged = ImGui::InputText(getLabel().get().c_str(), buffer.get(), 256, flags);
   } else {

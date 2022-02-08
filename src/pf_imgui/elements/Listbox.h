@@ -17,6 +17,7 @@
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/resources/ResourceFactory.h>
 #include <pf_imgui/unique_id.h>
 #include <range/v3/view/addressof.hpp>
 #include <string>
@@ -30,7 +31,7 @@ struct PF_IMGUI_EXPORT ListboxRowFactory {
   static inline std::size_t idCounter{};
   const std::string idStart = uniqueId();
   std::unique_ptr<Selectable> operator()(const T &item) {
-    return std::make_unique<Selectable>(idStart + std::to_string(idCounter++), toString(item));
+    return std::make_unique<Selectable>(idStart + std::to_string(idCounter++), makeConstResource(toString(item)));
   }
 };
 static_assert(CustomItemBoxFactory<ListboxRowFactory<int>, int, Selectable>);
@@ -78,7 +79,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
       const std::string &elementName, std::unique_ptr<Resource<std::string>> label, Size s = Size::Auto(),
       std::optional<int> selectedIdx = std::nullopt,
       Persistent persistent = Persistent::No) requires(std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomListbox<T, Selectable>(elementName, label, Factory{}, s), ValueObservable<T>(),
+      : CustomListbox<T, Selectable>(elementName, std::move(label), Factory{}, s), ValueObservable<T>(),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {}
 
   /**
@@ -125,7 +126,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   void setSelectedItem(const std::string &itemAsString) {
     if (const auto iter = std::ranges::find_if(
-            filteredItems, [itemAsString](const auto &item) { return item->second->getLabel() == itemAsString; });
+            filteredItems, [itemAsString](const auto &item) { return item->second->getLabel().get() == itemAsString; });
         iter != filteredItems.end()) {
       const auto index = std::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
@@ -192,7 +193,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];
-      result.insert_or_assign("selected", selectedItem->second->getLabel());
+      result.insert_or_assign("selected", selectedItem->second->getLabel().get());
     }
     return result;
   }

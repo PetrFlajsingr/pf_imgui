@@ -4,6 +4,7 @@
 
 #include "FileDialog.h"
 #include <pf_imgui/ImGuiInterface.h>
+#include <pf_imgui/resources/ResourceFactory.h>
 
 namespace pf::ui::ig {
 // TODO: fix multi dir selection - when using GetSelection() it returns invalid path
@@ -39,11 +40,11 @@ void FileDialog::renderImpl() {
   const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, openPath.string(), defaultName,
+      fileDialogInstance.OpenModal(getName(), getLabel().get(), extCstr, openPath.string(), defaultName,
                                    static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, openPath.string(), defaultName,
+      fileDialogInstance.OpenDialog(getName(), getLabel().get(), extCstr, openPath.string(), defaultName,
                                     static_cast<int>(maxSelectCount));
       break;
   }
@@ -77,7 +78,7 @@ void FileDialog::setExtInfos() {
 FileDialogBuilder::FileDialogBuilder(ImGuiInterface *parent, FileDialogType dialogType)
     : imguiInterface(parent), type(dialogType) {}
 
-FileDialogBuilder &FileDialogBuilder::label(std::string dialogLabel) {
+FileDialogBuilder &FileDialogBuilder::label(std::unique_ptr<Resource<std::string>> dialogLabel) {
   label_ = std::move(dialogLabel);
   return *this;
 }
@@ -114,16 +115,17 @@ FileDialogBuilder &FileDialogBuilder::modal() {
 
 void FileDialogBuilder::build() {
   using namespace std::string_literals;
+  if (label_ == nullptr) { label_ = makeConstResource(""s); }
   switch (type) {
     case FileDialogType::Dir:
-      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), label_, onSelect_,
-                                               onCancel_, size_, startPath_, defaultFilename_, modal_,
+      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), std::move(label_),
+                                               onSelect_, onCancel_, size_, startPath_, defaultFilename_, modal_,
                                                maxFilesSelected_});
       break;
     case FileDialogType::File:
-      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), label_, extensionSettings_,
-                                               onSelect_, onCancel_, size_, startPath_, defaultFilename_, modal_,
-                                               maxFilesSelected_});
+      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), std::move(label_),
+                                               extensionSettings_, onSelect_, onCancel_, size_, startPath_,
+                                               defaultFilename_, modal_, maxFilesSelected_});
       break;
   }
 }

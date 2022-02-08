@@ -319,7 +319,7 @@ set(INCLUDES
         src/pf_imgui/elements/Gizmo3D.h
         src/include/ImGuiColorTextEdit/ImGuiColorTextEditor.h
         src/pf_imgui/elements/TextEditor.h
-        src/pf_imgui/resources/Resource.h src/pf_imgui/resources/LocalisationResource.h)
+        src/pf_imgui/resources/Resource.h src/pf_imgui/resources/LocalisationResource.h src/pf_imgui/resources/ResourceFactory.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

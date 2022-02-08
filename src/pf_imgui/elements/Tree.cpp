@@ -11,8 +11,10 @@ details::TreeRecord::TreeRecord(const std::string &elementName, std::unique_ptr<
                                 const Flags<ImGuiTreeNodeFlags_> &defaultFlags)
     : ItemElement(elementName), Labellable(std::move(label)), flags(defaultFlags) {}
 
-TreeLeaf::TreeLeaf(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool selected, Persistent persistent)
-    : TreeRecord(elementName, label, ImGuiTreeNodeFlags_Leaf), ValueObservable(selected), Savable(persistent) {
+TreeLeaf::TreeLeaf(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool selected,
+                   Persistent persistent)
+    : TreeRecord(elementName, std::move(label), ImGuiTreeNodeFlags_Leaf), ValueObservable(selected),
+      Savable(persistent) {
   if (selected) {
     flags |= ImGuiTreeNodeFlags_Selected;
   } else {

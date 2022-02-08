@@ -7,8 +7,8 @@
 
 namespace pf::ui::ig::plot_type {
 
-LabeledPlotData::LabeledPlotData(const std::string &elementName, const std::string &caption)
-    : PlotData(elementName), Labellable(caption) {}
+LabeledPlotData::LabeledPlotData(const std::string &elementName, std::unique_ptr<Resource<std::string>> label)
+    : PlotData(elementName), Labellable(std::move(label)) {}
 
 PlotData::PlotData(const std::string &elementName) : Element(elementName) {}
 

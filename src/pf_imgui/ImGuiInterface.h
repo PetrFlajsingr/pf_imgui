@@ -92,7 +92,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param title title
    * @return reference to the created window
    */
-  Window &createWindow(const std::string &windowName, std::string title);
+  Window &createWindow(const std::string &windowName, std::unique_ptr<Resource<std::string>> label); 
   /**
    * Remove the window from UI. This invalidates any references to the window.
    * @param windowName ID of the window to remove

@@ -43,8 +43,8 @@ class PF_IMGUI_EXPORT Selectable
    * @param s size of the element
    * @param persistent allow value saving to disk
    */
-  Selectable(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value = false, Size s = Size::Auto(),
-             Persistent persistent = Persistent::No);
+  Selectable(const std::string &elementName, std::unique_ptr<Resource<std::string>> label, bool value = false,
+             Size s = Size::Auto(), Persistent persistent = Persistent::No);
 
  protected:
   void renderImpl() override;

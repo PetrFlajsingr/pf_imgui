@@ -60,10 +60,10 @@ class PF_IMGUI_EXPORT InputText
    * @param filters character filters for input
    * @param persistent enable state saving to disk
    */
-  InputText(const std::string &elementName, std::string label, const std::string &text = "",
-            TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
-            TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
-            Persistent persistent = Persistent::No);
+  InputText(const std::string &elementName, std::unique_ptr<Resource<std::string>> label,
+            const std::string &initText = "", TextInputType textInputType = TextInputType::SingleLine,
+            std::size_t inputLengthLimit = 256, TextTrigger trigger = TextTrigger::Character,
+            const Flags<TextFilter> &filters = TextFilter::None, Persistent persistent = Persistent::No);
 
   /**
    * Clear text.
@@ -114,4 +114,4 @@ class PF_IMGUI_EXPORT InputText
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_ELEMENTS_INPUTTEXT_H
+#endif  // PF_I

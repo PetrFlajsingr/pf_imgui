@@ -7,6 +7,7 @@
 #include "Checkbox.h"
 #include "InputText.h"
 #include <range/v3/range/conversion.hpp>
+#include <pf_imgui/resources/ResourceFactory.h>
 
 namespace pf::ui::ig {
 
@@ -55,19 +56,20 @@ void Memo::clearRecords() {
 }
 
 void Memo::rebuildPanel() {
+  using namespace std::string_literals;
   if (buttonsEnabled || filterEnabled) {
     controlsLayout = std::make_unique<BoxLayout>(getName() + "button_filter_panel", LayoutDirection::LeftToRight,
                                                  Size{Width::Auto(), 20});
     if (buttonsEnabled) {
-      controlsLayout->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] {
+      controlsLayout->createChild<Button>(getName() + "clear_btn", makeConstResource("Clear"s)).addClickListener([this] {
         clearRecords();
       });
-      controlsLayout->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
+      controlsLayout->createChild<Button>(getName() + "copy_btn", makeConstResource("Copy"s)).addClickListener([this] {
         ImGui::SetClipboardText(std::string{getText()}.c_str());
       });
     }
     if (filterEnabled) {
-      controlsLayout->createChild<InputText>(getName() + "filter_input", "Filter")
+      controlsLayout->createChild<InputText>(getName() + "filter_input", makeConstResource("Filter"s))
           .addValueListener([this](std::string_view str) {
             const auto filterStr = std::string(str);
             filterFnc = [filterStr](std::string_view recordStr) {
@@ -75,7 +77,7 @@ void Memo::rebuildPanel() {
             };
           });
     }
-    controlsLayout->createChild<Checkbox>(getName() + "scroll_checkbox", "Scroll to bottom")
+    controlsLayout->createChild<Checkbox>(getName() + "scroll_checkbox", makeConstResource("Scroll to bottom"s))
         .addValueListener([this](auto newVal) { scrollToBottom = newVal; });
   }
   textArea = &textAreaLayout.createChild<Text>(getName() + "memo_text", "Memo");
