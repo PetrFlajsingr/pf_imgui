@@ -29,7 +29,7 @@ bool details::DragSourceBase::drag_impl(const std::string &typeName, const void 
   }
   auto flags = ImGuiDragDropFlags_SourceAllowNullID;
   if (ImGui::BeginDragDropSource(flags)) {
-    RAII end{[] { ImGui::EndDragDropSource(); }};
+    RAII end{ImGui::EndDragDropSource};
     dragged = true;
     ownsPayload = true;
     ImGui::SetDragDropPayload(typeName.c_str(), sourceData, dataSize, ImGuiCond_Once);
@@ -93,7 +93,7 @@ void details::DropTargetBase::setDropAllowed(bool allowed) { dropAllowed = allow
 
 std::optional<void *> details::DropTargetBase::dropAccept_impl(const std::string &typeName) const {
   if (dropAllowed && ImGui::BeginDragDropTarget()) {
-    RAII end{[] { ImGui::EndDragDropTarget(); }};
+    RAII end{ImGui::EndDragDropTarget};
     auto payload = ImGui::AcceptDragDropPayload(typeName.c_str());  // todo type conversions
     void *result = payload == nullptr ? nullptr : payload->Data;
     if (result != nullptr) { return result; }

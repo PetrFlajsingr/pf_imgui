@@ -24,7 +24,7 @@ void Window::renderImpl() {
   auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
-  RAII endPopup{[] { ImGui::End(); }};
+  RAII endPopup{ImGui::End};
   if (ImGui::Begin(getLabel().c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
@@ -43,7 +43,7 @@ void Window::renderImpl() {
       updatePosition(Position{ImGui::GetWindowPos()});
       if (!isCollapsed()) {
         if (hasMenuBar()) { menuBar->render(); }
-        std::ranges::for_each(getChildren(), [&](auto &child) { child.render(); });
+        std::ranges::for_each(getChildren(), &Renderable::render);
       }
     }
   }

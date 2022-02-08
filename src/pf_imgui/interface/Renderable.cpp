@@ -30,7 +30,7 @@ void Renderable::render() {
   if (visibility == Visibility::Visible) {
     if (enabled == Enabled::No) {
       ImGui::BeginDisabled();
-      auto raiiEnabled = pf::RAII([] { ImGui::EndDisabled(); });
+      RAII raiiEnabled{ImGui::EndDisabled};
       renderImpl();
     } else {
       renderImpl();

@@ -154,7 +154,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
-      RAII end{[] { ImGui::EndListBox(); }};
+      RAII end{ImGui::EndListBox};
       std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
         const auto &[idx, item] = itemIdx;
         item->second->render();

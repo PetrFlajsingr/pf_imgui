@@ -49,7 +49,7 @@ void InvisibleButton::setRepeatable(bool isRepeatable) { repeatable = isRepeatab
 
 void InvisibleButton::renderImpl() {
   ImGui::PushButtonRepeat(repeatable);
-  auto disableRepeat = RAII{[] { ImGui::PopButtonRepeat(); }};
+  auto disableRepeat = RAII{ImGui::PopButtonRepeat};
   if (ImGui::InvisibleButton(getName().c_str(), getSize().asImVec(), static_cast<int>(clickBtn))) { notifyOnClick(); }
 }
 

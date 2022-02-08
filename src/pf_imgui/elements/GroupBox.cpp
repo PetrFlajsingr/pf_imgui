@@ -13,8 +13,8 @@ GroupBox::GroupBox(const std::string &name, const std::string &label, Size s)
 
 void GroupBox::renderImpl() {
   ImGui::BeginGroupPanel(getLabel().c_str(), getSize().asImVec());
-  pf::RAII end{[] { ImGui::EndGroupPanel(); }};
-  std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+  RAII end{ImGui::EndGroupPanel};
+  std::ranges::for_each(getChildren(), &Renderable::render);
 }
 
 }  // namespace pf::ui::ig

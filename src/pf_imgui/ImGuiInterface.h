@@ -12,6 +12,7 @@
 #include <pf_imgui/FontManager.h>
 #include <pf_imgui/NotificationManager.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/dialogs/CommandPaletteWindow.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
 #include <pf_imgui/dialogs/MessageDialog.h>
@@ -100,9 +101,26 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void removeWindow(const std::string &windowName);
   /**
    * Remove the window from UI. This invalidates any references to the window.
-   * @param name ID of the window to remove
+   * @param window window to remove
    */
   void removeWindow(const Window &window);
+
+  /**
+   * Create a CommandPaletteWindow
+   * @param windowName unique name of the window
+   * @return reference to the created window
+   */
+  CommandPaletteWindow &createCommandPalette(const std::string &windowName);
+  /**
+   * Remove palette window from UI. This invalidates references to the destroyed window.
+   * @param windowName unique name of the window to remove
+   */
+  void removePaletteWindow(const std::string &windowName);
+  /**
+   * Remove palette window from UI. This invalidates any references to it.
+   * @param window window to remove
+   */
+  void removePaletteWindow(const CommandPaletteWindow &window);
 
   /**
    * Find Window by its ID.
@@ -270,6 +288,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   toml::table config;
 
   std::vector<DragNDropGroup> dragNDropGroups{};
+
+  std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes{};
 
   void removeDialog(ModalDialog &dialog);
 };

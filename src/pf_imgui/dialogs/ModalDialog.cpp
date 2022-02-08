@@ -21,8 +21,8 @@ void ModalDialog::renderImpl() {
   if (font != nullptr) { ImGui::PushFont(font); }
   if (firstRender) { ImGui::OpenPopup(getLabel().c_str()); }
   if (ImGui::BeginPopupModal(getLabel().c_str())) {
-    RAII endPopup{[] { ImGui::EndPopup(); }};
-    std::ranges::for_each(getChildren(), [](auto &child) { child.render(); });
+    RAII endPopup{ImGui::EndPopup};
+    std::ranges::for_each(getChildren(), &Renderable::render);
   } else {
     close();
   }
