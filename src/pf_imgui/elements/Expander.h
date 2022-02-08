@@ -1,12 +1,12 @@
 /**
- * @file GroupBox.h
- * @brief GroupBox element.
+ * @file Expander.h
+ * @brief Expander element.
  * @author Petr Flajšingr
  * @date 17.11.21
  */
 
-#ifndef PF_IMGUI_GROUPBOX_H
-#define PF_IMGUI_GROUPBOX_H
+#ifndef PF_IMGUI_EXPANDER_H
+#define PF_IMGUI_EXPANDER_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
@@ -22,15 +22,15 @@ namespace pf::ui::ig {
  *
  * @todo: rename to expander and make a proper group box?
  */
-class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT Expander : public Element, public ElementContainer, public Labellable, public Resizable {
  public:
   /**
-   * Construct GroupBox.
+   * Construct Expander.
    * @param name unique name of the element
-   * @param label label rendered on the top of the groupbox
-   * @param s size of the groupbox
+   * @param label label rendered on the top of the Expander
+   * @param s size of the Expander
    */
-  GroupBox(const std::string &name, const std::string &label, Size s);
+  Expander(const std::string &name, const std::string &label, Size s);
 
  protected:
   void renderImpl() override;
@@ -38,4 +38,4 @@ class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_GROUPBOX_H
+#endif  // PF_IMGUI_EXPANDER_H
