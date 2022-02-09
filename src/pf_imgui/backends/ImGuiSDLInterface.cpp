@@ -4,46 +4,26 @@
 
 #include "ImGuiSDLInterface.h"
 
-pf::ui::ig::ImGuiSDLInterface::ImGuiSDLInterface(const pf::ui::ig::ImGuiSDLConfig &config)
-    : ImGuiInterface(config.flags, config.config, config.enableMultiViewport, config.pathToIconFolder,
-                     config.enabledIconPacks, config.defaultFontSize) {
+namespace pf::ui::ig {
+
+ImGuiSDLInterface::ImGuiSDLInterface(ImGuiSDLConfig config) : ImGuiInterface(std::move(config.imgui)) {
   ImGui_ImplSDL2_InitForSDLRenderer(config.windowHandle);
   ImGui_ImplSDLRenderer_Init(config.renderer);
   updateFonts();
 }
 
-pf::ui::ig::ImGuiSDLInterface::~ImGuiSDLInterface() {
+ImGuiSDLInterface::~ImGuiSDLInterface() {
   ImGui_ImplSDL2_Shutdown();
   ImGui_ImplSDLRenderer_Shutdown();
 }
 
-void pf::ui::ig::ImGuiSDLInterface::updateFonts() {
+void ImGuiSDLInterface::updateFonts() {
   // no need to implement this for SDL
 }
-
-void pf::ui::ig::ImGuiSDLInterface::render() {
-  if (shouldUpdateFontAtlas) {
-    shouldUpdateFontAtlas = false;
-    updateFonts();
-  }
+void ImGuiSDLInterface::newFrame_impl() {
   ImGui_ImplSDLRenderer_NewFrame();
   ImGui_ImplSDL2_NewFrame();
-  ImGui::NewFrame();
-  RAII endFrameRAII{[&] {
-    ImGui::Render();
-    ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
-    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    }
-  }};
-  if (getVisibility() == Visibility::Visible) {
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
-      renderImpl();
-    } else {
-      renderImpl();
-    }
-  }
 }
+void ImGuiSDLInterface::renderDrawData_impl(ImDrawData *drawData) { ImGui_ImplSDLRenderer_RenderDrawData(drawData); }
+
+}  // namespace pf::ui::ig

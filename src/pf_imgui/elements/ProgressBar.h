@@ -33,6 +33,8 @@ concept ProgressBarCompatible = requires(T t, float f) {
 /**
  * @brief Progress bar for notifying a user of operation progress.
  * @tparam T type storing the progress value
+ *
+ * @todo: overlay string
  */
 template<ProgressBarCompatible T>
 class PF_IMGUI_EXPORT ProgressBar

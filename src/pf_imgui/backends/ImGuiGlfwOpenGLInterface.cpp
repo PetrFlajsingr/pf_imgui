@@ -7,8 +7,7 @@
 #include "impl/imgui_impl_opengl3.h"
 
 pf::ui::ig::ImGuiGlfwOpenGLInterface::ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config)
-    : ImGuiInterface(config.flags, config.config, config.enableMultiViewport, config.pathToIconFolder,
-                     config.enabledIconPacks, config.defaultFontSize) {
+    : ImGuiInterface(std::move(config.imgui)) {
   ImGui_ImplGlfw_InitForOpenGL(config.windowHandle, true);
   ImGui_ImplOpenGL3_Init();
   updateFonts();
@@ -17,36 +16,17 @@ pf::ui::ig::ImGuiGlfwOpenGLInterface::ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLCo
 pf::ui::ig::ImGuiGlfwOpenGLInterface::~ImGuiGlfwOpenGLInterface() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
-  ImGui::DestroyContext();
 }
 
 void pf::ui::ig::ImGuiGlfwOpenGLInterface::updateFonts() {
   // no need to implement this for OpenGL
 }
 
-void pf::ui::ig::ImGuiGlfwOpenGLInterface::render() {
-  if (shouldUpdateFontAtlas) {
-    shouldUpdateFontAtlas = false;
-    updateFonts();
-  }
+void pf::ui::ig::ImGuiGlfwOpenGLInterface::newFrame_impl() {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
-  ImGui::NewFrame();
-  RAII endFrameRAII{[&] {
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    }
-  }};
-  if (getVisibility() == Visibility::Visible) {
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
-      renderImpl();
-    } else {
-      renderImpl();
-    }
-  }
+}
+
+void pf::ui::ig::ImGuiGlfwOpenGLInterface::renderDrawData_impl(ImDrawData *drawData) {
+  ImGui_ImplOpenGL3_RenderDrawData(drawData);
 }

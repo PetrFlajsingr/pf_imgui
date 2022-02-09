@@ -11,6 +11,7 @@
 #include <imcmd_command_palette.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Observable_impl.h>
+#include <string>
 #include <utility>
 
 namespace pf::ui::ig {

@@ -16,11 +16,12 @@
 #include <pf_imgui/elements/Checkbox.h>
 #include <pf_imgui/elements/ColorChooser.h>
 #include <pf_imgui/elements/Combobox.h>
+#include <pf_imgui/elements/CommandPalette.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/DragInput.h>
+#include <pf_imgui/elements/Expander.h>
 #include <pf_imgui/elements/FlameGraph.h>
 #include <pf_imgui/elements/Gizmo3D.h>
-#include <pf_imgui/elements/Expander.h>
 #include <pf_imgui/elements/GroupBox.h>
 #include <pf_imgui/elements/Image.h>
 #include <pf_imgui/elements/Input.h>

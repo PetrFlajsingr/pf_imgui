@@ -17,6 +17,7 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
+#include <string>
 #include <type_traits>
 
 namespace pf::ui::ig {

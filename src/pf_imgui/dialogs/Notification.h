@@ -51,7 +51,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
 
   bool firstRender = true;
 
-  const ImGuiWindowFlags flags =
+  inline static const ImGuiWindowFlags flags =
       ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoNav;
 
   void checkPhase();

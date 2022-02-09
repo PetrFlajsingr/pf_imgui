@@ -12,6 +12,7 @@
 
 namespace pf::ui::ig {
 struct ImGuiVulkanGlfwConfig {
+  ImGuiConfig imgui;
   VkInstance instance;
   VkPhysicalDevice physicalDevice;
   VkDevice device;
@@ -22,21 +23,18 @@ struct ImGuiVulkanGlfwConfig {
   VkQueue presentQueue;
   std::uint32_t swapchainImageCount;
   GLFWwindow *handle;
-  ImGuiConfigFlags flags = {};
-  bool enableMultiViewport = false;
-  toml::table config;
-  std::filesystem::path pathToIconFolder;
-  Flags<IconPack> enabledIconPacks = Flags<IconPack>{};
-  float defaultFontSize = 13.f;
 };
-class ImGuiGlfwVulkanInterface : public ImGuiInterface {
+class ImGuiGlfwVulkanInterface final : public ImGuiInterface {
  public:
   explicit ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config);
   ~ImGuiGlfwVulkanInterface() override;
 
   void updateFonts() override;
   void addToCommandBuffer(VkCommandBuffer commandBuffer);
-  void render() override;
+
+ protected:
+  void newFrame_impl() override;
+  void renderDrawData_impl(ImDrawData *drawData) override;
 
  private:
   std::optional<std::uint32_t> findGraphicsFamilyIndex();

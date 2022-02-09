@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_GIZMO3D_H
 #define PF_IMGUI_GIZMO3D_H
 
+#include <algorithm>
 #include <fmt/format.h>
 #include <imGuIZMOquat.h>
 #include <pf_imgui/_export.h>

@@ -21,7 +21,7 @@ void Image::renderImpl() {
   } else {
     ImGui::Image(textureId, getSize().asImVec(), uvStart, uvEnd);
   }
-  //if (pixelInspectionTooltipEnabled) {
+  //if (pixelInspectionTooltipEnabled) { // TODO: implement in derived
   //  auto &io = ImGui::GetIO();
   //  auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
   //  ImVec2 mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();

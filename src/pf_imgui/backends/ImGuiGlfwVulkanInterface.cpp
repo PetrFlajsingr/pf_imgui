@@ -15,9 +15,7 @@ void checkVkResult(VkResult err) {
 }  // namespace details
 
 ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config)
-    : ImGuiInterface(config.flags, std::move(config.config), config.enableMultiViewport, config.pathToIconFolder,
-                     config.enabledIconPacks, config.defaultFontSize),
-      config(std::move(config)) {
+    : ImGuiInterface(std::move(config.imgui)), config(config) {
   setupDescriptorPool();
   ImGui_ImplGlfw_InitForVulkan(config.handle, true);
   auto init_info = ImGui_ImplVulkan_InitInfo();
@@ -43,7 +41,6 @@ ImGuiGlfwVulkanInterface::~ImGuiGlfwVulkanInterface() {
   vkDeviceWaitIdle(config.device);
   ImGui_ImplVulkan_Shutdown();
   ImGui_ImplGlfw_Shutdown();
-  ImGui::DestroyContext();
   vkDestroyDescriptorPool(config.device, descriptorPool, nullptr);
 }
 
@@ -123,32 +120,6 @@ void ImGuiGlfwVulkanInterface::addToCommandBuffer(VkCommandBuffer commandBuffer)
   ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
 }
 
-void ImGuiGlfwVulkanInterface::render() {
-  if (shouldUpdateFontAtlas) {
-    shouldUpdateFontAtlas = false;
-    updateFonts();
-  }
-  ImGui_ImplVulkan_NewFrame();
-  ImGui_ImplGlfw_NewFrame();
-  ImGui::NewFrame();
-  RAII endFrameRAII{[&] {
-    ImGui::Render();
-    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    }
-  }};
-  if (getVisibility() == Visibility::Visible) {
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
-      renderImpl();
-    } else {
-      renderImpl();
-    }
-  }
-}
-
 void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
   constexpr auto DESCRIPTOR_COUNT = 1000;
   auto descPoolConfig = VkDescriptorPoolCreateInfo{};
@@ -173,5 +144,12 @@ void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
     throw std::runtime_error("failed to create descriptor pool!");
   }
 }
+
+void ImGuiGlfwVulkanInterface::newFrame_impl() {
+  ImGui_ImplVulkan_NewFrame();
+  ImGui_ImplGlfw_NewFrame();
+}
+
+void ImGuiGlfwVulkanInterface::renderDrawData_impl(ImDrawData *drawData) {}
 
 }  // namespace pf::ui::ig

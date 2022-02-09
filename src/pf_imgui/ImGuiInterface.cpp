@@ -9,22 +9,17 @@
 
 namespace pf::ui::ig {
 
-ImGuiInterface::ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
-                               const std::filesystem::path &iconFontDirectory, const Flags<IconPack> &enabledIconPacks,
-                               float iconSize)
-    : Renderable("imgui_interface"), io(baseInit(flags | ImGuiConfigFlags_DockingEnable
-                                                 | (enableMultiViewport ? ImGuiConfigFlags_ViewportsEnable : 0))),
-      fontManager(*this, iconFontDirectory, enabledIconPacks, iconSize), notificationManager(fontManager),
-      config(std::move(tomlConfig)) {}
-
-ImGuiIO &ImGuiInterface::baseInit(ImGuiConfigFlags flags) {
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext(); // TODO: fix this up so there can actually be multiple interfaces instances in one application
-  ImPlot::CreateContext();
-  auto &imguiIo = ImGui::GetIO();
-  imguiIo.ConfigFlags |= flags;
+ImGuiInterface::ImGuiInterface(ImGuiConfig config)
+    : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()),
+      io(ImGui::GetIO()), fontManager(*this, config.iconFontDirectory, config.enabledIconPacks, config.iconSize),
+      notificationManager(fontManager), config(std::move(config.config)) {
+  io.ConfigFlags = *config.flags;
   ImGui::StyleColorsDark();
-  return imguiIo;
+}
+
+ImGuiInterface::~ImGuiInterface() {
+  ImGui::DestroyContext(imguiContext);
+  ImPlot::DestroyContext(imPlotContext);
 }
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
@@ -53,7 +48,6 @@ void ImGuiInterface::removeStatusBar() { statusBar = nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() {
-  // config.clear();
   std::ranges::for_each(windows, [this](const auto &window) {
     auto serialisedTree = serializeImGuiTree(*window);
     for (const auto &item : serialisedTree) { config.insert_or_assign(item.first, item.second); }
@@ -61,7 +55,6 @@ void ImGuiInterface::updateConfig() {
       auto serialisedAppBar = serializeImGuiTree(*menuBar);
       for (const auto &item : serialisedAppBar) { config.insert_or_assign(item.first, item.second); }
     }
-    // config.insert(serialised.begin(), serialised.end());
   });
 }
 
@@ -178,5 +171,31 @@ const FontManager &ImGuiInterface::getFontManager() const { return fontManager; 
 NotificationManager &ImGuiInterface::getNotificationManager() { return notificationManager; }
 
 const NotificationManager &ImGuiInterface::getNotificationManager() const { return notificationManager; }
+
+void ImGuiInterface::render() {
+  if (shouldUpdateFontAtlas) {
+    shouldUpdateFontAtlas = false;
+    updateFonts();
+  }
+  newFrame_impl();
+  ImGui::NewFrame();
+  RAII endFrameRAII{[&] {
+    ImGui::Render();
+    renderDrawData_impl(ImGui::GetDrawData());
+    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+      ImGui::UpdatePlatformWindows();
+      ImGui::RenderPlatformWindowsDefault();
+    }
+  }};
+  if (getVisibility() == Visibility::Visible) {
+    if (getEnabled() == Enabled::No) {
+      ImGui::BeginDisabled();
+      RAII raiiEnabled{ImGui::EndDisabled};
+      renderImpl();
+    } else {
+      renderImpl();
+    }
+  }
+}
 
 }  // namespace pf::ui::ig

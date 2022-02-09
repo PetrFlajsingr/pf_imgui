@@ -16,7 +16,6 @@
 #include <pf_imgui/elements/VerticalSlider.h>
 
 namespace pf::ui::ig {
-//template class MessageDialog<MessageButtons>;
 
 template class ColorChooser<ColorChooserType::Edit, glm::vec3>;
 template class ColorChooser<ColorChooserType::Edit, glm::vec4>;

@@ -8,6 +8,7 @@ namespace pf::ui::ig {
 Savable::Savable(Persistent persistent) : persist(persistent == Persistent::Yes) {}
 
 Savable::Savable(Savable &&other) noexcept : persist(other.persist) {}
+
 Savable &Savable::operator=(Savable &&other) noexcept {
   persist = other.persist;
   return *this;

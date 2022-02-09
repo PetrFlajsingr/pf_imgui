@@ -11,24 +11,20 @@
 namespace pf::ui::ig {
 
 struct ImGuiGlfwOpenGLConfig {
+  ImGuiConfig imgui;
   GLFWwindow *windowHandle;
-  ImGuiConfigFlags flags = {};
-  bool enableMultiViewport = false;
-  toml::table config;
-  std::filesystem::path pathToIconFolder;
-  Flags<IconPack> enabledIconPacks = Flags<IconPack>{};
-  float defaultFontSize = 13.f;
 };
 
-class ImGuiGlfwOpenGLInterface : public ImGuiInterface {
+class ImGuiGlfwOpenGLInterface final : public ImGuiInterface {
  public:
   ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config);
   virtual ~ImGuiGlfwOpenGLInterface();
 
   void updateFonts() override;
-  void render() override;
 
- private:
+ protected:
+  void newFrame_impl() override;
+  void renderDrawData_impl(ImDrawData *drawData) override;
 };
 
 }  // namespace pf::ui::ig

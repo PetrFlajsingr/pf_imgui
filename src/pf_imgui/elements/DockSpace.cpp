@@ -15,7 +15,7 @@ void DockSpace::render() {
     auto colorSet = setColorStack();
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
-      auto raiiEnabled = RAII{ImGui::EndDisabled};
+      RAII raiiEnabled{ImGui::EndDisabled};
       renderImpl();
     } else {
       renderImpl();
