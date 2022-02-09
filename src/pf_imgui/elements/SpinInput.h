@@ -106,7 +106,7 @@ class PF_IMGUI_EXPORT SpinInput
   }
 
   [[nodiscard]] toml::table serialize_impl() const override {
-    return toml::table{{{"value", ValueObservable<T>::getValue()}}};
+    return toml::table{{"value", ValueObservable<T>::getValue()}};
   }
 
  private:

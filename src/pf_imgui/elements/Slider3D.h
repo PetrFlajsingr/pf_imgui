@@ -84,7 +84,7 @@ class PF_IMGUI_EXPORT Slider3D
   }
   [[nodiscard]] toml::table serialize_impl() const override {
     const auto val = ValueObservable<glm::vec3>::getValue();
-    return toml::table{{{"value", serializeGlmVec(val)}}};
+    return toml::table{{"value", serializeGlmVec(val)}};
   }
 
  private:

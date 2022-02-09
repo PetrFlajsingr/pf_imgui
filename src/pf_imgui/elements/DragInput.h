@@ -182,11 +182,11 @@ class PF_IMGUI_EXPORT DragInput
   [[nodiscard]] toml::table serialize_impl() const override {
     const auto value = ValueObservable<T>::getValue();
     if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
-      return toml::table{{{"value", toml::array{value.start, value.end}}}};
+      return toml::table{{"value", toml::array{value.start, value.end}}};
     } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
-      return toml::table{{{"value", serializeGlmVec(value)}}};
+      return toml::table{{"value", serializeGlmVec(value)}};
     } else {
-      return toml::table{{{"value", value}}};
+      return toml::table{{"value", value}};
     }
   }
 

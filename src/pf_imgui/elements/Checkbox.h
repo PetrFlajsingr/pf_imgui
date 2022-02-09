@@ -19,7 +19,7 @@
 namespace pf::ui::ig {
 
 /**
- * @brief A typical checkbox or a toggle.
+ * @brief A typical checkbox.
  *
  * A checkbox which saves it's state and provides it to listeners.
  */
@@ -35,30 +35,13 @@ class PF_IMGUI_EXPORT Checkbox
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
-   * Type of the checkbox.
-   */
-  enum class Type {
-    Checkbox, /**< Typical checkbox */
-    Toggle    /**< Toggle similiar to those on mobile devices */
-  };
-  /**
- * Construct Checkbox. Default value is that of Type::Checkbox.
- * @param elementName ID of the checkbox
- * @param label label drawn next to the checkbox
- * @param persistent allow value saving to disk
- * @param value starting value
- */
-  Checkbox(const std::string &elementName, const std::string &label, bool value = false,
-           Persistent persistent = Persistent::No);
-  /**
    * Construct Checkbox.
    * @param elementName ID of the checkbox
    * @param label label drawn next to the checkbox
-   * @param checkboxType type of the checkbox
-   * @param persistent allow state saving to disk
+   * @param persistent allow value saving to disk
    * @param value starting value
    */
-  Checkbox(const std::string &elementName, const std::string &label, Type checkboxType, bool value = false,
+  Checkbox(const std::string &elementName, const std::string &label, bool value = false,
            Persistent persistent = Persistent::No);
   /**
    * Set if the checkbox is selected or not.
@@ -76,10 +59,6 @@ class PF_IMGUI_EXPORT Checkbox
   void toggle();
 
  protected:
-  /**
-   * Type of checkbox.
-   */
-  Type type;
   void unserialize_impl(const toml::table &src) override;
   [[nodiscard]] toml::table serialize_impl() const override;
 

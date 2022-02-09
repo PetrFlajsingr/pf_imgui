@@ -63,7 +63,7 @@ void InputText::unserialize_impl(const toml::table &src) {
   std::snprintf(buffer.get(), text.size(), "%s", text.c_str());
 }
 
-toml::table InputText::serialize_impl() const { return toml::table{{{"text", text}}}; }
+toml::table InputText::serialize_impl() const { return toml::table{{"text", text}}; }
 
 void InputText::setValue(const std::string_view &newValue) {
   if (text != newValue) {

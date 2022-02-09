@@ -90,7 +90,7 @@ class PF_IMGUI_EXPORT ColorChooser
   [[nodiscard]] toml::table serialize_impl() const override {
     const auto color = ValueObservable<T>::getValue();
     const auto tomlColor = serializeGlmVec(color);
-    return toml::table{{{"color", tomlColor}}};
+    return toml::table{{"color", tomlColor}};
   }
 
   void renderImpl() override {

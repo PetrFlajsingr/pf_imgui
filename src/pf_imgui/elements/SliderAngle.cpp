@@ -36,7 +36,7 @@ void SliderAngle::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table SliderAngle::serialize_impl() const { return toml::table{{{"value", getValue()}}}; }
+toml::table SliderAngle::serialize_impl() const { return toml::table{{"value", getValue()}}; }
 
 float SliderAngle::getMinDeg() const { return minDeg; }
 

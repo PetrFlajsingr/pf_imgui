@@ -86,7 +86,7 @@ void MenuCheckboxItem::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table MenuCheckboxItem::serialize_impl() const { return toml::table{{{"checked", getValue()}}}; }
+toml::table MenuCheckboxItem::serialize_impl() const { return toml::table{{"checked", getValue()}}; }
 
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 

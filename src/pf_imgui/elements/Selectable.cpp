@@ -24,6 +24,6 @@ void Selectable::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table Selectable::serialize_impl() const { return toml::table{{{"selected", getValue()}}}; }
+toml::table Selectable::serialize_impl() const { return toml::table{{"selected", getValue()}}; }
 
 }  // namespace pf::ui::ig

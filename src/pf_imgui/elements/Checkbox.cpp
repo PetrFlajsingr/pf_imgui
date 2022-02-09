@@ -9,25 +9,13 @@
 namespace pf::ui::ig {
 
 Checkbox::Checkbox(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
-    : Checkbox(elementName, label, Type::Checkbox, value, persistent) {}
+    : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
 
-Checkbox::Checkbox(const std::string &elementName, const std::string &label, Checkbox::Type checkboxType, bool value,
-                   Persistent persistent)
-    : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent), type(checkboxType) {}
 
 void Checkbox::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  bool valueChanged = false;
-  switch (type) {  // TODO: split this up?
-    case Type::Checkbox: valueChanged = ImGui::Checkbox(getLabel().c_str(), getValueAddress()); break;
-    case Type::Toggle:
-      ImGui::Text("%s", getLabel().c_str());
-      ImGui::SameLine();
-      valueChanged = ToggleButton(getLabel().c_str(), getValueAddress());
-      break;
-  }
-  if (valueChanged) { notifyValueChanged(); }
+  if (ImGui::Checkbox(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 
 void Checkbox::unserialize_impl(const toml::table &src) {
@@ -36,7 +24,7 @@ void Checkbox::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table Checkbox::serialize_impl() const { return toml::table{{{"checked", getValue()}}}; }
+toml::table Checkbox::serialize_impl() const { return toml::table{{"checked", getValue()}}; }
 
 void Checkbox::setSelected(bool selected) { setValueAndNotifyIfChanged(selected); }
 
