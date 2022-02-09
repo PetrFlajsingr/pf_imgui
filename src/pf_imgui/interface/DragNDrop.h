@@ -30,6 +30,7 @@ namespace pf::ui::ig {
 
 // TODO: type conversions, user customisation
 // TODO: somehow unify with what imgui uses internally
+// TODO: custom drag and drop action
 
 namespace details {
 /**
