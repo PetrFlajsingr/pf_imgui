@@ -16,8 +16,9 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
       filters += desc;
       filters += '{';
       for (const auto &extName : extNames) {
-        filters += fmt::format(".{},", extName.string());
-        if (color.has_value()) { extColors.emplace_back(extName.string(), *color); }
+        const auto extString = fmt::format(".{}", extName.string());
+        filters += fmt::format("{},", extString);
+        if (color.has_value()) { extColors.emplace_back(extString, *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
       filters += "},";
@@ -36,18 +37,21 @@ void FileDialog::renderImpl() {
   if (done) { return; }
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  const auto extCstr = fileType == FileType::File ? filters.c_str() : nullptr;
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), getLabel(), extCstr, openPath.string(), defaultName,
-                                   static_cast<int>(maxSelectCount));
+      fileDialogInstance.OpenModal(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,
+                                   openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), getLabel(), extCstr, openPath.string(), defaultName,
-                                    static_cast<int>(maxSelectCount));
+      fileDialogInstance.OpenDialog(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,
+                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
   }
-  setExtInfos();
+
+  std::ranges::for_each(extColors, [this](const auto &extColor) {
+    const auto &[ext, color] = extColor;
+    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), color);
+  });
 
   if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize().asImVec())) {
     RAII end{[&] { fileDialogInstance.Close(); }};
@@ -68,10 +72,6 @@ void FileDialog::renderImpl() {
     }
     done = true;
   }
-}
-
-void FileDialog::setExtInfos() {
-  for (const auto &[ext, color] : extColors) { fileDialogInstance.SetExtentionInfos(fmt::format(".{}", ext), color); }
 }
 
 FileDialogBuilder::FileDialogBuilder(ImGuiInterface *parent, FileDialogType dialogType)

@@ -19,6 +19,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 
@@ -45,11 +46,16 @@ enum class FileDialogType { Dir, File };
 /**
  * @brief Dialog for file selection from disk.
  *
- * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::openFileDialog(...) or ImGuiInterface::openDirDialog(...).
+ * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::buildFileDialog(...).
  *
  * Dialogs are invalidated when isDone() == true.
  *
- * @todo: update to new version
+ * @todo: more SetFileStyle stuff
+ * @todo: size constraints
+ * @todo: key navigation
+ * @todo: bookmarks + de/serialization
+ * @todo: ImGuiFileDialogFlags_ConfirmOverwrite
+ * @todo: thumbnails
  */
 class PF_IMGUI_EXPORT FileDialog : public Renderable,
                                    public Labellable,
@@ -117,11 +123,6 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
    * @param extSettings
    */
   void prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings);
-
-  /**
-   * Set prepared filter strings to file dialog instance.
-   */
-  void setExtInfos();
 
   std::string filters;
   std::vector<std::pair<std::string, ImVec4>> extColors;

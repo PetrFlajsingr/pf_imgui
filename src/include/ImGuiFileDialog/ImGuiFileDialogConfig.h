@@ -4,11 +4,7 @@
 
 //this options need c++17
 #define USE_STD_FILESYSTEM
-#ifdef _MSC_VER // FIXME
-#ifndef WIN32
-#define WIN32
-#endif
-#endif
+
 //#define MAX_FILE_DIALOG_NAME_BUFFER 1024
 //#define MAX_PATH_BUFFER_SIZE 1024
 
@@ -91,6 +87,20 @@
 //#define tableHeaderFileTypeString " Type"
 //#define tableHeaderFileSizeString " Size"
 //#define tableHeaderFileDateTimeString " Date"
+//#define fileSizeBytes "o"
+//#define fileSizeKiloBytes "Ko"
+//#define fileSizeMegaBytes "Mo"
+//#define fileSizeGigaBytes "Go"
+
+// default table sort field (must be FIELD_FILENAME, FIELD_TYPE, FIELD_SIZE, FIELD_DATE or FIELD_THUMBNAILS)
+//#define defaultSortField FIELD_FILENAME
+
+// default table sort order for each field (true => Descending, false => Ascending)
+//#define defaultSortOrderFilename true
+//#define defaultSortOrderType true
+//#define defaultSortOrderSize true
+//#define defaultSortOrderDate true
+//#define defaultSortOrderThumbnails true
 
 //#define USE_BOOKMARK
 //#define bookmarkPaneWith 150.0f
