@@ -122,7 +122,7 @@ class PF_IMGUI_EXPORT VerticalSlider
   }
 
   [[nodiscard]] toml::table serialize_impl() const override {
-    return toml::table{{{"value", ValueObservable<T>::getValue()}}};
+    return toml::table{{"value", ValueObservable<T>::getValue()}};
   }
 
  private:

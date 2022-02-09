@@ -28,7 +28,7 @@ void TextEditor::unserialize_impl(const toml::table &src) {
   }
 }
 
-toml::table TextEditor::serialize_impl() const { return toml::table{{{"text", editor.GetText()}}}; }
+toml::table TextEditor::serialize_impl() const { return toml::table{{"text", editor.GetText()}}; }
 
 void TextEditor::setHighlighting(TextEditor::Highlight language) {
   switch (language) {

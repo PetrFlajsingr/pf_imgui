@@ -196,6 +196,7 @@ set(SOURCES
         src/pf_imgui/elements/TextEditor.cpp
         src/pf_imgui/dialogs/CommandPaletteWindow.cpp
         src/pf_imgui/elements/CommandPalette.cpp
+        src/pf_imgui/elements/Toggle.cpp
         )
 
 set(INCLUDES
@@ -328,6 +329,7 @@ set(INCLUDES
         src/include/imgui-command-palette/imcmd_fuzzy_search.h
         src/pf_imgui/dialogs/CommandPaletteWindow.h
         src/pf_imgui/elements/CommandPalette.h
+        src/pf_imgui/elements/Toggle.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})

@@ -1,12 +1,9 @@
-/**
- * @file Checkbox.h
- * @brief Checkbox element.
- * @author Petr Flajšingr
- * @date 31.10.20
- */
+//
+// Created by petr.flajsingr on 2/9/2022.
+//
 
-#ifndef PF_IMGUI_ELEMENTS_CHECKBOX_H
-#define PF_IMGUI_ELEMENTS_CHECKBOX_H
+#ifndef PF_IMGUI_TOGGLE_H
+#define PF_IMGUI_TOGGLE_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -19,11 +16,11 @@
 namespace pf::ui::ig {
 
 /**
- * @brief A typical checkbox.
+ * @brief A toggle working the same as Checkbox.
  *
- * A checkbox which saves it's state and provides it to listeners.
+ * It saves it's state and provides it to listeners.
  */
-class PF_IMGUI_EXPORT Checkbox
+class PF_IMGUI_EXPORT Toggle
     : public ItemElement,
       public ValueObservable<bool>,
       public Labellable,
@@ -35,14 +32,14 @@ class PF_IMGUI_EXPORT Checkbox
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
-   * Construct Checkbox.
+   * Construct Toggle.
    * @param elementName ID of the checkbox
    * @param label label drawn next to the checkbox
    * @param persistent allow value saving to disk
    * @param value starting value
    */
-  Checkbox(const std::string &elementName, const std::string &label, bool value = false,
-           Persistent persistent = Persistent::No);
+  Toggle(const std::string &elementName, const std::string &label, bool value = false,
+         Persistent persistent = Persistent::No);
   /**
    * Set if the checkbox is selected or not.
    * @param selected new value
@@ -66,4 +63,5 @@ class PF_IMGUI_EXPORT Checkbox
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_ELEMENTS_CHECKBOX_H
+
+#endif  //PF_IMGUI_TOGGLE_H
