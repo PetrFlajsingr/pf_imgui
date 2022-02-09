@@ -24,7 +24,7 @@ struct ImGuiVulkanGlfwConfig {
   std::uint32_t swapchainImageCount;
   GLFWwindow *handle;
 };
-class ImGuiGlfwVulkanInterface : public ImGuiInterface {
+class ImGuiGlfwVulkanInterface final : public ImGuiInterface {
  public:
   explicit ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config);
   ~ImGuiGlfwVulkanInterface() override;

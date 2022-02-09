@@ -17,7 +17,7 @@ struct ImGuiSDLConfig {
   SDL_Renderer *renderer;
 };
 
-class ImGuiSDLInterface : public ImGuiInterface {
+class ImGuiSDLInterface final : public ImGuiInterface {
  public:
   ImGuiSDLInterface(ImGuiSDLConfig config);
 

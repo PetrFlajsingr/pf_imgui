@@ -15,7 +15,7 @@ struct ImGuiGlfwOpenGLConfig {
   GLFWwindow *windowHandle;
 };
 
-class ImGuiGlfwOpenGLInterface : public ImGuiInterface {
+class ImGuiGlfwOpenGLInterface final : public ImGuiInterface {
  public:
   ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config);
   virtual ~ImGuiGlfwOpenGLInterface();
