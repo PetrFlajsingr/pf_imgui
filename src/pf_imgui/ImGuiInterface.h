@@ -322,6 +322,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes{};
 
+  std::optional<std::string> fileDialogBookmark = std::nullopt;
+
   void removeDialog(ModalDialog &dialog);
 };
 

@@ -53,7 +53,6 @@ enum class FileDialogType { Dir, File };
  * @todo: more SetFileStyle stuff
  * @todo: size constraints
  * @todo: key navigation
- * @todo: bookmarks + de/serialization
  * @todo: ImGuiFileDialogFlags_ConfirmOverwrite
  * @todo: thumbnails
  */

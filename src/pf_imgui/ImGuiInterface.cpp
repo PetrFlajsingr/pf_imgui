@@ -76,7 +76,10 @@ void ImGuiInterface::setStateFromConfig() {
   std::ranges::for_each(windows, [&serialiseSubtree](auto &window) { serialiseSubtree(*window); });
 }
 
-void ImGuiInterface::addFileDialog(FileDialog &&dialog) { fileDialogs.push_back(std::move(dialog)); }
+void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
+  auto &dialogRef = fileDialogs.emplace_back(std::move(dialog));
+  if (fileDialogBookmark.has_value()) { dialogRef.deserializeBookmark(*fileDialogBookmark); }
+}
 
 FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) { return FileDialogBuilder(this, type); }
 
@@ -84,6 +87,7 @@ void ImGuiInterface::renderDialogs() {
   std::ranges::for_each(fileDialogs, &FileDialog::render);
   if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
       iter != fileDialogs.end()) {
+    fileDialogBookmark = iter->serializeBookmark();
     fileDialogs.erase(iter);
   }
   std::ranges::for_each(dialogs, [](auto &dialog) { dialog->render(); });
