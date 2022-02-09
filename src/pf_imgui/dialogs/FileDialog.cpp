@@ -47,7 +47,7 @@ void FileDialog::renderImpl() {
                                     openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
   }
-  // TODO: more style options and icons
+
   std::ranges::for_each(extColors, [this](const auto &extColor) {
     const auto &[ext, color] = extColor;
     fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), color);
