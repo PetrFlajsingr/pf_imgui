@@ -48,7 +48,6 @@ void ImGuiInterface::removeStatusBar() { statusBar = nullptr; }
 const toml::table &ImGuiInterface::getConfig() const { return config; }
 
 void ImGuiInterface::updateConfig() {
-  // config.clear();
   std::ranges::for_each(windows, [this](const auto &window) {
     auto serialisedTree = serializeImGuiTree(*window);
     for (const auto &item : serialisedTree) { config.insert_or_assign(item.first, item.second); }
@@ -56,7 +55,6 @@ void ImGuiInterface::updateConfig() {
       auto serialisedAppBar = serializeImGuiTree(*menuBar);
       for (const auto &item : serialisedAppBar) { config.insert_or_assign(item.first, item.second); }
     }
-    // config.insert(serialised.begin(), serialised.end());
   });
 }
 

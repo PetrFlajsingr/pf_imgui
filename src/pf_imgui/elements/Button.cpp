@@ -20,7 +20,7 @@ void Button::renderImpl() {
   ImGui::PushButtonRepeat(repeatable);
   auto disableRepeat = RAII{[] { ImGui::PopButtonRepeat(); }};
   auto wasClicked = false;
-  switch (type) {
+  switch (type) {  // TODO: split this up?
     case ButtonType::Normal: wasClicked = ImGui::Button(getLabel().c_str(), getSize().asImVec()); break;
     case ButtonType::Small: wasClicked = ImGui::SmallButton(getLabel().c_str()); break;
     case ButtonType::ArrowUp: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Up); break;

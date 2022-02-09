@@ -22,7 +22,7 @@ void RadioGroup::renderImpl() {
   ImGui::Text("%s:", getLabel().c_str());
   std::ranges::for_each(buttons, [](auto &button) { button->renderImpl(); });
   std::optional<std::size_t> newSelection = std::nullopt;
-  std::ranges::for_each(buttons | ranges::views::enumerate, [&](auto idxBtn) {
+  std::ranges::for_each(buttons | ranges::views::enumerate, [&](const auto &idxBtn) {
     const auto &[idx, btn] = idxBtn;
     if (btn->isSelected()) {
       if (!selectedButtonIndex.has_value() || idx != *selectedButtonIndex) { newSelection = idx; }

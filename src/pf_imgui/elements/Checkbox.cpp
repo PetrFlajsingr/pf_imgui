@@ -19,7 +19,7 @@ void Checkbox::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   bool valueChanged = false;
-  switch (type) {
+  switch (type) {  // TODO: split this up?
     case Type::Checkbox: valueChanged = ImGui::Checkbox(getLabel().c_str(), getValueAddress()); break;
     case Type::Toggle:
       ImGui::Text("%s", getLabel().c_str());

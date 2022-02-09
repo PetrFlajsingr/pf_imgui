@@ -28,6 +28,7 @@ void Text::renderImpl() {
   drag(text);
   if (auto drop = dropAccept(); drop.has_value()) { setText(*drop); }
 }
+
 void Text::setTextInner(std::string txt) { text = std::move(txt); }
 
 }  // namespace pf::ui::ig

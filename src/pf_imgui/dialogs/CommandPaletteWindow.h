@@ -11,6 +11,7 @@
 #include <imcmd_command_palette.h>
 #include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <string>
 #include <utility>
 
 namespace pf::ui::ig {

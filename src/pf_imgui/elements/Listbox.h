@@ -110,7 +110,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
       if (const auto iter =
               std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
           iter != items.end()) {
-        const auto index = std::distance(items.begin(), iter);
+        const auto index = std::ranges::distance(items.begin(), iter);
         setSelectedItemByIndex(index);
       }
     } else {
@@ -127,7 +127,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     if (const auto iter = std::ranges::find_if(
             filteredItems, [itemAsString](const auto &item) { return item->second->getLabel() == itemAsString; });
         iter != filteredItems.end()) {
-      const auto index = std::distance(filteredItems.begin(), iter);
+      const auto index = std::ranges::distance(filteredItems.begin(), iter);
       setSelectedItemByIndex(index);
     }
   }
@@ -150,6 +150,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
  protected:
   using AllColorCustomizable::setColorStack;
   using AllStyleCustomizable::setStyleStack;
+
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();

@@ -24,8 +24,6 @@ void ImGuiSDLInterface::newFrame_impl() {
   ImGui_ImplSDLRenderer_NewFrame();
   ImGui_ImplSDL2_NewFrame();
 }
-void ImGuiSDLInterface::renderDrawData_impl(ImDrawData *drawData) {
-  ImGui_ImplSDLRenderer_RenderDrawData(drawData);
-}
+void ImGuiSDLInterface::renderDrawData_impl(ImDrawData *drawData) { ImGui_ImplSDLRenderer_RenderDrawData(drawData); }
 
-}
+}  // namespace pf::ui::ig

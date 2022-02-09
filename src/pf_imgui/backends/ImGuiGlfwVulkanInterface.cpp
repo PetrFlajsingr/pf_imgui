@@ -15,8 +15,7 @@ void checkVkResult(VkResult err) {
 }  // namespace details
 
 ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config)
-    : ImGuiInterface(std::move(config.imgui)),
-      config(config) {
+    : ImGuiInterface(std::move(config.imgui)), config(config) {
   setupDescriptorPool();
   ImGui_ImplGlfw_InitForVulkan(config.handle, true);
   auto init_info = ImGui_ImplVulkan_InitInfo();
@@ -151,8 +150,6 @@ void ImGuiGlfwVulkanInterface::newFrame_impl() {
   ImGui_ImplGlfw_NewFrame();
 }
 
-void ImGuiGlfwVulkanInterface::renderDrawData_impl(ImDrawData *drawData) {
-
-}
+void ImGuiGlfwVulkanInterface::renderDrawData_impl(ImDrawData *drawData) {}
 
 }  // namespace pf::ui::ig

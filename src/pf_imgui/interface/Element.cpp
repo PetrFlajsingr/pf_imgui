@@ -12,11 +12,11 @@ Element::Element(const std::string &name) : Renderable(name) {}
 
 void Element::render() {
   ImGui::PushID(getName().c_str());
+  if (font != nullptr) { ImGui::PushFont(font); }
   RAII end{[&] {
     ImGui::PopID();
     if (font != nullptr) { ImGui::PopFont(); }
   }};
-  if (font != nullptr) { ImGui::PushFont(font); }
   Renderable::render();
 }
 

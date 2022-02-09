@@ -27,7 +27,7 @@ bool details::DragSourceBase::drag_impl(const std::string &typeName, const void 
     dragged = false;
     didDrop = true;
   }
-  auto flags = ImGuiDragDropFlags_SourceAllowNullID;
+  constexpr auto flags = ImGuiDragDropFlags_SourceAllowNullID;
   if (ImGui::BeginDragDropSource(flags)) {
     RAII end{ImGui::EndDragDropSource};
     dragged = true;
@@ -102,7 +102,7 @@ std::optional<void *> details::DropTargetBase::dropAccept_impl(const std::string
 }
 
 void DragNDropGroup::frame() {
-  if (std::ranges::any_of(sources, [](auto source) { return source->isDragged(); })) {
+  if (std::ranges::any_of(sources, &details::DragSourceBase::isDragged)) {
     if (!wasDraggedLastFrame) {
       std::ranges::for_each(targets, [](auto &t) {
         t.second = t.first->isDropAllowed();

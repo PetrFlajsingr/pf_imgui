@@ -120,7 +120,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     if (const auto iter = std::ranges::find_if(
             items, [itemAsString](const auto &item) { return item.second->getLabel() == itemAsString; });
         iter != items.end()) {
-      const auto index = std::distance(items.begin(), iter);
+      const auto index = std::ranges::distance(items.begin(), iter);
       setSelectedItemByIndex(index);
     } else {
       cancelSelection();
