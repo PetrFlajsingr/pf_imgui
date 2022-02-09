@@ -49,23 +49,24 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
                                 public Savable,
                                 public DragSource<T>,
                                 public DropTarget<T> {
-  using CustomListbox<T, Selectable>::filteredItems;
-  using CustomListbox<T, Selectable>::items;
-  using CustomListbox<T, Selectable>::filter;
+  using CustomListbox = CustomListbox<T, Selectable>;
+  using CustomListbox::filter;
+  using CustomListbox::filteredItems;
+  using CustomListbox::items;
 
  public:
   using Factory = details::ListboxRowFactory<T>;
-  using CustomListbox<T, Selectable>::getName;
-  using CustomListbox<T, Selectable>::getLabel;
-  using CustomListbox<T, Selectable>::getSize;
-  using CustomListbox<T, Selectable>::setItems;
-  using CustomListbox<T, Selectable>::addItem;
-  using CustomListbox<T, Selectable>::addItems;
-  using CustomListbox<T, Selectable>::removeItem;
-  using CustomListbox<T, Selectable>::removeItemIf;
-  using CustomListbox<T, Selectable>::setFilter;
-  using CustomListbox<T, Selectable>::clearFilter;
-  using CustomListbox<T, Selectable>::getItems;
+  using CustomListbox::addItem;
+  using CustomListbox::addItems;
+  using CustomListbox::clearFilter;
+  using CustomListbox::getItems;
+  using CustomListbox::getLabel;
+  using CustomListbox::getName;
+  using CustomListbox::getSize;
+  using CustomListbox::removeItem;
+  using CustomListbox::removeItemIf;
+  using CustomListbox::setFilter;
+  using CustomListbox::setItems;
   /**
    * Construct Listbox.
    * @param elementName ID of the element
@@ -78,7 +79,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
       const std::string &elementName, const std::string &label, Size s = Size::Auto(),
       std::optional<int> selectedIdx = std::nullopt,
       Persistent persistent = Persistent::No) requires(std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomListbox<T, Selectable>(elementName, label, Factory{}, s), ValueObservable<T>(),
+      : CustomListbox(elementName, label, Factory{}, s), ValueObservable<T>(),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {}
 
   /**

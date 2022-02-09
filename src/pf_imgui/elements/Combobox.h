@@ -49,26 +49,27 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
                                  public ValueObservable<T>,
                                  public Savable,
                                  public DragSource<T> {
-  using CustomCombobox<T, Selectable>::items;
-  using CustomCombobox<T, Selectable>::filteredItems;
-  using CustomCombobox<T, Selectable>::flags;
+  using CustomCombobox = CustomCombobox<T, Selectable>;
+  using CustomCombobox::filteredItems;
+  using CustomCombobox::flags;
+  using CustomCombobox::items;
 
  public:
-  using CustomCombobox<T, Selectable>::addItem;
-  using CustomCombobox<T, Selectable>::addItems;
-  using CustomCombobox<T, Selectable>::setItems;
-  using CustomCombobox<T, Selectable>::removeItem;
-  using CustomCombobox<T, Selectable>::removeItemIf;
-  using CustomCombobox<T, Selectable>::setFilter;
-  using CustomCombobox<T, Selectable>::clearFilter;
-  using CustomCombobox<T, Selectable>::getItems;
-  using CustomCombobox<T, Selectable>::setPreviewValue;
-  using CustomCombobox<T, Selectable>::getPreviewValue;
-  using CustomCombobox<T, Selectable>::getShownItemCount;
-  using CustomCombobox<T, Selectable>::setShownItemCount;
-  using CustomCombobox<T, Selectable>::getLabel;
-  using CustomCombobox<T, Selectable>::getName;
-  using CustomCombobox<T, Selectable>::checkClose;
+  using CustomCombobox::addItem;
+  using CustomCombobox::addItems;
+  using CustomCombobox::checkClose;
+  using CustomCombobox::clearFilter;
+  using CustomCombobox::getItems;
+  using CustomCombobox::getLabel;
+  using CustomCombobox::getName;
+  using CustomCombobox::getPreviewValue;
+  using CustomCombobox::getShownItemCount;
+  using CustomCombobox::removeItem;
+  using CustomCombobox::removeItemIf;
+  using CustomCombobox::setFilter;
+  using CustomCombobox::setItems;
+  using CustomCombobox::setPreviewValue;
+  using CustomCombobox::setShownItemCount;
   /**
    * Construct Combobox.
    * @param elementName ID of the element
@@ -83,7 +84,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
            Persistent persistent =
                Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
                                             &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomCombobox<T, Selectable>(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
+      : CustomCombobox(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
         ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
   }
