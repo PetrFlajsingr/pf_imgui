@@ -67,12 +67,16 @@ void WrapLayout::renderTopToBottom() {
     const auto windowVisibleY = ImGui::GetWindowPos().y + ImGui::GetWindowContentRegionMax().y;
     const auto &style = ImGui::GetStyle();
     std::ranges::for_each(childrenView, [&](auto &child) {
+      ImGui::SetCursorPosX(currentX);
       child.render();
-      maxXInColumn = std::max(maxXInColumn, ImGui::GetItemRectMax().x);
+      maxXInColumn = std::max(maxXInColumn, ImGui::GetItemRectMax().x - ImGui::GetWindowPos().x);
       const auto lastOriginY = ImGui::GetItemRectMin().y;
       const auto lastY = ImGui::GetItemRectMax().y;
       const auto nextY = lastY + style.ItemSpacing.y + (lastY - lastOriginY);
-      if (nextY >= windowVisibleY) { ImGui::SetCursorPos(ImVec2{0, maxXInColumn}); }
+      if (nextY >= windowVisibleY) {
+        currentX = maxXInColumn + style.ItemSpacing.x;
+        ImGui::SetCursorPosY(0);
+      }
     });
   }
 }
