@@ -49,8 +49,6 @@ enum class FileDialogType { Dir, File };
  * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::openFileDialog(...) or ImGuiInterface::openDirDialog(...).
  *
  * Dialogs are invalidated when isDone() == true.
- *
- * @todo: update to new version
  */
 class PF_IMGUI_EXPORT FileDialog : public Renderable,
                                    public Labellable,
