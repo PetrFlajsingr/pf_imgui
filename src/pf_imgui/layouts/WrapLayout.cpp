@@ -50,15 +50,31 @@ void WrapLayout::renderLeftToRight() {
     const auto &style = ImGui::GetStyle();
     std::ranges::for_each(childrenView, [&](auto &child) {
       child.render();
-      const auto lastButtonOriginX = ImGui::GetItemRectMin().x;
-      const auto lastButtonX = ImGui::GetItemRectMax().x;
-      const auto nextButtonX = lastButtonX + style.ItemSpacing.x + (lastButtonX - lastButtonOriginX);
-      if (idx != childrenSize - 1 && nextButtonX < windowVisibleX) { ImGui::SameLine(); }
+      const auto lastOriginX = ImGui::GetItemRectMin().x;
+      const auto lastX = ImGui::GetItemRectMax().x;
+      const auto nextX = lastX + style.ItemSpacing.x + (lastX - lastOriginX);
+      if (idx != childrenSize - 1 && nextX < windowVisibleX) { ImGui::SameLine(); }
       ++idx;
     });
   }
 }
 
-void WrapLayout::renderTopToBottom() {}
-
+void WrapLayout::renderTopToBottom() {
+  auto childrenView = getChildren();
+  if (!childrenView.empty()) {
+    float currentX = 0;
+    float maxXInColumn = currentX;
+    const auto windowVisibleY = ImGui::GetWindowPos().y + ImGui::GetWindowContentRegionMax().y;
+    const auto &style = ImGui::GetStyle();
+    std::ranges::for_each(childrenView, [&](auto &child) {
+      child.render();
+      maxXInColumn = std::max(maxXInColumn, ImGui::GetItemRectMax().x);
+      const auto lastOriginY = ImGui::GetItemRectMin().y;
+      const auto lastY = ImGui::GetItemRectMax().y;
+      const auto nextY = lastY + style.ItemSpacing.y + (lastY - lastOriginY);
+      if (nextY >= windowVisibleY) { ImGui::SetCursorPos(ImVec2{0, maxXInColumn}); }
+    });
+  }
 }
+
+}  // namespace pf::ui::ig
