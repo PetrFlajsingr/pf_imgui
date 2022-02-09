@@ -36,7 +36,10 @@ class ImGuiGlfwVulkanInterface : public ImGuiInterface {
 
   void updateFonts() override;
   void addToCommandBuffer(VkCommandBuffer commandBuffer);
-  void render() override;
+
+ protected:
+  void newFrame_impl() override;
+  void renderDrawData_impl(ImDrawData *drawData) override;
 
  private:
   std::optional<std::uint32_t> findGraphicsFamilyIndex();

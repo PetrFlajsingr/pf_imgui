@@ -177,4 +177,30 @@ NotificationManager &ImGuiInterface::getNotificationManager() { return notificat
 
 const NotificationManager &ImGuiInterface::getNotificationManager() const { return notificationManager; }
 
+void ImGuiInterface::render() {
+  if (shouldUpdateFontAtlas) {
+    shouldUpdateFontAtlas = false;
+    updateFonts();
+  }
+  newFrame_impl();
+  ImGui::NewFrame();
+  RAII endFrameRAII{[&] {
+    ImGui::Render();
+    renderDrawData_impl(ImGui::GetDrawData());
+    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+      ImGui::UpdatePlatformWindows();
+      ImGui::RenderPlatformWindowsDefault();
+    }
+  }};
+  if (getVisibility() == Visibility::Visible) {
+    if (getEnabled() == Enabled::No) {
+      ImGui::BeginDisabled();
+      RAII raiiEnabled{ImGui::EndDisabled};
+      renderImpl();
+    } else {
+      renderImpl();
+    }
+  }
+}
+
 }  // namespace pf::ui::ig

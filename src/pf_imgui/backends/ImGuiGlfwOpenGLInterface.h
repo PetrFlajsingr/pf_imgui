@@ -26,9 +26,10 @@ class ImGuiGlfwOpenGLInterface : public ImGuiInterface {
   virtual ~ImGuiGlfwOpenGLInterface();
 
   void updateFonts() override;
-  void render() override;
 
- private:
+ protected:
+  void newFrame_impl() override;
+  void renderDrawData_impl(ImDrawData *drawData) override;
 };
 
 }  // namespace pf::ui::ig

@@ -122,32 +122,6 @@ void ImGuiGlfwVulkanInterface::addToCommandBuffer(VkCommandBuffer commandBuffer)
   ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
 }
 
-void ImGuiGlfwVulkanInterface::render() {
-  if (shouldUpdateFontAtlas) {
-    shouldUpdateFontAtlas = false;
-    updateFonts();
-  }
-  ImGui_ImplVulkan_NewFrame();
-  ImGui_ImplGlfw_NewFrame();
-  ImGui::NewFrame();
-  RAII endFrameRAII{[&] {
-    ImGui::Render();
-    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    }
-  }};
-  if (getVisibility() == Visibility::Visible) {
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
-      renderImpl();
-    } else {
-      renderImpl();
-    }
-  }
-}
-
 void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
   constexpr auto DESCRIPTOR_COUNT = 1000;
   auto descPoolConfig = VkDescriptorPoolCreateInfo{};
@@ -171,6 +145,15 @@ void ImGuiGlfwVulkanInterface::setupDescriptorPool() {
   if (vkCreateDescriptorPool(config.device, &descPoolConfig, nullptr, &descriptorPool) != VK_SUCCESS) {
     throw std::runtime_error("failed to create descriptor pool!");
   }
+}
+
+void ImGuiGlfwVulkanInterface::newFrame_impl() {
+  ImGui_ImplVulkan_NewFrame();
+  ImGui_ImplGlfw_NewFrame();
+}
+
+void ImGuiGlfwVulkanInterface::renderDrawData_impl(ImDrawData *drawData) {
+
 }
 
 }  // namespace pf::ui::ig

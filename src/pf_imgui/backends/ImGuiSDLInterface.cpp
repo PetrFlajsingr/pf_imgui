@@ -20,30 +20,10 @@ pf::ui::ig::ImGuiSDLInterface::~ImGuiSDLInterface() {
 void pf::ui::ig::ImGuiSDLInterface::updateFonts() {
   // no need to implement this for SDL
 }
-
-void pf::ui::ig::ImGuiSDLInterface::render() {
-  if (shouldUpdateFontAtlas) {
-    shouldUpdateFontAtlas = false;
-    updateFonts();
-  }
+void pf::ui::ig::ImGuiSDLInterface::newFrame_impl() {
   ImGui_ImplSDLRenderer_NewFrame();
   ImGui_ImplSDL2_NewFrame();
-  ImGui::NewFrame();
-  RAII endFrameRAII{[&] {
-    ImGui::Render();
-    ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
-    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    }
-  }};
-  if (getVisibility() == Visibility::Visible) {
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
-      renderImpl();
-    } else {
-      renderImpl();
-    }
-  }
+}
+void pf::ui::ig::ImGuiSDLInterface::renderDrawData_impl(ImDrawData *drawData) {
+  ImGui_ImplSDLRenderer_RenderDrawData(drawData);
 }

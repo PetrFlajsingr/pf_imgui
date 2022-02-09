@@ -23,30 +23,11 @@ void pf::ui::ig::ImGuiGlfwOpenGLInterface::updateFonts() {
   // no need to implement this for OpenGL
 }
 
-void pf::ui::ig::ImGuiGlfwOpenGLInterface::render() {
-  // todo: move most of this into ImGuiInterface which'll make context switching easier too
-  if (shouldUpdateFontAtlas) {
-    shouldUpdateFontAtlas = false;
-    updateFonts();
-  }
+void pf::ui::ig::ImGuiGlfwOpenGLInterface::newFrame_impl() {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
-  ImGui::NewFrame();
-  RAII endFrameRAII{[&] {
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    }
-  }};
-  if (getVisibility() == Visibility::Visible) {
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
-      renderImpl();
-    } else {
-      renderImpl();
-    }
-  }
+}
+
+void pf::ui::ig::ImGuiGlfwOpenGLInterface::renderDrawData_impl(ImDrawData *drawData) {
+  ImGui_ImplOpenGL3_RenderDrawData(drawData);
 }

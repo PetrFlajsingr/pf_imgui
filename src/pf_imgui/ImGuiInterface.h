@@ -256,6 +256,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   [[nodiscard]] NotificationManager &getNotificationManager();
   [[nodiscard]] const NotificationManager &getNotificationManager() const;
 
+  void render() override;
+
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
 
@@ -263,6 +265,11 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * Render all file dialogs which are currently open.
    */
   void renderDialogs();
+
+  virtual void newFrame_impl() = 0;
+
+  virtual void renderDrawData_impl(ImDrawData *drawData) = 0;
+
 
   /**
    * @attention Override this function to provide rendering capabilities.
