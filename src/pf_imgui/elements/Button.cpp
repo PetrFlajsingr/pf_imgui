@@ -9,48 +9,54 @@
 
 namespace pf::ui::ig {
 
-Button::Button(const std::string &name, std::string label, ButtonType buttonType, Repeatable isRepeatable,
-               const Size &size)
-    : ItemElement(name), Labellable(std::move(label)), Resizable(size), type(buttonType),
-      repeatable(isRepeatable == Repeatable::Yes) {}
+ButtonBase::ButtonBase(const std::string &name, Repeatable isRepeatable)
+    : ItemElement(name), repeatable(isRepeatable == Repeatable::Yes) {}
+
+bool ButtonBase::isRepeatable() const { return repeatable; }
+
+void ButtonBase::setRepeatable(bool newRepeatable) { repeatable = newRepeatable; }
+
+RAII ButtonBase::setButtonRepeat() {
+  ImGui::PushButtonRepeat(isRepeatable());
+  return RAII{ImGui::PopButtonRepeat};
+}
+
+InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, MouseButton clickButton,
+                                 Repeatable isRepeatable)
+    : ButtonBase(elementName, isRepeatable), Resizable(s), clickBtn(clickButton) {}
+
+void InvisibleButton::renderImpl() {
+  auto repeat = setButtonRepeat();
+  if (ImGui::InvisibleButton(getName().c_str(), getSize().asImVec(), static_cast<int>(clickBtn))) { notifyOnClick(); }
+}
+
+Button::Button(const std::string &name, const std::string &label, const Size &s, Repeatable isRepeatable)
+    : ButtonBase(name, isRepeatable), Labellable(label), Resizable(s) {}
 
 void Button::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  ImGui::PushButtonRepeat(repeatable);
-  auto disableRepeat = RAII{[] { ImGui::PopButtonRepeat(); }};
-  auto wasClicked = false;
-  switch (type) {  // TODO: split this up?
-    case ButtonType::Normal: wasClicked = ImGui::Button(getLabel().c_str(), getSize().asImVec()); break;
-    case ButtonType::Small: wasClicked = ImGui::SmallButton(getLabel().c_str()); break;
-    case ButtonType::ArrowUp: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Up); break;
-    case ButtonType::ArrowLeft: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Left); break;
-    case ButtonType::ArrowRight: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Right); break;
-    case ButtonType::ArrowDown: wasClicked = ImGui::ArrowButton(getLabel().c_str(), ImGuiDir_::ImGuiDir_Down); break;
-  }
-  if (wasClicked) { notifyOnClick(); }
+  auto repeat = setButtonRepeat();
+  if (ImGui::Button(getLabel().c_str(), getSize().asImVec())) { notifyOnClick(); }
 }
 
-ButtonType Button::getType() const { return type; }
+SmallButton::SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable)
+    : ButtonBase(name, isRepeatable), Labellable(label) {}
 
-void Button::setType(ButtonType buttonType) { type = buttonType; }
-
-bool Button::isRepeatable() const { return repeatable; }
-
-void Button::setRepeatable(bool newRepeatable) { repeatable = newRepeatable; }
-
-InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, MouseButton clickButton,
-                                 Repeatable isRepeatable)
-    : ItemElement(elementName), Resizable(s), repeatable(isRepeatable == Repeatable::Yes), clickBtn(clickButton) {}
-
-bool InvisibleButton::isRepeatable() const { return repeatable; }
-
-void InvisibleButton::setRepeatable(bool isRepeatable) { repeatable = isRepeatable; }
-
-void InvisibleButton::renderImpl() {
-  ImGui::PushButtonRepeat(repeatable);
-  auto disableRepeat = RAII{ImGui::PopButtonRepeat};
-  if (ImGui::InvisibleButton(getName().c_str(), getSize().asImVec(), static_cast<int>(clickBtn))) { notifyOnClick(); }
+void SmallButton::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  auto repeat = setButtonRepeat();
+  if (ImGui::SmallButton(getLabel().c_str())) { notifyOnClick(); }
 }
 
+ArrowButton::ArrowButton(const std::string &name, ArrowButton::Dir direction, Repeatable isRepeatable)
+    : ButtonBase(name, isRepeatable), dir(direction) {}
+
+void ArrowButton::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  auto repeat = setButtonRepeat();
+  if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { notifyOnClick(); }
+}
 }  // namespace pf::ui::ig
