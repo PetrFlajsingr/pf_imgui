@@ -31,6 +31,29 @@
 
 namespace pf::ui::ig {
 
+enum class ImGuiConfigFlags {
+  NavEnableKeyboard = ImGuiConfigFlags_NavEnableKeyboard,
+  NavEnableGamepad = ImGuiConfigFlags_NavEnableGamepad,
+  NavEnableSetMousePos = ImGuiConfigFlags_NavEnableSetMousePos,
+  NavNoCaptureKeyboard = ImGuiConfigFlags_NavNoCaptureKeyboard,
+  NoMouse = ImGuiConfigFlags_NoMouse,
+  NoMouseCursorChange = ImGuiConfigFlags_NoMouseCursorChange,
+  DockingEnable = ImGuiConfigFlags_DockingEnable,
+  ViewportsEnable = ImGuiConfigFlags_ViewportsEnable,
+  // TODO: not implemented DpiEnableScaleViewports = ImGuiConfigFlags_DpiEnableScaleViewports,
+  // TODO: not implemented DpiEnableScaleFonts = ImGuiConfigFlags_DpiEnableScaleFonts,
+  IsSRGB = ImGuiConfigFlags_IsSRGB,
+  IsTouchScreen = ImGuiConfigFlags_IsTouchScreen
+};
+
+struct ImGuiConfig {
+  Flags<ImGuiConfigFlags> flags;
+  toml::table config;
+  std::filesystem::path iconFontDirectory = "."; // TODO: change this to something like icon data provider
+  Flags<IconPack> enabledIconPacks{};
+  float iconSize = 13.f;
+};
+
 /**
  * @brief Root class of an entire UI tree. Provides an ability to create windows and dialogs.
  *
@@ -51,9 +74,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param flags
    * @param tomlConfig config containing data of Savable elements
    */
-  explicit ImGuiInterface(ImGuiConfigFlags flags, toml::table tomlConfig, bool enableMultiViewport,
-                          const std::filesystem::path &iconFontDirectory = ".",
-                          const Flags<IconPack> &enabledIconPacks = Flags<IconPack>{}, float iconSize = 16.f);
+  explicit ImGuiInterface(const ImGuiConfig &config);
 
   ~ImGuiInterface() override;
 
@@ -269,7 +290,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   virtual void newFrame_impl() = 0;
 
   virtual void renderDrawData_impl(ImDrawData *drawData) = 0;
-
 
   /**
    * @attention Override this function to provide rendering capabilities.

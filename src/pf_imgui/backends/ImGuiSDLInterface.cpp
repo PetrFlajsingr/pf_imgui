@@ -5,8 +5,7 @@
 #include "ImGuiSDLInterface.h"
 
 pf::ui::ig::ImGuiSDLInterface::ImGuiSDLInterface(const pf::ui::ig::ImGuiSDLConfig &config)
-    : ImGuiInterface(config.flags, config.config, config.enableMultiViewport, config.pathToIconFolder,
-                     config.enabledIconPacks, config.defaultFontSize) {
+    : ImGuiInterface(config) {
   ImGui_ImplSDL2_InitForSDLRenderer(config.windowHandle);
   ImGui_ImplSDLRenderer_Init(config.renderer);
   updateFonts();

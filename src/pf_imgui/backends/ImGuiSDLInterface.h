@@ -11,15 +11,9 @@
 
 namespace pf::ui::ig {
 
-struct ImGuiSDLConfig {
+struct ImGuiSDLConfig : public ImGuiConfig  {
   SDL_Window *windowHandle;
   SDL_Renderer *renderer;
-  ImGuiConfigFlags flags = {};
-  bool enableMultiViewport = false;
-  toml::table config;
-  std::filesystem::path pathToIconFolder;
-  Flags<IconPack> enabledIconPacks = Flags<IconPack>{};
-  float defaultFontSize = 13.f;
 };
 
 class ImGuiSDLInterface : public ImGuiInterface {

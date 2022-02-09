@@ -11,7 +11,7 @@
 #include <vulkan/vulkan.h>
 
 namespace pf::ui::ig {
-struct ImGuiVulkanGlfwConfig {
+struct ImGuiVulkanGlfwConfig : public ImGuiConfig  {
   VkInstance instance;
   VkPhysicalDevice physicalDevice;
   VkDevice device;
@@ -22,16 +22,10 @@ struct ImGuiVulkanGlfwConfig {
   VkQueue presentQueue;
   std::uint32_t swapchainImageCount;
   GLFWwindow *handle;
-  ImGuiConfigFlags flags = {};
-  bool enableMultiViewport = false;
-  toml::table config;
-  std::filesystem::path pathToIconFolder;
-  Flags<IconPack> enabledIconPacks = Flags<IconPack>{};
-  float defaultFontSize = 13.f;
 };
 class ImGuiGlfwVulkanInterface : public ImGuiInterface {
  public:
-  explicit ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config);
+  explicit ImGuiGlfwVulkanInterface(const ImGuiVulkanGlfwConfig &config);
   ~ImGuiGlfwVulkanInterface() override;
 
   void updateFonts() override;

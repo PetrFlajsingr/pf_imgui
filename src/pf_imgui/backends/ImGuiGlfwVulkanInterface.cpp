@@ -14,10 +14,9 @@ void checkVkResult(VkResult err) {
 }
 }  // namespace details
 
-ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config)
-    : ImGuiInterface(config.flags, std::move(config.config), config.enableMultiViewport, config.pathToIconFolder,
-                     config.enabledIconPacks, config.defaultFontSize),
-      config(std::move(config)) {
+ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(const ImGuiVulkanGlfwConfig &config)
+    : ImGuiInterface(config),
+      config(config) {
   setupDescriptorPool();
   ImGui_ImplGlfw_InitForVulkan(config.handle, true);
   auto init_info = ImGui_ImplVulkan_InitInfo();

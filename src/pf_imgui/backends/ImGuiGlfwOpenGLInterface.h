@@ -10,19 +10,13 @@
 
 namespace pf::ui::ig {
 
-struct ImGuiGlfwOpenGLConfig {
+struct ImGuiGlfwOpenGLConfig : public ImGuiConfig {
   GLFWwindow *windowHandle;
-  ImGuiConfigFlags flags = {};
-  bool enableMultiViewport = false;
-  toml::table config;
-  std::filesystem::path pathToIconFolder;
-  Flags<IconPack> enabledIconPacks = Flags<IconPack>{};
-  float defaultFontSize = 13.f;
 };
 
 class ImGuiGlfwOpenGLInterface : public ImGuiInterface {
  public:
-  ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config);
+  ImGuiGlfwOpenGLInterface(const ImGuiGlfwOpenGLConfig &config);
   virtual ~ImGuiGlfwOpenGLInterface();
 
   void updateFonts() override;
