@@ -74,7 +74,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param flags
    * @param tomlConfig config containing data of Savable elements
    */
-  explicit ImGuiInterface(const ImGuiConfig &config);
+  explicit ImGuiInterface(ImGuiConfig config);
 
   ~ImGuiInterface() override;
 

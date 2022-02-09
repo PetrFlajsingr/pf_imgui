@@ -14,8 +14,8 @@ void checkVkResult(VkResult err) {
 }
 }  // namespace details
 
-ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(const ImGuiVulkanGlfwConfig &config)
-    : ImGuiInterface(config),
+ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config)
+    : ImGuiInterface(std::move(config.imgui)),
       config(config) {
   setupDescriptorPool();
   ImGui_ImplGlfw_InitForVulkan(config.handle, true);

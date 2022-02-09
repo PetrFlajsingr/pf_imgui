@@ -9,10 +9,10 @@
 
 namespace pf::ui::ig {
 
-ImGuiInterface::ImGuiInterface(const ImGuiConfig &config)
+ImGuiInterface::ImGuiInterface(ImGuiConfig config)
     : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()),
       io(ImGui::GetIO()), fontManager(*this, config.iconFontDirectory, config.enabledIconPacks, config.iconSize),
-      notificationManager(fontManager), config(config.config) {
+      notificationManager(fontManager), config(std::move(config.config)) {
   io.ConfigFlags = *config.flags;
   ImGui::StyleColorsDark();
 }

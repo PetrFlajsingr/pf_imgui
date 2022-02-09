@@ -11,7 +11,8 @@
 #include <vulkan/vulkan.h>
 
 namespace pf::ui::ig {
-struct ImGuiVulkanGlfwConfig : public ImGuiConfig  {
+struct ImGuiVulkanGlfwConfig {
+  ImGuiConfig imgui;
   VkInstance instance;
   VkPhysicalDevice physicalDevice;
   VkDevice device;
@@ -25,7 +26,7 @@ struct ImGuiVulkanGlfwConfig : public ImGuiConfig  {
 };
 class ImGuiGlfwVulkanInterface : public ImGuiInterface {
  public:
-  explicit ImGuiGlfwVulkanInterface(const ImGuiVulkanGlfwConfig &config);
+  explicit ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config);
   ~ImGuiGlfwVulkanInterface() override;
 
   void updateFonts() override;

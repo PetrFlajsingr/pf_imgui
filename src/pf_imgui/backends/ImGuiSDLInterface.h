@@ -11,14 +11,15 @@
 
 namespace pf::ui::ig {
 
-struct ImGuiSDLConfig : public ImGuiConfig  {
+struct ImGuiSDLConfig {
+  ImGuiConfig imgui;
   SDL_Window *windowHandle;
   SDL_Renderer *renderer;
 };
 
 class ImGuiSDLInterface : public ImGuiInterface {
  public:
-  ImGuiSDLInterface(const ImGuiSDLConfig &config);
+  ImGuiSDLInterface(ImGuiSDLConfig config);
 
   virtual ~ImGuiSDLInterface();
 

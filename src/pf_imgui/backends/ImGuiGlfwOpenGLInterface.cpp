@@ -6,8 +6,8 @@
 #include "impl/imgui_impl_glfw.h"
 #include "impl/imgui_impl_opengl3.h"
 
-pf::ui::ig::ImGuiGlfwOpenGLInterface::ImGuiGlfwOpenGLInterface(const ImGuiGlfwOpenGLConfig &config)
-    : ImGuiInterface(config) {
+pf::ui::ig::ImGuiGlfwOpenGLInterface::ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config)
+    : ImGuiInterface(std::move(config.imgui)) {
   ImGui_ImplGlfw_InitForOpenGL(config.windowHandle, true);
   ImGui_ImplOpenGL3_Init();
   updateFonts();

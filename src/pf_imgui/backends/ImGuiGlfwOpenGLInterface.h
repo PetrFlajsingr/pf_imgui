@@ -10,13 +10,14 @@
 
 namespace pf::ui::ig {
 
-struct ImGuiGlfwOpenGLConfig : public ImGuiConfig {
+struct ImGuiGlfwOpenGLConfig {
+  ImGuiConfig imgui;
   GLFWwindow *windowHandle;
 };
 
 class ImGuiGlfwOpenGLInterface : public ImGuiInterface {
  public:
-  ImGuiGlfwOpenGLInterface(const ImGuiGlfwOpenGLConfig &config);
+  ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config);
   virtual ~ImGuiGlfwOpenGLInterface();
 
   void updateFonts() override;
