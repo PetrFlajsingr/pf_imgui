@@ -19,6 +19,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 
