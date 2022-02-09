@@ -26,7 +26,7 @@ SOFTWARE.
 */
 
 #include "ImGuiFileDialog.h"
-
+#include<pf_common/RAII.h>
 #ifdef __cplusplus
 
 #include <cfloat>
@@ -97,6 +97,18 @@ SOFTWARE.
 #include "stb/stb_image_resize.h"
 #endif // USE_THUMBNAILS
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wall"
+#pragma GCC diagnostic ignored "-Wextra"
+#pragma GCC diagnostic ignored "-Wformat-security"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wformat-zero-length"
+#endif
+#ifdef _MSC_VER
+#pragma warning( disable : 4996 )
+#pragma warning( disable : 4100 )
+#endif
 namespace IGFD
 {
 // float comparisons
@@ -3614,6 +3626,13 @@ namespace IGFD
 			{
 				beg = ImGui::Begin(name.c_str(), (bool*)nullptr, flags | ImGuiWindowFlags_NoScrollbar);
 			}
+            pf::RAII end{[&] {
+              if (prFileDialogInternal.puDLGmodal &&
+                  !prFileDialogInternal.puOkResultToConfirm){
+                ImGui::EndPopup();
+              } else
+                ImGui::End();
+            }};
 			if (beg)
 			{
 #ifdef IMGUI_HAS_VIEWPORT
@@ -3667,14 +3686,14 @@ namespace IGFD
 				// when the confirm to overwrite dialog will appear we need to 
 				// disable the modal mode of the main file dialog
 				// see prOkResultToConfirm under
-				if (prFileDialogInternal.puDLGmodal &&
-					!prFileDialogInternal.puOkResultToConfirm)
-					ImGui::EndPopup();
+				//if (prFileDialogInternal.puDLGmodal &&
+				//	!prFileDialogInternal.puOkResultToConfirm)
+				//	ImGui::EndPopup();
 			}
 
 			// same things here regarding prOkResultToConfirm
-			if (!prFileDialogInternal.puDLGmodal || prFileDialogInternal.puOkResultToConfirm)
-				ImGui::End();
+			//if (!prFileDialogInternal.puDLGmodal || prFileDialogInternal.puOkResultToConfirm)
+			//	ImGui::End();
 
 			// confirm the result and show the confirm to overwrite dialog if needed
 			res =  prConfirm_Or_OpenOverWriteFileDialog_IfNeeded(res, vFlags);
@@ -4578,6 +4597,7 @@ namespace IGFD
 				vFlags | ImGuiWindowFlags_AlwaysAutoResize |
 				ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 			{
+              pf::RAII endPopup{[] { ImGui::EndPopup(); }};
 				ImGui::SetWindowPos(prFileDialogInternal.puDialogCenterPos - ImGui::GetWindowSize() * 0.5f); // next frame needed for GetWindowSize to work
 
 				ImGui::Text("%s", OverWriteDialogMessageString);
@@ -4600,7 +4620,7 @@ namespace IGFD
 					ImGui::CloseCurrentPopup();
 				}
 
-				ImGui::EndPopup();
+				//ImGui::EndPopup();
 			}
 
 			if (res)
@@ -5194,3 +5214,16 @@ IMGUIFILEDIALOG_API void ManageGPUThumbnails(ImGuiFileDialog* vContext)
 	}
 }
 #endif // USE_THUMBNAILS
+
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
+
+#ifdef _MSC_VER
+#pragma warning( default : 4996 )
+#pragma warning( default : 4100 )
+#endif
+#ifdef _MSC_VER
+#pragma warning( default : 4996 )
+#pragma warning( default : 4100 )
+#endif
