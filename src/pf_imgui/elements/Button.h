@@ -18,6 +18,11 @@
 #include <string>
 
 namespace pf::ui::ig {
+/** Button types in this file: */
+class Button;
+class SmallButton;
+class ArrowButton;
+class InvisibleButton;
 
 /**
  * @brief A typical button element.
@@ -26,38 +31,14 @@ namespace pf::ui::ig {
  *
  * @see ButtonType
  */
-class PF_IMGUI_EXPORT Button
-    : public ItemElement,
-      public Labellable,
-      public Resizable,
-      public Clickable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
-                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign> {
+class PF_IMGUI_EXPORT ButtonBase : public ItemElement, public Clickable {
  public:
   /**
-   * Construct Button.
+   * Construct ButtonBase.
    * @param name ID of the button
-   * @param label label drawn on the button
-   * @param buttonType type of the button
    * @param isRepeatable enable/disable button can repeat its on click event when a user holds it
-   * @param size size of the button
    */
-  Button(const std::string &name, std::string label, ButtonType buttonType = ButtonType::Normal,
-         Repeatable isRepeatable = Repeatable::No, const Size &size = Size::Auto());
-
-  /**
-   * Get current type of the button.
-   * @return current type of the button
-   */
-  [[nodiscard]] ButtonType getType() const;
-  /**
-   * Set new type to the button.
-   * @param type new type
-   */
-  void setType(ButtonType type);
+  explicit ButtonBase(const std::string &name, Repeatable isRepeatable = Repeatable::No);
 
   /**
    * Check whether the button is repeatable or not
@@ -68,20 +49,19 @@ class PF_IMGUI_EXPORT Button
    * Set repeatable. If true then the button can be held by the user to trigger click events.
    * @param repeatable new state
    */
-  void setRepeatable(bool repeatable);
+  void setRepeatable(bool newRepeatable);
 
  protected:
-  void renderImpl() override;
+  [[nodiscard]] RAII setButtonRepeat();
 
  private:
-  ButtonType type;
   bool repeatable;
 };
 
 /**
  * @brief A button which is not rendered, can be used as a part of a new component for click&hover etc. detection.
  */
-class PF_IMGUI_EXPORT InvisibleButton : public ItemElement, public Resizable, public Clickable {
+class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
  public:
   /**
    * Create InvisibleButton.
@@ -94,23 +74,93 @@ class PF_IMGUI_EXPORT InvisibleButton : public ItemElement, public Resizable, pu
                            MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
 
  protected:
+  void renderImpl() override;
+
+ private:
+  MouseButton clickBtn;
+};
+
+/**
+ * @brief A typical button element.
+ *
+ * A button with a text label.
+ */
+class PF_IMGUI_EXPORT Button
+    : public ButtonBase,
+      public Labellable,
+      public Resizable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
+                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                               style::Style::ButtonTextAlign> {
+ public:
   /**
-   * Check whether the button is repeatable or not
-   * @return
+   * Construct Button
+   * @param name unique name of the element
+   * @param label text rendered on the button
+   * @param s size of the button
+   * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  [[nodiscard]] bool isRepeatable() const;
+  Button(const std::string &name, const std::string &label, const Size &s = Size::Auto(),
+         Repeatable isRepeatable = Repeatable::No);
+
+ protected:
+  void renderImpl() override;
+};
+
+/**
+ * @brief A small button.
+ *
+ * A button with a text label.
+ */
+class PF_IMGUI_EXPORT SmallButton
+    : public ButtonBase,
+      public Labellable,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
+                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                               style::Style::ButtonTextAlign> {
+ public:
   /**
-   * Set repeatable. If true then the button can be held by the user to trigger click events.
-   * @param repeatable new state
+   * Construct SmallButton
+   * @param name unique name of the element
+   * @param label text rendered on the button
+   * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  void setRepeatable(bool repeatable);
+  SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable = Repeatable::No);
+
+ protected:
+  void renderImpl() override;
+};
+/**
+ * @brief A small button with an arrow.
+ *
+ * A button with an arrow rendered on top of it.
+ */
+class PF_IMGUI_EXPORT ArrowButton
+    : public ButtonBase,
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
+                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
+                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
+                               style::Style::ButtonTextAlign> {
+ public:
+  enum class Dir { Up = ImGuiDir_Up, Left = ImGuiDir_Left, Right = ImGuiDir_Right, Down = ImGuiDir_Down };
+  /**
+   * Construct ArrowButton
+   * @param name unique name of the element
+   * @param direction direction of the arrow rendered on the button
+   * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
+   */
+  ArrowButton(const std::string &name, Dir direction, Repeatable isRepeatable = Repeatable::No);
 
  protected:
   void renderImpl() override;
 
  private:
-  bool repeatable = false;
-  MouseButton clickBtn;
+  Dir dir;
 };
 
 }  // namespace pf::ui::ig
