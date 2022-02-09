@@ -18,14 +18,14 @@ Window::Window(std::string name, std::string label, AllowCollapse allowCollapse,
 Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
-// TODO: fix up Begin, to use LABEL##NAME
 void Window::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
+  const auto idLabel = getLabel() + getName(); // FIXME: this is unnecessarily slow
   RAII endPopup{ImGui::End};
-  if (ImGui::Begin(getLabel().c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
+  if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
