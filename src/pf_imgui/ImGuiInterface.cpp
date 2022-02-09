@@ -56,6 +56,9 @@ void ImGuiInterface::updateConfig() {
       for (const auto &item : serialisedAppBar) { config.insert_or_assign(item.first, item.second); }
     }
   });
+  if (fileDialogBookmark.has_value()) {
+    config.insert_or_assign("file_dialog_bookmark", fileDialogBookmark.value());
+  }
 }
 
 void ImGuiInterface::setStateFromConfig() {
@@ -74,6 +77,9 @@ void ImGuiInterface::setStateFromConfig() {
   };
   if (menuBar != nullptr) { serialiseSubtree(*menuBar); }
   std::ranges::for_each(windows, [&serialiseSubtree](auto &window) { serialiseSubtree(*window); });
+  if (auto iter = config.find("file_dialog_bookmark"); iter != config.end()) {
+    if (auto str = iter->second.as_string(); str != nullptr) { fileDialogBookmark = str->get(); }
+  }
 }
 
 void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
