@@ -57,9 +57,7 @@ MenuCheckboxItem &MenuContainer::addCheckboxItem(const std::string &name, const 
 
 MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return addMenuItem<MenuSeparatorItem>(name); }
 
-void MenuContainer::renderItems() {
-  std::ranges::for_each(getChildren(), &Renderable::render);
-}
+void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
                                    Persistent persistent)

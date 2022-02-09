@@ -12,8 +12,8 @@
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -89,8 +89,7 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
     return *ptr;
   }
 
- protected:
-  void renderItems();
+ protected : void renderItems();
 };
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.
