@@ -18,7 +18,6 @@
 
 namespace pf::ui::ig {
 
-// TODO: allow any element in menu
 /**
  * @brief Menu bar belonging to Window.
  *

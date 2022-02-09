@@ -11,7 +11,6 @@ namespace pf::ui::ig {
 Checkbox::Checkbox(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
     : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
 
-
 void Checkbox::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();

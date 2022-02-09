@@ -12,8 +12,8 @@
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
-#include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -49,7 +49,7 @@ class MenuSeparatorItem;
 /**
  * @brief An item which can contain other menus.
  */
-class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
+class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
  public:
   /**
     * Create an instance of SubMenu and add it to the end if children.
@@ -82,26 +82,14 @@ class PF_IMGUI_EXPORT MenuContainer : public RenderablesContainer {
   MenuSeparatorItem &addSeparator(const std::string &name);
 
   template<std::derived_from<MenuItem> T, typename... Args>
-  T &addItem(Args &&...args) requires std::constructible_from<T, Args...> {
+  T &addMenuItem(Args &&...args) requires std::constructible_from<T, Args...> {
     auto newItem = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = newItem.get();
-    items.emplace_back(std::move(newItem));
+    addChild(std::move(newItem));
     return *ptr;
   }
 
-  /**
-    * Remove item by ID.
-    * @param name ID of the item to be removed
-    */
-  void removeItem(const std::string &name);
-
-  std::vector<Renderable *> getRenderables() override;
-
- protected:
-  void renderItems();
-
- private:
-  std::vector<std::unique_ptr<MenuItem>> items;
+ protected : void renderItems();
 };
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.

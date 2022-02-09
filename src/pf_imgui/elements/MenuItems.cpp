@@ -43,32 +43,21 @@ void SubMenu::renderImpl() {
 SubMenu::SubMenu(const std::string &elementName, const std::string &label) : MenuItem(elementName), Labellable(label) {}
 
 SubMenu &MenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
-  return addItem<SubMenu>(name, caption);
+  return addMenuItem<SubMenu>(name, caption);
 }
 
 MenuButtonItem &MenuContainer::addButtonItem(const std::string &name, const std::string &caption) {
-  return addItem<MenuButtonItem>(name, caption);
+  return addMenuItem<MenuButtonItem>(name, caption);
 }
 
 MenuCheckboxItem &MenuContainer::addCheckboxItem(const std::string &name, const std::string &caption, bool value,
                                                  Persistent persistent) {
-  return addItem<MenuCheckboxItem>(name, caption, value, persistent);
+  return addMenuItem<MenuCheckboxItem>(name, caption, value, persistent);
 }
 
-MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return addItem<MenuSeparatorItem>(name); }
+MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return addMenuItem<MenuSeparatorItem>(name); }
 
-void MenuContainer::removeItem(const std::string &name) {
-  if (const auto iter = std::ranges::find_if(items, [name](auto &item) { return item->getName() == name; });
-      iter != items.end()) {
-    items.erase(iter);
-  }
-}
-void MenuContainer::renderItems() {
-  std::ranges::for_each(items, [](auto &item) { item->render(); });
-}
-std::vector<Renderable *> MenuContainer::getRenderables() {
-  return items | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
-}
+void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
                                    Persistent persistent)

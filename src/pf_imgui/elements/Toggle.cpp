@@ -29,4 +29,4 @@ void Toggle::renderImpl() {
   if (ToggleButton(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 
-}
+}  // namespace pf::ui::ig

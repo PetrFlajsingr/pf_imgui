@@ -12,7 +12,8 @@ namespace pf::ui::ig {
 class WrapLayout : public BoxLayout {
  public:
   WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
+             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
+             Persistent persistent = Persistent::No);
 
   WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size, ShowBorder showBorder,
              Persistent persistent = Persistent::No);
@@ -28,6 +29,6 @@ class WrapLayout : public BoxLayout {
   void renderTopToBottom();
 };
 
-}
+}  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_WRAPLAYOUT_H
