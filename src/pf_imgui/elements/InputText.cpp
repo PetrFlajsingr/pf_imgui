@@ -10,14 +10,15 @@
 
 namespace pf::ui::ig {
 
-InputText::InputText(const std::string &elementName, std::string label, const std::string &text,
+InputText::InputText(const std::string &elementName, std::string label, const std::string &value,
                      TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
                      const Flags<TextFilter> &filters, Persistent persistent)
     : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(""),
-      Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false),
+      Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false), text(value),
       buffer(std::unique_ptr<char[]>(new char[inputLengthLimit + 1])), bufferLength(inputLengthLimit),
       inputType(textInputType) {
-  setTextInner(text);
+  setTextInner(value);
+  setValueInner(text);
   flags |= static_cast<ImGuiInputTextFlags>(*filters);
   if (trigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
 }
@@ -84,7 +85,9 @@ void InputText::setReadOnly(bool isReadOnly) {
     flags &= ~ImGuiInputTextFlags_ReadOnly;
   }
 }
+
 bool InputText::isPassword() const { return password; }
+
 void InputText::setPassword(bool passwd) {
   password = passwd;
   if (password) {
@@ -93,6 +96,7 @@ void InputText::setPassword(bool passwd) {
     flags &= ~ImGuiInputTextFlags_Password;
   }
 }
+
 void InputText::setTextInner(std::string txt) {
   if (txt.size() > bufferLength) { txt = txt.substr(bufferLength); }
   std::ranges::copy(txt, buffer.get());
