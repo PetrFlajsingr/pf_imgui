@@ -16,8 +16,9 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
       filters += desc;
       filters += '{';
       for (const auto &extName : extNames) {
-        filters += fmt::format(".{},", extName.string());
-        if (color.has_value()) { extColors.emplace_back(extName.string(), *color); }
+        const auto extString = fmt::format(".{}", extName.string());
+        filters += fmt::format("{},", extString);
+        if (color.has_value()) { extColors.emplace_back(extString, *color); }
       }
       filters = filters.substr(0, filters.size() - 1);
       filters += "},";
@@ -47,7 +48,7 @@ void FileDialog::renderImpl() {
       break;
   }
   // TODO: more style options and icons
-  std::ranges::for_each(extColors, [this] (const auto &extColor) {
+  std::ranges::for_each(extColors, [this](const auto &extColor) {
     const auto &[ext, color] = extColor;
     fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), color);
   });
