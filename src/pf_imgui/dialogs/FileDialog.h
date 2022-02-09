@@ -46,7 +46,7 @@ enum class FileDialogType { Dir, File };
 /**
  * @brief Dialog for file selection from disk.
  *
- * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::openFileDialog(...) or ImGuiInterface::openDirDialog(...).
+ * This dialog is shown on top of the other windows. It should be created via ImGuiInterface::buildFileDialog(...).
  *
  * Dialogs are invalidated when isDone() == true.
  *
