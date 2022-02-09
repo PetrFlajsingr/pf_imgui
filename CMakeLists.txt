@@ -197,6 +197,7 @@ set(SOURCES
         src/pf_imgui/dialogs/CommandPaletteWindow.cpp
         src/pf_imgui/elements/CommandPalette.cpp
         src/pf_imgui/elements/Toggle.cpp
+        src/pf_imgui/layouts/WrapLayout.cpp
         )
 
 set(INCLUDES
@@ -330,6 +331,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/CommandPaletteWindow.h
         src/pf_imgui/elements/CommandPalette.h
         src/pf_imgui/elements/Toggle.h
+        src/pf_imgui/layouts/WrapLayout.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
