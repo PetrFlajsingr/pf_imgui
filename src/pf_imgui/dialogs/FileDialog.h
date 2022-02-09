@@ -119,11 +119,6 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
    */
   void prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings);
 
-  /**
-   * Set prepared filter strings to file dialog instance.
-   */
-  void setExtInfos();
-
   std::string filters;
   std::vector<std::pair<std::string, ImVec4>> extColors;
 
