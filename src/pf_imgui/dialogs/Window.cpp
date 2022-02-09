@@ -23,7 +23,7 @@ void Window::renderImpl() {
   auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
-  const auto idLabel = getLabel() + getName(); // FIXME: this is unnecessarily slow
+  const auto idLabel = fmt::format("{}##{}", getLabel(), getName()); // FIXME: this is unnecessarily slow
   RAII endPopup{ImGui::End};
   if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
