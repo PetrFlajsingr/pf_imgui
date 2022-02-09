@@ -13,5 +13,6 @@
 #include "GridLayout.h"
 #include "StackedLayout.h"
 #include "StretchLayout.h"
+#include "WrapLayout.h"
 
 #endif  // PF_IMGUI_LAYOUTS_LAYOUTS_H
