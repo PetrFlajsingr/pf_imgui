@@ -114,6 +114,12 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
    */
   [[nodiscard]] bool isDone() const;
 
+#ifdef USE_BOOKMARK
+  [[nodiscard]] std::string serializeBookmark();
+
+  void deserializeBookmark(const std::string &bookmarkStr);
+#endif
+
  protected:
   void renderImpl() override;
 
