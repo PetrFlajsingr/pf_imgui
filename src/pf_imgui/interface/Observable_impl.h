@@ -50,9 +50,8 @@ class PF_IMGUI_EXPORT Observable_impl {
     listeners.emplace_back(id, std::forward<decltype(fnc)>(fnc));
     return Subscription([id, this, observableExists = exists] {
       if (!*observableExists) { return; }
-      std::erase_if(listeners, [id] (const auto &listener) {
-        return listener.first == id;
-      });
+      auto [removeB, removeE] = std::ranges::remove(listeners, id, &ListenerRecord::first);
+      listeners.erase(removeB, removeE);
     });
   }
 
