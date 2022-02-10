@@ -1,9 +1,9 @@
 /**
- * @file Combobox.h
- * @brief Selectable combobox.
- * @author Petr Flajšingr
- * @date 4.6.21
- */
+* @file Combobox.h
+* @brief Selectable combobox.
+* @author Petr Flajšingr
+* @date 4.6.21
+*/
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
@@ -71,25 +71,19 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomCombobox::setPreviewValue;
   using CustomCombobox::setShownItemCount;
 
-  template<std::ranges::range R>
-  requires(std::convertible_to<std::ranges::range_value_t<R>, T> &&std::is_default_constructible_v<T>
-               &&std::copy_constructible<T>) struct Config {
+  struct Config {
     using Parent = Combobox;
     std::string_view name;
     std::string_view label;
     std::string preview;
-    R &&items = std::vector<T>{};
     ComboBoxCount shownItemCount = ComboBoxCount::Items8;
     Persistent persistent = Persistent::Yes;
   };
 
-  template<std::ranges::range R>
-  explicit Combobox(Config<R> &&config)
+  explicit Combobox(Config &&config)
       : CustomCombobox(std::string{config.name}, std::string{config.label}, details::ComboboxRowFactory<T>{},
                        std::string{config.preview}, config.shownItemCount),
-        ValueObservable<T>(), Savable(config.persistent), DragSource<T>(false) {
-    addItems(std::forward<decltype(config.items)>(config.items));
-  }
+        ValueObservable<T>(), Savable(config.persistent), DragSource<T>(false) {}
   /**
    * Construct Combobox.
    * @param elementName ID of the element
