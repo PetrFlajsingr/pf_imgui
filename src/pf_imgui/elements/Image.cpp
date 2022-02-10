@@ -7,6 +7,10 @@
 
 namespace pf::ui::ig {
 
+Image::Image(Image::Config &&config)
+    : ItemElement(std::string{config.name}), Resizable(config.size), isButton_(config.isButton == IsButton::Yes),
+      textureId(config.textureId), uvMappingProvider(std::move(config.uvTextureMappingProvider)) {}
+
 Image::Image(const std::string &elementName, ImTextureID imTextureId, Size size, IsButton isBtn,
              Image::UvMappingProvider uvTextureMappingProvider)
     : ItemElement(elementName), Resizable(size), isButton_(isBtn == IsButton::Yes), textureId(imTextureId),
@@ -37,7 +41,6 @@ void Image::renderImpl() {
 }
 
 void Image::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
-
 bool Image::isButton() const { return isButton_; }
 
 //bool Image::isPixelInspectionTooltipEnabled() const {

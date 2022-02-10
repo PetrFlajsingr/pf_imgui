@@ -36,6 +36,16 @@ class PF_IMGUI_EXPORT Image
   */
   using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
 
+  struct Config {
+    using Parent = Image;
+    std::string_view name;
+    ImTextureID textureId;
+    Size size = Size::Auto();
+    IsButton isButton = IsButton::No;
+    UvMappingProvider uvTextureMappingProvider = [] { return std::pair(ImVec2{0, 0}, ImVec2{1, 1}); };
+  };
+
+  explicit Image(Config &&config);
   /**
   * Construct Image.
   * @param elementName ID of the element
