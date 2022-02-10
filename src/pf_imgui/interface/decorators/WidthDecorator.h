@@ -23,6 +23,11 @@ namespace pf::ui::ig {
 template<std::derived_from<ItemElement> T>
 requires(!std::derived_from<T, Resizable>) class PF_IMGUI_EXPORT WidthDecorator : public T {
  public:
+  struct Config {
+    using Parent = WidthDecorator;
+    typename T::Config config;
+    operator typename T::Config() { return config; }
+  };
   /**
    * Construct WidthDecorator.
    * @tparam Args argument types for T's constructor
@@ -31,8 +36,8 @@ requires(!std::derived_from<T, Resizable>) class PF_IMGUI_EXPORT WidthDecorator 
    */
   template<typename... Args>
   requires std::constructible_from<T, std::string, Args...>
-  explicit WidthDecorator(const std::string &elementName, Width elementWidth, Args &&...args)
-      : T(elementName, std::forward<Args>(args)...), width(elementWidth) {}
+  explicit WidthDecorator(Width elementWidth, Args &&...args)
+      : T(std::forward<Args>(args)...), width(elementWidth) {}
 
   /**
    * Get current element width.
