@@ -121,7 +121,7 @@ void ImGuiInterface::removePaletteWindow(const std::string &windowName) {
 
 void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
   auto remove = std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
-  commandPalettes.erase(remove.begin());
+  commandPalettes.erase(remove.begin(), remove.end());
 }
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
