@@ -59,10 +59,10 @@ void Memo::rebuildPanel() {
     controlsLayout = std::make_unique<BoxLayout>(getName() + "button_filter_panel", LayoutDirection::LeftToRight,
                                                  Size{Width::Auto(), 20});
     if (buttonsEnabled) {
-      controlsLayout->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] {
+      controlsLayout->createChild(Button::Config{getName() + "clear_btn", "Clear"}).addClickListener([this] {
         clearRecords();
       });
-      controlsLayout->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
+      controlsLayout->createChild(Button::Config{getName() + "copy_btn", "Copy"}).addClickListener([this] {
         ImGui::SetClipboardText(std::string{getText()}.c_str());
       });
     }

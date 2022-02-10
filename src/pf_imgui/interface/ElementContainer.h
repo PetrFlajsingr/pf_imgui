@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
 
   template<typename T>
   requires requires { typename T::Parent; }
-  std::derived_from<Element> auto &createChildConf(T &&config) requires(
+  std::derived_from<Element> auto &createChild(T &&config) requires(
       std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
     auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
@@ -87,6 +87,21 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
     }
 #endif
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    insertChild(std::move(child), index);
+    return *ptr;
+  }
+
+  template<typename T>
+  requires requires { typename T::Parent; }
+  std::derived_from<Element> auto &createChildAtIndex(std::size_t index, T &&config) requires(
+      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
+#ifndef _MSC_VER  // TODO: MSVC internal error
+    if (const auto iter = children.find(name); iter != children.end()) {
+      throw DuplicateIdException("{} already present in ui", name);
+    }
+#endif
+    auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     insertChild(std::move(child), index);
     return *ptr;

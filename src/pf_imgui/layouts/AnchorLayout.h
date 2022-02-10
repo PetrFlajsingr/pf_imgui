@@ -72,7 +72,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
     *
     * @throws DuplicateIdException when an ID is already present in the container
     */
-  template<typename T, typename... Args>
+  template<typename T, typename... Args> // TODO: createChild for Configs
   requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
   auto &createChild(ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
 #ifndef _MSC_VER  // TODO: MSVC c3779
@@ -109,6 +109,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
                                    addToWidth, addToHeight);
     return *ptr;
   }
+
   void setSize(const Size &s) override;
 
   /**

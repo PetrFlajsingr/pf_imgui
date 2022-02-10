@@ -100,7 +100,19 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
     auto child = std::make_unique<CreateType>(position, std::forward<Args>(args)...);
     const auto ptr = child.get();
-    children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
+    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
+    return *ptr;
+  }
+
+  template<typename T>
+  requires requires { typename T::Parent; }
+  std::derived_from<Element> auto &createChild(ImVec2 position, T &&config) requires(
+      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
+    constexpr auto IsPositionable = std::derived_from<T, Positionable>;
+    using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
+    auto child = std::make_unique<CreateType>(position, std::forward<T>(config));
+    const auto ptr = child.get();
+    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
     return *ptr;
   }
 

@@ -21,6 +21,9 @@ RAII ButtonBase::setButtonRepeat() {
   return RAII{ImGui::PopButtonRepeat};
 }
 
+InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
+    : ButtonBase(std::string{config.name}, config.repeatable), Resizable(config.size), clickBtn(config.clickButton) {}
+
 InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, MouseButton clickButton,
                                  Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), Resizable(s), clickBtn(clickButton) {}
@@ -29,6 +32,10 @@ void InvisibleButton::renderImpl() {
   auto repeat = setButtonRepeat();
   if (ImGui::InvisibleButton(getName().c_str(), getSize().asImVec(), static_cast<int>(clickBtn))) { notifyOnClick(); }
 }
+
+Button::Button(Button::Config &&config)
+    : ButtonBase(std::string{config.name}, config.repeatable), Labellable(std::string{config.label}),
+      Resizable(config.size) {}
 
 Button::Button(const std::string &name, const std::string &label, const Size &s, Repeatable isRepeatable)
     : ButtonBase(name, isRepeatable), Labellable(label), Resizable(s) {}
@@ -40,6 +47,9 @@ void Button::renderImpl() {
   if (ImGui::Button(getLabel().c_str(), getSize().asImVec())) { notifyOnClick(); }
 }
 
+SmallButton::SmallButton(SmallButton::Config &&config)
+    : ButtonBase(std::string{config.name}, config.repeatable), Labellable(std::string{config.label}) {}
+
 SmallButton::SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable)
     : ButtonBase(name, isRepeatable), Labellable(label) {}
 
@@ -50,6 +60,9 @@ void SmallButton::renderImpl() {
   if (ImGui::SmallButton(getLabel().c_str())) { notifyOnClick(); }
 }
 
+ArrowButton::ArrowButton(ArrowButton::Config &&config)
+    : ButtonBase(std::string{config.name}, config.repeatable), dir(config.direction) {}
+
 ArrowButton::ArrowButton(const std::string &name, ArrowButton::Dir direction, Repeatable isRepeatable)
     : ButtonBase(name, isRepeatable), dir(direction) {}
 
@@ -59,4 +72,5 @@ void ArrowButton::renderImpl() {
   auto repeat = setButtonRepeat();
   if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { notifyOnClick(); }
 }
+
 }  // namespace pf::ui::ig
