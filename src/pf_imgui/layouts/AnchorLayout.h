@@ -73,8 +73,8 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
     * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
-  auto &createChild(const std::string &name, ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+  auto &createChild(ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
 #ifndef _MSC_VER  // TODO: MSVC c3779
     if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
           return child->getName() == name;
@@ -84,7 +84,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
 #endif
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
-    auto child = std::make_unique<CreateType>(position, name, std::forward<Args>(args)...);
+    auto child = std::make_unique<CreateType>(position, std::forward<Args>(args)...);
     const auto ptr = child.get();
     std::function<void(float)> addToHeight = [](float) {};
     std::function<void(float)> addToWidth = [](float) {};

@@ -39,19 +39,17 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   * @throws DuplicateIdException when an ID is already present in the container
   * @tparam T type of created Element
   * @tparam Args arguments to pass to the Ts constructor after its name
-  * @param name ID of the newly created element
   * @param args arguments to pass to the Ts constructor after its nam
   * @return reference to the newly created Element
   */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
-  createChild(std::string name, Args &&...args) {
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChild(Args &&...args) {
 #ifndef _MSC_VER  // TODO: MSVC internal error
     if (const auto iter = children.find(name); iter != children.end()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
 #endif
-    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     addChild(std::move(child));
     return *ptr;
@@ -71,14 +69,14 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  * @throws InvalidArgumentException when index is out of bounds
  */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
-  createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChildAtIndex(std::size_t index,
+                                                                                                      Args &&...args) {
 #ifndef _MSC_VER  // TODO: MSVC internal error
     if (const auto iter = children.find(name); iter != children.end()) {
       throw DuplicateIdException("{} already present in ui", name);
     }
 #endif
-    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     insertChild(std::move(child), index);
     return *ptr;

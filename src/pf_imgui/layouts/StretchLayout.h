@@ -67,10 +67,9 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
    *
    */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, std::string,
-                                                                                                       Args...>
-      T &createChild(std::string name, Args &&...args) {
-    auto origChild = std::make_unique<T>(name, std::forward<Args>(args)...);
+  requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, Args...> T &
+  createChild(Args &&...args) {
+    auto origChild = std::make_unique<T>(std::forward<Args>(args)...);
     auto childPtr = origChild.get();
     child = std::move(origChild);
     renderableChild = dynamic_cast<Renderable *>(child.get());
