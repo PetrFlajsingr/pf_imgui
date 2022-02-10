@@ -55,6 +55,7 @@ enum class FileDialogType { Dir, File };
  * @todo: key navigation
  * @todo: ImGuiFileDialogFlags_ConfirmOverwrite
  * @todo: thumbnails
+ * @todo: custom pane
  */
 class PF_IMGUI_EXPORT FileDialog : public Renderable,
                                    public Labellable,
