@@ -70,6 +70,26 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomCombobox::setItems;
   using CustomCombobox::setPreviewValue;
   using CustomCombobox::setShownItemCount;
+
+  template<std::ranges::range R>
+  requires(std::convertible_to<std::ranges::range_value_t<R>, T> &&std::is_default_constructible_v<T>
+               &&std::copy_constructible<T>) struct Config {
+    using Parent = Combobox;
+    std::string_view name;
+    std::string_view label;
+    std::string preview;
+    R &&items = std::vector<T>{};
+    ComboBoxCount shownItemCount = ComboBoxCount::Items8;
+    Persistent persistent = Persistent::Yes;
+  };
+
+  template<std::ranges::range R>
+  explicit Combobox(Config<R> &&config)
+      : CustomCombobox(std::string{config.name}, std::string{config.label}, details::ComboboxRowFactory<T>{},
+                       std::string{config.preview}, config.shownItemCount),
+        ValueObservable<T>(), Savable(config.persistent), DragSource<T>(false) {
+    addItems(std::forward<decltype(config.items)>(config.items));
+  }
   /**
    * Construct Combobox.
    * @param elementName ID of the element
@@ -79,11 +99,12 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * @param showItemCount amount of items shown when open
    * @param persistent enable/disable disk state saving
    */
-  Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
-           std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
-           Persistent persistent =
-               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
+  [[deprecated("Use Config constructor")]] Combobox(
+      const std::string &elementName, const std::string &label, const std::string &prevValue,
+      std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
+      Persistent persistent =
+          Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+                                       &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : CustomCombobox(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
         ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
