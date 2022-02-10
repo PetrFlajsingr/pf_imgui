@@ -64,7 +64,10 @@ using InputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_L
 * @tparam T underlying type
 */
 template<typename T>
-struct PF_IMGUI_EXPORT InputData {};
+struct PF_IMGUI_EXPORT InputData {
+  InputData(auto...) {}
+  static constexpr const char *defaultFormat() { return ""; }
+};
 /**
 * @brief Storage structure for integer based types.
 */
@@ -146,8 +149,36 @@ class PF_IMGUI_EXPORT Input
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
   using Data = details::InputData<details::InputUnderlyingType<T>>;
   Data data;
+  struct Dummy {
+    Dummy(auto) {}
+    operator details::InputUnderlyingType<T>() {
+      return {};
+    }
+    operator std::string() {
+      return {};
+    }
+  };
 
  public:
+  struct Config {
+    using Parent = Input;
+
+    using ValueType = std::conditional_t<OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST>, T, Dummy>;
+    using FormatString =
+        std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>, std::string, Dummy>;
+
+    std::string_view name;
+    std::string_view label;
+    [[no_unique_address]] ValueType step{};
+    [[no_unique_address]] ValueType fastStep{};
+    T value{};
+    [[no_unique_address]] FormatString format = Data::defaultFormat();
+    Persistent persistent = Persistent::No;
+  };
+  explicit Input(Config &&config)
+      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), data(config.step, config.fastStep),
+        format(std::move(static_cast<std::string>(config.format))) {}
   /**
   * Construct Input. For the following types: int.
   * @param elementName ID of the input
