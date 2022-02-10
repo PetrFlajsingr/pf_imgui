@@ -71,8 +71,8 @@ class PF_IMGUI_EXPORT ColorChooser
    * @param persistent allow state saving to disk
    * @param value starting value
    */
-  [[deprecated("Use Config constructor")]] ColorChooser(const std::string &elementName, const std::string &label,
-                                                        T value = T{}, Persistent persistent = Persistent::No)
+  ColorChooser(const std::string &elementName, const std::string &label, T value = T{},
+               Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {}
 

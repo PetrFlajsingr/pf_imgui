@@ -7,6 +7,9 @@
 
 namespace pf::ui::ig {
 
+DockSpace::DockSpace(Config &&config)
+    : Element(std::string{config.name}), Resizable(config.size), flags(*config.flags) {}
+
 DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
     : Element(name), Resizable(s), flags(*dockFlags) {}
 
@@ -27,7 +30,6 @@ void DockSpace::renderImpl() {
   id = ImGui::GetID(getName().c_str());
   ImGui::DockSpace(id, getSize().asImVec(), flags);
 }
-
 DockSpace::Id DockSpace::getDockId() const { return id; }
 
 }  // namespace pf::ui::ig

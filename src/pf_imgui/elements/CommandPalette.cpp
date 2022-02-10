@@ -6,6 +6,9 @@
 
 namespace pf::ui::ig {
 
+CommandPalette::CommandPalette(CommandPalette::Config &&config)
+    : Element(std::string{config.name}), context(ImCmd::CreateContext()) {}
+
 CommandPalette::CommandPalette(const std::string &name) : Element(name), context(ImCmd::CreateContext()) {}
 
 CommandPalette::~CommandPalette() { ImCmd::DestroyContext(context); }
@@ -24,7 +27,6 @@ void CommandPalette::setSearchText(const std::string &text) {
   ImCmd::SetCurrentContext(context);
   ImCmd::SetNextCommandPaletteSearch(text);
 }
-
 void CommandPalette::renderImpl() {
   ImCmd::CommandPalette(getName().c_str());
   if (ImCmd::IsAnyItemSelected()) { observableInteract.notify(); }

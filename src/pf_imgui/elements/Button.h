@@ -120,9 +120,8 @@ class PF_IMGUI_EXPORT Button
    * @param s size of the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  [[deprecated("Use Config constructor")]] Button(const std::string &name, const std::string &label,
-                                                  const Size &s = Size::Auto(),
-                                                  Repeatable isRepeatable = Repeatable::No);
+  Button(const std::string &name, const std::string &label, const Size &s = Size::Auto(),
+         Repeatable isRepeatable = Repeatable::No);
 
  protected:
   void renderImpl() override;

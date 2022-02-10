@@ -21,6 +21,11 @@ namespace pf::ui::ig {
  */
 class CommandPalette : public Element {
  public:
+  struct Config {
+    using Parent = CommandPalette;
+    std::string_view name;
+  };
+  explicit CommandPalette(Config &&config);
   /**
    * Construct CommandPalette
    * @param name unique name of the element

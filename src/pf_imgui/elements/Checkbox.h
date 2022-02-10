@@ -49,7 +49,7 @@ class PF_IMGUI_EXPORT Checkbox
    * @param persistent allow value saving to disk
    * @param value starting value
    */
-  [[deprecated("Use Config constructor")]] Checkbox(const std::string &elementName, const std::string &label, bool value = false,
+  Checkbox(const std::string &elementName, const std::string &label, bool value = false,
            Persistent persistent = Persistent::No);
   /**
    * Set if the checkbox is selected or not.
