@@ -12,6 +12,7 @@
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/meta.h>
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/decorators/PositionDecorator.h>
 #include <range/v3/view/addressof.hpp>
@@ -104,12 +105,10 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
     return *ptr;
   }
 
-  template<typename T>
-  requires requires { typename T::Parent; }
-  std::derived_from<Element> auto &createChild(ImVec2 position, T &&config) requires(
-      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
-    constexpr auto IsPositionable = std::derived_from<T, Positionable>;
-    using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
+  template<ElementConstructConfig T>
+  typename T::Parent &createChild(ImVec2 position, T &&config) {
+    constexpr auto IsPositionable = std::derived_from<typename T::Parent, Positionable>;
+    using CreateType = std::conditional_t<IsPositionable, typename T::Parent, PositionDecorator<typename T::Parent>>;
     auto child = std::make_unique<CreateType>(position, std::forward<T>(config));
     const auto ptr = child.get();
     children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));

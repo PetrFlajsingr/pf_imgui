@@ -15,6 +15,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
 #include <string>
 #include <utility>
@@ -137,10 +138,8 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     return *ptr;
   }
 
-  template<typename T>
-  requires requires { typename T::Parent; }
-  std::derived_from<Element> auto &createChild(T &&config) requires(
-      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
+  template<ElementConstructConfig T>
+  typename T::Parent &createChild(T &&config) {
     auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     pushChild(std::move(child));
@@ -176,10 +175,8 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     return *ptr;
   }
 
-  template<typename T>
-  requires requires { typename T::Parent; }
-  std::derived_from<Element> auto &createChildAtIndex(std::size_t index, T &&config) requires(
-      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
+  template<ElementConstructConfig T>
+  typename T::Parent &createChildAtIndex(std::size_t index, T &&config) {
 #ifndef _MSC_VER  // TODO: MSVC internal error
     if (const auto iter = children.find(name); iter != children.end()) {
       throw DuplicateIdException("{} already present in ui", name);
@@ -191,7 +188,9 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     return *ptr;
   }
 
- protected : void renderImpl() override;
+ protected:
+  void renderImpl() override;
+
  private:
   LayoutDirection layoutDirection;
   std::vector<std::unique_ptr<Element>> children;

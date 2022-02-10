@@ -75,7 +75,7 @@ void Memo::rebuildPanel() {
             };
           });
     }
-    controlsLayout->createChild<Checkbox>(getName() + "scroll_checkbox", "Scroll to bottom")
+    controlsLayout->createChild(Checkbox::Config{getName() + "scroll_checkbox", "Scroll to bottom"})
         .addValueListener([this](auto newVal) { scrollToBottom = newVal; });
   }
   textArea = &textAreaLayout.createChild<Text>(getName() + "memo_text", "Memo");

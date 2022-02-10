@@ -34,6 +34,14 @@ class PF_IMGUI_EXPORT Checkbox
                                style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  struct Config {
+    using Parent = Checkbox;
+    std::string_view name;
+    std::string_view label;
+    bool checked = false;
+    Persistent persistent = Persistent::No;
+  };
+  explicit Checkbox(Config &&config);
   /**
    * Construct Checkbox.
    * @param elementName ID of the checkbox
@@ -41,7 +49,7 @@ class PF_IMGUI_EXPORT Checkbox
    * @param persistent allow value saving to disk
    * @param value starting value
    */
-  Checkbox(const std::string &elementName, const std::string &label, bool value = false,
+  [[deprecated("Use Config constructor")]] Checkbox(const std::string &elementName, const std::string &label, bool value = false,
            Persistent persistent = Persistent::No);
   /**
    * Set if the checkbox is selected or not.

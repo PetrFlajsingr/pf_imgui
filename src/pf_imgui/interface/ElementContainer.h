@@ -13,6 +13,7 @@
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
+#include <pf_imgui/meta.h>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <unordered_map>
@@ -55,10 +56,8 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
     return *ptr;
   }
 
-  template<typename T>
-  requires requires { typename T::Parent; }
-  std::derived_from<Element> auto &createChild(T &&config) requires(
-      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
+  template<ElementConstructConfig T>
+  std::derived_from<Element> auto &createChild(T &&config) {
     auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     addChild(std::move(child));
@@ -92,10 +91,8 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
     return *ptr;
   }
 
-  template<typename T>
-  requires requires { typename T::Parent; }
-  std::derived_from<Element> auto &createChildAtIndex(std::size_t index, T &&config) requires(
-      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
+  template<ElementConstructConfig T>
+  std::derived_from<Element> auto &createChildAtIndex(std::size_t index, T &&config) {
 #ifndef _MSC_VER  // TODO: MSVC internal error
     if (const auto iter = children.find(name); iter != children.end()) {
       throw DuplicateIdException("{} already present in ui", name);
