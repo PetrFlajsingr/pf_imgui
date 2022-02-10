@@ -7,6 +7,10 @@
 
 namespace pf::ui::ig {
 
+Expander::Expander(Expander::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}),
+      Collapsible(config.allowCollapse, config.persistent) {}
+
 Expander::Expander(const std::string &elementName, const std::string &label, Persistent persistent,
                    AllowCollapse allowCollapse)
     : ItemElement(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
