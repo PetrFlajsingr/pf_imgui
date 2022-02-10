@@ -54,6 +54,16 @@ class PF_IMGUI_EXPORT ColorChooser
                                style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  struct Config {
+    using Parent = ColorChooser;
+    std::string_view name;
+    std::string_view label;
+    T value{};
+    Persistent persistent = Persistent::No;
+  };
+  explicit ColorChooser(Config &&config)
+      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false) {}
   /**
    * Construct ColorChooser.
    * @param elementName ID of the element
@@ -61,8 +71,8 @@ class PF_IMGUI_EXPORT ColorChooser
    * @param persistent allow state saving to disk
    * @param value starting value
    */
-  ColorChooser(const std::string &elementName, const std::string &label, T value = T{},
-               Persistent persistent = Persistent::No)
+  [[deprecated("Use Config constructor")]] ColorChooser(const std::string &elementName, const std::string &label,
+                                                        T value = T{}, Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {}
 

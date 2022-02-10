@@ -26,6 +26,12 @@ concept ElementConstructConfig = requires {
 }
 &&std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>;
 
+template<typename T>
+concept ConfigConstructible = requires {
+  typename T::Config;
+}
+&&ElementConstructConfig<typename T::Config>;
+
 /**
  * Check if the type is a specialization of ValueObservable.
  * @tparam T type to be checked
