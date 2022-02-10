@@ -55,6 +55,16 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
     return *ptr;
   }
 
+  template<typename T>
+  requires requires { typename T::Parent; }
+  std::derived_from<Element> auto &createChildConf(T &&config) requires(
+      std::derived_from<typename T::Parent, Element> &&std::constructible_from<typename T::Parent, T>) {
+    auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
+    const auto ptr = child.get();
+    addChild(std::move(child));
+    return *ptr;
+  }
+
   /**
  * Create a child and append it to the end of children.
  *
