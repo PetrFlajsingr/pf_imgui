@@ -36,6 +36,14 @@ class PF_IMGUI_EXPORT FlameGraph
                                style::ColorOf::FrameBackground, style::ColorOf::Border, style::ColorOf::BorderShadow,
                                style::ColorOf::Text> {
  public:
+  struct Config {
+    using Parent = FlameGraph;
+    std::string_view name;
+    std::string_view label;
+    Size size = Size::Auto();
+    std::optional<std::string> overlay = std::nullopt;
+  };
+  explicit FlameGraph(Config &&config);
   /**
    * Construct FlameGraph.
    * @param elementName ID of the element
