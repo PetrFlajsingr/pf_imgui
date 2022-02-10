@@ -56,6 +56,9 @@ void ImGuiInterface::updateConfig() {
       for (const auto &item : serialisedAppBar) { config.insert_or_assign(item.first, item.second); }
     }
   });
+  if (fileDialogBookmark.has_value()) {
+    config.insert_or_assign("file_dialog_bookmark", fileDialogBookmark.value());
+  }
 }
 
 void ImGuiInterface::setStateFromConfig() {
@@ -74,9 +77,15 @@ void ImGuiInterface::setStateFromConfig() {
   };
   if (menuBar != nullptr) { serialiseSubtree(*menuBar); }
   std::ranges::for_each(windows, [&serialiseSubtree](auto &window) { serialiseSubtree(*window); });
+  if (auto iter = config.find("file_dialog_bookmark"); iter != config.end()) {
+    if (auto str = iter->second.as_string(); str != nullptr) { fileDialogBookmark = str->get(); }
+  }
 }
 
-void ImGuiInterface::addFileDialog(FileDialog &&dialog) { fileDialogs.push_back(std::move(dialog)); }
+void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
+  auto &dialogRef = fileDialogs.emplace_back(std::move(dialog));
+  if (fileDialogBookmark.has_value()) { dialogRef.deserializeBookmark(*fileDialogBookmark); }
+}
 
 FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) { return FileDialogBuilder(this, type); }
 
@@ -84,6 +93,7 @@ void ImGuiInterface::renderDialogs() {
   std::ranges::for_each(fileDialogs, &FileDialog::render);
   if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
       iter != fileDialogs.end()) {
+    fileDialogBookmark = iter->serializeBookmark();
     fileDialogs.erase(iter);
   }
   std::ranges::for_each(dialogs, [](auto &dialog) { dialog->render(); });
