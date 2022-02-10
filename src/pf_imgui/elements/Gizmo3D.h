@@ -47,6 +47,14 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
   using ValueType = details::GizmoValueType<Type>;
 
  public:
+  struct Config {
+    using Parent = Gizmo3D;
+    std::string_view name;
+    ValueType value;
+    Size size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE};
+  };
+  explicit Gizmo3D(Config &&config)
+      : Element(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value) {}
   /**
    * Construct Gizmo3D.
    * @param name unique name of the element

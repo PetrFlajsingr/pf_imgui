@@ -23,6 +23,7 @@ void FlameGraph::renderImpl() {
 void FlameGraph::setOverlay(std::string text) { overlay = std::move(text); }
 
 void FlameGraph::disableOverlay() { overlay = std::nullopt; }
+
 void FlameGraph::setSamples(const std::vector<ImGuiWidgetFlameGraph::FlameGraphSample> &newSamples) {
   samples = newSamples;
 }
