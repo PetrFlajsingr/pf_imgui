@@ -31,6 +31,13 @@ class PF_IMGUI_EXPORT Text
       public DropTarget<std::string>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget> {
  public:
+  struct Config {
+    using Parent = Text;
+    std::string_view name;
+    std::string text{};
+    std::optional<ImVec4> color = std::nullopt;
+  };
+  explicit Text(Config &&config);
   /**
   * Construct Text.
   * @param elementName ID of the element
