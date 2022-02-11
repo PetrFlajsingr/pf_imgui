@@ -10,6 +10,11 @@
 
 namespace pf::ui::ig {
 
+BoxLayout::BoxLayout(BoxLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent),
+      layoutDirection(config.layoutDirection) {}
+
 BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
                      AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), layoutDirection(layoutDirection) {}
