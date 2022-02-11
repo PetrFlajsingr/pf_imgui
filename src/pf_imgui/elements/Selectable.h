@@ -35,6 +35,15 @@ class PF_IMGUI_EXPORT Selectable
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::SelectableTextAlign> {
  public:
+  struct Config {
+    using Parent = Selectable;
+    std::string_view name;
+    std::string_view label;
+    bool selected = false;
+    Size size = Size::Auto();
+    Persistent persistent = Persistent::No;
+  };
+  explicit Selectable(Config &&config);
   /**
    * Construct Selectable.
    * @param elementName ID of the element
