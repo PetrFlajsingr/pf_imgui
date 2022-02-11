@@ -24,6 +24,15 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
  public:
+  struct Config {
+    using Parent = StackedLayout;
+    std::string_view name;
+    Size size;
+    AllowCollapse allowCollapse = AllowCollapse::No;
+    ShowBorder showBorder = ShowBorder::No;
+    Persistent persistent = Persistent::No;
+  };
+  explicit StackedLayout(Config &&config);
   /**
    * @brief A container for data within the layout.
    */

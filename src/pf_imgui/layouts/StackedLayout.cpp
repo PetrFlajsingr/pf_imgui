@@ -12,6 +12,10 @@
 
 namespace pf::ui::ig {
 
+StackedLayout::StackedLayout(StackedLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent) {}
+
 StackedLayout::Stack::Stack(StackedLayout &parent) : parent(parent) {}
 
 void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
