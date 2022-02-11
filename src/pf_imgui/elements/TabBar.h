@@ -36,6 +36,14 @@ enum class TabMod {
  */
 class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public Clickable {
  public:
+  struct Config {
+    using Parent = TabButton;
+    std::string_view name;
+    std::string_view label;
+    Flags<TabMod> mods{};
+  };
+  explicit TabButton(Config &&config);
+
   TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{});
 
   void setMods(const Flags<TabMod> &mods);
@@ -54,6 +62,14 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public 
 */
 class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  public:
+  struct Config {
+    using Parent = Tab;
+    std::string_view name;
+    std::string_view label;
+    Flags<TabMod> mods{};
+    bool closeable = false;
+  };
+  explicit Tab(Config &&config);
   /**
   * Construct Tab.
   * @param elementName ID of the Tab
@@ -114,6 +130,12 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
     ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown,
     Scroll = ImGuiTabBarFlags_FittingPolicyScroll
   };
+  struct Config {
+    using Parent = TabBar;
+    std::string_view name;
+    bool allowTabList = false;
+  };
+  explicit TabBar(Config &&config);
   /**
   * Construct TabBar.
   * @param elementName ID of the TabBar

@@ -9,6 +9,9 @@
 
 namespace pf::ui::ig {
 
+TabButton::TabButton(TabButton::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), flags(*config.mods) {}
+
 TabButton::TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods)
     : ItemElement(elementName), Labellable(label), flags(*mods) {}
 
@@ -17,6 +20,10 @@ void TabButton::renderImpl() {
 }
 
 void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
+
+Tab::Tab(Tab::Config &&config)
+    : TabButton(std::string{config.name}, std::string{config.label}, config.mods),
+      open(config.closeable ? new bool{true} : nullptr) {}
 
 Tab::Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods, bool closeable)
     : TabButton(elementName, label, mods), open(closeable ? new bool{true} : nullptr) {}
@@ -55,6 +62,8 @@ void Tab::setOpen(bool newOpen) {
 bool Tab::isSelected() const { return selected; }
 
 void Tab::setSelected() { setSelectedInNextFrame = true; }
+
+TabBar::TabBar(TabBar::Config &&config) : Element(std::string{config.name}) { setTabListAllowed(config.allowTabList); }
 
 TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elementName) {
   setTabListAllowed(allowTabList);
