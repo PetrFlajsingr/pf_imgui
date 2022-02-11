@@ -20,10 +20,17 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT PopupMenu : public Element, public MenuContainer {
  public:
+  /**
+   * @brief Struct for construction of PopupMenu.
+   */
   struct Config {
     using Parent = PopupMenu;
-    std::string_view name;
+    std::string_view name; /*!< Unique name of the element */
   };
+  /**
+   * Construct PopupMenu
+   * @param config construction args @see PopupMenu::Config
+   */
   explicit PopupMenu(Config &&config);
   /**
    * Construct PopupMenu.

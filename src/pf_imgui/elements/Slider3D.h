@@ -37,16 +37,23 @@ class PF_IMGUI_EXPORT Slider3D
                                style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Struct for construction of Slider3D.
+   */
   struct Config {
     using Parent = Slider3D;
-    std::string_view name;
-    std::string_view label;
-    glm::vec3 min;
-    glm::vec3 max;
-    glm::vec3 value{};
-    Size size = Size::Auto();
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the element */
+    glm::vec3 min;                          /*!< Minimum allowed value */
+    glm::vec3 max;                          /*!< Maximum allowed value */
+    glm::vec3 value{};                      /*!< Initial value */
+    Size size = Size::Auto();               /*!< Size of the element */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Slider3D
+   * @param config construction args @see Slider3D::Config
+   */
   explicit Slider3D(Config &&config)
       : ItemElement(std::string{config.name}),
         Labellable(std::string{config.label}), ValueObservable<glm::vec3>(config.value),

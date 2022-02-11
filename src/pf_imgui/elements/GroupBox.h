@@ -22,12 +22,19 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public Labellable, public Resizable {
  public:
+  /**
+   * @brief Struct for construction of GroupBox.
+   */
   struct Config {
     using Parent = GroupBox;
-    std::string_view name;
-    std::string_view label;
-    Size size;
+    std::string_view name;  /*!< Unique name of the element */
+    std::string_view label; /*!< Text rendered on top of the group */
+    Size size;              /*!< Size of the element */
   };
+  /**
+   * Construct GroupBox
+   * @param config construction args @see GroupBox::Config
+   */
   explicit GroupBox(Config &&config);
   /**
    * Construct GroupBox.

@@ -41,17 +41,24 @@ class PF_IMGUI_EXPORT SpinInput
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:
+  /**
+   * @brief Struct for construction of SpinInput.
+   */
   struct Config {
     using Parent = SpinInput;
-    std::string_view name;
-    std::string_view label;
-    T min;
-    T max;
-    T value{};
-    T step{1};
-    T fastStep{100};
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the element */
+    T min;                                  /*!< Minimum allowed value */
+    T max;                                  /*!< Maximum allowed value */
+    T value{};                              /*!< Initial value */
+    T step{1};                              /*!< Value change speed on interaction */
+    T fastStep{100};                        /*!< Fast value change speed on interaction */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct SpinInput
+   * @param config construction args @see SpinInput::Config
+   */
   explicit SpinInput(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
         Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), step(config.step),

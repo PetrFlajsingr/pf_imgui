@@ -36,15 +36,23 @@ class PF_IMGUI_EXPORT Image
   */
   using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
 
+  /**
+   * @brief Struct for construction of Image.
+   */
   struct Config {
     using Parent = Image;
-    std::string_view name;
-    ImTextureID textureId;
-    Size size = Size::Auto();
-    IsButton isButton = IsButton::No;
-    UvMappingProvider uvTextureMappingProvider = [] { return std::pair(ImVec2{0, 0}, ImVec2{1, 1}); };
+    std::string_view name;            /*!< Unique name of the element */
+    ImTextureID textureId;            /*!< Id of the texture to render */
+    Size size = Size::Auto();         /*!< Size of the element */
+    IsButton isButton = IsButton::No; /*!< Enable/disable button behavior TODO: decouple the button functionality */
+    UvMappingProvider uvTextureMappingProvider = [] {
+      return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
+    }; /*!< Provider of UV coordinates */
   };
-
+  /**
+   * Construct Image
+   * @param config construction args @see Image::Config
+   */
   explicit Image(Config &&config);
   /**
   * Construct Image.

@@ -53,17 +53,24 @@ class PF_IMGUI_EXPORT VerticalSlider
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Struct for construction of VerticalSlider.
+   */
   struct Config {
     using Parent = VerticalSlider;
-    std::string_view name;
-    std::string_view label;
-    T min;
-    T max;
-    T value{};
-    Size size;
-    std::string format = details::defaultVSliderFormat<T>();
-    Persistent persistent = Persistent::No;
+    std::string_view name;                                   /*!< Unique name of the element */
+    std::string_view label;                                  /*!< Text rendered next to the element */
+    T min;                                                   /*!< Minimum allowed value */
+    T max;                                                   /*!< Maximum allowed value */
+    T value{};                                               /*!< Initial value */
+    Size size;                                               /*!< Size of the element */
+    std::string format = details::defaultVSliderFormat<T>(); /*!< Format string used to render value */
+    Persistent persistent = Persistent::No;                  /*!< Allow state saving to disk */
   };
+  /**
+   * Construct VerticalSlider
+   * @param config construction args @see VerticalSlider::Config
+   */
   explicit VerticalSlider(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
         Savable(config.persistent), Resizable(config.size), DragSource<T>(false), DropTarget<T>(false), min(config.min),

@@ -23,10 +23,17 @@ class PF_IMGUI_EXPORT Separator : public Element,
                                   public ColorCustomizable<style::ColorOf::Separator, style::ColorOf::SeparatorHovered,
                                                            style::ColorOf::SeparatorActive> {
  public:
+  /**
+   * @brief Struct for construction of Separator.
+   */
   struct Config {
     using Parent = Separator;
-    std::string_view name;
+    std::string_view name; /*!< Unique name of the element */
   };
+  /**
+   * Construct Separator
+   * @param config construction args @see Checkbox::Separator
+   */
   explicit Separator(Config &&config);
   /**
    * Construct Separator.

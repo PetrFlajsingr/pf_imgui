@@ -13,6 +13,8 @@
 #include <pf_common/enums.h>
 #include <type_traits>
 
+// TODO: replace internal usage of binary enum to bool
+
 // TODO: add convenience operators for some enums
 namespace pf::ui::ig {
 enum class MouseButton {

@@ -25,10 +25,17 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
  public:
+  /**
+   * @brief Struct for construction of WindowMenuBar.
+   */
   struct Config {
     using Parent = WindowMenuBar;
-    std::string_view name;
+    std::string_view name; /*!< Unique name of the element */
   };
+  /**
+   * Construct WindowMenuBar
+   * @param config construction args @see WindowMenuBar::Config
+   */
   explicit WindowMenuBar(Config &&config);
   /**
    * Construct WindowMenuBar.

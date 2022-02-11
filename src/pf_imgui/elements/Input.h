@@ -149,7 +149,7 @@ class PF_IMGUI_EXPORT Input
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
   using Data = details::InputData<details::InputUnderlyingType<T>>;
   Data data;
-  struct Dummy {
+  struct Dummy {  // struct to hack Config
     explicit(false) Dummy(auto...) {}
     explicit(false) operator details::InputUnderlyingType<T>() { return {}; }
     explicit(false) operator std::string() { return {}; }
@@ -163,14 +163,18 @@ class PF_IMGUI_EXPORT Input
     using FormatString =
         std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>, std::string, Dummy>;
 
-    std::string_view name;
-    std::string_view label;
-    [[no_unique_address]] ValueType step{};
-    [[no_unique_address]] ValueType fastStep{};
-    T value{};
-    [[no_unique_address]] FormatString format = Data::defaultFormat();
-    Persistent persistent = Persistent::No;
+    std::string_view name;                                             /*!< Unique name of the element */
+    std::string_view label;                                            /*!< Text rendered next to the input */
+    [[no_unique_address]] ValueType step{};                            /*!< Speed of value change */
+    [[no_unique_address]] ValueType fastStep{};                        /*!< Fast speed of value change */
+    T value{};                                                         /*!< Initial value */
+    [[no_unique_address]] FormatString format = Data::defaultFormat(); /*!< Format string to render value */
+    Persistent persistent = Persistent::No;                            /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Input
+   * @param config construction args @see Input::Config
+   */
   explicit Input(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
         Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), data(config.step, config.fastStep),

@@ -51,17 +51,24 @@ class PF_IMGUI_EXPORT InputText
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::TextSelectedBackground>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Struct for construction of InputText.
+   */
   struct Config {
     using Parent = InputText;
-    std::string_view name;
-    std::string_view label;
-    std::string value;
-    TextInputType inputType = TextInputType::SingleLine;
-    std::size_t maxInputLength = 256;
-    TextTrigger eventTrigger = TextTrigger::Character;
-    Flags<TextFilter> filters = TextFilter::None;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                               /*!< Unique name of the element */
+    std::string_view label;                              /*!< Text rendered next to the input */
+    std::string value;                                   /*!< Initial value */
+    TextInputType inputType = TextInputType::SingleLine; /*!< Type of text input */
+    std::size_t maxInputLength = 256;                    /*!< Maximum length of input string */
+    TextTrigger eventTrigger = TextTrigger::Character;   /*!< Trigger to notify listeners */
+    Flags<TextFilter> filters = TextFilter::None;        /*!< Enabled text filters */
+    Persistent persistent = Persistent::No;              /*!< Allow state saving to disk */
   };
+  /**
+   * Construct InputText
+   * @param config construction args @see InputText::Config
+   */
   explicit InputText(Config &&config);
   /**
    * Construct InputText.

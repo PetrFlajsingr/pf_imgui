@@ -71,15 +71,21 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomCombobox::setPreviewValue;
   using CustomCombobox::setShownItemCount;
 
+  /**
+    * @brief Struct for construction of Combobox.
+    */
   struct Config {
     using Parent = Combobox;
-    std::string_view name;
-    std::string_view label;
-    std::string preview;
-    ComboBoxCount shownItemCount = ComboBoxCount::Items8;
-    Persistent persistent = Persistent::Yes;
+    std::string_view name;                                /*!< Unique name of the element */
+    std::string_view label;                               /*!< Text rendered next to the Combobox */
+    std::string preview;                                  /*!< Preview value shown when no item is selected */
+    ComboBoxCount shownItemCount = ComboBoxCount::Items8; /*!< Amount of items shown when Combobox is open */
+    Persistent persistent = Persistent::Yes;              /*!< Allow state saving to disk */
   };
-
+  /**
+   * Construct Combobox
+   * @param config construction args @see Combobox::Config
+   */
   explicit Combobox(Config &&config)
       : CustomCombobox(std::string{config.name}, std::string{config.label}, details::ComboboxRowFactory<T>{},
                        std::string{config.preview}, config.shownItemCount),

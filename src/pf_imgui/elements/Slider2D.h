@@ -48,16 +48,23 @@ class PF_IMGUI_EXPORT Slider2D
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   using StorageType = details::Slider2DStorageType<T>;
+  /**
+   * @brief Struct for construction of Slider2D.
+   */
   struct Config {
     using Parent = Slider2D;
-    std::string_view name;
-    std::string_view label;
-    StorageType min;
-    StorageType max;
-    StorageType value{};
-    Size size = Size::Auto();
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to element */
+    StorageType min;                        /*!< Minimum allowed value */
+    StorageType max;                        /*!< Maximum allowed value */
+    StorageType value{};                    /*!< Initial value */
+    Size size = Size::Auto();               /*!< Size of the element */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Slider2D
+   * @param config construction args @see Slider2D::Config
+   */
   explicit Slider2D(Config &&config)
       : ItemElement(std::string{config.name}),
         Labellable(std::string{config.label}), ValueObservable<StorageType>(config.value),

@@ -72,21 +72,28 @@ class PF_IMGUI_EXPORT TreeLeaf
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::HeaderActive, style::ColorOf::HeaderHovered,
                                style::ColorOf::Header> {
  public:
+  /**
+   * @brief Struct for construction of TreeLeaf.
+   */
   struct Config {
     using Parent = TreeLeaf;
-    std::string_view name;
-    std::string_view label;
-    bool selected = false;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Label rendered on the element */
+    bool selected = false;                  /*!< Initial state */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct TreeLeaf
+   * @param config construction args @see TreeLeaf::Config
+   */
   explicit TreeLeaf(Config &&config);
   /**
-  * Create TreeLeaf.
-  * @param elementName unique name of the element
-  * @param label label rendered on the element
-  * @param selected
-  * @param persistent enable/disable disk saving
-  */
+   * Create TreeLeaf.
+   * @param elementName unique name of the element
+   * @param label label rendered on the element
+   * @param selected
+   * @param persistent enable/disable disk saving
+   */
   TreeLeaf(const std::string &elementName, const std::string &label, bool selected = false,
            Persistent persistent = Persistent::No);
 
@@ -105,35 +112,41 @@ template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
     : public details::TreeRecord, public RenderablesContainer, public Collapsible {
  public:
+  /**
+   * @brief Struct for construction of TreeNode.
+   */
   struct Config {
     using Parent = TreeNode;
-    std::string_view name;
-    std::string_view label;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    std::string_view label;                          /*!< Text rendered on the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
-
+  /**
+   * Construct TreeNode
+   * @param config construction args @see TreeNode::Config
+   */
   explicit TreeNode(Config &&config)
       : TreeNode(std::string{config.name}, std::string{config.label}, config.allowCollapse, config.persistent,
                  Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
-  * Construct TreeNode.
-  * @param elementName unique name of the element
-  * @param label label rendered on the element
-  * @param allowCollapse enable/disable user collapsing the node
-  * @param persistent enable/disable disk saving
-  */
+   * Construct TreeNode.
+   * @param elementName unique name of the element
+   * @param label label rendered on the element
+   * @param allowCollapse enable/disable user collapsing the node
+   * @param persistent enable/disable disk saving
+   */
   TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse = AllowCollapse::Yes,
            Persistent persistent = Persistent::No)
       : TreeNode(elementName, label, allowCollapse, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
 
   /**
-  * Create a new child node.
-  * @param nodeName unique name of the element
-  * @param label label rendered on the element
-  * @param allowCollapse enable/disable user collapsing the node
-  * @return reference to the newly created node
-  */
+   * Create a new child node.
+   * @param nodeName unique name of the element
+   * @param label label rendered on the element
+   * @param allowCollapse enable/disable user collapsing the node
+   * @return reference to the newly created node
+   */
   TreeNode<TreeType::Simple> &addNode(const std::string &nodeName, const std::string &label,
                                       AllowCollapse allowCollapse = AllowCollapse::Yes) {
     auto &node = elementContainer.createChild<TreeNode<TreeType::Simple>>(
@@ -143,12 +156,12 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   }
 
   /**
-  * Create a new leaf node.
-  * @param leafName unique name of the element
-  * @param label label rendered on the element
-  * @param selected
-  * @return reference to the newly created leaf
-  */
+   * Create a new leaf node.
+   * @param leafName unique name of the element
+   * @param label label rendered on the element
+   * @param selected
+   * @return reference to the newly created leaf
+   */
   TreeLeaf &addLeaf(const std::string &leafName, const std::string &label, bool selected = false) {
     auto &leaf = elementContainer.createChild<TreeLeaf>(leafName, label, selected,
                                                         isPersistent() ? Persistent::Yes : Persistent::No);
@@ -164,9 +177,9 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   }
 
   /**
-  * Set what kind of marker is being rendered on the left part of the node.
-  * @param marker
-  */
+   * Set what kind of marker is being rendered on the left part of the node.
+   * @param marker
+   */
   void setNodeMarker(TreeNodeMarker marker) {
     switch (marker) {
       case TreeNodeMarker::Arrow: flags |= ImGuiTreeNodeFlags_Bullet; break;
@@ -205,14 +218,21 @@ template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     : public details::TreeRecord, public ElementContainer, public Collapsible {
  public:
+  /**
+   * @brief Struct for construction of TreeNode.
+   */
   struct Config {
     using Parent = TreeNode;
-    std::string_view name;
-    std::string_view label;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    std::string_view label;                          /*!< Text rendered on the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
 
+  /**
+   * Construct TreeNode
+   * @param config construction args @see TreeNode::Config
+   */
   explicit TreeNode(Config &&config)
       : TreeNode(std::string{config.name}, std::string{config.label}, config.allowCollapse, config.persistent,
                  Flags<ImGuiTreeNodeFlags_>{}) {}
@@ -300,14 +320,21 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
 template<TreeType treeType>
 class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
  public:
+  /**
+   * @brief Struct for construction of TreeHeaderNode.
+   */
   struct Config {
     using Parent = TreeHeaderNode;
-    std::string_view name;
-    std::string_view label;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    std::string_view label;                          /*!< Text rendered on the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
 
+  /**
+   * Construct TreeHeaderNode
+   * @param config construction args @see TreeHeaderNode::Config
+   */
   explicit TreeHeaderNode(Config &&config)
       : TreeNode<treeType>(std::string{config.name}, std::string{config.label}, config.allowCollapse, config.persistent,
                            ImGuiTreeNodeFlags_CollapsingHeader) {}
@@ -330,12 +357,19 @@ class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
 template<TreeType treeType>
 class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
  public:
+  /**
+   * @brief Struct for construction of Tree.
+   */
   struct Config {
     using Parent = Tree;
-    std::string_view name;
-    ShowBorder showBorder = ShowBorder::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    ShowBorder showBorder = ShowBorder::No; /*!< Enable rendering of Tree area border */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Tree
+   * @param config construction args @see Tree::Config
+   */
   explicit Tree(Config &&config)
       : Element(std::string{config.name}), persistent(config.persistent),
         layout(getName() + "_layout", LayoutDirection::TopToBottom, Size::Auto(), config.showBorder) {}

@@ -34,13 +34,20 @@ class PF_IMGUI_EXPORT Checkbox
                                style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Struct for construction of Checkbox.
+   */
   struct Config {
     using Parent = Checkbox;
-    std::string_view name;
-    std::string_view label;
-    bool checked = false;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the checkbox */
+    bool checked = false;                   /*!< Initial state of the checkbox */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Checkbox
+   * @param config construction args @see Checkbox::Config
+   */
   explicit Checkbox(Config &&config);
   /**
    * Construct Checkbox.

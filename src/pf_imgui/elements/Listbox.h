@@ -68,13 +68,20 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   using CustomListbox::removeItemIf;
   using CustomListbox::setFilter;
   using CustomListbox::setItems;
+  /**
+   * @brief Struct for construction of Listbox.
+   */
   struct Config {
     using Parent = Listbox;
-    std::string_view name;
-    std::string_view label;
-    Size size = Size::Auto();
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the Listbox */
+    Size size = Size::Auto();               /*!< Size of the element */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Listbox
+   * @param config construction args @see Listbox::Config
+   */
   explicit Listbox(Config &&config) requires(std::is_default_constructible_v<T> &&std::copy_constructible<T>)
       : CustomListbox(std::string{config.name}, std::string{config.label}, Factory{}, config.size),
         ValueObservable<T>(), Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false) {}

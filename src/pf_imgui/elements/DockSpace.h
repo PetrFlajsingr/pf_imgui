@@ -34,12 +34,19 @@ class PF_IMGUI_EXPORT DockSpace
       public ColorCustomizable<style::ColorOf::DockingPreview, style::ColorOf::DockingBackground> {
  public:
   using Id = ImGuiID;
+  /**
+   * @brief Struct for construction of DockSpace.
+   */
   struct Config {
     using Parent = DockSpace;
-    std::string_view name;
-    Size size = Size::Auto();
-    Flags<DockType> flags{};
+    std::string_view name;    /*!< Unique name of the element */
+    Size size = Size::Auto(); /*!< Size of the element */
+    Flags<DockType> flags{};  /*!< Flags to modify functionality */
   };
+  /**
+   * Construct DockSpace
+   * @param config construction args @see DockSpace::Config
+   */
   explicit DockSpace(Config &&config);
   /**
    * Construct DockSpace

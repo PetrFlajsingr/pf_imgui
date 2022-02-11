@@ -31,13 +31,20 @@ class PF_IMGUI_EXPORT Toggle
                                style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Struct for construction of Toggle.
+   */
   struct Config {
     using Parent = Toggle;
-    std::string_view name;
-    std::string_view label;
-    bool enabled = false;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the element */
+    bool enabled = false;                   /*!< Initial state */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Toggle
+   * @param config construction args @see Toggle::Config
+   */
   explicit Toggle(Config &&config);
   /**
    * Construct Toggle.

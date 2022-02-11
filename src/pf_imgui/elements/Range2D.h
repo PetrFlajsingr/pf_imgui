@@ -37,16 +37,23 @@ class PF_IMGUI_EXPORT Range2D
                                style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Struct for construction of Range2D.
+   */
   struct Config {
     using Parent = Range2D;
-    std::string_view name;
-    std::string_view label;
-    glm::vec2 min;
-    glm::vec2 max;
-    math::Range<glm::vec2> value{};
-    Size size = Size::Auto();
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the element */
+    glm::vec2 min;                          /*!< Minimum allowed value */
+    glm::vec2 max;                          /*!< Maximum allowed value*/
+    math::Range<glm::vec2> value{};         /*!< Initial value */
+    Size size = Size::Auto();               /*!< Size of the element */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
   };
+  /**
+   * Construct Range2D
+   * @param config construction args @see Range2D::Config
+   */
   explicit Range2D(Config &&config);
   /**
    * Construct Range2D.

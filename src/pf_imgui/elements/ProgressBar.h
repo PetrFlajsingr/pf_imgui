@@ -46,15 +46,23 @@ class PF_IMGUI_EXPORT ProgressBar
                                style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * Construct ProgressBar
+   * @param config construction args @see ProgressBar::Config
+   */
   struct Config {
     using Parent = ProgressBar;
-    std::string_view name;
-    T step;
-    T min;
-    T max;
-    T value = min;
-    Size size = Size::Auto();
+    std::string_view name;    /*!< Unique name of the element */
+    T step;                   /*!< Step taken when @code step() @endcode is called */
+    T min;                    /*!< Lowest value representing 0% */
+    T max;                    /*!< Highest value representing 100% */
+    T value = min;            /*!< Initial value within [min, max] */
+    Size size = Size::Auto(); /*!< Size of the element */
   };
+  /**
+   * Construct ProgressBar
+   * @param config construction args @see ProgressBar::Config
+   */
   explicit ProgressBar(Config &&config)
       : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Resizable(config.size),
         stepValue(config.step), min(config.min), max(config.max) {}

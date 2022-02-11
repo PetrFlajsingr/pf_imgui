@@ -99,17 +99,24 @@ class PF_IMGUI_EXPORT DragInput
  public:
   using ParamType = details::DragInputUnderlyingType<T>;
 
+  /**
+   * @brief Struct for construction of DragInput.
+   */
   struct Config {
     using Parent = DragInput;
-    std::string_view name;
-    std::string_view label;
-    ParamType speed;
-    ParamType min;
-    ParamType max;
-    T value{};
-    std::string format = details::defaultDragFormat<T>();
-    Persistent persistent = Persistent::No;
+    std::string_view name;                                /*!< Unique name of the element */
+    std::string_view label;                               /*!< Text rendered next to the input */
+    ParamType speed;                                      /*!< Speed of value change on drag */
+    ParamType min;                                        /*!< Minimum allowed value */
+    ParamType max;                                        /*!< Maximum allowed value */
+    T value{};                                            /*!< Initial value */
+    std::string format = details::defaultDragFormat<T>(); /*!< Text format for value */
+    Persistent persistent = Persistent::No;               /*!< Allow state saving to disk */
   };
+  /**
+   * Construct DragInput
+   * @param config construction args @see DragInput::Config
+   */
   explicit DragInput(Config &&config)
       : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Labellable(std::string{config.label}),
         Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), speed(config.speed), min(config.min),

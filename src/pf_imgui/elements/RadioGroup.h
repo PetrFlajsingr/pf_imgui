@@ -39,14 +39,21 @@ class PF_IMGUI_EXPORT RadioGroup
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Struct for construction of RadioGroup.
+   */
   struct Config {
     using Parent = RadioGroup;
-    std::string_view name;
-    std::string_view label;
-    std::vector<std::unique_ptr<RadioButton>> buttons{};
-    std::optional<std::size_t> selectedButtonIndex = std::nullopt;
+    std::string_view name;                                         /*!< Unique name of the element */
+    std::string_view label;                                        /*!< Text rendered above RadioButtons */
+    std::vector<std::unique_ptr<RadioButton>> buttons{};           /*!< Buttons inside the group TODO: changes this */
+    std::optional<std::size_t> selectedButtonIndex = std::nullopt; /*!< Index of the initially selected button */
     Persistent persistent = Persistent::No;
   };
+  /**
+   * Construct RadioGroup
+   * @param config construction args @see RadioGroup::Config
+   */
   explicit RadioGroup(Config &&config);
   /**
    * Construct RadioGroup.
