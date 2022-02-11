@@ -32,14 +32,21 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
  public:
+  /**
+   * @brief Struct for construction of AnchorLayout.
+   */
   struct Config {
     using Parent = AnchorLayout;
-    std::string_view name;
-    Size size;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    ShowBorder showBorder = ShowBorder::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    Size size;                                       /*!< Size of the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
+  /**
+   * Construct AnchorLayout
+   * @param config construction args @see AnchorLayout::Config
+   */
   explicit AnchorLayout(Config &&config);
   /**
    * Construct AnchorLayout.

@@ -23,15 +23,22 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
  public:
+  /**
+   * @brief Struct for construction of StretchLayout.
+   */
   struct Config {
     using Parent = StretchLayout;
-    std::string_view name;
-    Size size;
-    Stretch stretch;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    ShowBorder showBorder = ShowBorder::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    Size size;                                       /*!< Size of the element */
+    Stretch stretch;                                 /*!< Stretch direction */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
+  /**
+   * Construct StretchLayout
+   * @param config construction args @see StretchLayout::Config
+   */
   explicit StretchLayout(Config &&config);
   /**
    * Construct StretchLayout.

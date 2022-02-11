@@ -31,14 +31,21 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
  public:
+  /**
+   * @brief Struct for construction of AbsoluteLayout.
+   */
   struct Config {
     using Parent = AbsoluteLayout;
-    std::string_view name;
-    Size size;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    ShowBorder showBorder = ShowBorder::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    Size size;                                       /*!< Size of the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
+  /**
+   * Construct AbsoluteLayout
+   * @param config construction args @see AbsoluteLayout::Config
+   */
   explicit AbsoluteLayout(Config &&config);
   /**
    * Construct AbsoluteLayout.

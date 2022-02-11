@@ -30,15 +30,22 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
  public:
+  /**
+   * @brief Struct for construction of BoxLayout.
+   */
   struct Config {
     using Parent = BoxLayout;
-    std::string_view name;
-    LayoutDirection layoutDirection;
-    Size size;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    ShowBorder showBorder = ShowBorder::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    LayoutDirection layoutDirection;                 /*!< Direction the element are rendered in */
+    Size size;                                       /*!< Size of the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
+  /**
+   * Construct BoxLayout
+   * @param config construction args @see BoxLayout::Config
+   */
   explicit BoxLayout(Config &&config);
   /**
    * Construct BoxLayout.

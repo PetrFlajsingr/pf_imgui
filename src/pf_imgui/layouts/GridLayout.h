@@ -29,14 +29,18 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
  public:
   struct Config {
     using Parent = GridLayout;
-    std::string_view name;
-    Size size;
-    std::uint32_t widthInCells;
-    std::uint32_t heightInCells;
-    AllowCollapse allowCollapse = AllowCollapse::No;
-    ShowBorder showBorder = ShowBorder::No;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                           /*!< Unique name of the element */
+    Size size;                                       /*!< Size of the element */
+    std::uint32_t widthInCells;                      /*!< Amount of columns */
+    std::uint32_t heightInCells;                     /*!< Amount of rows */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
   };
+  /**
+   * Construct GridLayout
+   * @param config construction args @see GridLayout::Config
+   */
   explicit GridLayout(Config &&config);
   /**
    * Construct GridLayout.
