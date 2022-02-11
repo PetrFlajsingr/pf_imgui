@@ -7,10 +7,17 @@
 
 namespace pf::ui::ig {
 
+MarkdownText::MarkdownText(MarkdownText::Config &&config)
+    : ItemElement(std::string{config.name}), imGuiInterface(config.imguiInterface),
+      markdownSrc(std::move(config.markdownText)), fontSize(config.fontSize), loadImage(std::move(config.imageLoader)) {
+  loadHeaderFonts();
+  configure();
+}
+
 MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdownSrc,
                            float fontSize, std::optional<ImageLoader> imageLoader)
     : ItemElement(elementName), imGuiInterface(imguiInterface), markdownSrc(std::move(markdownSrc)), fontSize(fontSize),
-      loadImage(imageLoader) {
+      loadImage(std::move(imageLoader)) {
   loadHeaderFonts();
   configure();
 }
