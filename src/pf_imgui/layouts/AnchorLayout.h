@@ -52,24 +52,6 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
   AnchorLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
                ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
   /**
-   * Construct AnchorLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param showBorder draw border around the layout
-   * @param persistent enable state saving
-   */
-  AnchorLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-               Persistent persistent = Persistent::No);
-  /**
-   * Construct AnchorLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param allowCollapse enable collapse button
-   * @param persistent enable state saving
-   */
-  AnchorLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-               Persistent persistent = Persistent::No);
-  /**
     * Create a child and append it to the end of children.
     *
     * @tparam T type of created Element

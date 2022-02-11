@@ -16,14 +16,6 @@ AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, All
                            ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
 
-AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                           Persistent persistent)
-    : AnchorLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
-
-AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                           Persistent persistent)
-    : AnchorLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
-
 std::vector<Renderable *> AnchorLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.element.get(); })
       | ranges::to_vector;

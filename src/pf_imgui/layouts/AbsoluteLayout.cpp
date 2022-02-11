@@ -15,14 +15,6 @@ AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size,
                                ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
 
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                               Persistent persistent)
-    : AbsoluteLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
-
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                               Persistent persistent)
-    : AbsoluteLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
-
 void AbsoluteLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();

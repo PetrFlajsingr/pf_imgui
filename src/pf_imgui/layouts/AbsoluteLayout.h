@@ -12,9 +12,9 @@
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/meta.h>
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/decorators/PositionDecorator.h>
+#include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>
@@ -50,24 +50,6 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    */
   AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
                  ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
-  /**
-   * Construct AbsoluteLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param showBorder draw border around the layout
-   * @param persistent enable state saving
-   */
-  AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                 Persistent persistent = Persistent::No);
-  /**
-   * Construct AbsoluteLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param allowCollapse enable collapse button
-   * @param persistent enable state saving
-   */
-  AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                 Persistent persistent = Persistent::No);
 
   /**
    * Get all children of the layout as references.

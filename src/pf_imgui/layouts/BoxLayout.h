@@ -52,26 +52,6 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
             Persistent persistent = Persistent::No);
-  /**
-   * Construct BoxLayout.
-   * @param elementName ID of the layout
-   * @param layoutDirection direction of children stacking
-   * @param size size of the layout
-   * @param showBorder draw layouts border
-   * @param persistent allow state saving
-   */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size, ShowBorder showBorder,
-            Persistent persistent = Persistent::No);
-  /**
-   * Construct BoxLayout.
-   * @param elementName ID of the layout
-   * @param layoutDirection direction of children stacking
-   * @param size size of the layout
-   * @param allowCollapse enable collapse button
-   * @param persistent allow state saving
-   */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-            AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
 
   /**
    * Get current layout direction.

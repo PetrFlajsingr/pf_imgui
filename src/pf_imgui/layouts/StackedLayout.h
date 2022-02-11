@@ -54,24 +54,6 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    */
   StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
                 ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
-  /**
-   * Construct StackedLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param showBorder draw border around the layout
-   * @param persistent enable state saving
-   */
-  StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                Persistent persistent = Persistent::No);
-  /**
-   * Construct StackedLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param allowCollapse enable collapse button
-   * @param persistent enable state saving
-   */
-  StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                Persistent persistent = Persistent::No);
 
   /**
    * Push a new element container to the last index.

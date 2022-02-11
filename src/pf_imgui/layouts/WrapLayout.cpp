@@ -14,14 +14,6 @@ WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDir
                        AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : BoxLayout(elementName, layoutDirection, size, allowCollapse, showBorder, persistent) {}
 
-WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                       ShowBorder showBorder, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, showBorder, persistent) {}
-
-WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                       AllowCollapse allowCollapse, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, allowCollapse, persistent) {}
-
 void WrapLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();

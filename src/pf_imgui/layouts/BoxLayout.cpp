@@ -19,14 +19,6 @@ BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirec
                      AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), layoutDirection(layoutDirection) {}
 
-BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                     ShowBorder showBorder, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, AllowCollapse::No, showBorder, persistent) {}
-
-BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                     AllowCollapse allowCollapse, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, allowCollapse, ShowBorder::No, persistent) {}
-
 LayoutDirection BoxLayout::getLayoutDirection() const { return layoutDirection; }
 void BoxLayout::setLayoutDirection(LayoutDirection newLayoutDirection) { layoutDirection = newLayoutDirection; }
 

@@ -27,14 +27,6 @@ GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_
   std::ranges::fill(cells, nullptr);
 }
 
-GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
-                       ShowBorder showBorder, Persistent persistent)
-    : GridLayout(elementName, size, width, height, AllowCollapse::No, showBorder, persistent) {}
-
-GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
-                       AllowCollapse allowCollapse, Persistent persistent)
-    : GridLayout(elementName, size, width, height, allowCollapse, ShowBorder::No, persistent) {}
-
 void GridLayout::setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout) {
   cells[indexForCell(column, row)] = std::move(layout);
 }

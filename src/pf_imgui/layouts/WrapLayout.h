@@ -27,12 +27,6 @@ class WrapLayout : public BoxLayout {
              AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
              Persistent persistent = Persistent::No);
 
-  WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size, ShowBorder showBorder,
-             Persistent persistent = Persistent::No);
-
-  WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-             AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
-
  protected:
   void renderImpl() override;
 
