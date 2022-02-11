@@ -8,6 +8,11 @@
 
 namespace pf::ui::ig {
 
+SimplePlot::SimplePlot(SimplePlot::Config &&config)
+    : Element(std::string{config.name}), Labellable(std::string{config.label}), Resizable(config.size),
+      plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow), scaleMax(config.scaleHigh),
+      overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
+
 SimplePlot::SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
                        std::vector<float> values, std::optional<std::string> overlayText,
                        const std::optional<std::size_t> &historyLimit, float scaleLow, float scaleHigh, Size size)

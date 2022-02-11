@@ -35,6 +35,19 @@ class PF_IMGUI_EXPORT SimplePlot
                                style::ColorOf::PlotHistogramHovered, style::ColorOf::Text,
                                style::ColorOf::TextDisabled> {
  public:
+  struct Config {
+    using Parent = SimplePlot;
+    std::string_view name;
+    std::string_view label;
+    PlotType type;
+    std::vector<float> values{};
+    std::optional<std::string> overlay = std::nullopt;
+    std::optional<std::size_t> maxHistoryCount = std::nullopt;
+    float scaleLow = FLT_MAX;
+    float scaleHigh = FLT_MAX;
+    Size size = Size::Auto();
+  };
+  explicit SimplePlot(Config &&config);
   /**
    * Construct SimplePlot.
    * @param elementName ID of the plot
