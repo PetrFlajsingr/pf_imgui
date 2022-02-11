@@ -10,6 +10,15 @@
 
 namespace pf::ui::ig {
 
+Memo::Memo(Memo::Config &&config)
+    : Element(std::string{config.name}), Labellable(std::string{config.label}),
+      textAreaLayout(std::string{config.name} + "_memo_panel###", LayoutDirection::TopToBottom,
+                     Size{Width::Auto(), config.textAreaHeight}),
+      buttonsEnabled(config.buttonsEnabled), filterEnabled(config.filterEnabled), recordLimit(config.maxRecordCount) {
+  textAreaLayout.setScrollable(true);
+  rebuildPanel();
+}
+
 Memo::Memo(const std::string &elementName, const std::string &label, uint32_t textAHeight, bool buttonsEnabled,
            bool filterEnabled, const std::optional<std::size_t> &recordLimit)
     : Element(elementName), Labellable(label),

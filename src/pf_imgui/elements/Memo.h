@@ -32,6 +32,16 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public RenderablesContainer {
  public:
+  struct Config {
+    using Parent = Memo;
+    std::string_view name;
+    std::string_view label;
+    Height textAreaHeight = Height::Auto();
+    bool buttonsEnabled = true;
+    bool filterEnabled = true;
+    std::optional<std::size_t> maxRecordCount = std::nullopt;
+  };
+  explicit Memo(Config &&config);
   /**
    * Construct Memo.
    * @param elementName ID of the memo
