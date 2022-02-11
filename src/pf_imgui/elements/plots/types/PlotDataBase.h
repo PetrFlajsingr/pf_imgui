@@ -72,7 +72,8 @@ class PF_IMGUI_EXPORT DefaultPlotDataSetting {
         | ranges::to_vector;
   }
 
- protected : std::vector<double> xData;
+ protected:
+  std::vector<double> xData;
   std::vector<double> yData;
   double width;
 };

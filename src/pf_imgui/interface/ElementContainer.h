@@ -37,7 +37,6 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   /**
   * Create a child and append it to the end of children.
   *
-  * @throws DuplicateIdException when an ID is already present in the container
   * @tparam T type of created Element
   * @tparam Args arguments to pass to the Ts constructor after its name
   * @param args arguments to pass to the Ts constructor after its nam
@@ -45,11 +44,6 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChild(Args &&...args) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    if (const auto iter = children.find(name); iter != children.end()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     addChild(std::move(child));
@@ -73,18 +67,10 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  * @param name ID of the newly created element
  * @param args arguments to pass to the Ts constructor after its nam
  * @return reference to the newly created Element
- *
- * @throws DuplicateIdException when an ID is already present in the container
- * @throws InvalidArgumentException when index is out of bounds
  */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChildAtIndex(std::size_t index,
                                                                                                       Args &&...args) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    if (const auto iter = children.find(name); iter != children.end()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     insertChild(std::move(child), index);
@@ -93,11 +79,6 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
 
   template<ElementConstructConfig T>
   std::derived_from<Element> auto &createChildAtIndex(std::size_t index, T &&config) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    if (const auto iter = children.find(name); iter != children.end()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
     auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     insertChild(std::move(child), index);

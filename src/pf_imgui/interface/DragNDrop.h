@@ -328,7 +328,8 @@ class PF_IMGUI_EXPORT DragNDropGroup {
     if constexpr (sizeof...(Args) > 0) { remove(std::forward<Args &>(args)...); }
   }
 
- private : std::vector<details::DragSourceBase *> sources;
+ private:
+  std::vector<details::DragSourceBase *> sources;
   std::vector<std::pair<details::DropTargetBase *, bool>> targets;
   bool wasDraggedLastFrame = false;
 };

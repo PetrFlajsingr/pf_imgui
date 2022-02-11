@@ -50,24 +50,24 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
                                 public Savable,
                                 public DragSource<T>,
                                 public DropTarget<T> {
-  using CustomListbox = CustomListbox<T, Selectable>;
-  using CustomListbox::filter;
-  using CustomListbox::filteredItems;
-  using CustomListbox::items;
+  using CustomListboxBase = CustomListbox<T, Selectable>;
+  using CustomListboxBase::filter;
+  using CustomListboxBase::filteredItems;
+  using CustomListboxBase::items;
 
  public:
   using Factory = details::ListboxRowFactory<T>;
-  using CustomListbox::addItem;
-  using CustomListbox::addItems;
-  using CustomListbox::clearFilter;
-  using CustomListbox::getItems;
-  using CustomListbox::getLabel;
-  using CustomListbox::getName;
-  using CustomListbox::getSize;
-  using CustomListbox::removeItem;
-  using CustomListbox::removeItemIf;
-  using CustomListbox::setFilter;
-  using CustomListbox::setItems;
+  using CustomListboxBase::addItem;
+  using CustomListboxBase::addItems;
+  using CustomListboxBase::clearFilter;
+  using CustomListboxBase::getItems;
+  using CustomListboxBase::getLabel;
+  using CustomListboxBase::getName;
+  using CustomListboxBase::getSize;
+  using CustomListboxBase::removeItem;
+  using CustomListboxBase::removeItemIf;
+  using CustomListboxBase::setFilter;
+  using CustomListboxBase::setItems;
   /**
    * @brief Struct for construction of Listbox.
    */
@@ -83,7 +83,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param config construction args @see Listbox::Config
    */
   explicit Listbox(Config &&config) requires(std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomListbox(std::string{config.name}, std::string{config.label}, Factory{}, config.size),
+      : CustomListboxBase(std::string{config.name}, std::string{config.label}, Factory{}, config.size),
         ValueObservable<T>(), Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false) {}
   /**
    * Construct Listbox.
@@ -97,7 +97,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
       const std::string &elementName, const std::string &label, Size s = Size::Auto(),
       std::optional<int> selectedIdx = std::nullopt,
       Persistent persistent = Persistent::No) requires(std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomListbox(elementName, label, Factory{}, s), ValueObservable<T>(),
+      : CustomListboxBase(elementName, label, Factory{}, s), ValueObservable<T>(),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {}
 
   /**

@@ -89,7 +89,8 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
     return *ptr;
   }
 
- protected : void renderItems();
+ protected:
+  void renderItems();
 };
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.

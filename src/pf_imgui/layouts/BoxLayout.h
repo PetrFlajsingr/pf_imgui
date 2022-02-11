@@ -116,19 +116,9 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @param name ID of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
     * @return reference to the newly created Element
-    *
-    * @remark Duplicate check is disabled for MSVC
-    * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChild(Args &&...args) {
-#ifndef _MSC_VER  // disabled because of C3779 error
-    if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
-          return child->getName() == name;
-        }).has_value()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     pushChild(std::move(child));
@@ -151,21 +141,10 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @param name ID of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
     * @return reference to the newly created Element
-    *
-    * @remark Duplicate check is disabled for MSVC
-    *
-    * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
   requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChildAtIndex(std::size_t index,
                                                                                                       Args &&...args) {
-#ifndef _MSC_VER  // disabled because of C3779 error
-    if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
-          return child->getName() == name;
-        }).has_value()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     insertChild(std::move(child), index);
@@ -174,11 +153,6 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
 
   template<ElementConstructConfig T>
   typename T::Parent &createChildAtIndex(std::size_t index, T &&config) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    if (const auto iter = children.find(name); iter != children.end()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
     auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     insertChild(std::move(child), index);
