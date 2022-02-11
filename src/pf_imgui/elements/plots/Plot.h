@@ -69,7 +69,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    * @throw Exception when desired type doesn't match the storage data type
    */
   template<std::derived_from<plot_type::PlotData> T>
-  T &dataByName(const std::string &name) {
+  [[nodiscard]] T &dataByName(const std::string &name) {
     if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
         iter != datas.end()) {
       if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }

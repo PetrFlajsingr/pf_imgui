@@ -7,6 +7,8 @@
 
 namespace pf::ui::ig {
 
+PopupMenu::PopupMenu(PopupMenu::Config &&config) : Element(std::string{config.name}) {}
+
 PopupMenu::PopupMenu(const std::string &name) : Element(name) {}
 
 void PopupMenu::open() { opened = true; }
