@@ -46,6 +46,18 @@ class PF_IMGUI_EXPORT ProgressBar
                                style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  struct Config {
+    using Parent = ProgressBar;
+    std::string_view name;
+    T step;
+    T min;
+    T max;
+    T value = min;
+    Size size = Size::Auto();
+  };
+  explicit ProgressBar(Config &&config)
+      : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Resizable(config.size),
+        stepValue(config.step), min(config.min), max(config.max) {}
   /**
    * Construct ProgressBar.
    * @param elementName ID of the progress bar
