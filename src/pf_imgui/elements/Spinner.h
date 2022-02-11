@@ -18,6 +18,13 @@ class PF_IMGUI_EXPORT Spinner : public ItemElement,
                                 public ColorCustomizable<style::ColorOf::PlotHistogram>,
                                 public StyleCustomizable<style::Style::FramePadding> {
  public:
+  struct Config {
+    using Parent = Spinner;
+    std::string_view name;
+    float radius;
+    int thickness;
+  };
+  explicit Spinner(Config &&config);
   /**
    *
    * @param elementName unique element name
