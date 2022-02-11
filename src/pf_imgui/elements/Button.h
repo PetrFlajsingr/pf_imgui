@@ -78,10 +78,8 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
    * @param clickButton mouse button to register as a click
    * @param isRepeatable enable/disable button can repeat its on click event when a user holds it
    */
-  [[deprecated("Use Config constructor")]] explicit InvisibleButton(const std::string &elementName,
-                                                                    const Size &s = Size::Auto(),
-                                                                    MouseButton clickButton = MouseButton::Left,
-                                                                    Repeatable isRepeatable = Repeatable::No);
+  explicit InvisibleButton(const std::string &elementName, const Size &s = Size::Auto(),
+                           MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
 
  protected:
   void renderImpl() override;
@@ -154,8 +152,7 @@ class PF_IMGUI_EXPORT SmallButton
    * @param label text rendered on the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  [[deprecated("Use Config constructor")]] SmallButton(const std::string &name, const std::string &label,
-                                                       Repeatable isRepeatable = Repeatable::No);
+  SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable = Repeatable::No);
 
  protected:
   void renderImpl() override;
@@ -187,8 +184,7 @@ class PF_IMGUI_EXPORT ArrowButton
    * @param direction direction of the arrow rendered on the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  [[deprecated("Use Config constructor")]] ArrowButton(const std::string &name, Dir direction,
-                                                       Repeatable isRepeatable = Repeatable::No);
+  ArrowButton(const std::string &name, Dir direction, Repeatable isRepeatable = Repeatable::No);
 
  protected:
   void renderImpl() override;
