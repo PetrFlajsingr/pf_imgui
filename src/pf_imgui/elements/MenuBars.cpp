@@ -7,6 +7,8 @@
 
 namespace pf::ui::ig {
 
+WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : Element(std::string{config.name}) {}
+
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void WindowMenuBar::renderImpl() {
@@ -17,6 +19,8 @@ void WindowMenuBar::renderImpl() {
     renderItems();
   }
 }
+
+AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : Element(std::string{config.name}) {}
 
 AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 

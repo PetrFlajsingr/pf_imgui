@@ -25,6 +25,11 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
  public:
+  struct Config {
+    using Parent = WindowMenuBar;
+    std::string_view name;
+  };
+  explicit WindowMenuBar(Config &&config);
   /**
    * Construct WindowMenuBar.
    * @param elementName ID of the element
@@ -41,6 +46,11 @@ class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
  */
 class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
  public:
+  struct Config {
+    using Parent = AppMenuBar;
+    std::string_view name;
+  };
+  explicit AppMenuBar(Config &&config);
   /**
    * Construct AppMenuBar.
    * @param elementName ID of the element
