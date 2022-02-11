@@ -31,6 +31,14 @@ class PF_IMGUI_EXPORT Toggle
                                style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  struct Config {
+    using Parent = Toggle;
+    std::string_view name;
+    std::string_view label;
+    bool enabled = false;
+    Persistent persistent = Persistent::No;
+  };
+  explicit Toggle(Config &&config);
   /**
    * Construct Toggle.
    * @param elementName ID of the checkbox
