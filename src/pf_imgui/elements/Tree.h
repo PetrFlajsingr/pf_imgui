@@ -72,6 +72,14 @@ class PF_IMGUI_EXPORT TreeLeaf
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::HeaderActive, style::ColorOf::HeaderHovered,
                                style::ColorOf::Header> {
  public:
+  struct Config {
+    using Parent = TreeLeaf;
+    std::string_view name;
+    std::string_view label;
+    bool selected = false;
+    Persistent persistent = Persistent::No;
+  };
+  explicit TreeLeaf(Config &&config);
   /**
   * Create TreeLeaf.
   * @param elementName unique name of the element
@@ -97,6 +105,17 @@ template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
     : public details::TreeRecord, public RenderablesContainer, public Collapsible {
  public:
+  struct Config {
+    using Parent = TreeNode;
+    std::string_view name;
+    std::string_view label;
+    AllowCollapse allowCollapse = AllowCollapse::No;
+    Persistent persistent = Persistent::No;
+  };
+
+  explicit TreeNode(Config &&config)
+      : TreeNode(std::string{config.name}, std::string{config.label}, config.allowCollapse, config.persistent,
+                 Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
   * Construct TreeNode.
   * @param elementName unique name of the element
@@ -186,6 +205,17 @@ template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     : public details::TreeRecord, public ElementContainer, public Collapsible {
  public:
+  struct Config {
+    using Parent = TreeNode;
+    std::string_view name;
+    std::string_view label;
+    AllowCollapse allowCollapse = AllowCollapse::No;
+    Persistent persistent = Persistent::No;
+  };
+
+  explicit TreeNode(Config &&config)
+      : TreeNode(std::string{config.name}, std::string{config.label}, config.allowCollapse, config.persistent,
+                 Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
    * Construct TreeNode.
    * @param elementName unique name of the element
@@ -270,6 +300,17 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
 template<TreeType treeType>
 class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
  public:
+  struct Config {
+    using Parent = TreeHeaderNode;
+    std::string_view name;
+    std::string_view label;
+    AllowCollapse allowCollapse = AllowCollapse::No;
+    Persistent persistent = Persistent::No;
+  };
+
+  explicit TreeHeaderNode(Config &&config)
+      : TreeNode<treeType>(std::string{config.name}, std::string{config.label}, config.allowCollapse, config.persistent,
+                           ImGuiTreeNodeFlags_CollapsingHeader) {}
   /**
    * Construct TreeHeaderNode.
    * @param elementName unique name of the element
@@ -289,6 +330,15 @@ class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
 template<TreeType treeType>
 class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
  public:
+  struct Config {
+    using Parent = Tree;
+    std::string_view name;
+    ShowBorder showBorder = ShowBorder::No;
+    Persistent persistent = Persistent::No;
+  };
+  explicit Tree(Config &&config)
+      : Element(std::string{config.name}), persistent(config.persistent),
+        layout(getName() + "_layout", LayoutDirection::TopToBottom, Size::Auto(), config.showBorder) {}
   /**
    * Construct tree.
    * @param name unique name of the element
