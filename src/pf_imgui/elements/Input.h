@@ -150,17 +150,13 @@ class PF_IMGUI_EXPORT Input
   using Data = details::InputData<details::InputUnderlyingType<T>>;
   Data data;
   struct Dummy {
-    Dummy(auto) {}
-    operator details::InputUnderlyingType<T>() {
-      return {};
-    }
-    operator std::string() {
-      return {};
-    }
+    Dummy(auto...) {}
+    operator details::InputUnderlyingType<T>() { return {}; }
+    operator std::string() { return {}; }
   };
 
  public:
-  struct Config {
+  struct Config {  // FIXME: made this more readable
     using Parent = Input;
 
     using ValueType = std::conditional_t<OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST>, T, Dummy>;
