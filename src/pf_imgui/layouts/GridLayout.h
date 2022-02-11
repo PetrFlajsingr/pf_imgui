@@ -27,6 +27,17 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
  public:
+  struct Config {
+    using Parent = GridLayout;
+    std::string_view name;
+    Size size;
+    std::uint32_t widthInCells;
+    std::uint32_t heightInCells;
+    AllowCollapse allowCollapse = AllowCollapse::No;
+    ShowBorder showBorder = ShowBorder::No;
+    Persistent persistent = Persistent::No;
+  };
+  explicit GridLayout(Config &&config);
   /**
    * Construct GridLayout.
    * @param elementName ID of the layout

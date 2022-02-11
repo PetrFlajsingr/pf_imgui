@@ -10,6 +10,15 @@
 
 namespace pf::ui::ig {
 
+GridLayout::GridLayout(GridLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent),
+      width(config.widthInCells), height(config.heightInCells) {
+  const auto cellCount = width * height;
+  cells.resize(cellCount);
+  std::ranges::fill(cells, nullptr);
+}
+
 GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
                        AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), width(width), height(height) {
