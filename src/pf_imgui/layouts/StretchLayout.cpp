@@ -9,6 +9,11 @@
 
 namespace pf::ui::ig {
 
+StretchLayout::StretchLayout(StretchLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent),
+      stretch(config.stretch) {}
+
 StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
                              AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), stretch(stretch) {}
