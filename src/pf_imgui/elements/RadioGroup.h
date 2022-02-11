@@ -39,6 +39,15 @@ class PF_IMGUI_EXPORT RadioGroup
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  struct Config {
+    using Parent = RadioGroup;
+    std::string_view name;
+    std::string_view label;
+    std::vector<std::unique_ptr<RadioButton>> buttons{};
+    std::optional<std::size_t> selectedButtonIndex = std::nullopt;
+    Persistent persistent = Persistent::No;
+  };
+  explicit RadioGroup(Config &&config);
   /**
    * Construct RadioGroup.
    * @param elementName ID of the element
