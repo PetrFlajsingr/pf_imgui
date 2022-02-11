@@ -72,4 +72,4 @@ class PF_IMGUI_EXPORT Toggle
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_TOGGLE_H
+#endif  // PF_IMGUI_TOGGLE_H

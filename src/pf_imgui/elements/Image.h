@@ -89,7 +89,7 @@ class PF_IMGUI_EXPORT Image
   bool isButton_;
   ImTextureID textureId;
   UvMappingProvider uvMappingProvider;
-  //bool pixelInspectionTooltipEnabled = false;
+  // bool pixelInspectionTooltipEnabled = false;
 };
 
 }  // namespace pf::ui::ig

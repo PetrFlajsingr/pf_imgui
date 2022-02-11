@@ -29,8 +29,8 @@ Memo::Memo(const std::string &elementName, const std::string &label, uint32_t te
 }
 
 void Memo::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (rebuild) { rebuildPanel(); }
   removeRecordsAboveLimit();
   ImGui::Text("%s", getLabel().c_str());

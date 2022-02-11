@@ -12,8 +12,8 @@ WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : Element(std::stri
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void WindowMenuBar::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (ImGui::BeginMenuBar()) {
     RAII end{ImGui::EndMenuBar};
     renderItems();

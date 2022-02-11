@@ -33,8 +33,8 @@ StackedLayout::StackedLayout(const std::string &elementName, const Size &size, A
     : StackedLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
 
 void StackedLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};

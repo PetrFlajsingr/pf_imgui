@@ -101,5 +101,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
  private:
   GizmoMid mid = GizmoMid::None;
 };
+
 }  // namespace pf::ui::ig
-#endif  //PF_IMGUI_GIZMO3D_H
+
+#endif  // PF_IMGUI_GIZMO3D_H

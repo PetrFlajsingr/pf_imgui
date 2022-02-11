@@ -169,4 +169,4 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H

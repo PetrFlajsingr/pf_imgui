@@ -149,4 +149,4 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
 };
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H

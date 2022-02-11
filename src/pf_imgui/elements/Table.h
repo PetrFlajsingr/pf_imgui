@@ -113,8 +113,8 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
  protected:
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, getSize().asImVec())) {
       RAII end{ImGui::EndTable};
       if (header.has_value()) {

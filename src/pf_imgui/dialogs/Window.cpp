@@ -22,8 +22,8 @@ Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
   RAII endPopup{ImGui::End};
@@ -65,7 +65,7 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::setSize(const Size &newSize) {
-  Resizable::setSize(newSize);  //FIXME change this to SetNextWindowSize
+  Resizable::setSize(newSize);  // FIXME change this to SetNextWindowSize
   ImGui::SetWindowSize(idLabel.c_str(), getSize().asImVec());
 }
 

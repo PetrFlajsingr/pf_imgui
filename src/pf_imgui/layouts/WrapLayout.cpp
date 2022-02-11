@@ -23,8 +23,8 @@ WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDir
     : BoxLayout(elementName, layoutDirection, size, allowCollapse, persistent) {}
 
 void WrapLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};

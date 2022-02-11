@@ -76,8 +76,8 @@ class PF_IMGUI_EXPORT MemoryEditor : public ItemElement, public AllColorCustomiz
 
  protected:
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     memoryEditor.DrawContents(std::ranges::data(range),
                               std::ranges::size(range) * sizeof(std::ranges::range_value_t<R>));
   }

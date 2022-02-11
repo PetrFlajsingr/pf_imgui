@@ -110,21 +110,21 @@ enum class Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };
 */
 // clang-format off
 enum class Anchor : uint8_t {
- Top =                 0x1,
- Left =                0x2,
- Bottom =              0x4,
- Right =               0x8,
- LeftRight =           Left   | Right,
- TopLeft =             Top    | Left,
- TopRight =            Top    | Right,
- TopBottom =           Top    | Bottom,
- BottomLeft =          Bottom | Left,
- BottomRight =         Bottom | Right,
- TopLeftRight =        Top    | Left  | Right,
- BottomLeftRight =     Bottom | Left  | Right,
- TopBottomLeft =       Top    | Left  | Bottom,
- TopBottomRight =      Top    | Right | Bottom,
- TopBottomLeftRight =  Top    | Left  | Bottom | Right
+  Top =                 0x1,
+  Left =                0x2,
+  Bottom =              0x4,
+  Right =               0x8,
+  LeftRight =           Left   | Right,
+  TopLeft =             Top    | Left,
+  TopRight =            Top    | Right,
+  TopBottom =           Top    | Bottom,
+  BottomLeft =          Bottom | Left,
+  BottomRight =         Bottom | Right,
+  TopLeftRight =        Top    | Left  | Right,
+  BottomLeftRight =     Bottom | Left  | Right,
+  TopBottomLeft =       Top    | Left  | Bottom,
+  TopBottomRight =      Top    | Right | Bottom,
+  TopBottomLeftRight =  Top    | Left  | Bottom | Right
 };
 // clang-format on
 

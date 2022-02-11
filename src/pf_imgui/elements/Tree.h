@@ -182,8 +182,8 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   }
 
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
@@ -280,8 +280,8 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
   }
 
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
@@ -440,8 +440,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
 
  protected:
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     layout.render();
   }
 

@@ -211,4 +211,4 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_LAYOUTS_BOXLAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_BOXLAYOUT_H

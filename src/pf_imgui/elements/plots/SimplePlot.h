@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOT_H
 #define PF_IMGUI_ELEMENTS_PLOT_H
 
+#include <algorithm>
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <ranges>

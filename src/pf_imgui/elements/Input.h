@@ -150,9 +150,9 @@ class PF_IMGUI_EXPORT Input
   using Data = details::InputData<details::InputUnderlyingType<T>>;
   Data data;
   struct Dummy {
-    Dummy(auto...) {}
-    operator details::InputUnderlyingType<T>() { return {}; }
-    operator std::string() { return {}; }
+    explicit(false) Dummy(auto...) {}
+    explicit(false) operator details::InputUnderlyingType<T>() { return {}; }
+    explicit(false) operator std::string() { return {}; }
   };
 
  public:

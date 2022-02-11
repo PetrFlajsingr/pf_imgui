@@ -80,4 +80,4 @@ class CommandPalette : public Element {
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_COMMANDPALETTE_H
+#endif  // PF_IMGUI_COMMANDPALETTE_H

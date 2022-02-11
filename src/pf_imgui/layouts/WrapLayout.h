@@ -6,6 +6,7 @@
 #define PF_IMGUI_WRAPLAYOUT_H
 
 #include "BoxLayout.h"
+#include <string>
 
 namespace pf::ui::ig {
 

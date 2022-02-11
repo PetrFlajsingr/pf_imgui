@@ -52,4 +52,4 @@ class PF_IMGUI_EXPORT Closeable {
 };
 
 }  // namespace pf::ui::ig
-#endif  //PF_IMGUI_CLOSEABLE_H
+#endif  // PF_IMGUI_CLOSEABLE_H

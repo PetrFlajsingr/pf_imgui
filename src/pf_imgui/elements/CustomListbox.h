@@ -48,8 +48,8 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
   using AllStyleCustomizable::setStyleStack;
 
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     if (ImGui::BeginListBox(getLabel().c_str(), getSize().asImVec())) {
       RAII end{ImGui::EndListBox};
       std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });

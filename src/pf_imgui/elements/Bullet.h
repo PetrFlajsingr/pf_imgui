@@ -44,4 +44,4 @@ class PF_IMGUI_EXPORT Bullet : public T {
 };
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H

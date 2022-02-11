@@ -34,8 +34,8 @@ Tab::Tab(const std::string &elementName, const std::string &label, bool closeabl
 Tab::~Tab() { delete open; }
 
 void Tab::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
 
   const auto wasOpen = isOpen();
   const auto wasSelected = selected;

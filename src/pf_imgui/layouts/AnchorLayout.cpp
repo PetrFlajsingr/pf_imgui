@@ -40,6 +40,7 @@ void AnchorLayout::setChildPosition(const std::string &childName, Position posit
 #endif
   }
 }
+
 void AnchorLayout::removeChild(const std::string &childName) {
   if (auto iter = std::ranges::find_if(
           children, [childName](const auto &child) { return child.element->getName() == childName; });
@@ -47,6 +48,7 @@ void AnchorLayout::removeChild(const std::string &childName) {
     children.erase(iter);
   }
 }
+
 void AnchorLayout::setSize(const Size &s) {
   using namespace pf::enum_operators;
   const auto deltaWidth = s.width - getSize().width;
@@ -69,8 +71,8 @@ void AnchorLayout::setSize(const Size &s) {
 }
 
 void AnchorLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
