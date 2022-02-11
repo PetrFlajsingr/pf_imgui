@@ -17,6 +17,11 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT AppStatusBar : public Element, public ElementContainer {
  public:
+  struct Config {
+    using Parent = AppStatusBar;
+    std::string_view name;
+  };
+  explicit AppStatusBar(Config &&config);
   /**
    * Construct AppStatusBar.
    * @param name unique name of the element

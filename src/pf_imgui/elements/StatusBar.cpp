@@ -7,6 +7,8 @@
 
 namespace pf::ui::ig {
 
+AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : Element(std::string{config.name}) {}
+
 AppStatusBar::AppStatusBar(const std::string &name) : Element(name) {}
 
 void AppStatusBar::renderImpl() {
@@ -24,6 +26,7 @@ void AppStatusBar::renderImpl() {
     }
   }
 }
+
 float AppStatusBar::getHeight() const { return height; }
 
 }  // namespace pf::ui::ig
