@@ -26,14 +26,21 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable {
  public:
+  /**
+   * @brief Struct for construction of Plot.
+   */
   struct Config {
     using Parent = Plot;
-    std::string_view name;
-    std::string_view label;
-    std::optional<std::string> xLabel = std::nullopt;
-    std::optional<std::string> yLabel = std::nullopt;
-    Size size = Size::FillWidth();
+    std::string_view name;                            /*!< Unique name of the element */
+    std::string_view label;                           /*!< Text rendered above the plot */
+    std::optional<std::string> xLabel = std::nullopt; /*!< Label of X axis */
+    std::optional<std::string> yLabel = std::nullopt; /*!< Label of Y axis */
+    Size size = Size::FillWidth();                    /*!< Size of the element */
   };
+  /**
+   * Construct Plot.
+   * @param config construction args @see Plot::Config
+   */
   explicit Plot(Config &&config);
   /**
    * Construct Plot.
