@@ -11,6 +11,17 @@ namespace pf::ui::ig {
 
 class WrapLayout : public BoxLayout {
  public:
+  struct Config {
+    using Parent = WrapLayout;
+    std::string_view name;
+    LayoutDirection layoutDirection;
+    Size size;
+    AllowCollapse allowCollapse = AllowCollapse::No;
+    ShowBorder showBorder = ShowBorder::No;
+    Persistent persistent = Persistent::No;
+  };
+  explicit WrapLayout(Config &&config);
+
   WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
              AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
              Persistent persistent = Persistent::No);

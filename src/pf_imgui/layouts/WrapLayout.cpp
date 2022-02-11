@@ -6,6 +6,10 @@
 
 namespace pf::ui::ig {
 
+WrapLayout::WrapLayout(WrapLayout::Config &&config)
+    : BoxLayout(std::string{config.name}, config.layoutDirection, config.size, config.allowCollapse, config.showBorder,
+                config.persistent) {}
+
 WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
                        AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : BoxLayout(elementName, layoutDirection, size, allowCollapse, showBorder, persistent) {}
