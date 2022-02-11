@@ -32,6 +32,15 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
  public:
+  struct Config {
+    using Parent = AnchorLayout;
+    std::string_view name;
+    Size size;
+    AllowCollapse allowCollapse = AllowCollapse::No;
+    ShowBorder showBorder = ShowBorder::No;
+    Persistent persistent = Persistent::No;
+  };
+  explicit AnchorLayout(Config &&config);
   /**
    * Construct AnchorLayout.
    * @param elementName ID of the layout
@@ -72,7 +81,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
     *
     * @throws DuplicateIdException when an ID is already present in the container
     */
-  template<typename T, typename... Args> // TODO: createChild for Configs
+  template<typename T, typename... Args>  // TODO: createChild for Configs
   requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
   auto &createChild(ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
 #ifndef _MSC_VER  // TODO: MSVC c3779

@@ -8,6 +8,10 @@
 
 namespace pf::ui::ig {
 
+AnchorLayout::AnchorLayout(AnchorLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent) {}
+
 AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                            ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
@@ -80,4 +84,5 @@ void AnchorLayout::renderImpl() {
     }
   }
 }
+
 }  // namespace pf::ui::ig
