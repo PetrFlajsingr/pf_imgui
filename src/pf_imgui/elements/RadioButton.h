@@ -31,6 +31,13 @@ class PF_IMGUI_EXPORT RadioButton
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   friend class RadioGroup;
+  struct Config {
+    using Parent = RadioButton;
+    std::string_view name;
+    std::string_view label;
+    bool selected = false;
+  };
+  explicit RadioButton(Config &&config);
   /**
    * Construct RadioButton.
    * @param elementName ID of the button
