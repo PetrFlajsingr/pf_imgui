@@ -8,6 +8,8 @@
 
 namespace pf::ui::ig {
 
+Tooltip::Tooltip(Tooltip::Config &&config) : Element(std::string{config.name}) {}
+
 Tooltip::Tooltip(const std::string &elementName) : Element(elementName) {}
 
 void Tooltip::renderImpl() {
