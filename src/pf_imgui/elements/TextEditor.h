@@ -18,6 +18,17 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resizable {
  public:
   enum class Highlight { GLSL, HLSL, AngelScript, Lua, C, CPP, SQL };
+
+  struct Config {
+    using Parent = TextEditor;
+    std::string_view name;
+    std::string value{};
+    Size size = Size::Auto();
+    Persistent persistent = Persistent::No;
+  };
+
+  explicit TextEditor(Config &&config);
+
   TextEditor(const std::string &name, const std::string &value, Size s = Size::Auto(),
              Persistent persistent = Persistent::No);
 
