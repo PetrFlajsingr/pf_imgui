@@ -94,6 +94,20 @@ class PF_IMGUI_EXPORT Slider
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   using MinMaxType = details::SliderMinMaxType<T>;
+  struct Config {
+    using Parent = Slider;
+    std::string_view name;
+    std::string_view label;
+    MinMaxType min;
+    MinMaxType max;
+    T value{};
+    std::string format = details::defaultSliderFormat<MinMaxType>();
+    Persistent persistent = Persistent::No;
+  };
+  explicit Slider(Config &&config)
+      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), min(config.min), max(config.max),
+        format(std::move(config.format)) {}
   /**
    * Construct Slider.
    * @param elementName ID of the slider
