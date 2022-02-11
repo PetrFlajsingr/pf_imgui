@@ -37,6 +37,21 @@ class PF_IMGUI_EXPORT FlameGraph
                                style::ColorOf::Text> {
  public:
   /**
+   * @brief Struct for construction of FlameGraph.
+   */
+  struct Config {
+    using Parent = FlameGraph;
+    std::string_view name;                             /*!< Unique name of the element */
+    std::string_view label;                            /*!< Text rendered next to the graph */
+    Size size = Size::Auto();                          /*!< Size of the element */
+    std::optional<std::string> overlay = std::nullopt; /*!< Text rendered on top of the graph */
+  };
+  /**
+   * Construct FlameGraph
+   * @param config construction args @see FlameGraph::Config
+   */
+  explicit FlameGraph(Config &&config);
+  /**
    * Construct FlameGraph.
    * @param elementName ID of the element
    * @param label text drawn at the top of the graph

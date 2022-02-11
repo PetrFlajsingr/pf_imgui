@@ -16,11 +16,19 @@ namespace pf::ui::ig {
 
 /**
  * @brief Wrapper for an element rendering a bullet point next to it.
- * @tparam T element rendered next to the bullet
+ * @tparam T element rendered next to the bulletW
  */
 template<std::derived_from<Element> T>
 class PF_IMGUI_EXPORT Bullet : public T {
  public:
+  /**
+   * @brief Struct for construction of Bullet
+   */
+  struct Config {
+    using Parent = Bullet;
+    typename T::Config config; /*!< Config of the underlying Element */
+    operator typename T::Config() { return config; }
+  };
   /**
    * Construct Bullet.
    * @tparam Args types of arguments for T's constructor
@@ -39,4 +47,4 @@ class PF_IMGUI_EXPORT Bullet : public T {
 };
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
+#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H

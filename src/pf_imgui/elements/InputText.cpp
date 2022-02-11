@@ -10,6 +10,17 @@
 
 namespace pf::ui::ig {
 
+InputText::InputText(InputText::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(""),
+      Savable(config.persistent), DragSource<std::string>(false), DropTarget<std::string>(false),
+      text(std::move(config.value)), buffer(std::unique_ptr<char[]>(new char[config.maxInputLength + 1])),
+      bufferLength(config.maxInputLength), inputType(config.inputType) {
+  setTextInner(text);
+  setValueInner(text);
+  flags |= static_cast<ImGuiInputTextFlags>(*config.filters);
+  if (config.eventTrigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
+}
+
 InputText::InputText(const std::string &elementName, std::string label, const std::string &value,
                      TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
                      const Flags<TextFilter> &filters, Persistent persistent)
@@ -24,8 +35,8 @@ InputText::InputText(const std::string &elementName, std::string label, const st
 }
 
 void InputText::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
     valueChanged = ImGui::InputText(getLabel().c_str(), buffer.get(), 256, flags);
@@ -48,6 +59,7 @@ void InputText::renderImpl() {
     }
   }
 }
+
 void InputText::clear() {
   text = "";
   buffer[0] = '\0';

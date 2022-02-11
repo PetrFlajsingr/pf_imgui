@@ -64,6 +64,21 @@ class PF_IMGUI_EXPORT ButtonBase : public ItemElement, public Clickable {
 class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
  public:
   /**
+   * @brief Struct for construction of InvisibleButton.
+   */
+  struct Config {
+    using Parent = InvisibleButton;
+    std::string_view name;                       /*!< Unique name of the element */
+    Size size = Size::Auto();                    /*!< Size of the element */
+    MouseButton clickButton = MouseButton::Left; /*!< Mouse button to which the button reacts */
+    Repeatable repeatable = Repeatable::No;      /*!< Enable repeated listener callback on mouse down */
+  };
+  /**
+   * Construct InvisibleButton
+   * @param config construction args @see InvisibleButton::Config
+   */
+  explicit InvisibleButton(Config &&config);
+  /**
    * Create InvisibleButton.
    * @param elementName unique name
    * @param s size on screen
@@ -96,6 +111,21 @@ class PF_IMGUI_EXPORT Button
                                style::Style::ButtonTextAlign> {
  public:
   /**
+   * @brief Struct for construction of Button.
+   */
+  struct Config {
+    using Parent = Button;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered on the button */
+    Size size = Size::Auto();               /*!< Size of the button */
+    Repeatable repeatable = Repeatable::No; /*!< Enable repeated listener callback on mouse down */
+  };
+  /**
+   * Construct Button
+   * @param config construction args @see Button::Config
+   */
+  explicit Button(Config &&config);
+  /**
    * Construct Button
    * @param name unique name of the element
    * @param label text rendered on the button
@@ -124,6 +154,16 @@ class PF_IMGUI_EXPORT SmallButton
                                style::Style::ButtonTextAlign> {
  public:
   /**
+   * @brief Struct for construction of SmallButton.
+   */
+  struct Config {
+    using Parent = SmallButton;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered on the button */
+    Repeatable repeatable = Repeatable::No; /*!< Enable repeated listener callback on mouse down */
+  };
+  explicit SmallButton(Config &&config);
+  /**
    * Construct SmallButton
    * @param name unique name of the element
    * @param label text rendered on the button
@@ -148,6 +188,17 @@ class PF_IMGUI_EXPORT ArrowButton
                                style::Style::ButtonTextAlign> {
  public:
   enum class Dir { Up = ImGuiDir_Up, Left = ImGuiDir_Left, Right = ImGuiDir_Right, Down = ImGuiDir_Down };
+  struct Config {
+    using Parent = ArrowButton;
+    std::string_view name;                  /*!< Unique name of the element */
+    Dir direction;                          /*!< Direction of the arrow rendered on the button */
+    Repeatable repeatable = Repeatable::No; /*!< Enable repeated listener callback on mouse down */
+  };
+  /**
+   * Construct ArrowButton
+   * @param config construction args @see ArrowButton::Config
+   */
+  explicit ArrowButton(Config &&config);
   /**
    * Construct ArrowButton
    * @param name unique name of the element

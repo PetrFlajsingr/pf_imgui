@@ -8,6 +8,9 @@
 
 namespace pf::ui::ig {
 
+PieChart::PieChart(PieChart::Config &&config)
+    : Element(std::string{config.name}), Labellable(std::string{config.label}), Resizable(config.size) {}
+
 PieChart::PieChart(const std::string &name, const std::string &label, const Size &size)
     : Element(name), Labellable(label), Resizable(size) {}
 

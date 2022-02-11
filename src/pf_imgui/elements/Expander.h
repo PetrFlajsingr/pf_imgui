@@ -26,6 +26,21 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, public Labellable, public Collapsible {
  public:
   /**
+   * @brief Struct for construction of Expander.
+   */
+  struct Config {
+    using Parent = Expander;
+    std::string_view name;                            /*!< Unique name of the element */
+    std::string_view label;                           /*!< Text rendered in the header of the Expander */
+    AllowCollapse allowCollapse = AllowCollapse::Yes; /*!< Enable/disable collapse functionality */
+    Persistent persistent = Persistent::No;           /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct Expander
+   * @param config construction args @see Expander::Config
+   */
+  explicit Expander(Config &&config);
+  /**
    * Construct Expander.
    * @param elementName ID of the group
    * @param label text drawn on top of the Expander

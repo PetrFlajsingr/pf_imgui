@@ -49,6 +49,28 @@ class PF_IMGUI_EXPORT Slider2D
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
+   * @brief Struct for construction of Slider2D.
+   */
+  struct Config {
+    using Parent = Slider2D;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to element */
+    StorageType min;                        /*!< Minimum allowed value */
+    StorageType max;                        /*!< Maximum allowed value */
+    StorageType value{};                    /*!< Initial value */
+    Size size = Size::Auto();               /*!< Size of the element */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct Slider2D
+   * @param config construction args @see Slider2D::Config
+   */
+  explicit Slider2D(Config &&config)
+      : ItemElement(std::string{config.name}),
+        Labellable(std::string{config.label}), ValueObservable<StorageType>(config.value),
+        Savable(config.persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false),
+        Resizable(config.size), extremesX(config.min.x, config.max.x), extremesY(config.min.y, config.max.y) {}
+  /**
    * Construct Slider2d.
    * @param elementName ID of the slider
    * @param label text rendered above the slider

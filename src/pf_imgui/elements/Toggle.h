@@ -32,6 +32,21 @@ class PF_IMGUI_EXPORT Toggle
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
+   * @brief Struct for construction of Toggle.
+   */
+  struct Config {
+    using Parent = Toggle;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the element */
+    bool enabled = false;                   /*!< Initial state */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct Toggle
+   * @param config construction args @see Toggle::Config
+   */
+  explicit Toggle(Config &&config);
+  /**
    * Construct Toggle.
    * @param elementName ID of the checkbox
    * @param label label drawn next to the checkbox
@@ -64,4 +79,4 @@ class PF_IMGUI_EXPORT Toggle
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_TOGGLE_H
+#endif  // PF_IMGUI_TOGGLE_H

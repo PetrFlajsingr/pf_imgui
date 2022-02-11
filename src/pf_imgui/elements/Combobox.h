@@ -1,9 +1,9 @@
 /**
- * @file Combobox.h
- * @brief Selectable combobox.
- * @author Petr Flajšingr
- * @date 4.6.21
- */
+* @file Combobox.h
+* @brief Selectable combobox.
+* @author Petr Flajšingr
+* @date 4.6.21
+*/
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
@@ -49,27 +49,47 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
                                  public ValueObservable<T>,
                                  public Savable,
                                  public DragSource<T> {
-  using CustomCombobox = CustomCombobox<T, Selectable>;
-  using CustomCombobox::filteredItems;
-  using CustomCombobox::flags;
-  using CustomCombobox::items;
+  using CustomComboboxBase = CustomCombobox<T, Selectable>;
+  using CustomComboboxBase::filteredItems;
+  using CustomComboboxBase::flags;
+  using CustomComboboxBase::items;
 
  public:
-  using CustomCombobox::addItem;
-  using CustomCombobox::addItems;
-  using CustomCombobox::checkClose;
-  using CustomCombobox::clearFilter;
-  using CustomCombobox::getItems;
-  using CustomCombobox::getLabel;
-  using CustomCombobox::getName;
-  using CustomCombobox::getPreviewValue;
-  using CustomCombobox::getShownItemCount;
-  using CustomCombobox::removeItem;
-  using CustomCombobox::removeItemIf;
-  using CustomCombobox::setFilter;
-  using CustomCombobox::setItems;
-  using CustomCombobox::setPreviewValue;
-  using CustomCombobox::setShownItemCount;
+  using CustomComboboxBase::addItem;
+  using CustomComboboxBase::addItems;
+  using CustomComboboxBase::checkClose;
+  using CustomComboboxBase::clearFilter;
+  using CustomComboboxBase::getItems;
+  using CustomComboboxBase::getLabel;
+  using CustomComboboxBase::getName;
+  using CustomComboboxBase::getPreviewValue;
+  using CustomComboboxBase::getShownItemCount;
+  using CustomComboboxBase::removeItem;
+  using CustomComboboxBase::removeItemIf;
+  using CustomComboboxBase::setFilter;
+  using CustomComboboxBase::setItems;
+  using CustomComboboxBase::setPreviewValue;
+  using CustomComboboxBase::setShownItemCount;
+
+  /**
+    * @brief Struct for construction of Combobox.
+    */
+  struct Config {
+    using Parent = Combobox;
+    std::string_view name;                                /*!< Unique name of the element */
+    std::string_view label;                               /*!< Text rendered next to the Combobox */
+    std::string preview;                                  /*!< Preview value shown when no item is selected */
+    ComboBoxCount shownItemCount = ComboBoxCount::Items8; /*!< Amount of items shown when Combobox is open */
+    Persistent persistent = Persistent::Yes;              /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct Combobox
+   * @param config construction args @see Combobox::Config
+   */
+  explicit Combobox(Config &&config)
+      : CustomComboboxBase(std::string{config.name}, std::string{config.label}, details::ComboboxRowFactory<T>{},
+                           std::string{config.preview}, config.shownItemCount),
+        ValueObservable<T>(), Savable(config.persistent), DragSource<T>(false) {}
   /**
    * Construct Combobox.
    * @param elementName ID of the element
@@ -84,7 +104,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
            Persistent persistent =
                Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
                                             &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomCombobox(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
+      : CustomComboboxBase(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
         ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
   }
@@ -167,8 +187,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   }
 
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     const char *previewPtr;
     if (selectedItemIndex.has_value()) {
       previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();

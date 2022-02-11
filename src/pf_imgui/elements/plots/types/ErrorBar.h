@@ -46,7 +46,8 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
         | ranges::to_vector;
   }
 
- protected : void renderImpl() override {
+ protected:
+  void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
       ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     } else {

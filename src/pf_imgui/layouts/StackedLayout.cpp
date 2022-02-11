@@ -12,6 +12,10 @@
 
 namespace pf::ui::ig {
 
+StackedLayout::StackedLayout(StackedLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent) {}
+
 StackedLayout::Stack::Stack(StackedLayout &parent) : parent(parent) {}
 
 void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
@@ -20,17 +24,9 @@ StackedLayout::StackedLayout(const std::string &elementName, const Size &size, A
                              ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
 
-StackedLayout::StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                             Persistent persistent)
-    : StackedLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
-
-StackedLayout::StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                             Persistent persistent)
-    : StackedLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
-
 void StackedLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};

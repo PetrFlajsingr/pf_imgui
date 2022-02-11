@@ -13,6 +13,7 @@
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
+#include <pf_imgui/meta.h>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <unordered_map>
@@ -36,22 +37,22 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   /**
   * Create a child and append it to the end of children.
   *
-  * @throws DuplicateIdException when an ID is already present in the container
   * @tparam T type of created Element
   * @tparam Args arguments to pass to the Ts constructor after its name
-  * @param name ID of the newly created element
   * @param args arguments to pass to the Ts constructor after its nam
   * @return reference to the newly created Element
   */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
-  createChild(std::string name, Args &&...args) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    if (const auto iter = children.find(name); iter != children.end()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
-    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChild(Args &&...args) {
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    addChild(std::move(child));
+    return *ptr;
+  }
+
+  template<ElementConstructConfig T>
+  std::derived_from<Element> auto &createChild(T &&config) {
+    auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     addChild(std::move(child));
     return *ptr;
@@ -66,19 +67,19 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  * @param name ID of the newly created element
  * @param args arguments to pass to the Ts constructor after its nam
  * @return reference to the newly created Element
- *
- * @throws DuplicateIdException when an ID is already present in the container
- * @throws InvalidArgumentException when index is out of bounds
  */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
-  createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    if (const auto iter = children.find(name); iter != children.end()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
-    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChildAtIndex(std::size_t index,
+                                                                                                      Args &&...args) {
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    insertChild(std::move(child), index);
+    return *ptr;
+  }
+
+  template<ElementConstructConfig T>
+  std::derived_from<Element> auto &createChildAtIndex(std::size_t index, T &&config) {
+    auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     insertChild(std::move(child), index);
     return *ptr;

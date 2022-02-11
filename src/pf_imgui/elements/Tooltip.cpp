@@ -8,11 +8,13 @@
 
 namespace pf::ui::ig {
 
+Tooltip::Tooltip(Tooltip::Config &&config) : Element(std::string{config.name}) {}
+
 Tooltip::Tooltip(const std::string &elementName) : Element(elementName) {}
 
 void Tooltip::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   ImGui::BeginTooltip();
   RAII end{ImGui::EndTooltip};
   std::ranges::for_each(getChildren(), &Renderable::render);

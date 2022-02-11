@@ -31,6 +31,8 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  * Rows are created using a factory from stored value.
  * @tparam T type stored in each row
  * @tparam R type stored in each row
+ *
+ * @todo: Config
  */
 template<typename T, std::derived_from<Renderable> R>
 class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labellable {
@@ -81,8 +83,8 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
   using AllColorCustomizable::setColorStack;
   using AllStyleCustomizable::setStyleStack;
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     const char *previewPtr = previewValue.c_str();
     if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
       RAII end{ImGui::EndCombo};

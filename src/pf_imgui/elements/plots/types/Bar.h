@@ -39,4 +39,4 @@ class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotD
 };
 }  // namespace pf::ui::ig::plot_type
 
-#endif  //PF_IMGUI_ELEMENTS_PLOTS_TYPES_BAR_H
+#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_BAR_H

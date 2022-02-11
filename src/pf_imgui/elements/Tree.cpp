@@ -11,6 +11,16 @@ details::TreeRecord::TreeRecord(const std::string &elementName, const std::strin
                                 const Flags<ImGuiTreeNodeFlags_> &defaultFlags)
     : ItemElement(elementName), Labellable(label), flags(defaultFlags) {}
 
+TreeLeaf::TreeLeaf(TreeLeaf::Config &&config)
+    : TreeRecord(std::string{config.name}, std::string{config.label}, ImGuiTreeNodeFlags_Leaf),
+      ValueObservable(config.selected), Savable(config.persistent) {
+  if (config.selected) {
+    flags |= ImGuiTreeNodeFlags_Selected;
+  } else {
+    flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
+  }
+}
+
 TreeLeaf::TreeLeaf(const std::string &elementName, const std::string &label, bool selected, Persistent persistent)
     : TreeRecord(elementName, label, ImGuiTreeNodeFlags_Leaf), ValueObservable(selected), Savable(persistent) {
   if (selected) {

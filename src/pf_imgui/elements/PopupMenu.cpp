@@ -7,6 +7,8 @@
 
 namespace pf::ui::ig {
 
+PopupMenu::PopupMenu(PopupMenu::Config &&config) : Element(std::string{config.name}) {}
+
 PopupMenu::PopupMenu(const std::string &name) : Element(name) {}
 
 void PopupMenu::open() { opened = true; }
@@ -20,8 +22,8 @@ void PopupMenu::close() {
 
 void PopupMenu::renderImpl() {
   if (opened) {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     if (firstRender) { ImGui::OpenPopup(getName().c_str()); }
     if (ImGui::BeginPopup(getName().c_str())) {
       RAII end{ImGui::EndPopup};

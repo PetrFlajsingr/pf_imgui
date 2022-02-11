@@ -10,6 +10,15 @@
 
 namespace pf::ui::ig {
 
+Memo::Memo(Memo::Config &&config)
+    : Element(std::string{config.name}), Labellable(std::string{config.label}),
+      textAreaLayout(std::string{config.name} + "_memo_panel###", LayoutDirection::TopToBottom,
+                     Size{Width::Auto(), config.textAreaHeight}),
+      buttonsEnabled(config.buttonsEnabled), filterEnabled(config.filterEnabled), recordLimit(config.maxRecordCount) {
+  textAreaLayout.setScrollable(true);
+  rebuildPanel();
+}
+
 Memo::Memo(const std::string &elementName, const std::string &label, uint32_t textAHeight, bool buttonsEnabled,
            bool filterEnabled, const std::optional<std::size_t> &recordLimit)
     : Element(elementName), Labellable(label),
@@ -20,8 +29,8 @@ Memo::Memo(const std::string &elementName, const std::string &label, uint32_t te
 }
 
 void Memo::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (rebuild) { rebuildPanel(); }
   removeRecordsAboveLimit();
   ImGui::Text("%s", getLabel().c_str());
@@ -59,10 +68,10 @@ void Memo::rebuildPanel() {
     controlsLayout = std::make_unique<BoxLayout>(getName() + "button_filter_panel", LayoutDirection::LeftToRight,
                                                  Size{Width::Auto(), 20});
     if (buttonsEnabled) {
-      controlsLayout->createChild<Button>(getName() + "clear_btn", "Clear").addClickListener([this] {
+      controlsLayout->createChild(Button::Config{getName() + "clear_btn", "Clear"}).addClickListener([this] {
         clearRecords();
       });
-      controlsLayout->createChild<Button>(getName() + "copy_btn", "Copy").addClickListener([this] {
+      controlsLayout->createChild(Button::Config{getName() + "copy_btn", "Copy"}).addClickListener([this] {
         ImGui::SetClipboardText(std::string{getText()}.c_str());
       });
     }
@@ -75,7 +84,7 @@ void Memo::rebuildPanel() {
             };
           });
     }
-    controlsLayout->createChild<Checkbox>(getName() + "scroll_checkbox", "Scroll to bottom")
+    controlsLayout->createChild(Checkbox::Config{getName() + "scroll_checkbox", "Scroll to bottom"})
         .addValueListener([this](auto newVal) { scrollToBottom = newVal; });
   }
   textArea = &textAreaLayout.createChild<Text>(getName() + "memo_text", "Memo");

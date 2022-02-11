@@ -24,6 +24,23 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
  public:
   /**
+   * @brief Struct for construction of StretchLayout.
+   */
+  struct Config {
+    using Parent = StretchLayout;
+    std::string_view name;                           /*!< Unique name of the element */
+    Size size;                                       /*!< Size of the element */
+    Stretch stretch;                                 /*!< Stretch direction */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct StretchLayout
+   * @param config construction args @see StretchLayout::Config
+   */
+  explicit StretchLayout(Config &&config);
+  /**
    * Construct StretchLayout.
    * @param elementName ID of the layout
    * @param size size of the layout
@@ -34,26 +51,6 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
    */
   StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
                 AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
-                Persistent persistent = Persistent::No);
-  /**
-   * Construct StretchLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param stretch dimension to which the layout stretches
-   * @param showBorder draw border around the layout
-   * @param persistent enable state saving
-   */
-  StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, ShowBorder showBorder,
-                Persistent persistent = Persistent::No);
-  /**
-   * Construct StretchLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param stretch dimension to which the layout stretches
-   * @param allowCollapse enable collapse button
-   * @param persistent enable state saving
-   */
-  StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, AllowCollapse allowCollapse,
                 Persistent persistent = Persistent::No);
 
   /**
@@ -67,10 +64,9 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
    *
    */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, std::string,
-                                                                                                       Args...>
-      T &createChild(std::string name, Args &&...args) {
-    auto origChild = std::make_unique<T>(name, std::forward<Args>(args)...);
+  requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, Args...> T &
+  createChild(Args &&...args) {  // TODO: createChild for Configs
+    auto origChild = std::make_unique<T>(std::forward<Args>(args)...);
     auto childPtr = origChild.get();
     child = std::move(origChild);
     renderableChild = dynamic_cast<Renderable *>(child.get());

@@ -74,4 +74,4 @@ class CommandPaletteWindow : public Renderable, public Closeable {
 };
 
 }  // namespace pf::ui::ig
-#endif  //PF_IMGUI_COMMANDPALETTEWINDOW_H
+#endif  // PF_IMGUI_COMMANDPALETTEWINDOW_H

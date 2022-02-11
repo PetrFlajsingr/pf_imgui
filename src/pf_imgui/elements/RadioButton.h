@@ -32,6 +32,20 @@ class PF_IMGUI_EXPORT RadioButton
  public:
   friend class RadioGroup;
   /**
+   * @brief Struct for construction of RadioButton.
+   */
+  struct Config {
+    using Parent = RadioButton;
+    std::string_view name;  /*!< Unique name of the element */
+    std::string_view label; /*!< Text rendered next to the radio button */
+    bool selected = false;  /*!< Initial state of the button */
+  };
+  /**
+   * Construct RadioButton
+   * @param config construction args @see RadioButton::Config
+   */
+  explicit RadioButton(Config &&config);
+  /**
    * Construct RadioButton.
    * @param elementName ID of the button
    * @param label text rendered next to the button

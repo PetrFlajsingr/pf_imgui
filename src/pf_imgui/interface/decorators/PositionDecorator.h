@@ -26,6 +26,12 @@ namespace pf::ui::ig {
 template<std::derived_from<Element> T>
 class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
  public:
+  struct Config {
+    using Parent = PositionDecorator;
+    Position position;
+    typename T::Config config;
+    operator typename T::Config() { return config; }
+  };
   /**
    * Construct PositionDecorator.
    * @tparam Args argument types for T's constructor
@@ -35,6 +41,8 @@ class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
   template<typename... Args>
   requires std::constructible_from<T, Args...>
   explicit PositionDecorator(Position pos, Args &&...args) : T(std::forward<Args>(args)...), Positionable(pos) {}
+
+  explicit PositionDecorator(Config &&config) : T(std::move(config.config)), Positionable(config.position) {}
 };
 
 }  // namespace pf::ui::ig

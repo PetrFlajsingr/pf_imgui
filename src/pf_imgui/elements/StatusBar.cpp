@@ -7,11 +7,13 @@
 
 namespace pf::ui::ig {
 
+AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : Element(std::string{config.name}) {}
+
 AppStatusBar::AppStatusBar(const std::string &name) : Element(name) {}
 
 void AppStatusBar::renderImpl() {
   ImGui::GetFrameHeight();
-  auto *viewport = (ImGuiViewportP *) (void *) ImGui::GetMainViewport();
+  auto *viewport = reinterpret_cast<ImGuiViewportP *>(ImGui::GetMainViewport());
   ImGuiWindowFlags window_flags =
       ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar;
   height = ImGui::GetFrameHeight();
@@ -24,6 +26,7 @@ void AppStatusBar::renderImpl() {
     }
   }
 }
+
 float AppStatusBar::getHeight() const { return height; }
 
 }  // namespace pf::ui::ig

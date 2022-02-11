@@ -36,6 +36,21 @@ enum class TabMod {
  */
 class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public Clickable {
  public:
+  /**
+   * @brief Struct for construction of TabButton.
+   */
+  struct Config {
+    using Parent = TabButton;
+    std::string_view name;  /*!< Unique name of the element */
+    std::string_view label; /*!< Text rendered on the element */
+    Flags<TabMod> mods{};   /*!< TabButton functionality modifiers */
+  };
+  /**
+   * Construct TabButton
+   * @param config construction args @see TabButton::Config
+   */
+  explicit TabButton(Config &&config);
+
   TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{});
 
   void setMods(const Flags<TabMod> &mods);
@@ -54,6 +69,21 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public 
 */
 class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  public:
+  /**
+   * @brief Struct for construction of Tab.
+   */
+  struct Config {
+    using Parent = Tab;
+    std::string_view name;  /*!< Unique name of the element */
+    std::string_view label; /*!< Text rendered on the element */
+    Flags<TabMod> mods{};   /*!< Functionality modifiers */
+    bool closeable = false; /*!< Enable the tab to be closed by a button */
+  };
+  /**
+   * Construct Tab
+   * @param config construction args @see Tab::Config
+   */
+  explicit Tab(Config &&config);
   /**
   * Construct Tab.
   * @param elementName ID of the Tab
@@ -114,6 +144,19 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
     ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown,
     Scroll = ImGuiTabBarFlags_FittingPolicyScroll
   };
+  /**
+   * @brief Struct for construction of TabBar.
+   */
+  struct Config {
+    using Parent = TabBar;
+    std::string_view name;     /*!< Unique name of the element */
+    bool allowTabList = false; /*!< Render a button showing all Tabs in a combobox */
+  };
+  /**
+   * Construct TabBar
+   * @param config construction args @see TabBar::Config
+   */
+  explicit TabBar(Config &&config);
   /**
   * Construct TabBar.
   * @param elementName ID of the TabBar

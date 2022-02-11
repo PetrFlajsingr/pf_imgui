@@ -35,6 +35,20 @@ class PF_IMGUI_EXPORT DockSpace
  public:
   using Id = ImGuiID;
   /**
+   * @brief Struct for construction of DockSpace.
+   */
+  struct Config {
+    using Parent = DockSpace;
+    std::string_view name;    /*!< Unique name of the element */
+    Size size = Size::Auto(); /*!< Size of the element */
+    Flags<DockType> flags{};  /*!< Flags to modify functionality */
+  };
+  /**
+   * Construct DockSpace
+   * @param config construction args @see DockSpace::Config
+   */
+  explicit DockSpace(Config &&config);
+  /**
    * Construct DockSpace
    * @param name ID of the element
    * @param s size of the area

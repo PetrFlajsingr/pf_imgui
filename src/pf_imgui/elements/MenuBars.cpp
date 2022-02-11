@@ -7,16 +7,20 @@
 
 namespace pf::ui::ig {
 
+WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : Element(std::string{config.name}) {}
+
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 
 void WindowMenuBar::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (ImGui::BeginMenuBar()) {
     RAII end{ImGui::EndMenuBar};
     renderItems();
   }
 }
+
+AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : Element(std::string{config.name}) {}
 
 AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 

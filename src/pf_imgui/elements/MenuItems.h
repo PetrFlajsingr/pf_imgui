@@ -89,7 +89,8 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
     return *ptr;
   }
 
- protected : void renderItems();
+ protected:
+  void renderItems();
 };
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.
@@ -105,6 +106,20 @@ class PF_IMGUI_EXPORT MenuButtonItem
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:
+  /**
+   * Construct MenuButtonItem
+   * @param config construction args @see MenuButtonItem::Config
+   */
+  struct Config {
+    using Parent = MenuButtonItem;
+    std::string_view name;  /*!< Unique name of the element */
+    std::string_view label; /*!< Text rendered on top of the button */
+  };
+  /**
+   * Construct MenuButtonItem
+   * @param config construction args @see MenuButtonItem::Config
+   */
+  explicit MenuButtonItem(Config &&config);
   /**
    * Construct MenuButtonItem.
    * @param elementName ID of the element
@@ -130,6 +145,21 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
+   * @brief Struct for construction of Checkbox.
+   */
+  struct Config {
+    using Parent = MenuCheckboxItem;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered on the item */
+    bool checked = false;                   /*!< Initial value */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct MenuCheckboxItem
+   * @param config construction args @see MenuCheckboxItem::Config
+   */
+  explicit MenuCheckboxItem(Config &&config);
+  /**
    * Construct MenuCheckboxItem.
    * @param elementName ID of the element
    * @param label text rendered on the button
@@ -152,6 +182,18 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
                                style::ColorOf::SeparatorActive> {
  public:
   /**
+   * @brief Struct for construction of Checkbox.
+   */
+  struct Config {
+    using Parent = MenuSeparatorItem;
+    std::string_view name; /*!< Unique name of the element */
+  };
+  /**
+   * Construct MenuSeparatorItem
+   * @param config construction args @see MenuSeparatorItem::Config
+   */
+  explicit MenuSeparatorItem(Config &&config);
+  /**
    * Construct MenuSeparatorItem.
    * @param elementName ID of the element
    */
@@ -165,6 +207,19 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
  */
 class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuContainer {
  public:
+  /**
+   * @brief Struct for construction of SubMenu.
+   */
+  struct Config {
+    using Parent = SubMenu;
+    std::string_view name;  /*!< Unique name of the element */
+    std::string_view label; /*!< Text rendered on the element */
+  };
+  /**
+   * Construct SubMenu
+   * @param config construction args @see SubMenu::Config
+   */
+  explicit SubMenu(Config &&config);
   /**
    * Construct SubMenu.
    * @param elementName ID of the element

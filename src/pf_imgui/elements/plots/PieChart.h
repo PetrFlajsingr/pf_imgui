@@ -36,6 +36,20 @@ struct PF_IMGUI_EXPORT PieChartSample {
 class PF_IMGUI_EXPORT PieChart : public Element, public Labellable, public Resizable {
  public:
   /**
+   * @brief Struct for construction of PieChart.
+   */
+  struct Config {
+    using Parent = PieChart;
+    std::string_view name;  /*!< Unique name of the element */
+    std::string_view label; /*!< Text rendered above the chart */
+    Size size;              /*!< Size on display */
+  };
+  /**
+   * Construct PieChart
+   * @param config construction arguments @see PieChart::Config
+   */
+  explicit PieChart(Config &&config);
+  /**
    * Construct PieChart.
    * @param name ID of the chart
    * @param label text rendered above the chart
