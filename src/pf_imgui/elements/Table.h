@@ -46,6 +46,14 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
   };
 
  public:
+  struct Config {
+    using Parent = Table;
+    std::string_view name;
+    TableSettings<ColumnCount> settings;
+  };
+  explicit Table(Config &&config)
+      : Element(std::string{config.name}), Resizable(config.settings.size), header(config.settings.header),
+        flags(CreateFlags(config.settings.border, config.settings.options)) {}
   /**
    * Construct Table.
    * @param elementName unique name of the element
