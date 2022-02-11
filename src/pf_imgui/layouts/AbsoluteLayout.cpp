@@ -7,6 +7,10 @@
 
 namespace pf::ui::ig {
 
+AbsoluteLayout::AbsoluteLayout(AbsoluteLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent) {}
+
 AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                                ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
@@ -57,4 +61,5 @@ std::vector<Renderable *> AbsoluteLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.first.get(); })
       | ranges::to_vector;
 }
+
 }  // namespace pf::ui::ig
