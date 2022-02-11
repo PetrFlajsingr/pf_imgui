@@ -105,6 +105,12 @@ class PF_IMGUI_EXPORT MenuButtonItem
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:
+  struct Config {
+    using Parent = MenuButtonItem;
+    std::string_view name;
+    std::string_view label;
+  };
+  explicit MenuButtonItem(Config &&config);
   /**
    * Construct MenuButtonItem.
    * @param elementName ID of the element
@@ -129,6 +135,14 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
                                style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  struct Config {
+    using Parent = MenuCheckboxItem;
+    std::string_view name;
+    std::string_view label;
+    bool checked = false;
+    Persistent persistent = Persistent::No;
+  };
+  explicit MenuCheckboxItem(Config &&config);
   /**
    * Construct MenuCheckboxItem.
    * @param elementName ID of the element
@@ -151,6 +165,11 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
       public ColorCustomizable<style::ColorOf::Separator, style::ColorOf::SeparatorHovered,
                                style::ColorOf::SeparatorActive> {
  public:
+  struct Config {
+    using Parent = MenuSeparatorItem;
+    std::string_view name;
+  };
+  explicit MenuSeparatorItem(Config &&config);
   /**
    * Construct MenuSeparatorItem.
    * @param elementName ID of the element
@@ -165,6 +184,12 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
  */
 class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuContainer {
  public:
+  struct Config {
+    using Parent = SubMenu;
+    std::string_view name;
+    std::string_view label;
+  };
+  explicit SubMenu(Config &&config);
   /**
    * Construct SubMenu.
    * @param elementName ID of the element

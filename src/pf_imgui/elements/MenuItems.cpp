@@ -24,6 +24,9 @@ void MenuItem::render() {
   ImGui::PopItemFlag();
 }
 
+MenuButtonItem::MenuButtonItem(MenuButtonItem::Config &&config)
+    : MenuItem(std::string{config.name}), Labellable(std::string{config.label}) {}
+
 MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string &label)
     : MenuItem(elementName), Labellable(label) {}
 
@@ -39,6 +42,9 @@ void SubMenu::renderImpl() {
     renderItems();
   }
 }
+
+SubMenu::SubMenu(SubMenu::Config &&config)
+    : MenuItem(std::string{config.name}), Labellable(std::string{config.label}) {}
 
 SubMenu::SubMenu(const std::string &elementName, const std::string &label) : MenuItem(elementName), Labellable(label) {}
 
@@ -59,6 +65,10 @@ MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return
 
 void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
+MenuCheckboxItem::MenuCheckboxItem(MenuCheckboxItem::Config &&config)
+    : MenuItem(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.checked),
+      Savable(config.persistent) {}
+
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
                                    Persistent persistent)
     : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
@@ -76,6 +86,8 @@ void MenuCheckboxItem::unserialize_impl(const toml::table &src) {
 }
 
 toml::table MenuCheckboxItem::serialize_impl() const { return toml::table{{"checked", getValue()}}; }
+
+MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuItem(std::string{config.name}) {}
 
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 
