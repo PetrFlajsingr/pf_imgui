@@ -9,17 +9,14 @@
 
 namespace pf::ui::ig {
 
+StretchLayout::StretchLayout(StretchLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent),
+      stretch(config.stretch) {}
+
 StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
                              AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), stretch(stretch) {}
-
-StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, ShowBorder showBorder,
-                             Persistent persistent)
-    : StretchLayout(elementName, size, stretch, AllowCollapse::No, showBorder, persistent) {}
-
-StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
-                             AllowCollapse allowCollapse, Persistent persistent)
-    : StretchLayout(elementName, size, stretch, allowCollapse, ShowBorder::No, persistent) {}
 
 Stretch StretchLayout::getStretch() const { return stretch; }
 void StretchLayout::setStretch(Stretch newStretch) {
@@ -39,8 +36,8 @@ Element &StretchLayout::getChild() {
 }
 
 void StretchLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};

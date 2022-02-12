@@ -10,24 +10,21 @@
 
 namespace pf::ui::ig {
 
+BoxLayout::BoxLayout(BoxLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent),
+      layoutDirection(config.layoutDirection) {}
+
 BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
                      AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), layoutDirection(layoutDirection) {}
-
-BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                     ShowBorder showBorder, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, AllowCollapse::No, showBorder, persistent) {}
-
-BoxLayout::BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                     AllowCollapse allowCollapse, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, allowCollapse, ShowBorder::No, persistent) {}
 
 LayoutDirection BoxLayout::getLayoutDirection() const { return layoutDirection; }
 void BoxLayout::setLayoutDirection(LayoutDirection newLayoutDirection) { layoutDirection = newLayoutDirection; }
 
 void BoxLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};

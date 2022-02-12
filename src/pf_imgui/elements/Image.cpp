@@ -7,6 +7,10 @@
 
 namespace pf::ui::ig {
 
+Image::Image(Image::Config &&config)
+    : ItemElement(std::string{config.name}), Resizable(config.size), isButton_(config.isButton == IsButton::Yes),
+      textureId(config.textureId), uvMappingProvider(std::move(config.uvTextureMappingProvider)) {}
+
 Image::Image(const std::string &elementName, ImTextureID imTextureId, Size size, IsButton isBtn,
              Image::UvMappingProvider uvTextureMappingProvider)
     : ItemElement(elementName), Resizable(size), isButton_(isBtn == IsButton::Yes), textureId(imTextureId),
@@ -21,31 +25,30 @@ void Image::renderImpl() {
   } else {
     ImGui::Image(textureId, getSize().asImVec(), uvStart, uvEnd);
   }
-  //if (pixelInspectionTooltipEnabled) { // TODO: implement in derived
-  //  auto &io = ImGui::GetIO();
-  //  auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-  //  ImVec2 mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
-  //  mouseUVCoord.y = 1.f - mouseUVCoord.y;
+  // if (pixelInspectionTooltipEnabled) { // TODO: implement in derived
+  //   auto &io = ImGui::GetIO();
+  //   auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+  //   ImVec2 mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
+  //   mouseUVCoord.y = 1.f - mouseUVCoord.y;
   //
-  //  if (io.KeyShift && io.MouseDown[0] && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f) {
-  //    int width = getSize().width;
-  //    int height = getSize().height;
+  //   if (io.KeyShift && io.MouseDown[0] && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f) {
+  //     int width = getSize().width;
+  //     int height = getSize().height;
   //
-  //    imageInspect(width, height, pickerImage.GetBits(), mouseUVCoord, displayedTextureSize);
-  //  }
-  //}
+  //     imageInspect(width, height, pickerImage.GetBits(), mouseUVCoord, displayedTextureSize);
+  //   }
+  // }
 }
 
 void Image::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
-
 bool Image::isButton() const { return isButton_; }
 
-//bool Image::isPixelInspectionTooltipEnabled() const {
-//  return pixelInspectionTooltipEnabled;
-//}
+// bool Image::isPixelInspectionTooltipEnabled() const {
+//   return pixelInspectionTooltipEnabled;
+// }
 //
-//void Image::setPixelInspectionTooltipEnabled(bool enabled) {
-//  pixelInspectionTooltipEnabled = enabled;
-//}
+// void Image::setPixelInspectionTooltipEnabled(bool enabled) {
+//   pixelInspectionTooltipEnabled = enabled;
+// }
 
 }  // namespace pf::ui::ig

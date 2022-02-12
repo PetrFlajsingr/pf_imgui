@@ -50,12 +50,13 @@ const toml::table &ImGuiInterface::getConfig() const { return config; }
 void ImGuiInterface::updateConfig() {
   std::ranges::for_each(windows, [this](const auto &window) {
     auto serialisedTree = serializeImGuiTree(*window);
-    for (const auto &item : serialisedTree) { config.insert_or_assign(item.first, item.second); }
+    for (const auto &[key, value] : serialisedTree) { config.insert_or_assign(key, value); }
     if (menuBar != nullptr) {
       auto serialisedAppBar = serializeImGuiTree(*menuBar);
-      for (const auto &item : serialisedAppBar) { config.insert_or_assign(item.first, item.second); }
+      for (const auto &[key, value] : serialisedAppBar) { config.insert_or_assign(key, value); }
     }
   });
+  if (fileDialogBookmark.has_value()) { config.insert_or_assign("file_dialog_bookmark", fileDialogBookmark.value()); }
 }
 
 void ImGuiInterface::setStateFromConfig() {
@@ -74,9 +75,15 @@ void ImGuiInterface::setStateFromConfig() {
   };
   if (menuBar != nullptr) { serialiseSubtree(*menuBar); }
   std::ranges::for_each(windows, [&serialiseSubtree](auto &window) { serialiseSubtree(*window); });
+  if (auto iter = config.find("file_dialog_bookmark"); iter != config.end()) {
+    if (auto str = iter->second.as_string(); str != nullptr) { fileDialogBookmark = str->get(); }
+  }
 }
 
-void ImGuiInterface::addFileDialog(FileDialog &&dialog) { fileDialogs.push_back(std::move(dialog)); }
+void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
+  auto &dialogRef = fileDialogs.emplace_back(std::move(dialog));
+  if (fileDialogBookmark.has_value()) { dialogRef.deserializeBookmark(*fileDialogBookmark); }
+}
 
 FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) { return FileDialogBuilder(this, type); }
 
@@ -84,6 +91,7 @@ void ImGuiInterface::renderDialogs() {
   std::ranges::for_each(fileDialogs, &FileDialog::render);
   if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
       iter != fileDialogs.end()) {
+    fileDialogBookmark = iter->serializeBookmark();
     fileDialogs.erase(iter);
   }
   std::ranges::for_each(dialogs, [](auto &dialog) { dialog->render(); });
@@ -121,7 +129,7 @@ void ImGuiInterface::removePaletteWindow(const std::string &windowName) {
 
 void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
   auto remove = std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
-  commandPalettes.erase(remove.begin());
+  commandPalettes.erase(remove.begin(), remove.end());
 }
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
@@ -145,8 +153,8 @@ std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName
 }
 
 void ImGuiInterface::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (hasMenuBar()) { menuBar->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });

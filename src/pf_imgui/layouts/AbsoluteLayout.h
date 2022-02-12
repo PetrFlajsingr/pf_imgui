@@ -14,6 +14,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/decorators/PositionDecorator.h>
+#include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>
@@ -31,6 +32,22 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
  public:
   /**
+   * @brief Struct for construction of AbsoluteLayout.
+   */
+  struct Config {
+    using Parent = AbsoluteLayout;
+    std::string_view name;                           /*!< Unique name of the element */
+    Size size;                                       /*!< Size of the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct AbsoluteLayout
+   * @param config construction args @see AbsoluteLayout::Config
+   */
+  explicit AbsoluteLayout(Config &&config);
+  /**
    * Construct AbsoluteLayout.
    * @param elementName ID of the layout
    * @param size size of the layout
@@ -40,24 +57,6 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    */
   AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
                  ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
-  /**
-   * Construct AbsoluteLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param showBorder draw border around the layout
-   * @param persistent enable state saving
-   */
-  AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                 Persistent persistent = Persistent::No);
-  /**
-   * Construct AbsoluteLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param allowCollapse enable collapse button
-   * @param persistent enable state saving
-   */
-  AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                 Persistent persistent = Persistent::No);
 
   /**
    * Get all children of the layout as references.
@@ -83,24 +82,25 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
     * @param position position of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
     * @return reference to the newly created Element
-    *
-    * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...>
-  auto &createChild(std::string name, ImVec2 position, Args &&...args) {
-#ifndef _MSC_VER  // TODO: MSVC c3779
-    if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
-          return child->getName() == name;
-        }).has_value()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+  auto &createChild(ImVec2 position, Args &&...args) {
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
-    auto child = std::make_unique<CreateType>(position, name, std::forward<Args>(args)...);
+    auto child = std::make_unique<CreateType>(position, std::forward<Args>(args)...);
     const auto ptr = child.get();
-    children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
+    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
+    return *ptr;
+  }
+
+  template<ElementConstructConfig T>
+  typename T::Parent &createChild(ImVec2 position, T &&config) {
+    constexpr auto IsPositionable = std::derived_from<typename T::Parent, Positionable>;
+    using CreateType = std::conditional_t<IsPositionable, typename T::Parent, PositionDecorator<typename T::Parent>>;
+    auto child = std::make_unique<CreateType>(position, std::forward<T>(config));
+    const auto ptr = child.get();
+    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
     return *ptr;
   }
 
@@ -129,4 +129,4 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
 };
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H

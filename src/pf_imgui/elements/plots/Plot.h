@@ -27,6 +27,22 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable {
  public:
   /**
+   * @brief Struct for construction of Plot.
+   */
+  struct Config {
+    using Parent = Plot;
+    std::string_view name;                            /*!< Unique name of the element */
+    std::string_view label;                           /*!< Text rendered above the plot */
+    std::optional<std::string> xLabel = std::nullopt; /*!< Label of X axis */
+    std::optional<std::string> yLabel = std::nullopt; /*!< Label of Y axis */
+    Size size = Size::FillWidth();                    /*!< Size of the element */
+  };
+  /**
+   * Construct Plot.
+   * @param config construction args @see Plot::Config
+   */
+  explicit Plot(Config &&config);
+  /**
    * Construct Plot.
    * @param elementName ID of the plot
    * @param label rendered above the plot
@@ -60,7 +76,7 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    * @throw Exception when desired type doesn't match the storage data type
    */
   template<std::derived_from<plot_type::PlotData> T>
-  T &dataByName(const std::string &name) {
+  [[nodiscard]] T &dataByName(const std::string &name) {
     if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
         iter != datas.end()) {
       if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }

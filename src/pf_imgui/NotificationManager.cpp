@@ -27,10 +27,9 @@ void NotificationManager::renderNotifications() {
     notification->render();
     height = notification->height;
   });
-  notifications.erase(
-      std::ranges::begin(std::ranges::remove(notifications, NotificationPhase::Expired,
-                                             [](const auto &notification) { return notification->currentPhase; })),
-      std::ranges::end(notifications));
+  auto remove = std::ranges::remove(notifications, NotificationPhase::Expired,
+                                    [](const auto &notification) { return notification->currentPhase; });
+  notifications.erase(remove.begin(), remove.end());
 }
 
 Notification &NotificationManager::createNotification(NotificationType notificationType, const std::string &name,

@@ -13,17 +13,19 @@ namespace pf::ui::ig {
 
 Window::Window(std::string name, std::string label, AllowCollapse allowCollapse, Persistent persistent)
     : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
-      Positionable(Position{-1, -1}), Labellable(std::move(label)) {}
+      Positionable(Position{-1, -1}), Labellable(std::move(label)) {
+  refreshIdLabel();
+  addLabelListener([this](auto) { refreshIdLabel(); });
+}
 
 Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
-  const auto idLabel = fmt::format("{}##{}", getLabel(), getName()); // FIXME: this is unnecessarily slow
   RAII endPopup{ImGui::End};
   if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
@@ -63,8 +65,8 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::setSize(const Size &newSize) {
-  Resizable::setSize(newSize);  //FIXME change this to SetNextWindowSize
-  ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
+  Resizable::setSize(newSize);  // FIXME change this to SetNextWindowSize
+  ImGui::SetWindowSize(idLabel.c_str(), getSize().asImVec());
 }
 
 void Window::render() {
@@ -84,17 +86,17 @@ void Window::render() {
 }
 
 void Window::setCollapsed(bool collapse) {
-  ImGui::SetWindowCollapsed(getLabel().c_str(), collapse);
+  ImGui::SetWindowCollapsed(idLabel.c_str(), collapse);
   Collapsible::setCollapsed(collapse);
 }
 
 void Window::setFocus() {
-  ImGui::SetWindowFocus(getLabel().c_str());
+  ImGui::SetWindowFocus(idLabel.c_str());
   Focusable::setFocus();
 }
 
 void Window::setPosition(Position pos) {
-  ImGui::SetWindowPos(getLabel().c_str(), pos.asImVec());
+  ImGui::SetWindowPos(idLabel.c_str(), pos.asImVec());
   Positionable::setPosition(pos);
 }
 
@@ -172,5 +174,7 @@ void Window::setTitleBarVisible(bool visible) { titleBarVisible = visible; }
 bool Window::isStayInBackground() const { return stayInBackground; }
 
 void Window::setStayInBackground(bool stay) { stayInBackground = stay; }
+
+void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", getLabel(), getName()); }
 
 }  // namespace pf::ui::ig

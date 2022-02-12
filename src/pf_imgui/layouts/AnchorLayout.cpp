@@ -8,17 +8,13 @@
 
 namespace pf::ui::ig {
 
+AnchorLayout::AnchorLayout(AnchorLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent) {}
+
 AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                            ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
-
-AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                           Persistent persistent)
-    : AnchorLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
-
-AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                           Persistent persistent)
-    : AnchorLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
 
 std::vector<Renderable *> AnchorLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.element.get(); })
@@ -36,6 +32,7 @@ void AnchorLayout::setChildPosition(const std::string &childName, Position posit
 #endif
   }
 }
+
 void AnchorLayout::removeChild(const std::string &childName) {
   if (auto iter = std::ranges::find_if(
           children, [childName](const auto &child) { return child.element->getName() == childName; });
@@ -43,6 +40,7 @@ void AnchorLayout::removeChild(const std::string &childName) {
     children.erase(iter);
   }
 }
+
 void AnchorLayout::setSize(const Size &s) {
   using namespace pf::enum_operators;
   const auto deltaWidth = s.width - getSize().width;
@@ -65,8 +63,8 @@ void AnchorLayout::setSize(const Size &s) {
 }
 
 void AnchorLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
@@ -80,4 +78,5 @@ void AnchorLayout::renderImpl() {
     }
   }
 }
+
 }  // namespace pf::ui::ig

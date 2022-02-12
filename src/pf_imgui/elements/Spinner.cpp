@@ -8,6 +8,9 @@
 
 namespace pf::ui::ig {
 
+Spinner::Spinner(Spinner::Config &&config)
+    : ItemElement(std::string{config.name}), radius(config.radius), thickness(config.thickness) {}
+
 Spinner::Spinner(const std::string &elementName, float radius, int thickness)
     : ItemElement(elementName), radius(radius), thickness(thickness) {}
 

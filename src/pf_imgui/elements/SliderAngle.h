@@ -37,6 +37,24 @@ class PF_IMGUI_EXPORT SliderAngle
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   /**
+   * @brief Struct for construction of SliderAngle.
+   */
+  struct Config {
+    using Parent = SliderAngle;
+    std::string_view name;                  /*!< Unique name of the element */
+    std::string_view label;                 /*!< Text rendered next to the element */
+    float min;                              /*!< Minimum allowed value */
+    float max;                              /*!< Maximum allowed value */
+    float value{};                          /*!< Initial value */
+    std::string format = "%.0f deg";        /*!< Format string for value rendering */
+    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct SliderAngle
+   * @param config construction args @see SliderAngle::Config
+   */
+  explicit SliderAngle(Config &&config);
+  /**
    * Construct SliderAngle.
    * @param elementName ID of the slider
    * @param label text rendered next to the slider

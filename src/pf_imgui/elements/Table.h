@@ -27,9 +27,9 @@ namespace pf::ui::ig {
 template<std::size_t ColumnCount>
 struct PF_IMGUI_EXPORT TableSettings {
   std::optional<std::array<std::string, ColumnCount>> header = std::nullopt;
-  Flags<TableBorder> border;   /**< Type of border rendering. */
-  Flags<TableOptions> options; /**< Interaction options. */
-  Size size = Size::Auto();    /**< Size of the table. */
+  Flags<TableBorder> border;   /*!< Type of border rendering. */
+  Flags<TableOptions> options; /*!< Interaction options. */
+  Size size = Size::Auto();    /*!< Size of the table. */
 };
 
 /**
@@ -46,6 +46,21 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
   };
 
  public:
+  /**
+   * @brief Struct for construction of Table.
+   */
+  struct Config {
+    using Parent = Table;
+    std::string_view name;               /*!< Unique name of the element */
+    TableSettings<ColumnCount> settings; /*!< Table behavior settings */
+  };
+  /**
+   * Construct Table
+   * @param config construction args @see Table::Config
+   */
+  explicit Table(Config &&config)
+      : Element(std::string{config.name}), Resizable(config.settings.size), header(config.settings.header),
+        flags(CreateFlags(config.settings.border, config.settings.options)) {}
   /**
    * Construct Table.
    * @param elementName unique name of the element
@@ -105,8 +120,8 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
  protected:
   void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
+    [[maybe_unused]] auto colorStyle = setColorStack();
+    [[maybe_unused]] auto style = setStyleStack();
     if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, getSize().asImVec())) {
       RAII end{ImGui::EndTable};
       if (header.has_value()) {

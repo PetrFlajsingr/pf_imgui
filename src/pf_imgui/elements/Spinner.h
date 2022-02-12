@@ -19,6 +19,20 @@ class PF_IMGUI_EXPORT Spinner : public ItemElement,
                                 public StyleCustomizable<style::Style::FramePadding> {
  public:
   /**
+   * @brief Struct for construction of Checkbox.
+   */
+  struct Config {
+    using Parent = Spinner;
+    std::string_view name; /*!< Unique name of the element */
+    float radius;          /*<! Radius of the Spinner */
+    int thickness;         /*!< Thickness of rendered spinner line */
+  };
+  /**
+   * Construct Spinner
+   * @param config construction args @see Spinner::Config
+   */
+  explicit Spinner(Config &&config);
+  /**
    *
    * @param elementName unique element name
    * @param radius radius of the spin circle

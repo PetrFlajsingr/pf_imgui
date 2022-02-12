@@ -8,6 +8,10 @@
 
 namespace pf::ui::ig {
 
+Text::Text(Text::Config &&config)
+    : ItemElement(std::string{config.name}), DragSource<std::string>(false), DropTarget<std::string>(false),
+      text(std::move(config.text)), color(config.color) {}
+
 Text::Text(const std::string &elementName, std::string text)
     : ItemElement(elementName), DragSource<std::string>(false), DropTarget<std::string>(false), text(std::move(text)),
       color(std::nullopt) {}

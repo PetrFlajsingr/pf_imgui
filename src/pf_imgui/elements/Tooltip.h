@@ -22,6 +22,18 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Tooltip : public Element, public ElementContainer {
  public:
   /**
+   * @brief Struct for construction of Tooltip.
+   */
+  struct Config {
+    using Parent = Tooltip;
+    std::string_view name; /*!< Unique name of the element */
+  };
+  /**
+   * Construct Tooltip
+   * @param config construction args @see Tooltip::Config
+   */
+  explicit Tooltip(Config &&config);
+  /**
    * Construct Tooltip.
    * @param elementName ID of the tooltip
    */

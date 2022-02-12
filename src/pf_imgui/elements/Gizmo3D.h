@@ -48,6 +48,21 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
 
  public:
   /**
+   * @brief Struct for construction of Gizmo3D.
+   */
+  struct Config {
+    using Parent = Gizmo3D;
+    std::string_view name;                                  /*!< Unique name of the element */
+    ValueType value;                                        /*!< Initial value */
+    Size size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE}; /*!< Size of the element */
+  };
+  /**
+   * Construct Gizmo3D
+   * @param config construction args @see Gizmo3D::Config
+   */
+  explicit Gizmo3D(Config &&config)
+      : Element(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value) {}
+  /**
    * Construct Gizmo3D.
    * @param name unique name of the element
    * @param value starting value - needs to be valid, otherwise the element will malfunction
@@ -93,5 +108,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
  private:
   GizmoMid mid = GizmoMid::None;
 };
+
 }  // namespace pf::ui::ig
-#endif  //PF_IMGUI_GIZMO3D_H
+
+#endif  // PF_IMGUI_GIZMO3D_H

@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOT_H
 #define PF_IMGUI_ELEMENTS_PLOT_H
 
+#include <algorithm>
 #include <optional>
 #include <pf_imgui/_export.h>
 #include <ranges>
@@ -36,10 +37,31 @@ class PF_IMGUI_EXPORT SimplePlot
                                style::ColorOf::TextDisabled> {
  public:
   /**
+   * @brief Struct for construction of SimplePlot.
+   */
+  struct Config {
+    using Parent = SimplePlot;
+    std::string_view name;                             /*!< Unique name of the element */
+    std::string_view label;                            /*!< Text rendered above the plot */
+    PlotType type;                                     /*!< Type of the plot @see PlotType */
+    std::vector<float> values{};                       /*!< Initial values displayed on the plot */
+    std::optional<std::string> overlay = std::nullopt; /*!< Text rendered on top of the plot */
+    std::optional<std::size_t> maxHistoryCount =
+        std::nullopt;          /*!< Maximum amount of values rendered in the plot FIFO */
+    float scaleLow = FLT_MAX;  /*!< Lowest displayed value */
+    float scaleHigh = FLT_MAX; /*!< Highest displayed value */
+    Size size = Size::Auto();  /*!< Size of the element */
+  };
+  /**
+   * Construct SimplePlot.
+   * @param config construction args @see SimplePlot::Config
+   */
+  explicit SimplePlot(Config &&config);
+  /**
    * Construct SimplePlot.
    * @param elementName ID of the plot
    * @param text rendered above the plot
-   * @param plotType type of the plot @see PloType
+   * @param plotType type of the plot @see PlotType
    * @param values starting values of the plot
    * @param overlayText text rendered on top of the plot
    * @param historyLimit max count of values in plot, older ones are deleted first (FIFO)

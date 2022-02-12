@@ -10,6 +10,15 @@ namespace pf::ui::ig {
 
 bool FileDialog::isDone() const { return done; }
 
+#ifdef USE_BOOKMARK
+std::string FileDialog::serializeBookmark() {
+  return fileDialogInstance.SerializeBookmarks();
+}
+void FileDialog::deserializeBookmark(const std::string &bookmarkStr) {
+  fileDialogInstance.DeserializeBookmarks(bookmarkStr);
+}
+#endif
+
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
   for (const auto &[extNames, desc, color] : extSettings) {
     if (!desc.empty()) {
@@ -35,8 +44,8 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
 
 void FileDialog::renderImpl() {
   if (done) { return; }
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   switch (modal) {
     case Modal::Yes:
       fileDialogInstance.OpenModal(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,

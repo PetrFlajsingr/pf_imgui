@@ -32,6 +32,21 @@ class PF_IMGUI_EXPORT Text
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget> {
  public:
   /**
+   * @brief Struct for construction of Checkbox.
+   */
+  struct Config {
+    using Parent = Text;
+    std::string_view name; /*!< Unique name of the element */
+    std::string text{};    /*!< Text to render */
+    std::optional<ImVec4> color =
+        std::nullopt; /*!< Color of the rendered text TODO: maybe just remove this due to ColorCustomizable */
+  };
+  /**
+   * Construct Text
+   * @param config construction args @see Text::Config
+   */
+  explicit Text(Config &&config);
+  /**
   * Construct Text.
   * @param elementName ID of the element
   * @param text text to be rendered

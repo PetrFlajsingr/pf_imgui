@@ -9,6 +9,10 @@
 
 namespace pf::ui::ig {
 
+Plot::Plot(Plot::Config &&config)
+    : Element(std::string{config.name}), Labellable(std::string{config.label}), Resizable(config.size),
+      xLabel(std::move(config.xLabel)), yLabel(std::move(config.yLabel)) {}
+
 Plot::Plot(const std::string &elementName, const std::string &label, std::optional<std::string> xLabel,
            std::optional<std::string> yLabel, const Size &size)
     : Element(elementName), Labellable(label), Resizable(size), xLabel(std::move(xLabel)), yLabel(std::move(yLabel)) {}

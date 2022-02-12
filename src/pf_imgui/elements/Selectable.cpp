@@ -8,6 +8,10 @@
 
 namespace pf::ui::ig {
 
+Selectable::Selectable(Selectable::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.selected),
+      Resizable(config.size), Savable(config.persistent) {}
+
 Selectable::Selectable(const std::string &elementName, const std::string &label, bool value, Size s,
                        Persistent persistent)
     : ItemElement(elementName), Labellable(label), ValueObservable(value), Resizable(s), Savable(persistent) {}

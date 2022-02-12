@@ -53,9 +53,9 @@ enum class FileDialogType { Dir, File };
  * @todo: more SetFileStyle stuff
  * @todo: size constraints
  * @todo: key navigation
- * @todo: bookmarks + de/serialization
  * @todo: ImGuiFileDialogFlags_ConfirmOverwrite
  * @todo: thumbnails
+ * @todo: custom pane
  */
 class PF_IMGUI_EXPORT FileDialog : public Renderable,
                                    public Labellable,
@@ -113,6 +113,12 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
    * @return true if selected or canceled, false otherwise
    */
   [[nodiscard]] bool isDone() const;
+
+#ifdef USE_BOOKMARK
+  [[nodiscard]] std::string serializeBookmark();
+
+  void deserializeBookmark(const std::string &bookmarkStr);
+#endif
 
  protected:
   void renderImpl() override;

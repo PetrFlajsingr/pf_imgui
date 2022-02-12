@@ -7,21 +7,17 @@
 
 namespace pf::ui::ig {
 
+AbsoluteLayout::AbsoluteLayout(AbsoluteLayout::Config &&config)
+    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
+                      config.persistent) {}
+
 AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
                                ShowBorder showBorder, Persistent persistent)
     : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
 
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                               Persistent persistent)
-    : AbsoluteLayout(elementName, size, AllowCollapse::No, showBorder, persistent) {}
-
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                               Persistent persistent)
-    : AbsoluteLayout(elementName, size, allowCollapse, ShowBorder::No, persistent) {}
-
 void AbsoluteLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
@@ -57,4 +53,5 @@ std::vector<Renderable *> AbsoluteLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.first.get(); })
       | ranges::to_vector;
 }
+
 }  // namespace pf::ui::ig

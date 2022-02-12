@@ -236,6 +236,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void renderImpl() override;
 
  private:
+  void refreshIdLabel();
+
   std::unique_ptr<WindowMenuBar> menuBar = nullptr;
   std::optional<Size> minSizeConstraint = std::nullopt;
   std::optional<Size> maxSizeConstraint = std::nullopt;
@@ -257,6 +259,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool titleBarVisible = true;
   bool stayInBackground = false;
   // TODO: change flags so they are not computed every frame
+
+  std::string idLabel{};
 };
 
 }  // namespace pf::ui::ig

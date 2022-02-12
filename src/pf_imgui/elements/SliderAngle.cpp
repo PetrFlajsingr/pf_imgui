@@ -8,6 +8,11 @@
 
 namespace pf::ui::ig {
 
+SliderAngle::SliderAngle(SliderAngle::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.value),
+      Savable(config.persistent), DragSource<float>(false), DropTarget<float>(false), minDeg(config.min),
+      maxDeg(config.max), format(std::move(config.format)) {}
+
 SliderAngle::SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value,
                          Persistent persistent, std::string format)
     : ItemElement(elementName), Labellable(label), ValueObservable(value),

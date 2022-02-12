@@ -15,6 +15,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
 #include <string>
 #include <utility>
@@ -30,6 +31,23 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
  public:
   /**
+   * @brief Struct for construction of BoxLayout.
+   */
+  struct Config {
+    using Parent = BoxLayout;
+    std::string_view name;                           /*!< Unique name of the element */
+    LayoutDirection layoutDirection;                 /*!< Direction the element are rendered in */
+    Size size;                                       /*!< Size of the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct BoxLayout
+   * @param config construction args @see BoxLayout::Config
+   */
+  explicit BoxLayout(Config &&config);
+  /**
    * Construct BoxLayout.
    * @param elementName ID of the layout
    * @param layoutDirection direction of children stacking
@@ -41,26 +59,6 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
             Persistent persistent = Persistent::No);
-  /**
-   * Construct BoxLayout.
-   * @param elementName ID of the layout
-   * @param layoutDirection direction of children stacking
-   * @param size size of the layout
-   * @param showBorder draw layouts border
-   * @param persistent allow state saving
-   */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size, ShowBorder showBorder,
-            Persistent persistent = Persistent::No);
-  /**
-   * Construct BoxLayout.
-   * @param elementName ID of the layout
-   * @param layoutDirection direction of children stacking
-   * @param size size of the layout
-   * @param allowCollapse enable collapse button
-   * @param persistent allow state saving
-   */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-            AllowCollapse allowCollapse, Persistent persistent = Persistent::No);
 
   /**
    * Get current layout direction.
@@ -118,21 +116,18 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @param name ID of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
     * @return reference to the newly created Element
-    *
-    * @remark Duplicate check is disabled for MSVC
-    * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
-  createChild(std::string name, Args &&...args) {
-#ifndef _MSC_VER  // disabled because of C3779 error
-    if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
-          return child->getName() == name;
-        }).has_value()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
-    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChild(Args &&...args) {
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    pushChild(std::move(child));
+    return *ptr;
+  }
+
+  template<ElementConstructConfig T>
+  typename T::Parent &createChild(T &&config) {
+    auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     pushChild(std::move(child));
     return *ptr;
@@ -146,22 +141,19 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @param name ID of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
     * @return reference to the newly created Element
-    *
-    * @remark Duplicate check is disabled for MSVC
-    *
-    * @throws DuplicateIdException when an ID is already present in the container
     */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, std::string, Args...> T &
-  createChildAtIndex(std::size_t index, std::string name, Args &&...args) {
-#ifndef _MSC_VER  // disabled because of C3779 error
-    if (findIf(getChildren() | ranges::views::addressof, [name](const auto &child) {
-          return child->getName() == name;
-        }).has_value()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
-#endif
-    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChildAtIndex(std::size_t index,
+                                                                                                      Args &&...args) {
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
+    const auto ptr = child.get();
+    insertChild(std::move(child), index);
+    return *ptr;
+  }
+
+  template<ElementConstructConfig T>
+  typename T::Parent &createChildAtIndex(std::size_t index, T &&config) {
+    auto child = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto ptr = child.get();
     insertChild(std::move(child), index);
     return *ptr;
@@ -180,4 +172,4 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_LAYOUTS_BOXLAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_BOXLAYOUT_H

@@ -15,7 +15,7 @@ This library is a wrapper of [DearImGui](https://github.com/ocornut/imgui). It c
 In these examples `imgui` is an instance of `std::unique_ptr<ImGuiInterface>`. Examples only show basic usage, the classes usually have more functionality.
 
 ### ImGuiInterface
-`ImGuiInterface` needs to be subclassed with a custom rendering backend. It must also provide functionality to update font atlas when requested. This request is marked via a `protected` member variable `shouldUpdateFontAtlas`.
+`ImGuiInterface` needs to be subclassed with a custom rendering backend. It must also provide functionality to update font atlas when requested.
 
 There are some backend implementations in `pf_imgui/backends`. If you wish to use those you gotta add them to the project yourself, they are not part of the library by default.
 

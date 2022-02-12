@@ -10,6 +10,10 @@
 
 namespace pf::ui::ig {
 
+RadioGroup::RadioGroup(RadioGroup::Config &&config)
+    : Element(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<std::string_view>(""),
+      Savable(config.persistent), buttons(std::move(config.buttons)), selectedButtonIndex(config.selectedButtonIndex) {}
+
 RadioGroup::RadioGroup(const std::string &elementName, const std::string &label,
                        std::vector<std::unique_ptr<RadioButton>> buttons,
                        const std::optional<std::size_t> &selectedButtonIndex, Persistent persistent)

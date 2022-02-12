@@ -25,6 +25,22 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
  public:
   /**
+   * @brief Struct for construction of StackedLayout.
+   */
+  struct Config {
+    using Parent = StackedLayout;
+    std::string_view name;                           /*!< Unique name of the element */
+    Size size;                                       /*!< Size of the element */
+    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
+    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
+    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct StackedLayout
+   * @param config construction args @see StackedLayout::Config
+   */
+  explicit StackedLayout(Config &&config);
+  /**
    * @brief A container for data within the layout.
    */
   class Stack : public ElementContainer {
@@ -45,24 +61,6 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
    */
   StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
                 ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
-  /**
-   * Construct StackedLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param showBorder draw border around the layout
-   * @param persistent enable state saving
-   */
-  StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder,
-                Persistent persistent = Persistent::No);
-  /**
-   * Construct StackedLayout.
-   * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param allowCollapse enable collapse button
-   * @param persistent enable state saving
-   */
-  StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                Persistent persistent = Persistent::No);
 
   /**
    * Push a new element container to the last index.

@@ -6,21 +6,17 @@
 
 namespace pf::ui::ig {
 
+WrapLayout::WrapLayout(WrapLayout::Config &&config)
+    : BoxLayout(std::string{config.name}, config.layoutDirection, config.size, config.allowCollapse, config.showBorder,
+                config.persistent) {}
+
 WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
                        AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
     : BoxLayout(elementName, layoutDirection, size, allowCollapse, showBorder, persistent) {}
 
-WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                       ShowBorder showBorder, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, showBorder, persistent) {}
-
-WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                       AllowCollapse allowCollapse, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, allowCollapse, persistent) {}
-
 void WrapLayout::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
