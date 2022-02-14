@@ -17,6 +17,7 @@
 #include <pf_imgui/elements/ColorChooser.h>
 #include <pf_imgui/elements/Combobox.h>
 #include <pf_imgui/elements/CommandPalette.h>
+#include <pf_imgui/elements/DatePicker.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/DragInput.h>
 #include <pf_imgui/elements/Expander.h>
@@ -26,6 +27,7 @@
 #include <pf_imgui/elements/Image.h>
 #include <pf_imgui/elements/Input.h>
 #include <pf_imgui/elements/InputText.h>
+#include <pf_imgui/elements/LinkText.h>
 #include <pf_imgui/elements/Listbox.h>
 #include <pf_imgui/elements/MarkdownText.h>
 #include <pf_imgui/elements/Memo.h>
