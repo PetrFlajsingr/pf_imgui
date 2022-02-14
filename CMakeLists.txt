@@ -99,6 +99,7 @@ include_directories(src/include/imgInspect)
 include_directories(src/include/ImGuiIcons)
 include_directories(src/include/imgui_notify)
 include_directories(src/include/imgui-command-palette)
+include_directories(src/include/imgui_addons/)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -199,6 +200,8 @@ set(SOURCES
         src/pf_imgui/elements/Toggle.cpp
         src/pf_imgui/layouts/WrapLayout.cpp
         src/pf_imgui/elements/LinkText.cpp
+        src/pf_imgui/elements/DatePicker.cpp
+        src/include/imgui_addons/imguidatechooser.cpp
         )
 
 set(INCLUDES
@@ -334,6 +337,7 @@ set(INCLUDES
         src/pf_imgui/elements/Toggle.h
         src/pf_imgui/layouts/WrapLayout.h
         src/pf_imgui/elements/LinkText.h
+        src/pf_imgui/elements/DatePicker.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
@@ -372,6 +376,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiIcons>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiColorTextEdit>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-command-palette>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_addons>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
 
