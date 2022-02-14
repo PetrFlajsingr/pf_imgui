@@ -56,6 +56,8 @@ class DatePicker : public Element,
                  std::chrono::year_month_day{std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now())},
              Persistent persistent = Persistent::No);
 
+  void setValue(const std::chrono::year_month_day &newValue) override;
+
  protected:
   void renderImpl() override;
 

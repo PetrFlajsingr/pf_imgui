@@ -24,6 +24,13 @@ DatePicker::DatePicker(const std::string &name, const std::string &label, std::c
   rawTime->tm_year = static_cast<int>(value.year()) - 1900;
 }
 
+void DatePicker::setValue(const std::chrono::year_month_day &newValue) {
+  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(newValue.day()));
+  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(newValue.month()) - 1);
+  rawTime->tm_year = static_cast<int>(newValue.year()) - 1900;
+  ValueObservable::setValue(newValue);
+}
+
 void DatePicker::renderImpl() {
   using namespace std::chrono;
   if (ImGui::DateChooser(getLabel().c_str(), *rawTime)) {
@@ -59,7 +66,7 @@ void DatePicker::unserialize_impl(const toml::table &src) {
     }
   }
 
-  if (partsFound == 3) { setValueAndNotifyIfChanged(year_month_day{newYear, newMonth, newDay}); }
+  if (partsFound == 3) { setValue(year_month_day{newYear, newMonth, newDay}); }
 }
 
 toml::table DatePicker::serialize_impl() const {
