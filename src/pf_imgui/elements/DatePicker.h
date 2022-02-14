@@ -59,6 +59,9 @@ class DatePicker : public Element,
  protected:
   void renderImpl() override;
 
+  void unserialize_impl(const toml::table &src) override;
+  toml::table serialize_impl() const override;
+
  private:
   std::unique_ptr<tm> rawTime;
 };

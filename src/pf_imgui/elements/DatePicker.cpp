@@ -34,4 +34,40 @@ void DatePicker::renderImpl() {
   }
 }
 
+void DatePicker::unserialize_impl(const toml::table &src) {
+  using namespace std::chrono;
+  auto partsFound = 0;
+  year newYear{};
+  month newMonth{};
+  day newDay{};
+  if (auto yearIter = src.find("year"); yearIter != src.end()) {
+    if (auto newYearVal = yearIter->second.as_integer(); newYearVal != nullptr) {
+      newYear = year{static_cast<int>(newYearVal->get())};
+      ++partsFound;
+    }
+  }
+  if (auto monthIter = src.find("month"); monthIter != src.end()) {
+    if (auto newMonthVal = monthIter->second.as_integer(); newMonthVal != nullptr) {
+      newMonth = month{static_cast<unsigned int>(newMonthVal->get())};
+      ++partsFound;
+    }
+  }
+  if (auto dayIter = src.find("day"); dayIter != src.end()) {
+    if (auto newDayVal = dayIter->second.as_integer(); newDayVal != nullptr) {
+      newDay = day{static_cast<unsigned int>(newDayVal->get())};
+      ++partsFound;
+    }
+  }
+
+  if (partsFound == 3) { setValueAndNotifyIfChanged(year_month_day{newYear, newMonth, newDay}); }
+}
+
+toml::table DatePicker::serialize_impl() const {
+  return toml::table{
+      {"year", static_cast<int>(getValue().year())},
+      {"month", static_cast<unsigned int>(getValue().month())},
+      {"day", static_cast<unsigned int>(getValue().day())},
+  };
+}
+
 }  // namespace pf::ui::ig
