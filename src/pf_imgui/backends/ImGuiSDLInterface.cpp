@@ -7,7 +7,7 @@
 namespace pf::ui::ig {
 
 ImGuiSDLInterface::ImGuiSDLInterface(ImGuiSDLConfig config) : ImGuiInterface(std::move(config.imgui)) {
-  ImGui_ImplSDL2_InitForSDLRenderer(config.windowHandle);
+  ImGui_ImplSDL2_InitForSDLRenderer(config.windowHandle, config.renderer);
   ImGui_ImplSDLRenderer_Init(config.renderer);
   updateFonts();
 }
