@@ -81,7 +81,7 @@ void SetDateToday(tm* date)    {
 
 #ifndef IMGUIDATECHOOSER_ORIGINAL_IMPLEMENTATION
 // Not as good as the original version...
-bool DateChooser(const char* label, tm& dateOut,const char* dateFormat,bool closeWhenMouseLeavesIt,bool* pSetStartDateToDateOutThisFrame,const char* leftArrow,const char* rightArrow,const char* upArrowString,const char* downArrowString)    {
+bool DateChooser(const char* label, tm& dateOut,const char* dateFormat,bool closeWhenMouseLeavesIt,bool* pSetStartDateToDateOutThisFrame,const char* leftArrow,const char* rightArrow,[[maybe_unused]] const char* upArrowString,[[maybe_unused]] const char* downArrowString)    {
   ImGuiContext& g = *GImGui;
   ImGuiWindow* window = GetCurrentWindow();
   if (window->SkipItems)
@@ -121,7 +121,7 @@ bool DateChooser(const char* label, tm& dateOut,const char* dateFormat,bool clos
   static const int nameBufferSize = 64;
   static char dayNames[7][nameBufferSize]={"","","","","","",""};
   static char monthNames[12][nameBufferSize]={"","","","","","",""};
-  static char* pMonthNames[12]={&monthNames[0][0],&monthNames[1][0],&monthNames[2][0],&monthNames[3][0],&monthNames[4][0],&monthNames[5][0],&monthNames[6][0],&monthNames[7][0],&monthNames[8][0],&monthNames[9][0],&monthNames[10][0],&monthNames[11][0]};
+  [[maybe_unused]] static char* pMonthNames[12]={&monthNames[0][0],&monthNames[1][0],&monthNames[2][0],&monthNames[3][0],&monthNames[4][0],&monthNames[5][0],&monthNames[6][0],&monthNames[7][0],&monthNames[8][0],&monthNames[9][0],&monthNames[10][0],&monthNames[11][0]};
   static int maxMonthWidthIndex = -1;
   if (strlen(dayNames[0])==0) {
     tm tmp = GetDateZero();
