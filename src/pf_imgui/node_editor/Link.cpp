@@ -24,11 +24,11 @@ void Link::invalidate() { valid = false; }
 
 const ImVec4 &Link::getColor() const { return color; }
 
-void Link::setColor(const ImVec4 &color) { Link::color = color; }
+void Link::setColor(const ImVec4 &newColor) { color = newColor; }
 
 float Link::getThickness() const { return thickness; }
 
-void Link::setThickness(float thickness) { Link::thickness = thickness; }
+void Link::setThickness(float newThickness) { thickness = newThickness; }
 
 PopupMenu &Link::createOrGetPopupMenu() {
   if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }

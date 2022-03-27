@@ -28,9 +28,9 @@ class Link : public Renderable {
   void invalidate();
 
   [[nodiscard]] const ImVec4 &getColor() const;
-  void setColor(const ImVec4 &color);
+  void setColor(const ImVec4 &newColor);
   [[nodiscard]] float getThickness() const;
-  void setThickness(float thickness);
+  void setThickness(float newThickness);
 
   // change this in ItemElement too
   [[nodiscard]] PopupMenu &createOrGetPopupMenu();
