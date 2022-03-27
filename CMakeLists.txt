@@ -41,15 +41,15 @@ endif ()
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     list(APPEND flags "/std:c++latest" "/W4" "/wd4201")
-else()
-list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
-        "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
-        "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security")
-endif()
+else ()
+    list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
+            "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
+            "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security")
+endif ()
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         list(APPEND flags "/WX")
-    endif()
+    endif ()
 elseif (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
@@ -100,6 +100,7 @@ include_directories(src/include/ImGuiIcons)
 include_directories(src/include/imgui_notify)
 include_directories(src/include/imgui-command-palette)
 include_directories(src/include/imgui_addons/)
+include_directories(src/include/imgui-node-editor/)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -206,6 +207,10 @@ set(SOURCES
         src/include/imgui-node-editor/imgui_node_editor.cpp
         src/include/imgui-node-editor/imgui_canvas.cpp
         src/include/imgui-node-editor/crude_json.cpp
+        src/pf_imgui/node_editor/Link.cpp
+        src/pf_imgui/node_editor/Node.cpp
+        src/pf_imgui/node_editor/NodeEditor.cpp
+        src/pf_imgui/node_editor/Pin.cpp
         )
 
 set(INCLUDES
@@ -347,6 +352,11 @@ set(INCLUDES
         src/include/imgui-node-editor/crude_json.h
         src/include/imgui-node-editor/imgui_bezier_math.h
         src/include/imgui-node-editor/imgui_extra_math.h
+        src/pf_imgui/node_editor/Link.h
+        src/pf_imgui/node_editor/Node.h
+        src/pf_imgui/node_editor/NodeEditor.h
+        src/pf_imgui/node_editor/Pin.h
+        src/pf_imgui/node_editor/fwd.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
