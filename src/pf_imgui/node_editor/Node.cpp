@@ -18,7 +18,8 @@ Node::Node(const std::string &name) : Renderable(name) {}
 
 Node::~Node() {
   auto links = ranges::views::concat(inputPins, outputPins)
-      | ranges::views::transform([](auto &pin) { return pin->getLinks(); }) | ranges::views::cache1 | ranges::views::join;
+      | ranges::views::transform([](auto &pin) { return pin->getLinks(); }) | ranges::views::cache1
+      | ranges::views::join;
   std::ranges::for_each(links, [](auto &link) { link->invalidate(); });
 }
 
@@ -41,15 +42,19 @@ void Node::renderImpl() {
   ax::NodeEditor::BeginNode(id);
   auto endNode = RAII{ax::NodeEditor::EndNode};
 
-  ImGui::BeginGroup();
+  ImGui::BeginHorizontal((getName() + "_lay_main").c_str());
+
+  ImGui::BeginVertical((getName() + "lay_input").c_str());
   std::ranges::for_each(inputPins, [](auto &pin) { pin->render(); });
-  ImGui::EndGroup();
+  ImGui::EndVertical();
 
-  ImGui::SameLine();
+  ImGui::Spring(1);
 
-  ImGui::BeginGroup();
+  ImGui::BeginVertical((getName() + "_lay_output").c_str());
   std::ranges::for_each(outputPins, [](auto &pin) { pin->render(); });
-  ImGui::EndGroup();
+  ImGui::EndVertical();
+
+  ImGui::EndHorizontal();
 }
 
 int Node::getNextPinId() { return parent->getNextId(); }

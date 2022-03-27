@@ -40,18 +40,28 @@ bool Pin::hasPopupMenu() const { return popupMenu != nullptr; }
 void Pin::removePopupMenu() { popupMenu = nullptr; }
 
 void Pin::renderImpl() {
-  ax::NodeEditor::BeginPin(id, static_cast<ax::NodeEditor::PinKind>(type));
-  auto endPin = RAII{ax::NodeEditor::EndPin};
+  ImGui::BeginHorizontal(getId().AsPointer());
+  {
+    ax::NodeEditor::BeginPin(getId(), static_cast<ax::NodeEditor::PinKind>(getType()));
+    auto endPin = RAII{ax::NodeEditor::EndPin};
 
-  if (type == Type::Input) {
-    renderIcon();
-    ImGui::SameLine();
-    ImGui::Text(getLabel().c_str());
-  } else {
-    ImGui::Text(getLabel().c_str());
-    ImGui::SameLine();
-    renderIcon();
+    if (getType() == Type::Input) {
+      ax::NodeEditor::PinPivotAlignment(ImVec2(0.f, 0.5f));
+      ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
+      renderIcon();
+      ImGui::Spring(0);
+      ImGui::Text(getLabel().c_str());
+    } else {
+      ax::NodeEditor::PinPivotAlignment(ImVec2(1.0f, 0.5f));
+      ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
+
+      ImGui::Spring(1);
+      ImGui::Text(getLabel().c_str());
+      ImGui::Spring(0);
+      renderIcon();
+    }
   }
+  ImGui::EndHorizontal();
 
   if (--sinceLastLinkCleanup == 0) {
     sinceLastLinkCleanup = LINK_CLEANUP_FREQUENCY;
@@ -76,40 +86,29 @@ void Pin::renderIcon() {
   }
   ImGui::Text((prefix + infix + postfix).c_str());
 }
+
 const ImVec4 &Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
 
-void Pin::setValidLinkPreviewColor(const ImVec4 &color) {
-  validLinkPreviewColor = color;
-}
+void Pin::setValidLinkPreviewColor(const ImVec4 &color) { validLinkPreviewColor = color; }
 
 float Pin::getValidLinkPreviewThickness() const { return validLinkPreviewThickness; }
 
-void Pin::setValidLinkPreviewThickness(float thickness) {
-  validLinkPreviewThickness = thickness;
-}
+void Pin::setValidLinkPreviewThickness(float thickness) { validLinkPreviewThickness = thickness; }
 
 const ImVec4 &Pin::getInvalidLinkPreviewColor() const { return invalidLinkPreviewColor; }
 
-void Pin::setInvalidLinkPreviewColor(const ImVec4 &color) {
-  invalidLinkPreviewColor = color;
-}
+void Pin::setInvalidLinkPreviewColor(const ImVec4 &color) { invalidLinkPreviewColor = color; }
 
 float Pin::getInvalidLinkPreviewThickness() const { return invalidLinkPreviewThickness; }
 
-void Pin::setInvalidLinkPreviewThickness(float thickness) {
-  invalidLinkPreviewThickness = thickness;
-}
+void Pin::setInvalidLinkPreviewThickness(float thickness) { invalidLinkPreviewThickness = thickness; }
 
 const ImVec4 &Pin::getUnconnectedLinkPreviewColor() const { return unconnectedLinkPreviewColor; }
 
-void Pin::setUnconnectedLinkPreviewColor(const ImVec4 &color) {
-  unconnectedLinkPreviewColor = color;
-}
+void Pin::setUnconnectedLinkPreviewColor(const ImVec4 &color) { unconnectedLinkPreviewColor = color; }
 
 float Pin::getUnconnectedLinkPreviewThickness() const { return unconnectedLinkPreviewThickness; }
 
-void Pin::setUnconnectedLinkPreviewThickness(float thickness) {
-  unconnectedLinkPreviewThickness = thickness;
-}
+void Pin::setUnconnectedLinkPreviewThickness(float thickness) { unconnectedLinkPreviewThickness = thickness; }
 
 }  // namespace pf::ui::ig
