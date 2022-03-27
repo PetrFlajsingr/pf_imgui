@@ -202,6 +202,10 @@ set(SOURCES
         src/pf_imgui/elements/LinkText.cpp
         src/pf_imgui/elements/DatePicker.cpp
         src/include/imgui_addons/imguidatechooser.cpp
+        src/include/imgui-node-editor/imgui_node_editor_api.cpp
+        src/include/imgui-node-editor/imgui_node_editor.cpp
+        src/include/imgui-node-editor/imgui_canvas.cpp
+        src/include/imgui-node-editor/crude_json.cpp
         )
 
 set(INCLUDES
@@ -338,6 +342,11 @@ set(INCLUDES
         src/pf_imgui/layouts/WrapLayout.h
         src/pf_imgui/elements/LinkText.h
         src/pf_imgui/elements/DatePicker.h
+        src/include/imgui-node-editor/imgui_node_editor.h
+        src/include/imgui-node-editor/imgui_canvas.h
+        src/include/imgui-node-editor/crude_json.h
+        src/include/imgui-node-editor/imgui_bezier_math.h
+        src/include/imgui-node-editor/imgui_extra_math.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
@@ -377,6 +386,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiColorTextEdit>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-command-palette>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_addons>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-node-editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
 
