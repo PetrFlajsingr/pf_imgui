@@ -18,7 +18,7 @@ Node::Node(const std::string &name) : Renderable(name) {}
 
 Node::~Node() {
   auto links = ranges::views::concat(inputPins, outputPins)
-      | ranges::view::transform([](auto &pin) { return pin->getLinks(); }) | ranges::view::cache1 | ranges::view::join;
+      | ranges::views::transform([](auto &pin) { return pin->getLinks(); }) | ranges::views::cache1 | ranges::views::join;
   std::ranges::for_each(links, [](auto &link) { link->invalidate(); });
 }
 

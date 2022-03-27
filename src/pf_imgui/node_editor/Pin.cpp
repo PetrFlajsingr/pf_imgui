@@ -78,38 +78,38 @@ void Pin::renderIcon() {
 }
 const ImVec4 &Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
 
-void Pin::setValidLinkPreviewColor(const ImVec4 &validLinkPreviewColor) {
-  Pin::validLinkPreviewColor = validLinkPreviewColor;
+void Pin::setValidLinkPreviewColor(const ImVec4 &color) {
+  validLinkPreviewColor = color;
 }
 
 float Pin::getValidLinkPreviewThickness() const { return validLinkPreviewThickness; }
 
-void Pin::setValidLinkPreviewThickness(float validLinkPreviewThickness) {
-  Pin::validLinkPreviewThickness = validLinkPreviewThickness;
+void Pin::setValidLinkPreviewThickness(float thickness) {
+  validLinkPreviewThickness = thickness;
 }
 
 const ImVec4 &Pin::getInvalidLinkPreviewColor() const { return invalidLinkPreviewColor; }
 
-void Pin::setInvalidLinkPreviewColor(const ImVec4 &invalidLinkPreviewColor) {
-  Pin::invalidLinkPreviewColor = invalidLinkPreviewColor;
+void Pin::setInvalidLinkPreviewColor(const ImVec4 &color) {
+  invalidLinkPreviewColor = color;
 }
 
 float Pin::getInvalidLinkPreviewThickness() const { return invalidLinkPreviewThickness; }
 
-void Pin::setInvalidLinkPreviewThickness(float invalidLinkPreviewThickness) {
-  Pin::invalidLinkPreviewThickness = invalidLinkPreviewThickness;
+void Pin::setInvalidLinkPreviewThickness(float thickness) {
+  invalidLinkPreviewThickness = thickness;
 }
 
 const ImVec4 &Pin::getUnconnectedLinkPreviewColor() const { return unconnectedLinkPreviewColor; }
 
-void Pin::setUnconnectedLinkPreviewColor(const ImVec4 &unconnectedLinkPreviewColor) {
-  Pin::unconnectedLinkPreviewColor = unconnectedLinkPreviewColor;
+void Pin::setUnconnectedLinkPreviewColor(const ImVec4 &color) {
+  unconnectedLinkPreviewColor = color;
 }
 
 float Pin::getUnconnectedLinkPreviewThickness() const { return unconnectedLinkPreviewThickness; }
 
-void Pin::setUnconnectedLinkPreviewThickness(float unconnectedLinkPreviewThickness) {
-  Pin::unconnectedLinkPreviewThickness = unconnectedLinkPreviewThickness;
+void Pin::setUnconnectedLinkPreviewThickness(float thickness) {
+  unconnectedLinkPreviewThickness = thickness;
 }
 
 }  // namespace pf::ui::ig

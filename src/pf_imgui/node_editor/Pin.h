@@ -47,22 +47,22 @@ class Pin : public Renderable, public Labellable {
   [[nodiscard]] bool hasAnyValidLinks() const;
 
   [[nodiscard]] const ImVec4 &getValidLinkPreviewColor() const;
-  void setValidLinkPreviewColor(const ImVec4 &validLinkPreviewColor);
+  void setValidLinkPreviewColor(const ImVec4 &color);
 
   [[nodiscard]] float getValidLinkPreviewThickness() const;
-  void setValidLinkPreviewThickness(float validLinkPreviewThickness);
+  void setValidLinkPreviewThickness(float thickness);
 
   [[nodiscard]] const ImVec4 &getInvalidLinkPreviewColor() const;
-  void setInvalidLinkPreviewColor(const ImVec4 &invalidLinkPreviewColor);
+  void setInvalidLinkPreviewColor(const ImVec4 &color);
 
   [[nodiscard]] float getInvalidLinkPreviewThickness() const;
-  void setInvalidLinkPreviewThickness(float invalidLinkPreviewThickness);
+  void setInvalidLinkPreviewThickness(float thickness);
 
   [[nodiscard]] const ImVec4 &getUnconnectedLinkPreviewColor() const;
-  void setUnconnectedLinkPreviewColor(const ImVec4 &unconnectedLinkPreviewColor);
+  void setUnconnectedLinkPreviewColor(const ImVec4 &color);
 
   [[nodiscard]] float getUnconnectedLinkPreviewThickness() const;
-  void setUnconnectedLinkPreviewThickness(float unconnectedLinkPreviewThickness);
+  void setUnconnectedLinkPreviewThickness(float thickness);
 
   // change this in ItemElement too
   [[nodiscard]] PopupMenu &createOrGetPopupMenu();
