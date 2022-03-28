@@ -50,13 +50,13 @@ void Pin::renderImpl() {
       ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
       renderIcon();
       ImGui::Spring(0);
-      ImGui::Text(getLabel().c_str());
+      renderInfo();
     } else {
       ax::NodeEditor::PinPivotAlignment(ImVec2(1.0f, 0.5f));
       ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
 
       ImGui::Spring(1);
-      ImGui::Text(getLabel().c_str());
+      renderInfo();
       ImGui::Spring(0);
       renderIcon();
     }
@@ -86,6 +86,8 @@ void Pin::renderIcon() {
   }
   ImGui::Text((prefix + infix + postfix).c_str());
 }
+
+void Pin::renderInfo() { ImGui::Text(getLabel().c_str()); }
 
 const ImVec4 &Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
 

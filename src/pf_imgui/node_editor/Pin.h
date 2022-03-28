@@ -80,6 +80,8 @@ class Pin : public Renderable, public Labellable {
 
   virtual void renderIcon();
 
+  virtual void renderInfo();
+
  private:
   ax::NodeEditor::PinId id;
   Type type;
