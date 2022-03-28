@@ -76,7 +76,7 @@ set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
 CPMAddPackage(
         NAME pf_common
         GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG v1.2.0
+        GIT_TAG master
 )
 
 CPMAddPackage(

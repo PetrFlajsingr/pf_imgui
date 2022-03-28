@@ -50,13 +50,17 @@ void Pin::renderImpl() {
       ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
       renderIcon();
       ImGui::Spring(0);
+      ImGui::BeginVertical((getName() + "_info").c_str());
       renderInfo();
+      ImGui::EndVertical();
     } else {
       ax::NodeEditor::PinPivotAlignment(ImVec2(1.0f, 0.5f));
       ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
 
       ImGui::Spring(1);
+      ImGui::BeginVertical((getName() + "_info").c_str());
       renderInfo();
+      ImGui::EndVertical();
       ImGui::Spring(0);
       renderIcon();
     }
