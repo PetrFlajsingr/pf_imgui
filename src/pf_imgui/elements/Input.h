@@ -15,6 +15,7 @@
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -100,15 +101,15 @@ struct PF_IMGUI_EXPORT InputData<double> {
 * @tparam T
 */
 template<typename T>
-concept UnformattedWithStep =
-    OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+concept UnformattedWithStep = OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !
+OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 /**
 * Types which have no formatting and no step.
 * @tparam T
 */
 template<typename T>
-concept UnformattedWithoutStep =
-    !OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+concept UnformattedWithoutStep = !
+OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 /**
 * Types which have formatting and a step.
 * @tparam T
@@ -121,8 +122,8 @@ concept FormattedWithStep =
 * @tparam T
 */
 template<typename T>
-concept FormattedWithoutStep =
-    !OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+concept FormattedWithoutStep = !
+OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> &&OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
 }  // namespace details
 
 /**
@@ -134,7 +135,7 @@ concept FormattedWithoutStep =
 *
 * @tparam T Underlying type
 */
-template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
+template<OneOf<IMGUI_INPUT_TYPE_LIST, std::string> T>
 class PF_IMGUI_EXPORT Input
     : public ItemElement,
       public Labellable,
@@ -189,13 +190,15 @@ class PF_IMGUI_EXPORT Input
   * @param value starting value
   */
   Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0, T value = T{},
-        Persistent persistent = Persistent::No) requires details::UnformattedWithStep<T> : ItemElement(elementName),
-                                                                                           Labellable(label),
-                                                                                           ValueObservable<T>(value),
-                                                                                           Savable(persistent),
-                                                                                           DragSource<T>(false),
-                                                                                           DropTarget<T>(false),
-                                                                                           data(st, fStep) {}
+        Persistent persistent = Persistent::No)
+    requires details::UnformattedWithStep<T>
+  : ItemElement(elementName),
+    Labellable(label),
+    ValueObservable<T>(value),
+    Savable(persistent),
+    DragSource<T>(false),
+    DropTarget<T>(false),
+    data(st, fStep) {}
 
   /**
   * Construct Input. For the following types: float, double.
@@ -208,16 +211,16 @@ class PF_IMGUI_EXPORT Input
   * @param value starting value
   */
   Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0, T value = T{},
-        Persistent persistent = Persistent::No,
-        std::string format = Data::defaultFormat()) requires details::FormattedWithStep<T> : ItemElement(elementName),
-                                                                                             Labellable(label),
-                                                                                             ValueObservable<T>(value),
-                                                                                             Savable(persistent),
-                                                                                             DragSource<T>(false),
-                                                                                             DropTarget<T>(false),
-                                                                                             data(st, fStep),
-                                                                                             format(std::move(format)) {
-  }
+        Persistent persistent = Persistent::No, std::string format = Data::defaultFormat())
+    requires details::FormattedWithStep<T>
+  : ItemElement(elementName),
+    Labellable(label),
+    ValueObservable<T>(value),
+    Savable(persistent),
+    DragSource<T>(false),
+    DropTarget<T>(false),
+    data(st, fStep),
+    format(std::move(format)) {}
 
   /**
   * Construct Input. For the following types: glm::ivec2, glm::ivec3, glm::ivec4.
@@ -226,13 +229,14 @@ class PF_IMGUI_EXPORT Input
   * @param persistent enable state saving to disk
   * @param value starting value
   */
-  Input(const std::string &elementName, const std::string &label, T value = T{},
-        Persistent persistent = Persistent::No) requires details::UnformattedWithoutStep<T> : ItemElement(elementName),
-                                                                                              Labellable(label),
-                                                                                              ValueObservable<T>(value),
-                                                                                              Savable(persistent),
-                                                                                              DragSource<T>(false),
-                                                                                              DropTarget<T>(false) {}
+  Input(const std::string &elementName, const std::string &label, T value = T{}, Persistent persistent = Persistent::No)
+    requires details::UnformattedWithoutStep<T>
+  : ItemElement(elementName),
+    Labellable(label),
+    ValueObservable<T>(value),
+    Savable(persistent),
+    DragSource<T>(false),
+    DropTarget<T>(false) {}
 
   /**
   * Construct Input. For the following types:  glm::vec2, glm::vec3, glm::vec4.
@@ -243,14 +247,15 @@ class PF_IMGUI_EXPORT Input
   * @param value starting value
   */
   Input(const std::string &elementName, const std::string &label, T value = T{}, Persistent persistent = Persistent::No,
-        std::string format = Data::defaultFormat()) requires details::FormattedWithoutStep<T>
-      : ItemElement(elementName),
-        Labellable(label),
-        ValueObservable<T>(value),
-        Savable(persistent),
-        DragSource<T>(false),
-        DropTarget<T>(false),
-        format(std::move(format)) {}
+        std::string format = Data::defaultFormat())
+    requires details::FormattedWithoutStep<T>
+  : ItemElement(elementName),
+    Labellable(label),
+    ValueObservable<T>(value),
+    Savable(persistent),
+    DragSource<T>(false),
+    DropTarget<T>(false),
+    format(std::move(format)) {}
 
   [[nodiscard]] bool isReadOnly() const { return readOnly; }
 
@@ -335,6 +340,9 @@ class PF_IMGUI_EXPORT Input
   bool readOnly = false;
   ImGuiInputTextFlags flags = {};
 };
+
+template<>
+class Input<std::string> : public InputText {};
 #ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
 extern template class Input<float>;
 extern template class Input<glm::vec2>;
