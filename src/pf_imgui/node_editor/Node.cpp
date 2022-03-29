@@ -42,19 +42,40 @@ void Node::renderImpl() {
   ax::NodeEditor::BeginNode(id);
   auto endNode = RAII{ax::NodeEditor::EndNode};
 
-  ImGui::BeginHorizontal((getName() + "_lay_main").c_str());
+  ImGui::BeginVertical((getName() + "_lay_hea").c_str());
+  {
+    renderHeader();
 
+    ImGui::Spring(0);
+
+    ImGui::BeginHorizontal((getName() + "_lay_main").c_str());
+    {
+      renderInputs();
+      ImGui::Spring(1);
+      renderMiddle();
+      ImGui::Spring(1);
+      renderOutputs();
+    }
+    ImGui::EndHorizontal();
+  }
+  ImGui::EndVertical();
+}
+
+void Node::renderHeader() {}
+
+void Node::renderInputs() {
   ImGui::BeginVertical((getName() + "lay_input").c_str());
   std::ranges::for_each(inputPins, [](auto &pin) { pin->render(); });
-  ImGui::EndVertical();
-
   ImGui::Spring(1);
+  ImGui::EndVertical();
+}
 
+void Node::renderMiddle() {}
+void Node::renderOutputs() {
   ImGui::BeginVertical((getName() + "_lay_output").c_str());
   std::ranges::for_each(outputPins, [](auto &pin) { pin->render(); });
+  ImGui::Spring(1);
   ImGui::EndVertical();
-
-  ImGui::EndHorizontal();
 }
 
 int Node::getNextPinId() { return parent->getNextId(); }

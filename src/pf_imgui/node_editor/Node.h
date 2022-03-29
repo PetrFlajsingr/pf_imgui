@@ -61,6 +61,14 @@ class Node : public Renderable {
  protected:
   void renderImpl() override;
 
+  virtual void renderHeader();
+
+  virtual void renderInputs();
+
+  virtual void renderMiddle();
+
+  virtual void renderOutputs();
+
  private:
   int getNextPinId();
 
