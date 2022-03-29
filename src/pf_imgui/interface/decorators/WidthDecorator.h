@@ -11,6 +11,7 @@
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <utility>
 
