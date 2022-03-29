@@ -46,6 +46,10 @@ class Pin : public Renderable, public Labellable {
 
   [[nodiscard]] bool hasAnyValidLinks() const;
 
+  [[nodiscard]] virtual bool acceptsNewLinks() const;
+
+  [[nodiscard]] virtual bool acceptsLinkWith([[maybe_unused]] Pin &other) const;
+
   [[nodiscard]] const ImVec4 &getValidLinkPreviewColor() const;
   void setValidLinkPreviewColor(const ImVec4 &color);
 

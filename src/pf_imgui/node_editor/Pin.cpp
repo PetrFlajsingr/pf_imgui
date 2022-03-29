@@ -30,6 +30,10 @@ bool Pin::hasAnyValidLinks() const {
   return std::ranges::any_of(links, [](const auto &link) { return link->isValid(); });
 }
 
+bool Pin::acceptsNewLinks() const { return true; }
+
+bool Pin::acceptsLinkWith([[maybe_unused]] Pin &other) const { return true; }
+
 PopupMenu &Pin::createOrGetPopupMenu() {
   if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }
   return *popupMenu;

@@ -119,6 +119,9 @@ void NodeEditor::handleCreation() {
 }
 
 void NodeEditor::handleLinkCreation() {
+  const static auto rejectLink = [](Pin &originPin) {
+    ax::NodeEditor::RejectNewItem(originPin.getInvalidLinkPreviewColor(), originPin.getInvalidLinkPreviewThickness());
+  };
   ax::NodeEditor::PinId inPinId;
   ax::NodeEditor::PinId outPinId;
   if (ax::NodeEditor::QueryNewLink(&inPinId, &outPinId)) {
@@ -128,20 +131,18 @@ void NodeEditor::handleLinkCreation() {
 
       if (inPinOpt.has_value() && outPinOpt.has_value()) {
         auto inPin = inPinOpt.value();
-        const auto originPin = inPin;
         auto outPin = outPinOpt.value();
-        if (&inPin->getNode() == &outPin->getNode()) { return; }
-        if (inPin->type == Pin::Type::Output && outPin->type == Pin::Type::Input) { std::swap(inPin, outPin); }
 
-        const auto isValidLink = inPin->type == Pin::Type::Input && outPin->type == Pin::Type::Output;
-        if (!isValidLink) {
-          ax::NodeEditor::RejectNewItem(originPin->getInvalidLinkPreviewColor(),
-                                        originPin->getInvalidLinkPreviewThickness());
+        if (!inPin->acceptsNewLinks() || !outPin->acceptsNewLinks()) {
+          rejectLink(*inPin);
+          return;
+        }
+        if (!inPin->acceptsLinkWith(*outPin) || !outPin->acceptsLinkWith(*inPin)) {
+          rejectLink(*inPin);
           return;
         }
 
-        if (ax::NodeEditor::AcceptNewItem(originPin->getValidLinkPreviewColor(),
-                                          originPin->getValidLinkPreviewThickness())) {
+        if (ax::NodeEditor::AcceptNewItem(inPin->getValidLinkPreviewColor(), inPin->getValidLinkPreviewThickness())) {
           auto &newLink = links.emplace_back(std::make_shared<Link>(uniqueId(), getNextId(), inPin, outPin));
           inPin->links.emplace_back(newLink);
           outPin->links.emplace_back(newLink);
