@@ -211,6 +211,14 @@ set(SOURCES
         src/pf_imgui/node_editor/Node.cpp
         src/pf_imgui/node_editor/NodeEditor.cpp
         src/pf_imgui/node_editor/Pin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/ArrayPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/EventPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/ExecPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/InteractablePin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/PinDraw.cpp
+        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/ValuePin.cpp
         )
 
 set(INCLUDES
@@ -357,6 +365,16 @@ set(INCLUDES
         src/pf_imgui/node_editor/NodeEditor.h
         src/pf_imgui/node_editor/Pin.h
         src/pf_imgui/node_editor/fwd.h
+        src/pf_imgui/node_editor/blueprint/pins/ArrayPin.h
+        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.h
+        src/pf_imgui/node_editor/blueprint/pins/DragPin.h
+        src/pf_imgui/node_editor/blueprint/pins/PinWithValue.h
+        src/pf_imgui/node_editor/blueprint/pins/EventPin.h
+        src/pf_imgui/node_editor/blueprint/pins/ExecPin.h
+        src/pf_imgui/node_editor/blueprint/pins/InteractablePin.h
+        src/pf_imgui/node_editor/blueprint/pins/PinDraw.h
+        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.h
+        src/pf_imgui/node_editor/blueprint/pins/ValuePin.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
