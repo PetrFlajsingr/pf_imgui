@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-EventPin::EventPin(const std::string &name, const std::string &label, const ImColor &color)
-    : Pin(name, label, color) {}
+EventPin::EventPin(const std::string &name, const std::string &label, const ImColor &color) : Pin(name, label, color) {}
 
 void EventPin::renderIcon() {
   ImVec2 iconSize{16, 16};

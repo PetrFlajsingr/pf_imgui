@@ -12,11 +12,12 @@ namespace pf::ui::ig::bp {
 
 class Pin : public pf::ui::ig::Pin {
  public:
-  inline Pin(const std::string &name, const std::string &label, const ImColor &color)
-      : pf::ui::ig::Pin(name, label), color(color) {}
+  Pin(const std::string &name, const std::string &label, const ImColor &color);
 
-  [[nodiscard]] inline const ImColor &getColor() const { return color; }
-  inline void setColor(const ImColor &newColor) { color = newColor; }
+  [[nodiscard]] const ImColor &getColor() const;
+  void setColor(const ImColor &newColor);
+
+  [[nodiscard]] bool acceptsLinkWith(pf::ui::ig::Pin &other) const override;
 
  private:
   ImColor color;

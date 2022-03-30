@@ -14,6 +14,8 @@ class ExecPin : public Pin {
  public:
   ExecPin(const std::string &name, const std::string &label, const ImColor &pinColor);
 
+  [[nodiscard]] bool acceptsLinkWith(Pin &other) const;
+
  protected:
   void renderIcon() override;
 };

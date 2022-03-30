@@ -219,7 +219,7 @@ set(SOURCES
         src/pf_imgui/node_editor/blueprint/pins/PinDraw.cpp
         src/pf_imgui/node_editor/blueprint/pins/StringInputPin.cpp
         src/pf_imgui/node_editor/blueprint/pins/ValuePin.cpp
-        )
+        src/pf_imgui/node_editor/blueprint/pins/Pin.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
