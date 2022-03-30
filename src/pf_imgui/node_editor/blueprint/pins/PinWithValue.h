@@ -12,10 +12,10 @@ namespace pf::ui::ig::bp {
 
 template<typename T>
   requires(std::equality_comparable<T> && std::is_assignable_v<T &, T> && std::copy_constructible<T>)
-class PinWithValue : public ValuePin {
+class PinWithValue : public ValuePin<T> {
  public:
-  using ValueType = T;
-  using ValuePin::ValuePin;
+  using ValuePin<T>::ValueType;
+  using ValuePin<T>::ValuePin;
 
   [[nodiscard]] virtual T getValue() const = 0;
   virtual void setValue(const T &value) = 0;

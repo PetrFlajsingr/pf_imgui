@@ -19,7 +19,7 @@ template<std::derived_from<Renderable> T>
   requires derived_specialization_of<T, ValueObservable>
 class InteractablePin : public PinWithValue<typename T::ValueType> {
  public:
-  using ValueType = typename T::ValueType;
+  using ValueType = typename PinWithValue<typename T::ValueType>::ValueType;
 
   template<typename... Args>
   InteractablePin(const std::string &name, const std::string &label, const ImVec4 &color, Width width, Args &&...args)
@@ -38,7 +38,7 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
     if (PinWithValue<ValueType>::getType() == Pin::Type::Input && !PinWithValue<ValueType>::hasAnyValidLinks()) {
       inputElement->render();
     } else {
-      ValuePin::renderInfo();
+      ValuePin<ValueType>::renderInfo();
     }
   }
 
