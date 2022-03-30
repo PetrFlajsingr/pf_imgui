@@ -6,6 +6,7 @@
 #define IMGUI_EXPERIMENTS_ARRAYPIN_H
 
 #include "Pin.h"
+#include "PinDraw.h"
 #include <imgui_internal.h>
 
 namespace pf::ui::ig::bp {
