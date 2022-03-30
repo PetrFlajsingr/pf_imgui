@@ -30,6 +30,11 @@ bool Pin::hasAnyValidLinks() const {
   return std::ranges::any_of(links, [](const auto &link) { return link->isValid(); });
 }
 
+void Pin::clearLinks() {
+  std::ranges::for_each(links, [](auto &link) { link->invalidate(); });
+  links.clear();
+}
+
 bool Pin::acceptsNewLinks() const { return true; }
 
 bool Pin::acceptsLinkWith([[maybe_unused]] Pin &other) const { return true; }

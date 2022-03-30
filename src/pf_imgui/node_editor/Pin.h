@@ -46,6 +46,8 @@ class Pin : public Renderable, public Labellable {
 
   [[nodiscard]] bool hasAnyValidLinks() const;
 
+  void clearLinks();
+
   [[nodiscard]] virtual bool acceptsNewLinks() const;
 
   [[nodiscard]] virtual bool acceptsLinkWith([[maybe_unused]] Pin &other) const;
