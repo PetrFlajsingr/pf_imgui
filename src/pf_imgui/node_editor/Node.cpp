@@ -44,6 +44,8 @@ void Node::renderImpl() {
 
   ImGui::BeginVertical((getName() + "_lay_hea").c_str());
   {
+    ImGui::Spring(0);
+
     renderHeader();
 
     ImGui::Spring(0);
@@ -71,6 +73,7 @@ void Node::renderInputs() {
 }
 
 void Node::renderMiddle() {}
+
 void Node::renderOutputs() {
   ImGui::BeginVertical((getName() + "_lay_output").c_str());
   std::ranges::for_each(outputPins, [](auto &pin) { pin->render(); });
