@@ -86,6 +86,8 @@ class Pin : public Renderable, public Labellable {
 
   virtual void renderInfo();
 
+  virtual void addLink(std::shared_ptr<Link> link);
+
  private:
   ax::NodeEditor::PinId id;
   Type type;

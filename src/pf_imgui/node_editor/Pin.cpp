@@ -97,6 +97,11 @@ void Pin::renderIcon() {
 
 void Pin::renderInfo() { ImGui::Text(getLabel().c_str()); }
 
+void Pin::addLink(std::shared_ptr<Link> link) {
+  links.emplace_back(std::move(link));
+  observableLink.notify(links.back());
+}
+
 const ImVec4 &Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
 
 void Pin::setValidLinkPreviewColor(const ImVec4 &color) { validLinkPreviewColor = color; }
