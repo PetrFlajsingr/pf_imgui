@@ -18,6 +18,8 @@ class ExecPin : public Pin {
 
  protected:
   void renderIcon() override;
+
+  void addLink(std::shared_ptr<Link> link) override;
 };
 
 }  // namespace pf::ui::ig::bp
