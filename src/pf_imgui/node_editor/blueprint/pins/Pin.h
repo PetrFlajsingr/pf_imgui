@@ -19,6 +19,9 @@ class Pin : public pf::ui::ig::Pin {
 
   [[nodiscard]] bool acceptsLinkWith(pf::ui::ig::Pin &other) const override;
 
+ protected:
+  void addLink(std::shared_ptr<Link> link) override;
+
  private:
   ImColor color;
 };

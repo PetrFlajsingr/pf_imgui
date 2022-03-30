@@ -19,4 +19,9 @@ bool Pin::acceptsLinkWith(pf::ui::ig::Pin &other) const {
   return true;
 }
 
+void Pin::addLink(std::shared_ptr<Link> link) {
+  if (getType() == Pin::Type::Input) { clearLinks(); }
+  ig::Pin::addLink(link);
+}
+
 }  // namespace pf::ui::ig::bp
