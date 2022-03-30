@@ -14,6 +14,8 @@ class EventPin : public Pin {
  public:
   EventPin(const std::string &name, const std::string &label, const ImColor &color);
 
+  [[nodiscard]] bool acceptsLinkWith(pf::ui::ig::Pin &other) const override;
+
  protected:
   void renderIcon() override;
 };

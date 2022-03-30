@@ -9,6 +9,11 @@ namespace pf::ui::ig::bp {
 
 EventPin::EventPin(const std::string &name, const std::string &label, const ImColor &color) : Pin(name, label, color) {}
 
+bool EventPin::acceptsLinkWith(ig::Pin &other) const {
+  if (!Pin::acceptsLinkWith(other)) { return false; }
+  return dynamic_cast<EventPin *>(&other) != nullptr;
+}
+
 void EventPin::renderIcon() {
   ImVec2 iconSize{16, 16};
   if (ImGui::IsRectVisible(iconSize)) {

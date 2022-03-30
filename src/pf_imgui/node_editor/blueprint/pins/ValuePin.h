@@ -18,6 +18,11 @@ class ValuePin : public Pin {
 
   ValuePin(const std::string &name, const std::string &label, const ImColor &color) : Pin(name, label, color) {}
 
+  [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override {
+    if (!Pin::acceptsLinkWith(other)) { return false; }
+    return dynamic_cast<ValuePin *>(&other) != nullptr;
+  }
+
  protected:
   void renderIcon() override {
     const static auto renderAreaSize = ImVec2{16, 16};
@@ -31,12 +36,6 @@ class ValuePin : public Pin {
       drawPinArrow(drawList, circleCenter + ImVec2{6, 0}, getColor());
     }
     ImGui::Dummy(renderAreaSize);
-  }
-
- public:
-  bool acceptsLinkWith(ig::Pin &other) const override {
-    if (!Pin::acceptsLinkWith(other)) { return false; }
-    return dynamic_cast<ValuePin *>(&other) != nullptr;
   }
 };
 

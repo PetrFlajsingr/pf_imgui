@@ -211,7 +211,6 @@ set(SOURCES
         src/pf_imgui/node_editor/Node.cpp
         src/pf_imgui/node_editor/NodeEditor.cpp
         src/pf_imgui/node_editor/Pin.cpp
-        src/pf_imgui/node_editor/blueprint/pins/ArrayPin.cpp
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
         src/pf_imgui/node_editor/blueprint/pins/EventPin.cpp
         src/pf_imgui/node_editor/blueprint/pins/ExecPin.cpp
