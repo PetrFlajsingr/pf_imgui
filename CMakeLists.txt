@@ -216,7 +216,9 @@ set(SOURCES
         src/pf_imgui/node_editor/blueprint/pins/ExecPin.cpp
         src/pf_imgui/node_editor/blueprint/pins/PinDraw.cpp
         src/pf_imgui/node_editor/blueprint/pins/StringInputPin.cpp
-        src/pf_imgui/node_editor/blueprint/pins/Pin.cpp)
+        src/pf_imgui/node_editor/blueprint/pins/Pin.cpp
+        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.cpp
+        )
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -372,7 +374,8 @@ set(INCLUDES
         src/pf_imgui/node_editor/blueprint/pins/PinDraw.h
         src/pf_imgui/node_editor/blueprint/pins/StringInputPin.h
         src/pf_imgui/node_editor/blueprint/pins/ValuePin.h
-        src/pf_imgui/node_editor/blueprint/pins/Pin.h)
+        src/pf_imgui/node_editor/blueprint/pins/Pin.h
+        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
