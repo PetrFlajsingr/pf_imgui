@@ -3,11 +3,12 @@
 //
 
 #include "EventPin.h"
+#include "PinDraw.h"
 
 namespace pf::ui::ig::bp {
 
 EventPin::EventPin(const std::string &name, const std::string &label, const ImColor &color)
-    : ValuePin(name, label, color) {}
+    : Pin(name, label, color) {}
 
 void EventPin::renderIcon() {
   ImVec2 iconSize{16, 16};

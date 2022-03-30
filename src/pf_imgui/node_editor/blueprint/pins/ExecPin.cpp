@@ -3,11 +3,12 @@
 //
 
 #include "ExecPin.h"
+#include "PinDraw.h"
 
 namespace pf::ui::ig::bp {
 
 ExecPin::ExecPin(const std::string &name, const std::string &label, const ImColor &pinColor)
-    : ValuePin(name, label, pinColor) {}
+    : Pin(name, label, pinColor) {}
 
 void ExecPin::renderIcon() {
   ImVec2 iconSize{16, 16};

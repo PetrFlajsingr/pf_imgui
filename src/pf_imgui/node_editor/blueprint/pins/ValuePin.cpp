@@ -6,12 +6,7 @@
 
 namespace pf::ui::ig::bp {
 
-ValuePin::ValuePin(const std::string &name, const std::string &label, const ImColor &color)
-    : Pin(name, label), color(color) {}
-
-const ImColor &ValuePin::getColor() const { return color; }
-
-void ValuePin::setColor(const ImColor &newColor) { color = newColor; }
+ValuePin::ValuePin(const std::string &name, const std::string &label, const ImColor &color) : Pin(name, label, color) {}
 
 void ValuePin::renderIcon() {
   const static auto renderAreaSize = ImVec2{16, 16};

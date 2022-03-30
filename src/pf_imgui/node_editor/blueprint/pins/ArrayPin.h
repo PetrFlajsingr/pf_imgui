@@ -5,12 +5,12 @@
 #ifndef IMGUI_EXPERIMENTS_ARRAYPIN_H
 #define IMGUI_EXPERIMENTS_ARRAYPIN_H
 
-#include "ValuePin.h"
+#include "Pin.h"
 #include <imgui_internal.h>
 
 namespace pf::ui::ig::bp {
 
-class ArrayPin : public ValuePin {
+class ArrayPin : public Pin {
  public:
   ArrayPin(const std::string &name, const std::string &label, const ImVec4 &color);
 

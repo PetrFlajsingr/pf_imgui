@@ -3,11 +3,11 @@
 //
 
 #include "ArrayPin.h"
+#include "PinDraw.h"
 
 namespace pf::ui::ig::bp {
 
-ArrayPin::ArrayPin(const std::string &name, const std::string &label, const ImVec4 &color)
-    : ValuePin(name, label, color) {}
+ArrayPin::ArrayPin(const std::string &name, const std::string &label, const ImVec4 &color) : Pin(name, label, color) {}
 
 void ArrayPin::renderIcon() {
   ImVec2 iconSize{16, 16};

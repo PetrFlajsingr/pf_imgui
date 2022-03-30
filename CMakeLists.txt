@@ -375,7 +375,7 @@ set(INCLUDES
         src/pf_imgui/node_editor/blueprint/pins/PinDraw.h
         src/pf_imgui/node_editor/blueprint/pins/StringInputPin.h
         src/pf_imgui/node_editor/blueprint/pins/ValuePin.h
-        )
+        src/pf_imgui/node_editor/blueprint/pins/Pin.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
