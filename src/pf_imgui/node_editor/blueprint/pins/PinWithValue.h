@@ -14,7 +14,7 @@ template<typename T>
   requires(std::equality_comparable<T> && std::is_assignable_v<T &, T> && std::copy_constructible<T>)
 class PinWithValue : public ValuePin<T> {
  public:
-  using ValuePin<T>::ValueType;
+  using ValueType = typename ValuePin<T>::ValueType;
   using ValuePin<T>::ValuePin;
 
   [[nodiscard]] virtual T getValue() const = 0;

@@ -21,7 +21,7 @@ void ExecPin::renderIcon() {
   ImGui::Dummy(iconSize);
 }
 
-bool ExecPin::acceptsLinkWith(pf::ui::ig::Pin &other) const {
+bool ExecPin::acceptsLinkWith(ig::Pin &other) const {
   if (!Pin::acceptsLinkWith(other)) { return false; }
   return dynamic_cast<ExecPin *>(&other) != nullptr;
 }

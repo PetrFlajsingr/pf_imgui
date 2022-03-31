@@ -10,14 +10,14 @@
 
 namespace pf::ui::ig::bp {
 
-class Pin : public pf::ui::ig::Pin {
+class Pin : public ig::Pin {
  public:
   Pin(const std::string &name, const std::string &label, const ImColor &color);
 
   [[nodiscard]] const ImColor &getColor() const;
   void setColor(const ImColor &newColor);
 
-  [[nodiscard]] bool acceptsLinkWith(pf::ui::ig::Pin &other) const override;
+  [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 
  protected:
   void addLink(std::shared_ptr<Link> link) override;
