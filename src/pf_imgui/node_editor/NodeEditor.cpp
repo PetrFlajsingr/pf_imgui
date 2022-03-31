@@ -143,6 +143,9 @@ void NodeEditor::handleLinkCreation() {
         }
 
         if (ax::NodeEditor::AcceptNewItem(inPin->getValidLinkPreviewColor(), inPin->getValidLinkPreviewThickness())) {
+          if (inPin->getType() == Pin::Type::Output && outPin->getType() == Pin::Type::Input) {
+            std::swap(inPin, outPin);
+          }
           auto &newLink = links.emplace_back(std::make_shared<Link>(uniqueId(), getNextId(), inPin, outPin));
           inPin->addLink(newLink);
           outPin->addLink(newLink);
