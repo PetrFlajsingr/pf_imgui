@@ -2,8 +2,8 @@
 // Created by xflajs00 on 29.03.2022.
 //
 
-#ifndef IMGUI_EXPERIMENTS_DRAGPIN_H
-#define IMGUI_EXPERIMENTS_DRAGPIN_H
+#ifndef PF_IMGUI_BLUEPRINT_DRAGPIN_H
+#define PF_IMGUI_BLUEPRINT_DRAGPIN_H
 
 #include "InteractablePin.h"
 #include <pf_imgui/elements/DragInput.h>
@@ -42,4 +42,4 @@ class DragPin : public InteractablePin<DragInput<T>> {
 
 }  // namespace pf::ui::ig::bp
 
-#endif  //IMGUI_EXPERIMENTS_DRAGPIN_H
+#endif  //PF_IMGUI_BLUEPRINT_DRAGPIN_H

@@ -2,8 +2,8 @@
 // Created by xflajs00 on 30.03.2022.
 //
 
-#ifndef PF_IMGUI_PIN_H
-#define PF_IMGUI_PIN_H
+#ifndef PF_IMGUI_BLUEPRINT_PIN_H
+#define PF_IMGUI_BLUEPRINT_PIN_H
 
 #include <imgui.h>
 #include <pf_imgui/node_editor/Pin.h>
@@ -28,4 +28,4 @@ class Pin : public ig::Pin {
 
 }  // namespace pf::ui::ig::bp
 
-#endif  //PF_IMGUI_PIN_H
+#endif  //PF_IMGUI_BLUEPRINT_PIN_H

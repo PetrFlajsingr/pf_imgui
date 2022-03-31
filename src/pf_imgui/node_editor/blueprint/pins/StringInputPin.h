@@ -2,8 +2,8 @@
 // Created by xflajs00 on 29.03.2022.
 //
 
-#ifndef IMGUI_EXPERIMENTS_STRINGINPUTPIN_H
-#define IMGUI_EXPERIMENTS_STRINGINPUTPIN_H
+#ifndef PF_IMGUI_BLUEPRINT_STRINGINPUTPIN_H
+#define PF_IMGUI_BLUEPRINT_STRINGINPUTPIN_H
 
 #include "InteractablePin.h"
 #include <pf_imgui/elements/InputText.h>
@@ -30,4 +30,4 @@ class StringInputPin : public InteractablePin<InputText> {
 
 }  // namespace pf::ui::ig::bp
 
-#endif  //IMGUI_EXPERIMENTS_STRINGINPUTPIN_H
+#endif  //PF_IMGUI_BLUEPRINT_STRINGINPUTPIN_H

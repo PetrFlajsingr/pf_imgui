@@ -2,8 +2,8 @@
 // Created by xflajs00 on 29.03.2022.
 //
 
-#ifndef IMGUI_EXPERIMENTS_INTERACTABLEPIN_H
-#define IMGUI_EXPERIMENTS_INTERACTABLEPIN_H
+#ifndef PF_IMGUI_BLUEPRINT_INTERACTABLEPIN_H
+#define PF_IMGUI_BLUEPRINT_INTERACTABLEPIN_H
 
 #include "PinWithValue.h"
 #include <concepts>
@@ -47,4 +47,4 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
 };
 }  // namespace pf::ui::ig::bp
 
-#endif  //IMGUI_EXPERIMENTS_INTERACTABLEPIN_H
+#endif  //PF_IMGUI_BLUEPRINT_INTERACTABLEPIN_H

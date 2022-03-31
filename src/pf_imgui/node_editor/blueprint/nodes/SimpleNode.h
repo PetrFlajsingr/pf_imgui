@@ -2,8 +2,8 @@
 // Created by xflajs00 on 30.03.2022.
 //
 
-#ifndef PF_IMGUI_SIMPLENODE_H
-#define PF_IMGUI_SIMPLENODE_H
+#ifndef PF_IMGUI_BLUEPRINT_SIMPLENODE_H
+#define PF_IMGUI_BLUEPRINT_SIMPLENODE_H
 
 #include <pf_imgui/node_editor/Node.h>
 
@@ -21,4 +21,4 @@ class SimpleNode : public Node {
 
 }  // namespace pf::ui::ig::bp
 
-#endif  //PF_IMGUI_SIMPLENODE_H
+#endif  //PF_IMGUI_BLUEPRINT_SIMPLENODE_H

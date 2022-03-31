@@ -2,8 +2,8 @@
 // Created by xflajs00 on 29.03.2022.
 //
 
-#ifndef IMGUI_EXPERIMENTS_CHECKBOXPIN_H
-#define IMGUI_EXPERIMENTS_CHECKBOXPIN_H
+#ifndef PF_IMGUI_BLUEPRINT_CHECKBOXPIN_H
+#define PF_IMGUI_BLUEPRINT_CHECKBOXPIN_H
 
 #include "InteractablePin.h"
 #include <pf_imgui/elements/Checkbox.h>
@@ -16,4 +16,4 @@ class BPCheckboxPin : public InteractablePin<Checkbox> {
 };
 
 }  // namespace pf::ui::ig::bp
-#endif  //IMGUI_EXPERIMENTS_CHECKBOXPIN_H
+#endif  //PF_IMGUI_BLUEPRINT_CHECKBOXPIN_H

@@ -28,7 +28,7 @@ bool ExecPin::acceptsLinkWith(ig::Pin &other) const {
 
 void ExecPin::addLink(std::shared_ptr<Link> link) {
   clearLinks();
-  ig::Pin::addLink(link); // NOLINT(bugprone-parent-virtual-call)
+  ig::Pin::addLink(link);  // NOLINT(bugprone-parent-virtual-call)
 }
 
 }  // namespace pf::ui::ig::bp

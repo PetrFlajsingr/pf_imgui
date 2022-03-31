@@ -2,8 +2,8 @@
 // Created by xflajs00 on 29.03.2022.
 //
 
-#ifndef IMGUI_EXPERIMENTS_PINWITHVALUE_H
-#define IMGUI_EXPERIMENTS_PINWITHVALUE_H
+#ifndef PF_IMGUI_BLUEPRINT_PINWITHVALUE_H
+#define PF_IMGUI_BLUEPRINT_PINWITHVALUE_H
 
 #include "ValuePin.h"
 #include <imgui_internal.h>
@@ -23,4 +23,4 @@ class PinWithValue : public ValuePin<T> {
 
 }  // namespace pf::ui::ig::bp
 
-#endif  //IMGUI_EXPERIMENTS_PINWITHVALUE_H
+#endif  //PF_IMGUI_BLUEPRINT_PINWITHVALUE_H

@@ -2,8 +2,8 @@
 // Created by xflajs00 on 29.03.2022.
 //
 
-#ifndef IMGUI_EXPERIMENTS_ARRAYPIN_H
-#define IMGUI_EXPERIMENTS_ARRAYPIN_H
+#ifndef PF_IMGUI_BLUEPRINT_ARRAYPIN_H
+#define PF_IMGUI_BLUEPRINT_ARRAYPIN_H
 
 #include "Pin.h"
 #include "PinDraw.h"
@@ -38,4 +38,4 @@ class ArrayPin : public Pin {
 
 }  // namespace pf::ui::ig::bp
 
-#endif  //IMGUI_EXPERIMENTS_ARRAYPIN_H
+#endif  //PF_IMGUI_BLUEPRINT_ARRAYPIN_H
