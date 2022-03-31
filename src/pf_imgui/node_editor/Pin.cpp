@@ -10,6 +10,8 @@
 
 namespace pf::ui::ig {
 
+Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), Labellable(std::move(config.label)) {}
+
 Pin::Pin(const std::string &name, const std::string &label) : Renderable(name), Labellable(label) {}
 
 Pin::~Pin() {
@@ -19,8 +21,6 @@ Pin::~Pin() {
 ax::NodeEditor::PinId Pin::getId() const { return id; }
 
 Pin::Type Pin::getType() const { return type; }
-
-const std::vector<std::shared_ptr<Link>> &Pin::getLinks() const { return links; }
 
 Node &Pin::getNode() { return *parent; }
 
