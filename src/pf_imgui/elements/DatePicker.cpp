@@ -4,7 +4,7 @@
 
 #include "DatePicker.h"
 #include "imguidatechooser.h"
-#include <time.h>
+#include <ctime>
 
 namespace pf::ui::ig {
 

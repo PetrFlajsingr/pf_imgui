@@ -11,7 +11,7 @@ namespace pf::ui::ig::bp {
 
 class SimpleNode : public Node {
  public:
-  SimpleNode(const std::string &name);
+  explicit SimpleNode(const std::string &name);
 
  protected:
   virtual void renderIcon() = 0;

@@ -50,7 +50,7 @@ class LinkText : public ItemElement, public Labellable, public Clickable {
            std::invocable<std::string_view> auto &&linkClickHandler)
       : ItemElement(elementName), Labellable(label), link(std::move(link)),
         linkClickHandler(std::forward<decltype(linkClickHandler)>(linkClickHandler)) {
-    setTooltip(link);
+    setTooltip(LinkText::link);
   }
 
  protected:
