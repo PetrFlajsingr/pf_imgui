@@ -14,6 +14,8 @@
 
 namespace pf::ui::ig {
 
+Node::Node(Node::Config &&config) : Renderable(std::move(config.name)) {}
+
 Node::Node(const std::string &name) : Renderable(name) {}
 
 Node::~Node() {
@@ -24,10 +26,6 @@ Node::~Node() {
 }
 
 ax::NodeEditor::NodeId Node::getId() const { return id; }
-
-const std::vector<std::unique_ptr<Pin>> &Node::getInputPins() const { return inputPins; }
-
-const std::vector<std::unique_ptr<Pin>> &Node::getOutputPins() const { return outputPins; }
 
 PopupMenu &Node::createOrGetPopupMenu() {
   if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }

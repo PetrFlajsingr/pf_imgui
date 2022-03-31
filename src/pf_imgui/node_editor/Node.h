@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 27.03.2022.
-//
+/**
+* @file NodeEditor.h
+* @brief Node for NodeEditor.
+* @author Petr Flajšingr
+* @date 27.3.22
+*/
 
 #ifndef PF_IMGUI_NODE_EDITOR_NODE_H
 #define PF_IMGUI_NODE_EDITOR_NODE_H
@@ -9,6 +12,7 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <memory>
+#include <pf_common/concepts/ranges.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
@@ -16,18 +20,74 @@
 
 namespace pf::ui::ig {
 
-// TODO: comments
+/**
+ * @brief A node in NodeEditor containing Pins
+ */
 class Node : public Renderable {
   friend class NodeEditor;
 
  public:
-  Node(const std::string &name);
+  /**
+   * @brief Struct for construction of Node.
+   */
+  struct Config {
+    using Parent = Node;
+    std::string name; /*!< Unique name of the element */
+  };
+  /**
+   * Construct Node
+   * @param config construction args @see Node::Config
+   */
+  explicit Node(Config &&config);
+  /**
+   * Construct Node
+   * @param name unique name of the element
+   */
+  explicit Node(const std::string &name);
   ~Node() override;
 
+  /**
+   * Get id used internally.
+   */
   [[nodiscard]] ax::NodeEditor::NodeId getId() const;
-  [[nodiscard]] const std::vector<std::unique_ptr<Pin>> &getInputPins() const;
-  [[nodiscard]] const std::vector<std::unique_ptr<Pin>> &getOutputPins() const;
 
+  /**
+   * Get all input pins
+   * @return view to input pins
+   */
+  [[nodiscard]] auto getInputPins() {
+    return inputPins | ranges::views::transform([](auto &pin) -> Pin & { return *pin; });
+  }
+  /**
+   * Get all output pins
+   * @return view to output pins
+   */
+  [[nodiscard]] auto getOutputPins() {
+    return outputPins | ranges::views::transform([](auto &pin) -> Pin & { return *pin; });
+  }
+
+  /**
+   * Get all input pins
+   * @return view to input pins
+   */
+  [[nodiscard]] auto getInputPins() const {
+    return inputPins | ranges::views::transform([](auto &pin) -> const Pin & { return *pin; });
+  }
+  /**
+   * Get all output pins
+   * @return view to output pins
+   */
+  [[nodiscard]] auto getOutputPins() const {
+    return outputPins | ranges::views::transform([](auto &pin) -> const Pin & { return *pin; });
+  }
+
+  /**
+   * Create a new input pin of given type.
+   * @tparam T  type of the pin to create
+   * @tparam Args types of arguments for Pin's constructor
+   * @param args arguments for Pin's constructor
+   * @return reference to the newly created Pin
+   */
   template<std::derived_from<Pin> T = Pin, typename... Args>
   T &addInputPin(Args &&...args)
     requires std::constructible_from<T, Args...>
@@ -40,6 +100,14 @@ class Node : public Renderable {
     result->type = Pin::Type::Input;
     return *result;
   }
+
+  /**
+   * Create a new output pin of given type.
+   * @tparam T  type of the pin to create
+   * @tparam Args types of arguments for Pin's constructor
+   * @param args arguments for Pin's constructor
+   * @return reference to the newly created Pin
+   */
   template<std::derived_from<Pin> T = Pin, typename... Args>
   T &addOutputPin(Args &&...args)
     requires std::constructible_from<T, Args...>
@@ -53,20 +121,39 @@ class Node : public Renderable {
     return *result;
   }
 
-  // change this in ItemElement too
+  // TODO: change this in ItemElement too
+  /**
+   * Create or get PopupMenu which is shown when the node is right clicked.
+   */
   [[nodiscard]] PopupMenu &createOrGetPopupMenu();
+  /**
+   *
+   * @return true if PopupMenu is active for this node, faalse otherwise
+   */
   [[nodiscard]] bool hasPopupMenu() const;
+  /**
+   * Remove PopupMenu of this node, no lon
+   */
   void removePopupMenu();
 
  protected:
   void renderImpl() override;
 
+  /**
+   * Render top part of the node.
+   */
   virtual void renderHeader();
-
+  /**
+   * Render input pins on the left side of the node.
+   */
   virtual void renderInputs();
-
+  /**
+   * Render space between input and output nodes.
+   */
   virtual void renderMiddle();
-
+  /**
+   * Render output pins on the right side of the node.
+   */
   virtual void renderOutputs();
 
  private:
