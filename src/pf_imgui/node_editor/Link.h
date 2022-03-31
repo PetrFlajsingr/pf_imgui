@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 27.03.2022.
-//
+/**
+* @file Link.h
+* @brief Link for NodeEditor.
+* @author Petr Flajšingr
+* @date 27.3.22
+*/
 
 #ifndef PF_IMGUI_NODE_EDITOR_LINK_H
 #define PF_IMGUI_NODE_EDITOR_LINK_H
@@ -13,28 +16,81 @@
 
 namespace pf::ui::ig {
 
-// TODO: comments
+/**
+ * @brief Link connecting two Pins in NodeEditor.
+ */
 class Link : public Renderable {
   friend class NodeEditor;
 
  public:
+  /**
+   * Construct Link
+   * @param name unique name of the element
+   * @param id unique internal id
+   * @param inputPin input pin
+   * @param outputPin output pin
+   */
   Link(const std::string &name, const ax::NodeEditor::LinkId &id, Pin *inputPin, Pin *outputPin);
   ~Link() override;
 
+  /**
+   *
+   * @return internal id within NodeEditor
+   */
   [[nodiscard]] ax::NodeEditor::LinkId getId() const;
+  /**
+   *
+   * @return reference to input pin
+   */
   [[nodiscard]] Pin &getInputPin() const;
+  /**
+   *
+   * @return reference to output pin
+   */
   [[nodiscard]] Pin &getOutputPin() const;
+  /**
+   *
+   * @return true if the link was not invalidated, false otherwise
+   */
   [[nodiscard]] bool isValid() const;
+  /**
+   * Invalidate the Link, stopping its rendering and enqueue it for removal.
+   */
   void invalidate();
 
+  /**
+   *
+   * @return color of the Link line
+   */
   [[nodiscard]] const ImVec4 &getColor() const;
+  /**
+   * Set color of the Link line
+   * @param newColor new color
+   */
   void setColor(const ImVec4 &newColor);
+  /**
+   *
+   * @return thickness of Link line
+   */
   [[nodiscard]] float getThickness() const;
+  /**
+   * Set thickness of the Link's line
+   * @param newThickness
+   */
   void setThickness(float newThickness);
 
-  // change this in ItemElement too
+  /**
+   * Create or get PopupMenu which is shown when the node is right clicked.
+   */
   [[nodiscard]] PopupMenu &createOrGetPopupMenu();
+  /**
+   *
+   * @return true if PopupMenu is active for this node, faalse otherwise
+   */
   [[nodiscard]] bool hasPopupMenu() const;
+  /**
+   * Remove PopupMenu of this node, no lon
+   */
   void removePopupMenu();
 
  protected:
