@@ -26,10 +26,7 @@ NodeEditor::~NodeEditor() { ax::NodeEditor::DestroyEditor(context); }
 
 void NodeEditor::renderImpl() {
   {
-    ax::NodeEditor::SetCurrentEditor(context);
-    handleSelectionChange();
-
-    auto unsetEditor = RAII{[] { ax::NodeEditor::SetCurrentEditor(nullptr); }};
+    auto scopedContext = setContext();
     ax::NodeEditor::Begin(getName().c_str(), getSize().asImVec());
     auto end = RAII{ax::NodeEditor::End};
     {
@@ -38,6 +35,7 @@ void NodeEditor::renderImpl() {
 
       handleCreation();
       handleDeletion();
+      handleSelectionChange();
 
       ax::NodeEditor::NodeId contextNodeId;
       ax::NodeEditor::PinId contextPinId;
@@ -245,20 +243,34 @@ void NodeEditor::handleSelectionChange() {
   }
 }
 
-bool NodeEditor::isSuspended() const { return ax::NodeEditor::IsSuspended(); }
+bool NodeEditor::isSuspended() const {
+  auto scopedContext = setContext();
+  return ax::NodeEditor::IsSuspended();
+}
 
-void NodeEditor::suspend() { ax::NodeEditor::Suspend(); }
+void NodeEditor::suspend() {
+  auto scopedContext = setContext();
+  ax::NodeEditor::Suspend();
+}
 
-void NodeEditor::resume() { ax::NodeEditor::Resume(); }
+void NodeEditor::resume() {
+  auto scopedContext = setContext();
+  ax::NodeEditor::Resume();
+}
 
-void NodeEditor::clearSelection() { ax::NodeEditor::ClearSelection(); }
+void NodeEditor::clearSelection() {
+  auto scopedContext = setContext();
+  ax::NodeEditor::ClearSelection();
+}
 
 void NodeEditor::navigateToContent(std::optional<std::chrono::milliseconds> animationLength) {
+  auto scopedContext = setContext();
   ax::NodeEditor::NavigateToContent(
       static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
 }
 
 void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::milliseconds> animationLength) {
+  auto scopedContext = setContext();
   ax::NodeEditor::NavigateToSelection(
       zoomIn, static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
 }
@@ -271,6 +283,11 @@ void NodeEditor::cleanupLinks() {
     auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
     links.erase(beginRm, endRm);
   }
+}
+
+RAII NodeEditor::setContext() const {
+  ax::NodeEditor::SetCurrentEditor(context);
+  return RAII{[] { ax::NodeEditor::SetCurrentEditor(nullptr); }};
 }
 
 }  // namespace pf::ui::ig

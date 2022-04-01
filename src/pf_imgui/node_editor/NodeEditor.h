@@ -176,6 +176,8 @@ class NodeEditor : public Element, public Resizable {
   void renderImpl() override;
 
  private:
+  [[nodiscard]] RAII setContext() const;
+
   std::optional<Node *> findNodeById(ax::NodeEditor::NodeId id);
   std::optional<Pin *> findPinById(ax::NodeEditor::PinId id);
   std::optional<Link *> findLinkById(ax::NodeEditor::LinkId id);
