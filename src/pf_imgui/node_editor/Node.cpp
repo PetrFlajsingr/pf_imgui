@@ -44,6 +44,12 @@ Size Node::getSize() const { return ax::NodeEditor::GetNodeSize(getId()); }
 
 void Node::centerOnScreen() { ax::NodeEditor::CenterNodeOnScreen(getId()); }
 
+bool Node::isSelected() const { return selected; }
+
+void Node::select(bool appendToSelection) { ax::NodeEditor::SelectNode(getId(), appendToSelection); }
+
+void Node::deselect() { ax::NodeEditor::DeselectNode(getId()); }
+
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(id);
   auto endNode = RAII{ax::NodeEditor::EndNode};

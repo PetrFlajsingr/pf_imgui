@@ -160,6 +160,21 @@ class Node : public Renderable {
    */
   void centerOnScreen();
 
+  [[nodiscard]] bool isSelected() const;
+  /**
+   * Mark node as selected.
+   * @param appendToSelection append to the current selection
+   */
+  void select(bool appendToSelection);
+  /**
+   * Remove this Node from selection.
+   */
+  void deselect();
+
+  Subscription addSelectionListener(std::invocable<bool> auto &&listener) {
+    return observableSelected.addListener(std::forward<decltype(listener)>(listener));
+  }
+
  protected:
   void renderImpl() override;
 
@@ -190,6 +205,9 @@ class Node : public Renderable {
   std::vector<std::unique_ptr<Pin>> outputPins;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
+
+  bool selected = false;
+  Observable_impl<bool> observableSelected;
 };
 
 }  // namespace pf::ui::ig
