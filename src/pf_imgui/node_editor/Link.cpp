@@ -39,6 +39,12 @@ bool Link::hasPopupMenu() const { return popupMenu != nullptr; }
 
 void Link::removePopupMenu() { popupMenu = nullptr; }
 
+bool Link::isSelected() const { return selected; }
+
+void Link::select(bool appendToSelection) { ax::NodeEditor::SelectLink(getId(), appendToSelection); }
+
+void Link::deselect() { ax::NodeEditor::DeselectLink(getId()); }
+
 void Link::renderImpl() {
   if (!valid) { return; }
   ax::NodeEditor::Link(id, inputPin->getId(), outputPin->getId(), color, thickness);

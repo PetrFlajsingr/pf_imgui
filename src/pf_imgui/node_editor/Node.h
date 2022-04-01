@@ -160,17 +160,26 @@ class Node : public Renderable {
    */
   void centerOnScreen();
 
+  // TODO: implement this in NodeEditor
+  /**
+   * Check if the Node is selected in editor.
+   * @return true if selected, false otherwise
+   */
   [[nodiscard]] bool isSelected() const;
   /**
    * Mark node as selected.
    * @param appendToSelection append to the current selection
    */
-  void select(bool appendToSelection);
+  void select(bool appendToSelection = false);
   /**
    * Remove this Node from selection.
    */
   void deselect();
-
+  /**
+   * Add a listener called when the Node is de/selected.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
   Subscription addSelectionListener(std::invocable<bool> auto &&listener) {
     return observableSelected.addListener(std::forward<decltype(listener)>(listener));
   }

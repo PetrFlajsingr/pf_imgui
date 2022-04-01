@@ -93,6 +93,30 @@ class Link : public Renderable {
    */
   void removePopupMenu();
 
+  // TODO: implement this in NodeEditor
+  /**
+   * Check if the Link is selected in editor.
+   * @return true if selected, false otherwise
+   */
+  [[nodiscard]] bool isSelected() const;
+  /**
+   * Mark Link as selected.
+   * @param appendToSelection append to the current selection
+   */
+  void select(bool appendToSelection = false);
+  /**
+   * Remove this Link from selection.
+   */
+  void deselect();
+  /**
+   * Add a listener called when the Link is de/selected.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addSelectionListener(std::invocable<bool> auto &&listener) {
+    return observableSelected.addListener(std::forward<decltype(listener)>(listener));
+  }
+
  protected:
   void renderImpl() override;
 
@@ -108,6 +132,9 @@ class Link : public Renderable {
   bool valid = true;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
+
+  bool selected = false;
+  Observable_impl<bool> observableSelected;
 };
 
 }  // namespace pf::ui::ig
