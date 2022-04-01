@@ -36,6 +36,10 @@ bool Node::hasPopupMenu() const { return popupMenu != nullptr; }
 
 void Node::removePopupMenu() { popupMenu = nullptr; }
 
+Position Node::getPosition() const { return Position{ax::NodeEditor::GetNodePosition(getId())}; }
+
+void Node::setPosition(Position position) { ax::NodeEditor::SetNodePosition(getId(), position.asImVec()); }
+
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(id);
   auto endNode = RAII{ax::NodeEditor::EndNode};

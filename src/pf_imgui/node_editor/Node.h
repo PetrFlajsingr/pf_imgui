@@ -14,6 +14,7 @@
 #include <memory>
 #include <pf_common/concepts/ranges.h>
 #include <pf_imgui/elements/PopupMenu.h>
+#include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
 #include <vector>
@@ -135,6 +136,17 @@ class Node : public Renderable {
    * Remove PopupMenu of this node, no lon
    */
   void removePopupMenu();
+
+  /**
+   * Get node position within editor.
+   * @return position within editor
+   */
+  [[nodiscard]] Position getPosition() const;
+  /**
+   * Set node position within editor.
+   * @param position new position
+   */
+  void setPosition(Position position);
 
  protected:
   void renderImpl() override;
