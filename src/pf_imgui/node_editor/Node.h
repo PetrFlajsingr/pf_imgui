@@ -16,6 +16,7 @@
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
 
@@ -147,6 +148,12 @@ class Node : public Renderable {
    * @param position new position
    */
   void setPosition(Position position);
+
+  /**
+   * Get Node's size.
+   * @return size
+   */
+  [[nodiscard]] Size getSize() const;
 
  protected:
   void renderImpl() override;

@@ -40,6 +40,8 @@ Position Node::getPosition() const { return Position{ax::NodeEditor::GetNodePosi
 
 void Node::setPosition(Position position) { ax::NodeEditor::SetNodePosition(getId(), position.asImVec()); }
 
+Size Node::getSize() const { return ax::NodeEditor::GetNodeSize(getId()); }
+
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(id);
   auto endNode = RAII{ax::NodeEditor::EndNode};
