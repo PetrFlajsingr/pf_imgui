@@ -11,7 +11,9 @@
 #include "Link.h"
 #include "Node.h"
 #include "fwd.h"
+#include <chrono>
 #include <imgui_node_editor.h>
+#include <optional>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <range/v3/view/filter.hpp>
@@ -19,9 +21,10 @@
 namespace pf::ui::ig {
 
 // TODO: config
-// TODO: selection controls
 // TODO: comments
 // TODO: in code node&link deletion
+// TODO: shortcuts
+// TODO: double click handling
 /**
  * @brief Class allowing for node editing.
  */
@@ -150,6 +153,18 @@ class NodeEditor : public Element, public Resizable {
    * Remove all Links and Nodes from selection.
    */
   void clearSelection();
+
+  /**
+   * Zoom the window so the entire content is visible.
+   * @param animationLength optional length of zoom animation
+   */
+  void navigateToContent(std::optional<std::chrono::milliseconds> animationLength = std::nullopt);
+  /**
+   * Zoom the window so selected content.
+   * @param zooMin if true the function will zoom in to the selection, otherwise it will only zoom out
+   * @param animationLength optional length of zoom animation
+   */
+  void navigateToSelection(bool zoomIn = true, std::optional<std::chrono::milliseconds> animationLength = std::nullopt);
 
   /**
    *

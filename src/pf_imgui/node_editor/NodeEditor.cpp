@@ -252,6 +252,16 @@ void NodeEditor::resume() { ax::NodeEditor::Resume(); }
 
 void NodeEditor::clearSelection() { ax::NodeEditor::ClearSelection(); }
 
+void NodeEditor::navigateToContent(std::optional<std::chrono::milliseconds> animationLength) {
+  ax::NodeEditor::NavigateToContent(
+      static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
+}
+
+void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::milliseconds> animationLength) {
+  ax::NodeEditor::NavigateToSelection(
+      zoomIn, static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
+}
+
 int NodeEditor::getNextId() { return idCounter++; }
 
 void NodeEditor::cleanupLinks() {
