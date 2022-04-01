@@ -27,6 +27,8 @@ NodeEditor::~NodeEditor() { ax::NodeEditor::DestroyEditor(context); }
 void NodeEditor::renderImpl() {
   {
     ax::NodeEditor::SetCurrentEditor(context);
+    handleSelectionChange();
+
     auto unsetEditor = RAII{[] { ax::NodeEditor::SetCurrentEditor(nullptr); }};
     ax::NodeEditor::Begin(getName().c_str(), getSize().asImVec());
     auto end = RAII{ax::NodeEditor::End};
@@ -36,7 +38,6 @@ void NodeEditor::renderImpl() {
 
       handleCreation();
       handleDeletion();
-      handleSelectionChange();
 
       ax::NodeEditor::NodeId contextNodeId;
       ax::NodeEditor::PinId contextPinId;
