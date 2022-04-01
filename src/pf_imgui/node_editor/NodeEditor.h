@@ -48,6 +48,21 @@ class NodeEditor : public Element, public Resizable {
   ~NodeEditor() override;
 
   /**
+   * Get all nodes in editor
+   * @return all nodes in editor
+   */
+  [[nodiscard]] auto getNodes() {
+    return nodes | ranges::views::transform([](auto &node) -> Node & { return *node; });
+  }
+  /**
+   * Get all nodes in editor
+   * @return all nodes in editor
+   */
+  [[nodiscard]] auto getNodes() const {
+    return nodes | ranges::views::transform([](auto &node) -> const Node & { return *node; });
+  }
+
+  /**
    * Create a new node of given type.
    * TODO: node position setter
    * @tparam T type of the node to create
