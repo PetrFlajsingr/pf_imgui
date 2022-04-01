@@ -160,7 +160,6 @@ class Node : public Renderable {
    */
   void centerOnScreen();
 
-  // TODO: implement this in NodeEditor
   /**
    * Check if the Node is selected in editor.
    * @return true if selected, false otherwise

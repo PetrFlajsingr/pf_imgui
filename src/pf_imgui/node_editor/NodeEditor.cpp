@@ -10,6 +10,7 @@
 #include "pf_imgui/unique_id.h"
 #include <range/v3/view/cache1.hpp>
 #include <range/v3/view/concat.hpp>
+#include <range/v3/view/filter.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
 
@@ -35,6 +36,7 @@ void NodeEditor::renderImpl() {
 
       handleCreation();
       handleDeletion();
+      handleSelectionChange();
 
       ax::NodeEditor::NodeId contextNodeId;
       ax::NodeEditor::PinId contextPinId;
@@ -206,11 +208,49 @@ void NodeEditor::handleNodeDeletion() {
   }
 }
 
+void NodeEditor::handleSelectionChange() {
+  if (ax::NodeEditor::HasSelectionChanged()) {
+    const auto selectedObjectCount = ax::NodeEditor::GetSelectedObjectCount();
+    {
+      auto selectedNodeIds = std::vector<ax::NodeEditor::NodeId>(selectedObjectCount);
+      selectedNodeIds.resize(ax::NodeEditor::GetSelectedNodes(selectedNodeIds.data(), selectedObjectCount));
+
+      std::ranges::for_each(nodes | ranges::views::filter([&](const auto &node) {
+                              const auto isSelected =
+                                  std::ranges::find(selectedNodeIds, node->getId()) != selectedNodeIds.end();
+                              const auto wasSelected = node->isSelected();
+                              return (isSelected && !wasSelected) || (!isSelected && wasSelected);
+                            }),
+                            [](const auto &node) {
+                              node->selected = !node->selected;
+                              node->observableSelected.notify(node->selected);
+                            });
+    }
+    {
+      auto selectedLinkIds = std::vector<ax::NodeEditor::LinkId>(selectedObjectCount);
+      selectedLinkIds.resize(ax::NodeEditor::GetSelectedLinks(selectedLinkIds.data(), selectedObjectCount));
+
+      std::ranges::for_each(links | ranges::views::filter([&](const auto &link) {
+                              const auto isSelected =
+                                  std::ranges::find(selectedLinkIds, link->getId()) != selectedLinkIds.end();
+                              const auto wasSelected = link->isSelected();
+                              return (isSelected && !wasSelected) || (!isSelected && wasSelected);
+                            }),
+                            [](const auto &link) {
+                              link->selected = !link->selected;
+                              link->observableSelected.notify(link->selected);
+                            });
+    }
+  }
+}
+
 bool NodeEditor::isSuspended() const { return ax::NodeEditor::IsSuspended(); }
 
 void NodeEditor::suspend() { ax::NodeEditor::Suspend(); }
 
 void NodeEditor::resume() { ax::NodeEditor::Resume(); }
+
+void NodeEditor::clearSelection() { ax::NodeEditor::ClearSelection(); }
 
 int NodeEditor::getNextId() { return idCounter++; }
 

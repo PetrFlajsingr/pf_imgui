@@ -220,6 +220,7 @@ class Pin : public Renderable, public Labellable {
   ImVec4 unconnectedLinkPreviewColor = ImVec4(1, 1, 1, 1);
   float unconnectedLinkPreviewThickness = 1.f;
 
+  // TODO: get rid of these references and just keep it in NodeEditor
   std::vector<std::shared_ptr<Link>> links;
   Observable_impl<std::shared_ptr<Link>> observableLink;
 

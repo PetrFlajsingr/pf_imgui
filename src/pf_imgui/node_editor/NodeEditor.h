@@ -8,17 +8,20 @@
 #ifndef PF_IMGUI_NODE_EDITOR_NODEEDITOR_H
 #define PF_IMGUI_NODE_EDITOR_NODEEDITOR_H
 
+#include "Link.h"
 #include "Node.h"
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
 
 // TODO: config
 // TODO: selection controls
 // TODO: comments
+// TODO: in code node&link deletion
 /**
  * @brief Class allowing for node editing.
  */
@@ -110,6 +113,45 @@ class NodeEditor : public Element, public Resizable {
   void resume();
 
   /**
+   * Get all nodes currently selected by user.
+   * @return view to all selected nodes
+   */
+  [[nodiscard]] auto getSelectedNodes() {
+    return nodes | ranges::views::filter([](const auto &node) { return node->isSelected(); })
+        | ranges::views::transform([](const auto &node) -> Node & { return *node; });
+  }
+  /**
+   * Get all nodes currently selected by user.
+   * @return view to all selected nodes
+   */
+  [[nodiscard]] auto getSelectedNodes() const {
+    return nodes | ranges::views::filter([](const auto &node) { return node->isSelected(); })
+        | ranges::views::transform([](const auto &node) -> const Node & { return *node; });
+  }
+
+  /**
+   * Get all links currently selected by user.
+   * @return view to all selected links
+   */
+  [[nodiscard]] auto getSelectedLinks() {
+    return links | ranges::views::filter([](const auto &link) { return link->isSelected(); })
+        | ranges::views::transform([](const auto &link) -> Link & { return *link; });
+  }
+  /**
+   * Get all links currently selected by user.
+   * @return view to all selected links
+   */
+  [[nodiscard]] auto getSelectedLinks() const {
+    return links | ranges::views::filter([](const auto &link) { return link->isSelected(); })
+        | ranges::views::transform([](const auto &link) -> const Link & { return *link; });
+  }
+
+  /**
+   * Remove all Links and Nodes from selection.
+   */
+  void clearSelection();
+
+  /**
    *
    * @return next id for internal elements
    */
@@ -135,6 +177,8 @@ class NodeEditor : public Element, public Resizable {
   void handleDeletion();
   void handleLinkDeletion();
   void handleNodeDeletion();
+
+  void handleSelectionChange();
 
   ax::NodeEditor::EditorContext *context = nullptr;
 
