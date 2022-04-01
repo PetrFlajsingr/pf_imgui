@@ -155,6 +155,11 @@ class Node : public Renderable {
    */
   [[nodiscard]] Size getSize() const;
 
+  /**
+   * Center Node in the middle of the currently viewed are of editor.
+   */
+  void centerOnScreen();
+
  protected:
   void renderImpl() override;
 

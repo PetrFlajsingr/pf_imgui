@@ -42,6 +42,8 @@ void Node::setPosition(Position position) { ax::NodeEditor::SetNodePosition(getI
 
 Size Node::getSize() const { return ax::NodeEditor::GetNodeSize(getId()); }
 
+void Node::centerOnScreen() { ax::NodeEditor::CenterNodeOnScreen(getId()); }
+
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(id);
   auto endNode = RAII{ax::NodeEditor::EndNode};

@@ -15,11 +15,10 @@
 #include <pf_imgui/interface/Resizable.h>
 
 namespace pf::ui::ig {
+
 // TODO: config
 // TODO: selection controls
-// TODO: navigate to
 // TODO: comments
-
 /**
  * @brief Class allowing for node editing.
  */
