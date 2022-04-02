@@ -10,6 +10,7 @@ class Pin;
 class Node;
 class Link;
 class NodeEditor;
+class Comment;
 }  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_NODE_EDITOR_FWD_H

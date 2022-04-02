@@ -31,6 +31,7 @@ void NodeEditor::renderImpl() {
     auto end = RAII{ax::NodeEditor::End};
     {
       std::ranges::for_each(nodes, [](auto &node) { node->render(); });
+      std::ranges::for_each(comments, [](auto &comment) { comment->render(); });
       std::ranges::for_each(links, [](auto &link) { link->render(); });
 
       handleCreation();

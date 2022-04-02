@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_NODE_EDITOR_NODEEDITOR_H
 #define PF_IMGUI_NODE_EDITOR_NODEEDITOR_H
 
+#include "Comment.h"
 #include "Link.h"
 #include "Node.h"
 #include "fwd.h"
@@ -22,10 +23,9 @@
 namespace pf::ui::ig {
 
 // TODO: config
-// TODO: comments
-// TODO: in code node&link deletion
 // TODO: shortcuts
 // TODO: double click handling
+// TODO: custom control over saving data such as node position, don't let the lib save it itself - basically make it Savable
 /**
  * @brief Class allowing for node editing.
  */
@@ -81,7 +81,6 @@ class NodeEditor : public Element, public Resizable {
 
   /**
    * Create a new node of given type.
-   * TODO: node position setter
    * @tparam T type of the node to create
    * @tparam Args types of arguments for Node's construction
    * @param args arguments for Node's construction
@@ -91,9 +90,28 @@ class NodeEditor : public Element, public Resizable {
   T &addNode(Args &&...args)
     requires std::constructible_from<T, Args...>
   {
-    auto newPin = std::make_unique<T>(std::forward<Args>(args)...);
-    auto result = newPin.get();
-    nodes.emplace_back(std::move(newPin));
+    auto newNode = std::make_unique<T>(std::forward<Args>(args)...);
+    auto result = newNode.get();
+    nodes.emplace_back(std::move(newNode));
+    result->id = getNextId();
+    result->parent = this;
+    return *result;
+  }
+
+  /**
+   * Create a new comment of given type.
+   * @tparam T type of the comment to create
+   * @tparam Args types of arguments for Comment's construction
+   * @param args arguments for Comment's construction
+   * @return reference to the newly created comment
+   */
+  template<std::derived_from<Comment> T = Comment, typename... Args>
+  T &addComment(Args &&...args)
+    requires std::constructible_from<T, Args...>
+  {
+    auto newComment = std::make_unique<T>(std::forward<Args>(args)...);
+    auto result = newComment.get();
+    comments.emplace_back(std::move(newComment));
     result->id = getNextId();
     result->parent = this;
     return *result;
@@ -206,6 +224,7 @@ class NodeEditor : public Element, public Resizable {
 
   std::vector<std::unique_ptr<Node>> nodes;
   std::vector<std::unique_ptr<Link>> links;
+  std::vector<std::unique_ptr<Comment>> comments;
 
   std::function<void(Pin &)> createNodeRequestHandler = [](Pin &) {};
 

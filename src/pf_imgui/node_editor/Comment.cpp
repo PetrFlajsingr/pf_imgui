@@ -44,4 +44,11 @@ void Comment::renderImpl() {
     ImGui::EndVertical();
   }
 }
+
+Position Comment::getPosition() const { return Position{ax::NodeEditor::GetNodePosition(getId())}; }
+
+void Comment::setPosition(Position position) { ax::NodeEditor::SetNodePosition(getId(), position.asImVec()); }
+
+Size Comment::getSize() const { return ax::NodeEditor::GetNodeSize(getId()); }
+
 }  // namespace pf::ui::ig
