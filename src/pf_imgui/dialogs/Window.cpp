@@ -66,16 +66,16 @@ void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::setSize(const Size &newSize) {
   Resizable::setSize(newSize);  // FIXME change this to SetNextWindowSize
-  ImGui::SetWindowSize(idLabel.c_str(), getSize().asImVec());
+  ImGui::SetWindowSize(idLabel.c_str(), static_cast<ImVec2>(getSize()));
 }
 
 void Window::render() {
   if (getVisibility() == Visibility::Visible) {
     if (font != nullptr) { ImGui::PushFont(font); }
     ImGui::SetNextWindowSizeConstraints(
-        minSizeConstraint.value_or(Size{0, 0}).asImVec(),
-        maxSizeConstraint.value_or(Size{std::numeric_limits<uint32_t>::max(), std::numeric_limits<uint32_t>::max()})
-            .asImVec());
+        static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
+        static_cast<ImVec2>(maxSizeConstraint.value_or(
+            Size{std::numeric_limits<uint32_t>::max(), std::numeric_limits<uint32_t>::max()})));
     if (dockInto.has_value()) {
       ImGui::SetNextWindowDockID(*dockInto);
       dockInto = std::nullopt;
@@ -96,7 +96,7 @@ void Window::setFocus() {
 }
 
 void Window::setPosition(Position pos) {
-  ImGui::SetWindowPos(idLabel.c_str(), pos.asImVec());
+  ImGui::SetWindowPos(idLabel.c_str(), static_cast<ImVec2>(pos));
   Positionable::setPosition(pos);
 }
 

@@ -38,7 +38,7 @@ struct PF_IMGUI_EXPORT FileExtensionSettings {
   /**
    * Color given to these extensions.
    */
-  std::optional<ImVec4> color = std::nullopt;
+  std::optional<Color> color = std::nullopt;
 };
 
 enum class FileDialogType { Dir, File };
@@ -131,7 +131,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
   void prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings);
 
   std::string filters;
-  std::vector<std::pair<std::string, ImVec4>> extColors;
+  std::vector<std::pair<std::string, Color>> extColors;
 
   std::filesystem::path openPath;
   std::string defaultName;

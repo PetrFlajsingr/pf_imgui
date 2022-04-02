@@ -14,6 +14,8 @@ namespace pf::ui::ig {
 /**
  * Dark style, mostly shades of gray, with some orange elements.
  * @param imguiInterface
+ *
+ * @todo: create a proper way to control style globally
  */
 inline void setDarkStyle(ImGuiInterface &imguiInterface) {
   auto styleSetter = [](ImGuiStyle &style) {

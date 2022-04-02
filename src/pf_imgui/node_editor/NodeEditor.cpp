@@ -27,7 +27,7 @@ NodeEditor::~NodeEditor() { ax::NodeEditor::DestroyEditor(context); }
 void NodeEditor::renderImpl() {
   {
     auto scopedContext = setContext();
-    ax::NodeEditor::Begin(getName().c_str(), getSize().asImVec());
+    ax::NodeEditor::Begin(getName().c_str(), static_cast<ImVec2>(getSize()));
     auto end = RAII{ax::NodeEditor::End};
     {
       std::ranges::for_each(nodes, [](auto &node) { node->render(); });
@@ -83,7 +83,8 @@ void NodeEditor::handleCreation() {
 
 void NodeEditor::handleLinkCreation() {
   const static auto rejectLink = [](Pin &originPin) {
-    ax::NodeEditor::RejectNewItem(originPin.getInvalidLinkPreviewColor(), originPin.getInvalidLinkPreviewThickness());
+    ax::NodeEditor::RejectNewItem(static_cast<ImVec4>(originPin.getInvalidLinkPreviewColor()),
+                                  originPin.getInvalidLinkPreviewThickness());
   };
   ax::NodeEditor::PinId inPinId;
   ax::NodeEditor::PinId outPinId;
@@ -105,7 +106,8 @@ void NodeEditor::handleLinkCreation() {
           return;
         }
 
-        if (ax::NodeEditor::AcceptNewItem(inPin->getValidLinkPreviewColor(), inPin->getValidLinkPreviewThickness())) {
+        if (ax::NodeEditor::AcceptNewItem(static_cast<ImVec4>(inPin->getValidLinkPreviewColor()),
+                                          inPin->getValidLinkPreviewThickness())) {
           if (inPin->getType() == Pin::Type::Output && outPin->getType() == Pin::Type::Input) {
             std::swap(inPin, outPin);
           }
@@ -124,7 +126,7 @@ void NodeEditor::handleNodeCreation() {
     const auto pinOpt = findPinById(pinId);
     if (pinOpt.has_value()) {
       auto pin = pinOpt.value();
-      if (ax::NodeEditor::AcceptNewItem(pin->getUnconnectedLinkPreviewColor(),
+      if (ax::NodeEditor::AcceptNewItem(static_cast<ImVec4>(pin->getUnconnectedLinkPreviewColor()),
                                         pin->getUnconnectedLinkPreviewThickness())) {
         createNodeRequestHandler(*pin);
       }

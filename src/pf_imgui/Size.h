@@ -79,7 +79,7 @@ struct PF_IMGUI_EXPORT Size {
    * Convert to ImVec, mostly for internal use.
    * @return size as ImVec
    */
-  [[nodiscard]] ImVec2 asImVec() const;
+  explicit operator ImVec2() const;
   Width width;
   Height height;
 };

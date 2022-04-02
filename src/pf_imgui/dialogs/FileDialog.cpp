@@ -57,10 +57,10 @@ void FileDialog::renderImpl() {
 
   std::ranges::for_each(extColors, [this](const auto &extColor) {
     const auto &[ext, color] = extColor;
-    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), color);
+    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(color));
   });
 
-  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize().asImVec())) {
+  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(getSize()))) {
     RAII end{[&] { fileDialogInstance.Close(); }};
     if (fileDialogInstance.IsOk()) {
       const auto filePathName = fileDialogInstance.GetFilePathName();

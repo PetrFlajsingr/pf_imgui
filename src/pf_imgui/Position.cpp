@@ -12,7 +12,7 @@ Position::Position(ImVec2 pos) : x(pos.x), y(pos.y) {}
 
 Position Position::LeftTop() { return {0.f, 0.f}; }
 
-ImVec2 Position::asImVec() const { return {x, y}; }
+Position::operator ImVec2() const { return {x, y}; }
 
 Position Position::moveDelta(float deltaX, float deltaY) const { return {x + deltaX, y + deltaY}; }
 

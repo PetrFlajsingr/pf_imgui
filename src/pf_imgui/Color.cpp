@@ -14,6 +14,8 @@ const Color Color::White = Color{ImVec4{1, 1, 1, 1}};
 
 Color::Color() : color(IM_COL32(255, 255, 255, 255)) {}
 
+Color::Color(ImU32 value) : color(value) {}
+
 Color::Color(ImColor value) : color(ImGui::ColorConvertFloat4ToU32(value)) {}
 
 Color::Color(const ImVec4 &value) : color(ImGui::ColorConvertFloat4ToU32(value)) {}
@@ -27,5 +29,7 @@ float Color::blue() const { return static_cast<ImVec4>(ImColor{color}).z; }
 float Color::alpha() const { return static_cast<ImVec4>(ImColor{color}).w; }
 
 Color::operator ImU32() const { return color; }
+
+Color::operator ImVec4() const { return static_cast<ImVec4>(ImColor{color}); }
 
 }  // namespace pf::ui::ig

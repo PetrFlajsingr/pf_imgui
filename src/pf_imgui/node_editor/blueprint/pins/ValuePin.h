@@ -16,7 +16,7 @@ class ValuePin : public Pin {
  public:
   using ValueType = T;
 
-  ValuePin(const std::string &name, const std::string &label, const ImColor &color) : Pin(name, label, color) {}
+  ValuePin(const std::string &name, const std::string &label, Color color) : Pin(name, label, color) {}
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override {
     if (!Pin::acceptsLinkWith(other)) { return false; }
@@ -32,8 +32,8 @@ class ValuePin : public Pin {
 
       const auto circleCenter = cursorPos + ImVec2{6, 8};
 
-      drawPinCircle(drawList, circleCenter, getColor(), hasAnyValidLinks());
-      drawPinArrow(drawList, circleCenter + ImVec2{6, 0}, getColor());
+      drawPinCircle(drawList, circleCenter, static_cast<ImVec4>(getColor()), hasAnyValidLinks());
+      drawPinArrow(drawList, circleCenter + ImVec2{6, 0}, static_cast<ImVec4>(getColor()));
     }
     ImGui::Dummy(renderAreaSize);
   }

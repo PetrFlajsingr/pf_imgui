@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <imgui.h>
 #include <pf_imgui/_export.h>
+#include <pf_common/concepts/Integral.h>
 
 namespace pf::ui::ig {
 
@@ -19,6 +20,7 @@ class PF_IMGUI_EXPORT Color {
  public:
   Color();
   explicit Color(ImColor value);
+  explicit Color(ImU32 value);
   explicit Color(const ImVec4 &value);
 
   static const Color Red;
@@ -27,8 +29,8 @@ class PF_IMGUI_EXPORT Color {
   static const Color Black;
   static const Color White;
 
-  [[nodiscard]] static Color RGB(std::same_as<std::uint8_t> auto red, std::same_as<std::uint8_t> auto green,
-                                 std::same_as<std::uint8_t> auto blue, std::same_as<std::uint8_t> auto alpha = 255u) {
+  [[nodiscard]] static Color RGB(Integral auto red, Integral auto green,
+                                 Integral auto blue, Integral auto alpha = 255u) {
     return Color{IM_COL32(red, green, blue, alpha)};
   }
   [[nodiscard]] static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
@@ -36,8 +38,8 @@ class PF_IMGUI_EXPORT Color {
     return Color{ImColor(red, green, blue, alpha)};
   }
 
-  [[nodiscard]] static Color HSV(std::same_as<std::uint8_t> auto hue, std::same_as<std::uint8_t> auto saturation,
-                                 std::same_as<std::uint8_t> auto value, std::same_as<std::uint8_t> auto alpha = 255u) {
+  [[nodiscard]] static Color HSV(Integral auto hue, Integral auto saturation,
+                                 Integral auto value, Integral auto alpha = 255u) {
     float r;
     float g;
     float b;
@@ -59,22 +61,22 @@ class PF_IMGUI_EXPORT Color {
   [[nodiscard]] float blue() const;
   [[nodiscard]] float alpha() const;
 
-  void setRed(std::same_as<std::uint8_t> auto red) {
+  void setRed(Integral auto red) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.x = static_cast<float>(red) / 1.f;
     color = ImGui::ColorConvertFloat4ToU32(col);
   }
-  void setGreen(std::same_as<std::uint8_t> auto green) {
+  void setGreen(Integral auto green) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.y = static_cast<float>(green) / 1.f;
     color = ImGui::ColorConvertFloat4ToU32(col);
   }
-  void setBlue(std::same_as<std::uint8_t> auto blue) {
+  void setBlue(Integral auto blue) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.z = static_cast<float>(blue) / 1.f;
     color = ImGui::ColorConvertFloat4ToU32(col);
   }
-  void setAlpha(std::same_as<std::uint8_t> auto alpha) {
+  void setAlpha(Integral auto alpha) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.w = static_cast<float>(alpha) / 1.f;
     color = ImGui::ColorConvertFloat4ToU32(col);
@@ -102,6 +104,8 @@ class PF_IMGUI_EXPORT Color {
   }
 
   operator ImU32() const;
+
+  explicit operator ImVec4() const;
 
  private:
   ImU32 color;

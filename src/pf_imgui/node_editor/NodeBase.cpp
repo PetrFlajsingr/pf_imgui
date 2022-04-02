@@ -22,7 +22,7 @@ Position NodeBase::getPosition() const {
 
 void NodeBase::setPosition(Position position) {
   auto context = parent->setContext();
-  ax::NodeEditor::SetNodePosition(getId(), position.asImVec());
+  ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(position));
 }
 
 Size NodeBase::getSize() const {

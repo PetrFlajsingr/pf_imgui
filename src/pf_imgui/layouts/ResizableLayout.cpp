@@ -11,7 +11,7 @@ ResizableLayout::ResizableLayout(const std::string &elementName, const Size &siz
     : Layout(elementName, allowCollapse, showBorder, persistent), Resizable(size) {}
 
 ImVec2 ResizableLayout::getSizeIfCollapsed() const {
-  return isCollapsed() ? ImVec2{getSize().width.value, 20} : getSize().asImVec();
+  return isCollapsed() ? ImVec2{getSize().width.value, 20} : static_cast<ImVec2>(getSize());
 }
 
 }  // namespace pf::ui::ig

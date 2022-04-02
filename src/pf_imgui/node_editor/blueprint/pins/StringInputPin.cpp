@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig::bp {
 
-StringInputPin::StringInputPin(const std::string &name, const std::string &label, const ImVec4 &color,
+StringInputPin::StringInputPin(const std::string &name, const std::string &label, Color color,
                                StringInputPin::InputConfig &&config)
     : InteractablePin<InputText>(name, label, color, config.width,
                                  CreateInputConfig(uniqueId(), label, std::move(config))) {}

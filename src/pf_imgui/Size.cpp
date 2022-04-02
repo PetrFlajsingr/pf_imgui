@@ -16,7 +16,7 @@ Size Size::Auto() { return {Width::Auto(), Height::Auto()}; }
 
 Size Size::Fill() { return {Width::Fill(), Height::Fill()}; }
 
-ImVec2 Size::asImVec() const { return ImVec2{width.value, height.value}; }
+Size::operator ImVec2() const { return ImVec2{width.value, height.value}; }
 
 Size Size::FillWidth() { return {Width::Fill(), Height::Auto()}; }
 

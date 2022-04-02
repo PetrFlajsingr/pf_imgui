@@ -16,7 +16,7 @@ class ArrayPin : public Pin {
  public:
   using ValueType = std::vector<T>;
 
-  ArrayPin(const std::string &name, const std::string &label, const ImVec4 &color) : Pin(name, label, color) {}
+  ArrayPin(const std::string &name, const std::string &label, Color color) : Pin(name, label, color) {}
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override {
     if (!Pin::acceptsLinkWith(other)) { return false; }

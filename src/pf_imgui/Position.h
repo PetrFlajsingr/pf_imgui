@@ -37,7 +37,7 @@ struct PF_IMGUI_EXPORT Position {
 
   auto operator<=>(const Position &) const = default;
 
-  [[nodiscard]] ImVec2 asImVec() const;
+  explicit operator ImVec2() const;
 };
 
 }  // namespace pf::ui::ig
