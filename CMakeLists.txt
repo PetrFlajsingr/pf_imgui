@@ -41,15 +41,15 @@ endif ()
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     list(APPEND flags "/std:c++latest" "/W4" "/wd4201")
-else()
-list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
-        "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
-        "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security")
-endif()
+else ()
+    list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
+            "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
+            "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security")
+endif ()
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         list(APPEND flags "/WX")
-    endif()
+    endif ()
 elseif (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND flags "-O3")
 elseif (CMAKE_BUILD_TYPE MATCHES ASAN)
@@ -76,7 +76,7 @@ set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
 CPMAddPackage(
         NAME pf_common
         GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG v1.2.0
+        GIT_TAG master
 )
 
 CPMAddPackage(
@@ -100,6 +100,7 @@ include_directories(src/include/ImGuiIcons)
 include_directories(src/include/imgui_notify)
 include_directories(src/include/imgui-command-palette)
 include_directories(src/include/imgui_addons/)
+include_directories(src/include/imgui-node-editor/)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -202,6 +203,24 @@ set(SOURCES
         src/pf_imgui/elements/LinkText.cpp
         src/pf_imgui/elements/DatePicker.cpp
         src/include/imgui_addons/imguidatechooser.cpp
+        src/include/imgui-node-editor/imgui_node_editor_api.cpp
+        src/include/imgui-node-editor/imgui_node_editor.cpp
+        src/include/imgui-node-editor/imgui_canvas.cpp
+        src/include/imgui-node-editor/crude_json.cpp
+        src/pf_imgui/node_editor/Link.cpp
+        src/pf_imgui/node_editor/Node.cpp
+        src/pf_imgui/node_editor/NodeEditor.cpp
+        src/pf_imgui/node_editor/Pin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/EventPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/ExecPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/PinDraw.cpp
+        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/Pin.cpp
+        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.cpp
+        src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.cpp
+        src/pf_imgui/node_editor/Comment.cpp
+        src/pf_imgui/node_editor/NodeBase.cpp
         )
 
 set(INCLUDES
@@ -338,7 +357,32 @@ set(INCLUDES
         src/pf_imgui/layouts/WrapLayout.h
         src/pf_imgui/elements/LinkText.h
         src/pf_imgui/elements/DatePicker.h
-        )
+        src/include/imgui-node-editor/imgui_node_editor.h
+        src/include/imgui-node-editor/imgui_canvas.h
+        src/include/imgui-node-editor/crude_json.h
+        src/include/imgui-node-editor/imgui_bezier_math.h
+        src/include/imgui-node-editor/imgui_extra_math.h
+        src/pf_imgui/node_editor/Link.h
+        src/pf_imgui/node_editor/Node.h
+        src/pf_imgui/node_editor/NodeEditor.h
+        src/pf_imgui/node_editor/Pin.h
+        src/pf_imgui/node_editor/fwd.h
+        src/pf_imgui/node_editor/blueprint/pins/ArrayPin.h
+        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.h
+        src/pf_imgui/node_editor/blueprint/pins/DragPin.h
+        src/pf_imgui/node_editor/blueprint/pins/PinWithValue.h
+        src/pf_imgui/node_editor/blueprint/pins/EventPin.h
+        src/pf_imgui/node_editor/blueprint/pins/ExecPin.h
+        src/pf_imgui/node_editor/blueprint/pins/InteractablePin.h
+        src/pf_imgui/node_editor/blueprint/pins/PinDraw.h
+        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.h
+        src/pf_imgui/node_editor/blueprint/pins/ValuePin.h
+        src/pf_imgui/node_editor/blueprint/pins/Pin.h
+        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.h
+        src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.h
+        src/pf_imgui/node_editor/details/LinkPtrToRef.h
+        src/pf_imgui/node_editor/Comment.h
+        src/pf_imgui/node_editor/NodeBase.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
@@ -377,6 +421,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiColorTextEdit>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-command-palette>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_addons>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-node-editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
 

@@ -49,6 +49,7 @@ class PF_IMGUI_EXPORT Savable {
    * @return toml::table if saving is enabled, nullopt otherwise
    */
   [[nodiscard]] std::optional<toml::table> serialize() const;
+  [[nodiscard]] toml::table forceSerialize() const;
 
   virtual ~Savable() = default;
 
