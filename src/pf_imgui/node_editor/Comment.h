@@ -23,6 +23,7 @@ namespace pf::ui::ig {
  * TODO: popup menu
  */
 class Comment : public Renderable, public Labellable {
+  friend class NodeEditor;
  public:
   /**
    * Construct Comment
