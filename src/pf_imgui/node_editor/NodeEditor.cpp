@@ -205,6 +205,8 @@ void NodeEditor::handleNodeDeletion() {
   ax::NodeEditor::NodeId nodeId;
   while (ax::NodeEditor::QueryDeletedNode(&nodeId)) {
     if (ax::NodeEditor::AcceptDeletedItem()) {
+      const auto nodeToDelete = findNodeById(nodeId);
+      nodeToDelete.value()->observableDelete.notify();
       auto [rmBegin, rmEnd] = std::ranges::remove(nodes, nodeId, [](auto &node) { return node->getId(); });
       nodes.erase(rmBegin, rmEnd);
     }

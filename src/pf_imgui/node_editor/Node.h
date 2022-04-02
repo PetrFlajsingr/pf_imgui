@@ -183,6 +183,15 @@ class Node : public Renderable {
     return observableSelected.addListener(std::forward<decltype(listener)>(listener));
   }
 
+  /**
+   * Add a listener called when the Node is deleted.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addDeleteListener(std::invocable auto &&listener) {
+    return observableDelete.addListener(std::forward<decltype(listener)>(listener));
+  }
+
   [[nodiscard]] NodeEditor &getNodeEditor();
   [[nodiscard]] const NodeEditor &getNodeEditor() const;
 
@@ -219,6 +228,7 @@ class Node : public Renderable {
 
   bool selected = false;
   Observable_impl<bool> observableSelected;
+  Observable_impl<> observableDelete;
 };
 
 }  // namespace pf::ui::ig
