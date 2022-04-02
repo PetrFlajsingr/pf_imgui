@@ -31,7 +31,7 @@ class Comment : public Renderable, public Labellable {
    * @param initSize initial size of the Comment area
    * @param commentId unique internal id
    */
-  Comment(const std::string &name, const std::string &label, Size initSize, ax::NodeEditor::NodeId commentId);
+  Comment(const std::string &name, const std::string &label, Size initSize);
 
   /**
    *

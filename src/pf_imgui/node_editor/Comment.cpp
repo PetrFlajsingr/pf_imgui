@@ -7,8 +7,8 @@
 
 namespace pf::ui::ig {
 
-Comment::Comment(const std::string &name, const std::string &label, Size initSize, ax::NodeEditor::NodeId commentId)
-    : Renderable(name), Labellable(label), id(commentId), size(initSize.asImVec()) {}
+Comment::Comment(const std::string &name, const std::string &label, Size initSize)
+    : Renderable(name), Labellable(label), size(initSize.asImVec()) {}
 
 ax::NodeEditor::NodeId Comment::getId() const { return id; }
 
