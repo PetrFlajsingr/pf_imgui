@@ -101,6 +101,7 @@ include_directories(src/include/imgui_notify)
 include_directories(src/include/imgui-command-palette)
 include_directories(src/include/imgui_addons/)
 include_directories(src/include/imgui-node-editor/)
+include_directories(src/include/imgui_curve_editor/)
 
 file(GLOB toml++_headers
         "${toml++_SOURCE_DIR}/include/toml++/*.h"
@@ -224,6 +225,7 @@ set(SOURCES
         src/pf_imgui/Size.cpp
         src/pf_imgui/Position.cpp
         src/pf_imgui/Color.cpp
+        src/include/imgui_curve_editor/ImGuiCurveEditor.cpp
         )
 
 set(INCLUDES
@@ -389,6 +391,7 @@ set(INCLUDES
         src/pf_imgui/Size.h
         src/pf_imgui/Position.h
         src/pf_imgui/Color.h
+        src/include/imgui_curve_editor/ImGuiCurveEditor.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
@@ -429,6 +432,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-command-palette>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_addons>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-node-editor>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_curve_editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
 
