@@ -184,17 +184,17 @@ void NodeEditor::handleLinkDeletion() {
       auto iter = std::ranges::find(links, deletedLinkId, getLinkId);
       if (iter != links.end()) {
         iter->get()->invalidate();
-
-        iter->get()->getInputPin().observableLink.notify(**iter);
-        iter->get()->getOutputPin().observableLink.notify(**iter);
-
-        links.erase(iter);
+        linksDirty = true;
       }
     }
   }
   if (linksDirty) {
     std::ranges::for_each(getLinks() | ranges::views::filter([](const auto &link) { return !link.isValid(); }),
-                          [](auto &link) { link.observableDelete.notify(); });
+                          [](auto &link) {
+                            link.observableDelete.notify();
+                            link.getInputPin().observableLink.notify(link);
+                            link.getOutputPin().observableLink.notify(link);
+                          });
     auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
     links.erase(beginRm, endRm);
     linksDirty = false;
