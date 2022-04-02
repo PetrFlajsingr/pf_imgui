@@ -24,6 +24,9 @@ struct IsValidCurvePoint {
 };
 }  // namespace details
 
+/**
+ * Type for range of curve points.
+ */
 using CurvePointsView =
     ranges::take_while_view<ranges::ref_view<const std::vector<ImVec2>>, details::IsValidCurvePoint>;
 struct CurvePointsViewComparator {
@@ -35,6 +38,9 @@ struct CurvePointsViewComparator {
   }
 };
 
+/**
+ * @brief Simple curve editor allowing mouse control of key points and basic curve smoothing.
+ */
 class SimpleCurveEditor : public Element,
                           public Resizable,
                           public Labellable,
@@ -42,21 +48,52 @@ class SimpleCurveEditor : public Element,
                           public AllColorCustomizable,
                           public AllStyleCustomizable {
  public:
+  /**
+   * @brief Construction config for SimpleCurveEditor
+   */
   struct Config {
     using Parent = SimpleCurveEditor;
-    std::string name;
-    std::string label;
-    Size size = Size::Auto();
-    std::size_t maxPointCount;
+    std::string name;          /*!< Unique name of the element */
+    std::string label;         /*!< Label rendered as overlay over the editor */
+    Size size = Size::Auto();  /*!< Size of the element */
+    std::size_t maxPointCount; /*!< Maximum allowed key points */
   };
 
+  /**
+   * Construct SimpleCurveEditor
+   * @param config construction args @see SimpleCurveEditor::Config
+   */
   explicit SimpleCurveEditor(Config &&config);
+  /**
+   * Construct SimpleCurveEditor
+   * @param name unique name of the element
+   * @param label label rendered as overlay over the editor
+   * @param s size of the element
+   * @param maxPointCount maximum allowed key points
+   */
   SimpleCurveEditor(const std::string &name, const std::string &label, Size s, std::size_t maxPointCount);
 
+  /**
+   * Set maximum allowed key points.
+   * @param count new value
+   */
   void setMaxPointCount(std::size_t count);
+  /**
+   * Get maximum allowed key points.
+   */
   [[nodiscard]] std::size_t getMaxPointCount() const;
 
+  /**
+   * Calculate curve value on given position.
+   * @param x X axis position in range of [0.0, 1.0]
+   * @return curve value at given position
+   */
   [[nodiscard]] float getCurveValue(float x) const;
+  /**
+   * Calculate smoothed curve value on given position.
+   * @param x X axis position in range of [0.0, 1.0]
+   * @return smoothed curve value at given position
+   */
   [[nodiscard]] float getSmoothCurveValue(float x) const;
 
  protected:
