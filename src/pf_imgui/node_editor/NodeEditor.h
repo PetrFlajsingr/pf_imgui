@@ -102,14 +102,9 @@ class NodeEditor : public Element, public Resizable {
   /**
    * Register a callable which is invoked when a request for new node creation occurs from user.
    * This request happens when the user extends a link from a pin into open space.
-   *
-   * The NodeEditor will become suspended, you either need to call NodeEditor::resume after you're done modifying it
-   * or you can return true from the handler to let the editor resume itself.
    * @param handler callback for request
    */
-  void setCreateNodeRequestHandler(std::invocable<Pin &> auto &&handler)
-    requires std::same_as<bool, std::invoke_result_t<decltype(handler), Pin &>>
-  {
+  void setCreateNodeRequestHandler(std::invocable<Pin &> auto &&handler) {
     createNodeRequestHandler = std::forward<decltype(handler)>(handler);
   }
 
@@ -211,7 +206,7 @@ class NodeEditor : public Element, public Resizable {
   std::vector<std::unique_ptr<Node>> nodes;
   std::vector<std::unique_ptr<Link>> links;
 
-  std::function<bool(Pin &)> createNodeRequestHandler = [](Pin &) { return true; };
+  std::function<void(Pin &)> createNodeRequestHandler = [](Pin &) {};
 
   struct {
     Node *node = nullptr;

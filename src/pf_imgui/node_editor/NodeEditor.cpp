@@ -162,8 +162,7 @@ void NodeEditor::handleNodeCreation() {
       auto pin = pinOpt.value();
       if (ax::NodeEditor::AcceptNewItem(pin->getUnconnectedLinkPreviewColor(),
                                         pin->getUnconnectedLinkPreviewThickness())) {
-        suspend();
-        if (createNodeRequestHandler(*pin)) { resume(); }
+        createNodeRequestHandler(*pin);
       }
     }
   }
