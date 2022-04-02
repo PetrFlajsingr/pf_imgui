@@ -184,6 +184,15 @@ class Node : public Renderable {
   }
 
   /**
+   * Add a listener called when the Node is double clicked.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addDoubleClickListener(std::invocable auto &&listener) {
+    return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
+  }
+
+  /**
    * Remove the Node from NodeEditor.
    */
   void deleteNode();
@@ -235,6 +244,7 @@ class Node : public Renderable {
   Observable_impl<bool> observableSelected;
   Observable_impl<> observableDelete;
   bool markedForDelete = false;
+  Observable_impl<> observableDoubleClick;
 };
 
 }  // namespace pf::ui::ig

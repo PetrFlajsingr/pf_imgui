@@ -62,10 +62,30 @@ void NodeEditor::renderImpl() {
             popupPtrs.link->popupMenu->open();
           }
         }
+      } else if (ax::NodeEditor::ShowBackgroundContextMenu()) {
+        popupPtrs.editor = this;
       }
     }
   }
-
+  {
+    auto scopedContext = setContext();
+    const auto doubleClickedNode = ax::NodeEditor::GetDoubleClickedNode();
+    const auto doubleClickedPin = ax::NodeEditor::GetDoubleClickedPin();
+    const auto doubleClickedLink = ax::NodeEditor::GetDoubleClickedLink();
+    if (doubleClickedNode.Get() != 0) {
+      if (auto node = findNodeById(doubleClickedNode); node.has_value()) {
+        node.value()->observableDoubleClick.notify();
+      }
+    }
+    if (doubleClickedPin.Get() != 0) {
+      if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { pin.value()->observableDoubleClick.notify(); }
+    }
+    if (doubleClickedLink.Get() != 0) {
+      if (auto link = findLinkById(doubleClickedLink); link.has_value()) {
+        link.value()->observableDoubleClick.notify();
+      }
+    }
+  }
   if (popupPtrs.node != nullptr) {
     if (popupPtrs.node->popupMenu == nullptr || !popupPtrs.node->popupMenu->isOpen()) {
       popupPtrs.node = nullptr;
@@ -85,6 +105,13 @@ void NodeEditor::renderImpl() {
       popupPtrs.link = nullptr;
     } else {
       popupPtrs.link->popupMenu->render();
+    }
+  }
+  if (popupPtrs.editor != nullptr) {
+    if (popupPtrs.editor->popupMenu == nullptr || !popupPtrs.editor->popupMenu->isOpen()) {
+      popupPtrs.editor = nullptr;
+    } else {
+      popupPtrs.editor->popupMenu->render();
     }
   }
 }
@@ -287,6 +314,15 @@ void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::mil
   ax::NodeEditor::NavigateToSelection(
       zoomIn, static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
 }
+
+PopupMenu &NodeEditor::createOrGetPopupMenu() {
+  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }
+  return *popupMenu;
+}
+
+bool NodeEditor::hasPopupMenu() const { return popupMenu != nullptr; }
+
+void NodeEditor::removePopupMenu() { popupMenu = nullptr; }
 
 int NodeEditor::getNextId() { return idCounter++; }
 

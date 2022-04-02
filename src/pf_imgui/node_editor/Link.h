@@ -126,6 +126,15 @@ class Link : public Renderable {
   }
 
   /**
+   * Add a listener called when the Link is double clicked.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addDoubleClickListener(std::invocable auto &&listener) {
+    return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
+  }
+
+  /**
    * Enable visual flow for the Link.
    */
   void enableFlow();
@@ -159,6 +168,7 @@ class Link : public Renderable {
   bool selected = false;
   Observable_impl<bool> observableSelected;
   Observable_impl<> observableDelete;
+  Observable_impl<> observableDoubleClick;
 };
 
 }  // namespace pf::ui::ig

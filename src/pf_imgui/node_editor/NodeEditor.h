@@ -192,6 +192,20 @@ class NodeEditor : public Element, public Resizable {
   void navigateToSelection(bool zoomIn = true, std::optional<std::chrono::milliseconds> animationLength = std::nullopt);
 
   /**
+   * Create or get PopupMenu which is shown when the node is right clicked.
+   */
+  [[nodiscard]] PopupMenu &createOrGetPopupMenu();
+  /**
+   *
+   * @return true if PopupMenu is active for this node, faalse otherwise
+   */
+  [[nodiscard]] bool hasPopupMenu() const;
+  /**
+   * Remove PopupMenu of this node, no lon
+   */
+  void removePopupMenu();
+
+  /**
    *
    * @return next id for internal elements
    */
@@ -232,12 +246,15 @@ class NodeEditor : public Element, public Resizable {
     Node *node = nullptr;
     Pin *pin = nullptr;
     Link *link = nullptr;
+    NodeEditor *editor = nullptr;
   } popupPtrs;
 
   int idCounter = 1;
 
   bool linksDirty = false;
   bool nodesDirty = false;
+
+  std::unique_ptr<PopupMenu> popupMenu = nullptr;
 };
 
 }  // namespace pf::ui::ig

@@ -181,6 +181,15 @@ class Pin : public Renderable, public Labellable {
   void setUnconnectedLinkPreviewThickness(float thickness);
 
   /**
+   * Add a listener called when the Pin is double clicked.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addDoubleClickListener(std::invocable auto &&listener) {
+    return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
+  }
+
+  /**
    * Create or get PopupMenu which is shown when the node is right clicked.
    */
   [[nodiscard]] PopupMenu &createOrGetPopupMenu();
@@ -229,6 +238,7 @@ class Pin : public Renderable, public Labellable {
   float unconnectedLinkPreviewThickness = 1.f;
 
   Observable_impl<Link &> observableLink;
+  Observable_impl<> observableDoubleClick;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
 };
