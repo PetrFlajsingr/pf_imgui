@@ -5,6 +5,7 @@
 #include "Pin.h"
 #include "Link.h"
 #include "Node.h"
+#include "NodeEditor.h"
 #include "pf_common/RAII.h"
 #include <algorithm>
 
@@ -15,7 +16,8 @@ Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), Labellable(
 Pin::Pin(const std::string &name, const std::string &label) : Renderable(name), Labellable(label) {}
 
 Pin::~Pin() {
-  std::ranges::for_each(links, [](auto &link) { link->invalidate(); });
+  std::ranges::for_each(getLinks(), [](auto &link) { link.invalidate(); });
+  getNode().getNodeEditor().markLinksDirty();
 }
 
 ax::NodeEditor::PinId Pin::getId() const { return id; }
@@ -27,12 +29,12 @@ Node &Pin::getNode() { return *parent; }
 const Node &Pin::getNode() const { return *parent; }
 
 bool Pin::hasAnyValidLinks() const {
-  return std::ranges::any_of(links, [](const auto &link) { return link->isValid(); });
+  return std::ranges::any_of(getLinks(), [](const auto &link) { return link.isValid(); });
 }
 
 void Pin::clearLinks() {
-  std::ranges::for_each(links, [](auto &link) { link->invalidate(); });
-  links.clear();
+  std::ranges::for_each(getLinks(), [](auto &link) { link.invalidate(); });
+  getNode().getNodeEditor().markLinksDirty();
 }
 
 bool Pin::acceptsNewLinks() const { return true; }
@@ -75,12 +77,6 @@ void Pin::renderImpl() {
     }
   }
   ImGui::EndHorizontal();
-
-  if (--sinceLastLinkCleanup == 0) {
-    sinceLastLinkCleanup = LINK_CLEANUP_FREQUENCY;
-    auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
-    links.erase(beginRm, endRm);
-  }
 }
 
 void Pin::renderIcon() {
@@ -102,10 +98,7 @@ void Pin::renderIcon() {
 
 void Pin::renderInfo() { ImGui::Text(getLabel().c_str()); }
 
-void Pin::addLink(std::shared_ptr<Link> link) {
-  links.emplace_back(std::move(link));
-  observableLink.notify(links.back());
-}
+void Pin::addLink(Link &link) { observableLink.notify(link); }
 
 const ImVec4 &Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
 
@@ -130,5 +123,16 @@ void Pin::setUnconnectedLinkPreviewColor(const ImVec4 &color) { unconnectedLinkP
 float Pin::getUnconnectedLinkPreviewThickness() const { return unconnectedLinkPreviewThickness; }
 
 void Pin::setUnconnectedLinkPreviewThickness(float thickness) { unconnectedLinkPreviewThickness = thickness; }
+
+ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToRef>
+Pin::getAllLinks() {
+  return getNode().getNodeEditor().getLinks();
+}
+
+ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
+                       details::LinkPtrToConstRef>
+Pin::getAllLinks() const {
+  return getNode().getNodeEditor().getLinks();
+}
 
 }  // namespace pf::ui::ig

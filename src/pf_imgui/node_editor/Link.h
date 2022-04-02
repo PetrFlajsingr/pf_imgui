@@ -93,7 +93,6 @@ class Link : public Renderable {
    */
   void removePopupMenu();
 
-  // TODO: implement this in NodeEditor
   /**
    * Check if the Link is selected in editor.
    * @return true if selected, false otherwise

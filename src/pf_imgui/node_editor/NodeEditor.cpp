@@ -86,8 +86,6 @@ void NodeEditor::renderImpl() {
       popupPtrs.link->popupMenu->render();
     }
   }
-
-  cleanupLinks();
 }
 
 std::optional<Node *> NodeEditor::findNodeById(ax::NodeEditor::NodeId id) {
@@ -147,9 +145,9 @@ void NodeEditor::handleLinkCreation() {
           if (inPin->getType() == Pin::Type::Output && outPin->getType() == Pin::Type::Input) {
             std::swap(inPin, outPin);
           }
-          auto &newLink = links.emplace_back(std::make_shared<Link>(uniqueId(), getNextId(), inPin, outPin));
-          inPin->addLink(newLink);
-          outPin->addLink(newLink);
+          auto &newLink = links.emplace_back(std::make_unique<Link>(uniqueId(), getNextId(), inPin, outPin));
+          inPin->addLink(*newLink);
+          outPin->addLink(*newLink);
         }
       }
     }
@@ -188,12 +186,16 @@ void NodeEditor::handleLinkDeletion() {
       if (iter != links.end()) {
         iter->get()->invalidate();
 
-        iter->get()->getInputPin().observableLink.notify(*iter);
-        iter->get()->getOutputPin().observableLink.notify(*iter);
+        iter->get()->getInputPin().observableLink.notify(**iter);
+        iter->get()->getOutputPin().observableLink.notify(**iter);
 
         links.erase(iter);
       }
     }
+  }
+  if (linksDirty) {
+    auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
+    links.erase(beginRm, endRm);
   }
 }
 
@@ -277,13 +279,7 @@ void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::mil
 
 int NodeEditor::getNextId() { return idCounter++; }
 
-void NodeEditor::cleanupLinks() {
-  if (--sinceLastLinkCleanup == 0) {
-    sinceLastLinkCleanup = LINK_CLEANUP_FREQUENCY;
-    auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
-    links.erase(beginRm, endRm);
-  }
-}
+void NodeEditor::markLinksDirty() { linksDirty = true; }
 
 RAII NodeEditor::setContext() const {
   ax::NodeEditor::SetCurrentEditor(context);

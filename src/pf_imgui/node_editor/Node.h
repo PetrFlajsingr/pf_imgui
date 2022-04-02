@@ -183,6 +183,9 @@ class Node : public Renderable {
     return observableSelected.addListener(std::forward<decltype(listener)>(listener));
   }
 
+  [[nodiscard]] NodeEditor &getNodeEditor();
+  [[nodiscard]] const NodeEditor &getNodeEditor() const;
+
  protected:
   void renderImpl() override;
 

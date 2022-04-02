@@ -20,7 +20,7 @@ class Pin : public ig::Pin {
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 
  protected:
-  void addLink(std::shared_ptr<Link> link) override;
+  void addLink(Link &link) override;
 
  private:
   ImColor color;

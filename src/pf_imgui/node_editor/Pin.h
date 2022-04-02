@@ -9,25 +9,32 @@
 #define PF_IMGUI_NODE_EDITOR_PIN_H
 
 #include "fwd.h"
+#include "pf_imgui/node_editor/details/LinkPtrToRef.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
 
 // TODO: customization
-// TODO: link validation
 // TODO: code link
-// TODO: comments
-// TODO: change the way links are handled so there doesn't have to be cleanup here nor in NodeEditor - maybe just through disconnect events
 /**
  * @brief A Pin to be placed inside Node. @see Node
  */
 class Pin : public Renderable, public Labellable {
   friend class NodeEditor;
   friend class Node;
+  /**
+   * Get all Links in NodeEditor. It's done this way to avoid circular dependency.
+   */
+  ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToRef>
+  getAllLinks();
+  ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
+                         details::LinkPtrToConstRef>
+  getAllLinks() const;
 
  public:
   enum class Type {
@@ -70,13 +77,17 @@ class Pin : public Renderable, public Labellable {
    * Get all currently connected Links.
    */
   [[nodiscard]] auto getLinks() {
-    return links | ranges::views::transform([](auto &link) -> Link & { return *link; });
+    return getAllLinks() | ranges::views::filter([this](const Link &link) {
+             return link.isValid() && (link.getInputPin().getId() == getId() || link.getOutputPin().getId() == getId());
+           });
   }
   /**
    * Get all currently connected Links.
    */
   [[nodiscard]] auto getLinks() const {
-    return links | ranges::views::transform([](auto &link) -> const Link & { return *link; });
+    return getAllLinks() | ranges::views::filter([this](const Link &link) {
+             return link.isValid() && (link.getInputPin().getId() == getId() || link.getOutputPin().getId() == getId());
+           });
   }
 
   /**
@@ -184,9 +195,6 @@ class Pin : public Renderable, public Labellable {
   void removePopupMenu();
 
  protected:
-  constexpr static int LINK_CLEANUP_FREQUENCY = 100;
-  int sinceLastLinkCleanup = LINK_CLEANUP_FREQUENCY;
-
   /**
    * @warning Do not override unless you completely want to change the way pins look
    */
@@ -201,9 +209,9 @@ class Pin : public Renderable, public Labellable {
    */
   virtual void renderInfo();
   /**
-   * Called when NodeEditor decides a Lin
+   * Called when NodeEditor decides a Link is to be added
    */
-  virtual void addLink(std::shared_ptr<Link> link);
+  virtual void addLink(Link &link);
 
  private:
   ax::NodeEditor::PinId id;
@@ -220,9 +228,7 @@ class Pin : public Renderable, public Labellable {
   ImVec4 unconnectedLinkPreviewColor = ImVec4(1, 1, 1, 1);
   float unconnectedLinkPreviewThickness = 1.f;
 
-  // TODO: get rid of these references and just keep it in NodeEditor
-  std::vector<std::shared_ptr<Link>> links;
-  Observable_impl<std::shared_ptr<Link>> observableLink;
+  Observable_impl<Link &> observableLink;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
 };

@@ -50,6 +50,10 @@ void Node::select(bool appendToSelection) { ax::NodeEditor::SelectNode(getId(), 
 
 void Node::deselect() { ax::NodeEditor::DeselectNode(getId()); }
 
+NodeEditor &Node::getNodeEditor() { return *parent; }
+
+const NodeEditor &Node::getNodeEditor() const { return *parent; }
+
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(id);
   auto endNode = RAII{ax::NodeEditor::EndNode};

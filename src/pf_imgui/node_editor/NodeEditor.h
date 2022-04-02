@@ -16,6 +16,7 @@
 #include <optional>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
@@ -66,6 +67,17 @@ class NodeEditor : public Element, public Resizable {
   [[nodiscard]] auto getNodes() const {
     return nodes | ranges::views::transform([](auto &node) -> const Node & { return *node; });
   }
+
+  /**
+   * Get all links in editor
+   * @return all links in editor
+   */
+  [[nodiscard]] auto getLinks() { return links | ranges::views::transform(details::LinkPtrToRef{}); }
+  /**
+   * Get all links in editor
+   * @return all links in editor
+   */
+  [[nodiscard]] auto getLinks() const { return links | ranges::views::transform(details::LinkPtrToConstRef{}); }
 
   /**
    * Create a new node of given type.
@@ -172,6 +184,8 @@ class NodeEditor : public Element, public Resizable {
    */
   [[nodiscard]] int getNextId();
 
+  void markLinksDirty();
+
  protected:
   void renderImpl() override;
 
@@ -181,11 +195,6 @@ class NodeEditor : public Element, public Resizable {
   std::optional<Node *> findNodeById(ax::NodeEditor::NodeId id);
   std::optional<Pin *> findPinById(ax::NodeEditor::PinId id);
   std::optional<Link *> findLinkById(ax::NodeEditor::LinkId id);
-
-  constexpr static int LINK_CLEANUP_FREQUENCY = 100;
-  int sinceLastLinkCleanup = LINK_CLEANUP_FREQUENCY;
-
-  void cleanupLinks();
 
   void handleCreation();
   void handleLinkCreation();
@@ -200,7 +209,7 @@ class NodeEditor : public Element, public Resizable {
   ax::NodeEditor::EditorContext *context = nullptr;
 
   std::vector<std::unique_ptr<Node>> nodes;
-  std::vector<std::shared_ptr<Link>> links;
+  std::vector<std::unique_ptr<Link>> links;
 
   std::function<bool(Pin &)> createNodeRequestHandler = [](Pin &) { return true; };
 
@@ -211,6 +220,8 @@ class NodeEditor : public Element, public Resizable {
   } popupPtrs;
 
   int idCounter = 1;
+
+  bool linksDirty = true;
 };
 
 }  // namespace pf::ui::ig

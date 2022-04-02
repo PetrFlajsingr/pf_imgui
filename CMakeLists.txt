@@ -378,7 +378,7 @@ set(INCLUDES
         src/pf_imgui/node_editor/blueprint/pins/Pin.h
         src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.h
         src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.h
-        )
+        src/pf_imgui/node_editor/details/LinkPtrToRef.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

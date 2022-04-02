@@ -26,7 +26,7 @@ bool ExecPin::acceptsLinkWith(ig::Pin &other) const {
   return dynamic_cast<ExecPin *>(&other) != nullptr;
 }
 
-void ExecPin::addLink(std::shared_ptr<Link> link) {
+void ExecPin::addLink(Link &link) {
   clearLinks();
   ig::Pin::addLink(link);  // NOLINT(bugprone-parent-virtual-call)
 }
