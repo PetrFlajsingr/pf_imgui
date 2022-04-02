@@ -20,7 +20,11 @@ bool Pin::acceptsLinkWith(ig::Pin &other) const {
 }
 
 void Pin::addLink(Link &link) {
-  if (getType() == Pin::Type::Input) { clearLinks(); }
+  if (getType() == Pin::Type::Input) {
+    std::ranges::for_each(getLinks()
+                              | ranges::views::filter([&link](const auto &l) { return l.getId() != link.getId(); }),
+                          [](auto &l) { l.invalidate(); });
+  }
   ig::Pin::addLink(link);
 }
 

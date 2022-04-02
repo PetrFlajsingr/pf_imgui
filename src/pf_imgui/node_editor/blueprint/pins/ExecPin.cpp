@@ -27,7 +27,9 @@ bool ExecPin::acceptsLinkWith(ig::Pin &other) const {
 }
 
 void ExecPin::addLink(Link &link) {
-  clearLinks();
+  std::ranges::for_each(getLinks()
+                            | ranges::views::filter([&link](const auto &l) { return l.getId() != link.getId(); }),
+                        [](auto &l) { l.invalidate(); });
   ig::Pin::addLink(link);  // NOLINT(bugprone-parent-virtual-call)
 }
 
