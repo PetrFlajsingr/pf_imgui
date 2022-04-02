@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-ExecPin::ExecPin(const std::string &name, const std::string &label, const ImColor &pinColor)
+ExecPin::ExecPin(const std::string &name, const std::string &label, Color pinColor)
     : Pin(name, label, pinColor) {}
 
 void ExecPin::renderIcon() {
@@ -16,7 +16,7 @@ void ExecPin::renderIcon() {
     auto cursorPos = ImGui::GetCursorScreenPos();
     auto drawList = ImGui::GetWindowDrawList();
 
-    drawPinExec(drawList, cursorPos + ImVec2{3, 2}, getColor(), hasAnyValidLinks());
+    drawPinExec(drawList, cursorPos + ImVec2{3, 2}, static_cast<ImVec4>(getColor()), hasAnyValidLinks());
   }
   ImGui::Dummy(iconSize);
 }

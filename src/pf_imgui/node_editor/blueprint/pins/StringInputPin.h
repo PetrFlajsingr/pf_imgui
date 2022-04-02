@@ -21,7 +21,7 @@ class StringInputPin : public InteractablePin<InputText> {
     Flags<TextFilter> filters = TextFilter::None;
   };
 
-  StringInputPin(const std::string &name, const std::string &label, const ImVec4 &color, InputConfig &&config);
+  StringInputPin(const std::string &name, const std::string &label, Color color, InputConfig &&config);
 
  private:
   static typename InputText::Config CreateInputConfig(const std::string &name, const std::string &label,

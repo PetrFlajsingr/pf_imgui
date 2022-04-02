@@ -94,11 +94,11 @@ class PF_IMGUI_EXPORT Slider2D
     const auto oldValue = *address;
     if constexpr (std::same_as<T, int>) {
       valueChanged = ImWidgets::Slider2DInt(getLabel().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
-                                            &extremesY.x, &extremesY.y, getSize().asImVec());
+                                            &extremesY.x, &extremesY.y, static_cast<ImVec2>(getSize()));
     }
     if constexpr (std::same_as<T, float>) {
       valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
-                                              extremesY.x, extremesY.y, getSize().asImVec());
+                                              extremesY.x, extremesY.y, static_cast<ImVec2>(getSize()));
     }
     DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());
     if (auto drop = DropTarget<StorageType>::dropAccept(); drop.has_value()) {

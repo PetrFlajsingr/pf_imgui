@@ -12,7 +12,7 @@ namespace pf::ui::ig::bp {
 
 class EventPin : public Pin {
  public:
-  EventPin(const std::string &name, const std::string &label, const ImColor &color);
+  EventPin(const std::string &name, const std::string &label, Color color);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 

@@ -88,7 +88,7 @@ class PF_IMGUI_EXPORT Slider3D
     if constexpr (std::same_as<T, float>) {
       valueChanged =
           ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
-                                    extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, getSize().asImVec());
+                                    extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, static_cast<ImVec2>(getSize()));
     }
     DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());
     if (auto drop = DropTarget<glm::vec3>::dropAccept(); drop.has_value()) {

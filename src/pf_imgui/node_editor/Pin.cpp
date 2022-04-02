@@ -100,25 +100,25 @@ void Pin::renderInfo() { ImGui::Text(getLabel().c_str()); }
 
 void Pin::addLink(Link &link) { observableLink.notify(link); }
 
-const ImVec4 &Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
+Color Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
 
-void Pin::setValidLinkPreviewColor(const ImVec4 &color) { validLinkPreviewColor = color; }
+void Pin::setValidLinkPreviewColor(Color color) { validLinkPreviewColor = color; }
 
 float Pin::getValidLinkPreviewThickness() const { return validLinkPreviewThickness; }
 
 void Pin::setValidLinkPreviewThickness(float thickness) { validLinkPreviewThickness = thickness; }
 
-const ImVec4 &Pin::getInvalidLinkPreviewColor() const { return invalidLinkPreviewColor; }
+Color Pin::getInvalidLinkPreviewColor() const { return invalidLinkPreviewColor; }
 
-void Pin::setInvalidLinkPreviewColor(const ImVec4 &color) { invalidLinkPreviewColor = color; }
+void Pin::setInvalidLinkPreviewColor(Color color) { invalidLinkPreviewColor = color; }
 
 float Pin::getInvalidLinkPreviewThickness() const { return invalidLinkPreviewThickness; }
 
 void Pin::setInvalidLinkPreviewThickness(float thickness) { invalidLinkPreviewThickness = thickness; }
 
-const ImVec4 &Pin::getUnconnectedLinkPreviewColor() const { return unconnectedLinkPreviewColor; }
+Color Pin::getUnconnectedLinkPreviewColor() const { return unconnectedLinkPreviewColor; }
 
-void Pin::setUnconnectedLinkPreviewColor(const ImVec4 &color) { unconnectedLinkPreviewColor = color; }
+void Pin::setUnconnectedLinkPreviewColor(Color color) { unconnectedLinkPreviewColor = color; }
 
 float Pin::getUnconnectedLinkPreviewThickness() const { return unconnectedLinkPreviewThickness; }
 

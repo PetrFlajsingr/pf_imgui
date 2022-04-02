@@ -15,7 +15,7 @@ GroupBox::GroupBox(const std::string &name, const std::string &label, Size s)
     : Element(name), Labellable(label), Resizable(s) {}
 
 void GroupBox::renderImpl() {
-  ImGui::BeginGroupPanel(getLabel().c_str(), getSize().asImVec());
+  ImGui::BeginGroupPanel(getLabel().c_str(), static_cast<ImVec2>(getSize()));
   RAII end{ImGui::EndGroupPanel};
   std::ranges::for_each(getChildren(), &Renderable::render);
 }

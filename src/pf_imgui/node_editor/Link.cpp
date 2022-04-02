@@ -22,9 +22,9 @@ bool Link::isValid() const { return valid; }
 
 void Link::invalidate() { valid = false; }
 
-const ImVec4 &Link::getColor() const { return color; }
+Color Link::getColor() const { return color; }
 
-void Link::setColor(const ImVec4 &newColor) { color = newColor; }
+void Link::setColor(Color newColor) { color = newColor; }
 
 float Link::getThickness() const { return thickness; }
 
@@ -53,7 +53,7 @@ bool Link::isFlowEnabled() const { return flowEnabled; }
 
 void Link::renderImpl() {
   if (!valid) { return; }
-  ax::NodeEditor::Link(id, outputPin->getId(), inputPin->getId(), color, thickness);
+  ax::NodeEditor::Link(id, outputPin->getId(), inputPin->getId(), static_cast<ImVec4>(color), thickness);
   if (isFlowEnabled()) { ax::NodeEditor::Flow(id); }
 }
 }  // namespace pf::ui::ig

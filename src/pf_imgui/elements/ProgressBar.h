@@ -151,7 +151,7 @@ class PF_IMGUI_EXPORT ProgressBar
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
-    ImGui::ProgressBar(getCurrentPercentage(), getSize().asImVec());
+    ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()));
   }
 
  private:

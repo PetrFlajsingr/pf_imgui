@@ -14,10 +14,10 @@
 #include <imgui_node_editor.h>
 #include <memory>
 #include <pf_common/concepts/ranges.h>
+#include <pf_imgui/Position.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
 

@@ -12,7 +12,7 @@ namespace pf::ui::ig::bp {
 
 class ExecPin : public Pin {
  public:
-  ExecPin(const std::string &name, const std::string &label, const ImColor &pinColor);
+  ExecPin(const std::string &name, const std::string &label, Color pinColor);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 

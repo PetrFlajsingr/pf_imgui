@@ -12,7 +12,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Positionable.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <utility>
 
 namespace pf::ui::ig {

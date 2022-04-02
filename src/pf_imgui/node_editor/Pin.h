@@ -12,10 +12,10 @@
 #include "pf_imgui/node_editor/details/LinkPtrToRef.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/elements/PopupMenu.h>
+#include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/interface/Hoverable.h>
 #include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
@@ -130,11 +130,11 @@ class Pin : public Renderable, public Labellable, public Hoverable {
   /**
    * @return color used for a link which is in a valid configuration
    */
-  [[nodiscard]] const ImVec4 &getValidLinkPreviewColor() const;
+  [[nodiscard]] Color getValidLinkPreviewColor() const;
   /**
    * Set color used for a link which is in a valid configuration.
    */
-  void setValidLinkPreviewColor(const ImVec4 &color);
+  void setValidLinkPreviewColor(Color color);
 
   /**
    * @return thickness used for a link which is in a valid configuration
@@ -148,11 +148,11 @@ class Pin : public Renderable, public Labellable, public Hoverable {
   /**
    * @return color used for a link which is in an invalid configuration
    */
-  [[nodiscard]] const ImVec4 &getInvalidLinkPreviewColor() const;
+  [[nodiscard]] Color getInvalidLinkPreviewColor() const;
   /**
    * Set color used for a link which is in an invalid configuration.
    */
-  void setInvalidLinkPreviewColor(const ImVec4 &color);
+  void setInvalidLinkPreviewColor(Color color);
 
   /**
    * @return thickness used for a link which is in an invalid configuration
@@ -166,11 +166,11 @@ class Pin : public Renderable, public Labellable, public Hoverable {
   /**
    * @return color used for a link which is not connected
    */
-  [[nodiscard]] const ImVec4 &getUnconnectedLinkPreviewColor() const;
+  [[nodiscard]] Color getUnconnectedLinkPreviewColor() const;
   /**
    * Set color used for a link which is not connected.
    */
-  void setUnconnectedLinkPreviewColor(const ImVec4 &color);
+  void setUnconnectedLinkPreviewColor(Color color);
 
   /**
    * @return thickness used for a link which is not connected
@@ -229,13 +229,13 @@ class Pin : public Renderable, public Labellable, public Hoverable {
 
   Node *parent;
 
-  ImVec4 validLinkPreviewColor = ImVec4(1, 1, 1, 1);
+  Color validLinkPreviewColor = Color::White;
   float validLinkPreviewThickness = 1.f;
 
-  ImVec4 invalidLinkPreviewColor = ImVec4(1, 1, 1, 1);
+  Color invalidLinkPreviewColor = Color::White;
   float invalidLinkPreviewThickness = 1.f;
 
-  ImVec4 unconnectedLinkPreviewColor = ImVec4(1, 1, 1, 1);
+  Color unconnectedLinkPreviewColor = Color::White;
   float unconnectedLinkPreviewThickness = 1.f;
 
   Observable_impl<Link &> observableLink;

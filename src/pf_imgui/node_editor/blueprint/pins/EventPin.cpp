@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-EventPin::EventPin(const std::string &name, const std::string &label, const ImColor &color) : Pin(name, label, color) {}
+EventPin::EventPin(const std::string &name, const std::string &label, Color color) : Pin(name, label, color) {}
 
 bool EventPin::acceptsLinkWith(ig::Pin &other) const {
   if (!Pin::acceptsLinkWith(other)) { return false; }
@@ -22,8 +22,8 @@ void EventPin::renderIcon() {
 
     const auto quadPos = cursorPos + ImVec2{3, 5};
 
-    drawPinQuad(drawList, quadPos, getColor(), hasAnyValidLinks());
-    drawPinArrow(drawList, quadPos + ImVec2{9, 3}, getColor());
+    drawPinQuad(drawList, quadPos, static_cast<ImVec4>(getColor()), hasAnyValidLinks());
+    drawPinArrow(drawList, quadPos + ImVec2{9, 3}, static_cast<ImVec4>(getColor()));
   }
   ImGui::Dummy(iconSize);
 }

@@ -21,9 +21,9 @@ void Image::renderImpl() {
   const auto [uvStart, uvEnd] = uvMappingProvider();
 
   if (isButton_) {
-    if (ImGui::ImageButton(textureId, getSize().asImVec(), uvStart, uvEnd)) { notifyOnClick(); }
+    if (ImGui::ImageButton(textureId, static_cast<ImVec2>(getSize()), uvStart, uvEnd)) { notifyOnClick(); }
   } else {
-    ImGui::Image(textureId, getSize().asImVec(), uvStart, uvEnd);
+    ImGui::Image(textureId, static_cast<ImVec2>(getSize()), uvStart, uvEnd);
   }
   // if (pixelInspectionTooltipEnabled) { // TODO: implement in derived
   //   auto &io = ImGui::GetIO();

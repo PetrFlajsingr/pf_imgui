@@ -36,10 +36,10 @@ bool ModalDialog::isClosed() const { return closed; }
 
 void ModalDialog::setSize(const Size &newSize) {
   Resizable::setSize(newSize);  // FIXME change this to SetNextWindowSize
-  ImGui::SetWindowSize(getLabel().c_str(), getSize().asImVec());
+  ImGui::SetWindowSize(getLabel().c_str(), static_cast<ImVec2>(getSize()));
 }
 void ModalDialog::setPosition(Position pos) {
-  ImGui::SetWindowPos(getLabel().c_str(), pos.asImVec());
+  ImGui::SetWindowPos(getLabel().c_str(), static_cast<ImVec2>(pos));
   Positionable::setPosition(pos);
 }
 void ModalDialog::setFont(ImFont *fontPtr) { font = fontPtr; }

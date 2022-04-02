@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 Comment::Comment(const std::string &name, const std::string &label, Size initSize)
-    : NodeBase(name), Labellable(label), size(initSize.asImVec()) {}
+    : NodeBase(name), Labellable(label), size(static_cast<ImVec2>(initSize)) {}
 
 void Comment::renderImpl() {
   {

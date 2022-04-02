@@ -11,9 +11,7 @@ namespace pf::ui::ig {
 bool FileDialog::isDone() const { return done; }
 
 #ifdef USE_BOOKMARK
-std::string FileDialog::serializeBookmark() {
-  return fileDialogInstance.SerializeBookmarks();
-}
+std::string FileDialog::serializeBookmark() { return fileDialogInstance.SerializeBookmarks(); }
 void FileDialog::deserializeBookmark(const std::string &bookmarkStr) {
   fileDialogInstance.DeserializeBookmarks(bookmarkStr);
 }
@@ -59,10 +57,10 @@ void FileDialog::renderImpl() {
 
   std::ranges::for_each(extColors, [this](const auto &extColor) {
     const auto &[ext, color] = extColor;
-    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), color);
+    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(color));
   });
 
-  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, getSize().asImVec())) {
+  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(getSize()))) {
     RAII end{[&] { fileDialogInstance.Close(); }};
     if (fileDialogInstance.IsOk()) {
       const auto filePathName = fileDialogInstance.GetFilePathName();

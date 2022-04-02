@@ -72,7 +72,7 @@ void AnchorLayout::renderImpl() {
     if (renderCollapseButton()) {
       std::ranges::for_each(children, [](auto &childData) {
         auto &[child, positionable, anchor, _1, _2] = childData;
-        ImGui::SetCursorPos(positionable->getPosition().asImVec());
+        ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));
         child->render();
       });
     }

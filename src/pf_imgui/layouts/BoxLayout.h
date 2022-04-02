@@ -14,7 +14,6 @@
 #include <pf_common/exceptions/Exceptions.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/exceptions.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
 #include <string>
@@ -118,7 +117,8 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @return reference to the newly created Element
     */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChild(Args &&...args) {
+    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+  T &createChild(Args &&...args) {
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     pushChild(std::move(child));
@@ -143,8 +143,8 @@ class PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
     * @return reference to the newly created Element
     */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChildAtIndex(std::size_t index,
-                                                                                                      Args &&...args) {
+    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+  T &createChildAtIndex(std::size_t index, Args &&...args) {
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     insertChild(std::move(child), index);

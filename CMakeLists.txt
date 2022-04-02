@@ -221,6 +221,9 @@ set(SOURCES
         src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.cpp
         src/pf_imgui/node_editor/Comment.cpp
         src/pf_imgui/node_editor/NodeBase.cpp
+        src/pf_imgui/Size.cpp
+        src/pf_imgui/Position.cpp
+        src/pf_imgui/Color.cpp
         )
 
 set(INCLUDES
@@ -382,7 +385,11 @@ set(INCLUDES
         src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.h
         src/pf_imgui/node_editor/details/LinkPtrToRef.h
         src/pf_imgui/node_editor/Comment.h
-        src/pf_imgui/node_editor/NodeBase.h)
+        src/pf_imgui/node_editor/NodeBase.h
+        src/pf_imgui/Size.h
+        src/pf_imgui/Position.h
+        src/pf_imgui/Color.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 

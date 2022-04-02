@@ -63,12 +63,12 @@ class Link : public Renderable, public Hoverable {
    *
    * @return color of the Link line
    */
-  [[nodiscard]] const ImVec4 &getColor() const;
+  [[nodiscard]] Color getColor() const;
   /**
    * Set color of the Link line
    * @param newColor new color
    */
-  void setColor(const ImVec4 &newColor);
+  void setColor(Color newColor);
   /**
    *
    * @return thickness of Link line
@@ -158,7 +158,7 @@ class Link : public Renderable, public Hoverable {
   Pin *inputPin;
   Pin *outputPin;
 
-  ImVec4 color = ImVec4(1, 1, 1, 1);
+  Color color = Color::White;
   float thickness = 1.0f;
 
   bool valid = true;

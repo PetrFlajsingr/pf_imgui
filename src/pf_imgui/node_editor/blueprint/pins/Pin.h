@@ -12,10 +12,10 @@ namespace pf::ui::ig::bp {
 
 class Pin : public ig::Pin {
  public:
-  Pin(const std::string &name, const std::string &label, const ImColor &color);
+  Pin(const std::string &name, const std::string &label, Color color);
 
-  [[nodiscard]] const ImColor &getColor() const;
-  void setColor(const ImColor &newColor);
+  [[nodiscard]] Color getColor() const;
+  void setColor(Color newColor);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 
@@ -23,7 +23,7 @@ class Pin : public ig::Pin {
   void addLink(Link &link) override;
 
  private:
-  ImColor color;
+  Color color;
 };
 
 }  // namespace pf::ui::ig::bp

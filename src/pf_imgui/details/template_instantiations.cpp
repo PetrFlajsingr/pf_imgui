@@ -69,4 +69,4 @@ template class SpinInput<float>;
 
 template class VerticalSlider<int>;
 template class VerticalSlider<float>;
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig

@@ -16,7 +16,7 @@ class ArrayPin : public Pin {
  public:
   using ValueType = std::vector<T>;
 
-  ArrayPin(const std::string &name, const std::string &label, const ImVec4 &color) : Pin(name, label, color) {}
+  ArrayPin(const std::string &name, const std::string &label, Color color) : Pin(name, label, color) {}
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override {
     if (!Pin::acceptsLinkWith(other)) { return false; }
@@ -30,7 +30,7 @@ class ArrayPin : public Pin {
       auto cursorPos = ImGui::GetCursorScreenPos();
       auto drawList = ImGui::GetWindowDrawList();
 
-      drawPin3by3Quads(drawList, cursorPos + ImVec2{1, 3}, getColor(), hasAnyValidLinks());
+      drawPin3by3Quads(drawList, cursorPos + ImVec2{1, 3}, static_cast<ImVec4>(getColor()), hasAnyValidLinks());
     }
     ImGui::Dummy(iconSize);
   }
