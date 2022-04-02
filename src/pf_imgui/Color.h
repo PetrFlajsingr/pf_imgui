@@ -30,12 +30,20 @@ class PF_IMGUI_EXPORT Color {
   static const Color White;
 
   [[nodiscard]] static Color RGB(Integral auto red, Integral auto green,
-                                 Integral auto blue, Integral auto alpha = 255u) {
+                                 Integral auto blue, Integral auto alpha) {
     return Color{IM_COL32(red, green, blue, alpha)};
   }
+  [[nodiscard]] static Color RGB(Integral auto red, Integral auto green,
+                                 Integral auto blue) {
+    return RBG(red, green, blue, 255);
+  }
   [[nodiscard]] static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
-                                 std::same_as<float> auto blue, std::same_as<float> auto alpha = 1.f) {
+                                 std::same_as<float> auto blue, std::same_as<float> auto alpha) {
     return Color{ImColor(red, green, blue, alpha)};
+  }
+  [[nodiscard]] static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
+                                 std::same_as<float> auto blue) {
+    return RGB(red, green, blue, 1.f);
   }
 
   [[nodiscard]] static Color HSV(Integral auto hue, Integral auto saturation,
@@ -48,12 +56,16 @@ class PF_IMGUI_EXPORT Color {
     return RGB(r, g, b, alpha);
   }
   [[nodiscard]] static Color HSV(std::same_as<float> auto hue, std::same_as<float> auto saturation,
-                                 std::same_as<float> auto value, std::same_as<float> auto alpha = 1.f) {
+                                 std::same_as<float> auto value, std::same_as<float> auto alpha) {
     float r;
     float g;
     float b;
     ImGui::ColorConvertHSVtoRGB(hue, saturation, value, r, g, b);
     return RGB(r, g, b, alpha);
+  }
+  [[nodiscard]] static Color HSV(std::same_as<float> auto hue, std::same_as<float> auto saturation,
+                                 std::same_as<float> auto value) {
+    return HSV(hue, saturation, value, 1.f);
   }
 
   [[nodiscard]] float red() const;
