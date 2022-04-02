@@ -192,6 +192,15 @@ class NodeEditor : public Element, public Resizable {
   void navigateToSelection(bool zoomIn = true, std::optional<std::chrono::milliseconds> animationLength = std::nullopt);
 
   /**
+   * Add a listener called when editor's background is double clicked.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addBackgroundDoubleClickListener(std::invocable auto &&listener) {
+    return observableBackgroundDoubleClick.addListener(std::forward<decltype(listener)>(listener));
+  }
+
+  /**
    * Create or get PopupMenu which is shown when the node is right clicked.
    */
   [[nodiscard]] PopupMenu &createOrGetPopupMenu();
@@ -255,6 +264,7 @@ class NodeEditor : public Element, public Resizable {
   bool nodesDirty = false;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
+  ObservableImpl<> observableBackgroundDoubleClick;
 };
 
 }  // namespace pf::ui::ig
