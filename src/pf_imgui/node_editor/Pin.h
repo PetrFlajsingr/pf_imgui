@@ -15,6 +15,7 @@
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/interface/Hoverable.h>
 #include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
 /**
  * @brief A Pin to be placed inside Node. @see Node
  */
-class Pin : public Renderable, public Labellable {
+class Pin : public Renderable, public Labellable, public Hoverable {
   friend class NodeEditor;
   friend class Node;
   /**

@@ -38,91 +38,11 @@ void NodeEditor::renderImpl() {
       handleDeletion();
       handleSelectionChange();
 
-      ax::NodeEditor::NodeId contextNodeId;
-      ax::NodeEditor::PinId contextPinId;
-      ax::NodeEditor::LinkId contextLinkId;
-      if (ax::NodeEditor::ShowNodeContextMenu(&contextNodeId)) {
-        if (auto nodeOpt = findNodeById(contextNodeId); nodeOpt.has_value()) {
-          if (nodeOpt.value()->hasPopupMenu()) {
-            popupPtrs.node = nodeOpt.value();
-            popupPtrs.node->popupMenu->open();
-          }
-        } else if (auto commentOpt = findCommentById(contextNodeId); commentOpt.has_value()) {
-          if (commentOpt.value()->hasPopupMenu()) {
-            popupPtrs.node = commentOpt.value();
-            popupPtrs.node->popupMenu->open();
-          }
-        }
-      } else if (ax::NodeEditor::ShowPinContextMenu(&contextPinId)) {
-        if (auto pinOpt = findPinById(contextPinId); pinOpt.has_value()) {
-          if (pinOpt.value()->hasPopupMenu()) {
-            popupPtrs.pin = pinOpt.value();
-            popupPtrs.pin->popupMenu->open();
-          }
-        }
-      } else if (ax::NodeEditor::ShowLinkContextMenu(&contextLinkId)) {
-        if (auto linkOpt = findLinkById(contextLinkId); linkOpt.has_value()) {
-          if (linkOpt.value()->hasPopupMenu()) {
-            popupPtrs.link = linkOpt.value();
-            popupPtrs.link->popupMenu->open();
-          }
-        }
-      } else if (ax::NodeEditor::ShowBackgroundContextMenu()) {
-        popupPtrs.editor = this;
-      }
+      handlePopupMenuShowRequests();
     }
   }
-  {
-    auto scopedContext = setContext();
-    const auto doubleClickedNode = ax::NodeEditor::GetDoubleClickedNode();
-    const auto doubleClickedPin = ax::NodeEditor::GetDoubleClickedPin();
-    const auto doubleClickedLink = ax::NodeEditor::GetDoubleClickedLink();
-    if (doubleClickedNode.Get() != 0) {
-      if (auto node = findNodeById(doubleClickedNode); node.has_value()) {
-        node.value()->observableDoubleClick.notify();
-      } else if (auto comment = findCommentById(doubleClickedNode); comment.has_value()) {
-        comment.value()->observableDoubleClick.notify();
-      }
-    }
-    if (doubleClickedPin.Get() != 0) {
-      if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { pin.value()->observableDoubleClick.notify(); }
-    }
-    if (doubleClickedLink.Get() != 0) {
-      if (auto link = findLinkById(doubleClickedLink); link.has_value()) {
-        link.value()->observableDoubleClick.notify();
-      }
-    }
-    if (ax::NodeEditor::IsBackgroundClicked()) { observableBackgroundClick.notify(); }
-    if (ax::NodeEditor::IsBackgroundDoubleClicked()) { observableBackgroundDoubleClick.notify(); }
-  }
-  if (popupPtrs.node != nullptr) {
-    if (popupPtrs.node->popupMenu == nullptr || !popupPtrs.node->popupMenu->isOpen()) {
-      popupPtrs.node = nullptr;
-    } else {
-      popupPtrs.node->popupMenu->render();
-    }
-  }
-  if (popupPtrs.pin != nullptr) {
-    if (popupPtrs.pin->popupMenu == nullptr || !popupPtrs.pin->popupMenu->isOpen()) {
-      popupPtrs.pin = nullptr;
-    } else {
-      popupPtrs.pin->popupMenu->render();
-    }
-  }
-  if (popupPtrs.link != nullptr) {
-    if (popupPtrs.link->popupMenu == nullptr || !popupPtrs.link->popupMenu->isOpen()) {
-      popupPtrs.link = nullptr;
-    } else {
-      popupPtrs.link->popupMenu->render();
-    }
-  }
-  if (popupPtrs.editor != nullptr) {
-    if (popupPtrs.editor->popupMenu == nullptr || !popupPtrs.editor->popupMenu->isOpen()) {
-      popupPtrs.editor = nullptr;
-    } else {
-      popupPtrs.editor->popupMenu->render();
-    }
-  }
+  handleClickEvents();
+  renderPopupMenuForRequested();
 }
 
 std::optional<Node *> NodeEditor::findNodeById(ax::NodeEditor::NodeId id) {
@@ -348,6 +268,131 @@ void NodeEditor::markNodesDirty() { nodesDirty = true; }
 RAII NodeEditor::setContext() const {
   ax::NodeEditor::SetCurrentEditor(context);
   return RAII{[] { ax::NodeEditor::SetCurrentEditor(nullptr); }};
+}
+
+void NodeEditor::handlePopupMenuShowRequests() {
+  ax::NodeEditor::NodeId contextNodeId;
+  ax::NodeEditor::PinId contextPinId;
+  ax::NodeEditor::LinkId contextLinkId;
+  if (ax::NodeEditor::ShowNodeContextMenu(&contextNodeId)) {
+    if (auto nodeOpt = findNodeById(contextNodeId); nodeOpt.has_value()) {
+      if (nodeOpt.value()->hasPopupMenu()) {
+        popupPtrs.node = nodeOpt.value();
+        popupPtrs.node->popupMenu->open();
+      }
+    } else if (auto commentOpt = findCommentById(contextNodeId); commentOpt.has_value()) {
+      if (commentOpt.value()->hasPopupMenu()) {
+        popupPtrs.node = commentOpt.value();
+        popupPtrs.node->popupMenu->open();
+      }
+    }
+  } else if (ax::NodeEditor::ShowPinContextMenu(&contextPinId)) {
+    if (auto pinOpt = findPinById(contextPinId); pinOpt.has_value()) {
+      if (pinOpt.value()->hasPopupMenu()) {
+        popupPtrs.pin = pinOpt.value();
+        popupPtrs.pin->popupMenu->open();
+      }
+    }
+  } else if (ax::NodeEditor::ShowLinkContextMenu(&contextLinkId)) {
+    if (auto linkOpt = findLinkById(contextLinkId); linkOpt.has_value()) {
+      if (linkOpt.value()->hasPopupMenu()) {
+        popupPtrs.link = linkOpt.value();
+        popupPtrs.link->popupMenu->open();
+      }
+    }
+  } else if (ax::NodeEditor::ShowBackgroundContextMenu()) {
+    popupPtrs.editor = this;
+  }
+}
+
+void NodeEditor::renderPopupMenuForRequested() {
+  if (popupPtrs.node != nullptr) {
+    if (popupPtrs.node->popupMenu == nullptr || !popupPtrs.node->popupMenu->isOpen()) {
+      popupPtrs.node = nullptr;
+    } else {
+      popupPtrs.node->popupMenu->render();
+    }
+  }
+  if (popupPtrs.pin != nullptr) {
+    if (popupPtrs.pin->popupMenu == nullptr || !popupPtrs.pin->popupMenu->isOpen()) {
+      popupPtrs.pin = nullptr;
+    } else {
+      popupPtrs.pin->popupMenu->render();
+    }
+  }
+  if (popupPtrs.link != nullptr) {
+    if (popupPtrs.link->popupMenu == nullptr || !popupPtrs.link->popupMenu->isOpen()) {
+      popupPtrs.link = nullptr;
+    } else {
+      popupPtrs.link->popupMenu->render();
+    }
+  }
+  if (popupPtrs.editor != nullptr) {
+    if (popupPtrs.editor->popupMenu == nullptr || !popupPtrs.editor->popupMenu->isOpen()) {
+      popupPtrs.editor = nullptr;
+    } else {
+      popupPtrs.editor->popupMenu->render();
+    }
+  }
+}
+
+void NodeEditor::handleClickEvents() {
+  auto scopedContext = setContext();
+  const auto doubleClickedNode = ax::NodeEditor::GetDoubleClickedNode();
+  const auto doubleClickedPin = ax::NodeEditor::GetDoubleClickedPin();
+  const auto doubleClickedLink = ax::NodeEditor::GetDoubleClickedLink();
+  if (doubleClickedNode.Get() != 0) {
+    if (auto node = findNodeById(doubleClickedNode); node.has_value()) {
+      node.value()->observableDoubleClick.notify();
+    } else if (auto comment = findCommentById(doubleClickedNode); comment.has_value()) {
+      comment.value()->observableDoubleClick.notify();
+    }
+  }
+  if (doubleClickedPin.Get() != 0) {
+    if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { pin.value()->observableDoubleClick.notify(); }
+  }
+  if (doubleClickedLink.Get() != 0) {
+    if (auto link = findLinkById(doubleClickedLink); link.has_value()) { link.value()->observableDoubleClick.notify(); }
+  }
+  if (ax::NodeEditor::IsBackgroundClicked()) { observableBackgroundClick.notify(); }
+  if (ax::NodeEditor::IsBackgroundDoubleClicked()) { observableBackgroundDoubleClick.notify(); }
+}
+
+void NodeEditor::handleHoverEvents() {
+  auto scopedContext = setContext();
+  const auto hoveredNode = ax::NodeEditor::GetHoveredNode();
+  const auto hoveredPin = ax::NodeEditor::GetHoveredPin();
+  const auto hoveredLink = ax::NodeEditor::GetHoveredLink();
+
+  if (hoveredNode != hoverIds.node) {
+    if (hoverIds.node.Get() != 0) {
+      if (auto node = findNodeById(hoverIds.node); node.has_value()) {
+        node.value()->setHovered(false);
+      } else if (auto comment = findCommentById(hoverIds.node); comment.has_value()) {
+        comment.value()->setHovered(false);
+      }
+    }
+    if (auto node = findNodeById(hoveredNode); node.has_value()) {
+      node.value()->setHovered(true);
+    } else if (auto comment = findCommentById(hoveredNode); comment.has_value()) {
+      comment.value()->setHovered(true);
+    }
+    hoverIds.node = hoveredNode;
+  }
+  if (hoveredPin != hoverIds.pin) {
+    if (hoverIds.pin.Get() != 0) {
+      if (auto pin = findPinById(hoverIds.pin); pin.has_value()) { pin.value()->setHovered(false); }
+    }
+    if (auto pin = findPinById(hoveredPin); pin.has_value()) { pin.value()->setHovered(true); }
+    hoverIds.pin = hoveredPin;
+  }
+  if (hoveredLink != hoverIds.link) {
+    if (hoverIds.link.Get() != 0) {
+      if (auto link = findLinkById(hoverIds.link); link.has_value()) { link.value()->setHovered(false); }
+    }
+    if (auto link = findLinkById(hoveredLink); link.has_value()) { link.value()->setHovered(true); }
+    hoverIds.link = hoveredLink;
+  }
 }
 
 }  // namespace pf::ui::ig

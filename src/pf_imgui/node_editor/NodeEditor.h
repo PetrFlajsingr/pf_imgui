@@ -252,6 +252,12 @@ class NodeEditor : public Element, public Resizable {
 
   void handleSelectionChange();
 
+  void handlePopupMenuShowRequests();
+  void renderPopupMenuForRequested();
+
+  void handleClickEvents();
+  void handleHoverEvents();
+
   ax::NodeEditor::EditorContext *context = nullptr;
 
   std::vector<std::unique_ptr<Node>> nodes;
@@ -266,6 +272,12 @@ class NodeEditor : public Element, public Resizable {
     Link *link = nullptr;
     NodeEditor *editor = nullptr;
   } popupPtrs;
+
+  struct {
+    ax::NodeEditor::NodeId node = 0;
+    ax::NodeEditor::PinId pin = 0;
+    ax::NodeEditor::LinkId link = 0;
+  } hoverIds;
 
   int idCounter = 1;
 

@@ -11,6 +11,7 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/elements/PopupMenu.h>
+#include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
 
@@ -19,7 +20,7 @@ namespace pf::ui::ig {
 /**
  * @brief Link connecting two Pins in NodeEditor.
  */
-class Link : public Renderable {
+class Link : public Renderable, public Hoverable {
   friend class NodeEditor;
 
  public:

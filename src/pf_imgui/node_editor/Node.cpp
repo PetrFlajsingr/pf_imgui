@@ -9,8 +9,6 @@
 #include "pf_common/RAII.h"
 #include <range/v3/view/cache1.hpp>
 #include <range/v3/view/concat.hpp>
-#include <range/v3/view/join.hpp>
-#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 
