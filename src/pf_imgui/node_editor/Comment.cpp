@@ -8,13 +8,7 @@
 namespace pf::ui::ig {
 
 Comment::Comment(const std::string &name, const std::string &label, Size initSize)
-    : Renderable(name), Labellable(label), size(initSize.asImVec()) {}
-
-ax::NodeEditor::NodeId Comment::getId() const { return id; }
-
-NodeEditor &Comment::getNodeEditor() { return *parent; }
-
-const NodeEditor &Comment::getNodeEditor() const { return *parent; }
+    : NodeBase(name), Labellable(label), size(initSize.asImVec()) {}
 
 void Comment::renderImpl() {
   {
@@ -48,11 +42,5 @@ void Comment::renderImpl() {
     ImGui::EndVertical();
   }
 }
-
-Position Comment::getPosition() const { return Position{ax::NodeEditor::GetNodePosition(getId())}; }
-
-void Comment::setPosition(Position position) { ax::NodeEditor::SetNodePosition(getId(), position.asImVec()); }
-
-Size Comment::getSize() const { return ax::NodeEditor::GetNodeSize(getId()); }
 
 }  // namespace pf::ui::ig

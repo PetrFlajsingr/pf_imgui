@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_COMMENT_H
 #define PF_IMGUI_COMMENT_H
 
+#include "NodeBase.h"
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -21,9 +22,10 @@ namespace pf::ui::ig {
  * @brief Comment which can contain nodes and move them around
  * TODO: removal of the comment + events
  * TODO: ?detect what nodes are inside?
+ * TODO: create a base class for node editor class that can have a popup menu, selection, delete and double click
  * TODO: popup menu
  */
-class Comment : public Renderable, public Labellable {
+class Comment : public NodeBase, public Labellable {
   friend class NodeEditor;
 
  public:
@@ -36,39 +38,11 @@ class Comment : public Renderable, public Labellable {
    */
   Comment(const std::string &name, const std::string &label, Size initSize);
 
-  /**
-   *
-   * @return unique internal id
-   */
-  [[nodiscard]] ax::NodeEditor::NodeId getId() const;
-
-  /**
-   * Get node position within editor.
-   * @return position within editor
-   */
-  [[nodiscard]] Position getPosition() const;
-  /**
-   * Set node position within editor.
-   * @param position new position
-   */
-  void setPosition(Position position);
-
-  /**
-   * Get Node's size.
-   * @return size
-   */
-  [[nodiscard]] Size getSize() const;
-
-  [[nodiscard]] NodeEditor &getNodeEditor();
-  [[nodiscard]] const NodeEditor &getNodeEditor() const;
-
  protected:
   void renderImpl() override;
 
  private:
-  ax::NodeEditor::NodeId id;
   ImVec2 size;
-  NodeEditor *parent;
 };
 }  // namespace pf::ui::ig
 

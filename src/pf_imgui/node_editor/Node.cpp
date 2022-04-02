@@ -14,48 +14,10 @@
 
 namespace pf::ui::ig {
 
-Node::Node(Node::Config &&config) : Renderable(std::move(config.name)) {}
-
-Node::Node(const std::string &name) : Renderable(name) {}
-
-Node::~Node() {}
-
-ax::NodeEditor::NodeId Node::getId() const { return id; }
-
-PopupMenu &Node::createOrGetPopupMenu() {
-  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }
-  return *popupMenu;
-}
-
-bool Node::hasPopupMenu() const { return popupMenu != nullptr; }
-
-void Node::removePopupMenu() { popupMenu = nullptr; }
-
-Position Node::getPosition() const { return Position{ax::NodeEditor::GetNodePosition(getId())}; }
-
-void Node::setPosition(Position position) { ax::NodeEditor::SetNodePosition(getId(), position.asImVec()); }
-
-Size Node::getSize() const { return ax::NodeEditor::GetNodeSize(getId()); }
-
-void Node::centerOnScreen() { ax::NodeEditor::CenterNodeOnScreen(getId()); }
-
-bool Node::isSelected() const { return selected; }
-
-void Node::select(bool appendToSelection) { ax::NodeEditor::SelectNode(getId(), appendToSelection); }
-
-void Node::deselect() { ax::NodeEditor::DeselectNode(getId()); }
-
-void Node::deleteNode() {
-  markedForDelete = true;
-  getNodeEditor().markNodesDirty();
-}
-
-NodeEditor &Node::getNodeEditor() { return *parent; }
-
-const NodeEditor &Node::getNodeEditor() const { return *parent; }
+Node::Node(const std::string &name) : NodeBase(name) {}
 
 void Node::renderImpl() {
-  ax::NodeEditor::BeginNode(id);
+  ax::NodeEditor::BeginNode(getId());
   auto endNode = RAII{ax::NodeEditor::EndNode};
 
   ImGui::BeginVertical((getName() + "_lay_hea").c_str());
@@ -97,6 +59,6 @@ void Node::renderOutputs() {
   ImGui::EndVertical();
 }
 
-int Node::getNextPinId() { return parent->getNextId(); }
+int Node::getNextPinId() { return getNodeEditor().getNextId(); }
 
 }  // namespace pf::ui::ig

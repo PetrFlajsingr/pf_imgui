@@ -11,6 +11,7 @@
 #include "Comment.h"
 #include "Link.h"
 #include "Node.h"
+#include "NodeBase.h"
 #include "fwd.h"
 #include <chrono>
 #include <imgui_node_editor.h>
@@ -230,12 +231,12 @@ class NodeEditor : public Element, public Resizable {
   void markLinksDirty();
   void markNodesDirty();
 
+  [[nodiscard]] RAII setContext() const;
+
  protected:
   void renderImpl() override;
 
  private:
-  [[nodiscard]] RAII setContext() const;
-
   std::optional<Node *> findNodeById(ax::NodeEditor::NodeId id);
   std::optional<Pin *> findPinById(ax::NodeEditor::PinId id);
   std::optional<Link *> findLinkById(ax::NodeEditor::LinkId id);

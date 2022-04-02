@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_NODE_EDITOR_NODE_H
 #define PF_IMGUI_NODE_EDITOR_NODE_H
 
+#include "NodeBase.h"
 #include "Pin.h"
 #include "fwd.h"
 #include <imgui_node_editor.h>
@@ -25,33 +26,15 @@ namespace pf::ui::ig {
 /**
  * @brief A node in NodeEditor containing Pins
  */
-class Node : public Renderable {
+class Node : public NodeBase {
   friend class NodeEditor;
 
  public:
-  /**
-   * @brief Struct for construction of Node.
-   */
-  struct Config {
-    using Parent = Node;
-    std::string name; /*!< Unique name of the element */
-  };
-  /**
-   * Construct Node
-   * @param config construction args @see Node::Config
-   */
-  explicit Node(Config &&config);
   /**
    * Construct Node
    * @param name unique name of the element
    */
   explicit Node(const std::string &name);
-  ~Node() override;
-
-  /**
-   * Get id used internally.
-   */
-  [[nodiscard]] ax::NodeEditor::NodeId getId() const;
 
   /**
    * Get all input pins
@@ -123,57 +106,6 @@ class Node : public Renderable {
     return *result;
   }
 
-  // TODO: change this in ItemElement too
-  /**
-   * Create or get PopupMenu which is shown when the node is right clicked.
-   */
-  [[nodiscard]] PopupMenu &createOrGetPopupMenu();
-  /**
-   *
-   * @return true if PopupMenu is active for this node, faalse otherwise
-   */
-  [[nodiscard]] bool hasPopupMenu() const;
-  /**
-   * Remove PopupMenu of this node, no lon
-   */
-  void removePopupMenu();
-
-  /**
-   * Get node position within editor.
-   * @return position within editor
-   */
-  [[nodiscard]] Position getPosition() const;
-  /**
-   * Set node position within editor.
-   * @param position new position
-   */
-  void setPosition(Position position);
-
-  /**
-   * Get Node's size.
-   * @return size
-   */
-  [[nodiscard]] Size getSize() const;
-
-  /**
-   * Center Node in the middle of the currently viewed are of editor.
-   */
-  void centerOnScreen();
-
-  /**
-   * Check if the Node is selected in editor.
-   * @return true if selected, false otherwise
-   */
-  [[nodiscard]] bool isSelected() const;
-  /**
-   * Mark node as selected.
-   * @param appendToSelection append to the current selection
-   */
-  void select(bool appendToSelection = false);
-  /**
-   * Remove this Node from selection.
-   */
-  void deselect();
   /**
    * Add a listener called when the Node is de/selected.
    * @param listener listener
@@ -193,11 +125,6 @@ class Node : public Renderable {
   }
 
   /**
-   * Remove the Node from NodeEditor.
-   */
-  void deleteNode();
-
-  /**
    * Add a listener called when the Node is deleted.
    * @param listener listener
    * @return Subscription for listener unsubscription
@@ -205,9 +132,6 @@ class Node : public Renderable {
   Subscription addDeleteListener(std::invocable auto &&listener) {
     return observableDelete.addListener(std::forward<decltype(listener)>(listener));
   }
-
-  [[nodiscard]] NodeEditor &getNodeEditor();
-  [[nodiscard]] const NodeEditor &getNodeEditor() const;
 
  protected:
   void renderImpl() override;
@@ -232,19 +156,8 @@ class Node : public Renderable {
  private:
   int getNextPinId();
 
-  ax::NodeEditor::NodeId id;
-  NodeEditor *parent;
-
   std::vector<std::unique_ptr<Pin>> inputPins;
   std::vector<std::unique_ptr<Pin>> outputPins;
-
-  std::unique_ptr<PopupMenu> popupMenu = nullptr;
-
-  bool selected = false;
-  Observable_impl<bool> observableSelected;
-  Observable_impl<> observableDelete;
-  bool markedForDelete = false;
-  Observable_impl<> observableDoubleClick;
 };
 
 }  // namespace pf::ui::ig
