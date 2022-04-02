@@ -85,6 +85,7 @@ void NodeEditor::renderImpl() {
         link.value()->observableDoubleClick.notify();
       }
     }
+    if (ax::NodeEditor::IsBackgroundClicked()) { observableBackgroundClick.notify(); }
     if (ax::NodeEditor::IsBackgroundDoubleClicked()) { observableBackgroundDoubleClick.notify(); }
   }
   if (popupPtrs.node != nullptr) {

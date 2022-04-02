@@ -24,7 +24,6 @@ namespace pf::ui::ig {
 
 // TODO: config
 // TODO: shortcuts
-// TODO: double click handling
 // TODO: custom control over saving data such as node position, don't let the lib save it itself - basically make it Savable
 /**
  * @brief Class allowing for node editing.
@@ -192,6 +191,14 @@ class NodeEditor : public Element, public Resizable {
   void navigateToSelection(bool zoomIn = true, std::optional<std::chrono::milliseconds> animationLength = std::nullopt);
 
   /**
+   * Add a listener called when editor's background is clicked.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addBackgroundClickListener(std::invocable auto &&listener) {
+    return observableBackgroundClick.addListener(std::forward<decltype(listener)>(listener));
+  }
+  /**
    * Add a listener called when editor's background is double clicked.
    * @param listener listener
    * @return Subscription for listener unsubscription
@@ -264,7 +271,8 @@ class NodeEditor : public Element, public Resizable {
   bool nodesDirty = false;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
-  ObservableImpl<> observableBackgroundDoubleClick;
+  Observable_impl<> observableBackgroundClick;
+  Observable_impl<> observableBackgroundDoubleClick;
 };
 
 }  // namespace pf::ui::ig
