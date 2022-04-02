@@ -116,6 +116,20 @@ class Link : public Renderable {
     return observableSelected.addListener(std::forward<decltype(listener)>(listener));
   }
 
+  /**
+   * Enable visual flow for the Link.
+   */
+  void enableFlow();
+  /**
+   * Disable visual flow for the Link.
+   */
+  void disableFlow();
+  /**
+   *
+   * @return true if visual flow is enabled
+   */
+  [[nodiscard]] bool isFlowEnabled() const;
+
  protected:
   void renderImpl() override;
 
@@ -129,6 +143,7 @@ class Link : public Renderable {
   float thickness = 1.0f;
 
   bool valid = true;
+  bool flowEnabled = false;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
 

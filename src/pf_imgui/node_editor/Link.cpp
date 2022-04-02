@@ -45,8 +45,15 @@ void Link::select(bool appendToSelection) { ax::NodeEditor::SelectLink(getId(), 
 
 void Link::deselect() { ax::NodeEditor::DeselectLink(getId()); }
 
+void Link::enableFlow() { flowEnabled = true; }
+
+void Link::disableFlow() { flowEnabled = false; }
+
+bool Link::isFlowEnabled() const { return flowEnabled; }
+
 void Link::renderImpl() {
   if (!valid) { return; }
   ax::NodeEditor::Link(id, inputPin->getId(), outputPin->getId(), color, thickness);
+  if (isFlowEnabled()) { ax::NodeEditor::Flow(id); }
 }
 }  // namespace pf::ui::ig
