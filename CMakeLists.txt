@@ -226,6 +226,7 @@ set(SOURCES
         src/pf_imgui/Position.cpp
         src/pf_imgui/Color.cpp
         src/include/imgui_curve_editor/ImGuiCurveEditor.cpp
+        src/pf_imgui/elements/SimpleCurveEditor.cpp
         )
 
 set(INCLUDES
@@ -392,6 +393,7 @@ set(INCLUDES
         src/pf_imgui/Position.h
         src/pf_imgui/Color.h
         src/include/imgui_curve_editor/ImGuiCurveEditor.h
+        src/pf_imgui/elements/SimpleCurveEditor.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
