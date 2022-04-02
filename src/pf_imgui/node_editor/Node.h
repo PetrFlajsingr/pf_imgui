@@ -67,6 +67,11 @@ class Node : public NodeBase {
   }
 
   /**
+   * Clear all Links connected to this Node's Pins.
+   */
+  void clearLinks();
+
+  /**
    * Create a new input pin of given type.
    * @tparam T  type of the pin to create
    * @tparam Args types of arguments for Pin's constructor

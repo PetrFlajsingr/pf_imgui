@@ -16,6 +16,10 @@ namespace pf::ui::ig {
 
 Node::Node(const std::string &name) : NodeBase(name) {}
 
+void Node::clearLinks() {
+  std::ranges::for_each(ranges::views::concat(getInputPins(), getOutputPins()), [](Pin &pin) { pin.clearLinks(); });
+}
+
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(getId());
   auto endNode = RAII{ax::NodeEditor::EndNode};

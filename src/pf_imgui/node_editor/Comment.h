@@ -20,10 +20,7 @@ namespace pf::ui::ig {
 
 /**
  * @brief Comment which can contain nodes and move them around
- * TODO: removal of the comment + events
  * TODO: ?detect what nodes are inside?
- * TODO: create a base class for node editor class that can have a popup menu, selection, delete and double click
- * TODO: popup menu
  */
 class Comment : public NodeBase, public Labellable {
   friend class NodeEditor;
