@@ -19,6 +19,14 @@ void SimpleCurveEditor::setMaxPointCount(std::size_t count) { curveData.resize(c
 
 std::size_t SimpleCurveEditor::getMaxPointCount() const { return curveData.size() - 1; }
 
+float SimpleCurveEditor::getCurveValue(float x) const {
+  return ImGui::CurveValue(x, curveData.size() - 1, curveData.data());
+}
+
+float SimpleCurveEditor::getSmoothCurveValue(float x) const {
+  return ImGui::CurveValueSmooth(x, curveData.size() - 1, curveData.data());
+}
+
 void SimpleCurveEditor::renderImpl() {
   auto styleRAII = setStyleStack();
   auto colorRAII = setColorStack();

@@ -56,6 +56,9 @@ class SimpleCurveEditor : public Element,
   void setMaxPointCount(std::size_t count);
   [[nodiscard]] std::size_t getMaxPointCount() const;
 
+  [[nodiscard]] float getCurveValue(float x) const;
+  [[nodiscard]] float getSmoothCurveValue(float x) const;
+
  protected:
   void renderImpl() override;
 
