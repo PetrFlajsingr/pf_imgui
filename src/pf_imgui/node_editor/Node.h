@@ -184,6 +184,11 @@ class Node : public Renderable {
   }
 
   /**
+   * Remove the Node from NodeEditor.
+   */
+  void deleteNode();
+
+  /**
    * Add a listener called when the Node is deleted.
    * @param listener listener
    * @return Subscription for listener unsubscription
@@ -229,6 +234,7 @@ class Node : public Renderable {
   bool selected = false;
   Observable_impl<bool> observableSelected;
   Observable_impl<> observableDelete;
+  bool markedForDelete = false;
 };
 
 }  // namespace pf::ui::ig

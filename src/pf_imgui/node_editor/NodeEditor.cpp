@@ -206,10 +206,16 @@ void NodeEditor::handleNodeDeletion() {
   while (ax::NodeEditor::QueryDeletedNode(&nodeId)) {
     if (ax::NodeEditor::AcceptDeletedItem()) {
       const auto nodeToDelete = findNodeById(nodeId);
-      nodeToDelete.value()->observableDelete.notify();
-      auto [rmBegin, rmEnd] = std::ranges::remove(nodes, nodeId, [](auto &node) { return node->getId(); });
-      nodes.erase(rmBegin, rmEnd);
+      nodeToDelete.value()->markedForDelete = true;
+      markNodesDirty();
     }
+  }
+  if (nodesDirty) {
+    std::ranges::for_each(getNodes() | ranges::views::filter([](const auto &node) { return node.markedForDelete; }),
+                          [](auto &node) { node.observableDelete.notify(); });
+    auto [beginRm, endRm] = std::ranges::remove_if(nodes, [](const auto &node) { return node->markedForDelete; });
+    nodes.erase(beginRm, endRm);
+    nodesDirty = false;
   }
 }
 
@@ -284,6 +290,8 @@ void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::mil
 int NodeEditor::getNextId() { return idCounter++; }
 
 void NodeEditor::markLinksDirty() { linksDirty = true; }
+
+void NodeEditor::markNodesDirty() { nodesDirty = true; }
 
 RAII NodeEditor::setContext() const {
   ax::NodeEditor::SetCurrentEditor(context);

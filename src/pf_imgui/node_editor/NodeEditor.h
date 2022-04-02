@@ -180,6 +180,7 @@ class NodeEditor : public Element, public Resizable {
   [[nodiscard]] int getNextId();
 
   void markLinksDirty();
+  void markNodesDirty();
 
  protected:
   void renderImpl() override;
@@ -216,7 +217,8 @@ class NodeEditor : public Element, public Resizable {
 
   int idCounter = 1;
 
-  bool linksDirty = true;
+  bool linksDirty = false;
+  bool nodesDirty = false;
 };
 
 }  // namespace pf::ui::ig

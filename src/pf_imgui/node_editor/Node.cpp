@@ -18,12 +18,7 @@ Node::Node(Node::Config &&config) : Renderable(std::move(config.name)) {}
 
 Node::Node(const std::string &name) : Renderable(name) {}
 
-Node::~Node() {
-  auto links = ranges::views::concat(getInputPins(), getOutputPins())
-      | ranges::views::transform([](auto &pin) { return pin.getLinks(); }) | ranges::views::cache1
-      | ranges::views::join;
-  std::ranges::for_each(links, [](auto &link) { link.invalidate(); });
-}
+Node::~Node() {}
 
 ax::NodeEditor::NodeId Node::getId() const { return id; }
 
@@ -49,6 +44,11 @@ bool Node::isSelected() const { return selected; }
 void Node::select(bool appendToSelection) { ax::NodeEditor::SelectNode(getId(), appendToSelection); }
 
 void Node::deselect() { ax::NodeEditor::DeselectNode(getId()); }
+
+void Node::deleteNode() {
+  markedForDelete = true;
+  getNodeEditor().markNodesDirty();
+}
 
 NodeEditor &Node::getNodeEditor() { return *parent; }
 
