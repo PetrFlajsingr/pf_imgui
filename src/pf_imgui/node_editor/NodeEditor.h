@@ -238,6 +238,7 @@ class NodeEditor : public Element, public Resizable {
 
  private:
   std::optional<Node *> findNodeById(ax::NodeEditor::NodeId id);
+  std::optional<Comment *> findCommentById(ax::NodeEditor::NodeId id);
   std::optional<Pin *> findPinById(ax::NodeEditor::PinId id);
   std::optional<Link *> findLinkById(ax::NodeEditor::LinkId id);
 
@@ -260,7 +261,7 @@ class NodeEditor : public Element, public Resizable {
   std::function<void(Pin &)> createNodeRequestHandler = [](Pin &) {};
 
   struct {
-    Node *node = nullptr;
+    NodeBase *node = nullptr;
     Pin *pin = nullptr;
     Link *link = nullptr;
     NodeEditor *editor = nullptr;

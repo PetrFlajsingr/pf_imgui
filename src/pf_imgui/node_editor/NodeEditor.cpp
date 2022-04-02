@@ -47,6 +47,11 @@ void NodeEditor::renderImpl() {
             popupPtrs.node = nodeOpt.value();
             popupPtrs.node->popupMenu->open();
           }
+        } else if (auto commentOpt = findCommentById(contextNodeId); commentOpt.has_value()) {
+          if (commentOpt.value()->hasPopupMenu()) {
+            popupPtrs.node = commentOpt.value();
+            popupPtrs.node->popupMenu->open();
+          }
         }
       } else if (ax::NodeEditor::ShowPinContextMenu(&contextPinId)) {
         if (auto pinOpt = findPinById(contextPinId); pinOpt.has_value()) {
@@ -75,6 +80,8 @@ void NodeEditor::renderImpl() {
     if (doubleClickedNode.Get() != 0) {
       if (auto node = findNodeById(doubleClickedNode); node.has_value()) {
         node.value()->observableDoubleClick.notify();
+      } else if (auto comment = findCommentById(doubleClickedNode); comment.has_value()) {
+        comment.value()->observableDoubleClick.notify();
       }
     }
     if (doubleClickedPin.Get() != 0) {
@@ -121,6 +128,12 @@ void NodeEditor::renderImpl() {
 std::optional<Node *> NodeEditor::findNodeById(ax::NodeEditor::NodeId id) {
   const auto getNodeId = [](auto &node) { return node->id; };
   if (auto iter = std::ranges::find(nodes, id, getNodeId); iter != nodes.end()) { return iter->get(); }
+  return std::nullopt;
+}
+
+std::optional<Comment *> NodeEditor::findCommentById(ax::NodeEditor::NodeId id) {
+  const auto getCommentId = [](auto &comment) { return comment->id; };
+  if (auto iter = std::ranges::find(comments, id, getCommentId); iter != comments.end()) { return iter->get(); }
   return std::nullopt;
 }
 
