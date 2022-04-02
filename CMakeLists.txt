@@ -219,6 +219,7 @@ set(SOURCES
         src/pf_imgui/node_editor/blueprint/pins/Pin.cpp
         src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.cpp
         src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.cpp
+        src/pf_imgui/node_editor/Comment.cpp
         )
 
 set(INCLUDES
@@ -378,7 +379,8 @@ set(INCLUDES
         src/pf_imgui/node_editor/blueprint/pins/Pin.h
         src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.h
         src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.h
-        src/pf_imgui/node_editor/details/LinkPtrToRef.h)
+        src/pf_imgui/node_editor/details/LinkPtrToRef.h
+        src/pf_imgui/node_editor/Comment.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
