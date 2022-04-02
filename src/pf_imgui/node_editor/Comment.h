@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_COMMENT_H
 #define PF_IMGUI_COMMENT_H
 
+#include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Positionable.h>
@@ -24,6 +25,7 @@ namespace pf::ui::ig {
  */
 class Comment : public Renderable, public Labellable {
   friend class NodeEditor;
+
  public:
   /**
    * Construct Comment
@@ -57,12 +59,16 @@ class Comment : public Renderable, public Labellable {
    */
   [[nodiscard]] Size getSize() const;
 
+  [[nodiscard]] NodeEditor &getNodeEditor();
+  [[nodiscard]] const NodeEditor &getNodeEditor() const;
+
  protected:
   void renderImpl() override;
 
  private:
   ax::NodeEditor::NodeId id;
   ImVec2 size;
+  NodeEditor *parent;
 };
 }  // namespace pf::ui::ig
 

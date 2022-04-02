@@ -12,6 +12,10 @@ Comment::Comment(const std::string &name, const std::string &label, Size initSiz
 
 ax::NodeEditor::NodeId Comment::getId() const { return id; }
 
+NodeEditor &Comment::getNodeEditor() { return *parent; }
+
+const NodeEditor &Comment::getNodeEditor() const { return *parent; }
+
 void Comment::renderImpl() {
   {
     ImGui::PushStyleVar(ImGuiStyleVar_Alpha, 0.75);
