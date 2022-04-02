@@ -12,7 +12,7 @@
 #include "imgui.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "imgui_internal.h"
+#include <imgui_internal.h>
 
 #include <cmath>
 
@@ -605,7 +605,7 @@ int Curve(const char *label, const ImVec2 &size, const int maxpoints, ImVec2 *po
 	ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
 	ItemSize(bb);
 
-	if (!ItemAdd(bb, NULL))
+	if (!ItemAdd(bb, 0))
 	{
 		return 0;
 	}
@@ -817,7 +817,7 @@ int Curve(const char *label, const ImVec2 &size, const int maxpoints, ImVec2 *po
 		item = 0;
 	}
 
-	/*
+
 	if (ImGui::Combo("Ease type", &item, items, IM_ARRAYSIZE(items)))
 	{
 	    max = maxpoints;
@@ -830,7 +830,7 @@ int Curve(const char *label, const ImVec2 &size, const int maxpoints, ImVec2 *po
 	        }
 	    }
 	}
-	*/
+
 	char buf[128];
 	const char *str = label;
 
