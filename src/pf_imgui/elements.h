@@ -39,6 +39,7 @@
 #include <pf_imgui/elements/Range2D.h>
 #include <pf_imgui/elements/Selectable.h>
 #include <pf_imgui/elements/Separator.h>
+#include <pf_imgui/elements/SimpleCurveEditor.h>
 #include <pf_imgui/elements/Slider.h>
 #include <pf_imgui/elements/Slider2D.h>
 #include <pf_imgui/elements/Slider3D.h>
