@@ -53,7 +53,7 @@ bool Link::isFlowEnabled() const { return flowEnabled; }
 
 void Link::renderImpl() {
   if (!valid) { return; }
-  ax::NodeEditor::Link(id, inputPin->getId(), outputPin->getId(), color, thickness);
+  ax::NodeEditor::Link(id, outputPin->getId(), inputPin->getId(), color, thickness);
   if (isFlowEnabled()) { ax::NodeEditor::Flow(id); }
 }
 }  // namespace pf::ui::ig
