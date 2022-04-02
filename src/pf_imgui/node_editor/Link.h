@@ -117,6 +117,15 @@ class Link : public Renderable {
   }
 
   /**
+   * Add a listener called when the Link is deleted.
+   * @param listener listener
+   * @return Subscription for listener unsubscription
+   */
+  Subscription addDeleteListener(std::invocable auto &&listener) {
+    return observableDelete.addListener(std::forward<decltype(listener)>(listener));
+  }
+
+  /**
    * Enable visual flow for the Link.
    */
   void enableFlow();
@@ -149,6 +158,7 @@ class Link : public Renderable {
 
   bool selected = false;
   Observable_impl<bool> observableSelected;
+  Observable_impl<> observableDelete;
 };
 
 }  // namespace pf::ui::ig
