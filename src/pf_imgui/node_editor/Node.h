@@ -106,33 +106,6 @@ class Node : public NodeBase {
     return *result;
   }
 
-  /**
-   * Add a listener called when the Node is de/selected.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addSelectionListener(std::invocable<bool> auto &&listener) {
-    return observableSelected.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
-   * Add a listener called when the Node is double clicked.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addDoubleClickListener(std::invocable auto &&listener) {
-    return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
-   * Add a listener called when the Node is deleted.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addDeleteListener(std::invocable auto &&listener) {
-    return observableDelete.addListener(std::forward<decltype(listener)>(listener));
-  }
-
  protected:
   void renderImpl() override;
 
