@@ -103,7 +103,7 @@ class Pin : public Renderable, public Labellable {
    * Add a listener for new link connections.
    * @param listener listener
    */
-  Subscription addLinkListener(std::invocable<std::shared_ptr<Link>> auto &&listener) {
+  Subscription addLinkListener(std::invocable<Link &> auto &&listener) {
     return observableLink.addListener(std::forward<decltype(listener)>(listener));
   }
 
