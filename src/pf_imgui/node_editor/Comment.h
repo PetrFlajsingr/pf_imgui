@@ -12,9 +12,9 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/interface/Labellable.h>
-#include <pf_imgui/interface/Positionable.h>
+#include <pf_imgui/Position.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/Size.h>
 
 namespace pf::ui::ig {
 

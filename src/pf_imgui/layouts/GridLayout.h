@@ -78,8 +78,8 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @throws DuplicateIdException when an ID is already present in the container
    */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Layout> && std::constructible_from<T, std::string, Args...> T &
-  createLayout(uint32_t column, uint32_t row, std::string name, Args &&...args) {
+    requires std::derived_from<T, Layout> && std::constructible_from<T, std::string, Args...>
+  T &createLayout(uint32_t column, uint32_t row, std::string name, Args &&...args) {
     if (findIf(cells, [name](const auto &cell) { return cell->getName() == name; }).has_value()) {
       throw DuplicateIdException("{} already present in ui", name);
     }

@@ -9,28 +9,12 @@
 #define PF_IMGUI_INTERFACE_POSITIONABLE_H
 
 #include <imgui.h>
+#include <pf_imgui/Position.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <utility>
 
 namespace pf::ui::ig {
-
-struct PF_IMGUI_EXPORT Position {
-  Position() = default;
-  Position(float x, float y);
-  explicit Position(ImVec2 pos);
-
-  [[nodiscard]] static Position LeftTop();
-
-  [[nodiscard]] Position moveDelta(float deltaX, float deltaY) const;
-
-  float x;
-  float y;
-
-  auto operator<=>(const Position &) const = default;
-
-  [[nodiscard]] ImVec2 asImVec() const;
-};
 
 /**
  * @brief Interface for positionable elements

@@ -16,10 +16,10 @@
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <range/v3/view/transform.hpp>
 #include <string>
 #include <utility>
 #include <vector>
-#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 

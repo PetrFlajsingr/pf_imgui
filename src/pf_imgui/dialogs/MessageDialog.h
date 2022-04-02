@@ -43,9 +43,9 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
   */
   MessageDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
                 const std::string &message, const Flags<MessageButtons> &buttons,
-                std::invocable<MessageButtons> auto
-                    &&onDialogDone) requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
-      : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
+                std::invocable<MessageButtons> auto &&onDialogDone)
+    requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
+  : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
     createChild<Text>(getName() + "text", message);
     auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
     auto enabledButtons = buttons.getSetFlags();

@@ -27,16 +27,16 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     flags |= ImGuiInputTextFlags_CharsDecimal;
   flags |= ImGuiInputTextFlags_AutoSelectAll;
   flags |=
-      ImGuiInputTextFlags_NoMarkEdited;// We call MarkItemEdited() ourselve by comparing the actual data rather than the string.
+      ImGuiInputTextFlags_NoMarkEdited;  // We call MarkItemEdited() ourselve by comparing the actual data rather than the string.
 
   if (step != NULL) {
     const float button_size = GetFrameHeight();
 
-    BeginGroup();// The only purpose of the group here is to allow the caller to query item data e.g. IsItemActive()
+    BeginGroup();  // The only purpose of the group here is to allow the caller to query item data e.g. IsItemActive()
     PushID(label);
     SetNextItemWidth(ImMax(1.0f, CalcItemWidth() - (button_size + style.ItemInnerSpacing.x) * 2));
     if (InputText("", buf, IM_ARRAYSIZE(buf),
-                  flags))// PushId(label) + "" gives us the expected ID from outside point of view
+                  flags))  // PushId(label) + "" gives us the expected ID from outside point of view
       value_changed = DataTypeApplyFromText(buf, data_type, data_ptr, format);
 
     // Step buttons
@@ -88,7 +88,7 @@ IMGUI_API inline bool SpinScaler(const char *label, ImGuiDataType data_type, voi
     if (InputText(label, buf, IM_ARRAYSIZE(buf), flags))
       value_changed = DataTypeApplyFromText(buf, data_type, data_ptr, format);
   }
-  if (value_changed) MarkItemEdited(GImGui->LastItemData.ID);// TODO: check
+  if (value_changed) MarkItemEdited(GImGui->LastItemData.ID);  // TODO: check
 
   return value_changed;
 }
@@ -114,6 +114,6 @@ IMGUI_API inline bool SpinDouble(const char *label, double *v, double step = 0.0
   return SpinScaler(label, ImGuiDataType_Double, (void *) v, (void *) (step > 0.0 ? &step : NULL),
                     (void *) (step_fast > 0.0 ? &step_fast : NULL), format, flags);
 }
-};// namespace ImGui
+};  // namespace ImGui
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_DETAILS_SPIN_H
+#endif  //PF_IMGUI_SRC_PF_IMGUI_DETAILS_SPIN_H
