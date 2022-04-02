@@ -42,7 +42,16 @@ class SimpleCurveEditor : public Element,
                           public AllColorCustomizable,
                           public AllStyleCustomizable {
  public:
-  SimpleCurveEditor(const std::string &name, Size s, const std::string &label, std::size_t maxPointCount);
+  struct Config {
+    using Parent = SimpleCurveEditor;
+    std::string name;
+    std::string label;
+    Size size = Size::Auto();
+    std::size_t maxPointCount;
+  };
+
+  explicit SimpleCurveEditor(Config &&config);
+  SimpleCurveEditor(const std::string &name, const std::string &label, Size s, std::size_t maxPointCount);
 
   void setMaxPointCount(std::size_t count);
   [[nodiscard]] std::size_t getMaxPointCount() const;

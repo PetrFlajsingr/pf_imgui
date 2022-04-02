@@ -6,7 +6,11 @@
 
 namespace pf::ui::ig {
 
-SimpleCurveEditor::SimpleCurveEditor(const std::string &name, Size s, const std::string &label,
+SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
+    : Element(config.name), Resizable(config.size), Labellable(config.label), ValueObservable(getViewToCurveData()),
+      curveData(config.maxPointCount + 1, ImVec2{0, 0}) {}
+
+SimpleCurveEditor::SimpleCurveEditor(const std::string &name, const std::string &label, Size s,
                                      std::size_t maxPointCount)
     : Element(name), Resizable(s), Labellable(label), ValueObservable(getViewToCurveData()),
       curveData(maxPointCount + 1, ImVec2{0, 0}) {}
