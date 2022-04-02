@@ -30,7 +30,7 @@ class ArrayPin : public Pin {
       auto cursorPos = ImGui::GetCursorScreenPos();
       auto drawList = ImGui::GetWindowDrawList();
 
-      drawPin3by3Quads(drawList, cursorPos + ImVec2{1, 3}, getColor(), hasAnyValidLinks());
+      drawPin3by3Quads(drawList, cursorPos + ImVec2{1, 3}, static_cast<ImVec4>(getColor()), hasAnyValidLinks());
     }
     ImGui::Dummy(iconSize);
   }
