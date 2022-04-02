@@ -42,6 +42,7 @@ void NodeEditor::renderImpl() {
     }
   }
   handleClickEvents();
+  handleHoverEvents();
   renderPopupMenuForRequested();
 }
 
