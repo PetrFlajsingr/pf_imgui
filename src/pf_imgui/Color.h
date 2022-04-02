@@ -35,7 +35,7 @@ class PF_IMGUI_EXPORT Color {
   }
   [[nodiscard]] static Color RGB(Integral auto red, Integral auto green,
                                  Integral auto blue) {
-    return RBG(red, green, blue, 255);
+    return Color{IM_COL32(red, green, blue, 255)};
   }
   [[nodiscard]] static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
                                  std::same_as<float> auto blue, std::same_as<float> auto alpha) {
@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT Color {
   }
   [[nodiscard]] static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
                                  std::same_as<float> auto blue) {
-    return RGB(red, green, blue, 1.f);
+    return Color{ImColor(red, green, blue, 1.f)};
   }
 
   [[nodiscard]] static Color HSV(Integral auto hue, Integral auto saturation,
