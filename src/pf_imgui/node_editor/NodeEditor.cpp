@@ -196,6 +196,7 @@ void NodeEditor::handleLinkDeletion() {
   if (linksDirty) {
     auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
     links.erase(beginRm, endRm);
+    linksDirty = false;
   }
 }
 
