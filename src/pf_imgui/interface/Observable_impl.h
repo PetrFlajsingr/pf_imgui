@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT Observable_impl {
   Observable_impl(const Observable_impl &) = delete;
   Observable_impl &operator=(const Observable_impl &) = delete;
 
-  Observable_impl(Observable_impl &&other) noexcept : listeners(std::move(other.listeners)), idCounter(idCounter) {}
+  Observable_impl(Observable_impl &&other) noexcept : listeners(std::move(other.listeners)), idCounter(other.idCounter) {}
   Observable_impl &operator=(Observable_impl &&rhs) noexcept {
     listeners = std::move(rhs.listeners);
     idCounter = rhs.idCounter;

@@ -72,7 +72,7 @@ static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unuse
   ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
 
   ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
-      | ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoSavedSettings | 0;//ImGuiWindowFlags_ShowBorders;
+      | ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoSavedSettings | 0;  //ImGuiWindowFlags_ShowBorders;
 
   ImGui::SetNextWindowFocus();
 
@@ -184,5 +184,5 @@ static inline bool ComboFilter(const char *id, char *buffer, int bufferlen, cons
   }
   return done;
 }
-}// namespace pf::ui::ig
-#endif//PF_IMGUI_SRC_PF_IMGUI_DETAILS_COMBOFILTER_H
+}  // namespace pf::ui::ig
+#endif  //PF_IMGUI_SRC_PF_IMGUI_DETAILS_COMBOFILTER_H

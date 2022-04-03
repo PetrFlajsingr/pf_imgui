@@ -11,8 +11,6 @@
 #include "RadioButton.h"
 #include <memory>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <string>
 #include <vector>
@@ -24,31 +22,20 @@ namespace pf::ui::ig {
  *
  * Only one button in a group can be selected at one time.
  *
- * Label of the selected button is observable.
+ * The selected RadioButton is observable - value is nullptr if no button is selected.
  *
- * @todo: non-visual group - maybe just let the user place buttons as he wishes and let them add it to a ValueObservable<bool> group,
- * where only one value can be true
- * @todo: fix this up so it can look normal
+ * Only create this through ImGuiInterface::CreateRadioGroup
  */
-class PF_IMGUI_EXPORT RadioGroup
-    : public Element,
-      public Labellable,
-      public ValueObservable<std::string_view>,
-      public Savable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public Savable {
  public:
   /**
    * @brief Struct for construction of RadioGroup.
    */
   struct Config {
     using Parent = RadioGroup;
-    std::string_view name;                                         /*!< Unique name of the element */
-    std::string_view label;                                        /*!< Text rendered above RadioButtons */
-    std::vector<std::unique_ptr<RadioButton>> buttons{};           /*!< Buttons inside the group TODO: changes this */
-    std::optional<std::size_t> selectedButtonIndex = std::nullopt; /*!< Index of the initially selected button */
-    Persistent persistent = Persistent::No;
+    std::string_view groupName;             /*!< Unique name of the element */
+    std::vector<RadioButton *> buttons{};   /*!< Buttons inside the group */
+    Persistent persistent = Persistent::No; /*!< Enable disk state saving */
   };
   /**
    * Construct RadioGroup
@@ -57,33 +44,32 @@ class PF_IMGUI_EXPORT RadioGroup
   explicit RadioGroup(Config &&config);
   /**
    * Construct RadioGroup.
-   * @param elementName ID of the element
-   * @param label text rendered above the group
+   * @param groupName ID of the element
    * @param buttons buttons in the group
-   * @param selectedButtonIndex index of selected button
    * @param persistent enable state saving to disk
    */
-  RadioGroup(const std::string &elementName, const std::string &label,
-             std::vector<std::unique_ptr<RadioButton>> buttons = {},
-             const std::optional<std::size_t> &selectedButtonIndex = std::nullopt,
+  RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons = {},
              Persistent persistent = Persistent::No);
 
   /**
    * Create a new button and add it to the group.
-   * @param elementName ID of the button
-   * @param caption text rendered next to the button
-   * @param initValue true for selected, false otherwise
+   * @param button button to add
    */
-  RadioButton &addButton(const std::string &elementName, const std::string &caption, bool initValue = false);
+  void addButton(RadioButton &button);
+
+  /**
+   * Call this on each frame to perform group checks.
+   */
+  void frame();
 
  protected:
-  void unserialize_impl(const toml::table &src) override;
   [[nodiscard]] toml::table serialize_impl() const override;
-  void renderImpl() override;
+  void unserialize_impl(const toml::table &src) override;
 
  private:
-  std::vector<std::unique_ptr<RadioButton>> buttons;
-  std::optional<std::size_t> selectedButtonIndex = std::nullopt;
+  void addDestroyListener(RadioButton *button);
+  std::string groupName;
+  std::vector<RadioButton *> buttons;
 };
 }  // namespace pf::ui::ig
 

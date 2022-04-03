@@ -24,7 +24,7 @@ inline bool ToggleButton(const char *str_id, bool *v) {
 
   ImGuiContext &g = *GImGui;
   float ANIM_SPEED = 0.08f;
-  if (g.LastActiveId == g.CurrentWindow->GetID(str_id))// && g.LastActiveIdTimer < ANIM_SPEED)
+  if (g.LastActiveId == g.CurrentWindow->GetID(str_id))  // && g.LastActiveIdTimer < ANIM_SPEED)
   {
     float t_anim = ImSaturate(g.LastActiveIdTimer / ANIM_SPEED);
     t = *v ? (t_anim) : (1.0f - t_anim);
@@ -46,6 +46,6 @@ inline bool ToggleButton(const char *str_id, bool *v) {
                              IM_COL32(255, 255, 255, 255));
   return wasClicked;
 }
-}// namespace pf::ui::ig
+}  // namespace pf::ui::ig
 
-#endif//PF_IMGUI_SRC_PF_IMGUI_DETAILS_TOGGLEBUTTON_H
+#endif  //PF_IMGUI_SRC_PF_IMGUI_DETAILS_TOGGLEBUTTON_H

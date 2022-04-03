@@ -13,4 +13,4 @@ void Spinner(const char *label, float radius, int thickness);
 
 }
 
-#endif//PF_IMGUI_SPINNER_IMPLH
+#endif  //PF_IMGUI_SPINNER_IMPLH
