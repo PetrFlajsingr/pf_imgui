@@ -1,9 +1,9 @@
 /**
- * @file RadioGroup.h
- * @brief Radio group element.
- * @author Petr Flajšingr
- * @date 31.10.20
- */
+* @file RadioGroup.h
+* @brief Radio group element.
+* @author Petr Flajšingr
+* @date 31.10.20
+*/
 
 #ifndef PF_IMGUI_ELEMENTS_RADIOGROUP_H
 #define PF_IMGUI_ELEMENTS_RADIOGROUP_H
@@ -18,19 +18,19 @@
 namespace pf::ui::ig {
 
 /**
- * @brief Group of RadioButton.
- *
- * Only one button in a group can be selected at one time.
- *
- * The selected RadioButton is observable - value is nullptr if no button is selected.
- *
- * Only create this through ImGuiInterface::CreateRadioGroup
- */
+* @brief Group of RadioButton.
+*
+* Only one button in a group can be selected at one time.
+*
+* The selected RadioButton is observable - value is nullptr if no button is selected.
+*
+* Only create this through ImGuiInterface::CreateRadioGroup
+*/
 class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public Savable {
  public:
   /**
-   * @brief Struct for construction of RadioGroup.
-   */
+  * @brief Struct for construction of RadioGroup.
+  */
   struct Config {
     using Parent = RadioGroup;
     std::string_view groupName;             /*!< Unique name of the element */
@@ -38,28 +38,29 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
     Persistent persistent = Persistent::No; /*!< Enable disk state saving */
   };
   /**
-   * Construct RadioGroup
-   * @param config construction args @see RadioGroup::Config
-   */
+  * Construct RadioGroup
+  * @param config construction args @see RadioGroup::Config
+  */
   explicit RadioGroup(Config &&config);
+  ~RadioGroup() override;
   /**
-   * Construct RadioGroup.
-   * @param groupName ID of the element
-   * @param buttons buttons in the group
-   * @param persistent enable state saving to disk
-   */
+  * Construct RadioGroup.
+  * @param groupName ID of the element
+  * @param buttons buttons in the group
+  * @param persistent enable state saving to disk
+  */
   explicit RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons = {},
                       Persistent persistent = Persistent::No);
 
   /**
-   * Create a new button and add it to the group.
-   * @param button button to add
-   */
+  * Create a new button and add it to the group.
+  * @param button button to add
+  */
   void addButton(RadioButton &button);
 
   /**
-   * Call this on each frame to perform group checks.
-   */
+  * Call this on each frame to perform group checks.
+  */
   void frame();
 
   [[nodiscard]] const std::string &getGroupName() const;
@@ -72,6 +73,7 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
   void addDestroyListener(RadioButton *button);
   std::string groupName;
   std::vector<RadioButton *> buttons;
+  std::vector<Subscription> destroyButtonSubscriptions;
 };
 }  // namespace pf::ui::ig
 

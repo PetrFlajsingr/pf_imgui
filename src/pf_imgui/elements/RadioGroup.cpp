@@ -24,6 +24,8 @@ RadioGroup::RadioGroup(RadioGroup::Config &&config)
   });
 }
 
+RadioGroup::~RadioGroup() { std::ranges::for_each(destroyButtonSubscriptions, &Subscription::unsubscribe); }
+
 RadioGroup::RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons, Persistent persistent)
     : ValueObservable(nullptr), Savable(persistent), groupName(std::string{groupName}), buttons(std::move(buttons)) {
   std::ranges::for_each(buttons, [this](RadioButton *btn) { addDestroyListener(btn); });
@@ -82,7 +84,8 @@ toml::table RadioGroup::serialize_impl() const {
 }
 
 void RadioGroup::addDestroyListener(RadioButton *button) {
-  button->addDestroyListener([button, this] { buttons.erase(std::remove(buttons.begin(), buttons.end(), button)); });
+  destroyButtonSubscriptions.emplace_back(button->addDestroyListener(
+      [button, this] { buttons.erase(std::remove(buttons.begin(), buttons.end(), button)); }));
 }
 
 }  // namespace pf::ui::ig
