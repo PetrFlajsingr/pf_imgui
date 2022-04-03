@@ -18,7 +18,7 @@
 namespace pf::ui::ig {
 
 /**
- * @brief A button similar in function to CheckBox, but it can belong to RadioGroup.
+ * @brief A button similar in function to CheckBox, but it can belong to RadioGroup. @see RadioGroup
  */
 class PF_IMGUI_EXPORT RadioButton
     : public ItemElement,
