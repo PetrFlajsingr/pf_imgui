@@ -216,7 +216,7 @@ static void DrawGradientMarks(ImGradient* gradient,
   float barBottom = bar_pos.y + height;
   ImGradientMark* prevMark = nullptr;
   ImDrawList* draw_list = ImGui::GetWindowDrawList();
-  ImU32 colorAU32 = 0;
+  [[maybe_unused]] ImU32 colorAU32 = 0;
   ImU32 colorBU32 = 0;
 
   for(auto markIt = gradient->getMarks().begin(); markIt != gradient->getMarks().end(); ++markIt )
