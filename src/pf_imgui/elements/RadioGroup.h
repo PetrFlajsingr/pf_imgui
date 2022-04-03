@@ -48,8 +48,8 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
    * @param buttons buttons in the group
    * @param persistent enable state saving to disk
    */
-  RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons = {},
-             Persistent persistent = Persistent::No);
+  explicit RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons = {},
+                      Persistent persistent = Persistent::No);
 
   /**
    * Create a new button and add it to the group.
