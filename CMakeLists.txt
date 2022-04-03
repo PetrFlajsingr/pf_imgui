@@ -229,6 +229,7 @@ set(SOURCES
         src/include/imgui_curve_editor/ImGuiCurveEditor.cpp
         src/pf_imgui/elements/SimpleCurveEditor.cpp
         src/include/imgui_color_gradient/imgui_color_gradient.cpp
+        src/pf_imgui/elements/GradientEditor.cpp
         )
 
 set(INCLUDES
@@ -397,6 +398,7 @@ set(INCLUDES
         src/include/imgui_curve_editor/ImGuiCurveEditor.h
         src/pf_imgui/elements/SimpleCurveEditor.h
         src/include/imgui_color_gradient/imgui_color_gradient.h
+        src/pf_imgui/elements/GradientEditor.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
