@@ -64,7 +64,7 @@ void RadioGroup::unserialize_impl(const toml::table &src) {
     if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {
       const auto name = newVal.value();
       const auto btnIter = std::ranges::find(buttons, name, &RadioButton::getName);
-      if (btnIter != buttons.end()) { return; }
+      if (btnIter == buttons.end()) { return; }
       auto selectedButton = *btnIter;
       selectedButton->setValueInner(true);
       setValueAndNotifyIfChanged(selectedButton);
