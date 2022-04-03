@@ -19,6 +19,7 @@
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/elements/RadioGroup.h>
 #include <pf_imgui/elements/StatusBar.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/icons.h>
@@ -268,6 +269,12 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   [[nodiscard]] DragNDropGroup &createDragNDropGroup();
 
   /**
+   * Create a group for RadioButtons.
+   * @return newly created group
+   */
+  [[nodiscard]] RadioGroup &createRadioGroup(const std::string &groupName, Persistent persistent = Persistent::No);
+
+  /**
    * Update fonts atlas using your backend.
    */
   virtual void updateFonts() = 0;
@@ -318,7 +325,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   toml::table config;
 
-  std::vector<DragNDropGroup> dragNDropGroups{};
+  std::vector<std::unique_ptr<DragNDropGroup>> dragNDropGroups{};
+  std::vector<std::unique_ptr<RadioGroup>> radioGroups{};
 
   std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes{};
 

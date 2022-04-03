@@ -57,6 +57,11 @@ void ImGuiInterface::updateConfig() {
     }
   });
   if (fileDialogBookmark.has_value()) { config.insert_or_assign("file_dialog_bookmark", fileDialogBookmark.value()); }
+  std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
+    if (const auto toml = radioGroup->serialize(); toml.has_value()) {
+      config.insert_or_assign(radioGroup->getGroupName(), *toml);
+    }
+  });
 }
 
 void ImGuiInterface::setStateFromConfig() {
@@ -78,6 +83,11 @@ void ImGuiInterface::setStateFromConfig() {
   if (auto iter = config.find("file_dialog_bookmark"); iter != config.end()) {
     if (auto str = iter->second.as_string(); str != nullptr) { fileDialogBookmark = str->get(); }
   }
+  std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
+    if (auto iter = config.find(radioGroup->getGroupName()); iter != config.end()) {
+      if (auto data = iter->second.as_table(); data != nullptr) { radioGroup->unserialize(*data); }
+    }
+  });
 }
 
 void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
@@ -158,7 +168,8 @@ void ImGuiInterface::renderImpl() {
   if (hasMenuBar()) { menuBar->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });
-  std::ranges::for_each(dragNDropGroups, &DragNDropGroup::frame);
+  std::ranges::for_each(dragNDropGroups, &DragNDropGroup::frame, &std::unique_ptr<DragNDropGroup>::get);
+  std::ranges::for_each(radioGroups, &RadioGroup::frame, &std::unique_ptr<RadioGroup>::get);
   if (statusBar != nullptr) { statusBar->render(); }
   renderDialogs();
   notificationManager.renderNotifications();
@@ -170,7 +181,13 @@ void ImGuiInterface::removeDialog(ModalDialog &dialog) {
     dialogs.erase(iter);
   }
 }
-DragNDropGroup &ImGuiInterface::createDragNDropGroup() { return dragNDropGroups.emplace_back(); }
+DragNDropGroup &ImGuiInterface::createDragNDropGroup() {
+  return *dragNDropGroups.emplace_back(std::make_unique<DragNDropGroup>());
+}
+
+RadioGroup &ImGuiInterface::createRadioGroup(const std::string &groupName, Persistent persistent) {
+  return *radioGroups.emplace_back(std::make_unique<RadioGroup>(groupName, std::vector<RadioButton *>{}, persistent));
+}
 
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 

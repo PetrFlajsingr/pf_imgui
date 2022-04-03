@@ -11,66 +11,65 @@
 namespace pf::ui::ig {
 
 RadioGroup::RadioGroup(RadioGroup::Config &&config)
-    : Element(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<std::string_view>(""),
-      Savable(config.persistent), buttons(std::move(config.buttons)), selectedButtonIndex(config.selectedButtonIndex) {}
+    : ValueObservable(nullptr), Savable(config.persistent), groupName(std::string{config.groupName}),
+      buttons(std::move(config.buttons)) {
+  bool wasAnySelected = false;
+  std::ranges::for_each(buttons, [this, &wasAnySelected](RadioButton *btn) {
+    if (wasAnySelected) {
+      btn->setValue(false);
+    } else {
+      wasAnySelected = btn->getValue();
+    }
+    addDestroyListener(btn);
+  });
+}
 
-RadioGroup::RadioGroup(const std::string &elementName, const std::string &label,
-                       std::vector<std::unique_ptr<RadioButton>> buttons,
-                       const std::optional<std::size_t> &selectedButtonIndex, Persistent persistent)
-    : Element(elementName), Labellable(label), ValueObservable<std::string_view>(""), Savable(persistent),
-      buttons(std::move(buttons)), selectedButtonIndex(selectedButtonIndex) {}
+RadioGroup::RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons, Persistent persistent)
+    : ValueObservable(nullptr), Savable(persistent), groupName(std::string{groupName}), buttons(std::move(buttons)) {
+  std::ranges::for_each(buttons, [this](RadioButton *btn) { addDestroyListener(btn); });
+}
 
-void RadioGroup::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
-  ImGui::Text("%s:", getLabel().c_str());
-  std::ranges::for_each(buttons, [](auto &button) { button->renderImpl(); });
-  std::optional<std::size_t> newSelection = std::nullopt;
+void RadioGroup::frame() {
+  RadioButton *newSelection = nullptr;
   std::ranges::for_each(buttons | ranges::views::enumerate, [&](const auto &idxBtn) {
     const auto &[idx, btn] = idxBtn;
     if (btn->isSelected()) {
-      if (!selectedButtonIndex.has_value() || idx != *selectedButtonIndex) { newSelection = idx; }
+      if (getValue() != btn) { newSelection = btn; }
     }
   });
-  if (newSelection.has_value()) {
-    auto &selectedButton = buttons[*newSelection];
+  if (newSelection != nullptr) {
     std::ranges::for_each(buttons, [&](auto &button) {
-      if (&button != &selectedButton) { button->setValueAndNotifyIfChanged(false); }
+      if (button != newSelection) { button->setValueAndNotifyIfChanged(false); }
     });
-    setValueInner(selectedButton->getLabel());
-    selectedButtonIndex = newSelection;
+    setValueInner(newSelection);
     notifyValueChanged();
   }
 }
 
-RadioButton &RadioGroup::addButton(const std::string &elementName, const std::string &caption, bool initValue) {
-  return *buttons.emplace_back(std::make_unique<RadioButton>(elementName, caption, initValue));
+void RadioGroup::addButton(RadioButton &button) {
+  buttons.emplace_back(&button);
+  addDestroyListener(buttons.back());
+
+  if (getValue() != nullptr) {
+    button.setValue(false);
+  } else if (button.getValue()) {
+    setValueAndNotifyIfChanged(buttons.back());
+  }
 }
+
+const std::string &RadioGroup::getGroupName() const { return groupName; }
 
 void RadioGroup::unserialize_impl(const toml::table &src) {
   if (auto newValIter = src.find("selected"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<int>(); newVal.has_value()) {
-      const auto idx = newVal.value();
-      if (static_cast<std::size_t>(idx) >= buttons.size()) { return; }
-      selectedButtonIndex = idx;
-      auto &selectedButton = buttons[idx];
+    if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {
+      const auto name = newVal.value();
+      const auto btnIter = std::ranges::find(buttons, name, &RadioButton::getName);
+      if (btnIter == buttons.end()) { return; }
+      auto selectedButton = *btnIter;
       selectedButton->setValueInner(true);
-      setValueAndNotifyIfChanged(buttons[idx]->getLabel());
-      std::ranges::for_each(buttons, [&](auto &button) {
-        if (&button != &selectedButton) { button->setValueInner(false); }
-      });
-    }
-  }
-
-  if (src.contains("selected")) {
-    const auto idx = *src["selected"].value<int>();
-    if (static_cast<std::size_t>(idx) < buttons.size()) {
-      selectedButtonIndex = idx;
-      auto &selectedButton = buttons[idx];
-      selectedButton->setValueInner(true);
-      setValueAndNotifyIfChanged(buttons[idx]->getLabel());
-      std::ranges::for_each(buttons, [&](auto &button) {
-        if (&button != &selectedButton) { button->setValueInner(false); }
+      setValueAndNotifyIfChanged(selectedButton);
+      std::ranges::for_each(buttons, [&](auto button) {
+        if (button != selectedButton) { button->setValueInner(false); }
       });
     }
   }
@@ -78,8 +77,12 @@ void RadioGroup::unserialize_impl(const toml::table &src) {
 
 toml::table RadioGroup::serialize_impl() const {
   auto result = toml::table{};
-  if (selectedButtonIndex.has_value()) { result.insert_or_assign("selected", static_cast<int>(*selectedButtonIndex)); }
+  if (getValue() != nullptr) { result.insert_or_assign("selected", getValue()->getName()); }
   return result;
+}
+
+void RadioGroup::addDestroyListener(RadioButton *button) {
+  button->addDestroyListener([button, this] { buttons.erase(std::remove(buttons.begin(), buttons.end(), button)); });
 }
 
 }  // namespace pf::ui::ig

@@ -8,7 +8,19 @@
 #include <pf_common/RAII.h>
 
 namespace pf::ui::ig {
+
 Element::Element(const std::string &name) : Renderable(name) {}
+
+Element::~Element() { observableDestroy.notify(); }
+
+Element::Element(Element &&other) noexcept
+    : Renderable(std::move(other)), observableDestroy(std::move(other.observableDestroy)) {}
+
+Element &Element::operator=(Element &&other) noexcept {
+  observableDestroy = std::move(other.observableDestroy);
+  Renderable::operator=(std::move(other));
+  return *this;
+}
 
 void Element::render() {
   ImGui::PushID(getName().c_str());

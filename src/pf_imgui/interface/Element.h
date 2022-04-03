@@ -10,6 +10,7 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
 
@@ -31,6 +32,9 @@ class PF_IMGUI_EXPORT Element : public Renderable {
    * @param name ID of the element.
    */
   explicit Element(const std::string &name);
+  ~Element() override;
+  Element(Element &&other) noexcept;
+  Element &operator=(Element &&other) noexcept;
 
   void render() override;
   /**
@@ -38,11 +42,24 @@ class PF_IMGUI_EXPORT Element : public Renderable {
    * @param fontPtr new font
    */
   void setFont(ImFont *fontPtr);
-
   [[nodiscard]] ImFont *getFont() const;
+
+  /**
+   * Add a listener called when this object is destroyed.
+   * Most of the object will be destroyed at this point.
+   *
+   * @param listener listener to call
+   * @return Subscription to allow for listener cancellation
+   */
+  Subscription addDestroyListener(std::invocable auto &&listener) {
+    return observableDestroy.addListener(std::forward<decltype(listener)>(listener));
+  }
 
  protected:
   ImFont *font = nullptr;
+
+ private:
+  Observable_impl<> observableDestroy;
 };
 
 }  // namespace pf::ui::ig
