@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 03.04.2022.
-//
+/**
+* @file GradientEditor.h
+* @brief Gradient editor.
+* @author Petr Flajšingr
+* @date 3.4.22
+*/
 
 #ifndef PF_IMGUI_GRADIENTEDITOR_H
 #define PF_IMGUI_GRADIENTEDITOR_H
@@ -17,9 +20,12 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief Leading point for a gradient.
+ */
 struct GradientPoint {
   Color color;
-  float position;
+  float position; /*!< Position in range [0.0, 1.0] */
   [[nodiscard]] bool operator==(const GradientPoint &rhs) const;
 
   [[nodiscard]] static std::optional<GradientPoint> FromToml(const toml::table &src);
@@ -32,29 +38,59 @@ struct GradientMarkToGradientPoint {
 };
 }  // namespace details
 
+/**
+ * View of gradient points in GradientEditor.
+ */
 using GradientPointsView =
     ranges::transform_view<ranges::ref_view<const std::list<ImGradientMark *>>, details::GradientMarkToGradientPoint>;
 struct GradientPointsViewComparator {
   [[nodiscard]] bool operator()(GradientPointsView lhs, GradientPointsView rhs);
 };
 
+/**
+ * @brief Editor for gradient with color selection and an option to add more leading points. Selected poitns can be removed by pressing delete.
+ */
 class GradientEditor : public Element,
                        public ValueObservable<GradientPointsView, GradientPointsViewComparator>,
                        public Hoverable,
                        public Focusable,
                        public Savable {
  public:
+  /**
+   * @brief Construction args for GradientEditor.
+   */
   struct Config {
     using Parent = GradientEditor;
-    std::string_view name;
-    Persistent persistent = Persistent::No;
+    std::string_view name;                  /*!< Unique names of the element */
+    Persistent persistent = Persistent::No; /*!< Enable disk state saving */
   };
+  /**
+   * Construct GradientEditor
+   * @param config construction args @see GradientEditor::Config
+   */
   explicit GradientEditor(Config &&config);
+  /**
+   * Construct GradientEditor
+   * @param name unique name of the element
+   * @param persistent enable disk state saving
+   */
   explicit GradientEditor(const std::string &name, Persistent persistent = Persistent::No);
 
+  /**
+   * Calculate color of gradient at given position.
+   * @param percentage value in range [0.0, 1.0]
+   * @return color at position
+   */
   [[nodiscard]] Color getColorAt(float percentage) const;
 
+  /**
+   * Add a new leading point.
+   * @param gradientPoint new leading point
+   */
   void addGradientPoint(GradientPoint gradientPoint);
+  /**
+   * Remove leading point.
+   */
   void removeGradientPoint(GradientPoint gradientPoint);
 
  protected:

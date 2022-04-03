@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 02.04.2022.
-//
+/**
+* @file Color.h
+* @brief Color.
+* @author Petr Flajšingr
+* @date 2.4.22
+*/
 
 #ifndef PF_IMGUI_COLOR_H
 #define PF_IMGUI_COLOR_H
