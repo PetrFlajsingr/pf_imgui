@@ -13,7 +13,15 @@ namespace pf::ui::ig {
 RadioGroup::RadioGroup(RadioGroup::Config &&config)
     : ValueObservable(nullptr), Savable(config.persistent), groupName(std::string{config.groupName}),
       buttons(std::move(config.buttons)) {
-  std::ranges::for_each(buttons, [this](RadioButton *btn) { addDestroyListener(btn); });
+  bool wasAnySelected = false;
+  std::ranges::for_each(buttons, [this, &wasAnySelected](RadioButton *btn) {
+    if (wasAnySelected) {
+      btn->setValue(false);
+    } else {
+      wasAnySelected = btn->getValue();
+    }
+    addDestroyListener(btn);
+  });
 }
 
 RadioGroup::RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons, Persistent persistent)
@@ -31,7 +39,7 @@ void RadioGroup::frame() {
   });
   if (newSelection != nullptr) {
     std::ranges::for_each(buttons, [&](auto &button) {
-      if (&button != &newSelection) { button->setValueAndNotifyIfChanged(false); }
+      if (button != newSelection) { button->setValueAndNotifyIfChanged(false); }
     });
     setValueInner(newSelection);
     notifyValueChanged();
@@ -41,6 +49,12 @@ void RadioGroup::frame() {
 void RadioGroup::addButton(RadioButton &button) {
   buttons.emplace_back(&button);
   addDestroyListener(buttons.back());
+
+  if (getValue() != nullptr) {
+    button.setValue(false);
+  } else if (button.getValue()) {
+    setValueAndNotifyIfChanged(buttons.back());
+  }
 }
 
 void RadioGroup::unserialize_impl(const toml::table &src) {
