@@ -29,6 +29,9 @@ class PF_IMGUI_EXPORT Color {
   static const Color Black;
   static const Color White;
 
+  [[nodiscard]] bool operator==(const Color &rhs) const;
+  [[nodiscard]] bool operator!=(const Color &rhs) const;
+
   [[nodiscard]] static Color RGB(Integral auto red, Integral auto green,
                                  Integral auto blue, Integral auto alpha) {
     return Color{IM_COL32(red, green, blue, alpha)};

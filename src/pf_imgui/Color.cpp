@@ -20,6 +20,10 @@ Color::Color(ImColor value) : color(ImGui::ColorConvertFloat4ToU32(value)) {}
 
 Color::Color(const ImVec4 &value) : color(ImGui::ColorConvertFloat4ToU32(value)) {}
 
+bool Color::operator==(const Color &rhs) const { return color == rhs.color; }
+
+bool Color::operator!=(const Color &rhs) const { return !(rhs == *this); }
+
 float Color::red() const { return static_cast<ImVec4>(ImColor{color}).x; }
 
 float Color::green() const { return static_cast<ImVec4>(ImColor{color}).y; }
