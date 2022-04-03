@@ -62,6 +62,8 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
    */
   void frame();
 
+  [[nodiscard]] const std::string &getGroupName() const;
+
  protected:
   [[nodiscard]] toml::table serialize_impl() const override;
   void unserialize_impl(const toml::table &src) override;

@@ -57,6 +57,8 @@ void RadioGroup::addButton(RadioButton &button) {
   }
 }
 
+const std::string &RadioGroup::getGroupName() const { return groupName; }
+
 void RadioGroup::unserialize_impl(const toml::table &src) {
   if (auto newValIter = src.find("selected"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {

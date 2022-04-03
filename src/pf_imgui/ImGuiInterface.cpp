@@ -57,6 +57,11 @@ void ImGuiInterface::updateConfig() {
     }
   });
   if (fileDialogBookmark.has_value()) { config.insert_or_assign("file_dialog_bookmark", fileDialogBookmark.value()); }
+  std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
+    if (const auto toml = radioGroup->serialize(); toml.has_value()) {
+      config.insert_or_assign(radioGroup->getGroupName(), *toml);
+    }
+  });
 }
 
 void ImGuiInterface::setStateFromConfig() {
@@ -78,6 +83,11 @@ void ImGuiInterface::setStateFromConfig() {
   if (auto iter = config.find("file_dialog_bookmark"); iter != config.end()) {
     if (auto str = iter->second.as_string(); str != nullptr) { fileDialogBookmark = str->get(); }
   }
+  std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
+    if (auto iter = config.find(radioGroup->getGroupName()); iter != config.end()) {
+      if (auto data = iter->second.as_table(); data != nullptr) { radioGroup->unserialize(*data); }
+    }
+  });
 }
 
 void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
