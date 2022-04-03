@@ -380,7 +380,7 @@ bool GradientEditor(ImGradient* gradient,
 
   if(selectedMark)
   {
-    bool colorModified = ImGui::ColorPicker3("color_gradient_picker", selectedMark->color);
+    bool colorModified = ImGui::ColorPicker3("##c_grad_picker", selectedMark->color);
 
     if(selectedMark && colorModified)
     {
