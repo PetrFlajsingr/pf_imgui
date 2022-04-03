@@ -19,7 +19,7 @@ Selectable::Selectable(const std::string &elementName, const std::string &label,
 void Selectable::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  if (ImGui::Selectable(getLabel().c_str(), getValueAddress(), 0, getSize().asImVec())) { notifyValueChanged(); }
+  if (ImGui::Selectable(getLabel().c_str(), getValueAddress(), 0, static_cast<ImVec2>(getSize()))) { notifyValueChanged(); }
 }
 
 void Selectable::unserialize_impl(const toml::table &src) {

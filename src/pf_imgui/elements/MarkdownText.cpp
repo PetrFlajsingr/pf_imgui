@@ -88,7 +88,7 @@ ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLink
   result.isValid = true;
   result.user_texture_id = imageData->textureId;
 
-  result.size = imageData->size.asImVec();
+  result.size = static_cast<ImVec2>(imageData->size);
 
   ImVec2 const contentSize = ImGui::GetContentRegionAvail();
   if (result.size.x > contentSize.x) {

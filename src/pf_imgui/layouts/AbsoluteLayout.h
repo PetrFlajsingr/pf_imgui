@@ -84,7 +84,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
     * @return reference to the newly created Element
     */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
   auto &createChild(ImVec2 position, Args &&...args) {
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;

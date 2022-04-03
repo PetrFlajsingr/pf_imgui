@@ -22,6 +22,9 @@ std::optional<toml::table> Savable::serialize() const {
   if (persist) { return serialize_impl(); }
   return std::nullopt;
 }
+
+toml::table Savable::forceSerialize() const { return serialize_impl(); }
+
 bool Savable::isPersistent() const { return persist; }
 
 void Savable::setPersistent(bool persistent) { persist = persistent; }

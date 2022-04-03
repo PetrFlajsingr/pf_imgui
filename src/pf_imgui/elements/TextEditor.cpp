@@ -25,7 +25,7 @@ std::string TextEditor::getText() const { return editor.GetText(); }
 
 void TextEditor::setText(const std::string &text) { editor.SetText(text); }
 
-void TextEditor::renderImpl() { editor.Render(getName().c_str(), getSize().asImVec()); }
+void TextEditor::renderImpl() { editor.Render(getName().c_str(), static_cast<ImVec2>(getSize())); }
 
 void TextEditor::unserialize_impl(const toml::table &src) {
   if (auto newTextIter = src.find("text"); newTextIter != src.end()) {

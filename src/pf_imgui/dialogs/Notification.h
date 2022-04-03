@@ -33,7 +33,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
                std::chrono::milliseconds duration = DEFAULT_DURATION);
 
   void setIcon(const char *icon, ImFont *font = nullptr);
-  void setIconColor(const ImVec4 &newColor);
+  void setIconColor(Color newColor);
 
  protected:
   void renderImpl() override;
@@ -44,7 +44,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
 
   const char *icon = nullptr;
   ImFont *iconFont = nullptr;
-  std::optional<ImVec4> iconColor = std::nullopt;
+  std::optional<Color> iconColor = std::nullopt;
 
   std::chrono::steady_clock::time_point creationTime = std::chrono::steady_clock::now();
   std::chrono::milliseconds dismissDuration;

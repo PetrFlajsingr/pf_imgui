@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
 
+#include <pf_imgui/Color.h>
 #include <optional>
 #include <pf_common/RAII.h>
 #include <pf_common/concepts/OneOf.h>
@@ -19,10 +20,10 @@
 namespace pf::ui::ig {
 namespace details {
 template<style::ColorOf ColorType>
-using ColorOfAsImVec4 = ImVec4;
+using ColorOfAsColor = Color;
 
 template<style::ColorOf ColorType>
-using ColorOfAsOptionalImVec4 = std::optional<ColorOfAsImVec4<ColorType>>;
+using ColorOfAsOptionalColor = std::optional<ColorOfAsColor<ColorType>>;
 
 template<style::Style Style>
 using TypeForStyle = std::conditional_t<style::isFloatStyle(Style), float, ImVec2>;
@@ -68,13 +69,13 @@ class PF_IMGUI_EXPORT ColorCustomizable {
   * @tparam ColorType type to set color for
   */
   template<style::ColorOf ColorType>
-  requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(ImVec4 color) {
+  requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(Color color) {
     modified = true;
     std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = color;
   }
 
   template<style::ColorOf ColorType>
-  [[nodiscard]] std::optional<ImVec4> getColor() const {
+  [[nodiscard]] std::optional<Color> getColor() const {
     return std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues);
   }
 
@@ -127,7 +128,7 @@ class PF_IMGUI_EXPORT ColorCustomizable {
 #ifdef PF_IMGUI_ENABLE_STYLES
 
  private:
-  std::tuple<details::ColorOfAsOptionalImVec4<SupportedColorTypes>...> colorValues;
+  std::tuple<details::ColorOfAsOptionalColor<SupportedColorTypes>...> colorValues;
   bool modified = false;
 #endif
 };

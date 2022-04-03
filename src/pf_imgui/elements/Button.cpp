@@ -30,7 +30,7 @@ InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, 
 
 void InvisibleButton::renderImpl() {
   auto repeat = setButtonRepeat();
-  if (ImGui::InvisibleButton(getName().c_str(), getSize().asImVec(), static_cast<int>(clickBtn))) { notifyOnClick(); }
+  if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(getSize()), static_cast<int>(clickBtn))) { notifyOnClick(); }
 }
 
 Button::Button(Button::Config &&config)
@@ -44,7 +44,7 @@ void Button::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   auto repeat = setButtonRepeat();
-  if (ImGui::Button(getLabel().c_str(), getSize().asImVec())) { notifyOnClick(); }
+  if (ImGui::Button(getLabel().c_str(), static_cast<ImVec2>(getSize()))) { notifyOnClick(); }
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)

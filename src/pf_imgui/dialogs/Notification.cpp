@@ -16,7 +16,7 @@ void Notification::renderImpl() {
   if (firstRender) {
     firstRender = false;
     ImGui::SetNextWindowFocus();
-    if (!iconColor.has_value()) { iconColor = ImGui::GetStyleColorVec4(ImGuiCol_Text); }
+    if (!iconColor.has_value()) { iconColor = Color{ImGui::GetStyleColorVec4(ImGuiCol_Text)}; }
   }
   checkPhase();
   const auto vp_size = ImGui::GetMainViewport()->Size;
@@ -33,10 +33,12 @@ void Notification::renderImpl() {
 
     if (icon != nullptr) {
       if (iconFont != nullptr) { ImGui::PushFont(iconFont); }
+      ImGui::PushStyleColor(ImGuiCol_Text, *iconColor);
       RAII endFont{[&] {
         if (iconFont != nullptr) { ImGui::PopFont(); }
+        ImGui::PopStyleColor(1);
       }};
-      ImGui::TextColored(*iconColor, "%s", icon);
+      ImGui::Text("%s", icon);
       ImGui::SameLine();
     }
     ImGui::Text("%s", getLabel().c_str());
@@ -54,7 +56,7 @@ void Notification::setIcon(const char *newIcon, ImFont *font) {
   Notification::iconFont = font;
 }
 
-void Notification::setIconColor(const ImVec4 &newColor) { Notification::iconColor = newColor; }
+void Notification::setIconColor(Color newColor) { Notification::iconColor = newColor; }
 
 void Notification::checkPhase() {
   const auto timeElapsed =

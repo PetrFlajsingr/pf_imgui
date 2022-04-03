@@ -38,8 +38,6 @@ class PF_IMGUI_EXPORT Text
     using Parent = Text;
     std::string_view name; /*!< Unique name of the element */
     std::string text{};    /*!< Text to render */
-    std::optional<ImVec4> color =
-        std::nullopt; /*!< Color of the rendered text TODO: maybe just remove this due to ColorCustomizable */
   };
   /**
    * Construct Text
@@ -52,13 +50,6 @@ class PF_IMGUI_EXPORT Text
   * @param text text to be rendered
   */
   Text(const std::string &elementName, std::string text);
-  /**
-  * Construct Text.
-  * @param elementName ID of the element
-  * @param text text to be rendered
-  * @param textColor color of the text RGBA
-  */
-  Text(const std::string &elementName, std::string text, ImVec4 textColor);
 
   /**
   * Get rendered text.
@@ -82,7 +73,6 @@ class PF_IMGUI_EXPORT Text
 
  private:
   std::string text;
-  std::optional<ImVec4> color;
 };
 
 }  // namespace pf::ui::ig

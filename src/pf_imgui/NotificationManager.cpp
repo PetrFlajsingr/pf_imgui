@@ -36,22 +36,22 @@ Notification &NotificationManager::createNotification(NotificationType notificat
                                                       const std::string &label, std::chrono::milliseconds duration) {
   auto &notification = *newNotifications.emplace_back(std::make_unique<Notification>(name, label, duration));
   const char *icon = nullptr;
-  ImVec4 color;
+  Color color;
   switch (notificationType) {
     case NotificationType::Success:
-      color = ImVec4{0, 255, 0, 255};
+      color = Color::RGB(0u, 255u, 0u, 255u);
       icon = ICON_FA_CHECK_CIRCLE;
       break;
     case NotificationType::Warning:
-      color = ImVec4{255, 255, 0, 255};
+      color = Color::RGB(255, 255, 0, 255);
       icon = ICON_FA_EXCLAMATION_TRIANGLE;
       break;
     case NotificationType::Error:
-      color = ImVec4{255, 0, 0, 255};
+      color = Color::RGB(255, 0, 0, 255);
       icon = ICON_FA_TIMES_CIRCLE;
       break;
     case NotificationType::Info:
-      color = ImVec4{0, 157, 255, 255};
+      color = Color::RGB(0, 157, 255, 255);
       icon = ICON_FA_INFO_CIRCLE;
       break;
   }

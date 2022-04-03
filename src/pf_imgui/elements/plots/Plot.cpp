@@ -19,7 +19,7 @@ Plot::Plot(const std::string &elementName, const std::string &label, std::option
 
 // TODO: flags
 void Plot::renderImpl() {
-  if (ImPlot::BeginPlot(getLabel().c_str(), getSize().asImVec())) {
+  if (ImPlot::BeginPlot(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
     RAII endPopup{[] { ImPlot::EndPlot(); }};
     ImPlot::SetupAxis(ImAxis_X1, xLabel.has_value() ? xLabel->c_str() : nullptr);
     ImPlot::SetupAxis(ImAxis_Y1, yLabel.has_value() ? yLabel->c_str() : nullptr);

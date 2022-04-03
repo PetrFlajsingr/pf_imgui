@@ -122,7 +122,7 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();
     [[maybe_unused]] auto style = setStyleStack();
-    if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, getSize().asImVec())) {
+    if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
       RAII end{ImGui::EndTable};
       if (header.has_value()) {
         std::ranges::for_each(*header, ImGui::TableSetupColumn, &std::string::c_str);

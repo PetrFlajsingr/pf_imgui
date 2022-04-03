@@ -17,7 +17,7 @@ FlameGraph::FlameGraph(const std::string &elementName, const std::string &label,
 
 void FlameGraph::renderImpl() {
   auto colorStyle = setColorStack();
-  ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples, overlay, FLT_MAX, FLT_MAX, getSize().asImVec());
+  ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples, overlay, FLT_MAX, FLT_MAX, static_cast<ImVec2>(getSize()));
 }
 
 void FlameGraph::setOverlay(std::string text) { overlay = std::move(text); }

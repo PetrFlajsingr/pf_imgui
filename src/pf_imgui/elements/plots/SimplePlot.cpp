@@ -25,12 +25,12 @@ void SimplePlot::renderImpl() {
     case PlotType::Lines:
       ImGui::PlotLines(getLabel().c_str(), values.data(), static_cast<int>(values.size()), 0,
                        overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
-                       getSize().asImVec());
+                       static_cast<ImVec2>(getSize()));
       break;
     case PlotType::Histogram:
       ImGui::PlotHistogram(getLabel().c_str(), values.data(), static_cast<int>(values.size()), 0,
                            overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
-                           getSize().asImVec());
+                           static_cast<ImVec2>(getSize()));
       break;
   }
 }

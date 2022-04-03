@@ -11,6 +11,7 @@
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <utility>
 
@@ -21,7 +22,8 @@ namespace pf::ui::ig {
  *
  */
 template<std::derived_from<ItemElement> T>
-requires(!std::derived_from<T, Resizable>) class PF_IMGUI_EXPORT WidthDecorator : public T {
+  requires(!std::derived_from<T, Resizable>)
+class PF_IMGUI_EXPORT WidthDecorator : public T {
  public:
   struct Config {
     using Parent = WidthDecorator;
@@ -36,7 +38,7 @@ requires(!std::derived_from<T, Resizable>) class PF_IMGUI_EXPORT WidthDecorator 
    * @param args arguments for T's constructor
    */
   template<typename... Args>
-  requires std::constructible_from<T, std::string, Args...>
+    requires std::constructible_from<T, Args...>
   explicit WidthDecorator(Width elementWidth, Args &&...args) : T(std::forward<Args>(args)...), width(elementWidth) {}
 
   explicit WidthDecorator(Config &&config) : T(std::move(config.config)), width(config.width) {}
