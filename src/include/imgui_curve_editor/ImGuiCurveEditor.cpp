@@ -15,6 +15,7 @@
 #include <imgui_internal.h>
 
 #include <cmath>
+#include <fmt/format.h>
 
 /* To use, add this prototype somewhere..
 
@@ -838,7 +839,7 @@ int Curve(const char *label, const ImVec2 &size, const int maxpoints, ImVec2 *po
   {
     ImVec2 pos = (g.IO.MousePos - bb.Min) / (bb.Max - bb.Min);
     pos.y = 1 - pos.y;
-    sprintf_s(buf, "%s (%f,%f)", label, pos.x, pos.y);
+    fmt::format_to_n(buf, 128, "{} ({},{})", label, pos.x, pos.y);
     str = buf;
   }
 
