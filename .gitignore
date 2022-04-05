@@ -1,3 +1,9 @@
 # Project exclude paths
 /cmake-build-debug/
 /src/include/imgui/
+/.github/
+/.vs/
+/.idea/
+/cmake/
+/out/
+/cmake-build-*/

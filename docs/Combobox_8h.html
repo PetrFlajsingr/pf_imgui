@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pf_imgui: src/pf_imgui/elements/Combobox.h File Reference</title>
+<title>pf_imgui: src/pf_imgui/elements/ComboBox.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pf_imgui
-   &#160;<span id="projectnumber">0.6.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
   </td>
  </tr>
@@ -67,101 +67,117 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">Combobox.h File Reference</div>  </div>
+<div class="title">ComboBox.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Selectable combobox.  
+<p>ComboBox element.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="CustomCombobox_8h_source.html">pf_imgui/elements/CustomCombobox.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="Selectable_8h_source.html">pf_imgui/elements/Selectable.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;optional&gt;</code><br />
+<code>#include &lt;pf_common/concepts/StringConvertible.h&gt;</code><br />
+<code>#include &lt;pf_imgui/_export.h&gt;</code><br />
+<code>#include &lt;pf_imgui/details/ComboFilter.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="DragNDrop_8h_source.html">pf_imgui/interface/DragNDrop.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="ItemElement_8h_source.html">pf_imgui/interface/ItemElement.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="Labellable_8h_source.html">pf_imgui/interface/Labellable.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="Savable_8h_source.html">pf_imgui/interface/Savable.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="ValueObservable_8h_source.html">pf_imgui/interface/ValueObservable.h</a>&gt;</code><br />
 <code>#include &lt;range/v3/view/addressof.hpp&gt;</code><br />
+<code>#include &lt;range/v3/view/filter.hpp&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for Combobox.h:</div>
+Include dependency graph for ComboBox.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="Combobox_8h__incl.png" border="0" usemap="#src_2pf__imgui_2elements_2Combobox_8h" alt=""/></div>
-<map name="src_2pf__imgui_2elements_2Combobox_8h" id="src_2pf__imgui_2elements_2Combobox_8h">
-<area shape="rect" title="Selectable combobox." alt="" coords="2181,5,2347,47"/>
-<area shape="rect" href="CustomCombobox_8h.html" title="Customizable combobox." alt="" coords="2046,95,2245,136"/>
-<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="3244,527,3385,568"/>
-<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="821,527,971,568"/>
-<area shape="rect" href="Selectable_8h.html" title="Selectable element." alt="" coords="2270,191,2498,218"/>
-<area shape="rect" href="DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="452,273,593,315"/>
-<area shape="rect" title=" " alt="" coords="3359,102,3569,129"/>
-<area shape="rect" title=" " alt="" coords="1195,795,1266,821"/>
-<area shape="rect" title=" " alt="" coords="2973,795,3131,821"/>
-<area shape="rect" title=" " alt="" coords="1927,713,2071,739"/>
-<area shape="rect" href="CustomItemBox_8h.html" title="Customizable item container." alt="" coords="2021,184,2219,225"/>
-<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="3028,527,3169,568"/>
-<area shape="rect" title=" " alt="" coords="389,623,469,650"/>
-<area shape="rect" title=" " alt="" coords="1621,623,1707,650"/>
-<area shape="rect" title=" " alt="" coords="2036,534,2113,561"/>
-<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="2160,273,2301,315"/>
-<area shape="rect" href="Renderable_8h.html" title="Base class for renderables." alt="" coords="2751,616,2892,657"/>
-<area shape="rect" title=" " alt="" coords="2667,795,2759,821"/>
-<area shape="rect" title=" " alt="" coords="2771,713,2829,739"/>
-<area shape="rect" title=" " alt="" coords="789,713,849,739"/>
-<area shape="rect" title=" " alt="" coords="633,534,695,561"/>
-<area shape="rect" href="Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="2764,534,2852,561"/>
-<area shape="rect" href="Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="995,534,1093,561"/>
-<area shape="rect" href="Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="1543,534,1644,561"/>
-<area shape="rect" href="PopupMenu_8h.html" title="Popup menu usually shown when right clicking." alt="" coords="2473,363,2709,389"/>
-<area shape="rect" href="Tooltip_8h.html" title="Tooltip element." alt="" coords="1745,363,1948,389"/>
-<area shape="rect" href="fwd_8h.html" title="Forward declarations." alt="" coords="145,623,263,650"/>
-<area shape="rect" title=" " alt="" coords="109,705,270,747"/>
-<area shape="rect" href="enums_8h.html" title="Library&#39;s enums." alt="" coords="2853,713,2992,739"/>
-<area shape="rect" title=" " alt="" coords="2881,795,2948,821"/>
-<area shape="rect" href="Observable__impl_8h.html" title="Implementation of observable." alt="" coords="1035,623,1179,650"/>
-<area shape="rect" title=" " alt="" coords="679,713,764,739"/>
-<area shape="rect" title=" " alt="" coords="1216,713,1411,739"/>
-<area shape="rect" title=" " alt="" coords="1021,705,1192,747"/>
-<area shape="rect" title=" " alt="" coords="473,713,540,739"/>
-<area shape="rect" title=" " alt="" coords="873,713,997,739"/>
-<area shape="rect" href="MenuItems_8h.html" title="Items to be used in menu bars and popup menu." alt="" coords="2474,445,2707,471"/>
-<area shape="rect" href="Clickable_8h.html" title="Interface for elements which can be clicked." alt="" coords="1668,527,1809,568"/>
-<area shape="rect" href="RenderablesContainer_8h_source.html" title=" " alt="" coords="2506,527,2689,568"/>
-<area shape="rect" title=" " alt="" coords="2967,623,3073,650"/>
-<area shape="rect" title=" " alt="" coords="3351,623,3471,650"/>
-<area shape="rect" href="ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="1756,437,1911,479"/>
-<area shape="rect" href="exceptions_8h.html" title="Exceptions for pf_imgui." alt="" coords="1351,534,1518,561"/>
-<area shape="rect" title=" " alt="" coords="1117,534,1328,561"/>
-<area shape="rect" href="Resizable_8h.html" title="Interface for elements which can be resized." alt="" coords="2289,527,2431,568"/>
-<area shape="rect" title=" " alt="" coords="347,363,461,389"/>
-<area shape="rect" title=" " alt="" coords="485,363,560,389"/>
-<area shape="rect" href="unique__id_8h.html" title="Unique id generator for elements." alt="" coords="899,363,1058,389"/>
-<area shape="rect" title=" " alt="" coords="584,363,723,389"/>
-<area shape="rect" title=" " alt="" coords="848,445,920,471"/>
+<div class="center"><img src="ComboBox_8h__incl.png" border="0" usemap="#src_2pf__imgui_2elements_2ComboBox_8h" alt=""/></div>
+<map name="src_2pf__imgui_2elements_2ComboBox_8h" id="src_2pf__imgui_2elements_2ComboBox_8h">
+<area shape="rect" title="ComboBox element." alt="" coords="1361,5,1527,47"/>
+<area shape="rect" title=" " alt="" coords="1011,191,1085,218"/>
+<area shape="rect" title=" " alt="" coords="1171,273,1333,315"/>
+<area shape="rect" title=" " alt="" coords="339,541,483,568"/>
+<area shape="rect" href="ComboFilter_8h_source.html" title=" " alt="" coords="2603,459,2824,486"/>
+<area shape="rect" href="DragNDrop_8h.html" title="Definitions for drag and drop interface." alt="" coords="1373,95,1515,136"/>
+<area shape="rect" title=" " alt="" coords="1113,541,1172,568"/>
+<area shape="rect" title=" " alt="" coords="2315,370,2378,397"/>
+<area shape="rect" href="ItemElement_8h.html" title="Base class for elements on the lowest level." alt="" coords="288,95,429,136"/>
+<area shape="rect" href="Labellable_8h.html" title="Class providing label support." alt="" coords="899,452,1040,493"/>
+<area shape="rect" href="Savable_8h.html" title="Interface for elements which can save their state." alt="" coords="733,452,875,493"/>
+<area shape="rect" href="ValueObservable_8h.html" title="Interface for providing observable support to elements." alt="" coords="1859,184,2007,225"/>
+<area shape="rect" title=" " alt="" coords="2654,102,2863,129"/>
+<area shape="rect" title=" " alt="" coords="2887,102,3062,129"/>
+<area shape="rect" title=" " alt="" coords="2530,616,2601,643"/>
+<area shape="rect" title=" " alt="" coords="1600,370,1685,397"/>
+<area shape="rect" title=" " alt="" coords="1683,281,1763,307"/>
+<area shape="rect" title=" " alt="" coords="1507,191,1621,218"/>
+<area shape="rect" href="Tooltip_8h.html" title="Tooltip element." alt="" coords="421,191,624,218"/>
+<area shape="rect" href="fwd_8h.html" title="Forward declarations." alt="" coords="1211,191,1330,218"/>
+<area shape="rect" href="Observable__impl_8h.html" title="Implementation of observable." alt="" coords="1409,273,1557,315"/>
+<area shape="rect" title=" " alt="" coords="1709,370,1776,397"/>
+<area shape="rect" href="unique__id_8h.html" title="Unique id generator for elements." alt="" coords="2217,191,2375,218"/>
+<area shape="rect" title=" " alt="" coords="1645,191,1784,218"/>
+<area shape="rect" href="ElementContainer_8h.html" title="Base class for objects which can hold arbitrary elements." alt="" coords="992,273,1147,315"/>
+<area shape="rect" title=" " alt="" coords="245,370,323,397"/>
+<area shape="rect" href="exceptions_8h.html" title="Exceptions for pf_imgui." alt="" coords="1125,370,1291,397"/>
+<area shape="rect" title=" " alt="" coords="891,370,1101,397"/>
+<area shape="rect" href="Element_8h.html" title="Base class for objects which can be considered UI elements." alt="" coords="550,363,714,404"/>
+<area shape="rect" title=" " alt="" coords="1451,370,1575,397"/>
+<area shape="rect" title=" " alt="" coords="1367,370,1427,397"/>
+<area shape="rect" title=" " alt="" coords="1166,452,1341,493"/>
+<area shape="rect" href="Renderable_8h.html" title="Base class for renderables." alt="" coords="601,459,709,486"/>
+<area shape="rect" title=" " alt="" coords="618,616,777,643"/>
+<area shape="rect" href="enums_8h.html" title="Library&#39;s enums." alt="" coords="821,541,960,568"/>
+<area shape="rect" title=" " alt="" coords="857,616,924,643"/>
+<area shape="rect" title=" " alt="" coords="1623,616,1715,643"/>
+<area shape="rect" title=" " alt="" coords="1800,370,1995,397"/>
+<area shape="rect" title=" " alt="" coords="2019,363,2189,404"/>
+<area shape="rect" title=" " alt="" coords="2304,281,2376,307"/>
+<area shape="rect" href="Focusable_8h.html" title="Interface for elements which can hold focus." alt="" coords="648,191,747,218"/>
+<area shape="rect" href="Hoverable_8h.html" title="Interface for elements which can be hovered." alt="" coords="195,191,296,218"/>
+<area shape="rect" title=" " alt="" coords="985,541,1090,568"/>
+<area shape="rect" title=" " alt="" coords="677,541,797,568"/>
+<area shape="rect" title=" " alt="" coords="1990,281,2077,307"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="Combobox_8h__dep__incl.png" border="0" usemap="#src_2pf__imgui_2elements_2Combobox_8hdep" alt=""/></div>
-<map name="src_2pf__imgui_2elements_2Combobox_8hdep" id="src_2pf__imgui_2elements_2Combobox_8hdep">
-<area shape="rect" title="Selectable combobox." alt="" coords="11,5,178,47"/>
+<div class="center"><img src="ComboBox_8h__dep__incl.png" border="0" usemap="#src_2pf__imgui_2elements_2ComboBox_8hdep" alt=""/></div>
+<map name="src_2pf__imgui_2elements_2ComboBox_8hdep" id="src_2pf__imgui_2elements_2ComboBox_8hdep">
+<area shape="rect" title="ComboBox element." alt="" coords="11,5,178,47"/>
 <area shape="rect" href="elements_8h.html" title="Convenience include for all elements." alt="" coords="5,95,184,121"/>
 </map>
 </div>
 </div>
-<p><a href="Combobox_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="ComboBox_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpf_1_1ui_1_1ig_1_1details_1_1ComboboxRowFactory.html">pf::ui::ig::details::ComboboxRowFactory&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpf_1_1ui_1_1ig_1_1details_1_1ComboBoxItemStorage.html">pf::ui::ig::details::ComboBoxItemStorage&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for combo box items.  <a href="structpf_1_1ui_1_1ig_1_1details_1_1ComboBoxItemStorage.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Combobox.html">pf::ui::ig::Combobox&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A typical combobox with items which can be converted to string.  <a href="classpf_1_1ui_1_1ig_1_1Combobox.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpf_1_1ui_1_1ig_1_1details_1_1ComboBoxItemStorage_3_01std_1_1string_01_4.html">pf::ui::ig::details::ComboBoxItemStorage&lt; std::string &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialisation for std::string. This uses a union so there's no need to change code for this special case, but we don't waste 2 strings neither.  <a href="structpf_1_1ui_1_1ig_1_1details_1_1ComboBoxItemStorage_3_01std_1_1string_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ComboBox.html">pf::ui::ig::ComboBox&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A typical combobox with items which can be converted to string.  <a href="classpf_1_1ui_1_1ig_1_1ComboBox.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aae08317b317dfec1b78503350afb4716"><td class="memItemLeft" align="right" valign="top"><a id="aae08317b317dfec1b78503350afb4716"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ComboBoxCount</b> { <b>Items4</b> = 1 &lt;&lt; 1, 
+<b>Items8</b> = 1 &lt;&lt; 2, 
+<b>Items20</b> = 1 &lt;&lt; 3, 
+<b>ItemsAll</b> = 1 &lt;&lt; 4
+ }</td></tr>
+<tr class="separator:aae08317b317dfec1b78503350afb4716"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Selectable combobox. </p>
+<div class="textblock"><p>ComboBox element. </p>
 <dl class="section author"><dt>Author</dt><dd>Petr Flajšingr </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>4.6.21 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>31.10.20 </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
