@@ -49,7 +49,7 @@ void ImGradient::removeMark(ImGradientMark* mark)
 void ImGradient::getColorAt(float position, float* color) const
 {
   position = ImClamp(position, 0.0f, 1.0f);
-  int cachePos = (position * 255);
+  int cachePos = static_cast<int>((position * 255));
   cachePos *= 3;
   color[0] = m_cachedValues[cachePos+0];
   color[1] = m_cachedValues[cachePos+1];
