@@ -69,8 +69,7 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
   T &createChild(Args &&...args) {  // TODO: createChild for Configs
     auto origChild = std::make_unique<T>(std::forward<Args>(args)...);
     auto childPtr = origChild.get();
-    child = std::move(origChild);
-    renderableChild = dynamic_cast<Renderable *>(child.get());
+    setChild(std::move(origChild));
     return *childPtr;
   }
 
@@ -89,6 +88,7 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
   template<std::derived_from<Element> T>
   void setChild(std::unique_ptr<T> &&newChild) {
     child = std::move(newChild);
+    renderableChild = dynamic_cast<Renderable *>(child.get());
   }
 
   std::vector<Renderable *> getRenderables() override;
