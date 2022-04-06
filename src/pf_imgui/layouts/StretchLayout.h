@@ -11,6 +11,7 @@
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/meta.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -70,6 +71,14 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
     auto childPtr = origChild.get();
     child = std::move(origChild);
     renderableChild = dynamic_cast<Renderable *>(child.get());
+    return *childPtr;
+  }
+
+  template<ElementConstructConfig T>
+  std::derived_from<Element> auto &createChild(T &&config) {
+    auto origChild = std::make_unique<typename T::Parent>(std::forward<T>(config));
+    const auto childPtr = origChild.get();
+    setChild(std::move(origChild));
     return *childPtr;
   }
 
