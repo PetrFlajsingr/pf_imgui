@@ -518,14 +518,14 @@ install(
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
         DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/stb/"
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/stb
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ImGuiFileDialog/stb
         FILES_MATCHING
         PATTERN "*.h"
 )
