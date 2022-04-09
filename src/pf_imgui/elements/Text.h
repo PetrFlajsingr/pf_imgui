@@ -56,13 +56,15 @@ class PF_IMGUI_EXPORT Text
   * @return text
   */
   [[nodiscard]] std::string_view getText() const;
+
+  void setText(std::string newText);
   /**
   * Set new text for rendering
   * @param text new text to set
   * @param args values to insert into text using fmt::format
   */
   template<typename... Args>
-  void setText(const std::string &fmt, Args &&...args) {
+  void setText(fmt::format_string<Args...> fmt, Args &&...args) {
     setTextInner(fmt::format(fmt, std::forward<Args>(args)...));
   }
 

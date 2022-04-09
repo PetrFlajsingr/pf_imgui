@@ -1,0 +1,15 @@
+{
+  "name": "pf-imgui",
+  "version": "0.8.0",
+  "dependencies": [
+    {
+      "name": "pf-common",
+      "version>=": "1.2.1"
+    },
+    {
+      "name": "tomlplusplus",
+      "version>=": "3.0.1"
+    }
+  ],
+  "builtin-baseline": "59d355b5ec30d83aea2b18de5746f9c40224da9e"
+}

@@ -1,24 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
-
-include("cmake/HunterGate.cmake")
-HunterGate(
-        URL "https://github.com/cpp-pm/hunter/archive/v0.23.321.tar.gz"
-        SHA1 "5e53cbb0429037ea8e2592bfd92704b8ff3ab492"
-)
-
 project(pf_imgui
         VERSION 0.7.0)
 
-set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
-set(CPM_DOWNLOAD_VERSION 0.32.2)
-
-if (NOT (EXISTS ${CPM_DOWNLOAD_LOCATION} AND CPM_VERSION STREQUAL CPM_DOWNLOAD_VERSION))
-    message(STATUS "Downloading CPM.cmake")
-    file(DOWNLOAD https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
-endif ()
-
-
-include(${CPM_DOWNLOAD_LOCATION})
 
 option(ENABLE_EXTERN_TEMPLATE "enable extern templates" ON)
 
@@ -72,18 +55,12 @@ endif ()
 set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
 set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
 
-
-CPMAddPackage(
-        NAME pf_common
-        GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG master
-)
-
-CPMAddPackage(
-        NAME toml++
-        GITHUB_REPOSITORY marzer/tomlplusplus
-        GIT_TAG v3.0.1
-)
+find_package(pf_common CONFIG REQUIRED)
+find_package(tomlplusplus CONFIG REQUIRED)
+find_package(range-v3 CONFIG REQUIRED)
+find_package(magic_enum CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
 
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
@@ -437,7 +414,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_color_gradient>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${glm_SOURCE_DIR}>)
-target_link_libraries(${PROJECT_NAME} PRIVATE pf_common range-v3 StaticTypeInfo magic_enum)
+target_link_libraries(${PROJECT_NAME} PRIVATE pf_common::pf_common tomlplusplus::tomlplusplus)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
@@ -452,7 +429,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY INTERFACE_${PROJECT_NAME}_MAJOR_VER
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPATIBLE_INTERFACE_STRING ${PROJECT_NAME}_MAJOR_VERSION)
 
 
-install(TARGETS ${PROJECT_NAME} pf_common magic_enum StaticTypeInfo
+install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}Targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
