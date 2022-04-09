@@ -8,9 +8,9 @@
 #ifndef PF_IMGUI_ELEMENTS_SLIDER3D_H
 #define PF_IMGUI_ELEMENTS_SLIDER3D_H
 
+#include <dear_widgets.h>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
-#include <include/DearWidgets/dear_widgets.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
