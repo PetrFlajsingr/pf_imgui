@@ -463,7 +463,7 @@ install(
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui-command-palette"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui-command-palette/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
@@ -476,79 +476,79 @@ install(
         PATTERN "*.inl"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_addons"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_addons/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_color_gradient"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_color_gradient/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_curve_editor"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_curve_editor/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_markdown"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_markdown/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_memory_editor"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_memory_editor/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_notify"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_notify/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiColorTextEdit"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiColorTextEdit/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/stb"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/stb/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/stb
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_widget_flamegraph"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_widget_flamegraph/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiIcons"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiIcons/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imGuIZMO.quat"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imGuIZMO.quat/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/implot"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/implot/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
