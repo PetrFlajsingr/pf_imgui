@@ -62,6 +62,7 @@ find_package(magic_enum CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 
+include_directories(src/include/DearWidgets)
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
 include_directories(src/include/imgui_markdown)
@@ -386,6 +387,7 @@ include(GNUInstallDirs)
 
 target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/DearWidgets>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/implot>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
@@ -518,14 +520,14 @@ install(
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
 )
 install(
         DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/stb/"
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ImGuiFileDialog/stb
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/stb
         FILES_MATCHING
         PATTERN "*.h"
 )
