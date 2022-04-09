@@ -115,9 +115,9 @@ class PF_IMGUI_EXPORT Slider3D
   glm::vec2 extremesY;
   glm::vec2 extremesZ;
 };
-#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
+
 extern template class Slider3D<float>;
-#endif
+
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_ELEMENTS_SLIDER3D_H

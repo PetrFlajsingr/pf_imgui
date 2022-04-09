@@ -8,11 +8,11 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
 
-#include <pf_imgui/Color.h>
 #include <optional>
 #include <pf_common/RAII.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/tuple.h>
+#include <pf_imgui/Color.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/styles/enums.h>
 #include <tuple>
@@ -63,13 +63,13 @@ constexpr auto varArgValueForIndex(std::size_t index, std::size_t currIndex = 0)
 template<style::ColorOf... SupportedColorTypes>
 class PF_IMGUI_EXPORT ColorCustomizable {
  public:
-#ifdef PF_IMGUI_ENABLE_STYLES
   /**
   * Set color for given type.
   * @tparam ColorType type to set color for
   */
   template<style::ColorOf ColorType>
-  requires(OneOfValues_v<ColorType, SupportedColorTypes...>) void setColor(Color color) {
+    requires(OneOfValues_v<ColorType, SupportedColorTypes...>)
+  void setColor(Color color) {
     modified = true;
     std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = color;
   }
@@ -94,7 +94,6 @@ class PF_IMGUI_EXPORT ColorCustomizable {
   void clearColors() {
     iterateTuple([](auto &value) { value = std::nullopt; }, colorValues);
   }
-#endif
 
  protected:
   /**
@@ -102,7 +101,6 @@ class PF_IMGUI_EXPORT ColorCustomizable {
   * @return RAII resetting the stack
   */
   [[nodiscard]] RAII setColorStack() {
-#ifdef PF_IMGUI_ENABLE_STYLES
     if (!modified) {
       return RAII{[] {}};
     }
@@ -120,17 +118,11 @@ class PF_IMGUI_EXPORT ColorCustomizable {
         colorValues);
 
     return RAII{[popCount] { ImGui::PopStyleColor(static_cast<int>(popCount)); }};
-#else
-    return RAII{[] {}};
-#endif
   }
-
-#ifdef PF_IMGUI_ENABLE_STYLES
 
  private:
   std::tuple<details::ColorOfAsOptionalColor<SupportedColorTypes>...> colorValues;
   bool modified = false;
-#endif
 };
 
 using AllColorCustomizable = ColorCustomizable<
@@ -159,14 +151,14 @@ using AllColorCustomizable = ColorCustomizable<
 template<style::Style... SupportedStyles>
 class PF_IMGUI_EXPORT StyleCustomizable {
  public:
-#ifdef PF_IMGUI_ENABLE_STYLES
   /**
   * Set value for given type.
   * @tparam Style type to set value for
   * @param value value to set
   */
   template<style::Style Style>
-  requires(OneOfValues_v<Style, SupportedStyles...> &&style::isFloatStyle(Style)) void setStyle(float value) {
+    requires(OneOfValues_v<Style, SupportedStyles...> && style::isFloatStyle(Style))
+  void setStyle(float value) {
     modified = true;
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
@@ -176,7 +168,8 @@ class PF_IMGUI_EXPORT StyleCustomizable {
   * @param value value to set
   */
   template<style::Style Style>
-  requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style)) void setStyle(ImVec2 value) {
+    requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style))
+  void setStyle(ImVec2 value) {
     modified = true;
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
@@ -194,7 +187,6 @@ class PF_IMGUI_EXPORT StyleCustomizable {
   void clearStyles() {
     iterateTuple([](auto &value) { value = std::nullopt; }, styleValues);
   }
-#endif
 
  protected:
   /**
@@ -202,7 +194,6 @@ class PF_IMGUI_EXPORT StyleCustomizable {
   * @return RAII resetting the stack
   */
   [[nodiscard]] RAII setStyleStack() {
-#ifdef PF_IMGUI_ENABLE_STYLES
     if (!modified) {
       return RAII{[] {}};
     }
@@ -218,16 +209,11 @@ class PF_IMGUI_EXPORT StyleCustomizable {
         },
         styleValues);
     return RAII{[popCount] { ImGui::PopStyleVar(static_cast<int>(popCount)); }};
-#else
-    return RAII{[] {}};
-#endif
   }
-#ifdef PF_IMGUI_ENABLE_STYLES
 
  private:
   std::tuple<details::OptionalTypeForStyle<SupportedStyles>...> styleValues;
   bool modified = false;
-#endif
 };
 
 using AllStyleCustomizable =

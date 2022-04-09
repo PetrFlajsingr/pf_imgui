@@ -220,9 +220,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
  private:
   std::optional<std::size_t> selectedItemIndex = std::nullopt;
 };
-#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
+
 extern template class Listbox<std::string>;
-#endif
 
 }  // namespace pf::ui::ig
 

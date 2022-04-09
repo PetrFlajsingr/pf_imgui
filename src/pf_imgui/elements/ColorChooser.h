@@ -152,11 +152,11 @@ using ColorPicker = ColorChooser<ColorChooserType::Picker, T>;
  */
 template<OneOf<glm::vec3, glm::vec4> T>
 using ColorEdit = ColorChooser<ColorChooserType::Edit, T>;
-#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
+
 extern template class ColorChooser<ColorChooserType::Edit, glm::vec3>;
 extern template class ColorChooser<ColorChooserType::Edit, glm::vec4>;
 extern template class ColorChooser<ColorChooserType::Picker, glm::vec3>;
 extern template class ColorChooser<ColorChooserType::Picker, glm::vec4>;
-#endif
+
 }  // namespace pf::ui::ig
 #endif  // PF_IMGUI_ELEMENTS_COLORCHOOSER_H

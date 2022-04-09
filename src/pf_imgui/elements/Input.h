@@ -343,7 +343,7 @@ class PF_IMGUI_EXPORT Input
 
 template<>
 class Input<std::string> : public InputText {};
-#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
+
 extern template class Input<float>;
 extern template class Input<glm::vec2>;
 extern template class Input<glm::vec3>;
@@ -353,7 +353,7 @@ extern template class Input<int>;
 extern template class Input<glm::ivec2>;
 extern template class Input<glm::ivec3>;
 extern template class Input<glm::ivec4>;
-#endif
+
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_ELEMENTS_INPUT_H

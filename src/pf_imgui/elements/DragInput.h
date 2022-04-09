@@ -272,7 +272,7 @@ class PF_IMGUI_EXPORT DragInput
   ParamType max;
   std::string format;
 };
-#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
+
 extern template class DragInput<float>;
 extern template class DragInput<glm::vec2>;
 extern template class DragInput<glm::vec3>;
@@ -283,6 +283,6 @@ extern template class DragInput<glm::ivec2>;
 extern template class DragInput<glm::ivec3>;
 extern template class DragInput<glm::ivec4>;
 extern template class DragInput<math::Range<int>>;
-#endif
+
 }  // namespace pf::ui::ig
 #endif  // PF_IMGUI_ELEMENTS_DRAGINPUT_H

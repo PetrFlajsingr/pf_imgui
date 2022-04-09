@@ -2,19 +2,6 @@ cmake_minimum_required(VERSION 3.17)
 project(pf_imgui
         VERSION 0.8.0)
 
-
-option(ENABLE_EXTERN_TEMPLATE "enable extern templates" ON)
-
-if (ENABLE_EXTERN_TEMPLATE)
-    add_compile_definitions(PF_IMGUI_ENABLE_EXTERN_TEMPLATE)
-endif ()
-
-option(ENABLE_STYLES "enable style settings for each element" OFF)
-
-if (ENABLE_STYLES)
-    add_compile_definitions(PF_IMGUI_ENABLE_STYLES)
-endif ()
-
 if (MSVC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.29.30129 AND CMAKE_VERSION VERSION_GREATER 3.20.3)
     set(CMAKE_CXX_STANDARD 23)
 else ()

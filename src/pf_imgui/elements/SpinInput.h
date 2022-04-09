@@ -140,10 +140,10 @@ class PF_IMGUI_EXPORT SpinInput
   bool readOnly = false;
   ImGuiInputTextFlags flags = {};
 };
-#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
+
 extern template class SpinInput<int>;
 extern template class SpinInput<float>;
-#endif
+
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_ELEMENTS_SPININPUT_H
