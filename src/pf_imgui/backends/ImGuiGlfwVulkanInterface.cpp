@@ -3,8 +3,8 @@
 //
 
 #include "ImGuiGlfwVulkanInterface.h"
-#include <src/pf_imgui/backends/impl/imgui_impl_glfw.h>
-#include <src/pf_imgui/backends/impl/imgui_impl_vulkan.h>
+#include <pf_imgui/backends/impl/imgui_impl_glfw.h>
+#include <pf_imgui/backends/impl/imgui_impl_vulkan.h>
 
 namespace pf::ui::ig {
 namespace details {
