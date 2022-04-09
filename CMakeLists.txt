@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 project(pf_imgui
-        VERSION 0.7.0)
+        VERSION 0.8.0)
 
 
 option(ENABLE_EXTERN_TEMPLATE "enable extern templates" ON)
