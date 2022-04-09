@@ -85,12 +85,6 @@ CPMAddPackage(
         GIT_TAG v3.0.1
 )
 
-CPMAddPackage(
-        NAME StaticTypeInfo
-        GIT_TAG v1.3.1
-        GIT_REPOSITORY https://github.com/TheLartians/StaticTypeInfo
-)
-
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
 include_directories(src/include/imgui_markdown)
@@ -442,7 +436,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_curve_editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_color_gradient>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
-target_link_libraries(${PROJECT_NAME} PUBLIC pf_common range-v3 StaticTypeInfo magic_enum)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${glm_SOURCE_DIR}>)
+target_link_libraries(${PROJECT_NAME} PRIVATE pf_common range-v3 StaticTypeInfo magic_enum)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
