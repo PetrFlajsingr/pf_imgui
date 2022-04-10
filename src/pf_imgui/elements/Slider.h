@@ -30,6 +30,7 @@ namespace pf::ui::ig {
 // ImGuiSliderFlags_Logarithmic
 // ImGuiSliderFlags_NoRoundToFormat
 
+// TODO: support for more data types
 namespace details {
 /**
  * Types using float as underlying value.
@@ -185,30 +186,21 @@ class PF_IMGUI_EXPORT Slider
     auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     const auto flags = ImGuiSliderFlags_AlwaysClamp;
-    if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::SliderFloat(getLabel().c_str(), address, min, max, format.c_str(), flags);
+
+    ImGuiDataType_ dataType;
+    if constexpr (OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>) {
+      dataType = ImGuiDataType_Float;
+    } else {
+      dataType = ImGuiDataType_S32;
     }
-    if constexpr (std::same_as<T, glm::vec2>) {
-      valueChanged = ImGui::SliderFloat2(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
+
+    if constexpr (!OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+      valueChanged = ImGui::SliderScalar(getLabel().c_str(), dataType, address, &min, &max, format.c_str(), flags);
+    } else {
+      valueChanged = ImGui::SliderScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(), &min,
+                                          &max, format.c_str(), flags);
     }
-    if constexpr (std::same_as<T, glm::vec3>) {
-      valueChanged = ImGui::SliderFloat3(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::vec4>) {
-      valueChanged = ImGui::SliderFloat4(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::SliderInt(getLabel().c_str(), address, min, max, format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec2>) {
-      valueChanged = ImGui::SliderInt2(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec3>) {
-      valueChanged = ImGui::SliderInt3(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec4>) {
-      valueChanged = ImGui::SliderInt4(getLabel().c_str(), glm::value_ptr(*address), min, max, format.c_str(), flags);
-    }
+
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
