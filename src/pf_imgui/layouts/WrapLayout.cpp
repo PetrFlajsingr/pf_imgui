@@ -7,11 +7,11 @@
 namespace pf::ui::ig {
 
 WrapLayout::WrapLayout(WrapLayout::Config &&config)
-    : BoxLayout(std::string{config.name}, config.layoutDirection, config.size, config.showBorder) {}
+    : LinearLayout(std::string{config.name}, config.size, config.showBorder), direction(config.layoutDirection) {}
 
 WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
                        ShowBorder showBorder)
-    : BoxLayout(elementName, layoutDirection, size, showBorder) {}
+    : LinearLayout(elementName, size, showBorder), direction(layoutDirection) {}
 
 void WrapLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
@@ -29,7 +29,7 @@ void WrapLayout::renderImpl() {
       dimensionPreviousFrame.resize(getChildren().size());
       dimensionsCalculated = false;
     }
-    switch (getLayoutDirection()) {
+    switch (direction) {
       case LayoutDirection::LeftToRight: renderLeftToRight(); break;
       case LayoutDirection::TopToBottom: renderTopToBottom(); break;
     }

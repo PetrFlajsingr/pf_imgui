@@ -1,17 +1,20 @@
-//
-// Created by petr.flajsingr on 2/9/2022.
-//
+/**
+ * @file WrapLayout.h
+ * @brief Layout rendering its children in give direction while wrapping each row/column.
+ * @author Petr Flajšingr
+ * @date 2.9.22
+ */
 
 #ifndef PF_IMGUI_WRAPLAYOUT_H
 #define PF_IMGUI_WRAPLAYOUT_H
 
-#include "BoxLayout.h"
-#include <string>
+#include "LinearLayout.h"
 
 namespace pf::ui::ig {
-
-// TODO: spacing
-class PF_IMGUI_EXPORT WrapLayout : public BoxLayout {
+/**
+ * @brief Layout rendering its children in give direction while wrapping each row/column.
+ */
+class PF_IMGUI_EXPORT WrapLayout : public LinearLayout {
  public:
   /**
    * @brief Struct for construction of WrapLayout.
@@ -39,6 +42,7 @@ class PF_IMGUI_EXPORT WrapLayout : public BoxLayout {
   void renderLeftToRight();
   void renderTopToBottom();
 
+  LayoutDirection direction;
   std::vector<float> dimensionPreviousFrame{};
   bool dimensionsCalculated = false;
 };

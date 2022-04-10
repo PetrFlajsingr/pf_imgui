@@ -19,7 +19,7 @@
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/ValueObservable.h>
-#include <pf_imgui/layouts/BoxLayout.h>
+#include <pf_imgui/layouts/VerticalLayout.h>
 #include <string>
 #include <variant>
 #include <vector>
@@ -372,10 +372,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    */
   explicit Tree(Config &&config)
       : Element(std::string{config.name}), persistent(config.persistent),
-        layout({.name = getName() + "_layout",
-                .layoutDirection = LayoutDirection::TopToBottom,
-                .size = Size::Auto(),
-                .showBorder = config.showBorder}) {}
+        layout({.name = "layout", .size = Size::Auto(), .showBorder = config.showBorder}) {}
   /**
    * Construct tree.
    * @param name unique name of the element
@@ -384,10 +381,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * @param persistent enable/disable disk saving
    */
   explicit Tree(const std::string &name, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No)
-      : Element(name), persistent(persistent), layout({.name = name + "_layout",
-                                                       .layoutDirection = LayoutDirection::TopToBottom,
-                                                       .size = Size::Auto(),
-                                                       .showBorder = showBorder}) {}
+      : Element(name), persistent(persistent),
+        layout({.name = "layout", .size = Size::Auto(), .showBorder = showBorder}) {}
 
   /**
    * Create a new child node.
@@ -460,8 +455,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   // return true to continue deeper into the tree, false if not
   // in order
   template<typename F>
-  requires(std::invocable<F, TreeLeaf *, std::size_t>
-               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePreOrder(F &&callable) {
+    requires(std::invocable<F, TreeLeaf *, std::size_t> && std::invocable<F, TreeNode<treeType> *, std::size_t>)
+  void traversePreOrder(F &&callable) {
     std::ranges::for_each(layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
                             return dynamic_cast<details::TreeRecord &>(child);
                           }),
@@ -469,8 +464,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   }
 
   template<typename F>
-  requires(std::invocable<F, TreeLeaf *, std::size_t>
-               &&std::invocable<F, TreeNode<treeType> *, std::size_t>) void traversePostOrder(F &&callable) {
+    requires(std::invocable<F, TreeLeaf *, std::size_t> && std::invocable<F, TreeNode<treeType> *, std::size_t>)
+  void traversePostOrder(F &&callable) {
     std::ranges::for_each(layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
                             return dynamic_cast<details::TreeRecord &>(child);
                           }),
@@ -486,13 +481,12 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
 
  private:
   Persistent persistent;
-  BoxLayout layout;
+  VerticalLayout layout;
   std::unique_ptr<details::TreeSelectionLimiter> limiter = nullptr;
 
   template<typename F>
-  requires(std::invocable<F, TreeLeaf *, std::size_t> &&std::invocable<
-           F, TreeNode<treeType> *, std::size_t>) void traversePreOrderImpl(details::TreeRecord &node, F &&callable,
-                                                                            std::size_t depth) {
+    requires(std::invocable<F, TreeLeaf *, std::size_t> && std::invocable<F, TreeNode<treeType> *, std::size_t>)
+  void traversePreOrderImpl(details::TreeRecord &node, F &&callable, std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
       if (!callable(nodePtr, depth)) { return; }
       std::ranges::for_each(nodePtr->getTreeNodes(),
@@ -502,9 +496,8 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
     }
   }
   template<typename F>
-  requires(std::invocable<F, TreeLeaf *, std::size_t> &&std::invocable<
-           F, TreeNode<treeType> *, std::size_t>) void traversePosOrderImpl(details::TreeRecord &node, F &&callable,
-                                                                            std::size_t depth) {
+    requires(std::invocable<F, TreeLeaf *, std::size_t> && std::invocable<F, TreeNode<treeType> *, std::size_t>)
+  void traversePosOrderImpl(details::TreeRecord &node, F &&callable, std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
       std::ranges::for_each(nodePtr->getTreeNodes(),
                             [&](auto &record) { traversePosOrderImpl(record, callable, depth + 1); });
