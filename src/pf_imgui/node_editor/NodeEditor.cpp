@@ -254,7 +254,7 @@ void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::mil
 }
 
 PopupMenu &NodeEditor::createOrGetPopupMenu() {
-  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }
+  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>("popup"); }
   return *popupMenu;
 }
 

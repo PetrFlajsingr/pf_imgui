@@ -28,9 +28,9 @@ void Comment::renderImpl() {
 
     ax::NodeEditor::BeginNode(getId());
     auto endNode = RAII{ax::NodeEditor::EndNode};
-    ImGui::BeginVertical((getName() + "content").c_str());
+    ImGui::BeginVertical("content");
     {
-      ImGui::BeginHorizontal((getName() + "header").c_str());
+      ImGui::BeginHorizontal("header");
       {
         ImGui::Spring(1);
         ImGui::Text(getLabel().c_str());

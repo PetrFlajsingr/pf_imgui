@@ -42,7 +42,7 @@ bool Pin::acceptsNewLinks() const { return true; }
 bool Pin::acceptsLinkWith([[maybe_unused]] Pin &other) const { return true; }
 
 PopupMenu &Pin::createOrGetPopupMenu() {
-  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }
+  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>("popup"); }
   return *popupMenu;
 }
 
@@ -61,7 +61,7 @@ void Pin::renderImpl() {
       ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
       renderIcon();
       ImGui::Spring(0);
-      ImGui::BeginVertical((getName() + "_info").c_str());
+      ImGui::BeginVertical(("info").c_str());
       renderInfo();
       ImGui::EndVertical();
     } else {
@@ -69,7 +69,7 @@ void Pin::renderImpl() {
       ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
 
       ImGui::Spring(1);
-      ImGui::BeginVertical((getName() + "_info").c_str());
+      ImGui::BeginVertical("info");
       renderInfo();
       ImGui::EndVertical();
       ImGui::Spring(0);

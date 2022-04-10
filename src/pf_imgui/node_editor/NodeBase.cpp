@@ -53,7 +53,7 @@ void NodeBase::deleteNode() {
 }
 
 PopupMenu &NodeBase::createOrGetPopupMenu() {
-  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }
+  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>("popup"); }
   return *popupMenu;
 }
 
