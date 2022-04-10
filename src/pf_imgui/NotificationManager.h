@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT NotificationManager {
  private:
   std::vector<std::unique_ptr<Notification>> notifications;
   std::vector<std::unique_ptr<Notification>> newNotifications;
-  ImFont *defaultFont = nullptr;
+  Font defaultFont;
 };
 
 }  // namespace pf::ui::ig

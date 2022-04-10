@@ -34,8 +34,8 @@ FontManager::FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::
   });
 }
 
-std::optional<ImFont *> FontManager::fontByName(const std::string &name) const {
-  if (auto iter = fonts.find(name); iter != fonts.end()) { return iter->second; }
+std::optional<Font> FontManager::fontByName(const std::string &name) const {
+  if (auto iter = fonts.find(name); iter != fonts.end()) { return Font{iter->second}; }
   return std::nullopt;
 }
 
@@ -49,7 +49,7 @@ FontBuilder FontManager::fontBuilder(const std::string &name, std::vector<std::b
 
 FontBuilder FontManager::fontBuilder(const std::string &name) { return {*this, name}; }
 
-ImFont *FontManager::addFont(FontBuilder &builder) {
+Font FontManager::addFont(FontBuilder &builder) {
   auto fontConfig = ImFontConfig{};
   fontConfig.SizePixels = builder.fontSize;
   fontConfig.GlyphExtraSpacing = ImVec2{builder.extraHorizontalSpacing, 0};
@@ -98,7 +98,7 @@ ImFont *FontManager::addFont(FontBuilder &builder) {
   });
   fonts.emplace(builder.name, font);
   imguiInterface->shouldUpdateFontAtlas = true;
-  return font;
+  return Font{font};
 }
 
 SubFontBuilder::SubFontBuilder(FontBuilder &builder, std::filesystem::path ttfPath)
@@ -160,7 +160,7 @@ FontBuilder &FontBuilder::setExtraHorizontalSpacing(float spacing) {
   return *this;
 }
 
-ImFont *FontBuilder::build() { return parent.addFont(*this); }
+Font FontBuilder::build() { return parent.addFont(*this); }
 
 FontBuilder &FontBuilder::addIconSubfont(const Flags<IconPack> &iconPack, float size) {
   iconPacks = iconPack.getSetFlags()

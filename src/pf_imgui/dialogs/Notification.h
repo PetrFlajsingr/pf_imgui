@@ -6,6 +6,7 @@
 #define PF_IMGUI_NOTIFICATION_H
 
 #include <chrono>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -32,7 +33,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
   Notification(const std::string &name, const std::string &label,
                std::chrono::milliseconds duration = DEFAULT_DURATION);
 
-  void setIcon(const char *icon, ImFont *font = nullptr);
+  void setIcon(const char *icon, Font font = Font::Default());
   void setIconColor(Color newColor);
 
  protected:
@@ -43,7 +44,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
   NotificationPhase currentPhase = NotificationPhase::FadeIn;
 
   const char *icon = nullptr;
-  ImFont *iconFont = nullptr;
+  Font iconFont = Font::Default();
   std::optional<Color> iconColor = std::nullopt;
 
   std::chrono::steady_clock::time_point creationTime = std::chrono::steady_clock::now();

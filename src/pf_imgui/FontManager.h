@@ -13,6 +13,7 @@
 #include <memory>
 #include <optional>
 #include <pf_common/enums.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/icons.h>
 #include <span>
@@ -23,7 +24,6 @@
 #include <vector>
 
 namespace pf::ui::ig {
-
 class ImGuiInterface;
 
 class FontManager;
@@ -150,7 +150,7 @@ class PF_IMGUI_EXPORT FontBuilder {
    * Build the font.
    * @return built font
    */
-  ImFont *build();
+  Font build();
 
  private:
   struct DefaultFontTag {};
@@ -194,7 +194,7 @@ class PF_IMGUI_EXPORT FontManager {
    * @param name name of the font
    * @return std::nullopt if no font is found, otherwise a pointer to it
    */
-  [[nodiscard]] std::optional<ImFont *> fontByName(const std::string &name) const;
+  [[nodiscard]] std::optional<Font> fontByName(const std::string &name) const;
 
   /**
    * Build a font from ttf file.
@@ -219,7 +219,7 @@ class PF_IMGUI_EXPORT FontManager {
 
  private:
   friend class FontBuilder;
-  ImFont *addFont(FontBuilder &builder);
+  Font addFont(FontBuilder &builder);
 
   ImGuiInterface *imguiInterface;
   std::filesystem::path iconDir;
