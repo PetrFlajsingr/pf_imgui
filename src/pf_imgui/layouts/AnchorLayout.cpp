@@ -9,12 +9,10 @@
 namespace pf::ui::ig {
 
 AnchorLayout::AnchorLayout(AnchorLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
-                      config.persistent) {}
+    : ResizableLayout(std::string{config.name}, config.size, config.showBorder) {}
 
-AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                           ShowBorder showBorder, Persistent persistent)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
+AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
+    : ResizableLayout(elementName, size, showBorder) {}
 
 std::vector<Renderable *> AnchorLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.element.get(); })
@@ -68,14 +66,12 @@ void AnchorLayout::renderImpl() {
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
-    if (renderCollapseButton()) {
-      std::ranges::for_each(children, [](auto &childData) {
-        auto &[child, positionable, anchor, _1, _2] = childData;
-        ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));
-        child->render();
-      });
-    }
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    std::ranges::for_each(children, [](auto &childData) {
+      auto &[child, positionable, anchor, _1, _2] = childData;
+      ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));
+      child->render();
+    });
   }
 }
 

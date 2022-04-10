@@ -7,12 +7,11 @@
 namespace pf::ui::ig {
 
 WrapLayout::WrapLayout(WrapLayout::Config &&config)
-    : BoxLayout(std::string{config.name}, config.layoutDirection, config.size, config.allowCollapse, config.showBorder,
-                config.persistent) {}
+    : LinearLayout(std::string{config.name}, config.size, config.showBorder), direction(config.layoutDirection) {}
 
 WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-                       AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
-    : BoxLayout(elementName, layoutDirection, size, allowCollapse, showBorder, persistent) {}
+                       ShowBorder showBorder)
+    : LinearLayout(elementName, size, showBorder), direction(layoutDirection) {}
 
 void WrapLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
@@ -20,7 +19,7 @@ void WrapLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
     if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Top) {
       ImGui::SetScrollHereY(0.0f);
       nextFrameScrollPosition = std::nullopt;
@@ -30,11 +29,9 @@ void WrapLayout::renderImpl() {
       dimensionPreviousFrame.resize(getChildren().size());
       dimensionsCalculated = false;
     }
-    if (renderCollapseButton()) {
-      switch (getLayoutDirection()) {
-        case LayoutDirection::LeftToRight: renderLeftToRight(); break;
-        case LayoutDirection::TopToBottom: renderTopToBottom(); break;
-      }
+    switch (direction) {
+      case LayoutDirection::LeftToRight: renderLeftToRight(); break;
+      case LayoutDirection::TopToBottom: renderTopToBottom(); break;
     }
     if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Bottom) {
       ImGui::SetScrollHereY(1.0f);

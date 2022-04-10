@@ -5,6 +5,7 @@
 #include <implot.h>
 #include <pf_imgui/ImGuiInterface.h>
 #include <pf_imgui/serialization.h>
+#include <range/v3/view/addressof.hpp>
 #include <utility>
 
 namespace pf::ui::ig {

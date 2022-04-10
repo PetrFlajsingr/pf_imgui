@@ -15,7 +15,8 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
-#include <pf_imgui/layouts/BoxLayout.h>
+#include <pf_imgui/layouts/HorizontalLayout.h>
+#include <pf_imgui/layouts/VerticalLayout.h>
 #include <range/v3/view/filter.hpp>
 #include <range/v3/view/join.hpp>
 #include <string>
@@ -140,8 +141,8 @@ class PF_IMGUI_EXPORT Memo : public Element, public Labellable, public Renderabl
   void rebuildText();
   auto getTextView() { return records | ranges::views::filter(filterFnc) | ranges::views::join('\n'); }
 
-  std::unique_ptr<BoxLayout> controlsLayout = nullptr;
-  BoxLayout textAreaLayout;
+  std::unique_ptr<HorizontalLayout> controlsLayout = nullptr;
+  VerticalLayout textAreaLayout;
   bool buttonsEnabled;
   bool filterEnabled;
   bool rebuild = false;

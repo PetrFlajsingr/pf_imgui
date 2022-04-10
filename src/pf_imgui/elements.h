@@ -56,6 +56,5 @@
 #include <pf_imgui/elements/Tree.h>
 #include <pf_imgui/elements/VerticalSlider.h>
 #include <pf_imgui/elements/plots.h>
-#include <pf_imgui/layouts/layouts.h>
 
 #endif  // PF_IMGUI_ELEMENTS_H

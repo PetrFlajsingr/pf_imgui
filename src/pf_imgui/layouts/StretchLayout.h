@@ -29,12 +29,10 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
    */
   struct Config {
     using Parent = StretchLayout;
-    std::string_view name;                           /*!< Unique name of the element */
-    Size size;                                       /*!< Size of the element */
-    Stretch stretch;                                 /*!< Stretch direction */
-    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
-    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
-    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
+    std::string_view name;                  /*!< Unique name of the element */
+    Size size;                              /*!< Size of the element */
+    Stretch stretch;                        /*!< Stretch direction */
+    ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
   };
   /**
    * Construct StretchLayout
@@ -46,13 +44,10 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
    * @param elementName ID of the layout
    * @param size size of the layout
    * @param stretch dimension to which the layout stretches
-   * @param allowCollapse enable collapse button
    * @param showBorder draw border around the layout
-   * @param persistent enable state saving
    */
   StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
-                AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
-                Persistent persistent = Persistent::No);
+                ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Create a child inside the layout. If the layout already contains one it gets overwritten.

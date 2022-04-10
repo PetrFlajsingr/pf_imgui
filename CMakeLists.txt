@@ -115,7 +115,6 @@ set(SOURCES
         src/pf_imgui/interface/Renderable.cpp
         src/pf_imgui/interface/Positionable.cpp
         src/pf_imgui/layouts/ResizableLayout.cpp
-        src/pf_imgui/layouts/BoxLayout.cpp
         src/pf_imgui/layouts/GridLayout.cpp
         src/pf_imgui/layouts/StackedLayout.cpp
         src/pf_imgui/layouts/AbsoluteLayout.cpp
@@ -184,6 +183,9 @@ set(SOURCES
         src/include/imgui_color_gradient/imgui_color_gradient.cpp
         src/pf_imgui/elements/GradientEditor.cpp
         src/pf_imgui/Font.cpp
+        src/pf_imgui/layouts/HorizontalLayout.cpp
+        src/pf_imgui/layouts/VerticalLayout.cpp
+        src/pf_imgui/layouts/LinearLayout.cpp
         )
 
 set(INCLUDES
@@ -252,8 +254,7 @@ set(INCLUDES
         src/pf_imgui/interface/Renderable.h
         src/pf_imgui/interface/Positionable.h
         src/pf_imgui/layouts/ResizableLayout.h
-        src/pf_imgui/layouts/BoxLayout.h
-        src/pf_imgui/layouts/layouts.h
+        src/pf_imgui/layouts.h
         src/pf_imgui/layouts/GridLayout.h
         src/pf_imgui/layouts/StackedLayout.h
         src/pf_imgui/layouts/AbsoluteLayout.h
@@ -354,7 +355,9 @@ set(INCLUDES
         src/include/imgui_color_gradient/imgui_color_gradient.h
         src/pf_imgui/elements/GradientEditor.h
         src/pf_imgui/Font.h
-        )
+        src/pf_imgui/layouts/HorizontalLayout.h
+        src/pf_imgui/layouts/VerticalLayout.h
+        src/pf_imgui/layouts/LinearLayout.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

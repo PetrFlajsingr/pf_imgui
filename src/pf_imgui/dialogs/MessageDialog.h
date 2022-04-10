@@ -12,7 +12,6 @@
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/Text.h>
-#include <pf_imgui/layouts/BoxLayout.h>
 #include <string>
 
 namespace pf::ui::ig {

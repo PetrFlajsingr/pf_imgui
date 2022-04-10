@@ -11,17 +11,16 @@
 namespace pf::ui::ig {
 
 GridLayout::GridLayout(GridLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
-                      config.persistent),
-      width(config.widthInCells), height(config.heightInCells) {
+    : ResizableLayout(std::string{config.name}, config.size, config.showBorder), width(config.widthInCells),
+      height(config.heightInCells) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
   std::ranges::fill(cells, nullptr);
 }
 
 GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
-                       AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), width(width), height(height) {
+                       ShowBorder showBorder)
+    : ResizableLayout(elementName, size, showBorder), width(width), height(height) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
   std::ranges::fill(cells, nullptr);
@@ -36,19 +35,17 @@ void GridLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
-    if (renderCollapseButton()) {
-      const auto xCellSize = getSize().width.value / static_cast<float>(width);
-      const auto yCellSize = getSize().height.value / static_cast<float>(height);
-      const auto cellSize = Size{static_cast<uint32_t>(xCellSize), static_cast<uint32_t>(yCellSize)};
-      for (uint32_t y = 0; y < height; ++y) {
-        for (uint32_t x = 0; x < width; ++x) {
-          const auto index = indexForCell(x, y);
-          if (cells[index] != nullptr) {
-            cells[index]->setSize(cellSize);
-            ImGui::SetCursorPos(ImVec2{xCellSize * static_cast<float>(x), yCellSize * static_cast<float>(y)});
-            cells[index]->render();
-          }
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    const auto xCellSize = getSize().width.value / static_cast<float>(width);
+    const auto yCellSize = getSize().height.value / static_cast<float>(height);
+    const auto cellSize = Size{static_cast<uint32_t>(xCellSize), static_cast<uint32_t>(yCellSize)};
+    for (uint32_t y = 0; y < height; ++y) {
+      for (uint32_t x = 0; x < width; ++x) {
+        const auto index = indexForCell(x, y);
+        if (cells[index] != nullptr) {
+          cells[index]->setSize(cellSize);
+          ImGui::SetCursorPos(ImVec2{xCellSize * static_cast<float>(x), yCellSize * static_cast<float>(y)});
+          cells[index]->render();
         }
       }
     }
