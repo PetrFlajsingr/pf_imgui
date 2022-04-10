@@ -1,36 +1,38 @@
 /**
- * @file HorizontalLayout.h
- * @brief Layout rendering its children horizontally.
+ * @file VerticalLayout.h
+ * @brief Layout rendering its children vertically.
  * @author Petr Flajšingr
  * @date 10.4.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
-#define IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
+#ifndef IMGUI_EXPERIMENTS_VERTICALLAYOUT_H
+#define IMGUI_EXPERIMENTS_VERTICALLAYOUT_H
 
 #include "LinearLayout.h"
+
 namespace pf::ui::ig {
 
+// TODO: merge with HorizontalLayout? or make base class
 /**
- * @brief Layout rendering its children horizontal with optional spacing.
+ * @brief Layout rendering its children vertically with optional spacing.
  */
-class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
+class VerticalLayout : public LinearLayout {
  public:
   /**
-   * @brief Struct for construction of HorizontalLayout.
+   * @brief Struct for construction of VerticalLayout.
    */
   struct Config {
-    using Parent = HorizontalLayout;
+    using Parent = VerticalLayout;
     std::string_view name;                  /*!< Unique name of the element */
     Size size;                              /*!< Size of the element */
     float spacing = 0.f;                    /*!< Spaces between elements */
     ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
   };
   /**
-   * Config constructor of HorizontalLayout @see HorizontalLayout::Config
+   * Config constructor of VerticalLayout @see VerticalLayout::Config
    * @param config construction args
    */
-  explicit HorizontalLayout(Config &&config);
+  explicit VerticalLayout(Config &&config);
 
   /**
    * Construct HorizontalLayout
@@ -39,8 +41,8 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
    * @param elementSpacing spaces between elements
    * @param showBorder render border around layout's area
    */
-  HorizontalLayout(const std::string &name, Size size, float elementSpacing = 0.f,
-                   ShowBorder showBorder = ShowBorder::No);
+  VerticalLayout(const std::string &name, Size size, float elementSpacing = 0.f,
+                 ShowBorder showBorder = ShowBorder::No);
 
   /**
    *
@@ -59,6 +61,6 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
  private:
   float spacing;
 };
-}  // namespace pf::ui::ig
 
-#endif  //IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
+}  // namespace pf::ui::ig
+#endif  //IMGUI_EXPERIMENTS_VERTICALLAYOUT_H
