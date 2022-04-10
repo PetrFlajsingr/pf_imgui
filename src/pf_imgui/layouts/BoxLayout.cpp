@@ -61,6 +61,7 @@ void BoxLayout::renderLeftToRight() {
 }
 
 void BoxLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
+
 void BoxLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
 #ifndef _MSC_VER  // TODO: MSVC internal error
   if (index > children.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
@@ -74,6 +75,7 @@ void BoxLayout::removeChild(const std::string &childName) {
     children.erase(iter);
   }
 }
+
 std::vector<Renderable *> BoxLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); })
       | ranges::to_vector;

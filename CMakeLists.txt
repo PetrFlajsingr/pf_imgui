@@ -184,6 +184,7 @@ set(SOURCES
         src/include/imgui_color_gradient/imgui_color_gradient.cpp
         src/pf_imgui/elements/GradientEditor.cpp
         src/pf_imgui/Font.cpp
+        src/pf_imgui/layouts/HorizontalLayout.cpp
         )
 
 set(INCLUDES
@@ -354,7 +355,7 @@ set(INCLUDES
         src/include/imgui_color_gradient/imgui_color_gradient.h
         src/pf_imgui/elements/GradientEditor.h
         src/pf_imgui/Font.h
-        )
+        src/pf_imgui/layouts/HorizontalLayout.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

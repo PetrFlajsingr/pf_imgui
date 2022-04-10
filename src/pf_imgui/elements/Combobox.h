@@ -80,7 +80,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     std::string_view label;                               /*!< Text rendered next to the Combobox */
     std::string preview;                                  /*!< Preview value shown when no item is selected */
     ComboBoxCount shownItemCount = ComboBoxCount::Items8; /*!< Amount of items shown when Combobox is open */
-    Persistent persistent = Persistent::Yes;              /*!< Allow state saving to disk */
+    Persistent persistent = Persistent::No;              /*!< Allow state saving to disk */
   };
   /**
    * Construct Combobox

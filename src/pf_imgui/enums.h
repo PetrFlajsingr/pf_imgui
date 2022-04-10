@@ -22,6 +22,7 @@ enum class MouseButton {
   Right = ImGuiMouseButton_::ImGuiMouseButton_Right,
   Middle = ImGuiMouseButton_::ImGuiMouseButton_Middle
 };
+
 /**
 * Enum for selection.
 */

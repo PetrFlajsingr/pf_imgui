@@ -1,69 +1,64 @@
 /**
- * @file BoxLayout.h
- * @brief Layout boxing children in desired direction.
- * @author Petr Flajšingr
- * @date 24.1.21
- */
-#ifndef PF_IMGUI_LAYOUTS_BOXLAYOUT_H
-#define PF_IMGUI_LAYOUTS_BOXLAYOUT_H
+* @file HorizontalLayout.h
+* @brief Layout rendering its children horizontally.
+* @author Petr Flajšingr
+* @date 10.4.22
+*/
+
+#ifndef IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
+#define IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
 
 #include "ResizableLayout.h"
 #include <memory>
-#include <pf_common/algorithms.h>
 #include <pf_common/enums.h>
-#include <pf_common/exceptions/Exceptions.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/exceptions.h>
 #include <pf_imgui/meta.h>
-#include <range/v3/view/addressof.hpp>
-#include <string>
-#include <utility>
+#include <range/v3/view/transform.hpp>
 #include <vector>
 
 namespace pf::ui::ig {
 
 /**
- * @brief A layout which positions it's children from left to right or top to bottom, based on the settings.
- *
- * All children are positioned in the way they are added or inserted.
+ * @brief Layout rendering its children horizontal with optional spacing.
  */
-class /*[[deprecated]] */PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
+class PF_IMGUI_EXPORT HorizontalLayout : public ResizableLayout {
  public:
   /**
-   * @brief Struct for construction of BoxLayout.
+   * @brief Struct for construction of HorizontalLayout.
    */
   struct Config {
-    using Parent = BoxLayout;
+    using Parent = HorizontalLayout;
     std::string_view name;                  /*!< Unique name of the element */
-    LayoutDirection layoutDirection;        /*!< Direction the element are rendered in */
     Size size;                              /*!< Size of the element */
+    float spacing = 0.f;                    /*!< Spaces between elements */
     ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
   };
   /**
-   * Construct BoxLayout
-   * @param config construction args @see BoxLayout::Config
+   * Config constructor of HorizontalLayout @see HorizontalLayout::Config
+   * @param config construction args
    */
-  explicit BoxLayout(Config &&config);
-  /**
-   * Construct BoxLayout.
-   * @param elementName ID of the layout
-   * @param layoutDirection direction of children stacking
-   * @param size size of the layout
-   * @param showBorder draw layouts border
-   */
-  BoxLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
-            ShowBorder showBorder = ShowBorder::No);
+  explicit HorizontalLayout(Config &&config);
 
   /**
-   * Get current layout direction.
-   * @return current layout direction
+   * Construct HorizontalLayout
+   * @param name unique name of the element
+   * @param size size of the layout
+   * @param elementSpacing spaces between elements
+   * @param showBorder render border around layout's area
    */
-  [[nodiscard]] LayoutDirection getLayoutDirection() const;
+  HorizontalLayout(const std::string &name, Size size, float elementSpacing = 0.f,
+                   ShowBorder showBorder = ShowBorder::No);
+
   /**
-   * Set new layout direction.
-   * @param layoutDirection new layout direction
+   *
+   * @return current spacing between elements
    */
-  void setLayoutDirection(LayoutDirection layoutDirection);
+  [[nodiscard]] float getSpacing() const;
+  /**
+   * Set spacing between elements
+   * @param newSpacing
+   */
+  void setSpacing(float newSpacing);
 
   /**
    * Get all children of the layout as references.
@@ -158,13 +153,10 @@ class /*[[deprecated]] */PF_IMGUI_EXPORT BoxLayout : public ResizableLayout {
   void renderImpl() override;
 
  private:
-  LayoutDirection layoutDirection;
+  float spacing;
+
   std::vector<std::unique_ptr<Element>> children;
-
-  void renderTopToBottom();
-  void renderLeftToRight();
 };
-
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_LAYOUTS_BOXLAYOUT_H
+#endif  //IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H

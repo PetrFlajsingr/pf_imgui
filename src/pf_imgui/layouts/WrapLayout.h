@@ -10,7 +10,8 @@
 
 namespace pf::ui::ig {
 
-class WrapLayout : public BoxLayout {
+// TODO: spacing
+class PF_IMGUI_EXPORT WrapLayout : public BoxLayout {
  public:
   /**
    * @brief Struct for construction of WrapLayout.
