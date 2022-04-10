@@ -96,34 +96,7 @@ struct PF_IMGUI_EXPORT InputData<double> {
   double fastStep;
   static constexpr const char *defaultFormat() { return "%.6f"; }
 };
-/**
-* Types which have no formatting but have a step.
-* @tparam T
-*/
-template<typename T>
-concept UnformattedWithStep = OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !
-OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
-/**
-* Types which have no formatting and no step.
-* @tparam T
-*/
-template<typename T>
-concept UnformattedWithoutStep = !
-OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && !OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
-/**
-* Types which have formatting and a step.
-* @tparam T
-*/
-template<typename T>
-concept FormattedWithStep =
-    OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> && OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
-/**
-* Types which have formatting but have no step.
-* @tparam T
-*/
-template<typename T>
-concept FormattedWithoutStep = !
-OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST> &&OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>;
+
 }  // namespace details
 
 /**
@@ -148,29 +121,21 @@ class PF_IMGUI_EXPORT Input
                                style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
-  using Data = details::InputData<details::InputUnderlyingType<T>>;
+  using StepType = details::InputUnderlyingType<T>;
+  using Data = details::InputData<StepType>;
   Data data;
-  struct Dummy {  // struct to hack Config
-    explicit(false) Dummy(auto...) {}
-    explicit(false) operator details::InputUnderlyingType<T>() { return {}; }
-    explicit(false) operator std::string() { return {}; }
-  };
 
  public:
-  struct Config {  // FIXME: made this more readable
+  struct Config {
     using Parent = Input;
 
-    using ValueType = std::conditional_t<OneOf<T, IMGUI_INPUT_STEP_TYPE_LIST>, T, Dummy>;
-    using FormatString =
-        std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST, IMGUI_INPUT_DOUBLE_TYPE_LIST>, std::string, Dummy>;
-
-    std::string_view name;                                             /*!< Unique name of the element */
-    std::string_view label;                                            /*!< Text rendered next to the input */
-    [[no_unique_address]] ValueType step{};                            /*!< Speed of value change */
-    [[no_unique_address]] ValueType fastStep{};                        /*!< Fast speed of value change */
-    T value{};                                                         /*!< Initial value */
-    [[no_unique_address]] FormatString format = Data::defaultFormat(); /*!< Format string to render value */
-    Persistent persistent = Persistent::No;                            /*!< Allow state saving to disk */
+    std::string_view name;                      /*!< Unique name of the element */
+    std::string_view label;                     /*!< Text rendered next to the input */
+    StepType step{};                            /*!< Speed of value change */
+    StepType fastStep{};                        /*!< Fast speed of value change */
+    T value{};                                  /*!< Initial value */
+    std::string format = Data::defaultFormat(); /*!< Format string to render value */
+    Persistent persistent = Persistent::No;     /*!< Allow state saving to disk */
   };
   /**
    * Construct Input
@@ -180,25 +145,6 @@ class PF_IMGUI_EXPORT Input
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
         Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), data(config.step, config.fastStep),
         format(std::move(static_cast<std::string>(config.format))) {}
-  /**
-  * Construct Input. For the following types: int.
-  * @param elementName ID of the input
-  * @param label text drawn next to the input
-  * @param st step
-  * @param fStep fast step
-  * @param persistent enable state saving to disk
-  * @param value starting value
-  */
-  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0, T value = T{},
-        Persistent persistent = Persistent::No)
-    requires details::UnformattedWithStep<T>
-  : ItemElement(elementName),
-    Labellable(label),
-    ValueObservable<T>(value),
-    Savable(persistent),
-    DragSource<T>(false),
-    DropTarget<T>(false),
-    data(st, fStep) {}
 
   /**
   * Construct Input. For the following types: float, double.
@@ -210,52 +156,10 @@ class PF_IMGUI_EXPORT Input
   * @param persistent enable state saving to disk
   * @param value starting value
   */
-  Input(const std::string &elementName, const std::string &label, T st = 0, T fStep = 0, T value = T{},
+  Input(const std::string &elementName, const std::string &label, StepType st = 0, StepType fStep = 0, T value = T{},
         Persistent persistent = Persistent::No, std::string format = Data::defaultFormat())
-    requires details::FormattedWithStep<T>
-  : ItemElement(elementName),
-    Labellable(label),
-    ValueObservable<T>(value),
-    Savable(persistent),
-    DragSource<T>(false),
-    DropTarget<T>(false),
-    data(st, fStep),
-    format(std::move(format)) {}
-
-  /**
-  * Construct Input. For the following types: glm::ivec2, glm::ivec3, glm::ivec4.
-  * @param elementName ID of the input
-  * @param label text drawn next to the input
-  * @param persistent enable state saving to disk
-  * @param value starting value
-  */
-  Input(const std::string &elementName, const std::string &label, T value = T{}, Persistent persistent = Persistent::No)
-    requires details::UnformattedWithoutStep<T>
-  : ItemElement(elementName),
-    Labellable(label),
-    ValueObservable<T>(value),
-    Savable(persistent),
-    DragSource<T>(false),
-    DropTarget<T>(false) {}
-
-  /**
-  * Construct Input. For the following types:  glm::vec2, glm::vec3, glm::vec4.
-  * @param elementName ID of the input
-  * @param label text drawn next to the input
-  * @param persistent enable state saving to disk
-  * @param format format for printing underlying float value
-  * @param value starting value
-  */
-  Input(const std::string &elementName, const std::string &label, T value = T{}, Persistent persistent = Persistent::No,
-        std::string format = Data::defaultFormat())
-    requires details::FormattedWithoutStep<T>
-  : ItemElement(elementName),
-    Labellable(label),
-    ValueObservable<T>(value),
-    Savable(persistent),
-    DragSource<T>(false),
-    DropTarget<T>(false),
-    format(std::move(format)) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), data(st, fStep), format(std::move(format)) {}
 
   [[nodiscard]] bool isReadOnly() const { return readOnly; }
 
@@ -300,33 +204,24 @@ class PF_IMGUI_EXPORT Input
     auto style = setStyleStack();
     auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
-    if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::InputFloat(getLabel().c_str(), address, data.step, data.fastStep, format.c_str(), flags);
+
+    ImGuiDataType_ dataType;
+    if constexpr (OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST>) {
+      dataType = ImGuiDataType_Float;
+    } else if constexpr (OneOf<T, IMGUI_INPUT_INT_TYPE_LIST>) {
+      dataType = ImGuiDataType_S32;
+    } else {
+      dataType = ImGuiDataType_Double;
     }
-    if constexpr (std::same_as<T, glm::vec2>) {
-      valueChanged = ImGui::InputFloat2(getLabel().c_str(), glm::value_ptr(*address), format.c_str(), flags);
+
+    if constexpr (!OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
+      valueChanged =
+          ImGui::InputScalar(getLabel().c_str(), dataType, address, &data.step, &data.fastStep, format.c_str(), flags);
+    } else {
+      valueChanged = ImGui::InputScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(),
+                                         &data.step, &data.fastStep, format.c_str(), flags);
     }
-    if constexpr (std::same_as<T, glm::vec3>) {
-      valueChanged = ImGui::InputFloat3(getLabel().c_str(), glm::value_ptr(*address), format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::vec4>) {
-      valueChanged = ImGui::InputFloat4(getLabel().c_str(), glm::value_ptr(*address), format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGui::InputInt(getLabel().c_str(), address, data.step, data.fastStep);
-    }
-    if constexpr (std::same_as<T, glm::ivec2>) {
-      valueChanged = ImGui::InputInt2(getLabel().c_str(), glm::value_ptr(*address), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec3>) {
-      valueChanged = ImGui::InputInt3(getLabel().c_str(), glm::value_ptr(*address), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec4>) {
-      valueChanged = ImGui::InputInt4(getLabel().c_str(), glm::value_ptr(*address), flags);
-    }
-    if constexpr (std::same_as<T, double>) {
-      valueChanged = ImGui::InputDouble(getLabel().c_str(), address, data.step, data.fastStep, format.c_str(), flags);
-    }
+
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
