@@ -13,16 +13,14 @@
 namespace pf::ui::ig {
 
 StackedLayout::StackedLayout(StackedLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
-                      config.persistent) {}
+    : ResizableLayout(std::string{config.name}, config.size, config.showBorder) {}
 
 StackedLayout::Stack::Stack(StackedLayout &parent) : parent(parent) {}
 
 void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
 
-StackedLayout::StackedLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                             ShowBorder showBorder, Persistent persistent)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
+StackedLayout::StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
+    : ResizableLayout(elementName, size, showBorder) {}
 
 void StackedLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
@@ -30,12 +28,10 @@ void StackedLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
-    if (renderCollapseButton()) {
-      if (selectedIndex.has_value()) {
-        auto &activeStack = stacks[*selectedIndex];
-        std::ranges::for_each(activeStack->getChildren(), [](auto &child) { child.render(); });
-      }
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    if (selectedIndex.has_value()) {
+      auto &activeStack = stacks[*selectedIndex];
+      std::ranges::for_each(activeStack->getChildren(), [](auto &child) { child.render(); });
     }
   }
 }

@@ -29,13 +29,11 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
  public:
   struct Config {
     using Parent = GridLayout;
-    std::string_view name;                           /*!< Unique name of the element */
-    Size size;                                       /*!< Size of the element */
-    std::uint32_t widthInCells;                      /*!< Amount of columns */
-    std::uint32_t heightInCells;                     /*!< Amount of rows */
-    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
-    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
-    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
+    std::string_view name;                  /*!< Unique name of the element */
+    Size size;                              /*!< Size of the element */
+    std::uint32_t widthInCells;             /*!< Amount of columns */
+    std::uint32_t heightInCells;            /*!< Amount of rows */
+    ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
   };
   /**
    * Construct GridLayout
@@ -48,13 +46,10 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param size size of the layout
    * @param width width in cells - amount of cells in each row
    * @param height height in cells - amount of cells in each column
-   * @param allowCollapse enable collapse button
    * @param showBorder draw border around the layout
-   * @param persistent enable state saving
    */
   GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
-             AllowCollapse allowCollapse = AllowCollapse::No, ShowBorder showBorder = ShowBorder::No,
-             Persistent persistent = Persistent::No);
+             ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Set layout for a selected cell.

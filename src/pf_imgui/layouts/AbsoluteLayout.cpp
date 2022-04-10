@@ -8,12 +8,10 @@
 namespace pf::ui::ig {
 
 AbsoluteLayout::AbsoluteLayout(AbsoluteLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
-                      config.persistent) {}
+    : ResizableLayout(std::string{config.name}, config.size, config.showBorder) {}
 
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse,
-                               ShowBorder showBorder, Persistent persistent)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent) {}
+AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
+    : ResizableLayout(elementName, size, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
@@ -21,14 +19,12 @@ void AbsoluteLayout::renderImpl() {
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
-    if (renderCollapseButton()) {
-      std::ranges::for_each(children, [](auto &childPair) {
-        auto &[child, positionable] = childPair;
-        ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));
-        child->render();
-      });
-    }
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    std::ranges::for_each(children, [](auto &childPair) {
+      auto &[child, positionable] = childPair;
+      ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));
+      child->render();
+    });
   }
 }
 void AbsoluteLayout::setChildPosition(const std::string &childName, Position position) {

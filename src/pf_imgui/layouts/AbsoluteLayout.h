@@ -36,11 +36,9 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    */
   struct Config {
     using Parent = AbsoluteLayout;
-    std::string_view name;                           /*!< Unique name of the element */
-    Size size;                                       /*!< Size of the element */
-    AllowCollapse allowCollapse = AllowCollapse::No; /*!< Allow collapse functionality */
-    ShowBorder showBorder = ShowBorder::No;          /*!< Render border around layout's area */
-    Persistent persistent = Persistent::No;          /*!< Allow state saving to disk */
+    std::string_view name;                  /*!< Unique name of the element */
+    Size size;                              /*!< Size of the element */
+    ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
   };
   /**
    * Construct AbsoluteLayout
@@ -51,12 +49,10 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    * Construct AbsoluteLayout.
    * @param elementName ID of the layout
    * @param size size of the layout
-   * @param allowCollapse enable collapse button
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  AbsoluteLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse = AllowCollapse::No,
-                 ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No);
+  AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Get all children of the layout as references.

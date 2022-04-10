@@ -27,20 +27,9 @@ class PF_IMGUI_EXPORT ResizableLayout : public Layout, public Resizable {
    * Construct ResizableLayout.
    * @param elementName ID of the layout
    * @param size size of the layout
-   * @param allowCollapse enable collapse button
    * @param showBorder draw layouts border
-   * @param persistent allow state saving
    */
-  ResizableLayout(const std::string &elementName, const Size &size, AllowCollapse allowCollapse, ShowBorder showBorder,
-                  Persistent persistent);
-
- protected:
-  /**
-   * Check whether the layout is collapsed or not and calculate its size based on that.
-   * @attention Should be used in descendants to provide common functionality.
-   * @return size of the layout for rendering purposes
-   */
-  [[nodiscard]] ImVec2 getSizeIfCollapsed() const;
+  ResizableLayout(const std::string &elementName, const Size &size, ShowBorder showBorder);
 };
 
 }  // namespace pf::ui::ig

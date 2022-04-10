@@ -9,9 +9,9 @@
 #define PF_IMGUI_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
@@ -21,23 +21,19 @@ namespace pf::ui::ig {
 // TODO: collapse support in children
 // TODO: flags getter for children
 // TODO: delimit ratio
-// TODO: remove Collapsible?
 /**
  * @brief Base class for layouts.
  *
  * Provides basic functionality for layouts - border drawing and scrolling.
  */
-class PF_IMGUI_EXPORT Layout : public Element, public Collapsible, public RenderablesContainer {
+class PF_IMGUI_EXPORT Layout : public Element, public RenderablesContainer {
  public:
   /**
    * Construct a layout.
    * @param elementName ID of the element
-   * @param allowCollapse allow collapse button
    * @param showBorder when allowed a border is drawn at the edges of the layout area
-   * @param persistent when enabled the collapse state of the layout is stored on disk
    */
-  explicit Layout(const std::string &elementName, AllowCollapse allowCollapse, ShowBorder showBorder,
-                  Persistent persistent);
+  explicit Layout(const std::string &elementName, ShowBorder showBorder);
 
   /**
    * Check if border is drawn.
@@ -88,13 +84,6 @@ class PF_IMGUI_EXPORT Layout : public Element, public Collapsible, public Render
   void setHorizontalScrollEnabled(bool horizontalScroll);
 
  protected:
-  /**
-   * Render collapse button when isCollapsible() == true.
-   * @return true if the layout is not collapsed, false otherwise
-   * @todo implement
-   */
-  [[nodiscard]] bool renderCollapseButton();
-
   /**
    * This needs to be used while rendering inherited layouts.
    * @todo: turn into an interface?

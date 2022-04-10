@@ -10,13 +10,10 @@
 namespace pf::ui::ig {
 
 StretchLayout::StretchLayout(StretchLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.allowCollapse, config.showBorder,
-                      config.persistent),
-      stretch(config.stretch) {}
+    : ResizableLayout(std::string{config.name}, config.size, config.showBorder), stretch(config.stretch) {}
 
-StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch,
-                             AllowCollapse allowCollapse, ShowBorder showBorder, Persistent persistent)
-    : ResizableLayout(elementName, size, allowCollapse, showBorder, persistent), stretch(stretch) {}
+StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, ShowBorder showBorder)
+    : ResizableLayout(elementName, size, showBorder), stretch(stretch) {}
 
 Stretch StretchLayout::getStretch() const { return stretch; }
 void StretchLayout::setStretch(Stretch newStretch) {
@@ -41,15 +38,13 @@ void StretchLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), getSizeIfCollapsed(), isDrawBorder(), flags)) {
-    if (renderCollapseButton()) {
-      const auto newSize = ImGui::GetContentRegionMax();
-      if (newSize.x != previousSize.x && newSize.y != previousSize.y) {
-        child->setSize(newSize);
-        previousSize = newSize;
-      }
-      renderableChild->render();
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    const auto newSize = ImGui::GetContentRegionMax();
+    if (newSize.x != previousSize.x && newSize.y != previousSize.y) {
+      child->setSize(newSize);
+      previousSize = newSize;
     }
+    renderableChild->render();
   }
 }
 
