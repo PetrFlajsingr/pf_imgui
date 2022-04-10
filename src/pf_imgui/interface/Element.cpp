@@ -24,16 +24,13 @@ Element &Element::operator=(Element &&other) noexcept {
 
 void Element::render() {
   ImGui::PushID(getName().c_str());
-  if (font != nullptr) { ImGui::PushFont(font); }
-  RAII end{[&] {
-    ImGui::PopID();
-    if (font != nullptr) { ImGui::PopFont(); }
-  }};
+  RAII end{[&] { ImGui::PopID(); }};
+  auto fontScoped = font.applyScopedIfNotDefault();
   Renderable::render();
 }
 
-void Element::setFont(ImFont *fontPtr) { font = fontPtr; }
+void Element::setFont(Font newFont) { font = newFont; }
 
-ImFont *Element::getFont() const { return font; }
+Font Element::getFont() const { return font; }
 
 }  // namespace pf::ui::ig
