@@ -17,6 +17,8 @@ Text::Text(const std::string &elementName, std::string text)
 
 std::string_view Text::getText() const { return text; }
 
+void Text::setText(std::string newText) { setTextInner(std::move(newText)); }
+
 void Text::renderImpl() {
   auto colorStyle = setColorStack();
   ImGui::Text("%s", text.c_str());

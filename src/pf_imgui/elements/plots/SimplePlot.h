@@ -11,11 +11,11 @@
 #include <algorithm>
 #include <optional>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Customizable.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <ranges>
-#include <src/pf_imgui/interface/Customizable.h>
-#include <src/pf_imgui/interface/Element.h>
-#include <src/pf_imgui/interface/Labellable.h>
-#include <src/pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
 
@@ -82,8 +82,9 @@ class PF_IMGUI_EXPORT SimplePlot
    * Add values to the end of the graph.
    * @param values values to be added
    */
-  void addValue(const std::ranges::range auto &vals) requires(
-      std::same_as<float, std::ranges::range_value_t<decltype(vals)>>) {
+  void addValue(const std::ranges::range auto &vals)
+    requires(std::same_as<float, std::ranges::range_value_t<decltype(vals)>>)
+  {
     std::ranges::copy(vals, std::back_inserter(values));
   }
   /**

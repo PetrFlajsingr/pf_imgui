@@ -6,7 +6,7 @@
 #include "Link.h"
 #include "Node.h"
 #include "NodeEditor.h"
-#include "pf_common/RAII.h"
+#include <pf_common/RAII.h>
 #include <algorithm>
 
 namespace pf::ui::ig {

@@ -6,7 +6,7 @@
 #include "Link.h"
 #include "NodeEditor.h"
 #include "Pin.h"
-#include "pf_common/RAII.h"
+#include <pf_common/RAII.h>
 #include <range/v3/view/cache1.hpp>
 #include <range/v3/view/concat.hpp>
 

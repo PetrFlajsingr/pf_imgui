@@ -1,36 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
-
-include("cmake/HunterGate.cmake")
-HunterGate(
-        URL "https://github.com/cpp-pm/hunter/archive/v0.23.321.tar.gz"
-        SHA1 "5e53cbb0429037ea8e2592bfd92704b8ff3ab492"
-)
-
 project(pf_imgui
-        VERSION 0.7.0)
-
-set(CPM_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
-set(CPM_DOWNLOAD_VERSION 0.32.2)
-
-if (NOT (EXISTS ${CPM_DOWNLOAD_LOCATION} AND CPM_VERSION STREQUAL CPM_DOWNLOAD_VERSION))
-    message(STATUS "Downloading CPM.cmake")
-    file(DOWNLOAD https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
-endif ()
-
-
-include(${CPM_DOWNLOAD_LOCATION})
-
-option(ENABLE_EXTERN_TEMPLATE "enable extern templates" ON)
-
-if (ENABLE_EXTERN_TEMPLATE)
-    add_compile_definitions(PF_IMGUI_ENABLE_EXTERN_TEMPLATE)
-endif ()
-
-option(ENABLE_STYLES "enable style settings for each element" OFF)
-
-if (ENABLE_STYLES)
-    add_compile_definitions(PF_IMGUI_ENABLE_STYLES)
-endif ()
+        VERSION 0.8.0)
 
 if (MSVC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.29.30129 AND CMAKE_VERSION VERSION_GREATER 3.20.3)
     set(CMAKE_CXX_STANDARD 23)
@@ -72,19 +42,14 @@ endif ()
 set(IMGUI_FILE_DIALOG_DIR src/include/ImGuiFileDialog)
 set(IMGUI_FLAME_GRAPH_DIR src/include/ImGuiFlamegraph)
 
+find_package(pf_common CONFIG REQUIRED)
+find_package(tomlplusplus CONFIG REQUIRED)
+find_package(range-v3 CONFIG REQUIRED)
+find_package(magic_enum CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
 
-CPMAddPackage(
-        NAME pf_common
-        GITHUB_REPOSITORY PetrFlajsingr/pf_common
-        GIT_TAG master
-)
-
-CPMAddPackage(
-        NAME toml++
-        GITHUB_REPOSITORY marzer/tomlplusplus
-        GIT_TAG v3.0.1
-)
-
+include_directories(src/include/DearWidgets)
 include_directories(src/include/implot)
 include_directories(src/include/imgui)
 include_directories(src/include/imgui_markdown)
@@ -97,17 +62,11 @@ include_directories(src/include/imgui_addons/)
 include_directories(src/include/imgui-node-editor/)
 include_directories(src/include/imgui_curve_editor/)
 include_directories(src/include/imgui_color_gradient/)
-
-file(GLOB toml++_headers
-        "${toml++_SOURCE_DIR}/include/toml++/*.h"
-        "${toml++_SOURCE_DIR}/include/toml++/*.hpp"
-        )
-
-include_directories(${toml++_SOURCE_DIR}/include)
 include_directories(${IMGUI_FILE_DIALOG_DIR})
 include_directories(${IMGUI_FLAME_GRAPH_DIR})
-
 include_directories(${implot_SOURCE_DIR})
+
+
 
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
@@ -406,19 +365,16 @@ SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windo
 SET(CMAKE_RELWITHDEBINFO_POSTFIX "rd" CACHE STRING "add a postfix, usually empty on windows")
 SET(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on windows")
 
-add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDES})
+add_library(${PROJECT_NAME} STATIC ${SOURCES} ${INCLUDES})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
-
-if (MEASURE_BUILD_TIME)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
-endif ()
 
 include(GNUInstallDirs)
 
 target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/DearWidgets>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/implot>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
@@ -437,7 +393,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_color_gradient>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${glm_SOURCE_DIR}>)
-target_link_libraries(${PROJECT_NAME} PRIVATE pf_common range-v3 StaticTypeInfo magic_enum)
+target_link_libraries(${PROJECT_NAME} PRIVATE pf_common::pf_common tomlplusplus::tomlplusplus)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
@@ -452,7 +408,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY INTERFACE_${PROJECT_NAME}_MAJOR_VER
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPATIBLE_INTERFACE_STRING ${PROJECT_NAME}_MAJOR_VERSION)
 
 
-install(TARGETS ${PROJECT_NAME} pf_common magic_enum StaticTypeInfo
+install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}Targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -462,13 +418,131 @@ install(TARGETS ${PROJECT_NAME} pf_common magic_enum StaticTypeInfo
 
 install(
         FILES
-        ${INCLUDES}
         ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME_LOWER}_export.h
         DESTINATION
         ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
         COMPONENT
         Devel
 )
+
+# INCLUDE INSTALLS
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/pf_imgui/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/DearWidgets/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.hpp"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgInspect/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui-command-palette/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui-node-editor/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.inl"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_addons/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_color_gradient/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_curve_editor/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_markdown/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_memory_editor/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_notify/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiColorTextEdit/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFileDialog/stb/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/stb
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_widget_flamegraph/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiIcons/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imGuIZMO.quat/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/implot/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+
 
 install(
         FILES

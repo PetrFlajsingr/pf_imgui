@@ -8,8 +8,8 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H
 
+#include <dear_widgets.h>
 #include <glm/vec2.hpp>
-#include <include/DearWidgets/dear_widgets.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -126,10 +126,10 @@ class PF_IMGUI_EXPORT Slider2D
   StorageType extremesX;
   StorageType extremesY;
 };
-#ifdef PF_IMGUI_ENABLE_EXTERN_TEMPLATE
+
 extern template class Slider2D<int>;
 extern template class Slider2D<float>;
-#endif
+
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H

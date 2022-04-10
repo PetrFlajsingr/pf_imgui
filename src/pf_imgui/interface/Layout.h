@@ -10,9 +10,9 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
-#include <src/pf_imgui/interface/Collapsible.h>
-#include <src/pf_imgui/interface/Element.h>
-#include <src/pf_imgui/interface/Resizable.h>
+#include <pf_imgui/interface/Collapsible.h>
+#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <vector>
 
