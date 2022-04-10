@@ -32,12 +32,9 @@ void Notification::renderImpl() {
     RAII endTextWrap{ImGui::PopTextWrapPos};
 
     if (icon != nullptr) {
-      if (iconFont != nullptr) { ImGui::PushFont(iconFont); }
+      auto fontScoped = iconFont.applyScopedIfNotDefault();
       ImGui::PushStyleColor(ImGuiCol_Text, *iconColor);
-      RAII endFont{[&] {
-        if (iconFont != nullptr) { ImGui::PopFont(); }
-        ImGui::PopStyleColor(1);
-      }};
+      RAII popColor{[&] { ImGui::PopStyleColor(1); }};
       ImGui::Text("%s", icon);
       ImGui::SameLine();
     }
@@ -51,7 +48,7 @@ void Notification::renderImpl() {
   height += ImGui::GetWindowHeight() + PADDING_MESSAGE_Y;
 }
 
-void Notification::setIcon(const char *newIcon, ImFont *font) {
+void Notification::setIcon(const char *newIcon, Font font) {
   Notification::icon = newIcon;
   Notification::iconFont = font;
 }

@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_INTERFACE_ELEMENT_H
 #define PF_IMGUI_INTERFACE_ELEMENT_H
 
+#include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/Observable_impl.h>
@@ -39,10 +40,10 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   void render() override;
   /**
    * Set font for Element and all elements inside - except for those that have their own font.
-   * @param fontPtr new font
+   * @param font new font
    */
-  void setFont(ImFont *fontPtr);
-  [[nodiscard]] ImFont *getFont() const;
+  void setFont(Font newFont);
+  [[nodiscard]] Font getFont() const;
 
   /**
    * Add a listener called when this object is destroyed.
@@ -56,7 +57,7 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   }
 
  protected:
-  ImFont *font = nullptr;
+  Font font = Font::Default();
 
  private:
   Observable_impl<> observableDestroy;
