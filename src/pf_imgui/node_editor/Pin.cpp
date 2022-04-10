@@ -61,7 +61,7 @@ void Pin::renderImpl() {
       ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
       renderIcon();
       ImGui::Spring(0);
-      ImGui::BeginVertical(("info").c_str());
+      ImGui::BeginVertical("info");
       renderInfo();
       ImGui::EndVertical();
     } else {
