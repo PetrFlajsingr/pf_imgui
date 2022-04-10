@@ -46,13 +46,11 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
                 std::invocable<MessageButtons> auto &&onDialogDone)
     requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
   : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
-    createChild<Text>(getName() + "text", message);
-    auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
+    createChild<Text>("text", message);
+    auto &btnLayout = createChild<BoxLayout>("box_layout", LayoutDirection::LeftToRight, Size::Auto());
     auto enabledButtons = buttons.getSetFlags();
     std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
-      btnLayout
-          .createChild<Button>(getName() + "_button" + std::to_string(static_cast<int>(buttonType)),
-                               toString(buttonType))
+      btnLayout.createChild<Button>("button" + std::to_string(static_cast<int>(buttonType)), toString(buttonType))
           .addClickListener([this, buttonType] {
             if (dialogDone(buttonType)) { close(); }
           });

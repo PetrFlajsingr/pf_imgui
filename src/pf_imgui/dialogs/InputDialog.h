@@ -40,14 +40,14 @@ class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
               std::invocable auto &&onCancel)
       : ModalDialog(parent, elementName, title), inputDone(std::forward<decltype(onInput)>(onInput)),
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
-    createChild<Text>(getName() + "text", message);
-    auto &input = createChild<InputText>(getName() + "input", "", "", TextInputType::MultiLine);
-    auto &btnLayout = createChild<BoxLayout>(getName() + "box_layout", LayoutDirection::LeftToRight, Size::Auto());
-    btnLayout.createChild<Button>(getName() + "_button_ok", "Ok").addClickListener([this, &input] {
+    createChild<Text>("text", message);
+    auto &input = createChild<InputText>("input", "", "", TextInputType::MultiLine);
+    auto &btnLayout = createChild<BoxLayout>("box_layout", LayoutDirection::LeftToRight, Size::Auto());
+    btnLayout.createChild<Button>("button_ok", "Ok").addClickListener([this, &input] {
       inputDone(input.getValue());
       close();
     });
-    btnLayout.createChild<Button>(getName() + "_button_cancel", "Cancel").addClickListener([this] {
+    btnLayout.createChild<Button>("button_cancel", "Cancel").addClickListener([this] {
       cancelClicked();
       close();
     });
