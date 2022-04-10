@@ -31,7 +31,6 @@ using TypeForStyle = std::conditional_t<style::isFloatStyle(Style), float, ImVec
 template<style::Style Style>
 using OptionalTypeForStyle = std::optional<TypeForStyle<Style>>;
 
-// TODO: move this to pf_common
 template<auto Needle, auto HaystackStart, auto... Haystack>
 consteval std::size_t indexInVarArgList() {
   if (Needle == HaystackStart) {

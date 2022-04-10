@@ -25,8 +25,6 @@ namespace pf::ui::ig {
  * Rows are created using a factory from stored value.
  * @tparam T type stored in each row
  * @tparam R type stored in each row
-*
-* @todo: Config
  */
 template<typename T, std::derived_from<Renderable> R>
 class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labellable, public Resizable {

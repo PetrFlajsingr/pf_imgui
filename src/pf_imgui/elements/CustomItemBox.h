@@ -27,8 +27,6 @@ namespace pf::ui::ig {
  * @tparam F factory
  * @tparam T input/storage type
  * @tparam R resulting renderable for row
-*
-* @todo: Config
  */
 template<typename F, typename T, typename R>
 concept CustomItemBoxFactory = std::is_invocable_r_v<std::unique_ptr<R>, F, T>;

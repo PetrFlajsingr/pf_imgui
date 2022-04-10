@@ -31,8 +31,6 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  * Rows are created using a factory from stored value.
  * @tparam T type stored in each row
  * @tparam R type stored in each row
- *
- * @todo: Config
  */
 template<typename T, std::derived_from<Renderable> R>
 class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labellable {

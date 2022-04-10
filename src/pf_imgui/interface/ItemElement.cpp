@@ -28,7 +28,7 @@ void ItemElement::render() {
     auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
     if (newMousePos.x != lastMousePosition.x && newMousePos.y != lastMousePosition.y) {
       lastMousePosition = newMousePos;
-      mousePositionObservable.notify(lastMousePosition);
+      mousePositionObservable.notify(Position{lastMousePosition});
     }
   }
 
@@ -46,12 +46,12 @@ bool ItemElement::hasTooltip() const { return tooltip != nullptr; }
 void ItemElement::removeTooltip() { tooltip = nullptr; }
 
 void ItemElement::setTooltip(std::string_view text) {
-  tooltip = std::make_unique<Tooltip>(getName() + "_tooltip");
-  tooltip->createChild<Text>(tooltip->getName() + "_text", std::string(text));
+  tooltip = std::make_unique<Tooltip>("tooltip");
+  tooltip->createChild<Text>("text", std::string(text));
 }
 
 Tooltip &ItemElement::createTooltip() {
-  tooltip = std::make_unique<Tooltip>(getName() + "_tooltip");
+  tooltip = std::make_unique<Tooltip>("tooltip");
   return *tooltip;
 }
 
@@ -77,7 +77,7 @@ const Tooltip &ItemElement::getTooltip() const {
 void ItemElement::setTooltip(std::unique_ptr<Tooltip> &&newTooltip) { tooltip = std::move(newTooltip); }
 
 PopupMenu &ItemElement::createPopupMenu() {
-  popupMenu = std::make_unique<PopupMenu>(getName() + "_popup_menu");
+  popupMenu = std::make_unique<PopupMenu>("popup_menu");
   return *popupMenu;
 }
 

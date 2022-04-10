@@ -18,9 +18,7 @@
 
 namespace pf::ui::ig {
 
-// TODO: collapse support in children
 // TODO: flags getter for children
-// TODO: delimit ratio
 /**
  * @brief Base class for layouts.
  *

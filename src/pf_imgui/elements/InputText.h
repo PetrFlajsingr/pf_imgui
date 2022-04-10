@@ -37,7 +37,6 @@ enum class TextTrigger { Character, Enter };
  *
  * Typical text edit.
  * @todo: hint
- * @todo simplify constructor
  */
 class PF_IMGUI_EXPORT InputText
     : public ItemElement,

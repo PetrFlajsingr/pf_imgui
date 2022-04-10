@@ -12,6 +12,7 @@
 #include "Focusable.h"
 #include "Hoverable.h"
 #include <memory>
+#include <pf_imgui/Position.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/elements/Tooltip.h>
@@ -19,7 +20,7 @@
 #include <utility>
 
 namespace pf::ui::ig {
-// TODO: move position struct somewhere else and use it here for mouse pos
+
 /**
  * @brief Interface for elements, which are 'leaves' in the UI tree.
  *
@@ -106,7 +107,7 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
    * @param listener
    * @return Subscription to allow for listener removal
    */
-  Subscription addMousePositionListener(std::invocable<ImVec2> auto &&listener) {
+  Subscription addMousePositionListener(std::invocable<Position> auto &&listener) {
     return mousePositionObservable.addListener(std::forward<decltype(listener)>(listener));
   }
 
@@ -120,7 +121,7 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
 
   ImVec2 lastMousePosition{-1, -1};
-  Observable_impl<ImVec2> mousePositionObservable;
+  Observable_impl<Position> mousePositionObservable;
 };
 
 }  // namespace pf::ui::ig

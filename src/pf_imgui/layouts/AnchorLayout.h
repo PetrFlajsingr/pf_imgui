@@ -90,8 +90,8 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
         ptr->setWidth(width);
       };
     }
-    children.template emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr), static_cast<Anchor>(*anchors),
-                                   addToWidth, addToHeight);
+    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr), static_cast<Anchor>(*anchors),
+                          addToWidth, addToHeight);
     return *ptr;
   }
 
