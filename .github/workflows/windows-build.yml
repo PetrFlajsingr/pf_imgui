@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      -
+
     - name: Installing vcpkg (windows)
       run: |
         cd ..
