@@ -519,7 +519,7 @@ install(
         PATTERN "*.h"
 )
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui_widget_flamegraph/"
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuiFlamegraph/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
