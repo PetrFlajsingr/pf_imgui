@@ -13,10 +13,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    
+      -
+    - name: Installing vcpkg (windows)
+      run: |
+        cd ..
+        git clone https://github.com/Microsoft/vcpkg.git
+        cd vcpkg
+        .\bootstrap-vcpkg.bat
+
     - name: run build
       run: |
-        cmake .
+        cd ${{ github.workspace }}
+        cmake . -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake
         cmake --build . 
-        cmake . -DENABLE_STYLES=ON
-        cmake --build .

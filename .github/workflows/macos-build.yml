@@ -13,17 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: run build
-        run: |
-          cmake . -DCMAKE_CXX_COMPILER=g++-11
-          make
-  build_styles:
-    runs-on: macos-latest
 
-    steps:
-      - uses: actions/checkout@v1
+      - name: Installing vcpkg (windows)
+        run: |
+          cd ..
+          git clone https://github.com/Microsoft/vcpkg.git
+          cd vcpkg
+          .\bootstrap-vcpkg.sh
 
       - name: run build
         run: |
-          cmake . -DCMAKE_CXX_COMPILER=g++-11 -DENABLE_STYLES=ON
-          make
+          cd ${{ github.workspace }}
+          cmake . -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake
+          cmake --build .
