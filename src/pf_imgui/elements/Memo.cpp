@@ -12,7 +12,7 @@ namespace pf::ui::ig {
 
 Memo::Memo(Memo::Config &&config)
     : Element(std::string{config.name}), Labellable(std::string{config.label}),
-      textAreaLayout(std::string{config.name} + "_memo_panel###", LayoutDirection::TopToBottom,
+      textAreaLayout("memo_panel###", LayoutDirection::TopToBottom,
                      Size{Width::Auto(), config.textAreaHeight}),
       buttonsEnabled(config.buttonsEnabled), filterEnabled(config.filterEnabled), recordLimit(config.maxRecordCount) {
   textAreaLayout.setScrollable(true);
@@ -22,7 +22,7 @@ Memo::Memo(Memo::Config &&config)
 Memo::Memo(const std::string &elementName, const std::string &label, uint32_t textAHeight, bool buttonsEnabled,
            bool filterEnabled, const std::optional<std::size_t> &recordLimit)
     : Element(elementName), Labellable(label),
-      textAreaLayout(elementName + "_memo_panel###", LayoutDirection::TopToBottom, Size{Width::Auto(), textAHeight}),
+      textAreaLayout("memo_panel###", LayoutDirection::TopToBottom, Size{Width::Auto(), textAHeight}),
       buttonsEnabled(buttonsEnabled), filterEnabled(filterEnabled), recordLimit(recordLimit) {
   textAreaLayout.setScrollable(true);
   rebuildPanel();
@@ -65,18 +65,18 @@ void Memo::clearRecords() {
 
 void Memo::rebuildPanel() {
   if (buttonsEnabled || filterEnabled) {
-    controlsLayout = std::make_unique<BoxLayout>(getName() + "button_filter_panel", LayoutDirection::LeftToRight,
+    controlsLayout = std::make_unique<BoxLayout>("button_filter_panel", LayoutDirection::LeftToRight,
                                                  Size{Width::Auto(), 20});
     if (buttonsEnabled) {
-      controlsLayout->createChild(Button::Config{getName() + "clear_btn", "Clear"}).addClickListener([this] {
+      controlsLayout->createChild(Button::Config{"clear_btn", "Clear"}).addClickListener([this] {
         clearRecords();
       });
-      controlsLayout->createChild(Button::Config{getName() + "copy_btn", "Copy"}).addClickListener([this] {
+      controlsLayout->createChild(Button::Config{"copy_btn", "Copy"}).addClickListener([this] {
         ImGui::SetClipboardText(std::string{getText()}.c_str());
       });
     }
     if (filterEnabled) {
-      controlsLayout->createChild<InputText>(getName() + "filter_input", "Filter")
+      controlsLayout->createChild<InputText>("filter_input", "Filter")
           .addValueListener([this](std::string_view str) {
             const auto filterStr = std::string(str);
             filterFnc = [filterStr](std::string_view recordStr) {
@@ -84,10 +84,10 @@ void Memo::rebuildPanel() {
             };
           });
     }
-    controlsLayout->createChild(Checkbox::Config{getName() + "scroll_checkbox", "Scroll to bottom"})
+    controlsLayout->createChild(Checkbox::Config{"scroll_checkbox", "Scroll to bottom"})
         .addValueListener([this](auto newVal) { scrollToBottom = newVal; });
   }
-  textArea = &textAreaLayout.createChild<Text>(getName() + "memo_text", "Memo");
+  textArea = &textAreaLayout.createChild<Text>("memo_text", "Memo");
   rebuildText();
   rebuild = false;
 }

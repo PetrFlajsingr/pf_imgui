@@ -31,7 +31,7 @@ float Link::getThickness() const { return thickness; }
 void Link::setThickness(float newThickness) { thickness = newThickness; }
 
 PopupMenu &Link::createOrGetPopupMenu() {
-  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>(getName() + "_popup"); }
+  if (popupMenu == nullptr) { popupMenu = std::make_unique<PopupMenu>("_popup"); }
   return *popupMenu;
 }
 

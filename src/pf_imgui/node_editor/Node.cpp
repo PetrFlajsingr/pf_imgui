@@ -22,7 +22,7 @@ void Node::renderImpl() {
   ax::NodeEditor::BeginNode(getId());
   auto endNode = RAII{ax::NodeEditor::EndNode};
 
-  ImGui::BeginVertical((getName() + "_lay_hea").c_str());
+  ImGui::BeginVertical("header_vert");
   {
     ImGui::Spring(0);
 
@@ -30,7 +30,7 @@ void Node::renderImpl() {
 
     ImGui::Spring(0);
 
-    ImGui::BeginHorizontal((getName() + "_lay_main").c_str());
+    ImGui::BeginHorizontal("content_hori");
     {
       renderInputs();
       ImGui::Spring(1);
@@ -46,7 +46,7 @@ void Node::renderImpl() {
 void Node::renderHeader() {}
 
 void Node::renderInputs() {
-  ImGui::BeginVertical((getName() + "lay_input").c_str());
+  ImGui::BeginVertical("inputs");
   std::ranges::for_each(inputPins, [](auto &pin) { pin->render(); });
   ImGui::Spring(1);
   ImGui::EndVertical();
@@ -55,7 +55,7 @@ void Node::renderInputs() {
 void Node::renderMiddle() {}
 
 void Node::renderOutputs() {
-  ImGui::BeginVertical((getName() + "_lay_output").c_str());
+  ImGui::BeginVertical("outputs");
   std::ranges::for_each(outputPins, [](auto &pin) { pin->render(); });
   ImGui::Spring(1);
   ImGui::EndVertical();
