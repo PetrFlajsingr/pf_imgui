@@ -11,6 +11,7 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/elements/Button.h>
+#include <pf_imgui/layouts/HorizontalLayout.h>
 #include <pf_imgui/elements/Text.h>
 #include <string>
 
@@ -46,7 +47,7 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
     requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
   : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
     createChild<Text>("text", message);
-    auto &btnLayout = createChild<BoxLayout>("box_layout", LayoutDirection::LeftToRight, Size::Auto());
+    auto &btnLayout = createChild<HorizontalLayout>("hor_layout", Size::Auto());
     auto enabledButtons = buttons.getSetFlags();
     std::ranges::for_each(enabledButtons, [this, &btnLayout](auto buttonType) {
       btnLayout.createChild<Button>("button" + std::to_string(static_cast<int>(buttonType)), toString(buttonType))

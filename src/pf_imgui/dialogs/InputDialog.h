@@ -13,6 +13,7 @@
 #include <pf_imgui/elements/Button.h>
 #include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/elements/Text.h>
+#include <pf_imgui/layouts/HorizontalLayout.h>
 #include <string>
 #include <utility>
 
@@ -41,7 +42,7 @@ class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
     createChild<Text>("text", message);
     auto &input = createChild<InputText>("input", "", "", TextInputType::MultiLine);
-    auto &btnLayout = createChild<BoxLayout>("box_layout", LayoutDirection::LeftToRight, Size::Auto());
+    auto &btnLayout = createChild<HorizontalLayout>("hor_layout", Size::Auto());
     btnLayout.createChild<Button>("button_ok", "Ok").addClickListener([this, &input] {
       inputDone(input.getValue());
       close();
