@@ -116,17 +116,18 @@ class PF_IMGUI_EXPORT VerticalSlider
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();
-    auto valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     const auto flags = ImGuiSliderFlags_AlwaysClamp;
+
+    ImGuiDataType_ dataType;
     if constexpr (std::same_as<T, float>) {
-      valueChanged =
-          ImGui::VSliderFloat(getLabel().c_str(), static_cast<ImVec2>(getSize()), address, min, max, format.c_str(), flags);
+      dataType = ImGuiDataType_Float;
+    } else {
+      dataType = ImGuiDataType_S32;
     }
-    if constexpr (std::same_as<T, int>) {
-      valueChanged =
-          ImGui::VSliderInt(getLabel().c_str(), static_cast<ImVec2>(getSize()), address, min, max, format.c_str(), flags);
-    }
+    const auto valueChanged = ImGui::VSliderScalar(getLabel().c_str(), static_cast<ImVec2>(getSize()), dataType,
+                                                   address, &min, &max, format.c_str(), flags);
+
     DragSource<T>::drag(ValueObservable<T>::getValue());
     if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
       ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
