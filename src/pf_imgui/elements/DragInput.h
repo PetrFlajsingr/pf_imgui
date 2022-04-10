@@ -32,6 +32,7 @@ namespace pf::ui::ig {
 // ImGuiSliderFlags_Logarithmic
 // ImGuiSliderFlags_NoRoundToFormat
 
+// TODO: support for more data types
 namespace details {
 /**
  * Types with float as underlying value.
@@ -219,37 +220,23 @@ class PF_IMGUI_EXPORT DragInput
     bool valueChanged = false;
     const auto address = ValueObservable<T>::getValueAddress();
     const auto flags = ImGuiSliderFlags_AlwaysClamp;
-    if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGui::DragFloat(getLabel().c_str(), address, speed, min, max, format.c_str(), flags);
+
+    ImGuiDataType_ dataType;
+    if constexpr (OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>) {
+      dataType = ImGuiDataType_Float;
+    } else {
+      dataType = ImGuiDataType_S32;
     }
-    if constexpr (std::same_as<T, glm::vec2>) {
-      valueChanged =
-          ImGui::DragFloat2(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
+
+    if constexpr (OneOf<T, int, float>) {
+      valueChanged = ImGui::DragScalar(getLabel().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
+                                       format.c_str(), flags);
     }
-    if constexpr (std::same_as<T, glm::vec3>) {
-      valueChanged =
-          ImGui::DragFloat3(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
+    if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+      valueChanged = ImGui::DragScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(),
+                                        static_cast<float>(speed), &min, &max, format.c_str(), flags);
     }
-    if constexpr (std::same_as<T, glm::vec4>) {
-      valueChanged =
-          ImGui::DragFloat4(getLabel().c_str(), glm::value_ptr(*address), speed, min, max, format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, int>) {
-      valueChanged =
-          ImGui::DragInt(getLabel().c_str(), address, static_cast<float>(speed), min, max, format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec2>) {
-      valueChanged = ImGui::DragInt2(getLabel().c_str(), glm::value_ptr(*address), static_cast<float>(speed), min, max,
-                                     format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec3>) {
-      valueChanged = ImGui::DragInt3(getLabel().c_str(), glm::value_ptr(*address), static_cast<float>(speed), min, max,
-                                     format.c_str(), flags);
-    }
-    if constexpr (std::same_as<T, glm::ivec4>) {
-      valueChanged = ImGui::DragInt4(getLabel().c_str(), glm::value_ptr(*address), static_cast<float>(speed), min, max,
-                                     format.c_str(), flags);
-    }
+
     if constexpr (std::same_as<T, math::Range<int>>) {
       valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, static_cast<float>(speed),
                                           min, max, format.c_str(), nullptr, flags);
