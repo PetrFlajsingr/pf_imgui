@@ -3,6 +3,7 @@
 //
 
 #include "LinearLayout.h"
+#include <pf_common/exceptions/Exceptions.h>
 #include <range/v3/range/conversion.hpp>
 
 namespace pf::ui::ig {
