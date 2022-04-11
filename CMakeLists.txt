@@ -186,6 +186,7 @@ set(SOURCES
         src/pf_imgui/layouts/HorizontalLayout.cpp
         src/pf_imgui/layouts/VerticalLayout.cpp
         src/pf_imgui/layouts/LinearLayout.cpp
+        src/pf_imgui/elements/TimePicker.cpp
         )
 
 set(INCLUDES
@@ -357,7 +358,9 @@ set(INCLUDES
         src/pf_imgui/Font.h
         src/pf_imgui/layouts/HorizontalLayout.h
         src/pf_imgui/layouts/VerticalLayout.h
-        src/pf_imgui/layouts/LinearLayout.h)
+        src/pf_imgui/layouts/LinearLayout.h
+        src/pf_imgui/elements/TimePicker.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 
