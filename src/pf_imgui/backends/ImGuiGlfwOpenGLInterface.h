@@ -22,6 +22,8 @@ class ImGuiGlfwOpenGLInterface final : public ImGuiInterface {
 
   void updateFonts() override;
 
+  void processInput() override;
+
  protected:
   void newFrame_impl() override;
   void renderDrawData_impl(ImDrawData *drawData) override;

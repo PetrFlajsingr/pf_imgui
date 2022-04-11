@@ -101,6 +101,10 @@ void ImGuiGlfwVulkanInterface::updateFonts() {
   vkDestroyCommandPool(config.device, commandPool, nullptr);
 }
 
+void ImGuiGlfwVulkanInterface::processInput() {
+  // done via callbacks
+}
+
 std::optional<std::uint32_t> ImGuiGlfwVulkanInterface::findGraphicsFamilyIndex() {
   uint32_t queueFamilyCount = 0;
   vkGetPhysicalDeviceQueueFamilyProperties(config.physicalDevice, &queueFamilyCount, nullptr);

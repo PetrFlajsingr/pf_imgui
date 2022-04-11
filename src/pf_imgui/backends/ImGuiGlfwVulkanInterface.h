@@ -11,6 +11,7 @@
 #include <vulkan/vulkan.h>
 
 namespace pf::ui::ig {
+
 struct ImGuiVulkanGlfwConfig {
   ImGuiConfig imgui;
   VkInstance instance;
@@ -24,6 +25,7 @@ struct ImGuiVulkanGlfwConfig {
   std::uint32_t swapchainImageCount;
   GLFWwindow *handle;
 };
+
 class ImGuiGlfwVulkanInterface final : public ImGuiInterface {
  public:
   explicit ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config);
@@ -31,6 +33,8 @@ class ImGuiGlfwVulkanInterface final : public ImGuiInterface {
 
   void updateFonts() override;
   void addToCommandBuffer(VkCommandBuffer commandBuffer);
+
+  void processInput() override;
 
  protected:
   void newFrame_impl() override;
