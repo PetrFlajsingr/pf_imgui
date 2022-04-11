@@ -3,6 +3,7 @@
 //
 
 #include "ImGuiSDLInterface.h"
+#include <SDL.h>
 
 namespace pf::ui::ig {
 
@@ -21,8 +22,12 @@ void ImGuiSDLInterface::updateFonts() {
   // no need to implement this for SDL
 }
 
-void ImGuiSDLInterface::handleSDLEvent(const SDL_Event &event) {
-  ImGui_ImplSDL2_ProcessEvent(&event);
+void ImGuiSDLInterface::processInput() {
+  constexpr static auto MAX_EVENTS = 10;
+  std::array<SDL_Event, MAX_EVENTS> events;
+  const auto eventCount =
+      SDL_PeepEvents(events.data(), events.size(), SDL_eventaction::SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT);
+  for (int i = 0; i < eventCount; ++i) { ImGui_ImplSDL2_ProcessEvent(&events[0]); }
 }
 
 void ImGuiSDLInterface::newFrame_impl() {

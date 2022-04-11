@@ -86,6 +86,11 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   [[nodiscard]] ImGuiIO &getIo() const;
 
   /**
+   * Process platform input.
+   */
+  virtual void processInput() = 0;
+
+  /**
    * Create a dialog. @see Dialog
    * The dialog should be built by the user.
    * @param elementName ID of the dialog

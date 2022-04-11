@@ -25,11 +25,7 @@ class ImGuiSDLInterface final : public ImGuiInterface {
 
   void updateFonts() override;
 
-  /**
-   * This is required to be called for SDL events so the UI can be interacted with.
-   * @param event
-   */
-  void handleSDLEvent(const SDL_Event &event);
+  void processInput() override;
 
  protected:
   void newFrame_impl() override;
