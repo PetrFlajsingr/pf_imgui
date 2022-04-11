@@ -46,6 +46,12 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   [[nodiscard]] Font getFont() const;
 
   /**
+   * Only available after first render call.
+   * @return
+   */
+  [[nodiscard]] ImGuiID getId() const;
+
+  /**
    * Add a listener called when this object is destroyed.
    * Most of the object will be destroyed at this point.
    *
@@ -61,6 +67,7 @@ class PF_IMGUI_EXPORT Element : public Renderable {
 
  private:
   Observable_impl<> observableDestroy;
+  ImGuiID id;
 };
 
 }  // namespace pf::ui::ig

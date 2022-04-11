@@ -23,7 +23,8 @@ Element &Element::operator=(Element &&other) noexcept {
 }
 
 void Element::render() {
-  ImGui::PushID(getName().c_str());
+  id = ImGui::GetID(getName().c_str());
+  ImGui::PushOverrideID(id);
   RAII end{[&] { ImGui::PopID(); }};
   auto fontScoped = font.applyScopedIfNotDefault();
   Renderable::render();
@@ -32,5 +33,7 @@ void Element::render() {
 void Element::setFont(Font newFont) { font = newFont; }
 
 Font Element::getFont() const { return font; }
+
+ImGuiID Element::getId() const { return id; }
 
 }  // namespace pf::ui::ig

@@ -59,18 +59,11 @@ class PF_IMGUI_EXPORT DockSpace
 
   void render() override;
 
-  /**
-   * @attention Call this only after the first render.
-   * @return id to be used for docking windows into the area
-   */
-  [[nodiscard]] Id getDockId() const;
-
  protected:
   void renderImpl() override;
 
  private:
   ImGuiDockNodeFlags flags;
-  Id id{};
 };
 }  // namespace pf::ui::ig
 
