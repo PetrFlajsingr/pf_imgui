@@ -1,9 +1,9 @@
 /**
-* @file TabBar.h
-* @brief TabBar element.
-* @author Petr Flajšingr
-* @date 2.11.20
-*/
+ * @file TabBar.h
+ * @brief TabBar element.
+ * @author Petr Flajšingr
+ * @date 2.11.20
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_TABBAR_H
 #define PF_IMGUI_ELEMENTS_TABBAR_H

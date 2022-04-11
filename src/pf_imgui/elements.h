@@ -52,6 +52,7 @@
 #include <pf_imgui/elements/Table.h>
 #include <pf_imgui/elements/Text.h>
 #include <pf_imgui/elements/TextEditor.h>
+#include <pf_imgui/elements/TimePicker.h>
 #include <pf_imgui/elements/Toggle.h>
 #include <pf_imgui/elements/Tree.h>
 #include <pf_imgui/elements/VerticalSlider.h>
