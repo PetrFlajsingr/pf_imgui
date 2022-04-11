@@ -16,6 +16,7 @@
 #include <string>
 
 namespace pf::ui::ig {
+
 enum class DockType {
   DisableCentralNode = 1 << 2,
   DisableAreaSplit = 1 << 4,
@@ -63,6 +64,7 @@ class PF_IMGUI_EXPORT DockSpace
   void renderImpl() override;
 
  private:
+  bool firstFrame = true;
   ImGuiDockNodeFlags flags;
 };
 }  // namespace pf::ui::ig
