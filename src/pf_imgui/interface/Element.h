@@ -63,6 +63,8 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   }
 
  protected:
+  void setId(ImGuiID newId);
+
   Font font = Font::Default();
 
  private:
