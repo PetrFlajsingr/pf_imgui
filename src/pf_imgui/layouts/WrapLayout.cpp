@@ -7,7 +7,8 @@
 namespace pf::ui::ig {
 
 WrapLayout::WrapLayout(WrapLayout::Config &&config)
-    : LinearLayout(std::string{config.name}, config.size, config.showBorder), direction(config.layoutDirection) {}
+    : LinearLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
+      direction(config.layoutDirection) {}
 
 WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
                        ShowBorder showBorder)
