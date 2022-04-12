@@ -106,7 +106,7 @@ class PF_IMGUI_EXPORT Slider
     MinMaxType max;                                                  /*!< Maximum allowed value */
     T value{};                                                       /*!< Initial value */
     std::string format = details::defaultSliderFormat<MinMaxType>(); /*!< Format string for value rendering */
-    Persistent persistent = Persistent::No;                          /*!< Allow state saving to disk */
+    bool persistent = false;                                         /*!< Allow state saving to disk */
   };
   /**
    * Construct Slider
@@ -114,8 +114,8 @@ class PF_IMGUI_EXPORT Slider
    */
   explicit Slider(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), min(config.min), max(config.max),
-        format(std::move(config.format)) {}
+        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
+        min(config.min), max(config.max), format(std::move(config.format)) {}
   /**
    * Construct Slider.
    * @param elementName ID of the slider
