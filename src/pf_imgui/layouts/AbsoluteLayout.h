@@ -38,7 +38,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
     using Parent = AbsoluteLayout;
     std::string_view name;                  /*!< Unique name of the element */
     Size size;                              /*!< Size of the element */
-    ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
+    bool showBorder = false; /*!< Render border around layout's area */
   };
   /**
    * Construct AbsoluteLayout
