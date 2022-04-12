@@ -71,7 +71,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
     std::string_view name;                       /*!< Unique name of the element */
     Size size = Size::Auto();                    /*!< Size of the element */
     MouseButton clickButton = MouseButton::Left; /*!< Mouse button to which the button reacts */
-    Repeatable repeatable = Repeatable::No;      /*!< Enable repeated listener callback on mouse down */
+    bool repeatable = false;                     /*!< Enable repeated listener callback on mouse down */
   };
   /**
    * Construct InvisibleButton
@@ -115,10 +115,10 @@ class PF_IMGUI_EXPORT Button
    */
   struct Config {
     using Parent = Button;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered on the button */
-    Size size = Size::Auto();               /*!< Size of the button */
-    Repeatable repeatable = Repeatable::No; /*!< Enable repeated listener callback on mouse down */
+    std::string_view name;    /*!< Unique name of the element */
+    std::string_view label;   /*!< Text rendered on the button */
+    Size size = Size::Auto(); /*!< Size of the button */
+    bool repeatable = false;  /*!< Enable repeated listener callback on mouse down */
   };
   /**
    * Construct Button
@@ -158,9 +158,9 @@ class PF_IMGUI_EXPORT SmallButton
    */
   struct Config {
     using Parent = SmallButton;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered on the button */
-    Repeatable repeatable = Repeatable::No; /*!< Enable repeated listener callback on mouse down */
+    std::string_view name;   /*!< Unique name of the element */
+    std::string_view label;  /*!< Text rendered on the button */
+    bool repeatable = false; /*!< Enable repeated listener callback on mouse down */
   };
   explicit SmallButton(Config &&config);
   /**
@@ -190,9 +190,9 @@ class PF_IMGUI_EXPORT ArrowButton
   enum class Dir { Up = ImGuiDir_Up, Left = ImGuiDir_Left, Right = ImGuiDir_Right, Down = ImGuiDir_Down };
   struct Config {
     using Parent = ArrowButton;
-    std::string_view name;                  /*!< Unique name of the element */
-    Dir direction;                          /*!< Direction of the arrow rendered on the button */
-    Repeatable repeatable = Repeatable::No; /*!< Enable repeated listener callback on mouse down */
+    std::string_view name;   /*!< Unique name of the element */
+    Dir direction;           /*!< Direction of the arrow rendered on the button */
+    bool repeatable = false; /*!< Enable repeated listener callback on mouse down */
   };
   /**
    * Construct ArrowButton
