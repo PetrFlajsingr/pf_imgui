@@ -7,7 +7,8 @@
 namespace pf::ui::ig {
 
 TimePicker::TimePicker(TimePicker::Config &&config)
-    : TimePicker(std::string{config.name}, config.label, config.value, config.persistent) {}
+    : TimePicker(std::string{config.name}, config.label, config.value,
+                 config.persistent ? Persistent::Yes : Persistent::No) {}
 
 TimePicker::TimePicker(const std::string &name, const std::string &label, pf::ui::ig::TimeOfDay value,
                        pf::ui::ig::Persistent persistent)
