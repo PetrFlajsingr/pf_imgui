@@ -145,7 +145,7 @@ void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
 }
 
 DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
-  return *dockBuilders.emplace_back(std::make_unique<DockBuilder>(dockSpace));
+  return *dockBuilders.emplace_back(std::unique_ptr<DockBuilder>{new DockBuilder{dockSpace}});
 }
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {

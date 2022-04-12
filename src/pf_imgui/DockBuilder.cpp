@@ -10,7 +10,7 @@ namespace pf::ui::ig {
 SubDockBuilder::SubDockBuilder(Direction direction) : direction(direction) {}
 
 SubDockBuilder &SubDockBuilder::split(Direction splitDirection) {
-  auto subBuilder = std::make_unique<SubDockBuilder>(splitDirection);
+  auto subBuilder = std::unique_ptr<SubDockBuilder>{new SubDockBuilder{splitDirection}};
   auto result = subBuilder.get();
   subCommands.emplace_back(std::move(subBuilder));
   return *result;
@@ -40,7 +40,7 @@ void SubDockBuilder::run(ImGuiID &parentNodeId) {
 DockBuilder::DockBuilder(DockSpace &dockSpace) : dockSpaceRef(dockSpace) {}
 
 SubDockBuilder &DockBuilder::split(Direction direction) {
-  auto subBuilder = std::make_unique<SubDockBuilder>(direction);
+  auto subBuilder = std::unique_ptr<SubDockBuilder>{new SubDockBuilder{direction}};
   auto result = subBuilder.get();
   subCommands.emplace_back(std::move(subBuilder));
   return *result;
