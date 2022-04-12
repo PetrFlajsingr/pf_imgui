@@ -65,7 +65,7 @@ class PF_IMGUI_EXPORT VerticalSlider
     T value{};                                               /*!< Initial value */
     Size size;                                               /*!< Size of the element */
     std::string format = details::defaultVSliderFormat<T>(); /*!< Format string used to render value */
-    Persistent persistent = Persistent::No;                  /*!< Allow state saving to disk */
+    bool persistent = false;                                 /*!< Allow state saving to disk */
   };
   /**
    * Construct VerticalSlider
@@ -73,8 +73,9 @@ class PF_IMGUI_EXPORT VerticalSlider
    */
   explicit VerticalSlider(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent), Resizable(config.size), DragSource<T>(false), DropTarget<T>(false), min(config.min),
-        max(config.max), format(std::move(config.format)) {}
+        Savable(config.persistent ? Persistent::Yes : Persistent::No),
+        Resizable(config.size), DragSource<T>(false), DropTarget<T>(false), min(config.min), max(config.max),
+        format(std::move(config.format)) {}
   /**
    * Construct VerticalSlider.
    * @param elementName ID of the element
