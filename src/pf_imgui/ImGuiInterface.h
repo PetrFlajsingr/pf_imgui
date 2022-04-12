@@ -152,6 +152,12 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    */
   void removePaletteWindow(const CommandPaletteWindow &window);
 
+  /**
+   * Create a DockBuilder to layout DockSpace. This will be run at the end of the next frame.
+   * @warning If the DockSpace or any of the Windows you use in it get destroyed the app will most likely crash (or UB)
+   * @param dockSpace DockSpace to modify
+   * @return DockBuilder
+   */
   [[nodiscard]] DockBuilder &createDockBuilder(DockSpace &dockSpace);
 
   /**
