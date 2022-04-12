@@ -51,7 +51,8 @@ bool GradientPointsViewComparator::operator()(GradientPointsView lhs, GradientPo
 }
 
 GradientEditor::GradientEditor(GradientEditor::Config &&config)
-    : Element(std::string{config.name}), ValueObservable(getPointsView()), Savable(config.persistent) {}
+    : Element(std::string{config.name}), ValueObservable(getPointsView()),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 GradientEditor::GradientEditor(const std::string &name, Persistent persistent)
     : Element(name), ValueObservable(getPointsView()), Savable(persistent) {}

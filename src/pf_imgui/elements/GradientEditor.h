@@ -61,8 +61,8 @@ class GradientEditor : public Element,
    */
   struct Config {
     using Parent = GradientEditor;
-    std::string_view name;                  /*!< Unique names of the element */
-    Persistent persistent = Persistent::No; /*!< Enable disk state saving */
+    std::string_view name;   /*!< Unique names of the element */
+    bool persistent = false; /*!< Enable disk state saving */
   };
   /**
    * Construct GradientEditor
