@@ -42,13 +42,13 @@ class PF_IMGUI_EXPORT Range2D
    */
   struct Config {
     using Parent = Range2D;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered next to the element */
-    glm::vec2 min;                          /*!< Minimum allowed value */
-    glm::vec2 max;                          /*!< Maximum allowed value*/
-    math::Range<glm::vec2> value{};         /*!< Initial value */
-    Size size = Size::Auto();               /*!< Size of the element */
-    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+    std::string_view name;          /*!< Unique name of the element */
+    std::string_view label;         /*!< Text rendered next to the element */
+    glm::vec2 min;                  /*!< Minimum allowed value */
+    glm::vec2 max;                  /*!< Maximum allowed value*/
+    math::Range<glm::vec2> value{}; /*!< Initial value */
+    Size size = Size::Auto();       /*!< Size of the element */
+    bool persistent = false;        /*!< Allow state saving to disk */
   };
   /**
    * Construct Range2D
