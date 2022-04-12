@@ -9,7 +9,7 @@ namespace pf::ui::ig {
 
 Toggle::Toggle(Toggle::Config &&config)
     : ItemElement(std::string{config.name}), ValueObservable(config.enabled), Labellable(std::string{config.label}),
-      Savable(config.persistent) {}
+      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 Toggle::Toggle(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
     : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
