@@ -13,7 +13,7 @@ details::TreeRecord::TreeRecord(const std::string &elementName, const std::strin
 
 TreeLeaf::TreeLeaf(TreeLeaf::Config &&config)
     : TreeRecord(std::string{config.name}, std::string{config.label}, ImGuiTreeNodeFlags_Leaf),
-      ValueObservable(config.selected), Savable(config.persistent) {
+      ValueObservable(config.selected), Savable(config.persistent ? Persistent::Yes : Persistent::No) {
   if (config.selected) {
     flags |= ImGuiTreeNodeFlags_Selected;
   } else {
