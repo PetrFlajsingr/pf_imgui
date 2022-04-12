@@ -46,14 +46,14 @@ class PF_IMGUI_EXPORT SpinInput
    */
   struct Config {
     using Parent = SpinInput;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered next to the element */
-    T min;                                  /*!< Minimum allowed value */
-    T max;                                  /*!< Maximum allowed value */
-    T value{};                              /*!< Initial value */
-    T step{1};                              /*!< Value change speed on interaction */
-    T fastStep{100};                        /*!< Fast value change speed on interaction */
-    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+    std::string_view name;   /*!< Unique name of the element */
+    std::string_view label;  /*!< Text rendered next to the element */
+    T min;                   /*!< Minimum allowed value */
+    T max;                   /*!< Maximum allowed value */
+    T value{};               /*!< Initial value */
+    T step{1};               /*!< Value change speed on interaction */
+    T fastStep{100};         /*!< Fast value change speed on interaction */
+    bool persistent = false; /*!< Allow state saving to disk */
   };
   /**
    * Construct SpinInput
@@ -61,8 +61,8 @@ class PF_IMGUI_EXPORT SpinInput
    */
   explicit SpinInput(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), step(config.step),
-        stepFast(config.fastStep), min(config.min), max(config.max) {}
+        Savable(config.persistent) ? Persistent::Yes : Persistent::No, DragSource<T>(false), DropTarget<T>(false),
+        step(config.step), stepFast(config.fastStep), min(config.min), max(config.max) {}
   /**
    * Construct SpinInput.
    * @param elementName ID of the element
