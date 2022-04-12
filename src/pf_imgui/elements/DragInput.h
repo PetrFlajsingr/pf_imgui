@@ -112,7 +112,7 @@ class PF_IMGUI_EXPORT DragInput
     ParamType max;                                        /*!< Maximum allowed value */
     T value{};                                            /*!< Initial value */
     std::string format = details::defaultDragFormat<T>(); /*!< Text format for value */
-    Persistent persistent = Persistent::No;               /*!< Allow state saving to disk */
+    bool persistent = false;                              /*!< Allow state saving to disk */
   };
   /**
    * Construct DragInput
@@ -120,8 +120,8 @@ class PF_IMGUI_EXPORT DragInput
    */
   explicit DragInput(Config &&config)
       : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Labellable(std::string{config.label}),
-        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), speed(config.speed), min(config.min),
-        max(config.max), format(std::move(config.format)) {}
+        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
+        speed(config.speed), min(config.min), max(config.max), format(std::move(config.format)) {}
 
   /**
    * Construct DragInput.
