@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT SpinInput
    */
   explicit SpinInput(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent) ? Persistent::Yes : Persistent::No, DragSource<T>(false), DropTarget<T>(false),
+        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
         step(config.step), stepFast(config.fastStep), min(config.min), max(config.max) {}
   /**
    * Construct SpinInput.

@@ -227,7 +227,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     std::string_view name;     /*!< Unique name of the element */
     std::string_view label;    /*!< Text rendered on the element */
     bool allowCollapse = true; /*!< Allow collapse functionality */
-    false persistent = false;  /*!< Allow state saving to disk */
+    bool persistent = false;   /*!< Allow state saving to disk */
   };
 
   /**
@@ -365,9 +365,9 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    */
   struct Config {
     using Parent = Tree;
-    std::string_view name;    /*!< Unique name of the element */
-    false showBorder = false; /*!< Enable rendering of Tree area border */
-    false persistent = false; /*!< Allow state saving to disk */
+    std::string_view name;   /*!< Unique name of the element */
+    bool showBorder = false; /*!< Enable rendering of Tree area border */
+    bool persistent = false; /*!< Allow state saving to disk */
   };
   /**
    * Construct Tree
