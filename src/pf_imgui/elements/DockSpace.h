@@ -58,6 +58,8 @@ class PF_IMGUI_EXPORT DockSpace
   explicit DockSpace(const std::string &name, Size s = Size::Auto(),
                      const Flags<DockType> &dockFlags = Flags<DockType>{});
 
+  [[nodiscard]] bool isInitialised() const;
+
   void render() override;
 
  protected:

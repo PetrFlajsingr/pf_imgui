@@ -13,6 +13,8 @@ DockSpace::DockSpace(Config &&config)
 DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
     : Element(name), Resizable(s), flags(*dockFlags) {}
 
+bool DockSpace::isInitialised() const { return !firstFrame; }
+
 void DockSpace::render() {
   if (firstFrame) {
     firstFrame = false;
@@ -22,8 +24,6 @@ void DockSpace::render() {
   Renderable::render();
 }
 
-void DockSpace::renderImpl() {
-  setId(ImGui::DockSpace(getId(), static_cast<ImVec2>(getSize()), flags));
-}
+void DockSpace::renderImpl() { setId(ImGui::DockSpace(getId(), static_cast<ImVec2>(getSize()), flags)); }
 
 }  // namespace pf::ui::ig

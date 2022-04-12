@@ -9,8 +9,7 @@
 
 #include <imgui.h>
 #include <memory>
-#include <pf_imgui/managers/FontManager.h>
-#include <pf_imgui/managers/NotificationManager.h>
+#include <pf_imgui/DockBuilder.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/CommandPaletteWindow.h>
 #include <pf_imgui/dialogs/FileDialog.h>
@@ -25,6 +24,8 @@
 #include <pf_imgui/icons.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/managers/FontManager.h>
+#include <pf_imgui/managers/NotificationManager.h>
 #include <string>
 #include <toml++/toml.h>
 #include <utility>
@@ -150,6 +151,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * @param window window to remove
    */
   void removePaletteWindow(const CommandPaletteWindow &window);
+
+  [[nodiscard]] DockBuilder &createDockBuilder(DockSpace &dockSpace);
 
   /**
    * Find Window by its ID.
@@ -334,6 +337,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   std::vector<std::unique_ptr<RadioGroup>> radioGroups{};
 
   std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes{};
+
+  std::vector<std::unique_ptr<DockBuilder>> dockBuilders{};
 
   std::optional<std::string> fileDialogBookmark = std::nullopt;
 

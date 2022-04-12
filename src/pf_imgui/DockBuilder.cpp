@@ -3,6 +3,7 @@
 //
 
 #include "DockBuilder.h"
+#include <pf_imgui/dialogs/Window.h>
 
 namespace pf::ui::ig {
 
@@ -19,14 +20,14 @@ void SubDockBuilder::setSize(Size size) { subCommands.emplace_back(details::Dock
 
 void SubDockBuilder::setSplitRatio(float ratio) { sizeRatio = ratio; }
 
-void SubDockBuilder::setWindow(std::string name) { subCommands.emplace_back(details::DockWindowCmd{name}); }
+void SubDockBuilder::setWindow(Window &window) { subCommands.emplace_back(details::DockWindowCmd{window}); }
 
 void SubDockBuilder::run(ImGuiID &parentNodeId) {
   auto nodeId =
       ImGui::DockBuilderSplitNode(parentNodeId, static_cast<ImGuiDir>(direction), sizeRatio, nullptr, &parentNodeId);
   std::ranges::for_each(subCommands, [&](auto &val) {
     std::visit(Visitor{[&](const details::DockWindowCmd &cmd) {
-                         ImGui::DockBuilderDockWindow(cmd.windowName.c_str(), nodeId);
+                         ImGui::DockBuilderDockWindow(cmd.window.getImGuiName().c_str(), nodeId);
                        },
                        [&](const std::unique_ptr<SubDockBuilder> &subDockBuilder) { subDockBuilder->run(nodeId); },
                        [&](const details::DockSizeCmd &sizeCmd) {
@@ -47,7 +48,7 @@ SubDockBuilder &DockBuilder::split(Direction direction) {
 
 void DockBuilder::setSize(Size size) { subCommands.emplace_back(details::DockSizeCmd{size}); }
 
-void DockBuilder::setWindow(std::string name) { subCommands.emplace_back(details::DockWindowCmd{name}); }
+void DockBuilder::setWindow(Window &window) { subCommands.emplace_back(details::DockWindowCmd{window}); }
 
 void DockBuilder::run() {
   auto dockspaceId = dockSpaceRef.getId();
@@ -55,14 +56,15 @@ void DockBuilder::run() {
   ImGui::DockBuilderAddNode(dockspaceId, ImGuiDockNodeFlags_DockSpace);
 
   std::ranges::for_each(subCommands, [&](auto &val) {
-    std::visit(
-        Visitor{[&](const details::DockWindowCmd &cmd) { ImGui::DockBuilderDockWindow(cmd.windowName.c_str(), dockspaceId); },
-                [&](const std::unique_ptr<SubDockBuilder> &subDockBuilder) { subDockBuilder->run(dockspaceId); },
-                [&](const details::DockSizeCmd &sizeCmd) {
-                  ImGui::DockBuilderSetNodeSize(dockspaceId, static_cast<ImVec2>(sizeCmd.size));
-                }},
-        val);
+    std::visit(Visitor{[&](const details::DockWindowCmd &cmd) {
+                         ImGui::DockBuilderDockWindow(cmd.window.getImGuiName().c_str(), dockspaceId);
+                       },
+                       [&](const std::unique_ptr<SubDockBuilder> &subDockBuilder) { subDockBuilder->run(dockspaceId); },
+                       [&](const details::DockSizeCmd &sizeCmd) {
+                         ImGui::DockBuilderSetNodeSize(dockspaceId, static_cast<ImVec2>(sizeCmd.size));
+                       }},
+               val);
   });
 }
 
-}
+}  // namespace pf::ui::ig
