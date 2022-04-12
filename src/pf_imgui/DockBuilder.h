@@ -5,8 +5,8 @@
  * @date 12.4.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_DOCKBUILDER_H
-#define IMGUI_EXPERIMENTS_DOCKBUILDER_H
+#ifndef PF_IMGUI_DOCKBUILDER_H
+#define PF_IMGUI_DOCKBUILDER_H
 
 #include <imgui_internal.h>
 #include <memory>
@@ -152,4 +152,4 @@ class DockBuilder {
 };
 
 }  // namespace pf::ui::ig
-#endif  //IMGUI_EXPERIMENTS_DOCKBUILDER_H
+#endif  //PF_IMGUI_DOCKBUILDER_H
