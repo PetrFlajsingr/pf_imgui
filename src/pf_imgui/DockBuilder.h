@@ -29,12 +29,15 @@ struct DockSizeCmd {
   Size size;
 };
 }  // namespace details
-
+class HorizontalSplitBuilder;
+class VerticalSplitBuilder;
 /**
  * @brief Builder for divided area.
  */
 class SubDockBuilder {
   friend class DockBuilder;
+
+ protected:
   explicit SubDockBuilder(Direction direction);
 
  public:
@@ -44,16 +47,17 @@ class SubDockBuilder {
   SubDockBuilder &operator=(SubDockBuilder &&) = delete;
 
   /**
-   * Split this area in two.
-   * @param direction direction of split
+   * Split this area in two horizontally.
+   * @param splitDirection direction of split
    * @return builder for the split off area
    */
-  SubDockBuilder &split(Direction direction);
+  [[nodiscard]] HorizontalSplitBuilder &split(HorizontalDirection splitDirection);
   /**
-   * Set size of the new area.
-   * @param size size of the new area
+   * Split this area in two vertically.
+   * @param splitDirection direction of split
+   * @return builder for the split off area
    */
-  void setSize(Size size);
+  [[nodiscard]] VerticalSplitBuilder &split(VerticalDirection splitDirection);
   /**
    * Set size of split off area as percentage. @warning DOES NOT WORK CURRENTLY
    * @param ratio split ratio
@@ -65,12 +69,43 @@ class SubDockBuilder {
    */
   void setWindow(Window &window);
 
+ protected:
+  void setSize(Size size);
+
  private:
   void run(ImGuiID &parentNodeId);
 
   Direction direction;
   float sizeRatio = 0.5f;
   std::vector<std::variant<details::DockWindowCmd, details::DockSizeCmd, std::unique_ptr<SubDockBuilder>>> subCommands;
+};
+
+class HorizontalSplitBuilder : public SubDockBuilder {
+ protected:
+  friend class DockBuilder;
+  friend class SubDockBuilder;
+  explicit HorizontalSplitBuilder(Direction direction) : SubDockBuilder(direction) {}
+
+ public:
+  /**
+   * Set width of the divided off area.
+   * @param width width
+   */
+  inline void setWidth(Width width) { SubDockBuilder::setSize(Size{width, 1}); }
+};
+
+class VerticalSplitBuilder : public SubDockBuilder {
+ protected:
+  friend class DockBuilder;
+  friend class SubDockBuilder;
+  explicit VerticalSplitBuilder(Direction direction) : SubDockBuilder(direction) {}
+
+ public:
+  /**
+   * Set height of the divided off area.
+   * @param height height
+   */
+  inline void setHeight(Height height) { SubDockBuilder::setSize(Size{1, height}); }
 };
 
 // TODO: set initial dockspace size properly so ratio functionality can be used
@@ -87,11 +122,17 @@ class DockBuilder {
   DockBuilder(DockBuilder &&) = delete;
   DockBuilder &operator=(DockBuilder &&) = delete;
   /**
-   * Split this area in two.
+   * Split this area in two horizontally.
    * @param direction direction of split
    * @return builder for the split off area
    */
-  SubDockBuilder &split(Direction direction);
+  [[nodiscard]] HorizontalSplitBuilder &split(HorizontalDirection direction);
+  /**
+   * Split this area in two vertically.
+   * @param direction direction of split
+   * @return builder for the split off area
+   */
+  [[nodiscard]] VerticalSplitBuilder &split(VerticalDirection direction);
   /**
    * Set size of the new area.
    * @param size size of the new area
