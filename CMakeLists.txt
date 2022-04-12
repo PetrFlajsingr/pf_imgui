@@ -187,6 +187,7 @@ set(SOURCES
         src/pf_imgui/layouts/VerticalLayout.cpp
         src/pf_imgui/layouts/LinearLayout.cpp
         src/pf_imgui/elements/TimePicker.cpp
+        src/pf_imgui/DockBuilder.cpp
         )
 
 set(INCLUDES
@@ -360,7 +361,7 @@ set(INCLUDES
         src/pf_imgui/layouts/VerticalLayout.h
         src/pf_imgui/layouts/LinearLayout.h
         src/pf_imgui/elements/TimePicker.h
-        )
+        src/pf_imgui/DockBuilder.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 
