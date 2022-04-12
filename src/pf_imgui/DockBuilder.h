@@ -31,6 +31,11 @@ class SubDockBuilder {
  public:
   explicit SubDockBuilder(Direction direction);
 
+  SubDockBuilder(const SubDockBuilder &) = delete;
+  SubDockBuilder &operator=(const SubDockBuilder &) = delete;
+  SubDockBuilder(SubDockBuilder &&) = delete;
+  SubDockBuilder &operator=(SubDockBuilder &&) = delete;
+
   SubDockBuilder &split(Direction direction);
 
   void setSize(Size size);
@@ -52,6 +57,11 @@ class DockBuilder {
 
  public:
   explicit DockBuilder(DockSpace &dockSpace);
+
+  DockBuilder(const DockBuilder &) = delete;
+  DockBuilder &operator=(const DockBuilder &) = delete;
+  DockBuilder(DockBuilder &&) = delete;
+  DockBuilder &operator=(DockBuilder &&) = delete;
 
   SubDockBuilder &split(Direction direction);
 
