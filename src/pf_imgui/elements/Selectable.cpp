@@ -10,7 +10,7 @@ namespace pf::ui::ig {
 
 Selectable::Selectable(Selectable::Config &&config)
     : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.selected),
-      Resizable(config.size), Savable(config.persistent) {}
+      Resizable(config.size), Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 Selectable::Selectable(const std::string &elementName, const std::string &label, bool value, Size s,
                        Persistent persistent)
@@ -19,7 +19,9 @@ Selectable::Selectable(const std::string &elementName, const std::string &label,
 void Selectable::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  if (ImGui::Selectable(getLabel().c_str(), getValueAddress(), 0, static_cast<ImVec2>(getSize()))) { notifyValueChanged(); }
+  if (ImGui::Selectable(getLabel().c_str(), getValueAddress(), 0, static_cast<ImVec2>(getSize()))) {
+    notifyValueChanged();
+  }
 }
 
 void Selectable::unserialize_impl(const toml::table &src) {
