@@ -30,10 +30,10 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
    */
   struct Config {
     using Parent = Expander;
-    std::string_view name;                            /*!< Unique name of the element */
-    std::string_view label;                           /*!< Text rendered in the header of the Expander */
-    AllowCollapse allowCollapse = AllowCollapse::Yes; /*!< Enable/disable collapse functionality */
-    Persistent persistent = Persistent::No;           /*!< Allow state saving to disk */
+    std::string_view name;     /*!< Unique name of the element */
+    std::string_view label;    /*!< Text rendered in the header of the Expander */
+    bool allowCollapse = true; /*!< Enable/disable collapse functionality */
+    bool persistent = false;   /*!< Allow state saving to disk */
   };
   /**
    * Construct Expander

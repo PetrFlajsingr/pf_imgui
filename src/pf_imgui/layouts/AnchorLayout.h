@@ -37,9 +37,9 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
    */
   struct Config {
     using Parent = AnchorLayout;
-    std::string_view name;                  /*!< Unique name of the element */
-    Size size;                              /*!< Size of the element */
-    ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
+    std::string_view name;   /*!< Unique name of the element */
+    Size size;               /*!< Size of the element */
+    bool showBorder = false; /*!< Render border around layout's area */
   };
   /**
    * Construct AnchorLayout

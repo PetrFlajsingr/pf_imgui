@@ -11,8 +11,8 @@
 namespace pf::ui::ig {
 
 GridLayout::GridLayout(GridLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.showBorder), width(config.widthInCells),
-      height(config.heightInCells) {
+    : ResizableLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
+      width(config.widthInCells), height(config.heightInCells) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
   std::ranges::fill(cells, nullptr);

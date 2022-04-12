@@ -21,10 +21,10 @@ class PF_IMGUI_EXPORT WrapLayout : public LinearLayout {
    */
   struct Config {
     using Parent = WrapLayout;
-    std::string_view name;                  /*!< Unique name of the element */
-    LayoutDirection layoutDirection;        /*!< Direction the element are rendered in */
-    Size size;                              /*!< Size of the element */
-    ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
+    std::string_view name;           /*!< Unique name of the element */
+    LayoutDirection layoutDirection; /*!< Direction the element are rendered in */
+    Size size;                       /*!< Size of the element */
+    bool showBorder = false;         /*!< Render border around layout's area */
   };
   /**
    * Construct WrapLayout

@@ -62,7 +62,7 @@ class PF_IMGUI_EXPORT InputText
     std::size_t maxInputLength = 256;                    /*!< Maximum length of input string */
     TextTrigger eventTrigger = TextTrigger::Character;   /*!< Trigger to notify listeners */
     Flags<TextFilter> filters = TextFilter::None;        /*!< Enabled text filters */
-    Persistent persistent = Persistent::No;              /*!< Allow state saving to disk */
+    bool persistent = false;                             /*!< Allow state saving to disk */
   };
   /**
    * Construct InputText

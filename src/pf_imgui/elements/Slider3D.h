@@ -42,13 +42,13 @@ class PF_IMGUI_EXPORT Slider3D
    */
   struct Config {
     using Parent = Slider3D;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered next to the element */
-    glm::vec3 min;                          /*!< Minimum allowed value */
-    glm::vec3 max;                          /*!< Maximum allowed value */
-    glm::vec3 value{};                      /*!< Initial value */
-    Size size = Size::Auto();               /*!< Size of the element */
-    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+    std::string_view name;    /*!< Unique name of the element */
+    std::string_view label;   /*!< Text rendered next to the element */
+    glm::vec3 min;            /*!< Minimum allowed value */
+    glm::vec3 max;            /*!< Maximum allowed value */
+    glm::vec3 value{};        /*!< Initial value */
+    Size size = Size::Auto(); /*!< Size of the element */
+    bool persistent = false;  /*!< Allow state saving to disk */
   };
   /**
    * Construct Slider3D
@@ -57,9 +57,9 @@ class PF_IMGUI_EXPORT Slider3D
   explicit Slider3D(Config &&config)
       : ItemElement(std::string{config.name}),
         Labellable(std::string{config.label}), ValueObservable<glm::vec3>(config.value),
-        Savable(config.persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(config.size),
-        extremesX(config.min.x, config.max.x), extremesY(config.min.y, config.max.y),
-        extremesZ(config.min.z, config.max.z) {}
+        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<glm::vec3>(false),
+        DropTarget<glm::vec3>(false), Resizable(config.size), extremesX(config.min.x, config.max.x),
+        extremesY(config.min.y, config.max.y), extremesZ(config.min.z, config.max.z) {}
   /**
    * Construct Slider3D.
    * @param elementName ID of the element

@@ -36,10 +36,10 @@ class PF_IMGUI_EXPORT Toggle
    */
   struct Config {
     using Parent = Toggle;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered next to the element */
-    bool enabled = false;                   /*!< Initial state */
-    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+    std::string_view name;   /*!< Unique name of the element */
+    std::string_view label;  /*!< Text rendered next to the element */
+    bool enabled = false;    /*!< Initial state */
+    bool persistent = false; /*!< Allow state saving to disk */
   };
   /**
    * Construct Toggle

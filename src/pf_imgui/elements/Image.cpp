@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 Image::Image(Image::Config &&config)
-    : ItemElement(std::string{config.name}), Resizable(config.size), isButton_(config.isButton == IsButton::Yes),
+    : ItemElement(std::string{config.name}), Resizable(config.size), isButton_(config.isButton),
       textureId(config.textureId), uvMappingProvider(std::move(config.uvTextureMappingProvider)) {}
 
 Image::Image(const std::string &elementName, ImTextureID imTextureId, Size size, IsButton isBtn,

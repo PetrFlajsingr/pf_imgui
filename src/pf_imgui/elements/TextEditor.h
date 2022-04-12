@@ -24,10 +24,10 @@ class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resiza
    */
   struct Config {
     using Parent = TextEditor;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string value{};                    /*!< Initial text inside the editor */
-    Size size = Size::Auto();               /*!< Size of the element */
-    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+    std::string_view name;    /*!< Unique name of the element */
+    std::string value{};      /*!< Initial text inside the editor */
+    Size size = Size::Auto(); /*!< Size of the element */
+    bool persistent = false;  /*!< Allow state saving to disk */
   };
   /**
    * Construct TextEditor

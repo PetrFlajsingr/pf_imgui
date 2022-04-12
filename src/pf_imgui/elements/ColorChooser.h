@@ -59,10 +59,10 @@ class PF_IMGUI_EXPORT ColorChooser
    */
   struct Config {
     using Parent = ColorChooser;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered next to interactable parts */
-    T value{};                              /*!< Initial value */
-    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+    std::string_view name;   /*!< Unique name of the element */
+    std::string_view label;  /*!< Text rendered next to interactable parts */
+    T value{};               /*!< Initial value */
+    bool persistent = false; /*!< Allow state saving to disk */
   };
   /**
    * Construct ColorChooser
@@ -70,7 +70,7 @@ class PF_IMGUI_EXPORT ColorChooser
    */
   explicit ColorChooser(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false) {}
+        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false) {}
   /**
    * Construct ColorChooser.
    * @param elementName ID of the element

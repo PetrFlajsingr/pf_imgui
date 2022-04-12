@@ -34,6 +34,7 @@ using GizmoValueType =
 }
 
 /**
+ * @todo Savable
  * @brief A 3D gizmo allowing the user to modify rotation or a direction by rendering axis'/direction arrow.
  * Axes3 -> 3D rotation
  * Direction -> 3D direction

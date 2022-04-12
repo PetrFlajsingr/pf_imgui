@@ -8,7 +8,8 @@
 namespace pf::ui::ig {
 
 TextEditor::TextEditor(TextEditor::Config &&config)
-    : Element(std::string{config.name}), Savable(config.persistent), Resizable(config.size) {
+    : Element(std::string{config.name}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      Resizable(config.size) {
   editor.SetText(config.value);
 }
 

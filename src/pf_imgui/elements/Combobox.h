@@ -80,7 +80,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     std::string_view label;                               /*!< Text rendered next to the Combobox */
     std::string preview;                                  /*!< Preview value shown when no item is selected */
     ComboBoxCount shownItemCount = ComboBoxCount::Items8; /*!< Amount of items shown when Combobox is open */
-    Persistent persistent = Persistent::No;              /*!< Allow state saving to disk */
+    bool persistent = false;                              /*!< Allow state saving to disk */
   };
   /**
    * Construct Combobox
@@ -89,7 +89,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   explicit Combobox(Config &&config)
       : CustomComboboxBase(std::string{config.name}, std::string{config.label}, details::ComboboxRowFactory<T>{},
                            std::string{config.preview}, config.shownItemCount),
-        ValueObservable<T>(), Savable(config.persistent), DragSource<T>(false) {}
+        ValueObservable<T>(), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false) {}
   /**
    * Construct Combobox.
    * @param elementName ID of the element
@@ -101,11 +101,11 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    */
   Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
-           Persistent persistent =
-               Persistent::No) requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-                                            &&std::is_default_constructible_v<T> &&std::copy_constructible<T>)
-      : CustomComboboxBase(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
-        ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
+           Persistent persistent = Persistent::No)
+    requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>,
+                                 T> && std::is_default_constructible_v<T> && std::copy_constructible<T>)
+  : CustomComboboxBase(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
+    ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
   }
   /**
@@ -120,7 +120,9 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * Set selected item. If no such item is found the selection is cancelled.
    * @param item item to be selected
    */
-  void setSelectedItem(const T &itemToSelect) requires(!std::same_as<T, std::string>) {
+  void setSelectedItem(const T &itemToSelect)
+    requires(!std::same_as<T, std::string>)
+  {
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter =
               std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item.first == itemToSelect; });
@@ -210,7 +212,6 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
  private:
   std::optional<unsigned int> selectedItemIndex = std::nullopt;
 };
-
 
 extern template class Combobox<std::string>;
 

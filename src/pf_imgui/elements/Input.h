@@ -135,7 +135,7 @@ class PF_IMGUI_EXPORT Input
     StepType fastStep{};                        /*!< Fast speed of value change */
     T value{};                                  /*!< Initial value */
     std::string format = Data::defaultFormat(); /*!< Format string to render value */
-    Persistent persistent = Persistent::No;     /*!< Allow state saving to disk */
+    bool persistent = false;                    /*!< Allow state saving to disk */
   };
   /**
    * Construct Input
@@ -143,8 +143,8 @@ class PF_IMGUI_EXPORT Input
    */
   explicit Input(Config &&config)
       : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent), DragSource<T>(false), DropTarget<T>(false), data(config.step, config.fastStep),
-        format(std::move(static_cast<std::string>(config.format))) {}
+        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
+        data(config.step, config.fastStep), format(std::move(static_cast<std::string>(config.format))) {}
 
   /**
   * Construct Input. For the following types: float, double.

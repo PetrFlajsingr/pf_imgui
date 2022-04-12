@@ -10,8 +10,8 @@ namespace pf::ui::ig {
 
 Range2D::Range2D(Range2D::Config &&config)
     : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.value),
-      Resizable(config.size), Savable(config.persistent), DragSource(false), DropTarget(false), minRange(config.min),
-      maxRange(config.max) {}
+      Resizable(config.size), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false),
+      DropTarget(false), minRange(config.min), maxRange(config.max) {}
 
 Range2D::Range2D(const std::string &elementName, const std::string &label, const glm::vec2 &min, const glm::vec2 &max,
                  const math::Range<glm::vec2> &value, const Size &s, Persistent persistent)

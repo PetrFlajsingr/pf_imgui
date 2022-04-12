@@ -9,7 +9,7 @@
 namespace pf::ui::ig {
 
 AnchorLayout::AnchorLayout(AnchorLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.showBorder) {}
+    : ResizableLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
 AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
     : ResizableLayout(elementName, size, showBorder) {}

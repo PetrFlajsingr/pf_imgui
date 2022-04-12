@@ -33,9 +33,9 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
   */
   struct Config {
     using Parent = RadioGroup;
-    std::string_view groupName;             /*!< Unique name of the element */
-    std::vector<RadioButton *> buttons{};   /*!< Buttons inside the group */
-    Persistent persistent = Persistent::No; /*!< Enable disk state saving */
+    std::string_view groupName;           /*!< Unique name of the element */
+    std::vector<RadioButton *> buttons{}; /*!< Buttons inside the group */
+    bool persistent = false;              /*!< Enable disk state saving */
   };
   /**
   * Construct RadioGroup

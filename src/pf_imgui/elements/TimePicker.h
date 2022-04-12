@@ -39,10 +39,10 @@ class TimePicker : public Element,
    */
   struct Config {
     using Parent = TimePicker;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string label;                      /*!< Text rendered next to the input */
-    TimeOfDay value{};                      /*!< Initial value */
-    Persistent persistent = Persistent::No; /*!< Enable disk state saving */
+    std::string_view name;   /*!< Unique name of the element */
+    std::string label;       /*!< Text rendered next to the input */
+    TimeOfDay value{};       /*!< Initial value */
+    bool persistent = false; /*!< Enable disk state saving */
   };
   /**
    * Construct TimePicker
