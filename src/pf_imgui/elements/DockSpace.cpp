@@ -13,24 +13,17 @@ DockSpace::DockSpace(Config &&config)
 DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
     : Element(name), Resizable(s), flags(*dockFlags) {}
 
+bool DockSpace::isInitialised() const { return !firstFrame; }
+
 void DockSpace::render() {
-  if (getVisibility() == Visibility::Visible) {
-    auto colorSet = setColorStack();
-    if (getEnabled() == Enabled::No) {
-      ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
-      renderImpl();
-    } else {
-      renderImpl();
-    }
+  if (firstFrame) {
+    firstFrame = false;
+    setId(ImGui::GetID(getName().c_str()));
   }
+  auto fontScoped = font.applyScopedIfNotDefault();
+  Renderable::render();
 }
 
-void DockSpace::renderImpl() {
-  id = ImGui::GetID(getName().c_str());
-  ImGui::DockSpace(id, static_cast<ImVec2>(getSize()), flags);
-}
-
-DockSpace::Id DockSpace::getDockId() const { return id; }
+void DockSpace::renderImpl() { setId(ImGui::DockSpace(getId(), static_cast<ImVec2>(getSize()), flags)); }
 
 }  // namespace pf::ui::ig

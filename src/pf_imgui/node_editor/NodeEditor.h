@@ -237,10 +237,10 @@ class NodeEditor : public Element, public Resizable {
   void renderImpl() override;
 
  private:
-  std::optional<Node *> findNodeById(ax::NodeEditor::NodeId id);
-  std::optional<Comment *> findCommentById(ax::NodeEditor::NodeId id);
-  std::optional<Pin *> findPinById(ax::NodeEditor::PinId id);
-  std::optional<Link *> findLinkById(ax::NodeEditor::LinkId id);
+  std::optional<Node *> findNodeById(ax::NodeEditor::NodeId nodeId);
+  std::optional<Comment *> findCommentById(ax::NodeEditor::NodeId nodeId);
+  std::optional<Pin *> findPinById(ax::NodeEditor::PinId pinId);
+  std::optional<Link *> findLinkById(ax::NodeEditor::LinkId linkId);
 
   void handleCreation();
   void handleLinkCreation();

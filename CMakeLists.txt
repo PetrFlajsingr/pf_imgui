@@ -137,7 +137,7 @@ set(SOURCES
         src/pf_imgui/interface/DragNDrop.cpp
         src/pf_imgui/elements/MenuItems.cpp
         src/pf_imgui/elements/PopupMenu.cpp
-        src/pf_imgui/FontManager.cpp
+        src/pf_imgui/managers/FontManager.cpp
         src/pf_imgui/layouts/AnchorLayout.cpp
         src/pf_imgui/details/template_instantiations.cpp
         src/pf_imgui/elements/DockSpace.cpp
@@ -145,7 +145,7 @@ set(SOURCES
         src/pf_imgui/elements/Spinner.cpp
         src/pf_imgui/elements/StatusBar.cpp
         src/pf_imgui/dialogs/Notification.cpp
-        src/pf_imgui/NotificationManager.cpp
+        src/pf_imgui/managers/NotificationManager.cpp
         src/pf_imgui/interface/Closeable.cpp
         src/pf_imgui/details/GroupBox.cpp
         src/pf_imgui/elements/GroupBox.cpp
@@ -187,6 +187,7 @@ set(SOURCES
         src/pf_imgui/layouts/VerticalLayout.cpp
         src/pf_imgui/layouts/LinearLayout.cpp
         src/pf_imgui/elements/TimePicker.cpp
+        src/pf_imgui/DockBuilder.cpp
         )
 
 set(INCLUDES
@@ -297,7 +298,7 @@ set(INCLUDES
         src/pf_imgui/elements/MenuItems.h
         src/pf_imgui/elements/PopupMenu.h
         src/pf_imgui/icons.h
-        src/pf_imgui/FontManager.h
+        src/pf_imgui/managers/FontManager.h
         src/pf_imgui/layouts/AnchorLayout.h
         src/pf_imgui/interface/RenderablesContainer.h
         src/pf_imgui/styles/enums.h
@@ -307,7 +308,7 @@ set(INCLUDES
         src/pf_imgui/elements/Spinner.h
         src/pf_imgui/elements/StatusBar.h
         src/pf_imgui/dialogs/Notification.h
-        src/pf_imgui/NotificationManager.h
+        src/pf_imgui/managers/NotificationManager.h
         src/pf_imgui/interface/Closeable.h
         src/pf_imgui/details/GroupBox.h
         src/pf_imgui/elements/GroupBox.h
@@ -360,7 +361,7 @@ set(INCLUDES
         src/pf_imgui/layouts/VerticalLayout.h
         src/pf_imgui/layouts/LinearLayout.h
         src/pf_imgui/elements/TimePicker.h
-        )
+        src/pf_imgui/DockBuilder.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

@@ -46,30 +46,30 @@ void NodeEditor::renderImpl() {
   renderPopupMenuForRequested();
 }
 
-std::optional<Node *> NodeEditor::findNodeById(ax::NodeEditor::NodeId id) {
+std::optional<Node *> NodeEditor::findNodeById(ax::NodeEditor::NodeId nodeId) {
   const auto getNodeId = [](auto &node) { return node->id; };
-  if (auto iter = std::ranges::find(nodes, id, getNodeId); iter != nodes.end()) { return iter->get(); }
+  if (auto iter = std::ranges::find(nodes, nodeId, getNodeId); iter != nodes.end()) { return iter->get(); }
   return std::nullopt;
 }
 
-std::optional<Comment *> NodeEditor::findCommentById(ax::NodeEditor::NodeId id) {
+std::optional<Comment *> NodeEditor::findCommentById(ax::NodeEditor::NodeId nodeId) {
   const auto getCommentId = [](auto &comment) { return comment->id; };
-  if (auto iter = std::ranges::find(comments, id, getCommentId); iter != comments.end()) { return iter->get(); }
+  if (auto iter = std::ranges::find(comments, nodeId, getCommentId); iter != comments.end()) { return iter->get(); }
   return std::nullopt;
 }
 
-std::optional<Pin *> NodeEditor::findPinById(ax::NodeEditor::PinId id) {
+std::optional<Pin *> NodeEditor::findPinById(ax::NodeEditor::PinId pinId) {
   const auto getPinId = [](auto &pin) { return pin->id; };
   auto pins = nodes
       | ranges::views::transform([](auto &node) { return ranges::views::concat(node->inputPins, node->outputPins); })
       | ranges::views::cache1 | ranges::views::join;
-  if (auto iter = std::ranges::find(pins, id, getPinId); iter != pins.end()) { return iter->get(); }
+  if (auto iter = std::ranges::find(pins, pinId, getPinId); iter != pins.end()) { return iter->get(); }
   return std::nullopt;
 }
 
-std::optional<Link *> NodeEditor::findLinkById(ax::NodeEditor::LinkId id) {
+std::optional<Link *> NodeEditor::findLinkById(ax::NodeEditor::LinkId linkId) {
   const auto getLinkId = [](auto &link) { return link->id; };
-  if (auto iter = std::ranges::find(links, id, getLinkId); iter != links.end()) { return iter->get(); }
+  if (auto iter = std::ranges::find(links, linkId, getLinkId); iter != links.end()) { return iter->get(); }
   return std::nullopt;
 }
 

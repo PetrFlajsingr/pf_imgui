@@ -6,7 +6,7 @@
 #define PF_IMGUI_NOTIFICATIONMANAGER_H
 
 #include <memory>
-#include <pf_imgui/FontManager.h>
+#include <pf_imgui/managers/FontManager.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/Notification.h>
 #include <string>

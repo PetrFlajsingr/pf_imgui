@@ -74,9 +74,9 @@ std::vector<Renderable *> StackedLayout::getRenderables() {
 std::size_t StackedLayout::size() const { return stacks.size(); }
 
 void StackedLayout::setStackActive(StackedLayout::Stack &stack) {
-  for (const auto &[id, s] : ranges::views::enumerate(stacks)) {
+  for (const auto &[stackId, s] : ranges::views::enumerate(stacks)) {
     if (s.get() == &stack) {
-      setIndex(id);
+      setIndex(stackId);
       break;
     }
   }

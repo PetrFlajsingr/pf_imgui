@@ -6,6 +6,7 @@
 #include <pf_imgui/ImGuiInterface.h>
 #include <pf_imgui/serialization.h>
 #include <range/v3/view/addressof.hpp>
+#include <range/v3/view/filter.hpp>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -143,6 +144,10 @@ void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
   commandPalettes.erase(remove.begin(), remove.end());
 }
 
+DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
+  return *dockBuilders.emplace_back(std::unique_ptr<DockBuilder>{new DockBuilder{dockSpace}});
+}
+
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
   if (auto window = findIf(getWindows() | ranges::views::addressof,
                            [windowName](const auto &window) { return window->getName() == windowName; });
@@ -171,6 +176,20 @@ void ImGuiInterface::renderImpl() {
   std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });
   std::ranges::for_each(dragNDropGroups, &DragNDropGroup::frame, &std::unique_ptr<DragNDropGroup>::get);
   std::ranges::for_each(radioGroups, &RadioGroup::frame, &std::unique_ptr<RadioGroup>::get);
+
+  auto anyDockBuilderRun = false;
+  std::ranges::for_each(dockBuilders | ranges::views::filter([](std::unique_ptr<DockBuilder> &builder) {
+                          return builder->dockSpaceRef.isInitialised();
+                        }),
+                        [&anyDockBuilderRun](std::unique_ptr<DockBuilder> &builder) {
+                          builder->run();
+                          anyDockBuilderRun = true;
+                        });
+  if (anyDockBuilderRun) {
+    const auto [rmBeg, rmEnd] = std::ranges::remove_if(
+        dockBuilders, [](std::unique_ptr<DockBuilder> &builder) { return builder->dockSpaceRef.isInitialised(); });
+    dockBuilders.erase(rmBeg, rmEnd);
+  }
   if (statusBar != nullptr) { statusBar->render(); }
   renderDialogs();
   notificationManager.renderNotifications();

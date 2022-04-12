@@ -16,6 +16,7 @@
 #include <string>
 
 namespace pf::ui::ig {
+
 enum class DockType {
   DisableCentralNode = 1 << 2,
   DisableAreaSplit = 1 << 4,
@@ -57,20 +58,16 @@ class PF_IMGUI_EXPORT DockSpace
   explicit DockSpace(const std::string &name, Size s = Size::Auto(),
                      const Flags<DockType> &dockFlags = Flags<DockType>{});
 
-  void render() override;
+  [[nodiscard]] bool isInitialised() const;
 
-  /**
-   * @attention Call this only after the first render.
-   * @return id to be used for docking windows into the area
-   */
-  [[nodiscard]] Id getDockId() const;
+  void render() override;
 
  protected:
   void renderImpl() override;
 
  private:
+  bool firstFrame = true;
   ImGuiDockNodeFlags flags;
-  Id id{};
 };
 }  // namespace pf::ui::ig
 

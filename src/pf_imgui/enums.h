@@ -23,6 +23,12 @@ enum class MouseButton {
   Middle = ImGuiMouseButton_::ImGuiMouseButton_Middle
 };
 
+enum class Direction { Left = ImGuiDir_Left, Right = ImGuiDir_Right, Up = ImGuiDir_Up, Down = ImGuiDir_Down };
+
+enum class HorizontalDirection { Left = ImGuiDir_Left, Right = ImGuiDir_Right };
+
+enum class VerticalDirection { Up = ImGuiDir_Up, Down = ImGuiDir_Down };
+
 /**
 * Enum for selection.
 */
