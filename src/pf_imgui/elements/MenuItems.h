@@ -82,7 +82,9 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
   MenuSeparatorItem &addSeparator(const std::string &name);
 
   template<std::derived_from<MenuItem> T, typename... Args>
-  T &addMenuItem(Args &&...args) requires std::constructible_from<T, Args...> {
+  T &addMenuItem(Args &&...args)
+    requires std::constructible_from<T, Args...>
+  {
     auto newItem = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = newItem.get();
     addChild(std::move(newItem));
@@ -149,10 +151,10 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
    */
   struct Config {
     using Parent = MenuCheckboxItem;
-    std::string_view name;                  /*!< Unique name of the element */
-    std::string_view label;                 /*!< Text rendered on the item */
-    bool checked = false;                   /*!< Initial value */
-    Persistent persistent = Persistent::No; /*!< Allow state saving to disk */
+    std::string_view name;   /*!< Unique name of the element */
+    std::string_view label;  /*!< Text rendered on the item */
+    bool checked = false;    /*!< Initial value */
+    bool persistent = false; /*!< Allow state saving to disk */
   };
   /**
    * Construct MenuCheckboxItem

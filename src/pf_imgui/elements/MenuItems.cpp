@@ -67,7 +67,7 @@ void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Render
 
 MenuCheckboxItem::MenuCheckboxItem(MenuCheckboxItem::Config &&config)
     : MenuItem(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.checked),
-      Savable(config.persistent) {}
+      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
                                    Persistent persistent)
