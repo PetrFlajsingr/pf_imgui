@@ -9,8 +9,8 @@
 
 #include <imgui.h>
 #include <memory>
-#include <pf_imgui/FontManager.h>
-#include <pf_imgui/NotificationManager.h>
+#include <pf_imgui/managers/FontManager.h>
+#include <pf_imgui/managers/NotificationManager.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/CommandPaletteWindow.h>
 #include <pf_imgui/dialogs/FileDialog.h>
