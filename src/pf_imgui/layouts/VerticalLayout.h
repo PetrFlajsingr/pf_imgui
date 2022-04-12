@@ -23,10 +23,10 @@ class VerticalLayout : public LinearLayout {
    */
   struct Config {
     using Parent = VerticalLayout;
-    std::string_view name;                  /*!< Unique name of the element */
-    Size size;                              /*!< Size of the element */
-    float spacing = 0.f;                    /*!< Spaces between elements */
-    ShowBorder showBorder = ShowBorder::No; /*!< Render border around layout's area */
+    std::string_view name;   /*!< Unique name of the element */
+    Size size;               /*!< Size of the element */
+    float spacing = 0.f;     /*!< Spaces between elements */
+    bool showBorder = false; /*!< Render border around layout's area */
   };
   /**
    * Config constructor of VerticalLayout @see VerticalLayout::Config
