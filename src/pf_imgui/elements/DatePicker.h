@@ -36,7 +36,7 @@ class DatePicker : public Element,
     std::string_view label; /*!< Text rendered next to the element */
     std::chrono::year_month_day value = std::chrono::year_month_day{
         std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now())}; /*!< Initial value of the element */
-    Persistent persistent = Persistent::No;                                       /*!< Allow state saving to disk */
+    bool persistent = false;                                                      /*!< Allow state saving to disk */
   };
   /**
    * Construct DatePicker
