@@ -16,6 +16,7 @@ ImGuiInterface::ImGuiInterface(ImGuiConfig config)
       io(ImGui::GetIO()), fontManager(*this, config.iconFontDirectory, config.enabledIconPacks, config.iconSize),
       notificationManager(fontManager), config(std::move(config.config)) {
   io.ConfigFlags = *config.flags;
+  io.IniFilename = nullptr;
   ImGui::StyleColorsDark();
 }
 
@@ -64,6 +65,13 @@ void ImGuiInterface::updateConfig() {
       config.insert_or_assign(radioGroup->getGroupName(), *toml);
     }
   });
+  //  if (io.WantSaveIniSettings) {
+  io.WantSaveIniSettings = false;
+  std::size_t iniSize;
+  const auto imguiIniDataRaw = ImGui::SaveIniSettingsToMemory(&iniSize);
+  std::string imguiIniData{imguiIniDataRaw, iniSize};
+  config.insert_or_assign("imgui_ini", imguiIniData);
+  // }
 }
 
 void ImGuiInterface::setStateFromConfig() {
@@ -90,6 +98,11 @@ void ImGuiInterface::setStateFromConfig() {
       if (auto data = iter->second.as_table(); data != nullptr) { radioGroup->unserialize(*data); }
     }
   });
+  if (auto imguiIniToml = config.find("imgui_ini"); imguiIniToml != config.end()) {
+    if (auto imguiIni = imguiIniToml->second.as_string(); imguiIni != nullptr) {
+      ImGui::LoadIniSettingsFromMemory(imguiIni->get().data(), imguiIni->get().size());
+    }
+  }
 }
 
 void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
