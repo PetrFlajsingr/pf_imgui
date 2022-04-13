@@ -68,6 +68,7 @@ struct ImGuiConfig {
  * @todo: localization
  * @todo: key bindings?
  * @todo: icon loading from memory not just from file - implement that in backends as well
+ * @todo: check if context is actually properly set where needed
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomizable, public AllColorCustomizable {
  public:
