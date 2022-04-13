@@ -23,10 +23,11 @@ class VerticalLayout : public LinearLayout {
    */
   struct Config {
     using Parent = VerticalLayout;
-    std::string_view name;   /*!< Unique name of the element */
-    Size size;               /*!< Size of the element */
-    float spacing = 0.f;     /*!< Spaces between elements */
-    bool showBorder = false; /*!< Render border around layout's area */
+    std::string_view name;                     /*!< Unique name of the element */
+    Size size;                                 /*!< Size of the element */
+    VerticalAlign align = VerticalAlign::Left; /*!< Element alignment */
+    float spacing = 0.f;                       /*!< Spaces between elements */
+    bool showBorder = false;                   /*!< Render border around layout's area */
   };
   /**
    * Config constructor of VerticalLayout @see VerticalLayout::Config
@@ -38,11 +39,12 @@ class VerticalLayout : public LinearLayout {
    * Construct HorizontalLayout
    * @param name unique name of the element
    * @param size size of the layout
+   * @param align element alignment
    * @param elementSpacing spaces between elements
    * @param showBorder render border around layout's area
    */
-  VerticalLayout(const std::string &name, Size size, float elementSpacing = 0.f,
-                 ShowBorder showBorder = ShowBorder::No);
+  VerticalLayout(const std::string &name, Size size, VerticalAlign align = VerticalAlign::Left,
+                 float elementSpacing = 0.f, ShowBorder showBorder = ShowBorder::No);
 
   /**
    *
@@ -59,6 +61,9 @@ class VerticalLayout : public LinearLayout {
   void renderImpl() override;
 
  private:
+  [[nodiscard]] float alignmentAsFloat() const;
+
+  VerticalAlign alignment;
   float spacing;
 };
 
