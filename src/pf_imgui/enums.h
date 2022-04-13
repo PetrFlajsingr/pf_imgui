@@ -13,8 +13,6 @@
 #include <pf_common/enums.h>
 #include <type_traits>
 
-// TODO: replace internal usage of binary enum to bool
-
 // TODO: add convenience operators for some enums
 namespace pf::ui::ig {
 enum class MouseButton {
@@ -28,6 +26,10 @@ enum class Direction { Left = ImGuiDir_Left, Right = ImGuiDir_Right, Up = ImGuiD
 enum class HorizontalDirection { Left = ImGuiDir_Left, Right = ImGuiDir_Right };
 
 enum class VerticalDirection { Up = ImGuiDir_Up, Down = ImGuiDir_Down };
+
+enum class HorizontalAlign { Up, Middle, Down };
+
+enum class VerticalAlign { Left, Middle, Right };
 
 /**
 * Enum for selection.
