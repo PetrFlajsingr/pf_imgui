@@ -20,6 +20,45 @@
 namespace pf::ui::ig {
 
 /**
+    EXAMPLE SPDLOG SINK
+
+```
+template<typename Mutex>
+class PfImguiLogSink : public spdlog::sinks::base_sink<Mutex> {
+ public:
+  template<std::size_t LogLimit>
+  explicit PfImguiLogSink(pf::ui::ig::LogPanel<spdlog::level::level_enum, LogLimit> &logPanel)
+    : spdlog::sinks::base_sink<Mutex>(),
+      addRecord([this, &logPanel](auto level, auto message) { logPanel.addRecord(level, message); }) {
+    logPanel.addDestroyListener([this] { panelValid = false; });
+  }
+  template<std::size_t LogLimit>
+  PfImguiLogSink(pf::ui::ig::LogPanel<spdlog::level::level_enum, LogLimit> &logPanel,
+               const std::unique_ptr<spdlog::formatter> &formatter)
+    : spdlog::sinks::base_sink<Mutex>(formatter),
+      addRecord([this, &logPanel](auto level, auto message) { logPanel.addRecord(level, message); }) {
+    logPanel.addDestroyListener([this] { panelValid = false; });
+  }
+
+  protected:
+  void sink_it_(const spdlog::details::log_msg &msg) override {
+    if (!panelValid) { return; }
+    spdlog::memory_buf_t formatted;
+    spdlog::sinks::base_sink<Mutex>::formatter_->format(msg, formatted);
+    addRecord(msg.level, std::string_view{formatted.begin(), formatted.end()});
+  }
+  void flush_() override {}
+
+ private:
+  bool panelValid = true;
+  std::function<void(spdlog::level::level_enum, std::string_view)> addRecord;
+};
+using PfImguiLogSink_mt = PfImguiLogSink<std::mutex>;
+using PfImguiLogSink_st = PfImguiLogSink<spdlog::details::null_mutex>;
+```
+ */
+
+/**
  * @brief An element displaying log data.
  *
  * It can color records based on category. There is a text input for substring filtering and checkboxes for categories.
@@ -64,7 +103,7 @@ class LogPanel : public Element, public Resizable {
    * @param category logging category
    * @param text text to render
    */
-  void addRecord(Category category, std::string text);
+  void addRecord(Category category, std::string_view text);
   /**
    * @return all text stored inside the element currently
    */
@@ -117,9 +156,9 @@ LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size) : 
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-void LogPanel<Category, RecordLimit>::addRecord(Category category, std::string text) {
+void LogPanel<Category, RecordLimit>::addRecord(Category category, std::string_view text) {
   if (records.writeAvailable() == 0) { records.remove(); }
-  auto newRecord = Record{category, text, categoryColors[*magic_enum::enum_index(category)]};
+  auto newRecord = Record{category, std::string{text}, categoryColors[*magic_enum::enum_index(category)]};
   newRecord.show = isAllowedRecord(newRecord);
   records.insert(newRecord);
 }
