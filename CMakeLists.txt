@@ -77,7 +77,6 @@ set(SOURCES
         src/pf_imgui/elements/Expander.cpp
         src/pf_imgui/elements/Image.cpp
         src/pf_imgui/elements/InputText.cpp
-        src/pf_imgui/elements/Memo.cpp
         src/pf_imgui/elements/MenuBars.cpp
         src/pf_imgui/elements/plots/SimplePlot.cpp
         src/pf_imgui/elements/plots/Plot.cpp
@@ -208,7 +207,6 @@ set(INCLUDES
         src/pf_imgui/elements/Input.h
         src/pf_imgui/elements/InputText.h
         src/pf_imgui/elements/Listbox.h
-        src/pf_imgui/elements/Memo.h
         src/pf_imgui/elements/MenuBars.h
         src/pf_imgui/elements/plots/SimplePlot.h
         src/pf_imgui/elements/plots/Plot.h

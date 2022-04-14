@@ -69,9 +69,11 @@ class TimePicker : public Element,
   [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
-  SpinInput<int> spinH;
-  SpinInput<int> spinM;
-  SpinInput<int> spinS;
+  void inputChanged();
+
+  int hours;
+  int minutes;
+  int seconds;
 };
 
 }  // namespace pf::ui::ig
