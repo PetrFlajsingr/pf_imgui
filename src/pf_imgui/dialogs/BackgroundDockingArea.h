@@ -10,14 +10,13 @@
 
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/interface/Resizable.h>
 
 namespace pf::ui::ig {
 
 /**
  * @brief A special type of window, which acts as docking area for the whole viewport. It is always in background/
  */
-class BackgroundDockingArea : public Renderable, private Resizable {
+class BackgroundDockingArea : public Renderable {
  public:
   /**
    * Construct BackgroundDockingArea.
@@ -31,13 +30,16 @@ class BackgroundDockingArea : public Renderable, private Resizable {
    */
   [[nodiscard]] DockSpace &getDockSpace();
 
+  [[nodiscard]] Size getSize() const;
+
  protected:
   void renderImpl() override;
 
  private:
+  Size size;
   DockSpace dockSpace;
-  constexpr static auto flags =
-      ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+  constexpr static auto flags = ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoResize
+      | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar;
 };
 
 }  // namespace pf::ui::ig
