@@ -114,6 +114,12 @@ class LogPanel : public Element, public Resizable {
    * @param color new color of the category
    */
   void setCategoryColor(Category category, Color color);
+  /**
+   * Enable/disable category for both records and controls.
+   * @param category category to enable/disable
+   * @param enabled new category state
+   */
+  void setCategoryEnabled(Category category, bool enabled);
 
  protected:
   void renderImpl() override;
@@ -131,6 +137,8 @@ class LogPanel : public Element, public Resizable {
 
   std::array<Color, magic_enum::enum_count<Category>()> categoryColors;
   std::array<std::string, magic_enum::enum_count<Category>()> categoryStrings;
+
+  std::array<bool, magic_enum::enum_count<Category>()> categoryAllowed;
 
   bool scrollToBottom = false;
   bool textWrapEnabled = true;
@@ -151,6 +159,7 @@ LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size) : 
     categoryStrings[i++] = magic_enum::enum_name(category);
   }
   std::ranges::fill(categoryEnabled, true);
+  std::ranges::fill(categoryAllowed, true);
   std::ranges::fill(categoryColors, Color::White);
 }
 
@@ -182,6 +191,12 @@ void LogPanel<Category, RecordLimit>::setCategoryColor(Category category, Color 
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
+void LogPanel<Category, RecordLimit>::setCategoryEnabled(Category category, bool enabled) {
+  categoryAllowed[*magic_enum::enum_index(category)] = enabled;
+}
+
+template<Enum Category, std::size_t RecordLimit>
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
 void LogPanel<Category, RecordLimit>::renderImpl() {
   auto filterChanged = false;
   ImGui::BeginHorizontal("layout", static_cast<ImVec2>(getSize()), 0);
@@ -208,6 +223,7 @@ void LogPanel<Category, RecordLimit>::renderImpl() {
         ImGui::Spring(0.f);
         std::size_t i = 0;
         std::ranges::for_each(categoryEnabled, [&](bool &enabled) {
+          if (!categoryAllowed[i]) { return; }
           ImGui::PushStyleColor(ImGuiCol_Text, categoryColors[i]);
           filterChanged = filterChanged | ImGui::Checkbox(categoryStrings[i++].c_str(), &enabled);
           ImGui::Spring(0.f);
@@ -274,7 +290,8 @@ void LogPanel<Category, RecordLimit>::refreshAllowedRecords() {
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0) bool
 LogPanel<Category, RecordLimit>::isAllowedCategory(Category category) {
-  return categoryEnabled[*magic_enum::enum_index(category)];
+  const auto catIndex = *magic_enum::enum_index(category);
+  return categoryEnabled[catIndex] && categoryAllowed[catIndex];
 }
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0) bool
