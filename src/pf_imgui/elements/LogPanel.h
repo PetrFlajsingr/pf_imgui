@@ -16,6 +16,7 @@
 #include <pf_imgui/interface/Resizable.h>
 #include <ringbuffer.hpp>
 #include <sstream>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
@@ -70,7 +71,7 @@ using PfImguiLogSink_st = PfImguiLogSink<spdlog::details::null_mutex>;
  */
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)  // RecordLimit has to be power of two
-class LogPanel : public Element, public Resizable {
+class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
   struct Record {
     Category category;
     std::string text;
