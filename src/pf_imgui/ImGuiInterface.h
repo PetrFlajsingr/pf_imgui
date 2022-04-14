@@ -11,6 +11,7 @@
 #include <memory>
 #include <pf_imgui/DockBuilder.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/dialogs/BackgroundDockingArea.h>
 #include <pf_imgui/dialogs/CommandPaletteWindow.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
@@ -289,6 +290,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    */
   [[nodiscard]] RadioGroup &createRadioGroup(const std::string &groupName, Persistent persistent = Persistent::No);
 
+  [[nodiscard]] BackgroundDockingArea &createOrGetBackgroundDockingArea();
+
+  void removeBackgroundDockingArea();
+
   /**
    * Update fonts atlas using your backend.
    */
@@ -346,6 +351,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes{};
 
   std::vector<std::unique_ptr<DockBuilder>> dockBuilders{};
+  std::unique_ptr<BackgroundDockingArea> backgroundDockingArea = nullptr;
 
   std::optional<std::string> fileDialogBookmark = std::nullopt;
 

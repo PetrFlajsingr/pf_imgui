@@ -185,6 +185,7 @@ void ImGuiInterface::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
   if (hasMenuBar()) { menuBar->render(); }
+  if (backgroundDockingArea != nullptr) { backgroundDockingArea->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });
   std::ranges::for_each(dragNDropGroups, &DragNDropGroup::frame, &std::unique_ptr<DragNDropGroup>::get);
@@ -221,6 +222,15 @@ DragNDropGroup &ImGuiInterface::createDragNDropGroup() {
 RadioGroup &ImGuiInterface::createRadioGroup(const std::string &groupName, Persistent persistent) {
   return *radioGroups.emplace_back(std::make_unique<RadioGroup>(groupName, std::vector<RadioButton *>{}, persistent));
 }
+
+BackgroundDockingArea &ImGuiInterface::createOrGetBackgroundDockingArea() {
+  if (backgroundDockingArea == nullptr) {
+    backgroundDockingArea = std::make_unique<BackgroundDockingArea>("background_docking_area");
+  }
+  return *backgroundDockingArea;
+}
+
+void ImGuiInterface::removeBackgroundDockingArea() { backgroundDockingArea = nullptr; }
 
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
