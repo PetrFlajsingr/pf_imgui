@@ -30,6 +30,7 @@
 #include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/elements/LinkText.h>
 #include <pf_imgui/elements/Listbox.h>
+#include <pf_imgui/elements/LogPanel.h>
 #include <pf_imgui/elements/MarkdownText.h>
 #include <pf_imgui/elements/Memo.h>
 #include <pf_imgui/elements/MemoryEditor.h>
