@@ -12,11 +12,11 @@
 #include <imgui.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/Color.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <ringbuffer.hpp>
 #include <sstream>
-#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
@@ -116,11 +116,17 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
    */
   void setCategoryColor(Category category, Color color);
   /**
-   * Enable/disable category for both records and controls.
+   * Enable/disable category for record filtering.
    * @param category category to enable/disable
    * @param enabled new category state
    */
   void setCategoryEnabled(Category category, bool enabled);
+  /**
+   * Enable/disable category for being shown in the UI.
+   * @param category category to enable/disable
+   * @param enabled new category state
+   */
+  void setCategoryAllowed(Category category, bool enabled);
 
  protected:
   void renderImpl() override;
@@ -193,6 +199,12 @@ void LogPanel<Category, RecordLimit>::setCategoryColor(Category category, Color 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 void LogPanel<Category, RecordLimit>::setCategoryEnabled(Category category, bool enabled) {
+  categoryEnabled[*magic_enum::enum_index(category)] = enabled;
+}
+
+template<Enum Category, std::size_t RecordLimit>
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
+void LogPanel<Category, RecordLimit>::setCategoryAllowed(Category category, bool enabled) {
   categoryAllowed[*magic_enum::enum_index(category)] = enabled;
 }
 
