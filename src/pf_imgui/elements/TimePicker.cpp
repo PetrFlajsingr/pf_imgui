@@ -47,7 +47,20 @@ void TimePicker::renderImpl() {
   ImGui::Text("%s", getLabel().c_str());
 }
 
-void TimePicker::unserialize_impl(const toml::table &src) {
+void TimePicker::setValue(const pf::ui::ig::TimeOfDay &newValue) {
+  hours = static_cast<int>(duration_cast<std::chrono::hours>(newValue.to_duration()).count());
+  minutes = static_cast<int>(duration_cast<std::chrono::minutes>(newValue.to_duration()).count() % 60);
+  seconds = static_cast<int>(duration_cast<std::chrono::seconds>(newValue.to_duration()).count() % 60);
+  ValueObservable::setValue(newValue);
+}
+
+toml::table TimePicker::toToml() const {
+  return toml::table{{"hours", getValue().hours().count()},
+                     {"minutes", getValue().minutes().count() % 60},
+                     {"seconds", getValue().seconds().count() % 60}};
+}
+
+void TimePicker::setFromToml(const toml::table &src) {
   auto partsFound = 0;
   std::chrono::hours newHours{};
   std::chrono::minutes newMinutes{};
@@ -74,19 +87,6 @@ void TimePicker::unserialize_impl(const toml::table &src) {
   if (partsFound == 3) {
     setValue(TimeOfDay{std::chrono::hh_mm_ss<std::chrono::seconds>{newHours + newMinutes + newSeconds}});
   }
-}
-
-toml::table TimePicker::serialize_impl() const {
-  return toml::table{{"hours", getValue().hours().count()},
-                     {"minutes", getValue().minutes().count() % 60},
-                     {"seconds", getValue().seconds().count() % 60}};
-}
-
-void TimePicker::setValue(const pf::ui::ig::TimeOfDay &newValue) {
-  hours = static_cast<int>(duration_cast<std::chrono::hours>(newValue.to_duration()).count());
-  minutes = static_cast<int>(duration_cast<std::chrono::minutes>(newValue.to_duration()).count() % 60);
-  seconds = static_cast<int>(duration_cast<std::chrono::seconds>(newValue.to_duration()).count() % 60);
-  ValueObservable::setValue(newValue);
 }
 
 void TimePicker::inputChanged() {

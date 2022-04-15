@@ -39,7 +39,12 @@ const glm::vec2 &Range2D::getMax() const { return maxRange; }
 
 void Range2D::setMax(const glm::vec2 &max) { maxRange = max; }
 
-void Range2D::unserialize_impl(const toml::table &src) {
+toml::table Range2D::toToml() const {
+  const auto val = getValue();
+  return toml::table{{"startValue", serializeGlmVec(val.start)}, {"endValue", serializeGlmVec(val.end)}};
+}
+
+void Range2D::setFromToml(const toml::table &src) {
   if (auto newValStartIter = src.find("startValue"); newValStartIter != src.end()) {
     if (auto newValStart = newValStartIter->second.as_array(); newValStart != nullptr) {
       if (newValStart->size() != 2) { return; }
@@ -55,11 +60,6 @@ void Range2D::unserialize_impl(const toml::table &src) {
       }
     }
   }
-}
-
-toml::table Range2D::serialize_impl() const {
-  const auto val = getValue();
-  return toml::table{{"startValue", serializeGlmVec(val.start)}, {"endValue", serializeGlmVec(val.end)}};
 }
 
 }  // namespace pf::ui::ig

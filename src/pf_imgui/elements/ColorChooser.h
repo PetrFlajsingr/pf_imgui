@@ -94,8 +94,12 @@ class PF_IMGUI_EXPORT ColorChooser
    */
   void setPickerEnabled(bool value) { pickerEnabled = value; }
 
- protected:
-  void unserialize_impl(const toml::table &src) override {
+  [[nodiscard]] toml::table toToml() const override {
+    const auto color = ValueObservable<T>::getValue();
+    const auto tomlColor = serializeGlmVec(color);
+    return toml::table{{"color", tomlColor}};
+  }
+  void setFromToml(const toml::table &src) override {
     if (auto newValIter = src.find("color"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
@@ -104,12 +108,7 @@ class PF_IMGUI_EXPORT ColorChooser
     }
   }
 
-  [[nodiscard]] toml::table serialize_impl() const override {
-    const auto color = ValueObservable<T>::getValue();
-    const auto tomlColor = serializeGlmVec(color);
-    return toml::table{{"color", tomlColor}};
-  }
-
+ protected:
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();

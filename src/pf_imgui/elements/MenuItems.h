@@ -170,10 +170,11 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
   MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value = false,
                    Persistent persistent = Persistent::No);
 
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
  protected:
   void renderImpl() override;
-  void unserialize_impl(const toml::table &src) override;
-  [[nodiscard]] toml::table serialize_impl() const override;
 };
 /**
  * @brief An item, which divides menus.

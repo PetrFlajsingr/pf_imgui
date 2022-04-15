@@ -61,7 +61,13 @@ void RadioGroup::addButton(RadioButton &button) {
 
 const std::string &RadioGroup::getGroupName() const { return groupName; }
 
-void RadioGroup::unserialize_impl(const toml::table &src) {
+toml::table RadioGroup::toToml() const {
+  auto result = toml::table{};
+  if (getValue() != nullptr) { result.insert_or_assign("selected", getValue()->getName()); }
+  return result;
+}
+
+void RadioGroup::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("selected"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {
       const auto name = newVal.value();
@@ -75,12 +81,6 @@ void RadioGroup::unserialize_impl(const toml::table &src) {
       });
     }
   }
-}
-
-toml::table RadioGroup::serialize_impl() const {
-  auto result = toml::table{};
-  if (getValue() != nullptr) { result.insert_or_assign("selected", getValue()->getName()); }
-  return result;
 }
 
 void RadioGroup::addDestroyListener(RadioButton *button) {

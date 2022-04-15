@@ -5,7 +5,7 @@
 #ifndef PF_IMGUI_BLUEPRINT_NODEWITHHEADER_H
 #define PF_IMGUI_BLUEPRINT_NODEWITHHEADER_H
 
-#include <pf_imgui/node_editor/Node.h>
+#include <pf_imgui/node_editor/blueprint/nodes/BlueprintNode.h>
 
 namespace pf::ui::ig::bp {
 

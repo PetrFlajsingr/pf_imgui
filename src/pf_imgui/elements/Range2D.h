@@ -90,11 +90,11 @@ class PF_IMGUI_EXPORT Range2D
    */
   void setMax(const glm::vec2 &maxRange);
 
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
  protected:
   void renderImpl() override;
-
-  void unserialize_impl(const toml::table &src) override;
-  [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
   glm::vec2 minRange;

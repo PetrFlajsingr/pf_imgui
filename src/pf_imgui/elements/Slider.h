@@ -153,8 +153,15 @@ class PF_IMGUI_EXPORT Slider
    */
   void setMax(MinMaxType newMax) { max = newMax; }
 
- protected:
-  void unserialize_impl(const toml::table &src) override {
+  [[nodiscard]] toml::table toToml() const override {
+    const auto value = ValueObservable<T>::getValue();
+    if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+      return toml::table{{"value", serializeGlmVec(value)}};
+    } else {
+      return toml::table{{"value", value}};
+    }
+  }
+  void setFromToml(const toml::table &src) override {
     if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
       if (auto newValIter = src.find("value"); newValIter != src.end()) {
         if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
@@ -171,15 +178,7 @@ class PF_IMGUI_EXPORT Slider
     }
   }
 
-  [[nodiscard]] toml::table serialize_impl() const override {
-    const auto value = ValueObservable<T>::getValue();
-    if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
-      return toml::table{{"value", serializeGlmVec(value)}};
-    } else {
-      return toml::table{{"value", value}};
-    }
-  }
-
+ protected:
   void renderImpl() override {
     auto colorStyle = setColorStack();
     auto style = setStyleStack();

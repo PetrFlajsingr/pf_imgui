@@ -28,14 +28,6 @@ void TextEditor::setText(const std::string &text) { editor.SetText(text); }
 
 void TextEditor::renderImpl() { editor.Render(getName().c_str(), static_cast<ImVec2>(getSize())); }
 
-void TextEditor::unserialize_impl(const toml::table &src) {
-  if (auto newTextIter = src.find("text"); newTextIter != src.end()) {
-    if (auto newText = newTextIter->second.as_string(); newText != nullptr) { editor.SetText(newText->get()); }
-  }
-}
-
-toml::table TextEditor::serialize_impl() const { return toml::table{{"text", editor.GetText()}}; }
-
 void TextEditor::setHighlighting(TextEditor::Highlight language) {
   switch (language) {
     case Highlight::GLSL:
@@ -56,4 +48,11 @@ void TextEditor::setHighlighting(TextEditor::Highlight language) {
   }
 }
 
+toml::table TextEditor::toToml() const { return toml::table{{"text", editor.GetText()}}; }
+
+void TextEditor::setFromToml(const toml::table &src) {
+  if (auto newTextIter = src.find("text"); newTextIter != src.end()) {
+    if (auto newText = newTextIter->second.as_string(); newText != nullptr) { editor.SetText(newText->get()); }
+  }
+}
 }  // namespace pf::ui::ig

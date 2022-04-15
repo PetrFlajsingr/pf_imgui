@@ -31,17 +31,15 @@ void DatePicker::setValue(const std::chrono::year_month_day &newValue) {
   ValueObservable::setValue(newValue);
 }
 
-void DatePicker::renderImpl() {
-  using namespace std::chrono;
-  if (ImGui::DateChooser(getLabel().c_str(), *rawTime)) {
-    const auto newDate =
-        year_month_day{year{rawTime->tm_year + 1900}, month{static_cast<unsigned int>(rawTime->tm_mon + 1)},
-                       day{static_cast<unsigned int>(rawTime->tm_mday)}};
-    setValueAndNotifyIfChanged(newDate);
-  }
+toml::table DatePicker::toToml() const {
+  return toml::table{
+      {"year", static_cast<int>(getValue().year())},
+      {"month", static_cast<unsigned int>(getValue().month())},
+      {"day", static_cast<unsigned int>(getValue().day())},
+  };
 }
 
-void DatePicker::unserialize_impl(const toml::table &src) {
+void DatePicker::setFromToml(const toml::table &src) {
   using namespace std::chrono;
   auto partsFound = 0;
   year newYear{};
@@ -69,12 +67,14 @@ void DatePicker::unserialize_impl(const toml::table &src) {
   if (partsFound == 3) { setValue(year_month_day{newYear, newMonth, newDay}); }
 }
 
-toml::table DatePicker::serialize_impl() const {
-  return toml::table{
-      {"year", static_cast<int>(getValue().year())},
-      {"month", static_cast<unsigned int>(getValue().month())},
-      {"day", static_cast<unsigned int>(getValue().day())},
-  };
+void DatePicker::renderImpl() {
+  using namespace std::chrono;
+  if (ImGui::DateChooser(getLabel().c_str(), *rawTime)) {
+    const auto newDate =
+        year_month_day{year{rawTime->tm_year + 1900}, month{static_cast<unsigned int>(rawTime->tm_mon + 1)},
+                       day{static_cast<unsigned int>(rawTime->tm_mday)}};
+    setValueAndNotifyIfChanged(newDate);
+  }
 }
 
 }  // namespace pf::ui::ig

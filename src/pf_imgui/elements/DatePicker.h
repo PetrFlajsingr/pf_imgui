@@ -58,11 +58,11 @@ class DatePicker : public Element,
 
   void setValue(const std::chrono::year_month_day &newValue) override;
 
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
  protected:
   void renderImpl() override;
-
-  void unserialize_impl(const toml::table &src) override;
-  [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
   std::unique_ptr<tm> rawTime;

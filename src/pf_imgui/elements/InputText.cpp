@@ -66,7 +66,9 @@ void InputText::clear() {
   buffer[0] = '\0';
 }
 
-void InputText::unserialize_impl(const toml::table &src) {
+toml::table InputText::toToml() const { return toml::table{{"text", text}}; }
+
+void InputText::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("text"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {
       text = *newVal;
@@ -76,8 +78,6 @@ void InputText::unserialize_impl(const toml::table &src) {
 
   std::snprintf(buffer.get(), text.size(), "%s", text.c_str());
 }
-
-toml::table InputText::serialize_impl() const { return toml::table{{"text", text}}; }
 
 void InputText::setValue(const std::string_view &newValue) {
   if (text != newValue) {

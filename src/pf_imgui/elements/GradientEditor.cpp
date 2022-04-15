@@ -93,7 +93,13 @@ void GradientEditor::renderImpl() {
   }
 }
 
-void GradientEditor::unserialize_impl(const toml::table &src) {
+toml::table GradientEditor::toToml() const {
+  auto points = toml::array{};
+  std::ranges::for_each(getPointsView(), [&points](const auto &point) { points.push_back(point.toToml()); });
+  return toml::table{{"points", points}};
+}
+
+void GradientEditor::setFromToml(const toml::table &src) {
   if (auto pointsIter = src.find("points"); pointsIter != src.end()) {
     if (auto pointsArr = pointsIter->second.as_array(); pointsArr != nullptr) {
       std::ranges::for_each(*pointsArr, [this](const auto &pointToml) {
@@ -103,12 +109,6 @@ void GradientEditor::unserialize_impl(const toml::table &src) {
       });
     }
   }
-}
-
-toml::table GradientEditor::serialize_impl() const {
-  auto points = toml::array{};
-  std::ranges::for_each(getPointsView(), [&points](const auto &point) { points.push_back(point.toToml()); });
-  return toml::table{{"points", points}};
 }
 
 GradientPointsView GradientEditor::getPointsView() const {

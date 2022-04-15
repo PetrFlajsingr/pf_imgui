@@ -93,11 +93,11 @@ class GradientEditor : public Element,
    */
   void removeGradientPoint(GradientPoint gradientPoint);
 
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
  protected:
   void renderImpl() override;
-
-  void unserialize_impl(const toml::table &src) override;
-  [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
   [[nodiscard]] GradientPointsView getPointsView() const;
