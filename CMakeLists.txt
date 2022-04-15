@@ -172,7 +172,7 @@ set(SOURCES
         src/pf_imgui/node_editor/blueprint/pins/StringInputPin.cpp
         src/pf_imgui/node_editor/blueprint/pins/Pin.cpp
         src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.cpp
-        src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.cpp
+        src/pf_imgui/node_editor/blueprint/nodes/NodeWithLabel.cpp
         src/pf_imgui/node_editor/Comment.cpp
         src/pf_imgui/node_editor/NodeBase.cpp
         src/pf_imgui/Size.cpp
@@ -189,7 +189,7 @@ set(SOURCES
         src/pf_imgui/elements/TimePicker.cpp
         src/pf_imgui/DockBuilder.cpp
         src/pf_imgui/dialogs/BackgroundDockingArea.cpp
-        )
+        src/pf_imgui/node_editor/blueprint/nodes/Node.cpp)
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -345,7 +345,7 @@ set(INCLUDES
         src/pf_imgui/node_editor/blueprint/pins/ValuePin.h
         src/pf_imgui/node_editor/blueprint/pins/Pin.h
         src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.h
-        src/pf_imgui/node_editor/blueprint/nodes/NodeWithHeader.h
+        src/pf_imgui/node_editor/blueprint/nodes/NodeWithLabel.h
         src/pf_imgui/node_editor/details/LinkPtrToRef.h
         src/pf_imgui/node_editor/Comment.h
         src/pf_imgui/node_editor/NodeBase.h
@@ -365,7 +365,7 @@ set(INCLUDES
         src/pf_imgui/DockBuilder.h
         src/pf_imgui/elements/LogPanel.h
         src/pf_imgui/dialogs/BackgroundDockingArea.h
-        src/pf_imgui/node_editor/blueprint/nodes/BlueprintNode.h src/pf_imgui/interface/TomlSerializable.h)
+        src/pf_imgui/node_editor/blueprint/nodes/Node.h src/pf_imgui/interface/TomlSerializable.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

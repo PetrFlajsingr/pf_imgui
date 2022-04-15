@@ -33,6 +33,21 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
     return inputElement->addValueListener(std::forward<decltype(listener)>(listener));
   }
 
+  [[nodiscard]] toml::table toToml() const override {
+    auto result = Pin::toToml();
+    if constexpr (std::derived_from<T, TomlSerializable>) { result.insert_or_assign("data", inputElement->toToml()); }
+    return result;
+  }
+
+  void setFromToml(const toml::table &src) override {
+    Pin::setFromToml(src);
+    if constexpr (std::derived_from<T, TomlSerializable>) {
+      if (auto data = src.find("data"); data != src.end()) {
+        if (auto dataTable = data->second.as_table(); dataTable != nullptr) { inputElement->setFromToml(*dataTable); }
+      }
+    }
+  }
+
  protected:
   void renderInfo() override {
     if (PinWithValue<ValueType>::getType() == Pin::Type::Input && !PinWithValue<ValueType>::hasAnyValidLinks()) {

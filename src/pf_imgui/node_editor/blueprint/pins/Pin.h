@@ -6,11 +6,12 @@
 #define PF_IMGUI_BLUEPRINT_PIN_H
 
 #include <imgui.h>
+#include <pf_imgui/interface/TomlSerializable.h>
 #include <pf_imgui/node_editor/Pin.h>
 
 namespace pf::ui::ig::bp {
 
-class Pin : public ig::Pin {
+class Pin : public ig::Pin, public TomlSerializable {
  public:
   Pin(const std::string &name, const std::string &label, Color color);
 
@@ -18,6 +19,9 @@ class Pin : public ig::Pin {
   void setColor(Color newColor);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
+
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
  protected:
   void addLink(Link &link) override;
