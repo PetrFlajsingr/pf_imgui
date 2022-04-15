@@ -230,6 +230,10 @@ BackgroundDockingArea &ImGuiInterface::createOrGetBackgroundDockingArea() {
 
 void ImGuiInterface::removeBackgroundDockingArea() { backgroundDockingArea = nullptr; }
 
+Font ImGuiInterface::getGlobalFont() const { return globalFont; }
+
+void ImGuiInterface::setGlobalFont(Font newFont) { globalFont = std::move(newFont); }
+
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
 const FontManager &ImGuiInterface::getFontManager() const { return fontManager; }
@@ -254,6 +258,7 @@ void ImGuiInterface::render() {
     }
   }};
   if (getVisibility() == Visibility::Visible) {
+    auto fontScoped = globalFont.applyScoped();
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};

@@ -299,6 +299,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    */
   virtual void updateFonts() = 0;
 
+  [[nodiscard]] Font getGlobalFont() const;
+  void setGlobalFont(Font globalFont);
+
   [[nodiscard]] FontManager &getFontManager();
   [[nodiscard]] const FontManager &getFontManager() const;
   [[nodiscard]] NotificationManager &getNotificationManager();
@@ -354,6 +357,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   std::unique_ptr<BackgroundDockingArea> backgroundDockingArea = nullptr;
 
   std::optional<std::string> fileDialogBookmark = std::nullopt;
+
+  Font globalFont = Font::Default();
 
   void removeDialog(ModalDialog &dialog);
 };
