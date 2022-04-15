@@ -7,6 +7,7 @@
 
 #include "Pin.h"
 #include "PinDraw.h"
+#include <pf_imgui/node_editor/blueprint/common.h>
 #include <string>
 
 namespace pf::ui::ig::bp {
@@ -14,6 +15,7 @@ namespace pf::ui::ig::bp {
 template<typename T>
 class ValuePin : public Pin {
  public:
+  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(ValuePin)
   using ValueType = T;
 
   ValuePin(const std::string &name, const std::string &label, Color color) : Pin(name, label, color) {}

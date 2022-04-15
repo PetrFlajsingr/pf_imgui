@@ -7,6 +7,7 @@
 
 #include "InteractablePin.h"
 #include <pf_imgui/elements/DragInput.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
 
@@ -14,6 +15,7 @@ namespace pf::ui::ig::bp {
 template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
 class DragPin : public InteractablePin<DragInput<T>> {
  public:
+  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(DragPin)
   struct DragConfig {
     Width width;
     typename DragInput<T>::ParamType speed;

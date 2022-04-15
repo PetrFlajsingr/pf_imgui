@@ -365,7 +365,7 @@ set(INCLUDES
         src/pf_imgui/DockBuilder.h
         src/pf_imgui/elements/LogPanel.h
         src/pf_imgui/dialogs/BackgroundDockingArea.h
-        src/pf_imgui/node_editor/blueprint/nodes/Node.h src/pf_imgui/interface/TomlSerializable.h)
+        src/pf_imgui/node_editor/blueprint/nodes/Node.h src/pf_imgui/interface/TomlSerializable.h src/pf_imgui/node_editor/blueprint/common.h)
 
 list(APPEND INCLUDES ${toml++_headers})
 

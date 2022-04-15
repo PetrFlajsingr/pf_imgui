@@ -7,11 +7,13 @@
 
 #include "InteractablePin.h"
 #include <pf_imgui/elements/Checkbox.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
 
 class BPCheckboxPin : public InteractablePin<Checkbox> {
  public:
+  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(BPCheckboxPin)
   BPCheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width);
 };
 

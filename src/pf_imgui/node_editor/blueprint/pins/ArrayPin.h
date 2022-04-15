@@ -8,6 +8,7 @@
 #include "Pin.h"
 #include "PinDraw.h"
 #include <imgui_internal.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
 
@@ -15,6 +16,7 @@ template<typename T>
 class ArrayPin : public Pin {
  public:
   using ValueType = std::vector<T>;
+  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(ArrayPin)
 
   ArrayPin(const std::string &name, const std::string &label, Color color) : Pin(name, label, color) {}
 

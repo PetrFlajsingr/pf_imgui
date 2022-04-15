@@ -8,6 +8,7 @@
 #include <imgui.h>
 #include <pf_imgui/interface/TomlSerializable.h>
 #include <pf_imgui/node_editor/Pin.h>
+#include <static_type_info.h>
 
 namespace pf::ui::ig::bp {
 
@@ -22,6 +23,8 @@ class Pin : public ig::Pin, public TomlSerializable {
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  [[nodiscard]] virtual static_type_info::TypeIndex getTypeId() const = 0;
 
  protected:
   void addLink(Link &link) override;

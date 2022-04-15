@@ -7,11 +7,13 @@
 
 #include "InteractablePin.h"
 #include <pf_imgui/elements/InputText.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
 
 class StringInputPin : public InteractablePin<InputText> {
  public:
+  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(StringInputPin)
   struct InputConfig {
     Width width;
     std::string value{};

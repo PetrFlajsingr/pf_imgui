@@ -18,9 +18,7 @@ toml::table NodeWithLabel::toToml() const {
 void NodeWithLabel::setFromToml(const toml::table &src) {
   Node::setFromToml(src);
   if (auto labelIter = src.find("label"); labelIter != src.end()) {
-    if (auto labelToml = labelIter->second.as_string(); labelToml != nullptr) {
-      setLabel(labelToml->get());
-    }
+    if (auto labelToml = labelIter->second.as_string(); labelToml != nullptr) { setLabel(labelToml->get()); }
   }
 }
 

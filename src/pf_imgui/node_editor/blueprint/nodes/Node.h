@@ -7,6 +7,7 @@
 
 #include <pf_imgui/interface/TomlSerializable.h>
 #include <pf_imgui/node_editor/Node.h>
+#include <static_type_info.h>
 
 namespace pf::ui::ig::bp {
 
@@ -16,6 +17,8 @@ class Node : public ig::Node, public TomlSerializable {
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  [[nodiscard]] virtual static_type_info::TypeIndex getTypeId() const = 0;
 };
 
 }  // namespace pf::ui::ig::bp
