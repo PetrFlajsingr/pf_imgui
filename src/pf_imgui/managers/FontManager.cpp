@@ -35,7 +35,7 @@ FontManager::FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::
 }
 
 std::optional<Font> FontManager::fontByName(const std::string &name) const {
-  if (auto iter = fonts.find(name); iter != fonts.end()) { return Font{iter->second}; }
+  if (auto iter = fonts.find(name); iter != fonts.end()) { return Font{iter->second, iter->first}; }
   return std::nullopt;
 }
 
@@ -98,7 +98,7 @@ Font FontManager::addFont(FontBuilder &builder) {
   });
   fonts.emplace(builder.name, font);
   imguiInterface->shouldUpdateFontAtlas = true;
-  return Font{font};
+  return Font{font, builder.name};
 }
 
 SubFontBuilder::SubFontBuilder(FontBuilder &builder, std::filesystem::path ttfPath)

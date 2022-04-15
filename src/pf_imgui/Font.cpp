@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-Font::Font(ImFont *value) : font(value) {}
+Font::Font(ImFont *value, std::string fontName) : font(value), name(fontName) {}
 
 RAII Font::applyScoped() {
   ImGui::PushFont(font);
@@ -18,7 +18,7 @@ RAII Font::applyScopedIfNotDefault() {
   return RAII{[] {}};
 }
 
-std::string_view Font::getName() const { return font != nullptr ? font->GetDebugName() : "default"; }
+std::string_view Font::getName() const { return name; }
 
 bool Font::operator==(const Font &rhs) const { return font == rhs.font; }
 bool Font::operator!=(const Font &rhs) const { return !(rhs == *this); }

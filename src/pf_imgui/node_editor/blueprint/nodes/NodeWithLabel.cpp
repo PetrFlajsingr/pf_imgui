@@ -23,16 +23,21 @@ void NodeWithLabel::setFromToml(const toml::table &src) {
 }
 
 void NodeWithLabel::renderHeader() {
-  ImGui::BeginHorizontal((getName() + "_head").c_str());
+  ImGui::BeginHorizontal("node_header");
   {
     ImGui::Spring(0);
     ImGui::Text(getLabel().c_str());
     ImGui::Spring(1);
   }
   ImGui::EndHorizontal();
+  ImGui::Spring(0.f);
+
   const auto min = ImGui::GetItemRectMin();
   const auto max = ImGui::GetItemRectMax();
-  ImGui::GetWindowDrawList()->AddLine(ImVec2{min.x, max.y}, max, ImGui::GetColorU32(ImGuiCol_Separator), 1.5f);
+  const auto nodeSize = ax::NodeEditor::GetNodeSize(getId());
+  const auto paddingOffset = 2 * ax::NodeEditor::GetStyle().NodePadding.x;
+  ImGui::GetWindowDrawList()->AddLine(ImVec2{min.x, max.y}, ImVec2{min.x + nodeSize.x - paddingOffset, max.y},
+                                      ImGui::GetColorU32(ImGuiCol_Separator), 1.5f);
 }
 
 }  // namespace pf::ui::ig::bp
