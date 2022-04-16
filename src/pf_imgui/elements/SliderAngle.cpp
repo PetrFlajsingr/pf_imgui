@@ -33,16 +33,6 @@ void SliderAngle::renderImpl() {
   }
 }
 
-void SliderAngle::unserialize_impl(const toml::table &src) {
-  if (auto newValIter = src.find("value"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<float>(); newVal.has_value()) {
-      ValueObservable<float>::setValueAndNotifyIfChanged(*newVal);
-    }
-  }
-}
-
-toml::table SliderAngle::serialize_impl() const { return toml::table{{"value", getValue()}}; }
-
 float SliderAngle::getMinDeg() const { return minDeg; }
 
 void SliderAngle::setMinDeg(float min) { SliderAngle::minDeg = min; }
@@ -50,5 +40,15 @@ void SliderAngle::setMinDeg(float min) { SliderAngle::minDeg = min; }
 float SliderAngle::getMaxDeg() const { return maxDeg; }
 
 void SliderAngle::setMaxDeg(float max) { SliderAngle::maxDeg = max; }
+
+toml::table SliderAngle::toToml() const { return toml::table{{"value", getValue()}}; }
+
+void SliderAngle::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("value"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<float>(); newVal.has_value()) {
+      ValueObservable<float>::setValueAndNotifyIfChanged(*newVal);
+    }
+  }
+}
 
 }  // namespace pf::ui::ig

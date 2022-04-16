@@ -35,6 +35,12 @@ class Node : public NodeBase {
    * @param name unique name of the element
    */
   explicit Node(const std::string &name);
+  /**
+   * Construct Node
+   * @param name unique name of the element
+   * @param initPosition initial position
+   */
+  Node(const std::string &name, const Position &initPosition);
 
   /**
    * Get all input pins
@@ -131,7 +137,7 @@ class Node : public NodeBase {
    */
   virtual void renderOutputs();
 
- private:
+ protected:
   int getNextPinId();
 
   std::vector<std::unique_ptr<Pin>> inputPins;

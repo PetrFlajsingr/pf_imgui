@@ -9,13 +9,13 @@
 #define PF_IMGUI_NODE_EDITOR_PIN_H
 
 #include "fwd.h"
-#include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <imgui_node_editor.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
@@ -62,7 +62,6 @@ class Pin : public Renderable, public Labellable, public Hoverable {
    * @param label text rendered next to the pin
    */
   Pin(const std::string &name, const std::string &label);
-  ~Pin() override;
 
   /**
    * Get internally used id of the pin.
@@ -223,7 +222,6 @@ class Pin : public Renderable, public Labellable, public Hoverable {
    */
   virtual void addLink(Link &link);
 
- private:
   ax::NodeEditor::PinId id;
   Type type;
 

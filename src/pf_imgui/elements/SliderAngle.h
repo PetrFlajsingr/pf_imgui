@@ -88,10 +88,11 @@ class PF_IMGUI_EXPORT SliderAngle
    */
   void setMaxDeg(float max);
 
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
  protected:
   void renderImpl() override;
-  void unserialize_impl(const toml::table &src) override;
-  [[nodiscard]] toml::table serialize_impl() const override;
 
  private:
   float minDeg;

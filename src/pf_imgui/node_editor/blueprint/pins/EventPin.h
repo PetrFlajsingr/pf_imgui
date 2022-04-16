@@ -7,14 +7,18 @@
 
 #include "Pin.h"
 #include <imgui_internal.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
 
 class EventPin : public Pin {
  public:
+  PF_IMGUI_BLUEPRINT_PIN_ID(EventPin)
   EventPin(const std::string &name, const std::string &label, Color color);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
+
+  [[nodiscard]] static std::unique_ptr<EventPin> ConstructFromToml(ig::Node *parent, const toml::table &src);
 
  protected:
   void renderIcon() override;

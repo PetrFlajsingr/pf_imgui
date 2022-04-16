@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-Size::Size(const Width &width, const Height &height) : width(width), height(height) {}
+Size::Size(Width width, Height height) : width(width), height(height) {}
 
 bool Size::operator==(const Size &rhs) const { return width == rhs.width && height == rhs.height; }
 
@@ -16,7 +16,7 @@ Size Size::Auto() { return {Width::Auto(), Height::Auto()}; }
 
 Size Size::Fill() { return {Width::Fill(), Height::Fill()}; }
 
-Size::operator ImVec2() const { return ImVec2{width.value, height.value}; }
+Size::operator ImVec2() const { return ImVec2{static_cast<float>(width), static_cast<float>(height)}; }
 
 Size Size::FillWidth() { return {Width::Fill(), Height::Auto()}; }
 

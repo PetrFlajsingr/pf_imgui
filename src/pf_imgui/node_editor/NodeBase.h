@@ -1,9 +1,9 @@
 /**
-* @file NodeBase.h
-* @brief Base class for node like objects in NodeEditor.
-* @author Petr Flajšingr
-* @date 2.4.22
-*/
+ * @file NodeBase.h
+ * @brief Base class for node like objects in NodeEditor.
+ * @author Petr Flajšingr
+ * @date 2.4.22
+ */
 
 #ifndef PF_IMGUI_NODEBASE_H
 #define PF_IMGUI_NODEBASE_H
@@ -15,6 +15,7 @@
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Renderable.h>
 
 namespace pf::ui::ig {
@@ -22,7 +23,7 @@ namespace pf::ui::ig {
 /**
  * @brief Base class for node like objects in NodeEditor.
  */
-class NodeBase : public Renderable, public Hoverable {
+class NodeBase : public Renderable, public Hoverable, public Positionable {
   friend class NodeEditor;
 
  public:
@@ -30,7 +31,13 @@ class NodeBase : public Renderable, public Hoverable {
    * Construct NodeBase
    * @param name unique name of the element
    */
-  explicit NodeBase(const std::string &name);
+  NodeBase(const std::string &name);
+  /**
+   * Construct NodeBase
+   * @param name unique name of the element
+   * @param initPosition initial position
+   */
+  NodeBase(const std::string &name, Position initPosition);
 
   /**
    *
@@ -59,20 +66,15 @@ class NodeBase : public Renderable, public Hoverable {
   }
 
   /**
-   * Get node position within editor.
-   * @return position within editor
-   */
-  [[nodiscard]] Position getPosition() const;
-  /**
    * Set node position within editor.
-   * @param position new position
+   * @param newPosition new position
    */
-  void setPosition(Position position);
+  void setPosition(Position newPosition) override;
   /**
    * Get Node's size.
    * @return size
    */
-  [[nodiscard]] Size getSize() const;
+  [[nodiscard]] Size getNodeSize() const;
 
   /**
    * Center Node in the middle of the currently viewed are of editor.
@@ -123,7 +125,9 @@ class NodeBase : public Renderable, public Hoverable {
    */
   void removePopupMenu();
 
- private:
+  void render() override;
+
+ protected:
   ax::NodeEditor::NodeId id;
   NodeEditor *parent;
 
@@ -134,6 +138,8 @@ class NodeBase : public Renderable, public Hoverable {
   Observable_impl<> observableDelete;
   bool markedForDelete = false;
   Observable_impl<> observableDoubleClick;
+  bool isInitialised = false;
+  bool initSize;
 };
 
 }  // namespace pf::ui::ig

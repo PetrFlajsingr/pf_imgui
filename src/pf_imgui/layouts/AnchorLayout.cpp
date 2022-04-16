@@ -49,12 +49,12 @@ void AnchorLayout::setSize(const Size &s) {
     if (anchorFlags.is(Anchor::Left)) {
       if (anchorFlags.is(Anchor::Right)) { addWidth(deltaWidth); }
     } else if (anchorFlags.is(Anchor::Right)) {
-      positionable->setPosition(positionable->getPosition().moveDelta(deltaWidth, 0));
+      positionable->setPosition(positionable->getPosition().moveDelta(static_cast<float>(deltaWidth), 0));
     }
     if (anchorFlags.is(Anchor::Top)) {
       if (anchorFlags.is(Anchor::Bottom)) { addHeight(deltaHeight); }
     } else if (anchorFlags.is(Anchor::Bottom)) {
-      positionable->setPosition(positionable->getPosition().moveDelta(0, deltaHeight));
+      positionable->setPosition(positionable->getPosition().moveDelta(0, static_cast<float>(deltaHeight)));
     }
   });
   Resizable::setSize(s);

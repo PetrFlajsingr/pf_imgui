@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-ExecPin::ExecPin(const std::string &name, const std::string &label, Color pinColor)
-    : Pin(name, label, pinColor) {}
+ExecPin::ExecPin(const std::string &name, const std::string &label, Color pinColor) : Pin(name, label, pinColor) {}
 
 void ExecPin::renderIcon() {
   ImVec2 iconSize{16, 16};
@@ -24,6 +23,13 @@ void ExecPin::renderIcon() {
 bool ExecPin::acceptsLinkWith(ig::Pin &other) const {
   if (!Pin::acceptsLinkWith(other)) { return false; }
   return dynamic_cast<ExecPin *>(&other) != nullptr;
+}
+
+std::unique_ptr<ExecPin> ExecPin::ConstructFromToml(ig::Node *parent, const toml::table &src) {
+  auto result = std::make_unique<ExecPin>("", "", Color::White);
+  result->parent = parent;
+  result->setFromToml(src);
+  return result;
 }
 
 void ExecPin::addLink(Link &link) {

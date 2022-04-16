@@ -5,8 +5,9 @@
 #ifndef IMGUI_EXPERIMENTS_FONT_H
 #define IMGUI_EXPERIMENTS_FONT_H
 
-#include <pf_common/RAII.h>
 #include <imgui.h>
+#include <pf_common/RAII.h>
+#include <string>
 #include <string_view>
 
 namespace pf::ui::ig {
@@ -18,7 +19,7 @@ class FontManager;
 class Font {
  private:
   friend class FontManager;
-  explicit Font(ImFont *value);
+  explicit Font(ImFont *value, std::string fontName);
 
  public:
   Font(const Font &other) = default;
@@ -34,11 +35,12 @@ class Font {
 
   [[nodiscard]] std::string_view getName() const;
 
-  static inline Font Default() { return Font{nullptr}; }
+  [[nodiscard]] static inline Font Default() { return Font{nullptr, "default"}; }
 
  private:
   ImFont *font;
+  std::string name;
 };
-}
+}  // namespace pf::ui::ig
 
 #endif  //IMGUI_EXPERIMENTS_FONT_H

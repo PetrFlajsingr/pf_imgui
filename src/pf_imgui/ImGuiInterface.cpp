@@ -61,9 +61,7 @@ void ImGuiInterface::updateConfig() {
   });
   if (fileDialogBookmark.has_value()) { config.insert_or_assign("file_dialog_bookmark", fileDialogBookmark.value()); }
   std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
-    if (const auto toml = radioGroup->serialize(); toml.has_value()) {
-      config.insert_or_assign(radioGroup->getGroupName(), *toml);
-    }
+    if (radioGroup->isPersistent()) { config.insert_or_assign(radioGroup->getGroupName(), radioGroup->toToml()); }
   });
   //  if (io.WantSaveIniSettings) {
   io.WantSaveIniSettings = false;
@@ -77,11 +75,11 @@ void ImGuiInterface::updateConfig() {
 void ImGuiInterface::setStateFromConfig() {
   const auto serialiseSubtree = [this](Renderable &root) {
     traverseImGuiTree(root, [this](Renderable &renderable) {
-      if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
+      if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr && ptrSavable->isPersistent()) {
         if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
           if (auto elemDataIter = config.find(ptrElement->getName()); elemDataIter != config.end()) {
             if (auto elemData = elemDataIter->second.as_table(); elemData != nullptr) {
-              ptrSavable->unserialize(*elemData);
+              ptrSavable->setFromToml(*elemData);
             }
           }
         }
@@ -94,8 +92,8 @@ void ImGuiInterface::setStateFromConfig() {
     if (auto str = iter->second.as_string(); str != nullptr) { fileDialogBookmark = str->get(); }
   }
   std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
-    if (auto iter = config.find(radioGroup->getGroupName()); iter != config.end()) {
-      if (auto data = iter->second.as_table(); data != nullptr) { radioGroup->unserialize(*data); }
+    if (auto iter = config.find(radioGroup->getGroupName()); iter != config.end() && radioGroup->isPersistent()) {
+      if (auto data = iter->second.as_table(); data != nullptr) { radioGroup->setFromToml(*data); }
     }
   });
   if (auto imguiIniToml = config.find("imgui_ini"); imguiIniToml != config.end()) {
@@ -232,6 +230,10 @@ BackgroundDockingArea &ImGuiInterface::createOrGetBackgroundDockingArea() {
 
 void ImGuiInterface::removeBackgroundDockingArea() { backgroundDockingArea = nullptr; }
 
+Font ImGuiInterface::getGlobalFont() const { return globalFont; }
+
+void ImGuiInterface::setGlobalFont(Font newFont) { globalFont = std::move(newFont); }
+
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
 const FontManager &ImGuiInterface::getFontManager() const { return fontManager; }
@@ -256,6 +258,7 @@ void ImGuiInterface::render() {
     }
   }};
   if (getVisibility() == Visibility::Visible) {
+    auto fontScoped = globalFont.applyScoped();
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};

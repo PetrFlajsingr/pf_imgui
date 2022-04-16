@@ -33,6 +33,32 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
     return inputElement->addValueListener(std::forward<decltype(listener)>(listener));
   }
 
+  [[nodiscard]] toml::table toToml() const override {
+    auto result = Pin::toToml();
+    if constexpr (std::derived_from<T, TomlSerializable>) {
+      auto elementData = inputElement->toToml();
+      elementData.insert_or_assign("width", static_cast<float>(inputElement->getWidth()));
+      result.insert_or_assign("data", elementData);
+    }
+    return result;
+  }
+
+  void setFromToml(const toml::table &src) override {
+    Pin::setFromToml(src);
+    if constexpr (std::derived_from<T, TomlSerializable>) {
+      if (auto data = src.find("data"); data != src.end()) {
+        if (auto dataTable = data->second.as_table(); dataTable != nullptr) {
+          inputElement->setFromToml(*dataTable);
+          if (auto width = dataTable->find("width"); width != dataTable->end()) {
+            if (auto widthVal = width->second.as_floating_point(); widthVal != nullptr) {
+              inputElement->setWidth(static_cast<float>(widthVal->get()));
+            }
+          }
+        }
+      }
+    }
+  }
+
  protected:
   void renderInfo() override {
     if (PinWithValue<ValueType>::getType() == Pin::Type::Input && !PinWithValue<ValueType>::hasAnyValidLinks()) {
@@ -42,7 +68,6 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
     }
   }
 
- private:
   std::unique_ptr<WidthDecorator<T>> inputElement;
 };
 }  // namespace pf::ui::ig::bp

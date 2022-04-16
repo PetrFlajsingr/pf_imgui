@@ -83,6 +83,8 @@ class PF_IMGUI_EXPORT Renderable {
    */
   virtual void renderImpl() = 0;
 
+  void setName(std::string newName);
+
  private:
   Visibility visibility = Visibility::Visible;
   Enabled enabled = Enabled::Yes;

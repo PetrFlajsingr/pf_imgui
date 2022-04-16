@@ -16,6 +16,14 @@ Selectable::Selectable(const std::string &elementName, const std::string &label,
                        Persistent persistent)
     : ItemElement(elementName), Labellable(label), ValueObservable(value), Resizable(s), Savable(persistent) {}
 
+toml::table Selectable::toToml() const { return toml::table{{"selected", getValue()}}; }
+
+void Selectable::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("selected"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+  }
+}
+
 void Selectable::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
@@ -23,13 +31,5 @@ void Selectable::renderImpl() {
     notifyValueChanged();
   }
 }
-
-void Selectable::unserialize_impl(const toml::table &src) {
-  if (auto newValIter = src.find("selected"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
-  }
-}
-
-toml::table Selectable::serialize_impl() const { return toml::table{{"selected", getValue()}}; }
 
 }  // namespace pf::ui::ig

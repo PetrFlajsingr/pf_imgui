@@ -95,6 +95,15 @@ class PF_IMGUI_EXPORT SpinInput
     }
   }
 
+  [[nodiscard]] toml::table toToml() const override { return toml::table{{"value", ValueObservable<T>::getValue()}}; }
+  void setFromToml(const toml::table &src) override {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+      }
+    }
+  }
+
  protected:
   void renderImpl() override {
     auto colorStyle = setColorStack();
@@ -117,18 +126,6 @@ class PF_IMGUI_EXPORT SpinInput
       ValueObservable<T>::setValueAndNotifyIfChanged(value);
       return;
     }
-  }
-
-  void unserialize_impl(const toml::table &src) override {
-    if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-      }
-    }
-  }
-
-  [[nodiscard]] toml::table serialize_impl() const override {
-    return toml::table{{"value", ValueObservable<T>::getValue()}};
   }
 
  private:

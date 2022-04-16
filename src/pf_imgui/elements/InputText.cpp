@@ -66,7 +66,9 @@ void InputText::clear() {
   buffer[0] = '\0';
 }
 
-void InputText::unserialize_impl(const toml::table &src) {
+toml::table InputText::toToml() const { return toml::table{{"text", text}}; }
+
+void InputText::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("text"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {
       text = *newVal;
@@ -76,8 +78,6 @@ void InputText::unserialize_impl(const toml::table &src) {
 
   std::snprintf(buffer.get(), text.size(), "%s", text.c_str());
 }
-
-toml::table InputText::serialize_impl() const { return toml::table{{"text", text}}; }
 
 void InputText::setValue(const std::string_view &newValue) {
   if (text != newValue) {
@@ -114,6 +114,38 @@ void InputText::setTextInner(std::string txt) {
   if (txt.size() > bufferLength) { txt = txt.substr(bufferLength); }
   std::ranges::copy(txt, buffer.get());
   buffer[txt.size()] = '\0';
+}
+
+TextInputType InputText::getInputType() const { return inputType; }
+
+void InputText::setInputType(TextInputType newInputType) { inputType = newInputType; }
+
+TextTrigger InputText::getInputTrigger() const {
+  if (flags & ImGuiInputTextFlags_EnterReturnsTrue) {
+    return TextTrigger::Enter;
+  } else {
+    return TextTrigger::Character;
+  }
+}
+
+void InputText::setInputTrigger(TextTrigger trigger) {
+  if (trigger == TextTrigger::Enter) {
+    flags |= ImGuiInputTextFlags_EnterReturnsTrue;
+  } else {
+    flags &= ~ImGuiInputTextFlags_EnterReturnsTrue;
+  }
+}
+
+Flags<TextFilter> InputText::getFilters() const {
+  const Flags<TextFilter> allFlags{magic_enum::enum_values<TextFilter>()};
+  const auto setFilterFlags = flags & static_cast<ImGuiInputTextFlags>(*allFlags);
+  return Flags<TextFilter>{static_cast<TextFilter>(setFilterFlags)};
+}
+
+void InputText::setFilters(Flags<TextFilter> filters) {
+  const Flags<TextFilter> allFlags{magic_enum::enum_values<TextFilter>()};
+  flags &= ~static_cast<ImGuiInputTextFlags>(*allFlags);
+  flags |= static_cast<ImGuiInputTextFlags>(*filters);
 }
 
 }  // namespace pf::ui::ig

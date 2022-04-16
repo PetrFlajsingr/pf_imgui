@@ -21,18 +21,18 @@ void Checkbox::renderImpl() {
   if (ImGui::Checkbox(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 
-void Checkbox::unserialize_impl(const toml::table &src) {
-  if (auto newValIter = src.find("checked"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
-  }
-}
-
-toml::table Checkbox::serialize_impl() const { return toml::table{{"checked", getValue()}}; }
-
 void Checkbox::setSelected(bool selected) { setValueAndNotifyIfChanged(selected); }
 
 bool Checkbox::isSelected() const { return getValue(); }
 
 void Checkbox::toggle() { setSelected(!isSelected()); }
+
+toml::table Checkbox::toToml() const { return toml::table{{"checked", getValue()}}; }
+
+void Checkbox::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("checked"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+  }
+}
 
 }  // namespace pf::ui::ig

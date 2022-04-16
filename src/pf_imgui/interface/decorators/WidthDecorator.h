@@ -52,7 +52,7 @@ class PF_IMGUI_EXPORT WidthDecorator : public T {
 
  protected:
   void renderImpl() override {
-    ImGui::SetNextItemWidth(width);
+    ImGui::SetNextItemWidth(static_cast<float>(width));
     T::renderImpl();
   }
 

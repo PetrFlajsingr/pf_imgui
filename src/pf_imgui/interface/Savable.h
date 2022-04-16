@@ -10,6 +10,7 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/interface/TomlSerializable.h>
 #include <string>
 #include <toml++/toml.h>
 
@@ -20,50 +21,24 @@ namespace pf::ui::ig {
  *
  * Provides a functionality to save subclasses' state and load it back up.
  */
-class PF_IMGUI_EXPORT Savable {
+class PF_IMGUI_EXPORT Savable : public TomlSerializable {
  public:
   /**
    * Construct Savable with enabled/disabled saving capability
    * @param persistent
    */
   explicit Savable(Persistent persistent);
+  virtual ~Savable() = default;
 
   Savable(Savable &&other) noexcept;
   Savable &operator=(Savable &&other) noexcept;
 
   /**
-   *
-   * @return
+   * @return true if the object is marked as persistent, thus saving its data to disk
    */
   [[nodiscard]] bool isPersistent() const;
 
   void setPersistent(bool persistent);
-
-  /**
-   * Load data from toml.
-   * @param src source toml data
-   */
-  void unserialize(const toml::table &src);
-  /**
-   * Save data to toml.
-   * @return toml::table if saving is enabled, nullopt otherwise
-   */
-  [[nodiscard]] std::optional<toml::table> serialize() const;
-  [[nodiscard]] toml::table forceSerialize() const;
-
-  virtual ~Savable() = default;
-
- protected:
-  /**
-   * Method for subclasses' implementation of deserialization.
-   * @param src source toml data
-   */
-  virtual void unserialize_impl(const toml::table &src) = 0;
-  /**
-   * Method for subclasses' implementation of serialization.
-   * @return serialized toml data
-   */
-  [[nodiscard]] virtual toml::table serialize_impl() const = 0;
 
  private:
   bool persist;

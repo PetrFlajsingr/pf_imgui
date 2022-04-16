@@ -7,7 +7,9 @@
 
 namespace pf::ui::ig {
 
-NodeBase::NodeBase(const std::string &name) : Renderable(name) {}
+NodeBase::NodeBase(const std::string &name) : Renderable(name), Positionable(Position{}), initSize(false) {}
+NodeBase::NodeBase(const std::string &name, Position initPosition)
+    : Renderable(name), Positionable(initPosition), initSize(true) {}
 
 ax::NodeEditor::NodeId NodeBase::getId() const { return id; }
 
@@ -15,35 +17,35 @@ NodeEditor &NodeBase::getNodeEditor() { return *parent; }
 
 const NodeEditor &NodeBase::getNodeEditor() const { return *parent; }
 
-Position NodeBase::getPosition() const {
-  auto context = parent->setContext();
-  return Position{ax::NodeEditor::GetNodePosition(getId())};
+void NodeBase::setPosition(Position newPosition) {
+  if (isInitialised) {
+    parent->setContext();
+    ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(newPosition));
+  } else {
+    initSize = true;
+  }
+  Positionable::setPosition(newPosition);
 }
 
-void NodeBase::setPosition(Position position) {
-  auto context = parent->setContext();
-  ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(position));
-}
-
-Size NodeBase::getSize() const {
-  auto context = parent->setContext();
+Size NodeBase::getNodeSize() const {
+  parent->setContext();
   return ax::NodeEditor::GetNodeSize(getId());
 }
 
 void NodeBase::centerOnScreen() {
-  auto context = parent->setContext();
+  parent->setContext();
   ax::NodeEditor::CenterNodeOnScreen(getId());
 }
 
 bool NodeBase::isSelected() const { return selected; }
 
 void NodeBase::select(bool appendToSelection) {
-  auto context = parent->setContext();
+  parent->setContext();
   ax::NodeEditor::SelectNode(getId(), appendToSelection);
 }
 
 void NodeBase::deselect() {
-  auto context = parent->setContext();
+  parent->setContext();
   ax::NodeEditor::DeselectNode(getId());
 }
 
@@ -60,5 +62,23 @@ PopupMenu &NodeBase::createOrGetPopupMenu() {
 bool NodeBase::hasPopupMenu() const { return popupMenu != nullptr; }
 
 void NodeBase::removePopupMenu() { popupMenu = nullptr; }
+
+void NodeBase::render() {
+  if (getVisibility() == Visibility::Visible) {
+    if (isInitialised) { setPosition(Position{ax::NodeEditor::GetNodePosition(getId())}); }
+    if (getEnabled() == Enabled::No) {
+      ImGui::BeginDisabled();
+      RAII raiiEnabled{ImGui::EndDisabled};
+      renderImpl();
+    } else {
+      renderImpl();
+    }
+    if (initSize) {
+      ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(getPosition()));
+      initSize = false;
+    }
+    isInitialised = true;
+  }
+}
 
 }  // namespace pf::ui::ig

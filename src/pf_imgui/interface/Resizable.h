@@ -29,6 +29,7 @@ class PF_IMGUI_EXPORT Resizable {
    * @param s size
    */
   explicit Resizable(const Size &s);
+  virtual ~Resizable() = default;
 
   Resizable(Resizable &&other) noexcept;
   Resizable &operator=(Resizable &&other) noexcept;
@@ -52,7 +53,11 @@ class PF_IMGUI_EXPORT Resizable {
     return observableImpl.addListener(std::forward<decltype(listener)>(listener));
   }
 
-  virtual ~Resizable() = default;
+ protected:
+  /**
+   * Set size without notifying observers.
+   */
+  void setSizeInner(Size newSize);
 
  private:
   Size size;

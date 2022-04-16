@@ -169,6 +169,22 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
     }
   }
 
+  [[nodiscard]] toml::table toToml() const override {
+    auto result = toml::table{};
+    if (selectedItemIndex.has_value()) {
+      const auto selectedItem = filteredItems[*selectedItemIndex];
+      result.insert_or_assign("selected", selectedItem->second->getLabel());
+    }
+    return result;
+  }
+  void setFromToml(const toml::table &src) override {
+    if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
+      if (auto selectedVal = selectedValIter->second.value<std::string>(); selectedVal.has_value()) {
+        setSelectedItem(selectedVal.value());
+      }
+    }
+  }
+
  protected:
   using AllColorCustomizable::setColorStack;
   using AllStyleCustomizable::setStyleStack;
@@ -201,23 +217,6 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
         }
       }
     }
-  }
-
-  void unserialize_impl(const toml::table &src) override {
-    if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
-      if (auto selectedVal = selectedValIter->second.value<std::string>(); selectedVal.has_value()) {
-        setSelectedItem(selectedVal.value());
-      }
-    }
-  }
-
-  [[nodiscard]] toml::table serialize_impl() const override {
-    auto result = toml::table{};
-    if (selectedItemIndex.has_value()) {
-      const auto selectedItem = filteredItems[*selectedItemIndex];
-      result.insert_or_assign("selected", selectedItem->second->getLabel());
-    }
-    return result;
   }
 
  private:

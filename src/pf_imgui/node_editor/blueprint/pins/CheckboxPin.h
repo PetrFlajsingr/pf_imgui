@@ -7,12 +7,16 @@
 
 #include "InteractablePin.h"
 #include <pf_imgui/elements/Checkbox.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
 
-class BPCheckboxPin : public InteractablePin<Checkbox> {
+class CheckboxPin : public InteractablePin<Checkbox> {
  public:
-  BPCheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width);
+  PF_IMGUI_BLUEPRINT_PIN_ID(CheckboxPin)
+  CheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width);
+
+  [[nodiscard]] static std::unique_ptr<CheckboxPin> ConstructFromToml(ig::Node *parent, const toml::table &src);
 };
 
 }  // namespace pf::ui::ig::bp

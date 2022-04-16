@@ -112,10 +112,19 @@ class PF_IMGUI_EXPORT InputText
    */
   void setPassword(bool passwd);
 
- protected:
-  void unserialize_impl(const toml::table &src) override;
-  [[nodiscard]] toml::table serialize_impl() const override;
+  [[nodiscard]] TextInputType getInputType() const;
+  void setInputType(TextInputType newInputType);
 
+  [[nodiscard]] TextTrigger getInputTrigger() const;
+  void setInputTrigger(TextTrigger trigger);
+
+  [[nodiscard]] Flags<TextFilter> getFilters() const;
+  void setFilters(Flags<TextFilter> filters);
+
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
+ protected:
   void renderImpl() override;
 
   void setTextInner(std::string txt);

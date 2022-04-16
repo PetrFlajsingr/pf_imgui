@@ -8,7 +8,15 @@
 namespace pf::ui::ig {
 
 Comment::Comment(const std::string &name, const std::string &label, Size initSize)
-    : NodeBase(name), Labellable(label), size(static_cast<ImVec2>(initSize)) {}
+    : NodeBase(name), Labellable(label), Resizable(initSize) {}
+
+Comment::Comment(const std::string &name, const Position &initPosition, const std::string &label, const Size &s)
+    : NodeBase(name, initPosition), Labellable(label), Resizable(s) {}
+
+void Comment::setSize(const Size &s) {
+  Resizable::setSize(s);
+  sizeDirty = true;
+}
 
 void Comment::renderImpl() {
   {
@@ -30,6 +38,10 @@ void Comment::renderImpl() {
     auto endNode = RAII{ax::NodeEditor::EndNode};
     ImGui::BeginVertical("content");
     {
+      if (sizeDirty) {
+        sizeDirty = false;
+        ax::NodeEditor::SetGroupSize(getId(), static_cast<ImVec2>(getSize()));
+      }
       ImGui::BeginHorizontal("header");
       {
         ImGui::Spring(1);
@@ -37,10 +49,11 @@ void Comment::renderImpl() {
         ImGui::Spring(1);
       }
       ImGui::EndHorizontal();
-      ax::NodeEditor::Group(size);
+      ax::NodeEditor::Group(static_cast<ImVec2>(getSize()));
+      const auto commentSize = ax::NodeEditor::GetNodeSize(getId());
+      setSizeInner(Size{commentSize});
     }
     ImGui::EndVertical();
   }
 }
-
 }  // namespace pf::ui::ig

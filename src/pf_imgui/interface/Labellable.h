@@ -43,8 +43,12 @@ class PF_IMGUI_EXPORT Labellable {
   * @param fmt format string
   * @param args arguments for format string
   */
-  void setLabel(const std::string &fmt, auto &&...args) {
-    label_ = fmt::format(fmt, std::forward<decltype(args)>(args)...);
+  template<typename... Args>
+  void setLabel(fmt::format_string<Args...> format, Args &&...args) {
+    setLabel(fmt::format(format, std::forward<Args>(args)...));
+  }
+  inline void setLabel(const std::string &newLabel) {
+    label_ = newLabel;
     observableImpl.notify(label_);
   }
 

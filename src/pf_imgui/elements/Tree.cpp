@@ -41,6 +41,14 @@ void TreeLeaf::setValue(const bool &newValue) {
   ValueObservable::setValue(newValue);
 }
 
+toml::table TreeLeaf::toToml() const { return toml::table{{"value", getValue()}}; }
+
+void TreeLeaf::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("value"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValue(*newVal); }
+  }
+}
+
 void TreeLeaf::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
@@ -51,13 +59,5 @@ void TreeLeaf::renderImpl() {
   if (ImGui::IsItemClicked()) { setValue(!getValue()); }
   if (limiter != nullptr && limiter->selected != this) { setValue(false); }
 }
-
-void TreeLeaf::unserialize_impl(const toml::table &src) {
-  if (auto newValIter = src.find("value"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValue(*newVal); }
-  }
-}
-
-toml::table TreeLeaf::serialize_impl() const { return toml::table{{"value", getValue()}}; }
 
 }  // namespace pf::ui::ig

@@ -16,6 +16,8 @@
 #include <limits>
 #include <atomic>
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wattributes"
 namespace jnk0le
 {
 	/*!
@@ -471,4 +473,5 @@ namespace jnk0le
 
 } // namespace
 
+#pragma GCC diagnostic pop
 #endif //RINGBUFFER_HPP

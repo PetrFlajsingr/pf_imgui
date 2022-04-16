@@ -37,6 +37,9 @@ void Renderable::render() {
     }
   }
 }
+
 const std::string &Renderable::getName() const { return name; }
+
+void Renderable::setName(std::string newName) { name = std::move(newName); }
 
 }  // namespace pf::ui::ig

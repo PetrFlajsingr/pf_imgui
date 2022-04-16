@@ -168,18 +168,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    */
   void cancelSelection() { selectedItemIndex = std::nullopt; }
 
- protected:
-  using AllColorCustomizable::setColorStack;
-  using AllStyleCustomizable::setStyleStack;
-  void unserialize_impl(const toml::table &src) override {
-    if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
-      if (auto selectedVal = selectedValIter->second.value<std::string>(); selectedVal.has_value()) {
-        setSelectedItem(selectedVal.value());
-      }
-    }
-  }
-
-  [[nodiscard]] toml::table serialize_impl() const override {
+  [[nodiscard]] toml::table toToml() const override {
     auto result = toml::table{};
     if (selectedItemIndex.has_value()) {
       const auto selectedItem = filteredItems[*selectedItemIndex];
@@ -187,6 +176,17 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     }
     return result;
   }
+  void setFromToml(const toml::table &src) override {
+    if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
+      if (auto selectedVal = selectedValIter->second.value<std::string>(); selectedVal.has_value()) {
+        setSelectedItem(selectedVal.value());
+      }
+    }
+  }
+
+ protected:
+  using AllColorCustomizable::setColorStack;
+  using AllStyleCustomizable::setStyleStack;
 
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();

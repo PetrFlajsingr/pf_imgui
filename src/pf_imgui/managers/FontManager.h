@@ -16,6 +16,7 @@
 #include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/icons.h>
+#include <range/v3/view/transform.hpp>
 #include <span>
 #include <string>
 #include <unordered_map>
@@ -195,6 +196,14 @@ class PF_IMGUI_EXPORT FontManager {
    * @return std::nullopt if no font is found, otherwise a pointer to it
    */
   [[nodiscard]] std::optional<Font> fontByName(const std::string &name) const;
+  /**
+   * @return all fonts currently available inside FontManager
+   */
+  [[nodiscard]] auto getFonts() const {
+    return fonts | ranges::views::transform([](const auto &fontRecord) {
+             return Font{fontRecord.second, fontRecord.first};
+           });
+  }
 
   /**
    * Build a font from ttf file.

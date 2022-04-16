@@ -86,6 +86,19 @@ class PF_IMGUI_EXPORT Slider2D
         Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(size),
         extremesX(minMaxX), extremesY(minMaxY) {}
 
+  [[nodiscard]] toml::table toToml() const override {
+    const auto value = ValueObservable<StorageType>::getValue();
+    return toml::table{{"value", serializeGlmVec(value)}};
+  }
+  void setFromToml(const toml::table &src) override {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<StorageType>(*newVal);
+        if (vecValue.has_value()) { ValueObservable<StorageType>::setValueAndNotifyIfChanged(vecValue.value()); }
+      }
+    }
+  }
+
  protected:
   void renderImpl() override {
     auto colorStyle = setColorStack();
@@ -107,20 +120,6 @@ class PF_IMGUI_EXPORT Slider2D
       return;
     }
     if (valueChanged && oldValue != *address) { ValueObservable<StorageType>::notifyValueChanged(); }
-  }
-
-  void unserialize_impl(const toml::table &src) override {
-    if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-        const auto vecValue = safeDeserializeGlmVec<StorageType>(*newVal);
-        if (vecValue.has_value()) { ValueObservable<StorageType>::setValueAndNotifyIfChanged(vecValue.value()); }
-      }
-    }
-  }
-
-  [[nodiscard]] toml::table serialize_impl() const override {
-    const auto value = ValueObservable<StorageType>::getValue();
-    return toml::table{{"value", serializeGlmVec(value)}};
   }
 
  private:

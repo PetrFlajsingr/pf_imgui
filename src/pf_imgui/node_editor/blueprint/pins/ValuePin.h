@@ -7,6 +7,7 @@
 
 #include "Pin.h"
 #include "PinDraw.h"
+#include <pf_imgui/node_editor/blueprint/common.h>
 #include <string>
 
 namespace pf::ui::ig::bp {
@@ -14,6 +15,7 @@ namespace pf::ui::ig::bp {
 template<typename T>
 class ValuePin : public Pin {
  public:
+  PF_IMGUI_BLUEPRINT_PIN_ID(ValuePin)
   using ValueType = T;
 
   ValuePin(const std::string &name, const std::string &label, Color color) : Pin(name, label, color) {}
@@ -21,6 +23,13 @@ class ValuePin : public Pin {
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override {
     if (!Pin::acceptsLinkWith(other)) { return false; }
     return dynamic_cast<ValuePin *>(&other) != nullptr;
+  }
+
+  [[nodiscard]] static std::unique_ptr<ValuePin> ConstructFromToml(ig::Node *parent, const toml::table &src) {
+    auto result = std::make_unique<ValuePin>("", "", Color::White);
+    result->parent = parent;
+    result->setFromToml(src);
+    return result;
   }
 
  protected:
