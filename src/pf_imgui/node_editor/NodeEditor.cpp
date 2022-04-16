@@ -6,7 +6,6 @@
 #include "Link.h"
 #include "Node.h"
 #include "Pin.h"
-#include <iostream>
 #include <pf_common/RAII.h>
 #include <pf_imgui/unique_id.h>
 #include <range/v3/view/cache1.hpp>
@@ -14,6 +13,7 @@
 #include <range/v3/view/filter.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
+
 namespace pf::ui::ig {
 
 NodeEditor::NodeEditor(const std::string &name, Size size)
@@ -172,7 +172,6 @@ void NodeEditor::handleLinkDeletion() {
   ax::NodeEditor::LinkId deletedLinkId;
   while (ax::NodeEditor::QueryDeletedLink(&deletedLinkId)) {
     if (ax::NodeEditor::AcceptDeletedItem()) {
-      std::cout << "Accepting link delete" << std::endl;
       const auto getLinkId = [](auto &link) { return link->id; };
       auto iter = std::ranges::find(links, deletedLinkId, getLinkId);
       if (iter != links.end()) {
@@ -187,7 +186,6 @@ void NodeEditor::handleNodeDeletion() {
   ax::NodeEditor::NodeId nodeId;
   while (ax::NodeEditor::QueryDeletedNode(&nodeId)) {
     if (ax::NodeEditor::AcceptDeletedItem()) {
-      std::cout << "Accepting node delete" << std::endl;
       if (const auto nodeToDelete = findNodeById(nodeId); nodeToDelete.has_value()) {
         nodeToDelete.value()->markedForDelete = true;
         markNodesDirty();
@@ -338,9 +336,7 @@ void NodeEditor::markLinksDirty() { linksDirty = true; }
 
 void NodeEditor::markNodesDirty() { nodesDirty = true; }
 
-void NodeEditor::setContext() const {
-  ax::NodeEditor::SetCurrentEditor(context);
-}
+void NodeEditor::setContext() const { ax::NodeEditor::SetCurrentEditor(context); }
 
 void NodeEditor::handlePopupMenuShowRequests() {
   ax::NodeEditor::NodeId contextNodeId;

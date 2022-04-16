@@ -15,7 +15,6 @@ Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), Labellable(
 
 Pin::Pin(const std::string &name, const std::string &label) : Renderable(name), Labellable(label) {}
 
-
 ax::NodeEditor::PinId Pin::getId() const { return id; }
 
 Pin::Type Pin::getType() const { return type; }

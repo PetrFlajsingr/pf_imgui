@@ -5,8 +5,8 @@
 #ifndef PF_IMGUI_BLUEPRINT_NODEEDITOR_H
 #define PF_IMGUI_BLUEPRINT_NODEEDITOR_H
 
-#include <pf_imgui/node_editor/NodeEditor.h>
 #include <pf_imgui/interface/TomlSerializable.h>
+#include <pf_imgui/node_editor/NodeEditor.h>
 
 namespace pf::ui::ig::bp {
 
@@ -31,6 +31,6 @@ class NodeEditor : public ig::NodeEditor, public TomlSerializable {
   [[nodiscard]] toml::array commentsToToml() const;
 };
 
-}
+}  // namespace pf::ui::ig::bp
 
 #endif  //PF_IMGUI_BLUEPRINT_NODEEDITOR_H

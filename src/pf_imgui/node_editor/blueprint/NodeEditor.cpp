@@ -90,7 +90,8 @@ void NodeEditor::setFromToml(const toml::table &src) {
             if (auto positionXToml = positionXIter->second.as_floating_point(); positionXToml != nullptr) {
               if (auto positionYIter = commentToml->find("positionY"); positionYIter != commentToml->end()) {
                 if (auto positionYToml = positionYIter->second.as_floating_point(); positionYToml != nullptr) {
-                  position = Position{static_cast<float>(positionXToml->get()), static_cast<float>(positionYToml->get())};
+                  position =
+                      Position{static_cast<float>(positionXToml->get()), static_cast<float>(positionYToml->get())};
                 }
               }
             }
@@ -110,9 +111,7 @@ void NodeEditor::setFromToml(const toml::table &src) {
           }
           if (!width.has_value() || !height.has_value() || !label.has_value() || !name.has_value()) { return; }
           auto &newComment = addComment(*name, *label, Size{*width, *height});
-          if (position.has_value()) {
-            newComment.setPosition(position.value());
-          }
+          if (position.has_value()) { newComment.setPosition(position.value()); }
         }
       });
     }

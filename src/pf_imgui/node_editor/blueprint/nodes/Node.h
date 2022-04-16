@@ -5,9 +5,9 @@
 #ifndef PF_IMUI_NODE_EDITOR_BLUEPRINTNODE_H
 #define PF_IMUI_NODE_EDITOR_BLUEPRINTNODE_H
 
-#include <pf_imgui/node_editor/blueprint/common.h>
 #include <pf_imgui/interface/TomlSerializable.h>
 #include <pf_imgui/node_editor/Node.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
 class NodeEditor;

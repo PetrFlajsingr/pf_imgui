@@ -9,13 +9,13 @@
 #define PF_IMGUI_NODE_EDITOR_PIN_H
 
 #include "fwd.h"
-#include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <imgui_node_editor.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
