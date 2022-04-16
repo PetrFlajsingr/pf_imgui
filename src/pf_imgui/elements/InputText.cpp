@@ -116,4 +116,36 @@ void InputText::setTextInner(std::string txt) {
   buffer[txt.size()] = '\0';
 }
 
+TextInputType InputText::getInputType() const { return inputType; }
+
+void InputText::setInputType(TextInputType newInputType) { inputType = newInputType; }
+
+TextTrigger InputText::getInputTrigger() const {
+  if (flags & ImGuiInputTextFlags_EnterReturnsTrue) {
+    return TextTrigger::Enter;
+  } else {
+    return TextTrigger::Character;
+  }
+}
+
+void InputText::setInputTrigger(TextTrigger trigger) {
+  if (trigger == TextTrigger::Enter) {
+    flags |= ImGuiInputTextFlags_EnterReturnsTrue;
+  } else {
+    flags &= ~ImGuiInputTextFlags_EnterReturnsTrue;
+  }
+}
+
+Flags<TextFilter> InputText::getFilters() const {
+  const Flags<TextFilter> allFlags{magic_enum::enum_values<TextFilter>()};
+  const auto setFilterFlags = flags & static_cast<ImGuiInputTextFlags>(*allFlags);
+  return Flags<TextFilter>{static_cast<TextFilter>(setFilterFlags)};
+}
+
+void InputText::setFilters(Flags<TextFilter> filters) {
+  const Flags<TextFilter> allFlags{magic_enum::enum_values<TextFilter>()};
+  flags &= ~static_cast<ImGuiInputTextFlags>(*allFlags);
+  flags |= static_cast<ImGuiInputTextFlags>(*filters);
+}
+
 }  // namespace pf::ui::ig

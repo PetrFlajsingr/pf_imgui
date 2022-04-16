@@ -18,6 +18,8 @@ class EventPin : public Pin {
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 
+  [[nodiscard]] static std::unique_ptr<EventPin> ConstructFromToml(const toml::table &src);
+
  protected:
   void renderIcon() override;
 };

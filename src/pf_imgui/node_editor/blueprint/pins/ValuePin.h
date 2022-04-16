@@ -25,6 +25,12 @@ class ValuePin : public Pin {
     return dynamic_cast<ValuePin *>(&other) != nullptr;
   }
 
+  [[nodiscard]] static std::unique_ptr<ValuePin> ConstructFromToml(const toml::table &src) {
+    auto result = std::make_unique<ValuePin>("", "", Color::White);
+    result->setFromToml(src);
+    return std::move(result);
+  }
+
  protected:
   void renderIcon() override {
     const static auto renderAreaSize = ImVec2{16, 16};

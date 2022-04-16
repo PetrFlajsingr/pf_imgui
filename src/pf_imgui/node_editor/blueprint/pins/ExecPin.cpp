@@ -25,6 +25,12 @@ bool ExecPin::acceptsLinkWith(ig::Pin &other) const {
   return dynamic_cast<ExecPin *>(&other) != nullptr;
 }
 
+std::unique_ptr<ExecPin> ExecPin::ConstructFromToml(const toml::table &src) {
+  auto result = std::make_unique<ExecPin>("", "", Color::White);
+  result->setFromToml(src);
+  return std::move(result);
+}
+
 void ExecPin::addLink(Link &link) {
   std::ranges::for_each(getLinks()
                             | ranges::views::filter([&link](const auto &l) { return l.getId() != link.getId(); }),

@@ -9,7 +9,7 @@
 namespace pf::ui::ig::bp {
 
 toml::table Node::toToml() const {
-  auto result = toml::table{{"name", getName()}, {"type", reinterpret_cast<details::IntPtr_t>(getTypeId())}};
+  auto result = toml::table{{"name", getName()}, {"type", details::typeIdToIntPtr_t(getTypeId())}};
   auto inputPinsArray = toml::array{};
   std::ranges::for_each(getInputPins(), [&](const ig::Pin &inputPin) {
     if (auto pin = dynamic_cast<const Pin *>(&inputPin); pin != nullptr) { inputPinsArray.push_back(pin->toToml()); }

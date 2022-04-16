@@ -14,6 +14,12 @@ bool EventPin::acceptsLinkWith(ig::Pin &other) const {
   return dynamic_cast<EventPin *>(&other) != nullptr;
 }
 
+std::unique_ptr<EventPin> EventPin::ConstructFromToml(const toml::table &src) {
+  auto result = std::make_unique<EventPin>("", "", Color::White);
+  result->setFromToml(src);
+  return std::move(result);
+}
+
 void EventPin::renderIcon() {
   ImVec2 iconSize{16, 16};
   if (ImGui::IsRectVisible(iconSize)) {

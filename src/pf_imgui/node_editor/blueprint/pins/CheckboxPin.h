@@ -15,6 +15,8 @@ class BPCheckboxPin : public InteractablePin<Checkbox> {
  public:
   PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(BPCheckboxPin)
   BPCheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width);
+
+  [[nodiscard]] static std::unique_ptr<BPCheckboxPin> ConstructFromToml(const toml::table &src);
 };
 
 }  // namespace pf::ui::ig::bp

@@ -20,8 +20,9 @@ bool Pin::acceptsLinkWith(ig::Pin &other) const {
 }
 
 toml::table Pin::toToml() const {
+  // TODO: missing properties like link colors, pin type, ?pin id? most likely gonna be generated on construction or something
   return toml::table{{"name", getName()},
-                     {"type", reinterpret_cast<details::IntPtr_t>(getTypeId())},
+                     {"type", details::typeIdToIntPtr_t(getTypeId())},
                      {"label", getLabel()},
                      {"color", static_cast<ImU32>(getColor())}};
 }

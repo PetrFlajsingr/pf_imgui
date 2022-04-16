@@ -171,6 +171,10 @@ class PF_IMGUI_EXPORT DragInput
    */
   void setMax(ParamType newMax) { max = newMax; }
 
+  [[nodiscard]] std::string_view getFormat() const { return format; }
+
+  void setFormat(std::string newFormat) { format = std::move(newFormat); }
+
   [[nodiscard]] toml::table toToml() const override {
     const auto value = ValueObservable<T>::getValue();
     if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {

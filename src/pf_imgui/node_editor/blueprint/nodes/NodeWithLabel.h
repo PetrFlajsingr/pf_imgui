@@ -13,12 +13,13 @@ namespace pf::ui::ig::bp {
 
 class NodeWithLabel : public Node, public Labellable {
  public:
+  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(NodeWithLabel)
   NodeWithLabel(const std::string &name, std::string label);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(NodeWithLabel)
+  [[nodiscard]] static std::unique_ptr<NodeWithLabel> ConstructFromToml(const toml::table &src);
  protected:
   void renderHeader() override;
 };

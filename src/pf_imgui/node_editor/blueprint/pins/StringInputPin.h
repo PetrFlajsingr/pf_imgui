@@ -25,6 +25,11 @@ class StringInputPin : public InteractablePin<InputText> {
 
   StringInputPin(const std::string &name, const std::string &label, Color color, InputConfig &&config);
 
+  [[nodiscard]] static std::unique_ptr<StringInputPin> ConstructFromToml(const toml::table &src);
+
+  toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
  private:
   static typename InputText::Config CreateInputConfig(const std::string &name, const std::string &label,
                                                       InputConfig &&config);

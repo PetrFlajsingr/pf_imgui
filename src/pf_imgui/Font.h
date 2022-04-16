@@ -7,6 +7,7 @@
 
 #include <imgui.h>
 #include <pf_common/RAII.h>
+#include <string>
 #include <string_view>
 
 namespace pf::ui::ig {
