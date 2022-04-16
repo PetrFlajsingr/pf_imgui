@@ -33,7 +33,7 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
     return inputElement->addValueListener(std::forward<decltype(listener)>(listener));
   }
 
-  virtual [[nodiscard]] toml::table toToml() const override {
+  [[nodiscard]] toml::table toToml() const override {
     auto result = Pin::toToml();
     if constexpr (std::derived_from<T, TomlSerializable>) {
       auto elementData = inputElement->toToml();
@@ -43,7 +43,7 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
     return result;
   }
 
-  virtual void setFromToml(const toml::table &src) override {
+  void setFromToml(const toml::table &src) override {
     Pin::setFromToml(src);
     if constexpr (std::derived_from<T, TomlSerializable>) {
       if (auto data = src.find("data"); data != src.end()) {

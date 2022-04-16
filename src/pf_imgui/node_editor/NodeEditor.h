@@ -69,6 +69,21 @@ class NodeEditor : public Element, public Resizable {
   }
 
   /**
+   * Get all comments in editor
+   * @return all comments in editor
+   */
+  [[nodiscard]] auto getComments() {
+    return comments | ranges::views::transform([](auto &comment) -> Comment & { return *comment; });
+  }
+  /**
+   * Get all comments in editor
+   * @return all comments in editor
+   */
+  [[nodiscard]] auto getComments() const {
+    return comments | ranges::views::transform([](auto &comment) -> const Comment & { return *comment; });
+  }
+
+  /**
    * Get all links in editor
    * @return all links in editor
    */
@@ -139,6 +154,8 @@ class NodeEditor : public Element, public Resizable {
    * Resume the editor from suspended state.
    */
   void resume();
+
+  Link &addLink(std::string linkName, Pin &inputPin, Pin &outputPin);
 
   /**
    * Get all nodes currently selected by user.
@@ -231,16 +248,20 @@ class NodeEditor : public Element, public Resizable {
   void markLinksDirty();
   void markNodesDirty();
 
-  [[nodiscard]] RAII setContext() const;
+  void setContext() const;
 
  protected:
   void renderImpl() override;
 
- private:
   std::optional<Node *> findNodeById(ax::NodeEditor::NodeId nodeId);
   std::optional<Comment *> findCommentById(ax::NodeEditor::NodeId nodeId);
   std::optional<Pin *> findPinById(ax::NodeEditor::PinId pinId);
   std::optional<Link *> findLinkById(ax::NodeEditor::LinkId linkId);
+
+  std::optional<Node *> findNodeByName(const std::string &nodeName);
+  std::optional<Comment *> findCommentByName(const std::string &nodeName);
+  std::optional<Pin *> findPinByName(const std::string &pinName);
+  std::optional<Link *> findLinkByName(const std::string &linkName);
 
   void handleCreation();
   void handleLinkCreation();
@@ -249,6 +270,8 @@ class NodeEditor : public Element, public Resizable {
   void handleDeletion();
   void handleLinkDeletion();
   void handleNodeDeletion();
+
+  void removeMarkedElements();
 
   void handleSelectionChange();
 

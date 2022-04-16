@@ -11,12 +11,12 @@
 
 namespace pf::ui::ig::bp {
 
-class BPCheckboxPin : public InteractablePin<Checkbox> {
+class CheckboxPin : public InteractablePin<Checkbox> {
  public:
-  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(BPCheckboxPin)
-  BPCheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width);
+  PF_IMGUI_BLUEPRINT_PIN_ID(CheckboxPin)
+  CheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width);
 
-  [[nodiscard]] static std::unique_ptr<BPCheckboxPin> ConstructFromToml(const toml::table &src);
+  [[nodiscard]] static std::unique_ptr<CheckboxPin> ConstructFromToml(ig::Node *parent, const toml::table &src);
 };
 
 }  // namespace pf::ui::ig::bp

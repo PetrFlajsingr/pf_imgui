@@ -14,10 +14,11 @@ bool EventPin::acceptsLinkWith(ig::Pin &other) const {
   return dynamic_cast<EventPin *>(&other) != nullptr;
 }
 
-std::unique_ptr<EventPin> EventPin::ConstructFromToml(const toml::table &src) {
+std::unique_ptr<EventPin> EventPin::ConstructFromToml(ig::Node *parent, const toml::table &src) {
   auto result = std::make_unique<EventPin>("", "", Color::White);
+  result->parent = parent;
   result->setFromToml(src);
-  return std::move(result);
+  return result;
 }
 
 void EventPin::renderIcon() {

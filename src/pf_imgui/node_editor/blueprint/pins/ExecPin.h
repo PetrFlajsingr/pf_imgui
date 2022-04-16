@@ -13,12 +13,12 @@ namespace pf::ui::ig::bp {
 
 class ExecPin : public Pin {
  public:
-  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(ExecPin)
+  PF_IMGUI_BLUEPRINT_PIN_ID(ExecPin)
   ExecPin(const std::string &name, const std::string &label, Color pinColor);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 
-  [[nodiscard]] static std::unique_ptr<ExecPin> ConstructFromToml(const toml::table &src);
+  [[nodiscard]] static std::unique_ptr<ExecPin> ConstructFromToml(ig::Node *parent, const toml::table &src);
 
  protected:
   void renderIcon() override;

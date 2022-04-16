@@ -6,6 +6,7 @@
 #include "Link.h"
 #include "Node.h"
 #include "Pin.h"
+#include <iostream>
 #include <pf_common/RAII.h>
 #include <pf_imgui/unique_id.h>
 #include <range/v3/view/cache1.hpp>
@@ -13,7 +14,6 @@
 #include <range/v3/view/filter.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
-
 namespace pf::ui::ig {
 
 NodeEditor::NodeEditor(const std::string &name, Size size)
@@ -26,7 +26,7 @@ NodeEditor::~NodeEditor() { ax::NodeEditor::DestroyEditor(context); }
 
 void NodeEditor::renderImpl() {
   {
-    auto scopedContext = setContext();
+    setContext();
     ax::NodeEditor::Begin(getName().c_str(), static_cast<ImVec2>(getSize()));
     auto end = RAII{ax::NodeEditor::End};
     {
@@ -73,6 +73,33 @@ std::optional<Link *> NodeEditor::findLinkById(ax::NodeEditor::LinkId linkId) {
   return std::nullopt;
 }
 
+std::optional<Node *> NodeEditor::findNodeByName(const std::string &nodeName) {
+  const auto getNodeName = [](auto &node) { return node->getName(); };
+  if (auto iter = std::ranges::find(nodes, nodeName, getNodeName); iter != nodes.end()) { return iter->get(); }
+  return std::nullopt;
+}
+
+std::optional<Comment *> NodeEditor::findCommentByName(const std::string &nodeName) {
+  const auto getCommentName = [](auto &comment) { return comment->getName(); };
+  if (auto iter = std::ranges::find(comments, nodeName, getCommentName); iter != comments.end()) { return iter->get(); }
+  return std::nullopt;
+}
+
+std::optional<Pin *> NodeEditor::findPinByName(const std::string &pinName) {
+  const auto getPinName = [](auto &pin) { return pin->getName(); };
+  auto pins = nodes
+      | ranges::views::transform([](auto &node) { return ranges::views::concat(node->inputPins, node->outputPins); })
+      | ranges::views::cache1 | ranges::views::join;
+  if (auto iter = std::ranges::find(pins, pinName, getPinName); iter != pins.end()) { return iter->get(); }
+  return std::nullopt;
+}
+
+std::optional<Link *> NodeEditor::findLinkByName(const std::string &linkName) {
+  const auto getLinkName = [](auto &link) { return link->getName(); };
+  if (auto iter = std::ranges::find(links, linkName, getLinkName); iter != links.end()) { return iter->get(); }
+  return std::nullopt;
+}
+
 void NodeEditor::handleCreation() {
   auto endCreate = RAII{ax::NodeEditor::EndCreate};
   if (ax::NodeEditor::BeginCreate()) {
@@ -111,9 +138,7 @@ void NodeEditor::handleLinkCreation() {
           if (inPin->getType() == Pin::Type::Output && outPin->getType() == Pin::Type::Input) {
             std::swap(inPin, outPin);
           }
-          auto &newLink = links.emplace_back(std::make_unique<Link>(uniqueId(), getNextId(), inPin, outPin));
-          inPin->addLink(*newLink);
-          outPin->addLink(*newLink);
+          addLink(uniqueId(), *inPin, *outPin);
         }
       }
     }
@@ -140,12 +165,14 @@ void NodeEditor::handleDeletion() {
     handleLinkDeletion();
     handleNodeDeletion();
   }
+  removeMarkedElements();
 }
 
 void NodeEditor::handleLinkDeletion() {
   ax::NodeEditor::LinkId deletedLinkId;
   while (ax::NodeEditor::QueryDeletedLink(&deletedLinkId)) {
     if (ax::NodeEditor::AcceptDeletedItem()) {
+      std::cout << "Accepting link delete" << std::endl;
       const auto getLinkId = [](auto &link) { return link->id; };
       auto iter = std::ranges::find(links, deletedLinkId, getLinkId);
       if (iter != links.end()) {
@@ -154,33 +181,69 @@ void NodeEditor::handleLinkDeletion() {
       }
     }
   }
-  if (linksDirty) {
-    std::ranges::for_each(getLinks() | ranges::views::filter([](const auto &link) { return !link.isValid(); }),
-                          [](auto &link) {
-                            link.observableDelete.notify();
-                            link.getInputPin().observableLink.notify(link);
-                            link.getOutputPin().observableLink.notify(link);
-                          });
-    auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
-    links.erase(beginRm, endRm);
-    linksDirty = false;
-  }
 }
 
 void NodeEditor::handleNodeDeletion() {
   ax::NodeEditor::NodeId nodeId;
   while (ax::NodeEditor::QueryDeletedNode(&nodeId)) {
     if (ax::NodeEditor::AcceptDeletedItem()) {
-      const auto nodeToDelete = findNodeById(nodeId);
-      nodeToDelete.value()->markedForDelete = true;
-      markNodesDirty();
+      std::cout << "Accepting node delete" << std::endl;
+      if (const auto nodeToDelete = findNodeById(nodeId); nodeToDelete.has_value()) {
+        nodeToDelete.value()->markedForDelete = true;
+        markNodesDirty();
+      } else if (const auto commentToDelete = findCommentById(nodeId); commentToDelete.has_value()) {
+        commentToDelete.value()->markedForDelete = true;
+        markNodesDirty();
+      }
     }
   }
+}
+
+void NodeEditor::removeMarkedElements() {
+  if (linksDirty) {
+    std::ranges::for_each(getLinks() | ranges::views::filter([](const auto &link) { return !link.isValid(); }),
+                          [](auto &link) {
+                            link.observableDelete.notify();
+                            if (link.inputPin != nullptr) { link.getInputPin().observableLink.notify(link); }
+                            if (link.outputPin != nullptr) { link.getOutputPin().observableLink.notify(link); }
+                          });
+    auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
+    links.erase(beginRm, endRm);
+    linksDirty = false;
+  }
+
   if (nodesDirty) {
-    std::ranges::for_each(getNodes() | ranges::views::filter([](const auto &node) { return node.markedForDelete; }),
-                          [](auto &node) { node.observableDelete.notify(); });
-    auto [beginRm, endRm] = std::ranges::remove_if(nodes, [](const auto &node) { return node->markedForDelete; });
-    nodes.erase(beginRm, endRm);
+    {
+      auto markedNodes = getNodes() | ranges::views::filter([](const auto &node) { return node.markedForDelete; });
+      auto inputPins =
+          markedNodes | ranges::views::transform([](auto &node) { return node.getInputPins(); }) | ranges::views::join;
+      std::ranges::for_each(inputPins, [](auto &pin) {
+        std::ranges::for_each(pin.getLinks(), [](auto &link) {
+          link.invalidate();
+          link.inputPin = nullptr;
+        });
+      });
+      auto outputPins =
+          markedNodes | ranges::views::transform([](auto &node) { return node.getOutputPins(); }) | ranges::views::join;
+      std::ranges::for_each(outputPins, [](auto &pin) {
+        std::ranges::for_each(pin.getLinks(), [](auto &link) {
+          link.invalidate();
+          link.outputPin = nullptr;
+        });
+      });
+
+      std::ranges::for_each(markedNodes, [](auto &node) { node.observableDelete.notify(); });
+      auto [beginRm, endRm] = std::ranges::remove_if(nodes, [](const auto &node) { return node->markedForDelete; });
+      nodes.erase(beginRm, endRm);
+    }
+    {
+      auto markedComments =
+          getComments() | ranges::views::filter([](const auto &node) { return node.markedForDelete; });
+      std::ranges::for_each(markedComments, [](auto &comment) { comment.observableDelete.notify(); });
+      auto [beginRm, endRm] =
+          std::ranges::remove_if(comments, [](const auto &comment) { return comment->markedForDelete; });
+      comments.erase(beginRm, endRm);
+    }
     nodesDirty = false;
   }
 }
@@ -222,33 +285,40 @@ void NodeEditor::handleSelectionChange() {
 }
 
 bool NodeEditor::isSuspended() const {
-  auto scopedContext = setContext();
+  setContext();
   return ax::NodeEditor::IsSuspended();
 }
 
 void NodeEditor::suspend() {
-  auto scopedContext = setContext();
+  setContext();
   ax::NodeEditor::Suspend();
 }
 
 void NodeEditor::resume() {
-  auto scopedContext = setContext();
+  setContext();
   ax::NodeEditor::Resume();
 }
 
+Link &NodeEditor::addLink(std::string linkName, Pin &inputPin, Pin &outputPin) {
+  auto &newLink = links.emplace_back(std::make_unique<Link>(linkName, getNextId(), &inputPin, &outputPin));
+  inputPin.addLink(*newLink);
+  outputPin.addLink(*newLink);
+  return *newLink;
+}
+
 void NodeEditor::clearSelection() {
-  auto scopedContext = setContext();
+  setContext();
   ax::NodeEditor::ClearSelection();
 }
 
 void NodeEditor::navigateToContent(std::optional<std::chrono::milliseconds> animationLength) {
-  auto scopedContext = setContext();
+  setContext();
   ax::NodeEditor::NavigateToContent(
       static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
 }
 
 void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::milliseconds> animationLength) {
-  auto scopedContext = setContext();
+  setContext();
   ax::NodeEditor::NavigateToSelection(
       zoomIn, static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
 }
@@ -268,9 +338,8 @@ void NodeEditor::markLinksDirty() { linksDirty = true; }
 
 void NodeEditor::markNodesDirty() { nodesDirty = true; }
 
-RAII NodeEditor::setContext() const {
+void NodeEditor::setContext() const {
   ax::NodeEditor::SetCurrentEditor(context);
-  return RAII{[] { ax::NodeEditor::SetCurrentEditor(nullptr); }};
 }
 
 void NodeEditor::handlePopupMenuShowRequests() {
@@ -340,7 +409,7 @@ void NodeEditor::renderPopupMenuForRequested() {
 }
 
 void NodeEditor::handleClickEvents() {
-  auto scopedContext = setContext();
+  setContext();
   const auto doubleClickedNode = ax::NodeEditor::GetDoubleClickedNode();
   const auto doubleClickedPin = ax::NodeEditor::GetDoubleClickedPin();
   const auto doubleClickedLink = ax::NodeEditor::GetDoubleClickedLink();
@@ -362,7 +431,7 @@ void NodeEditor::handleClickEvents() {
 }
 
 void NodeEditor::handleHoverEvents() {
-  auto scopedContext = setContext();
+  setContext();
   const auto hoveredNode = ax::NodeEditor::GetHoveredNode();
   const auto hoveredPin = ax::NodeEditor::GetHoveredPin();
   const auto hoveredLink = ax::NodeEditor::GetHoveredLink();
@@ -397,5 +466,4 @@ void NodeEditor::handleHoverEvents() {
     hoverIds.link = hoveredLink;
   }
 }
-
 }  // namespace pf::ui::ig

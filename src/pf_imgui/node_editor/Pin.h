@@ -62,7 +62,6 @@ class Pin : public Renderable, public Labellable, public Hoverable {
    * @param label text rendered next to the pin
    */
   Pin(const std::string &name, const std::string &label);
-  ~Pin() override;
 
   /**
    * Get internally used id of the pin.
@@ -223,7 +222,6 @@ class Pin : public Renderable, public Labellable, public Hoverable {
    */
   virtual void addLink(Link &link);
 
- private:
   ax::NodeEditor::PinId id;
   Type type;
 

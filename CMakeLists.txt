@@ -189,7 +189,10 @@ set(SOURCES
         src/pf_imgui/elements/TimePicker.cpp
         src/pf_imgui/DockBuilder.cpp
         src/pf_imgui/dialogs/BackgroundDockingArea.cpp
-        src/pf_imgui/node_editor/blueprint/nodes/Node.cpp)
+        src/pf_imgui/node_editor/blueprint/nodes/Node.cpp
+        src/pf_imgui/node_editor/blueprint/NodeEditor.cpp
+        src/pf_imgui/node_editor/blueprint/common.cpp
+        )
 
 set(INCLUDES
         src/pf_imgui/fwd.h
@@ -365,7 +368,11 @@ set(INCLUDES
         src/pf_imgui/DockBuilder.h
         src/pf_imgui/elements/LogPanel.h
         src/pf_imgui/dialogs/BackgroundDockingArea.h
-        src/pf_imgui/node_editor/blueprint/nodes/Node.h src/pf_imgui/interface/TomlSerializable.h src/pf_imgui/node_editor/blueprint/common.h)
+        src/pf_imgui/node_editor/blueprint/nodes/Node.h
+        src/pf_imgui/interface/TomlSerializable.h
+        src/pf_imgui/node_editor/blueprint/common.h
+        src/pf_imgui/node_editor/blueprint/NodeEditor.h
+        )
 
 list(APPEND INCLUDES ${toml++_headers})
 

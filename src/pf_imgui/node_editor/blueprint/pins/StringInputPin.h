@@ -13,7 +13,7 @@ namespace pf::ui::ig::bp {
 
 class StringInputPin : public InteractablePin<InputText> {
  public:
-  PF_IMGUI_BLUEPRINT_OVERRIDE_GETTYPEID(StringInputPin)
+  PF_IMGUI_BLUEPRINT_PIN_ID(StringInputPin)
   struct InputConfig {
     Width width;
     std::string value{};
@@ -25,7 +25,7 @@ class StringInputPin : public InteractablePin<InputText> {
 
   StringInputPin(const std::string &name, const std::string &label, Color color, InputConfig &&config);
 
-  [[nodiscard]] static std::unique_ptr<StringInputPin> ConstructFromToml(const toml::table &src);
+  [[nodiscard]] static std::unique_ptr<StringInputPin> ConstructFromToml(ig::Node *parent, const toml::table &src);
 
   toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;

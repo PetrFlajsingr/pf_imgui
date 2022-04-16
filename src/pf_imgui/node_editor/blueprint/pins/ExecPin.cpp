@@ -25,10 +25,11 @@ bool ExecPin::acceptsLinkWith(ig::Pin &other) const {
   return dynamic_cast<ExecPin *>(&other) != nullptr;
 }
 
-std::unique_ptr<ExecPin> ExecPin::ConstructFromToml(const toml::table &src) {
+std::unique_ptr<ExecPin> ExecPin::ConstructFromToml(ig::Node *parent, const toml::table &src) {
   auto result = std::make_unique<ExecPin>("", "", Color::White);
+  result->parent = parent;
   result->setFromToml(src);
-  return std::move(result);
+  return result;
 }
 
 void ExecPin::addLink(Link &link) {

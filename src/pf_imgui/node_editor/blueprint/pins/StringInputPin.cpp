@@ -32,10 +32,11 @@ InputText::Config StringInputPin::CreateInputConfig(const std::string &name, con
           .eventTrigger = config.eventTrigger};
 }
 
-std::unique_ptr<StringInputPin> StringInputPin::ConstructFromToml(const toml::table &src) {
+std::unique_ptr<StringInputPin> StringInputPin::ConstructFromToml(ig::Node *parent, const toml::table &src) {
   auto result = std::make_unique<StringInputPin>("", "", Color::White, InputConfig{0.f});
+  result->parent = parent;
   result->setFromToml(src);
-  return std::move(result);
+  return result;
 }
 
 toml::table StringInputPin::toToml() const {

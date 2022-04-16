@@ -22,6 +22,7 @@ namespace pf::ui::ig {
  */
 class Link : public Renderable, public Hoverable {
   friend class NodeEditor;
+  friend class Pin;
 
  public:
   /**
@@ -149,10 +150,11 @@ class Link : public Renderable, public Hoverable {
    */
   [[nodiscard]] bool isFlowEnabled() const;
 
+  void setId(ax::NodeEditor::LinkId newId);
+
  protected:
   void renderImpl() override;
 
- private:
   ax::NodeEditor::LinkId id;
 
   Pin *inputPin;

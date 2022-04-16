@@ -22,6 +22,9 @@ void Resizable::setSize(const Size &s) {
     notifySizeChanged(size);
   }
 }
+
+void Resizable::setSizeInner(Size newSize) { size = newSize; }
+
 void Resizable::notifySizeChanged(Size newSize) { observableImpl.notify(newSize); }
 
 }  // namespace pf::ui::ig

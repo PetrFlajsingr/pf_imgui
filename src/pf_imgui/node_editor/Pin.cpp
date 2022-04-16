@@ -6,8 +6,8 @@
 #include "Link.h"
 #include "Node.h"
 #include "NodeEditor.h"
-#include <pf_common/RAII.h>
 #include <algorithm>
+#include <pf_common/RAII.h>
 
 namespace pf::ui::ig {
 
@@ -15,10 +15,6 @@ Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), Labellable(
 
 Pin::Pin(const std::string &name, const std::string &label) : Renderable(name), Labellable(label) {}
 
-Pin::~Pin() {
-  std::ranges::for_each(getLinks(), [](auto &link) { link.invalidate(); });
-  getNode().getNodeEditor().markLinksDirty();
-}
 
 ax::NodeEditor::PinId Pin::getId() const { return id; }
 

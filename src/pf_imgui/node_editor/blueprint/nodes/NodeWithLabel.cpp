@@ -22,10 +22,11 @@ void NodeWithLabel::setFromToml(const toml::table &src) {
   }
 }
 
-std::unique_ptr<NodeWithLabel> NodeWithLabel::ConstructFromToml(const toml::table &src) {
+std::unique_ptr<NodeWithLabel> NodeWithLabel::ConstructFromToml(ig::NodeEditor *parent, const toml::table &src) {
   auto result = std::make_unique<NodeWithLabel>("", "");
+  result->parent = parent;
   result->setFromToml(src);
-  return std::move(result);
+  return result;
 }
 
 void NodeWithLabel::renderHeader() {

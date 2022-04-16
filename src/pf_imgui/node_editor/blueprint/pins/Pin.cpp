@@ -20,11 +20,19 @@ bool Pin::acceptsLinkWith(ig::Pin &other) const {
 }
 
 toml::table Pin::toToml() const {
-  // TODO: missing properties like link colors, pin type, ?pin id? most likely gonna be generated on construction or something
-  return toml::table{{"name", getName()},
-                     {"type", details::typeIdToIntPtr_t(getTypeId())},
-                     {"label", getLabel()},
-                     {"color", static_cast<ImU32>(getColor())}};
+  return toml::table{
+      {"name", getName()},
+      {"type", getPinTypeId()},
+      {"label", getLabel()},
+      {"pinType", magic_enum::enum_name(getType())},
+      {"color", static_cast<ImU32>(getColor())},
+      {"validLinkColor", static_cast<ImU32>(getValidLinkPreviewColor())},
+      {"invalidLinkColor", static_cast<ImU32>(getInvalidLinkPreviewColor())},
+      {"unconnectedLinkColor", static_cast<ImU32>(getUnconnectedLinkPreviewColor())},
+      {"validLinkThickness", static_cast<ImU32>(getValidLinkPreviewThickness())},
+      {"invalidLinkThickness", static_cast<ImU32>(getInvalidLinkPreviewThickness())},
+      {"unconnectedLinkThickness", static_cast<ImU32>(getUnconnectedLinkPreviewThickness())},
+  };
 }
 
 void Pin::setFromToml(const toml::table &src) {
@@ -37,6 +45,43 @@ void Pin::setFromToml(const toml::table &src) {
   if (auto colorIter = src.find("color"); colorIter != src.end()) {
     if (auto colorToml = colorIter->second.as_integer(); colorToml != nullptr) {
       setColor(Color{static_cast<ImU32>(colorToml->get())});
+    }
+  }
+  if (auto pinTypeIter = src.find("pinType"); pinTypeIter != src.end()) {
+    if (auto pinTypeToml = pinTypeIter->second.as_string(); pinTypeToml != nullptr) {
+      if (auto pinType = magic_enum::enum_cast<Pin::Type>(pinTypeToml->get()); pinType.has_value()) {
+        type = pinType.value();
+      }
+    }
+  }
+  if (auto colorIter = src.find("validLinkColor"); colorIter != src.end()) {
+    if (auto colorToml = colorIter->second.as_integer(); colorToml != nullptr) {
+      setValidLinkPreviewColor(Color{static_cast<ImU32>(colorToml->get())});
+    }
+  }
+  if (auto colorIter = src.find("invalidLinkColor"); colorIter != src.end()) {
+    if (auto colorToml = colorIter->second.as_integer(); colorToml != nullptr) {
+      setInvalidLinkPreviewColor(Color{static_cast<ImU32>(colorToml->get())});
+    }
+  }
+  if (auto colorIter = src.find("unconnectedLinkColor"); colorIter != src.end()) {
+    if (auto colorToml = colorIter->second.as_integer(); colorToml != nullptr) {
+      setUnconnectedLinkPreviewColor(Color{static_cast<ImU32>(colorToml->get())});
+    }
+  }
+  if (auto thicknessIter = src.find("validLinkThickness"); thicknessIter != src.end()) {
+    if (auto thicknessToml = thicknessIter->second.as_floating_point(); thicknessToml != nullptr) {
+      setValidLinkPreviewThickness(static_cast<float>(thicknessToml->get()));
+    }
+  }
+  if (auto thicknessIter = src.find("invalidLinkThickness"); thicknessIter != src.end()) {
+    if (auto thicknessToml = thicknessIter->second.as_floating_point(); thicknessToml != nullptr) {
+      setInvalidLinkPreviewThickness(static_cast<float>(thicknessToml->get()));
+    }
+  }
+  if (auto thicknessIter = src.find("unconnectedLinkThickness"); thicknessIter != src.end()) {
+    if (auto thicknessToml = thicknessIter->second.as_floating_point(); thicknessToml != nullptr) {
+      setUnconnectedLinkPreviewThickness(static_cast<float>(thicknessToml->get()));
     }
   }
 }

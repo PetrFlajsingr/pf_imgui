@@ -8,11 +8,15 @@
 #include <imgui.h>
 #include <pf_imgui/interface/TomlSerializable.h>
 #include <pf_imgui/node_editor/Pin.h>
-#include <static_type_info.h>
+#include <pf_imgui/node_editor/blueprint/common.h>
 
 namespace pf::ui::ig::bp {
-
+class Node;
+class NodeEditor;
 class Pin : public ig::Pin, public TomlSerializable {
+  friend class Node;
+  friend class NodeEditor;
+
  public:
   Pin(const std::string &name, const std::string &label, Color color);
 
@@ -24,7 +28,7 @@ class Pin : public ig::Pin, public TomlSerializable {
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  [[nodiscard]] virtual static_type_info::TypeIndex getTypeId() const = 0;
+  [[nodiscard]] virtual PinTypeIdentifier getPinTypeId() const = 0;
 
  protected:
   void addLink(Link &link) override;
