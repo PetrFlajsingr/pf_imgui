@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_SIZE_H
 #define PF_IMGUI_SIZE_H
 
+#include <compare>
 #include <concepts>
 #include <cstdint>
 #include <imgui.h>
@@ -15,42 +16,76 @@
 
 namespace pf::ui::ig {
 
-namespace details {
-template<typename T>
-struct PF_IMGUI_EXPORT SizeDimension : public T {
-  constexpr explicit(false) SizeDimension(std::same_as<std::uint32_t> auto value) : T(static_cast<float>(value)) {}
-  constexpr explicit(false) SizeDimension(std::same_as<int> auto value) : SizeDimension(static_cast<float>(value)) {}
-  constexpr explicit(false) SizeDimension(std::same_as<float> auto value) : T(value) {}
-  constexpr bool operator==(const SizeDimension &other) const { return T::value == other.value; }
-  constexpr bool operator!=(const SizeDimension &other) const { return !(*this == other); }
-  constexpr explicit(false) operator float() const { return T::value; }
+class PF_IMGUI_EXPORT Width {
+ public:
+  constexpr explicit(false) Width(float width) : value(width) {}
+
+  constexpr auto operator<=>(const Width &) const = default;
+  [[nodiscard]] constexpr Width operator+(Width rhs) const { return {value + rhs.value}; }
+  [[nodiscard]] constexpr Width operator-(Width rhs) const { return {value - rhs.value}; }
+  [[nodiscard]] constexpr Width &operator+=(Width rhs) {
+    value += rhs.value;
+    return *this;
+  }
+  [[nodiscard]] constexpr Width &operator-=(Width rhs) {
+    value -= rhs.value;
+    return *this;
+  }
+
+  constexpr explicit operator float() const { return value; }
   /**
-   * Fill the dimension except for the margin.
+   * Fill the except for the margin.
    * @param margin
    * @return
    */
-  constexpr static SizeDimension Fill(std::uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
+  [[nodiscard]] constexpr static Width Fill(std::uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
   /**
-   * Automatic size detection.
+    * Automatic size detection.
+    * @return
+    */
+  [[nodiscard]] constexpr static Width Auto() { return {0}; }
+
+ private:
+  float value;
+};
+class PF_IMGUI_EXPORT Height {
+ public:
+  constexpr explicit(false) Height(float height) : value(height) {}
+
+  constexpr auto operator<=>(const Height &) const = default;
+  [[nodiscard]] constexpr Height operator+(Height rhs) const { return {value + rhs.value}; }
+  [[nodiscard]] constexpr Height operator-(Height rhs) const { return {value - rhs.value}; }
+  [[nodiscard]] constexpr Height &operator+=(Height rhs) {
+    value += rhs.value;
+    return *this;
+  }
+  [[nodiscard]] constexpr Height &operator-=(Height rhs) {
+    value -= rhs.value;
+    return *this;
+  }
+
+  constexpr explicit operator float() const { return value; }
+  /**
+   * Fill the except for the margin.
+   * @param margin
    * @return
    */
-  constexpr static SizeDimension Auto() { return {0}; }
-};
-struct PF_IMGUI_EXPORT Width {
-  float value;
-};
-struct PF_IMGUI_EXPORT Height {
-  float value;
-};
-}  // namespace details
+  [[nodiscard]] constexpr static Height Fill(std::uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
+  /**
+    * Automatic size detection.
+    * @return
+    */
+  [[nodiscard]] constexpr static Height Auto() { return {0}; }
 
-using Width = details::SizeDimension<details::Width>;
-using Height = details::SizeDimension<details::Height>;
+ private:
+  float value;
+};
+
 /**
  * @brief Size to be used for element sizes.
  */
 struct PF_IMGUI_EXPORT Size {
-  Size(const Width &width, const Height &height);
+  Size(Width width, Height height);
   /**
    * Conversion constructor.
    * @param vec size as ImVec2

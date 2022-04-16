@@ -71,22 +71,24 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
     auto child = std::make_unique<CreateType>(position, std::forward<Args>(args)...);
     const auto ptr = child.get();
-    std::function<void(float)> addToHeight = [](float) {};
-    std::function<void(float)> addToWidth = [](float) {};
+    std::function<void(Height)> addToHeight = [](Height) {};
+    std::function<void(Width)> addToWidth = [](Width) {};
     if constexpr (std::derived_from<T, Resizable>) {
       addToWidth = [ptr = child.get()](float d) {
         auto size = ptr->getSize();
         size.width = std::clamp(size.width + d, 0.f, std::numeric_limits<float>::max());
         ptr->setSize(size);
       };
-      addToHeight = [ptr = child.get()](float d) {
+      addToHeight = [ptr = child.get()](Height d) {
         auto size = ptr->getSize();
-        size.height = std::clamp(size.height + d, 0.f, std::numeric_limits<float>::max());
+        size.height = size.height + d;
+        if (size.height < Height{0}) { size.height = 0; }
         ptr->setSize(size);
       };
     } else if constexpr (std::derived_from<T, WidthDecorator<T>>) {
-      addToWidth = [ptr = child.get()](float d) {
-        const auto width = std::clamp(ptr->getWidth() + d, 0.f, std::numeric_limits<float>::max());
+      addToWidth = [ptr = child.get()](Width d) {
+        auto width = ptr->getWidth() + d;
+        if (width < Width{0}) { width = 0; }
         ptr->setWidth(width);
       };
     }
@@ -137,8 +139,8 @@ class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
     std::unique_ptr<Element> element;
     Positionable *positionable;
     Flags<Anchor> anchors;
-    std::function<void(float)> addToWidth;
-    std::function<void(float)> addToHeight;
+    std::function<void(Width)> addToWidth;
+    std::function<void(Height)> addToHeight;
   };
   std::vector<AnchoredChild> children;
 };

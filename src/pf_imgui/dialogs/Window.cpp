@@ -72,10 +72,9 @@ void Window::setSize(const Size &newSize) {
 void Window::render() {
   if (getVisibility() == Visibility::Visible) {
     if (font != nullptr) { ImGui::PushFont(font); }
-    ImGui::SetNextWindowSizeConstraints(
-        static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
-        static_cast<ImVec2>(maxSizeConstraint.value_or(
-            Size{std::numeric_limits<uint32_t>::max(), std::numeric_limits<uint32_t>::max()})));
+    ImGui::SetNextWindowSizeConstraints(static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
+                                        static_cast<ImVec2>(maxSizeConstraint.value_or(Size{
+                                            std::numeric_limits<float>::max(), std::numeric_limits<float>::max()})));
     if (dockInto.has_value()) {
       ImGui::SetNextWindowDockID(*dockInto);
       dockInto = std::nullopt;
