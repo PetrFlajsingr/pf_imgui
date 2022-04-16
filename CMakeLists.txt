@@ -165,14 +165,6 @@ set(SOURCES
         src/pf_imgui/node_editor/Node.cpp
         src/pf_imgui/node_editor/NodeEditor.cpp
         src/pf_imgui/node_editor/Pin.cpp
-        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
-        src/pf_imgui/node_editor/blueprint/pins/EventPin.cpp
-        src/pf_imgui/node_editor/blueprint/pins/ExecPin.cpp
-        src/pf_imgui/node_editor/blueprint/pins/PinDraw.cpp
-        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.cpp
-        src/pf_imgui/node_editor/blueprint/pins/Pin.cpp
-        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.cpp
-        src/pf_imgui/node_editor/blueprint/nodes/NodeWithLabel.cpp
         src/pf_imgui/node_editor/Comment.cpp
         src/pf_imgui/node_editor/NodeBase.cpp
         src/pf_imgui/Size.cpp
@@ -189,6 +181,17 @@ set(SOURCES
         src/pf_imgui/elements/TimePicker.cpp
         src/pf_imgui/DockBuilder.cpp
         src/pf_imgui/dialogs/BackgroundDockingArea.cpp
+        )
+
+set(BLUEPRINT_SOURCES
+        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/EventPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/ExecPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/PinDraw.cpp
+        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.cpp
+        src/pf_imgui/node_editor/blueprint/pins/Pin.cpp
+        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.cpp
+        src/pf_imgui/node_editor/blueprint/nodes/NodeWithLabel.cpp
         src/pf_imgui/node_editor/blueprint/nodes/Node.cpp
         src/pf_imgui/node_editor/blueprint/NodeEditor.cpp
         src/pf_imgui/node_editor/blueprint/common.cpp
@@ -336,19 +339,6 @@ set(INCLUDES
         src/pf_imgui/node_editor/NodeEditor.h
         src/pf_imgui/node_editor/Pin.h
         src/pf_imgui/node_editor/fwd.h
-        src/pf_imgui/node_editor/blueprint/pins/ArrayPin.h
-        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.h
-        src/pf_imgui/node_editor/blueprint/pins/DragPin.h
-        src/pf_imgui/node_editor/blueprint/pins/PinWithValue.h
-        src/pf_imgui/node_editor/blueprint/pins/EventPin.h
-        src/pf_imgui/node_editor/blueprint/pins/ExecPin.h
-        src/pf_imgui/node_editor/blueprint/pins/InteractablePin.h
-        src/pf_imgui/node_editor/blueprint/pins/PinDraw.h
-        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.h
-        src/pf_imgui/node_editor/blueprint/pins/ValuePin.h
-        src/pf_imgui/node_editor/blueprint/pins/Pin.h
-        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.h
-        src/pf_imgui/node_editor/blueprint/nodes/NodeWithLabel.h
         src/pf_imgui/node_editor/details/LinkPtrToRef.h
         src/pf_imgui/node_editor/Comment.h
         src/pf_imgui/node_editor/NodeBase.h
@@ -368,10 +358,26 @@ set(INCLUDES
         src/pf_imgui/DockBuilder.h
         src/pf_imgui/elements/LogPanel.h
         src/pf_imgui/dialogs/BackgroundDockingArea.h
-        src/pf_imgui/node_editor/blueprint/nodes/Node.h
         src/pf_imgui/interface/TomlSerializable.h
+        )
+
+set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
         src/pf_imgui/node_editor/blueprint/NodeEditor.h
+        src/pf_imgui/node_editor/blueprint/nodes/Node.h
+        src/pf_imgui/node_editor/blueprint/pins/ArrayPin.h
+        src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.h
+        src/pf_imgui/node_editor/blueprint/pins/DragPin.h
+        src/pf_imgui/node_editor/blueprint/pins/PinWithValue.h
+        src/pf_imgui/node_editor/blueprint/pins/EventPin.h
+        src/pf_imgui/node_editor/blueprint/pins/ExecPin.h
+        src/pf_imgui/node_editor/blueprint/pins/InteractablePin.h
+        src/pf_imgui/node_editor/blueprint/pins/PinDraw.h
+        src/pf_imgui/node_editor/blueprint/pins/StringInputPin.h
+        src/pf_imgui/node_editor/blueprint/pins/ValuePin.h
+        src/pf_imgui/node_editor/blueprint/pins/Pin.h
+        src/pf_imgui/node_editor/blueprint/nodes/SimpleNode.h
+        src/pf_imgui/node_editor/blueprint/nodes/NodeWithLabel.h
         )
 
 list(APPEND INCLUDES ${toml++_headers})
@@ -388,7 +394,11 @@ SET(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on w
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${INCLUDES})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
+add_library(${PROJECT_NAME}_blueprint STATIC ${BLUEPRINT_SOURCES} ${BLUEPRINT_INCLUDES})
+add_library(${PROJECT_NAME}_blueprint::${PROJECT_NAME}_blueprint ALIAS ${PROJECT_NAME}_blueprint)
+
 target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
+target_compile_options(${PROJECT_NAME}_blueprint PRIVATE ${flags})
 
 include(GNUInstallDirs)
 
@@ -415,6 +425,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${glm_SOURCE_DIR}>)
 target_link_libraries(${PROJECT_NAME} PRIVATE pf_common::pf_common tomlplusplus::tomlplusplus)
+target_link_libraries(${PROJECT_NAME}_blueprint PRIVATE pf_common::pf_common tomlplusplus::tomlplusplus ${PROJECT_NAME}::${PROJECT_NAME})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
@@ -428,9 +439,22 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY SOVERSION ${PROJECT_VERSION_MAJOR})
 set_property(TARGET ${PROJECT_NAME} PROPERTY INTERFACE_${PROJECT_NAME}_MAJOR_VERSION ${PROJECT_VERSION_MAJOR})
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPATIBLE_INTERFACE_STRING ${PROJECT_NAME}_MAJOR_VERSION)
 
+set_property(TARGET ${PROJECT_NAME}_blueprint PROPERTY VERSION ${PROJECT_VERSION})
+set_property(TARGET ${PROJECT_NAME}_blueprint PROPERTY SOVERSION ${PROJECT_VERSION_MAJOR})
+set_property(TARGET ${PROJECT_NAME}_blueprint PROPERTY INTERFACE_${PROJECT_NAME}_MAJOR_VERSION ${PROJECT_VERSION_MAJOR})
+set_property(TARGET ${PROJECT_NAME}_blueprint APPEND PROPERTY COMPATIBLE_INTERFACE_STRING ${PROJECT_NAME}_MAJOR_VERSION)
+
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}Targets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
+
+install(TARGETS ${PROJECT_NAME}_blueprint
+        EXPORT ${PROJECT_NAME}_blueprintTargets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -586,9 +610,18 @@ write_basic_package_version_file(
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY SameMajorVersion
 )
+write_basic_package_version_file(
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfigVersion.cmake
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY SameMajorVersion
+)
 
 export(EXPORT ${PROJECT_NAME}Targets
         FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Targets.cmake
+        NAMESPACE ${PROJECT_NAME}::
+        )
+export(EXPORT ${PROJECT_NAME}_blueprintTargets
+        FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintTargets.cmake
         NAMESPACE ${PROJECT_NAME}::
         )
 
@@ -601,8 +634,20 @@ install(EXPORT ${PROJECT_NAME}Targets
         DESTINATION
         ${ConfigPackageLocation}
         )
+set(ConfigPackageLocation lib/cmake/${PROJECT_NAME}_blueprint)
+install(EXPORT ${PROJECT_NAME}_blueprintTargets
+        FILE
+        ${PROJECT_NAME}_blueprintTargets.cmake
+        NAMESPACE
+        ${PROJECT_NAME}_blueprint::
+        DESTINATION
+        ${ConfigPackageLocation}
+        )
 
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
+        "include($" "{CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}Targets.cmake)"
+        )
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfig.cmake
         "include($" "{CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}Targets.cmake)"
         )
 
@@ -610,6 +655,15 @@ install(
         FILES
         ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
         ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake
+        DESTINATION
+        ${ConfigPackageLocation}
+        COMPONENT
+        Devel
+)
+install(
+        FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfigVersion.cmake
         DESTINATION
         ${ConfigPackageLocation}
         COMPONENT
