@@ -24,6 +24,7 @@ AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : Element(std::string{config
 
 AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 
+
 void AppMenuBar::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();

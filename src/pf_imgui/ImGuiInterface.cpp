@@ -182,7 +182,14 @@ std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName
 void ImGuiInterface::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
-  if (hasMenuBar()) { menuBar->render(); }
+  if (hasMenuBar()) {
+    if (backgroundDockingArea != nullptr) {
+      backgroundDockingArea->leftTopMargin = ImVec2{0, ImGui::GetFrameHeight()};
+    }
+    menuBar->render();
+  } else {
+    if (backgroundDockingArea != nullptr) { backgroundDockingArea->leftTopMargin = ImVec2{0, 0}; }
+  }
   if (backgroundDockingArea != nullptr) { backgroundDockingArea->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });

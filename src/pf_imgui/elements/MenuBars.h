@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <memory>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/MenuItems.h>
 #include <string>
@@ -64,8 +65,10 @@ class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
    */
   explicit AppMenuBar(const std::string &elementName);
 
+
  protected:
   void renderImpl() override;
+
 };
 
 }  // namespace pf::ui::ig

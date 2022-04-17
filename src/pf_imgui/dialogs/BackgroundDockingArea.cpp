@@ -15,8 +15,8 @@ Size BackgroundDockingArea::getSize() const { return size; }
 
 void BackgroundDockingArea::renderImpl() {
   RAII end{ImGui::End};
-  ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()));
-  ImGui::SetNextWindowPos(ImVec2{0, 0});
+  ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()) - leftTopMargin - bottomRightMargin);
+  ImGui::SetNextWindowPos(ImVec2{0, 0} + leftTopMargin);
   if (ImGui::Begin("##background_dock_window", nullptr, flags)) {
     const auto viewportSize = ImGui::GetWindowViewport()->Size;
     size = Size{Width{viewportSize.x}, Height{viewportSize.y}};

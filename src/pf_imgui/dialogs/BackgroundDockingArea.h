@@ -17,6 +17,7 @@ namespace pf::ui::ig {
  * @brief A special type of window, which acts as docking area for the whole viewport. It is always in background/
  */
 class BackgroundDockingArea : public Renderable {
+  friend class ImGuiInterface;
  public:
   /**
    * Construct BackgroundDockingArea.
@@ -36,6 +37,8 @@ class BackgroundDockingArea : public Renderable {
   void renderImpl() override;
 
  private:
+  ImVec2 leftTopMargin = ImVec2{0, 0};
+  ImVec2 bottomRightMargin = ImVec2{0, 0};
   Size size;
   DockSpace dockSpace;
   constexpr static auto flags = ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoResize
