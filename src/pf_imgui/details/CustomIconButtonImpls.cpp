@@ -20,7 +20,7 @@ void WrapTextToggle::renderIcon(ImDrawList *drawList, ImVec2 cursorPos) {
 
   const auto points = make_array(cursorPos + ImVec2{16, 12}, cursorPos + ImVec2{18, 14}, cursorPos + ImVec2{18, 15},
                                  cursorPos + ImVec2{16, 17}, cursorPos + ImVec2{14, 17});
-  drawList->AddPolyline(points.data(), points.size(), getIconColor(), {}, 2.f);
+  drawList->AddPolyline(points.data(), static_cast<int>(points.size()), getIconColor(), {}, 2.f);
   drawList->AddTriangleFilled(cursorPos + ImVec2{14, 19}, cursorPos + ImVec2{14, 15}, cursorPos + ImVec2{12, 17},
                               getIconColor());
 }

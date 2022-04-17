@@ -24,6 +24,7 @@ class WrapTextToggle : public CustomIconToggle {
  protected:
   void renderIcon(ImDrawList *drawList, ImVec2 cursorPos) override;
 };
+
 class ScrollToEndToggle : public CustomIconToggle {
  public:
   using CustomIconToggle::CustomIconToggle;

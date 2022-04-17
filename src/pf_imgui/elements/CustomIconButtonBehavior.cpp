@@ -19,7 +19,7 @@ void CustomIconButtonBehavior::renderImpl() {
   auto drawList = ImGui::GetWindowDrawList();
   State state;
   if (isHovered() || keepHighlighted) {
-    if (ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+    if (isHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
       backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(style::ColorOf::ButtonActive))};
       state = State::MouseDown;
     } else {
