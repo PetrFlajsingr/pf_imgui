@@ -181,6 +181,8 @@ set(SOURCES
         src/pf_imgui/elements/TimePicker.cpp
         src/pf_imgui/DockBuilder.cpp
         src/pf_imgui/dialogs/BackgroundDockingArea.cpp
+        src/pf_imgui/elements/CustomIconButtonBehavior.cpp
+        src/pf_imgui/details/CustomIconButtonImpls.cpp
         )
 
 set(BLUEPRINT_SOURCES
@@ -359,7 +361,8 @@ set(INCLUDES
         src/pf_imgui/elements/LogPanel.h
         src/pf_imgui/dialogs/BackgroundDockingArea.h
         src/pf_imgui/interface/TomlSerializable.h
-        )
+        src/pf_imgui/elements/CustomIconButtonBehavior.h
+        src/pf_imgui/details/CustomIconButtonImpls.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

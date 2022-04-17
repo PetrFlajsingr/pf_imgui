@@ -13,6 +13,7 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/Color.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/details/CustomIconButtonImpls.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <ringbuffer.hpp>
@@ -134,6 +135,8 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
  private:
   void renderTextArea();
 
+  [[nodiscard]] bool renderCategoryCombobox();
+
   bool isAllowedRecord(const Record &record);
   void refreshAllowedRecords();
   bool isAllowedCategory(Category category);
@@ -147,11 +150,14 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
 
   std::array<bool, magic_enum::enum_count<Category>()> categoryAllowed;
 
-  bool scrollToBottom = false;
-  bool textWrapEnabled = true;
   std::array<bool, magic_enum::enum_count<Category>()> categoryEnabled;
   char filterBuffer[BUFFER_SIZE] = "\0";
   std::size_t filterStringSize = 0;
+
+  WrapTextToggle wrapTextToggle;
+  ScrollToEndToggle scrollToEndToggle;
+  CopyToClipboardButton copyToClipboardButton;
+  TrashcanButton clearButton;
 };
 
 template<Enum Category, std::size_t RecordLimit>
@@ -160,7 +166,9 @@ LogPanel<Category, RecordLimit>::LogPanel(Config &&config) : LogPanel(std::strin
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size) : Element(name), Resizable(size) {
+LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size)
+    : Element(name), Resizable(size), wrapTextToggle("wrapText"), scrollToEndToggle("scrollToEnd"),
+      copyToClipboardButton("copyToClipboard"), clearButton("clear") {
   std::size_t i = 0;
   for (const auto category : magic_enum::enum_values<Category>()) {
     categoryStrings[i++] = magic_enum::enum_name(category);
@@ -168,6 +176,13 @@ LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size) : 
   std::ranges::fill(categoryEnabled, true);
   std::ranges::fill(categoryAllowed, true);
   std::ranges::fill(categoryColors, Color::White);
+
+  clearButton.addClickListener([this] { records.remove(records.readAvailable()); });
+  copyToClipboardButton.addClickListener([this] { ImGui::SetClipboardText(getText().c_str()); });
+  clearButton.setTooltip("Clear log");
+  copyToClipboardButton.setTooltip("Copy log to clipboard");
+  wrapTextToggle.setTooltip("Wrap text");
+  scrollToEndToggle.setTooltip("Autoscroll down");
 }
 
 template<Enum Category, std::size_t RecordLimit>
@@ -214,34 +229,17 @@ void LogPanel<Category, RecordLimit>::renderImpl() {
   auto filterChanged = false;
   ImGui::BeginHorizontal("layout", static_cast<ImVec2>(getSize()), 0);
   {
-    ImGui::BeginChild("controls_area", ImVec2{100, 0});
+    ImGui::BeginChild("controls_area", ImVec2{25, 0});
     {
       ImGui::BeginVertical("controls", ImVec2{0, 0}, 0);
       {
-        ImGui::BeginHorizontal("buttons", ImVec2{0, 20}, 0);
-        {
-          if (ImGui::Button("Clear")) { records.remove(records.readAvailable()); }
-          ImGui::Spring(0.f);
-          if (ImGui::Button("Copy")) { ImGui::SetClipboardText(getText().c_str()); }
-        }
-        ImGui::EndHorizontal();
-        ImGui::Spring(0.f);
-        ImGui::Separator();
-        ImGui::Spring(0.f);
-        ImGui::Checkbox("Autoscroll", &scrollToBottom);
-        ImGui::Spring(0.f);
-        ImGui::Checkbox("Wrap text", &textWrapEnabled);
-        ImGui::Spring(0.f);
-        ImGui::Separator();
-        ImGui::Spring(0.f);
-        std::size_t i = 0;
-        std::ranges::for_each(categoryEnabled, [&](bool &enabled) {
-          if (!categoryAllowed[i]) { return; }
-          ImGui::PushStyleColor(ImGuiCol_Text, categoryColors[i]);
-          filterChanged = filterChanged | ImGui::Checkbox(categoryStrings[i++].c_str(), &enabled);
-          ImGui::Spring(0.f);
-          ImGui::PopStyleColor(1);
-        });
+        wrapTextToggle.render();
+        ImGui::Spring(0);
+        scrollToEndToggle.render();
+        ImGui::Spring(0);
+        copyToClipboardButton.render();
+        ImGui::Spring(0);
+        clearButton.render();
       }
       ImGui::EndVertical();
     }
@@ -249,15 +247,21 @@ void LogPanel<Category, RecordLimit>::renderImpl() {
     ImGui::Spring(0.f);
     ImGui::BeginVertical("log", ImVec2{0, 0}, 0);
     {
-      ImGui::SetNextItemWidth(-50.f);
-      if (ImGui::InputText("Filter", filterBuffer, BUFFER_SIZE)) {
-        filterChanged = true;
-        if (filterBuffer[0] == '\0') {
-          filterStringSize = 0;
-        } else {
-          filterStringSize = std::strlen(filterBuffer);
+      ImGui::BeginHorizontal("log_filter", ImVec2{0, 25}, 0);
+      {
+        filterChanged |= renderCategoryCombobox();
+        ImGui::Spring(0.f);
+        ImGui::SetNextItemWidth(-50.f);
+        if (ImGui::InputText("Filter", filterBuffer, BUFFER_SIZE)) {
+          filterChanged = true;
+          if (filterBuffer[0] == '\0') {
+            filterStringSize = 0;
+          } else {
+            filterStringSize = std::strlen(filterBuffer);
+          }
         }
       }
+      ImGui::EndHorizontal();
       ImGui::Spring(0.f);
       if (filterChanged) { refreshAllowedRecords(); }
       renderTextArea();
@@ -272,20 +276,39 @@ template<Enum Category, std::size_t RecordLimit>
 void LogPanel<Category, RecordLimit>::renderTextArea() {
   RAII end{ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), ImVec2{0, 0}, true,
-                        textWrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
+                        wrapTextToggle.getValue() ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
     for (std::size_t i = 0; i < records.readAvailable(); ++i) {
       const auto &record = records[i];
       if (!record.show) { continue; }
       ImGui::PushStyleColor(ImGuiCol_Text, record.color);
-      if (textWrapEnabled) {
+      if (wrapTextToggle.getValue()) {
         ImGui::TextWrapped(record.text.c_str());
       } else {
         ImGui::Text(record.text.c_str());
       }
       ImGui::PopStyleColor(1);
     }
-    if (scrollToBottom) { ImGui::SetScrollHereY(1.0f); }
+    if (scrollToEndToggle.getValue()) { ImGui::SetScrollHereY(1.0f); }
   }
+}
+
+template<Enum Category, std::size_t RecordLimit>
+  requires((RecordLimit & (RecordLimit - 1)) == 0) bool
+LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
+  bool filterChanged = false;
+  std::size_t i = 0;
+  ImGui::SetNextItemWidth(120);
+  if (ImGui::BeginCombo("##categories", "Categories")) {
+    std::ranges::for_each(categoryEnabled, [&](bool &enabled) {
+      if (!categoryAllowed[i]) { return; }
+      ImGui::PushStyleColor(ImGuiCol_Text, categoryColors[i]);
+      filterChanged = filterChanged | ImGui::Checkbox(categoryStrings[i++].c_str(), &enabled);
+      ImGui::PopStyleColor(1);
+    });
+    ImGui::EndCombo();
+  }
+  if (ImGui::IsItemHovered()) { ImGui::SetTooltip("Filter categories"); }
+  return filterChanged;
 }
 
 template<Enum Category, std::size_t RecordLimit>
@@ -312,7 +335,6 @@ LogPanel<Category, RecordLimit>::isAllowedText(const std::string &text) {
   if (filterStringSize == 0) { return true; }
   return text.find(std::string_view{filterBuffer, filterStringSize}) != std::string::npos;
 }
-
 }  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_ELEMENTS_LOGPANEL_H
