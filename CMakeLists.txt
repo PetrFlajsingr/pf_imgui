@@ -614,7 +614,7 @@ write_basic_package_version_file(
         COMPATIBILITY SameMajorVersion
 )
 write_basic_package_version_file(
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfigVersion.cmake
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY SameMajorVersion
 )
@@ -624,7 +624,7 @@ export(EXPORT ${PROJECT_NAME}Targets
         NAMESPACE ${PROJECT_NAME}::
         )
 export(EXPORT ${PROJECT_NAME}_blueprintTargets
-        FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintTargets.cmake
+        FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintTargets.cmake
         NAMESPACE ${PROJECT_NAME}::
         )
 
@@ -637,7 +637,7 @@ install(EXPORT ${PROJECT_NAME}Targets
         DESTINATION
         ${ConfigPackageLocation}
         )
-set(ConfigPackageLocation lib/cmake/${PROJECT_NAME}_blueprint)
+set(ConfigPackageLocation lib/cmake/${PROJECT_NAME})
 install(EXPORT ${PROJECT_NAME}_blueprintTargets
         FILE
         ${PROJECT_NAME}_blueprintTargets.cmake
@@ -650,7 +650,7 @@ install(EXPORT ${PROJECT_NAME}_blueprintTargets
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
         "include($" "{CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}Targets.cmake)"
         )
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfig.cmake
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfig.cmake
         "include($" "{CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}_blueprintTargets.cmake)"
         )
 
@@ -665,8 +665,8 @@ install(
 )
 install(
         FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfig.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfigVersion.cmake
         DESTINATION
         ${ConfigPackageLocation}
         COMPONENT
