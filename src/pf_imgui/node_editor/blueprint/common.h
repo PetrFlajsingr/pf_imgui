@@ -8,6 +8,7 @@
 #include <functional>
 #include <memory>
 #include <optional>
+#include <pf_common/type_name.h>
 #include <static_type_info.h>
 #include <toml++/toml.h>
 #include <type_traits>
@@ -23,55 +24,12 @@ class Node;
 class Pin;
 }  // namespace bp
 }  // namespace pf::ui::ig
-// TODO: move this to pf_common
-namespace pf::ui::ig::bp::details {
-template<typename T>
-[[nodiscard]] constexpr std::string_view RawTypeName() {
-#ifndef _MSC_VER
-  return __PRETTY_FUNCTION__;
-#else
-  return __FUNCSIG__;
-#endif
-}
-
-struct TypeNameFormat {
-  std::size_t junk_leading = 0;
-  std::size_t junk_total = 0;
-};
-
-constexpr TypeNameFormat type_name_format = [] {
-  TypeNameFormat ret;
-  std::string_view sample = RawTypeName<int>();
-  ret.junk_leading = sample.find("int");
-  ret.junk_total = sample.size() - 3;
-  return ret;
-}();
-static_assert(type_name_format.junk_leading != std::size_t(-1),
-              "Unable to determine the type name format on this compiler.");
-
-template<typename T>
-static constexpr auto type_name_storage = [] {
-  std::array<char, RawTypeName<T>().size() - type_name_format.junk_total + 1> ret{};
-  std::copy_n(RawTypeName<T>().data() + type_name_format.junk_leading, ret.size() - 1, ret.data());
-  return ret;
-}();
-
-template<typename T>
-[[nodiscard]] constexpr std::string_view TypeName() {
-  return {type_name_storage<T>.data(), type_name_storage<T>.size() - 1};
-}
-
-template<typename T>
-[[nodiscard]] constexpr const char *TypeNameCstr() {
-  return type_name_storage<T>.data();
-}
-}  // namespace pf::ui::ig::bp::details
 
 #define PF_IMGUI_BLUEPRINT_NODE_ID(type)                                                                               \
-  [[nodiscard]] static inline NodeTypeIdentifier UniqueNodeIdentifier() { return details::TypeNameCstr<type>(); }      \
+  [[nodiscard]] static inline NodeTypeIdentifier UniqueNodeIdentifier() { return pf::TypeNameCstr<type>(); }           \
   [[nodiscard]] inline NodeTypeIdentifier getNodeTypeId() const override { return UniqueNodeIdentifier(); }
 #define PF_IMGUI_BLUEPRINT_PIN_ID(type)                                                                                \
-  [[nodiscard]] static inline PinTypeIdentifier UniquePinIdentifier() { return details::TypeNameCstr<type>(); }        \
+  [[nodiscard]] static inline PinTypeIdentifier UniquePinIdentifier() { return pf::TypeNameCstr<type>(); }             \
   [[nodiscard]] inline PinTypeIdentifier getPinTypeId() const override { return UniquePinIdentifier(); }
 
 namespace pf::ui::ig::bp {
