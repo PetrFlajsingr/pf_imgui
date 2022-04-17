@@ -24,7 +24,6 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
     std::string_view name;                       /*!< Unique name of the element */
     Size size;                                   /*!< Size of the element */
     HorizontalAlign align = HorizontalAlign::Up; /*!< Element alignment */
-    float spacing = 0.f;                         /*!< Spaces between elements */
     bool showBorder = false;                     /*!< Render border around layout's area */
   };
   /**
@@ -38,22 +37,10 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
    * @param name unique name of the element
    * @param size size of the layout
    * @param align element alignment
-   * @param elementSpacing spaces between elements
    * @param showBorder render border around layout's area
    */
   HorizontalLayout(const std::string &name, Size size, HorizontalAlign align = HorizontalAlign::Up,
-                   float elementSpacing = 0.f, ShowBorder showBorder = ShowBorder::No);
-
-  /**
-   *
-   * @return current spacing between elements
-   */
-  [[nodiscard]] float getSpacing() const;
-  /**
-   * Set spacing between elements
-   * @param newSpacing
-   */
-  void setSpacing(float newSpacing);
+                   ShowBorder showBorder = ShowBorder::No);
 
  protected:
   void renderImpl() override;
@@ -62,7 +49,6 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
   [[nodiscard]] float alignmentAsFloat() const;
 
   HorizontalAlign alignment;
-  float spacing;
 };
 }  // namespace pf::ui::ig
 

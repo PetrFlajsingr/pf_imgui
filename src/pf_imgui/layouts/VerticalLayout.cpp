@@ -8,15 +8,10 @@ namespace pf::ui::ig {
 
 VerticalLayout::VerticalLayout(VerticalLayout::Config &&config)
     : LinearLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
-      alignment(config.align), spacing(config.spacing) {}
+      alignment(config.align) {}
 
-VerticalLayout::VerticalLayout(const std::string &name, Size size, VerticalAlign align, float elementSpacing,
-                               ShowBorder showBorder)
-    : LinearLayout(name, size, showBorder), alignment(align), spacing(elementSpacing) {}
-
-float VerticalLayout::getSpacing() const { return spacing; }
-
-void VerticalLayout::setSpacing(float newSpacing) { spacing = newSpacing; }
+VerticalLayout::VerticalLayout(const std::string &name, Size size, VerticalAlign align, ShowBorder showBorder)
+    : LinearLayout(name, size, showBorder), alignment(align) {}
 
 void VerticalLayout::renderImpl() {
   const auto flags =
@@ -29,7 +24,7 @@ void VerticalLayout::renderImpl() {
       auto elements = getChildren();
       std::ranges::for_each_n(elements.begin(), static_cast<int>(elements.size() - 1), [this](auto &child) {
         child.render();
-        ImGui::Spring(0.f, spacing);
+        ImGui::Spring(0.f, ImGui::GetStyle().ItemSpacing.y);
       });
       if (!elements.empty()) { elements.back().render(); }
     }

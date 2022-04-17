@@ -26,7 +26,6 @@ class VerticalLayout : public LinearLayout {
     std::string_view name;                     /*!< Unique name of the element */
     Size size;                                 /*!< Size of the element */
     VerticalAlign align = VerticalAlign::Left; /*!< Element alignment */
-    float spacing = 0.f;                       /*!< Spaces between elements */
     bool showBorder = false;                   /*!< Render border around layout's area */
   };
   /**
@@ -40,22 +39,10 @@ class VerticalLayout : public LinearLayout {
    * @param name unique name of the element
    * @param size size of the layout
    * @param align element alignment
-   * @param elementSpacing spaces between elements
    * @param showBorder render border around layout's area
    */
   VerticalLayout(const std::string &name, Size size, VerticalAlign align = VerticalAlign::Left,
-                 float elementSpacing = 0.f, ShowBorder showBorder = ShowBorder::No);
-
-  /**
-   *
-   * @return current spacing between elements
-   */
-  [[nodiscard]] float getSpacing() const;
-  /**
-   * Set spacing between elements
-   * @param newSpacing
-   */
-  void setSpacing(float newSpacing);
+                 ShowBorder showBorder = ShowBorder::No);
 
  protected:
   void renderImpl() override;
@@ -64,7 +51,6 @@ class VerticalLayout : public LinearLayout {
   [[nodiscard]] float alignmentAsFloat() const;
 
   VerticalAlign alignment;
-  float spacing;
 };
 
 }  // namespace pf::ui::ig

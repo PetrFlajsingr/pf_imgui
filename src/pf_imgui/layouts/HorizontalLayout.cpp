@@ -9,15 +9,10 @@ namespace pf::ui::ig {
 
 HorizontalLayout::HorizontalLayout(HorizontalLayout::Config &&config)
     : LinearLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
-      alignment(config.align), spacing(config.spacing) {}
+      alignment(config.align) {}
 
-HorizontalLayout::HorizontalLayout(const std::string &name, Size size, HorizontalAlign align, float elementSpacing,
-                                   ShowBorder showBorder)
-    : LinearLayout(name, size, showBorder), alignment(align), spacing(elementSpacing) {}
-
-float HorizontalLayout::getSpacing() const { return spacing; }
-
-void HorizontalLayout::setSpacing(float newSpacing) { spacing = newSpacing; }
+HorizontalLayout::HorizontalLayout(const std::string &name, Size size, HorizontalAlign align, ShowBorder showBorder)
+    : LinearLayout(name, size, showBorder), alignment(align) {}
 
 void HorizontalLayout::renderImpl() {
   const auto flags =
@@ -30,7 +25,7 @@ void HorizontalLayout::renderImpl() {
       auto elements = getChildren();
       std::ranges::for_each_n(elements.begin(), static_cast<int>(elements.size() - 1), [this](auto &child) {
         child.render();
-        ImGui::Spring(0.f, spacing);
+        ImGui::Spring(0.f, ImGui::GetStyle().ItemSpacing.x);
       });
       if (!elements.empty()) { elements.back().render(); }
     }
