@@ -478,7 +478,7 @@ install(
         DIRECTORY "${CMAKE_SOURCE_DIR}/src/pf_imgui/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
         PATTERN "*.cpp" EXCLUDE
-        PATTERN "backends/" EXCLUDE
+        PATTERN "backends/*" EXCLUDE
 )
 install(
         DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/DearWidgets/"
