@@ -650,7 +650,7 @@ install(EXPORT ${PROJECT_NAME}_blueprintTargets
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
         "include($" "{CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}Targets.cmake)"
         )
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfig.cmake
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfig.cmake
         "include($" "{CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}_blueprintTargets.cmake)"
         )
 
