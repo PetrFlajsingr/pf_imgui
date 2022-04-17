@@ -388,7 +388,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    */
   explicit Tree(const std::string &name, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No)
       : Element(name), persistent(persistent),
-        layout({.name = "layout", .size = Size::Auto(), .showBorder = showBorder}) {}
+        layout({.name = "layout", .size = Size::Auto(), .showBorder = showBorder == ShowBorder::Yes ? true : false}) {}
 
   /**
    * Create a new child node.
