@@ -665,8 +665,8 @@ install(
 )
 install(
         FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfig.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}_blueprintConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_blueprint/${PROJECT_NAME}_blueprintConfigVersion.cmake
         DESTINATION
         ${ConfigPackageLocation}
         COMPONENT
