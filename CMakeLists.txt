@@ -362,7 +362,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/BackgroundDockingArea.h
         src/pf_imgui/interface/TomlSerializable.h
         src/pf_imgui/elements/CustomIconButtonBehavior.h
-        src/pf_imgui/details/CustomIconButtonImpls.h)
+        src/pf_imgui/details/CustomIconButtonImpls.h src/pf_imgui/elements/common/TextEditorTypes.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

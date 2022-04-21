@@ -160,7 +160,9 @@ class TextEditor {
   void SetPalette(const Palette &aValue);
 
   void SetErrorMarkers(const ErrorMarkers &aMarkers) { mErrorMarkers = aMarkers; }
+  const ErrorMarkers &GetErrorMarkers() const { return mErrorMarkers; }
   void SetBreakpoints(const Breakpoints &aMarkers) { mBreakpoints = aMarkers; }
+  const Breakpoints & GetBreakpoints() const { return mBreakpoints; }
 
   void Render(const char *aTitle, const ImVec2 &aSize = ImVec2(), bool aBorder = false);
   void SetText(const std::string &aText);

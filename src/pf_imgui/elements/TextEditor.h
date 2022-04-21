@@ -5,11 +5,15 @@
 #ifndef PF_IMGUI_TEXTEDITOR_H
 #define PF_IMGUI_TEXTEDITOR_H
 
+#include "common/TextEditorTypes.h"
 #include <ImGuiColorTextEditor.h>
+#include <pf_imgui/Color.h>
+#include <pf_imgui/Position.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
+#include <range/v3/view/transform.hpp>
 #include <string>
 
 namespace pf::ui::ig {
@@ -17,8 +21,38 @@ namespace pf::ui::ig {
 
 class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resizable {
  public:
-  enum class Highlight { GLSL, HLSL, AngelScript, Lua, C, CPP, SQL };
+  class Cursor {
+    friend class TextEditor;
 
+   public:
+    Cursor &insertTextAtCursorPos(const std::string &text);
+    Cursor &moveUp(std::uint32_t lineCnt = 1, bool addToSelection = false);
+    Cursor &moveDown(std::uint32_t lineCnt = 1, bool addToSelection = false);
+    Cursor &moveLeft(std::uint32_t lineCnt = 1, bool addToSelection = false);
+    Cursor &moveRight(std::uint32_t lineCnt = 1, bool addToSelection = false);
+    Cursor &moveTop(bool addToSelection = false);
+    Cursor &moveBottom(bool addToSelection = false);
+    Cursor &moveHome(bool addToSelection = false);
+    Cursor &moveEnd(bool addToSelection = false);
+    Cursor &setSelectionStart(TextCursorPosition position);
+    Cursor &setSelectionEnd(TextCursorPosition position);
+    Cursor &selectAll();
+    [[nodiscard]] bool hasSelection() const;
+    Cursor &selectCurrentWord();
+    Cursor &cutToClipboard();
+    Cursor &pasteFromClipboard();
+    Cursor &deleteSelection();
+    Cursor &setPosition(TextCursorPosition position);
+    [[nodiscard]] TextCursorPosition getPosition() const;
+    [[nodiscard]] std::string getSelectedText() const;
+    Subscription addPositionListener(std::invocable<CursorPosition> auto &&listener) {
+      return owner.observableCursorPosition.addListener(std::forward<decltype(listener)>(listener));
+    }
+
+   private:
+    explicit Cursor(TextEditor &parent);
+    TextEditor &owner;
+  };
   /**
    * @brief Struct for construction of TextEditor.
    */
@@ -38,13 +72,48 @@ class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resiza
   TextEditor(const std::string &name, const std::string &value, Size s = Size::Auto(),
              Persistent persistent = Persistent::No);
 
+  // TODO: maybe change this into a builder
+  [[nodiscard]] Color getColor(TextEditorColor colorType) const;
+  void setColor(TextEditorColor colorType, Color color);
+
+  [[nodiscard]] auto getBreakpoints() const {
+    return editor.GetBreakpoints() | ranges::views::transform([](int bpLine) {
+             return Breakpoint{static_cast<uint32_t>(bpLine), true, {}};
+           });
+  }
+  void clearBreakpoints();
+  void addBreakpoint(const Breakpoint &breakpoint);
+  void removeBreakpoint(std::uint32_t line);
+  // TODO: warning markers, info markers
+  [[nodiscard]] auto getErrorMarkers() const;
+  void clearErrorMarkers();
+  void addErrorMarker(const TextEditorErrorMarker &marker);
+  void removeErrorMarker(std::uint32_t line);
+
+  [[nodiscard]] std::uint32_t getTabSize() const;
+  void setTabSize(std::uint32_t tabSize);
+
+  [[nodiscard]] Cursor getCursor();
+
   [[nodiscard]] ImGuiColorTextEdit::TextEditor &getEditor();
   [[nodiscard]] const ImGuiColorTextEdit::TextEditor &getEditor() const;
 
   [[nodiscard]] std::string getText() const;
   void setText(const std::string &text);
+  Subscription addTextListener(std::invocable<std::string_view> auto &&listener) {
+    return observableText.addListener(std::forward<decltype(listener)>(listener));
+  }
 
-  void setHighlighting(Highlight language);
+  [[nodiscard]] bool canUndo() const;
+  [[nodiscard]] bool canRedo() const;
+  bool undo();
+  bool redo();
+
+  [[nodiscard]] bool isReadOnly() const;
+  void setReadOnly(bool readOnly);
+
+  // todo: custom highlighting&adding types, macros etc
+  void setHighlighting(TextEditorHighlight language);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -54,6 +123,8 @@ class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resiza
 
  private:
   ImGuiColorTextEdit::TextEditor editor;
+  Observable_impl<std::string_view> observableText;
+  Observable_impl<TextCursorPosition> observableCursorPosition;
 };
 
 }  // namespace pf::ui::ig

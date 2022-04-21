@@ -38,6 +38,7 @@ class PF_IMGUI_EXPORT Text
     using Parent = Text;
     std::string_view name; /*!< Unique name of the element */
     std::string text{};    /*!< Text to render */
+    bool wrapText = false;     /*!< If true the text will wrap */
   };
   /**
    * Construct Text
@@ -49,7 +50,7 @@ class PF_IMGUI_EXPORT Text
   * @param elementName ID of the element
   * @param text text to be rendered
   */
-  Text(const std::string &elementName, std::string text);
+  Text(const std::string &elementName, std::string text, bool wrapText = false);
 
   /**
   * Get rendered text.
@@ -68,6 +69,9 @@ class PF_IMGUI_EXPORT Text
     setTextInner(fmt::format(fmt, std::forward<Args>(args)...));
   }
 
+  [[nodiscard]] bool isWrap() const;
+  void setWrap(bool textWrap);
+
  protected:
   void renderImpl() override;
 
@@ -75,6 +79,7 @@ class PF_IMGUI_EXPORT Text
 
  private:
   std::string text;
+  bool wrap;
 };
 
 }  // namespace pf::ui::ig
