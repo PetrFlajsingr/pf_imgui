@@ -35,6 +35,7 @@ class TextEditor {
     CurrentLineFill,
     CurrentLineFillInactive,
     CurrentLineEdge,
+    WarningMarker,
     Max
   };
 
@@ -101,6 +102,7 @@ class TextEditor {
   typedef std::unordered_map<std::string, Identifier> Identifiers;
   typedef std::unordered_set<std::string> Keywords;
   typedef std::map<int, std::string> ErrorMarkers;
+  typedef std::map<int, std::string> WarningMarkers;
   typedef std::unordered_set<int> Breakpoints;
   typedef std::array<ImU32, (unsigned) PaletteIndex::Max> Palette;
   typedef uint8_t Char;
@@ -161,6 +163,8 @@ class TextEditor {
 
   void SetErrorMarkers(const ErrorMarkers &aMarkers) { mErrorMarkers = aMarkers; }
   const ErrorMarkers &GetErrorMarkers() const { return mErrorMarkers; }
+  void SetWarningMarkers(const WarningMarkers &aMarkers) { mWarningMarkers = aMarkers; }
+  const WarningMarkers &GetWarningMarkers() const { return mWarningMarkers; }
   void SetBreakpoints(const Breakpoints &aMarkers) { mBreakpoints = aMarkers; }
   const Breakpoints & GetBreakpoints() const { return mBreakpoints; }
 
@@ -347,6 +351,7 @@ class TextEditor {
 
   Breakpoints mBreakpoints;
   ErrorMarkers mErrorMarkers;
+  WarningMarkers mWarningMarkers;
   ImVec2 mCharAdvance;
   Coordinates mInteractiveStart, mInteractiveEnd;
   std::string mLineBuffer;

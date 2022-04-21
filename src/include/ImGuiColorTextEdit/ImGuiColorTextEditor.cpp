@@ -457,6 +457,14 @@ void TextEditor::RemoveLine(int aStart, int aEnd) {
   }
   mErrorMarkers = std::move(etmp);
 
+  WarningMarkers wtmp;
+  for (auto &i : mWarningMarkers) {
+    WarningMarkers::value_type e(i.first >= aStart ? i.first - 1 : i.first, i.second);
+    if (e.first >= aStart && e.first <= aEnd) continue;
+    wtmp.insert(e);
+  }
+  mWarningMarkers = std::move(wtmp);
+
   Breakpoints btmp;
   for (auto i : mBreakpoints) {
     if (i >= aStart && i <= aEnd) continue;
@@ -482,6 +490,14 @@ void TextEditor::RemoveLine(int aIndex) {
   }
   mErrorMarkers = std::move(etmp);
 
+  WarningMarkers wtmp;
+  for (auto &i : mWarningMarkers) {
+    WarningMarkers::value_type e(i.first > aIndex ? i.first - 1 : i.first, i.second);
+    if (e.first - 1 == aIndex) continue;
+    wtmp.insert(e);
+  }
+  mWarningMarkers = std::move(wtmp);
+
   Breakpoints btmp;
   for (auto i : mBreakpoints) {
     if (i == aIndex) continue;
@@ -504,6 +520,11 @@ TextEditor::Line &TextEditor::InsertLine(int aIndex) {
   for (auto &i : mErrorMarkers)
     etmp.insert(ErrorMarkers::value_type(i.first >= aIndex ? i.first + 1 : i.first, i.second));
   mErrorMarkers = std::move(etmp);
+
+  WarningMarkers wtmp;
+  for (auto &i : mWarningMarkers)
+    wtmp.insert(WarningMarkers::value_type(i.first >= aIndex ? i.first + 1 : i.first, i.second));
+  mWarningMarkers = std::move(wtmp);
 
   Breakpoints btmp;
   for (auto i : mBreakpoints) btmp.insert(i >= aIndex ? i + 1 : i);
@@ -776,6 +797,24 @@ void TextEditor::Render() {
           ImGui::Separator();
           ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 0.2f, 1.0f));
           ImGui::Text("%s", errorIt->second.c_str());
+          ImGui::PopStyleColor();
+          ImGui::EndTooltip();
+        }
+      }
+      // Draw warning markers
+      auto warningIt = mWarningMarkers.find(lineNo + 1);
+      if (warningIt != mWarningMarkers.end()) {
+        auto end = ImVec2(lineStartScreenPos.x + contentSize.x + 2.0f * scrollX, lineStartScreenPos.y + mCharAdvance.y);
+        drawList->AddRectFilled(start, end, mPalette[(int) PaletteIndex::WarningMarker]);
+
+        if (ImGui::IsMouseHoveringRect(lineStartScreenPos, end)) {
+          ImGui::BeginTooltip();
+          ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.2f, 0.2f, 1.0f));
+          ImGui::Text("Warning at line %d:", warningIt->first);
+          ImGui::PopStyleColor();
+          ImGui::Separator();
+          ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 0.2f, 1.0f));
+          ImGui::Text("%s", warningIt->second.c_str());
           ImGui::PopStyleColor();
           ImGui::EndTooltip();
         }
@@ -1510,6 +1549,12 @@ void TextEditor::Backspace() {
             ErrorMarkers::value_type(i.first - 1 == mState.mCursorPosition.mLine ? i.first - 1 : i.first, i.second));
       mErrorMarkers = std::move(etmp);
 
+      WarningMarkers wtmp;
+      for (auto &i : mWarningMarkers)
+        wtmp.insert(
+            WarningMarkers::value_type(i.first - 1 == mState.mCursorPosition.mLine ? i.first - 1 : i.first, i.second));
+      mWarningMarkers = std::move(wtmp);
+
       RemoveLine(mState.mCursorPosition.mLine);
       --mState.mCursorPosition.mLine;
       mState.mCursorPosition.mColumn = prevSize;
@@ -1645,6 +1690,7 @@ const TextEditor::Palette &TextEditor::GetDarkPalette() {
       0x40000000,// Current line fill
       0x40808080,// Current line fill (inactive)
       0x40a0a0a0,// Current line edge
+      0x80009087,// WarningMarker
   }};
   return p;
 }
@@ -1672,6 +1718,7 @@ const TextEditor::Palette &TextEditor::GetLightPalette() {
       0x40000000,// Current line fill
       0x40808080,// Current line fill (inactive)
       0x40000000,// Current line edge
+      0x80009087,// WarningMarker
   }};
   return p;
 }
@@ -1699,6 +1746,7 @@ const TextEditor::Palette &TextEditor::GetRetroBluePalette() {
       0x40000000,// Current line fill
       0x40808080,// Current line fill (inactive)
       0x40000000,// Current line edge
+      0x80009087,// WarningMarker
   }};
   return p;
 }

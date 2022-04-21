@@ -19,7 +19,7 @@ struct Breakpoint {
   std::string text{};
 };
 
-struct TextEditorErrorMarker {
+struct TextEditorMarker {
   std::uint32_t line;
   std::string text;
 };
@@ -46,6 +46,7 @@ enum class TextEditorColor {
   Cursor = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::Cursor),
   Selection = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::Selection),
   ErrorMarker = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::ErrorMarker),
+  WarningMarker = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::WarningMarker),
   Breakpoint = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::Breakpoint),
   LineNumber = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::LineNumber),
   CurrentLineFill = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::CurrentLineFill),

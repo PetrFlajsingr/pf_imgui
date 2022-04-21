@@ -39,6 +39,7 @@ namespace pf::ui::ig {
  *
  * @tparam Type type of the chooser
  * @tparam T inner value of the chooser
+ * @todo use Color here
  */
 template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
 class PF_IMGUI_EXPORT ColorChooser

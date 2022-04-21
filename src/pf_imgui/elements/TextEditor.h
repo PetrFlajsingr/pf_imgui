@@ -45,7 +45,7 @@ class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resiza
     Cursor &setPosition(TextCursorPosition position);
     [[nodiscard]] TextCursorPosition getPosition() const;
     [[nodiscard]] std::string getSelectedText() const;
-    Subscription addPositionListener(std::invocable<CursorPosition> auto &&listener) {
+    Subscription addPositionListener(std::invocable<TextCursorPosition> auto &&listener) {
       return owner.observableCursorPosition.addListener(std::forward<decltype(listener)>(listener));
     }
 
@@ -85,10 +85,24 @@ class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resiza
   void addBreakpoint(const Breakpoint &breakpoint);
   void removeBreakpoint(std::uint32_t line);
   // TODO: warning markers, info markers
-  [[nodiscard]] auto getErrorMarkers() const;
+
+  [[nodiscard]] auto getErrorMarkers() const {
+    return editor.GetErrorMarkers() | ranges::views::transform([](const auto &errMarker) {
+             return TextEditorMarker{static_cast<uint32_t>(errMarker.first), errMarker.second};
+           });
+  }
   void clearErrorMarkers();
-  void addErrorMarker(const TextEditorErrorMarker &marker);
+  void addErrorMarker(const TextEditorMarker &marker);
   void removeErrorMarker(std::uint32_t line);
+
+  [[nodiscard]] auto getWarningMarkers() const {
+    return editor.GetWarningMarkers() | ranges::views::transform([](const auto &errMarker) {
+             return TextEditorMarker{static_cast<uint32_t>(errMarker.first), errMarker.second};
+           });
+  }
+  void clearWarningMarkers();
+  void addWarningMarker(const TextEditorMarker &marker);
+  void removeWarningMarker(std::uint32_t line);
 
   [[nodiscard]] std::uint32_t getTabSize() const;
   void setTabSize(std::uint32_t tabSize);

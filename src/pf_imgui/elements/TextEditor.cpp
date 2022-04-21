@@ -177,21 +177,29 @@ void TextEditor::removeBreakpoint(std::uint32_t line) {
   editor.SetBreakpoints(breakpoints);
 }
 
-auto TextEditor::getErrorMarkers() const {
-  return editor.GetErrorMarkers() | ranges::views::transform([](const auto &errMarker) {
-           return TextEditorErrorMarker{static_cast<uint32_t>(errMarker.first), errMarker.second};
-         });
-}
-
 void TextEditor::clearErrorMarkers() { editor.SetErrorMarkers({}); }
 
-void TextEditor::addErrorMarker(const TextEditorErrorMarker &marker) {
+void TextEditor::addErrorMarker(const TextEditorMarker &marker) {
   auto markers = editor.GetErrorMarkers();
   markers.emplace(marker.line, marker.text);
   editor.SetErrorMarkers(markers);
 }
 
 void TextEditor::removeErrorMarker(std::uint32_t line) {
+  auto markers = editor.GetErrorMarkers();
+  markers.erase(static_cast<int>(line));
+  editor.SetErrorMarkers(markers);
+}
+
+void TextEditor::clearWarningMarkers() { editor.SetWarningMarkers({}); }
+
+void TextEditor::addWarningMarker(const TextEditorMarker &marker) {
+  auto markers = editor.GetWarningMarkers();
+  markers.emplace(marker.line, marker.text);
+  editor.SetWarningMarkers(markers);
+}
+
+void TextEditor::removeWarningMarker(std::uint32_t line) {
   auto markers = editor.GetErrorMarkers();
   markers.erase(static_cast<int>(line));
   editor.SetErrorMarkers(markers);
