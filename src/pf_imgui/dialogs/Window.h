@@ -257,6 +257,9 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   ImGuiWindowFlags flags;
 
+  bool sizeDirty = false;
+  bool positionDirty = false;
+
   std::string idLabel{};
 };
 

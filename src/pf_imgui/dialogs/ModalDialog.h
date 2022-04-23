@@ -70,6 +70,8 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
   bool closed = false;
   ImGuiInterface &owner;
   ImFont *font = nullptr;
+  bool sizeDirty = false;
+  bool positionDirty = false;
 };
 }  // namespace pf::ui::ig
 #endif  // PF_IMGUI_ELEMENTS_DIALOG_H
