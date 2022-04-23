@@ -26,6 +26,16 @@ void Window::renderImpl() {
   [[maybe_unused]] auto style = setStyleStack();
   auto flags = createWindowFlags();
   auto isNotClosed = true;
+
+  if (sizeDirty) {
+    sizeDirty = false;
+    ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()));
+  }
+  if (positionDirty) {
+    positionDirty = false;
+    ImGui::SetNextWindowPos(static_cast<ImVec2>(getPosition()));
+  }
+
   RAII endPopup{ImGui::End};
   if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
     isWindowDocked = ImGui::IsWindowDocked();
@@ -65,8 +75,8 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::setSize(const Size &newSize) {
-  Resizable::setSize(newSize);  // FIXME change this to SetNextWindowSize
-  ImGui::SetWindowSize(idLabel.c_str(), static_cast<ImVec2>(getSize()));
+  sizeDirty = true;
+  Resizable::setSize(newSize);
 }
 
 void Window::render() {
@@ -95,7 +105,7 @@ void Window::setFocus() {
 }
 
 void Window::setPosition(Position pos) {
-  ImGui::SetWindowPos(idLabel.c_str(), static_cast<ImVec2>(pos));
+  positionDirty = true;
   Positionable::setPosition(pos);
 }
 
