@@ -24,7 +24,6 @@ Window::Window(std::string name, std::string label, Persistent persistent)
 void Window::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
-  auto flags = createWindowFlags();
   auto isNotClosed = true;
   RAII endPopup{ImGui::End};
   if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
@@ -99,38 +98,54 @@ void Window::setPosition(Position pos) {
   Positionable::setPosition(pos);
 }
 
-bool Window::isUserResizable() const { return userResizable; }
+bool Window::isUserResizable() const { return flags & ImGuiWindowFlags_NoResize; }
 
-void Window::setUserResizable(bool resizable) { userResizable = resizable; }
+void Window::setUserResizable(bool resizable) {
+  if (resizable) {
+    flags &= ~ImGuiWindowFlags_NoResize;
+  } else {
+    flags |= ImGuiWindowFlags_NoResize;
+  }
+}
 
-bool Window::isUserMovable() const { return userMovable; }
+bool Window::isUserMovable() const { return flags & ImGuiWindowFlags_NoMove; }
 
-void Window::setUserMovable(bool movable) { userMovable = movable; }
+void Window::setUserMovable(bool movable) {
+  if (movable) {
+    flags &= ~ImGuiWindowFlags_NoMove;
+  } else {
+    flags |= ImGuiWindowFlags_NoMove;
+  }
+}
 
-bool Window::isAutoResize() const { return autoResizeToContent; }
+bool Window::isAutoResize() const { return flags & ImGuiWindowFlags_AlwaysAutoResize; }
 
-void Window::setAutoResize(bool autoResize) { autoResizeToContent = autoResize; }
+void Window::setAutoResize(bool autoResize) {
+  if (autoResize) {
+    flags |= ImGuiWindowFlags_AlwaysAutoResize;
+  } else {
+    flags &= ~ImGuiWindowFlags_AlwaysAutoResize;
+  }
+}
 
-bool Window::isHorizontalScrollEnabled() const { return enableHorizontalScroll; }
+bool Window::isHorizontalScrollEnabled() const { return flags & ImGuiWindowFlags_HorizontalScrollbar; }
 
-void Window::setHorizontalScrollEnabled(bool horizontalScroll) { enableHorizontalScroll = horizontalScroll; }
+void Window::setHorizontalScrollEnabled(bool horizontalScroll) {
+  if (horizontalScroll) {
+    flags |= ImGuiWindowFlags_HorizontalScrollbar;
+  } else {
+    flags &= ~ImGuiWindowFlags_HorizontalScrollbar;
+  }
+}
 
-bool Window::isDisplayDot() const { return displayDot; }
+bool Window::isDisplayDot() const { return flags & ImGuiWindowFlags_UnsavedDocument; }
 
-void Window::setDisplayDot(bool display) { displayDot = display; }
-
-ImGuiWindowFlags Window::createWindowFlags() {
-  ImGuiWindowFlags result = hasMenuBar() ? ImGuiWindowFlags_MenuBar : ImGuiWindowFlags{};
-  if (!isCollapsible()) { result |= ImGuiWindowFlags_NoCollapse; }
-  if (!titleBarVisible) { result |= ImGuiWindowFlags_NoTitleBar; }
-  if (!isDockArea) { result |= ImGuiWindowFlags_NoDocking; }
-  if (!userResizable) { result |= ImGuiWindowFlags_NoResize; }
-  if (!userMovable) { result |= ImGuiWindowFlags_NoMove; }
-  if (autoResizeToContent) { result |= ImGuiWindowFlags_AlwaysAutoResize; }
-  if (enableHorizontalScroll) { result |= ImGuiWindowFlags_HorizontalScrollbar; }
-  if (displayDot) { result |= ImGuiWindowFlags_UnsavedDocument; }
-  if (stayInBackground) { result |= ImGuiWindowFlags_NoBringToFrontOnFocus; }
-  return result;
+void Window::setDisplayDot(bool display) {
+  if (display) {
+    flags |= ImGuiWindowFlags_UnsavedDocument;
+  } else {
+    flags &= ~ImGuiWindowFlags_UnsavedDocument;
+  }
 }
 
 const std::optional<Size> &Window::getMinSizeConstraint() const { return minSizeConstraint; }
@@ -152,9 +167,15 @@ void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstr
 
 void Window::setFont(ImFont *fontPtr) { font = fontPtr; }
 
-bool Window::isDockable() const { return isDockArea; }
+bool Window::isDockable() const { return flags & ImGuiWindowFlags_NoDocking; }
 
-void Window::setIsDockable(bool dockable) { isDockArea = dockable; }
+void Window::setIsDockable(bool dockable) {
+  if (dockable) {
+    flags &= ~ImGuiWindowFlags_NoDocking;
+  } else {
+    flags |= ImGuiWindowFlags_NoDocking;
+  }
+}
 
 bool Window::isDocked() const { return isWindowDocked; }
 
@@ -166,14 +187,35 @@ std::vector<Renderable *> Window::getRenderables() {
   return result;
 }
 
-bool Window::isTitleBarVisible() const { return titleBarVisible; }
+bool Window::isTitleBarVisible() const { return flags & ImGuiWindowFlags_NoTitleBar; }
 
-void Window::setTitleBarVisible(bool visible) { titleBarVisible = visible; }
+void Window::setTitleBarVisible(bool visible) {
+  if (visible) {
+    flags &= ~ImGuiWindowFlags_NoTitleBar;
+  } else {
+    flags |= ImGuiWindowFlags_NoTitleBar;
+  }
+}
 
-bool Window::isStayInBackground() const { return stayInBackground; }
+bool Window::isStayInBackground() const { return flags & ImGuiWindowFlags_NoBringToFrontOnFocus; }
 
-void Window::setStayInBackground(bool stay) { stayInBackground = stay; }
+void Window::setStayInBackground(bool stay) {
+  if (stay) {
+    flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
+  } else {
+    flags &= ~ImGuiWindowFlags_NoBringToFrontOnFocus;
+  }
+}
 
 void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", getLabel(), getName()); }
+
+void Window::setCollapsible(bool newCollapsible) {
+  if (newCollapsible) {
+    flags &= ~ImGuiWindowFlags_NoCollapse;
+  } else {
+    flags |= ImGuiWindowFlags_NoCollapse;
+  }
+  Collapsible::setCollapsible(newCollapsible);
+}
 
 }  // namespace pf::ui::ig
