@@ -255,7 +255,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   std::optional<ImGuiID> dockInto = std::nullopt;
 
-  ImGuiWindowFlags flags;
+  ImGuiWindowFlags flags{};
 
   bool sizeDirty = false;
   bool positionDirty = false;
