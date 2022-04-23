@@ -121,6 +121,9 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
 
   void setSelected();
 
+  [[nodiscard]] bool isDisplayDot() const;
+  void setDisplayDot(bool displayDot);
+
  protected:
   void renderImpl() override;
 

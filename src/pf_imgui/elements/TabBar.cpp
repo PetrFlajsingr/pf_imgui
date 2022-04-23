@@ -63,6 +63,16 @@ bool Tab::isSelected() const { return selected; }
 
 void Tab::setSelected() { setSelectedInNextFrame = true; }
 
+bool Tab::isDisplayDot() const { return flags & ImGuiTabItemFlags_UnsavedDocument; }
+
+void Tab::setDisplayDot(bool displayDot) {
+  if (displayDot) {
+    flags |= ImGuiTabItemFlags_UnsavedDocument;
+  } else {
+    flags &= ~ImGuiTabItemFlags_UnsavedDocument;
+  }
+}
+
 TabBar::TabBar(TabBar::Config &&config) : Element(std::string{config.name}) { setTabListAllowed(config.allowTabList); }
 
 TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elementName) {
