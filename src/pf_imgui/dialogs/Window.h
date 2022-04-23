@@ -264,6 +264,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool titleBarVisible = true;
   bool stayInBackground = false;
   // TODO: change flags so they are not computed every frame
+  bool sizeDirty = false;
+  bool positionDirty = false;
 
   std::string idLabel{};
 };
