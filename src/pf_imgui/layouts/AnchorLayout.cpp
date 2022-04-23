@@ -67,6 +67,7 @@ void AnchorLayout::renderImpl() {
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    auto scrollApplier = applyScroll();
     std::ranges::for_each(children, [](auto &childData) {
       auto &[child, positionable, anchor, _1, _2] = childData;
       ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));

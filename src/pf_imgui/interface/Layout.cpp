@@ -24,4 +24,17 @@ bool Layout::isHorizontalScrollEnabled() const { return horizontalScrollEnabled;
 
 void Layout::setHorizontalScrollEnabled(bool horizontalScroll) { horizontalScrollEnabled = horizontalScroll; }
 
+RAII Layout::applyScroll() {
+  if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Top) {
+    ImGui::SetScrollHereY(0.0f);
+    nextFrameScrollPosition.reset();
+  }
+  return RAII{[this] {
+    if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Bottom) {
+      ImGui::SetScrollHereY(1.0f);
+      nextFrameScrollPosition.reset();
+    }
+  }};
+}
+
 }  // namespace pf::ui::ig

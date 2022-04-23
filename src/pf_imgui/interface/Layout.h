@@ -69,22 +69,23 @@ class PF_IMGUI_EXPORT Layout : public Element, public RenderablesContainer {
   void setScrollPosition(ScrollPosition position);
 
   /**
-    * Check if horizontal scroll is allowed when content is bigger than the window.
-    * @return
-    */
+   * Check if horizontal scroll is allowed when content is bigger than the window.
+   * @return
+   */
   [[nodiscard]] bool isHorizontalScrollEnabled() const;
 
   /**
-    * Enable/disable horizontal scroll when the content is bigger than the window.
-    * @param horizontalScroll
-    * @todo implement
-    */
+   * Enable/disable horizontal scroll when the content is bigger than the window.
+   * @param horizontalScroll
+   * @todo implement
+   */
   void setHorizontalScrollEnabled(bool horizontalScroll);
 
  protected:
+  [[nodiscard]] RAII applyScroll();
+
   /**
    * This needs to be used while rendering inherited layouts.
-   * @todo: turn into an interface?
    */
   std::optional<ScrollPosition> nextFrameScrollPosition = std::nullopt;
 

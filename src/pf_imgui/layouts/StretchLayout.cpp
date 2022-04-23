@@ -40,6 +40,7 @@ void StretchLayout::renderImpl() {
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    auto scrollApplier = applyScroll();
     const auto newSize = ImGui::GetContentRegionMax();
     if (newSize.x != previousSize.x && newSize.y != previousSize.y) {
       child->setSize(newSize);

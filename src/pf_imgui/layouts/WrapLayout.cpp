@@ -21,10 +21,7 @@ void WrapLayout::renderImpl() {
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
-    if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Top) {
-      ImGui::SetScrollHereY(0.0f);
-      nextFrameScrollPosition = std::nullopt;
-    }
+    auto scrollApplier = applyScroll();
     if (dimensionPreviousFrame.size() != getChildren().size()) {
       dimensionPreviousFrame.clear();
       dimensionPreviousFrame.resize(getChildren().size());
@@ -34,12 +31,9 @@ void WrapLayout::renderImpl() {
       case LayoutDirection::LeftToRight: renderLeftToRight(); break;
       case LayoutDirection::TopToBottom: renderTopToBottom(); break;
     }
-    if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Bottom) {
-      ImGui::SetScrollHereY(1.0f);
-      nextFrameScrollPosition = std::nullopt;
-    }
   }
 }
+
 void WrapLayout::renderLeftToRight() {
   auto childrenView = getChildren();
   if (!childrenView.empty()) {
