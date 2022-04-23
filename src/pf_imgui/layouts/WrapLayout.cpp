@@ -23,7 +23,7 @@ void WrapLayout::renderImpl() {
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
     if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Top) {
       ImGui::SetScrollHereY(0.0f);
-      nextFrameScrollPosition = std::nullopt;
+      nextFrameScrollPosition.reset();
     }
     if (dimensionPreviousFrame.size() != getChildren().size()) {
       dimensionPreviousFrame.clear();
@@ -36,7 +36,7 @@ void WrapLayout::renderImpl() {
     }
     if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Bottom) {
       ImGui::SetScrollHereY(1.0f);
-      nextFrameScrollPosition = std::nullopt;
+      nextFrameScrollPosition.reset();
     }
   }
 }
