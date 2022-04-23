@@ -36,6 +36,7 @@ void GridLayout::renderImpl() {
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+    auto scrollApplier = applyScroll();
     const auto xCellSize = static_cast<float>(getSize().width) / static_cast<float>(width);
     const auto yCellSize = static_cast<float>(getSize().height) / static_cast<float>(height);
     const auto cellSize = Size{xCellSize, yCellSize};
