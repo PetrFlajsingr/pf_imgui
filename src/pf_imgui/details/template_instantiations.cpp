@@ -17,10 +17,10 @@
 
 namespace pf::ui::ig {
 
-template class ColorChooser<ColorChooserType::Edit, glm::vec3>;
-template class ColorChooser<ColorChooserType::Edit, glm::vec4>;
-template class ColorChooser<ColorChooserType::Picker, glm::vec3>;
-template class ColorChooser<ColorChooserType::Picker, glm::vec4>;
+template class ColorChooser<ColorChooserType::Edit, ColorChooserFormat::RGB>;
+template class ColorChooser<ColorChooserType::Edit, ColorChooserFormat::RGBA>;
+template class ColorChooser<ColorChooserType::Picker, ColorChooserFormat::RGB>;
+template class ColorChooser<ColorChooserType::Picker, ColorChooserFormat::RGBA>;
 
 template class Combobox<std::string>;
 

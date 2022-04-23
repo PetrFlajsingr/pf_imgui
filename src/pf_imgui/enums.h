@@ -66,6 +66,7 @@ enum class Persistent { Yes, No };
 * Enum for types of ColorChooser.
 */
 enum class ColorChooserType { Edit, Picker };
+enum class ColorChooserFormat { RGB, RGBA };
 /**
 * Enum for StackLayout direction.
 */

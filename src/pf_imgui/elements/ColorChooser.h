@@ -38,17 +38,16 @@ namespace pf::ui::ig {
  * It can do either RGB or RGBA colors based on the T parameter.
  *
  * @tparam Type type of the chooser
- * @tparam T inner value of the chooser
- * @todo use Color here
+ *
  */
-template<ColorChooserType Type, OneOf<glm::vec3, glm::vec4> T>
+template<ColorChooserType Type, ColorChooserFormat Format>
 class PF_IMGUI_EXPORT ColorChooser
     : public ItemElement,
       public Labellable,
-      public ValueObservable<T>,
+      public ValueObservable<Color>,
       public Savable,
-      public DragSource<T>,
-      public DropTarget<T>,
+      public DragSource<Color>,
+      public DropTarget<Color>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
                                style::ColorOf::DragDropTarget, style::ColorOf::NavHighlight, style::ColorOf::Border,
@@ -60,18 +59,20 @@ class PF_IMGUI_EXPORT ColorChooser
    */
   struct Config {
     using Parent = ColorChooser;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string_view label;  /*!< Text rendered next to interactable parts */
-    T value{};               /*!< Initial value */
-    bool persistent = false; /*!< Allow state saving to disk */
+    std::string_view name;      /*!< Unique name of the element */
+    std::string_view label;     /*!< Text rendered next to interactable parts */
+    Color value = Color::White; /*!< Initial value */
+    bool persistent = false;    /*!< Allow state saving to disk */
   };
   /**
    * Construct ColorChooser
    * @param config construction args @see ColorChooser::Config
    */
   explicit ColorChooser(Config &&config)
-      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false) {}
+      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.value),
+        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false), DropTarget(false) {
+    setValue(config.value);
+  }
   /**
    * Construct ColorChooser.
    * @param elementName ID of the element
@@ -79,10 +80,12 @@ class PF_IMGUI_EXPORT ColorChooser
    * @param persistent allow state saving to disk
    * @param value starting value
    */
-  ColorChooser(const std::string &elementName, const std::string &label, T value = T{},
+  ColorChooser(const std::string &elementName, const std::string &label, Color value = Color::White,
                Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {}
+      : ItemElement(elementName), Labellable(label), ValueObservable(value), Savable(persistent), DragSource(false),
+        DropTarget(false) {
+    setValue(value);
+  }
 
   /**
    * Check if picker appearing on color btn click is enabled.
@@ -93,20 +96,26 @@ class PF_IMGUI_EXPORT ColorChooser
    * Enable/disable picker
    * @param pickerEnabled
    */
-  void setPickerEnabled(bool value) { pickerEnabled = value; }
+  void setPickerEnabled(bool newValue) { pickerEnabled = newValue; }
 
   [[nodiscard]] toml::table toToml() const override {
-    const auto color = ValueObservable<T>::getValue();
-    const auto tomlColor = serializeGlmVec(color);
-    return toml::table{{"color", tomlColor}};
+    const auto color = ValueObservable::getValue();
+    return toml::table{{"color", static_cast<std::uint32_t>(color)}};
   }
   void setFromToml(const toml::table &src) override {
     if (auto newValIter = src.find("color"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-        const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+      if (auto newVal = newValIter->second.as_integer(); newVal != nullptr) {
+        ValueObservable::setValueAndNotifyIfChanged(Color{static_cast<ImU32>(newVal->get())});
       }
     }
+  }
+
+  void setValue(const Color &newValue) override {
+    valueStorage.r = newValue.red();
+    valueStorage.g = newValue.green();
+    valueStorage.b = newValue.blue();
+    if constexpr (Format == ColorChooserFormat::RGBA) { valueStorage.a = newValue.alpha(); }
+    ValueObservable::setValue(newValue);
   }
 
  protected:
@@ -115,48 +124,55 @@ class PF_IMGUI_EXPORT ColorChooser
     auto style = setStyleStack();
     auto flags = pickerEnabled ? ImGuiColorEditFlags{} : ImGuiColorEditFlags_NoPicker;
     auto valueChanged = false;
-    const auto address = ValueObservable<T>::getValueAddress();
     if constexpr (Type == ColorChooserType::Edit) {
-      if constexpr (std::same_as<glm::vec3, T>) {
-        valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(*address), flags);
+      if constexpr (Format == ColorChooserFormat::RGB) {
+        valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
       } else {
-        valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(*address), flags);
+        valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
       }
     } else {
-      if constexpr (std::same_as<glm::vec3, T>) {
-        valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(*address), flags);
+      if constexpr (Format == ColorChooserFormat::RGB) {
+        valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
       } else {
-        valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(*address), flags);
+        valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
       }
     }
-    DragSource<T>::drag(ValueObservable<T>::getValue());
-    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    DragSource::drag(ValueObservable::getValue());
+    if (auto drop = DropTarget::dropAccept(); drop.has_value()) {
+      ValueObservable::setValueAndNotifyIfChanged(*drop);
       return;
     }
-    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+    if (valueChanged) {
+      if constexpr (Format == ColorChooserFormat::RGB) {
+        ValueObservable::setValueAndNotifyIfChanged(Color::RGB(valueStorage.r, valueStorage.g, valueStorage.b));
+      } else {
+        ValueObservable::setValueAndNotifyIfChanged(
+            Color::RGB(valueStorage.r, valueStorage.g, valueStorage.b, valueStorage.a));
+      }
+    }
   }
 
  private:
   bool pickerEnabled = true;
+  std::conditional_t<Format == ColorChooserFormat::RGB, glm::vec3, glm::vec4> valueStorage;
 };
 
 /**
  * @brief Convenience alias for ColorChooser as picker.
  */
-template<OneOf<glm::vec3, glm::vec4> T>
-using ColorPicker = ColorChooser<ColorChooserType::Picker, T>;
+template<ColorChooserFormat Format>
+using ColorPicker = ColorChooser<ColorChooserType::Picker, Format>;
 
 /**
  * @brief Convenience alias for ColorChooser as edit.
  */
-template<OneOf<glm::vec3, glm::vec4> T>
-using ColorEdit = ColorChooser<ColorChooserType::Edit, T>;
+template<ColorChooserFormat Format>
+using ColorEdit = ColorChooser<ColorChooserType::Edit, Format>;
 
-extern template class ColorChooser<ColorChooserType::Edit, glm::vec3>;
-extern template class ColorChooser<ColorChooserType::Edit, glm::vec4>;
-extern template class ColorChooser<ColorChooserType::Picker, glm::vec3>;
-extern template class ColorChooser<ColorChooserType::Picker, glm::vec4>;
+extern template class ColorChooser<ColorChooserType::Edit, ColorChooserFormat::RGB>;
+extern template class ColorChooser<ColorChooserType::Edit, ColorChooserFormat::RGBA>;
+extern template class ColorChooser<ColorChooserType::Picker, ColorChooserFormat::RGB>;
+extern template class ColorChooser<ColorChooserType::Picker, ColorChooserFormat::RGBA>;
 
 }  // namespace pf::ui::ig
 #endif  // PF_IMGUI_ELEMENTS_COLORCHOOSER_H
