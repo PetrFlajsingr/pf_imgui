@@ -54,7 +54,7 @@ If a font is set to an element it'll be used in its children as well, unless you
 ```cpp
 auto font = imgui->getFontManager().fontByName("arial11");
 if (font.has_value()) {
-  myTextElement.setFont(*font);
+  myTextElement.setFont(font);
 }
 ```
 
@@ -88,8 +88,8 @@ window.setCollapsed(true);
 This interface allows its derived classes to apply certain style/color changes. You can see which styles/colors can be modified in the base class list of the element you are to use.
 ```cpp
 auto &button = window.createChild<Button>("button_id", "Click me");
-button.setColor<styles::ColorOf::Button>(ImVec4{1, 0, 0, 1});
-button.setColor<styles::ColorOf::ButtonHovered>(ImVec4{0, 1, 0, 1});
+button.setColor<styles::ColorOf::Button>(Color::Red);
+button.setColor<styles::ColorOf::ButtonHovered>(Color::Green);
 ```
 
 ### ItemElement
@@ -118,8 +118,8 @@ button.setLabel("NEW LABEL");
 Elements deriving from this interface provide an observable interface for their position. You can also change their position programmatically.
 ```cpp
 auto &window = imgui->createWindow("window_id", "Window name");
-window.addPositionListener([](ImVec2 newPosition));
-window.setPosition(ImVec2{100, 100});
+window.addPositionListener([](Position newPosition));
+window.setPosition(Position{100, 100});
 ```
 
 ### Resizable
@@ -133,7 +133,7 @@ window.setSize(Size{Width::Auto(), 100});
 ### Savable
 Elements derived from this interface can be serialized to `toml` (and deserialized from it as well). This is used to save their state to a config file.
 ```cpp
-auto &checkbox = imgui->createChild<Checkbox>("id", "Checkbox", Checkbox::Type::Toggle, false, Persistent::Yes);
+auto &checkbox = imgui->createChild<Checkbox>("id", "Checkbox", false, Persistent::Yes);
 ```
 
 ### ValueObservable
@@ -200,7 +200,7 @@ dialog.createChild<Button>("dialog_close_button", "Close")
 ```
 ![img.png](img/dialog.png)
 
-There are some additional `ModalDialog` descendants for easy of usage:
+There are some additional `ModalDialog` descendants for ease of usage:
 
 * `InputDialog` for string input.
 ```cpp
@@ -235,7 +235,7 @@ Allows the user to select directories or files with a filter.
 ```cpp
 const auto allowedExtensions = {"vox", "pf_vox"};
 const auto filetypeDescription = "Vox model";
-const auto filetypeColor = ImVec4{1, 0, 0, 1};
+const auto filetypeColor = Color::Red;
 const auto extensionSettings = FileExtensionSettings{allowedExtensions, 
                                                      filetypeDescription, 
                                                      filetypeColor};
