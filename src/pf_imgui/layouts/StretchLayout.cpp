@@ -27,7 +27,7 @@ void StretchLayout::setStretch(Stretch newStretch) {
 }
 
 std::optional<std::reference_wrapper<Element>> StretchLayout::getChild() {
-  if (child == nullptr) { std::nullopt; }
+  if (child == nullptr) { return std::nullopt; }
   return *dynamic_cast<Element *>(child.get());
 }
 
