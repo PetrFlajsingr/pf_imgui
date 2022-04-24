@@ -3,6 +3,7 @@
 //
 
 #include "StatusBar.h"
+#include <fmt/format.h>
 #include <string>
 
 namespace pf::ui::ig {

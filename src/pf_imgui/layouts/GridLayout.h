@@ -14,7 +14,6 @@
 #include <memory>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/exceptions.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -56,7 +55,6 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param column column of the selected cell
    * @param row row of the selected cell
    * @param layout layout to be moved
-   * @throws InvalidArgumentException when coordinates are out of bounds
    */
   void setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout);
 
@@ -69,19 +67,14 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param name ID of the newly created layout
    * @param args arguments passed to Ts constructor
    * @return reference to the newly created Layout
-   * @throws InvalidArgumentException when coordinates are out of bounds
-   * @throws DuplicateIdException when an ID is already present in the container
    */
   template<typename T, typename... Args>
     requires std::derived_from<T, Layout> && std::constructible_from<T, std::string, Args...>
   T &createLayout(uint32_t column, uint32_t row, std::string name, Args &&...args) {
-    if (findIf(cells, [name](const auto &cell) { return cell->getName() == name; }).has_value()) {
-      throw DuplicateIdException("{} already present in ui", name);
-    }
+    if (findIf(cells, [name](const auto &cell) { return cell->getName() == name; }).has_value()) { return; }
     auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
     const auto ptr = child.get();
     const auto index = indexForCell(column, row);
-    if (index >= cells.size()) { throw InvalidArgumentException("Indices out of bounds: {}x{}", column, row); }
     cells[index] = std::move(child);
     return *ptr;
   }
@@ -91,7 +84,6 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param column column of the cell
    * @param row row of the cell
    * @return reference to layout at the given coordinates
-   * @throws InvalidArgumentException when coordinates are out of bounds
    */
   [[nodiscard]] ResizableLayout &getCellLayout(uint32_t column, uint32_t row);
 
@@ -100,11 +92,13 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param column column of the cell
    * @param row row of the cell
    * @return true if the cell is filled, false otherwise
-   * @throws InvalidArgumentException when coordinates are out of bounds
    */
   [[nodiscard]] bool hasLayoutAt(uint32_t column, uint32_t row);
 
   std::vector<Renderable *> getRenderables() override;
+
+  [[nodiscard]] std::uint32_t getWidth() const;
+  [[nodiscard]] std::uint32_t getHeight() const;
 
  protected:
   void renderImpl() override;

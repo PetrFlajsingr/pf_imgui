@@ -24,10 +24,6 @@ void AnchorLayout::setChildPosition(const std::string &childName, Position posit
                           [childName](auto child) { return child->element->getName() == childName; });
       child.has_value()) {
     child.value()->positionable->setPosition(position);
-  } else {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    throw IdNotFoundException("Child not found: {}", childName);
-#endif
   }
 }
 

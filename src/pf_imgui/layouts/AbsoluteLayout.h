@@ -12,7 +12,6 @@
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/decorators/PositionDecorator.h>
 #include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
@@ -104,7 +103,6 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
    * Set position by elements' ID.
    * @param childName ID of the child
    * @param position new position
-   * @throws IdNotFoundException when the child is not present in the layout
    */
   void setChildPosition(const std::string &childName, Position position);
 

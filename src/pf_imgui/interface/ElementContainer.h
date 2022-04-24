@@ -10,7 +10,6 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/meta.h>
