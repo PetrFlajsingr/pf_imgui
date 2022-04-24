@@ -13,7 +13,6 @@
 #include <pf_common/exceptions/Exceptions.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
-#include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <utility>
@@ -61,7 +60,8 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    * @return reference to he newly created data
    */
   template<std::derived_from<plot_type::PlotData> T, typename... Args>
-  requires std::constructible_from<T, Args...> T &addData(Args &&...args) {
+    requires std::constructible_from<T, Args...>
+  T &addData(Args &&...args) {
     auto data = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = data.get();
     datas.emplace_back(std::move(data));
@@ -72,17 +72,16 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    * Get data storage by its ID.
    * @param name ID of the data storage
    * @return reference to data storage
-   * @throws IdNotFoundException when no such data storage exists
    * @throw Exception when desired type doesn't match the storage data type
    */
   template<std::derived_from<plot_type::PlotData> T>
-  [[nodiscard]] T &dataByName(const std::string &name) {
+  [[nodiscard]] std::optional<std::reference_wrapper<T>> dataByName(const std::string &name) {
     if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
         iter != datas.end()) {
       if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }
-      throw Exception("Wrong type for data: '{}' in '{}'", name, getName());
+      return std::nullopt;
     }
-    throw IdNotFoundException("Data not found: '{}' in '{}'", name, getName());
+    return std::nullopt;
   }
 
   /**
