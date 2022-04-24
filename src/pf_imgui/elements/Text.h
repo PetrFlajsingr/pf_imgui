@@ -1,9 +1,9 @@
 /**
-* @file Text.h
-* @brief Text element.
-* @author Petr Flajšingr
-* @date 31.10.20
-*/
+ * @file Text.h
+ * @brief Text element.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_TEXT_H
 #define PF_IMGUI_ELEMENTS_TEXT_H
@@ -21,10 +21,8 @@
 namespace pf::ui::ig {
 
 /**
-* @brief Simple rendered text. May be colored.
-*
-* @todo: text wrapping
-*/
+ * @brief Simple rendered text. May be colored.
+ */
 class PF_IMGUI_EXPORT Text
     : public ItemElement,
       public DragSource<std::string>,
@@ -38,7 +36,7 @@ class PF_IMGUI_EXPORT Text
     using Parent = Text;
     std::string_view name; /*!< Unique name of the element */
     std::string text{};    /*!< Text to render */
-    bool wrapText = false;     /*!< If true the text will wrap */
+    bool wrapText = false; /*!< If true the text will wrap */
   };
   /**
    * Construct Text
@@ -53,17 +51,17 @@ class PF_IMGUI_EXPORT Text
   Text(const std::string &elementName, std::string text, bool wrapText = false);
 
   /**
-  * Get rendered text.
-  * @return text
-  */
+   * Get rendered text.
+   * @return text
+   */
   [[nodiscard]] std::string_view getText() const;
 
   void setText(std::string newText);
   /**
-  * Set new text for rendering
-  * @param text new text to set
-  * @param args values to insert into text using fmt::format
-  */
+   * Set new text for rendering
+   * @param text new text to set
+   * @param args values to insert into text using fmt::format
+   */
   template<typename... Args>
   void setText(fmt::format_string<Args...> fmt, Args &&...args) {
     setTextInner(fmt::format(fmt, std::forward<Args>(args)...));
