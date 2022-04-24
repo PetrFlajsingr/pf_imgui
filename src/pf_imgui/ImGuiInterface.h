@@ -165,14 +165,12 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   /**
    * Find Window by its ID.
    * @param windowName ID of the window
-   * @throws IdNotFoundException when the Window of given ID is not present
    * @return reference to the searched for Window or nullopt if no such window exists
    */
   std::optional<std::reference_wrapper<Window>> windowByName(const std::string &windowName);
   /**
    * Find Window by its ID.
    * @param windowName ID of the window
-   * @throws IdNotFoundException when the Window of given ID is not present
    * @return reference to the searched for Window or nullopt if no such window exists
    */
   [[nodiscard]] std::optional<std::reference_wrapper<const Window>> windowByName(const std::string &windowName) const;
