@@ -44,7 +44,7 @@ void StretchLayout::renderImpl() {
       child->setSize(newSize);
       previousSize = newSize;
     }
-    renderableChild->render();
+    if (renderableChild != nullptr) { renderableChild->render(); }
   }
 }
 
