@@ -329,6 +329,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   // @warning you need to update font atlas manually when this value is set
   bool shouldUpdateFontAtlas = false;
 
+  void setContext() const;
+
  private:
   friend class ModalDialog;
   friend class FontManager;

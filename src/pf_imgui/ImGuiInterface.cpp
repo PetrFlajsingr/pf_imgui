@@ -124,9 +124,15 @@ void ImGuiInterface::renderDialogs() {
   }
 }
 
-bool ImGuiInterface::isWindowHovered() const { return io.WantCaptureMouse; }
+bool ImGuiInterface::isWindowHovered() const {
+  setContext();
+  return io.WantCaptureMouse;
+}
 
-bool ImGuiInterface::isKeyboardCaptured() const { return io.WantCaptureKeyboard; }
+bool ImGuiInterface::isKeyboardCaptured() const {
+  setContext();
+  return io.WantCaptureKeyboard;
+}
 
 Window &ImGuiInterface::createWindow(const std::string &windowName, std::string title) {
   windows.emplace_back(std::make_unique<Window>(windowName, std::move(title)));
@@ -183,9 +189,7 @@ void ImGuiInterface::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
   if (hasMenuBar()) {
-    if (backgroundDockingArea != nullptr) {
-      backgroundDockingArea->leftTopMargin = ImVec2{0, ImGui::GetFrameHeight()};
-    }
+    if (backgroundDockingArea != nullptr) { backgroundDockingArea->leftTopMargin = ImVec2{0, ImGui::GetFrameHeight()}; }
     menuBar->render();
   } else {
     if (backgroundDockingArea != nullptr) { backgroundDockingArea->leftTopMargin = ImVec2{0, 0}; }
@@ -250,6 +254,7 @@ NotificationManager &ImGuiInterface::getNotificationManager() { return notificat
 const NotificationManager &ImGuiInterface::getNotificationManager() const { return notificationManager; }
 
 void ImGuiInterface::render() {
+  setContext();
   if (shouldUpdateFontAtlas) {
     shouldUpdateFontAtlas = false;
     updateFonts();
@@ -275,5 +280,7 @@ void ImGuiInterface::render() {
     }
   }
 }
+
+void ImGuiInterface::setContext() const { ImGui::SetCurrentContext(imguiContext); }
 
 }  // namespace pf::ui::ig
