@@ -36,7 +36,7 @@ void Window::renderImpl() {
   }
 
   RAII endPopup{ImGui::End};
-  if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr), flags)) {
+  if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr), flags | (hasMenuBar() ? ImGuiWindowFlags_MenuBar : 0))) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
