@@ -67,24 +67,10 @@ class PF_IMGUI_EXPORT DragSourceBase {
    */
   [[nodiscard]] bool hasDragTooltip() const;
   /**
-   * Get the drag tooltip if it exists.
-   * @return tooltip of drag
-   *
-   * @throws Exception if the tooltip doesn't exist
+   * Create an instance of tooltip for drag to be filled with elements by the user or get the one already created.
+   * @return reference to the tooltip
    */
-  [[nodiscard]] Tooltip &getDragTooltip();
-  /**
-   * Get the drag tooltip if it exists.
-   * @return tooltip of drag
-   *
-   * @throws Exception if the tooltip doesn't exist
-   */
-  [[nodiscard]] const Tooltip &getDragTooltip() const;
-  /**
-   * Create an instance of tooltip for drag to be filled with elements by the user.
-   * @return reference to the newly created tooltip
-   */
-  [[nodiscard]] Tooltip &createDragTooltip();
+  [[nodiscard]] Tooltip &createOrGetDragTooltip();
   /**
    * Removes drag's tooltip if it is assigned. If the tooltip doesn't exist, nothing happens.
    */

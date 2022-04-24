@@ -10,7 +10,6 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/exceptions.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/meta.h>
@@ -43,7 +42,8 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   * @return reference to the newly created Element
   */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChild(Args &&...args) {
+    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+  T &createChild(Args &&...args) {
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     addChild(std::move(child));
@@ -69,8 +69,8 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  * @return reference to the newly created Element
  */
   template<typename T, typename... Args>
-  requires std::derived_from<T, Element> && std::constructible_from<T, Args...> T &createChildAtIndex(std::size_t index,
-                                                                                                      Args &&...args) {
+    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+  T &createChildAtIndex(std::size_t index, Args &&...args) {
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     insertChild(std::move(child), index);
@@ -103,8 +103,6 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   *
   * @param child child to be added
   * @param index index at which the child should be stored
-  *
-  * @throws InvalidArgumentException when index is out of bounds
   */
   void insertChild(std::unique_ptr<Element> child, std::size_t index);
 
@@ -120,20 +118,14 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
   * @param name name of the searched for child
   * @return reference to the searched for child
-  *
-  * @throws IdNotFoundException when the child is not found or when it doesn't match the desired type
   */
   template<std::derived_from<Element> T>
-  [[nodiscard]] T &childByName(const std::string &name) {
+  [[nodiscard]] std::optional<std::reference_wrapper<T>> childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
-#ifndef _MSC_VER  // TODO: MSVC internal error
-      throw IdNotFoundException("Wrong type for child: '{}'", name);
-#endif
+      return std::nullopt;
     }
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    throw IdNotFoundException("Child not found: '{}'", name);
-#endif
+    return std::nullopt;
   }
 
   /**
@@ -142,20 +134,14 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
   * @param name name of the searched for child
   * @return reference to the searched for child
-  *
-  * @throws IdNotFoundException when the child is not found or when it doesn't match the desired type
   */
   template<std::derived_from<Element> T>
-  [[nodiscard]] const T &childByName(const std::string &name) const {
+  [[nodiscard]] std::optional<std::reference_wrapper<const T>> childByName(const std::string &name) const {
     if (const auto iter = children.find(name); iter != children.end()) {
       if (auto result = std::dynamic_pointer_cast<T>(iter->second); result != nullptr) { return result; }
-#ifndef _MSC_VER  // TODO: MSVC internal error
-      throw IdNotFoundException("Wrong type for child: '{}'", name);
-#endif
+      return std::nullopt;
     }
-#ifndef _MSC_VER  // TODO: MSVC internal error
-    throw IdNotFoundException("Child not found: '{}'", name);
-#endif
+    return std::nullopt;
   }
 
   /**

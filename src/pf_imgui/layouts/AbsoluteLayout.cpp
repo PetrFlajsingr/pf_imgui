@@ -33,10 +33,6 @@ void AbsoluteLayout::setChildPosition(const std::string &childName, Position pos
                           [childName](auto child) { return child->first->getName() == childName; });
       child.has_value()) {
     child.value()->second->setPosition(position);
-  } else {
-#ifndef _MSC_VER  // TODO: MSVC internal compiler error
-    throw IdNotFoundException("Child not found: {}", childName);
-#endif
   }
 }
 void AbsoluteLayout::removeChild(const std::string &childName) {

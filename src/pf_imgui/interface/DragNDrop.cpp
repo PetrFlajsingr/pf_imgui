@@ -41,26 +41,14 @@ bool details::DragSourceBase::drag_impl(const std::string &typeName, const void 
   return didDrop;
 }
 
-bool details::DragSourceBase::hasDragTooltip() const { return tooltip != nullptr; }
-Tooltip &details::DragSourceBase::getDragTooltip() {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-  if (tooltip == nullptr) { throw Exception("Drag tooltip doesn't exist."); }
-#endif
-  return *tooltip;
-}
-
-const Tooltip &details::DragSourceBase::getDragTooltip() const {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-  if (tooltip == nullptr) { throw Exception("Drag tooltip doesn't exist."); }
-#endif
-  return *tooltip;
-}
-
-Tooltip &details::DragSourceBase::createDragTooltip() {
+Tooltip &details::DragSourceBase::createOrGetDragTooltip() {
+  if (tooltip != nullptr) { return *tooltip; }
   tooltip = std::make_unique<Tooltip>(uniqueId());
   tooltipTextFmt = std::nullopt;
   return *tooltip;
 }
+
+bool details::DragSourceBase::hasDragTooltip() const { return tooltip != nullptr; }
 
 void details::DragSourceBase::removeDragTooltip() {
   tooltip = nullptr;
@@ -76,7 +64,7 @@ bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, const v
 }
 
 void details::DragSourceBase::createSimpleTooltip(const std::string &fmt, bool isValueFmt) {
-  auto &tooltipText = createDragTooltip().createChild<Text>(uniqueId(), std::string(fmt));
+  auto &tooltipText = createOrGetDragTooltip().createChild<Text>(uniqueId(), std::string(fmt));
   if (isValueFmt) {
     tooltipTextFmt = std::make_pair(fmt, &tooltipText);
   } else {

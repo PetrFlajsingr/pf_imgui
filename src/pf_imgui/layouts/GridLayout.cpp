@@ -29,6 +29,7 @@ GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_
 void GridLayout::setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout) {
   cells[indexForCell(column, row)] = std::move(layout);
 }
+
 void GridLayout::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
@@ -52,23 +53,25 @@ void GridLayout::renderImpl() {
     }
   }
 }
+
 uint32_t GridLayout::indexForCell(uint32_t column, uint32_t row) const { return row * width + column; }
+
 ResizableLayout &GridLayout::getCellLayout(uint32_t column, uint32_t row) {
   const auto index = indexForCell(column, row);
-#ifndef _MSC_VER  // TODO: MSVC internal error
-  if (index >= cells.size()) { throw InvalidArgumentException("Indices out of bounds: {}x{}", column, row); }
-#endif
   return *cells[index];
 }
+
 std::vector<Renderable *> GridLayout::getRenderables() {
   return cells | ranges::views::transform([](auto &child) -> Renderable * { return child.get(); }) | ranges::to_vector;
 }
+
 bool GridLayout::hasLayoutAt(uint32_t column, uint32_t row) {
   const auto index = indexForCell(column, row);
-#ifndef _MSC_VER  // TODO: MSVC internal error
-  if (index >= cells.size()) { throw InvalidArgumentException("Indices out of bounds: {}x{}", column, row); }
-#endif
   return cells[index] != nullptr;
 }
+
+std::uint32_t GridLayout::getWidth() const { return width; }
+
+std::uint32_t GridLayout::getHeight() const { return height; }
 
 }  // namespace pf::ui::ig
