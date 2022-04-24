@@ -71,7 +71,6 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
   template<typename T, typename... Args>
     requires std::derived_from<T, Layout> && std::constructible_from<T, std::string, Args...>
   T &createLayout(uint32_t column, uint32_t row, std::string name, Args &&...args) {
-    if (findIf(cells, [name](const auto &cell) { return cell->getName() == name; }).has_value()) { return; }
     auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
     const auto ptr = child.get();
     const auto index = indexForCell(column, row);
