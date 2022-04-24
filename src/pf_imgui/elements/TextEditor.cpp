@@ -22,13 +22,13 @@ TextEditor::Cursor &TextEditor::Cursor::moveDown(std::uint32_t lineCnt, bool add
   return *this;
 }
 
-TextEditor::Cursor &TextEditor::Cursor::moveLeft(std::uint32_t lineCnt, bool addToSelection) {
-  owner.editor.MoveLeft(static_cast<int>(lineCnt), addToSelection);
+TextEditor::Cursor &TextEditor::Cursor::moveLeft(std::uint32_t charCnt, bool addToSelection) {
+  owner.editor.MoveLeft(static_cast<int>(charCnt), addToSelection);
   return *this;
 }
 
-TextEditor::Cursor &TextEditor::Cursor::moveRight(std::uint32_t lineCnt, bool addToSelection) {
-  owner.editor.MoveRight(static_cast<int>(lineCnt), addToSelection);
+TextEditor::Cursor &TextEditor::Cursor::moveRight(std::uint32_t charCnt, bool addToSelection) {
+  owner.editor.MoveRight(static_cast<int>(charCnt), addToSelection);
   return *this;
 }
 
@@ -143,6 +143,10 @@ void TextEditor::setHighlighting(TextEditorHighlight language) {
     case CPP: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::CPlusPlus()); break;
     case SQL: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::SQL()); break;
   }
+}
+
+void TextEditor::setHighlighting(const ImGuiColorTextEdit::TextEditor::LanguageDefinition &language) {
+  editor.SetLanguageDefinition(language);
 }
 
 toml::table TextEditor::toToml() const { return toml::table{{"text", editor.GetText()}}; }
