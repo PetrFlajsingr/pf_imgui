@@ -25,9 +25,6 @@ void ElementContainer::addChild(std::unique_ptr<Element> child) {
 }
 
 void ElementContainer::insertChild(std::unique_ptr<Element> child, std::size_t index) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-  if (index > childrenInOrder.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
-#endif
   childrenInOrder.insert(childrenInOrder.begin() + static_cast<long long>(index), *child);
   children[child->getName()] = std::move(child);
 }
