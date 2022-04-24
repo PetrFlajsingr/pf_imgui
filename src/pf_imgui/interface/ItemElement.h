@@ -46,24 +46,15 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
   void render() override;
 
   /**
+   * Create an instance of tooltip to be filled with element by the user or get an existing one.
+   * @return reference to the created tooltip
+   */
+  [[nodiscard]] Tooltip &createOrGetTooltip();
+  /**
    * Check if this item has an active tooltip.
    * @return true if the tooltip is active, false otherwise
    */
   [[nodiscard]] bool hasTooltip() const;
-  /**
-   * Get the tooltip if it exists.
-   * @return tooltip of this item
-   *
-   * @throws Exception if the tooltip doesn't exist
-   */
-  [[nodiscard]] Tooltip &getTooltip();
-  /**
-   * Get the tooltip if it exists.
-   * @return tooltip of this item
-   *
-   * @throws Exception if the tooltip doesn't exist
-   */
-  [[nodiscard]] const Tooltip &getTooltip() const;
   /**
    * Removes tooltip if it is assigned. If the tooltip doesn't exist, nothing happens.
    */
@@ -78,29 +69,21 @@ class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hov
    * @param newTooltip new tooltip
    */
   void setTooltip(std::unique_ptr<Tooltip> &&newTooltip);
-  /**
-   * Create an instance of tooltip to be filled with element by the user.
-   * @return reference to the newly created tooltip
-   */
-  [[nodiscard]] Tooltip &createTooltip();
 
+  /**
+   * Create an instance of popup menu to be filled with elements by the user or get an existing one.
+   * @return reference to the newly created PopupMenu
+   */
+  [[nodiscard]] PopupMenu &createOrGetPopupMenu();
   /**
    * Check if this item has an active tooltip.
    * @return true if the tooltip is active, false otherwise
    */
   [[nodiscard]] bool hasPopupMenu() const;
   /**
-   * Get the tooltip if it exists.
-   * @return tooltip of this item
-   *
-   * @throws Exception if the tooltip doesn't exist
+   * Removes popup menu if it is assigned. If it doesn't exist, nothing happens.
    */
-  [[nodiscard]] PopupMenu &getPopupMenu();
-  /**
-   * Create an instance of popup menu to be filled with elements by the user.
-   * @return reference to the newly created PopupMenu
-   */
-  [[nodiscard]] PopupMenu &createPopupMenu();
+  void removePopupMenu();
 
   /**
    * Add a listener to mouse position. Returned value is distance from upper left corner of the element area.
