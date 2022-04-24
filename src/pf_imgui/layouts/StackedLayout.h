@@ -69,7 +69,6 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
   /**
    * Remove stack at the selected index.
    * @param index index of a stack to be removed
-   * @throws InvalidArgumentException when the index is out of bounds
    */
   void removeStack(std::size_t index);
   /**
@@ -87,7 +86,6 @@ class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
   /**
    * Set active stack by index.
    * @param index index of a stack to activate
-   * @throws InvalidArgumentException when the index is out of bounds
    */
   void setIndex(std::size_t index);
 

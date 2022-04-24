@@ -59,7 +59,6 @@ class PF_IMGUI_EXPORT LinearLayout : public ResizableLayout {
    * Insert child to the provided index.
    * @param child child to be added
    * @param index
-   * @throws InvalidArgumentException if the index is out of bounds
    */
   void insertChild(std::unique_ptr<Element> child, std::size_t index);
 

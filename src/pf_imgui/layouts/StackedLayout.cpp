@@ -44,11 +44,9 @@ void StackedLayout::popStack() {
 }
 
 void StackedLayout::removeStack(std::size_t index) {
-#ifndef _MSC_VER  // TODO: MSVC internal compiler error
-  if (index >= stacks.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
-#endif
   stacks.erase(stacks.begin() + static_cast<long long>(index));
 }
+
 void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
   auto stack = std::move(stacks[srcIndex]);
   stacks.erase(stacks.begin() + static_cast<long long>(srcIndex));
@@ -56,12 +54,11 @@ void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
 }
 
 std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
+
 void StackedLayout::setIndex(std::size_t index) {
-#ifndef _MSC_VER  // TODO: MSVC internal compiler error
-  if (index >= stacks.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
-#endif
   selectedIndex = index;
 }
+
 StackedLayout::Stack &StackedLayout::getCurrentStack() { return *stacks[*selectedIndex]; }
 
 StackedLayout::Stack &StackedLayout::getStackAtIndex(std::size_t index) { return *stacks[index]; }

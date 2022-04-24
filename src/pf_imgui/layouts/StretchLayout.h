@@ -91,9 +91,8 @@ class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
   /**
    * Get child of the layout.
    * @return reference to the child
-   * @throws Exception when no child is present inside the layout
    */
-  [[nodiscard]] Element &getChild();
+  [[nodiscard]] std::optional<std::reference_wrapper<Element>> getChild();
   /**
    * Check whether the layout contains a child.
    * @return true if the layout contains a child, false otherwise

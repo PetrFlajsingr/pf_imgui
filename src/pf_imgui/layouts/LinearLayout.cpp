@@ -14,9 +14,6 @@ LinearLayout::LinearLayout(const std::string &name, Size size, ShowBorder showBo
 void LinearLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
 
 void LinearLayout::insertChild(std::unique_ptr<Element> child, std::size_t index) {
-#ifndef _MSC_VER  // TODO: MSVC internal error
-  if (index > children.size()) { throw InvalidArgumentException("Index out of bounds: {}", index); }
-#endif
   children.insert(children.begin() + static_cast<long long>(index), std::move(child));
 }
 void LinearLayout::removeChild(const std::string &childName) {
