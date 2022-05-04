@@ -19,9 +19,9 @@ struct ImGuiSDLConfig {
 
 class ImGuiSDLInterface final : public ImGuiInterface {
  public:
-  ImGuiSDLInterface(ImGuiSDLConfig config);
+  explicit ImGuiSDLInterface(ImGuiSDLConfig config);
 
-  virtual ~ImGuiSDLInterface();
+  ~ImGuiSDLInterface() override;
 
   void updateFonts() override;
 

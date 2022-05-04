@@ -122,13 +122,6 @@ class PF_IMGUI_EXPORT FontBuilder {
    */
   SubFontBuilder addSubfont(const std::vector<std::byte> &data);
   /**
-   * Add an icon subfont from preset.
-   * @param iconPack type of icon pack
-   * @param size font size
-   * @return self
-   */
-  FontBuilder &addIconSubfont(const Flags<IconPack> &iconPack, float size);
-  /**
    * Set index of font.
    * @param index index of font in ttf data
    * @return self
@@ -146,6 +139,18 @@ class PF_IMGUI_EXPORT FontBuilder {
    * @return self
    */
   FontBuilder &setExtraHorizontalSpacing(float spacing);
+  /**
+   * Add one of prebuilt icon packs.
+   * @param type pack type
+   * @param file font source file
+   */
+  FontBuilder &addIconPack(IconPack type, std::filesystem::path file, float size = 13.f);
+  /**
+   * Add one of prebuilt icon packs.
+   * @param type pack type
+   * @param data font data
+   */
+  FontBuilder &addIconPack(IconPack type, std::vector<std::byte> data, float size = 13.f);
 
   /**
    * Build the font.
@@ -164,7 +169,12 @@ class PF_IMGUI_EXPORT FontBuilder {
   int indexInTTF{};
   float extraHorizontalSpacing{};
   std::vector<SubFontBuilder> subfonts;
-  std::vector<std::pair<IconPack, float>> iconPacks;
+  struct IconPackInfo {
+    std::variant<std::filesystem::path, std::vector<std::byte>> data;
+    IconPack type;
+    float size;
+  };
+  std::vector<IconPackInfo> iconPacks;
 };
 
 /**
@@ -177,19 +187,8 @@ class PF_IMGUI_EXPORT FontManager {
   /**
    * Construct font manager with a 'default' font.
    * @param imGuiInterface owner
-   * @param iconFontDir directory for default icon fonts
    */
-  explicit FontManager(ImGuiInterface &imGuiInterface, std::filesystem::path iconFontDir);
-  /**
-   * Construct font manager with a 'default' font and icons added to it.
-   * @param imGuiInterface owner
-   * @param iconFontDir directory for default icon fonts
-   * @param iconPacks icons to add to default font
-   * @param iconSize size of icons
-   */
-  explicit FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::path &iconFontDir,
-                       const Flags<IconPack> &iconPacks, float iconSize);
-
+  explicit FontManager(ImGuiInterface &imGuiInterface);
   /**
    * Get font by name.
    * @param name name of the font
@@ -231,7 +230,6 @@ class PF_IMGUI_EXPORT FontManager {
   Font addFont(FontBuilder &builder);
 
   ImGuiInterface *imguiInterface;
-  std::filesystem::path iconDir;
   std::unordered_map<std::string, ImFont *> fonts;
   std::vector<std::array<ImWchar, 3>> glyphRangeInfos;
 };

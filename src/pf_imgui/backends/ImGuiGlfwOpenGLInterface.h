@@ -17,8 +17,8 @@ struct ImGuiGlfwOpenGLConfig {
 
 class ImGuiGlfwOpenGLInterface final : public ImGuiInterface {
  public:
-  ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config);
-  virtual ~ImGuiGlfwOpenGLInterface();
+  explicit ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config);
+  ~ImGuiGlfwOpenGLInterface() override;
 
   void updateFonts() override;
 

@@ -13,25 +13,10 @@
 
 namespace pf::ui::ig {
 
-FontManager::FontManager(ImGuiInterface &imGuiInterface, std::filesystem::path iconFontDir)
-    : imguiInterface(&imGuiInterface), iconDir(std::move(iconFontDir)) {
+FontManager::FontManager(ImGuiInterface &imGuiInterface) : imguiInterface(&imGuiInterface) {
   glyphRangeInfos.reserve(100);
   auto defaultFont = imguiInterface->getIo().Fonts->AddFontDefault();
   fonts.emplace("default", defaultFont);
-}
-
-FontManager::FontManager(ImGuiInterface &imGuiInterface, const std::filesystem::path &iconFontDir,
-                         const Flags<IconPack> &iconPacks, float iconSize)
-    : FontManager(imGuiInterface, iconFontDir) {
-  std::ranges::for_each(iconPacks.getSetFlags(), [&](const auto iconPack) {
-    const auto fileNames = fontFileNamesForIconPack(iconPack);
-    std::ranges::for_each(fileNames, [&](const auto fileName) {
-      const auto fontConfig = fontConfigForIconPack(iconPack);
-      const auto fontPath = iconDir / fileName;
-      imguiInterface->getIo().Fonts->AddFontFromFileTTF(fontPath.string().c_str(), iconSize, &fontConfig.config,
-                                                        fontConfig.iconRange);
-    });
-  });
 }
 
 std::optional<Font> FontManager::fontByName(const std::string &name) const {
@@ -86,15 +71,18 @@ Font FontManager::addFont(FontBuilder &builder) {
                                         }},
                                 subfontBuilder.source);
   }
-  std::ranges::for_each(builder.iconPacks, [&](const auto iconPackSize) {
-    const auto &[iconPack, iconSize] = iconPackSize;
-    const auto fileNames = fontFileNamesForIconPack(iconPack);
-    std::ranges::for_each(fileNames, [&](const auto fileName) {
-      const auto fontConfig = fontConfigForIconPack(iconPack);
-      const auto fontPath = iconDir / fileName;
-      imguiInterface->getIo().Fonts->AddFontFromFileTTF(fontPath.string().c_str(), iconSize, &fontConfig.config,
-                                                        fontConfig.iconRange);
-    });
+  std::ranges::for_each(builder.iconPacks, [&, this](FontBuilder::IconPackInfo &iconPack) {
+    const auto config = fontConfigForIconPack(iconPack.type);
+    std::visit(Visitor{[&, this](const std::filesystem::path &src) {
+                         return imguiInterface->getIo().Fonts->AddFontFromFileTTF(src.string().c_str(), iconPack.size,
+                                                                                  &config.config, config.iconRange);
+                       },
+                       [&, this](std::vector<std::byte> &src) {
+                         return imguiInterface->getIo().Fonts->AddFontFromMemoryTTF(
+                             reinterpret_cast<void *>(src.data()), static_cast<int>(src.size()), iconPack.size,
+                             &config.config, config.iconRange);
+                       }},
+               iconPack.data);
   });
   fonts.emplace(builder.name, font);
   imguiInterface->shouldUpdateFontAtlas = true;
@@ -160,12 +148,16 @@ FontBuilder &FontBuilder::setExtraHorizontalSpacing(float spacing) {
   return *this;
 }
 
-Font FontBuilder::build() { return parent.addFont(*this); }
-
-FontBuilder &FontBuilder::addIconSubfont(const Flags<IconPack> &iconPack, float size) {
-  iconPacks = iconPack.getSetFlags()
-      | std::views::transform([size](const auto pack) { return std::make_pair(pack, size); }) | ranges::to_vector;
+FontBuilder &FontBuilder::addIconPack(IconPack type, std::filesystem::path file, float size) {
+  iconPacks.emplace_back(std::move(file), type, size);
   return *this;
 }
+
+FontBuilder &FontBuilder::addIconPack(IconPack type, std::vector<std::byte> data, float size) {
+  iconPacks.emplace_back(std::move(data), type, size);
+  return *this;
+}
+
+Font FontBuilder::build() { return parent.addFont(*this); }
 
 }  // namespace pf::ui::ig

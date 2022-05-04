@@ -52,9 +52,6 @@ enum class ImGuiConfigFlags {
 struct ImGuiConfig {
   Flags<ImGuiConfigFlags> flags;
   toml::table config;
-  std::filesystem::path iconFontDirectory = ".";  // TODO: change this to something like icon data provider
-  Flags<IconPack> enabledIconPacks{};
-  float iconSize = 13.f;
 };
 
 /**

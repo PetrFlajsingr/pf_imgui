@@ -22,16 +22,6 @@ enum class IconPack {
   Fontaudio = 1 << 4
 };
 
-inline std::vector<std::filesystem::path> fontFileNamesForIconPack(IconPack iconPack) {
-  switch (iconPack) {
-    case IconPack::FontAwesome5Regular: return {FONT_ICON_FILE_NAME_FAR};
-    case IconPack::FontAwesome5Solid: return {FONT_ICON_FILE_NAME_FAS};
-    case IconPack::ForkAwesome: return {FONT_ICON_FILE_NAME_FK};
-    case IconPack::Kenney: return {FONT_ICON_FILE_NAME_KI};
-    case IconPack::Fontaudio: return {FONT_ICON_FILE_NAME_FAD};
-  }
-  return {};
-}
 
 namespace details {
 static ImWchar iconRangeFA[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
