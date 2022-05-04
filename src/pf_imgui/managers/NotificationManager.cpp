@@ -7,10 +7,9 @@
 #include <string>
 
 namespace pf::ui::ig {
-
+// TODO: fix icons for this
 NotificationManager::NotificationManager(FontManager &fontManager)
-    : defaultFont(
-        fontManager.fontBuilder("def_icon_notif").addIconSubfont(IconPack::FontAwesome5Regular, 13.f).build()) {}
+    : defaultFont(fontManager.fontBuilder("def_icon_notif").build()) {}
 
 Notification &NotificationManager::createNotification(const std::string &name, const std::string &label,
                                                       std::chrono::milliseconds duration) {
