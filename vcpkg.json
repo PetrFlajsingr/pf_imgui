@@ -8,7 +8,7 @@
     },
     {
       "name": "tomlplusplus",
-      "version>=": "3.0.1"
+      "version>=": "3.1.0"
     }
   ],
   "builtin-baseline": "59d355b5ec30d83aea2b18de5746f9c40224da9e"
