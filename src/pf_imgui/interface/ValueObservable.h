@@ -25,14 +25,15 @@ namespace pf::ui::ig {
 namespace details {
 template<std::equality_comparable T>
 struct DefaultComparator {
-  [[nodiscard]] bool operator()(const T &lhs, const T &rhs) const {
-    return lhs == rhs;
-  }
+  [[nodiscard]] bool operator()(const T &lhs, const T &rhs) const { return lhs == rhs; }
 };
-}
+}  // namespace details
 
 template<typename T, typename ValueType>
-concept ValueObservableComparator = std::invocable<T, ValueType, ValueType> && std::same_as<std::invoke_result_t<T, ValueType, ValueType>, bool> && std::is_default_constructible_v<T>;
+concept ValueObservableComparator =
+    std::invocable<T, ValueType, ValueType> && std::same_as < std::invoke_result_t<T, ValueType, ValueType>,
+        bool
+> &&std::is_default_constructible_v<T>;
 /**
 * @brief Interface for elements with observable values.
 *
@@ -43,9 +44,10 @@ concept ValueObservableComparator = std::invocable<T, ValueType, ValueType> && s
 * @todo: drop the copy constructible requirement
 */
 template<typename T, ValueObservableComparator<T> Comparator = details::DefaultComparator<T>>
-  requires(std::is_assignable_v<T &, T> &&std::copy_constructible<T>) class PF_IMGUI_EXPORT
-    ValueObservable {
+  requires(std::is_assignable_v<T &, T> && std::copy_constructible<T>)
+class PF_IMGUI_EXPORT ValueObservable {
   [[no_unique_address]] Comparator comparator{};
+
  public:
   using ValueType = T;
   /**
@@ -54,10 +56,13 @@ template<typename T, ValueObservableComparator<T> Comparator = details::DefaultC
   */
   explicit ValueObservable(T value = T{}) : value(value) {}
 
-  ValueObservable(ValueObservable &&other) noexcept requires(std::is_move_constructible_v<T>)
+  ValueObservable(ValueObservable &&other) noexcept
+    requires(std::is_move_constructible_v<T>)
   : value(std::move(other.value)), observableImpl(std::move(other.observableImpl)) {}
 
-  ValueObservable &operator=(ValueObservable &&other) noexcept requires(std::is_move_assignable_v<T>) {
+  ValueObservable &operator=(ValueObservable &&other) noexcept
+    requires(std::is_move_assignable_v<T>)
+  {
     value = std::move(other.value);
     observableImpl = std::move(other.observableImpl);
     return *this;
@@ -83,6 +88,7 @@ template<typename T, ValueObservableComparator<T> Comparator = details::DefaultC
   * @see Subscription
   */
   Subscription bind(T &toBind) {
+    toBind = getValue();
     auto bindAddress = &toBind;
     return addValueListener([bindAddress](auto newValue) { *bindAddress = newValue; });
   }
