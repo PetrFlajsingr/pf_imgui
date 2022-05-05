@@ -29,7 +29,7 @@ class ImGuiInterface;
 
 class FontManager;
 class FontBuilder;
-
+// TODO: move builders to a separate file
 /**
  * @brief Builder for fonts which are merged into another font.
  */

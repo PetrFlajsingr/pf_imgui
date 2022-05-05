@@ -64,7 +64,7 @@ void Window::renderImpl() {
   }
 }
 
-WindowMenuBar &Window::getMenuBar() {
+WindowMenuBar &Window::createOrGetMenuBar() {
   if (menuBar == nullptr) { menuBar = std::make_unique<WindowMenuBar>("menu_bar"); }
   return *menuBar;
 }

@@ -64,7 +64,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
    * @return Windows menu bar
    */
-  [[nodiscard]] WindowMenuBar &getMenuBar();
+  [[nodiscard]] WindowMenuBar &createOrGetMenuBar();
 
   /**
    * Check if the menu bar exists.

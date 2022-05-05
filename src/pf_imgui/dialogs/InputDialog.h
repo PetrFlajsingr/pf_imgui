@@ -22,6 +22,8 @@ namespace pf::ui::ig {
 /**
  * @brief Simplified dialog for user input.
  * It should be created via ImGuiInterface.
+ *
+ * @todo: rework this
  */
 class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
  public:

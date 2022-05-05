@@ -13,7 +13,7 @@ namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfig config)
     : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()),
-      io(ImGui::GetIO()), fontManager(*this), notificationManager(fontManager), config(std::move(config.config)) {
+      io(ImGui::GetIO()), fontManager(*this), notificationManager(), config(std::move(config.config)) {
   io.ConfigFlags = *config.flags;
   io.IniFilename = nullptr;
   ImGui::StyleColorsDark();

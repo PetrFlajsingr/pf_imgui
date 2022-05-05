@@ -28,6 +28,7 @@ enum class MessageButtons { Ok = 1, Yes = 2, No = 4 };
 * @tparam ButtonTypes values allowed for buttons
 *
 * @todo: type of message - info, warning, error, debug with some sort of graphic
+* @todo: rework this
 */
 class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
  public:
