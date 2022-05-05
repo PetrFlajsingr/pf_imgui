@@ -157,7 +157,7 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
    * @param parent owner of the FileDialog to be created
    * @param dialogType type of the dialog - directory or file
    */
-  explicit FileDialogBuilder(class ImGuiInterface *parent, FileDialogType dialogType);
+  explicit FileDialogBuilder(class DialogManager *parent, FileDialogType dialogType);
 
   /**
    * Set dialog's label
@@ -224,7 +224,7 @@ class PF_IMGUI_EXPORT FileDialogBuilder {
   void build();
 
  private:
-  class ImGuiInterface *imguiInterface;
+  class DialogManager *dialogManager;
   FileDialogType type;
   std::string label_;
   std::vector<FileExtensionSettings> extensionSettings_;

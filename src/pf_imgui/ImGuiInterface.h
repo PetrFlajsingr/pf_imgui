@@ -7,6 +7,7 @@
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 
+#include <pf_imgui/managers/DialogManager.h>
 #include <imgui.h>
 #include <memory>
 #include <pf_imgui/DockBuilder.h>
@@ -65,8 +66,8 @@ struct ImGuiConfig {
  * You also need to update fonts when required based on variable shouldUpdateFontAtlas.
  * @todo: localization
  * @todo: key bindings?
- * @todo: icon loading from memory not just from file - implement that in backends as well
  * @todo: check if context is actually properly set where needed
+ * @todo: dialog manager
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomizable, public AllColorCustomizable {
  public:
@@ -89,33 +90,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * Process platform input.
    */
   virtual void processInput() = 0;
-
-  /**
-   * Create a dialog. @see Dialog
-   * The dialog should be built by the user.
-   * @param elementName ID of the dialog
-   * @param caption title
-   * @return reference to the created dialog
-   */
-  ModalDialog &createDialog(const std::string &elementName, const std::string &caption);
-
-  /**
-   * Create MessageDialog
-   * @tparam ButtonTypes enum type used to represent buttons
-   * @param title title of the dialog
-   * @param message message shown to a user
-   * @param buttons allowed buttons
-   * @param onDialogDone callback for user interaction
-   */
-  template<typename ButtonTypes = MessageButtons>
-  void createMsgDlg(const std::string &title, const std::string &message, Flags<ButtonTypes> buttons,
-                    std::invocable<ButtonTypes> auto &&onDialogDone) {
-    using namespace std::string_literals;
-    auto dialog = std::make_unique<MessageDialog>(*this, "MsgDialog"s + std::to_string(idCounter++), title, message,
-                                                  buttons, std::forward<decltype(onDialogDone)>(onDialogDone));
-    dialogs.emplace_back(std::move(dialog));
-  }
-
   /**
    * Create a Window.
    * @param windowName ID of the window
@@ -251,35 +225,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void setStyle(std::invocable<ImGuiStyle &> auto styleSetter) { styleSetter(ImGui::GetStyle()); }
 
   /**
-   * Create a builder for FileDialog.
-   * @param type type of files to be selected
-   * @return builder
-   */
-  [[nodiscard]] FileDialogBuilder buildFileDialog(FileDialogType type);
-
-  /**
-   * Add a separately created FileDialog, which will be destroyed upon closing.
-   * @param dialog
-   */
-  void addFileDialog(FileDialog &&dialog);
-
-  /**
-   * Create InputDialog.
-   * @param title title of the dialog
-   * @param message message shown to a user
-   * @param onInput callback on user input
-   * @param onCancel callback on dialog cancel
-   */
-  void openInputDialog(const std::string &title, const std::string &message, std::invocable<std::string> auto &&onInput,
-                       std::invocable auto &&onCancel) {
-    using namespace std::string_literals;
-    auto dialog = std::make_unique<InputDialog>(*this, "InputDialog"s + std::to_string(idCounter++), title, message,
-                                                std::forward<decltype(onInput)>(onInput),
-                                                std::forward<decltype(onCancel)>(onCancel));
-    dialogs.emplace_back(std::move(dialog));
-  }
-
-  /**
    * Create a group for drag and drop elements.
    * @return newly created group
    */
@@ -307,6 +252,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   [[nodiscard]] const FontManager &getFontManager() const;
   [[nodiscard]] NotificationManager &getNotificationManager();
   [[nodiscard]] const NotificationManager &getNotificationManager() const;
+  [[nodiscard]] DialogManager &getDialogManager();
+  [[nodiscard]] const DialogManager &getDialogManager() const;
 
   void render() override;
 
@@ -333,17 +280,15 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void setContext() const;
 
  private:
-  friend class ModalDialog;
   friend class FontManager;
 
-  std::vector<std::unique_ptr<ModalDialog>> dialogs{};
 
   ImGuiContext *imguiContext = nullptr;
   struct ImPlotContext *imPlotContext = nullptr;
   ImGuiIO &io;
   FontManager fontManager;
   NotificationManager notificationManager;
-  std::vector<FileDialog> fileDialogs{};
+  DialogManager dialogManager;
   std::size_t idCounter{};
 
   std::vector<std::unique_ptr<Window>> windows{};
@@ -359,11 +304,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   std::vector<std::unique_ptr<DockBuilder>> dockBuilders{};
   std::unique_ptr<BackgroundDockingArea> backgroundDockingArea = nullptr;
 
-  std::optional<std::string> fileDialogBookmark = std::nullopt;
-
   Font globalFont = Font::Default();
 
-  void removeDialog(ModalDialog &dialog);
 };
 
 }  // namespace pf::ui::ig

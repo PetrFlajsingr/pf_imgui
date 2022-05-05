@@ -3,7 +3,7 @@
 //
 
 #include "FileDialog.h"
-#include <pf_imgui/ImGuiInterface.h>
+#include <pf_imgui/managers/DialogManager.h>
 
 namespace pf::ui::ig {
 // TODO: fix multi dir selection - when using GetSelection() it returns invalid path
@@ -81,8 +81,8 @@ void FileDialog::renderImpl() {
   }
 }
 
-FileDialogBuilder::FileDialogBuilder(ImGuiInterface *parent, FileDialogType dialogType)
-    : imguiInterface(parent), type(dialogType) {}
+FileDialogBuilder::FileDialogBuilder(DialogManager *parent, FileDialogType dialogType)
+    : dialogManager(parent), type(dialogType) {}
 
 FileDialogBuilder &FileDialogBuilder::label(std::string dialogLabel) {
   label_ = std::move(dialogLabel);
@@ -123,14 +123,14 @@ void FileDialogBuilder::build() {
   using namespace std::string_literals;
   switch (type) {
     case FileDialogType::Dir:
-      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), label_, onSelect_,
-                                               onCancel_, size_, startPath_, defaultFilename_, modal_,
-                                               maxFilesSelected_});
+      dialogManager->addFileDialog(std::make_unique<FileDialog>("FileDialog"s + std::to_string(IdCounter++), label_,
+                                                                onSelect_, onCancel_, size_, startPath_,
+                                                                defaultFilename_, modal_, maxFilesSelected_));
       break;
     case FileDialogType::File:
-      imguiInterface->addFileDialog(FileDialog{"FileDialog"s + std::to_string(IdCounter++), label_, extensionSettings_,
-                                               onSelect_, onCancel_, size_, startPath_, defaultFilename_, modal_,
-                                               maxFilesSelected_});
+      dialogManager->addFileDialog(std::make_unique<FileDialog>(
+          "FileDialog"s + std::to_string(IdCounter++), label_, extensionSettings_, onSelect_, onCancel_, size_,
+          startPath_, defaultFilename_, modal_, maxFilesSelected_));
       break;
   }
 }

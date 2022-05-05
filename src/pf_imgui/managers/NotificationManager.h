@@ -37,9 +37,10 @@ class PF_IMGUI_EXPORT NotificationManager {
   [[nodiscard]] Notification &createNotification(const std::string &name, const std::string &label,
                                                  std::chrono::milliseconds duration = Notification::DEFAULT_DURATION);
 
+ private:
+  friend class ImGuiInterface;
   void renderNotifications();
 
- private:
   std::vector<std::unique_ptr<Notification>> notifications;
   std::vector<std::unique_ptr<Notification>> newNotifications;
 };

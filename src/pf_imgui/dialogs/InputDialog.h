@@ -29,7 +29,6 @@ class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
  public:
   /**
    * Construct InputDialog.
-   * @param parent owner
    * @param elementName ID of the dialog
    * @param title title of the dialog
    * @param message message shown to a user
@@ -37,10 +36,9 @@ class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
    * @param onCancel callback for user cancel
    * @param modal dialog modality
    */
-  InputDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
-              const std::string &message, std::invocable<std::string_view> auto &&onInput,
-              std::invocable auto &&onCancel)
-      : ModalDialog(parent, elementName, title), inputDone(std::forward<decltype(onInput)>(onInput)),
+  InputDialog(const std::string &elementName, const std::string &title, const std::string &message,
+              std::invocable<std::string_view> auto &&onInput, std::invocable auto &&onCancel)
+      : ModalDialog(elementName, title), inputDone(std::forward<decltype(onInput)>(onInput)),
         cancelClicked(std::forward<decltype(onCancel)>(onCancel)) {
     createChild<Text>("text", message);
     auto &input = createChild<InputText>("input", "", "", TextInputType::MultiLine);

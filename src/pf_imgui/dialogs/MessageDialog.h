@@ -11,8 +11,8 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/elements/Button.h>
-#include <pf_imgui/layouts/HorizontalLayout.h>
 #include <pf_imgui/elements/Text.h>
+#include <pf_imgui/layouts/HorizontalLayout.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -34,7 +34,6 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
  public:
   /**
   * Construct MessageDialog.
-  * @param parent owner
   * @param elementName ID of the dialog
   * @param title text rendered as a title
   * @param message message to show to the user
@@ -42,11 +41,10 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
   * @param onDialogDone callback for buttons being pressed, If returns true then the dialog is closed
   * @param modal dialog modality
   */
-  MessageDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &title,
-                const std::string &message, const Flags<MessageButtons> &buttons,
-                std::invocable<MessageButtons> auto &&onDialogDone)
+  MessageDialog(const std::string &elementName, const std::string &title, const std::string &message,
+                const Flags<MessageButtons> &buttons, std::invocable<MessageButtons> auto &&onDialogDone)
     requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
-  : ModalDialog(parent, elementName, title), dialogDone(onDialogDone) {
+  : ModalDialog(elementName, title), dialogDone(onDialogDone) {
     createChild<Text>("text", message);
     auto &btnLayout = createChild<HorizontalLayout>("hor_layout", Size::Auto());
     auto enabledButtons = buttons.getSetFlags();
