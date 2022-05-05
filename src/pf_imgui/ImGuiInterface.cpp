@@ -13,8 +13,7 @@ namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfig config)
     : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()),
-      io(ImGui::GetIO()), fontManager(*this),
-      notificationManager(fontManager), config(std::move(config.config)) {
+      io(ImGui::GetIO()), fontManager(*this), notificationManager(fontManager), config(std::move(config.config)) {
   io.ConfigFlags = *config.flags;
   io.IniFilename = nullptr;
   ImGui::StyleColorsDark();
@@ -34,17 +33,21 @@ ModalDialog &ImGuiInterface::createDialog(const std::string &elementName, const 
   return *ptr;
 }
 
-AppMenuBar &ImGuiInterface::getMenuBar() {
+AppMenuBar &ImGuiInterface::createOrGetMenuBar() {
   if (menuBar == nullptr) { menuBar = std::make_unique<AppMenuBar>("app_menu_bar"); }
   return *menuBar;
 }
 
 bool ImGuiInterface::hasMenuBar() const { return menuBar != nullptr; }
 
-AppStatusBar &ImGuiInterface::createStatusBar(const std::string &barName) {
-  statusBar = std::make_unique<AppStatusBar>(barName);
+void ImGuiInterface::removeMenuBar() { menuBar = nullptr; }
+
+AppStatusBar &ImGuiInterface::createOrGetStatusBar() {
+  if (!hasStatusBar()) { statusBar = std::make_unique<AppStatusBar>("status_bar"); }
   return *statusBar;
 }
+
+bool ImGuiInterface::hasStatusBar() const { return statusBar != nullptr; }
 
 void ImGuiInterface::removeStatusBar() { statusBar = nullptr; }
 

@@ -22,7 +22,7 @@ namespace pf::ui::ig {
 /**
  * @brief Menu bar belonging to Window.
  *
- * There can be one menu bar for each Window instance. It is created via Window::getMenuBar().
+ * There can be one menu bar for each Window instance. It is created via Window::createOrGetMenuBar().
  */
 class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
  public:
@@ -50,7 +50,7 @@ class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
 /**
  * @brief Menu bar belonging to the entire application window.
  *
- * Only one of these can exist at a time. It is created via ImGuiInterface::getMenuBar().
+ * Only one of these can exist at a time. It is created via ImGuiInterface::createOrGetMenuBar().
  */
 class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
  public:

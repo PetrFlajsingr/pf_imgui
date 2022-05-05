@@ -191,20 +191,26 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    * Get menu bar of the application. If the menubar doesn't exist, it is created.
    * @return reference to the applications menu bar
    */
-  [[nodiscard]] AppMenuBar &getMenuBar();
+  [[nodiscard]] AppMenuBar &createOrGetMenuBar();
   /**
    * Check if menu bar is present.
    * @return true if menu bar is present, false otherwise
    */
   [[nodiscard]] bool hasMenuBar() const;
+  /**
+   * Remove menu bar.
+   */
+  void removeMenuBar();
 
   /**
    * Create a status bar or replace the existing one.
-   * @param barName unique name of the element
    * @return reference to the created status bar
    */
-  [[nodiscard]] AppStatusBar &createStatusBar(const std::string &barName);
-
+  [[nodiscard]] AppStatusBar &createOrGetStatusBar();
+  /**
+   * @return true if the interface has an active status bar
+   */
+  [[nodiscard]] bool hasStatusBar() const;
   /**
    * Remove status bar.
    */

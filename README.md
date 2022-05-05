@@ -182,7 +182,7 @@ window.setMaxSizeConstraints(Size{100, 100});
 window.createChild<Button>("button_id", "Button label"); 
 
 // create or get a MenuBar for the window
-auto &menuBar = window.getMenuBar(); 
+auto &menuBar = window.createOrGetMenuBar(); 
 ```
 ![img.png](img/window.png)
 
