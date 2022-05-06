@@ -5,12 +5,14 @@
 #ifndef IMGUI_EXPERIMENTS_DIALOGMANAGER_H
 #define IMGUI_EXPERIMENTS_DIALOGMANAGER_H
 
-#include <pf_imgui/dialogs/MessageDialog.h>
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <pf_imgui/dialogs/InputDialog.h>
+#include <pf_imgui/dialogs/MessageDialog.h>
 #include <pf_imgui/dialogs/ModalDialog.h>
+#include <pf_imgui/dialogs/builders/FileDialogBuilder.h>
+#include <pf_imgui/dialogs/builders/MessageDialogBuilder.h>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -48,22 +50,15 @@ class PF_IMGUI_EXPORT DialogManager {
   }
 
   /**
-   * Create MessageDialog
-   * @tparam ButtonTypes enum type used to represent buttons
-   * @param title title of the dialog
-   * @param message message shown to a user
-   * @param buttons allowed buttons
-   * @param onDialogDone callback for user interaction
+   * Create a builder for MessageDialogBuilder.
+   * @return builder
    */
-  template<typename ButtonTypes = MessageButtons>
-  void createMsgDlg(const std::string &title, const std::string &message, Flags<ButtonTypes> buttons,
-                    std::invocable<ButtonTypes> auto &&onDialogDone) {
-    using namespace std::string_literals;
-    auto dialog = std::make_unique<MessageDialog>(*this, "MsgDialog"s + std::to_string(idCounter++), title, message,
-                                                  buttons, std::forward<decltype(onDialogDone)>(onDialogDone));
-    dialogs.emplace_back(std::move(dialog));
-  }
-
+  [[nodiscard]] MessageDialogBuilder buildMessageDialog() { return MessageDialogBuilder(this); }
+  /**
+   * Add a separately created MessageDialog, which will be destroyed upon closing.
+   * @param dialog
+   */
+  void addMessageDialog(std::unique_ptr<MessageDialog> &&dialog) { dialogs.emplace_back(std::move(dialog)); }
 
   /**
    * Create InputDialog.
@@ -76,7 +71,7 @@ class PF_IMGUI_EXPORT DialogManager {
   void openInputDialog(const std::string &title, const std::string &message, std::invocable<std::string> auto &&onInput,
                        std::invocable auto &&onCancel) {
     using namespace std::string_literals;
-    auto dialog = std::make_unique<InputDialog>(*this, "InputDialog"s + std::to_string(idCounter++), title, message,
+    auto dialog = std::make_unique<InputDialog>("InputDialog"s + std::to_string(idCounter++), title, message,
                                                 std::forward<decltype(onInput)>(onInput),
                                                 std::forward<decltype(onCancel)>(onCancel));
     dialogs.emplace_back(std::move(dialog));
