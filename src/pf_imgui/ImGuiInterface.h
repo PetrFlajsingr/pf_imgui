@@ -7,7 +7,6 @@
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 
-#include <pf_imgui/managers/DialogManager.h>
 #include <imgui.h>
 #include <memory>
 #include <pf_imgui/DockBuilder.h>
@@ -26,6 +25,7 @@
 #include <pf_imgui/icons.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/managers/DialogManager.h>
 #include <pf_imgui/managers/FontManager.h>
 #include <pf_imgui/managers/NotificationManager.h>
 #include <string>
@@ -250,8 +250,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   [[nodiscard]] FontManager &getFontManager();
   [[nodiscard]] const FontManager &getFontManager() const;
+
   [[nodiscard]] NotificationManager &getNotificationManager();
   [[nodiscard]] const NotificationManager &getNotificationManager() const;
+
   [[nodiscard]] DialogManager &getDialogManager();
   [[nodiscard]] const DialogManager &getDialogManager() const;
 
@@ -259,11 +261,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
-
-  /**
-   * Render all file dialogs which are currently open.
-   */
-  void renderDialogs();
 
   virtual void newFrame_impl() = 0;
 
@@ -281,7 +278,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
  private:
   friend class FontManager;
-
 
   ImGuiContext *imguiContext = nullptr;
   struct ImPlotContext *imPlotContext = nullptr;
@@ -305,7 +301,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   std::unique_ptr<BackgroundDockingArea> backgroundDockingArea = nullptr;
 
   Font globalFont = Font::Default();
-
 };
 
 }  // namespace pf::ui::ig
