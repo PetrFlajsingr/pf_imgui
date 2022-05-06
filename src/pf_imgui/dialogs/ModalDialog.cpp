@@ -7,15 +7,12 @@
 #include <pf_imgui/ImGuiInterface.h>
 
 namespace pf::ui::ig {
-ModalDialog::ModalDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label)
-    : Renderable(elementName), Labellable(label), Resizable(Size::Auto()), Positionable(Position{-1, -1}),
-      owner(parent) {}
+
+ModalDialog::ModalDialog(const std::string &elementName, const std::string &label)
+    : Renderable(elementName), Labellable(label), Resizable(Size::Auto()), Positionable(Position{-1, -1}) {}
 
 void ModalDialog::renderImpl() {
-  if (closed) {
-    owner.removeDialog(*this);
-    return;
-  }
+  if (closed) { return; }
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
   if (font != nullptr) { ImGui::PushFont(font); }

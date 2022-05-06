@@ -26,13 +26,6 @@ ImGuiInterface::~ImGuiInterface() {
 
 ImGuiIO &ImGuiInterface::getIo() const { return io; }
 
-ModalDialog &ImGuiInterface::createDialog(const std::string &elementName, const std::string &caption) {
-  auto dialog = std::make_unique<ModalDialog>(*this, elementName, caption);
-  const auto ptr = dialog.get();
-  dialogs.emplace_back(std::move(dialog));
-  return *ptr;
-}
-
 AppMenuBar &ImGuiInterface::createOrGetMenuBar() {
   if (menuBar == nullptr) { menuBar = std::make_unique<AppMenuBar>("app_menu_bar"); }
   return *menuBar;
@@ -62,7 +55,9 @@ void ImGuiInterface::updateConfig() {
       for (const auto &[key, value] : serialisedAppBar) { config.insert_or_assign(key, value); }
     }
   });
-  if (fileDialogBookmark.has_value()) { config.insert_or_assign("file_dialog_bookmark", fileDialogBookmark.value()); }
+  if (dialogManager.fileDialogBookmark.has_value()) {
+    config.insert_or_assign("file_dialog_bookmark", dialogManager.fileDialogBookmark.value());
+  }
   std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
     if (radioGroup->isPersistent()) { config.insert_or_assign(radioGroup->getGroupName(), radioGroup->toToml()); }
   });
@@ -92,7 +87,7 @@ void ImGuiInterface::setStateFromConfig() {
   if (menuBar != nullptr) { serialiseSubtree(*menuBar); }
   std::ranges::for_each(windows, [&serialiseSubtree](auto &window) { serialiseSubtree(*window); });
   if (auto iter = config.find("file_dialog_bookmark"); iter != config.end()) {
-    if (auto str = iter->second.as_string(); str != nullptr) { fileDialogBookmark = str->get(); }
+    if (auto str = iter->second.as_string(); str != nullptr) { dialogManager.fileDialogBookmark = str->get(); }
   }
   std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
     if (auto iter = config.find(radioGroup->getGroupName()); iter != config.end() && radioGroup->isPersistent()) {
@@ -103,27 +98,6 @@ void ImGuiInterface::setStateFromConfig() {
     if (auto imguiIni = imguiIniToml->second.as_string(); imguiIni != nullptr) {
       ImGui::LoadIniSettingsFromMemory(imguiIni->get().data(), imguiIni->get().size());
     }
-  }
-}
-
-void ImGuiInterface::addFileDialog(FileDialog &&dialog) {
-  auto &dialogRef = fileDialogs.emplace_back(std::move(dialog));
-  if (fileDialogBookmark.has_value()) { dialogRef.deserializeBookmark(*fileDialogBookmark); }
-}
-
-FileDialogBuilder ImGuiInterface::buildFileDialog(FileDialogType type) { return FileDialogBuilder(this, type); }
-
-void ImGuiInterface::renderDialogs() {
-  std::ranges::for_each(fileDialogs, &FileDialog::render);
-  if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog.isDone(); });
-      iter != fileDialogs.end()) {
-    fileDialogBookmark = iter->serializeBookmark();
-    fileDialogs.erase(iter);
-  }
-  std::ranges::for_each(dialogs, [](auto &dialog) { dialog->render(); });
-  if (const auto iter = std::ranges::find_if(dialogs, [](auto &dialog) { return dialog->isClosed(); });
-      iter != dialogs.end()) {
-    dialogs.erase(iter);
   }
 }
 
@@ -217,16 +191,10 @@ void ImGuiInterface::renderImpl() {
     dockBuilders.erase(rmBeg, rmEnd);
   }
   if (statusBar != nullptr) { statusBar->render(); }
-  renderDialogs();
+  dialogManager.renderDialogs();
   notificationManager.renderNotifications();
 }
 
-void ImGuiInterface::removeDialog(ModalDialog &dialog) {
-  if (const auto iter = std::ranges::find_if(dialogs, [&dialog](const auto &ptr) { return ptr.get() == &dialog; });
-      iter != dialogs.end()) {
-    dialogs.erase(iter);
-  }
-}
 DragNDropGroup &ImGuiInterface::createDragNDropGroup() {
   return *dragNDropGroups.emplace_back(std::make_unique<DragNDropGroup>());
 }
@@ -255,6 +223,10 @@ const FontManager &ImGuiInterface::getFontManager() const { return fontManager; 
 NotificationManager &ImGuiInterface::getNotificationManager() { return notificationManager; }
 
 const NotificationManager &ImGuiInterface::getNotificationManager() const { return notificationManager; }
+
+DialogManager &ImGuiInterface::getDialogManager() { return dialogManager; }
+
+const DialogManager &ImGuiInterface::getDialogManager() const { return dialogManager; }
 
 void ImGuiInterface::render() {
   setContext();

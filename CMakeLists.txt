@@ -187,7 +187,10 @@ set(SOURCES
         src/pf_imgui/dialogs/BackgroundDockingArea.cpp
         src/pf_imgui/elements/CustomIconButtonBehavior.cpp
         src/pf_imgui/details/CustomIconButtonImpls.cpp
-        )
+        src/pf_imgui/managers/DialogManager.cpp
+        src/pf_imgui/dialogs/MessageDialog.cpp
+        src/pf_imgui/dialogs/builders/FileDialogBuilder.cpp
+        src/pf_imgui/dialogs/builders/MessageDialogBuilder.cpp src/pf_imgui/dialogs/builders/InputDialogBuilder.cpp src/pf_imgui/dialogs/builders/InputDialogBuilder.h src/pf_imgui/dialogs/InputDialog.cpp)
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
@@ -366,7 +369,11 @@ set(INCLUDES
         src/pf_imgui/dialogs/BackgroundDockingArea.h
         src/pf_imgui/interface/TomlSerializable.h
         src/pf_imgui/elements/CustomIconButtonBehavior.h
-        src/pf_imgui/details/CustomIconButtonImpls.h src/pf_imgui/elements/common/TextEditorTypes.h)
+        src/pf_imgui/details/CustomIconButtonImpls.h
+        src/pf_imgui/elements/common/TextEditorTypes.h
+        src/pf_imgui/managers/DialogManager.h
+        src/pf_imgui/dialogs/builders/FileDialogBuilder.h
+        src/pf_imgui/dialogs/builders/MessageDialogBuilder.h src/pf_imgui/elements/Dummy.h src/pf_imgui/dialogs/builders/InputDialogBuilder.cpp src/pf_imgui/dialogs/builders/InputDialogBuilder.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
@@ -398,7 +405,7 @@ SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windo
 SET(CMAKE_RELWITHDEBINFO_POSTFIX "rd" CACHE STRING "add a postfix, usually empty on windows")
 SET(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on windows")
 
-add_library(${PROJECT_NAME} STATIC ${SOURCES} ${INCLUDES})
+add_library(${PROJECT_NAME} STATIC ${SOURCES} ${INCLUDES} )
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 add_library(${PROJECT_NAME}_blueprint STATIC ${BLUEPRINT_SOURCES} ${BLUEPRINT_INCLUDES})

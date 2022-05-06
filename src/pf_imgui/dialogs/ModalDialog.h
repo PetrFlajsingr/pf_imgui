@@ -34,12 +34,11 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
  public:
   /**
    * Create Dialog with given name and label.
-   * @param parent owner of the dialog - has to be present in order to render it
    * @param elementName ID of the dialog
    * @param label title
    * @param modal modality
    */
-  ModalDialog(ImGuiInterface &parent, const std::string &elementName, const std::string &label);
+  ModalDialog(const std::string &elementName, const std::string &label);
 
   /**
    * Set flag for closing the dialog, which invalidates the dialog.
@@ -68,7 +67,6 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
  private:
   bool firstRender = true;
   bool closed = false;
-  ImGuiInterface &owner;
   ImFont *font = nullptr;
   bool sizeDirty = false;
   bool positionDirty = false;
