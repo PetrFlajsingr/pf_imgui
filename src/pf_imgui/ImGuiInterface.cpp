@@ -171,6 +171,13 @@ void ImGuiInterface::renderImpl() {
   } else {
     if (backgroundDockingArea != nullptr) { backgroundDockingArea->leftTopMargin = ImVec2{0, 0}; }
   }
+  if (hasStatusBar()) {
+    if (backgroundDockingArea != nullptr) {
+      backgroundDockingArea->bottomRightMargin = ImVec2{0, ImGui::GetFrameHeight()};
+    } else {
+      backgroundDockingArea->bottomRightMargin = ImVec2{0, 0};
+    }
+  }
   if (backgroundDockingArea != nullptr) { backgroundDockingArea->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });
