@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 06.05.2022.
-//
+/**
+ * @file MessageDialogBuilder.h
+ * @brief Builder for MessageDialog.
+ * @author Petr Flajšingr
+ * @date 6.5.22
+ */
 
 #ifndef IMGUI_EXPERIMENTS_MESSAGEDIALOGBUILDER_H
 #define IMGUI_EXPERIMENTS_MESSAGEDIALOGBUILDER_H
@@ -18,7 +21,6 @@ class PF_IMGUI_EXPORT MessageDialogBuilder {
   /**
    * Construct MessageDialogBuilder
    * @param parent owner of the FileDialog to be created
-   * @param dialogType type of the dialog - directory or file
    */
   explicit MessageDialogBuilder(class DialogManager *parent);
   /**

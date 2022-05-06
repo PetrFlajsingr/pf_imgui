@@ -1,6 +1,9 @@
-//
-// Created by xflajs00 on 05.05.2022.
-//
+/**
+ * @file DialogManager.h
+ * @brief Class managing dialogs.
+ * @author Petr Flajšingr
+ * @date 5.5.22
+ */
 
 #ifndef IMGUI_EXPERIMENTS_DIALOGMANAGER_H
 #define IMGUI_EXPERIMENTS_DIALOGMANAGER_H
@@ -12,6 +15,7 @@
 #include <pf_imgui/dialogs/MessageDialog.h>
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/builders/FileDialogBuilder.h>
+#include <pf_imgui/dialogs/builders/InputDialogBuilder.h>
 #include <pf_imgui/dialogs/builders/MessageDialogBuilder.h>
 #include <vector>
 
@@ -50,7 +54,7 @@ class PF_IMGUI_EXPORT DialogManager {
   }
 
   /**
-   * Create a builder for MessageDialogBuilder.
+   * Create a builder for MessageDialog.
    * @return builder
    */
   [[nodiscard]] MessageDialogBuilder buildMessageDialog() { return MessageDialogBuilder(this); }
@@ -61,21 +65,15 @@ class PF_IMGUI_EXPORT DialogManager {
   void addMessageDialog(std::unique_ptr<MessageDialog> &&dialog) { dialogs.emplace_back(std::move(dialog)); }
 
   /**
-   * Create InputDialog.
-   * @param title title of the dialog
-   * @param message message shown to a user
-   * @param onInput callback on user input
-   * @param onCancel callback on dialog cancel
-   * @todo: use builder instead?
+   * Create a builder for InputDialog.
+   * @return builder
    */
-  void openInputDialog(const std::string &title, const std::string &message, std::invocable<std::string> auto &&onInput,
-                       std::invocable auto &&onCancel) {
-    using namespace std::string_literals;
-    auto dialog = std::make_unique<InputDialog>("InputDialog"s + std::to_string(idCounter++), title, message,
-                                                std::forward<decltype(onInput)>(onInput),
-                                                std::forward<decltype(onCancel)>(onCancel));
-    dialogs.emplace_back(std::move(dialog));
-  }
+  [[nodiscard]] InputDialogBuilder buildInputDialog() { return InputDialogBuilder(this); }
+  /**
+   * Add a separately created InputDialog, which will be destroyed upon closing.
+   * @param dialog
+   */
+  void addInputDialog(std::unique_ptr<InputDialog> &&dialog) { dialogs.emplace_back(std::move(dialog)); }
 
  private:
   friend class ImGuiInterface;

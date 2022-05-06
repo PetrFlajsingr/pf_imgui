@@ -190,7 +190,7 @@ set(SOURCES
         src/pf_imgui/managers/DialogManager.cpp
         src/pf_imgui/dialogs/MessageDialog.cpp
         src/pf_imgui/dialogs/builders/FileDialogBuilder.cpp
-        src/pf_imgui/dialogs/builders/MessageDialogBuilder.cpp)
+        src/pf_imgui/dialogs/builders/MessageDialogBuilder.cpp src/pf_imgui/dialogs/builders/InputDialogBuilder.cpp src/pf_imgui/dialogs/builders/InputDialogBuilder.h src/pf_imgui/dialogs/InputDialog.cpp)
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
@@ -373,7 +373,7 @@ set(INCLUDES
         src/pf_imgui/elements/common/TextEditorTypes.h
         src/pf_imgui/managers/DialogManager.h
         src/pf_imgui/dialogs/builders/FileDialogBuilder.h
-        src/pf_imgui/dialogs/builders/MessageDialogBuilder.h src/pf_imgui/elements/Dummy.h)
+        src/pf_imgui/dialogs/builders/MessageDialogBuilder.h src/pf_imgui/elements/Dummy.h src/pf_imgui/dialogs/builders/InputDialogBuilder.cpp src/pf_imgui/dialogs/builders/InputDialogBuilder.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
