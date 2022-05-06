@@ -28,16 +28,13 @@ class PF_IMGUI_EXPORT DialogManager {
    * @param type type of files to be selected
    * @return builder
    */
-  [[nodiscard]] FileDialogBuilder buildFileDialog(FileDialogType type) { return FileDialogBuilder(this, type); }
+  [[nodiscard]] FileDialogBuilder buildFileDialog(FileDialogType type);
 
   /**
    * Add a separately created FileDialog, which will be destroyed upon closing.
    * @param dialog
    */
-  void addFileDialog(std::unique_ptr<FileDialog> &&dialog) {
-    auto &dialogRef = fileDialogs.emplace_back(std::move(dialog));
-    if (fileDialogBookmark.has_value()) { dialogRef->deserializeBookmark(*fileDialogBookmark); }
-  }
+  void addFileDialog(std::unique_ptr<FileDialog> &&dialog);
 
   /**
    * Create a dialog. @see Dialog
@@ -46,58 +43,36 @@ class PF_IMGUI_EXPORT DialogManager {
    * @param caption title
    * @return reference to the created dialog
    */
-  ModalDialog &createDialog(const std::string &elementName, const std::string &caption) {
-    auto dialog = std::make_unique<ModalDialog>(elementName, caption);
-    const auto ptr = dialog.get();
-    dialogs.emplace_back(std::move(dialog));
-    return *ptr;
-  }
+  ModalDialog &createDialog(const std::string &elementName, const std::string &caption);
 
   /**
    * Create a builder for MessageDialog.
    * @return builder
    */
-  [[nodiscard]] MessageDialogBuilder buildMessageDialog() { return MessageDialogBuilder(this); }
+  [[nodiscard]] MessageDialogBuilder buildMessageDialog();
   /**
    * Add a separately created MessageDialog, which will be destroyed upon closing.
    * @param dialog
    */
-  void addMessageDialog(std::unique_ptr<MessageDialog> &&dialog) { dialogs.emplace_back(std::move(dialog)); }
+  void addMessageDialog(std::unique_ptr<MessageDialog> &&dialog);
 
   /**
    * Create a builder for InputDialog.
    * @return builder
    */
-  [[nodiscard]] InputDialogBuilder buildInputDialog() { return InputDialogBuilder(this); }
+  [[nodiscard]] InputDialogBuilder buildInputDialog();
   /**
    * Add a separately created InputDialog, which will be destroyed upon closing.
    * @param dialog
    */
-  void addInputDialog(std::unique_ptr<InputDialog> &&dialog) { dialogs.emplace_back(std::move(dialog)); }
+  void addInputDialog(std::unique_ptr<InputDialog> &&dialog);
 
  private:
   friend class ImGuiInterface;
 
-  void renderDialogs() {
-    std::ranges::for_each(fileDialogs, &FileDialog::render);
-    if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog->isDone(); });
-        iter != fileDialogs.end()) {
-      fileDialogBookmark = (*iter)->serializeBookmark();
-      fileDialogs.erase(iter);
-    }
-    std::ranges::for_each(dialogs, [](auto &dialog) { dialog->render(); });
-    if (const auto iter = std::ranges::find_if(dialogs, [](auto &dialog) { return dialog->isClosed(); });
-        iter != dialogs.end()) {
-      dialogs.erase(iter);
-    }
-  }
+  void renderDialogs();
 
-  void removeDialog(ModalDialog &dialog) {
-    if (const auto iter = std::ranges::find_if(dialogs, [&dialog](const auto &ptr) { return ptr.get() == &dialog; });
-        iter != dialogs.end()) {
-      dialogs.erase(iter);
-    }
-  }
+  void removeDialog(ModalDialog &dialog);
 
   std::vector<std::unique_ptr<ModalDialog>> dialogs{};
   std::vector<std::unique_ptr<FileDialog>> fileDialogs{};
