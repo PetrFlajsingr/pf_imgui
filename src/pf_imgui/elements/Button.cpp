@@ -78,4 +78,21 @@ void ArrowButton::renderImpl() {
   if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { notifyOnClick(); }
 }
 
+ImageButton::ImageButton(ImageButton::Config &&config)
+    : ButtonBase(std::string{config.name}, config.repeatable ? Repeatable::Yes : Repeatable::No),
+      Resizable(config.size), textureId(config.textureId), uvMappingProvider(config.uvTextureMappingProvider) {}
+
+ImageButton::ImageButton(const std::string &name, ImTextureID texId, Size s, Repeatable isRepeatable,
+                         UvMappingProvider uvTextureMappingProvider)
+    : ButtonBase(name, isRepeatable), Resizable(s), textureId(texId), uvMappingProvider(uvTextureMappingProvider) {}
+
+void ImageButton::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
+
+void ImageButton::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  auto repeat = setButtonRepeat();
+  if (ImGui::ImageButton(textureId, static_cast<ImVec2>(getSize()), ImVec2{0, 0}, ImVec2{1, 1})) { notifyOnClick(); }
+}
+
 }  // namespace pf::ui::ig

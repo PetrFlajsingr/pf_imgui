@@ -76,7 +76,11 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
    * Set a type of object rendered in the origin.
    * @param newObject type of the object to render
    */
-  void setMidObject(GizmoMid newObject) requires(Type != GizmoType::Direction) { mid = newObject; }
+  void setMidObject(GizmoMid newObject)
+    requires(Type != GizmoType::Direction)
+  {
+    mid = newObject;
+  }
 
   void setSize(Size s) override {
     const auto min = std::min(s.width.value, s.height.value);

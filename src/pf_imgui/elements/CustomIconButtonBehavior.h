@@ -7,10 +7,10 @@
 
 #include <pf_imgui/Color.h>
 #include <pf_imgui/Size.h>
-#include <pf_imgui/styles/enums.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/Customizable.h>
+#include <pf_imgui/styles/enums.h>
 
 namespace pf::ui::ig {
 
@@ -54,7 +54,8 @@ class CustomIconButton : public CustomIconButtonBehavior, public Clickable {
 
 class CustomIconToggle : public CustomIconButtonBehavior, public ValueObservable<bool>, public Savable {
  public:
-  explicit CustomIconToggle(const std::string &elementName, bool initValue = false, Persistent persistent = Persistent::No);
+  explicit CustomIconToggle(const std::string &elementName, bool initValue = false,
+                            Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
 
@@ -64,7 +65,6 @@ class CustomIconToggle : public CustomIconButtonBehavior, public ValueObservable
   void update(State state) override;
 };
 
-
-}
+}  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_ELEMENTS_CUSTOMICONBUTTONBEHAVIOR_H

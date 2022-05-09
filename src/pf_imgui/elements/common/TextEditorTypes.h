@@ -54,7 +54,6 @@ enum class TextEditorColor {
   CurrentLineEdge = static_cast<int>(ImGuiColorTextEdit::TextEditor::PaletteIndex::CurrentLineEdge),
 };
 
-}
-
+}  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_ELEMENTS_COMMON_TEXTEDITORTYPES_H

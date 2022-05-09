@@ -29,7 +29,8 @@ namespace pf::ui::ig {
  * @tparam R resulting renderable for row
  */
 template<typename F, typename T, typename R>
-concept CustomItemBoxFactory = std::is_invocable_r_v<std::unique_ptr<R>, F, T>;
+concept CustomItemBoxFactory = std::is_invocable_r_v < std::unique_ptr<R>,
+F, T > ;
 
 /**
  * @brief Box containing items provided by user based on stored type.
@@ -67,8 +68,9 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * @param newItems items to be added
    * @return references to the newly created rows
    */
-  auto addItems(std::ranges::range auto &&newItems) requires(
-      std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>) {
+  auto addItems(std::ranges::range auto &&newItems)
+    requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>)
+  {
     std::ranges::for_each(newItems, [this](const auto &newItem) { items.emplace_back(newItem, factory(newItem)); });
     refilterItems();
     return items | ranges::views::transform([](auto &item) -> T & { return *item; });
@@ -79,8 +81,9 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * @param newItems items to set
    * @return references to the newly created rows
    */
-  auto setItems(std::ranges::range auto &&newItems) requires(
-      std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>) {
+  auto setItems(std::ranges::range auto &&newItems)
+    requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>)
+  {
     items.clear();
     return addItems(std::forward<decltype(newItems)>(newItems));
   }
@@ -89,7 +92,9 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * Remove an item.
    * @param itemToRemove item to remove
    */
-  void removeItem(const T &itemToRemove) requires(std::equality_comparable<T>) {
+  void removeItem(const T &itemToRemove)
+    requires(std::equality_comparable<T>)
+  {
     std::erase_if(items, [this, &itemToRemove](const auto &item) { return item.first == itemToRemove; });
     refilterItems();
   }

@@ -62,8 +62,9 @@ class PF_IMGUI_EXPORT DefaultPlotDataSetting {
    * @todo plot data settings (line width etc.)
    */
   template<Plottable T>
-  void setData(const std::ranges::range auto &newData) requires(
-      std::same_as<std::ranges::range_value_t<decltype(newData)>, XYPlotData<T>>) {
+  void setData(const std::ranges::range auto &newData)
+    requires(std::same_as<std::ranges::range_value_t<decltype(newData)>, XYPlotData<T>>)
+  {
     xData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); })
         | ranges::to_vector;
     const auto extremes = ranges::minmax(xData);

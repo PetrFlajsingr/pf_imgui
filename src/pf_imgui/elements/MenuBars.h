@@ -65,10 +65,8 @@ class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
    */
   explicit AppMenuBar(const std::string &elementName);
 
-
  protected:
   void renderImpl() override;
-
 };
 
 }  // namespace pf::ui::ig

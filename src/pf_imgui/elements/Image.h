@@ -1,9 +1,9 @@
 /**
-* @file Image.h
-* @brief Image element.
-* @author Petr Flajšingr
-* @date 31.10.20
-*/
+ * @file Image.h
+ * @brief Image element.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_IMAGE_H
 #define PF_IMGUI_ELEMENTS_IMAGE_H
@@ -20,10 +20,10 @@
 namespace pf::ui::ig {
 
 /**
-* @brief Image rendered from a texture. It can serve as a button.
-*
-* Image rendering should be handled by the use when descending from ImGuiInterface.
-*/
+ * @brief Image rendered from a texture. It can serve as a button.
+ *
+ * Image rendering should be handled by the use when descending from ImGuiInterface.
+ */
 class PF_IMGUI_EXPORT Image
     : public ItemElement,
       public Resizable,
@@ -32,8 +32,8 @@ class PF_IMGUI_EXPORT Image
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow> {
  public:
   /**
-  * Provider of UV mapping for textures. First is left upper corner, right is right lower.
-  */
+   * Provider of UV mapping for textures. First is left upper corner, right is right lower.
+   */
   using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
 
   /**
@@ -44,7 +44,6 @@ class PF_IMGUI_EXPORT Image
     std::string_view name;    /*!< Unique name of the element */
     ImTextureID textureId;    /*!< Id of the texture to render */
     Size size = Size::Auto(); /*!< Size of the element */
-    bool isButton = false;    /*!< Enable/disable button behavior TODO: decouple the button functionality */
     UvMappingProvider uvTextureMappingProvider = [] {
       return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
     }; /*!< Provider of UV coordinates */
@@ -55,49 +54,30 @@ class PF_IMGUI_EXPORT Image
    */
   explicit Image(Config &&config);
   /**
-  * Construct Image.
-  * @param elementName ID of the element
-  * @param imTextureId ID of a texture
-  * @param size size of the image on screen
-  * @param isBtn allow for usage as a button
-  * @param uvTextureMappingProvider provider of UV coordinates
-  */
+   * Construct Image.
+   * @param elementName ID of the element
+   * @param imTextureId ID of a texture
+   * @param size size of the image on screen
+   * @param uvTextureMappingProvider provider of UV coordinates
+   */
   Image(
-      const std::string &elementName, ImTextureID imTextureId, Size size = Size::Auto(), IsButton isBtn = IsButton::No,
+      const std::string &elementName, ImTextureID imTextureId, Size size = Size::Auto(),
       UvMappingProvider uvTextureMappingProvider = [] {
         return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
       });
 
   /**
-  * Check if the image acts as a button.
-  * @return true of image is a button, false otherwise
-  */
-  [[nodiscard]] bool isButton() const;
-  ///**
-  // * Check if a tooltip activated by pressing shift while hovering an image is active.
-  // * @return
-  // */
-  // [[nodiscard]] bool isPixelInspectionTooltipEnabled() const;
-  ///**
-  // * Enable/disable a tooltip activated by pressing shift while hovering an image.
-  // * @param enabled
-  // */
-  // void setPixelInspectionTooltipEnabled(bool enabled);
-
-  /**
-  * Change texture ID.
-  * @param imTextureId new id
-  */
+   * Change texture ID.
+   * @param imTextureId new id
+   */
   void setTextureId(ImTextureID imTextureId);
 
  protected:
   void renderImpl() override;
 
  private:
-  bool isButton_;
   ImTextureID textureId;
   UvMappingProvider uvMappingProvider;
-  // bool pixelInspectionTooltipEnabled = false;
 };
 
 }  // namespace pf::ui::ig
