@@ -66,18 +66,25 @@ PF_IMGUI_EXPORT T deserializeGlmVec(const toml::array &arr) {
  */
 template<typename T>
 PF_IMGUI_EXPORT std::optional<T> safeDeserializeGlmVec(const toml::array &arr) {
+  using ValueType = typename T::value_type;
   if (static_cast<std::size_t>(T::length()) != arr.size()) { return std::nullopt; }
   auto result = T{};
   for (auto i : std::views::iota(0, T::length())) {
-    if constexpr (std::is_floating_point_v<typename T::value_type>) {
+    if constexpr (std::is_floating_point_v<ValueType>) {
       if (const auto value = arr.get(i)->as_floating_point(); value != nullptr) {
-        result[i] = static_cast<typename T::value_type>(value->get());
+        result[i] = static_cast<ValueType>(value->get());
       } else {
         return std::nullopt;
       }
-    } else {
+    } else if constexpr (std::integral<ValueType>) {
       if (const auto value = arr.get(i)->as_integer(); value != nullptr) {
-        result[i] = static_cast<typename T::value_type>(value->get());
+        result[i] = static_cast<ValueType>(value->get());
+      } else {
+        return std::nullopt;
+      }
+    } else if constexpr (std::same_as<bool, ValueType>) {
+      if (const auto value = arr.get(i)->as_boolean(); value != nullptr) {
+        result[i] = static_cast<ValueType>(value->get());
       } else {
         return std::nullopt;
       }
