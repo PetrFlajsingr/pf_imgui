@@ -55,6 +55,7 @@ find_package(fmt CONFIG REQUIRED)
 
 include_directories(src/include/DearWidgets)
 include_directories(src/include/implot)
+include_directories(src/include/imgui-knobs)
 include_directories(src/include/imgui)
 include_directories(src/include/imgui_markdown)
 include_directories(src/include/imgui_memory_editor)
@@ -128,6 +129,7 @@ set(SOURCES
         ${IMGUI_FLAME_GRAPH_DIR}/imgui_widget_flamegraph.cpp
         src/include/implot/implot_items.cpp
         src/include/implot/implot.cpp
+        src/include/imgui-knobs/imgui-knobs.cpp
         src/include/imgui/imgui.cpp
         src/include/imgui/imgui_widgets.cpp
         src/include/imgui/imgui_draw.cpp
@@ -287,6 +289,7 @@ set(INCLUDES
         src/pf_imgui/styles/dark.h
         src/include/implot/implot.h
         src/include/implot/implot_internal.h
+        src/include/imgui-knobs/imgui-knobs.h
         src/include/imgui/imgui.h
         src/include/imgui/imgui_internal.h
         src/include/imgui_markdown/imgui_markdown.h
@@ -377,7 +380,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/builders/FileDialogBuilder.h
         src/pf_imgui/dialogs/builders/MessageDialogBuilder.h
         src/pf_imgui/elements/Dummy.h
-        src/pf_imgui/dialogs/builders/InputDialogBuilder.h)
+        src/pf_imgui/dialogs/builders/InputDialogBuilder.h src/pf_imgui/elements/Knob.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
@@ -425,6 +428,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/DearWidgets>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/implot>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui-knobs>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileDialog>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuiFileFlameGraph>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_markdown>)
@@ -601,6 +605,12 @@ install(
 )
 install(
         DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/implot/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/imgui-knobs/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.h"
