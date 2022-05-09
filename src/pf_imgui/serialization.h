@@ -44,16 +44,20 @@ PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Renderable &root) {
  */
 template<typename T>
 PF_IMGUI_EXPORT T deserializeGlmVec(const toml::array &arr) {
+  using ValueType = typename T::value_type;
   auto result = T{};
   for (auto i : std::views::iota(0, T::length())) {
-    if constexpr (std::is_floating_point_v<typename T::value_type>) {
-      result[i] = static_cast<typename T::value_type>(**arr.get(i)->as_floating_point());
-    } else {
-      result[i] = static_cast<typename T::value_type>(**arr.get(i)->as_integer());
+    if constexpr (std::is_floating_point_v<ValueType>) {
+      result[i] = static_cast<ValueType>(**arr.get(i)->as_floating_point());
+    } else if constexpr (std::integral<ValueType>) {
+      result[i] = static_cast<ValueType>(**arr.get(i)->as_integer());
+    } else if constexpr (std::same_as<bool, ValueType>) {
+      result[i] = **arr.get(i)->as_boolean();
     }
   }
   return result;
 }
+
 /**
  * Deserialize all types of glm::vec safely
  * @tparam T one of glm::vec types
