@@ -5,7 +5,7 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 
-#define IMGUIKNOBS_PI 3.14159265358979323846
+#define IMGUIKNOBS_PI 3.14159265358979323846f
 
 namespace ImGuiKnobs {
     namespace detail {
@@ -33,14 +33,14 @@ namespace ImGuiKnobs {
 
             auto *draw_list = ImGui::GetWindowDrawList();
 
-            draw_list->AddBezierCurve(start, arc1, arc2, end, color, thickness, num_segments);
+            draw_list->AddBezierCubic(start, arc1, arc2, end, color, thickness, num_segments);
         }
 
         void draw_arc(ImVec2 center, float radius, float start_angle, float end_angle, float thickness, ImColor color, int num_segments, int bezier_count) {
             // Overlap and angle of ends of bezier curves needs work, only looks good when not transperant
             auto overlap = thickness * radius * 0.00001f * IMGUIKNOBS_PI;
             auto delta = end_angle - start_angle;
-            auto bez_step = 1.0f / bezier_count;
+            auto bez_step = 1.0f / static_cast<float>(bezier_count);
             auto mid_angle = start_angle + overlap;
 
             for (auto i = 0; i < bezier_count - 1; i++) {
@@ -80,8 +80,8 @@ namespace ImGuiKnobs {
                 }
                 value_changed = ImGui::DragBehavior(gid, data_type, p_value, speed, &v_min, &v_max, format, drag_flags);
 
-                angle_min = IMGUIKNOBS_PI * 0.75;
-                angle_max = IMGUIKNOBS_PI * 2.25;
+                angle_min = IMGUIKNOBS_PI * 0.75f;
+                angle_max = IMGUIKNOBS_PI * 2.25f;
                 center = {screen_pos[0] + radius, screen_pos[1] + radius};
                 is_active = ImGui::IsItemActive();
                 is_hovered = ImGui::IsItemHovered();
@@ -90,31 +90,31 @@ namespace ImGuiKnobs {
                 angle_sin = sinf(angle);
             }
 
-            void draw_dot(float size, float radius, float angle, color_set color, bool filled, int segments) {
+            void draw_dot(float size, float radius_, float angle_, color_set color, [[maybe_unused]] bool filled, int segments) {
                 auto dot_size = size * this->radius;
-                auto dot_radius = radius * this->radius;
+                auto dot_radius = radius_ * this->radius;
 
                 ImGui::GetWindowDrawList()->AddCircleFilled(
-                        {center[0] + cosf(angle) * dot_radius, center[1] + sinf(angle) * dot_radius},
+                        {center[0] + cosf(angle_) * dot_radius, center[1] + sinf(angle_) * dot_radius},
                         dot_size,
                         is_active ? color.active : (is_hovered ? color.hovered : color.base),
                         segments);
             }
 
-            void draw_tick(float start, float end, float width, float angle, color_set color) {
+            void draw_tick(float start, float end, float width, float angle_, color_set color) {
                 auto tick_start = start * radius;
                 auto tick_end = end * radius;
-                auto angle_cos = cosf(angle);
-                auto angle_sin = sinf(angle);
+                auto angle_cos_ = cosf(angle_);
+                auto angle_sin_ = sinf(angle_);
 
                 ImGui::GetWindowDrawList()->AddLine(
-                        {center[0] + angle_cos * tick_end, center[1] + angle_sin * tick_end},
-                        {center[0] + angle_cos * tick_start, center[1] + angle_sin * tick_start},
+                        {center[0] + angle_cos_ * tick_end, center[1] + angle_sin_ * tick_end},
+                        {center[0] + angle_cos_ * tick_start, center[1] + angle_sin_ * tick_start},
                         is_active ? color.active : (is_hovered ? color.hovered : color.base),
                         width * radius);
             }
 
-            void draw_circle(float size, color_set color, bool filled, int segments) {
+            void draw_circle(float size, color_set color, [[maybe_unused]] bool filled, [[maybe_unused]] int segments) {
                 auto circle_radius = size * radius;
 
                 ImGui::GetWindowDrawList()->AddCircleFilled(
@@ -123,8 +123,8 @@ namespace ImGuiKnobs {
                         is_active ? color.active : (is_hovered ? color.hovered : color.base));
             }
 
-            void draw_arc(float radius, float size, float start_angle, float end_angle, color_set color, int segments, int bezier_count) {
-                auto track_radius = radius * this->radius;
+            void draw_arc(float radius_, float size, float start_angle, float end_angle, color_set color, int segments, int bezier_count) {
+                auto track_radius = radius_ * this->radius;
                 auto track_size = size * this->radius * 0.5f + 0.0001f;
 
                 detail::draw_arc(
@@ -225,57 +225,57 @@ namespace ImGuiKnobs {
 
         switch (variant) {
             case ImGuiKnobVariant_Tick: {
-                knob.draw_circle(0.85, detail::GetSecondaryColorSet(), true, 32);
-                knob.draw_tick(0.5, 0.85, 0.08, knob.angle, detail::GetPrimaryColorSet());
+                knob.draw_circle(0.85f, detail::GetSecondaryColorSet(), true, 32);
+                knob.draw_tick(0.5f, 0.85f, 0.08f, knob.angle, detail::GetPrimaryColorSet());
                 break;
             }
             case ImGuiKnobVariant_Dot: {
-                knob.draw_circle(0.85, detail::GetSecondaryColorSet(), true, 32);
-                knob.draw_dot(0.12, 0.6, knob.angle, detail::GetPrimaryColorSet(), true, 12);
+                knob.draw_circle(0.85f, detail::GetSecondaryColorSet(), true, 32);
+                knob.draw_dot(0.12f, 0.6f, knob.angle, detail::GetPrimaryColorSet(), true, 12);
                 break;
             }
 
             case ImGuiKnobVariant_Wiper: {
-                knob.draw_circle(0.7, detail::GetSecondaryColorSet(), true, 32);
-                knob.draw_arc(0.8, 0.41, knob.angle_min, knob.angle_max, detail::GetTrackColorSet(), 16, 2);
+                knob.draw_circle(0.7f, detail::GetSecondaryColorSet(), true, 32);
+                knob.draw_arc(0.8f, 0.41f, knob.angle_min, knob.angle_max, detail::GetTrackColorSet(), 16, 2);
 
-                if (knob.t > 0.01) {
-                    knob.draw_arc(0.8, 0.43, knob.angle_min, knob.angle, detail::GetPrimaryColorSet(), 16, 2);
+                if (knob.t > 0.01f) {
+                    knob.draw_arc(0.8f, 0.43f, knob.angle_min, knob.angle, detail::GetPrimaryColorSet(), 16, 2);
                 }
                 break;
             }
             case ImGuiKnobVariant_WiperOnly: {
-                knob.draw_arc(0.8, 0.41, knob.angle_min, knob.angle_max, detail::GetTrackColorSet(), 32, 2);
+                knob.draw_arc(0.8f, 0.41f, knob.angle_min, knob.angle_max, detail::GetTrackColorSet(), 32, 2);
 
-                if (knob.t > 0.01) {
-                    knob.draw_arc(0.8, 0.43, knob.angle_min, knob.angle, detail::GetPrimaryColorSet(), 16, 2);
+                if (knob.t > 0.01f) {
+                    knob.draw_arc(0.8f, 0.43f, knob.angle_min, knob.angle, detail::GetPrimaryColorSet(), 16, 2);
                 }
                 break;
             }
             case ImGuiKnobVariant_WiperDot: {
-                knob.draw_circle(0.6, detail::GetSecondaryColorSet(), true, 32);
-                knob.draw_arc(0.85, 0.41, knob.angle_min, knob.angle_max, detail::GetTrackColorSet(), 16, 2);
-                knob.draw_dot(0.1, 0.85, knob.angle, detail::GetPrimaryColorSet(), true, 12);
+                knob.draw_circle(0.6f, detail::GetSecondaryColorSet(), true, 32);
+                knob.draw_arc(0.85f, 0.41f, knob.angle_min, knob.angle_max, detail::GetTrackColorSet(), 16, 2);
+                knob.draw_dot(0.1f, 0.85f, knob.angle, detail::GetPrimaryColorSet(), true, 12);
                 break;
             }
             case ImGuiKnobVariant_Stepped: {
-                for (auto n = 0.f; n < steps; n++) {
-                    auto a = n / (steps - 1);
+                for (auto n = 0; n < steps; n++) {
+                    auto a = n / static_cast<float>(steps - 1);
                     auto angle = knob.angle_min + (knob.angle_max - knob.angle_min) * a;
-                    knob.draw_tick(0.7, 0.9, 0.04, angle, detail::GetPrimaryColorSet());
+                    knob.draw_tick(0.7f, 0.9f, 0.04f, angle, detail::GetPrimaryColorSet());
                 }
 
-                knob.draw_circle(0.6, detail::GetSecondaryColorSet(), true, 32);
-                knob.draw_dot(0.12, 0.4, knob.angle, detail::GetPrimaryColorSet(), true, 12);
+                knob.draw_circle(0.6f, detail::GetSecondaryColorSet(), true, 32);
+                knob.draw_dot(0.12f, 0.4f, knob.angle, detail::GetPrimaryColorSet(), true, 12);
                 break;
             }
             case ImGuiKnobVariant_Space: {
-                knob.draw_circle(0.3 - knob.t * 0.1, detail::GetSecondaryColorSet(), true, 16);
+                knob.draw_circle(0.3f - knob.t * 0.1f, detail::GetSecondaryColorSet(), true, 16);
 
-                if (knob.t > 0.01) {
-                    knob.draw_arc(0.4, 0.15, knob.angle_min - 1.0, knob.angle - 1.0, detail::GetPrimaryColorSet(), 16, 2);
-                    knob.draw_arc(0.6, 0.15, knob.angle_min + 1.0, knob.angle + 1.0, detail::GetPrimaryColorSet(), 16, 2);
-                    knob.draw_arc(0.8, 0.15, knob.angle_min + 3.0, knob.angle + 3.0, detail::GetPrimaryColorSet(), 16, 2);
+                if (knob.t > 0.01f) {
+                    knob.draw_arc(0.4f, 0.15f, knob.angle_min - 1.0f, knob.angle - 1.0f, detail::GetPrimaryColorSet(), 16, 2);
+                    knob.draw_arc(0.6f, 0.15f, knob.angle_min + 1.0f, knob.angle + 1.0f, detail::GetPrimaryColorSet(), 16, 2);
+                    knob.draw_arc(0.8f, 0.15f, knob.angle_min + 3.0f, knob.angle + 3.0f, detail::GetPrimaryColorSet(), 16, 2);
                 }
                 break;
             }
