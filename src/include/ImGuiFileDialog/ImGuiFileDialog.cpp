@@ -387,7 +387,7 @@ namespace IGFD
 		return SplitterBehavior(bb, id, split_vertically ? ImGuiAxis_X : ImGuiAxis_Y, size1, size2, min_size1, min_size2, 1.0f);
 	}
 
-	bool IGFD::Utils::WReplaceString(std::wstring& str, const std::wstring& oldStr, const std::wstring& newStr)
+	bool IGFD::Utils::WReplaceString([[maybe_unused]] std::wstring& str, [[maybe_unused]] const std::wstring& oldStr, [[maybe_unused]] const std::wstring& newStr)
 	{
 		bool found = false;
 #ifdef _IGFD_WIN_
@@ -402,7 +402,7 @@ namespace IGFD
 		return found;
 	}
 
-	std::vector<std::wstring> IGFD::Utils::WSplitStringToVector(const std::wstring& text, char delimiter, bool pushEmpty)
+	std::vector<std::wstring> IGFD::Utils::WSplitStringToVector([[maybe_unused]] const std::wstring& text, [[maybe_unused]] char delimiter, [[maybe_unused]] bool pushEmpty)
 	{
 		std::vector<std::wstring> arr;
 #ifdef _IGFD_WIN_
@@ -427,7 +427,7 @@ namespace IGFD
 	}
 	
 	// Convert a wide Unicode string to an UTF8 string
-	std::string IGFD::Utils::utf8_encode(const std::wstring &wstr)
+	std::string IGFD::Utils::utf8_encode([[maybe_unused]] const std::wstring &wstr)
 	{
 		std::string res;
 #ifdef _IGFD_WIN_
@@ -447,7 +447,7 @@ namespace IGFD
 	}
 
 	// Convert an UTF8 string to a wide Unicode String
-	std::wstring IGFD::Utils::utf8_decode(const std::string &str)
+	std::wstring IGFD::Utils::utf8_decode([[maybe_unused]] const std::string &str)
 	{
 		std::wstring res;
 #ifdef _IGFD_WIN_
@@ -546,7 +546,7 @@ namespace IGFD
 				const auto dir_iter = std::filesystem::directory_iterator(pathName);
 				(void)dir_iter; // for avoid unused warnings
 			}
-			catch (std::exception /*ex*/)
+			catch (const std::exception &/*ex*/)
 			{
 				// fail so this dir cant be opened
 				bExists = false;
