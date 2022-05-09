@@ -76,10 +76,6 @@ enum class LayoutDirection { LeftToRight, TopToBottom };
 */
 enum class FileType { File, Directory };
 /**
-* Enum for marking elements as a button.
-*/
-enum class IsButton { Yes, No };
-/**
 * Enum for Collapsible.
 */
 enum class AllowCollapse { Yes, No };

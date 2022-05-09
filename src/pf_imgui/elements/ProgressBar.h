@@ -24,11 +24,10 @@ namespace pf::ui::ig {
  */
 template<typename T>
 concept ProgressBarCompatible = requires(T t, float f) {
-  { t + t } -> std::same_as<T>;
-  {t *= f};
-  { std::clamp(t, t, t) } -> std::convertible_to<T>;
-}
-&&std::convertible_to<float, T>;
+                                  { t + t } -> std::same_as<T>;
+                                  { t *= f };
+                                  { std::clamp(t, t, t) } -> std::convertible_to<T>;
+                                } && std::convertible_to<float, T>;
 
 /**
  * @brief Progress bar for notifying a user of operation progress.

@@ -35,7 +35,9 @@ class PF_IMGUI_EXPORT Bullet : public T {
    * @param args arguments for T's constructor
    */
   template<typename... Args>
-  explicit Bullet(Args &&...args) requires(std::constructible_from<T, Args...>) : T(std::forward<Args>(args)...) {}
+  explicit Bullet(Args &&...args)
+    requires(std::constructible_from<T, Args...>)
+  : T(std::forward<Args>(args)...) {}
 
  protected:
   void renderImpl() override {

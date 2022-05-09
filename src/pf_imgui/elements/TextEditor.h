@@ -234,7 +234,7 @@ class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resiza
    */
   void setHighlighting(TextEditorHighlight language);
 
-  void setHighlighting(const ImGuiColorTextEdit::TextEditor::LanguageDefinition& language);
+  void setHighlighting(const ImGuiColorTextEdit::TextEditor::LanguageDefinition &language);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
