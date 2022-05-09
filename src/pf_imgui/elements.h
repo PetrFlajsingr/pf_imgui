@@ -28,6 +28,7 @@
 #include <pf_imgui/elements/Image.h>
 #include <pf_imgui/elements/Input.h>
 #include <pf_imgui/elements/InputText.h>
+#include <pf_imgui/elements/Knob.h>
 #include <pf_imgui/elements/LinkText.h>
 #include <pf_imgui/elements/Listbox.h>
 #include <pf_imgui/elements/LogPanel.h>
