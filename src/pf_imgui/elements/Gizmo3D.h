@@ -61,16 +61,14 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
    * Construct Gizmo3D
    * @param config construction args @see Gizmo3D::Config
    */
-  explicit Gizmo3D(Config &&config)
-      : Element(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value) {}
+  explicit Gizmo3D(Config &&config);
   /**
    * Construct Gizmo3D.
    * @param name unique name of the element
    * @param value starting value - needs to be valid, otherwise the element will malfunction
    * @param size size of the element, the smaller value will be used for both axis'
    */
-  Gizmo3D(const std::string &name, ValueType value, const Size &size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE})
-      : Element(name), Resizable(size), ValueObservable<ValueType>(value) {}
+  Gizmo3D(const std::string &name, ValueType value, const Size &size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE});
 
   /**
    * Set a type of object rendered in the origin.
@@ -78,41 +76,60 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
    */
   void setMidObject(GizmoMid newObject)
     requires(Type != GizmoType::Direction)
-  {
-    mid = newObject;
-  }
+  ;
 
-  void setSize(Size s) override {
-    const auto min = std::min(s.width.value, s.height.value);
-    Resizable::setSize(Size{min, min});
-  }
+  void setSize(Size s) override;
 
  protected:
-  void renderImpl() override {
-    const auto flags = static_cast<int>(Type) | static_cast<int>(mid);
-    if constexpr (Type == GizmoType::Axes3) {
-      glm::quat quat = ValueObservable<ValueType>::getValue();
-      if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, getSize().width.value, flags)) {
-        ValueObservable<ValueType>::setValueAndNotifyIfChanged(quat);
-      }
-    }
-    if constexpr (Type == GizmoType::Direction) {
-      glm::vec3 dir = ValueObservable<ValueType>::getValue();
-      if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, getSize().width.value, flags)) {
-        ValueObservable<ValueType>::setValueAndNotifyIfChanged(dir);
-      }
-    }
-    if constexpr (Type == GizmoType::Dual) {
-      auto [quat, dir] = ValueObservable<ValueType>::getValue();
-      if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, dir, getSize().width.value, flags)) {
-        ValueObservable<ValueType>::setValueAndNotifyIfChanged({quat, dir});
-      }
-    }
-  }
+  void renderImpl() override;
 
  private:
   GizmoMid mid = GizmoMid::None;
 };
+
+template<GizmoType Type>
+Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
+    : Element(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value) {}
+
+template<GizmoType Type>
+Gizmo3D<Type>::Gizmo3D(const std::string &name, Gizmo3D::ValueType value, const Size &size)
+    : Element(name), Resizable(size), ValueObservable<ValueType>(value) {}
+
+template<GizmoType Type>
+void Gizmo3D<Type>::setMidObject(GizmoMid newObject)
+  requires(Type != GizmoType::Direction)
+{
+  mid = newObject;
+}
+
+template<GizmoType Type>
+void Gizmo3D<Type>::setSize(Size s) {
+  const auto min = std::min(static_cast<float>(s.width), static_cast<float>(s.height)());
+  Resizable::setSize(Size{min, min});
+}
+
+template<GizmoType Type>
+void Gizmo3D<Type>::renderImpl() {
+  const auto flags = static_cast<int>(Type) | static_cast<int>(mid);
+  if constexpr (Type == GizmoType::Axes3) {
+    glm::quat quat = ValueObservable<ValueType>::getValue();
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, getSize().width.value, flags)) {
+      ValueObservable<ValueType>::setValueAndNotifyIfChanged(quat);
+    }
+  }
+  if constexpr (Type == GizmoType::Direction) {
+    glm::vec3 dir = ValueObservable<ValueType>::getValue();
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, getSize().width.value, flags)) {
+      ValueObservable<ValueType>::setValueAndNotifyIfChanged(dir);
+    }
+  }
+  if constexpr (Type == GizmoType::Dual) {
+    auto [quat, dir] = ValueObservable<ValueType>::getValue();
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, dir, getSize().width.value, flags)) {
+      ValueObservable<ValueType>::setValueAndNotifyIfChanged({quat, dir});
+    }
+  }
+}
 
 }  // namespace pf::ui::ig
 
