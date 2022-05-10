@@ -62,9 +62,7 @@ class PF_IMGUI_EXPORT ProgressBar
    * Construct ProgressBar
    * @param config construction args @see ProgressBar::Config
    */
-  explicit ProgressBar(Config &&config)
-      : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Resizable(config.size),
-        stepValue(config.step), min(config.min), max(config.max) {}
+  explicit ProgressBar(Config &&config);
   /**
    * Construct ProgressBar.
    * @param elementName ID of the progress bar
@@ -75,35 +73,20 @@ class PF_IMGUI_EXPORT ProgressBar
    * @param size size of the progress bar
    */
   ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
-              const Size &size = Size::Auto())
-      : ItemElement(elementName), ValueObservable<T>(value.has_value() ? *value : min), Resizable(size),
-        stepValue(stepValue), min(min), max(max) {}
+              const Size &size = Size::Auto());
 
   /**
    * Set current percentage where min = 0% and max = 100%.
    * @param percentage <0.0f-1.0f>, gets clamped if outside this interval
    * @return current inner value of the progress bar
    */
-  T setPercentage(float percentage) {
-    percentage = std::clamp(percentage, 0.f, 1.f);
-    const auto oldValue = ValueObservable<T>::getValue();
-    const auto newValue = min + (max - min) * percentage;
-    ValueObservable<T>::setValueInner(static_cast<T>(newValue));
-    if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
-    return ValueObservable<T>::getValue();
-  }
+  T setPercentage(float percentage);
 
   /**
    * Move inner value by step provided in constructor.
    * @return current inner value of the progress bar
    */
-  T step() {
-    const auto oldValue = ValueObservable<T>::getValue();
-    const auto newValue = std::clamp(oldValue + stepValue, min, max);
-    ValueObservable<T>::setValueInner(newValue);
-    if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
-    return newValue;
-  }
+  T step();
 
   /**
    * Get min progress bar value.
@@ -141,23 +124,59 @@ class PF_IMGUI_EXPORT ProgressBar
    * Get current percentage of the progress bar <0.0f-1.0f>.
    * @return current percentage of the progress bar <0.0f-1.0f>
    */
-  [[nodiscard]] float getCurrentPercentage() const {
-    const auto diff = max - min;
-    return (ValueObservable<T>::getValue() - min) / static_cast<float>(diff);
-  }
+  [[nodiscard]] float getCurrentPercentage() const;
 
  protected:
-  void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
-    ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()));
-  }
+  void renderImpl() override;
 
  private:
   T stepValue;
   T min;
   T max;
 };
+
+template<ProgressBarCompatible T>
+ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
+    : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Resizable(config.size),
+      stepValue(config.step), min(config.min), max(config.max) {}
+
+template<ProgressBarCompatible T>
+ProgressBar<T>::ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value,
+                            const Size &size)
+    : ItemElement(elementName), ValueObservable<T>(value.has_value() ? *value : min), Resizable(size),
+      stepValue(stepValue), min(min), max(max) {}
+
+template<ProgressBarCompatible T>
+T ProgressBar<T>::setPercentage(float percentage) {
+  percentage = std::clamp(percentage, 0.f, 1.f);
+  const auto oldValue = ValueObservable<T>::getValue();
+  const auto newValue = min + (max - min) * percentage;
+  ValueObservable<T>::setValueInner(static_cast<T>(newValue));
+  if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
+  return ValueObservable<T>::getValue();
+}
+
+template<ProgressBarCompatible T>
+T ProgressBar<T>::step() {
+  const auto oldValue = ValueObservable<T>::getValue();
+  const auto newValue = std::clamp(oldValue + stepValue, min, max);
+  ValueObservable<T>::setValueInner(newValue);
+  if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
+  return newValue;
+}
+
+template<ProgressBarCompatible T>
+float ProgressBar<T>::getCurrentPercentage() const {
+  const auto diff = max - min;
+  return (ValueObservable<T>::getValue() - min) / static_cast<float>(diff);
+}
+
+template<ProgressBarCompatible T>
+void ProgressBar<T>::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()));
+}
 
 extern template class ProgressBar<float>;
 extern template class ProgressBar<int>;
