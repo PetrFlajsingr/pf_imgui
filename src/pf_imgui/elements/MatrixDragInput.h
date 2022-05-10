@@ -100,30 +100,16 @@ MatrixDragInput<M>::MatrixDragInput(const std::string &name, const std::string &
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 toml::table MatrixDragInput<M>::toToml() const {
-  toml::array rows;
-  for (std::size_t row = 0; row < Height; ++row) {
-    rows.push_back(serializeGlmVec(ValueObservable<M>::getValue()[row]));
-  }
-  return toml::table{{"value", rows}};
+  return toml::table{{"value", serializeGlmMat(ValueObservable<M>::getValue())}};
 }
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 void MatrixDragInput<M>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-      M value;
-      std::size_t row = 0;
-      for (const auto &rowVal : *newVal) {
-        if (auto rowValArr = rowVal.as_array(); rowValArr != nullptr) {
-          if (const auto rowVec = safeDeserializeGlmVec<typename M::col_type>(*rowValArr); rowVec.has_value()) {
-            value[row] = rowVec.value();
-          } else {
-            return;
-          }
-        }
-        ++row;
+      if (const auto matValue = safeDeserializeGlmMat<M>(*newVal); matValue.has_value()) {
+        ValueObservable<M>::setValueAndNotifyIfChanged(matValue.value());
       }
-      ValueObservable<M>::setValueAndNotifyIfChanged(value);
     }
   }
 }
