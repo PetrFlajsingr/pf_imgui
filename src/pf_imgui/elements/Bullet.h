@@ -27,7 +27,7 @@ class PF_IMGUI_EXPORT Bullet : public T {
   struct Config {
     using Parent = Bullet;
     typename T::Config config; /*!< Config of the underlying Element */
-    operator typename T::Config() { return config; }
+    explicit(false) operator typename T::Config() { return config; }
   };
   /**
    * Construct Bullet.
@@ -36,17 +36,24 @@ class PF_IMGUI_EXPORT Bullet : public T {
    */
   template<typename... Args>
   explicit Bullet(Args &&...args)
-    requires(std::constructible_from<T, Args...>)
-  : T(std::forward<Args>(args)...) {}
+    requires(std::constructible_from<T, Args...>);
 
  protected:
-  void renderImpl() override {
-    ImGui::Bullet();
-    T::renderImpl();
-  }
+  void renderImpl() override;
 
- private:
 };
+
+template<std::derived_from<Element> T>
+template<typename... Args>
+Bullet<T>::Bullet(Args &&...args)
+  requires(std::constructible_from<T, Args...>)
+    : T(std::forward<Args>(args)...) {}
+
+template<std::derived_from<Element> T>
+void Bullet<T>::renderImpl() {
+  ImGui::Bullet();
+  T::renderImpl();
+}
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
