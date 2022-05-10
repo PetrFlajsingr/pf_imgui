@@ -329,12 +329,14 @@ LogPanel<Category, RecordLimit>::isAllowedCategory(Category category) {
   const auto catIndex = *magic_enum::enum_index(category);
   return categoryEnabled[catIndex] && categoryAllowed[catIndex];
 }
+
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0) bool
 LogPanel<Category, RecordLimit>::isAllowedText(const std::string &text) {
   if (filterStringSize == 0) { return true; }
   return text.find(std::string_view{filterBuffer, filterStringSize}) != std::string::npos;
 }
+
 }  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_ELEMENTS_LOGPANEL_H

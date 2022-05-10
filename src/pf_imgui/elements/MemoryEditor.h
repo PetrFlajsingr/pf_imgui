@@ -12,7 +12,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <ranges>
 #include <string>
 
 namespace pf::ui::ig {
@@ -23,69 +22,69 @@ namespace pf::ui::ig {
  * Editor holds the provided range as a reference.
  *
  * @todo: more options
- * @todo: change this so it's not templated - use std::span<std::byte> to pass data
  */
-template<std::ranges::contiguous_range R>
 class PF_IMGUI_EXPORT MemoryEditor : public ItemElement, public AllColorCustomizable, public AllStyleCustomizable {
  public:
-  MemoryEditor(const std::string &elementName, R &data) : ItemElement(elementName), range(data) {}
+  template<typename T>
+  MemoryEditor(const std::string &elementName, std::span<T> newData);
 
   /**
    * Check if editor is read only.
    * @return
    */
-  [[nodiscard]] bool isReadOnly() const { return memoryEditor.ReadOnly; }
+  [[nodiscard]] bool isReadOnly() const;
   /**
    * Set editor to read only.
    * @param readOnly
    */
-  void setReadOnly(bool readOnly) { memoryEditor.ReadOnly = readOnly; }
+  void setReadOnly(bool readOnly);
   /**
    * Check if options button is enabled.
    * @return
    */
-  [[nodiscard]] bool isShowOptions() const { return memoryEditor.OptShowOptions; }
+  [[nodiscard]] bool isShowOptions() const;
   /**
    * Enable/disable options button.
    * @param showOptions
    */
-  void setShowOptions(bool showOptions) { memoryEditor.OptShowOptions = showOptions; }
+  void setShowOptions(bool showOptions);
   /**
    * Check if panel for previewing data in different formats is enabled.
    * @return
    */
-  [[nodiscard]] bool isDataPreview() const { return memoryEditor.OptShowDataPreview; }
+  [[nodiscard]] bool isDataPreview() const;
   /**
    * Enable/disable data preview panel
    * @param dataPreview
    */
-  void setDataPreview(bool dataPreview) { memoryEditor.OptShowDataPreview = dataPreview; }
+  void setDataPreview(bool dataPreview);
   /**
    * Get an amount of rendered values on a row.
    * @return an amount of rendered values on a row
    */
-  [[nodiscard]] unsigned int getColumnCount() const { return memoryEditor.Cols; }
+  [[nodiscard]] unsigned int getColumnCount() const;
   /**
    * Set an amount of rendered values on a row.
    * @param count new column count
    */
-  void setColumnCount(unsigned int count) { memoryEditor.Cols = count; }
+  void setColumnCount(unsigned int count);
 
-  [[nodiscard]] R &getRange() const { return range; }
-  void setRange(const R &newRange) { range = newRange; }
+  [[nodiscard]] std::span<std::byte> getData() const;
+  void setData(std::span<std::byte> newData);
 
  protected:
-  void renderImpl() override {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    memoryEditor.DrawContents(std::ranges::data(range),
-                              std::ranges::size(range) * sizeof(std::ranges::range_value_t<R>));
-  }
+  void renderImpl() override;
 
  private:
   ImGui::MemoryEditor memoryEditor{};
-  R &range;
+  std::span<std::byte> data;
 };
+
+template<typename T>
+MemoryEditor::MemoryEditor(const std::string &elementName, std::span<T> newData)
+    : ItemElement(elementName),
+      data(std::span{reinterpret_cast<const std::byte *>(newData.data()), newData.size() * sizeof(T)}) {}
+
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_ELEMENTS_MEMORYEDITOR_H
