@@ -118,10 +118,7 @@ class PF_IMGUI_EXPORT DragInput
    * Construct DragInput
    * @param config construction args @see DragInput::Config
    */
-  explicit DragInput(Config &&config)
-      : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Labellable(std::string{config.label}),
-        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-        speed(config.speed), min(config.min), max(config.max), format(std::move(config.format)) {}
+  explicit DragInput(Config &&config);
 
   /**
    * Construct DragInput.
@@ -135,10 +132,8 @@ class PF_IMGUI_EXPORT DragInput
    * @param format format for formatting value to string
    */
   DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
-            T value = T{}, Persistent persistent = Persistent::No, std::string format = details::defaultDragFormat<T>())
-      : ItemElement(elementName), ValueObservable<T>(value), Labellable(label),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
-        format(std::move(format)) {}
+            T value = T{}, Persistent persistent = Persistent::No,
+            std::string format = details::defaultDragFormat<T>());
 
   /**
    * Get movement speed.
@@ -175,86 +170,11 @@ class PF_IMGUI_EXPORT DragInput
 
   void setFormat(std::string newFormat) { format = std::move(newFormat); }
 
-  [[nodiscard]] toml::table toToml() const override {
-    const auto value = ValueObservable<T>::getValue();
-    if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
-      return toml::table{{"value", toml::array{value.start, value.end}}};
-    } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
-      return toml::table{{"value", serializeGlmVec(value)}};
-    } else {
-      return toml::table{{"value", value}};
-    }
-  }
-  void setFromToml(const toml::table &src) override {
-    if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
-      if (auto newValIter = src.find("value"); newValIter != src.end()) {
-        if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-          if (newVal->size() != 2) { return; }
-          auto range = T{};
-          if (auto newRangeStart = newVal->get(0)->value<ParamType>(); newRangeStart.has_value()) {
-            range.start = newRangeStart.value();
-          }
-          if (auto newRangeEnd = newVal->get(1)->value<ParamType>(); newRangeEnd.has_value()) {
-            range.end = newRangeEnd.value();
-          }
-          ValueObservable<T>::setValueAndNotifyIfChanged(range);
-        }
-      }
-    } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
-      if (auto newValIter = src.find("value"); newValIter != src.end()) {
-        if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-          const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-          if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
-        }
-      }
-    } else {
-      if (auto newValIter = src.find("value"); newValIter != src.end()) {
-        if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-          ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-        }
-      }
-    }
-  }
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
  protected:
-  void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
-    bool valueChanged = false;
-    const auto address = ValueObservable<T>::getValueAddress();
-    const auto flags = ImGuiSliderFlags_AlwaysClamp;
-
-    ImGuiDataType_ dataType;
-    if constexpr (OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>) {
-      dataType = ImGuiDataType_Float;
-    } else {
-      dataType = ImGuiDataType_S32;
-    }
-
-    if constexpr (OneOf<T, int, float>) {
-      valueChanged = ImGui::DragScalar(getLabel().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
-                                       format.c_str(), flags);
-    }
-    if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
-      valueChanged = ImGui::DragScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(),
-                                        static_cast<float>(speed), &min, &max, format.c_str(), flags);
-    }
-
-    if constexpr (std::same_as<T, math::Range<int>>) {
-      valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, static_cast<float>(speed),
-                                          min, max, format.c_str(), nullptr, flags);
-    }
-    if constexpr (std::same_as<T, math::Range<float>>) {
-      valueChanged = ImGui::DragFloatRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max,
-                                            format.c_str(), nullptr, flags);
-    }
-    DragSource<T>::drag(ValueObservable<T>::getValue());
-    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
-      return;
-    }
-    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
-  }
+  void renderImpl() override;
 
  private:
   ParamType speed;
@@ -262,6 +182,104 @@ class PF_IMGUI_EXPORT DragInput
   ParamType max;
   std::string format;
 };
+
+template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+DragInput<T>::DragInput(DragInput::Config &&config)
+    : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Labellable(std::string{config.label}),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
+      speed(config.speed), min(config.min), max(config.max), format(std::move(config.format)) {}
+
+template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+DragInput<T>::DragInput(const std::string &elementName, const std::string &label,
+                        details::DragInputUnderlyingType<T> speed, details::DragInputUnderlyingType<T> min,
+                        details::DragInputUnderlyingType<T> max, T value, Persistent persistent, std::string format)
+    : ItemElement(elementName), ValueObservable<T>(value), Labellable(label),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
+      format(std::move(format)) {}
+
+template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+toml::table DragInput<T>::toToml() const {
+  const auto value = ValueObservable<T>::getValue();
+  if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
+    return toml::table{{"value", toml::array{value.start, value.end}}};
+  } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+    return toml::table{{"value", serializeGlmVec(value)}};
+  } else {
+    return toml::table{{"value", value}};
+  }
+}
+
+template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+void DragInput<T>::setFromToml(const toml::table &src) {
+  if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        if (newVal->size() != 2) { return; }
+        auto range = T{};
+        if (auto newRangeStart = newVal->get(0)->value<ParamType>(); newRangeStart.has_value()) {
+          range.start = newRangeStart.value();
+        }
+        if (auto newRangeEnd = newVal->get(1)->value<ParamType>(); newRangeEnd.has_value()) {
+          range.end = newRangeEnd.value();
+        }
+        ValueObservable<T>::setValueAndNotifyIfChanged(range);
+      }
+    }
+  } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
+        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+      }
+    }
+  } else {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+      }
+    }
+  }
+}
+
+template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+void DragInput<T>::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  bool valueChanged = false;
+  const auto address = ValueObservable<T>::getValueAddress();
+  const auto flags = ImGuiSliderFlags_AlwaysClamp;
+
+  ImGuiDataType_ dataType;
+  if constexpr (OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>) {
+    dataType = ImGuiDataType_Float;
+  } else {
+    dataType = ImGuiDataType_S32;
+  }
+
+  if constexpr (OneOf<T, int, float>) {
+    valueChanged = ImGui::DragScalar(getLabel().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
+                                     format.c_str(), flags);
+  }
+  if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+    valueChanged = ImGui::DragScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(),
+                                      static_cast<float>(speed), &min, &max, format.c_str(), flags);
+  }
+
+  if constexpr (std::same_as<T, math::Range<int>>) {
+    valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, static_cast<float>(speed),
+                                        min, max, format.c_str(), nullptr, flags);
+  }
+  if constexpr (std::same_as<T, math::Range<float>>) {
+    valueChanged = ImGui::DragFloatRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max,
+                                          format.c_str(), nullptr, flags);
+  }
+  DragSource<T>::drag(ValueObservable<T>::getValue());
+  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    return;
+  }
+  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+}
 
 extern template class DragInput<float>;
 extern template class DragInput<glm::vec2>;
