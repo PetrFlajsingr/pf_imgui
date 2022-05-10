@@ -14,6 +14,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 #include <utility>
@@ -34,7 +35,6 @@ using GizmoValueType =
 }
 
 /**
- * @todo Savable
  * @brief A 3D gizmo allowing the user to modify rotation or a direction by rendering axis'/direction arrow.
  * Axes3 -> 3D rotation
  * Direction -> 3D direction
@@ -44,7 +44,8 @@ using GizmoValueType =
 template<GizmoType Type>
 class PF_IMGUI_EXPORT Gizmo3D : public Element,
                                 public Resizable,
-                                public ValueObservable<details::GizmoValueType<Type>> {
+                                public ValueObservable<details::GizmoValueType<Type>>,
+                                public Savable {
   using ValueType = details::GizmoValueType<Type>;
 
  public:
@@ -56,6 +57,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
     std::string_view name;                                  /*!< Unique name of the element */
     ValueType value;                                        /*!< Initial value */
     Size size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE}; /*!< Size of the element */
+    bool persistent = false;                                /*!< Enable state saving to disk */
   };
   /**
    * Construct Gizmo3D
@@ -67,8 +69,10 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
    * @param name unique name of the element
    * @param value starting value - needs to be valid, otherwise the element will malfunction
    * @param size size of the element, the smaller value will be used for both axis'
+   * @param persistent enable state saving
    */
-  Gizmo3D(const std::string &name, ValueType value, const Size &size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE});
+  Gizmo3D(const std::string &name, ValueType value, const Size &size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE},
+          Persistent persistent = Persistent::No);
 
   /**
    * Set a type of object rendered in the origin.
@@ -80,6 +84,9 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
 
   void setSize(const Size &s) override;
 
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
  protected:
   void renderImpl() override;
 
@@ -89,11 +96,12 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
-    : Element(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value) {}
+    : Element(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<GizmoType Type>
-Gizmo3D<Type>::Gizmo3D(const std::string &name, Gizmo3D::ValueType value, const Size &size)
-    : Element(name), Resizable(size), ValueObservable<ValueType>(value) {}
+Gizmo3D<Type>::Gizmo3D(const std::string &name, Gizmo3D::ValueType value, const Size &size, Persistent persistent)
+    : Element(name), Resizable(size), ValueObservable<ValueType>(value), Savable(persistent) {}
 
 template<GizmoType Type>
 void Gizmo3D<Type>::setMidObject(GizmoMid newObject)
@@ -106,6 +114,59 @@ template<GizmoType Type>
 void Gizmo3D<Type>::setSize(const Size &s) {
   const auto min = std::min(static_cast<float>(s.width), static_cast<float>(s.height));
   Resizable::setSize(Size{min, min});
+}
+
+template<GizmoType Type>
+toml::table Gizmo3D<Type>::toToml() const {
+  auto result = toml::table{};
+  if constexpr (Type == GizmoType::Direction) {
+    result.insert("direction", serializeGlmVec(ValueObservable<ValueType>::getValue()));
+  }
+  if constexpr (Type == GizmoType::Axes3) {
+    result.insert("quaternion", serializeGlmQuat(ValueObservable<ValueType>::getValue()));
+  }
+  if constexpr (Type == GizmoType::Dual) {
+    result.insert("quaternion", serializeGlmQuat(ValueObservable<ValueType>::getValue().first));
+    result.insert("direction", serializeGlmVec(ValueObservable<ValueType>::getValue().second));
+  }
+  return result;
+}
+
+template<GizmoType Type>
+void Gizmo3D<Type>::setFromToml(const toml::table &src) {
+  glm::vec3 direction;
+  glm::quat quaternion;
+  if constexpr (Type == GizmoType::Direction || Type == GizmoType::Dual) {
+    using VecType = glm::vec3;
+    if (auto newValIter = src.find("direction"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<VecType>(*newVal);
+        if (vecValue.has_value()) {
+          direction = vecValue.value();
+        } else {
+          return;
+        }
+      }
+    }
+  }
+  if constexpr (Type == GizmoType::Axes3 || Type == GizmoType::Dual) {
+    if (auto newValIter = src.find("quaternion"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto quatValue = safeDeserializeGlmQuat(*newVal);
+        if (quatValue.has_value()) {
+          quaternion = quatValue.value();
+        } else {
+          return;
+        }
+      }
+    }
+  }
+
+  if constexpr (Type == GizmoType::Direction) { ValueObservable<ValueType>::setValueAndNotifyIfChanged(direction); }
+  if constexpr (Type == GizmoType::Axes3) { ValueObservable<ValueType>::setValueAndNotifyIfChanged(quaternion); }
+  if constexpr (Type == GizmoType::Dual) {
+    ValueObservable<ValueType>::setValueAndNotifyIfChanged(std::make_pair(quaternion, direction));
+  }
 }
 
 template<GizmoType Type>
