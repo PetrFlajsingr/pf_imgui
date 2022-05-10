@@ -78,7 +78,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
     requires(Type != GizmoType::Direction)
   ;
 
-  void setSize(Size s) override;
+  void setSize(const Size &s) override;
 
  protected:
   void renderImpl() override;
@@ -103,8 +103,8 @@ void Gizmo3D<Type>::setMidObject(GizmoMid newObject)
 }
 
 template<GizmoType Type>
-void Gizmo3D<Type>::setSize(Size s) {
-  const auto min = std::min(static_cast<float>(s.width), static_cast<float>(s.height)());
+void Gizmo3D<Type>::setSize(const Size &s) {
+  const auto min = std::min(static_cast<float>(s.width), static_cast<float>(s.height));
   Resizable::setSize(Size{min, min});
 }
 
@@ -113,19 +113,19 @@ void Gizmo3D<Type>::renderImpl() {
   const auto flags = static_cast<int>(Type) | static_cast<int>(mid);
   if constexpr (Type == GizmoType::Axes3) {
     glm::quat quat = ValueObservable<ValueType>::getValue();
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, getSize().width.value, flags)) {
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, static_cast<float>(getSize().width), flags)) {
       ValueObservable<ValueType>::setValueAndNotifyIfChanged(quat);
     }
   }
   if constexpr (Type == GizmoType::Direction) {
     glm::vec3 dir = ValueObservable<ValueType>::getValue();
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, getSize().width.value, flags)) {
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, static_cast<float>(getSize().width), flags)) {
       ValueObservable<ValueType>::setValueAndNotifyIfChanged(dir);
     }
   }
   if constexpr (Type == GizmoType::Dual) {
     auto [quat, dir] = ValueObservable<ValueType>::getValue();
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, dir, getSize().width.value, flags)) {
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, dir, static_cast<float>(getSize().width), flags)) {
       ValueObservable<ValueType>::setValueAndNotifyIfChanged({quat, dir});
     }
   }
