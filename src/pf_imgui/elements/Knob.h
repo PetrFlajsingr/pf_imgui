@@ -34,6 +34,7 @@ enum class KnobType {
 /**
  * @brief Element similar to slider.
  * @tparam T underlying value type
+ * @todo: more types
  */
 template<OneOf<int, float> T>
 class Knob : public Element,
@@ -63,9 +64,7 @@ class Knob : public Element,
    * Construct Knob.
    * @param config construction args @see Knob::Config
    */
-  explicit Knob(Config &&config)
-      : Knob(std::string{config.name}, std::string{config.label}, config.type, config.size, config.minValue,
-             config.maxValue, config.speed, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
+  explicit Knob(Config &&config);
   /**
    * Construct Knob
    * @param name unique name of the lement
@@ -79,35 +78,14 @@ class Knob : public Element,
    * @param persistent enable state saving to disk
    */
   Knob(const std::string &name, const std::string &label, KnobType type, Size s, T min, T max, float speed = 1.f,
-       T value = T{}, Persistent persistent = Persistent::No)
-      : Element(name), Labellable(label), Resizable(s), ValueObservable<T>(value), Savable(persistent), min(min),
-        max(max), speed(speed), type(type) {}
+       T value = T{}, Persistent persistent = Persistent::No);
 
-  [[nodiscard]] toml::table toToml() const override { return toml::table{{"value", ValueObservable<T>::getValue()}}; }
+  [[nodiscard]] toml::table toToml() const override;
 
-  void setFromToml(const toml::table &src) override {
-    if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-      }
-    }
-  }
+  void setFromToml(const toml::table &src) override;
 
  protected:
-  void renderImpl() override {
-    const auto flags = isLabelVisible() ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
-    const auto knobSize = std::min(static_cast<float>(getSize().width), static_cast<float>(getSize().height));
-    auto valueChanged = false;
-    if constexpr (std::same_as<T, int>) {
-      valueChanged = ImGuiKnobs::KnobInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
-                                         nullptr, static_cast<ImGuiKnobVariant>(type), knobSize, flags);
-    }
-    if constexpr (std::same_as<T, float>) {
-      valueChanged = ImGuiKnobs::Knob(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
-                                      nullptr, static_cast<ImGuiKnobVariant>(type), knobSize, flags);
-    }
-    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
-  }
+  void renderImpl() override;
 
  private:
   T min;
@@ -115,6 +93,47 @@ class Knob : public Element,
   float speed;
   KnobType type;
 };
+
+template<OneOf<int, float> T>
+Knob<T>::Knob(Knob::Config &&config)
+    : Knob(std::string{config.name}, std::string{config.label}, config.type, config.size, config.minValue,
+           config.maxValue, config.speed, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
+
+template<OneOf<int, float> T>
+Knob<T>::Knob(const std::string &name, const std::string &label, KnobType type, Size s, T min, T max, float speed,
+              T value, Persistent persistent)
+    : Element(name), Labellable(label), Resizable(s), ValueObservable<T>(value), Savable(persistent), min(min),
+      max(max), speed(speed), type(type) {}
+
+template<OneOf<int, float> T>
+toml::table Knob<T>::toToml() const {
+  return toml::table{{"value", ValueObservable<T>::getValue()}};
+}
+
+template<OneOf<int, float> T>
+void Knob<T>::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("value"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+      ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+    }
+  }
+}
+
+template<OneOf<int, float> T>
+void Knob<T>::renderImpl() {
+  const auto flags = isLabelVisible() ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
+  const auto knobSize = std::min(static_cast<float>(getSize().width), static_cast<float>(getSize().height));
+  auto valueChanged = false;
+  if constexpr (std::same_as<T, int>) {
+    valueChanged = ImGuiKnobs::KnobInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
+                                       nullptr, static_cast<ImGuiKnobVariant>(type), knobSize, flags);
+  }
+  if constexpr (std::same_as<T, float>) {
+    valueChanged = ImGuiKnobs::Knob(getLabel().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed, nullptr,
+                                    static_cast<ImGuiKnobVariant>(type), knobSize, flags);
+  }
+  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+}
 
 }  // namespace pf::ui::ig
 

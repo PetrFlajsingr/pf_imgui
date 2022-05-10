@@ -36,6 +36,7 @@ struct PF_IMGUI_EXPORT TableSettings {
  * @brief A table containing any renderable element in each cell.
  *
  * @tparam ColumnCount static column count of the table
+ * @todo: change Row to something actually useful
  */
 template<std::size_t ColumnCount>
 class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, public Resizable {
@@ -58,90 +59,51 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
    * Construct Table
    * @param config construction args @see Table::Config
    */
-  explicit Table(Config &&config)
-      : Element(std::string{config.name}), Resizable(config.settings.size), header(config.settings.header),
-        flags(CreateFlags(config.settings.border, config.settings.options)) {}
+  explicit Table(Config &&config);
   /**
    * Construct Table.
    * @param elementName unique name of the element
    * @param settings rendering and behavioral settings
    */
-  Table(const std::string &elementName, const TableSettings<ColumnCount> &settings)
-      : Element(elementName), Resizable(settings.size), header(settings.header),
-        flags(CreateFlags(settings.border, settings.options)) {}
+  Table(const std::string &elementName, const TableSettings<ColumnCount> &settings);
 
-  std::vector<Renderable *> getRenderables() override {
-    return rows | ranges::view::transform(&Row::cells) | ranges::view::join
-        | ranges::view::transform(&std::unique_ptr<Renderable>::get) | ranges::to_vector;
-  }
+  std::vector<Renderable *> getRenderables() override;
 
   /**
    * Add a new row of elements.
    * @param row elements to be added
    * @return unique identifier of the newly added row. It can be used to remove this row.
    */
-  std::size_t addRow(Cells &&row) {
-    const auto rowId = idCounter++;
-    rows.emplace_back(idCounter++, std::move(row));
-    return rowId;
-  }
+  std::size_t addRow(Cells &&row);
 
   /**
    * Remove row based on its unique id.
    * @param rowId id of the row to be removed
    */
-  void removeRow(std::size_t rowId) {
-    auto remove = std::ranges::remove(rows, rowId, &Row::id);
-    rows.erase(remove.begin(), remove.end());
-  }
+  void removeRow(std::size_t rowId);
 
   /**
    *
    * @param id unique row id
    * @return row with given id if found, otherwise nullopt
    */
-  [[nodiscard]] std::optional<std::reference_wrapper<const Row>> getRowById(std::size_t id) {
-    if (auto iter = std::ranges::find(rows, id, &Row::id); iter != rows.end()) { return *iter; }
-    return std::nullopt;
-  }
+  [[nodiscard]] std::optional<std::reference_wrapper<const Row>> getRowById(std::size_t id);
   /**
    *
    * @param index index of a row
    * @return row with given index if found, otherwise nullopt
    */
-  [[nodiscard]] std::optional<std::reference_wrapper<const Row>> getRowByIndex(std::size_t index) {
-    if (index < rows.size()) { return rows[index]; }
-    return std::nullopt;
-  }
+  [[nodiscard]] std::optional<std::reference_wrapper<const Row>> getRowByIndex(std::size_t index);
 
   [[nodiscard]] std::size_t getColumnCount() const { return ColumnCount; }
 
   [[nodiscard]] std::size_t getRowCount() const { return rows.size(); }
 
  protected:
-  void renderImpl() override {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
-      RAII end{ImGui::EndTable};
-      if (header.has_value()) {
-        std::ranges::for_each(*header, ImGui::TableSetupColumn, &std::string::c_str);
-        ImGui::TableHeadersRow();
-      }
-
-      std::ranges::for_each(rows | ranges::views::transform(&Row::cells), [](auto &row) {
-        ImGui::TableNextRow();
-        std::ranges::for_each(row, [](auto &cell) {
-          if (ImGui::TableNextColumn()) { cell->render(); }
-        });
-      });
-    }
-  }
+  void renderImpl() override;
 
  private:
-  static ImGuiTableFlags CreateFlags(const Flags<TableBorder> &tableBorder, const Flags<TableOptions> &options) {
-    return ImGuiTableFlags{*tableBorder | *options};
-  }
+  static ImGuiTableFlags CreateFlags(const Flags<TableBorder> &tableBorder, const Flags<TableOptions> &options);
 
   std::optional<std::array<std::string, ColumnCount>> header;
   ImGuiTableFlags flags;
@@ -150,6 +112,75 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
   std::size_t idCounter = 0;
 };
+
+template<std::size_t ColumnCount>
+Table<ColumnCount>::Table(Table::Config &&config)
+    : Element(std::string{config.name}), Resizable(config.settings.size), header(config.settings.header),
+      flags(CreateFlags(config.settings.border, config.settings.options)) {}
+
+template<std::size_t ColumnCount>
+Table<ColumnCount>::Table(const std::string &elementName, const TableSettings<ColumnCount> &settings)
+    : Element(elementName), Resizable(settings.size), header(settings.header),
+      flags(CreateFlags(settings.border, settings.options)) {}
+
+template<std::size_t ColumnCount>
+std::vector<Renderable *> Table<ColumnCount>::getRenderables() {
+  return rows | ranges::view::transform(&Row::cells) | ranges::view::join
+      | ranges::view::transform(&std::unique_ptr<Renderable>::get) | ranges::to_vector;
+}
+
+template<std::size_t ColumnCount>
+std::size_t Table<ColumnCount>::addRow(Table::Cells &&row) {
+  const auto rowId = idCounter++;
+  rows.emplace_back(idCounter++, std::move(row));
+  return rowId;
+}
+
+template<std::size_t ColumnCount>
+void Table<ColumnCount>::removeRow(std::size_t rowId) {
+  auto remove = std::ranges::remove(rows, rowId, &Row::id);
+  rows.erase(remove.begin(), remove.end());
+}
+
+template<std::size_t ColumnCount>
+std::optional<std::reference_wrapper<const typename Table<ColumnCount>::Row>>
+Table<ColumnCount>::getRowById(std::size_t id) {
+  if (auto iter = std::ranges::find(rows, id, &Row::id); iter != rows.end()) { return *iter; }
+  return std::nullopt;
+}
+
+template<std::size_t ColumnCount>
+std::optional<std::reference_wrapper<const typename Table<ColumnCount>::Row>>
+Table<ColumnCount>::getRowByIndex(std::size_t index) {
+  if (index < rows.size()) { return rows[index]; }
+  return std::nullopt;
+}
+
+template<std::size_t ColumnCount>
+void Table<ColumnCount>::renderImpl() {
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
+    RAII end{ImGui::EndTable};
+    if (header.has_value()) {
+      std::ranges::for_each(*header, ImGui::TableSetupColumn, &std::string::c_str);
+      ImGui::TableHeadersRow();
+    }
+
+    std::ranges::for_each(rows | ranges::views::transform(&Row::cells), [](auto &row) {
+      ImGui::TableNextRow();
+      std::ranges::for_each(row, [](auto &cell) {
+        if (ImGui::TableNextColumn()) { cell->render(); }
+      });
+    });
+  }
+}
+
+template<std::size_t ColumnCount>
+ImGuiTableFlags Table<ColumnCount>::CreateFlags(const Flags<TableBorder> &tableBorder,
+                                                const Flags<TableOptions> &options) {
+  return ImGuiTableFlags{*tableBorder | *options};
+}
 
 }  // namespace pf::ui::ig
 

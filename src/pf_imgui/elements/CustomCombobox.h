@@ -44,33 +44,21 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
    * @param showItemCount amount of items shown when open
    */
   CustomCombobox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
-                 std::string prevValue = "", ComboBoxCount showItemCount = ComboBoxCount::Items8)
-      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
-        flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
-    if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
-  }
+                 std::string prevValue = "", ComboBoxCount showItemCount = ComboBoxCount::Items8);
 
-  void setPreviewValue(std::string value) {
-    previewValue = std::move(value);
-    if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
-  }
+  void setPreviewValue(std::string value);
   [[nodiscard]] const std::string &getPreviewValue() const { return previewValue; }
 
   /**
    * Get count of items shown when the element is unrolled.
    * @return count of items
    */
-  [[nodiscard]] ComboBoxCount getShownItemCount() const {
-    return static_cast<ComboBoxCount>(*(flags & ImGuiComboFlags_::ImGuiComboFlags_HeightMask_));
-  }
+  [[nodiscard]] ComboBoxCount getShownItemCount() const;
   /**
    * Set count of items shown when the element is unrolled.
    * @param shownItemCount count of items
    */
-  void setShownItemCount(ComboBoxCount shownItemCount) {
-    flags &= static_cast<ImGuiComboFlags_>(~ImGuiComboFlags_::ImGuiComboFlags_HeightMask_);
-    flags |= static_cast<ImGuiComboFlags_>(shownItemCount);
-  }
+  void setShownItemCount(ComboBoxCount shownItemCount);
 
   /**
    * Close the Combobox in the next render loop.
@@ -80,16 +68,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
  protected:
   using AllColorCustomizable::setColorStack;
   using AllStyleCustomizable::setStyleStack;
-  void renderImpl() override {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    const char *previewPtr = previewValue.c_str();
-    if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
-      RAII end{ImGui::EndCombo};
-      checkClose();
-      std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });
-    }
-  }
+  void renderImpl() override;
 
   /**
    * Call closing impl now.
@@ -99,12 +78,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
   /**
    * Check for closing during rendering.
    */
-  void checkClose() {
-    if (shouldClose) {
-      closeNow();
-      shouldClose = false;
-    }
-  }
+  void checkClose();
 
   Flags<ImGuiComboFlags_> flags{};
 
@@ -112,6 +86,52 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
   std::string previewValue{};
   bool shouldClose = false;
 };
+
+template<typename T, std::derived_from<Renderable> R>
+CustomCombobox<T, R>::CustomCombobox(const std::string &elementName, const std::string &label,
+                                     CustomItemBoxFactory<T, R> auto &&rowFactory, std::string prevValue,
+                                     ComboBoxCount showItemCount)
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
+      flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
+  if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomCombobox<T, R>::setPreviewValue(std::string value) {
+  previewValue = std::move(value);
+  if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
+}
+
+template<typename T, std::derived_from<Renderable> R>
+ComboBoxCount CustomCombobox<T, R>::getShownItemCount() const {
+  return static_cast<ComboBoxCount>(*(flags & ImGuiComboFlags_::ImGuiComboFlags_HeightMask_));
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomCombobox<T, R>::setShownItemCount(ComboBoxCount shownItemCount) {
+  flags &= static_cast<ImGuiComboFlags_>(~ImGuiComboFlags_::ImGuiComboFlags_HeightMask_);
+  flags |= static_cast<ImGuiComboFlags_>(shownItemCount);
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomCombobox<T, R>::renderImpl() {
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  const char *previewPtr = previewValue.c_str();
+  if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+    RAII end{ImGui::EndCombo};
+    checkClose();
+    std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });
+  }
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomCombobox<T, R>::checkClose() {
+  if (shouldClose) {
+    closeNow();
+    shouldClose = false;
+  }
+}
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H

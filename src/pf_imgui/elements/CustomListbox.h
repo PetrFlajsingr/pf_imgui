@@ -37,23 +37,30 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
    * @param s size of the element
    */
   CustomListbox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
-                Size s = Size::Auto())
-      : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
-        Resizable(s) {}
+                Size s = Size::Auto());
 
  protected:
   using AllColorCustomizable::setColorStack;
   using AllStyleCustomizable::setStyleStack;
 
-  void renderImpl() override {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    if (ImGui::BeginListBox(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
-      RAII end{ImGui::EndListBox};
-      std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
-    }
-  }
+  void renderImpl() override;
 };
+
+template<typename T, std::derived_from<Renderable> R>
+CustomListbox<T, R>::CustomListbox(const std::string &elementName, const std::string &label,
+                                   CustomItemBoxFactory<T, R> auto &&rowFactory, Size s)
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
+      Resizable(s) {}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomListbox<T, R>::renderImpl() {
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  if (ImGui::BeginListBox(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
+    RAII end{ImGui::EndListBox};
+    std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
+  }
+}
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H

@@ -61,41 +61,20 @@ template<OneOf<IMGUI_INPUT_TYPE_LIST> T>
 using InputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST>, float,
                                                std::conditional_t<OneOf<T, IMGUI_INPUT_INT_TYPE_LIST>, int, double>>;
 /**
-* Storage structure for different underlying types.
-* @tparam T underlying type
-*/
+ * Default formatting string for supported types.
+ * @tparam T type to based format on
+ * @return printf like format for numbers
+ */
 template<typename T>
-struct PF_IMGUI_EXPORT InputData {
-  InputData(auto...) {}
-  static constexpr const char *defaultFormat() { return ""; }
-};
-/**
-* @brief Storage structure for integer based types.
-*/
-template<>
-struct PF_IMGUI_EXPORT InputData<int> {
-  int step;
-  int fastStep;
-  static constexpr const char *defaultFormat() { return "%d"; }
-};
-/**
-* @brief Storage structure for float based types.
-*/
-template<>
-struct PF_IMGUI_EXPORT InputData<float> {
-  float step;
-  float fastStep;
-  static constexpr const char *defaultFormat() { return "%.3f"; }
-};
-/**
-* @brief Storage structure for double based types.
-*/
-template<>
-struct PF_IMGUI_EXPORT InputData<double> {
-  double step;
-  double fastStep;
-  static constexpr const char *defaultFormat() { return "%.6f"; }
-};
+constexpr const char *defaultInputFormat() {
+  if constexpr (std::same_as<InputUnderlyingType<T>, float>) {
+    return "%.3f";
+  } else if constexpr (std::same_as<InputUnderlyingType<T>, double>) {
+    return "%.6f";
+  } else {
+    return "%d";
+  }
+}
 
 }  // namespace details
 
@@ -122,29 +101,24 @@ class PF_IMGUI_EXPORT Input
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
   using StepType = details::InputUnderlyingType<T>;
-  using Data = details::InputData<StepType>;
-  Data data;
 
  public:
   struct Config {
     using Parent = Input;
 
-    std::string_view name;                      /*!< Unique name of the element */
-    std::string_view label;                     /*!< Text rendered next to the input */
-    StepType step{};                            /*!< Speed of value change */
-    StepType fastStep{};                        /*!< Fast speed of value change */
-    T value{};                                  /*!< Initial value */
-    std::string format = Data::defaultFormat(); /*!< Format string to render value */
-    bool persistent = false;                    /*!< Allow state saving to disk */
+    std::string_view name;                                 /*!< Unique name of the element */
+    std::string_view label;                                /*!< Text rendered next to the input */
+    StepType step{};                                       /*!< Speed of value change */
+    StepType fastStep{};                                   /*!< Fast speed of value change */
+    T value{};                                             /*!< Initial value */
+    std::string format = details::defaultInputFormat<T>(); /*!< Format string to render value */
+    bool persistent = false;                               /*!< Allow state saving to disk */
   };
   /**
    * Construct Input
    * @param config construction args @see Input::Config
    */
-  explicit Input(Config &&config)
-      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-        data(config.step, config.fastStep), format(std::move(static_cast<std::string>(config.format))) {}
+  explicit Input(Config &&config);
 
   /**
   * Construct Input. For the following types: float, double.
@@ -157,83 +131,107 @@ class PF_IMGUI_EXPORT Input
   * @param value starting value
   */
   Input(const std::string &elementName, const std::string &label, StepType st = 0, StepType fStep = 0, T value = T{},
-        Persistent persistent = Persistent::No, std::string format = Data::defaultFormat())
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), data(st, fStep), format(std::move(format)) {}
+        Persistent persistent = Persistent::No, std::string format = details::defaultInputFormat<T>());
 
   [[nodiscard]] bool isReadOnly() const { return readOnly; }
 
-  void setReadOnly(bool isReadOnly) {
-    readOnly = isReadOnly;
-    if (readOnly) {
-      flags |= ImGuiInputTextFlags_ReadOnly;
-    } else {
-      flags &= ~ImGuiInputTextFlags_ReadOnly;
-    }
-  }
+  void setReadOnly(bool isReadOnly);
 
-  [[nodiscard]] toml::table toToml() const override {
-    const auto value = ValueObservable<T>::getValue();
-    if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
-      return toml::table{{"value", serializeGlmVec(value)}};
-    } else {
-      return toml::table{{"value", value}};
-    }
-  }
-  void setFromToml(const toml::table &src) override {
-    if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
-      if (auto newValIter = src.find("value"); newValIter != src.end()) {
-        if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-          const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-          if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
-        }
-      }
-    } else {
-      if (auto newValIter = src.find("value"); newValIter != src.end()) {
-        if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-          ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-        }
-      }
-    }
-  }
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
  protected:
-  void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
-    auto valueChanged = false;
-    const auto address = ValueObservable<T>::getValueAddress();
-
-    ImGuiDataType_ dataType;
-    if constexpr (OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST>) {
-      dataType = ImGuiDataType_Float;
-    } else if constexpr (OneOf<T, IMGUI_INPUT_INT_TYPE_LIST>) {
-      dataType = ImGuiDataType_S32;
-    } else {
-      dataType = ImGuiDataType_Double;
-    }
-
-    if constexpr (!OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
-      valueChanged =
-          ImGui::InputScalar(getLabel().c_str(), dataType, address, &data.step, &data.fastStep, format.c_str(), flags);
-    } else {
-      valueChanged = ImGui::InputScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(),
-                                         &data.step, &data.fastStep, format.c_str(), flags);
-    }
-
-    DragSource<T>::drag(ValueObservable<T>::getValue());
-    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
-      return;
-    }
-    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
-  }
+  void renderImpl() override;
 
  private:
+  StepType step;
+  StepType fastStep;
   std::string format;
   bool readOnly = false;
   ImGuiInputTextFlags flags = {};
 };
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST, std::string> T>
+Input<T>::Input(Input::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
+      step(config.step), fastStep(config.fastStep), format(std::move(static_cast<std::string>(config.format))) {}
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST, std::string> T>
+Input<T>::Input(const std::string &elementName, const std::string &label, Input::StepType st, Input::StepType fStep,
+                T value, Persistent persistent, std::string format)
+    : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), step(st), fastStep(fStep),
+      format(std::move(format)) {}
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST, std::string> T>
+void Input<T>::setReadOnly(bool isReadOnly) {
+  readOnly = isReadOnly;
+  if (readOnly) {
+    flags |= ImGuiInputTextFlags_ReadOnly;
+  } else {
+    flags &= ~ImGuiInputTextFlags_ReadOnly;
+  }
+}
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST, std::string> T>
+toml::table Input<T>::toToml() const {
+  const auto value = ValueObservable<T>::getValue();
+  if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
+    return toml::table{{"value", serializeGlmVec(value)}};
+  } else {
+    return toml::table{{"value", value}};
+  }
+}
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST, std::string> T>
+void Input<T>::setFromToml(const toml::table &src) {
+  if constexpr (OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
+        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+      }
+    }
+  } else {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+      }
+    }
+  }
+}
+
+template<OneOf<IMGUI_INPUT_TYPE_LIST, std::string> T>
+void Input<T>::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  auto valueChanged = false;
+  const auto address = ValueObservable<T>::getValueAddress();
+
+  ImGuiDataType_ dataType;
+  if constexpr (OneOf<T, IMGUI_INPUT_FLOAT_TYPE_LIST>) {
+    dataType = ImGuiDataType_Float;
+  } else if constexpr (OneOf<T, IMGUI_INPUT_INT_TYPE_LIST>) {
+    dataType = ImGuiDataType_S32;
+  } else {
+    dataType = ImGuiDataType_Double;
+  }
+
+  if constexpr (!OneOf<T, IMGUI_INPUT_GLM_TYPE_LIST>) {
+    valueChanged = ImGui::InputScalar(getLabel().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
+  } else {
+    valueChanged = ImGui::InputScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
+                                       &fastStep, format.c_str(), flags);
+  }
+
+  DragSource<T>::drag(ValueObservable<T>::getValue());
+  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    return;
+  }
+  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+}
 
 template<>
 class Input<std::string> : public InputText {};

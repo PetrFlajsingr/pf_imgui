@@ -30,14 +30,10 @@ class PF_IMGUI_EXPORT Observable_impl {
   Observable_impl(const Observable_impl &) = delete;
   Observable_impl &operator=(const Observable_impl &) = delete;
 
-  Observable_impl(Observable_impl &&other) noexcept : listeners(std::move(other.listeners)), idCounter(other.idCounter) {}
-  Observable_impl &operator=(Observable_impl &&rhs) noexcept {
-    listeners = std::move(rhs.listeners);
-    idCounter = rhs.idCounter;
-    return *this;
-  }
+  Observable_impl(Observable_impl &&other) noexcept;
+  Observable_impl &operator=(Observable_impl &&rhs) noexcept;
 
-  virtual ~Observable_impl() { *exists = false; }
+  virtual ~Observable_impl();
 
   /**
   * Add a listener and return a Subscription object which can be used to unregister it.
@@ -45,24 +41,13 @@ class PF_IMGUI_EXPORT Observable_impl {
   * @return Subscription for unregistration purposes
   * @see Subscription
   */
-  Subscription addListener(std::invocable<const Args &...> auto &&fnc) {
-    const auto id = generateListenerId();
-    listeners.emplace_back(id, std::forward<decltype(fnc)>(fnc));
-    return Subscription([id, this, observableExists = exists] {
-      if (!*observableExists) { return; }
-      auto [removeB, removeE] = std::ranges::remove(listeners, id, &ListenerRecord::first);
-      listeners.erase(removeB, removeE);
-    });
-  }
+  Subscription addListener(std::invocable<const Args &...> auto &&fnc);
 
   /**
   * Notify all listeners with provided parameters.
   * @param args parameters to be passed to listeners
   */
-  void notify(const Args &...args) {
-    auto callables = listeners | std::views::values;
-    std::ranges::for_each(callables, [&](const auto &callable) { callable(args...); });
-  }
+  void notify(const Args &...args);
 
  private:
   using ListenerId = uint32_t;
@@ -74,5 +59,39 @@ class PF_IMGUI_EXPORT Observable_impl {
   ListenerId idCounter{};
   std::shared_ptr<bool> exists = std::make_shared<bool>(true);
 };
+
+template<typename... Args>
+Observable_impl<Args...>::Observable_impl(Observable_impl &&other) noexcept
+    : listeners(std::move(other.listeners)), idCounter(other.idCounter) {}
+
+template<typename... Args>
+Observable_impl<Args...> &Observable_impl<Args...>::operator=(Observable_impl &&rhs) noexcept {
+  listeners = std::move(rhs.listeners);
+  idCounter = rhs.idCounter;
+  return *this;
+}
+
+template<typename... Args>
+Observable_impl<Args...>::~Observable_impl() {
+  *exists = false;
+}
+
+template<typename... Args>
+Subscription Observable_impl<Args...>::addListener(std::invocable<const Args &...> auto &&fnc) {
+  const auto id = generateListenerId();
+  listeners.emplace_back(id, std::forward<decltype(fnc)>(fnc));
+  return Subscription([id, this, observableExists = exists] {
+    if (!*observableExists) { return; }
+    auto [removeB, removeE] = std::ranges::remove(listeners, id, &ListenerRecord::first);
+    listeners.erase(removeB, removeE);
+  });
+}
+
+template<typename... Args>
+void Observable_impl<Args...>::notify(const Args &...args) {
+  auto callables = listeners | std::views::values;
+  std::ranges::for_each(callables, [&](const auto &callable) { callable(args...); });
+}
+
 }  // namespace pf::ui::ig
 #endif  // PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H

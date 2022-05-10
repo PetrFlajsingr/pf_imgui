@@ -194,7 +194,7 @@ set(SOURCES
         src/pf_imgui/dialogs/builders/FileDialogBuilder.cpp
         src/pf_imgui/dialogs/builders/MessageDialogBuilder.cpp
         src/pf_imgui/dialogs/builders/InputDialogBuilder.cpp
-        src/pf_imgui/dialogs/InputDialog.cpp)
+        src/pf_imgui/dialogs/InputDialog.cpp src/pf_imgui/elements/MemoryEditor.cpp)
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
