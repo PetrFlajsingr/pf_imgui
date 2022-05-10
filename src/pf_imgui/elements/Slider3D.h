@@ -54,12 +54,7 @@ class PF_IMGUI_EXPORT Slider3D
    * Construct Slider3D
    * @param config construction args @see Slider3D::Config
    */
-  explicit Slider3D(Config &&config)
-      : ItemElement(std::string{config.name}),
-        Labellable(std::string{config.label}), ValueObservable<glm::vec3>(config.value),
-        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<glm::vec3>(false),
-        DropTarget<glm::vec3>(false), Resizable(config.size), extremesX(config.min.x, config.max.x),
-        extremesY(config.min.y, config.max.y), extremesZ(config.min.z, config.max.z) {}
+  explicit Slider3D(Config &&config);
   /**
    * Construct Slider3D.
    * @param elementName ID of the element
@@ -73,49 +68,70 @@ class PF_IMGUI_EXPORT Slider3D
    */
   Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
            const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, Size size = Size::Auto(),
-           Persistent persistent = Persistent::No)
-      : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value),
-        Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size),
-        extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
+           Persistent persistent = Persistent::No);
 
-  [[nodiscard]] toml::table toToml() const override {
-    const auto val = ValueObservable<glm::vec3>::getValue();
-    return toml::table{{"value", serializeGlmVec(val)}};
-  }
-  void setFromToml(const toml::table &src) override {
-    if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-        const auto vecValue = safeDeserializeGlmVec<glm::vec3>(*newVal);
-        if (vecValue.has_value()) { ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(vecValue.value()); }
-      }
-    }
-  }
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
  protected:
-  void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
-    auto valueChanged = false;
-    auto address = ValueObservable<glm::vec3>::getValueAddress();
-    const auto oldValue = *address;
-    if constexpr (std::same_as<T, float>) {
-      valueChanged =
-          ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
-                                    extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, static_cast<ImVec2>(getSize()));
-    }
-    DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());
-    if (auto drop = DropTarget<glm::vec3>::dropAccept(); drop.has_value()) {
-      ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(*drop);
-      return;
-    }
-    if (valueChanged && oldValue != *address) { ValueObservable<glm::vec3>::notifyValueChanged(); }
-  }
+  void renderImpl() override;
 
  private:
   glm::vec2 extremesX;
   glm::vec2 extremesY;
   glm::vec2 extremesZ;
 };
+
+template<OneOf<float> T>
+Slider3D<T>::Slider3D(Slider3D::Config &&config)
+    : ItemElement(std::string{config.name}),
+      Labellable(std::string{config.label}), ValueObservable<glm::vec3>(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<glm::vec3>(false),
+      DropTarget<glm::vec3>(false), Resizable(config.size), extremesX(config.min.x, config.max.x),
+      extremesY(config.min.y, config.max.y), extremesZ(config.min.z, config.max.z) {}
+
+template<OneOf<float> T>
+Slider3D<T>::Slider3D(const std::string &elementName, const std::string &label, const vec2 &minMaxX,
+                      const vec2 &minMaxY, const vec2 &minMaxZ, const vec3 &value, Size size, Persistent persistent)
+    : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value),
+      Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size),
+      extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
+
+template<OneOf<float> T>
+toml::table Slider3D<T>::toToml() const {
+  const auto val = ValueObservable<glm::vec3>::getValue();
+  return toml::table{{"value", serializeGlmVec(val)}};
+}
+
+template<OneOf<float> T>
+void Slider3D<T>::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("value"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+      const auto vecValue = safeDeserializeGlmVec<glm::vec3>(*newVal);
+      if (vecValue.has_value()) { ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(vecValue.value()); }
+    }
+  }
+}
+
+template<OneOf<float> T>
+void Slider3D<T>::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  auto valueChanged = false;
+  auto address = ValueObservable<glm::vec3>::getValueAddress();
+  const auto oldValue = *address;
+  if constexpr (std::same_as<T, float>) {
+    valueChanged =
+        ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
+                                  extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, static_cast<ImVec2>(getSize()));
+  }
+  DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());
+  if (auto drop = DropTarget<glm::vec3>::dropAccept(); drop.has_value()) {
+    ValueObservable<glm::vec3>::setValueAndNotifyIfChanged(*drop);
+    return;
+  }
+  if (valueChanged && oldValue != *address) { ValueObservable<glm::vec3>::notifyValueChanged(); }
+}
 
 extern template class Slider3D<float>;
 
