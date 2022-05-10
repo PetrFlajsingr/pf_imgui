@@ -71,11 +71,7 @@ class PF_IMGUI_EXPORT VerticalSlider
    * Construct VerticalSlider
    * @param config construction args @see VerticalSlider::Config
    */
-  explicit VerticalSlider(Config &&config)
-      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent ? Persistent::Yes : Persistent::No),
-        Resizable(config.size), DragSource<T>(false), DropTarget<T>(false), min(config.min), max(config.max),
-        format(std::move(config.format)) {}
+  explicit VerticalSlider(Config &&config);
   /**
    * Construct VerticalSlider.
    * @param elementName ID of the element
@@ -87,10 +83,7 @@ class PF_IMGUI_EXPORT VerticalSlider
    * @param format printf-like format for value
    */
   VerticalSlider(const std::string &elementName, const std::string &label, Size size, T minVal, T maxVal, T value = T{},
-                 Persistent persistent = Persistent::No, std::string format = details::defaultVSliderFormat<T>())
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent),
-        Resizable(size), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal),
-        format(std::move(format)) {}
+                 Persistent persistent = Persistent::No, std::string format = details::defaultVSliderFormat<T>());
 
   /**
    * Get min slider value.
@@ -113,44 +106,68 @@ class PF_IMGUI_EXPORT VerticalSlider
    */
   void setMax(const T &newMax) { max = newMax; }
 
-  [[nodiscard]] toml::table toToml() const override { return toml::table{{"value", ValueObservable<T>::getValue()}}; }
-  void setFromToml(const toml::table &src) override {
-    if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-      }
-    }
-  }
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
  protected:
-  void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
-    const auto address = ValueObservable<T>::getValueAddress();
-    const auto flags = ImGuiSliderFlags_AlwaysClamp;
-
-    ImGuiDataType_ dataType;
-    if constexpr (std::same_as<T, float>) {
-      dataType = ImGuiDataType_Float;
-    } else {
-      dataType = ImGuiDataType_S32;
-    }
-    const auto valueChanged = ImGui::VSliderScalar(getLabel().c_str(), static_cast<ImVec2>(getSize()), dataType,
-                                                   address, &min, &max, format.c_str(), flags);
-
-    DragSource<T>::drag(ValueObservable<T>::getValue());
-    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
-      return;
-    }
-    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
-  }
+  void renderImpl() override;
 
  private:
   T min;
   T max;
   std::string format;
 };
+
+template<OneOf<float, int> T>
+VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      Resizable(config.size), DragSource<T>(false), DropTarget<T>(false), min(config.min), max(config.max),
+      format(std::move(config.format)) {}
+
+template<OneOf<float, int> T>
+VerticalSlider<T>::VerticalSlider(const std::string &elementName, const std::string &label, Size size, T minVal,
+                                  T maxVal, T value, Persistent persistent, std::string format)
+    : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent),
+      Resizable(size), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal), format(std::move(format)) {
+}
+
+template<OneOf<float, int> T>
+toml::table VerticalSlider<T>::toToml() const {
+  return toml::table{{"value", ValueObservable<T>::getValue()}};
+}
+template<OneOf<float, int> T>
+void VerticalSlider<T>::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("value"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+      ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+    }
+  }
+}
+
+template<OneOf<float, int> T>
+void VerticalSlider<T>::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  const auto address = ValueObservable<T>::getValueAddress();
+  const auto flags = ImGuiSliderFlags_AlwaysClamp;
+
+  ImGuiDataType_ dataType;
+  if constexpr (std::same_as<T, float>) {
+    dataType = ImGuiDataType_Float;
+  } else {
+    dataType = ImGuiDataType_S32;
+  }
+  const auto valueChanged = ImGui::VSliderScalar(getLabel().c_str(), static_cast<ImVec2>(getSize()), dataType, address,
+                                                 &min, &max, format.c_str(), flags);
+
+  DragSource<T>::drag(ValueObservable<T>::getValue());
+  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    return;
+  }
+  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+}
 
 extern template class VerticalSlider<int>;
 extern template class VerticalSlider<float>;
