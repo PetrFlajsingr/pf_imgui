@@ -101,7 +101,10 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
            Persistent persistent = Persistent::No)
     requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>,
                                  T> && std::is_default_constructible_v<T> && std::copy_constructible<T>)
-  ;
+  : CustomComboboxBase(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
+    ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
+    addItems(std::forward<decltype(newItems)>(newItems));
+  };
   /**
    * Get currently selected item.
    * @return if any item is selected return it, otherwise std::nullopt
@@ -147,16 +150,6 @@ Combobox<T>::Combobox(Combobox::Config &&config)
     : CustomComboboxBase(std::string{config.name}, std::string{config.label}, details::ComboboxRowFactory<T>{},
                          std::string{config.preview}, config.shownItemCount),
       ValueObservable<T>(), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false) {}
-
-template<ToStringConvertible T>
-Combobox<T>::Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
-                      std::ranges::range auto &&newItems, ComboBoxCount showItemCount, Persistent persistent)
-  requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>,
-                               T> && std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: CustomComboboxBase(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
-  ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
-  addItems(std::forward<decltype(newItems)>(newItems));
-}
 
 template<ToStringConvertible T>
 std::optional<T> Combobox<T>::getSelectedItem() const {
