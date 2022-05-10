@@ -112,10 +112,7 @@ class PF_IMGUI_EXPORT Slider
    * Construct Slider
    * @param config construction args @see Slider::Config
    */
-  explicit Slider(Config &&config)
-      : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
-        Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-        min(config.min), max(config.max), format(std::move(config.format)) {}
+  explicit Slider(Config &&config);
   /**
    * Construct Slider.
    * @param elementName ID of the slider
@@ -127,10 +124,7 @@ class PF_IMGUI_EXPORT Slider
    * @param format printf-like format for rendering value over slider
    */
   Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
-         Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>())
-      : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-        Savable(persistent), DragSource<T>(false), DropTarget<T>(false), min(min), max(max), format(std::move(format)) {
-  }
+         Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>());
 
   /**
    * Get min slider value.
@@ -153,66 +147,87 @@ class PF_IMGUI_EXPORT Slider
    */
   void setMax(MinMaxType newMax) { max = newMax; }
 
-  [[nodiscard]] toml::table toToml() const override {
-    const auto value = ValueObservable<T>::getValue();
-    if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
-      return toml::table{{"value", serializeGlmVec(value)}};
-    } else {
-      return toml::table{{"value", value}};
-    }
-  }
-  void setFromToml(const toml::table &src) override {
-    if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
-      if (auto newValIter = src.find("value"); newValIter != src.end()) {
-        if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-          const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-          if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
-        }
-      }
-    } else {
-      if (auto newValIter = src.find("value"); newValIter != src.end()) {
-        if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-          ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-        }
-      }
-    }
-  }
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
  protected:
-  void renderImpl() override {
-    auto colorStyle = setColorStack();
-    auto style = setStyleStack();
-    auto valueChanged = false;
-    const auto address = ValueObservable<T>::getValueAddress();
-    const auto flags = ImGuiSliderFlags_AlwaysClamp;
-
-    ImGuiDataType_ dataType;
-    if constexpr (OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>) {
-      dataType = ImGuiDataType_Float;
-    } else {
-      dataType = ImGuiDataType_S32;
-    }
-
-    if constexpr (!OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
-      valueChanged = ImGui::SliderScalar(getLabel().c_str(), dataType, address, &min, &max, format.c_str(), flags);
-    } else {
-      valueChanged = ImGui::SliderScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(), &min,
-                                          &max, format.c_str(), flags);
-    }
-
-    DragSource<T>::drag(ValueObservable<T>::getValue());
-    if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
-      return;
-    }
-    if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
-  }
+  void renderImpl() override;
 
  private:
   MinMaxType min;
   MinMaxType max;
   std::string format;
 };
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+Slider<T>::Slider(Slider::Config &&config)
+    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
+      min(config.min), max(config.max), format(std::move(config.format)) {}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+Slider<T>::Slider(const std::string &elementName, const std::string &label, Slider::MinMaxType min,
+                  Slider::MinMaxType max, T value, Persistent persistent, std::string format)
+    : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), min(min), max(max), format(std::move(format)) {}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+toml::table Slider<T>::toToml() const {
+  const auto value = ValueObservable<T>::getValue();
+  if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+    return toml::table{{"value", serializeGlmVec(value)}};
+  } else {
+    return toml::table{{"value", value}};
+  }
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+void Slider<T>::setFromToml(const toml::table &src) {
+  if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
+        const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
+        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+      }
+    }
+  } else {
+    if (auto newValIter = src.find("value"); newValIter != src.end()) {
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
+        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
+      }
+    }
+  }
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+void Slider<T>::renderImpl() {
+  auto colorStyle = setColorStack();
+  auto style = setStyleStack();
+  auto valueChanged = false;
+  const auto address = ValueObservable<T>::getValueAddress();
+  const auto flags = ImGuiSliderFlags_AlwaysClamp;
+
+  ImGuiDataType_ dataType;
+  if constexpr (OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>) {
+    dataType = ImGuiDataType_Float;
+  } else {
+    dataType = ImGuiDataType_S32;
+  }
+
+  if constexpr (!OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+    valueChanged = ImGui::SliderScalar(getLabel().c_str(), dataType, address, &min, &max, format.c_str(), flags);
+  } else {
+    valueChanged = ImGui::SliderScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(), &min, &max,
+                                        format.c_str(), flags);
+  }
+
+  DragSource<T>::drag(ValueObservable<T>::getValue());
+  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
+    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    return;
+  }
+  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+}
 
 extern template class Slider<int>;
 extern template class Slider<glm::ivec2>;
