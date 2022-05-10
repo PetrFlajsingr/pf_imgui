@@ -91,8 +91,9 @@ Slider3D<T>::Slider3D(Slider3D::Config &&config)
       extremesY(config.min.y, config.max.y), extremesZ(config.min.z, config.max.z) {}
 
 template<OneOf<float> T>
-Slider3D<T>::Slider3D(const std::string &elementName, const std::string &label, const vec2 &minMaxX,
-                      const vec2 &minMaxY, const vec2 &minMaxZ, const vec3 &value, Size size, Persistent persistent)
+Slider3D<T>::Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX,
+                      const glm::vec2 &minMaxY, const glm::vec2 &minMaxZ, const glm::vec3 &value, Size size,
+                      Persistent persistent)
     : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value),
       Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size),
       extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
