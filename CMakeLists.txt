@@ -73,7 +73,6 @@ include_directories(${IMGUI_FLAME_GRAPH_DIR})
 include_directories(${implot_SOURCE_DIR})
 
 
-
 set(SOURCES
         src/pf_imgui/ImGuiInterface.cpp
         src/pf_imgui/elements/Button.cpp
@@ -222,6 +221,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/ModalDialog.h
         src/pf_imgui/dialogs/MessageDialog.h
         src/pf_imgui/elements/DragInput.h
+        src/pf_imgui/elements/MatrixDragInput.h
         src/pf_imgui/elements/Expander.h
         src/pf_imgui/elements/Image.h
         src/pf_imgui/elements/Input.h
@@ -380,7 +380,8 @@ set(INCLUDES
         src/pf_imgui/dialogs/builders/FileDialogBuilder.h
         src/pf_imgui/dialogs/builders/MessageDialogBuilder.h
         src/pf_imgui/elements/Dummy.h
-        src/pf_imgui/dialogs/builders/InputDialogBuilder.h src/pf_imgui/elements/Knob.h)
+        src/pf_imgui/dialogs/builders/InputDialogBuilder.h
+        src/pf_imgui/elements/Knob.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
@@ -412,7 +413,7 @@ SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windo
 SET(CMAKE_RELWITHDEBINFO_POSTFIX "rd" CACHE STRING "add a postfix, usually empty on windows")
 SET(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on windows")
 
-add_library(${PROJECT_NAME} STATIC ${SOURCES} ${INCLUDES} )
+add_library(${PROJECT_NAME} STATIC ${SOURCES} ${INCLUDES})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 add_library(${PROJECT_NAME}_blueprint STATIC ${BLUEPRINT_SOURCES} ${BLUEPRINT_INCLUDES})

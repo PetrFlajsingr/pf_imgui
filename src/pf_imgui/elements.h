@@ -33,6 +33,7 @@
 #include <pf_imgui/elements/Listbox.h>
 #include <pf_imgui/elements/LogPanel.h>
 #include <pf_imgui/elements/MarkdownText.h>
+#include <pf_imgui/elements/MatrixDragInput.h>
 #include <pf_imgui/elements/MemoryEditor.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/elements/ProgressBar.h>
