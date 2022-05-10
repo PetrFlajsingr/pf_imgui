@@ -8,6 +8,7 @@
 #define PF_IMGUI_SERIALIZATION_H
 
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/Savable.h>
@@ -130,6 +131,36 @@ PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &vec) {
 PF_IMGUI_EXPORT inline toml::array serializeGlmQuat(const glm::quat &quat) {
   auto result = toml::array{};
   for (auto i : std::views::iota(0, glm::quat::length())) { result.push_back(quat[i]); }
+  return result;
+}
+/**
+ * Serialize all types of glm::mat
+ * @tparam M one of glm::mat types
+ * @param mat data to serialize
+ * @return serialized data as toml
+ */
+template<typename M>
+PF_IMGUI_EXPORT toml::array serializeGlmMat(const M &mat) {
+  auto result = toml::array{};
+  for (auto i : std::views::iota(0, M::col_type::length() * M::length())) { result.push_back(glm::value_ptr(mat)[i]); }
+  return result;
+}
+/**
+ * Deserialize any glm::mat
+ * @param arr toml data to deserialize
+ * @return deserialized value
+ */
+template<typename M>
+PF_IMGUI_EXPORT inline std::optional<M> safeDeserializeGlmMat(const toml::array &arr) {
+  if (static_cast<std::size_t>(M::length() * M::col_type::length()) != arr.size()) { return std::nullopt; }
+  auto result = M{};
+  for (auto i : std::views::iota(0, M::length() * M::col_type::length())) {
+    if (const auto value = arr.get(i)->as_floating_point(); value != nullptr) {
+      glm::value_ptr(result)[i] = static_cast<float>(value->get());
+    } else {
+      return std::nullopt;
+    }
+  }
   return result;
 }
 
