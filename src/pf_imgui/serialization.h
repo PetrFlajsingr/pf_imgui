@@ -7,6 +7,7 @@
 #ifndef PF_IMGUI_SERIALIZATION_H
 #define PF_IMGUI_SERIALIZATION_H
 
+#include <glm/gtc/quaternion.hpp>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/Savable.h>
@@ -93,6 +94,23 @@ PF_IMGUI_EXPORT std::optional<T> safeDeserializeGlmVec(const toml::array &arr) {
   return result;
 }
 /**
+ * Deserialize glm::quat
+ * @param arr toml data to deserialize
+ * @return deserialized value
+ */
+PF_IMGUI_EXPORT inline std::optional<glm::quat> safeDeserializeGlmQuat(const toml::array &arr) {
+  if (static_cast<std::size_t>(glm::quat::length()) != arr.size()) { return std::nullopt; }
+  auto result = glm::quat{};
+  for (auto i : std::views::iota(0, glm::quat::length())) {
+    if (const auto value = arr.get(i)->as_floating_point(); value != nullptr) {
+      result[i] = static_cast<float>(value->get());
+    } else {
+      return std::nullopt;
+    }
+  }
+  return result;
+}
+/**
  * Serialize all types of glm::vec
  * @tparam T one of glm::vec types
  * @param vec data to serialize
@@ -102,6 +120,16 @@ template<typename T>
 PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &vec) {
   auto result = toml::array{};
   for (auto i : std::views::iota(0, T::length())) { result.push_back(vec[i]); }
+  return result;
+}
+/**
+ * Serialize glm::quat
+ * @param quat data to serialize
+ * @return serialized data as toml
+ */
+PF_IMGUI_EXPORT inline toml::array serializeGlmQuat(const glm::quat &quat) {
+  auto result = toml::array{};
+  for (auto i : std::views::iota(0, glm::quat::length())) { result.push_back(quat[i]); }
   return result;
 }
 
