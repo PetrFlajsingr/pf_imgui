@@ -49,19 +49,14 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * @param rowFactory factory for row creation
    * @param s size of the element
    */
-  CustomItemBox(const std::string &elementName, CustomItemBoxFactory<T, R> auto &&rowFactory)
-      : ItemElement(elementName), factory(std::forward<decltype(rowFactory)>(rowFactory)) {}
+  CustomItemBox(const std::string &elementName, CustomItemBoxFactory<T, R> auto &&rowFactory);
 
   /**
    * Add item to the end of the list.
    * @param item item to be added
    * @return reference to the Renderable representing the newly created row
    */
-  R &addItem(const T &item) {
-    auto &result = *items.emplace_back(item, factory(item)).second.get();
-    refilterItems();
-    return result;
-  }
+  R &addItem(const T &item);
 
   /**
    * Add multiple item to the end of the list.
@@ -102,33 +97,20 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * Remove all items for which predicate returns true.
    * @param predicate predicate for item removal
    */
-  void removeItemIf(std::predicate<const T &> auto &&predicate) {
-    std::erase_if(items,
-                  [p = std::forward<decltype(predicate)>(predicate)](const auto &item) { return p(item.first); });
-    refilterItems();
-  }
+  void removeItemIf(std::predicate<const T &> auto &&predicate);
   /**
    * Remove all items.
    */
-  void clearItems() {
-    items.clear();
-    refilterItems();
-  }
+  void clearItems();
   /**
    * Set filter by which shown items are filtered.
    * @param filterFnc
    */
-  void setFilter(std::predicate<const T &> auto filterFnc) {
-    filter = filterFnc;
-    refilterItems();
-  }
+  void setFilter(std::predicate<const T &> auto filterFnc);
   /**
    * Remove filter.
    */
-  void clearFilter() {
-    filter = [](auto) { return true; };
-    refilterItems();
-  }
+  void clearFilter();
   /**
    * Get reference to all items.
    * @return references to all items
@@ -148,20 +130,12 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * Set item factory which will be used for any items added after this.
    * @param rowFactory
    */
-  void setItemFactory(CustomItemBoxFactory<T, R> auto &&rowFactory) {
-    factory = std::forward<decltype(rowFactory)>(rowFactory);
-  }
+  void setItemFactory(CustomItemBoxFactory<T, R> auto &&rowFactory);
 
-  std::vector<Renderable *> getRenderables() override {
-    return items | std::views::transform([](auto &child) -> Renderable * { return child.second.get(); })
-        | ranges::to_vector;
-  }
+  std::vector<Renderable *> getRenderables() override;
 
  protected:
-  virtual void refilterItems() {
-    filteredItems = items | std::views::filter([this](auto &item) { return filter(item.first); })
-        | std::views::transform([](auto &item) { return &item; }) | ranges::to_vector;
-  }
+  virtual void refilterItems();
 
   using Item = std::pair<T, std::unique_ptr<R>>;
   std::vector<Item> items;
@@ -169,6 +143,58 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
   std::function<std::unique_ptr<R>(const T &)> factory;
   std::function<bool(const T &)> filter = [](const auto &) { return true; };
 };
+
+template<typename T, std::derived_from<Renderable> R>
+CustomItemBox<T, R>::CustomItemBox(const std::string &elementName, CustomItemBoxFactory<T, R> auto &&rowFactory)
+    : ItemElement(elementName), factory(std::forward<decltype(rowFactory)>(rowFactory)) {}
+
+template<typename T, std::derived_from<Renderable> R>
+R &CustomItemBox<T, R>::addItem(const T &item) {
+  auto &result = *items.emplace_back(item, factory(item)).second.get();
+  refilterItems();
+  return result;
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomItemBox<T, R>::removeItemIf(std::predicate<const T &> auto &&predicate) {
+  std::erase_if(items, [p = std::forward<decltype(predicate)>(predicate)](const auto &item) { return p(item.first); });
+  refilterItems();
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomItemBox<T, R>::clearItems() {
+  items.clear();
+  refilterItems();
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomItemBox<T, R>::setFilter(std::predicate<const T &> auto filterFnc) {
+  filter = filterFnc;
+  refilterItems();
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomItemBox<T, R>::clearFilter() {
+  filter = [](auto) { return true; };
+  refilterItems();
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomItemBox<T, R>::setItemFactory(CustomItemBoxFactory<T, R> auto &&rowFactory) {
+  factory = std::forward<decltype(rowFactory)>(rowFactory);
+}
+
+template<typename T, std::derived_from<Renderable> R>
+std::vector<Renderable *> CustomItemBox<T, R>::getRenderables() {
+  return items | std::views::transform([](auto &child) -> Renderable * { return child.second.get(); })
+      | ranges::to_vector;
+}
+
+template<typename T, std::derived_from<Renderable> R>
+void CustomItemBox<T, R>::refilterItems() {
+  filteredItems = items | std::views::filter([this](auto &item) { return filter(item.first); })
+      | std::views::transform([](auto &item) { return &item; }) | ranges::to_vector;
+}
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
