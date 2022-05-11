@@ -1,9 +1,9 @@
 /**
-* @file Table.h
-* @brief Table element.
-* @author Petr Flajšingr
-* @date 12.4.21
-*/
+ * @file Table.h
+ * @brief Table element.
+ * @author Petr Flajšingr
+ * @date 12.4.21
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_TABLE_H
 #define PF_IMGUI_ELEMENTS_TABLE_H
@@ -16,6 +16,7 @@
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <range/v3/range/conversion.hpp>
+#include <range/v3/view/cache1.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>
@@ -32,19 +33,169 @@ struct PF_IMGUI_EXPORT TableSettings {
   Size size = Size::Auto();    /*!< Size of the table. */
 };
 
+template<std::size_t ColumnCount>
+class Table;
+template<std::size_t ColumnCount, std::size_t RemainingCount = ColumnCount>
+class TableRowBuilder;
+
+/**
+ * @brief Object representing a row in Table.
+ * @tparam ColumnCount count of columns in row
+ */
+template<std::size_t ColumnCount>
+class PF_IMGUI_EXPORT TableRow {
+  friend class TableRowBuilder<ColumnCount>;
+
+ public:
+  using Cells = std::array<std::unique_ptr<Element>, ColumnCount>;
+  /**
+   * Construct TableRow.
+   * @param owner owning table
+   * @param rowId unique id within the table
+   * @param rowCells cells for this row
+   */
+  TableRow(Table<ColumnCount> *owner, std::size_t rowId, Cells &&rowCells);
+  /**
+   * @return unique id within Row's table
+   */
+  [[nodiscard]] std::size_t getId() const { return id; }
+  /**
+   * @return index of row within table
+   */
+  [[nodiscard]] std::size_t getIndex() const;
+  /**
+   * Move row up by given count. Stops at 0.
+   * @param count amount of rows to move by
+   */
+  void moveUp(std::uint32_t count = 1) { moveImpl(-static_cast<std::int32_t>(count)); }
+  /**
+   * Move row down by given count. Stops at last row.
+   * @param count amount of rows to move by
+   */
+  void moveDown(std::uint32_t count = 1) { moveImpl(count); }
+  /**
+   * Swap with provided row.
+   */
+  void swapWith(const TableRow &otherRow);
+  /**
+   * Swap with row on given index.
+   */
+  void swapWith(std::size_t index);
+  /**
+   * @return references to all cells in this row
+   */
+  [[nodiscard]] auto getCells() {
+    return cells | ranges::views::transform([](const auto &cell) -> Element & { return *cell; });
+  }
+  /**
+   * @return const references to all cells in this row
+   */
+  [[nodiscard]] auto getCells() const {
+    return cells | ranges::views::transform([](const auto &cell) -> const Element & { return *cell; });
+  }
+
+  [[nodiscard]] Element &operator[](std::size_t index) { return *cells[index]; }
+  [[nodiscard]] const Element &operator[](std::size_t index) const { return *cells[index]; }
+
+ private:
+  void moveImpl(std::int32_t delta);
+
+  Table<ColumnCount> *table;
+  std::size_t id;
+  Cells cells;
+};
+
+/**
+ * @brief Builder for Table's rows.
+ * @tparam ColumnCount total column count in table
+ * @tparam RemainingCount remaining column count, internal use to allow build() function
+ * Example:
+ * // can access the new button via this variable
+ * auto builder2 = table.buildRow()
+ *                     .cell<Text>("text", "Text")
+ *                     .cell<Button>("btn", "Button");
+ * // accessing Button with operator->()
+ * builder2->setColor<style::ColorOf::Button>(Color::Red);
+ * // finishing up the row
+ * auto &row = builder2.cell<DragInput<float>>("drag", "Drag", 1.f, 0.f, 100.f).build();
+ */
+template<std::size_t ColumnCount, std::size_t RemainingCount>
+class PF_IMGUI_EXPORT TableRowBuilder {
+ public:
+  using Cells = typename TableRow<ColumnCount>::Cells;
+  /**
+   * @brief Wrapper to allow access for newly created Element when building Row.
+   * @tparam T type of Element
+   */
+  template<std::derived_from<Element> T>
+  class Result : public TableRowBuilder<ColumnCount, RemainingCount - 1> {
+   public:
+    Result(T &newElement, Table<ColumnCount> *ownerTable, Cells &&initCells)
+        : TableRowBuilder<ColumnCount, RemainingCount - 1>(ownerTable, std::move(initCells)), element(newElement) {}
+
+    T *operator->() { return &element; }
+
+   private:
+    T &element;
+  };
+
+ public:
+  explicit TableRowBuilder(Table<ColumnCount> *ownerTable, Cells &&initCells)
+      : table(ownerTable), cells(std::move(initCells)) {}
+  /**
+   * Create a new element within the cell. This invalidates the current builder and returns a new one.
+   * @tparam T type of Element to create
+   * @tparam Args types of construction args
+   * @param args construction args
+   * @return wrapper object serving as builder for the next row and accessor for the newly created element
+   */
+  template<std::derived_from<Element> T, typename... Args>
+  Result<T> cell(Args &&...args)
+    requires(RemainingCount > 0 && std::constructible_from<T, Args...>)
+  {
+    auto newElement = std::make_unique<T>(std::forward<Args>(args)...);
+    auto newElementPtr = newElement.get();
+    cells[ColumnCount - RemainingCount] = std::move(newElement);
+    return Result<T>{*newElementPtr, table, std::move(cells)};
+  }
+  /**
+   * Create a new element within the cell. This invalidates the current builder and returns a new one.
+   * @tparam T config type for the new element
+   * @param config config
+* @return wrapper object serving as builder for the next row and accessor for the newly created element
+   */
+  template<ElementConstructConfig T>
+  Result<typename T::Parent> cell(T &&config) {
+    auto newElement = std::make_unique<typename T::Parent>(std::forward<T>(config));
+    auto newElementPtr = newElement.get();
+    cells[ColumnCount - RemainingCount] = std::move(newElement);
+    return Result<typename T::Parent>{*newElementPtr, table, std::move(cells)};
+  }
+  TableRow<ColumnCount> &build()
+    requires(RemainingCount == 0)
+  {
+    return buildRow();
+  }
+
+ private:
+  TableRow<ColumnCount> &buildRow() {
+    return table->addRow(std::make_unique<TableRow<ColumnCount>>(table, table->idCounter++, std::move(cells)));
+  }
+
+  Table<ColumnCount> *table;
+  Cells cells;
+};
+
 /**
  * @brief A table containing any renderable element in each cell.
  *
  * @tparam ColumnCount static column count of the table
- * @todo: change Row to something actually useful
+ * @todo: sorting support
  */
 template<std::size_t ColumnCount>
 class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, public Resizable {
-  using Cells = std::array<std::unique_ptr<Renderable>, ColumnCount>;
-  struct Row {
-    const std::size_t id;
-    Cells cells;
-  };
+  friend class TableRowBuilder<ColumnCount, 0>;
+  friend class TableRow<ColumnCount>;
 
  public:
   /**
@@ -66,36 +217,14 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
    * @param settings rendering and behavioral settings
    */
   Table(const std::string &elementName, const TableSettings<ColumnCount> &settings);
+  /**
+   * @return builder object to create a new row @see TableRowBuilder
+   */
+  [[nodiscard]] TableRowBuilder<ColumnCount> buildRow() { return TableRowBuilder<ColumnCount>{this, {}}; }
 
   std::vector<Renderable *> getRenderables() override;
 
-  /**
-   * Add a new row of elements.
-   * @param row elements to be added
-   * @return unique identifier of the newly added row. It can be used to remove this row.
-   */
-  std::size_t addRow(Cells &&row);
-
-  /**
-   * Remove row based on its unique id.
-   * @param rowId id of the row to be removed
-   */
-  void removeRow(std::size_t rowId);
-
-  /**
-   *
-   * @param id unique row id
-   * @return row with given id if found, otherwise nullopt
-   */
-  [[nodiscard]] std::optional<std::reference_wrapper<const Row>> getRowById(std::size_t id);
-  /**
-   *
-   * @param index index of a row
-   * @return row with given index if found, otherwise nullopt
-   */
-  [[nodiscard]] std::optional<std::reference_wrapper<const Row>> getRowByIndex(std::size_t index);
-
-  [[nodiscard]] std::size_t getColumnCount() const { return ColumnCount; }
+  [[nodiscard]] constexpr static std::size_t getColumnCount() { return ColumnCount; }
 
   [[nodiscard]] std::size_t getRowCount() const { return rows.size(); }
 
@@ -103,12 +232,16 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
   void renderImpl() override;
 
  private:
+  [[nodiscard]] TableRow<ColumnCount> &addRow(std::unique_ptr<TableRow<ColumnCount>> newRow) {
+    return *rows.emplace_back(std::move(newRow));
+  }
+
   static ImGuiTableFlags CreateFlags(const Flags<TableBorder> &tableBorder, const Flags<TableOptions> &options);
 
   std::optional<std::array<std::string, ColumnCount>> header;
   ImGuiTableFlags flags;
 
-  std::vector<Row> rows;
+  std::vector<std::unique_ptr<TableRow<ColumnCount>>> rows;
 
   std::size_t idCounter = 0;
 };
@@ -125,35 +258,9 @@ Table<ColumnCount>::Table(const std::string &elementName, const TableSettings<Co
 
 template<std::size_t ColumnCount>
 std::vector<Renderable *> Table<ColumnCount>::getRenderables() {
-  return rows | ranges::view::transform(&Row::cells) | ranges::view::join
-      | ranges::view::transform(&std::unique_ptr<Renderable>::get) | ranges::to_vector;
-}
-
-template<std::size_t ColumnCount>
-std::size_t Table<ColumnCount>::addRow(Table::Cells &&row) {
-  const auto rowId = idCounter++;
-  rows.emplace_back(idCounter++, std::move(row));
-  return rowId;
-}
-
-template<std::size_t ColumnCount>
-void Table<ColumnCount>::removeRow(std::size_t rowId) {
-  auto remove = std::ranges::remove(rows, rowId, &Row::id);
-  rows.erase(remove.begin(), remove.end());
-}
-
-template<std::size_t ColumnCount>
-std::optional<std::reference_wrapper<const typename Table<ColumnCount>::Row>>
-Table<ColumnCount>::getRowById(std::size_t id) {
-  if (auto iter = std::ranges::find(rows, id, &Row::id); iter != rows.end()) { return *iter; }
-  return std::nullopt;
-}
-
-template<std::size_t ColumnCount>
-std::optional<std::reference_wrapper<const typename Table<ColumnCount>::Row>>
-Table<ColumnCount>::getRowByIndex(std::size_t index) {
-  if (index < rows.size()) { return rows[index]; }
-  return std::nullopt;
+  return rows | ranges::view::transform([](auto &row) { return row->getCells(); }) | ranges::views::cache1
+      | ranges::view::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
+      | ranges::to_vector;
 }
 
 template<std::size_t ColumnCount>
@@ -163,14 +270,14 @@ void Table<ColumnCount>::renderImpl() {
   if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndTable};
     if (header.has_value()) {
-      std::ranges::for_each(*header, ImGui::TableSetupColumn, &std::string::c_str);
+      std::ranges::for_each(*header, [](const auto &str) { ImGui::TableSetupColumn(str.c_str()); });
       ImGui::TableHeadersRow();
     }
 
-    std::ranges::for_each(rows | ranges::views::transform(&Row::cells), [](auto &row) {
+    std::ranges::for_each(rows, [](auto &row) {
       ImGui::TableNextRow();
-      std::ranges::for_each(row, [](auto &cell) {
-        if (ImGui::TableNextColumn()) { cell->render(); }
+      std::ranges::for_each(row->getCells(), [](auto &cell) {
+        if (ImGui::TableNextColumn()) { cell.render(); }
       });
     });
   }
@@ -180,6 +287,45 @@ template<std::size_t ColumnCount>
 ImGuiTableFlags Table<ColumnCount>::CreateFlags(const Flags<TableBorder> &tableBorder,
                                                 const Flags<TableOptions> &options) {
   return ImGuiTableFlags{*tableBorder | *options};
+}
+
+template<std::size_t ColumnCount>
+TableRow<ColumnCount>::TableRow(Table<ColumnCount> *owner, std::size_t rowId, TableRow::Cells &&rowCells)
+    : table(owner), id(rowId), cells(std::move(rowCells)) {}
+
+template<std::size_t ColumnCount>
+std::size_t TableRow<ColumnCount>::getIndex() const {
+  return std::ranges::distance(table->rows.begin(), std::ranges::find(table->rows, id, &TableRow::id));
+}
+
+template<std::size_t ColumnCount>
+void TableRow<ColumnCount>::swapWith(const TableRow &otherRow) {
+  const auto thisIter = std::ranges::find(table->rows, id, &TableRow::id);
+  const auto otherIter = std::ranges::find(table->rows, otherRow.getId(), &TableRow::id);
+  ranges::iter_swap(thisIter, otherIter);
+}
+
+template<std::size_t ColumnCount>
+void TableRow<ColumnCount>::swapWith(std::size_t index) {
+  const auto thisIter = std::ranges::find(table->rows, id, &TableRow::id);
+  const auto otherIter = table->rows.begin() + index;
+  ranges::iter_swap(thisIter, otherIter);
+}
+
+template<std::size_t ColumnCount>
+void TableRow<ColumnCount>::moveImpl(std::int32_t delta) {
+  const auto targetIndex =
+      std::clamp(static_cast<std::int32_t>(getIndex()) + delta, 0, static_cast<std::int32_t>(table->rows.size()));
+  const auto targetPosIter = table->rows.begin() + targetIndex;
+  const auto targetIter = table->rows.insert(targetPosIter, nullptr);
+
+  const auto originalPosIter = std::ranges::find(table->rows, id, [](const auto &cell) {
+    if (cell == nullptr) { return static_cast<std::size_t>(-1); }
+    return cell->id;
+  });
+  auto thisUnique = std::move(*originalPosIter);
+  *targetIter = std::move(thisUnique);
+  table->rows.erase(originalPosIter, originalPosIter + 1);
 }
 
 }  // namespace pf::ui::ig
