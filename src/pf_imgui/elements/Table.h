@@ -39,7 +39,7 @@ template<std::size_t ColumnCount, std::size_t RemainingCount = ColumnCount>
 class TableRowBuilder;
 
 /**
- * @brief Object represeting a row in Table.
+ * @brief Object representing a row in Table.
  * @tparam ColumnCount count of columns in row
  */
 template<std::size_t ColumnCount>
