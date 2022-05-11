@@ -381,7 +381,7 @@ set(INCLUDES
         src/pf_imgui/dialogs/builders/MessageDialogBuilder.h
         src/pf_imgui/elements/Dummy.h
         src/pf_imgui/dialogs/builders/InputDialogBuilder.h
-        src/pf_imgui/elements/Knob.h)
+        src/pf_imgui/elements/Knob.h src/pf_imgui/elements/details/DragInputDetails.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
