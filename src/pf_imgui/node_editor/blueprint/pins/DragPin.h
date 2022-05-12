@@ -12,7 +12,7 @@
 namespace pf::ui::ig::bp {
 
 // TODO: min max speed setters
-template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 class DragPin : public InteractablePin<DragInput<T>> {
  public:
   PF_IMGUI_BLUEPRINT_PIN_ID(DragPin)
@@ -22,7 +22,7 @@ class DragPin : public InteractablePin<DragInput<T>> {
     typename DragInput<T>::ParamType min;
     typename DragInput<T>::ParamType max;
     T value{};
-    std::string format = ui::ig::details::defaultDragFormat<T>();
+    std::string format = ui::ig::drag_details::defaultFormat<T>();
   };
 
   DragPin(const std::string &name, const std::string &label, Color color, DragConfig &&config)

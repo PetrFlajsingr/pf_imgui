@@ -27,6 +27,7 @@ using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
 /**
  * @brief Graph for visualising stack traces, performance stuff...
  * @todo: style
+ * @todo: styles for samples?
  */
 class PF_IMGUI_EXPORT FlameGraph
     : public Element,

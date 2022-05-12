@@ -10,13 +10,11 @@
 
 #include <algorithm>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/math/Range.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/details/DragInputDetails.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -33,47 +31,6 @@ namespace pf::ui::ig {
 // ImGuiSliderFlags_NoRoundToFormat
 
 // TODO: support for more data types
-namespace details {
-/**
- * Types with float as underlying value.
- */
-#define IMGUI_DRAG_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>
-/**
- * Types with int as underlying value.
- */
-#define IMGUI_DRAG_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4, math::Range<int>
-/**
- * Used glm types.
- */
-#define IMGUI_DRAG_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
-/**
- * Used range types.
- */
-#define IMGUI_DRAG_RANGE_TYPE_LIST math::Range<int>, math::Range<float>
-/**
- * All allowed types for DragInput
- */
-#define IMGUI_DRAG_TYPE_LIST IMGUI_DRAG_FLOAT_TYPE_LIST, IMGUI_DRAG_INT_TYPE_LIST
-/**
- * Underlying type of supported types.
- */
-template<typename T>
-using DragInputUnderlyingType = std::conditional_t<OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>, float, int>;
-/**
- * Default formatting string for supported types.
- * @tparam T type to based format on
- * @return printf like format for numbers
- */
-template<typename T>
-constexpr const char *defaultDragFormat() {
-  if constexpr (OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST> || std::same_as<T, math::Range<float>>) {
-    return "%.3f";
-  } else {
-    return "%d";
-  }
-}
-}  // namespace details
-
 /**
  * @brief Numeric input supporting either keyboard input or mouse drag.
  *
@@ -83,7 +40,7 @@ constexpr const char *defaultDragFormat() {
  *
  * @tparam T Underlying type
  */
-template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 class PF_IMGUI_EXPORT DragInput
     : public ItemElement,
       public ValueObservable<T>,
@@ -98,21 +55,21 @@ class PF_IMGUI_EXPORT DragInput
                                style::ColorOf::SliderGrabActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
-  using ParamType = details::DragInputUnderlyingType<T>;
+  using ParamType = drag_details::UnderlyingType<T>;
 
   /**
    * @brief Struct for construction of DragInput.
    */
   struct Config {
     using Parent = DragInput;
-    std::string_view name;                                /*!< Unique name of the element */
-    std::string_view label;                               /*!< Text rendered next to the input */
-    ParamType speed;                                      /*!< Speed of value change on drag */
-    ParamType min;                                        /*!< Minimum allowed value */
-    ParamType max;                                        /*!< Maximum allowed value */
-    T value{};                                            /*!< Initial value */
-    std::string format = details::defaultDragFormat<T>(); /*!< Text format for value */
-    bool persistent = false;                              /*!< Allow state saving to disk */
+    std::string_view name;                                 /*!< Unique name of the element */
+    std::string_view label;                                /*!< Text rendered next to the input */
+    ParamType speed;                                       /*!< Speed of value change on drag */
+    ParamType min;                                         /*!< Minimum allowed value */
+    ParamType max;                                         /*!< Maximum allowed value */
+    T value{};                                             /*!< Initial value */
+    std::string format = drag_details::defaultFormat<T>(); /*!< Text format for value */
+    bool persistent = false;                               /*!< Allow state saving to disk */
   };
   /**
    * Construct DragInput
@@ -133,7 +90,7 @@ class PF_IMGUI_EXPORT DragInput
    */
   DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
             T value = T{}, Persistent persistent = Persistent::No,
-            std::string format = details::defaultDragFormat<T>());
+            std::string format = drag_details::defaultFormat<T>());
 
   /**
    * Get movement speed.
@@ -183,35 +140,35 @@ class PF_IMGUI_EXPORT DragInput
   std::string format;
 };
 
-template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(DragInput::Config &&config)
     : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Labellable(std::string{config.label}),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       speed(config.speed), min(config.min), max(config.max), format(std::move(config.format)) {}
 
-template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
-DragInput<T>::DragInput(const std::string &elementName, const std::string &label,
-                        details::DragInputUnderlyingType<T> speed, details::DragInputUnderlyingType<T> min,
-                        details::DragInputUnderlyingType<T> max, T value, Persistent persistent, std::string format)
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
+DragInput<T>::DragInput(const std::string &elementName, const std::string &label, drag_details::UnderlyingType<T> speed,
+                        drag_details::UnderlyingType<T> min, drag_details::UnderlyingType<T> max, T value,
+                        Persistent persistent, std::string format)
     : ItemElement(elementName), ValueObservable<T>(value), Labellable(label),
       Savable(persistent), DragSource<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
       format(std::move(format)) {}
 
-template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 toml::table DragInput<T>::toToml() const {
   const auto value = ValueObservable<T>::getValue();
-  if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_RANGE_TYPE_LIST>) {
     return toml::table{{"value", toml::array{value.start, value.end}}};
-  } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+  } else if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
     return toml::table{{"value", serializeGlmVec(value)}};
   } else {
     return toml::table{{"value", value}};
   }
 }
 
-template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 void DragInput<T>::setFromToml(const toml::table &src) {
-  if constexpr (OneOf<T, IMGUI_DRAG_RANGE_TYPE_LIST>) {
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_RANGE_TYPE_LIST>) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         if (newVal->size() != 2) { return; }
@@ -225,7 +182,7 @@ void DragInput<T>::setFromToml(const toml::table &src) {
         ValueObservable<T>::setValueAndNotifyIfChanged(range);
       }
     }
-  } else if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+  } else if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
@@ -241,7 +198,7 @@ void DragInput<T>::setFromToml(const toml::table &src) {
   }
 }
 
-template<OneOf<IMGUI_DRAG_TYPE_LIST> T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 void DragInput<T>::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
@@ -250,7 +207,7 @@ void DragInput<T>::renderImpl() {
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
-  if constexpr (OneOf<T, IMGUI_DRAG_FLOAT_TYPE_LIST>) {
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_FLOAT_TYPE_LIST>) {
     dataType = ImGuiDataType_Float;
   } else {
     dataType = ImGuiDataType_S32;
@@ -260,7 +217,7 @@ void DragInput<T>::renderImpl() {
     valueChanged = ImGui::DragScalar(getLabel().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
                                      format.c_str(), flags);
   }
-  if constexpr (OneOf<T, IMGUI_DRAG_GLM_TYPE_LIST>) {
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
     valueChanged = ImGui::DragScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(),
                                       static_cast<float>(speed), &min, &max, format.c_str(), flags);
   }

@@ -9,7 +9,7 @@
 #define PF_IMGUI_ELEMENTS_MATRIXDRAGINPUT_H
 
 #include <glm/glm.hpp>
-#include <pf_imgui/elements/DragInput.h>
+#include <pf_imgui/elements/details/DragInputDetails.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -37,7 +37,7 @@ class MatrixDragInput
                                style::ColorOf::SliderGrabActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
-  using ParamType = details::DragInputUnderlyingType<typename M::col_type>;
+  using ParamType = drag_details::UnderlyingType<typename M::col_type>;
   constexpr static auto Height = M::length();
   constexpr static auto Width = M::col_type::length();
   /**
