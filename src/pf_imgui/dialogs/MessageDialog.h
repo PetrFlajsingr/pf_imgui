@@ -20,7 +20,8 @@ namespace pf::ui::ig {
 /**
  * Default button type for MessageDialog.
  */
-enum class MessageButtons { Ok, Yes, No, Cancel };
+enum class MessageButtons { Ok = (1 << 0), Yes = (1 << 1), No = (1 << 2), Cancel = (1 << 3) };
+static_assert(IsPureFlags<MessageButtons>());
 
 /**
  * @brief Simplified Dialog for showing messages.
