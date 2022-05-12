@@ -9,12 +9,10 @@
 #define PF_IMGUI_ELEMENTS_SLIDER_H
 
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
 #include <imgui.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/elements/details/SliderDetails.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -30,45 +28,6 @@ namespace pf::ui::ig {
 // ImGuiSliderFlags_Logarithmic
 // ImGuiSliderFlags_NoRoundToFormat
 
-// TODO: support for more data types
-namespace details {
-/**
- * Types using float as underlying value.
- */
-#define IMGUI_SLIDER_FLOAT_TYPE_LIST float, glm::vec2, glm::vec3, glm::vec4
-/**
- * Types using int as underlying value.
- */
-#define IMGUI_SLIDER_INT_TYPE_LIST int, glm::ivec2, glm::ivec3, glm::ivec4
-/**
- * Supported glm types.
- */
-#define IMGUI_SLIDER_GLM_TYPE_LIST glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4
-/**
- * All types supported by Slider.
- */
-#define IMGUI_SLIDER_TYPE_LIST IMGUI_SLIDER_FLOAT_TYPE_LIST, IMGUI_SLIDER_INT_TYPE_LIST
-/**
- * Detection for underlying type.
- */
-template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
-using SliderMinMaxType = std::conditional_t<OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>, float, int>;
-
-/**
- * Default formats for underlying types.
- * @tparam T underlying type
- * @return format
- */
-template<typename T>
-constexpr const char *defaultSliderFormat() {
-  if constexpr (OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>) {
-    return "%.3f";
-  } else {
-    return "%d";
-  }
-}
-}  // namespace details
-
 /**
  * @brief Slider supporting multiple types.
  *
@@ -79,7 +38,7 @@ constexpr const char *defaultSliderFormat() {
  *
  * @todo: ToStringConvertible support
  */
-template<OneOf<IMGUI_SLIDER_TYPE_LIST> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Slider
     : public ItemElement,
       public Labellable,
@@ -94,19 +53,19 @@ class PF_IMGUI_EXPORT Slider
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
-  using MinMaxType = details::SliderMinMaxType<T>;
+  using MinMaxType = slider_details::MinMaxType<T>;
   /**
    * @brief Struct for construction of Slider.
    */
   struct Config {
     using Parent = Slider;
-    std::string_view name;                                           /*!< Unique name of the element */
-    std::string_view label;                                          /*!< Text rendered next to the element */
-    MinMaxType min;                                                  /*!< Minimum allowed value */
-    MinMaxType max;                                                  /*!< Maximum allowed value */
-    T value{};                                                       /*!< Initial value */
-    std::string format = details::defaultSliderFormat<MinMaxType>(); /*!< Format string for value rendering */
-    bool persistent = false;                                         /*!< Allow state saving to disk */
+    std::string_view name;                                            /*!< Unique name of the element */
+    std::string_view label;                                           /*!< Text rendered next to the element */
+    MinMaxType min;                                                   /*!< Minimum allowed value */
+    MinMaxType max;                                                   /*!< Maximum allowed value */
+    T value{};                                                        /*!< Initial value */
+    std::string format = slider_details::defaultFormat<MinMaxType>(); /*!< Format string for value rendering */
+    bool persistent = false;                                          /*!< Allow state saving to disk */
   };
   /**
    * Construct Slider
@@ -124,7 +83,7 @@ class PF_IMGUI_EXPORT Slider
    * @param format printf-like format for rendering value over slider
    */
   Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
-         Persistent persistent = Persistent::No, std::string format = details::defaultSliderFormat<MinMaxType>());
+         Persistent persistent = Persistent::No, std::string format = slider_details::defaultFormat<MinMaxType>());
 
   /**
    * Get min slider value.
@@ -174,7 +133,7 @@ Slider<T>::Slider(const std::string &elementName, const std::string &label, Slid
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 toml::table Slider<T>::toToml() const {
   const auto value = ValueObservable<T>::getValue();
-  if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+  if constexpr (OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
     return toml::table{{"value", serializeGlmVec(value)}};
   } else {
     return toml::table{{"value", value}};
@@ -183,7 +142,7 @@ toml::table Slider<T>::toToml() const {
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 void Slider<T>::setFromToml(const toml::table &src) {
-  if constexpr (OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+  if constexpr (OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
@@ -208,13 +167,13 @@ void Slider<T>::renderImpl() {
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
-  if constexpr (OneOf<T, IMGUI_SLIDER_FLOAT_TYPE_LIST>) {
+  if constexpr (OneOf<T, PF_IMGUI_SLIDER_FLOAT_TYPE_LIST>) {
     dataType = ImGuiDataType_Float;
   } else {
     dataType = ImGuiDataType_S32;
   }
 
-  if constexpr (!OneOf<T, IMGUI_SLIDER_GLM_TYPE_LIST>) {
+  if constexpr (!OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
     valueChanged = ImGui::SliderScalar(getLabel().c_str(), dataType, address, &min, &max, format.c_str(), flags);
   } else {
     valueChanged = ImGui::SliderScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(), &min, &max,
