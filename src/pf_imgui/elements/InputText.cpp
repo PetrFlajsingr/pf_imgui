@@ -82,7 +82,7 @@ void InputText::setFromToml(const toml::table &src) {
 void InputText::setValue(const std::string_view &newValue) {
   if (text != newValue) {
     text = newValue;
-    setTextInner(buffer.get());
+    setTextInner(text);
     setValueInner(text);
     notifyValueChanged();
   }
