@@ -55,8 +55,8 @@ class PF_IMGUI_EXPORT Input
 
     std::string_view name;                                  /*!< Unique name of the element */
     std::string_view label;                                 /*!< Text rendered next to the input */
-    StepType step{};                                        /*!< Speed of value change */
-    StepType fastStep{};                                    /*!< Fast speed of value change */
+    StepType step{static_cast<StepType>(1)};                /*!< Speed of value change */
+    StepType fastStep{static_cast<StepType>(10)};           /*!< Fast speed of value change */
     T value{};                                              /*!< Initial value */
     std::string format = input_details::defaultFormat<T>(); /*!< Format string to render value */
     bool persistent = false;                                /*!< Allow state saving to disk */
@@ -77,8 +77,9 @@ class PF_IMGUI_EXPORT Input
    * @param persistent enable state saving to disk
    * @param value starting value
    */
-  Input(const std::string &elementName, const std::string &label, StepType st = 0, StepType fStep = 0, T value = T{},
-        Persistent persistent = Persistent::No, std::string format = input_details::defaultFormat<T>());
+  Input(const std::string &elementName, const std::string &label, StepType st = static_cast<StepType>(1),
+        StepType fStep = static_cast<StepType>(10), T value = T{}, Persistent persistent = Persistent::No,
+        std::string format = input_details::defaultFormat<T>());
 
   [[nodiscard]] bool isReadOnly() const { return readOnly; }
 
