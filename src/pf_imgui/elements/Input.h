@@ -201,7 +201,7 @@ class Input<std::string> : public InputText {
    * Construct Input<std::string>
    * @param config construction args @see Input<std::string>::Config
    */
-  Input(Config &&config)
+  explicit Input(Config &&config)
       : InputText(InputText::Config{config.name, config.label, config.value, config.inputType, config.maxInputLength,
                                     config.eventTrigger, config.filters, config.persistent}) {}
   /**
@@ -217,7 +217,8 @@ class Input<std::string> : public InputText {
         TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
         TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
         Persistent persistent = Persistent::No)
-      : InputText(elementName, label, value, textInputType, inputLengthLimit, trigger, filters, persistent) {}
+      : InputText(elementName, std::move(label), value, textInputType, inputLengthLimit, trigger, filters, persistent) {
+  }
 };
 
 extern template class Input<float>;
