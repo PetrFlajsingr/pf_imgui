@@ -181,7 +181,45 @@ void Input<T>::renderImpl() {
 }
 
 template<>
-class Input<std::string> : public InputText {};
+class Input<std::string> : public InputText {
+ public:
+  /**
+   * @brief Struct for construction of Input<std::string>.
+   */
+  struct Config {
+    using Parent = Input<std::string>;
+    std::string_view name;                               /*!< Unique name of the element */
+    std::string_view label;                              /*!< Text rendered next to the input */
+    std::string value;                                   /*!< Initial value */
+    TextInputType inputType = TextInputType::SingleLine; /*!< Type of text input */
+    std::size_t maxInputLength = 256;                    /*!< Maximum length of input string */
+    TextTrigger eventTrigger = TextTrigger::Character;   /*!< Trigger to notify listeners */
+    Flags<TextFilter> filters = TextFilter::None;        /*!< Enabled text filters */
+    bool persistent = false;                             /*!< Allow state saving to disk */
+  };
+  /**
+   * Construct Input<std::string>
+   * @param config construction args @see Input<std::string>::Config
+   */
+  explicit Input(Config &&config)
+      : InputText(InputText::Config{config.name, config.label, config.value, config.inputType, config.maxInputLength,
+                                    config.eventTrigger, config.filters, config.persistent}) {}
+  /**
+   * Construct Input<std::string>.
+   * @param elementName ID of the input
+   * @param label text rendered next to the input
+   * @param text starting text in the input
+   * @param textInputType singleline or multiline support
+   * @param filters character filters for input
+   * @param persistent enable state saving to disk
+   */
+  Input(const std::string &elementName, std::string label, const std::string &value = "",
+        TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
+        TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
+        Persistent persistent = Persistent::No)
+      : InputText(elementName, std::move(label), value, textInputType, inputLengthLimit, trigger, filters, persistent) {
+  }
+};
 
 extern template class Input<float>;
 extern template class Input<glm::vec2>;
