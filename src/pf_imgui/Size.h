@@ -1,9 +1,9 @@
 /**
-* @file Size.h
-* @brief Type representing size in pf_imgui.
-* @author Petr Flajšingr
-* @date 4.2.22
-*/
+ * @file Size.h
+ * @brief Type representing size in pf_imgui.
+ * @author Petr Flajšingr
+ * @date 4.2.22
+ */
 
 #ifndef PF_IMGUI_SIZE_H
 #define PF_IMGUI_SIZE_H
@@ -40,9 +40,9 @@ class PF_IMGUI_EXPORT Width {
    */
   [[nodiscard]] constexpr static Width Fill(std::uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
   /**
-    * Automatic size detection.
-    * @return
-    */
+   * Automatic size detection.
+   * @return
+   */
   [[nodiscard]] constexpr static Width Auto() { return {0}; }
 
  private:
@@ -72,9 +72,9 @@ class PF_IMGUI_EXPORT Height {
    */
   [[nodiscard]] constexpr static Height Fill(std::uint32_t margin = 1) { return {-static_cast<float>(margin)}; }
   /**
-    * Automatic size detection.
-    * @return
-    */
+   * Automatic size detection.
+   * @return
+   */
   [[nodiscard]] constexpr static Height Auto() { return {0}; }
 
  private:

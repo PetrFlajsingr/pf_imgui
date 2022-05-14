@@ -1,9 +1,9 @@
 /**
-* @file CommandPaletteWindow.h
-* @brief Special type of window which allows command selection.
-* @author Petr Flajšingr
-* @date 8.2.22
-*/
+ * @file CommandPaletteWindow.h
+ * @brief Special type of window which allows command selection.
+ * @author Petr Flajšingr
+ * @date 8.2.22
+ */
 
 #ifndef PF_IMGUI_COMMANDPALETTEWINDOW_H
 #define PF_IMGUI_COMMANDPALETTEWINDOW_H

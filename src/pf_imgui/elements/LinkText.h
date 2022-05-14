@@ -1,9 +1,9 @@
 /**
-* @file LinkText.h
-* @brief Text element serving as an URL.
-* @author Petr Flajšingr
-* @date 14.02.22
-*/
+ * @file LinkText.h
+ * @brief Text element serving as an URL.
+ * @author Petr Flajšingr
+ * @date 14.02.22
+ */
 
 #ifndef PF_IMGUI_LINKTEXT_H
 #define PF_IMGUI_LINKTEXT_H

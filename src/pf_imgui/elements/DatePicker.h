@@ -1,9 +1,9 @@
 /**
-* @file DatePicker.h
-* @brief Date picker element.
-* @author Petr Flajšingr
-* @date 14.02.22
-*/
+ * @file DatePicker.h
+ * @brief Date picker element.
+ * @author Petr Flajšingr
+ * @date 14.02.22
+ */
 
 #ifndef PF_IMGUI_DATEPICKER_H
 #define PF_IMGUI_DATEPICKER_H

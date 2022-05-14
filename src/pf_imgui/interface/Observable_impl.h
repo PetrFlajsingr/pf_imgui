@@ -1,9 +1,9 @@
 /**
-* @file Observable_impl.h
-* @brief Implementation of observable.
-* @author Petr Flajšingr
-* @date 23.1.21
-*/
+ * @file Observable_impl.h
+ * @brief Implementation of observable.
+ * @author Petr Flajšingr
+ * @date 23.1.21
+ */
 
 #ifndef PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
 #define PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
@@ -18,11 +18,11 @@
 
 namespace pf::ui::ig {
 /**
-* @brief Implementation of observable design pattern.
-*
-* Allows multiple observers, each of which has a unique ID.
-* @tparam Args Types of arguments to be used as callback parameters
-*/
+ * @brief Implementation of observable design pattern.
+ *
+ * Allows multiple observers, each of which has a unique ID.
+ * @tparam Args Types of arguments to be used as callback parameters
+ */
 template<typename... Args>
 class PF_IMGUI_EXPORT Observable_impl {
  public:
@@ -36,17 +36,17 @@ class PF_IMGUI_EXPORT Observable_impl {
   virtual ~Observable_impl();
 
   /**
-  * Add a listener and return a Subscription object which can be used to unregister it.
-  * @param fnc listener
-  * @return Subscription for unregistration purposes
-  * @see Subscription
-  */
+   * Add a listener and return a Subscription object which can be used to unregister it.
+   * @param fnc listener
+   * @return Subscription for unregistration purposes
+   * @see Subscription
+   */
   Subscription addListener(std::invocable<const Args &...> auto &&fnc);
 
   /**
-  * Notify all listeners with provided parameters.
-  * @param args parameters to be passed to listeners
-  */
+   * Notify all listeners with provided parameters.
+   * @param args parameters to be passed to listeners
+   */
   void notify(const Args &...args);
 
  private:

@@ -1,9 +1,9 @@
 /**
-* @file TimePicker.h
-* @brief TimePicker element.
-* @author Petr Flajšingr
-* @date 11.4.22
-*/
+ * @file TimePicker.h
+ * @brief TimePicker element.
+ * @author Petr Flajšingr
+ * @date 11.4.22
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_TIMEPICKER_H
 #define PF_IMGUI_ELEMENTS_TIMEPICKER_H

@@ -1,9 +1,9 @@
 /**
-* @file CommandPalette.h
-* @brief An element allowing for command selection.
-* @author Petr Flajšingr
-* @date 8.2.22
-*/
+ * @file CommandPalette.h
+ * @brief An element allowing for command selection.
+ * @author Petr Flajšingr
+ * @date 8.2.22
+ */
 
 #ifndef PF_IMGUI_COMMANDPALETTE_H
 #define PF_IMGUI_COMMANDPALETTE_H

@@ -1,9 +1,9 @@
 /**
-* @file Customizable.h
-* @brief Interface to provide customization functionality to its descendants.
-* @author Petr Flajšingr
-* @date 18.6.21
-*/
+ * @file Customizable.h
+ * @brief Interface to provide customization functionality to its descendants.
+ * @author Petr Flajšingr
+ * @date 18.6.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
@@ -56,16 +56,16 @@ constexpr auto varArgValueForIndex(std::size_t index, std::size_t currIndex = 0)
 }  // namespace details
 
 /**
-* @brief An interface to allow for changing color style. It also provides functionality to apply these styles.
-* @tparam SupportedColorTypes list of types which are supported
-*/
+ * @brief An interface to allow for changing color style. It also provides functionality to apply these styles.
+ * @tparam SupportedColorTypes list of types which are supported
+ */
 template<style::ColorOf... SupportedColorTypes>
 class PF_IMGUI_EXPORT ColorCustomizable {
  public:
   /**
-  * Set color for given type.
-  * @tparam ColorType type to set color for
-  */
+   * Set color for given type.
+   * @tparam ColorType type to set color for
+   */
   template<style::ColorOf ColorType>
     requires(OneOfValues_v<ColorType, SupportedColorTypes...>)
   void setColor(Color color) {
@@ -79,26 +79,26 @@ class PF_IMGUI_EXPORT ColorCustomizable {
   }
 
   /**
-  * Reset color to default value.
-  * @tparam ColorType color to reset
-  */
+   * Reset color to default value.
+   * @tparam ColorType color to reset
+   */
   template<style::ColorOf ColorType>
   void unsetColor() {
     std::get<details::indexInVarArgList<ColorType, SupportedColorTypes...>()>(colorValues) = std::nullopt;
   }
 
   /**
-  * Reset all colors to default values.
-  */
+   * Reset all colors to default values.
+   */
   void clearColors() {
     iterateTuple([](auto &value) { value = std::nullopt; }, colorValues);
   }
 
  protected:
   /**
-  * Add color options on imgui stack and return an instance of RAII which resets it.
-  * @return RAII resetting the stack
-  */
+   * Add color options on imgui stack and return an instance of RAII which resets it.
+   * @return RAII resetting the stack
+   */
   [[nodiscard]] RAII setColorStack() {
     if (!modified) {
       return RAII{[] {}};
@@ -144,17 +144,17 @@ using AllColorCustomizable = ColorCustomizable<
     style::ColorOf::NavWindowingDimBackground, style::ColorOf::ModalWindowDimBackground>;
 
 /**
-* @brief An interface to allow for changing style. It also provides functionality to apply these styles.
-* @tparam SupportedStyles list of types which are supported
-*/
+ * @brief An interface to allow for changing style. It also provides functionality to apply these styles.
+ * @tparam SupportedStyles list of types which are supported
+ */
 template<style::Style... SupportedStyles>
 class PF_IMGUI_EXPORT StyleCustomizable {
  public:
   /**
-  * Set value for given type.
-  * @tparam Style type to set value for
-  * @param value value to set
-  */
+   * Set value for given type.
+   * @tparam Style type to set value for
+   * @param value value to set
+   */
   template<style::Style Style>
     requires(OneOfValues_v<Style, SupportedStyles...> && style::isFloatStyle(Style))
   void setStyle(float value) {
@@ -162,10 +162,10 @@ class PF_IMGUI_EXPORT StyleCustomizable {
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
   /**
-  * Set value for given type.
-  * @tparam Style type to set value for
-  * @param value value to set
-  */
+   * Set value for given type.
+   * @tparam Style type to set value for
+   * @param value value to set
+   */
   template<style::Style Style>
     requires(OneOfValues_v<Style, SupportedStyles...> && !style::isFloatStyle(Style))
   void setStyle(ImVec2 value) {
@@ -173,25 +173,25 @@ class PF_IMGUI_EXPORT StyleCustomizable {
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = value;
   }
   /**
-  * Reset the style to a default value.
-  * @tparam Style style to reset
-  */
+   * Reset the style to a default value.
+   * @tparam Style style to reset
+   */
   template<style::Style Style>
   void unsetStyle() {
     std::get<details::indexInVarArgList<Style, SupportedStyles...>()>(styleValues) = std::nullopt;
   }
   /**
-  * Reset all styles to default values.
-  */
+   * Reset all styles to default values.
+   */
   void clearStyles() {
     iterateTuple([](auto &value) { value = std::nullopt; }, styleValues);
   }
 
  protected:
   /**
-  * Add style options on imgui stack and return an instance of RAII which resets it.
-  * @return RAII resetting the stack
-  */
+   * Add style options on imgui stack and return an instance of RAII which resets it.
+   * @return RAII resetting the stack
+   */
   [[nodiscard]] RAII setStyleStack() {
     if (!modified) {
       return RAII{[] {}};

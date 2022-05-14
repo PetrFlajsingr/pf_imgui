@@ -1,9 +1,9 @@
 /**
-* @file enums.h
-* @brief Library's enums.
-* @author Petr Flajšingr
-* @date 4.11.20
-*/
+ * @file enums.h
+ * @brief Library's enums.
+ * @author Petr Flajšingr
+ * @date 4.11.20
+ */
 
 #ifndef PF_IMGUI_ENUMS_H
 #define PF_IMGUI_ENUMS_H
@@ -32,60 +32,60 @@ enum class HorizontalAlign { Up, Middle, Down };
 enum class VerticalAlign { Left, Middle, Right };
 
 /**
-* Enum for selection.
-*/
+ * Enum for selection.
+ */
 enum class Selected { Yes, No };
 /**
-* Enum for visibility of various types.
-*/
+ * Enum for visibility of various types.
+ */
 enum class Visibility { Visible, Invisible };
 inline Visibility operator!(Visibility visibility) {
   return visibility == Visibility::Visible ? Visibility::Invisible : Visibility::Visible;
 }
 /**
-* Enum for modality of dialogs.
-*/
+ * Enum for modality of dialogs.
+ */
 enum class Modal { Yes, No };
 /**
-* Enum for input type of text based elements.
-*/
+ * Enum for input type of text based elements.
+ */
 enum class TextInputType { SingleLine, MultiLine };
 /**
-* Enum for plot type of SimplePlot.
-*/
+ * Enum for plot type of SimplePlot.
+ */
 enum class PlotType { Lines, Histogram };
 /**
-* Enable/disable repeatable behavior.
-*/
+ * Enable/disable repeatable behavior.
+ */
 enum class Repeatable { Yes, No };
 /**
-* Enum for marking persistence of Savable elements.
-*/
+ * Enum for marking persistence of Savable elements.
+ */
 enum class Persistent { Yes, No };
 /**
-* Enum for types of ColorChooser.
-*/
+ * Enum for types of ColorChooser.
+ */
 enum class ColorChooserType { Edit, Picker };
 enum class ColorChooserFormat { RGB, RGBA };
 /**
-* Enum for StackLayout direction.
-*/
+ * Enum for StackLayout direction.
+ */
 enum class LayoutDirection { LeftToRight, TopToBottom };
 /**
-* Enum for FileDialog selection type.
-*/
+ * Enum for FileDialog selection type.
+ */
 enum class FileType { File, Directory };
 /**
-* Enum for Collapsible.
-*/
+ * Enum for Collapsible.
+ */
 enum class AllowCollapse { Yes, No };
 /**
-* Enum for marking border render of layouts.
-*/
+ * Enum for marking border render of layouts.
+ */
 enum class ShowBorder { Yes, No };
 /**
-* Enum for selection of which borders to render in a table. Functions as a bit mask.
-*/
+ * Enum for selection of which borders to render in a table. Functions as a bit mask.
+ */
 enum class TableBorder : int {
   None = 0x00,
   HorizontalInner = ImGuiTableFlags_BordersInnerH,
@@ -98,8 +98,8 @@ enum class TableBorder : int {
       | ImGuiTableFlags_BordersOuterV
 };
 /**
-* Enum for options of interaction with a table
-*/
+ * Enum for options of interaction with a table
+ */
 enum class TableOptions : int {
   None = 0,
   Resizable = ImGuiTableFlags_Resizable,
@@ -109,13 +109,13 @@ enum class TableOptions : int {
 };
 
 /**
-* Enum for stretch type of StretchLayout.
-*/
+ * Enum for stretch type of StretchLayout.
+ */
 enum class Stretch : uint8_t { Width = 0x1, Height = 0x2, All = 0x3 };
 
 /**
-* Enum for anchor type of AnchorLayout.
-*/
+ * Enum for anchor type of AnchorLayout.
+ */
 // clang-format off
 enum class Anchor : uint8_t {
   Top =                 0x1,

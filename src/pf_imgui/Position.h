@@ -1,9 +1,9 @@
 /**
-* @file Position.h
-* @brief Type used for position in pf_imgui.
-* @author Petr Flajšingr
-* @date 2.4.22
-*/
+ * @file Position.h
+ * @brief Type used for position in pf_imgui.
+ * @author Petr Flajšingr
+ * @date 2.4.22
+ */
 
 #ifndef PF_IMGUI_POSITION_H
 #define PF_IMGUI_POSITION_H

@@ -1,9 +1,9 @@
 /**
-* @file GradientEditor.h
-* @brief Gradient editor.
-* @author Petr Flajšingr
-* @date 3.4.22
-*/
+ * @file GradientEditor.h
+ * @brief Gradient editor.
+ * @author Petr Flajšingr
+ * @date 3.4.22
+ */
 
 #ifndef PF_IMGUI_GRADIENTEDITOR_H
 #define PF_IMGUI_GRADIENTEDITOR_H

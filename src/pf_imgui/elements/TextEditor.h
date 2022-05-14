@@ -1,9 +1,9 @@
 /**
-* @file TextEditor.h
-* @brief TextEdiitor element.
-* @author Petr Flajšingr
-* @date 2.4.22
-*/
+ * @file TextEditor.h
+ * @brief TextEdiitor element.
+ * @author Petr Flajšingr
+ * @date 2.4.22
+ */
 
 #ifndef PF_IMGUI_TEXTEDITOR_H
 #define PF_IMGUI_TEXTEDITOR_H

@@ -1,9 +1,9 @@
 /**
-* @file NodeEditor.h
-* @brief Node for NodeEditor.
-* @author Petr Flajšingr
-* @date 27.3.22
-*/
+ * @file NodeEditor.h
+ * @brief Node for NodeEditor.
+ * @author Petr Flajšingr
+ * @date 27.3.22
+ */
 
 #ifndef PF_IMGUI_NODE_EDITOR_NODE_H
 #define PF_IMGUI_NODE_EDITOR_NODE_H

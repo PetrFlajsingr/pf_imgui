@@ -1,9 +1,9 @@
 /**
-* @file Pin.h
-* @brief Pin for NodeEditor.
-* @author Petr Flajšingr
-* @date 27.3.22
-*/
+ * @file Pin.h
+ * @brief Pin for NodeEditor.
+ * @author Petr Flajšingr
+ * @date 27.3.22
+ */
 
 #ifndef PF_IMGUI_NODE_EDITOR_PIN_H
 #define PF_IMGUI_NODE_EDITOR_PIN_H

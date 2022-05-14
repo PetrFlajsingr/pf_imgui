@@ -1,9 +1,9 @@
 /**
-* @file WidthDecorator.h
-* @brief Decorator to enable control of element width.
-* @author Petr Flajšingr
-* @date 2.5.21
-*/
+ * @file WidthDecorator.h
+ * @brief Decorator to enable control of element width.
+ * @author Petr Flajšingr
+ * @date 2.5.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H

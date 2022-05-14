@@ -1,9 +1,9 @@
 /**
-* @file Comment.h
-* @brief Commet for NodeEditor.
-* @author Petr Flajšingr
-* @date 2.4.22
-*/
+ * @file Comment.h
+ * @brief Commet for NodeEditor.
+ * @author Petr Flajšingr
+ * @date 2.4.22
+ */
 
 #ifndef PF_IMGUI_COMMENT_H
 #define PF_IMGUI_COMMENT_H

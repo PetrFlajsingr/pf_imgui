@@ -1,9 +1,9 @@
 /**
-* @file Combobox.h
-* @brief Selectable combobox.
-* @author Petr Flajšingr
-* @date 4.6.21
-*/
+ * @file Combobox.h
+ * @brief Selectable combobox.
+ * @author Petr Flajšingr
+ * @date 4.6.21
+ */
 
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
@@ -72,8 +72,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomComboboxBase::setShownItemCount;
 
   /**
-    * @brief Struct for construction of Combobox.
-    */
+   * @brief Struct for construction of Combobox.
+   */
   struct Config {
     using Parent = Combobox;
     std::string_view name;                                /*!< Unique name of the element */

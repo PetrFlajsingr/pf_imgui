@@ -1,9 +1,9 @@
 /**
-* @file Color.h
-* @brief Color.
-* @author Petr Flajšingr
-* @date 2.4.22
-*/
+ * @file Color.h
+ * @brief Color.
+ * @author Petr Flajšingr
+ * @date 2.4.22
+ */
 
 #ifndef PF_IMGUI_COLOR_H
 #define PF_IMGUI_COLOR_H
@@ -18,6 +18,7 @@ namespace pf::ui::ig {
 
 /**
  * @brief Color for pf_imgui, optimized compared to using ImVec4.
+ * TODO: blend functions etc
  */
 class PF_IMGUI_EXPORT Color {
  public:
@@ -25,7 +26,8 @@ class PF_IMGUI_EXPORT Color {
   explicit Color(ImColor value);
   explicit Color(ImU32 value);
   explicit Color(const ImVec4 &value);
-
+  // color constants
+  // TODO: add more
   static const Color Red;
   static const Color Green;
   static const Color Blue;

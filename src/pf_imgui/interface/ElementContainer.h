@@ -1,9 +1,9 @@
 /**
-* @file ElementContainer.h
-* @brief Base class for objects which can hold arbitrary elements.
-* @author Petr Flajšingr
-* @date 31.10.20
-*/
+ * @file ElementContainer.h
+ * @brief Base class for objects which can hold arbitrary elements.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 
 #ifndef PF_IMGUI_INTERFACE_CONTAINER_H
 #define PF_IMGUI_INTERFACE_CONTAINER_H
@@ -22,10 +22,10 @@
 namespace pf::ui::ig {
 
 /**
-* @brief Interface for objects, which can contain instances of Element.
-*
-* Allows for creation of child elements directly via templated methods.
-*/
+ * @brief Interface for objects, which can contain instances of Element.
+ *
+ * Allows for creation of child elements directly via templated methods.
+ */
 class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  public:
   ElementContainer() = default;
@@ -34,13 +34,13 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   ElementContainer &operator=(ElementContainer &&other) noexcept;
 
   /**
-  * Create a child and append it to the end of children.
-  *
-  * @tparam T type of created Element
-  * @tparam Args arguments to pass to the Ts constructor after its name
-  * @param args arguments to pass to the Ts constructor after its nam
-  * @return reference to the newly created Element
-  */
+   * Create a child and append it to the end of children.
+   *
+   * @tparam T type of created Element
+   * @tparam Args arguments to pass to the Ts constructor after its name
+   * @param args arguments to pass to the Ts constructor after its nam
+   * @return reference to the newly created Element
+   */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
   T &createChild(Args &&...args) {
@@ -59,15 +59,15 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   }
 
   /**
- * Create a child and append it to the end of children.
- *
- * @tparam T type of created Element
- * @tparam Args arguments to pass to the Ts constructor after its name
- * @param index index to insert the newly created child at
- * @param name ID of the newly created element
- * @param args arguments to pass to the Ts constructor after its nam
- * @return reference to the newly created Element
- */
+   * Create a child and append it to the end of children.
+   *
+   * @tparam T type of created Element
+   * @tparam Args arguments to pass to the Ts constructor after its name
+   * @param index index to insert the newly created child at
+   * @param name ID of the newly created element
+   * @param args arguments to pass to the Ts constructor after its nam
+   * @return reference to the newly created Element
+   */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
   T &createChildAtIndex(std::size_t index, Args &&...args) {
@@ -86,39 +86,39 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   }
 
   /**
-  * Remove a child by name.
-  *
-  * @details If the container doesn't contain any child by this name, nothing is done.
-  * @param name name of the child to be removed
-  */
+   * Remove a child by name.
+   *
+   * @details If the container doesn't contain any child by this name, nothing is done.
+   * @param name name of the child to be removed
+   */
   void removeChild(const std::string &name);
   /**
-  * Add an already created child.
-  *
-  * @param child child to be added
-  */
+   * Add an already created child.
+   *
+   * @param child child to be added
+   */
   void addChild(std::unique_ptr<Element> child);
   /**
-  * Insert an already created child at the provided index.
-  *
-  * @param child child to be added
-  * @param index index at which the child should be stored
-  */
+   * Insert an already created child at the provided index.
+   *
+   * @param child child to be added
+   * @param index index at which the child should be stored
+   */
   void insertChild(std::unique_ptr<Element> child, std::size_t index);
 
   /**
-  * Enqueue child removal by its name. The removal is run in the next call to getChildren().
-  * @param name name of the child to be removed
-  */
+   * Enqueue child removal by its name. The removal is run in the next call to getChildren().
+   * @param name name of the child to be removed
+   */
   void enqueueChildRemoval(const std::string &name);
 
   /**
-  * Find a child by its name.
-  *
-  * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
-  * @param name name of the searched for child
-  * @return reference to the searched for child
-  */
+   * Find a child by its name.
+   *
+   * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
+   * @param name name of the searched for child
+   * @return reference to the searched for child
+   */
   template<std::derived_from<Element> T>
   [[nodiscard]] std::optional<std::reference_wrapper<T>> childByName(const std::string &name) {
     if (const auto iter = children.find(name); iter != children.end()) {
@@ -129,12 +129,12 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   }
 
   /**
-  * Find a child by its name.
-  *
-  * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
-  * @param name name of the searched for child
-  * @return reference to the searched for child
-  */
+   * Find a child by its name.
+   *
+   * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
+   * @param name name of the searched for child
+   * @return reference to the searched for child
+   */
   template<std::derived_from<Element> T>
   [[nodiscard]] std::optional<std::reference_wrapper<const T>> childByName(const std::string &name) const {
     if (const auto iter = children.find(name); iter != children.end()) {
@@ -145,45 +145,45 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   }
 
   /**
-  * Get all children.
-  *
-  * @details Upon calling this method, all children enqueued for removal are removed first.
-  * @return View to references of all children in the container.
-  */
+   * Get all children.
+   *
+   * @details Upon calling this method, all children enqueued for removal are removed first.
+   * @return View to references of all children in the container.
+   */
   [[nodiscard]] auto getChildren() {
     std::ranges::for_each(childrenToRemove, [this](const auto &name) { removeChild(name); });
     childrenToRemove.clear();
     return childrenInOrder | ranges::views::transform([](auto &childRef) -> Element & { return childRef.get(); });
   }
   /**
-  * Get all children.
-  *
-  * @details Unlike it's non-const alternative, this method does not remove children enqueued for removal.
-  * @return View to const references of all children in the container.
-  */
+   * Get all children.
+   *
+   * @details Unlike it's non-const alternative, this method does not remove children enqueued for removal.
+   * @return View to const references of all children in the container.
+   */
   [[nodiscard]] auto getChildren() const {
     return childrenInOrder | ranges::views::transform([](auto &childRef) -> const Element & { return childRef.get(); });
   }
 
   /**
-  * Remove all children from the container.
-  */
+   * Remove all children from the container.
+   */
   void clear();
 
   std::vector<Renderable *> getRenderables() override;
 
  private:
   /**
-  * Main storage of children. Stored as an unordered_map for quick access by ID.
-  */
+   * Main storage of children. Stored as an unordered_map for quick access by ID.
+   */
   std::unordered_map<std::string, std::unique_ptr<Element>> children;
   /**
-  * Secondary storage, where children are stored in their insertion order.
-  */
+   * Secondary storage, where children are stored in their insertion order.
+   */
   std::vector<std::reference_wrapper<Element>> childrenInOrder;
   /**
-  * Storage for IDs of children which should be removed during the next getChildren() call.
-  */
+   * Storage for IDs of children which should be removed during the next getChildren() call.
+   */
   std::vector<std::string> childrenToRemove;
 };
 

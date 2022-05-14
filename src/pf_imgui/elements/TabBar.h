@@ -62,11 +62,11 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public 
 };
 
 /**
-* @brief Par of TabBar, when clicked it switches to the selected sub-layout.
+ * @brief Par of TabBar, when clicked it switches to the selected sub-layout.
  *
  * @todo: close & selected persistence
  * @todo: Closeable
-*/
+ */
 class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  public:
   /**
@@ -136,11 +136,11 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
 };
 
 /**
-* @brief A bar for containment and switching of tabs.
-*
-* TabBar contains only Bars, elements are inside the Tabs created by addTab().
-*
-*/
+ * @brief A bar for containment and switching of tabs.
+ *
+ * TabBar contains only Bars, elements are inside the Tabs created by addTab().
+ *
+ */
 class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
  public:
   enum class ResizePolicy {
@@ -161,64 +161,64 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
    */
   explicit TabBar(Config &&config);
   /**
-  * Construct TabBar.
-  * @param elementName ID of the TabBar
-  * @param allowTabList set if tab list on the left side is allowed
-  */
+   * Construct TabBar.
+   * @param elementName ID of the TabBar
+   * @param allowTabList set if tab list on the left side is allowed
+   */
   explicit TabBar(const std::string &elementName, bool allowTabList = false);
 
   /**
-  * Create a new Tab.
-  * @param tabName ID of the Tab
-  * @param caption text rendered on the Tab
-  * @param mods modifiers
-  * @return reference to the newly created Tab
-  */
+   * Create a new Tab.
+   * @param tabName ID of the Tab
+   * @param caption text rendered on the Tab
+   * @param mods modifiers
+   * @return reference to the newly created Tab
+   */
   Tab &addTab(const std::string &tabName, const std::string &caption, const Flags<TabMod> &mods = Flags<TabMod>{},
               bool closeable = false);
   /**
-  * Create a new Tab.
-  * @param tabName ID of the Tab
-  * @param caption text rendered on the Tab
-  * @return reference to the newly created Tab
-  */
+   * Create a new Tab.
+   * @param tabName ID of the Tab
+   * @param caption text rendered on the Tab
+   * @return reference to the newly created Tab
+   */
   Tab &addTab(const std::string &tabName, const std::string &caption, bool closeable);
   /**
-  * Create a new TabButton.
-  * @param buttonName ID of the TabButton
-  * @param caption text rendered on the TabButton
-  * @return reference to the newly created TabButton
-  */
+   * Create a new TabButton.
+   * @param buttonName ID of the TabButton
+   * @param caption text rendered on the TabButton
+   * @return reference to the newly created TabButton
+   */
   TabButton &addTabButton(const std::string &buttonName, const std::string &caption,
                           const Flags<TabMod> &mods = Flags<TabMod>{});
   /**
-  * Remove a tab with the given ID.
-  * If no such Tab exists nothing happens.
-  * @param tabName ID of the tab to be removed
-  */
+   * Remove a tab with the given ID.
+   * If no such Tab exists nothing happens.
+   * @param tabName ID of the tab to be removed
+   */
   void removeTab(const std::string &tabName);
 
   /**
-  * Get currently selected Tab.
-  * @return
-  */
+   * Get currently selected Tab.
+   * @return
+   */
   [[nodiscard]] Tab &getSelectedTab();
 
   /**
-  * Set Tab as selected. If a Tab with this name is not found nothing happens.
-  * @param tabName name of the tab to open
-  */
+   * Set Tab as selected. If a Tab with this name is not found nothing happens.
+   * @param tabName name of the tab to open
+   */
   void setSelectedTab(std::string_view tabName);
 
   /**
-  * Check if tab list on the left side is allowed.
-  * @return true if allowed
-  */
+   * Check if tab list on the left side is allowed.
+   * @return true if allowed
+   */
   [[nodiscard]] bool isTabListAllowed() const;
   /**
-  * Set if tab list on the left side is allowed.
-  * @param listAllowed allowed
-  */
+   * Set if tab list on the left side is allowed.
+   * @param listAllowed allowed
+   */
   void setTabListAllowed(bool listAllowed);
 
   /**

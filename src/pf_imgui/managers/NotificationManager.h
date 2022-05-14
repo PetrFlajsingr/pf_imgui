@@ -1,9 +1,9 @@
 /**
-* @file NotificationManager.h
-* @brief Class for management of notifications.
-* @author Petr Flajšingr
-* @date 16.11.21
-*/
+ * @file NotificationManager.h
+ * @brief Class for management of notifications.
+ * @author Petr Flajšingr
+ * @date 16.11.21
+ */
 #ifndef PF_IMGUI_NOTIFICATIONMANAGER_H
 #define PF_IMGUI_NOTIFICATIONMANAGER_H
 

@@ -1,9 +1,9 @@
 /**
-* @file InputText.h
-* @brief InputText element.
-* @author Petr Flajšingr
-* @date 31.10.20
-*/
+ * @file InputText.h
+ * @brief InputText element.
+ * @author Petr Flajšingr
+ * @date 31.10.20
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_INPUTTEXT_H
 #define PF_IMGUI_ELEMENTS_INPUTTEXT_H

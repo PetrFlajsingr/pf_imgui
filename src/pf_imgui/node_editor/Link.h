@@ -1,9 +1,9 @@
 /**
-* @file Link.h
-* @brief Link for NodeEditor.
-* @author Petr Flajšingr
-* @date 27.3.22
-*/
+ * @file Link.h
+ * @brief Link for NodeEditor.
+ * @author Petr Flajšingr
+ * @date 27.3.22
+ */
 
 #ifndef PF_IMGUI_NODE_EDITOR_LINK_H
 #define PF_IMGUI_NODE_EDITOR_LINK_H
