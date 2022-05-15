@@ -13,14 +13,14 @@
 namespace pf::ui::ig {
 
 StackedLayout::StackedLayout(StackedLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
+    : Layout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
 StackedLayout::Stack::Stack(StackedLayout &parent) : parent(parent) {}
 
 void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
 
 StackedLayout::StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
-    : ResizableLayout(elementName, size, showBorder) {}
+    : Layout(elementName, size, showBorder) {}
 
 void StackedLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();

@@ -11,7 +11,7 @@
 namespace pf::ui::ig {
 
 GridLayout::GridLayout(GridLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
+    : Layout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       width(config.widthInCells), height(config.heightInCells) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
@@ -20,13 +20,13 @@ GridLayout::GridLayout(GridLayout::Config &&config)
 
 GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
                        ShowBorder showBorder)
-    : ResizableLayout(elementName, size, showBorder), width(width), height(height) {
+    : Layout(elementName, size, showBorder), width(width), height(height) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
   std::ranges::fill(cells, nullptr);
 }
 
-void GridLayout::setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout) {
+void GridLayout::setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<Layout> layout) {
   cells[indexForCell(column, row)] = std::move(layout);
 }
 
@@ -56,7 +56,7 @@ void GridLayout::renderImpl() {
 
 uint32_t GridLayout::indexForCell(uint32_t column, uint32_t row) const { return row * width + column; }
 
-ResizableLayout &GridLayout::getCellLayout(uint32_t column, uint32_t row) {
+Layout &GridLayout::getCellLayout(uint32_t column, uint32_t row) {
   const auto index = indexForCell(column, row);
   return *cells[index];
 }

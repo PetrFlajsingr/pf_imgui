@@ -10,11 +10,11 @@
 namespace pf::ui::ig {
 
 StretchLayout::StretchLayout(StretchLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
+    : Layout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       stretch(config.stretch) {}
 
 StretchLayout::StretchLayout(const std::string &elementName, const Size &size, Stretch stretch, ShowBorder showBorder)
-    : ResizableLayout(elementName, size, showBorder), stretch(stretch) {}
+    : Layout(elementName, size, showBorder), stretch(stretch) {}
 
 Stretch StretchLayout::getStretch() const { return stretch; }
 void StretchLayout::setStretch(Stretch newStretch) {

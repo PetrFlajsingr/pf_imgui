@@ -7,7 +7,7 @@
 #ifndef PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
 #define PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
 
-#include "ResizableLayout.h"
+#include <pf_imgui/interface/Layout.h>
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
@@ -22,7 +22,7 @@ namespace pf::ui::ig {
  *
  *
  */
-class PF_IMGUI_EXPORT StretchLayout : public ResizableLayout {
+class PF_IMGUI_EXPORT StretchLayout : public Layout {
  public:
   /**
    * @brief Struct for construction of StretchLayout.

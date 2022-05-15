@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
 #define PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
 
-#include "ResizableLayout.h"
+#include <pf_imgui/interface/Layout.h>
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
@@ -22,7 +22,7 @@ namespace pf::ui::ig {
  *
  * This layout serves as a multi-page layout.
  */
-class PF_IMGUI_EXPORT StackedLayout : public ResizableLayout {
+class PF_IMGUI_EXPORT StackedLayout : public Layout {
  public:
   /**
    * @brief Struct for construction of StackedLayout.

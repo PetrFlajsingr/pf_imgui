@@ -8,12 +8,12 @@
 #ifndef PF_IMGUI_LAYOUTS_GRIDLAYOUT_H
 #define PF_IMGUI_LAYOUTS_GRIDLAYOUT_H
 
-#include "ResizableLayout.h"
 #include <algorithm>
 #include <concepts>
 #include <memory>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Layout.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -24,7 +24,7 @@ namespace pf::ui::ig {
  *
  * Only descendants of Layout interface are allowed as children, in order to avoid weird element positioning.
  */
-class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
+class PF_IMGUI_EXPORT GridLayout : public Layout {
  public:
   struct Config {
     using Parent = GridLayout;
@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param row row of the selected cell
    * @param layout layout to be moved
    */
-  void setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<ResizableLayout> layout);
+  void setLayoutForCell(uint32_t column, uint32_t row, std::unique_ptr<Layout> layout);
 
   /**
    * Create a layout on given coordinates. If a layout is already present there it is overwritten.
@@ -84,7 +84,7 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
    * @param row row of the cell
    * @return reference to layout at the given coordinates
    */
-  [[nodiscard]] ResizableLayout &getCellLayout(uint32_t column, uint32_t row);
+  [[nodiscard]] Layout &getCellLayout(uint32_t column, uint32_t row);
 
   /**
    * Check whether a cell contains a Layout or not.
@@ -105,7 +105,7 @@ class PF_IMGUI_EXPORT GridLayout : public ResizableLayout {
  private:
   uint32_t width;
   uint32_t height;
-  std::vector<std::unique_ptr<ResizableLayout>> cells;
+  std::vector<std::unique_ptr<Layout>> cells;
 
   /**
    * Translate 2D coordinates to 1D for lookup in cell storage.

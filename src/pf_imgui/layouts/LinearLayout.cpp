@@ -9,7 +9,7 @@
 namespace pf::ui::ig {
 
 LinearLayout::LinearLayout(const std::string &name, Size size, ShowBorder showBorder)
-    : ResizableLayout(name, size, showBorder) {}
+    : Layout(name, size, showBorder) {}
 
 void LinearLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
 

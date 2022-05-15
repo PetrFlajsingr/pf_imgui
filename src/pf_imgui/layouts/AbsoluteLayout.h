@@ -8,10 +8,10 @@
 #ifndef PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 #define PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 
-#include "ResizableLayout.h"
 #include <memory>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/decorators/PositionDecorator.h>
 #include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
@@ -28,15 +28,15 @@ namespace pf::ui::ig {
  * All children are wrapped int a PositionDecorator, which allows for settings position even to not Positionable elements.
  * Coordinates are the same as the ones used for size.
  */
-class PF_IMGUI_EXPORT AbsoluteLayout : public ResizableLayout {
+class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
  public:
   /**
    * @brief Struct for construction of AbsoluteLayout.
    */
   struct Config {
     using Parent = AbsoluteLayout;
-    std::string_view name;                  /*!< Unique name of the element */
-    Size size;                              /*!< Size of the element */
+    std::string_view name;   /*!< Unique name of the element */
+    Size size;               /*!< Size of the element */
     bool showBorder = false; /*!< Render border around layout's area */
   };
   /**

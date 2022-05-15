@@ -8,7 +8,7 @@
 #ifndef IMGUI_EXPERIMENTS_LINEARLAYOUT_H
 #define IMGUI_EXPERIMENTS_LINEARLAYOUT_H
 
-#include "ResizableLayout.h"
+#include <pf_imgui/interface/Layout.h>
 #include <memory>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
@@ -21,7 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief Layout rendering its children horizontal with optional spacing.
  */
-class PF_IMGUI_EXPORT LinearLayout : public ResizableLayout {
+class PF_IMGUI_EXPORT LinearLayout : public Layout {
  public:
   /**
    * Construct LinearLayout

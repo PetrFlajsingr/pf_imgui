@@ -24,14 +24,14 @@ namespace pf::ui::ig {
  *
  * Provides basic functionality for layouts - border drawing and scrolling.
  */
-class PF_IMGUI_EXPORT Layout : public Element, public RenderablesContainer {
+class PF_IMGUI_EXPORT Layout : public Element, public Resizable, public RenderablesContainer {
  public:
   /**
    * Construct a layout.
    * @param elementName ID of the element
    * @param showBorder when allowed a border is drawn at the edges of the layout area
    */
-  explicit Layout(const std::string &elementName, ShowBorder showBorder);
+  explicit Layout(const std::string &elementName, const Size &size, ShowBorder showBorder);
 
   /**
    * Check if border is drawn.

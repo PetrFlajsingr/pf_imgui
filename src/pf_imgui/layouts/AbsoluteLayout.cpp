@@ -8,10 +8,10 @@
 namespace pf::ui::ig {
 
 AbsoluteLayout::AbsoluteLayout(AbsoluteLayout::Config &&config)
-    : ResizableLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
+    : Layout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
 AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
-    : ResizableLayout(elementName, size, showBorder) {}
+    : Layout(elementName, size, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();

@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
 #define PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
 
-#include "ResizableLayout.h"
+#include <pf_imgui/interface/Layout.h>
 #include <limits>
 #include <memory>
 #include <pf_common/algorithms.h>
@@ -29,7 +29,7 @@ namespace pf::ui::ig {
  *
  * @todo: layouts can't see they were resized
  */
-class PF_IMGUI_EXPORT AnchorLayout : public ResizableLayout {
+class PF_IMGUI_EXPORT AnchorLayout : public Layout {
  public:
   /**
    * @brief Struct for construction of AnchorLayout.
