@@ -10,7 +10,7 @@
 
 #include <chrono>
 #include <memory>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -22,7 +22,7 @@ namespace pf::ui::ig {
 /**
  * @brief Date picker element.
  */
-class DatePicker : public Element,
+class DatePicker : public ItemElement,
                    public Labellable,
                    public ValueObservable<std::chrono::year_month_day>,
                    public Savable {

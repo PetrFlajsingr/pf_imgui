@@ -10,7 +10,7 @@
 
 #include <chrono>
 #include <pf_imgui/elements/SpinInput.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -29,7 +29,7 @@ struct TimeOfDayComparator {
 /**
  * @brief Simple HH MM SS 24 time picker.
  */
-class TimePicker : public Element,
+class TimePicker : public ItemElement,
                    public Labellable,
                    public ValueObservable<TimeOfDay, details::TimeOfDayComparator>,
                    public Savable {

@@ -11,7 +11,7 @@
 #include <imgui-knobs.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -37,7 +37,7 @@ enum class KnobType {
  * @todo: more types
  */
 template<OneOf<int, float> T>
-class Knob : public Element,
+class Knob : public ItemElement,
              public Labellable,
              public Resizable,
              public ValueObservable<T>,
@@ -102,7 +102,7 @@ Knob<T>::Knob(Knob::Config &&config)
 template<OneOf<int, float> T>
 Knob<T>::Knob(const std::string &name, const std::string &label, KnobType type, Size s, T min, T max, float speed,
               T value, Persistent persistent)
-    : Element(name), Labellable(label), Resizable(s), ValueObservable<T>(value), Savable(persistent), min(min),
+    : ItemElement(name), Labellable(label), Resizable(s), ValueObservable<T>(value), Savable(persistent), min(min),
       max(max), speed(speed), type(type) {}
 
 template<OneOf<int, float> T>

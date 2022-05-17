@@ -12,7 +12,7 @@
 #include <fmt/format.h>
 #include <imGuIZMOquat.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -42,7 +42,7 @@ using GizmoValueType =
  * @tparam Type
  */
 template<GizmoType Type>
-class PF_IMGUI_EXPORT Gizmo3D : public Element,
+class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
                                 public Resizable,
                                 public ValueObservable<details::GizmoValueType<Type>>,
                                 public Savable {
@@ -96,12 +96,12 @@ class PF_IMGUI_EXPORT Gizmo3D : public Element,
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
-    : Element(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value),
+    : ItemElement(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(const std::string &name, Gizmo3D::ValueType value, const Size &size, Persistent persistent)
-    : Element(name), Resizable(size), ValueObservable<ValueType>(value), Savable(persistent) {}
+    : ItemElement(name), Resizable(size), ValueObservable<ValueType>(value), Savable(persistent) {}
 
 template<GizmoType Type>
 void Gizmo3D<Type>::setMidObject(GizmoMid newObject)

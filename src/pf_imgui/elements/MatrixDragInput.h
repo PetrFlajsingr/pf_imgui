@@ -11,7 +11,7 @@
 #include <glm/glm.hpp>
 #include <pf_imgui/elements/details/DragInputDetails.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -26,7 +26,7 @@ namespace pf::ui::ig {
  */
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 class MatrixDragInput
-    : public Element,
+    : public ItemElement,
       public ValueObservable<M>,
       public Labellable,
       public Savable,
@@ -93,7 +93,7 @@ template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(const std::string &name, const std::string &label,
                                     MatrixDragInput::ParamType changeSpeed, MatrixDragInput::ParamType minVal,
                                     MatrixDragInput::ParamType maxVal, M initValue, Persistent persistent)
-    : Element(name), ValueObservable<M>(initValue), Labellable(label), Savable(persistent), speed(changeSpeed),
+    : ItemElement(name), ValueObservable<M>(initValue), Labellable(label), Savable(persistent), speed(changeSpeed),
       min(minVal), max(maxVal) {
   for (std::size_t i = 0; i < Height - 1; ++i) { dragNames[i] = std::string{"##drag_"} + std::to_string(i); }
 }
@@ -116,8 +116,8 @@ void MatrixDragInput<M>::setFromToml(const toml::table &src) {
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 void MatrixDragInput<M>::renderImpl() {
+  ImGui::BeginGroup();
   if (ImGui::BeginTable("lay", 1)) {
-    ImGui::BeginGroup();
     auto valueChanged = false;
     const auto firstDragName = getLabel() + "##drag";
     for (std::size_t row = 0; row < Height; ++row) {
@@ -132,9 +132,9 @@ void MatrixDragInput<M>::renderImpl() {
                                glm::value_ptr((*ValueObservable<M>::getValueAddress())[row]), Width, speed, &min, &max);
     }
     if (valueChanged) { ValueObservable<M>::notifyValueChanged(); }
-    ImGui::EndGroup();
     ImGui::EndTable();
   }
+  ImGui::EndGroup();
 }
 
 }  // namespace pf::ui::ig
