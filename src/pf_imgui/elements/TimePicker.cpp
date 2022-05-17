@@ -14,11 +14,12 @@ TimePicker::TimePicker(TimePicker::Config &&config)
 
 TimePicker::TimePicker(const std::string &name, const std::string &label, pf::ui::ig::TimeOfDay value,
                        pf::ui::ig::Persistent persistent)
-    : Element(name), Labellable(label), ValueObservable(value), Savable(persistent) {
+    : ItemElement(name), Labellable(label), ValueObservable(value), Savable(persistent) {
   setValue(value);
 }
 
 void TimePicker::renderImpl() {
+  ImGui::BeginGroup();
   {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
     pf::RAII popStyleVar{[] { ImGui::PopStyleVar(); }};
@@ -45,6 +46,7 @@ void TimePicker::renderImpl() {
   }
   ImGui::SameLine();
   ImGui::Text("%s", getLabel().c_str());
+  ImGui::EndGroup();
 }
 
 void TimePicker::setValue(const pf::ui::ig::TimeOfDay &newValue) {
