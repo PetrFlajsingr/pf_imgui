@@ -72,7 +72,7 @@ namespace pf::ui::ig {
  */
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)  // RecordLimit has to be power of two
-class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
+class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable, public Savable {
   struct Record {
     Category category;
     std::string text;
@@ -89,6 +89,7 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
     using Parent = LogPanel;
     std::string_view name;    /*!< Unique name of the element */
     Size size = Size::Auto(); /*!< Size of the element */
+    bool persistent = false;  /*!< Enable toggle buttons state saving */
   };
   /**
    * Construct LogPanel
@@ -99,8 +100,9 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
    * Construct LogPanel
    * @param name unique name of the element
    * @param size size of the element
+   * @param persistent enable toggle buttons state saving
    */
-  LogPanel(const std::string &name, Size size);
+  LogPanel(const std::string &name, Size size, Persistent persistent = Persistent::No);
   /**
    * Add a record to the output,
    * @param category logging category
@@ -135,6 +137,9 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
    * @param enabled new category state
    */
   void setCategoryAllowed(Category category, bool enabled);
+
+  toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
  protected:
   void renderImpl() override;
@@ -174,12 +179,13 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable {
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-LogPanel<Category, RecordLimit>::LogPanel(Config &&config) : LogPanel(std::string{config.name}, config.size) {}
+LogPanel<Category, RecordLimit>::LogPanel(Config &&config)
+    : LogPanel(std::string{config.name}, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size)
-    : Element(name), Resizable(size), wrapTextToggle("wrapText"), scrollToEndToggle("scrollToEnd"),
+LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size, Persistent persistent)
+    : Element(name), Resizable(size), Savable(persistent), wrapTextToggle("wrapText"), scrollToEndToggle("scrollToEnd"),
       copyToClipboardButton("copyToClipboard"), clearButton("clear") {
   std::size_t i = 0;
   for (const auto category : magic_enum::enum_values<Category>()) {
@@ -381,6 +387,23 @@ template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 constexpr std::size_t LogPanel<Category, RecordLimit>::GetCategoryIndex(Category category) {
   return *magic_enum::enum_index(category);
+}
+
+template<Enum Category, std::size_t RecordLimit>
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
+toml::table LogPanel<Category, RecordLimit>::toToml() const {
+  return toml::table{{"textwrap", wrapTextToggle.getValue()}, {"autoscroll", scrollToEndToggle.getValue()}};
+}
+
+template<Enum Category, std::size_t RecordLimit>
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
+void LogPanel<Category, RecordLimit>::setFromToml(const toml::table &src) {
+  if (const auto iter = src.find("textwrap"); iter != src.end()) {
+    if (const auto ptr = iter->second.as_boolean(); ptr != nullptr) { wrapTextToggle.setValue(ptr->get()); }
+  }
+  if (const auto iter = src.find("autoscroll"); iter != src.end()) {
+    if (const auto ptr = iter->second.as_boolean(); ptr != nullptr) { scrollToEndToggle.setValue(ptr->get()); }
+  }
 }
 
 }  // namespace pf::ui::ig
