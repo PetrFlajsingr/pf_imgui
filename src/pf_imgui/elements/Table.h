@@ -269,8 +269,15 @@ void Table<ColumnCount>::renderImpl() {
   [[maybe_unused]] auto style = setStyleStack();
   if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndTable};
+
+    std::ranges::for_each(std::views::iota(0ull, ColumnCount), [&](const auto index) {
+        const char *name = nullptr;
+        if (header.has_value()) {
+          name = (*header)[index].c_str();
+        }
+        ImGui::TableSetupColumn(name, {}, 0.f, index);
+    });
     if (header.has_value()) {
-      std::ranges::for_each(*header, [](const auto &str) { ImGui::TableSetupColumn(str.c_str()); });
       ImGui::TableHeadersRow();
     }
 
