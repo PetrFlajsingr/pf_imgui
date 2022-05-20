@@ -192,7 +192,11 @@ set(SOURCES
         src/pf_imgui/dialogs/builders/FileDialogBuilder.cpp
         src/pf_imgui/dialogs/builders/MessageDialogBuilder.cpp
         src/pf_imgui/dialogs/builders/InputDialogBuilder.cpp
-        src/pf_imgui/dialogs/InputDialog.cpp src/pf_imgui/elements/MemoryEditor.cpp)
+        src/pf_imgui/dialogs/InputDialog.cpp
+        src/pf_imgui/elements/MemoryEditor.cpp
+        src/pf_imgui/details/IndeterminateProgressBar.cpp
+        src/pf_imgui/elements/IndeterminateProgressBar.cpp
+        )
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
@@ -382,7 +386,9 @@ set(INCLUDES
         src/pf_imgui/elements/Knob.h
         src/pf_imgui/elements/details/DragInputDetails.h
         src/pf_imgui/elements/details/InputDetails.h
-        src/pf_imgui/elements/details/SliderDetails.h)
+        src/pf_imgui/elements/details/SliderDetails.h
+        src/pf_imgui/details/IndeterminateProgressBar.h
+        src/pf_imgui/elements/IndeterminateProgressBar.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
