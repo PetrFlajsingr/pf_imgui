@@ -48,6 +48,7 @@ class PF_IMGUI_EXPORT IndeterminateProgressBar
   /**
    * Construct IndeterminateProgressBar.
    * @param elementName ID of the progress bar
+   * @param overlayStr text rendered on top of the element
    * @param speed speed of change
    * @param size size of the progress bar
    */
