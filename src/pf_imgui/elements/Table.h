@@ -190,7 +190,6 @@ class PF_IMGUI_EXPORT TableRowBuilder {
  * @brief A table containing any renderable element in each cell.
  *
  * @tparam ColumnCount static column count of the table
- * @todo: sorting support
  */
 template<std::size_t ColumnCount>
 class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, public Resizable {
@@ -228,6 +227,13 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
   [[nodiscard]] std::size_t getRowCount() const { return rows.size(); }
 
+  /**
+   * Set a sorting function for given column. This enabled sorting for the column by clicking header cells.
+   * @param columnIndex index of the column to apply sorting function too
+   * @param pred sorting predicate
+   */
+  void setSortFncForColumn(std::size_t columnIndex, std::predicate<const Element &, const Element &> auto &&pred);
+
  protected:
   void renderImpl() override;
 
@@ -242,6 +248,9 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
   ImGuiTableFlags flags;
 
   std::vector<std::unique_ptr<TableRow<ColumnCount>>> rows;
+
+  using ColumnSortFnc = std::function<bool(const Element &, const Element &)>;
+  std::array<std::optional<ColumnSortFnc>, ColumnCount> columnSortFunctions{};
 
   std::size_t idCounter = 0;
 };
@@ -264,6 +273,12 @@ std::vector<Renderable *> Table<ColumnCount>::getRenderables() {
 }
 
 template<std::size_t ColumnCount>
+void Table<ColumnCount>::setSortFncForColumn(std::size_t columnIndex,
+                                             std::predicate<const Element &, const Element &> auto &&pred) {
+  columnSortFunctions[columnIndex] = std::forward<decltype(pred)>(pred);
+}
+
+template<std::size_t ColumnCount>
 void Table<ColumnCount>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
@@ -271,15 +286,13 @@ void Table<ColumnCount>::renderImpl() {
     RAII end{ImGui::EndTable};
 
     std::ranges::for_each(std::views::iota(0ull, ColumnCount), [&](const auto index) {
-        const char *name = nullptr;
-        if (header.has_value()) {
-          name = (*header)[index].c_str();
-        }
-        ImGui::TableSetupColumn(name, {}, 0.f, index);
+      const char *name = nullptr;
+      if (header.has_value()) { name = (*header)[index].c_str(); }
+      const auto columnFlags =
+          columnSortFunctions[index].has_value() ? ImGuiTableColumnFlags_None : ImGuiTableColumnFlags_NoSort;
+      ImGui::TableSetupColumn(name, columnFlags, 0.f, index);
     });
-    if (header.has_value()) {
-      ImGui::TableHeadersRow();
-    }
+    if (header.has_value()) { ImGui::TableHeadersRow(); }
 
     std::ranges::for_each(rows, [](auto &row) {
       ImGui::TableNextRow();
@@ -287,13 +300,32 @@ void Table<ColumnCount>::renderImpl() {
         if (ImGui::TableNextColumn()) { cell.render(); }
       });
     });
+
+    if (const auto sortSpecs = ImGui::TableGetSortSpecs(); sortSpecs->SpecsDirty) {
+      const auto sortPred = [&](const auto &lhs, const auto &rhs) {
+        for (auto specsIndex : std::views::iota(0, sortSpecs->SpecsCount)) {
+          const auto columnSpecs = sortSpecs->Specs[specsIndex];
+          const auto columnIndex = columnSpecs.ColumnUserID;  // TODO: sort ordeer or direction or whatever
+          if (columnSortFunctions[columnIndex].has_value()) {
+            auto comparisonResult = columnSortFunctions[columnIndex].value()((*lhs)[columnIndex], (*rhs)[columnIndex]);
+            if (columnSpecs.SortDirection == ImGuiSortDirection_Descending) { comparisonResult = !comparisonResult; }
+            if (comparisonResult) { return true; }
+          }
+        }
+        return false;
+      };
+
+      std::ranges::sort(rows, sortPred);
+
+      sortSpecs->SpecsDirty = false;
+    }
   }
 }
 
 template<std::size_t ColumnCount>
 ImGuiTableFlags Table<ColumnCount>::CreateFlags(const Flags<TableBorder> &tableBorder,
                                                 const Flags<TableOptions> &options) {
-  return ImGuiTableFlags{*tableBorder | *options};
+  return ImGuiTableFlags{*tableBorder | *options | ImGuiTableFlags_Sortable};
 }
 
 template<std::size_t ColumnCount>
