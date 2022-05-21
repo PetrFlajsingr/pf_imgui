@@ -100,11 +100,11 @@ enum class TableBorder : int {
 /**
  * Enum for options of interaction with a table
  */
-enum class TableOptions : int {
+enum class TableOptions : ImGuiTableFlags {
   None = 0,
   Resizable = ImGuiTableFlags_Resizable,
   Reorderable = ImGuiTableFlags_Reorderable,
-  Sortable = ImGuiTableFlags_Sortable,
+  //Sortable = ImGuiTableFlags_Sortable,
   Hideable = ImGuiTableFlags_Hideable
 };
 

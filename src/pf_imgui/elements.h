@@ -26,6 +26,7 @@
 #include <pf_imgui/elements/GradientEditor.h>
 #include <pf_imgui/elements/GroupBox.h>
 #include <pf_imgui/elements/Image.h>
+#include <pf_imgui/elements/IndeterminateProgressBar.h>
 #include <pf_imgui/elements/Input.h>
 #include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/elements/Knob.h>

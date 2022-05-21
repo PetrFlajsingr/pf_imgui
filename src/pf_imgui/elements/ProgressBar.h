@@ -32,8 +32,6 @@ concept ProgressBarCompatible = requires(T t, float f) {
 /**
  * @brief Progress bar for notifying a user of operation progress.
  * @tparam T type storing the progress value
- *
- * @todo: overlay string
  */
 template<ProgressBarCompatible T>
 class PF_IMGUI_EXPORT ProgressBar
@@ -56,6 +54,7 @@ class PF_IMGUI_EXPORT ProgressBar
     T min;                    /*!< Lowest value representing 0% */
     T max;                    /*!< Highest value representing 100% */
     T value = min;            /*!< Initial value within [min, max] */
+    std::string overlay = ""; /*!< Text rendered on top of the element */
     Size size = Size::Auto(); /*!< Size of the element */
   };
   /**
@@ -70,10 +69,11 @@ class PF_IMGUI_EXPORT ProgressBar
    * @param min min value - used as a starting value when no value is provided
    * @param max max value
    * @param value starting value - min <= value <=max
+   * @param overlayStr text rendered on top of the element
    * @param size size of the progress bar
    */
   ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
-              const Size &size = Size::Auto());
+              std::string overlayStr = "", const Size &size = Size::Auto());
 
   /**
    * Set current percentage where min = 0% and max = 100%.
@@ -133,18 +133,19 @@ class PF_IMGUI_EXPORT ProgressBar
   T stepValue;
   T min;
   T max;
+  std::string overlay;
 };
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
     : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Resizable(config.size),
-      stepValue(config.step), min(config.min), max(config.max) {}
+      stepValue(config.step), min(config.min), max(config.max), overlay(std::move(config.overlay)) {}
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value,
-                            const Size &size)
-    : ItemElement(elementName), ValueObservable<T>(value.has_value() ? *value : min), Resizable(size),
-      stepValue(stepValue), min(min), max(max) {}
+                            std::string overlayStr, const Size &size)
+    : ItemElement(elementName), ValueObservable<T>(value.value_or(min)), Resizable(size), stepValue(stepValue),
+      min(min), max(max), overlay(std::move(overlayStr)) {}
 
 template<ProgressBarCompatible T>
 T ProgressBar<T>::setPercentage(float percentage) {
@@ -175,7 +176,7 @@ template<ProgressBarCompatible T>
 void ProgressBar<T>::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
-  ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()));
+  ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()), overlay.c_str());
 }
 
 extern template class ProgressBar<float>;
