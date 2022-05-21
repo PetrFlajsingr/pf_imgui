@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT WidthDecorator : public T {
   }
 
  private:
-  Width width{};
+  Width width;
 };
 }  // namespace pf::ui::ig
 
