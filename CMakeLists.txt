@@ -68,6 +68,7 @@ include_directories(src/include/imgui-node-editor/)
 include_directories(src/include/imgui_curve_editor/)
 include_directories(src/include/imgui_color_gradient/)
 include_directories(src/include/ringbuffer/)
+include_directories(src/include/ImGuizmo/)
 include_directories(${IMGUI_FILE_DIALOG_DIR})
 include_directories(${IMGUI_FLAME_GRAPH_DIR})
 include_directories(${implot_SOURCE_DIR})
@@ -135,6 +136,7 @@ set(SOURCES
         src/include/imgui/imgui_demo.cpp
         src/include/DearWidgets/dear_widgets.cpp
         src/include/imGuIZMO.quat/imGuIZMOquat.cpp
+        src/include/ImGuizmo/ImGuizmo.cpp
         src/include/ImGuiColorTextEdit/ImGuiColorTextEditor.cpp
         src/include/imgui-command-palette/imcmd_command_palette.cpp
         src/include/imgui-command-palette/imcmd_fuzzy_search.cpp
@@ -365,6 +367,7 @@ set(INCLUDES
         src/pf_imgui/elements/SimpleCurveEditor.h
         src/include/imgui_color_gradient/imgui_color_gradient.h
         src/include/ringbuffer/ringbuffer.hpp
+        src/include/ImGuizmo/ImGuizmo.h
         src/pf_imgui/elements/GradientEditor.h
         src/pf_imgui/Font.h
         src/pf_imgui/layouts/HorizontalLayout.h
@@ -452,6 +455,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_curve_editor>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/imgui_color_gradient>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ringbuffer>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/include/ImGuizmo>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${toml++_SOURCE_DIR}/include>)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${glm_SOURCE_DIR}>)
 target_link_libraries(${PROJECT_NAME} PRIVATE pf_common::pf_common tomlplusplus::tomlplusplus)
@@ -628,6 +632,12 @@ install(
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING
         PATTERN "*.hpp"
+)
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src/include/ImGuizmo/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING
+        PATTERN "*.h"
 )
 
 
