@@ -69,8 +69,8 @@ class OverlayGizmoBase : public ValueObservable<glm::mat4> {
   std::optional<glm::vec3> snapValues = std::nullopt;
 
   glm::mat4 view;
-  bool projectionOrthographic;
   glm::mat4 projection;
+  bool projectionOrthographic;
 
   bool wasUsing = false;
   Observable_impl<bool> inUseObservableImpl;
