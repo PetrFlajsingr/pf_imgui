@@ -15,8 +15,10 @@
 
 namespace pf::ui::ig {
 
+
 /**
  * @brief Gizmo overlaying the main viewport.
+ * @attention Only one gizmo can be used within the app at the same time (this applies to ViewportOverlayGizmo and AreaOverlayGizmo)
  */
 class ViewportOverlayGizmo : public Renderable, public OverlayGizmoBase {
  public:
@@ -58,6 +60,7 @@ class ViewportOverlayGizmo : public Renderable, public OverlayGizmoBase {
 
 /**
  * @brief Gizmo overlaying its window/layout.
+ * @attention Only one gizmo can be used within the app at the same time (this applies to ViewportOverlayGizmo and AreaOverlayGizmo)
  */
 class AreaOverlayGizmo : public Element, public OverlayGizmoBase {
  public:

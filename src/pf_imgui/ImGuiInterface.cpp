@@ -165,6 +165,7 @@ std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName
 
 void ImGuiInterface::renderImpl() {
   ImGuizmo::BeginFrame();
+  if (viewportGizmo != nullptr) { viewportGizmo->render(); }
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
   if (hasMenuBar()) {
@@ -266,5 +267,7 @@ void ImGuiInterface::render() {
 }
 
 void ImGuiInterface::setContext() const { ImGui::SetCurrentContext(imguiContext); }
+
+void ImGuiInterface::removeViewportGizmo() { viewportGizmo = nullptr; }
 
 }  // namespace pf::ui::ig

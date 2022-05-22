@@ -19,6 +19,7 @@
 #include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/elements/OverlayGizmo.h>
 #include <pf_imgui/elements/RadioGroup.h>
 #include <pf_imgui/elements/StatusBar.h>
 #include <pf_imgui/fwd.h>
@@ -238,6 +239,17 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   [[nodiscard]] BackgroundDockingArea &createOrGetBackgroundDockingArea();
 
   void removeBackgroundDockingArea();
+  // TODO: change this to something not insane
+  template<typename... Args>
+    requires(std::constructible_from<ViewportOverlayGizmo, Args...>)
+  [[nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
+    if (viewportGizmo == nullptr) {
+      viewportGizmo = std::make_unique<ViewportOverlayGizmo>(std::forward<Args>(args)...);
+    }
+    return *viewportGizmo;
+  }
+
+  void removeViewportGizmo();
 
   /**
    * Update fonts atlas using your backend.
@@ -298,6 +310,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   std::vector<std::unique_ptr<DockBuilder>> dockBuilders{};
   std::unique_ptr<BackgroundDockingArea> backgroundDockingArea = nullptr;
+
+  std::unique_ptr<ViewportOverlayGizmo> viewportGizmo{};
 
   Font globalFont = Font::Default();
 };
