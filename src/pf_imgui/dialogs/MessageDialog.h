@@ -29,7 +29,6 @@ static_assert(IsPureFlags<MessageButtons>());
  * @tparam ButtonTypes values allowed for buttons
  *
  * @todo: type of message - info, warning, error, debug with some sort of graphic
- * @todo: align buttons to bottom
  */
 class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
  public:
