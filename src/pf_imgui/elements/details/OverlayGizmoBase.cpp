@@ -3,14 +3,13 @@
 //
 
 #include "OverlayGizmoBase.h"
-#include "glm/gtc/type_ptr.hpp"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace pf::ui::ig {
 
 OverlayGizmoBase::OverlayGizmoBase(const glm::mat4 &value, ViewportGizmoMode mode, ViewportGizmoSpace space,
-                                   const glm::mat4 &view, const glm::mat4 &projection, bool isProjectionOrthographic,
-                                   std::optional<glm::vec3> snapValues)
-    : ValueObservable(value), mode(mode), space(space), snapValues(snapValues), view(view), projection(projection),
+                                   const glm::mat4 &view, const glm::mat4 &projection, bool isProjectionOrthographic)
+    : ValueObservable(value), mode(mode), space(space), view(view), projection(projection),
       projectionOrthographic(isProjectionOrthographic) {}
 
 ViewportGizmoMode OverlayGizmoBase::getMode() const { return mode; }

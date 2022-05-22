@@ -6,8 +6,8 @@
 #define PF_IMGUI_ELEMENTS_DETAILS_OVERLAYGIZMO_BASE_H
 
 #include <ImGuizmo.h>
-#include <optional>
 #include <glm/matrix.hpp>
+#include <optional>
 #include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {
@@ -40,8 +40,7 @@ enum class ViewportGizmoSpace { Local = ImGuizmo::LOCAL, World = ImGuizmo::WORLD
 class OverlayGizmoBase : public ValueObservable<glm::mat4> {
  public:
   OverlayGizmoBase(const glm::mat4 &value, ViewportGizmoMode mode, ViewportGizmoSpace space, const glm::mat4 &view,
-                   const glm::mat4 &projection, bool isProjectionOrthographic,
-                   std::optional<glm::vec3> snapValues = std::nullopt);
+                   const glm::mat4 &projection, bool isProjectionOrthographic);
 
   [[nodiscard]] ViewportGizmoMode getMode() const;
   void setMode(ViewportGizmoMode newMode);
@@ -77,6 +76,6 @@ class OverlayGizmoBase : public ValueObservable<glm::mat4> {
   Observable_impl<bool> inUseObservableImpl;
 };
 
-}
+}  // namespace pf::ui::ig
 
-#endif // PF_IMGUI_ELEMENTS_DETAILS_OVERLAYGIZMO_BASE_H
+#endif  // PF_IMGUI_ELEMENTS_DETAILS_OVERLAYGIZMO_BASE_H

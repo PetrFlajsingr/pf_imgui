@@ -2,6 +2,7 @@
 // Created by petr on 10/27/20.
 //
 
+#include <ImGuizmo.h>
 #include <implot.h>
 #include <pf_imgui/ImGuiInterface.h>
 #include <pf_imgui/serialization.h>
@@ -163,6 +164,7 @@ std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName
 }
 
 void ImGuiInterface::renderImpl() {
+  ImGuizmo::BeginFrame();
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
   if (hasMenuBar()) {
