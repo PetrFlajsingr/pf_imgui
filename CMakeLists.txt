@@ -198,6 +198,7 @@ set(SOURCES
         src/pf_imgui/elements/MemoryEditor.cpp
         src/pf_imgui/details/IndeterminateProgressBar.cpp
         src/pf_imgui/elements/IndeterminateProgressBar.cpp
+        src/pf_imgui/elements/OverlayGizmo.cpp
         )
 
 set(BLUEPRINT_SOURCES
@@ -391,7 +392,8 @@ set(INCLUDES
         src/pf_imgui/elements/details/InputDetails.h
         src/pf_imgui/elements/details/SliderDetails.h
         src/pf_imgui/details/IndeterminateProgressBar.h
-        src/pf_imgui/elements/IndeterminateProgressBar.h)
+        src/pf_imgui/elements/IndeterminateProgressBar.h
+        src/pf_imgui/elements/OverlayGizmo.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
