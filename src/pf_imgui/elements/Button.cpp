@@ -80,11 +80,15 @@ void ArrowButton::renderImpl() {
 
 ImageButton::ImageButton(ImageButton::Config &&config)
     : ButtonBase(std::string{config.name}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Resizable(config.size), textureId(config.textureId), uvMappingProvider(config.uvTextureMappingProvider) {}
+      Resizable(config.size), textureId(config.textureId) {}
 
-ImageButton::ImageButton(const std::string &name, ImTextureID texId, Size s, Repeatable isRepeatable,
-                         UvMappingProvider uvTextureMappingProvider)
-    : ButtonBase(name, isRepeatable), Resizable(s), textureId(texId), uvMappingProvider(uvTextureMappingProvider) {}
+ImageButton::ImageButton(const std::string &name, ImTextureID texId, Size s, Repeatable isRepeatable)
+    : ButtonBase(name, isRepeatable), Resizable(s), textureId(texId) {}
+
+void ImageButton::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
+  uvLeftTop = leftTop;
+  uvRightBottom = rightBottom;
+}
 
 void ImageButton::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
 
@@ -92,7 +96,7 @@ void ImageButton::renderImpl() {
   auto colorStyle = setColorStack();
   auto style = setStyleStack();
   auto repeat = setButtonRepeat();
-  if (ImGui::ImageButton(textureId, static_cast<ImVec2>(getSize()), ImVec2{0, 0}, ImVec2{1, 1})) { notifyOnClick(); }
+  if (ImGui::ImageButton(textureId, static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom)) { notifyOnClick(); }
 }
 
 }  // namespace pf::ui::ig

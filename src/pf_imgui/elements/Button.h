@@ -226,19 +226,12 @@ class PF_IMGUI_EXPORT ImageButton
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:
-  /**
-   * Provider of UV mapping for textures. First is left upper corner, right is right lower.
-   */
-  using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
   struct Config {
     using Parent = ImageButton;
     std::string_view name;    /*!< Unique name of the element */
     ImTextureID textureId;    /*!< Id of the texture to render */
     Size size = Size::Auto(); /*!< Size of the element */
     bool repeatable = false;  /*!< Enable repeated listener callback on mouse down */
-    UvMappingProvider uvTextureMappingProvider = [] {
-      return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
-    }; /*!< Provider of UV coordinates */
   };
   /**
    * Construct ImageButton
@@ -251,26 +244,27 @@ class PF_IMGUI_EXPORT ImageButton
    * @param textureId texture to render
    * @param s size of the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
-   * @param uvTextureMappingProvider uv mapping provider
    */
-  ImageButton(
-      const std::string &name, ImTextureID texId, Size s = Size::Auto(), Repeatable isRepeatable = Repeatable::No,
-      UvMappingProvider uvTextureMappingProvider = [] {
-        return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
-      });
+  ImageButton(const std::string &name, ImTextureID texId, Size s = Size::Auto(),
+              Repeatable isRepeatable = Repeatable::No);
 
   /**
    * Change texture ID.
    * @param imTextureId new id
    */
   void setTextureId(ImTextureID imTextureId);
+  /**
+   * Set UVs according to which the image will get sampled.
+   */
+  void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
 
  protected:
   void renderImpl() override;
 
  private:
   ImTextureID textureId;
-  UvMappingProvider uvMappingProvider;
+  ImVec2 uvLeftTop{0.f, 0.f};
+  ImVec2 uvRightBottom{1.f, 1.f};
 };
 
 }  // namespace pf::ui::ig

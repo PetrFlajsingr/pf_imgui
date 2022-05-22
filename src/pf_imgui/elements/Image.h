@@ -24,18 +24,8 @@ namespace pf::ui::ig {
  *
  * Image rendering should be handled by the use when descending from ImGuiInterface.
  */
-class PF_IMGUI_EXPORT Image
-    : public ItemElement,
-      public Resizable,
-      public Clickable,
-      public ColorCustomizable<style::ColorOf::Button, style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow> {
+class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Clickable {
  public:
-  /**
-   * Provider of UV mapping for textures. First is left upper corner, right is right lower.
-   */
-  using UvMappingProvider = std::function<std::pair<ImVec2, ImVec2>()>;
-
   /**
    * @brief Struct for construction of Image.
    */
@@ -44,9 +34,6 @@ class PF_IMGUI_EXPORT Image
     std::string_view name;    /*!< Unique name of the element */
     ImTextureID textureId;    /*!< Id of the texture to render */
     Size size = Size::Auto(); /*!< Size of the element */
-    UvMappingProvider uvTextureMappingProvider = [] {
-      return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
-    }; /*!< Provider of UV coordinates */
   };
   /**
    * Construct Image
@@ -58,26 +45,26 @@ class PF_IMGUI_EXPORT Image
    * @param elementName ID of the element
    * @param imTextureId ID of a texture
    * @param size size of the image on screen
-   * @param uvTextureMappingProvider provider of UV coordinates
    */
-  Image(
-      const std::string &elementName, ImTextureID imTextureId, Size size = Size::Auto(),
-      UvMappingProvider uvTextureMappingProvider = [] {
-        return std::pair(ImVec2{0, 0}, ImVec2{1, 1});
-      });
+  Image(const std::string &elementName, ImTextureID imTextureId, Size size = Size::Auto());
 
   /**
    * Change texture ID.
    * @param imTextureId new id
    */
   void setTextureId(ImTextureID imTextureId);
+  /**
+   * Set UVs according to which the image will get sampled.
+   */
+  void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
 
  protected:
   void renderImpl() override;
 
  private:
   ImTextureID textureId;
-  UvMappingProvider uvMappingProvider;
+  ImVec2 uvLeftTop{0.f, 0.f};
+  ImVec2 uvRightBottom{1.f, 1.f};
 };
 
 }  // namespace pf::ui::ig
