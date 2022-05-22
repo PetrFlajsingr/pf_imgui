@@ -67,7 +67,6 @@ struct ImGuiConfig {
  * @todo: localization
  * @todo: key bindings?
  * @todo: check if context is actually properly set where needed
- * @todo: dialog manager
  */
 class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomizable, public AllColorCustomizable {
  public:
