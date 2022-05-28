@@ -30,9 +30,9 @@ TextEditor::TextEditor()
     : mLineSpacing(1.0f), mUndoIndex(0), mTabSize(4), mOverwrite(false), mReadOnly(false), mWithinRender(false),
       mScrollToCursor(false), mScrollToCursor_CursorLineOnPage(-1), mScrollToTop(false), mTextChanged(false),
       mColorizerEnabled(true), mTextStart(20.0f), mLeftMargin(10), mCursorPositionChanged(false), mColorRangeMin(0),
-      mColorRangeMax(0), mSelectionMode(SelectionMode::Normal), mCheckComments(true),
+      mColorRangeMax(0), mSelectionMode(SelectionMode::Normal),
       mHandleKeyboardInputs(true), mHandleMouseInputs(true), mIgnoreImGuiChild(false), mShowWhitespaces(true),
-      mShowShortTabGlyphs(false), mStartTime(std::chrono::duration_cast<std::chrono::milliseconds>(
+      mShowShortTabGlyphs(false), mCheckComments(true), mStartTime(std::chrono::duration_cast<std::chrono::milliseconds>(
                                                  std::chrono::system_clock::now().time_since_epoch())
                                                  .count()), mLastClick(-1.0f) {
   SetPalette(GetDarkPalette());
@@ -429,7 +429,7 @@ int TextEditor::GetLineCharacterCount(int aLine) const {
 }
 
 int TextEditor::GetLineMaxColumn(int aLine) const {
-  if (static_cast<int>(aLine >= mLines.size())) return 0;
+  if (aLine >= static_cast<int>(mLines.size())) return 0;
   auto &line = mLines[aLine];
   int col = 0;
   for (unsigned i = 0; i < line.size();) {
@@ -2021,7 +2021,7 @@ void TextEditor::ColorizeInternal() {
               withinSingleLineComment = true;
             }
 
-            inComment = inComment = (static_cast<int>(commentStartLine) < currentLine
+            inComment = (static_cast<int>(commentStartLine) < currentLine
                                      || (static_cast<int>(commentStartLine) == currentLine && commentStartIndex <= currentIndex));
 
             line[currentIndex].mMultiLineComment = inComment;
