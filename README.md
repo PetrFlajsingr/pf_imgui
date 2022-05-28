@@ -19,6 +19,25 @@ In these examples `imgui` is an instance of `std::unique_ptr<ImGuiInterface>`. E
 
 There are some backend implementations in `pf_imgui/backends`. If you wish to use those you gotta add them to the project yourself, they are not part of the library by default.
 
+## Config constructors
+Most (if not all) elements provide a constructor with a struct as a parameter, which makes it easier to use and makes the code more readable.
+
+Example creation of `DragInput<int>`:
+```cpp
+window.createChild<DragInput<int>>("drag_int_1", "Drag int", 1.f, 0.f, 100.f);
+```
+
+Example creation of `DragInput<int>` with its config:
+```cpp
+window.createChild(DragInput<int>::Config{
+  .name = "drag_int_1",
+  .label = "Drag int",
+  .speed = 1.f,
+  .min = 0.f,
+  .max = 100.f
+});
+```
+
 ## Common interfaces
 All of the functions which register an observer return an instance of `Subscription` which can be used to cancel the observer.
 ### Drag and drop
@@ -32,11 +51,7 @@ sliderTarget.setDropAllowed(true);
 ```
 
 ### Fonts
-Only the default font is created upon `ImGuiInterface` creation. You can call its constructor with `IconPack` enum to add support for icons. These are used as follows:
-```cpp
-// imgui created with IconPack::ForkAwesome
-window.createChild<Text>("text_id", ICON_FK_FILE_O " Open file");
-```
+Only the default font is created upon `ImGuiInterface` creation.
 
 New fonts can be loaded via `FontManager`:
 ```cpp
@@ -98,7 +113,7 @@ ItemElement is an element which can receive focus and hover events. It can also 
 auto &button = window.createChild<Button>("button_id", "Click me");
 button.setTooltip("This is a button"); // create a simple text tooltip
 button.createTooltip().createChild<Image>(...); // create a tooltip with an image
-auto &buttonPopupMenu = button.createPopupMenu();
+auto &buttonPopupMenu = button.createOrGetPopupMenu();
 buttonPopupMenu.addButonItem("item1", "Remove");
 buttonPopupMenu.addButonItem("item2", "Duplicate");
 buttonPopupMenu.addCheckboxItem("item3", "Enabled");
