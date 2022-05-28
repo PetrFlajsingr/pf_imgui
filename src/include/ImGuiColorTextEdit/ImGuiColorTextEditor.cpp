@@ -1976,7 +1976,7 @@ void TextEditor::ColorizeInternal() {
         if (currentIndex == (int) line.size() - 1 && line[line.size() - 1].mChar == '\\') concatenate = true;
 
         bool inComment =
-            (static_cast<int>(commentStartLine) < currentLine || (commentStartLine == currentLine && commentStartIndex <= currentIndex));
+            (static_cast<int>(commentStartLine) < currentLine || (static_cast<int>(commentStartLine) == currentLine && commentStartIndex <= currentIndex));
 
         if (withinString) {
           line[currentIndex].mMultiLineComment = inComment;
