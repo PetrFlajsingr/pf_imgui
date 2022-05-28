@@ -16,8 +16,10 @@
 #include <limits>
 #include <atomic>
 
+#ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wattributes"
+#endif
 namespace jnk0le
 {
 	/*!
@@ -473,5 +475,7 @@ namespace jnk0le
 
 } // namespace
 
+#ifdef __GNUC__
 #pragma GCC diagnostic pop
+#endif
 #endif //RINGBUFFER_HPP

@@ -267,8 +267,8 @@ Table<ColumnCount>::Table(const std::string &elementName, const TableSettings<Co
 
 template<std::size_t ColumnCount>
 std::vector<Renderable *> Table<ColumnCount>::getRenderables() {
-  return rows | ranges::view::transform([](auto &row) { return row->getCells(); }) | ranges::views::cache1
-      | ranges::view::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
+  return rows | ranges::views::transform([](auto &row) { return row->getCells(); }) | ranges::views::cache1
+      | ranges::views::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
       | ranges::to_vector;
 }
 
@@ -290,7 +290,7 @@ void Table<ColumnCount>::renderImpl() {
       if (header.has_value()) { name = (*header)[index].c_str(); }
       const auto columnFlags =
           columnSortFunctions[index].has_value() ? ImGuiTableColumnFlags_None : ImGuiTableColumnFlags_NoSort;
-      ImGui::TableSetupColumn(name, columnFlags, 0.f, index);
+      ImGui::TableSetupColumn(name, columnFlags, 0.f, static_cast<ImGuiID>(index));
     });
     if (header.has_value()) { ImGui::TableHeadersRow(); }
 

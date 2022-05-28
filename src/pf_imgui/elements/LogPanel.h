@@ -134,11 +134,11 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable, public Savabl
   /**
    * Enable/disable category for being shown in the UI.
    * @param category category to enable/disable
-   * @param enabled new category state
+   * @param catAllowed new category state
    */
-  void setCategoryAllowed(Category category, bool enabled);
+  void setCategoryAllowed(Category category, bool catAllowed);
 
-  toml::table toToml() const override;
+  [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
  protected:
@@ -246,8 +246,8 @@ void LogPanel<Category, RecordLimit>::setCategoryEnabled(Category category, bool
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-void LogPanel<Category, RecordLimit>::setCategoryAllowed(Category category, bool enabled) {
-  categoryAllowed[GetCategoryIndex(category)] = enabled;
+void LogPanel<Category, RecordLimit>::setCategoryAllowed(Category category, bool catAllowed) {
+  categoryAllowed[GetCategoryIndex(category)] = catAllowed;
 }
 
 template<Enum Category, std::size_t RecordLimit>
@@ -330,13 +330,13 @@ LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
   std::size_t i = 0;
   ImGui::SetNextItemWidth(120);
   if (ImGui::BeginCombo("##categories", "Categories")) {
-    std::ranges::for_each(categoryEnabled, [&](bool &enabled) {
+    std::ranges::for_each(categoryEnabled, [&](bool &catEnabled) {
       if (!categoryAllowed[i]) { return; }
       if (categoryBackgroundColors[i].has_value()) {
         DrawTextBackground(categoryStrings[i].c_str(), categoryBackgroundColors[i].value(), false, true);
       }
       ImGui::PushStyleColor(ImGuiCol_Text, categoryTextColors[i]);
-      filterChanged = filterChanged | ImGui::Checkbox(categoryStrings[i++].c_str(), &enabled);
+      filterChanged = filterChanged | ImGui::Checkbox(categoryStrings[i++].c_str(), &catEnabled);
       ImGui::PopStyleColor(1);
     });
     ImGui::EndCombo();

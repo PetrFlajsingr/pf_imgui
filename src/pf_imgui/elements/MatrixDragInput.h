@@ -120,7 +120,7 @@ void MatrixDragInput<M>::renderImpl() {
   if (ImGui::BeginTable("lay", 1)) {
     auto valueChanged = false;
     const auto firstDragName = getLabel() + "##drag";
-    for (std::size_t row = 0; row < Height; ++row) {
+    for (typename M::length_type row = 0; row < Height; ++row) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
 

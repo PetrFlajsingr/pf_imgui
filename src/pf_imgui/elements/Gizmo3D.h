@@ -134,8 +134,8 @@ toml::table Gizmo3D<Type>::toToml() const {
 
 template<GizmoType Type>
 void Gizmo3D<Type>::setFromToml(const toml::table &src) {
-  glm::vec3 direction;
-  glm::quat quaternion;
+  glm::vec3 direction{};
+  glm::quat quaternion{};
   if constexpr (Type == GizmoType::Direction || Type == GizmoType::Dual) {
     using VecType = glm::vec3;
     if (auto newValIter = src.find("direction"); newValIter != src.end()) {

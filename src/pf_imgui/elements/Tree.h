@@ -406,27 +406,27 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
 
   /**
    * Create a new child header node.
-   * @param name unique name of the element
+   * @param nodeName unique name of the element
    * @param label label rendered on the element
    * @param allowCollapse enable/disable user collapsing the node
    * @return reference to the newly created node
    */
-  TreeHeaderNode<treeType> &addHeaderNode(const std::string &name, const std::string &label,
+  TreeHeaderNode<treeType> &addHeaderNode(const std::string &nodeName, const std::string &label,
                                           AllowCollapse allowCollapse = AllowCollapse::Yes) {
-    auto &node = layout.createChild<TreeHeaderNode<treeType>>(name, label, allowCollapse, persistent);
+    auto &node = layout.createChild<TreeHeaderNode<treeType>>(nodeName, label, allowCollapse, persistent);
     node.limiter = limiter.get();
     return node;
   }
 
   /**
    * Create a new leaf node.
-   * @param name unique name of the element
+   * @param leafName unique name of the element
    * @param label label rendered on the element
    * @param selected
    * @return reference to the newly created leaf
    */
-  TreeLeaf &addLeaf(const std::string &name, const std::string &label, bool selected = false) {
-    auto &leaf = layout.createChild<TreeLeaf>(name, label, selected, persistent);
+  TreeLeaf &addLeaf(const std::string &leafName, const std::string &label, bool selected = false) {
+    auto &leaf = layout.createChild<TreeLeaf>(leafName, label, selected, persistent);
     leaf.limiter = limiter.get();
     return leaf;
   }

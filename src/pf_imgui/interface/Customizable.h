@@ -33,7 +33,7 @@ using OptionalTypeForStyle = std::optional<TypeForStyle<Style>>;
 
 template<auto Needle, auto HaystackStart, auto... Haystack>
 consteval std::size_t indexInVarArgList() {
-  if (Needle == HaystackStart) {
+  if constexpr (Needle == HaystackStart) {
     return 0;
   } else {
     if constexpr (sizeof...(Haystack) == 0) {
