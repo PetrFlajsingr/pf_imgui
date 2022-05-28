@@ -30,7 +30,7 @@ InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, 
     : ButtonBase(elementName, isRepeatable), Resizable(s), clickBtn(clickButton) {}
 
 void InvisibleButton::renderImpl() {
-  auto repeat = setButtonRepeat();
+  [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(getSize()), static_cast<int>(clickBtn))) {
     notifyOnClick();
   }
@@ -44,9 +44,9 @@ Button::Button(const std::string &name, const std::string &label, const Size &s,
     : ButtonBase(name, isRepeatable), Labellable(label), Resizable(s) {}
 
 void Button::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
-  auto repeat = setButtonRepeat();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::Button(getLabel().c_str(), static_cast<ImVec2>(getSize()))) { notifyOnClick(); }
 }
 
@@ -58,9 +58,9 @@ SmallButton::SmallButton(const std::string &name, const std::string &label, Repe
     : ButtonBase(name, isRepeatable), Labellable(label) {}
 
 void SmallButton::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
-  auto repeat = setButtonRepeat();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::SmallButton(getLabel().c_str())) { notifyOnClick(); }
 }
 
@@ -72,9 +72,9 @@ ArrowButton::ArrowButton(const std::string &name, ArrowButton::Dir direction, Re
     : ButtonBase(name, isRepeatable), dir(direction) {}
 
 void ArrowButton::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
-  auto repeat = setButtonRepeat();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { notifyOnClick(); }
 }
 
@@ -93,9 +93,9 @@ void ImageButton::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
 void ImageButton::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
 
 void ImageButton::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
-  auto repeat = setButtonRepeat();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::ImageButton(textureId, static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom)) { notifyOnClick(); }
 }
 

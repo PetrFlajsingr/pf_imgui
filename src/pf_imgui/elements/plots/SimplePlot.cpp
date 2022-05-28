@@ -20,7 +20,7 @@ SimplePlot::SimplePlot(const std::string &elementName, const std::string &label,
       scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(overlayText)), historyLimit(historyLimit) {}
 
 void SimplePlot::renderImpl() {
-  auto colorStyle = setColorStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
   switch (plotType) {
     case PlotType::Lines:
       ImGui::PlotLines(getLabel().c_str(), values.data(), static_cast<int>(values.size()), 0,

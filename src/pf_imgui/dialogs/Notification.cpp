@@ -32,7 +32,7 @@ void Notification::renderImpl() {
     RAII endTextWrap{ImGui::PopTextWrapPos};
 
     if (icon != nullptr) {
-      auto fontScoped = iconFont.applyScopedIfNotDefault();
+      [[maybe_unused]] auto fontScoped = iconFont.applyScopedIfNotDefault();
       ImGui::PushStyleColor(ImGuiCol_Text, *iconColor);
       RAII popColor{[&] { ImGui::PopStyleColor(1); }};
       ImGui::Text("%s", icon);

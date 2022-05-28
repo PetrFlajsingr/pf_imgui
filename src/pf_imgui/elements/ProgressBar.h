@@ -174,8 +174,8 @@ float ProgressBar<T>::getCurrentPercentage() const {
 
 template<ProgressBarCompatible T>
 void ProgressBar<T>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()), overlay.c_str());
 }
 

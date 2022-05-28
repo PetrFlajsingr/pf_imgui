@@ -29,13 +29,13 @@ void Comment::renderImpl() {
     ax::NodeEditor::PushStyleColor(ax::NodeEditor::StyleColor_NodeBg, bgColor);
     ax::NodeEditor::PushStyleColor(ax::NodeEditor::StyleColor_NodeBorder, borderColor);
 
-    auto stylPop = RAII{[] {
+    [[maybe_unused]] auto stylePop = RAII{[] {
       ImGui::PopStyleVar();
       ax::NodeEditor::PopStyleColor(2);
     }};
 
     ax::NodeEditor::BeginNode(getId());
-    auto endNode = RAII{ax::NodeEditor::EndNode};
+    [[maybe_unused]] auto endNode = RAII{ax::NodeEditor::EndNode};
     ImGui::BeginVertical("content");
     {
       if (sizeDirty) {

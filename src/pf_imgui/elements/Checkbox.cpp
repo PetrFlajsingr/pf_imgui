@@ -16,8 +16,8 @@ Checkbox::Checkbox(const std::string &elementName, const std::string &label, boo
     : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
 
 void Checkbox::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (ImGui::Checkbox(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 

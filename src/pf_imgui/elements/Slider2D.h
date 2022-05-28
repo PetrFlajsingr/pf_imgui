@@ -122,8 +122,8 @@ void Slider2D<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<int, float> T>
 void Slider2D<T>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto valueChanged = false;
   auto address = ValueObservable<StorageType>::getValueAddress();
   const auto oldValue = *address;

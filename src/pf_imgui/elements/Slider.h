@@ -160,8 +160,8 @@ void Slider<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 void Slider<T>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;

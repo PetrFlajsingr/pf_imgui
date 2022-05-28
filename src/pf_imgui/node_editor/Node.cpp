@@ -22,7 +22,7 @@ void Node::clearLinks() {
 
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(getId());
-  auto endNode = RAII{ax::NodeEditor::EndNode};
+  [[maybe_unused]] auto endNode = RAII{ax::NodeEditor::EndNode};
 
   ImGui::BeginVertical("header_vert");
   {

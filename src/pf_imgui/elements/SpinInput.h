@@ -135,8 +135,8 @@ void SpinInput<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<int, float> T>
 void SpinInput<T>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
     valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);

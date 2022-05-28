@@ -21,7 +21,7 @@ std::string_view Text::getText() const { return text; }
 void Text::setText(std::string newText) { setTextInner(std::move(newText)); }
 
 void Text::renderImpl() {
-  auto colorStyle = setColorStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
   if (wrap) {
     ImGui::TextWrapped("%s", text.c_str());
   } else {

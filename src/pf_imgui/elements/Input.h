@@ -152,8 +152,8 @@ void Input<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 void Input<T>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
 

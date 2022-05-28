@@ -80,8 +80,8 @@ TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elem
 }
 
 void TabBar::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (ImGui::BeginTabBar(getName().c_str(), flags)) {
     RAII end{ImGui::EndTabBar};
     std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });

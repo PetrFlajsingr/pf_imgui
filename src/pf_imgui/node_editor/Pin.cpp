@@ -49,7 +49,7 @@ void Pin::renderImpl() {
   ImGui::BeginHorizontal(getId().AsPointer());
   {
     ax::NodeEditor::BeginPin(getId(), static_cast<ax::NodeEditor::PinKind>(getType()));
-    auto endPin = RAII{ax::NodeEditor::EndPin};
+    [[maybe_unused]] auto endPin = RAII{ax::NodeEditor::EndPin};
 
     if (getType() == Type::Input) {
       ax::NodeEditor::PinPivotAlignment(ImVec2(0.f, 0.5f));

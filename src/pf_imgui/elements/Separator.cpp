@@ -12,7 +12,7 @@ Separator::Separator(Separator::Config &&config) : Element(std::string{config.na
 Separator::Separator(const std::string &name) : Element(name) {}
 
 void Separator::renderImpl() {
-  auto colorStyle = setColorStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
   ImGui::Separator();
 }
 

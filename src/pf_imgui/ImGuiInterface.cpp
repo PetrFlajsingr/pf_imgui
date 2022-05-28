@@ -255,7 +255,7 @@ void ImGuiInterface::render() {
     }
   }};
   if (getVisibility() == Visibility::Visible) {
-    auto fontScoped = globalFont.applyScoped();
+    [[maybe_unused]] auto fontScoped = globalFont.applyScoped();
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};

@@ -144,8 +144,8 @@ void ColorChooser<Type, Format>::setValue(const Color &newValue) {
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 void ColorChooser<Type, Format>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto flags = pickerEnabled ? ImGuiColorEditFlags{} : ImGuiColorEditFlags_NoPicker;
   auto valueChanged = false;
   if constexpr (Type == ColorChooserType::Edit) {

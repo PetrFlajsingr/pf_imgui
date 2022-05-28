@@ -26,7 +26,7 @@ void Element::render() {
   setId(ImGui::GetID(getName().c_str()));
   ImGui::PushOverrideID(id);
   RAII end{[&] { ImGui::PopID(); }};
-  auto fontScoped = font.applyScopedIfNotDefault();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   Renderable::render();
 }
 

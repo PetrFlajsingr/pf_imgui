@@ -19,8 +19,8 @@ Range2D::Range2D(const std::string &elementName, const std::string &label, const
       DragSource(false), DropTarget(false), minRange(min), maxRange(max) {}
 
 void Range2D::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   auto val = getValueAddress();
   const auto oldVal = getValue();
   if (ImWidgets::RangeSelect2D(getLabel().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,

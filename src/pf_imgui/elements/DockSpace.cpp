@@ -20,7 +20,7 @@ void DockSpace::render() {
     firstFrame = false;
     setId(ImGui::GetID(getName().c_str()));
   }
-  auto fontScoped = font.applyScopedIfNotDefault();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   Renderable::render();
 }
 

@@ -28,8 +28,8 @@ float SimpleCurveEditor::getSmoothCurveValue(float x) const {
 }
 
 void SimpleCurveEditor::renderImpl() {
-  auto styleRAII = setStyleStack();
-  auto colorRAII = setColorStack();
+  [[maybe_unused]] auto styleRAII = setStyleStack();
+  [[maybe_unused]] auto colorRAII = setColorStack();
   if (ImGui::Curve(getLabel().c_str(), static_cast<ImVec2>(getSize()), static_cast<int>(getMaxPointCount()),
                    curveData.data())) {
     setValueInner(getViewToCurveData());

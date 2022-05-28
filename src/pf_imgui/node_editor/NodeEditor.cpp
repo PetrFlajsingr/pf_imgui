@@ -101,7 +101,7 @@ std::optional<Link *> NodeEditor::findLinkByName(const std::string &linkName) {
 }
 
 void NodeEditor::handleCreation() {
-  auto endCreate = RAII{ax::NodeEditor::EndCreate};
+  [[maybe_unused]] auto endCreate = RAII{ax::NodeEditor::EndCreate};
   if (ax::NodeEditor::BeginCreate()) {
     handleLinkCreation();
     handleNodeCreation();
@@ -160,7 +160,7 @@ void NodeEditor::handleNodeCreation() {
 }
 
 void NodeEditor::handleDeletion() {
-  auto endDelete = RAII{ax::NodeEditor::EndDelete};
+  [[maybe_unused]] auto endDelete = RAII{ax::NodeEditor::EndDelete};
   if (ax::NodeEditor::BeginDelete()) {
     handleLinkDeletion();
     handleNodeDeletion();

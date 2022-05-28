@@ -50,8 +50,8 @@ void TreeLeaf::setFromToml(const toml::table &src) {
 }
 
 void TreeLeaf::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto pop = ImGui::TreeNodeEx(getLabel().c_str(), *flags);
   RAII end{[pop] {
     if (pop) { ImGui::TreePop(); }

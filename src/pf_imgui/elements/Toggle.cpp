@@ -29,8 +29,8 @@ void Toggle::setFromToml(const toml::table &src) {
 }
 
 void Toggle::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (ToggleButton(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 

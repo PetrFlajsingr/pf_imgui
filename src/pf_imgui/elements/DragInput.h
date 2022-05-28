@@ -200,8 +200,8 @@ void DragInput<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 void DragInput<T>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   bool valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;

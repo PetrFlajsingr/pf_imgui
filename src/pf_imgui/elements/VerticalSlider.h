@@ -147,8 +147,8 @@ void VerticalSlider<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<float, int> T>
 void VerticalSlider<T>::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   const auto address = ValueObservable<T>::getValueAddress();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 

@@ -31,8 +31,8 @@ MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string
     : MenuItem(elementName), Labellable(label) {}
 
 void MenuButtonItem::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
 }
 
@@ -74,8 +74,8 @@ MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::st
     : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
 
 void MenuCheckboxItem::renderImpl() {
-  auto colorStyle = setColorStack();
-  auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 
@@ -92,7 +92,7 @@ MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuI
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 
 void MenuSeparatorItem::renderImpl() {
-  auto colorStyle = setColorStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
   ImGui::Separator();
 }
 
