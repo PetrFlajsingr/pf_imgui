@@ -9,7 +9,6 @@
 #include <map>
 #include <regex>
 #include "imgui.h"
-
 namespace ImGuiColorTextEdit {
 class TextEditor {
  public:
@@ -30,11 +29,14 @@ class TextEditor {
     Cursor,
     Selection,
     ErrorMarker,
+    ControlCharacter,
     Breakpoint,
     LineNumber,
     CurrentLineFill,
     CurrentLineFillInactive,
     CurrentLineEdge,
+    WhiteSpace,
+    WhiteSpaceTab,
     WarningMarker,
     Max
   };
@@ -163,10 +165,12 @@ class TextEditor {
 
   void SetErrorMarkers(const ErrorMarkers &aMarkers) { mErrorMarkers = aMarkers; }
   const ErrorMarkers &GetErrorMarkers() const { return mErrorMarkers; }
+
+  void SetBreakpoints(const Breakpoints &aMarkers) { mBreakpoints = aMarkers; }
+  const Breakpoints &GetBreakpoints() const { return mBreakpoints; }
+
   void SetWarningMarkers(const WarningMarkers &aMarkers) { mWarningMarkers = aMarkers; }
   const WarningMarkers &GetWarningMarkers() const { return mWarningMarkers; }
-  void SetBreakpoints(const Breakpoints &aMarkers) { mBreakpoints = aMarkers; }
-  const Breakpoints & GetBreakpoints() const { return mBreakpoints; }
 
   void Render(const char *aTitle, const ImVec2 &aSize = ImVec2(), bool aBorder = false);
   void SetText(const std::string &aText);
@@ -190,7 +194,7 @@ class TextEditor {
   void SetColorizerEnable(bool aValue);
 
   Coordinates GetCursorPosition() const { return GetActualCursorCoordinates(); }
-  void SetCursorPosition(const Coordinates &aPosition);
+  void SetCursorPosition(const Coordinates &aPosition, int cursorLineOnPage = -1);
 
   inline void SetHandleMouseInputs(bool aValue) { mHandleMouseInputs = aValue; }
   inline bool IsHandleMouseInputsEnabled() const { return mHandleKeyboardInputs; }
@@ -203,6 +207,9 @@ class TextEditor {
 
   inline void SetShowWhitespaces(bool aValue) { mShowWhitespaces = aValue; }
   inline bool IsShowingWhitespaces() const { return mShowWhitespaces; }
+
+  inline void SetShowShortTabGlyphs(bool aValue) { mShowShortTabGlyphs = aValue; }
+  inline bool IsShowingShortTabGlyphs() const { return mShowShortTabGlyphs; }
 
   void SetTabSize(int aValue);
   inline int GetTabSize() const { return mTabSize; }
@@ -284,7 +291,7 @@ class TextEditor {
   void ColorizeRange(int aFromLine = 0, int aToLine = 0);
   void ColorizeInternal();
   float TextDistanceToLineStart(const Coordinates &aFrom) const;
-  void EnsureCursorVisible();
+  void EnsureCursorVisible(int cursorLineOnPage = -1);
   int GetPageSize() const;
   std::string GetText(const Coordinates &aStart, const Coordinates &aEnd) const;
   Coordinates GetActualCursorCoordinates() const;
@@ -293,7 +300,7 @@ class TextEditor {
   void DeleteRange(const Coordinates &aStart, const Coordinates &aEnd);
   int InsertTextAt(Coordinates &aWhere, const char *aValue);
   void AddUndo(UndoRecord &aValue);
-  Coordinates ScreenPosToCoordinates(const ImVec2 &aPosition) const;
+  Coordinates ScreenPosToCoordinates(const ImVec2 &aPosition, bool aInsertionMode = false) const;
   Coordinates FindWordStart(const Coordinates &aFrom) const;
   Coordinates FindWordEnd(const Coordinates &aFrom) const;
   Coordinates FindNextWord(const Coordinates &aFrom) const;
@@ -314,6 +321,7 @@ class TextEditor {
 
   void HandleKeyboardInputs();
   void HandleMouseInputs();
+  void UpdatePalette();
   void Render();
 
   float mLineSpacing;
@@ -327,28 +335,27 @@ class TextEditor {
   bool mReadOnly;
   bool mWithinRender;
   bool mScrollToCursor;
+  int mScrollToCursor_CursorLineOnPage;
   bool mScrollToTop;
   bool mTextChanged;
   bool mColorizerEnabled;
-  float mTextStart;// position (in pixels) where a code line starts relative to the left of the TextEditor.
+  float mTextStart;  // position (in pixels) where a code line starts relative to the left of the TextEditor.
   int mLeftMargin;
   bool mCursorPositionChanged;
   int mColorRangeMin, mColorRangeMax;
   SelectionMode mSelectionMode;
-
-  bool mCheckComments;
-  float mLastClick;
-
   bool mHandleKeyboardInputs;
   bool mHandleMouseInputs;
   bool mIgnoreImGuiChild;
   bool mShowWhitespaces;
+  bool mShowShortTabGlyphs;
 
   Palette mPaletteBase;
   Palette mPalette;
   LanguageDefinition mLanguageDefinition;
   RegexList mRegexList;
 
+  bool mCheckComments;
   Breakpoints mBreakpoints;
   ErrorMarkers mErrorMarkers;
   WarningMarkers mWarningMarkers;
@@ -357,5 +364,6 @@ class TextEditor {
   std::string mLineBuffer;
   uint64_t mStartTime;
 
+  float mLastClick;
 };
 }
