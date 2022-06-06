@@ -85,7 +85,7 @@ void RadioGroup::setFromToml(const toml::table &src) {
 
 void RadioGroup::addDestroyListener(RadioButton *button) {
   destroyButtonSubscriptions.emplace_back(button->addDestroyListener(
-      [button, this] { buttons.erase(std::remove(buttons.begin(), buttons.end(), button)); }));
+      [button, this] { buttons.erase(std::remove(buttons.begin(), buttons.end(), button), buttons.end()); }));
 }
 
 }  // namespace pf::ui::ig

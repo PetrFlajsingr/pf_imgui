@@ -52,8 +52,8 @@ void Node::setFromToml(const toml::table &src) {
       std::ranges::for_each(*inputsToml, [&](const auto &item) {
         if (auto pinToml = item.as_table(); pinToml != nullptr) {
           if (auto newPin = pinFromToml(*pinToml); newPin.has_value()) {
-            newPin.value()->id = getNextPinId();
-            inputPins.emplace_back(std::move(newPin.value()));
+            (*newPin)->id = getNextPinId();
+            inputPins.emplace_back(std::move(*newPin));
           }
         }
       });
@@ -64,8 +64,8 @@ void Node::setFromToml(const toml::table &src) {
       std::ranges::for_each(*outputsToml, [&](const auto &item) {
         if (auto pinToml = item.as_table(); pinToml != nullptr) {
           if (auto newPin = pinFromToml(*pinToml); newPin.has_value()) {
-            newPin.value()->id = getNextPinId();
-            outputPins.emplace_back(std::move(newPin.value()));
+            (*newPin)->id = getNextPinId();
+            outputPins.emplace_back(std::move(*newPin));
           }
         }
       });

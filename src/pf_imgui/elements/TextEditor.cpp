@@ -204,9 +204,9 @@ void TextEditor::addWarningMarker(const TextEditorMarker &marker) {
 }
 
 void TextEditor::removeWarningMarker(std::uint32_t line) {
-  auto markers = editor.GetErrorMarkers();
+  auto markers = editor.GetWarningMarkers();
   markers.erase(static_cast<int>(line));
-  editor.SetErrorMarkers(markers);
+  editor.SetWarningMarkers(markers);
 }
 
 std::uint32_t TextEditor::getTabSize() const { return static_cast<std::uint32_t>(editor.GetTabSize()); }

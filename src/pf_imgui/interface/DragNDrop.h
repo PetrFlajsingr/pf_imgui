@@ -305,11 +305,11 @@ class PF_IMGUI_EXPORT DragNDropGroup {
       std::derived_from<T, details::DropTargetBase> || std::derived_from<T, details::DragSourceBase>) {
     if constexpr (std::derived_from<T, details::DropTargetBase>) {
       auto remove = std::ranges::remove_if(targets, [&arg1](const auto &t) { return t.first == &arg1; });
-      targets.erase(remove.begin(), remove.end());
+      targets.erase(remove.begin(), remove.end()); //-V539
     }
     if constexpr (std::derived_from<T, details::DragSourceBase>) {
       auto remove = std::ranges::remove_if(sources, [&arg1](const auto &s) { return s == &arg1; });
-      targets.erase(remove.begin(), remove.end());
+      targets.erase(remove.begin(), remove.end()); //-V539
     }
     if constexpr (sizeof...(Args) > 0) { remove(std::forward<Args &>(args)...); }
   }

@@ -57,7 +57,7 @@ void ImGuiInterface::updateConfig() {
     }
   });
   if (dialogManager.fileDialogBookmark.has_value()) {
-    config.insert_or_assign("file_dialog_bookmark", dialogManager.fileDialogBookmark.value());
+    config.insert_or_assign("file_dialog_bookmark", *dialogManager.fileDialogBookmark);
   }
   std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
     if (radioGroup->isPersistent()) { config.insert_or_assign(radioGroup->getGroupName(), radioGroup->toToml()); }
@@ -131,16 +131,16 @@ CommandPaletteWindow &ImGuiInterface::createCommandPalette(const std::string &wi
 
 void ImGuiInterface::removePaletteWindow(const std::string &windowName) {
   auto remove = std::ranges::remove(commandPalettes, windowName, [](const auto &window) { return window->getName(); });
-  commandPalettes.erase(remove.begin());
+  commandPalettes.erase(remove.begin()); //-V539
 }
 
 void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
   auto remove = std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
-  commandPalettes.erase(remove.begin(), remove.end());
+  commandPalettes.erase(remove.begin(), remove.end()); //-V539
 }
 
 DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
-  return *dockBuilders.emplace_back(std::unique_ptr<DockBuilder>{new DockBuilder{dockSpace}});
+  return *dockBuilders.emplace_back(std::unique_ptr<DockBuilder>{new DockBuilder{dockSpace}}); //-V824
 }
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
@@ -177,9 +177,9 @@ void ImGuiInterface::renderImpl() {
   if (hasStatusBar()) {
     if (backgroundDockingArea != nullptr) {
       backgroundDockingArea->bottomRightMargin = ImVec2{0, ImGui::GetFrameHeight()};
-    } else {
-      backgroundDockingArea->bottomRightMargin = ImVec2{0, 0};
     }
+  } else {
+    if (backgroundDockingArea != nullptr) { backgroundDockingArea->bottomRightMargin = ImVec2{0, 0}; }
   }
   if (backgroundDockingArea != nullptr) { backgroundDockingArea->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });

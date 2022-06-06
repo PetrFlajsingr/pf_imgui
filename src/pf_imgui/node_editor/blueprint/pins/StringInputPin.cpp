@@ -42,9 +42,11 @@ std::unique_ptr<StringInputPin> StringInputPin::ConstructFromToml(ig::Node *pare
 toml::table StringInputPin::toToml() const {
   auto result = InteractablePin::toToml();
   if (auto data = result.find("data"); data != result.end()) {
-    data->second.as_table()->insert_or_assign("inputType", magic_enum::enum_name(inputElement->getInputType()));
-    data->second.as_table()->insert_or_assign("eventTrigger", magic_enum::enum_name(inputElement->getInputTrigger()));
-    data->second.as_table()->insert_or_assign("filters", *inputElement->getFilters());
+    if (auto table = data->second.as_table(); table != nullptr) {
+      table->insert_or_assign("inputType", magic_enum::enum_name(inputElement->getInputType()));
+      table->insert_or_assign("eventTrigger", magic_enum::enum_name(inputElement->getInputTrigger()));
+      table->insert_or_assign("filters", *inputElement->getFilters());
+    }
   }
   return result;
 }

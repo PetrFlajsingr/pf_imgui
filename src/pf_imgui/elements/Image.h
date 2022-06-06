@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Click
   /**
    * @brief Struct for construction of Image.
    */
-  struct Config {
+  struct Config { //-V730
     using Parent = Image;
     std::string_view name;    /*!< Unique name of the element */
     ImTextureID textureId;    /*!< Id of the texture to render */

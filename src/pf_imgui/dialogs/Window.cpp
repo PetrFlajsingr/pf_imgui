@@ -41,7 +41,7 @@ void Window::renderImpl() {
     if (firstPass) {
       firstPass = false;
       if (getSize() != Size::Auto()) { setSize(getSize()); }
-      if (getPosition().x != -1 && getPosition().y != -1) { setPosition(getPosition()); }
+      if (getPosition().x != -1 && getPosition().y != -1) { setPosition(getPosition()); } //-V550
     }
     if (getEnabled() == Enabled::No) { ImGui::BeginDisabled(); }
     {

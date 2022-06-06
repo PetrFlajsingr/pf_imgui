@@ -121,8 +121,8 @@ void NodeEditor::handleLinkCreation() {
       auto outPinOpt = findPinById(outPinId);
 
       if (inPinOpt.has_value() && outPinOpt.has_value()) {
-        auto inPin = inPinOpt.value();
-        auto outPin = outPinOpt.value();
+        auto inPin = *inPinOpt;
+        auto outPin = *outPinOpt;
 
         if (!inPin->acceptsNewLinks() || !outPin->acceptsNewLinks()) {
           rejectLink(*inPin);
@@ -150,7 +150,7 @@ void NodeEditor::handleNodeCreation() {
   if (ax::NodeEditor::QueryNewNode(&pinId)) {
     const auto pinOpt = findPinById(pinId);
     if (pinOpt.has_value()) {
-      auto pin = pinOpt.value();
+      auto pin = *pinOpt;
       if (ax::NodeEditor::AcceptNewItem(static_cast<ImVec4>(pin->getUnconnectedLinkPreviewColor()),
                                         pin->getUnconnectedLinkPreviewThickness())) {
         createNodeRequestHandler(*pin);
@@ -187,10 +187,10 @@ void NodeEditor::handleNodeDeletion() {
   while (ax::NodeEditor::QueryDeletedNode(&nodeId)) {
     if (ax::NodeEditor::AcceptDeletedItem()) {
       if (const auto nodeToDelete = findNodeById(nodeId); nodeToDelete.has_value()) {
-        nodeToDelete.value()->markedForDelete = true;
+        (*nodeToDelete)->markedForDelete = true;
         markNodesDirty();
       } else if (const auto commentToDelete = findCommentById(nodeId); commentToDelete.has_value()) {
-        commentToDelete.value()->markedForDelete = true;
+        (*commentToDelete)->markedForDelete = true;
         markNodesDirty();
       }
     }
@@ -257,7 +257,7 @@ void NodeEditor::handleSelectionChange() {
                               const auto isSelected =
                                   std::ranges::find(selectedNodeIds, node->getId()) != selectedNodeIds.end();
                               const auto wasSelected = node->isSelected();
-                              return (isSelected && !wasSelected) || (!isSelected && wasSelected);
+                              return isSelected != wasSelected;
                             }),
                             [](const auto &node) {
                               node->selected = !node->selected;
@@ -272,7 +272,7 @@ void NodeEditor::handleSelectionChange() {
                               const auto isSelected =
                                   std::ranges::find(selectedLinkIds, link->getId()) != selectedLinkIds.end();
                               const auto wasSelected = link->isSelected();
-                              return (isSelected && !wasSelected) || (!isSelected && wasSelected);
+                              return isSelected != wasSelected;
                             }),
                             [](const auto &link) {
                               link->selected = !link->selected;
@@ -344,27 +344,27 @@ void NodeEditor::handlePopupMenuShowRequests() {
   ax::NodeEditor::LinkId contextLinkId;
   if (ax::NodeEditor::ShowNodeContextMenu(&contextNodeId)) {
     if (auto nodeOpt = findNodeById(contextNodeId); nodeOpt.has_value()) {
-      if (nodeOpt.value()->hasPopupMenu()) {
-        popupPtrs.node = nodeOpt.value();
+      if ((*nodeOpt)->hasPopupMenu()) {
+        popupPtrs.node = *nodeOpt;
         popupPtrs.node->popupMenu->open();
       }
     } else if (auto commentOpt = findCommentById(contextNodeId); commentOpt.has_value()) {
-      if (commentOpt.value()->hasPopupMenu()) {
-        popupPtrs.node = commentOpt.value();
+      if ((*commentOpt)->hasPopupMenu()) {
+        popupPtrs.node = *commentOpt;
         popupPtrs.node->popupMenu->open();
       }
     }
   } else if (ax::NodeEditor::ShowPinContextMenu(&contextPinId)) {
     if (auto pinOpt = findPinById(contextPinId); pinOpt.has_value()) {
-      if (pinOpt.value()->hasPopupMenu()) {
-        popupPtrs.pin = pinOpt.value();
+      if ((*pinOpt)->hasPopupMenu()) {
+        popupPtrs.pin = *pinOpt;
         popupPtrs.pin->popupMenu->open();
       }
     }
   } else if (ax::NodeEditor::ShowLinkContextMenu(&contextLinkId)) {
     if (auto linkOpt = findLinkById(contextLinkId); linkOpt.has_value()) {
-      if (linkOpt.value()->hasPopupMenu()) {
-        popupPtrs.link = linkOpt.value();
+      if ((*linkOpt)->hasPopupMenu()) {
+        popupPtrs.link = *linkOpt;
         popupPtrs.link->popupMenu->open();
       }
     }
@@ -411,16 +411,16 @@ void NodeEditor::handleClickEvents() {
   const auto doubleClickedLink = ax::NodeEditor::GetDoubleClickedLink();
   if (doubleClickedNode.Get() != 0) {
     if (auto node = findNodeById(doubleClickedNode); node.has_value()) {
-      node.value()->observableDoubleClick.notify();
+      (*node)->observableDoubleClick.notify();
     } else if (auto comment = findCommentById(doubleClickedNode); comment.has_value()) {
-      comment.value()->observableDoubleClick.notify();
+      (*comment)->observableDoubleClick.notify();
     }
   }
   if (doubleClickedPin.Get() != 0) {
-    if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { pin.value()->observableDoubleClick.notify(); }
+    if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { (*pin)->observableDoubleClick.notify(); }
   }
   if (doubleClickedLink.Get() != 0) {
-    if (auto link = findLinkById(doubleClickedLink); link.has_value()) { link.value()->observableDoubleClick.notify(); }
+    if (auto link = findLinkById(doubleClickedLink); link.has_value()) { (*link)->observableDoubleClick.notify(); }
   }
   if (ax::NodeEditor::IsBackgroundClicked()) { observableBackgroundClick.notify(); }
   if (ax::NodeEditor::IsBackgroundDoubleClicked()) { observableBackgroundDoubleClick.notify(); }
@@ -435,30 +435,30 @@ void NodeEditor::handleHoverEvents() {
   if (hoveredNode != hoverIds.node) {
     if (hoverIds.node.Get() != 0) {
       if (auto node = findNodeById(hoverIds.node); node.has_value()) {
-        node.value()->setHovered(false);
+        (*node)->setHovered(false);
       } else if (auto comment = findCommentById(hoverIds.node); comment.has_value()) {
-        comment.value()->setHovered(false);
+        (*comment)->setHovered(false);
       }
     }
     if (auto node = findNodeById(hoveredNode); node.has_value()) {
-      node.value()->setHovered(true);
+      (*node)->setHovered(true);
     } else if (auto comment = findCommentById(hoveredNode); comment.has_value()) {
-      comment.value()->setHovered(true);
+      (*comment)->setHovered(true);
     }
     hoverIds.node = hoveredNode;
   }
   if (hoveredPin != hoverIds.pin) {
     if (hoverIds.pin.Get() != 0) {
-      if (auto pin = findPinById(hoverIds.pin); pin.has_value()) { pin.value()->setHovered(false); }
+      if (auto pin = findPinById(hoverIds.pin); pin.has_value()) { (*pin)->setHovered(false); }
     }
-    if (auto pin = findPinById(hoveredPin); pin.has_value()) { pin.value()->setHovered(true); }
+    if (auto pin = findPinById(hoveredPin); pin.has_value()) { (*pin)->setHovered(true); }
     hoverIds.pin = hoveredPin;
   }
   if (hoveredLink != hoverIds.link) {
     if (hoverIds.link.Get() != 0) {
-      if (auto link = findLinkById(hoverIds.link); link.has_value()) { link.value()->setHovered(false); }
+      if (auto link = findLinkById(hoverIds.link); link.has_value()) { (*link)->setHovered(false); }
     }
-    if (auto link = findLinkById(hoveredLink); link.has_value()) { link.value()->setHovered(true); }
+    if (auto link = findLinkById(hoveredLink); link.has_value()) { (*link)->setHovered(true); }
     hoverIds.link = hoveredLink;
   }
 }

@@ -23,7 +23,7 @@ void AnchorLayout::setChildPosition(const std::string &childName, Position posit
   if (auto child = findIf(children | ranges::views::addressof,
                           [childName](auto child) { return child->element->getName() == childName; });
       child.has_value()) {
-    child.value()->positionable->setPosition(position);
+    (*child)->positionable->setPosition(position);
   }
 }
 

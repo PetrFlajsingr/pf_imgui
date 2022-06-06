@@ -39,7 +39,7 @@ class PF_IMGUI_EXPORT SliderAngle
   /**
    * @brief Struct for construction of SliderAngle.
    */
-  struct Config {
+  struct Config { //-V730
     using Parent = SliderAngle;
     std::string_view name;           /*!< Unique name of the element */
     std::string_view label;          /*!< Text rendered next to the element */

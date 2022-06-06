@@ -142,7 +142,7 @@ void Gizmo3D<Type>::setFromToml(const toml::table &src) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<VecType>(*newVal);
         if (vecValue.has_value()) {
-          direction = vecValue.value();
+          direction = *vecValue;
         } else {
           return;
         }
@@ -154,7 +154,7 @@ void Gizmo3D<Type>::setFromToml(const toml::table &src) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto quatValue = safeDeserializeGlmQuat(*newVal);
         if (quatValue.has_value()) {
-          quaternion = quatValue.value();
+          quaternion = *quatValue;
         } else {
           return;
         }

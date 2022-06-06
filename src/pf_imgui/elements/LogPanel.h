@@ -310,7 +310,7 @@ void LogPanel<Category, RecordLimit>::renderTextArea() {
       if (!record.show) { continue; }
       ImGui::PushStyleColor(ImGuiCol_Text, record.color);
       if (record.backgroundColor.has_value()) {
-        DrawTextBackground(record.text.c_str(), record.backgroundColor.value(), wrapEnabled, false);
+        DrawTextBackground(record.text.c_str(), *record.backgroundColor, wrapEnabled, false);
       }
       if (wrapEnabled) {
         ImGui::TextWrapped(record.text.c_str());
@@ -336,7 +336,8 @@ LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
         DrawTextBackground(categoryStrings[i].c_str(), categoryBackgroundColors[i].value(), false, true);
       }
       ImGui::PushStyleColor(ImGuiCol_Text, categoryTextColors[i]);
-      filterChanged = filterChanged | ImGui::Checkbox(categoryStrings[i++].c_str(), &catEnabled);
+      const auto categoryChanged = ImGui::Checkbox(categoryStrings[i++].c_str(), &catEnabled);
+      filterChanged = filterChanged || categoryChanged;
       ImGui::PopStyleColor(1);
     });
     ImGui::EndCombo();

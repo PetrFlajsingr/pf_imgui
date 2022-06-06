@@ -7,7 +7,7 @@
 namespace pf::ui::ig {
 
 bool GradientPoint::operator==(const GradientPoint &rhs) const {
-  return color == rhs.color && position == rhs.position;
+  return color == rhs.color && position == rhs.position; //-V550
 }
 
 std::optional<GradientPoint> GradientPoint::FromToml(const toml::table &src) {
@@ -104,7 +104,7 @@ void GradientEditor::setFromToml(const toml::table &src) {
     if (auto pointsArr = pointsIter->second.as_array(); pointsArr != nullptr) {
       std::ranges::for_each(*pointsArr, [this](const auto &pointToml) {
         if (auto pointTable = pointToml.as_table(); pointTable != nullptr) {
-          if (auto point = GradientPoint::FromToml(*pointTable); point.has_value()) { addGradientPoint(point.value()); }
+          if (auto point = GradientPoint::FromToml(*pointTable); point.has_value()) { addGradientPoint(*point); }
         }
       });
     }

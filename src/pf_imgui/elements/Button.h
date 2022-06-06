@@ -188,7 +188,7 @@ class PF_IMGUI_EXPORT ArrowButton
                                style::Style::ButtonTextAlign> {
  public:
   enum class Dir { Up = ImGuiDir_Up, Left = ImGuiDir_Left, Right = ImGuiDir_Right, Down = ImGuiDir_Down };
-  struct Config {
+  struct Config { //-V730
     using Parent = ArrowButton;
     std::string_view name;   /*!< Unique name of the element */
     Dir direction;           /*!< Direction of the arrow rendered on the button */
@@ -226,7 +226,7 @@ class PF_IMGUI_EXPORT ImageButton
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:
-  struct Config {
+  struct Config { //-V730
     using Parent = ImageButton;
     std::string_view name;    /*!< Unique name of the element */
     ImTextureID textureId;    /*!< Id of the texture to render */

@@ -161,7 +161,7 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
    * @details Unlike it's non-const alternative, this method does not remove children enqueued for removal.
    * @return View to const references of all children in the container.
    */
-  [[nodiscard]] auto getChildren() const {
+  [[nodiscard]] auto getChildren() const { //-V659
     return childrenInOrder | ranges::views::transform([](auto &childRef) -> const Element & { return childRef.get(); });
   }
 

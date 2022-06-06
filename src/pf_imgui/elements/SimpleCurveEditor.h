@@ -20,7 +20,7 @@
 namespace pf::ui::ig {
 namespace details {
 struct IsValidCurvePoint {
-  bool operator()(const ImVec2 &point) { return point.x != -1; }
+  bool operator()(const ImVec2 &point) { return point.x != -1; } //-V550
 };
 }  // namespace details
 
@@ -51,7 +51,7 @@ class SimpleCurveEditor : public Element,
   /**
    * @brief Construction config for SimpleCurveEditor
    */
-  struct Config {
+  struct Config { //-V730
     using Parent = SimpleCurveEditor;
     std::string name;          /*!< Unique name of the element */
     std::string label;         /*!< Label rendered as overlay over the editor */

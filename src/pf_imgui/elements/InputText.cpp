@@ -62,7 +62,7 @@ void InputText::renderImpl() {
 }
 
 void InputText::clear() {
-  text = "";
+  text.clear();
   buffer[0] = '\0';
 }
 
@@ -142,7 +142,7 @@ Flags<TextFilter> InputText::getFilters() const {
   return Flags<TextFilter>{static_cast<TextFilter>(setFilterFlags)};
 }
 
-void InputText::setFilters(Flags<TextFilter> filters) {
+void InputText::setFilters(Flags<TextFilter> filters) { //-V813
   const Flags<TextFilter> allFlags{magic_enum::enum_values<TextFilter>()};
   flags &= ~static_cast<ImGuiInputTextFlags>(*allFlags);
   flags |= static_cast<ImGuiInputTextFlags>(*filters);

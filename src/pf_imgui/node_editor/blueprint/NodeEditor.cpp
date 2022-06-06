@@ -67,8 +67,8 @@ void NodeEditor::setFromToml(const toml::table &src) {
       std::ranges::for_each(*nodesToml, [&](const auto &item) {
         if (auto nodeToml = item.as_table(); nodeToml != nullptr) {
           if (auto newNode = nodeFromToml(*nodeToml); newNode.has_value()) {
-            newNode.value()->id = getNextId();
-            nodes.emplace_back(std::move(newNode.value()));
+            (*newNode)->id = getNextId();
+            nodes.emplace_back(std::move(*newNode));
           }
         }
       });
@@ -111,7 +111,7 @@ void NodeEditor::setFromToml(const toml::table &src) {
           }
           if (!width.has_value() || !height.has_value() || !label.has_value() || !name.has_value()) { return; }
           auto &newComment = addComment(*name, *label, Size{*width, *height});
-          if (position.has_value()) { newComment.setPosition(position.value()); }
+          if (position.has_value()) { newComment.setPosition(*position); }
         }
       });
     }
@@ -131,13 +131,13 @@ void NodeEditor::setFromToml(const toml::table &src) {
           if (auto iter = linkToml->find("inputPin"); iter != linkToml->end()) {
             if (auto inputPinNameToml = iter->second.as_string(); inputPinNameToml != nullptr) {
               auto pin = findPinByName(inputPinNameToml->get());
-              if (pin.has_value()) { inputPin = static_cast<Pin *>(pin.value()); }
+              if (pin.has_value()) { inputPin = static_cast<Pin *>(*pin); }
             }
           }
           if (auto iter = linkToml->find("outputPin"); iter != linkToml->end()) {
             if (auto outputPinNameToml = iter->second.as_string(); outputPinNameToml != nullptr) {
               auto pin = findPinByName(outputPinNameToml->get());
-              if (pin.has_value()) { outputPin = static_cast<Pin *>(pin.value()); }
+              if (pin.has_value()) { outputPin = static_cast<Pin *>(*pin); }
             }
           }
           if (auto iter = linkToml->find("color"); iter != linkToml->end()) {
@@ -154,7 +154,7 @@ void NodeEditor::setFromToml(const toml::table &src) {
               || !thickness.has_value()) {
             return;
           }
-          auto &newLink = addLink(*linkName, *inputPin.value(), *outputPin.value());
+          auto &newLink = addLink(*linkName, **inputPin, **outputPin);
           newLink.setColor(*color);
           newLink.setThickness(*thickness);
           newLink.setId(getNextId());

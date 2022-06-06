@@ -115,7 +115,7 @@ void Slider2D<T>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
       const auto vecValue = safeDeserializeGlmVec<StorageType>(*newVal);
-      if (vecValue.has_value()) { ValueObservable<StorageType>::setValueAndNotifyIfChanged(vecValue.value()); }
+      if (vecValue.has_value()) { ValueObservable<StorageType>::setValueAndNotifyIfChanged(*vecValue); }
     }
   }
 }

@@ -39,7 +39,7 @@ class PF_IMGUI_EXPORT SimplePlot
   /**
    * @brief Struct for construction of SimplePlot.
    */
-  struct Config {
+  struct Config { //-V730
     using Parent = SimplePlot;
     std::string_view name;                             /*!< Unique name of the element */
     std::string_view label;                            /*!< Text rendered above the plot */

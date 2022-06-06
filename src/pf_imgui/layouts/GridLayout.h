@@ -26,7 +26,7 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT GridLayout : public Layout {
  public:
-  struct Config {
+  struct Config { //-V730
     using Parent = GridLayout;
     std::string_view name;       /*!< Unique name of the element */
     Size size;                   /*!< Size of the element */

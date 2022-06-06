@@ -39,10 +39,12 @@ class DragPin : public InteractablePin<DragInput<T>> {
   [[nodiscard]] toml::table toToml() const override {
     toml::table result = InteractablePin<DragInput<T>>::toToml();
     if (auto data = result.find("data"); data != result.end()) {
-      data->second.as_table()->insert_or_assign("speed", InteractablePin<DragInput<T>>::inputElement->getSpeed());
-      data->second.as_table()->insert_or_assign("min", InteractablePin<DragInput<T>>::inputElement->getMin());
-      data->second.as_table()->insert_or_assign("max", InteractablePin<DragInput<T>>::inputElement->getMax());
-      data->second.as_table()->insert_or_assign("format", InteractablePin<DragInput<T>>::inputElement->getFormat());
+      if (auto table = data->second.as_table(); table != nullptr) {
+        table->insert_or_assign("speed", InteractablePin<DragInput<T>>::inputElement->getSpeed());
+        table->insert_or_assign("min", InteractablePin<DragInput<T>>::inputElement->getMin());
+        table->insert_or_assign("max", InteractablePin<DragInput<T>>::inputElement->getMax());
+        table->insert_or_assign("format", InteractablePin<DragInput<T>>::inputElement->getFormat());
+      }
     }
     return result;
   }

@@ -138,7 +138,7 @@ void Input<T>::setFromToml(const toml::table &src) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(vecValue.value()); }
+        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(*vecValue); }
       }
     }
   } else {

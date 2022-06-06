@@ -28,11 +28,12 @@ void MarkdownText::renderImpl() {
 
 void MarkdownText::loadHeaderFonts() {
   if (details::DefaultFontData.fontH1 == nullptr) {
-    details::DefaultFontData.fontH1 = ImGui::GetIO().Fonts->AddFontDefault();
+    const auto fonts = ImGui::GetIO().Fonts;
+    details::DefaultFontData.fontH1 = fonts->AddFontDefault();
     details::DefaultFontData.fontH1->Scale = 1.5f;
-    details::DefaultFontData.fontH2 = ImGui::GetIO().Fonts->AddFontDefault();
+    details::DefaultFontData.fontH2 = fonts->AddFontDefault();
     details::DefaultFontData.fontH2->Scale = 1.30f;
-    details::DefaultFontData.fontH3 = ImGui::GetIO().Fonts->AddFontDefault();
+    details::DefaultFontData.fontH3 = fonts->AddFontDefault();
     details::DefaultFontData.fontH3->Scale = 1.15f;
     imGuiInterface.updateFonts();
   }
@@ -94,7 +95,7 @@ ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLink
   if (result.size.x > contentSize.x) {
     float const ratio = result.size.y / result.size.x;
     result.size.x = contentSize.x;
-    result.size.y = contentSize.x * ratio;
+    result.size.y = contentSize.y * ratio;
   }
 
   return result;

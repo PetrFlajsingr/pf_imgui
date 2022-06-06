@@ -108,7 +108,7 @@ void MatrixDragInput<M>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
       if (const auto matValue = safeDeserializeGlmMat<M>(*newVal); matValue.has_value()) {
-        ValueObservable<M>::setValueAndNotifyIfChanged(matValue.value());
+        ValueObservable<M>::setValueAndNotifyIfChanged(*matValue);
       }
     }
   }
@@ -127,9 +127,11 @@ void MatrixDragInput<M>::renderImpl() {
       const char *dragName = firstDragName.c_str();
       if (row > 0) { dragName = dragNames[row - 1].c_str(); }
 
-      valueChanged = valueChanged
-          | ImGui::DragScalarN(dragName, ImGuiDataType_Float,
-                               glm::value_ptr((*ValueObservable<M>::getValueAddress())[row]), Width, speed, &min, &max);
+      const auto rowValueChanged =
+          ImGui::DragScalarN(dragName, ImGuiDataType_Float,
+                             glm::value_ptr((*ValueObservable<M>::getValueAddress())[row]), Width, speed, &min, &max);
+
+      valueChanged = valueChanged || rowValueChanged;
     }
     if (valueChanged) { ValueObservable<M>::notifyValueChanged(); }
     ImGui::EndTable();
