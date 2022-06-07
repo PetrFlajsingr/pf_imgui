@@ -10,6 +10,7 @@
 
 #include <dear_widgets.h>
 #include <glm/vec2.hpp>
+#include <pf_common/Explicit.h>
 #include <pf_common/math/Range.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
@@ -42,13 +43,13 @@ class PF_IMGUI_EXPORT Range2D
    */
   struct Config {
     using Parent = Range2D;
-    std::string_view name;          /*!< Unique name of the element */
-    std::string_view label;         /*!< Text rendered next to the element */
-    glm::vec2 min;                  /*!< Minimum allowed value */
-    glm::vec2 max;                  /*!< Maximum allowed value*/
-    math::Range<glm::vec2> value{}; /*!< Initial value */
-    Size size = Size::Auto();       /*!< Size of the element */
-    bool persistent = false;        /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the element */
+    Explicit<glm::vec2> min;          /*!< Minimum allowed value */
+    Explicit<glm::vec2> max;          /*!< Maximum allowed value*/
+    math::Range<glm::vec2> value{};   /*!< Initial value */
+    Size size = Size::Auto();         /*!< Size of the element */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct Range2D

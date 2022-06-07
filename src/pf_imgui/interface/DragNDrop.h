@@ -286,8 +286,9 @@ class PF_IMGUI_EXPORT DragNDropGroup {
    * @param args
    */
   template<typename T, typename... Args>
-  void add(T &arg1, Args &...args) requires(
-      std::derived_from<T, details::DropTargetBase> || std::derived_from<T, details::DragSourceBase>) {
+  void add(T &arg1, Args &...args)
+    requires(std::derived_from<T, details::DropTargetBase> || std::derived_from<T, details::DragSourceBase>)
+  {
     if constexpr (std::derived_from<T, details::DropTargetBase>) { targets.emplace_back(&arg1, false); }
     if constexpr (std::derived_from<T, details::DragSourceBase>) { sources.emplace_back(&arg1); }
     if constexpr (sizeof...(Args) > 0) { add(std::forward<Args &>(args)...); }
@@ -301,15 +302,16 @@ class PF_IMGUI_EXPORT DragNDropGroup {
    * @param args
    */
   template<typename T, typename... Args>
-  void remove(T &arg1, Args &...args) requires(
-      std::derived_from<T, details::DropTargetBase> || std::derived_from<T, details::DragSourceBase>) {
+  void remove(T &arg1, Args &...args)
+    requires(std::derived_from<T, details::DropTargetBase> || std::derived_from<T, details::DragSourceBase>)
+  {
     if constexpr (std::derived_from<T, details::DropTargetBase>) {
       auto remove = std::ranges::remove_if(targets, [&arg1](const auto &t) { return t.first == &arg1; });
-      targets.erase(remove.begin(), remove.end()); //-V539
+      targets.erase(remove.begin(), remove.end());  //-V539
     }
     if constexpr (std::derived_from<T, details::DragSourceBase>) {
       auto remove = std::ranges::remove_if(sources, [&arg1](const auto &s) { return s == &arg1; });
-      targets.erase(remove.begin(), remove.end()); //-V539
+      targets.erase(remove.begin(), remove.end());  //-V539
     }
     if constexpr (sizeof...(Args) > 0) { remove(std::forward<Args &>(args)...); }
   }

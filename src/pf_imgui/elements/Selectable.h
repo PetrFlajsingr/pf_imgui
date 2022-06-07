@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SELECTABLE_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SELECTABLE_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -40,11 +41,11 @@ class PF_IMGUI_EXPORT Selectable
    */
   struct Config {
     using Parent = Selectable;
-    std::string_view name;    /*!< Unique name of the element */
-    std::string_view label;   /*!< Text rendered on top of the element */
-    bool selected = false;    /*!< Initial state of the Selectable */
-    Size size = Size::Auto(); /*!< Size of the element */
-    bool persistent = false;  /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on top of the element */
+    bool selected = false;            /*!< Initial state of the Selectable */
+    Size size = Size::Auto();         /*!< Size of the element */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct Selectable

@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/math/Range.h>
 #include <pf_imgui/_export.h>
@@ -62,11 +63,11 @@ class PF_IMGUI_EXPORT DragInput
    */
   struct Config {
     using Parent = DragInput;
-    std::string_view name;                                 /*!< Unique name of the element */
-    std::string_view label;                                /*!< Text rendered next to the input */
-    ParamType speed;                                       /*!< Speed of value change on drag */
-    ParamType min;                                         /*!< Minimum allowed value */
-    ParamType max;                                         /*!< Maximum allowed value */
+    Explicit<std::string_view> name;                       /*!< Unique name of the element */
+    Explicit<std::string_view> label;                      /*!< Text rendered next to the input */
+    Explicit<ParamType> speed;                             /*!< Speed of value change on drag */
+    Explicit<ParamType> min;                               /*!< Minimum allowed value */
+    Explicit<ParamType> max;                               /*!< Maximum allowed value */
     T value{};                                             /*!< Initial value */
     std::string format = drag_details::defaultFormat<T>(); /*!< Text format for value */
     bool persistent = false;                               /*!< Allow state saving to disk */
@@ -142,7 +143,8 @@ class PF_IMGUI_EXPORT DragInput
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(DragInput::Config &&config)
-    : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Labellable(std::string{config.label}),
+    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
+      Labellable(std::string{config.label.value}),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       speed(config.speed), min(config.min), max(config.max), format(std::move(config.format)) {}
 

@@ -10,7 +10,7 @@
 namespace pf::ui::ig {
 
 TabButton::TabButton(TabButton::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), flags(*config.mods) {}
+    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}), flags(*config.mods) {}
 
 TabButton::TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods)
     : ItemElement(elementName), Labellable(label), flags(*mods) {}
@@ -22,7 +22,7 @@ void TabButton::renderImpl() {
 void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
 
 Tab::Tab(Tab::Config &&config)
-    : TabButton(std::string{config.name}, std::string{config.label}, config.mods),
+    : TabButton(std::string{config.name.value}, std::string{config.label.value}, config.mods),
       open(config.closeable ? new bool{true} : nullptr) {}
 
 Tab::Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods, bool closeable)
@@ -73,7 +73,9 @@ void Tab::setDisplayDot(bool displayDot) {
   }
 }
 
-TabBar::TabBar(TabBar::Config &&config) : Element(std::string{config.name}) { setTabListAllowed(config.allowTabList); }
+TabBar::TabBar(TabBar::Config &&config) : Element(std::string{config.name.value}) {
+  setTabListAllowed(config.allowTabList);
+}
 
 TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elementName) {
   setTabListAllowed(allowTabList);

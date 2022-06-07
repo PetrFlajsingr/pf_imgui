@@ -9,11 +9,11 @@
 
 namespace pf::ui::ig {
 
-Element::Element(const std::string &name) : Renderable(name) {} //-V730
+Element::Element(const std::string &name) : Renderable(name) {}  //-V730
 
 Element::~Element() { observableDestroy.notify(); }
 
-Element::Element(Element &&other) noexcept //-V730
+Element::Element(Element &&other) noexcept  //-V730
     : Renderable(std::move(other)), observableDestroy(std::move(other.observableDestroy)) {}
 
 Element &Element::operator=(Element &&other) noexcept {
@@ -30,14 +30,12 @@ void Element::render() {
   Renderable::render();
 }
 
-void Element::setFont(Font newFont) { font = newFont; } //-V813
+void Element::setFont(Font newFont) { font = newFont; }  //-V813
 
 Font Element::getFont() const { return font; }
 
 ImGuiID Element::getId() const { return id; }
 
-void Element::setId(ImGuiID newId) {
-  id = newId;
-}
+void Element::setId(ImGuiID newId) { id = newId; }
 
 }  // namespace pf::ui::ig

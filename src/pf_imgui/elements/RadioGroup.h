@@ -10,6 +10,7 @@
 
 #include "RadioButton.h"
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Savable.h>
 #include <string>
@@ -33,7 +34,7 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
    */
   struct Config {
     using Parent = RadioGroup;
-    std::string_view groupName;           /*!< Unique name of the element */
+    Explicit<std::string_view> groupName; /*!< Unique name of the element */
     std::vector<RadioButton *> buttons{}; /*!< Buttons inside the group */
     bool persistent = false;              /*!< Enable disk state saving */
   };

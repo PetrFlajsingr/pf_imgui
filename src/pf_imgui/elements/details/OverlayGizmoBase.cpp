@@ -31,7 +31,9 @@ void OverlayGizmoBase::setProjection(const glm::mat4 &newProjection, bool isOrth
   projectionOrthographic = isOrthographic;
 }
 
-void OverlayGizmoBase::setSnapValues(float translate, float rotate, float scale) { snapValues = glm::vec3{translate, rotate, scale}; }
+void OverlayGizmoBase::setSnapValues(float translate, float rotate, float scale) {
+  snapValues = glm::vec3{translate, rotate, scale};
+}
 
 void OverlayGizmoBase::drawImpl(bool isEnabled) {
   ImGuizmo::Enable(isEnabled);
@@ -55,4 +57,4 @@ void OverlayGizmoBase::drawImpl(bool isEnabled) {
   }
 }
 
-}
+}  // namespace pf::ui::ig

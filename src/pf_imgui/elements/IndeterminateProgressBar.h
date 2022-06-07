@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -35,10 +36,10 @@ class PF_IMGUI_EXPORT IndeterminateProgressBar
    */
   struct Config {
     using Parent = IndeterminateProgressBar;
-    std::string_view name;    /*!< Unique name of the element */
-    float speed = 1.f;        /*!< Speed of change */
-    std::string overlay = ""; /*!< Text rendered on top of the element */
-    Size size = Size::Auto(); /*!< Size of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    float speed = 1.f;               /*!< Speed of change */
+    std::string overlay{};           /*!< Text rendered on top of the element */
+    Size size = Size::Auto();        /*!< Size of the element */
   };
   /**
    * Construct IndeterminateProgressBar

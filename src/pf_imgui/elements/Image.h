@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_IMAGE_H
 
 #include <functional>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -29,11 +30,11 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Click
   /**
    * @brief Struct for construction of Image.
    */
-  struct Config { //-V730
+  struct Config {
     using Parent = Image;
-    std::string_view name;    /*!< Unique name of the element */
-    ImTextureID textureId;    /*!< Id of the texture to render */
-    Size size = Size::Auto(); /*!< Size of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<ImTextureID> textureId; /*!< Id of the texture to render */
+    Size size = Size::Auto();        /*!< Size of the element */
   };
   /**
    * Construct Image

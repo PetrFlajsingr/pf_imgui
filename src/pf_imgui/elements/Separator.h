@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_SPLITTER_H
 #define PF_IMGUI_ELEMENTS_SPLITTER_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <string>
@@ -28,7 +29,7 @@ class PF_IMGUI_EXPORT Separator : public Element,
    */
   struct Config {
     using Parent = Separator;
-    std::string_view name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
   };
   /**
    * Construct Separator

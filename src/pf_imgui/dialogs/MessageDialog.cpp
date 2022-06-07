@@ -11,7 +11,7 @@ MessageDialog::MessageDialog(const std::string &elementName, const std::string &
                              const std::string &message, const Flags<MessageButtons> &buttons)
     : ModalDialog(elementName, title) {
   createChild<Text>("text", message).setWrap(true);
-  createChild<Dummy>("area_fill", Size{Width::Auto(),Height::Fill(25)});
+  createChild<Dummy>("area_fill", Size{Width::Auto(), Height::Fill(25)});
   auto &btnLayout = createChild<HorizontalLayout>("hor_layout", Size{Width::Auto(), 20}, HorizontalAlign::Down);
   auto enabledButtons = buttons.getSetFlags();
   std::ranges::for_each(enabledButtons, [this, &btnLayout](MessageButtons buttonType) {

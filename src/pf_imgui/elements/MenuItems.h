@@ -8,6 +8,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
 
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -114,8 +115,8 @@ class PF_IMGUI_EXPORT MenuButtonItem
    */
   struct Config {
     using Parent = MenuButtonItem;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered on top of the button */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on top of the button */
   };
   /**
    * Construct MenuButtonItem
@@ -151,10 +152,10 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
    */
   struct Config {
     using Parent = MenuCheckboxItem;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string_view label;  /*!< Text rendered on the item */
-    bool checked = false;    /*!< Initial value */
-    bool persistent = false; /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on the item */
+    bool checked = false;             /*!< Initial value */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct MenuCheckboxItem
@@ -189,7 +190,7 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
    */
   struct Config {
     using Parent = MenuSeparatorItem;
-    std::string_view name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
   };
   /**
    * Construct MenuSeparatorItem
@@ -215,8 +216,8 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuC
    */
   struct Config {
     using Parent = SubMenu;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered on the element */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on the element */
   };
   /**
    * Construct SubMenu

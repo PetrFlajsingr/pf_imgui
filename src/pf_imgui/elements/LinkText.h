@@ -9,6 +9,7 @@
 #define PF_IMGUI_LINKTEXT_H
 
 #include <functional>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -28,10 +29,10 @@ class LinkText : public ItemElement, public Labellable, public Clickable {
    */
   struct Config {
     using Parent = LinkText;
-    std::string_view name;         /*!< Unique name of the element */
-    std::string_view label;        /*!< Text of the element */
-    std::string link;              /*!< Underlying link/url */
-    LinkClickHandler clickHandler; /*!< Handler for url interact */
+    Explicit<std::string_view> name;         /*!< Unique name of the element */
+    Explicit<std::string_view> label;        /*!< Text of the element */
+    Explicit<std::string> link;              /*!< Underlying link/url */
+    Explicit<LinkClickHandler> clickHandler; /*!< Handler for url interact */
   };
   /**
    * Construct LinkText

@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 
-WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : Element(std::string{config.name}) {}
+WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : Element(std::string{config.name.value}) {}
 
 WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
 
@@ -20,7 +20,7 @@ void WindowMenuBar::renderImpl() {
   }
 }
 
-AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : Element(std::string{config.name}) {}
+AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : Element(std::string{config.name.value}) {}
 
 AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
 

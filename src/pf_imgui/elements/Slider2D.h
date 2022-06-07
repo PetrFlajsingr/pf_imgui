@@ -10,6 +10,7 @@
 
 #include <dear_widgets.h>
 #include <glm/vec2.hpp>
+#include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -53,13 +54,13 @@ class PF_IMGUI_EXPORT Slider2D
    */
   struct Config {
     using Parent = Slider2D;
-    std::string_view name;    /*!< Unique name of the element */
-    std::string_view label;   /*!< Text rendered next to element */
-    StorageType min;          /*!< Minimum allowed value */
-    StorageType max;          /*!< Maximum allowed value */
-    StorageType value{};      /*!< Initial value */
-    Size size = Size::Auto(); /*!< Size of the element */
-    bool persistent = false;  /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to element */
+    Explicit<StorageType> min;        /*!< Minimum allowed value */
+    Explicit<StorageType> max;        /*!< Maximum allowed value */
+    StorageType value{};              /*!< Initial value */
+    Size size = Size::Auto();         /*!< Size of the element */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct Slider2D
@@ -91,11 +92,11 @@ class PF_IMGUI_EXPORT Slider2D
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(Slider2D::Config &&config)
-    : ItemElement(std::string{config.name}),
-      Labellable(std::string{config.label}), ValueObservable<StorageType>(config.value),
+    : ItemElement(std::string{config.name.value}),
+      Labellable(std::string{config.label.value}), ValueObservable<StorageType>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<StorageType>(false),
-      DropTarget<StorageType>(false), Resizable(config.size), extremesX(config.min.x, config.max.x),
-      extremesY(config.min.y, config.max.y) {}
+      DropTarget<StorageType>(false), Resizable(config.size), extremesX(config.min.value.x, config.max.value.x),
+      extremesY(config.min.value.y, config.max.value.y) {}
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(const std::string &elementName, const std::string &label, Slider2D::StorageType minMaxX,

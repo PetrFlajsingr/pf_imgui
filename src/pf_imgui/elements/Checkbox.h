@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_CHECKBOX_H
 #define PF_IMGUI_ELEMENTS_CHECKBOX_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -39,10 +40,10 @@ class PF_IMGUI_EXPORT Checkbox
    */
   struct Config {
     using Parent = Checkbox;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string_view label;  /*!< Text rendered next to the checkbox */
-    bool checked = false;    /*!< Initial state of the checkbox */
-    bool persistent = false; /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the checkbox */
+    bool checked = false;             /*!< Initial state of the checkbox */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct Checkbox

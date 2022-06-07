@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 IndeterminateProgressBar::IndeterminateProgressBar(IndeterminateProgressBar::Config &&config)
-    : IndeterminateProgressBar(std::string{config.name}, config.overlay, config.speed, config.size) {}
+    : IndeterminateProgressBar(std::string{config.name.value}, config.overlay, config.speed, config.size) {}
 
 IndeterminateProgressBar::IndeterminateProgressBar(const std::string &elementName, std::string overlayStr, float speed,
                                                    const Size &size)

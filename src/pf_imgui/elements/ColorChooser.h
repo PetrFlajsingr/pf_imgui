@@ -12,6 +12,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -59,10 +60,10 @@ class PF_IMGUI_EXPORT ColorChooser
    */
   struct Config {
     using Parent = ColorChooser;
-    std::string_view name;      /*!< Unique name of the element */
-    std::string_view label;     /*!< Text rendered next to interactable parts */
-    Color value = Color::White; /*!< Initial value */
-    bool persistent = false;    /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to interactable parts */
+    Color value = Color::White;       /*!< Initial value */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct ColorChooser
@@ -105,8 +106,9 @@ class PF_IMGUI_EXPORT ColorChooser
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 ColorChooser<Type, Format>::ColorChooser(ColorChooser::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false), DropTarget(false) {
+    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      ValueObservable(config.value), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false),
+      DropTarget(false) {
   setValue(config.value);
 }
 

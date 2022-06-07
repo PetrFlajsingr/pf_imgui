@@ -22,7 +22,7 @@ RAII ButtonBase::setButtonRepeat() {
 }
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
-    : ButtonBase(std::string{config.name}, config.repeatable ? Repeatable::Yes : Repeatable::No),
+    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       Resizable(config.size), clickBtn(config.clickButton) {}
 
 InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, MouseButton clickButton,
@@ -37,8 +37,8 @@ void InvisibleButton::renderImpl() {
 }
 
 Button::Button(Button::Config &&config)
-    : ButtonBase(std::string{config.name}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Labellable(std::string{config.label}), Resizable(config.size) {}
+    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
+      Labellable(std::string{config.label.value}), Resizable(config.size) {}
 
 Button::Button(const std::string &name, const std::string &label, const Size &s, Repeatable isRepeatable)
     : ButtonBase(name, isRepeatable), Labellable(label), Resizable(s) {}
@@ -51,8 +51,8 @@ void Button::renderImpl() {
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
-    : ButtonBase(std::string{config.name}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Labellable(std::string{config.label}) {}
+    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
+      Labellable(std::string{config.label.value}) {}
 
 SmallButton::SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable)
     : ButtonBase(name, isRepeatable), Labellable(label) {}
@@ -65,7 +65,7 @@ void SmallButton::renderImpl() {
 }
 
 ArrowButton::ArrowButton(ArrowButton::Config &&config)
-    : ButtonBase(std::string{config.name}, config.repeatable ? Repeatable::Yes : Repeatable::No),
+    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       dir(config.direction) {}
 
 ArrowButton::ArrowButton(const std::string &name, ArrowButton::Dir direction, Repeatable isRepeatable)
@@ -79,7 +79,7 @@ void ArrowButton::renderImpl() {
 }
 
 ImageButton::ImageButton(ImageButton::Config &&config)
-    : ButtonBase(std::string{config.name}, config.repeatable ? Repeatable::Yes : Repeatable::No),
+    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       Resizable(config.size), textureId(config.textureId) {}
 
 ImageButton::ImageButton(const std::string &name, ImTextureID texId, Size s, Repeatable isRepeatable)

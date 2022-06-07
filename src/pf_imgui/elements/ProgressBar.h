@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -49,13 +50,13 @@ class PF_IMGUI_EXPORT ProgressBar
    */
   struct Config {
     using Parent = ProgressBar;
-    std::string_view name;    /*!< Unique name of the element */
-    T step;                   /*!< Step taken when @code step() @endcode is called */
-    T min;                    /*!< Lowest value representing 0% */
-    T max;                    /*!< Highest value representing 100% */
-    T value = min;            /*!< Initial value within [min, max] */
-    std::string overlay = ""; /*!< Text rendered on top of the element */
-    Size size = Size::Auto(); /*!< Size of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<T> step;                /*!< Step taken when @code step() @endcode is called */
+    Explicit<T> min;                 /*!< Lowest value representing 0% */
+    Explicit<T> max;                 /*!< Highest value representing 100% */
+    T value = min;                   /*!< Initial value within [min, max] */
+    std::string overlay = "";        /*!< Text rendered on top of the element */
+    Size size = Size::Auto();        /*!< Size of the element */
   };
   /**
    * Construct ProgressBar
@@ -138,7 +139,7 @@ class PF_IMGUI_EXPORT ProgressBar
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
-    : ItemElement(std::string{config.name}), ValueObservable<T>(config.value), Resizable(config.size),
+    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value), Resizable(config.size),
       stepValue(config.step), min(config.min), max(config.max), overlay(std::move(config.overlay)) {}
 
 template<ProgressBarCompatible T>

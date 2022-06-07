@@ -11,7 +11,7 @@ Positionable::Positionable(const Position &position) : position(position) {}
 Position Positionable::getPosition() const { return position; }
 
 void Positionable::setPosition(Position pos) {
-  if (pos.x != position.x || pos.y != position.y) { //-V550
+  if (pos.x != position.x || pos.y != position.y) {  //-V550
     position = pos;
     notifyPositionChanged(position);
   }

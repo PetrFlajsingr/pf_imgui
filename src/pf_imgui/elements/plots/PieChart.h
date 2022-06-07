@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
 #define PF_IMGUI_ELEMENTS_PLOTS_PIECHART_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
 #include <pf_imgui/interface/Element.h>
@@ -40,9 +41,9 @@ class PF_IMGUI_EXPORT PieChart : public Element, public Labellable, public Resiz
    */
   struct Config {
     using Parent = PieChart;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered above the chart */
-    Size size;              /*!< Size on display */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered above the chart */
+    Explicit<Size> size;              /*!< Size on display */
   };
   /**
    * Construct PieChart

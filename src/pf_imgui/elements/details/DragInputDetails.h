@@ -5,13 +5,13 @@
 #ifndef PF_IMGUI_ELEMENTS_DETAILS_DRAGINPUT_H
 #define PF_IMGUI_ELEMENTS_DETAILS_DRAGINPUT_H
 
-#include <type_traits>
+#include <glm/matrix.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
-#include <glm/matrix.hpp>
-#include <pf_common/math/Range.h>
 #include <pf_common/concepts/OneOf.h>
+#include <pf_common/math/Range.h>
+#include <type_traits>
 
 namespace pf::ui::ig::drag_details {
 /**
@@ -52,6 +52,6 @@ constexpr const char *defaultFormat() {
     return "%d";
   }
 }
-}  // namespace details
+}  // namespace pf::ui::ig::drag_details
 
 #endif  //PF_IMGUI_ELEMENTS_DETAILS_DRAGINPUT_H

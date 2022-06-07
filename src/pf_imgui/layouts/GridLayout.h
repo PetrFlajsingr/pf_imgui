@@ -17,6 +17,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 /**
@@ -26,12 +27,12 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT GridLayout : public Layout {
  public:
-  struct Config { //-V730
+  struct Config {
     using Parent = GridLayout;
-    std::string_view name;       /*!< Unique name of the element */
-    Size size;                   /*!< Size of the element */
-    std::uint32_t widthInCells;  /*!< Amount of columns */
-    std::uint32_t heightInCells; /*!< Amount of rows */
+    Explicit<std::string_view> name;       /*!< Unique name of the element */
+    Explicit<Size> size;                   /*!< Size of the element */
+    Explicit<std::uint32_t> widthInCells;  /*!< Amount of columns */
+    Explicit<std::uint32_t> heightInCells; /*!< Amount of rows */
     bool showBorder = false;     /*!< Render border around layout's area */
   };
   /**

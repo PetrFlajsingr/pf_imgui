@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 DockSpace::DockSpace(Config &&config)
-    : Element(std::string{config.name}), Resizable(config.size), flags(*config.flags) {}
+    : Element(std::string{config.name.value}), Resizable(config.size), flags(*config.flags) {}
 
 DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
     : Element(name), Resizable(s), flags(*dockFlags) {}

@@ -11,7 +11,7 @@
 namespace pf::ui::ig {
 
 GridLayout::GridLayout(GridLayout::Config &&config)
-    : Layout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
+    : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       width(config.widthInCells), height(config.heightInCells) {
   const auto cellCount = width * height;
   cells.resize(cellCount);

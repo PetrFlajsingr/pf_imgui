@@ -13,7 +13,7 @@
 namespace pf::ui::ig {
 
 StackedLayout::StackedLayout(StackedLayout::Config &&config)
-    : Layout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
+    : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
 StackedLayout::Stack::Stack(StackedLayout &parent) : parent(parent) {}
 

@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_GROUPBOX_H
 #define PF_IMGUI_GROUPBOX_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
@@ -27,9 +28,9 @@ class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public
    */
   struct Config {
     using Parent = GroupBox;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered on top of the group */
-    Size size;              /*!< Size of the element */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on top of the group */
+    Explicit<Size> size;              /*!< Size of the element */
   };
   /**
    * Construct GroupBox

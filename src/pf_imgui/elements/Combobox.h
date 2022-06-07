@@ -148,8 +148,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
 
 template<ToStringConvertible T>
 Combobox<T>::Combobox(Combobox::Config &&config)
-    : CustomComboboxBase(std::string{config.name.value}, std::string{config.label.value}, details::ComboboxRowFactory<T>{},
-                         std::string{config.preview}, config.shownItemCount),
+    : CustomComboboxBase(std::string{config.name.value}, std::string{config.label.value},
+                         details::ComboboxRowFactory<T>{}, std::string{config.preview}, config.shownItemCount),
       ValueObservable<T>(), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false) {}
 
 template<ToStringConvertible T>

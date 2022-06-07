@@ -9,6 +9,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
 
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -27,7 +28,7 @@ class PF_IMGUI_EXPORT WidthDecorator : public T {
  public:
   struct Config {
     using Parent = WidthDecorator;
-    Width width;
+    Explicit<Width> width;
     typename T::Config config;
     operator typename T::Config() { return config; }
   };

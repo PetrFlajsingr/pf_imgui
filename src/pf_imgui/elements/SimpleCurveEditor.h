@@ -9,6 +9,7 @@
 #define PF_IMGUI_SIMPLECURVEEDITOR_H
 
 #include <ImGuiCurveEditor.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -20,7 +21,7 @@
 namespace pf::ui::ig {
 namespace details {
 struct IsValidCurvePoint {
-  bool operator()(const ImVec2 &point) { return point.x != -1; } //-V550
+  bool operator()(const ImVec2 &point) { return point.x != -1; }  //-V550
 };
 }  // namespace details
 
@@ -51,12 +52,12 @@ class SimpleCurveEditor : public Element,
   /**
    * @brief Construction config for SimpleCurveEditor
    */
-  struct Config { //-V730
+  struct Config {
     using Parent = SimpleCurveEditor;
-    std::string name;          /*!< Unique name of the element */
-    std::string label;         /*!< Label rendered as overlay over the editor */
-    Size size = Size::Auto();  /*!< Size of the element */
-    std::size_t maxPointCount; /*!< Maximum allowed key points */
+    Explicit<std::string> name;  /*!< Unique name of the element */
+    Explicit<std::string> label; /*!< Label rendered as overlay over the editor */
+    Size size = Size::Auto();    /*!< Size of the element */
+    std::size_t maxPointCount;   /*!< Maximum allowed key points */
   };
 
   /**

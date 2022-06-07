@@ -6,6 +6,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H
 
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -58,10 +59,10 @@ class PF_IMGUI_EXPORT VerticalSlider
    */
   struct Config {
     using Parent = VerticalSlider;
-    std::string_view name;                                   /*!< Unique name of the element */
-    std::string_view label;                                  /*!< Text rendered next to the element */
-    T min;                                                   /*!< Minimum allowed value */
-    T max;                                                   /*!< Maximum allowed value */
+    Explicit<std::string_view> name;                         /*!< Unique name of the element */
+    Explicit<std::string_view> label;                        /*!< Text rendered next to the element */
+    Explicit<T> min;                                         /*!< Minimum allowed value */
+    Explicit<T> max;                                         /*!< Maximum allowed value */
     T value{};                                               /*!< Initial value */
     Size size;                                               /*!< Size of the element */
     std::string format = details::defaultVSliderFormat<T>(); /*!< Format string used to render value */
@@ -120,7 +121,8 @@ class PF_IMGUI_EXPORT VerticalSlider
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
+      Labellable(std::string{config.label.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No),
       Resizable(config.size), DragSource<T>(false), DropTarget<T>(false), min(config.min), max(config.max),
       format(std::move(config.format)) {}

@@ -11,7 +11,7 @@
 namespace pf::ui::ig {
 
 InputText::InputText(InputText::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(""),
+    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}), ValueObservable(""),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<std::string>(false),
       DropTarget<std::string>(false), text(std::move(config.value)),
       buffer(std::unique_ptr<char[]>(new char[config.maxInputLength + 1])), bufferLength(config.maxInputLength),
@@ -142,7 +142,7 @@ Flags<TextFilter> InputText::getFilters() const {
   return Flags<TextFilter>{static_cast<TextFilter>(setFilterFlags)};
 }
 
-void InputText::setFilters(Flags<TextFilter> filters) { //-V813
+void InputText::setFilters(Flags<TextFilter> filters) {  //-V813
   const Flags<TextFilter> allFlags{magic_enum::enum_values<TextFilter>()};
   flags &= ~static_cast<ImGuiInputTextFlags>(*allFlags);
   flags |= static_cast<ImGuiInputTextFlags>(*filters);

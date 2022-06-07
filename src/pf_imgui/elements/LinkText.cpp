@@ -7,8 +7,8 @@
 namespace pf::ui::ig {
 
 LinkText::LinkText(pf::ui::ig::LinkText::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), link(std::move(config.link)),
-      linkClickHandler(std::move(config.clickHandler)) {
+    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      link(std::move(config.link)), linkClickHandler(std::move(config.clickHandler)) {
   setTooltip(link);
 }
 

@@ -10,6 +10,7 @@
 
 #include <imgui_widget_flamegraph.h>
 #include <optional>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
@@ -42,8 +43,8 @@ class PF_IMGUI_EXPORT FlameGraph
    */
   struct Config {
     using Parent = FlameGraph;
-    std::string_view name;                             /*!< Unique name of the element */
-    std::string_view label;                            /*!< Text rendered next to the graph */
+    Explicit<std::string_view> name;                   /*!< Unique name of the element */
+    Explicit<std::string_view> label;                  /*!< Text rendered next to the graph */
     Size size = Size::Auto();                          /*!< Size of the element */
     std::optional<std::string> overlay = std::nullopt; /*!< Text rendered on top of the graph */
   };

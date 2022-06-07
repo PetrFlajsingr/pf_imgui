@@ -8,7 +8,8 @@
 namespace pf::ui::ig {
 
 RadioButton::RadioButton(RadioButton::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.selected) {}
+    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      ValueObservable(config.selected) {}
 
 RadioButton::RadioButton(const std::string &elementName, const std::string &label, bool value)
     : ItemElement(elementName), Labellable(label), ValueObservable(value) {}

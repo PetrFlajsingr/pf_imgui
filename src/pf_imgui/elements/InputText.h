@@ -11,6 +11,7 @@
 #include "Text.h"
 #include <functional>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -55,9 +56,9 @@ class PF_IMGUI_EXPORT InputText
    */
   struct Config {
     using Parent = InputText;
-    std::string_view name;                               /*!< Unique name of the element */
-    std::string_view label;                              /*!< Text rendered next to the input */
-    std::string value;                                   /*!< Initial value */
+    Explicit<std::string_view> name;                     /*!< Unique name of the element */
+    Explicit<std::string_view> label;                    /*!< Text rendered next to the input */
+    std::string value{};                                 /*!< Initial value */
     TextInputType inputType = TextInputType::SingleLine; /*!< Type of text input */
     std::size_t maxInputLength = 256;                    /*!< Maximum length of input string */
     TextTrigger eventTrigger = TextTrigger::Character;   /*!< Trigger to notify listeners */

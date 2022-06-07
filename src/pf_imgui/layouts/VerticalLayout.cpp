@@ -7,7 +7,7 @@
 namespace pf::ui::ig {
 
 VerticalLayout::VerticalLayout(VerticalLayout::Config &&config)
-    : LinearLayout(std::string{config.name}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
+    : LinearLayout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       alignment(config.align) {}
 
 VerticalLayout::VerticalLayout(const std::string &name, Size size, VerticalAlign align, ShowBorder showBorder)

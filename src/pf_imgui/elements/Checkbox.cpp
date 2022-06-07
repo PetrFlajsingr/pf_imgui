@@ -9,8 +9,8 @@
 namespace pf::ui::ig {
 
 Checkbox::Checkbox(Checkbox::Config &&config)
-    : ItemElement(std::string{config.name}), ValueObservable(config.checked), Labellable(std::string{config.label}),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
+    : ItemElement(std::string{config.name.value}), ValueObservable(config.checked),
+      Labellable(std::string{config.label.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 Checkbox::Checkbox(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
     : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}

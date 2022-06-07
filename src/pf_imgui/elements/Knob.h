@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_KNOB_H
 
 #include <imgui-knobs.h>
+#include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -50,15 +51,15 @@ class Knob : public ItemElement,
    */
   struct Config {
     using Parent = Knob;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string label;       /*!< Label rendered above the element */
-    Size size;               /*!< Size of the element */
-    KnobType type;           /*!< Type of knob */
-    T minValue;              /*!< Min allowed value */
-    T maxValue;              /*!< Max allowed value */
-    float speed = 1.f;       /*!< Value change speed */
-    T value = T{};           /*!< Initial value */
-    bool persistent = false; /*!< Enable state saving to disk */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<std::string> label;     /*!< Label rendered above the element */
+    Explicit<Size> size;             /*!< Size of the element */
+    Explicit<KnobType> type;         /*!< Type of knob */
+    Explicit<T> minValue;            /*!< Min allowed value */
+    Explicit<T> maxValue;            /*!< Max allowed value */
+    float speed = 1.f;               /*!< Value change speed */
+    T value = T{};                   /*!< Initial value */
+    bool persistent = false;         /*!< Enable state saving to disk */
   };
   /**
    * Construct Knob.
@@ -96,7 +97,7 @@ class Knob : public ItemElement,
 
 template<OneOf<int, float> T>
 Knob<T>::Knob(Knob::Config &&config)
-    : Knob(std::string{config.name}, std::string{config.label}, config.type, config.size, config.minValue,
+    : Knob(std::string{config.name.value}, std::string{config.label.value}, config.type, config.size, config.minValue,
            config.maxValue, config.speed, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<int, float> T>

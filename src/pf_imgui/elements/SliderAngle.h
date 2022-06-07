@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 #define PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -39,15 +40,15 @@ class PF_IMGUI_EXPORT SliderAngle
   /**
    * @brief Struct for construction of SliderAngle.
    */
-  struct Config { //-V730
+  struct Config {
     using Parent = SliderAngle;
-    std::string_view name;           /*!< Unique name of the element */
-    std::string_view label;          /*!< Text rendered next to the element */
-    float min;                       /*!< Minimum allowed value */
-    float max;                       /*!< Maximum allowed value */
-    float value{};                   /*!< Initial value */
-    std::string format = "%.0f deg"; /*!< Format string for value rendering */
-    bool persistent = false;         /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the element */
+    Explicit<float> min;              /*!< Minimum allowed value */
+    Explicit<float> max;              /*!< Maximum allowed value */
+    float value{};                    /*!< Initial value */
+    std::string format = "%.0f deg";  /*!< Format string for value rendering */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct SliderAngle
