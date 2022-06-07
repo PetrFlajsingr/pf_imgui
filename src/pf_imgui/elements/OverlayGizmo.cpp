@@ -44,7 +44,7 @@ void AreaOverlayGizmo::renderImpl() {
     parentWindow.setUserMovable(false);
   } else {
     if (wasWindowMovable.has_value()) {
-      parentWindow.setUserMovable(wasWindowMovable.value());
+      parentWindow.setUserMovable(*wasWindowMovable);
       wasWindowMovable.reset();
     }
   }

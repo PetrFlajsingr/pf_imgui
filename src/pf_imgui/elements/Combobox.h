@@ -9,6 +9,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
 
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomCombobox.h>
 #include <pf_imgui/elements/Selectable.h>
@@ -76,9 +77,9 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    */
   struct Config {
     using Parent = Combobox;
-    std::string_view name;                                /*!< Unique name of the element */
-    std::string_view label;                               /*!< Text rendered next to the Combobox */
-    std::string preview;                                  /*!< Preview value shown when no item is selected */
+    Explicit<std::string_view> name;                      /*!< Unique name of the element */
+    Explicit<std::string_view> label;                     /*!< Text rendered next to the Combobox */
+    Explicit<std::string> preview;                        /*!< Preview value shown when no item is selected */
     ComboBoxCount shownItemCount = ComboBoxCount::Items8; /*!< Amount of items shown when Combobox is open */
     bool persistent = false;                              /*!< Allow state saving to disk */
   };
@@ -147,7 +148,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
 
 template<ToStringConvertible T>
 Combobox<T>::Combobox(Combobox::Config &&config)
-    : CustomComboboxBase(std::string{config.name}, std::string{config.label}, details::ComboboxRowFactory<T>{},
+    : CustomComboboxBase(std::string{config.name.value}, std::string{config.label.value}, details::ComboboxRowFactory<T>{},
                          std::string{config.preview}, config.shownItemCount),
       ValueObservable<T>(), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false) {}
 

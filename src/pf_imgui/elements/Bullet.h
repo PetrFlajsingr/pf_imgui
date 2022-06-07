@@ -11,6 +11,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <utility>
+#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 
@@ -26,7 +27,7 @@ class PF_IMGUI_EXPORT Bullet : public T {
    */
   struct Config {
     using Parent = Bullet;
-    typename T::Config config; /*!< Config of the underlying Element */
+    Explicit<typename T::Config> config; /*!< Config of the underlying Element */
     explicit(false) operator typename T::Config() { return config; }
   };
   /**
