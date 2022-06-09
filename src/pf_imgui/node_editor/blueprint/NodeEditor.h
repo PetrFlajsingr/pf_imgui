@@ -5,9 +5,9 @@
 #ifndef PF_IMGUI_BLUEPRINT_NODEEDITOR_H
 #define PF_IMGUI_BLUEPRINT_NODEEDITOR_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/TomlSerializable.h>
 #include <pf_imgui/node_editor/NodeEditor.h>
-#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig::bp {
 
@@ -18,8 +18,8 @@ class NodeEditor : public ig::NodeEditor, public TomlSerializable {
    */
   struct Config {
     using Parent = NodeEditor;
-    Explicit<std::string> name;         /*!< Unique name of the element */
-    Size size = Size::Auto(); /*!< Size of the element */
+    Explicit<std::string> name; /*!< Unique name of the element */
+    Size size = Size::Auto();   /*!< Size of the element */
   };
   NodeEditor(const std::string &name, const Size &size);
   explicit NodeEditor(Config &&config);

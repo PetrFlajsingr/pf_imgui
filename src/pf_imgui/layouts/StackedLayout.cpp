@@ -43,9 +43,7 @@ void StackedLayout::popStack() {
   if (!stacks.empty()) { stacks.erase(stacks.end() - 1); }
 }
 
-void StackedLayout::removeStack(std::size_t index) {
-  stacks.erase(stacks.begin() + static_cast<long long>(index));
-}
+void StackedLayout::removeStack(std::size_t index) { stacks.erase(stacks.begin() + static_cast<long long>(index)); }
 
 void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
   auto stack = std::move(stacks[srcIndex]);
@@ -55,9 +53,7 @@ void StackedLayout::moveStack(std::size_t srcIndex, std::size_t dstIndex) {
 
 std::size_t StackedLayout::getCurrentIndex() const { return *selectedIndex; }
 
-void StackedLayout::setIndex(std::size_t index) {
-  selectedIndex = index;
-}
+void StackedLayout::setIndex(std::size_t index) { selectedIndex = index; }
 
 StackedLayout::Stack &StackedLayout::getCurrentStack() { return *stacks[*selectedIndex]; }
 

@@ -8,13 +8,13 @@
 #ifndef PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
 #define PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H
 
-#include <pf_imgui/interface/Layout.h>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/Layout.h>
 #include <string>
 #include <vector>
-#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 
@@ -30,9 +30,9 @@ class PF_IMGUI_EXPORT StackedLayout : public Layout {
    */
   struct Config {
     using Parent = StackedLayout;
-    Explicit<std::string_view> name;   /*!< Unique name of the element */
-    Explicit<Size> size;               /*!< Size of the element */
-    bool showBorder = false; /*!< Render border around layout's area */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<Size> size;             /*!< Size of the element */
+    bool showBorder = false;         /*!< Render border around layout's area */
   };
   /**
    * Construct StackedLayout

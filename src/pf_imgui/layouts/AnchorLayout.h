@@ -8,11 +8,12 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
 #define PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
 
-#include <pf_imgui/interface/Layout.h>
 #include <limits>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/decorators/PositionDecorator.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 #include <range/v3/view/addressof.hpp>
@@ -21,7 +22,6 @@
 #include <tuple>
 #include <utility>
 #include <vector>
-#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 
@@ -37,9 +37,9 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
    */
   struct Config {
     using Parent = AnchorLayout;
-    Explicit<std::string_view> name;   /*!< Unique name of the element */
-    Explicit<Size> size;               /*!< Size of the element */
-    bool showBorder = false; /*!< Render border around layout's area */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<Size> size;             /*!< Size of the element */
+    bool showBorder = false;         /*!< Render border around layout's area */
   };
   /**
    * Construct AnchorLayout

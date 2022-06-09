@@ -54,10 +54,10 @@ class SimpleCurveEditor : public Element,
    */
   struct Config {
     using Parent = SimpleCurveEditor;
-    Explicit<std::string> name;  /*!< Unique name of the element */
-    Explicit<std::string> label; /*!< Label rendered as overlay over the editor */
-    Size size = Size::Auto();    /*!< Size of the element */
-    Explicit<std::size_t> maxPointCount;   /*!< Maximum allowed key points */
+    Explicit<std::string> name;          /*!< Unique name of the element */
+    Explicit<std::string> label;         /*!< Label rendered as overlay over the editor */
+    Size size = Size::Auto();            /*!< Size of the element */
+    Explicit<std::size_t> maxPointCount; /*!< Maximum allowed key points */
   };
 
   /**

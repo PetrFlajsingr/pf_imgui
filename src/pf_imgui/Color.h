@@ -11,8 +11,8 @@
 #include <concepts>
 #include <cstdint>
 #include <imgui.h>
-#include <pf_imgui/_export.h>
 #include <pf_common/concepts/Integral.h>
+#include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
 
@@ -37,12 +37,10 @@ class PF_IMGUI_EXPORT Color {
   [[nodiscard]] bool operator==(const Color &rhs) const;
   [[nodiscard]] bool operator!=(const Color &rhs) const;
 
-  [[nodiscard]] static Color RGB(Integral auto red, Integral auto green,
-                                 Integral auto blue, Integral auto alpha) {
+  [[nodiscard]] static Color RGB(Integral auto red, Integral auto green, Integral auto blue, Integral auto alpha) {
     return Color{IM_COL32(red, green, blue, alpha)};
   }
-  [[nodiscard]] static Color RGB(Integral auto red, Integral auto green,
-                                 Integral auto blue) {
+  [[nodiscard]] static Color RGB(Integral auto red, Integral auto green, Integral auto blue) {
     return Color{IM_COL32(red, green, blue, 255)};
   }
   [[nodiscard]] static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
@@ -54,8 +52,8 @@ class PF_IMGUI_EXPORT Color {
     return Color{ImColor(red, green, blue, 1.f)};
   }
 
-  [[nodiscard]] static Color HSV(Integral auto hue, Integral auto saturation,
-                                 Integral auto value, Integral auto alpha = 255u) {
+  [[nodiscard]] static Color HSV(Integral auto hue, Integral auto saturation, Integral auto value,
+                                 Integral auto alpha = 255u) {
     float r;
     float g;
     float b;

@@ -8,10 +8,10 @@
 #ifndef IMGUI_EXPERIMENTS_LINEARLAYOUT_H
 #define IMGUI_EXPERIMENTS_LINEARLAYOUT_H
 
-#include <pf_imgui/interface/Layout.h>
 #include <memory>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/meta.h>
 #include <range/v3/view/transform.hpp>
 #include <vector>

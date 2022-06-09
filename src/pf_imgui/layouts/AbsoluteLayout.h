@@ -9,6 +9,7 @@
 #define PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H
 
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Layout.h>
@@ -19,7 +20,6 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 
@@ -36,9 +36,9 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
    */
   struct Config {
     using Parent = AbsoluteLayout;
-    Explicit<std::string_view> name;   /*!< Unique name of the element */
-    Explicit<Size> size;               /*!< Size of the element */
-    bool showBorder = false; /*!< Render border around layout's area */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<Size> size;             /*!< Size of the element */
+    bool showBorder = false;         /*!< Render border around layout's area */
   };
   /**
    * Construct AbsoluteLayout

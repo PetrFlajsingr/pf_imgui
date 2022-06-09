@@ -29,8 +29,7 @@ namespace pf::ui::ig {
  * @tparam R resulting renderable for row
  */
 template<typename F, typename T, typename R>
-concept CustomItemBoxFactory = std::is_invocable_r_v < std::unique_ptr<R>,
-F, T > ;
+concept CustomItemBoxFactory = std::is_invocable_r_v<std::unique_ptr<R>, F, T>;
 
 /**
  * @brief Box containing items provided by user based on stored type.

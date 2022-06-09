@@ -24,8 +24,8 @@ class VerticalLayout : public LinearLayout {
    */
   struct Config {
     using Parent = VerticalLayout;
-    Explicit<std::string_view> name;                     /*!< Unique name of the element */
-    Explicit<Size> size;                                 /*!< Size of the element */
+    Explicit<std::string_view> name;           /*!< Unique name of the element */
+    Explicit<Size> size;                       /*!< Size of the element */
     VerticalAlign align = VerticalAlign::Left; /*!< Element alignment */
     bool showBorder = false;                   /*!< Render border around layout's area */
   };

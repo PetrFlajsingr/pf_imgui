@@ -131,16 +131,16 @@ CommandPaletteWindow &ImGuiInterface::createCommandPalette(const std::string &wi
 
 void ImGuiInterface::removePaletteWindow(const std::string &windowName) {
   auto remove = std::ranges::remove(commandPalettes, windowName, [](const auto &window) { return window->getName(); });
-  commandPalettes.erase(remove.begin()); //-V539
+  commandPalettes.erase(remove.begin());  //-V539
 }
 
 void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
   auto remove = std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
-  commandPalettes.erase(remove.begin(), remove.end()); //-V539
+  commandPalettes.erase(remove.begin(), remove.end());  //-V539
 }
 
 DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
-  return *dockBuilders.emplace_back(std::unique_ptr<DockBuilder>{new DockBuilder{dockSpace}}); //-V824
+  return *dockBuilders.emplace_back(std::unique_ptr<DockBuilder>{new DockBuilder{dockSpace}});  //-V824
 }
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {

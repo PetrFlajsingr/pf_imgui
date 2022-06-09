@@ -7,15 +7,15 @@
 #ifndef PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
 #define PF_IMGUI_LAYOUTS_STRETCHLAYOUT_H
 
-#include <pf_imgui/interface/Layout.h>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/meta.h>
 #include <string>
 #include <utility>
 #include <vector>
-#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 /**
@@ -30,10 +30,10 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    */
   struct Config {
     using Parent = StretchLayout;
-    Explicit<std::string_view> name;   /*!< Unique name of the element */
-    Explicit<Size> size;               /*!< Size of the element */
-    Explicit<Stretch> stretch;         /*!< Stretch direction */
-    bool showBorder = false; /*!< Render border around layout's area */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<Size> size;             /*!< Size of the element */
+    Explicit<Stretch> stretch;       /*!< Stretch direction */
+    bool showBorder = false;         /*!< Render border around layout's area */
   };
   /**
    * Construct StretchLayout

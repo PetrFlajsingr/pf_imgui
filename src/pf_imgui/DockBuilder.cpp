@@ -10,19 +10,20 @@ namespace pf::ui::ig {
 SubDockBuilder::SubDockBuilder(Direction direction) : direction(direction) {}
 
 HorizontalSplitBuilder &SubDockBuilder::split(HorizontalDirection splitDirection) {
-  auto subBuilder = std::unique_ptr<HorizontalSplitBuilder>{new HorizontalSplitBuilder{static_cast<Direction>(splitDirection)}}; //-V824
+  auto subBuilder = std::unique_ptr<HorizontalSplitBuilder>{
+      new HorizontalSplitBuilder{static_cast<Direction>(splitDirection)}};  //-V824
   auto result = subBuilder.get();
   subCommands.emplace_back(std::move(subBuilder));
   return *result;
 }
 
 VerticalSplitBuilder &SubDockBuilder::split(VerticalDirection splitDirection) {
-  auto subBuilder = std::unique_ptr<VerticalSplitBuilder>{new VerticalSplitBuilder{static_cast<Direction>(splitDirection)}}; //-V824
+  auto subBuilder =
+      std::unique_ptr<VerticalSplitBuilder>{new VerticalSplitBuilder{static_cast<Direction>(splitDirection)}};  //-V824
   auto result = subBuilder.get();
   subCommands.emplace_back(std::move(subBuilder));
   return *result;
 }
-
 
 void SubDockBuilder::setSize(Size size) { subCommands.emplace_back(details::DockSizeCmd{size}); }
 
@@ -48,14 +49,16 @@ void SubDockBuilder::run(ImGuiID &parentNodeId) {
 DockBuilder::DockBuilder(DockSpace &dockSpace) : dockSpaceRef(dockSpace) {}
 
 HorizontalSplitBuilder &DockBuilder::split(HorizontalDirection direction) {
-  auto subBuilder = std::unique_ptr<HorizontalSplitBuilder>{new HorizontalSplitBuilder{static_cast<Direction>(direction)}}; //-V824
+  auto subBuilder =
+      std::unique_ptr<HorizontalSplitBuilder>{new HorizontalSplitBuilder{static_cast<Direction>(direction)}};  //-V824
   auto result = subBuilder.get();
   subCommands.emplace_back(std::move(subBuilder));
   return *result;
 }
 
 VerticalSplitBuilder &DockBuilder::split(VerticalDirection direction) {
-  auto subBuilder = std::unique_ptr<VerticalSplitBuilder>{new VerticalSplitBuilder{static_cast<Direction>(direction)}}; //-V824
+  auto subBuilder =
+      std::unique_ptr<VerticalSplitBuilder>{new VerticalSplitBuilder{static_cast<Direction>(direction)}};  //-V824
   auto result = subBuilder.get();
   subCommands.emplace_back(std::move(subBuilder));
   return *result;

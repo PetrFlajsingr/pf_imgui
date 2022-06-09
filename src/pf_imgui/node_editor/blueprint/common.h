@@ -64,7 +64,7 @@ class NodeEditorLoading {
   NodeEditorLoading &operator=(NodeEditorLoading &&) = delete;
 
   [[nodiscard]] inline static NodeEditorLoading *Get() {
-    if (instance == nullptr) { instance = std::unique_ptr<NodeEditorLoading>(new NodeEditorLoading{}); } //-V824
+    if (instance == nullptr) { instance = std::unique_ptr<NodeEditorLoading>(new NodeEditorLoading{}); }  //-V824
     return instance.get();
   }
 

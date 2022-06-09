@@ -22,7 +22,6 @@ enum class IconPack {
   Fontaudio = 1 << 4
 };
 
-
 namespace details {
 static ImWchar iconRangeFA[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
 static ImWchar iconRangeFK[] = {ICON_MIN_FK, ICON_MAX_FK, 0};

@@ -25,7 +25,7 @@ class PF_IMGUI_EXPORT WrapLayout : public LinearLayout {
     Explicit<std::string_view> name;           /*!< Unique name of the element */
     Explicit<LayoutDirection> layoutDirection; /*!< Direction the element are rendered in */
     Explicit<Size> size;                       /*!< Size of the element */
-    bool showBorder = false;         /*!< Render border around layout's area */
+    bool showBorder = false;                   /*!< Render border around layout's area */
   };
   /**
    * Construct WrapLayout

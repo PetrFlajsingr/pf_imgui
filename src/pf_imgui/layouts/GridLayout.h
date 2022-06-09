@@ -11,13 +11,13 @@
 #include <algorithm>
 #include <concepts>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Layout.h>
 #include <string>
 #include <utility>
 #include <vector>
-#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 /**
@@ -33,7 +33,7 @@ class PF_IMGUI_EXPORT GridLayout : public Layout {
     Explicit<Size> size;                   /*!< Size of the element */
     Explicit<std::uint32_t> widthInCells;  /*!< Amount of columns */
     Explicit<std::uint32_t> heightInCells; /*!< Amount of rows */
-    bool showBorder = false;     /*!< Render border around layout's area */
+    bool showBorder = false;               /*!< Render border around layout's area */
   };
   /**
    * Construct GridLayout

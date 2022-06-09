@@ -12,9 +12,9 @@
 #include <pf_imgui/layouts/AnchorLayout.h>
 #include <pf_imgui/layouts/GridLayout.h>
 #include <pf_imgui/layouts/HorizontalLayout.h>
-#include <pf_imgui/layouts/VerticalLayout.h>
 #include <pf_imgui/layouts/StackedLayout.h>
 #include <pf_imgui/layouts/StretchLayout.h>
+#include <pf_imgui/layouts/VerticalLayout.h>
 #include <pf_imgui/layouts/WrapLayout.h>
 
 #endif  // PF_IMGUI_LAYOUTS_LAYOUTS_H
