@@ -17,6 +17,7 @@
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
+#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 
@@ -48,8 +49,8 @@ class Pin : public Renderable, public Labellable, public Hoverable {
     */
   struct Config {
     using Parent = Pin;
-    std::string name;  /*!< Unique name of the element */
-    std::string label; /*!< Text rendered next to the pin */
+    Explicit<std::string> name;  /*!< Unique name of the element */
+    Explicit<std::string> label; /*!< Text rendered next to the pin */
   };
   /**
     * Construct Node

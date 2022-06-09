@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_RADIOBUTTON_H
 #define PF_IMGUI_ELEMENTS_RADIOBUTTON_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -36,9 +37,9 @@ class PF_IMGUI_EXPORT RadioButton
    */
   struct Config {
     using Parent = RadioButton;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered next to the radio button */
-    bool selected = false;  /*!< Initial state of the button */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the radio button */
+    bool selected = false;            /*!< Initial state of the button */
   };
   /**
    * Construct RadioButton

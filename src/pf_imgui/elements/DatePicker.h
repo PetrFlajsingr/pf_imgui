@@ -10,6 +10,7 @@
 
 #include <chrono>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -32,8 +33,8 @@ class DatePicker : public ItemElement,
    */
   struct Config {
     using Parent = DatePicker;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered next to the element */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the element */
     std::chrono::year_month_day value = std::chrono::year_month_day{
         std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now())}; /*!< Initial value of the element */
     bool persistent = false;                                                      /*!< Allow state saving to disk */

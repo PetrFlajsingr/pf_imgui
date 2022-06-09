@@ -10,6 +10,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/elements/details/InputDetails.h>
@@ -53,8 +54,8 @@ class PF_IMGUI_EXPORT Input
   struct Config {
     using Parent = Input;
 
-    std::string_view name;                                  /*!< Unique name of the element */
-    std::string_view label;                                 /*!< Text rendered next to the input */
+    Explicit<std::string_view> name;                        /*!< Unique name of the element */
+    Explicit<std::string_view> label;                       /*!< Text rendered next to the input */
     StepType step{static_cast<StepType>(1)};                /*!< Speed of value change */
     StepType fastStep{static_cast<StepType>(10)};           /*!< Fast speed of value change */
     T value{};                                              /*!< Initial value */
@@ -101,7 +102,8 @@ class PF_IMGUI_EXPORT Input
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(Input::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
+      Labellable(std::string{config.label.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       step(config.step), fastStep(config.fastStep), format(std::move(static_cast<std::string>(config.format))) {}
 
@@ -189,9 +191,9 @@ class Input<std::string> : public InputText {
    */
   struct Config {
     using Parent = Input<std::string>;
-    std::string_view name;                               /*!< Unique name of the element */
-    std::string_view label;                              /*!< Text rendered next to the input */
-    std::string value;                                   /*!< Initial value */
+    Explicit<std::string_view> name;                     /*!< Unique name of the element */
+    Explicit<std::string_view> label;                    /*!< Text rendered next to the input */
+    std::string value{};                                 /*!< Initial value */
     TextInputType inputType = TextInputType::SingleLine; /*!< Type of text input */
     std::size_t maxInputLength = 256;                    /*!< Maximum length of input string */
     TextTrigger eventTrigger = TextTrigger::Character;   /*!< Trigger to notify listeners */

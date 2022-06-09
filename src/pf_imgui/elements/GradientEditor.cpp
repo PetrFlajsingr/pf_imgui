@@ -7,7 +7,7 @@
 namespace pf::ui::ig {
 
 bool GradientPoint::operator==(const GradientPoint &rhs) const {
-  return color == rhs.color && position == rhs.position; //-V550
+  return color == rhs.color && position == rhs.position;  //-V550
 }
 
 std::optional<GradientPoint> GradientPoint::FromToml(const toml::table &src) {
@@ -51,7 +51,7 @@ bool GradientPointsViewComparator::operator()(GradientPointsView lhs, GradientPo
 }
 
 GradientEditor::GradientEditor(GradientEditor::Config &&config)
-    : Element(std::string{config.name}), ValueObservable(getPointsView()),
+    : Element(std::string{config.name.value}), ValueObservable(getPointsView()),
       Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 GradientEditor::GradientEditor(const std::string &name, Persistent persistent)

@@ -7,6 +7,7 @@
 
 #include <imgui.h>
 #include <imgui_markdown.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/ImGuiInterface.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <string>
@@ -43,7 +44,7 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    */
   struct Config {
     using Parent = MarkdownText;
-    std::string_view name;                                 /*!< Unique name of the element */
+    Explicit<std::string_view> name;                       /*!< Unique name of the element */
     ImGuiInterface &imguiInterface;                        /*!< For automatic font upload */
     std::u8string markdownText{};                          /*!< Initial value */
     float fontSize = 12.f;                                 /*!< Size of standard text */

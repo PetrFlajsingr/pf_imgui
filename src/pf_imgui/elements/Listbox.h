@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomListbox.h>
@@ -73,10 +74,10 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   struct Config {
     using Parent = Listbox;
-    std::string_view name;    /*!< Unique name of the element */
-    std::string_view label;   /*!< Text rendered next to the Listbox */
-    Size size = Size::Auto(); /*!< Size of the element */
-    bool persistent = false;  /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the Listbox */
+    Size size = Size::Auto();         /*!< Size of the element */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct Listbox
@@ -149,7 +150,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
 template<ToStringConvertible T>
 Listbox<T>::Listbox(Listbox::Config &&config)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: CustomListboxBase(std::string{config.name}, std::string{config.label}, Factory{}, config.size), ValueObservable<T>(),
+: CustomListboxBase(std::string{config.name.value}, std::string{config.label.value}, Factory{}, config.size),
+  ValueObservable<T>(),
   Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false) {}
 
 template<ToStringConvertible T>

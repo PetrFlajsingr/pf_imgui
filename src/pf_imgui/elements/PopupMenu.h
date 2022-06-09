@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/MenuItems.h>
 #include <pf_imgui/interface/Element.h>
@@ -25,7 +26,7 @@ class PF_IMGUI_EXPORT PopupMenu : public Element, public MenuContainer {
    */
   struct Config {
     using Parent = PopupMenu;
-    std::string_view name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
   };
   /**
    * Construct PopupMenu

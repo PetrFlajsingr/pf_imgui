@@ -10,6 +10,7 @@
 
 #include <array>
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/Color.h>
 #include <pf_imgui/_export.h>
@@ -87,9 +88,9 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable, public Savabl
    */
   struct Config {
     using Parent = LogPanel;
-    std::string_view name;    /*!< Unique name of the element */
-    Size size = Size::Auto(); /*!< Size of the element */
-    bool persistent = false;  /*!< Enable toggle buttons state saving */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Size size = Size::Auto();        /*!< Size of the element */
+    bool persistent = false;         /*!< Enable toggle buttons state saving */
   };
   /**
    * Construct LogPanel
@@ -180,7 +181,7 @@ class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable, public Savabl
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 LogPanel<Category, RecordLimit>::LogPanel(Config &&config)
-    : LogPanel(std::string{config.name}, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : LogPanel(std::string{config.name.value}, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)

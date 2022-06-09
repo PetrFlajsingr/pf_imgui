@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_TOOLTIP_H
 #define PF_IMGUI_ELEMENTS_TOOLTIP_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <string>
@@ -26,7 +27,7 @@ class PF_IMGUI_EXPORT Tooltip : public Element, public ElementContainer {
    */
   struct Config {
     using Parent = Tooltip;
-    std::string_view name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
   };
   /**
    * Construct Tooltip

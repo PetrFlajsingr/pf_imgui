@@ -41,7 +41,7 @@ NodeEditor::NodeEditor(const std::string &name, const Size &size) : ig::NodeEdit
   NodeEditorLoading::Get()->registerConstruction<NodeWithLabel>();
 }
 
-NodeEditor::NodeEditor(Config &&config) : NodeEditor(std::string{config.name}, config.size) {}
+NodeEditor::NodeEditor(Config &&config) : NodeEditor(std::string{config.name.value}, config.size) {}
 
 toml::table NodeEditor::toToml() const {
   auto nodesToml = toml::array{};

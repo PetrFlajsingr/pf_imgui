@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_BUTTON_H
 
 #include <functional>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -68,7 +69,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
    */
   struct Config {
     using Parent = InvisibleButton;
-    std::string_view name;                       /*!< Unique name of the element */
+    Explicit<std::string_view> name;             /*!< Unique name of the element */
     Size size = Size::Auto();                    /*!< Size of the element */
     MouseButton clickButton = MouseButton::Left; /*!< Mouse button to which the button reacts */
     bool repeatable = false;                     /*!< Enable repeated listener callback on mouse down */
@@ -115,10 +116,10 @@ class PF_IMGUI_EXPORT Button
    */
   struct Config {
     using Parent = Button;
-    std::string_view name;    /*!< Unique name of the element */
-    std::string_view label;   /*!< Text rendered on the button */
-    Size size = Size::Auto(); /*!< Size of the button */
-    bool repeatable = false;  /*!< Enable repeated listener callback on mouse down */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on the button */
+    Size size = Size::Auto();         /*!< Size of the button */
+    bool repeatable = false;          /*!< Enable repeated listener callback on mouse down */
   };
   /**
    * Construct Button
@@ -158,9 +159,9 @@ class PF_IMGUI_EXPORT SmallButton
    */
   struct Config {
     using Parent = SmallButton;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string_view label;  /*!< Text rendered on the button */
-    bool repeatable = false; /*!< Enable repeated listener callback on mouse down */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on the button */
+    bool repeatable = false;          /*!< Enable repeated listener callback on mouse down */
   };
   explicit SmallButton(Config &&config);
   /**
@@ -188,11 +189,11 @@ class PF_IMGUI_EXPORT ArrowButton
                                style::Style::ButtonTextAlign> {
  public:
   enum class Dir { Up = ImGuiDir_Up, Left = ImGuiDir_Left, Right = ImGuiDir_Right, Down = ImGuiDir_Down };
-  struct Config { //-V730
+  struct Config {
     using Parent = ArrowButton;
-    std::string_view name;   /*!< Unique name of the element */
-    Dir direction;           /*!< Direction of the arrow rendered on the button */
-    bool repeatable = false; /*!< Enable repeated listener callback on mouse down */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<Dir> direction;         /*!< Direction of the arrow rendered on the button */
+    bool repeatable = false;         /*!< Enable repeated listener callback on mouse down */
   };
   /**
    * Construct ArrowButton
@@ -226,12 +227,12 @@ class PF_IMGUI_EXPORT ImageButton
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
                                style::Style::ButtonTextAlign> {
  public:
-  struct Config { //-V730
+  struct Config {
     using Parent = ImageButton;
-    std::string_view name;    /*!< Unique name of the element */
-    ImTextureID textureId;    /*!< Id of the texture to render */
-    Size size = Size::Auto(); /*!< Size of the element */
-    bool repeatable = false;  /*!< Enable repeated listener callback on mouse down */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<ImTextureID> textureId; /*!< Id of the texture to render */
+    Size size = Size::Auto();        /*!< Size of the element */
+    bool repeatable = false;         /*!< Enable repeated listener callback on mouse down */
   };
   /**
    * Construct ImageButton

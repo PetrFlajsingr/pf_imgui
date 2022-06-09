@@ -9,8 +9,9 @@
 namespace pf::ui::ig {
 
 DatePicker::DatePicker(DatePicker::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), rawTime(std::make_unique<tm>()) {
+    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      ValueObservable(config.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      rawTime(std::make_unique<tm>()) {
   rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(config.value.day()));
   rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(config.value.month()) - 1);
   rawTime->tm_year = static_cast<int>(config.value.year()) - 1900;

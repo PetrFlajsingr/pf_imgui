@@ -9,7 +9,7 @@
 namespace pf::ui::ig {
 
 SimplePlot::SimplePlot(SimplePlot::Config &&config)
-    : Element(std::string{config.name}), Labellable(std::string{config.label}), Resizable(config.size),
+    : Element(std::string{config.name.value}), Labellable(std::string{config.label.value}), Resizable(config.size),
       plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow), scaleMax(config.scaleHigh),
       overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
 

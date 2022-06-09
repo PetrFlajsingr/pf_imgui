@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_SPININPUT_H
 
 #include <algorithm>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/details/Spin.h>
 #include <pf_imgui/interface/DragNDrop.h>
@@ -46,14 +47,14 @@ class PF_IMGUI_EXPORT SpinInput
    */
   struct Config {
     using Parent = SpinInput;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string_view label;  /*!< Text rendered next to the element */
-    T min;                   /*!< Minimum allowed value */
-    T max;                   /*!< Maximum allowed value */
-    T value{};               /*!< Initial value */
-    T step{1};               /*!< Value change speed on interaction */
-    T fastStep{100};         /*!< Fast value change speed on interaction */
-    bool persistent = false; /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the element */
+    Explicit<T> min;                  /*!< Minimum allowed value */
+    Explicit<T> max;                  /*!< Maximum allowed value */
+    T value{};                        /*!< Initial value */
+    T step{1};                        /*!< Value change speed on interaction */
+    T fastStep{100};                  /*!< Fast value change speed on interaction */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct SpinInput
@@ -100,7 +101,8 @@ class PF_IMGUI_EXPORT SpinInput
 
 template<OneOf<int, float> T>
 SpinInput<T>::SpinInput(SpinInput::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
+      Labellable(std::string{config.label.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       step(config.step), stepFast(config.fastStep), min(config.min), max(config.max) {}
 
@@ -122,7 +124,9 @@ void SpinInput<T>::setReadOnly(bool isReadOnly) {
 }
 
 template<OneOf<int, float> T>
-toml::table SpinInput<T>::toToml() const { return toml::table{{"value", ValueObservable<T>::getValue()}}; }
+toml::table SpinInput<T>::toToml() const {
+  return toml::table{{"value", ValueObservable<T>::getValue()}};
+}
 
 template<OneOf<int, float> T>
 void SpinInput<T>::setFromToml(const toml::table &src) {

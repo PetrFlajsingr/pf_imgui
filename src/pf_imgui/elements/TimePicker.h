@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_TIMEPICKER_H
 
 #include <chrono>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/elements/SpinInput.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -39,10 +40,10 @@ class TimePicker : public ItemElement,
    */
   struct Config {
     using Parent = TimePicker;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string label;       /*!< Text rendered next to the input */
-    TimeOfDay value{};       /*!< Initial value */
-    bool persistent = false; /*!< Enable disk state saving */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<std::string> label;     /*!< Text rendered next to the input */
+    TimeOfDay value{};               /*!< Initial value */
+    bool persistent = false;         /*!< Enable disk state saving */
   };
   /**
    * Construct TimePicker

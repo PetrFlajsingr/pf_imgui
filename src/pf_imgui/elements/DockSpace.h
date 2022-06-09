@@ -9,6 +9,7 @@
 #define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
 
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
@@ -40,9 +41,9 @@ class PF_IMGUI_EXPORT DockSpace
    */
   struct Config {
     using Parent = DockSpace;
-    std::string_view name;    /*!< Unique name of the element */
-    Size size = Size::Auto(); /*!< Size of the element */
-    Flags<DockType> flags{};  /*!< Flags to modify functionality */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Size size = Size::Auto();        /*!< Size of the element */
+    Flags<DockType> flags{};         /*!< Flags to modify functionality */
   };
   /**
    * Construct DockSpace

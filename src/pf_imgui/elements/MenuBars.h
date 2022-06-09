@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/MenuItems.h>
@@ -31,7 +32,7 @@ class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
    */
   struct Config {
     using Parent = WindowMenuBar;
-    std::string_view name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
   };
   /**
    * Construct WindowMenuBar
@@ -56,7 +57,7 @@ class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
  public:
   struct Config {
     using Parent = AppMenuBar;
-    std::string_view name;
+    Explicit<std::string_view> name;
   };
   explicit AppMenuBar(Config &&config);
   /**

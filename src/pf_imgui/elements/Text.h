@@ -10,6 +10,7 @@
 
 #include <imgui.h>
 #include <optional>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/DragNDrop.h>
@@ -34,9 +35,9 @@ class PF_IMGUI_EXPORT Text
    */
   struct Config {
     using Parent = Text;
-    std::string_view name; /*!< Unique name of the element */
-    std::string text{};    /*!< Text to render */
-    bool wrapText = false; /*!< If true the text will wrap */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    std::string text{};              /*!< Text to render */
+    bool wrapText = false;           /*!< If true the text will wrap */
   };
   /**
    * Construct Text

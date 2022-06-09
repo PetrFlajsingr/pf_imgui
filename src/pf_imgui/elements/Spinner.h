@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_SPINNER_H
 #define PF_IMGUI_SPINNER_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/styles/enums.h>
@@ -23,9 +24,9 @@ class PF_IMGUI_EXPORT Spinner : public ItemElement,
    */
   struct Config {
     using Parent = Spinner;
-    std::string_view name; /*!< Unique name of the element */
-    float radius;          /*<! Radius of the Spinner */
-    int thickness;         /*!< Thickness of rendered spinner line */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<float> radius;          /*<! Radius of the Spinner */
+    Explicit<int> thickness;         /*!< Thickness of rendered spinner line */
   };
   /**
    * Construct Spinner

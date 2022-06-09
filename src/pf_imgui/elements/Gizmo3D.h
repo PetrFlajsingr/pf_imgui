@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <fmt/format.h>
 #include <imGuIZMOquat.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -54,8 +55,8 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
    */
   struct Config {
     using Parent = Gizmo3D;
-    std::string_view name;                                  /*!< Unique name of the element */
-    ValueType value;                                        /*!< Initial value */
+    Explicit<std::string_view> name;                        /*!< Unique name of the element */
+    Explicit<ValueType> value;                              /*!< Initial value */
     Size size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE}; /*!< Size of the element */
     bool persistent = false;                                /*!< Enable state saving to disk */
   };
@@ -96,7 +97,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
-    : ItemElement(std::string{config.name}), Resizable(config.size), ValueObservable<ValueType>(config.value),
+    : ItemElement(std::string{config.name.value}), Resizable(config.size), ValueObservable<ValueType>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<GizmoType Type>

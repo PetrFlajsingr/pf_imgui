@@ -9,6 +9,7 @@
 #define PF_IMGUI_COMMANDPALETTE_H
 
 #include <imcmd_command_palette.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <string>
@@ -26,7 +27,7 @@ class CommandPalette : public Element {
    */
   struct Config {
     using Parent = CommandPalette;
-    std::string_view name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
   };
   /**
    * Construct CommandPalette

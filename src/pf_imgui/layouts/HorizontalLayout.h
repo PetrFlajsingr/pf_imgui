@@ -9,6 +9,8 @@
 #define IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
 
 #include "LinearLayout.h"
+#include <pf_common/Explicit.h>
+
 namespace pf::ui::ig {
 
 /**
@@ -21,8 +23,8 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
    */
   struct Config {
     using Parent = HorizontalLayout;
-    std::string_view name;                       /*!< Unique name of the element */
-    Size size;                                   /*!< Size of the element */
+    Explicit<std::string_view> name;                       /*!< Unique name of the element */
+    Explicit<Size> size;                                   /*!< Size of the element */
     HorizontalAlign align = HorizontalAlign::Up; /*!< Element alignment */
     bool showBorder = false;                     /*!< Render border around layout's area */
   };

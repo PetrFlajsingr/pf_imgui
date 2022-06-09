@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_TOGGLE_H
 #define PF_IMGUI_TOGGLE_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -36,10 +37,10 @@ class PF_IMGUI_EXPORT Toggle
    */
   struct Config {
     using Parent = Toggle;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string_view label;  /*!< Text rendered next to the element */
-    bool enabled = false;    /*!< Initial state */
-    bool persistent = false; /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the element */
+    bool enabled = false;             /*!< Initial state */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct Toggle

@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <optional>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Element.h>
@@ -39,11 +40,11 @@ class PF_IMGUI_EXPORT SimplePlot
   /**
    * @brief Struct for construction of SimplePlot.
    */
-  struct Config { //-V730
+  struct Config {
     using Parent = SimplePlot;
-    std::string_view name;                             /*!< Unique name of the element */
-    std::string_view label;                            /*!< Text rendered above the plot */
-    PlotType type;                                     /*!< Type of the plot @see PlotType */
+    Explicit<std::string_view> name;                   /*!< Unique name of the element */
+    Explicit<std::string_view> label;                  /*!< Text rendered above the plot */
+    Explicit<PlotType> type;                           /*!< Type of the plot @see PlotType */
     std::vector<float> values{};                       /*!< Initial values displayed on the plot */
     std::optional<std::string> overlay = std::nullopt; /*!< Text rendered on top of the plot */
     std::optional<std::size_t> maxHistoryCount =

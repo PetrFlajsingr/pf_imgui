@@ -9,6 +9,7 @@
 #define PF_IMGUI_LAYOUTS_LAYOUT_DECORATORS_H
 
 #include <concepts>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Positionable.h>
@@ -27,7 +28,7 @@ class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
  public:
   struct Config {
     using Parent = PositionDecorator;
-    Position position;
+    Explicit<Position> position;
     typename T::Config config;
     operator typename T::Config() { return config; }
   };
@@ -38,7 +39,7 @@ class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
    * @param args arguments for T's constructor
    */
   template<typename... Args>
-  requires std::constructible_from<T, Args...>
+    requires std::constructible_from<T, Args...>
   explicit PositionDecorator(Position pos, Args &&...args) : T(std::forward<Args>(args)...), Positionable(pos) {}
 
   explicit PositionDecorator(Config &&config) : T(std::move(config.config)), Positionable(config.position) {}

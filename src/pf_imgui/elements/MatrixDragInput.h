@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_MATRIXDRAGINPUT_H
 
 #include <glm/glm.hpp>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/elements/details/DragInputDetails.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -45,13 +46,13 @@ class MatrixDragInput
    */
   struct Config {
     using Parent = MatrixDragInput;
-    std::string_view name;   /*!< Unique name of the element */
-    std::string_view label;  /*!< Text rendered next to the element */
-    ParamType speed;         /*!< Value change speed */
-    ParamType min;           /*!< Minimum allowed value for each cell */
-    ParamType max;           /*!< Maximum allowed value for each cell */
-    M value = M{};           /*!< Initial value */
-    bool persistent = false; /*!< Enable state saving */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the element */
+    Explicit<ParamType> speed;        /*!< Value change speed */
+    Explicit<ParamType> min;          /*!< Minimum allowed value for each cell */
+    Explicit<ParamType> max;          /*!< Maximum allowed value for each cell */
+    M value = M{};                    /*!< Initial value */
+    bool persistent = false;          /*!< Enable state saving */
   };
   /**
    * Construct MatrixDragInput.
@@ -86,8 +87,8 @@ class MatrixDragInput
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(MatrixDragInput::Config &&config)
-    : MatrixDragInput(std::string{config.name}, std::string{config.label}, config.speed, config.min, config.max,
-                      config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : MatrixDragInput(std::string{config.name.value}, std::string{config.label.value}, config.speed, config.min,
+                      config.max, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(const std::string &name, const std::string &label,

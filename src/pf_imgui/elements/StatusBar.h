@@ -5,6 +5,7 @@
 #ifndef PF_IMGUI_STATUSBAR_H
 #define PF_IMGUI_STATUSBAR_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
@@ -22,7 +23,7 @@ class PF_IMGUI_EXPORT AppStatusBar : public Element, public ElementContainer {
    */
   struct Config {
     using Parent = AppStatusBar;
-    std::string_view name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
   };
   /**
    * Construct AppStatusBar

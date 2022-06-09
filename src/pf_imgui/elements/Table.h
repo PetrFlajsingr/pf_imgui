@@ -10,6 +10,7 @@
 
 #include <imgui.h>
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/Element.h>
@@ -202,7 +203,7 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
    */
   struct Config {
     using Parent = Table;
-    std::string_view name;               /*!< Unique name of the element */
+    Explicit<std::string_view> name;     /*!< Unique name of the element */
     TableSettings<ColumnCount> settings; /*!< Table behavior settings */
   };
   /**
@@ -257,7 +258,7 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(Table::Config &&config)
-    : Element(std::string{config.name}), Resizable(config.settings.size), header(config.settings.header),
+    : Element(std::string{config.name.value}), Resizable(config.settings.size), header(config.settings.header),
       flags(CreateFlags(config.settings.border, config.settings.options)) {}
 
 template<std::size_t ColumnCount>

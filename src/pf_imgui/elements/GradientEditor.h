@@ -9,6 +9,7 @@
 #define PF_IMGUI_GRADIENTEDITOR_H
 
 #include <imgui_color_gradient.h>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/Color.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Focusable.h>
@@ -61,8 +62,8 @@ class GradientEditor : public Element,
    */
   struct Config {
     using Parent = GradientEditor;
-    std::string_view name;   /*!< Unique names of the element */
-    bool persistent = false; /*!< Enable disk state saving */
+    Explicit<std::string_view> name; /*!< Unique names of the element */
+    bool persistent = false;         /*!< Enable disk state saving */
   };
   /**
    * Construct GradientEditor

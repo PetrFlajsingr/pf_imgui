@@ -10,6 +10,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
+#include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/details/SliderDetails.h>
@@ -59,10 +60,10 @@ class PF_IMGUI_EXPORT Slider
    */
   struct Config {
     using Parent = Slider;
-    std::string_view name;                                            /*!< Unique name of the element */
-    std::string_view label;                                           /*!< Text rendered next to the element */
-    MinMaxType min;                                                   /*!< Minimum allowed value */
-    MinMaxType max;                                                   /*!< Maximum allowed value */
+    Explicit<std::string_view> name;                                  /*!< Unique name of the element */
+    Explicit<std::string_view> label;                                 /*!< Text rendered next to the element */
+    Explicit<MinMaxType> min;                                         /*!< Minimum allowed value */
+    Explicit<MinMaxType> max;                                         /*!< Maximum allowed value */
     T value{};                                                        /*!< Initial value */
     std::string format = slider_details::defaultFormat<MinMaxType>(); /*!< Format string for value rendering */
     bool persistent = false;                                          /*!< Allow state saving to disk */
@@ -120,7 +121,8 @@ class PF_IMGUI_EXPORT Slider
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 Slider<T>::Slider(Slider::Config &&config)
-    : ItemElement(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
+      Labellable(std::string{config.label.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       min(config.min), max(config.max), format(std::move(config.format)) {}
 

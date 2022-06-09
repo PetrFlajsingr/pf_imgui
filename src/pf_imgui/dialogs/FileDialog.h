@@ -147,7 +147,6 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
   bool done = false;
 };
 
-
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_ELEMENTS_FILEDIALOG_H

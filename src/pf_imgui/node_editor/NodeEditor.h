@@ -20,6 +20,7 @@
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
+#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 
@@ -36,7 +37,7 @@ class NodeEditor : public Element, public Resizable {
    */
   struct Config {
     using Parent = NodeEditor;
-    std::string name;         /*!< Unique name of the element */
+    Explicit<std::string> name;         /*!< Unique name of the element */
     Size size = Size::Auto(); /*!< Size of the element */
   };
   /**

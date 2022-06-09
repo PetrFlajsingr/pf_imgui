@@ -106,7 +106,7 @@ TextEditor::Cursor &TextEditor::Cursor::selectAll() {
 bool TextEditor::Cursor::hasSelection() const { return owner.editor.HasSelection(); }
 
 TextEditor::TextEditor(TextEditor::Config &&config)
-    : Element(std::string{config.name}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+    : Element(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
       Resizable(config.size) {
   editor.SetText(config.value);
 }

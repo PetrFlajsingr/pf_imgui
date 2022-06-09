@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <optional>
+#include <pf_common/Explicit.h>
 #include <pf_common/exceptions/Exceptions.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
@@ -30,8 +31,8 @@ class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable
    */
   struct Config {
     using Parent = Plot;
-    std::string_view name;                            /*!< Unique name of the element */
-    std::string_view label;                           /*!< Text rendered above the plot */
+    Explicit<std::string_view> name;                  /*!< Unique name of the element */
+    Explicit<std::string_view> label;                 /*!< Text rendered above the plot */
     std::optional<std::string> xLabel = std::nullopt; /*!< Label of X axis */
     std::optional<std::string> yLabel = std::nullopt; /*!< Label of Y axis */
     Size size = Size::FillWidth();                    /*!< Size of the element */

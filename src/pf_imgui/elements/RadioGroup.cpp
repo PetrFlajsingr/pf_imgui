@@ -12,7 +12,7 @@ namespace pf::ui::ig {
 
 RadioGroup::RadioGroup(RadioGroup::Config &&config)
     : ValueObservable(nullptr), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      groupName(std::string{config.groupName}), buttons(std::move(config.buttons)) {
+      groupName(std::string{config.groupName.value}), buttons(std::move(config.buttons)) {
   bool wasAnySelected = false;
   std::ranges::for_each(buttons, [this, &wasAnySelected](RadioButton *btn) {
     if (wasAnySelected) {

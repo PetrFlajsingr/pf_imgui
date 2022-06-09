@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_GROUP_H
 #define PF_IMGUI_ELEMENTS_GROUP_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
@@ -30,10 +31,10 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
    */
   struct Config {
     using Parent = Expander;
-    std::string_view name;     /*!< Unique name of the element */
-    std::string_view label;    /*!< Text rendered in the header of the Expander */
-    bool allowCollapse = true; /*!< Enable/disable collapse functionality */
-    bool persistent = false;   /*!< Allow state saving to disk */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered in the header of the Expander */
+    bool allowCollapse = true;        /*!< Enable/disable collapse functionality */
+    bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**
    * Construct Expander

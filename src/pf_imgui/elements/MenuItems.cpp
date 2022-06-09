@@ -25,7 +25,7 @@ void MenuItem::render() {
 }
 
 MenuButtonItem::MenuButtonItem(MenuButtonItem::Config &&config)
-    : MenuItem(std::string{config.name}), Labellable(std::string{config.label}) {}
+    : MenuItem(std::string{config.name.value}), Labellable(std::string{config.label.value}) {}
 
 MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string &label)
     : MenuItem(elementName), Labellable(label) {}
@@ -44,7 +44,7 @@ void SubMenu::renderImpl() {
 }
 
 SubMenu::SubMenu(SubMenu::Config &&config)
-    : MenuItem(std::string{config.name}), Labellable(std::string{config.label}) {}
+    : MenuItem(std::string{config.name.value}), Labellable(std::string{config.label.value}) {}
 
 SubMenu::SubMenu(const std::string &elementName, const std::string &label) : MenuItem(elementName), Labellable(label) {}
 
@@ -66,8 +66,8 @@ MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return
 void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
 MenuCheckboxItem::MenuCheckboxItem(MenuCheckboxItem::Config &&config)
-    : MenuItem(std::string{config.name}), Labellable(std::string{config.label}), ValueObservable(config.checked),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
+    : MenuItem(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      ValueObservable(config.checked), Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
                                    Persistent persistent)
@@ -87,7 +87,7 @@ void MenuCheckboxItem::setFromToml(const toml::table &src) {
   }
 }
 
-MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuItem(std::string{config.name}) {}
+MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuItem(std::string{config.name.value}) {}
 
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 

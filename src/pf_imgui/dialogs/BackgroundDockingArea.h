@@ -18,6 +18,7 @@ namespace pf::ui::ig {
  */
 class BackgroundDockingArea : public Renderable {
   friend class ImGuiInterface;
+
  public:
   /**
    * Construct BackgroundDockingArea.

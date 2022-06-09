@@ -9,12 +9,12 @@
 #define PF_IMGUI_ELEMENTS_OVERLAYGIZMO_H
 
 #include "details/OverlayGizmoBase.h"
+#include <pf_common/Explicit.h>
 #include <pf_imgui/dialogs/Window.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Renderable.h>
 
 namespace pf::ui::ig {
-
 
 /**
  * @brief Gizmo overlaying the main viewport.
@@ -24,16 +24,17 @@ class ViewportOverlayGizmo : public Renderable, public OverlayGizmoBase {
  public:
   /**
    * @brief Construction args for ViewportOverlayGizmo
+   * // TODO: strong types for each projection type instead of bool flag
    */
   struct Config {
     using Parent = ViewportOverlayGizmo;
-    std::string_view name;         /*!< Unique name of the element */
-    glm::mat4 value;               /*!< Initial value */
-    ViewportGizmoMode mode;        /*!< Gizmo mode */
-    ViewportGizmoSpace space;      /*!< Gizmo space */
-    glm::mat4 viewMatrix;          /*!< Camera view matrix */
-    glm::mat4 projectionMatrix;    /*!< Camera projection matrix */
-    bool isProjectionOrthographic; /*!< Set true if projectionMatrix is ortho */
+    Explicit<std::string_view> name;         /*!< Unique name of the element */
+    Explicit<glm::mat4> value;               /*!< Initial value */
+    Explicit<ViewportGizmoMode> mode;        /*!< Gizmo mode */
+    Explicit<ViewportGizmoSpace> space;      /*!< Gizmo space */
+    Explicit<glm::mat4> viewMatrix;          /*!< Camera view matrix */
+    Explicit<glm::mat4> projectionMatrix;    /*!< Camera projection matrix */
+    Explicit<bool> isProjectionOrthographic; /*!< Set true if projectionMatrix is ortho */
   };
   /**
    * Construct ViewportOverlayGizmo.
@@ -69,14 +70,14 @@ class AreaOverlayGizmo : public Element, public OverlayGizmoBase {
    */
   struct Config {
     using Parent = AreaOverlayGizmo;
-    std::string_view name;         /*!< Unique name of the element */
-    Window &owningWindow;          /*!< Parent window of the element */
-    glm::mat4 value;               /*!< Initial value */
-    ViewportGizmoMode mode;        /*!< Gizmo mode */
-    ViewportGizmoSpace space;      /*!< Gizmo space */
-    glm::mat4 viewMatrix;          /*!< Camera view matrix */
-    glm::mat4 projectionMatrix;    /*!< Camera projection matrix */
-    bool isProjectionOrthographic; /*!< Set true if projectionMatrix is ortho */
+    Explicit<std::string_view> name;         /*!< Unique name of the element */
+    Window &owningWindow;                    /*!< Parent window of the element */
+    Explicit<glm::mat4> value;               /*!< Initial value */
+    Explicit<ViewportGizmoMode> mode;        /*!< Gizmo mode */
+    Explicit<ViewportGizmoSpace> space;      /*!< Gizmo space */
+    Explicit<glm::mat4> viewMatrix;          /*!< Camera view matrix */
+    Explicit<glm::mat4> projectionMatrix;    /*!< Camera projection matrix */
+    Explicit<bool> isProjectionOrthographic; /*!< Set true if projectionMatrix is ortho */
   };
   /**
    * Construct AreaOverlayGizmo.

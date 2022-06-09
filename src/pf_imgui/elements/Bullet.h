@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
 #define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
 
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Element.h>
 #include <utility>
@@ -26,7 +27,7 @@ class PF_IMGUI_EXPORT Bullet : public T {
    */
   struct Config {
     using Parent = Bullet;
-    typename T::Config config; /*!< Config of the underlying Element */
+    Explicit<typename T::Config> config; /*!< Config of the underlying Element */
     explicit(false) operator typename T::Config() { return config; }
   };
   /**
@@ -36,18 +37,18 @@ class PF_IMGUI_EXPORT Bullet : public T {
    */
   template<typename... Args>
   explicit Bullet(Args &&...args)
-    requires(std::constructible_from<T, Args...>);
+    requires(std::constructible_from<T, Args...>)
+  ;
 
  protected:
   void renderImpl() override;
-
 };
 
 template<std::derived_from<Element> T>
 template<typename... Args>
 Bullet<T>::Bullet(Args &&...args)
   requires(std::constructible_from<T, Args...>)
-    : T(std::forward<Args>(args)...) {}
+: T(std::forward<Args>(args)...) {}
 
 template<std::derived_from<Element> T>
 void Bullet<T>::renderImpl() {

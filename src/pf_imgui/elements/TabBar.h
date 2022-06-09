@@ -9,6 +9,7 @@
 #define PF_IMGUI_ELEMENTS_TABBAR_H
 
 #include <memory>
+#include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
@@ -41,9 +42,9 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public 
    */
   struct Config {
     using Parent = TabButton;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered on the element */
-    Flags<TabMod> mods{};   /*!< TabButton functionality modifiers */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on the element */
+    Flags<TabMod> mods{};             /*!< TabButton functionality modifiers */
   };
   /**
    * Construct TabButton
@@ -74,10 +75,10 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
    */
   struct Config {
     using Parent = Tab;
-    std::string_view name;  /*!< Unique name of the element */
-    std::string_view label; /*!< Text rendered on the element */
-    Flags<TabMod> mods{};   /*!< Functionality modifiers */
-    bool closeable = false; /*!< Enable the tab to be closed by a button */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered on the element */
+    Flags<TabMod> mods{};             /*!< Functionality modifiers */
+    bool closeable = false;           /*!< Enable the tab to be closed by a button */
   };
   /**
    * Construct Tab
@@ -152,8 +153,8 @@ class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
    */
   struct Config {
     using Parent = TabBar;
-    std::string_view name;     /*!< Unique name of the element */
-    bool allowTabList = false; /*!< Render a button showing all Tabs in a combobox */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    bool allowTabList = false;       /*!< Render a button showing all Tabs in a combobox */
   };
   /**
    * Construct TabBar

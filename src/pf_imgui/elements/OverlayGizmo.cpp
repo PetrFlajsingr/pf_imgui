@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 ViewportOverlayGizmo::ViewportOverlayGizmo(ViewportOverlayGizmo::Config &&config)
-    : ViewportOverlayGizmo(std::string{config.name}, config.value, config.mode, config.space, config.viewMatrix,
+    : ViewportOverlayGizmo(std::string{config.name.value}, config.value, config.mode, config.space, config.viewMatrix,
                            config.projectionMatrix, config.isProjectionOrthographic) {}
 
 ViewportOverlayGizmo::ViewportOverlayGizmo(const std::string &name, const glm::mat4 &value, ViewportGizmoMode mode,
@@ -22,7 +22,7 @@ void ViewportOverlayGizmo::renderImpl() {
 }
 
 AreaOverlayGizmo::AreaOverlayGizmo(AreaOverlayGizmo::Config &&config)
-    : AreaOverlayGizmo(std::string{config.name}, config.owningWindow, config.value, config.mode, config.space,
+    : AreaOverlayGizmo(std::string{config.name.value}, config.owningWindow, config.value, config.mode, config.space,
                        config.viewMatrix, config.projectionMatrix, config.isProjectionOrthographic) {}
 
 AreaOverlayGizmo::AreaOverlayGizmo(const std::string &name, Window &owningWindow, const glm::mat4 &value,
@@ -44,7 +44,7 @@ void AreaOverlayGizmo::renderImpl() {
     parentWindow.setUserMovable(false);
   } else {
     if (wasWindowMovable.has_value()) {
-      parentWindow.setUserMovable(wasWindowMovable.value());
+      parentWindow.setUserMovable(*wasWindowMovable);
       wasWindowMovable.reset();
     }
   }

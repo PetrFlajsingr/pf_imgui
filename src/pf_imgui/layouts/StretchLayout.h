@@ -15,6 +15,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <pf_common/Explicit.h>
 
 namespace pf::ui::ig {
 /**
@@ -29,9 +30,9 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    */
   struct Config {
     using Parent = StretchLayout;
-    std::string_view name;   /*!< Unique name of the element */
-    Size size;               /*!< Size of the element */
-    Stretch stretch;         /*!< Stretch direction */
+    Explicit<std::string_view> name;   /*!< Unique name of the element */
+    Explicit<Size> size;               /*!< Size of the element */
+    Explicit<Stretch> stretch;         /*!< Stretch direction */
     bool showBorder = false; /*!< Render border around layout's area */
   };
   /**
