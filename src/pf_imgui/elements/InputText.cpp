@@ -14,7 +14,8 @@ InputText::InputText(InputText::Config &&config)
     : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}), ValueObservable(""),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<std::string>(false),
       DropTarget<std::string>(false), text(std::move(config.value)),
-      buffer(std::unique_ptr<char[]>(new char[config.maxInputLength + 1])), bufferLength(config.maxInputLength),
+      buffer(std::make_unique<char[]>(config.maxInputLength + 1)),
+      bufferLength(config.maxInputLength),
       inputType(config.inputType) {
   setTextInner(text);
   setValueInner(text);
@@ -27,7 +28,7 @@ InputText::InputText(const std::string &elementName, std::string label, const st
                      const Flags<TextFilter> &filters, Persistent persistent)
     : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(""),
       Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false), text(value),
-      buffer(std::unique_ptr<char[]>(new char[inputLengthLimit + 1])), bufferLength(inputLengthLimit),
+      buffer(std::make_unique<char[]>(inputLengthLimit + 1)), bufferLength(inputLengthLimit),
       inputType(textInputType) {
   setTextInner(value);
   setValueInner(text);
