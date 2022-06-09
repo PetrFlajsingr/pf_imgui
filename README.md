@@ -59,7 +59,7 @@ auto newFont = fontBuilder
                   .setFontSize(16)
                   .addSubfont("path/to/ttf/file") // this allows you to add custom fonts which will be baked inside the master one
                     .setGlyphRange({0xFFFF, 0xFFFF}) // range which will get replaced in the master font
-                  .endSubfont();
+                  .endSubfont()
                   .build();
 ```
 
