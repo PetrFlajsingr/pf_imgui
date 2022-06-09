@@ -204,7 +204,7 @@ auto &menuBar = window.createOrGetMenuBar();
 ### ModalDialog
 A dialog which blocks user from interacting with anything else.
 ```cpp
-auto &dialog = imgui->createDialog("dialog_id", "Title");
+auto &dialog = imgui->getDialogManager().createDialog("dialog_id", "Title");
 
 dialog.createChild<Button>("dialog_close_button", "Close")
     .addClickListener([&dialog] {
@@ -225,10 +225,12 @@ auto handleInput = [](std::string input) {
 auto handleClose = [] { 
   print("closed"); 
 };
-auto &inputDialog = imgui->openInputDialog("Title", 
-                                           "message to user", 
-                                           handleInput, 
-                                           handleClose);
+imgui->getDialogManager().buildInputDialog()
+      .title("Title")
+      .message("Message to user")
+      .onInput(handleInput)
+      .onCancel(handleClose)
+      .build();
 ```
 
 * `MessageDialog` to show a message and get user response.
@@ -237,35 +239,34 @@ auto &inputDialog = imgui->openInputDialog("Title",
 auto handleInput = [](ButtonTypes input) { 
   if (input == ButtonTypes::Ok) { return true; } 
 }; 
-using namespace pf::enum_operators;
-auto &inputDialog = imgui->createMsgDlg("Title", 
-                                        "message to user", 
-                                        ButtonTypes::Ok | ButtonTypes::Cancel, 
-                                        handleInput);
+imgui->getDialogManager().buildMessageDialog()
+      .title("Title")
+      .message("Message to user")
+      .buttons(MessageButtons::Ok, MessageButtons::Cancel)
+      .onDone(handleInput)
+      .build();
 ```
 
 
 ### FileDialog - uses [ImGuiFileDialog](https://github.com/aiekick/ImGuiFileDialog)
 Allows the user to select directories or files with a filter.
 ```cpp
-const auto allowedExtensions = {"vox", "pf_vox"};
-const auto filetypeDescription = "Vox model";
-const auto filetypeColor = Color::Red;
-const auto extensionSettings = FileExtensionSettings{allowedExtensions, 
-                                                     filetypeDescription, 
-                                                     filetypeColor};
-// there can be multiple of these settings
 const auto onFilesSelected = [](std::vector<std::filesystem::path> selection) {
   std::ranges::for_each(selection, printPath);
 };
 const auto onSelectionCanceled = [] { print("Canceled selection"); };
-const auto startPath = "/home/pf_imgui"; // path at which the dialog will open
-imgui->openFileDialog("Title", 
-                      {extensionSettings}, 
-                      onFilesSelected, 
-                      onSelectionCanceled, 
-                      Size{500, 400}, 
-                      startPath);
+
+imgui->getDialogManager().buildFileDialog(FileDialogType::File)
+      .extension({{"vox", "pf_vox"}, "Voxel model", Color::Red})
+      .label("Title")
+      .onSelect(onFilesSelected)
+      .onCancel(onSelectionCanceled)
+      .size(Size{500, 400})
+      .startPath("/home/pf_imgui")
+      .maxFilesSelected(5)
+      .modal() // set as modal
+      .build();
+
 ```
 ![img.png](img/filedialog.png)
 
