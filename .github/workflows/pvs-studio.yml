@@ -36,7 +36,7 @@ jobs:
       - name: Downloading dependencies
         run: |
           cd ${{ github.workspace }}
-          cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=On -B -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake build .
+          cmake -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=On -B build .
           cmake --build build -j
 
       - name: Running PVS-Studio
