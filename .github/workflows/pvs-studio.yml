@@ -18,7 +18,7 @@ jobs:
           cd ..
           git clone https://github.com/Microsoft/vcpkg.git
           cd vcpkg
-          .\bootstrap-vcpkg.bat
+          .\bootstrap-vcpkg.sh
 
       - name: Installing PVS-Studio
         env:
