@@ -13,6 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: install updates
+        run: |
+          sudo apt install g++-11
+          wget -O cmake.sh https://cmake.org/files/v3.20/cmake-3.20.1-linux-x86_64.sh
+          sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
+          export PATH=/usr/local/bin:$PATH
+          cmake --version
+
       - name: Installing vcpkg
         run: |
           cd ..
@@ -36,7 +44,7 @@ jobs:
       - name: Downloading dependencies
         run: |
           cd ${{ github.workspace }}
-          cmake -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=On -B build .
+          cmake -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=On -B build .
           cmake --build build -j
 
       - name: Running PVS-Studio
