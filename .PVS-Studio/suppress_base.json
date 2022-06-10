@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "warnings": [
+    {
+      "FileName": "Pin.cpp",
+      "ErrorCode": "V730",
+      "Message": "Not all members of a class are initialized inside the constructor. Consider inspecting: type, parent.",
+      "CodePrev": 0,
+      "CodeCurrent": 1132813096,
+      "CodeNext": 0
+    },
+    {
+      "FileName": "Pin.cpp",
+      "ErrorCode": "V730",
+      "Message": "Not all members of a class are initialized inside the constructor. Consider inspecting: type, parent.",
+      "CodePrev": 0,
+      "CodeCurrent": -1947489987,
+      "CodeNext": 0
+    },
+    {
+      "FileName": "Window.cpp",
+      "ErrorCode": "V813",
+      "Message": "Decreased performance. The \u0027cursorPosition\u0027 argument should probably be rendered as a constant reference.",
+      "CodePrev": 0,
+      "CodeCurrent": -2117528278,
+      "CodeNext": 1180018803
+    },
+    {
+      "FileName": "WrapLayout.h",
+      "ErrorCode": "V730",
+      "Message": "Not all members of a class are initialized inside the compiler generated constructor. Consider inspecting: layoutDirection.",
+      "CodePrev": 123,
+      "CodeCurrent": 389857,
+      "CodeNext": 397923279
+    },
+    {
+      "FileName": "StretchLayout.cpp",
+      "ErrorCode": "V522",
+      "Message": "There might be dereferencing of a potential null pointer \u0027dynamic_cast\u003c Element * \u003e (child.get())\u0027.",
+      "CodePrev": -1767813997,
+      "CodeCurrent": 1490989459,
+      "CodeNext": 125
+    },
+    {
+      "FileName": "Knob.h",
+      "ErrorCode": "V730",
+      "Message": "Not all members of a class are initialized inside the compiler generated constructor. Consider inspecting: type.",
+      "CodePrev": 123,
+      "CodeCurrent": 389857,
+      "CodeNext": 6217251
+    },
+    {
+      "FileName": "Notification.cpp",
+      "ErrorCode": "V813",
+      "Message": "Decreased performance. The \u0027font\u0027 argument should probably be rendered as a constant reference.",
+      "CodePrev": 0,
+      "CodeCurrent": 725776083,
+      "CodeNext": -1236323470
+    },
+    {
+      "FileName": "StretchLayout.h",
+      "ErrorCode": "V730",
+      "Message": "Not all members of a class are initialized inside the compiler generated constructor. Consider inspecting: stretch.",
+      "CodePrev": 123,
+      "CodeCurrent": 389857,
+      "CodeNext": -1111572017
+    },
+    {
+      "FileName": "NodeBase.cpp",
+      "ErrorCode": "V730",
+      "Message": "Not all members of a class are initialized inside the constructor. Consider inspecting: parent.",
+      "CodePrev": 0,
+      "CodeCurrent": -1592846222,
+      "CodeNext": 906263917
+    },
+    {
+      "FileName": "NodeBase.cpp",
+      "ErrorCode": "V730",
+      "Message": "Not all members of a class are initialized inside the constructor. Consider inspecting: parent.",
+      "CodePrev": -1592846222,
+      "CodeCurrent": 906263917,
+      "CodeNext": 78091050
+    }
+  ]
+}
