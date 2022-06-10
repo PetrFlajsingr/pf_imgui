@@ -44,10 +44,7 @@ GradientPoint details::GradientMarkToGradientPoint::operator()(ImGradientMark *m
 }
 
 bool GradientPointsViewComparator::operator()(GradientPointsView lhs, GradientPointsView rhs) {
-  return std::ranges::all_of(ranges::views::zip(lhs, rhs), [](const auto &val) {
-    const auto &[lhs, rhs] = val;
-    return lhs == rhs;
-  });
+  return std::ranges::all_of(ranges::views::zip(lhs, rhs), [](const auto &val) { return val.first == val.second; });
 }
 
 GradientEditor::GradientEditor(GradientEditor::Config &&config)

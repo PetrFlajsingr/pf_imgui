@@ -12,7 +12,7 @@ IndeterminateProgressBar::IndeterminateProgressBar(IndeterminateProgressBar::Con
 
 IndeterminateProgressBar::IndeterminateProgressBar(const std::string &elementName, std::string overlayStr, float speed,
                                                    const Size &size)
-    : ItemElement(elementName), Resizable(size), changeSpeed(speed), overlay(overlayStr) {}
+    : ItemElement(elementName), Resizable(size), changeSpeed(speed), overlay(std::move(overlayStr)) {}
 
 void IndeterminateProgressBar::setSpeed(float speed) { changeSpeed = speed; }
 

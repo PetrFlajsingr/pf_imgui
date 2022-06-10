@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-Font::Font(ImFont *value, std::string fontName) : font(value), name(fontName) {}
+Font::Font(ImFont *value, std::string fontName) : font(value), name(std::move(fontName)) {}
 
 RAII Font::applyScoped() {
   ImGui::PushFont(font);

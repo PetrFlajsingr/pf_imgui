@@ -124,7 +124,7 @@ FontBuilder::FontBuilder(FontManager &manager, std::string fontName)
     : parent(manager), name(std::move(fontName)), source(FontBuilder::DefaultFontTag{}) {}
 
 FontBuilder::FontBuilder(FontManager &manager, std::string fontName, std::filesystem::path ttfPath)
-    : parent(manager), name(std::move(fontName)), source(ttfPath) {}
+    : parent(manager), name(std::move(fontName)), source(std::move(ttfPath)) {}
 
 FontBuilder::FontBuilder(FontManager &manager, std::string fontName, std::vector<std::byte> data)
     : parent(manager), name(std::move(fontName)), source(std::move(data)) {}
