@@ -41,7 +41,7 @@ jobs:
           sudo apt install pvs-studio
           pvs-studio-analyzer credentials ${{ secrets.PVS_STUDIO_CREDENTIALS }}   
 
-      - name: Downloading dependencies
+      - name: Running build
         run: |
           cd ${{ github.workspace }}
           cmake -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=On -B build .
@@ -50,3 +50,13 @@ jobs:
       - name: Running PVS-Studio
         run: |
           pvs-studio-analyzer analyze -f build/compile_commands.json -j
+
+      - name: Convert PVS-Studio report
+        run: |
+          plog-converter -t sarif -o pvs-report.sarif PVS-Studio.log
+
+      - name: Publish PVS-studio report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: pvs-report.sarif
+          category: PVS-Studio
