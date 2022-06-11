@@ -8,7 +8,7 @@
 namespace pf::ui::ig {
 
 InputDialog::InputDialog(const std::string &elementName, const std::string &title, Size s, const std::string &message)
-    : ModalDialog(elementName, title) {
+    : ModalDialog(elementName, title, s) {
   createChild<Text>("text", message);
   auto &input = createChild<InputText>("input", "", "");
   createChild<Dummy>("area_fill", Size{Width::Auto(), Height::Fill(25)});
@@ -21,6 +21,5 @@ InputDialog::InputDialog(const std::string &elementName, const std::string &titl
     cancelClicked();
     close();
   });
-  setSize(s);
 }
 }  // namespace pf::ui::ig
