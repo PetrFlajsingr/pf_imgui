@@ -3,6 +3,7 @@ name: pvs-studio
 
 on:
   push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -49,7 +50,7 @@ jobs:
 
       - name: Running PVS-Studio
         run: |
-          pvs-studio-analyzer  analyze -f compile_commands.json -j -e /src/include -e /src/pf_imgui/backends/impl -e /src/pf_imgui/details
+          pvs-studio-analyzer  analyze -f compile_commands.json -j -e src/include -e src/pf_imgui/backends/impl -e src/pf_imgui/details
 
       - name: Convert PVS-Studio report
         run: |
