@@ -6,7 +6,10 @@
 
 namespace pf::ui::ig {
 Collapsible::Collapsible(AllowCollapse allowCollapse, Persistent persistent)
-    : Savable(persistent), collapsible(allowCollapse == AllowCollapse::Yes) {}
+    : Collapsible(allowCollapse, false, persistent) {}
+
+Collapsible::Collapsible(AllowCollapse allowCollapse, bool initCollapsed, Persistent persistent)
+    : Savable(persistent), collapsed(initCollapsed), collapsible(allowCollapse == AllowCollapse::Yes) {}
 
 bool Collapsible::isCollapsed() const { return collapsed; }
 

@@ -9,7 +9,7 @@ namespace pf::ui::ig {
 
 MessageDialog::MessageDialog(const std::string &elementName, const std::string &title, Size size,
                              const std::string &message, const Flags<MessageButtons> &buttons)
-    : ModalDialog(elementName, title) {
+    : ModalDialog(elementName, title, size) {
   createChild<Text>("text", message).setWrap(true);
   createChild<Dummy>("area_fill", Size{Width::Auto(), Height::Fill(25)});
   auto &btnLayout = createChild<HorizontalLayout>("hor_layout", Size{Width::Auto(), 20}, HorizontalAlign::Down);
@@ -22,7 +22,6 @@ MessageDialog::MessageDialog(const std::string &elementName, const std::string &
           if (dialogDone(buttonType)) { close(); }
         });
   });
-  setSize(size);
 }
 
 }  // namespace pf::ui::ig

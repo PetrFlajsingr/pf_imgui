@@ -32,6 +32,13 @@ class PF_IMGUI_EXPORT Collapsible : public Savable {
    * @param persistent enable config saving capabilities
    */
   explicit Collapsible(AllowCollapse allowCollapse, Persistent persistent);
+  /**
+   * Create Collapsible.
+   * @param allowCollapse enable collapse capabilities
+   * @param initCollapsed initial collapse state
+   * @param persistent enable config saving capabilities
+   */
+  Collapsible(AllowCollapse allowCollapse, bool initCollapsed, Persistent persistent);
 
   /**
    * Add a listener, which is called every time the elements' collapse state is changed.
