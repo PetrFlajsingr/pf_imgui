@@ -193,8 +193,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
  protected:
   TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent,
            const Flags<ImGuiTreeNodeFlags_> &flags)
-      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, true, persistent) {
-  }
+      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, true, persistent) {}
 
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();
@@ -298,9 +297,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
  protected:
   TreeNode(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse, Persistent persistent,
            const Flags<ImGuiTreeNodeFlags_> &flags)
-      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, persistent) {
-    setCollapsed(true);
-  }
+      : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, true, persistent) {}
 
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();
