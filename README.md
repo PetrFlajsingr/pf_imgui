@@ -5,7 +5,6 @@
 [![macos-build Actions Status](https://github.com/PetrFlajsingr/pf_imgui/workflows/macos-build/badge.svg)](https://github.com/PetrFlajsingr/pf_imgui/actions)
 [![windows-build Actions Status](https://github.com/PetrFlajsingr/pf_imgui/workflows/windows-build/badge.svg)](https://github.com/PetrFlajsingr/pf_imgui/actions)
 
-
 [Documentation](https://petrflajsingr.github.io/pf_imgui/)
 
 This library is a wrapper of [DearImGui](https://github.com/ocornut/imgui). Dependencies are most easily downloaded via [VCPKG](https://github.com/microsoft/vcpkg), you can use [my VCPKG registry](https://github.com/PetrFlajsingr/vcpkg-registry) to add this library to your project.
@@ -13,7 +12,7 @@ This library is a wrapper of [DearImGui](https://github.com/ocornut/imgui). Depe
 # Examples
 In these examples `imgui` is an instance of `std::unique_ptr<ImGuiInterface>`. Examples only show basic usage, the classes usually have more functionality.
 
-### ImGuiInterface
+## ImGuiInterface
 `ImGuiInterface` needs to be subclassed with a custom rendering backend. It must also provide functionality to update font atlas when requested.
 
 There are some backend implementations in `pf_imgui/backends`. If you wish to use those you gotta add them to the project yourself, they are not part of the library by default.
