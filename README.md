@@ -246,7 +246,6 @@ imgui->getDialogManager().buildMessageDialog()
       .build();
 ```
 
-
 ### FileDialog - uses [ImGuiFileDialog](https://github.com/aiekick/ImGuiFileDialog)
 Allows the user to select directories or files with a filter.
 ```cpp
@@ -298,6 +297,7 @@ checkbox.addValueListener([](bool selected) {
 ### ColorChooser
 For selection of colors. It supports 3 or 4 component colors and there are two types available:
 * `ColorChooserType::Edit` - slider for each component
+
 * `ColorChooserType::Picker` - slider for each component and a paletter
 ![img.png](img/colorchooser.png)
   
@@ -336,9 +336,7 @@ TODO:
 ### Tooltip
 ### Tree
 
-
 ## Plots
-
 
 ## Layouts
 ### AbsoluteLayout
