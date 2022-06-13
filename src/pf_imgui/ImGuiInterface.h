@@ -277,6 +277,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   virtual void renderDrawData_impl(ImDrawData *drawData) = 0;
 
+  virtual void updateMultiViewport();
+
   /**
    * @attention Override this function to provide rendering capabilities.
    */
