@@ -34,4 +34,10 @@ void ImGuiGlfwOpenGLInterface::newFrame_impl() {
 }
 void ImGuiGlfwOpenGLInterface::renderDrawData_impl(ImDrawData *drawData) { ImGui_ImplOpenGL3_RenderDrawData(drawData); }
 
+void ImGuiGlfwOpenGLInterface::updateMultiViewport() {
+  auto backupContext = glfwGetCurrentContext();
+  ImGuiInterface::updateMultiViewport();
+  glfwMakeContextCurrent(backupContext);
+}
+
 }  // namespace pf::ui::ig
