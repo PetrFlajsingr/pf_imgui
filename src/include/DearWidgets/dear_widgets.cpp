@@ -9,6 +9,7 @@
 #include <vector>
 #ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 #endif
 #ifdef _MSC_VER
 #pragma warning( disable : 4101 )

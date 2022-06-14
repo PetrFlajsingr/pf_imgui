@@ -249,10 +249,7 @@ void ImGuiInterface::render() {
   RAII endFrameRAII{[&] {
     ImGui::Render();
     renderDrawData_impl(ImGui::GetDrawData());
-    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    }
+    if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) { updateMultiViewport(); }
   }};
   if (getVisibility() == Visibility::Visible) {
     [[maybe_unused]] auto fontScoped = globalFont.applyScoped();
@@ -264,6 +261,11 @@ void ImGuiInterface::render() {
       renderImpl();
     }
   }
+}
+
+void ImGuiInterface::updateMultiViewport() {
+  ImGui::UpdatePlatformWindows();
+  ImGui::RenderPlatformWindowsDefault();
 }
 
 void ImGuiInterface::setContext() const { ImGui::SetCurrentContext(imguiContext); }

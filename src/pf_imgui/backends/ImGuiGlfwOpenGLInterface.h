@@ -27,6 +27,7 @@ class ImGuiGlfwOpenGLInterface final : public ImGuiInterface {
  protected:
   void newFrame_impl() override;
   void renderDrawData_impl(ImDrawData *drawData) override;
+  void updateMultiViewport() override;
 };
 
 }  // namespace pf::ui::ig

@@ -286,7 +286,7 @@ void Table<ColumnCount>::renderImpl() {
   if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndTable};
 
-    std::ranges::for_each(std::views::iota(0ull, ColumnCount), [&](const auto index) {
+    std::ranges::for_each(std::views::iota(std::size_t{0}, ColumnCount), [&](const auto index) {
       const char *name = nullptr;
       if (header.has_value()) { name = (*header)[index].c_str(); }
       const auto columnFlags =
@@ -306,7 +306,7 @@ void Table<ColumnCount>::renderImpl() {
       const auto sortPred = [&](const auto &lhs, const auto &rhs) {
         for (auto specsIndex : std::views::iota(0, sortSpecs->SpecsCount)) {
           const auto columnSpecs = sortSpecs->Specs[specsIndex];
-          const auto columnIndex = columnSpecs.ColumnUserID;  // TODO: sort ordeer or direction or whatever
+          const auto columnIndex = columnSpecs.ColumnUserID;
           if (columnSortFunctions[columnIndex].has_value()) {
             auto comparisonResult = columnSortFunctions[columnIndex].value()((*lhs)[columnIndex], (*rhs)[columnIndex]);
             if (columnSpecs.SortDirection == ImGuiSortDirection_Descending) { comparisonResult = !comparisonResult; }
