@@ -14,7 +14,7 @@
 namespace pf::ui::ig {
 
 /**
- * @brief A special type of window, which acts as docking area for the whole viewport. It is always in background/
+ * @brief A special type of window, which acts as docking area for the whole main viewport. It is always in the background.
  */
 class BackgroundDockingArea : public Renderable {
   friend class ImGuiInterface;
