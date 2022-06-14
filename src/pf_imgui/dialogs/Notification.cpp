@@ -19,8 +19,10 @@ void Notification::renderImpl() {
     if (!iconColor.has_value()) { iconColor = Color{ImGui::GetStyleColorVec4(ImGuiCol_Text)}; }
   }
   checkPhase();
+  const auto vp_pos =
+      ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable ? ImGui::GetMainViewport()->Pos : ImVec2{0, 0};
   const auto vp_size = ImGui::GetMainViewport()->Size;
-  ImGui::SetNextWindowPos(ImVec2(vp_size.x - PADDING_X, vp_size.y - PADDING_Y - height), ImGuiCond_Always,
+  ImGui::SetNextWindowPos(vp_pos + ImVec2(vp_size.x - PADDING_X, vp_size.y - PADDING_Y - height), ImGuiCond_Always,
                           ImVec2(1.0f, 1.0f));
 
   const auto opacity = getOpacity();
