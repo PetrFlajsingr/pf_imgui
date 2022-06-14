@@ -117,6 +117,10 @@ You can read releases logs https://github.com/epezent/implot/releases for more d
 #define sprintf sprintf_s
 #endif
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wformat-truncation"
+#endif
+
 // Support for pre-1.82 versions. Users on 1.82+ can use 0 (default) flags to mean "all corners" but in order to support older versions we are more explicit.
 #if (IMGUI_VERSION_NUM < 18102) && !defined(ImDrawFlags_RoundCornersAll)
 #define ImDrawFlags_RoundCornersAll ImDrawCornerFlags_All

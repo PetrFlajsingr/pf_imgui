@@ -11,6 +11,12 @@
 #include <ctype.h>  // toupper()
 #pragma warning( push )
 #pragma warning( disable : 4996 4244 4100 )
+
+
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wformat-overflow"
+#endif
+
 namespace ImGui {
 
 
