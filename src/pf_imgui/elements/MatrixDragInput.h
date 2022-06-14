@@ -94,8 +94,8 @@ template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(const std::string &name, const std::string &label,
                                     MatrixDragInput::ParamType changeSpeed, MatrixDragInput::ParamType minVal,
                                     MatrixDragInput::ParamType maxVal, M initValue, Persistent persistent)
-    : ItemElement(name), ValueObservable<M>(initValue), Labellable(label), Savable(persistent), speed(changeSpeed),
-      min(minVal), max(maxVal) {
+    : ItemElement(name), ValueObservable<M>(initValue), Labellable(label), Savable(persistent), min(minVal),
+      max(maxVal), speed(changeSpeed) {
   for (std::size_t i = 0; i < Height - 1; ++i) { dragNames[i] = std::string{"##drag_"} + std::to_string(i); }
 }
 
