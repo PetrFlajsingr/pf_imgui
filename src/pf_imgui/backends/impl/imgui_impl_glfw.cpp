@@ -67,6 +67,10 @@
 #endif
 #endif
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wclass-memaccess"
+#endif
+
 // GLFW
 #include <GLFW/glfw3.h>
 #ifdef _WIN32
