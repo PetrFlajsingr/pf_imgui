@@ -37,6 +37,7 @@
 #include <pf_imgui/elements/MatrixDragInput.h>
 #include <pf_imgui/elements/MemoryEditor.h>
 #include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/elements/OptionSlider.h>
 #include <pf_imgui/elements/OverlayGizmo.h>
 #include <pf_imgui/elements/ProgressBar.h>
 #include <pf_imgui/elements/RadioButton.h>
@@ -52,7 +53,6 @@
 #include <pf_imgui/elements/SpinInput.h>
 #include <pf_imgui/elements/Spinner.h>
 #include <pf_imgui/elements/StatusBar.h>
-#include <pf_imgui/elements/StringSlider.h>
 #include <pf_imgui/elements/TabBar.h>
 #include <pf_imgui/elements/Table.h>
 #include <pf_imgui/elements/Text.h>

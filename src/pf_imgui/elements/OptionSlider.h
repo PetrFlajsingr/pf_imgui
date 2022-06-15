@@ -2,8 +2,8 @@
 // Created by Petr on 6/15/2022.
 //
 
-#ifndef PF_IMGUI_ELEMENTS_STRING_SLIDER
-#define PF_IMGUI_ELEMENTS_STRING_SLIDER
+#ifndef PF_IMGUI_ELEMENTS_OPTION_SLIDER
+#define PF_IMGUI_ELEMENTS_OPTION_SLIDER
 
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_common/concepts/ranges.h>
@@ -18,7 +18,7 @@
 namespace pf::ui::ig {
 
 template<ToStringConvertible T>
-class PF_IMGUI_EXPORT StringSlider
+class PF_IMGUI_EXPORT OptionSlider
     : public ItemElement,
       public Labellable,
       public ValueObservable<T>,
@@ -33,13 +33,13 @@ class PF_IMGUI_EXPORT StringSlider
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
   struct Config {
-    using Parent = StringSlider<T>;
+    using Parent = OptionSlider<T>;
     Explicit<std::string> name;
     Explicit<std::string> label;
     Explicit<std::vector<T>> values;
     bool persistent = false;
   };
-  StringSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
+  OptionSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
                Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(*std::ranges::begin(newValues)),
         Savable(persistent), DragSource<T>(false), DropTarget<T>(false), values{std::ranges::begin(newValues),
@@ -86,4 +86,4 @@ class PF_IMGUI_EXPORT StringSlider
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_ELEMENTS_STRING_SLIDER
+#endif  //PF_IMGUI_ELEMENTS_OPTION_SLIDER
