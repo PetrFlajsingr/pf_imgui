@@ -34,7 +34,7 @@ jobs:
           ./bootstrap-vcpkg.sh
 
       - name: Checkout repo
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: run build
         run: |
