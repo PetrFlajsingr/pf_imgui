@@ -727,6 +727,7 @@ if (BUILD_DOCS)
     find_package(Doxygen)
     if (DOXYGEN_FOUND)
         set(HTML_DYNAMIC_MENUS YES)
+        set(DOXYGEN_EXCLUDE_PATTERNS "*/src/pf_imgui/backends/*" "*/src/pf_imgui/details/*" )
         doxygen_add_docs(pf_imgui_doc ALL
                 ${CMAKE_SOURCE_DIR}/src/pf_imgui
                 )
