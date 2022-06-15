@@ -1,6 +1,9 @@
-//
-// Created by Petr on 6/15/2022.
-//
+/**
+ * @file OptionSlider.h
+ * @brief OptionSlider element.
+ * @author Petr Flajšingr
+ * @date 15.6.22
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_OPTION_SLIDER
 #define PF_IMGUI_ELEMENTS_OPTION_SLIDER
@@ -17,6 +20,10 @@
 
 namespace pf::ui::ig {
 
+/**
+ * @brief A slider class with predefined options.
+ * @tparam T type of stored selectable value
+ */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT OptionSlider
     : public ItemElement,
@@ -32,13 +39,29 @@ class PF_IMGUI_EXPORT OptionSlider
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
  public:
+  /**
+   * @brief Construction args for OptionSlider /.
+   */
   struct Config {
     using Parent = OptionSlider<T>;
-    Explicit<std::string> name;
-    Explicit<std::string> label;
-    Explicit<std::vector<T>> values;
-    bool persistent = false;
+    Explicit<std::string> name;      /*!< Unique name of the element */
+    Explicit<std::string> label;     /*!< Text rendered next to the element */
+    Explicit<std::vector<T>> values; /*!< Possible options */
+    bool persistent = false;         /*!< Enable disk state saving */
   };
+  /**
+   * Construct OptionSlider.
+   * @param config construction args @see OptionSlider::Config
+   */
+  explicit OptionSlider(Config &&config)
+      : OptionSlider(config.name, config.label, config.values, config.persistent ? Persistent::Yes : Persistent::No) {}
+  /**
+   * Construct OptionSlider.
+   * @param elementName unique name of the element
+   * @param label text rendered next to the element
+   * @param newValues possible options
+   * @param persistent enable disk state saving
+   */
   OptionSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
                Persistent persistent = Persistent::No)
       : ItemElement(elementName), Labellable(label), ValueObservable<T>(*std::ranges::begin(newValues)),
@@ -57,6 +80,7 @@ class PF_IMGUI_EXPORT OptionSlider
   }
 
   [[nodiscard]] toml::table toToml() const override { return toml::table{{"selected", selectedValueStr}}; }
+
   void setFromToml(const toml::table &src) override {
     if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
       if (auto selectedVal = selectedValIter->second.as_string(); selectedVal != nullptr) {
