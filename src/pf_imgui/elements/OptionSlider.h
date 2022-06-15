@@ -46,6 +46,16 @@ class PF_IMGUI_EXPORT OptionSlider
                                                                                 std::ranges::end(newValues)},
         selectedValueStr(toString(values[0])) {}
 
+  void setValue(const T &newValue) override {
+    if (const auto iter =
+            std::ranges::find_if(values, [&](const auto &val) { return toString(val) == toString(newValue); });
+        iter != values.end()) {
+      selectedValueIndex = static_cast<int>(iter - values.begin());
+      selectedValueStr = toString(values[selectedValueIndex]);
+      ValueObservable<T>::setValue(values[selectedValueIndex]);
+    }
+  }
+
   [[nodiscard]] toml::table toToml() const override { return toml::table{{"selected", selectedValueStr}}; }
   void setFromToml(const toml::table &src) override {
     if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
