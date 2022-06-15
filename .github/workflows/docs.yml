@@ -40,7 +40,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           cmake . -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake -DBUILD_DOCS=ON
-          cmake --target pf_imgui_doc --build .
+          cmake --build . --target pf_imgui_doc
           cd html
 
       - name: Deploy
