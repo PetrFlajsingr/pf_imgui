@@ -1,8 +1,0 @@
-<map id="pf::ui::ig::FlameGraph" name="pf::ui::ig::FlameGraph">
-<area shape="rect" id="node1" title="Graph for visualising stack traces, performance stuff..." alt="" coords="532,81,695,108"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="279,5,415,32"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="272,56,421,83"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="274,107,419,133"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title=" " alt="" coords="209,158,484,258"/>
-</map>

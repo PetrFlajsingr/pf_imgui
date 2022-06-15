@@ -1,6 +1,0 @@
-<map id="src/pf_imgui/layouts/layout_decorators.h" name="src/pf_imgui/layouts/layout_decorators.h">
-<area shape="rect" id="node1" title="Decorators used in layouts to provide functionality which is not provided by an Element." alt="" coords="17,5,172,47"/>
-<area shape="rect" id="node2" href="$AbsoluteLayout_8h.html" title="Layout allowing positioning children with absolute position." alt="" coords="17,95,172,136"/>
-<area shape="rect" id="node3" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="17,184,172,225"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,273,184,300"/>
-</map>

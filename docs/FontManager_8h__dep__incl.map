@@ -1,8 +1,0 @@
-<map id="src/pf_imgui/FontManager.h" name="src/pf_imgui/FontManager.h">
-<area shape="rect" id="node1" title="Class for building and managing imgui fonts." alt="" coords="221,5,424,32"/>
-<area shape="rect" id="node2" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="215,80,430,107"/>
-<area shape="rect" id="node3" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="5,155,216,196"/>
-<area shape="rect" id="node4" href="$MarkdownText_8h_source.html" title=" " alt="" coords="239,155,406,196"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="430,155,575,196"/>
-<area shape="rect" id="node5" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="233,244,412,271"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="pf::ui::ig::DragSource&lt; T &gt;" name="pf::ui::ig::DragSource&lt; T &gt;">
-<area shape="rect" id="node1" title="Class providing the ability for derived to be a source of data for drag and drop operation." alt="" coords="5,95,200,121"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1details_1_1DragSourceBase.html" title="Base class for templated DragSource&lt;T&gt;" alt="" coords="34,5,171,47"/>
-</map>

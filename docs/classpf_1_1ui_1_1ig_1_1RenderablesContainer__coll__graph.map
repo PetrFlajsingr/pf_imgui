@@ -1,5 +1,0 @@
-<map id="pf::ui::ig::RenderablesContainer" name="pf::ui::ig::RenderablesContainer">
-<area shape="rect" id="node1" title=" " alt="" coords="67,80,293,107"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="" coords="5,5,168,32"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="" coords="193,5,354,32"/>
-</map>

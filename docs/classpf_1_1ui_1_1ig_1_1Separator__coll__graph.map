@@ -1,6 +1,0 @@
-<map id="pf::ui::ig::Separator" name="pf::ui::ig::Separator">
-<area shape="rect" id="node1" title="Visual separation of UI." alt="" coords="501,43,647,69"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="263,5,399,32"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title=" " alt="" coords="209,57,453,127"/>
-</map>

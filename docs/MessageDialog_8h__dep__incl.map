@@ -1,8 +1,0 @@
-<map id="src/pf_imgui/dialogs/MessageDialog.h" name="src/pf_imgui/dialogs/MessageDialog.h">
-<area shape="rect" id="node1" title="Simplified Dialog for informing a user and getting his response." alt="" coords="5,5,159,47"/>
-<area shape="rect" id="node2" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="98,259,277,285"/>
-<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="152,95,367,121"/>
-<area shape="rect" id="node4" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="47,169,258,211"/>
-<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="281,169,448,211"/>
-<area shape="rect" id="node6" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="472,169,617,211"/>
-</map>

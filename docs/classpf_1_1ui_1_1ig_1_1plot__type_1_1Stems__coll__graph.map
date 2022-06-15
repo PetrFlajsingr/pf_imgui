@@ -1,9 +1,0 @@
-<map id="pf::ui::ig::plot_type::Stems" name="pf::ui::ig::plot_type::Stems">
-<area shape="rect" id="node1" title="2D graph, where each value is rendered as a stem on X axis." alt="" coords="871,68,1013,109"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html" title="Base class for plot data wich support data labeling." alt="" coords="635,35,778,76"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html" title="Base class for all types of plot data." alt="" coords="397,5,539,47"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="209,13,345,39"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,13,161,39"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="393,71,543,98"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1details_1_1DefaultPlotDataSetting.html" title="Default setter for data storage." alt="" coords="591,100,823,141"/>
-</map>

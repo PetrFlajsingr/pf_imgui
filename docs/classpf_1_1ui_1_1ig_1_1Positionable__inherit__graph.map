@@ -1,8 +1,0 @@
-<map id="pf::ui::ig::Positionable" name="pf::ui::ig::Positionable">
-<area shape="rect" id="node1" title="Interface for positionable elements." alt="" coords="324,5,487,32"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1ModalDialog.html" title="Simple modal dialog which can be modal. Contains Elements." alt="" coords="99,80,263,107"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1PositionDecorator.html" title="Decorator for non&#45;Positionable elements." alt="" coords="287,80,523,107"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Window.html" title="Main building piece for UI. Persistent element container with plenty of controls." alt="" coords="547,80,682,107"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1InputDialog.html" title="Simplified dialog for user input. It should be created via ImGuiInterface." alt="" coords="5,162,163,189"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1MessageDialog.html" title="Simplified Dialog for showing messages. Button labels are the same as enums being used...." alt="" coords="187,155,370,196"/>
-</map>

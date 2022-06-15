@@ -1,9 +1,0 @@
-<map id="src/pf_imgui/elements/MenuBars.h" name="src/pf_imgui/elements/MenuBars.h">
-<area shape="rect" id="node1" title="All types necessary for building menu bars." alt="" coords="325,5,491,47"/>
-<area shape="rect" id="node2" href="$Window_8h.html" title="Dialog for building windows." alt="" coords="217,95,370,136"/>
-<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="261,348,440,375"/>
-<area shape="rect" id="node4" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="243,184,458,211"/>
-<area shape="rect" id="node5" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="33,259,244,300"/>
-<area shape="rect" id="node6" href="$MarkdownText_8h_source.html" title=" " alt="" coords="267,259,434,300"/>
-<area shape="rect" id="node7" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="458,259,603,300"/>
-</map>

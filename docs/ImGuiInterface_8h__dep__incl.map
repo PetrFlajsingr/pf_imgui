@@ -1,7 +1,0 @@
-<map id="src/pf_imgui/ImGuiInterface.h" name="src/pf_imgui/ImGuiInterface.h">
-<area shape="rect" id="node1" title="Main class of the library." alt="" coords="215,5,430,32"/>
-<area shape="rect" id="node2" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="5,80,216,121"/>
-<area shape="rect" id="node3" href="$MarkdownText_8h_source.html" title=" " alt="" coords="239,80,406,121"/>
-<area shape="rect" id="node5" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="430,80,575,121"/>
-<area shape="rect" id="node4" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="233,169,412,196"/>
-</map>

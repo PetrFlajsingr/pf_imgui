@@ -1,8 +1,0 @@
-<map id="pf::ui::ig::plot_type::HeatMap" name="pf::ui::ig::plot_type::HeatMap">
-<area shape="rect" id="node1" title="2D plot where data is visualised as a heat map." alt="" coords="97,333,240,375"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html" title="Base class for plot data wich support data labeling." alt="" coords="97,244,240,285"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html" title="Base class for all types of plot data." alt="" coords="12,155,155,196"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="15,80,151,107"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="179,162,329,189"/>
-</map>

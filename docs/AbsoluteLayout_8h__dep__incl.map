@@ -1,5 +1,0 @@
-<map id="src/pf_imgui/layouts/AbsoluteLayout.h" name="src/pf_imgui/layouts/AbsoluteLayout.h">
-<area shape="rect" id="node1" title="Layout allowing positioning children with absolute position." alt="" coords="17,5,172,47"/>
-<area shape="rect" id="node2" href="$layouts_8h.html" title="Convenience include for all layouts." alt="" coords="17,95,172,136"/>
-<area shape="rect" id="node3" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="5,184,184,211"/>
-</map>

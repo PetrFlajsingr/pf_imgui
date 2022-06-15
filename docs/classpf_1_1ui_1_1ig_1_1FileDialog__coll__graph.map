@@ -1,8 +1,0 @@
-<map id="pf::ui::ig::FileDialog" name="pf::ui::ig::FileDialog">
-<area shape="rect" id="node1" title="Dialog for file selection from disk." alt="" coords="216,107,363,133"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="9,5,165,32"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Labellable.html" title="Interface for labellable elements." alt="" coords="12,56,161,83"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="" coords="14,107,159,133"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="" coords="5,157,168,184"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="" coords="6,208,167,235"/>
-</map>

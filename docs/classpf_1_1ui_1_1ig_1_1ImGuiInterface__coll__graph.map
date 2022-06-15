@@ -1,4 +1,0 @@
-<map id="pf::ui::ig::ImGuiInterface" name="pf::ui::ig::ImGuiInterface">
-<area shape="rect" id="node1" title="Root class of an entire UI tree. Provides an ability to create windows and dialogs." alt="" coords="5,80,184,107"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="17,5,173,32"/>
-</map>

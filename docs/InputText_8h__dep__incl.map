@@ -1,9 +1,0 @@
-<map id="src/pf_imgui/elements/InputText.h" name="src/pf_imgui/elements/InputText.h">
-<area shape="rect" id="node1" title="InputText element." alt="" coords="458,5,625,47"/>
-<area shape="rect" id="node2" href="$InputDialog_8h.html" title="Convenience dialog for text input." alt="" coords="407,95,561,136"/>
-<area shape="rect" id="node6" href="$elements_8h.html" title="Convenience include for all elements." alt="" coords="379,348,557,375"/>
-<area shape="rect" id="node3" href="$ImGuiInterface_8h.html" title="Main class of the library." alt="" coords="289,184,503,211"/>
-<area shape="rect" id="node4" href="$ImGuiGlfwVulkanInterface_8h_source.html" title=" " alt="" coords="5,259,216,300"/>
-<area shape="rect" id="node5" href="$MarkdownText_8h_source.html" title=" " alt="" coords="239,259,406,300"/>
-<area shape="rect" id="node7" href="$dark_8h.html" title="Dark style for imgui." alt="" coords="430,259,575,300"/>
-</map>

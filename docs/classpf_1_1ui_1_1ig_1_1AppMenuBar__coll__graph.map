@@ -1,9 +1,0 @@
-<map id="pf::ui::ig::AppMenuBar" name="pf::ui::ig::AppMenuBar">
-<area shape="rect" id="node1" title="Menu bar belonging to the entire application window." alt="" coords="107,229,273,256"/>
-<area shape="rect" id="node2" href="$classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="" coords="31,155,167,181"/>
-<area shape="rect" id="node3" href="$classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="" coords="5,80,161,107"/>
-<area shape="rect" id="node4" href="$classpf_1_1ui_1_1ig_1_1MenuContainer.html" title="An item which can contain other menus." alt="" coords="199,155,381,181"/>
-<area shape="rect" id="node5" href="$classpf_1_1ui_1_1ig_1_1RenderablesContainer.html" title=" " alt="" coords="186,80,413,107"/>
-<area shape="rect" id="node6" href="$classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="" coords="125,5,287,32"/>
-<area shape="rect" id="node7" href="$classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="" coords="312,5,473,32"/>
-</map>
