@@ -395,7 +395,7 @@ set(INCLUDES
         src/pf_imgui/details/IndeterminateProgressBar.h
         src/pf_imgui/elements/IndeterminateProgressBar.h
         src/pf_imgui/elements/OverlayGizmo.h
-        src/pf_imgui/elements/details/OverlayGizmoBase.h)
+        src/pf_imgui/elements/details/OverlayGizmoBase.h src/pf_imgui/elements/StringSlider.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

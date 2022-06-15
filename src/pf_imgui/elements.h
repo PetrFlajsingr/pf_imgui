@@ -52,6 +52,7 @@
 #include <pf_imgui/elements/SpinInput.h>
 #include <pf_imgui/elements/Spinner.h>
 #include <pf_imgui/elements/StatusBar.h>
+#include <pf_imgui/elements/StringSlider.h>
 #include <pf_imgui/elements/TabBar.h>
 #include <pf_imgui/elements/Table.h>
 #include <pf_imgui/elements/Text.h>

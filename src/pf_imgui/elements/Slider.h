@@ -36,8 +36,6 @@ namespace pf::ui::ig {
  *
  * If the type is not a scalar, each scalar part of the structure gets its own slider.
  * @tparam T underlying type
- *
- * @todo: ToStringConvertible support
  */
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Slider
@@ -160,7 +158,7 @@ void Slider<T>::setFromToml(const toml::table &src) {
   }
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 void Slider<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
