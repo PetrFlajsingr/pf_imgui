@@ -1,0 +1,51 @@
+name: Docs
+
+on:
+  #push:
+  #  branches-ignore:
+  #    - '**'
+  push:
+    branches: [ master ]
+  #pull_request:
+  #  branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Requirements
+        run: sudo apt install doxygen
+
+      - name: install updates
+        run: |
+          sudo apt install g++-11
+          wget -O cmake.sh https://cmake.org/files/v3.20/cmake-3.20.1-linux-x86_64.sh
+          sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
+          export PATH=/usr/local/bin:$PATH
+          cmake --version
+
+      - name: Installing vcpkg (windows)
+        run: |
+          cd ..
+          git clone https://github.com/Microsoft/vcpkg.git
+          cd vcpkg
+          ./bootstrap-vcpkg.sh
+
+      - name: Checkout repo
+      - uses: actions/checkout@v1
+
+      - name: run build
+        run: |
+          cd ${{ github.workspace }}
+          cmake . -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake -DBUILD_DOCS=ON
+          cmake --target pf_imgui_doc --build .
+          cd html
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v4.3.3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: docs_sphinx/_build/html # The folder the action should deploy.
