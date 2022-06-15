@@ -32,6 +32,7 @@ void ImGuiGlfwOpenGLInterface::newFrame_impl() {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
 }
+
 void ImGuiGlfwOpenGLInterface::renderDrawData_impl(ImDrawData *drawData) { ImGui_ImplOpenGL3_RenderDrawData(drawData); }
 
 void ImGuiGlfwOpenGLInterface::updateMultiViewport() {
