@@ -35,9 +35,12 @@ InspectableImage::InspectableImage(const std::string &elementName, Size s, std::
       trig(trigger) {}
 
 void InspectableImage::renderImpl() {
+  const auto cursorPos = ImGui::GetCursorPos();
   ImGui::Image(textureId, static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom);
   auto &io = ImGui::GetIO();
   const auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+  ImGui::SetCursorPos(cursorPos);
+  ImGui::InvisibleButton("ignore_btn", static_cast<ImVec2>(getSize()));
   auto mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
 
   bool inspectActive = ImGui::IsItemHovered();

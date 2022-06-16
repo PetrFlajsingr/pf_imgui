@@ -143,7 +143,7 @@ namespace ImageInspect
         draw_list->AddRectFilled(pickRc.Min, pickRc.Max, 0xFF000000);
         const float quadWidth = zoomRectangleWidth / float(zoomSize * 2 + 1);
         const ImVec2 quadSize(quadWidth, quadWidth);
-        const int basex = ImClamp(int(mouseUVCoord.x * width), zoomSize, width - zoomSize);
+        const int basex = ImClamp(int(mouseUVCoord.x * width), 2*zoomSize, width - zoomSize);
         const int basey = ImClamp(int(mouseUVCoord.y * height), zoomSize, height - zoomSize);
         for (int y = -zoomSize; y <= zoomSize; y++)
         {
@@ -201,7 +201,7 @@ namespace ImageInspect
         ImGui::Separator();
         ImGui::Text("Size %d, %d", int(displayedTextureSize.x), int(displayedTextureSize.y));
         ImGui::EndGroup();
-        histogram(width, height, bits);
+        //histogram(width, height, bits);
         ImGui::EndTooltip();
     }
 } // namespace ImageInspect
