@@ -76,6 +76,15 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
  */
 class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
  public:
+  /**
+   * @brief Trigger for inspection popup.
+   */
+  enum class Trigger {
+    Hover, LeftMouseDown, RightMouseDown
+  };
+  /**
+   * @brief Construction args for @see InspectableImage.
+   */
   struct Config {
     using Parent = InspectableImage;
     Explicit<std::string_view> name; /*!< Unique name of the element */
@@ -84,6 +93,7 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
         rgbaData;                     /*!< Image data, the element won't store this, you needto keep the memory valid */
     Explicit<std::size_t> imageWidth; /*!< Width of the provided image */
     Size size = Size::Auto();         /*!< Size of the element */
+    Trigger trigger = Trigger::Hover; /*!< Trigger for inspect overlay popup */
   };
   /**
    * Construct InspectableImage.
@@ -99,7 +109,7 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
    * @param texId texture id
    */
   InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData, std::size_t imgWidth,
-                   ImTextureID texId);
+                   ImTextureID texId, Trigger trigger);
   /**
    * Set UVs according to which the image will get sampled.
    */
@@ -127,6 +137,7 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
   ImTextureID textureId;
   ImVec2 uvLeftTop{0.f, 0.f};
   ImVec2 uvRightBottom{1.f, 1.f};
+  Trigger trig;
 };
 
 }  // namespace pf::ui::ig

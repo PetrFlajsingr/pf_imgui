@@ -27,11 +27,12 @@ void Image::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
 
 InspectableImage::InspectableImage(InspectableImage::Config &&config)
     : InspectableImage(std::string{config.name.value}, config.size, config.rgbaData, config.imageWidth,
-                       config.textureId) {}
+                       config.textureId, config.trigger) {}
 
 InspectableImage::InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData,
-                                   std::size_t imgWidth, ImTextureID texId)
-    : ItemElement(elementName), Resizable(s), imageRGBAData(rgbaData), imageWidth(imgWidth), textureId(texId) {}
+                                   std::size_t imgWidth, ImTextureID texId, Trigger trigger)
+    : ItemElement(elementName), Resizable(s), imageRGBAData(rgbaData), imageWidth(imgWidth), textureId(texId),
+      trig(trigger) {}
 
 void InspectableImage::renderImpl() {
   ImGui::Image(textureId, static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom);
@@ -39,7 +40,14 @@ void InspectableImage::renderImpl() {
   const auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
   auto mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
 
-  if (ImGui::IsItemHovered() && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f) {
+  bool inspectActive = ImGui::IsItemHovered();
+  switch (trig) {
+    case Trigger::Hover: break;
+    case Trigger::LeftMouseDown: inspectActive = inspectActive && io.MouseDown[0]; break;
+    case Trigger::RightMouseDown: inspectActive = inspectActive && io.MouseDown[2]; break;
+  }
+
+  if (inspectActive && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f) {
     const auto dataPtr = imageRGBAData.data();
     ImageInspect::inspect(static_cast<int>(imageWidth), static_cast<int>(imageRGBAData.size() / 4 / imageWidth - 1),
                           reinterpret_cast<const unsigned char *>(dataPtr), mouseUVCoord,
