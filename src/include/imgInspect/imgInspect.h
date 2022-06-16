@@ -29,7 +29,11 @@ ImGui::ImageButton(pickerImage.textureID, ImVec2(pickerImage.mWidth, pickerImage
 ImRect rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
 ImVec2 mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
 mouseUVCoord.y = 1.f - mouseUVCoord.y;
-                        
+                        
+
+
+
+
 
 if (io.KeyShift && io.MouseDown[0] && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f)
 {
@@ -125,7 +129,8 @@ namespace ImageInspect
                         const int height,
                         const unsigned char* const bits,
                         ImVec2 mouseUVCoord,
-                        ImVec2 displayedTextureSize)
+                        ImVec2 displayedTextureSize,
+                        int &zoomSize)
     {
         ImGui::BeginTooltip();
         ImGui::BeginGroup();
@@ -136,7 +141,6 @@ namespace ImageInspect
         ImGui::InvisibleButton("AnotherInvisibleMan", ImVec2(zoomRectangleWidth, zoomRectangleWidth));
         const ImRect pickRc(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
         draw_list->AddRectFilled(pickRc.Min, pickRc.Max, 0xFF000000);
-        static int zoomSize = 4;
         const float quadWidth = zoomRectangleWidth / float(zoomSize * 2 + 1);
         const ImVec2 quadSize(quadWidth, quadWidth);
         const int basex = ImClamp(int(mouseUVCoord.x * width), zoomSize, width - zoomSize);
@@ -145,7 +149,7 @@ namespace ImageInspect
         {
             for (int x = -zoomSize; x <= zoomSize; x++)
             {
-                uint32_t texel = ((uint32_t*)bits)[(basey - y) * width + x + basex];
+                uint32_t texel = ((uint32_t*)bits)[(basey - y * -1) * width + x + basex];
                 ImVec2 pos = pickRc.Min + ImVec2(float(x + zoomSize), float(y + zoomSize)) * quadSize;
                 draw_list->AddRectFilled(pos, pos + quadSize, texel);
             }
@@ -154,7 +158,7 @@ namespace ImageInspect
 
         // center quad
         const ImVec2 pos = pickRc.Min + ImVec2(float(zoomSize), float(zoomSize)) * quadSize;
-        draw_list->AddRect(pos, pos + quadSize, 0xFF0000FF, 0.f, 15, 2.f);
+        draw_list->AddRect(pos, pos + quadSize, 0xFF0000FF, 0.f, ImDrawFlags_RoundCornersAll, 2.f);
 
         // normal direction
         ImGui::InvisibleButton("AndOneMore", ImVec2(zoomRectangleWidth, zoomRectangleWidth));

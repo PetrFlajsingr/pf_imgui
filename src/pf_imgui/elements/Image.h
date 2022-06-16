@@ -25,7 +25,7 @@ namespace pf::ui::ig {
  *
  * Image rendering should be handled by the use when descending from ImGuiInterface.
  */
-class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Clickable {
+class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
  public:
   /**
    * @brief Struct for construction of Image.
@@ -54,6 +54,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Click
    * @param imTextureId new id
    */
   void setTextureId(ImTextureID imTextureId);
+  [[nodiscard]] ImTextureID getTextureId() const;
   /**
    * Set UVs according to which the image will get sampled.
    */
@@ -63,6 +64,30 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable, public Click
   void renderImpl() override;
 
  private:
+  ImTextureID textureId;
+  ImVec2 uvLeftTop{0.f, 0.f};
+  ImVec2 uvRightBottom{1.f, 1.f};
+};
+
+
+class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
+ public:
+  InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData,
+                   std::size_t imgWidth, ImTextureID texId);
+  /**
+   * Set UVs according to which the image will get sampled.
+   */
+  void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
+
+  void setTexture(ImTextureID texId, std::span<const std::byte> rgbaData, std::size_t imgWidth);
+
+ protected:
+  void renderImpl() override;
+
+ private:
+  std::span<const std::byte> imageRGBAData;
+  int zoomSize = 20;
+  std::size_t imageWidth;
   ImTextureID textureId;
   ImVec2 uvLeftTop{0.f, 0.f};
   ImVec2 uvRightBottom{1.f, 1.f};
