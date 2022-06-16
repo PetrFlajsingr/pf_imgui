@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pf_imgui: pf::ui::ig::Image Class Reference</title>
+<title>pf_imgui: pf::ui::ig::InspectableImage Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,58 +62,67 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>pf</b></li><li class="navelem"><b>ui</b></li><li class="navelem"><b>ig</b></li><li class="navelem"><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html">Image</a></li>  </ul>
+<li class="navelem"><b>pf</b></li><li class="navelem"><b>ui</b></li><li class="navelem"><b>ig</b></li><li class="navelem"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html">InspectableImage</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="classpf_1_1ui_1_1ig_1_1Image-members.html">List of all members</a>  </div>
+<a href="classpf_1_1ui_1_1ig_1_1InspectableImage-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">pf::ui::ig::Image Class Reference</div>  </div>
+<div class="title">pf::ui::ig::InspectableImage Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a> rendered from a texture. For button version see <a class="el" href="classpf_1_1ui_1_1ig_1_1ImageButton.html" title="A button with an image.">ImageButton</a>.  
- <a href="classpf_1_1ui_1_1ig_1_1Image.html#details">More...</a></p>
+<p><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a> rendered from a texture, has a special tooltip zooming on pixels and providing info.  
+ <a href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Image_8h_source.html">Image.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for pf::ui::ig::Image:</div>
+Inheritance diagram for pf::ui::ig::InspectableImage:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classpf_1_1ui_1_1ig_1_1Image.png" usemap="#pf::ui::ig::Image_map" alt=""/>
-  <map id="pf::ui::ig::Image_map" name="pf::ui::ig::Image_map">
-<area href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="pf::ui::ig::ItemElement" shape="rect" coords="137,112,264,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="pf::ui::ig::Resizable" shape="rect" coords="274,112,401,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="pf::ui::ig::Element" shape="rect" coords="0,56,127,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="pf::ui::ig::Focusable" shape="rect" coords="137,56,264,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="pf::ui::ig::Hoverable" shape="rect" coords="274,56,401,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,127,24"/>
+  <img src="classpf_1_1ui_1_1ig_1_1InspectableImage.png" usemap="#pf::ui::ig::InspectableImage_map" alt=""/>
+  <map id="pf::ui::ig::InspectableImage_map" name="pf::ui::ig::InspectableImage_map">
+<area href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="pf::ui::ig::ItemElement" shape="rect" coords="168,112,326,136"/>
+<area href="classpf_1_1ui_1_1ig_1_1Resizable.html" title="Interface for resizable elements." alt="pf::ui::ig::Resizable" shape="rect" coords="336,112,494,136"/>
+<area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Interface for all ImGui elements." alt="pf::ui::ig::Element" shape="rect" coords="0,56,158,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="pf::ui::ig::Focusable" shape="rect" coords="168,56,326,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="pf::ui::ig::Hoverable" shape="rect" coords="336,56,494,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,158,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpf_1_1ui_1_1ig_1_1Image_1_1Config.html">Config</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct for construction of <a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a>.  <a href="structpf_1_1ui_1_1ig_1_1Image_1_1Config.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html">Config</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construction args for.  <a href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ad9b3a53fe7a55c3f1d72c177d16db6fd"><td class="memItemLeft" align="right" valign="top"><a id="ad9b3a53fe7a55c3f1d72c177d16db6fd"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#ad9b3a53fe7a55c3f1d72c177d16db6fd">Trigger</a> { <b>Hover</b>, 
+<b>LeftMouseDown</b>, 
+<b>RightMouseDown</b>
+ }</td></tr>
+<tr class="memdesc:ad9b3a53fe7a55c3f1d72c177d16db6fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger for inspection popup. <br /></td></tr>
+<tr class="separator:ad9b3a53fe7a55c3f1d72c177d16db6fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a729521ea243192dd455059b5cbb1905e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html#a729521ea243192dd455059b5cbb1905e">Image</a> (<a class="el" href="structpf_1_1ui_1_1ig_1_1Image_1_1Config.html">Config</a> &amp;&amp;config)</td></tr>
-<tr class="separator:a729521ea243192dd455059b5cbb1905e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69707a6cd6ce65b58b889a9b88804ed7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html#a69707a6cd6ce65b58b889a9b88804ed7">Image</a> (const std::string &amp;elementName, ImTextureID imTextureId, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size=<a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>())</td></tr>
-<tr class="separator:a69707a6cd6ce65b58b889a9b88804ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f7311d0fd97fe14206bceee2afd7bfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html#a8f7311d0fd97fe14206bceee2afd7bfd">setTextureId</a> (ImTextureID imTextureId)</td></tr>
-<tr class="separator:a8f7311d0fd97fe14206bceee2afd7bfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa57c233fa52d5d5f4bc2264eb3e83bdf"><td class="memItemLeft" align="right" valign="top"><a id="aa57c233fa52d5d5f4bc2264eb3e83bdf"></a>
-ImTextureID&#160;</td><td class="memItemRight" valign="bottom"><b>getTextureId</b> () const</td></tr>
-<tr class="separator:aa57c233fa52d5d5f4bc2264eb3e83bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67ceb84676ba936bdcea0dcdfcd61e3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html#a67ceb84676ba936bdcea0dcdfcd61e3b">setUVs</a> (ImVec2 leftTop, ImVec2 rightBottom)</td></tr>
-<tr class="separator:a67ceb84676ba936bdcea0dcdfcd61e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9369016e3a1571c1b29a52a4b1e8eb6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#a9369016e3a1571c1b29a52a4b1e8eb6a">InspectableImage</a> (<a class="el" href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html">Config</a> &amp;&amp;config)</td></tr>
+<tr class="separator:a9369016e3a1571c1b29a52a4b1e8eb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbedefe9d260291e279f2f8259159d2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#adbedefe9d260291e279f2f8259159d2b">InspectableImage</a> (const std::string &amp;elementName, <a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> s, std::span&lt; const std::byte &gt; rgbaData, std::size_t imgWidth, ImTextureID texId, <a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#ad9b3a53fe7a55c3f1d72c177d16db6fd">Trigger</a> trigger)</td></tr>
+<tr class="separator:adbedefe9d260291e279f2f8259159d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e313d80e78bf04dffe9821978289c0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#a8e313d80e78bf04dffe9821978289c0e">setUVs</a> (ImVec2 leftTop, ImVec2 rightBottom)</td></tr>
+<tr class="separator:a8e313d80e78bf04dffe9821978289c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9abcab54613add3cf04673ac895bebf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#a9abcab54613add3cf04673ac895bebf8">setTexture</a> (ImTextureID texId, std::span&lt; const std::byte &gt; rgbaData, std::size_t imgWidth)</td></tr>
+<tr class="separator:a9abcab54613add3cf04673ac895bebf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4568a0857c0eadc73bdcb71cf866576d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#a4568a0857c0eadc73bdcb71cf866576d">setZoomSize</a> (std::uint32_t zoom)</td></tr>
+<tr class="separator:a4568a0857c0eadc73bdcb71cf866576d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
 <tr class="memitem:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a1edd037f3e2d9f55121f68ffd6d3cba4">ItemElement</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,8 +225,8 @@ ImTextureID&#160;</td><td class="memItemRight" valign="bottom"><b>getTextureId</
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a448565f2a356a95599f8155598c42c14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html#a448565f2a356a95599f8155598c42c14">renderImpl</a> () override</td></tr>
-<tr class="separator:a448565f2a356a95599f8155598c42c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac6c2ecf537dbefe6aff1e395d333a8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#aac6c2ecf537dbefe6aff1e395d333a8e">renderImpl</a> () override</td></tr>
+<tr class="separator:aac6c2ecf537dbefe6aff1e395d333a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Element"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Element')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></td></tr>
 <tr class="memitem:ad4ca006d8c1d42b69e8b41a4ae259fc1 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top"><a id="ad4ca006d8c1d42b69e8b41a4ae259fc1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (ImGuiID newId)</td></tr>
@@ -244,12 +253,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a1c783d21e01f03e27fdf61a61333669d inherit pro_attribs_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a> rendered from a texture. For button version see <a class="el" href="classpf_1_1ui_1_1ig_1_1ImageButton.html" title="A button with an image.">ImageButton</a>. </p>
-<dl class="section see"><dt>See also</dt><dd>ImageButtom</dd></dl>
+<div class="textblock"><p><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a> rendered from a texture, has a special tooltip zooming on pixels and providing info. </p>
 <p><a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a> rendering should be handled by the user when deriving from <a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html" title="Root class of an entire UI tree. Provides an ability to create windows and dialogs.">ImGuiInterface</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a729521ea243192dd455059b5cbb1905e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a729521ea243192dd455059b5cbb1905e">&#9670;&nbsp;</a></span>Image() <span class="overload">[1/2]</span></h2>
+<a id="a9369016e3a1571c1b29a52a4b1e8eb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9369016e3a1571c1b29a52a4b1e8eb6a">&#9670;&nbsp;</a></span>InspectableImage() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,9 +266,9 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">pf::ui::ig::Image::Image </td>
+          <td class="memname">pf::ui::ig::InspectableImage::InspectableImage </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpf_1_1ui_1_1ig_1_1Image_1_1Config.html">Image::Config</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html">InspectableImage::Config</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>config</em></td><td>)</td>
           <td></td>
         </tr>
@@ -271,24 +279,24 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html" title="Image rendered from a texture, has a special tooltip zooming on pixels and providing info.">InspectableImage</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">config</td><td>construction args </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="structpf_1_1ui_1_1ig_1_1Image_1_1Config.html" title="Struct for construction of Image.">Image::Config</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html" title="Construction args for.">InspectableImage::Config</a> </dd></dl>
 
 </div>
 </div>
-<a id="a69707a6cd6ce65b58b889a9b88804ed7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69707a6cd6ce65b58b889a9b88804ed7">&#9670;&nbsp;</a></span>Image() <span class="overload">[2/2]</span></h2>
+<a id="adbedefe9d260291e279f2f8259159d2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbedefe9d260291e279f2f8259159d2b">&#9670;&nbsp;</a></span>InspectableImage() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pf::ui::ig::Image::Image </td>
+          <td class="memname">pf::ui::ig::InspectableImage::InspectableImage </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>elementName</em>, </td>
@@ -296,14 +304,32 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ImTextureID&#160;</td>
-          <td class="paramname"><em>imTextureId</em>, </td>
+          <td class="paramtype"><a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a>&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a>&#160;</td>
-          <td class="paramname"><em>size</em> = <code><a class="el" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>()</code>&#160;</td>
+          <td class="paramtype">std::span&lt; const std::byte &gt;&#160;</td>
+          <td class="paramname"><em>rgbaData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>imgWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ImTextureID&#160;</td>
+          <td class="paramname"><em>texId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#ad9b3a53fe7a55c3f1d72c177d16db6fd">Trigger</a>&#160;</td>
+          <td class="paramname"><em>trigger</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -312,11 +338,13 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1Image.html" title="Image rendered from a texture. For button version see ImageButton.">Image</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Construct <a class="el" href="classpf_1_1ui_1_1ig_1_1InspectableImage.html" title="Image rendered from a texture, has a special tooltip zooming on pixels and providing info.">InspectableImage</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elementName</td><td>ID of the element </td></tr>
-    <tr><td class="paramname">imTextureId</td><td>ID of a texture </td></tr>
-    <tr><td class="paramname">size</td><td>size of the image on screen </td></tr>
+    <tr><td class="paramname">elementName</td><td>unique name of the element </td></tr>
+    <tr><td class="paramname">s</td><td>size of the element </td></tr>
+    <tr><td class="paramname">rgbaData</td><td>image data, the element won't store this, you needto keep the memory valid </td></tr>
+    <tr><td class="paramname">imgWidth</td><td>width of the provided image </td></tr>
+    <tr><td class="paramname">texId</td><td>texture id </td></tr>
   </table>
   </dd>
 </dl>
@@ -324,8 +352,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a448565f2a356a95599f8155598c42c14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a448565f2a356a95599f8155598c42c14">&#9670;&nbsp;</a></span>renderImpl()</h2>
+<a id="aac6c2ecf537dbefe6aff1e395d333a8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac6c2ecf537dbefe6aff1e395d333a8e">&#9670;&nbsp;</a></span>renderImpl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -334,7 +362,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void pf::ui::ig::Image::renderImpl </td>
+          <td class="memname">void pf::ui::ig::InspectableImage::renderImpl </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -352,38 +380,56 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a8f7311d0fd97fe14206bceee2afd7bfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f7311d0fd97fe14206bceee2afd7bfd">&#9670;&nbsp;</a></span>setTextureId()</h2>
+<a id="a9abcab54613add3cf04673ac895bebf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9abcab54613add3cf04673ac895bebf8">&#9670;&nbsp;</a></span>setTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void pf::ui::ig::Image::setTextureId </td>
+          <td class="memname">void pf::ui::ig::InspectableImage::setTexture </td>
           <td>(</td>
           <td class="paramtype">ImTextureID&#160;</td>
-          <td class="paramname"><em>imTextureId</em></td><td>)</td>
+          <td class="paramname"><em>texId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::span&lt; const std::byte &gt;&#160;</td>
+          <td class="paramname"><em>rgbaData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>imgWidth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Change texture ID. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Set texture along with necessary information. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">imTextureId</td><td>new id </td></tr>
+    <tr><td class="paramname">texId</td><td>texture id </td></tr>
+    <tr><td class="paramname">rgbaData</td><td>image data, the element won't store this, you needto keep the memory valid </td></tr>
+    <tr><td class="paramname">imgWidth</td><td>width of the provided image </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a67ceb84676ba936bdcea0dcdfcd61e3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67ceb84676ba936bdcea0dcdfcd61e3b">&#9670;&nbsp;</a></span>setUVs()</h2>
+<a id="a8e313d80e78bf04dffe9821978289c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e313d80e78bf04dffe9821978289c0e">&#9670;&nbsp;</a></span>setUVs()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void pf::ui::ig::Image::setUVs </td>
+          <td class="memname">void pf::ui::ig::InspectableImage::setUVs </td>
           <td>(</td>
           <td class="paramtype">ImVec2&#160;</td>
           <td class="paramname"><em>leftTop</em>, </td>
@@ -402,6 +448,25 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Set UVs according to which the image will get sampled. </p>
+
+</div>
+</div>
+<a id="a4568a0857c0eadc73bdcb71cf866576d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4568a0857c0eadc73bdcb71cf866576d">&#9670;&nbsp;</a></span>setZoomSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::InspectableImage::setZoomSize </td>
+          <td>(</td>
+          <td class="paramtype">std::uint32_t&#160;</td>
+          <td class="paramname"><em>zoom</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set amount of pixels zoomed in around selection. </p>
 
 </div>
 </div>
