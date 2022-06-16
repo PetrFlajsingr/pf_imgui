@@ -25,6 +25,10 @@ void Image::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
   uvRightBottom = rightBottom;
 }
 
+InspectableImage::InspectableImage(InspectableImage::Config &&config)
+    : InspectableImage(std::string{config.name.value}, config.size, config.rgbaData, config.imageWidth,
+                       config.textureId) {}
+
 InspectableImage::InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData,
                                    std::size_t imgWidth, ImTextureID texId)
     : ItemElement(elementName), Resizable(s), imageRGBAData(rgbaData), imageWidth(imgWidth), textureId(texId) {}
@@ -34,11 +38,10 @@ void InspectableImage::renderImpl() {
   auto &io = ImGui::GetIO();
   const auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
   auto mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
-  //mouseUVCoord.y = 1.f - mouseUVCoord.y;
 
   if (ImGui::IsItemHovered() && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f) {
     const auto dataPtr = imageRGBAData.data();
-    ImageInspect::inspect(static_cast<int>(imageWidth), static_cast<int>(imageRGBAData.size() / 4 / imageWidth),
+    ImageInspect::inspect(static_cast<int>(imageWidth), static_cast<int>(imageRGBAData.size() / 4 / imageWidth - 1),
                           reinterpret_cast<const unsigned char *>(dataPtr), mouseUVCoord,
                           ImVec2{rc.GetWidth(), rc.GetHeight()}, zoomSize);
   }
@@ -54,4 +57,6 @@ void InspectableImage::setTexture(ImTextureID texId, std::span<const std::byte> 
   imageRGBAData = rgbaData;
   imageWidth = imgWidth;
 }
+
+void InspectableImage::setZoomSize(std::uint32_t zoom) { zoomSize = zoom; }
 }  // namespace pf::ui::ig

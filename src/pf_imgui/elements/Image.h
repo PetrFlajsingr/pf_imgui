@@ -21,9 +21,9 @@
 namespace pf::ui::ig {
 
 /**
- * @brief Image rendered from a texture. It can serve as a button.
+ * @brief Image rendered from a texture. For button version see ImageButton. @see ImageButtom
  *
- * Image rendering should be handled by the use when descending from ImGuiInterface.
+ * Image rendering should be handled by the user when deriving from ImGuiInterface.
  */
 class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
  public:
@@ -69,17 +69,53 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
   ImVec2 uvRightBottom{1.f, 1.f};
 };
 
-
+/**
+ * @brief Image rendered from a texture, has a special tooltip zooming on pixels and providing info.
+ *
+ * Image rendering should be handled by the user when deriving from ImGuiInterface.
+ */
 class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
  public:
-  InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData,
-                   std::size_t imgWidth, ImTextureID texId);
+  struct Config {
+    using Parent = InspectableImage;
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Explicit<ImTextureID> textureId; /*!< Id of the texture to render */
+    Explicit<std::span<const std::byte>>
+        rgbaData;                     /*!< Image data, the element won't store this, you needto keep the memory valid */
+    Explicit<std::size_t> imageWidth; /*!< Width of the provided image */
+    Size size = Size::Auto();         /*!< Size of the element */
+  };
+  /**
+   * Construct InspectableImage.
+   * @param config construction args @see InspectableImage::Config
+   */
+  explicit InspectableImage(Config &&config);
+  /**
+   * Construct InspectableImage.
+   * @param elementName unique name of the element
+   * @param s size of the element
+   * @param rgbaData image data, the element won't store this, you needto keep the memory valid
+   * @param imgWidth width of the provided image
+   * @param texId texture id
+   */
+  InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData, std::size_t imgWidth,
+                   ImTextureID texId);
   /**
    * Set UVs according to which the image will get sampled.
    */
   void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
-
+  /**
+   * Set texture along with necessary information.
+   * @param texId texture id
+   * @param rgbaData image data, the element won't store this, you needto keep the memory valid
+   * @param imgWidth width of the provided image
+   */
   void setTexture(ImTextureID texId, std::span<const std::byte> rgbaData, std::size_t imgWidth);
+
+  /**
+   * Set amount of pixels zoomed in around selection.
+   */
+  void setZoomSize(std::uint32_t zoom);
 
  protected:
   void renderImpl() override;
