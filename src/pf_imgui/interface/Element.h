@@ -1,6 +1,6 @@
 /**
  * @file Element.h
- * @brief Base class for objects which can be considered UI elements.
+ * @brief Base class for objects which can be considered UI elements and need ID or/and a font.
  * @author Petr Flajšingr
  * @date 31.10.20
  */
@@ -11,31 +11,36 @@
 #include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/ElementBase.h>
 #include <pf_imgui/interface/Observable_impl.h>
-#include <pf_imgui/interface/Renderable.h>
 #include <string>
 
 namespace pf::ui::ig {
 
 /**
- * @brief Interface for all ImGui elements
+ * @brief Interface for all ImGui elements with IDs
  *
  * Adds functionality of pushing unique names to ImGui render tree.
  *
  * @warning If there are duplicate IDs in the render tree the program may have some undefined behavior for functions which use IDs.
  * @see Renderable
  *
+ * @attention For classes which don't need IDs use ElementBaase
+ * @attention For classes with hover/focus/tooltip etc. use ItemElement
  */
-class PF_IMGUI_EXPORT Element : public Renderable {
+class PF_IMGUI_EXPORT Element : public ElementBase {
  public:
   /**
    * Construct Element.
    * @param name ID of the element.
    */
   explicit Element(const std::string &name);
-  ~Element() override;
-  Element(Element &&other) noexcept;
-  Element &operator=(Element &&other) noexcept;
+
+  /**
+   * Only available after first render call.
+   * @return
+   */
+  [[nodiscard]] ImGuiID getId() const;
 
   void render() override;
   /**
@@ -45,30 +50,11 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   void setFont(Font newFont);
   [[nodiscard]] Font getFont() const;
 
-  /**
-   * Only available after first render call.
-   * @return
-   */
-  [[nodiscard]] ImGuiID getId() const;
-
-  /**
-   * Add a listener called when this object is destroyed.
-   * Most of the object will be destroyed at this point.
-   *
-   * @param listener listener to call
-   * @return Subscription to allow for listener cancellation
-   */
-  Subscription addDestroyListener(std::invocable auto &&listener) {
-    return observableDestroy.addListener(std::forward<decltype(listener)>(listener));
-  }
-
  protected:
   void setId(ImGuiID newId);
-
   Font font = Font::Default();
 
  private:
-  Observable_impl<> observableDestroy;
   ImGuiID id;
 };
 
