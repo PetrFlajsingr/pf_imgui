@@ -33,7 +33,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
   Notification(const std::string &name, const std::string &label,
                std::chrono::milliseconds duration = DEFAULT_DURATION);
 
-  void setIcon(const char *icon, Font font = Font::Default());
+  void setIcon(const char *icon, Font newIconFont = Font::Default());
   void setIconColor(Color newColor);
 
  protected:

@@ -37,7 +37,8 @@ class PF_IMGUI_EXPORT OptionSlider
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
                                style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Construction args for OptionSlider /.
@@ -98,6 +99,7 @@ class PF_IMGUI_EXPORT OptionSlider
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();
     [[maybe_unused]] auto style = setStyleStack();
+    [[maybe_unused]] auto scopedFont = applyFont();
     const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
     if (ImGui::SliderInt(getLabel().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),

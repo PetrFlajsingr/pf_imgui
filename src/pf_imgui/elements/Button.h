@@ -109,7 +109,8 @@ class PF_IMGUI_EXPORT Button
                                style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign> {
+                               style::Style::ButtonTextAlign>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Button.
@@ -152,7 +153,8 @@ class PF_IMGUI_EXPORT SmallButton
                                style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign> {
+                               style::Style::ButtonTextAlign>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of SmallButton.

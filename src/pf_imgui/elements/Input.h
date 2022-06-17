@@ -47,7 +47,8 @@ class PF_IMGUI_EXPORT Input
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
                                style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
   using StepType = input_details::UnderlyingType<T>;
 
  public:
@@ -156,6 +157,7 @@ template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 void Input<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
 

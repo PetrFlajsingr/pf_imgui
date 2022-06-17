@@ -52,7 +52,8 @@ class PF_IMGUI_EXPORT VerticalSlider
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
                                style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of VerticalSlider.
@@ -151,6 +152,7 @@ template<OneOf<float, int> T>
 void VerticalSlider<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   const auto address = ValueObservable<T>::getValueAddress();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 

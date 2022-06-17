@@ -8,11 +8,14 @@
 
 namespace pf::ui::ig {
 
-AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : Element(std::string{config.name.value}) {}
+AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : ElementWithID(std::string{config.name.value}) {}
 
-AppStatusBar::AppStatusBar(const std::string &name) : Element(name) {}
+AppStatusBar::AppStatusBar(const std::string &name) : ElementWithID(name) {}
 
 void AppStatusBar::renderImpl() {
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   ImGui::GetFrameHeight();
   auto *viewport = reinterpret_cast<ImGuiViewportP *>(ImGui::GetMainViewport());
   ImGuiWindowFlags window_flags =

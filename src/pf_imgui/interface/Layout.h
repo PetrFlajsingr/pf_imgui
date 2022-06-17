@@ -10,7 +10,7 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Collapsible.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
@@ -24,7 +24,7 @@ namespace pf::ui::ig {
  *
  * Provides basic functionality for layouts - border drawing and scrolling.
  */
-class PF_IMGUI_EXPORT Layout : public Element, public Resizable, public RenderablesContainer {
+class PF_IMGUI_EXPORT Layout : public ElementWithID, public Resizable, public RenderablesContainer {
  public:
   /**
    * Construct a layout.

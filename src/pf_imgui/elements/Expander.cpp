@@ -22,6 +22,7 @@ Expander::Expander(const std::string &elementName, const std::string &label, All
 void Expander::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;

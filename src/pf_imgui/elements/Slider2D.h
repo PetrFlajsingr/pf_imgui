@@ -5,8 +5,8 @@
  * @date 18.4.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H
+#ifndef PF_IMGUI_ELEMENTS_SLIDER2D_H
+#define PF_IMGUI_ELEMENTS_SLIDER2D_H
 
 #include <dear_widgets.h>
 #include <glm/vec2.hpp>
@@ -46,7 +46,8 @@ class PF_IMGUI_EXPORT Slider2D
       public Resizable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
                                style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -125,6 +126,7 @@ template<OneOf<int, float> T>
 void Slider2D<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto valueChanged = false;
   auto address = ValueObservable<StorageType>::getValueAddress();
   const auto oldValue = *address;
@@ -149,4 +151,4 @@ extern template class Slider2D<float>;
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SLIDER2D_H
+#endif  // PF_IMGUI_ELEMENTS_SLIDER2D_H

@@ -29,6 +29,7 @@ void MemoryEditor::setData(std::span<std::byte> newData) { data = newData; }
 void MemoryEditor::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   memoryEditor.DrawContents(data.data(), data.size());
 }
 

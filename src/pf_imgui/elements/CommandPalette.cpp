@@ -7,9 +7,9 @@
 namespace pf::ui::ig {
 
 CommandPalette::CommandPalette(CommandPalette::Config &&config)
-    : Element(std::string{config.name.value}), context(ImCmd::CreateContext()) {}
+    : ElementWithID(std::string{config.name.value}), context(ImCmd::CreateContext()) {}
 
-CommandPalette::CommandPalette(const std::string &name) : Element(name), context(ImCmd::CreateContext()) {}
+CommandPalette::CommandPalette(const std::string &name) : ElementWithID(name), context(ImCmd::CreateContext()) {}
 
 CommandPalette::~CommandPalette() { ImCmd::DestroyContext(context); }
 
@@ -28,6 +28,7 @@ void CommandPalette::setSearchText(const std::string &text) {
   ImCmd::SetNextCommandPaletteSearch(text);
 }
 void CommandPalette::renderImpl() {
+  [[maybe_unused]] auto scopedFont = applyFont();
   ImCmd::CommandPalette(getName().c_str());
   if (ImCmd::IsAnyItemSelected()) { observableInteract.notify(); }
 }

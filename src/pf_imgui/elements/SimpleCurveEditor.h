@@ -5,13 +5,13 @@
  * @date 2.4.22
  */
 
-#ifndef PF_IMGUI_SIMPLECURVEEDITOR_H
-#define PF_IMGUI_SIMPLECURVEEDITOR_H
+#ifndef PF_IMGUI_ELEMENTS_SIMPLECURVEEDITOR_H
+#define PF_IMGUI_ELEMENTS_SIMPLECURVEEDITOR_H
 
 #include <ImGuiCurveEditor.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -42,7 +42,7 @@ struct CurvePointsViewComparator {
 /**
  * @brief Simple curve editor allowing mouse control of key points and basic curve smoothing.
  */
-class SimpleCurveEditor : public Element,
+class SimpleCurveEditor : public ElementWithID,
                           public Resizable,
                           public Labellable,
                           public ValueObservable<CurvePointsView, CurvePointsViewComparator>,
@@ -106,4 +106,4 @@ class SimpleCurveEditor : public Element,
 };
 
 }  // namespace pf::ui::ig
-#endif  //PF_IMGUI_SIMPLECURVEEDITOR_H
+#endif  //PF_IMGUI_ELEMENTS_SIMPLECURVEEDITOR_H

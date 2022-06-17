@@ -42,7 +42,8 @@ class PF_IMGUI_EXPORT ProgressBar
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
                                style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * Construct ProgressBar
@@ -177,6 +178,7 @@ template<ProgressBarCompatible T>
 void ProgressBar<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()), overlay.c_str());
 }
 

@@ -71,11 +71,11 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
   /**
     * Create a child and append it to the end of children.
     *
-    * @tparam T type of created Element
+    * @tparam T type of created ElementWithID
     * @tparam Args arguments to pass to the Ts constructor after its name
     * @param name ID of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
-    * @return reference to the newly created Element
+    * @return reference to the newly created ElementWithID
     */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
@@ -96,12 +96,12 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
   /**
     * Create a child and append it to the end of children.
     *
-    * @tparam T type of created Element
+    * @tparam T type of created ElementWithID
     * @tparam Args arguments to pass to the Ts constructor after its name
     * @param index
     * @param name ID of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
-    * @return reference to the newly created Element
+    * @return reference to the newly created ElementWithID
     */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>

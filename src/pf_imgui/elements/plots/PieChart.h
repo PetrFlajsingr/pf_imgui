@@ -11,7 +11,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
@@ -34,7 +34,7 @@ struct PF_IMGUI_EXPORT PieChartSample {
  *
  * Each sample shows as a percentage in the sum of all sample values.
  */
-class PF_IMGUI_EXPORT PieChart : public Element, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT PieChart : public ElementWithID, public Labellable, public Resizable {
  public:
   /**
    * @brief Struct for construction of PieChart.

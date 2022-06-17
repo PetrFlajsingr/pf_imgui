@@ -1,6 +1,6 @@
 /**
  * @file Range2D.h
- * @brief Element for 2D range selection.
+ * @brief ElementWithID for 2D range selection.
  * @author Petr Flajšingr
  * @date 22.05.20
  */
@@ -36,7 +36,8 @@ class PF_IMGUI_EXPORT Range2D
       public DropTarget<math::Range<glm::vec2>>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
                                style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Range2D.

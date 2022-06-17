@@ -1,6 +1,6 @@
 /**
  * @file LogPanel.h
- * @brief Element to visualize log data.
+ * @brief ElementWithID to visualize log data.
  * @author Petr Flajšingr
  * @date 14.4.22
  */
@@ -15,7 +15,7 @@
 #include <pf_imgui/Color.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/details/CustomIconButtonImpls.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <ringbuffer.hpp>
 #include <sstream>
@@ -73,7 +73,12 @@ namespace pf::ui::ig {
  */
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)  // RecordLimit has to be power of two
-class PF_IMGUI_EXPORT LogPanel : public Element, public Resizable, public Savable {
+class PF_IMGUI_EXPORT LogPanel : public ElementWithID,
+                                 public Resizable,
+                                 public Savable,
+                                 public AllColorCustomizable,
+                                 public AllStyleCustomizable,
+                                 public FontCustomizable {
   struct Record {
     Category category;
     std::string text;
@@ -186,8 +191,8 @@ LogPanel<Category, RecordLimit>::LogPanel(Config &&config)
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size, Persistent persistent)
-    : Element(name), Resizable(size), Savable(persistent), wrapTextToggle("wrapText"), scrollToEndToggle("scrollToEnd"),
-      copyToClipboardButton("copyToClipboard"), clearButton("clear") {
+    : ElementWithID(name), Resizable(size), Savable(persistent), wrapTextToggle("wrapText"),
+      scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
   std::size_t i = 0;
   for (const auto category : magic_enum::enum_values<Category>()) {
     categoryStrings[i++] = magic_enum::enum_name(category);
@@ -254,6 +259,9 @@ void LogPanel<Category, RecordLimit>::setCategoryAllowed(Category category, bool
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 void LogPanel<Category, RecordLimit>::renderImpl() {
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto filterChanged = false;
   ImGui::BeginHorizontal("layout", static_cast<ImVec2>(getSize()), 0);
   {

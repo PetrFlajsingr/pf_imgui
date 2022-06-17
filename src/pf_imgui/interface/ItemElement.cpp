@@ -9,18 +9,19 @@
 
 namespace pf::ui::ig {
 
-ItemElement::ItemElement(const std::string &elementName) : Element(elementName) {}
+ItemElement::ItemElement(const std::string &elementName) : ElementWithID(elementName) {}
 
-ItemElement::ItemElement(ItemElement &&other) noexcept : Element(std::move(other)), tooltip(std::move(other.tooltip)) {}
+ItemElement::ItemElement(ItemElement &&other) noexcept
+    : ElementWithID(std::move(other)), tooltip(std::move(other.tooltip)) {}
 
 ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
   tooltip = std::move(other.tooltip);
-  Element::operator=(std::move(other));
+  ElementWithID::operator=(std::move(other));
   return *this;
 }
 
 void ItemElement::render() {
-  Element::render();
+  ElementWithID::render();
   setHovered(ImGui::IsItemHovered());
   updateFocused(ImGui::IsItemFocused());
 

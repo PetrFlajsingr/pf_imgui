@@ -28,7 +28,8 @@ class PF_IMGUI_EXPORT IndeterminateProgressBar
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
                                style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * Construct IndeterminateProgressBar

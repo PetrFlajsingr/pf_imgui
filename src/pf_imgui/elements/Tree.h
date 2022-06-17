@@ -71,7 +71,8 @@ class PF_IMGUI_EXPORT TreeLeaf
       public Savable,
       public StyleCustomizable<style::Style::FramePadding, style::Style::ItemSpacing, style::Style::FrameRounding>,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::HeaderActive, style::ColorOf::HeaderHovered,
-                               style::ColorOf::Header> {
+                               style::ColorOf::Header>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of TreeLeaf.
@@ -112,7 +113,7 @@ class PF_IMGUI_EXPORT TreeLeaf
  */
 template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
-    : public details::TreeRecord, public RenderablesContainer, public Collapsible {
+    : public details::TreeRecord, public RenderablesContainer, public Collapsible, public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of TreeNode.
@@ -198,6 +199,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();
     [[maybe_unused]] auto style = setStyleStack();
+    [[maybe_unused]] auto scopedFont = applyFont();
     ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
@@ -302,6 +304,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();
     [[maybe_unused]] auto style = setStyleStack();
+    [[maybe_unused]] auto scopedFont = applyFont();
     ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
@@ -356,7 +359,7 @@ class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
  * @tparam treeType
  */
 template<TreeType treeType>
-class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
+class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer, public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Tree.
@@ -372,7 +375,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * @param config construction args @see Tree::Config
    */
   explicit Tree(Config &&config)
-      : Element(std::string{config.name.value}), persistent(config.persistent ? Persistent::Yes : Persistent::No),
+      : ElementWithID(std::string{config.name.value}), persistent(config.persistent ? Persistent::Yes : Persistent::No),
         layout({.name = "layout",
                 .size = Size::Auto(),
                 .showBorder = config.showBorder ? ShowBorder::Yes : ShowBorder::No}) {}
@@ -384,7 +387,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
    * @param persistent enable/disable disk saving
    */
   explicit Tree(const std::string &name, ShowBorder showBorder = ShowBorder::No, Persistent persistent = Persistent::No)
-      : Element(name), persistent(persistent),
+      : ElementWithID(name), persistent(persistent),
         layout({.name = "layout", .size = Size::Auto(), .showBorder = showBorder == ShowBorder::Yes ? true : false}) {}
 
   /**
@@ -479,6 +482,7 @@ class PF_IMGUI_EXPORT Tree : public Element, public RenderablesContainer {
   void renderImpl() override {
     [[maybe_unused]] auto colorStyle = setColorStack();
     [[maybe_unused]] auto style = setStyleStack();
+    [[maybe_unused]] auto scopedFont = applyFont();
     layout.render();
   }
 

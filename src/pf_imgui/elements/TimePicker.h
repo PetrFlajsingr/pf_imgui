@@ -27,13 +27,15 @@ struct TimeOfDayComparator {
 };
 }  // namespace details
 
+// TODO: styles
 /**
  * @brief Simple HH MM SS 24 time picker.
  */
 class TimePicker : public ItemElement,
                    public Labellable,
                    public ValueObservable<TimeOfDay, details::TimeOfDayComparator>,
-                   public Savable {
+                   public Savable,
+                   public FontCustomizable {
  public:
   /**
    * @brief Construction config for TimePicker.

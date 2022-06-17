@@ -23,7 +23,10 @@ namespace pf::ui::ig {
  *
  * @todo: more options
  */
-class PF_IMGUI_EXPORT MemoryEditor : public ItemElement, public AllColorCustomizable, public AllStyleCustomizable {
+class PF_IMGUI_EXPORT MemoryEditor : public ItemElement,
+                                     public AllColorCustomizable,
+                                     public AllStyleCustomizable,
+                                     public FontCustomizable {
  public:
   template<typename T>
   MemoryEditor(const std::string &elementName, std::span<T> newData);

@@ -5,8 +5,8 @@
  * @date 22.05.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SELECTABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SELECTABLE_H
+#ifndef PF_IMGUI_ELEMENTS_SELECTABLE_H
+#define PF_IMGUI_ELEMENTS_SELECTABLE_H
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -34,7 +34,8 @@ class PF_IMGUI_EXPORT Selectable
                                style::ColorOf::Header, style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive,
                                style::ColorOf::NavHighlight>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::SelectableTextAlign> {
+                               style::Style::SelectableTextAlign>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Selectable.
@@ -72,4 +73,4 @@ class PF_IMGUI_EXPORT Selectable
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_SELECTABLE_H
+#endif  // PF_IMGUI_ELEMENTS_SELECTABLE_H

@@ -9,7 +9,7 @@
 #define PF_IMGUI_META_H
 
 #include <pf_common/specializations.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {

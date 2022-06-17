@@ -5,8 +5,8 @@
  * @date 14.02.22
  */
 
-#ifndef PF_IMGUI_LINKTEXT_H
-#define PF_IMGUI_LINKTEXT_H
+#ifndef PF_IMGUI_ELEMENTS_LINKTEXT_H
+#define PF_IMGUI_ELEMENTS_LINKTEXT_H
 
 #include <functional>
 #include <pf_common/Explicit.h>
@@ -21,7 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief Text element providing click detection.
  */
-class LinkText : public ItemElement, public Labellable, public Clickable {
+class LinkText : public ItemElement, public Labellable, public Clickable, public FontCustomizable {
  public:
   using LinkClickHandler = std::function<void(std::string_view)>;
   /**
@@ -64,4 +64,4 @@ class LinkText : public ItemElement, public Labellable, public Clickable {
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_LINKTEXT_H
+#endif  //PF_IMGUI_ELEMENTS_LINKTEXT_H

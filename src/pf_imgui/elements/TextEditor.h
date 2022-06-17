@@ -5,8 +5,8 @@
  * @date 2.4.22
  */
 
-#ifndef PF_IMGUI_TEXTEDITOR_H
-#define PF_IMGUI_TEXTEDITOR_H
+#ifndef PF_IMGUI_ELEMENTS_TEXTEDITOR_H
+#define PF_IMGUI_ELEMENTS_TEXTEDITOR_H
 
 #include "common/TextEditorTypes.h"
 #include <ImGuiColorTextEditor.h>
@@ -14,19 +14,19 @@
 #include <pf_imgui/Color.h>
 #include <pf_imgui/Position.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Customizable.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <range/v3/view/transform.hpp>
 #include <string>
 
 namespace pf::ui::ig {
-// TODO: styles/colors
 
 /**
  * @brief Text editor with highlighting.
  */
-class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resizable {
+class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable, public Resizable, public FontCustomizable {
  public:
   /**
    * @brief Control struct for editor's cursor. Allows for control of its movement and selection adjustments.
@@ -251,4 +251,4 @@ class PF_IMGUI_EXPORT TextEditor : public Element, public Savable, public Resiza
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_TEXTEDITOR_H
+#endif  // PF_IMGUI_ELEMENTS_TEXTEDITOR_H

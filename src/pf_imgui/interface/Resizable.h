@@ -5,8 +5,8 @@
  * @date 31.10.20
  */
 
-#ifndef PF_IMGUI_INTERFACE_RESIZABLEELEMENT_H
-#define PF_IMGUI_INTERFACE_RESIZABLEELEMENT_H
+#ifndef PF_IMGUI_INTERFACE_RESIZABLE_H
+#define PF_IMGUI_INTERFACE_RESIZABLE_H
 
 #include <imgui.h>
 #include <pf_imgui/Size.h>
@@ -67,4 +67,4 @@ class PF_IMGUI_EXPORT Resizable {
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_INTERFACE_RESIZABLEELEMENT_H
+#endif  // PF_IMGUI_INTERFACE_RESIZABLE_H

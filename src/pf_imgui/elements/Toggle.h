@@ -2,8 +2,8 @@
 // Created by petr.flajsingr on 2/9/2022.
 //
 
-#ifndef PF_IMGUI_TOGGLE_H
-#define PF_IMGUI_TOGGLE_H
+#ifndef PF_IMGUI_ELEMENTS_TOGGLE_H
+#define PF_IMGUI_ELEMENTS_TOGGLE_H
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
@@ -30,7 +30,8 @@ class PF_IMGUI_EXPORT Toggle
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::FrameBackground,
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::NavHighlight,
                                style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Toggle.
@@ -80,4 +81,4 @@ class PF_IMGUI_EXPORT Toggle
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_TOGGLE_H
+#endif  // PF_IMGUI_ELEMENTS_TOGGLE_H

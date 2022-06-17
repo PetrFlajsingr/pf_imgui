@@ -108,7 +108,7 @@ set(SOURCES
         src/pf_imgui/elements/plots/types/Digital.cpp
         src/pf_imgui/elements/MarkdownText.cpp
         src/pf_imgui/interface/ElementContainer.cpp
-        src/pf_imgui/interface/Element.cpp
+        src/pf_imgui/interface/ElementWithID.cpp
         src/pf_imgui/interface/Labellable.cpp
         src/pf_imgui/interface/Resizable.cpp
         src/pf_imgui/interface/Savable.cpp
@@ -200,6 +200,7 @@ set(SOURCES
         src/pf_imgui/elements/IndeterminateProgressBar.cpp
         src/pf_imgui/elements/OverlayGizmo.cpp
         src/pf_imgui/elements/details/OverlayGizmoBase.cpp
+        src/pf_imgui/interface/Element.cpp
         )
 
 set(BLUEPRINT_SOURCES
@@ -268,7 +269,7 @@ set(INCLUDES
         src/pf_imgui/elements/SpinInput.h
         src/pf_imgui/elements/MemoryEditor.h
         src/pf_imgui/interface/ElementContainer.h
-        src/pf_imgui/interface/Element.h
+        src/pf_imgui/interface/ElementWithID.h
         src/pf_imgui/interface/Labellable.h
         src/pf_imgui/interface/Resizable.h
         src/pf_imgui/interface/Savable.h
@@ -397,6 +398,7 @@ set(INCLUDES
         src/pf_imgui/elements/OverlayGizmo.h
         src/pf_imgui/elements/details/OverlayGizmoBase.h
         src/pf_imgui/elements/OptionSlider.h
+        src/pf_imgui/interface/Element.h
         )
 
 set(BLUEPRINT_INCLUDES

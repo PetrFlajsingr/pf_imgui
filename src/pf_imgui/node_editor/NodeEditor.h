@@ -17,7 +17,7 @@
 #include <imgui_node_editor.h>
 #include <optional>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
@@ -30,7 +30,7 @@ namespace pf::ui::ig {
 /**
  * @brief Class allowing for node editing.
  */
-class NodeEditor : public Element, public Resizable {
+class NodeEditor : public ElementWithID, public Resizable {
  public:
   /**
    * @brief Struct for construction of NodeEditor.

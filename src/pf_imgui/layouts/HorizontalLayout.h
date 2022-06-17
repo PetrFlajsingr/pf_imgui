@@ -25,7 +25,7 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
     using Parent = HorizontalLayout;
     Explicit<std::string_view> name;             /*!< Unique name of the element */
     Explicit<Size> size;                         /*!< Size of the element */
-    HorizontalAlign align = HorizontalAlign::Up; /*!< Element alignment */
+    HorizontalAlign align = HorizontalAlign::Up; /*!< ElementWithID alignment */
     bool showBorder = false;                     /*!< Render border around layout's area */
   };
   /**

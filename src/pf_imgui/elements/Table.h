@@ -13,7 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <range/v3/range/conversion.hpp>
@@ -24,6 +24,7 @@
 #include <utility>
 #include <vector>
 
+// TODO: styles/fonts
 namespace pf::ui::ig {
 
 template<std::size_t ColumnCount>
@@ -125,8 +126,8 @@ class PF_IMGUI_EXPORT TableRowBuilder {
  public:
   using Cells = typename TableRow<ColumnCount>::Cells;
   /**
-   * @brief Wrapper to allow access for newly created Element when building Row.
-   * @tparam T type of Element
+   * @brief Wrapper to allow access for newly created ElementWithID when building Row.
+   * @tparam T type of ElementWithID
    */
   template<std::derived_from<Element> T>
   class Result : public TableRowBuilder<ColumnCount, RemainingCount - 1> {
@@ -145,7 +146,7 @@ class PF_IMGUI_EXPORT TableRowBuilder {
       : table(ownerTable), cells(std::move(initCells)) {}
   /**
    * Create a new element within the cell. This invalidates the current builder and returns a new one.
-   * @tparam T type of Element to create
+   * @tparam T type of ElementWithID to create
    * @tparam Args types of construction args
    * @param args construction args
    * @return wrapper object serving as builder for the next row and accessor for the newly created element
@@ -193,7 +194,7 @@ class PF_IMGUI_EXPORT TableRowBuilder {
  * @tparam ColumnCount static column count of the table
  */
 template<std::size_t ColumnCount>
-class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, public Resizable {
+class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer, public Resizable {
   friend class TableRowBuilder<ColumnCount, 0>;
   friend class TableRow<ColumnCount>;
 
@@ -258,12 +259,12 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(Table::Config &&config)
-    : Element(std::string{config.name.value}), Resizable(config.settings.size), header(config.settings.header),
+    : ElementWithID(std::string{config.name.value}), Resizable(config.settings.size), header(config.settings.header),
       flags(CreateFlags(config.settings.border, config.settings.options)) {}
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(const std::string &elementName, const TableSettings<ColumnCount> &settings)
-    : Element(elementName), Resizable(settings.size), header(settings.header),
+    : ElementWithID(elementName), Resizable(settings.size), header(settings.header),
       flags(CreateFlags(settings.border, settings.options)) {}
 
 template<std::size_t ColumnCount>

@@ -5,8 +5,8 @@
  * @date 6.5.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_DUMMY_H
-#define IMGUI_EXPERIMENTS_DUMMY_H
+#ifndef PF_IMGUI_ELEMENTS_DUMMY_H
+#define PF_IMGUI_ELEMENTS_DUMMY_H
 
 #include <imgui.h>
 #include <pf_common/Explicit.h>
@@ -49,4 +49,4 @@ class Dummy : public Element, public Resizable {
 
 }  // namespace pf::ui::ig
 
-#endif  //IMGUI_EXPERIMENTS_DUMMY_H
+#endif  //PF_IMGUI_ELEMENTS_DUMMY_H

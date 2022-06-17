@@ -5,8 +5,8 @@
  * @date 31.10.20
  */
 
-#ifndef PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
-#define PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
+#ifndef PF_IMGUI_INTERFACE_VALUEOBSERVABLE_H
+#define PF_IMGUI_INTERFACE_VALUEOBSERVABLE_H
 
 #include "Observable_impl.h"
 #include <algorithm>
@@ -30,8 +30,10 @@ struct DefaultComparator {
 }  // namespace details
 
 template<typename T, typename ValueType>
-concept ValueObservableComparator = std::invocable<T, ValueType, ValueType>
-    && std::same_as<std::invoke_result_t<T, ValueType, ValueType>, bool> && std::is_default_constructible_v<T>;
+concept ValueObservableComparator =
+    std::invocable<T, ValueType, ValueType> && std::same_as < std::invoke_result_t<T, ValueType, ValueType>,
+        bool
+> &&std::is_default_constructible_v<T>;
 /**
  * @brief Interface for elements with observable values.
  *
@@ -136,4 +138,4 @@ class PF_IMGUI_EXPORT ValueObservable {
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_INTERFACE_VALUEOBSERVABLEELEMENT_H
+#endif  // PF_IMGUI_INTERFACE_VALUEOBSERVABLE_H

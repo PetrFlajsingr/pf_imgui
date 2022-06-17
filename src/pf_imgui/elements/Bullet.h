@@ -5,12 +5,12 @@
  * @date 20.4.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
+#ifndef PF_IMGUI_SRC_ELEMENTS_BULLET_H
+#define PF_IMGUI_SRC_ELEMENTS_BULLET_H
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -37,7 +37,8 @@ class PF_IMGUI_EXPORT Bullet : public T {
    */
   template<typename... Args>
   explicit Bullet(Args &&...args)
-    requires(std::constructible_from<T, Args...>);
+    requires(std::constructible_from<T, Args...>)
+  ;
 
  protected:
   void renderImpl() override;
@@ -56,4 +57,4 @@ void Bullet<T>::renderImpl() {
 }
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_BULLET_H
+#endif  // PF_IMGUI_SRC_ELEMENTS_BULLET_H

@@ -53,11 +53,11 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
   /**
    * Create a child inside the layout. If the layout already contains one it gets overwritten.
    *
-   * @tparam T type of created Element
+   * @tparam T type of created ElementWithID
    * @tparam Args arguments to pass to the Ts constructor after its name
    * @param name ID of the newly created element
    * @param args arguments to pass to the Ts constructor after its nam
-   * @return reference to the newly created Element
+   * @return reference to the newly created ElementWithID
    *
    */
   template<typename T, typename... Args>

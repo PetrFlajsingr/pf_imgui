@@ -5,8 +5,8 @@
  * @date 17.11.21
  */
 
-#ifndef PF_IMGUI_GIZMO3D_H
-#define PF_IMGUI_GIZMO3D_H
+#ifndef PF_IMGUI_ELEMENTS_GIZMO3D_H
+#define PF_IMGUI_ELEMENTS_GIZMO3D_H
 
 #include <algorithm>
 #include <fmt/format.h>
@@ -80,7 +80,8 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
    * @param newObject type of the object to render
    */
   void setMidObject(GizmoMid newObject)
-    requires(Type != GizmoType::Direction);
+    requires(Type != GizmoType::Direction)
+  ;
 
   void setSize(const Size &s) override;
 
@@ -194,4 +195,4 @@ void Gizmo3D<Type>::renderImpl() {
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_GIZMO3D_H
+#endif  // PF_IMGUI_ELEMENTS_GIZMO3D_H

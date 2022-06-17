@@ -5,14 +5,14 @@
  * @date 27.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
-#define PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
+#ifndef PF_IMGUI_ELEMENTS_DOCKSPACE_H
+#define PF_IMGUI_ELEMENTS_DOCKSPACE_H
 
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
 
@@ -31,7 +31,7 @@ enum class DockType {
  * @warning DockSpace HAS TO BE RENDERED AS SOON AS POSSIBLE OTHERWISE YOU WON'T BE ABLE TO DOCK ANYTHING
  */
 class PF_IMGUI_EXPORT DockSpace
-    : public Element,
+    : public ElementWithID,
       public Resizable,
       public ColorCustomizable<style::ColorOf::DockingPreview, style::ColorOf::DockingBackground> {
  public:
@@ -72,4 +72,4 @@ class PF_IMGUI_EXPORT DockSpace
 };
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_DIALOGS_DOCKSPACE_H
+#endif  // PF_IMGUI_ELEMENTS_DOCKSPACE_H

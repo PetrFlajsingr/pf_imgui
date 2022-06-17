@@ -5,8 +5,8 @@
  * @date 4.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
+#ifndef PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
+#define PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
 
 #include <concepts>
 #include <functional>
@@ -29,7 +29,8 @@ namespace pf::ui::ig {
  * @tparam R resulting renderable for row
  */
 template<typename F, typename T, typename R>
-concept CustomItemBoxFactory = std::is_invocable_r_v<std::unique_ptr<R>, F, T>;
+concept CustomItemBoxFactory = std::is_invocable_r_v < std::unique_ptr<R>,
+F, T > ;
 
 /**
  * @brief Box containing items provided by user based on stored type.
@@ -39,7 +40,7 @@ concept CustomItemBoxFactory = std::is_invocable_r_v<std::unique_ptr<R>, F, T>;
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesContainer {
+class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesContainer, public FontCustomizable {
  public:
   /**
    * Construct CustomItemBox
@@ -196,4 +197,4 @@ void CustomItemBox<T, R>::refilterItems() {
 }
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H
+#endif  // PF_IMGUI_ELEMENTS_CUSTOMITEMBOX_H

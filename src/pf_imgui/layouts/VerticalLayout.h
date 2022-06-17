@@ -26,7 +26,7 @@ class VerticalLayout : public LinearLayout {
     using Parent = VerticalLayout;
     Explicit<std::string_view> name;           /*!< Unique name of the element */
     Explicit<Size> size;                       /*!< Size of the element */
-    VerticalAlign align = VerticalAlign::Left; /*!< Element alignment */
+    VerticalAlign align = VerticalAlign::Left; /*!< ElementWithID alignment */
     bool showBorder = false;                   /*!< Render border around layout's area */
   };
   /**

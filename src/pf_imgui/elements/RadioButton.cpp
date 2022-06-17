@@ -17,6 +17,7 @@ RadioButton::RadioButton(const std::string &elementName, const std::string &labe
 void RadioButton::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   const auto oldValue = getValue();
   if (ImGui::RadioButton(getLabel().c_str(), getValue())) { setValueInner(true); }
   if (oldValue != getValue()) { notifyValueChanged(); }

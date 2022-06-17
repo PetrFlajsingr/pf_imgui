@@ -13,8 +13,8 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <string>
@@ -31,7 +31,7 @@ enum class TabMod {
   ForceLeft = ImGuiTabItemFlags_Leading,
   ForceRight = ImGuiTabItemFlags_Trailing
 };
-
+// TODO: styles/fonts to all these
 /**
  * @brief A button which looks like a Tab in TabBar.
  */
@@ -142,7 +142,7 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  * TabBar contains only Bars, elements are inside the Tabs created by addTab().
  *
  */
-class PF_IMGUI_EXPORT TabBar : public Element, public RenderablesContainer {
+class PF_IMGUI_EXPORT TabBar : public ElementWithID, public RenderablesContainer {
  public:
   enum class ResizePolicy {
     ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown,

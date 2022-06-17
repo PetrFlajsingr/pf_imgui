@@ -53,7 +53,8 @@ class PF_IMGUI_EXPORT ColorChooser
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
                                style::ColorOf::DragDropTarget, style::ColorOf::NavHighlight, style::ColorOf::Border,
                                style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of ColorChooser.
@@ -148,6 +149,7 @@ template<ColorChooserType Type, ColorChooserFormat Format>
 void ColorChooser<Type, Format>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto flags = pickerEnabled ? ImGuiColorEditFlags{} : ImGuiColorEditFlags_NoPicker;
   auto valueChanged = false;
   if constexpr (Type == ColorChooserType::Edit) {

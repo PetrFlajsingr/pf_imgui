@@ -35,7 +35,8 @@ class PF_IMGUI_EXPORT SliderAngle
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
                                style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of SliderAngle.

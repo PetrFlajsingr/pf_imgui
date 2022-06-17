@@ -18,6 +18,7 @@ Checkbox::Checkbox(const std::string &elementName, const std::string &label, boo
 void Checkbox::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::Checkbox(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 

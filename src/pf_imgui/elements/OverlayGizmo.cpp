@@ -28,7 +28,7 @@ AreaOverlayGizmo::AreaOverlayGizmo(AreaOverlayGizmo::Config &&config)
 AreaOverlayGizmo::AreaOverlayGizmo(const std::string &name, Window &owningWindow, const glm::mat4 &value,
                                    ViewportGizmoMode mode, ViewportGizmoSpace space, const glm::mat4 &view,
                                    const glm::mat4 &projection, bool isProjectionOrthographic)
-    : Element(name), OverlayGizmoBase(value, mode, space, view, projection, isProjectionOrthographic),
+    : ElementWithID(name), OverlayGizmoBase(value, mode, space, view, projection, isProjectionOrthographic),
       parentWindow(owningWindow) {}
 
 void AreaOverlayGizmo::renderImpl() {

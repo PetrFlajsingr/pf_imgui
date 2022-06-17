@@ -40,7 +40,8 @@ class PF_IMGUI_EXPORT SpinInput
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow,
                                style::ColorOf::TextSelectedBackground>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign> {
+                               style::Style::ButtonTextAlign>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of SpinInput.
@@ -141,6 +142,7 @@ template<OneOf<int, float> T>
 void SpinInput<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
     valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);

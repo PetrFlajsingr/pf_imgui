@@ -79,9 +79,7 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
   /**
    * @brief Trigger for inspection popup.
    */
-  enum class Trigger {
-    Hover, LeftMouseDown, RightMouseDown
-  };
+  enum class Trigger { Hover, LeftMouseDown, RightMouseDown };
   /**
    * @brief Construction args for @see InspectableImage.
    */

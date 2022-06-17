@@ -7,26 +7,28 @@
 
 namespace pf::ui::ig {
 
-WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : Element(std::string{config.name.value}) {}
+WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : ElementWithID(std::string{config.name.value}) {}
 
-WindowMenuBar::WindowMenuBar(const std::string &elementName) : Element(elementName) {}
+WindowMenuBar::WindowMenuBar(const std::string &elementName) : ElementWithID(elementName) {}
 
 void WindowMenuBar::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::BeginMenuBar()) {
     RAII end{ImGui::EndMenuBar};
     renderItems();
   }
 }
 
-AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : Element(std::string{config.name.value}) {}
+AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : ElementWithID(std::string{config.name.value}) {}
 
-AppMenuBar::AppMenuBar(const std::string &elementName) : Element(elementName) {}
+AppMenuBar::AppMenuBar(const std::string &elementName) : ElementWithID(elementName) {}
 
 void AppMenuBar::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::BeginMainMenuBar()) {
     RAII end{ImGui::EndMainMenuBar};
     renderItems();

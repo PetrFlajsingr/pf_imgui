@@ -11,7 +11,7 @@
 #include "details/OverlayGizmoBase.h"
 #include <pf_common/Explicit.h>
 #include <pf_imgui/dialogs/Window.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Renderable.h>
 
 namespace pf::ui::ig {
@@ -63,7 +63,7 @@ class ViewportOverlayGizmo : public Renderable, public OverlayGizmoBase {
  * @brief Gizmo overlaying its window/layout.
  * @attention Only one gizmo can be used within the app at the same time (this applies to ViewportOverlayGizmo and AreaOverlayGizmo)
  */
-class AreaOverlayGizmo : public Element, public OverlayGizmoBase {
+class AreaOverlayGizmo : public ElementWithID, public OverlayGizmoBase {
  public:
   /**
    * @brief Construction args for AreaOverlayGizmo

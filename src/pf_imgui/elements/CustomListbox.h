@@ -56,6 +56,7 @@ template<typename T, std::derived_from<Renderable> R>
 void CustomListbox<T, R>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = CustomItemBox<T, R>::applyFont();
   if (ImGui::BeginListBox(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
