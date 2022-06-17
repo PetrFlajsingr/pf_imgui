@@ -29,7 +29,7 @@ PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Renderable &root) {
   auto result = toml::table();
   traverseImGuiTree(root, [&result](Renderable &renderable) {
     if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
-      if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr && ptrSavable->isPersistent()) {
+      if (auto ptrElement = dynamic_cast<ElementBase *>(&renderable); ptrElement != nullptr && ptrSavable->isPersistent()) {
         const auto serialised = ptrSavable->toToml();
         result.insert_or_assign(ptrElement->getName(), serialised);
       }

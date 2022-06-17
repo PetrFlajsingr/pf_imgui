@@ -19,12 +19,12 @@ ElementContainer &ElementContainer::operator=(ElementContainer &&other) noexcept
   return *this;
 }
 
-void ElementContainer::addChild(std::unique_ptr<Element> child) {
+void ElementContainer::addChild(std::unique_ptr<ElementBase> child) {
   childrenInOrder.emplace_back(*child);
   children[child->getName()] = std::move(child);
 }
 
-void ElementContainer::insertChild(std::unique_ptr<Element> child, std::size_t index) {
+void ElementContainer::insertChild(std::unique_ptr<ElementBase> child, std::size_t index) {
   childrenInOrder.insert(childrenInOrder.begin() + static_cast<long long>(index), *child);
   children[child->getName()] = std::move(child);
 }

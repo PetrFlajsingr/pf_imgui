@@ -5,8 +5,8 @@
  * @date 2.11.20
  */
 
-#ifndef PF_IMGUI_INTERFACE_SAVABLEELEMENT_H
-#define PF_IMGUI_INTERFACE_SAVABLEELEMENT_H
+#ifndef PF_IMGUI_INTERFACE_SAVABLE_H
+#define PF_IMGUI_INTERFACE_SAVABLE_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
@@ -45,4 +45,4 @@ class PF_IMGUI_EXPORT Savable : public TomlSerializable {
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_INTERFACE_SAVABLEELEMENT_H
+#endif  // PF_IMGUI_INTERFACE_SAVABLE_H

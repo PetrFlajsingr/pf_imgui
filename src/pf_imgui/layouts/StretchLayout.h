@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    *
    */
   template<typename T, typename... Args>
-    requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, Args...>
+    requires std::derived_from<T, ElementBase> && std::derived_from<T, Resizable> && std::constructible_from<T, Args...>
   T &createChild(Args &&...args) {
     auto origChild = std::make_unique<T>(std::forward<Args>(args)...);
     auto childPtr = origChild.get();
@@ -70,7 +70,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
   }
 
   template<ElementConstructConfig T>
-  std::derived_from<Element> auto &createChild(T &&config) {
+  std::derived_from<ElementBase> auto &createChild(T &&config) {
     auto origChild = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto childPtr = origChild.get();
     setChild(std::move(origChild));
@@ -81,7 +81,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    * Set child inside the layout. If the layout already contains one it gets overwritten.
    * @param newChild
    */
-  template<std::derived_from<Element> T>
+  template<std::derived_from<ElementBase> T>
   void setChild(std::unique_ptr<T> &&newChild) {
     child = std::move(newChild);
     renderableChild = dynamic_cast<Renderable *>(child.get());
@@ -93,7 +93,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    * Get child of the layout.
    * @return reference to the child
    */
-  [[nodiscard]] std::optional<std::reference_wrapper<Element>> getChild();
+  [[nodiscard]] std::optional<std::reference_wrapper<ElementBase>> getChild();
   /**
    * Check whether the layout contains a child.
    * @return true if the layout contains a child, false otherwise

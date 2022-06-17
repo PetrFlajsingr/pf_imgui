@@ -23,7 +23,7 @@ namespace pf::ui::ig {
  * This decorator adds Positionable capabilities to any Element. It is used for AbsoluteLayout.
  *
  */
-template<std::derived_from<Element> T>
+template<std::derived_from<ElementBase> T>
 class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
  public:
   struct Config {

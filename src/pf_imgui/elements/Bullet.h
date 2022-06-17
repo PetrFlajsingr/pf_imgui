@@ -19,7 +19,7 @@ namespace pf::ui::ig {
  * @brief Wrapper for an element rendering a bullet point next to it.
  * @tparam T element rendered next to the bulletW
  */
-template<std::derived_from<Element> T>
+template<std::derived_from<ElementBase> T>
 class PF_IMGUI_EXPORT Bullet : public T {
  public:
   /**
@@ -43,13 +43,13 @@ class PF_IMGUI_EXPORT Bullet : public T {
   void renderImpl() override;
 };
 
-template<std::derived_from<Element> T>
+template<std::derived_from<ElementBase> T>
 template<typename... Args>
 Bullet<T>::Bullet(Args &&...args)
   requires(std::constructible_from<T, Args...>)
 : T(std::forward<Args>(args)...) {}
 
-template<std::derived_from<Element> T>
+template<std::derived_from<ElementBase> T>
 void Bullet<T>::renderImpl() {
   ImGui::Bullet();
   T::renderImpl();

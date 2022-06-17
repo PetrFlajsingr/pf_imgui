@@ -26,9 +26,9 @@ void StretchLayout::setStretch(Stretch newStretch) {
   }
 }
 
-std::optional<std::reference_wrapper<Element>> StretchLayout::getChild() {
+std::optional<std::reference_wrapper<ElementBase>> StretchLayout::getChild() {
   if (child == nullptr) { return std::nullopt; }
-  return *dynamic_cast<Element *>(child.get());
+  return *dynamic_cast<ElementBase *>(child.get());
 }
 
 void StretchLayout::renderImpl() {

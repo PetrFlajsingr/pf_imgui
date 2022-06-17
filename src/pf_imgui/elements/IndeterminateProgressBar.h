@@ -17,7 +17,7 @@
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
-
+ //TODO: TEST IF THIS ACTUALLY SHOULD BE AN ItemElement AND NOT ElementBase
 namespace pf::ui::ig {
 /**
  * @brief Progress bar with infinite animation.

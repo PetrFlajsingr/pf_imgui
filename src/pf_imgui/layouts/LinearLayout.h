@@ -37,14 +37,14 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
    * @return view to references of children in the layout
    */
   [[nodiscard]] inline auto getChildren() {
-    return children | ranges::views::transform([](auto &child) -> Element & { return *child; });
+    return children | ranges::views::transform([](auto &child) -> ElementBase & { return *child; });
   }
   /**
    * Get all children of the layout as references.
    * @return view to const references of children in the layout
    */
   [[nodiscard]] inline auto getChildren() const {
-    return children | ranges::views::transform([](auto &child) -> const Element & { return *child; });
+    return children | ranges::views::transform([](auto &child) -> const ElementBase & { return *child; });
   }
 
   std::vector<Renderable *> getRenderables() override;
@@ -53,14 +53,14 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
    * Push child to the end.
    * @param child child to be added
    */
-  void pushChild(std::unique_ptr<Element> child);
+  void pushChild(std::unique_ptr<ElementBase> child);
 
   /**
    * Insert child to the provided index.
    * @param child child to be added
    * @param index
    */
-  void insertChild(std::unique_ptr<Element> child, std::size_t index);
+  void insertChild(std::unique_ptr<ElementBase> child, std::size_t index);
 
   /**
    * Remove child by ID.
@@ -78,7 +78,7 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
     * @return reference to the newly created Element
     */
   template<typename T, typename... Args>
-    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+    requires std::derived_from<T, ElementBase> && std::constructible_from<T, Args...>
   T &createChild(Args &&...args) {
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
@@ -104,7 +104,7 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
     * @return reference to the newly created Element
     */
   template<typename T, typename... Args>
-    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
+    requires std::derived_from<T, ElementBase> && std::constructible_from<T, Args...>
   T &createChildAtIndex(std::size_t index, Args &&...args) {
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
@@ -121,7 +121,7 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
   }
 
  private:
-  std::vector<std::unique_ptr<Element>> children;
+  std::vector<std::unique_ptr<ElementBase>> children;
 };
 
 }  // namespace pf::ui::ig
