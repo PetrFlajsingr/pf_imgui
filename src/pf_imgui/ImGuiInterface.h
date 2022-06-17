@@ -289,6 +289,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   void setContext() const;
 
+  Font globalFont = Font::Default();
+
  private:
   friend class FontManager;
 
@@ -315,7 +317,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
 
   std::unique_ptr<ViewportOverlayGizmo> viewportGizmo{};
 
-  Font globalFont = Font::Default();
 };
 
 }  // namespace pf::ui::ig

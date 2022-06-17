@@ -28,6 +28,7 @@ void Selectable::setFromToml(const toml::table &src) {
 void Selectable::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::Selectable(getLabel().c_str(), getValueAddress(), 0, static_cast<ImVec2>(getSize()))) {
     notifyValueChanged();
   }

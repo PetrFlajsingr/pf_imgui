@@ -23,6 +23,7 @@ SliderAngle::SliderAngle(const std::string &elementName, const std::string &labe
 void SliderAngle::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
   if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str(), flags)) {
     ValueObservable::notifyValueChanged();

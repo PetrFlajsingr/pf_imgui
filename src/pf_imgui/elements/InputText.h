@@ -49,7 +49,8 @@ class PF_IMGUI_EXPORT InputText
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
                                style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::TextSelectedBackground>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of InputText.

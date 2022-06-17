@@ -13,7 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
@@ -31,12 +31,13 @@ using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
  * @todo: styles for samples?
  */
 class PF_IMGUI_EXPORT FlameGraph
-    : public Element,
+    : public ElementWithID,
       public Labellable,
       public Resizable,
       public ColorCustomizable<style::ColorOf::PlotHistogram, style::ColorOf::PlotHistogramHovered,
                                style::ColorOf::FrameBackground, style::ColorOf::Border, style::ColorOf::BorderShadow,
-                               style::ColorOf::Text> {
+                               style::ColorOf::Text>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of FlameGraph.

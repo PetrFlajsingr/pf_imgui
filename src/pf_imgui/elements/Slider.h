@@ -50,7 +50,8 @@ class PF_IMGUI_EXPORT Slider
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
                                style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   using MinMaxType = slider_details::MinMaxType<T>;
   /**
@@ -162,6 +163,7 @@ template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 void Slider<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;

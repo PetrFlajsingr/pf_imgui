@@ -57,15 +57,15 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
   /**
     * Create a child and append it to the end of children.
     *
-    * @tparam T type of created Element
+    * @tparam T type of created ElementWithID
     * @tparam Args arguments to pass to the Ts constructor after its name
     * @param name ID of the newly created element
     * @param position position of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
-    * @return reference to the newly created Element
+    * @return reference to the newly created ElementWithID
     */
   template<typename T, typename... Args>
-    requires std::derived_from<T, ElementBase> && std::constructible_from<T, Args...>
+    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
   auto &createChild(ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
@@ -104,14 +104,14 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
    * @return view to references of children in the layout
    */
   inline auto getChildren() {
-    return children | ranges::views::transform([](auto &child) -> ElementBase & { return *child.element; });
+    return children | ranges::views::transform([](auto &child) -> Element & { return *child.element; });
   }
   /**
    * Get all children of the layout as references.
    * @return view to const references of children in the layout
    */
   [[nodiscard]] inline auto getChildren() const {
-    return children | ranges::views::transform([](auto &child) -> const ElementBase & { return *child.element; });
+    return children | ranges::views::transform([](auto &child) -> const Element & { return *child.element; });
   }
 
   /**
@@ -135,7 +135,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
 
  private:
   struct AnchoredChild {
-    std::unique_ptr<ElementBase> element;
+    std::unique_ptr<Element> element;
     Positionable *positionable;
     Flags<Anchor> anchors;
     std::function<void(Width)> addToWidth;

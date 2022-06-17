@@ -33,7 +33,7 @@ enum class KnobType {
 };
 
 /**
- * @brief Element similar to slider.
+ * @brief ElementWithID similar to slider.
  * @tparam T underlying value type
  * @todo: more types
  */
@@ -44,7 +44,8 @@ class Knob : public ItemElement,
              public ValueObservable<T>,
              public Savable,
              public ColorCustomizable<style::ColorOf::ButtonActive, style::ColorOf::ButtonHovered,
-                                      style::ColorOf::FrameBackground> {
+                                      style::ColorOf::FrameBackground>,
+             public FontCustomizable {
  public:
   /**
    * @brief Construction args for Knob
@@ -122,6 +123,8 @@ void Knob<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<int, float> T>
 void Knob<T>::renderImpl() {
+  [[maybe_unused]] auto color = setColorStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   const auto flags = isLabelVisible() ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
   const auto knobSize = std::min(static_cast<float>(getSize().width), static_cast<float>(getSize().height));
   auto valueChanged = false;

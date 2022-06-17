@@ -5,8 +5,8 @@
  * @date 4.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
+#ifndef PF_IMGUI_ELEMENTS_COMBOBOX_H
+#define PF_IMGUI_ELEMENTS_COMBOBOX_H
 
 #include <memory>
 #include <pf_common/Explicit.h>
@@ -221,6 +221,7 @@ template<ToStringConvertible T>
 void Combobox<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = CustomComboboxBase::applyFont();
   const char *previewPtr;
   if (selectedItemIndex.has_value()) {
     previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();
@@ -243,4 +244,4 @@ extern template class Combobox<std::string>;
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_COMBOBOX_H
+#endif  // PF_IMGUI_ELEMENTS_COMBOBOX_H

@@ -59,28 +59,28 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
    * @return view to references of children in the layout
    */
   auto getChildren() {
-    return children | ranges::views::transform([](auto &child) -> ElementBase & { return *child.first; });
+    return children | ranges::views::transform([](auto &child) -> Element & { return *child.first; });
   }
   /**
    * Get all children of the layout as references.
    * @return view to const references of children in the layout
    */
   [[nodiscard]] auto getChildren() const {
-    return children | ranges::views::transform([](auto &child) -> const ElementBase & { return *child.first; });
+    return children | ranges::views::transform([](auto &child) -> const Element & { return *child.first; });
   }
 
   /**
     * Create a child and append it to the end of children.
     *
-    * @tparam T type of created Element
+    * @tparam T type of created ElementWithID
     * @tparam Args arguments to pass to the Ts constructor after its name
     * @param name ID of the newly created element
     * @param position position of the newly created element
     * @param args arguments to pass to the Ts constructor after its nam
-    * @return reference to the newly created Element
+    * @return reference to the newly created ElementWithID
     */
   template<typename T, typename... Args>
-    requires std::derived_from<T, ElementBase> && std::constructible_from<T, Args...>
+    requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
   auto &createChild(ImVec2 position, Args &&...args) {
     constexpr auto IsPositionable = std::derived_from<T, Positionable>;
     using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
@@ -120,7 +120,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   void renderImpl() override;
 
  private:
-  std::vector<std::pair<std::unique_ptr<ElementBase>, Positionable *>> children;
+  std::vector<std::pair<std::unique_ptr<Element>, Positionable *>> children;
 };
 }  // namespace pf::ui::ig
 

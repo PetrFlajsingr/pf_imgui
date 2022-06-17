@@ -8,10 +8,10 @@
 namespace pf::ui::ig {
 
 DockSpace::DockSpace(Config &&config)
-    : Element(std::string{config.name.value}), Resizable(config.size), flags(*config.flags) {}
+    : ElementWithID(std::string{config.name.value}), Resizable(config.size), flags(*config.flags) {}
 
 DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
-    : Element(name), Resizable(s), flags(*dockFlags) {}
+    : ElementWithID(name), Resizable(s), flags(*dockFlags) {}
 
 bool DockSpace::isInitialised() const { return !firstFrame; }
 
@@ -20,7 +20,6 @@ void DockSpace::render() {
     firstFrame = false;
     setId(ImGui::GetID(getName().c_str()));
   }
-  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   Renderable::render();
 }
 

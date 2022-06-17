@@ -48,11 +48,11 @@ bool GradientPointsViewComparator::operator()(GradientPointsView lhs, GradientPo
 }
 
 GradientEditor::GradientEditor(GradientEditor::Config &&config)
-    : Element(std::string{config.name.value}), ValueObservable(getPointsView()),
+    : ElementWithID(std::string{config.name.value}), ValueObservable(getPointsView()),
       Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
 GradientEditor::GradientEditor(const std::string &name, Persistent persistent)
-    : Element(name), ValueObservable(getPointsView()), Savable(persistent) {}
+    : ElementWithID(name), ValueObservable(getPointsView()), Savable(persistent) {}
 
 Color GradientEditor::getColorAt(float percentage) const {
   float color[4];
@@ -77,6 +77,7 @@ void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
 }
 
 void GradientEditor::renderImpl() {
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) {
     setValueInner(getPointsView());
     notifyValueChanged();

@@ -5,13 +5,13 @@
  * @date 10.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H
+#ifndef PF_IMGUI_ELEMENTS_POPUPMENU_H
+#define PF_IMGUI_ELEMENTS_POPUPMENU_H
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/MenuItems.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -19,7 +19,7 @@ namespace pf::ui::ig {
 /**
  * @brief Popup menu to be used for example when right clicking an element.
  */
-class PF_IMGUI_EXPORT PopupMenu : public Element, public MenuContainer {
+class PF_IMGUI_EXPORT PopupMenu : public ElementWithID, public MenuContainer {
  public:
   /**
    * @brief Struct for construction of PopupMenu.
@@ -60,4 +60,4 @@ class PF_IMGUI_EXPORT PopupMenu : public Element, public MenuContainer {
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H
+#endif  // PF_IMGUI_ELEMENTS_POPUPMENU_H

@@ -17,10 +17,10 @@
 namespace pf::ui::ig {
 
 NodeEditor::NodeEditor(const std::string &name, Size size)
-    : Element(name), Resizable(size), context(ax::NodeEditor::CreateEditor()) {}
+    : ElementWithID(name), Resizable(size), context(ax::NodeEditor::CreateEditor()) {}
 
 NodeEditor::NodeEditor(NodeEditor::Config &&config)
-    : Element(std::move(config.name)), Resizable(config.size), context(ax::NodeEditor::CreateEditor()) {}
+    : ElementWithID(std::move(config.name)), Resizable(config.size), context(ax::NodeEditor::CreateEditor()) {}
 
 NodeEditor::~NodeEditor() { ax::NodeEditor::DestroyEditor(context); }
 

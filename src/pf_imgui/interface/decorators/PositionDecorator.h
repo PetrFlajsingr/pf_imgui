@@ -11,7 +11,7 @@
 #include <concepts>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Positionable.h>
 #include <utility>
 
@@ -20,10 +20,10 @@ namespace pf::ui::ig {
 /**
  * @brief Decorator for non-Positionable elements.
  *
- * This decorator adds Positionable capabilities to any Element. It is used for AbsoluteLayout.
+ * This decorator adds Positionable capabilities to any ElementWithID. It is used for AbsoluteLayout.
  *
  */
-template<std::derived_from<ElementBase> T>
+template<std::derived_from<Element> T>
 class PF_IMGUI_EXPORT PositionDecorator : public T, public Positionable {
  public:
   struct Config {

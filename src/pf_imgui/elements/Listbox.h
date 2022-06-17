@@ -84,7 +84,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param config construction args @see Listbox::Config
    */
   explicit Listbox(Config &&config)
-    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
+    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
+  ;
   /**
    * Construct Listbox.
    * @param elementName ID of the element
@@ -95,7 +96,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   Listbox(const std::string &elementName, const std::string &label, Size s = Size::Auto(),
           std::optional<int> selectedIdx = std::nullopt, Persistent persistent = Persistent::No)
-    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
+    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
+  ;
 
   /**
    * Add item to the end of the list.
@@ -115,7 +117,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param itemToSelect item to select
    */
   void setSelectedItem(const T &itemToSelect)
-    requires(!std::same_as<T, std::string>);
+    requires(!std::same_as<T, std::string>)
+  ;
 
   /**
    * Set selected item by name. If no such item is found nothing happens.
@@ -233,6 +236,7 @@ template<ToStringConvertible T>
 void Listbox<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = CustomListboxBase::applyFont();
   if (ImGui::BeginListBox(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {

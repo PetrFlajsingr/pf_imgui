@@ -12,7 +12,7 @@
 
 namespace pf::ui::ig {
 
-MenuItem::MenuItem(const std::string &name) : Element(name) {}
+MenuItem::MenuItem(const std::string &name) : ElementWithID(name) {}
 
 bool MenuItem::isCloseMenuOnInteract() const { return closeOnInteract; }
 
@@ -20,7 +20,7 @@ void MenuItem::setCloseOnInteract(bool close) { closeOnInteract = close; }
 
 void MenuItem::render() {
   ImGui::PushItemFlag(ImGuiItemFlags_SelectableDontClosePopup, !closeOnInteract);
-  Element::render();
+  ElementWithID::render();
   ImGui::PopItemFlag();
 }
 
@@ -33,10 +33,14 @@ MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string
 void MenuButtonItem::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
 }
 
 void SubMenu::renderImpl() {
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::BeginMenu(getLabel().c_str())) {
     RAII end{ImGui::EndMenu};
     renderItems();
@@ -76,6 +80,7 @@ MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::st
 void MenuCheckboxItem::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 

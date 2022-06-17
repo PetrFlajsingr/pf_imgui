@@ -5,8 +5,8 @@
  * @date 4.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
+#ifndef PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
+#define PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
 
 #include <imgui.h>
 #include <pf_common/enums.h>
@@ -117,6 +117,7 @@ template<typename T, std::derived_from<Renderable> R>
 void CustomCombobox<T, R>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = CustomItemBox<T, R>::applyFont();
   const char *previewPtr = previewValue.c_str();
   if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
     RAII end{ImGui::EndCombo};
@@ -134,4 +135,4 @@ void CustomCombobox<T, R>::checkClose() {
 }
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H
+#endif  // PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H

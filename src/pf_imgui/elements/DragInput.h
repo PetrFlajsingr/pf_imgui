@@ -54,7 +54,8 @@ class PF_IMGUI_EXPORT DragInput
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::NavHighlight,
                                style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::SliderGrab,
                                style::ColorOf::SliderGrabActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   using ParamType = drag_details::UnderlyingType<T>;
 
@@ -204,6 +205,7 @@ template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 void DragInput<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   bool valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;

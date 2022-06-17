@@ -37,6 +37,7 @@ InputText::InputText(const std::string &elementName, std::string label, const st
 void InputText::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
     valueChanged = ImGui::InputText(getLabel().c_str(), buffer.get(), 256, flags);

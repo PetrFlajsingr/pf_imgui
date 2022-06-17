@@ -47,6 +47,7 @@ void Button::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
   [[maybe_unused]] auto repeat = setButtonRepeat();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::Button(getLabel().c_str(), static_cast<ImVec2>(getSize()))) { notifyOnClick(); }
 }
 
@@ -61,6 +62,7 @@ void SmallButton::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
   [[maybe_unused]] auto repeat = setButtonRepeat();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ImGui::SmallButton(getLabel().c_str())) { notifyOnClick(); }
 }
 

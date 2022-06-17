@@ -13,7 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <ranges>
@@ -28,7 +28,7 @@ namespace pf::ui::ig {
  * @see PlotType
  */
 class PF_IMGUI_EXPORT SimplePlot
-    : public Element,
+    : public ElementWithID,
       public Labellable,
       public Resizable,
       public ColorCustomizable<style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,

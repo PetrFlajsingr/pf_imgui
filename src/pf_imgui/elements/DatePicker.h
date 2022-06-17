@@ -20,13 +20,14 @@ namespace pf::ui::ig {
 
 // todo date format and other args
 // todo crashes on invalid dates
+// TODO: styles
 /**
  * @brief Date picker element.
  */
 class DatePicker : public ItemElement,
                    public Labellable,
                    public ValueObservable<std::chrono::year_month_day>,
-                   public Savable {
+                   public Savable, public FontCustomizable {
  public:
   /**
    * @brief Construction config for DatePicker

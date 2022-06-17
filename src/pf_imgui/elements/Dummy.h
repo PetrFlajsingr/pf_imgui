@@ -10,7 +10,7 @@
 
 #include <imgui.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/interface/ElementBase.h>
+#include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/Resizable.h>
 
 namespace pf::ui::ig {
@@ -18,7 +18,7 @@ namespace pf::ui::ig {
 /**
  * @brief An invisible element which just fills certain space.
  */
-class Dummy : public ElementBase, public Resizable {
+class Dummy : public Element, public Resizable {
  public:
   struct Config {
     using Parent = Dummy;
@@ -35,7 +35,7 @@ class Dummy : public ElementBase, public Resizable {
    * @param name unique name of the element
    * @param s size of the element
    */
-  inline Dummy(const std::string &name, Size s) : ElementBase(name), Resizable(s) {}
+  inline Dummy(const std::string &name, Size s) : Element(name), Resizable(s) {}
 
  protected:
   inline void renderImpl() override {

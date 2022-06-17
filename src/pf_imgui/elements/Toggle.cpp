@@ -31,6 +31,7 @@ void Toggle::setFromToml(const toml::table &src) {
 void Toggle::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (ToggleButton(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 

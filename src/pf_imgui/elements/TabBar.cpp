@@ -73,11 +73,11 @@ void Tab::setDisplayDot(bool displayDot) {
   }
 }
 
-TabBar::TabBar(TabBar::Config &&config) : Element(std::string{config.name.value}) {
+TabBar::TabBar(TabBar::Config &&config) : ElementWithID(std::string{config.name.value}) {
   setTabListAllowed(config.allowTabList);
 }
 
-TabBar::TabBar(const std::string &elementName, bool allowTabList) : Element(elementName) {
+TabBar::TabBar(const std::string &elementName, bool allowTabList) : ElementWithID(elementName) {
   setTabListAllowed(allowTabList);
 }
 

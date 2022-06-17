@@ -75,7 +75,7 @@ void ImGuiInterface::setStateFromConfig() {
   const auto serialiseSubtree = [this](Renderable &root) {
     traverseImGuiTree(root, [this](Renderable &renderable) {
       if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr && ptrSavable->isPersistent()) {
-        if (auto ptrElement = dynamic_cast<ElementBase *>(&renderable); ptrElement != nullptr) {
+        if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
           if (auto elemDataIter = config.find(ptrElement->getName()); elemDataIter != config.end()) {
             if (auto elemData = elemDataIter->second.as_table(); elemData != nullptr) {
               ptrSavable->setFromToml(*elemData);

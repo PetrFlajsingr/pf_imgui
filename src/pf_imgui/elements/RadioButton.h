@@ -29,7 +29,8 @@ class PF_IMGUI_EXPORT RadioButton
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
                                style::ColorOf::NavHighlight, style::ColorOf::CheckMark, style::ColorOf::Border,
                                style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   friend class RadioGroup;
   /**

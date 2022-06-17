@@ -14,7 +14,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/DragNDrop.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <string>
 #include <utility>
@@ -28,7 +28,8 @@ class PF_IMGUI_EXPORT Text
     : public ItemElement,
       public DragSource<std::string>,
       public DropTarget<std::string>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget> {
+      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Checkbox.

@@ -20,7 +20,7 @@ namespace pf::ui::ig {
  *
  * This tooltip should usually be created via createTooltip() method in ItemElement s.
  */
-class PF_IMGUI_EXPORT Tooltip : public Element, public ElementContainer {
+class PF_IMGUI_EXPORT Tooltip : public ElementWithID, public ElementContainer {
  public:
   /**
    * @brief Struct for construction of Tooltip.

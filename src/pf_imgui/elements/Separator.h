@@ -10,7 +10,7 @@
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <string>
 
 namespace pf::ui::ig {

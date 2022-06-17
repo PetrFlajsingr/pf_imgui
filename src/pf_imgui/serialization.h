@@ -9,7 +9,7 @@
 
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/ui_tree_traversal.h>
@@ -29,7 +29,7 @@ PF_IMGUI_EXPORT inline toml::table serializeImGuiTree(Renderable &root) {
   auto result = toml::table();
   traverseImGuiTree(root, [&result](Renderable &renderable) {
     if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr) {
-      if (auto ptrElement = dynamic_cast<ElementBase *>(&renderable); ptrElement != nullptr && ptrSavable->isPersistent()) {
+      if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr && ptrSavable->isPersistent()) {
         const auto serialised = ptrSavable->toToml();
         result.insert_or_assign(ptrElement->getName(), serialised);
       }

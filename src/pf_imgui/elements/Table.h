@@ -13,7 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <range/v3/range/conversion.hpp>
@@ -24,6 +24,7 @@
 #include <utility>
 #include <vector>
 
+// TODO: styles/fonts
 namespace pf::ui::ig {
 
 template<std::size_t ColumnCount>
@@ -48,7 +49,7 @@ class PF_IMGUI_EXPORT TableRow {
   friend class TableRowBuilder<ColumnCount>;
 
  public:
-  using Cells = std::array<std::unique_ptr<ElementBase>, ColumnCount>;
+  using Cells = std::array<std::unique_ptr<Element>, ColumnCount>;
   /**
    * Construct TableRow.
    * @param owner owning table
@@ -86,17 +87,17 @@ class PF_IMGUI_EXPORT TableRow {
    * @return references to all cells in this row
    */
   [[nodiscard]] auto getCells() {
-    return cells | ranges::views::transform([](const auto &cell) -> ElementBase & { return *cell; });
+    return cells | ranges::views::transform([](const auto &cell) -> Element & { return *cell; });
   }
   /**
    * @return const references to all cells in this row
    */
   [[nodiscard]] auto getCells() const {
-    return cells | ranges::views::transform([](const auto &cell) -> const ElementBase & { return *cell; });
+    return cells | ranges::views::transform([](const auto &cell) -> const Element & { return *cell; });
   }
 
-  [[nodiscard]] ElementBase &operator[](std::size_t index) { return *cells[index]; }
-  [[nodiscard]] const ElementBase &operator[](std::size_t index) const { return *cells[index]; }
+  [[nodiscard]] Element &operator[](std::size_t index) { return *cells[index]; }
+  [[nodiscard]] const Element &operator[](std::size_t index) const { return *cells[index]; }
 
  private:
   void moveImpl(std::int32_t delta);
@@ -125,10 +126,10 @@ class PF_IMGUI_EXPORT TableRowBuilder {
  public:
   using Cells = typename TableRow<ColumnCount>::Cells;
   /**
-   * @brief Wrapper to allow access for newly created Element when building Row.
-   * @tparam T type of Element
+   * @brief Wrapper to allow access for newly created ElementWithID when building Row.
+   * @tparam T type of ElementWithID
    */
-  template<std::derived_from<ElementBase> T>
+  template<std::derived_from<Element> T>
   class Result : public TableRowBuilder<ColumnCount, RemainingCount - 1> {
    public:
     Result(T &newElement, Table<ColumnCount> *ownerTable, Cells &&initCells)
@@ -145,12 +146,12 @@ class PF_IMGUI_EXPORT TableRowBuilder {
       : table(ownerTable), cells(std::move(initCells)) {}
   /**
    * Create a new element within the cell. This invalidates the current builder and returns a new one.
-   * @tparam T type of Element to create
+   * @tparam T type of ElementWithID to create
    * @tparam Args types of construction args
    * @param args construction args
    * @return wrapper object serving as builder for the next row and accessor for the newly created element
    */
-  template<std::derived_from<ElementBase> T, typename... Args>
+  template<std::derived_from<Element> T, typename... Args>
   Result<T> cell(Args &&...args)
     requires(RemainingCount > 0 && std::constructible_from<T, Args...>)
   {
@@ -193,7 +194,7 @@ class PF_IMGUI_EXPORT TableRowBuilder {
  * @tparam ColumnCount static column count of the table
  */
 template<std::size_t ColumnCount>
-class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, public Resizable {
+class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer, public Resizable {
   friend class TableRowBuilder<ColumnCount, 0>;
   friend class TableRow<ColumnCount>;
 
@@ -233,7 +234,7 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
    * @param columnIndex index of the column to apply sorting function too
    * @param pred sorting predicate
    */
-  void setSortFncForColumn(std::size_t columnIndex, std::predicate<const ElementBase &, const ElementBase &> auto &&pred);
+  void setSortFncForColumn(std::size_t columnIndex, std::predicate<const Element &, const Element &> auto &&pred);
 
  protected:
   void renderImpl() override;
@@ -250,7 +251,7 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
   std::vector<std::unique_ptr<TableRow<ColumnCount>>> rows;
 
-  using ColumnSortFnc = std::function<bool(const ElementBase &, const ElementBase &)>;
+  using ColumnSortFnc = std::function<bool(const Element &, const Element &)>;
   std::array<std::optional<ColumnSortFnc>, ColumnCount> columnSortFunctions{};
 
   std::size_t idCounter = 0;
@@ -258,12 +259,12 @@ class PF_IMGUI_EXPORT Table : public Element, public RenderablesContainer, publi
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(Table::Config &&config)
-    : Element(std::string{config.name.value}), Resizable(config.settings.size), header(config.settings.header),
+    : ElementWithID(std::string{config.name.value}), Resizable(config.settings.size), header(config.settings.header),
       flags(CreateFlags(config.settings.border, config.settings.options)) {}
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(const std::string &elementName, const TableSettings<ColumnCount> &settings)
-    : Element(elementName), Resizable(settings.size), header(settings.header),
+    : ElementWithID(elementName), Resizable(settings.size), header(settings.header),
       flags(CreateFlags(settings.border, settings.options)) {}
 
 template<std::size_t ColumnCount>
@@ -275,7 +276,7 @@ std::vector<Renderable *> Table<ColumnCount>::getRenderables() {
 
 template<std::size_t ColumnCount>
 void Table<ColumnCount>::setSortFncForColumn(std::size_t columnIndex,
-                                             std::predicate<const ElementBase &, const ElementBase &> auto &&pred) {
+                                             std::predicate<const Element &, const Element &> auto &&pred) {
   columnSortFunctions[columnIndex] = std::forward<decltype(pred)>(pred);
 }
 

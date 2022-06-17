@@ -9,14 +9,14 @@
 #define PF_IMGUI_META_H
 
 #include <pf_common/specializations.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {
 
 template<typename T>
 concept ElementConstructConfig = requires { typename T::Parent; }
-    && std::derived_from<typename T::Parent, ElementBase> && std::constructible_from<typename T::Parent, T>;
+    && std::derived_from<typename T::Parent, Element> && std::constructible_from<typename T::Parent, T>;
 
 template<typename T>
 concept ConfigConstructible = requires { typename T::Config; } && ElementConstructConfig<typename T::Config>;

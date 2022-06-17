@@ -24,7 +24,7 @@ namespace pf::ui::ig {
 /**
  * @brief Advanced plot for plotting 2D data.
  */
-class PF_IMGUI_EXPORT Plot : public Element, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT Plot : public ElementWithID, public Labellable, public Resizable {
  public:
   /**
    * @brief Struct for construction of Plot.

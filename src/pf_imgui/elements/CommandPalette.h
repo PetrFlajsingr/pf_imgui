@@ -10,17 +10,19 @@
 
 #include <imcmd_command_palette.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/Customizable.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <string>
 #include <utility>
 
 namespace pf::ui::ig {
 
+// TODO: styles
 /**
  * @brief A command palette like in sublime text or VSC
  */
-class CommandPalette : public Element {
+class CommandPalette : public ElementWithID, public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of CommandPalette.

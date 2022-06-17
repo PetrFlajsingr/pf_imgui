@@ -36,7 +36,8 @@ class MatrixDragInput
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::NavHighlight,
                                style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::SliderGrab,
                                style::ColorOf::SliderGrabActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   using ParamType = drag_details::UnderlyingType<typename M::col_type>;
   constexpr static auto Height = M::length();
@@ -117,6 +118,9 @@ void MatrixDragInput<M>::setFromToml(const toml::table &src) {
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 void MatrixDragInput<M>::renderImpl() {
+  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   ImGui::BeginGroup();
   if (ImGui::BeginTable("lay", 1)) {
     auto valueChanged = false;

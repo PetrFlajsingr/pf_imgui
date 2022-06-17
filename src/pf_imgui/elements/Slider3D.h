@@ -36,7 +36,8 @@ class PF_IMGUI_EXPORT Slider3D
       public Resizable,
       public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
                                style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Slider3D.
@@ -119,6 +120,7 @@ template<OneOf<float> T>
 void Slider3D<T>::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
   [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   auto valueChanged = false;
   auto address = ValueObservable<glm::vec3>::getValueAddress();
   const auto oldValue = *address;

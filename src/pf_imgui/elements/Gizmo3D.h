@@ -5,8 +5,8 @@
  * @date 17.11.21
  */
 
-#ifndef PF_IMGUI_GIZMO3D_H
-#define PF_IMGUI_GIZMO3D_H
+#ifndef PF_IMGUI_ELEMENTS_GIZMO3D_H
+#define PF_IMGUI_ELEMENTS_GIZMO3D_H
 
 #include <algorithm>
 #include <fmt/format.h>
@@ -194,4 +194,4 @@ void Gizmo3D<Type>::renderImpl() {
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_GIZMO3D_H
+#endif  // PF_IMGUI_ELEMENTS_GIZMO3D_H

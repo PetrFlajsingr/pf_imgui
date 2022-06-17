@@ -2,8 +2,8 @@
 // Created by petr on 5/22/21.
 //
 
-#ifndef PF_IMGUI_MARKDOWNTEXT_H
-#define PF_IMGUI_MARKDOWNTEXT_H
+#ifndef PF_IMGUI_ELEMENTS_MARKDOWNTEXT_H
+#define PF_IMGUI_ELEMENTS_MARKDOWNTEXT_H
 
 #include <imgui.h>
 #include <imgui_markdown.h>
@@ -123,4 +123,4 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_MARKDOWNTEXT_H
+#endif  // PF_IMGUI_ELEMENTS_MARKDOWNTEXT_H

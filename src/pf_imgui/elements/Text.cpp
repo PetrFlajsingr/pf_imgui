@@ -22,6 +22,7 @@ void Text::setText(std::string newText) { setTextInner(std::move(newText)); }
 
 void Text::renderImpl() {
   [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto scopedFont = applyFont();
   if (wrap) {
     ImGui::TextWrapped("%s", text.c_str());
   } else {

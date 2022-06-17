@@ -13,7 +13,7 @@ namespace pf::ui::ig {
 class ImGuiInterface;
 class FontManager;
 
-class Element;
+class ElementWithID;
 class ElementContainer;
 class Labellable;
 class Resizable;

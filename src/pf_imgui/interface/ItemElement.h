@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_INTERFACE_ITEMELEMENT_H
 #define PF_IMGUI_INTERFACE_ITEMELEMENT_H
 
-#include "Element.h"
+#include "ElementWithID.h"
 #include "Focusable.h"
 #include "Hoverable.h"
 #include <memory>
@@ -26,7 +26,7 @@ namespace pf::ui::ig {
  *
  * Provides hover and focus changes. Adds an option to add a tooltip, which is shown when the item is hovered.
  */
-class PF_IMGUI_EXPORT ItemElement : public Element, public Focusable, public Hoverable {
+class PF_IMGUI_EXPORT ItemElement : public ElementWithID, public Focusable, public Hoverable {
  public:
   /**
    * Construct ItemElement with the given ID.

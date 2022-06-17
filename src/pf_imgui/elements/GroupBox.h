@@ -5,13 +5,13 @@
  * @date 17.11.21
  */
 
-#ifndef PF_IMGUI_GROUPBOX_H
-#define PF_IMGUI_GROUPBOX_H
+#ifndef PF_IMGUI_ELEMENTS_GROUPBOX_H
+#define PF_IMGUI_ELEMENTS_GROUPBOX_H
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
@@ -21,7 +21,10 @@ namespace pf::ui::ig {
 /**
  * @brief A group of elements with a border and a label.
  */
-class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT GroupBox : public ElementWithID,
+                                 public ElementContainer,
+                                 public Labellable,
+                                 public Resizable {
  public:
   /**
    * @brief Struct for construction of GroupBox.
@@ -51,4 +54,4 @@ class PF_IMGUI_EXPORT GroupBox : public Element, public ElementContainer, public
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_GROUPBOX_H
+#endif  // PF_IMGUI_ELEMENTS_GROUPBOX_H

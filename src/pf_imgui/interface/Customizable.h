@@ -5,19 +5,41 @@
  * @date 18.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
+#ifndef PF_IMGUI_INTERFACE_CUSTOMIZABLE_H
+#define PF_IMGUI_INTERFACE_CUSTOMIZABLE_H
 
 #include <optional>
 #include <pf_common/RAII.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/tuple.h>
 #include <pf_imgui/Color.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/styles/enums.h>
 #include <tuple>
 
 namespace pf::ui::ig {
+
+/**
+ * @brief Base class for elements with fonts.
+ */
+class PF_IMGUI_EXPORT FontCustomizable {
+ public:
+  inline FontCustomizable(Font initFont = Font::Default()) : font(initFont) {}
+  /**
+   * Set font for ElementWithID and all elements inside - except for those that have their own font.
+   * @param font new font
+   */
+  inline void setFont(Font newFont) { font = newFont; }
+  [[nodiscard]] inline Font getFont() const { return font; }
+
+ protected:
+  [[nodiscard]] inline RAII applyFont() { return font.applyScopedIfNotDefault(); }
+
+ private:
+  Font font;
+};
+
 namespace details {
 template<style::ColorOf ColorType>
 using ColorOfAsColor = Color;
@@ -224,6 +246,7 @@ using AllStyleCustomizable =
                       style::Style::WindowPadding, style::Style::WindowMinSize, style::Style::WindowTitleAlign,
                       style::Style::FramePadding, style::Style::ItemSpacing, style::Style::ItemInnerSpacing,
                       style::Style::CellPadding, style::Style::ButtonTextAlign, style::Style::SelectableTextAlign>;
+
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMIZABLE_H
+#endif  // PF_IMGUI_INTERFACE_CUSTOMIZABLE_H

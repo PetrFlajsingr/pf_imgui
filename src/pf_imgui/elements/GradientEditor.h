@@ -5,13 +5,14 @@
  * @date 3.4.22
  */
 
-#ifndef PF_IMGUI_GRADIENTEDITOR_H
-#define PF_IMGUI_GRADIENTEDITOR_H
+#ifndef PF_IMGUI_ELEMENTS_GRADIENTEDITOR_H
+#define PF_IMGUI_ELEMENTS_GRADIENTEDITOR_H
 
+#include <pf_imgui/interface/Customizable.h>
 #include <imgui_color_gradient.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Color.h>
-#include <pf_imgui/interface/Element.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Focusable.h>
 #include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -48,14 +49,16 @@ struct GradientPointsViewComparator {
   [[nodiscard]] bool operator()(GradientPointsView lhs, GradientPointsView rhs);
 };
 
+// TODO: styles
 /**
  * @brief Editor for gradient with color selection and an option to add more leading points. Selected poitns can be removed by pressing delete.
  */
-class GradientEditor : public Element,
+class GradientEditor : public ElementWithID,
                        public ValueObservable<GradientPointsView, GradientPointsViewComparator>,
                        public Hoverable,
                        public Focusable,
-                       public Savable {
+                       public Savable,
+                       public FontCustomizable {
  public:
   /**
    * @brief Construction args for GradientEditor.
@@ -109,4 +112,4 @@ class GradientEditor : public Element,
 };
 
 }  // namespace pf::ui::ig
-#endif  //PF_IMGUI_GRADIENTEDITOR_H
+#endif  //PF_IMGUI_ELEMENTS_GRADIENTEDITOR_H

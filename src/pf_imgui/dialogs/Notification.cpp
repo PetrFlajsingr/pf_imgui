@@ -50,12 +50,12 @@ void Notification::renderImpl() {
   height += ImGui::GetWindowHeight() + PADDING_MESSAGE_Y;
 }
 
-void Notification::setIcon(const char *newIcon, Font font) {
-  Notification::icon = newIcon;
-  Notification::iconFont = font;
+void Notification::setIcon(const char *newIcon, Font newIconFont) {
+  icon = newIcon;
+  iconFont = newIconFont;
 }
 
-void Notification::setIconColor(Color newColor) { Notification::iconColor = newColor; }
+void Notification::setIconColor(Color newColor) { iconColor = newColor; }
 
 void Notification::checkPhase() {
   const auto timeElapsed =

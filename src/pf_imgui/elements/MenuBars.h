@@ -25,7 +25,7 @@ namespace pf::ui::ig {
  *
  * There can be one menu bar for each Window instance. It is created via Window::createOrGetMenuBar().
  */
-class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
+class PF_IMGUI_EXPORT WindowMenuBar : public ElementWithID, public MenuContainer {
  public:
   /**
    * @brief Struct for construction of WindowMenuBar.
@@ -53,7 +53,7 @@ class PF_IMGUI_EXPORT WindowMenuBar : public Element, public MenuContainer {
  *
  * Only one of these can exist at a time. It is created via ImGuiInterface::createOrGetMenuBar().
  */
-class PF_IMGUI_EXPORT AppMenuBar : public Element, public MenuContainer {
+class PF_IMGUI_EXPORT AppMenuBar : public ElementWithID, public MenuContainer {
  public:
   struct Config {
     using Parent = AppMenuBar;

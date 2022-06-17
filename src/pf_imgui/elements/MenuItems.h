@@ -4,16 +4,16 @@
  * @author Petr Flajšingr
  * @date 10.6.21
  */
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
+#ifndef PF_IMGUI_ELEMENTS_MENUITEMS_H
+#define PF_IMGUI_ELEMENTS_MENUITEMS_H
 
 #include <memory>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/Customizable.h>
-#include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/ElementContainer.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -24,7 +24,7 @@
 namespace pf::ui::ig {
 
 class SubMenu;
-class PF_IMGUI_EXPORT MenuItem : public Element {
+class PF_IMGUI_EXPORT MenuItem : public ElementWithID {
  public:
   explicit MenuItem(const std::string &name);
 
@@ -107,7 +107,8 @@ class PF_IMGUI_EXPORT MenuButtonItem
                                style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow,
                                style::ColorOf::Header, style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive>,
       public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign> {
+                               style::Style::ButtonTextAlign>,
+      public FontCustomizable {
  public:
   /**
    * Construct MenuButtonItem
@@ -145,7 +146,8 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
                                style::ColorOf::FrameBackgroundActive, style::ColorOf::FrameBackground,
                                style::ColorOf::FrameBackgroundHovered, style::ColorOf::NavHighlight,
                                style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize> {
+      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
+      public FontCustomizable {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -236,4 +238,4 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuC
 };
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_MENUITEMS_H
+#endif  // PF_IMGUI_ELEMENTS_MENUITEMS_H
