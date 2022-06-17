@@ -71,18 +71,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="PopupMenu_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_POPUPMENU_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_POPUPMENU_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="MenuItems_8h.html">pf_imgui/elements/MenuItems.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Element_8h.html">pf_imgui/interface/Element.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementWithID_8h.html">pf_imgui/interface/ElementWithID.h</a>&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">   22</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">PopupMenu</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">   22</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">PopupMenu</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">MenuContainer</a> {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1PopupMenu_1_1Config.html">   27</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1PopupMenu_1_1Config.html">Config</a> {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">PopupMenu</a>;</div>
@@ -106,14 +106,14 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_POPUPMENU_H</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_POPUPMENU_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Interface for all ImGui elements.</div><div class="ttdef"><b>Definition:</b> Element.h:29</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1PopupMenu_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1PopupMenu_1_1Config.html">pf::ui::ig::PopupMenu::Config</a></div><div class="ttdoc">Struct for construction of PopupMenu.</div><div class="ttdef"><b>Definition:</b> PopupMenu.h:27</div></div>
-<div class="ttc" id="aElement_8h_html"><div class="ttname"><a href="Element_8h.html">Element.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1PopupMenu_1_1Config_html_aab8c7dedff5c62693750c5b4860fa735"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1PopupMenu_1_1Config.html#aab8c7dedff5c62693750c5b4860fa735">pf::ui::ig::PopupMenu::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> PopupMenu.h:29</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MenuContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MenuContainer.html">pf::ui::ig::MenuContainer</a></div><div class="ttdoc">An item which can contain other menus.</div><div class="ttdef"><b>Definition:</b> MenuItems.h:53</div></div>
 <div class="ttc" id="aMenuItems_8h_html"><div class="ttname"><a href="MenuItems_8h.html">MenuItems.h</a></div><div class="ttdoc">Items to be used in menu bars and popup menu.</div></div>
+<div class="ttc" id="aElementWithID_8h_html"><div class="ttname"><a href="ElementWithID_8h.html">ElementWithID.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements and need ID or/and a font.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementWithID_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></div><div class="ttdoc">Interface for all ImGui elements with IDs.</div><div class="ttdef"><b>Definition:</b> ElementWithID.h:31</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1PopupMenu_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">pf::ui::ig::PopupMenu</a></div><div class="ttdoc">Popup menu to be used for example when right clicking an element.</div><div class="ttdef"><b>Definition:</b> PopupMenu.h:22</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

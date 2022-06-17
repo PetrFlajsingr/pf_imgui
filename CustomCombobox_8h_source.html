@@ -71,8 +71,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="CustomCombobox_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/enums.h&gt;</span></div>
@@ -151,36 +151,37 @@ $(function() {
 <div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a249b6537c05c60e291956a6aa0b37582">  117</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html">CustomCombobox&lt;T, R&gt;::renderImpl</a>() {</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> colorStyle = setColorStack();</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> style = setStyleStack();</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *previewPtr = previewValue.c_str();</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    RAII end{ImGui::EndCombo};</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    checkClose();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    std::ranges::for_each(<a class="code" href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">CustomItemBox&lt;T, R&gt;::filteredItems</a>, [](<span class="keyword">auto</span> item) { item-&gt;second-&gt;<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">render</a>(); });</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, std::derived_from&lt;Renderable&gt; R&gt;</div>
-<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#ab870277670c49b51db912e245852cf1f">  129</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html">CustomCombobox&lt;T, R&gt;::checkClose</a>() {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordflow">if</span> (shouldClose) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    closeNow();</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    shouldClose = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> scopedFont = <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">CustomItemBox&lt;T, R&gt;::applyFont</a>();</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *previewPtr = previewValue.c_str();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    RAII end{ImGui::EndCombo};</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    checkClose();</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    std::ranges::for_each(<a class="code" href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">CustomItemBox&lt;T, R&gt;::filteredItems</a>, [](<span class="keyword">auto</span> item) { item-&gt;second-&gt;<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">render</a>(); });</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, std::derived_from&lt;Renderable&gt; R&gt;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#ab870277670c49b51db912e245852cf1f">  130</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html">CustomCombobox&lt;T, R&gt;::checkClose</a>() {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keywordflow">if</span> (shouldClose) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    closeNow();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    shouldClose = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_CUSTOMCOMBOBOX_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomItemBox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">pf::ui::ig::CustomItemBox</a></div><div class="ttdoc">Box containing items provided by user based on stored type.</div><div class="ttdef"><b>Definition:</b> CustomItemBox.h:42</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomItemBox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">pf::ui::ig::CustomItemBox</a></div><div class="ttdoc">Box containing items provided by user based on stored type.</div><div class="ttdef"><b>Definition:</b> CustomItemBox.h:43</div></div>
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleCustomizable_html_abf5429b381aecff52fae22bb516719cb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#abf5429b381aecff52fae22bb516719cb">pf::ui::ig::StyleCustomizable::setStyleStack</a></div><div class="ttdeci">RAII setStyleStack()</div><div class="ttdef"><b>Definition:</b> Customizable.h:195</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleCustomizable_html_abf5429b381aecff52fae22bb516719cb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#abf5429b381aecff52fae22bb516719cb">pf::ui::ig::StyleCustomizable::setStyleStack</a></div><div class="ttdeci">RAII setStyleStack()</div><div class="ttdef"><b>Definition:</b> Customizable.h:217</div></div>
 <div class="ttc" id="aCustomItemBox_8h_html"><div class="ttname"><a href="CustomItemBox_8h.html">CustomItemBox.h</a></div><div class="ttdoc">Customizable item container.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorCustomizable_html_ab947e3afca3160a54d077acf14f4c35c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html#ab947e3afca3160a54d077acf14f4c35c">pf::ui::ig::ColorCustomizable::setColorStack</a></div><div class="ttdeci">RAII setColorStack()</div><div class="ttdef"><b>Definition:</b> Customizable.h:102</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorCustomizable_html_ab947e3afca3160a54d077acf14f4c35c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html#ab947e3afca3160a54d077acf14f4c35c">pf::ui::ig::ColorCustomizable::setColorStack</a></div><div class="ttdeci">RAII setColorStack()</div><div class="ttdef"><b>Definition:</b> Customizable.h:124</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html_a23e2943b6326ba078b6e866a3c88b65d"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a23e2943b6326ba078b6e866a3c88b65d">pf::ui::ig::CustomCombobox::close</a></div><div class="ttdeci">void close()</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:66</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:25</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html">pf::ui::ig::CustomCombobox</a></div><div class="ttdoc">Combobox where rows can be whatever is provided by the user.</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:36</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html_a4a97d61ccdfc2183c16f9cec073b1b32"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a4a97d61ccdfc2183c16f9cec073b1b32">pf::ui::ig::CustomCombobox::CustomCombobox</a></div><div class="ttdeci">CustomCombobox(const std::string &amp;elementName, const std::string &amp;label, CustomItemBoxFactory&lt; T, R &gt; auto &amp;&amp;rowFactory, std::string prevValue=&quot;&quot;, ComboBoxCount showItemCount=ComboBoxCount::Items8)</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:91</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html_a771e463a254223e73652e894bd0a472b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a771e463a254223e73652e894bd0a472b">pf::ui::ig::CustomCombobox::closeNow</a></div><div class="ttdeci">void closeNow()</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:76</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html_ac9485e0ac1206b1a271525c74cba08f9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">pf::ui::ig::ItemElement::render</a></div><div class="ttdeci">void render() override</div><div class="ttdef"><b>Definition:</b> ItemElement.cpp:22</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html_ac9485e0ac1206b1a271525c74cba08f9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">pf::ui::ig::ItemElement::render</a></div><div class="ttdeci">void render() override</div><div class="ttdef"><b>Definition:</b> ItemElement.cpp:23</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
