@@ -200,7 +200,7 @@ set(SOURCES
         src/pf_imgui/elements/IndeterminateProgressBar.cpp
         src/pf_imgui/elements/OverlayGizmo.cpp
         src/pf_imgui/elements/details/OverlayGizmoBase.cpp
-        src/pf_imgui/interface/ElementBase.cpp
+        src/pf_imgui/interface/Element.cpp
         )
 
 set(BLUEPRINT_SOURCES
