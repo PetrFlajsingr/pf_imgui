@@ -27,7 +27,8 @@ namespace pf::ui::ig {
 class DatePicker : public ItemElement,
                    public Labellable,
                    public ValueObservable<std::chrono::year_month_day>,
-                   public Savable, public FontCustomizable {
+                   public Savable,
+                   public FontCustomizable {
  public:
   /**
    * @brief Construction config for DatePicker

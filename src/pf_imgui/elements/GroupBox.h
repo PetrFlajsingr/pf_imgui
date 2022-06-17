@@ -21,10 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief A group of elements with a border and a label.
  */
-class PF_IMGUI_EXPORT GroupBox : public ElementWithID,
-                                 public ElementContainer,
-                                 public Labellable,
-                                 public Resizable {
+class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer, public Labellable, public Resizable {
  public:
   /**
    * @brief Struct for construction of GroupBox.

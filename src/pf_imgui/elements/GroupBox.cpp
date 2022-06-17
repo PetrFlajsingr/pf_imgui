@@ -9,7 +9,8 @@
 namespace pf::ui::ig {
 
 GroupBox::GroupBox(GroupBox::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}), Resizable(config.size) {}
+    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      Resizable(config.size) {}
 
 GroupBox::GroupBox(const std::string &name, const std::string &label, Size s)
     : ElementWithID(name), Labellable(label), Resizable(s) {}

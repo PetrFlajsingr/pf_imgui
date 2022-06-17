@@ -8,8 +8,8 @@
 namespace pf::ui::ig {
 
 FlameGraph::FlameGraph(FlameGraph::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}), Resizable(config.size),
-      overlay(std::move(config.overlay)) {}
+    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      Resizable(config.size), overlay(std::move(config.overlay)) {}
 
 FlameGraph::FlameGraph(const std::string &elementName, const std::string &label, const Size &size,
                        std::optional<std::string> overlay)

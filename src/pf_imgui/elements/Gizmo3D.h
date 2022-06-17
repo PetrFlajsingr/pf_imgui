@@ -80,7 +80,8 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
    * @param newObject type of the object to render
    */
   void setMidObject(GizmoMid newObject)
-    requires(Type != GizmoType::Direction);
+    requires(Type != GizmoType::Direction)
+  ;
 
   void setSize(const Size &s) override;
 

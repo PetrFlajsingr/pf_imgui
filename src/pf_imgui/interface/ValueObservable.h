@@ -30,8 +30,10 @@ struct DefaultComparator {
 }  // namespace details
 
 template<typename T, typename ValueType>
-concept ValueObservableComparator = std::invocable<T, ValueType, ValueType>
-    && std::same_as<std::invoke_result_t<T, ValueType, ValueType>, bool> && std::is_default_constructible_v<T>;
+concept ValueObservableComparator =
+    std::invocable<T, ValueType, ValueType> && std::same_as < std::invoke_result_t<T, ValueType, ValueType>,
+        bool
+> &&std::is_default_constructible_v<T>;
 /**
  * @brief Interface for elements with observable values.
  *

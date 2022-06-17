@@ -8,10 +8,10 @@
 #ifndef PF_IMGUI_ELEMENTS_GRADIENTEDITOR_H
 #define PF_IMGUI_ELEMENTS_GRADIENTEDITOR_H
 
-#include <pf_imgui/interface/Customizable.h>
 #include <imgui_color_gradient.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Color.h>
+#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Focusable.h>
 #include <pf_imgui/interface/Hoverable.h>

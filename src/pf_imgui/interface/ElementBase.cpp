@@ -21,5 +21,4 @@ Element &Element::operator=(Element &&other) noexcept {
   return *this;
 }
 
-
 }  // namespace pf::ui::ig
