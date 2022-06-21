@@ -78,171 +78,169 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Clickable_8h.html">pf_imgui/interface/Clickable.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Customizable_8h.html">pf_imgui/interface/Customizable.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementContainer_8h.html">pf_imgui/interface/ElementContainer.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementWithID_8h.html">pf_imgui/interface/ElementWithID.h</a>&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// @todo: TabBar flags</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">enum class</span> TabMod {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  DisplayDot = ImGuiTabItemFlags_UnsavedDocument,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  DisableMidMouseClose = ImGuiTabItemFlags_NoCloseWithMiddleMouseButton,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  ForceLeft = ImGuiTabItemFlags_Leading,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  ForceRight = ImGuiTabItemFlags_Trailing</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// TODO: styles/fonts to all these</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TabButton.html">   38</a></span>&#160;<span class="comment"></span><span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Clickable.html">Clickable</a> {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html">   43</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html">Config</a> {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#ab054b65d86057a7ce50e1d3f85293d35">   45</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#ab054b65d86057a7ce50e1d3f85293d35">name</a>;  </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a2cd83bc65dae7d3c53cb6b9d5a162a36">   46</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a2cd83bc65dae7d3c53cb6b9d5a162a36">label</a>; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a9bca18829da5c9db0931ab42f1c5c4f1">   47</a></span>&#160;    Flags&lt;TabMod&gt; mods{};             </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>(Config &amp;&amp;config);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{});</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> setMods(<span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  ImGuiTabItemFlags flags;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Tab.html">   71</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">   76</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">Config</a> {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#af9112737c133a5d51b7642a5fc81a6a8">   78</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#af9112737c133a5d51b7642a5fc81a6a8">name</a>;  </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a70fb752d4d980fed31195c4f1d4b00c3">   79</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a70fb752d4d980fed31195c4f1d4b00c3">label</a>; </div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a2e5c22fd73f917e15c8041d7bc060696">   80</a></span>&#160;    Flags&lt;TabMod&gt; mods{};             </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a131c499b0c2415fa082947566bd8ba54">   81</a></span>&#160;    <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>;           </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  };</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{},</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  ~<a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Tab.html#a3e024406fea333a49cda222135294482">  109</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html#a3e024406fea333a49cda222135294482">addOpenListener</a>(std::invocable&lt;bool&gt; <span class="keyword">auto</span> &amp;&amp;listener) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    openObservable.addListener(std::forward&lt;decltype(listener)&gt;(listener));</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isOpen() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isSelected() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordtype">void</span> setOpen(<span class="keywordtype">bool</span> newOpen);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordtype">void</span> setSelected();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isDisplayDot() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keywordtype">void</span> setDisplayDot(<span class="keywordtype">bool</span> displayDot);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> openObservable;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> selectedObservable;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordtype">bool</span> *open;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordtype">bool</span> selected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="keywordtype">bool</span> setSelectedInNextFrame = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;};</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TabBar.html">  145</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html">RenderablesContainer</a> {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <span class="keyword">enum class</span> ResizePolicy {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown,</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    Scroll = ImGuiTabBarFlags_FittingPolicyScroll</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  };</div>
-<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">  154</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">Config</a> {</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a3ce2d366959b8db8edf5ee3fca0496fb">  156</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a3ce2d366959b8db8edf5ee3fca0496fb">name</a>; </div>
-<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a048105d9f33f31c9b2b40706aa415d35">  157</a></span>&#160;    <span class="keywordtype">bool</span> allowTabList = <span class="keyword">false</span>;       </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  };</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keywordtype">bool</span> allowTabList = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a> &amp;addTab(<span class="keyword">const</span> std::string &amp;tabName, <span class="keyword">const</span> std::string &amp;caption, <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{},</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;              <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a> &amp;addTab(<span class="keyword">const</span> std::string &amp;tabName, <span class="keyword">const</span> std::string &amp;caption, <span class="keywordtype">bool</span> closeable);</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a> &amp;addTabButton(<span class="keyword">const</span> std::string &amp;buttonName, <span class="keyword">const</span> std::string &amp;caption,</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                          <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{});</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keywordtype">void</span> removeTab(<span class="keyword">const</span> std::string &amp;tabName);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  [[nodiscard]] Tab &amp;getSelectedTab();</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordtype">void</span> setSelectedTab(std::string_view tabName);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isTabListAllowed() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="keywordtype">void</span> setTabListAllowed(<span class="keywordtype">bool</span> listAllowed);</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isReorderable() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <span class="keywordtype">void</span> setReorderable(<span class="keywordtype">bool</span> reorderable);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isCloseMidMouseButton() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordtype">void</span> setCloseMidMouseButton(<span class="keywordtype">bool</span> allowedClose);</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  [[nodiscard]] Flags&lt;ResizePolicy&gt; getResizePolicy() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <span class="keywordtype">void</span> setResizePolicy(<span class="keyword">const</span> Flags&lt;ResizePolicy&gt; &amp;newPolicy);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  [[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> getTabButtons()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">return</span> tabs | std::views::transform([](<span class="keyword">auto</span> &amp;btn) -&gt; TabButton &amp; { <span class="keywordflow">return</span> *btn; });</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  [[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> getTabs()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">return</span> tabs | std::views::filter([](<span class="keyword">auto</span> &amp;tabButton) { <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>Tab *<span class="keyword">&gt;</span>(tabButton.get()) != <span class="keyword">nullptr</span>; })</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        | std::views::transform([](<span class="keyword">auto</span> &amp;tab) -&gt; Tab &amp; { <span class="keywordflow">return</span> *<span class="keyword">dynamic_cast&lt;</span>Tab *<span class="keyword">&gt;</span>(tab.get()); });</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  std::vector&lt;std::unique_ptr&lt;TabButton&gt;&gt; tabs;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  ImGuiTabBarFlags flags = 0;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;};</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_TABBAR_H</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementContainer_8h.html">pf_imgui/interface/ElementContainer.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementWithID_8h.html">pf_imgui/interface/ElementWithID.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// @todo: TabBar flags</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">enum class</span> TabMod {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  DisplayDot = ImGuiTabItemFlags_UnsavedDocument,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  DisableMidMouseClose = ImGuiTabItemFlags_NoCloseWithMiddleMouseButton,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  ForceLeft = ImGuiTabItemFlags_Leading,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  ForceRight = ImGuiTabItemFlags_Trailing</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// TODO: styles/fonts to all these</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TabButton.html">   37</a></span>&#160;<span class="comment"></span><span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Clickable.html">Clickable</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html">   42</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html">Config</a> {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#ab054b65d86057a7ce50e1d3f85293d35">   44</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#ab054b65d86057a7ce50e1d3f85293d35">name</a>;  </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a2cd83bc65dae7d3c53cb6b9d5a162a36">   45</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a2cd83bc65dae7d3c53cb6b9d5a162a36">label</a>; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a9bca18829da5c9db0931ab42f1c5c4f1">   46</a></span>&#160;    Flags&lt;TabMod&gt; mods{};             </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  };</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>(Config &amp;&amp;config);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{});</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">void</span> setMods(<span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  ImGuiTabItemFlags flags;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Tab.html">   70</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">   75</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">Config</a> {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#af9112737c133a5d51b7642a5fc81a6a8">   77</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#af9112737c133a5d51b7642a5fc81a6a8">name</a>;  </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a70fb752d4d980fed31195c4f1d4b00c3">   78</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a70fb752d4d980fed31195c4f1d4b00c3">label</a>; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a2e5c22fd73f917e15c8041d7bc060696">   79</a></span>&#160;    Flags&lt;TabMod&gt; mods{};             </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a131c499b0c2415fa082947566bd8ba54">   80</a></span>&#160;    <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>;           </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  };</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">Config</a> &amp;&amp;config);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{},</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  ~<a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Tab.html#a3e024406fea333a49cda222135294482">  108</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html#a3e024406fea333a49cda222135294482">addOpenListener</a>(std::invocable&lt;bool&gt; <span class="keyword">auto</span> &amp;&amp;listener) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    openObservable.addListener(std::forward&lt;decltype(listener)&gt;(listener));</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isOpen() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isSelected() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordtype">void</span> setOpen(<span class="keywordtype">bool</span> newOpen);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keywordtype">void</span> setSelected();</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isDisplayDot() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordtype">void</span> setDisplayDot(<span class="keywordtype">bool</span> displayDot);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> openObservable;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> selectedObservable;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keywordtype">bool</span> *open;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordtype">bool</span> selected = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordtype">bool</span> setSelectedInNextFrame = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;};</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TabBar.html">  144</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html">RenderablesContainer</a> {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keyword">enum class</span> ResizePolicy {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    Scroll = ImGuiTabBarFlags_FittingPolicyScroll</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  };</div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">  153</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">Config</a> {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a3ce2d366959b8db8edf5ee3fca0496fb">  155</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a3ce2d366959b8db8edf5ee3fca0496fb">name</a>; </div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a048105d9f33f31c9b2b40706aa415d35">  156</a></span>&#160;    <span class="keywordtype">bool</span> allowTabList = <span class="keyword">false</span>;       </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  };</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">Config</a> &amp;&amp;config);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TabBar.html">TabBar</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keywordtype">bool</span> allowTabList = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a> &amp;addTab(<span class="keyword">const</span> std::string &amp;tabName, <span class="keyword">const</span> std::string &amp;caption, <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{},</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;              <span class="keywordtype">bool</span> closeable = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Tab.html">Tab</a> &amp;addTab(<span class="keyword">const</span> std::string &amp;tabName, <span class="keyword">const</span> std::string &amp;caption, <span class="keywordtype">bool</span> closeable);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1TabButton.html">TabButton</a> &amp;addTabButton(<span class="keyword">const</span> std::string &amp;buttonName, <span class="keyword">const</span> std::string &amp;caption,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                          <span class="keyword">const</span> Flags&lt;TabMod&gt; &amp;mods = Flags&lt;TabMod&gt;{});</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keywordtype">void</span> removeTab(<span class="keyword">const</span> std::string &amp;tabName);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  [[nodiscard]] Tab &amp;getSelectedTab();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordtype">void</span> setSelectedTab(std::string_view tabName);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isTabListAllowed() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keywordtype">void</span> setTabListAllowed(<span class="keywordtype">bool</span> listAllowed);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isReorderable() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <span class="keywordtype">void</span> setReorderable(<span class="keywordtype">bool</span> reorderable);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isCloseMidMouseButton() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="keywordtype">void</span> setCloseMidMouseButton(<span class="keywordtype">bool</span> allowedClose);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  [[nodiscard]] Flags&lt;ResizePolicy&gt; getResizePolicy() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="keywordtype">void</span> setResizePolicy(<span class="keyword">const</span> Flags&lt;ResizePolicy&gt; &amp;newPolicy);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  [[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> getTabButtons()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">return</span> tabs | std::views::transform([](<span class="keyword">auto</span> &amp;btn) -&gt; TabButton &amp; { <span class="keywordflow">return</span> *btn; });</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  [[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> getTabs()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">return</span> tabs | std::views::filter([](<span class="keyword">auto</span> &amp;tabButton) { <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>Tab *<span class="keyword">&gt;</span>(tabButton.get()) != <span class="keyword">nullptr</span>; })</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        | std::views::transform([](<span class="keyword">auto</span> &amp;tab) -&gt; Tab &amp; { <span class="keywordflow">return</span> *<span class="keyword">dynamic_cast&lt;</span>Tab *<span class="keyword">&gt;</span>(tab.get()); });</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  std::vector&lt;std::unique_ptr&lt;TabButton&gt;&gt; tabs;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  ImGuiTabBarFlags flags = 0;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;};</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_TABBAR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of ElementWithID.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:29</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabBar_1_1Config_html_a3ce2d366959b8db8edf5ee3fca0496fb"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a3ce2d366959b8db8edf5ee3fca0496fb">pf::ui::ig::TabBar::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> TabBar.h:156</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Tab_1_1Config_html_af9112737c133a5d51b7642a5fc81a6a8"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#af9112737c133a5d51b7642a5fc81a6a8">pf::ui::ig::Tab::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> TabBar.h:78</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabBar_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">pf::ui::ig::TabBar::Config</a></div><div class="ttdoc">Struct for construction of TabBar.</div><div class="ttdef"><b>Definition:</b> TabBar.h:154</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Tab_1_1Config_html_a70fb752d4d980fed31195c4f1d4b00c3"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a70fb752d4d980fed31195c4f1d4b00c3">pf::ui::ig::Tab::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> TabBar.h:79</div></div>
-<div class="ttc" id="aCustomizable_8h_html"><div class="ttname"><a href="Customizable_8h.html">Customizable.h</a></div><div class="ttdoc">Interface to provide customization functionality to its descendants.</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabBar_1_1Config_html_a3ce2d366959b8db8edf5ee3fca0496fb"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html#a3ce2d366959b8db8edf5ee3fca0496fb">pf::ui::ig::TabBar::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> TabBar.h:155</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Tab_1_1Config_html_af9112737c133a5d51b7642a5fc81a6a8"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#af9112737c133a5d51b7642a5fc81a6a8">pf::ui::ig::Tab::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> TabBar.h:77</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabBar_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabBar_1_1Config.html">pf::ui::ig::TabBar::Config</a></div><div class="ttdoc">Struct for construction of TabBar.</div><div class="ttdef"><b>Definition:</b> TabBar.h:153</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Tab_1_1Config_html_a70fb752d4d980fed31195c4f1d4b00c3"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html#a70fb752d4d980fed31195c4f1d4b00c3">pf::ui::ig::Tab::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> TabBar.h:78</div></div>
 <div class="ttc" id="aClickable_8h_html"><div class="ttname"><a href="Clickable_8h.html">Clickable.h</a></div><div class="ttdoc">Interface for elements which can be clicked.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TabBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TabBar.html">pf::ui::ig::TabBar</a></div><div class="ttdoc">A bar for containment and switching of tabs.</div><div class="ttdef"><b>Definition:</b> TabBar.h:145</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabButton_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html">pf::ui::ig::TabButton::Config</a></div><div class="ttdoc">Struct for construction of TabButton.</div><div class="ttdef"><b>Definition:</b> TabBar.h:43</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Tab_html_a3e024406fea333a49cda222135294482"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Tab.html#a3e024406fea333a49cda222135294482">pf::ui::ig::Tab::addOpenListener</a></div><div class="ttdeci">void addOpenListener(std::invocable&lt; bool &gt; auto &amp;&amp;listener)</div><div class="ttdef"><b>Definition:</b> TabBar.h:109</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TabButton_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TabButton.html">pf::ui::ig::TabButton</a></div><div class="ttdoc">A button which looks like a Tab in TabBar.</div><div class="ttdef"><b>Definition:</b> TabBar.h:38</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabButton_1_1Config_html_ab054b65d86057a7ce50e1d3f85293d35"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#ab054b65d86057a7ce50e1d3f85293d35">pf::ui::ig::TabButton::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> TabBar.h:45</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabButton_1_1Config_html_a2cd83bc65dae7d3c53cb6b9d5a162a36"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a2cd83bc65dae7d3c53cb6b9d5a162a36">pf::ui::ig::TabButton::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> TabBar.h:46</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1RenderablesContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html">pf::ui::ig::RenderablesContainer</a></div><div class="ttdef"><b>Definition:</b> RenderablesContainer.h:14</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TabBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TabBar.html">pf::ui::ig::TabBar</a></div><div class="ttdoc">A bar for containment and switching of tabs.</div><div class="ttdef"><b>Definition:</b> TabBar.h:144</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabButton_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html">pf::ui::ig::TabButton::Config</a></div><div class="ttdoc">Struct for construction of TabButton.</div><div class="ttdef"><b>Definition:</b> TabBar.h:42</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Tab_html_a3e024406fea333a49cda222135294482"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Tab.html#a3e024406fea333a49cda222135294482">pf::ui::ig::Tab::addOpenListener</a></div><div class="ttdeci">void addOpenListener(std::invocable&lt; bool &gt; auto &amp;&amp;listener)</div><div class="ttdef"><b>Definition:</b> TabBar.h:108</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TabButton_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TabButton.html">pf::ui::ig::TabButton</a></div><div class="ttdoc">A button which looks like a Tab in TabBar.</div><div class="ttdef"><b>Definition:</b> TabBar.h:37</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabButton_1_1Config_html_ab054b65d86057a7ce50e1d3f85293d35"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#ab054b65d86057a7ce50e1d3f85293d35">pf::ui::ig::TabButton::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> TabBar.h:44</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1TabButton_1_1Config_html_a2cd83bc65dae7d3c53cb6b9d5a162a36"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1TabButton_1_1Config.html#a2cd83bc65dae7d3c53cb6b9d5a162a36">pf::ui::ig::TabButton::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> TabBar.h:45</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1RenderablesContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html">pf::ui::ig::RenderablesContainer</a></div><div class="ttdef"><b>Definition:</b> RenderablesContainer.h:16</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:25</div></div>
 <div class="ttc" id="aElementWithID_8h_html"><div class="ttname"><a href="ElementWithID_8h.html">ElementWithID.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements and need ID or/and a font.</div></div>
 <div class="ttc" id="aElementContainer_8h_html"><div class="ttname"><a href="ElementContainer_8h.html">ElementContainer.h</a></div><div class="ttdoc">Base class for objects which can hold arbitrary elements.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Clickable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Clickable.html">pf::ui::ig::Clickable</a></div><div class="ttdoc">Interface for clickable elements.</div><div class="ttdef"><b>Definition:</b> Clickable.h:25</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Tab_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">pf::ui::ig::Tab::Config</a></div><div class="ttdoc">Struct for construction of Tab.</div><div class="ttdef"><b>Definition:</b> TabBar.h:76</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Tab_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Tab.html">pf::ui::ig::Tab</a></div><div class="ttdoc">Par of TabBar, when clicked it switches to the selected sub-layout.</div><div class="ttdef"><b>Definition:</b> TabBar.h:71</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Tab_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Tab_1_1Config.html">pf::ui::ig::Tab::Config</a></div><div class="ttdoc">Struct for construction of Tab.</div><div class="ttdef"><b>Definition:</b> TabBar.h:75</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Tab_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Tab.html">pf::ui::ig::Tab</a></div><div class="ttdoc">Par of TabBar, when clicked it switches to the selected sub-layout.</div><div class="ttdef"><b>Definition:</b> TabBar.h:70</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">pf::ui::ig::Observable_impl&lt; bool &gt;</a></div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementWithID_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></div><div class="ttdoc">Interface for all ImGui elements with IDs.</div><div class="ttdef"><b>Definition:</b> ElementWithID.h:31</div></div>

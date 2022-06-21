@@ -123,7 +123,7 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  toml::table config;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">   72</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html">AllStyleCustomizable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html">AllColorCustomizable</a> {</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">   72</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1ImGuiConfig.html">ImGuiConfig</a> config);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
@@ -179,8 +179,8 @@ $(function() {
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <span class="keywordtype">void</span> removeBackgroundDockingArea();</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="comment">// TODO: change this to something not insane</span></div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a>(std::constructible_from&lt;ViewportOverlayGizmo, Args...&gt;)</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html">ViewportOverlayGizmo</a> &amp;createOrGetViewportGizmo(Args &amp;&amp;...args) {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a>(std::constructible_from&lt;ViewportOverlayGizmo, Args...&gt;) [</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        [nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html">ViewportOverlayGizmo</a> &amp;createOrGetViewportGizmo(Args &amp;&amp;...args) {</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordflow">if</span> (viewportGizmo == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;      viewportGizmo = std::make_unique&lt;ViewportOverlayGizmo&gt;(std::forward&lt;Args&gt;(args)...);</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    }</div>
@@ -191,69 +191,67 @@ $(function() {
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> updateFonts() = 0;</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  [[nodiscard]] Font getGlobalFont() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keywordtype">void</span> setGlobalFont(Font globalFont);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  [[nodiscard]] FontManager &amp;getFontManager();</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  [[nodiscard]] <span class="keyword">const</span> FontManager &amp;getFontManager() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  [[nodiscard]] FontManager &amp;getFontManager();</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  [[nodiscard]] <span class="keyword">const</span> FontManager &amp;getFontManager() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  [[nodiscard]] NotificationManager &amp;getNotificationManager();</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  [[nodiscard]] <span class="keyword">const</span> NotificationManager &amp;getNotificationManager() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  [[nodiscard]] NotificationManager &amp;getNotificationManager();</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  [[nodiscard]] <span class="keyword">const</span> NotificationManager &amp;getNotificationManager() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  [[nodiscard]] DialogManager &amp;getDialogManager();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  [[nodiscard]] <span class="keyword">const</span> DialogManager &amp;getDialogManager() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  [[nodiscard]] DialogManager &amp;getDialogManager();</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  [[nodiscard]] <span class="keyword">const</span> DialogManager &amp;getDialogManager() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  std::unique_ptr&lt;AppMenuBar&gt; menuBar = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> newFrame_impl() = 0;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> renderDrawData_impl(ImDrawData *drawData) = 0;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> updateMultiViewport();</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="comment">// @warning you need to update font atlas manually when this value is set</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  <span class="keywordtype">bool</span> shouldUpdateFontAtlas = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  <span class="keywordtype">void</span> setContext() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  Font globalFont = Font::Default();</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span>FontManager;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  ImGuiContext *imguiContext = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  <span class="keyword">struct </span>ImPlotContext *imPlotContext = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  ImGuiIO &amp;io;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  FontManager fontManager;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  NotificationManager notificationManager;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  DialogManager dialogManager;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;  std::size_t idCounter{};</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  std::vector&lt;std::unique_ptr&lt;Window&gt;&gt; windows{};</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  std::unique_ptr&lt;AppStatusBar&gt; statusBar = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;  toml::table config;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  std::vector&lt;std::unique_ptr&lt;DragNDropGroup&gt;&gt; dragNDropGroups{};</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  std::vector&lt;std::unique_ptr&lt;RadioGroup&gt;&gt; radioGroups{};</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  std::vector&lt;std::unique_ptr&lt;CommandPaletteWindow&gt;&gt; commandPalettes{};</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  std::vector&lt;std::unique_ptr&lt;DockBuilder&gt;&gt; dockBuilders{};</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  std::unique_ptr&lt;BackgroundDockingArea&gt; backgroundDockingArea = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  std::unique_ptr&lt;ViewportOverlayGizmo&gt; viewportGizmo{};</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  FullColorPalette color;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  FullStyleOptions style;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  Font font = Font::Default();</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  std::unique_ptr&lt;AppMenuBar&gt; menuBar = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> newFrame_impl() = 0;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> renderDrawData_impl(ImDrawData *drawData) = 0;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> updateMultiViewport();</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  <span class="comment">// @warning you need to update font atlas manually when this value is set</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  <span class="keywordtype">bool</span> shouldUpdateFontAtlas = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  <span class="keywordtype">void</span> setContext() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span>FontManager;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  ImGuiContext *imguiContext = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  <span class="keyword">struct </span>ImPlotContext *imPlotContext = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  ImGuiIO &amp;io;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  FontManager fontManager;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  NotificationManager notificationManager;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  DialogManager dialogManager;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  std::size_t idCounter{};</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  std::vector&lt;std::unique_ptr&lt;Window&gt;&gt; windows{};</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  std::unique_ptr&lt;AppStatusBar&gt; statusBar = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  toml::table config;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  std::vector&lt;std::unique_ptr&lt;DragNDropGroup&gt;&gt; dragNDropGroups{};</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  std::vector&lt;std::unique_ptr&lt;RadioGroup&gt;&gt; radioGroups{};</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  std::vector&lt;std::unique_ptr&lt;CommandPaletteWindow&gt;&gt; commandPalettes{};</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  std::vector&lt;std::unique_ptr&lt;DockBuilder&gt;&gt; dockBuilders{};</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  std::unique_ptr&lt;BackgroundDockingArea&gt; backgroundDockingArea = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  std::unique_ptr&lt;ViewportOverlayGizmo&gt; viewportGizmo{};</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;};</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;};</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_IMGUIINTERFACE_H</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_IMGUIINTERFACE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">pf::ui::ig::CommandPaletteWindow</a></div><div class="ttdoc">A command palette like in sublime text or VSC.</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.h:22</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a502176a0deb2da5a07632f8792bd8d5f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a502176a0deb2da5a07632f8792bd8d5f">pf::ui::ig::ImGuiInterface::setStyle</a></div><div class="ttdeci">void setStyle(std::invocable&lt; ImGuiStyle &amp; &gt; auto styleSetter)</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:225</div></div>
@@ -261,7 +259,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DockBuilder_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DockBuilder.html">pf::ui::ig::DockBuilder</a></div><div class="ttdoc">Builder for DockSpace.</div><div class="ttdef"><b>Definition:</b> DockBuilder.h:115</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ViewportOverlayGizmo_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html">pf::ui::ig::ViewportOverlayGizmo</a></div><div class="ttdoc">Gizmo overlaying the main viewport.</div><div class="ttdef"><b>Definition:</b> OverlayGizmo.h:23</div></div>
 <div class="ttc" id="aNotificationManager_8h_html"><div class="ttname"><a href="NotificationManager_8h.html">NotificationManager.h</a></div><div class="ttdoc">Class for management of notifications.</div></div>
-<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:187</div></div>
+<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:186</div></div>
 <div class="ttc" id="afwd_8h_html"><div class="ttname"><a href="fwd_8h.html">fwd.h</a></div><div class="ttdoc">Forward declarations.</div></div>
 <div class="ttc" id="aRadioGroup_8h_html"><div class="ttname"><a href="RadioGroup_8h.html">RadioGroup.h</a></div><div class="ttdoc">Radio group element.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1BackgroundDockingArea_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1BackgroundDockingArea.html">pf::ui::ig::BackgroundDockingArea</a></div><div class="ttdoc">A special type of window, which acts as docking area for the whole main viewport. It is always in the...</div><div class="ttdef"><b>Definition:</b> BackgroundDockingArea.h:19</div></div>
@@ -278,14 +276,12 @@ $(function() {
 <div class="ttc" id="aFontManager_8h_html"><div class="ttname"><a href="FontManager_8h.html">FontManager.h</a></div><div class="ttdoc">Class for building and managing imgui fonts.</div></div>
 <div class="ttc" id="aOverlayGizmo_8h_html"><div class="ttname"><a href="OverlayGizmo_8h.html">OverlayGizmo.h</a></div><div class="ttdoc">Gizmos overlaying entire viewport or a window.</div></div>
 <div class="ttc" id="aElementContainer_8h_html"><div class="ttname"><a href="ElementContainer_8h.html">ElementContainer.h</a></div><div class="ttdoc">Base class for objects which can hold arbitrary elements.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorCustomizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html">pf::ui::ig::ColorCustomizable</a></div><div class="ttdoc">An interface to allow for changing color style. It also provides functionality to apply these styles.</div><div class="ttdef"><b>Definition:</b> Customizable.h:85</div></div>
 <div class="ttc" id="aFileDialog_8h_html"><div class="ttname"><a href="FileDialog_8h.html">FileDialog.h</a></div><div class="ttdoc">Dialog for selecting files on disk.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html_a7047a5ad8a32e1cb96101a29f8c24831"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#a7047a5ad8a32e1cb96101a29f8c24831">pf::ui::ig::ImGuiInterface::getWindows</a></div><div class="ttdeci">auto getWindows()</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:153</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:25</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AppStatusBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AppStatusBar.html">pf::ui::ig::AppStatusBar</a></div><div class="ttdoc">A status bar rendered on the bottom of the main window.</div><div class="ttdef"><b>Definition:</b> StatusBar.h:19</div></div>
 <div class="ttc" id="aInputDialog_8h_html"><div class="ttname"><a href="InputDialog_8h.html">InputDialog.h</a></div><div class="ttdoc">Convenience dialog for text input.</div></div>
 <div class="ttc" id="aMessageDialog_8h_html"><div class="ttname"><a href="MessageDialog_8h.html">MessageDialog.h</a></div><div class="ttdoc">Simplified Dialog for informing a user and getting his response.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleCustomizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html">pf::ui::ig::StyleCustomizable</a></div><div class="ttdoc">An interface to allow for changing style. It also provides functionality to apply these styles.</div><div class="ttdef"><b>Definition:</b> Customizable.h:173</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AppMenuBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">pf::ui::ig::AppMenuBar</a></div><div class="ttdoc">Menu bar belonging to the entire application window.</div><div class="ttdef"><b>Definition:</b> MenuBars.h:56</div></div>
 <div class="ttc" id="aDragNDrop_8h_html"><div class="ttname"><a href="DragNDrop_8h.html">DragNDrop.h</a></div><div class="ttdoc">Definitions for drag and drop interface.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1ImGuiConfig_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1ImGuiConfig.html">pf::ui::ig::ImGuiConfig</a></div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:54</div></div>

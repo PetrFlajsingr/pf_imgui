@@ -256,101 +256,102 @@ $(function() {
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Table.html">Table&lt;ColumnCount&gt;::renderImpl</a>() {</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> colorStyle = setColorStack();</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> style = setStyleStack();</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, <span class="keyword">static_cast&lt;</span>ImVec2<span class="keyword">&gt;</span>(getSize()))) {</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    RAII end{ImGui::EndTable};</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    std::ranges::for_each(std::views::iota(std::size_t{0}, ColumnCount), [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> index) {</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">char</span> *name = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      <span class="keywordflow">if</span> (header.has_value()) { name = (*header)[index].c_str(); }</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> columnFlags =</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;          columnSortFunctions[index].has_value() ? ImGuiTableColumnFlags_None : ImGuiTableColumnFlags_NoSort;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      ImGui::TableSetupColumn(name, columnFlags, 0.f, <span class="keyword">static_cast&lt;</span>ImGuiID<span class="keyword">&gt;</span>(index));</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    });</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordflow">if</span> (header.has_value()) { ImGui::TableHeadersRow(); }</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    std::ranges::for_each(rows, [](<span class="keyword">auto</span> &amp;row) {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      ImGui::TableNextRow();</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      std::ranges::for_each(row-&gt;getCells(), [](<span class="keyword">auto</span> &amp;cell) {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        if (ImGui::TableNextColumn()) { cell.render(); }</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;      });</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    });</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> sortSpecs = ImGui::TableGetSortSpecs(); sortSpecs-&gt;SpecsDirty) {</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> sortPred = [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;lhs, <span class="keyword">const</span> <span class="keyword">auto</span> &amp;rhs) {</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> specsIndex : std::views::iota(0, sortSpecs-&gt;SpecsCount)) {</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> columnSpecs = sortSpecs-&gt;Specs[specsIndex];</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> columnIndex = columnSpecs.ColumnUserID;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;          <span class="keywordflow">if</span> (columnSortFunctions[columnIndex].has_value()) {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            <span class="keyword">auto</span> comparisonResult = columnSortFunctions[columnIndex].value()((*lhs)[columnIndex], (*rhs)[columnIndex]);</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="keywordflow">if</span> (columnSpecs.SortDirection == ImGuiSortDirection_Descending) { comparisonResult = !comparisonResult; }</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <span class="keywordflow">if</span> (comparisonResult) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;          }</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        }</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;      };</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;      std::ranges::sort(rows, sortPred);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      sortSpecs-&gt;SpecsDirty = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    }</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  }</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;}</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;ImGuiTableFlags Table&lt;ColumnCount&gt;::CreateFlags(<span class="keyword">const</span> Flags&lt;TableBorder&gt; &amp;tableBorder,</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                                                <span class="keyword">const</span> Flags&lt;TableOptions&gt; &amp;options) {</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <span class="keywordflow">return</span> ImGuiTableFlags{*tableBorder | *options | ImGuiTableFlags_Sortable};</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;}</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
-<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#ad7ff3b34036247c1f20d5cc48bc4567f">  334</a></span>&#160;<a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html">TableRow&lt;ColumnCount&gt;::TableRow</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Table.html">Table&lt;ColumnCount&gt;</a> *owner, std::size_t rowId, TableRow::Cells &amp;&amp;rowCells)</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    : table(owner), id(rowId), cells(std::move(rowCells)) {}</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
-<div class="line"><a name="l00338"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#acd195aee6e651d1f2c5392a3a80c8330">  338</a></span>&#160;std::size_t <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#acd195aee6e651d1f2c5392a3a80c8330">TableRow&lt;ColumnCount&gt;::getIndex</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;  <span class="keywordflow">return</span> std::ranges::distance(table-&gt;rows.begin(), std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, &amp;TableRow::id));</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;}</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
-<div class="line"><a name="l00343"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">  343</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">TableRow&lt;ColumnCount&gt;::swapWith</a>(<span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html">TableRow</a> &amp;otherRow) {</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> thisIter = std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, &amp;TableRow::id);</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> otherIter = std::ranges::find(table-&gt;rows, otherRow.<a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#a44e0a282d8d8f2ab04dfacbd2813cc44">getId</a>(), &amp;TableRow::id);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;  ranges::iter_swap(thisIter, otherIter);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;}</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
-<div class="line"><a name="l00350"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#a3bfaa6e46bc0ce356f2c2b41c684bbb6">  350</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">TableRow&lt;ColumnCount&gt;::swapWith</a>(std::size_t index) {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> thisIter = std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, &amp;TableRow::id);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> otherIter = table-&gt;rows.begin() + index;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  ranges::iter_swap(thisIter, otherIter);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;}</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html">TableRow&lt;ColumnCount&gt;::moveImpl</a>(std::int32_t delta) {</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> targetIndex =</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      std::clamp(<span class="keyword">static_cast&lt;</span>std::int32_t<span class="keyword">&gt;</span>(getIndex()) + delta, 0, <span class="keyword">static_cast&lt;</span>std::int32_t<span class="keyword">&gt;</span>(table-&gt;rows.size()));</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> targetPosIter = table-&gt;rows.begin() + targetIndex;</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> targetIter = table-&gt;rows.insert(targetPosIter, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> originalPosIter = std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, [](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell) {</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    if (cell == nullptr) { return static_cast&lt;std::size_t&gt;(-1); }</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">return</span> cell-&gt;id;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  });</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  <span class="keyword">auto</span> thisUnique = std::move(*originalPosIter);</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  *targetIter = std::move(thisUnique);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  table-&gt;rows.erase(originalPosIter, originalPosIter + 1);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;}</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_TABLE_H</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> colorScoped = color.applyScoped();</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = style.applyScoped();</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = font.applyScopedIfNotDefault();</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, <span class="keyword">static_cast&lt;</span>ImVec2<span class="keyword">&gt;</span>(getSize()))) {</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    RAII end{ImGui::EndTable};</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    std::ranges::for_each(std::views::iota(std::size_t{0}, ColumnCount), [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> index) {</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">char</span> *name = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;      <span class="keywordflow">if</span> (header.has_value()) { name = (*header)[index].c_str(); }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> columnFlags =</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;          columnSortFunctions[index].has_value() ? ImGuiTableColumnFlags_None : ImGuiTableColumnFlags_NoSort;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;      ImGui::TableSetupColumn(name, columnFlags, 0.f, <span class="keyword">static_cast&lt;</span>ImGuiID<span class="keyword">&gt;</span>(index));</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    });</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">if</span> (header.has_value()) { ImGui::TableHeadersRow(); }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    std::ranges::for_each(rows, [](<span class="keyword">auto</span> &amp;row) {</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      ImGui::TableNextRow();</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;      std::ranges::for_each(row-&gt;getCells(), [](<span class="keyword">auto</span> &amp;cell) {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        if (ImGui::TableNextColumn()) { cell.render(); }</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;      });</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    });</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> sortSpecs = ImGui::TableGetSortSpecs(); sortSpecs-&gt;SpecsDirty) {</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> sortPred = [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;lhs, <span class="keyword">const</span> <span class="keyword">auto</span> &amp;rhs) {</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> specsIndex : std::views::iota(0, sortSpecs-&gt;SpecsCount)) {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> columnSpecs = sortSpecs-&gt;Specs[specsIndex];</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> columnIndex = columnSpecs.ColumnUserID;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;          <span class="keywordflow">if</span> (columnSortFunctions[columnIndex].has_value()) {</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="keyword">auto</span> comparisonResult = columnSortFunctions[columnIndex].value()((*lhs)[columnIndex], (*rhs)[columnIndex]);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <span class="keywordflow">if</span> (columnSpecs.SortDirection == ImGuiSortDirection_Descending) { comparisonResult = !comparisonResult; }</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            <span class="keywordflow">if</span> (comparisonResult) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;          }</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        }</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      };</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;      std::ranges::sort(rows, sortPred);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;      sortSpecs-&gt;SpecsDirty = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;}</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;ImGuiTableFlags Table&lt;ColumnCount&gt;::CreateFlags(<span class="keyword">const</span> Flags&lt;TableBorder&gt; &amp;tableBorder,</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                                                <span class="keyword">const</span> Flags&lt;TableOptions&gt; &amp;options) {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="keywordflow">return</span> ImGuiTableFlags{*tableBorder | *options | ImGuiTableFlags_Sortable};</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;}</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
+<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#ad7ff3b34036247c1f20d5cc48bc4567f">  335</a></span>&#160;<a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html">TableRow&lt;ColumnCount&gt;::TableRow</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Table.html">Table&lt;ColumnCount&gt;</a> *owner, std::size_t rowId, TableRow::Cells &amp;&amp;rowCells)</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    : table(owner), id(rowId), cells(std::move(rowCells)) {}</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#acd195aee6e651d1f2c5392a3a80c8330">  339</a></span>&#160;std::size_t <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#acd195aee6e651d1f2c5392a3a80c8330">TableRow&lt;ColumnCount&gt;::getIndex</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  <span class="keywordflow">return</span> std::ranges::distance(table-&gt;rows.begin(), std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, &amp;TableRow::id));</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;}</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
+<div class="line"><a name="l00344"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">  344</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">TableRow&lt;ColumnCount&gt;::swapWith</a>(<span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html">TableRow</a> &amp;otherRow) {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> thisIter = std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, &amp;TableRow::id);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> otherIter = std::ranges::find(table-&gt;rows, otherRow.<a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#a44e0a282d8d8f2ab04dfacbd2813cc44">getId</a>(), &amp;TableRow::id);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  ranges::iter_swap(thisIter, otherIter);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;}</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
+<div class="line"><a name="l00351"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1TableRow.html#a3bfaa6e46bc0ce356f2c2b41c684bbb6">  351</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">TableRow&lt;ColumnCount&gt;::swapWith</a>(std::size_t index) {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> thisIter = std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, &amp;TableRow::id);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> otherIter = table-&gt;rows.begin() + index;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  ranges::iter_swap(thisIter, otherIter);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;}</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> ColumnCount&gt;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1TableRow.html">TableRow&lt;ColumnCount&gt;::moveImpl</a>(std::int32_t delta) {</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> targetIndex =</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;      std::clamp(<span class="keyword">static_cast&lt;</span>std::int32_t<span class="keyword">&gt;</span>(getIndex()) + delta, 0, <span class="keyword">static_cast&lt;</span>std::int32_t<span class="keyword">&gt;</span>(table-&gt;rows.size()));</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> targetPosIter = table-&gt;rows.begin() + targetIndex;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> targetIter = table-&gt;rows.insert(targetPosIter, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> originalPosIter = std::ranges::find(table-&gt;rows, <span class="keywordtype">id</span>, [](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell) {</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    if (cell == nullptr) { return static_cast&lt;std::size_t&gt;(-1); }</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordflow">return</span> cell-&gt;id;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  });</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  <span class="keyword">auto</span> thisUnique = std::move(*originalPosIter);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  *targetIter = std::move(thisUnique);</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;  table-&gt;rows.erase(originalPosIter, originalPosIter + 1);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;}</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_TABLE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Table_html_a82e2528390137cfd1bca5139ca7996c2"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Table.html#a82e2528390137cfd1bca5139ca7996c2">pf::ui::ig::Table::Table</a></div><div class="ttdeci">Table(Config &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> Table.h:261</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_acd195aee6e651d1f2c5392a3a80c8330"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#acd195aee6e651d1f2c5392a3a80c8330">pf::ui::ig::TableRow::getIndex</a></div><div class="ttdeci">std::size_t getIndex() const</div><div class="ttdef"><b>Definition:</b> Table.h:338</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_acd195aee6e651d1f2c5392a3a80c8330"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#acd195aee6e651d1f2c5392a3a80c8330">pf::ui::ig::TableRow::getIndex</a></div><div class="ttdeci">std::size_t getIndex() const</div><div class="ttdef"><b>Definition:</b> Table.h:339</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_abffc124509f537024a6f7faf21d1d5b3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#abffc124509f537024a6f7faf21d1d5b3">pf::ui::ig::TableRow::getCells</a></div><div class="ttdeci">auto getCells() const</div><div class="ttdef"><b>Definition:</b> Table.h:95</div></div>
-<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:187</div></div>
+<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:186</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRowBuilder_1_1Result_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRowBuilder_1_1Result.html">pf::ui::ig::TableRowBuilder::Result</a></div><div class="ttdoc">Wrapper to allow access for newly created ElementWithID when building Row.</div><div class="ttdef"><b>Definition:</b> Table.h:133</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Base class for anythin which can be considered a UI element.</div><div class="ttdef"><b>Definition:</b> Element.h:22</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_a44e0a282d8d8f2ab04dfacbd2813cc44"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#a44e0a282d8d8f2ab04dfacbd2813cc44">pf::ui::ig::TableRow::getId</a></div><div class="ttdeci">std::size_t getId() const</div><div class="ttdef"><b>Definition:</b> Table.h:63</div></div>
@@ -363,7 +364,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:25</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRowBuilder_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRowBuilder.html">pf::ui::ig::TableRowBuilder</a></div><div class="ttdoc">Builder for Table's rows.</div><div class="ttdef"><b>Definition:</b> Table.h:41</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_a3cbfd8e008f97650033eb14dc7799a22"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#a3cbfd8e008f97650033eb14dc7799a22">pf::ui::ig::TableRow::getCells</a></div><div class="ttdeci">auto getCells()</div><div class="ttdef"><b>Definition:</b> Table.h:89</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_aedc5d02af372f9df1fd31213f8a90936"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">pf::ui::ig::TableRow::swapWith</a></div><div class="ttdeci">void swapWith(const TableRow &amp;otherRow)</div><div class="ttdef"><b>Definition:</b> Table.h:343</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_aedc5d02af372f9df1fd31213f8a90936"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#aedc5d02af372f9df1fd31213f8a90936">pf::ui::ig::TableRow::swapWith</a></div><div class="ttdeci">void swapWith(const TableRow &amp;otherRow)</div><div class="ttdef"><b>Definition:</b> Table.h:344</div></div>
 <div class="ttc" id="aElementWithID_8h_html"><div class="ttname"><a href="ElementWithID_8h.html">ElementWithID.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements and need ID or/and a font.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRowBuilder_html_a5095bb9edc21102e5946f47a14e53188"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRowBuilder.html#a5095bb9edc21102e5946f47a14e53188">pf::ui::ig::TableRowBuilder::cell</a></div><div class="ttdeci">Result&lt; typename T::Parent &gt; cell(T &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> Table.h:170</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1TableRow_html_adc5f4be5f49da82976bae818117a6ed0"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1TableRow.html#adc5f4be5f49da82976bae818117a6ed0">pf::ui::ig::TableRow::moveDown</a></div><div class="ttdeci">void moveDown(std::uint32_t count=1)</div><div class="ttdef"><b>Definition:</b> Table.h:77</div></div>

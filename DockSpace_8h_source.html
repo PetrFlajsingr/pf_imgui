@@ -83,9 +83,9 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Customizable_8h.html">pf_imgui/interface/Customizable.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementWithID_8h.html">pf_imgui/interface/ElementWithID.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Resizable_8h.html">pf_imgui/interface/Resizable.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementWithID_8h.html">pf_imgui/interface/ElementWithID.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Resizable_8h.html">pf_imgui/interface/Resizable.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ColorPalette_8h.html">pf_imgui/style/ColorPalette.h</a>&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
@@ -98,48 +98,46 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// TODO: somehow keep this alive when the parent is collapsed/invisible -</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// TODO: add dock builder impl</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">   33</a></span>&#160;<span class="comment"></span><span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html">ColorCustomizable</a>&lt;style::ColorOf::DockingPreview, style::ColorOf::DockingBackground&gt; {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">using</span> Id = ImGuiID;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html">   42</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html">Config</a> {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a8462a5515dd569c0ef39cc23104d49d4">   44</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a8462a5515dd569c0ef39cc23104d49d4">name</a>; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a217c3fd7eb395d0858320a9af8f3ece9">   45</a></span>&#160;    <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>();        </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a303eb8a8d18be6bb77c0c791d087812b">   46</a></span>&#160;    Flags&lt;DockType&gt; flags{};         </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  };</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a>(Config &amp;&amp;config);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a>(<span class="keyword">const</span> std::string &amp;name, <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> s = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>(),</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                     <span class="keyword">const</span> Flags&lt;DockType&gt; &amp;dockFlags = Flags&lt;DockType&gt;{});</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isInitialised() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">bool</span> firstFrame = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  ImGuiDockNodeFlags flags;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_DOCKSPACE_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">   33</a></span>&#160;<span class="comment"></span><span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keyword">using</span> Id = ImGuiID;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html">   39</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html">Config</a> {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a8462a5515dd569c0ef39cc23104d49d4">   41</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a8462a5515dd569c0ef39cc23104d49d4">name</a>; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a217c3fd7eb395d0858320a9af8f3ece9">   42</a></span>&#160;    <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>();        </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a303eb8a8d18be6bb77c0c791d087812b">   43</a></span>&#160;    Flags&lt;DockType&gt; flags{};         </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  };</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a>(Config &amp;&amp;config);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DockSpace.html">DockSpace</a>(<span class="keyword">const</span> std::string &amp;name, <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> s = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">Size::Auto</a>(),</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                     <span class="keyword">const</span> Flags&lt;DockType&gt; &amp;dockFlags = Flags&lt;DockType&gt;{});</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> isInitialised() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  ColorPalette&lt;ColorOf::DockingPreview, ColorOf::DockingBackground&gt; color;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">bool</span> firstFrame = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  ImGuiDockNodeFlags flags;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_DOCKSPACE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aCustomizable_8h_html"><div class="ttname"><a href="Customizable_8h.html">Customizable.h</a></div><div class="ttdoc">Interface to provide customization functionality to its descendants.</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DockSpace_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html">pf::ui::ig::DockSpace::Config</a></div><div class="ttdoc">Struct for construction of DockSpace.</div><div class="ttdef"><b>Definition:</b> DockSpace.h:42</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DockSpace_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html">pf::ui::ig::DockSpace::Config</a></div><div class="ttdoc">Struct for construction of DockSpace.</div><div class="ttdef"><b>Definition:</b> DockSpace.h:39</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:87</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DockSpace_1_1Config_html_a8462a5515dd569c0ef39cc23104d49d4"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a8462a5515dd569c0ef39cc23104d49d4">pf::ui::ig::DockSpace::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> DockSpace.h:44</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DockSpace_1_1Config_html_a8462a5515dd569c0ef39cc23104d49d4"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DockSpace_1_1Config.html#a8462a5515dd569c0ef39cc23104d49d4">pf::ui::ig::DockSpace::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> DockSpace.h:41</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DockSpace_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DockSpace.html">pf::ui::ig::DockSpace</a></div><div class="ttdoc">An area to which dockable windows can be docked.</div><div class="ttdef"><b>Definition:</b> DockSpace.h:33</div></div>
 <div class="ttc" id="aResizable_8h_html"><div class="ttname"><a href="Resizable_8h.html">Resizable.h</a></div><div class="ttdoc">Interface for elements which can be resized.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:25</div></div>
 <div class="ttc" id="aElementWithID_8h_html"><div class="ttname"><a href="ElementWithID_8h.html">ElementWithID.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements and need ID or/and a font.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorCustomizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html">pf::ui::ig::ColorCustomizable</a></div><div class="ttdoc">An interface to allow for changing color style. It also provides functionality to apply these styles.</div><div class="ttdef"><b>Definition:</b> Customizable.h:85</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementWithID_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></div><div class="ttdoc">Interface for all ImGui elements with IDs.</div><div class="ttdef"><b>Definition:</b> ElementWithID.h:31</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html_ad8f3c07e4451879ff3645c47d8a94716"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html#ad8f3c07e4451879ff3645c47d8a94716">pf::ui::ig::Size::Auto</a></div><div class="ttdeci">static Size Auto()</div><div class="ttdef"><b>Definition:</b> Size.cpp:15</div></div>
+<div class="ttc" id="aColorPalette_8h_html"><div class="ttname"><a href="ColorPalette_8h.html">ColorPalette.h</a></div><div class="ttdoc">ColorPalette for element styling.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

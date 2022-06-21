@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
@@ -87,9 +88,7 @@ Inheritance diagram for pf::ui::ig::ImGuiInterface:</div>
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1ImGuiInterface.png" usemap="#pf::ui::ig::ImGuiInterface_map" alt=""/>
   <map id="pf::ui::ig::ImGuiInterface_map" name="pf::ui::ig::ImGuiInterface_map">
-<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,313,24"/>
-<area href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html" title="An interface to allow for changing style. It also provides functionality to apply these styles." alt="pf::ui::ig::StyleCustomizable&lt; SupportedStyles &gt;" shape="rect" coords="323,0,636,24"/>
-<area href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html" title="An interface to allow for changing color style. It also provides functionality to apply these styles." alt="pf::ui::ig::ColorCustomizable&lt; SupportedColorTypes &gt;" shape="rect" coords="646,0,959,24"/>
+<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,142,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -157,21 +156,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ace7b62b945fd52dddf76e7f04269c364"><td class="memItemLeft" align="right" valign="top"><a id="ace7b62b945fd52dddf76e7f04269c364"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>removeBackgroundDockingArea</b> ()</td></tr>
 <tr class="separator:ace7b62b945fd52dddf76e7f04269c364"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a290311118fe639966cfbebcd081d3a71"><td class="memTemplParams" colspan="2"><a id="a290311118fe639966cfbebcd081d3a71"></a>
+<tr class="memitem:a3cd8e2e9c4a38a6ea3b08017f484c688"><td class="memTemplParams" colspan="2"><a id="a3cd8e2e9c4a38a6ea3b08017f484c688"></a>
 template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a290311118fe639966cfbebcd081d3a71"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>requires</b> (std::constructible_from&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html">ViewportOverlayGizmo</a>, Args... &gt;) <a class="el" href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html">ViewportOverlayGizmo</a> &amp;createOrGetViewportGizmo(Args &amp;&amp;...args)</td></tr>
-<tr class="separator:a290311118fe639966cfbebcd081d3a71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cd8e2e9c4a38a6ea3b08017f484c688"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>requires</b> (std::constructible_from&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html">ViewportOverlayGizmo</a>, Args... &gt;)[[nodiscard]] <a class="el" href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html">ViewportOverlayGizmo</a> &amp;createOrGetViewportGizmo(Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a3cd8e2e9c4a38a6ea3b08017f484c688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45b02f1c9bf45e742c43bc7bd069276a"><td class="memItemLeft" align="right" valign="top"><a id="a45b02f1c9bf45e742c43bc7bd069276a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>removeViewportGizmo</b> ()</td></tr>
 <tr class="separator:a45b02f1c9bf45e742c43bc7bd069276a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcb612664927970434072bc32713b69e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html#afcb612664927970434072bc32713b69e">updateFonts</a> ()=0</td></tr>
 <tr class="separator:afcb612664927970434072bc32713b69e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36ca8dd4a6559cd09656b0834c31717c"><td class="memItemLeft" align="right" valign="top"><a id="a36ca8dd4a6559cd09656b0834c31717c"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getGlobalFont</b> () const</td></tr>
-<tr class="separator:a36ca8dd4a6559cd09656b0834c31717c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a737f9abac5626d94f950bd6867fc8c8f"><td class="memItemLeft" align="right" valign="top"><a id="a737f9abac5626d94f950bd6867fc8c8f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setGlobalFont</b> (<a class="el" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a> globalFont)</td></tr>
-<tr class="separator:a737f9abac5626d94f950bd6867fc8c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7efbfa5b54242da14aec10632cf45a16"><td class="memItemLeft" align="right" valign="top"><a id="a7efbfa5b54242da14aec10632cf45a16"></a>
 <a class="el" href="classpf_1_1ui_1_1ig_1_1FontManager.html">FontManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getFontManager</b> ()</td></tr>
 <tr class="separator:a7efbfa5b54242da14aec10632cf45a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,31 +210,18 @@ const <a class="el" href="classpf_1_1ui_1_1ig_1_1DialogManager.html">DialogManag
 <tr class="separator:a15edd6bdbb7f00ab46463cac159c34fc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a188cf4479c7cd627091002ab64833b02 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a188cf4479c7cd627091002ab64833b02">getName</a> () const</td></tr>
 <tr class="separator:a188cf4479c7cd627091002ab64833b02 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html">pf::ui::ig::StyleCustomizable&lt; SupportedStyles &gt;</a></td></tr>
-<tr class="memitem:a5a266901834f93a3b69cb4ac57dab980 inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memTemplParams" colspan="2">template&lt;style::Style Style&gt; </td></tr>
-<tr class="memitem:a5a266901834f93a3b69cb4ac57dab980 inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#a5a266901834f93a3b69cb4ac57dab980">requires</a> (OneOfValues_v&lt; Style, SupportedStyles... &gt; &amp;&amp;style::isFloatStyle(Style)) void setStyle(float value)</td></tr>
-<tr class="separator:a5a266901834f93a3b69cb4ac57dab980 inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac861c7c4be4b396412642a4a5182f18c inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memTemplParams" colspan="2">template&lt;style::Style Style&gt; </td></tr>
-<tr class="memitem:ac861c7c4be4b396412642a4a5182f18c inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#ac861c7c4be4b396412642a4a5182f18c">requires</a> (OneOfValues_v&lt; Style, SupportedStyles... &gt; &amp;&amp;!style::isFloatStyle(Style)) void setStyle(ImVec2 value)</td></tr>
-<tr class="separator:ac861c7c4be4b396412642a4a5182f18c inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeda745ed31e252e550e739938a6ff839 inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memTemplParams" colspan="2">template&lt;style::Style Style&gt; </td></tr>
-<tr class="memitem:aeda745ed31e252e550e739938a6ff839 inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#aeda745ed31e252e550e739938a6ff839">unsetStyle</a> ()</td></tr>
-<tr class="separator:aeda745ed31e252e550e739938a6ff839 inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bae776c1ad4d43cc0ae63adc6fd1f0b inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#a2bae776c1ad4d43cc0ae63adc6fd1f0b">clearStyles</a> ()</td></tr>
-<tr class="separator:a2bae776c1ad4d43cc0ae63adc6fd1f0b inherit pub_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html">pf::ui::ig::ColorCustomizable&lt; SupportedColorTypes &gt;</a></td></tr>
-<tr class="memitem:a6ea2fd63470ee132a382a0d9d61c9afb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memTemplParams" colspan="2">template&lt;style::ColorOf ColorType&gt; </td></tr>
-<tr class="memitem:a6ea2fd63470ee132a382a0d9d61c9afb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html#a6ea2fd63470ee132a382a0d9d61c9afb">requires</a> (OneOfValues_v&lt; ColorType, SupportedColorTypes... &gt;) void setColor(<a class="el" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> color)</td></tr>
-<tr class="separator:a6ea2fd63470ee132a382a0d9d61c9afb inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab32156a36337522dff1ae042e901e7f1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memTemplParams" colspan="2"><a id="ab32156a36337522dff1ae042e901e7f1"></a>
-template&lt;style::ColorOf ColorType&gt; </td></tr>
-<tr class="memitem:ab32156a36337522dff1ae042e901e7f1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memTemplItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getColor</b> () const</td></tr>
-<tr class="separator:ab32156a36337522dff1ae042e901e7f1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a209a14f3f8b071693008acff3ad958af inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memTemplParams" colspan="2">template&lt;style::ColorOf ColorType&gt; </td></tr>
-<tr class="memitem:a209a14f3f8b071693008acff3ad958af inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html#a209a14f3f8b071693008acff3ad958af">unsetColor</a> ()</td></tr>
-<tr class="separator:a209a14f3f8b071693008acff3ad958af inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b9ccacd868fd7fa58848c5ba2023fa9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html#a7b9ccacd868fd7fa58848c5ba2023fa9">clearColors</a> ()</td></tr>
-<tr class="separator:a7b9ccacd868fd7fa58848c5ba2023fa9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a88dcee86770dff135ff45266b510731f"><td class="memItemLeft" align="right" valign="top"><a id="a88dcee86770dff135ff45266b510731f"></a>
+<a class="el" href="ColorPalette_8h.html#a468a3baee5e4709df9dee89cf4e641c8">FullColorPalette</a>&#160;</td><td class="memItemRight" valign="bottom"><b>color</b></td></tr>
+<tr class="separator:a88dcee86770dff135ff45266b510731f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab521781f0eda46ec410f084c2cd68934"><td class="memItemLeft" align="right" valign="top"><a id="ab521781f0eda46ec410f084c2cd68934"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">FullStyleOptions</a>&#160;</td><td class="memItemRight" valign="bottom"><b>style</b></td></tr>
+<tr class="separator:ab521781f0eda46ec410f084c2cd68934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a153b9e0cbf638e390fbca09f26137a41"><td class="memItemLeft" align="right" valign="top"><a id="a153b9e0cbf638e390fbca09f26137a41"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a>&#160;</td><td class="memItemRight" valign="bottom"><b>font</b> = Font::Default()</td></tr>
+<tr class="separator:a153b9e0cbf638e390fbca09f26137a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -263,12 +243,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setContext</b> () con
 <tr class="memitem:a4449139cf826dd07f5a7766cf0ccd8da inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="a4449139cf826dd07f5a7766cf0ccd8da"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::string newName)</td></tr>
 <tr class="separator:a4449139cf826dd07f5a7766cf0ccd8da inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html">pf::ui::ig::StyleCustomizable&lt; SupportedStyles &gt;</a></td></tr>
-<tr class="memitem:abf5429b381aecff52fae22bb516719cb inherit pro_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memItemLeft" align="right" valign="top">RAII&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1StyleCustomizable.html#abf5429b381aecff52fae22bb516719cb">setStyleStack</a> ()</td></tr>
-<tr class="separator:abf5429b381aecff52fae22bb516719cb inherit pro_methods_classpf_1_1ui_1_1ig_1_1StyleCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html">pf::ui::ig::ColorCustomizable&lt; SupportedColorTypes &gt;</a></td></tr>
-<tr class="memitem:ab947e3afca3160a54d077acf14f4c35c inherit pro_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memItemLeft" align="right" valign="top">RAII&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ColorCustomizable.html#ab947e3afca3160a54d077acf14f4c35c">setColorStack</a> ()</td></tr>
-<tr class="separator:ab947e3afca3160a54d077acf14f4c35c inherit pro_methods_classpf_1_1ui_1_1ig_1_1ColorCustomizable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -278,9 +252,6 @@ std::unique_ptr&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1AppMenuBar.html">
 <tr class="memitem:a44c4a31b64afb60fa8a2d8ef26002937"><td class="memItemLeft" align="right" valign="top"><a id="a44c4a31b64afb60fa8a2d8ef26002937"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>shouldUpdateFontAtlas</b> = false</td></tr>
 <tr class="separator:a44c4a31b64afb60fa8a2d8ef26002937"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc792ec312b5b8048b56e4100a773dd0"><td class="memItemLeft" align="right" valign="top"><a id="abc792ec312b5b8048b56e4100a773dd0"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a>&#160;</td><td class="memItemRight" valign="bottom"><b>globalFont</b> = Font::Default()</td></tr>
-<tr class="separator:abc792ec312b5b8048b56e4100a773dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>

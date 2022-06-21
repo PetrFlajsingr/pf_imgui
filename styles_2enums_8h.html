@@ -66,9 +66,6 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">enums.h File Reference</div>  </div>
 </div><!--header-->
@@ -81,121 +78,6 @@ $(function() {
 <code>#include &lt;pf_common/algorithms.h&gt;</code><br />
 </div>
 <p><a href="styles_2enums_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:af0078e3128b9c0ec1fbff69648c785db"><td class="memItemLeft" align="right" valign="top"><a id="af0078e3128b9c0ec1fbff69648c785db"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ColorOf</b> : int { <br />
-&#160;&#160;<b>Text</b> = ImGuiCol_Text, 
-<b>TextDisabled</b> = ImGuiCol_TextDisabled, 
-<b>WindowBackground</b> = ImGuiCol_WindowBg, 
-<b>ChildBackground</b> = ImGuiCol_ChildBg, 
-<br />
-&#160;&#160;<b>PopupBackground</b> = ImGuiCol_PopupBg, 
-<b>Border</b> = ImGuiCol_Border, 
-<b>BorderShadow</b> = ImGuiCol_BorderShadow, 
-<b>FrameBackground</b> = ImGuiCol_FrameBg, 
-<br />
-&#160;&#160;<b>FrameBackgroundHovered</b> = ImGuiCol_FrameBgHovered, 
-<b>FrameBackgroundActive</b> = ImGuiCol_FrameBgActive, 
-<b>TitleBackground</b> = ImGuiCol_TitleBg, 
-<b>TitleBackgroundActive</b> = ImGuiCol_TitleBgActive, 
-<br />
-&#160;&#160;<b>TitleBackgroundCollapsed</b> = ImGuiCol_TitleBgCollapsed, 
-<b>MenuBarBackground</b> = ImGuiCol_MenuBarBg, 
-<b>ScrollbarBackground</b> = ImGuiCol_ScrollbarBg, 
-<b>ScrollbarGrab</b> = ImGuiCol_ScrollbarGrab, 
-<br />
-&#160;&#160;<b>ScrollbarGrabHovered</b> = ImGuiCol_ScrollbarGrabHovered, 
-<b>ScrollbarGrabActive</b> = ImGuiCol_ScrollbarGrabActive, 
-<b>CheckMark</b> = ImGuiCol_CheckMark, 
-<b>SliderGrab</b> = ImGuiCol_SliderGrab, 
-<br />
-&#160;&#160;<b>SliderGrabActive</b> = ImGuiCol_SliderGrabActive, 
-<b>Button</b> = ImGuiCol_Button, 
-<b>ButtonHovered</b> = ImGuiCol_ButtonHovered, 
-<b>ButtonActive</b> = ImGuiCol_ButtonActive, 
-<br />
-&#160;&#160;<b>Header</b> = ImGuiCol_Header, 
-<b>HeaderHovered</b> = ImGuiCol_HeaderHovered, 
-<b>HeaderActive</b> = ImGuiCol_HeaderActive, 
-<b>Separator</b> = ImGuiCol_Separator, 
-<br />
-&#160;&#160;<b>SeparatorHovered</b> = ImGuiCol_SeparatorHovered, 
-<b>SeparatorActive</b> = ImGuiCol_SeparatorActive, 
-<b>ResizeGrip</b> = ImGuiCol_ResizeGrip, 
-<b>ResizeGripHovered</b> = ImGuiCol_ResizeGripHovered, 
-<br />
-&#160;&#160;<b>ResizeGripActive</b> = ImGuiCol_ResizeGripActive, 
-<b>Tab</b> = ImGuiCol_Tab, 
-<b>TabHovered</b> = ImGuiCol_TabHovered, 
-<b>TabActive</b> = ImGuiCol_TabActive, 
-<br />
-&#160;&#160;<b>TabUnfocused</b> = ImGuiCol_TabUnfocused, 
-<b>TabUnfocusedActive</b> = ImGuiCol_TabUnfocusedActive, 
-<b>PlotLines</b> = ImGuiCol_PlotLines, 
-<b>PlotLinesHovered</b> = ImGuiCol_PlotLinesHovered, 
-<br />
-&#160;&#160;<b>PlotHistogram</b> = ImGuiCol_PlotHistogram, 
-<b>PlotHistogramHovered</b> = ImGuiCol_PlotHistogramHovered, 
-<b>TableHeaderBackground</b> = ImGuiCol_TableHeaderBg, 
-<b>TableBorderStrong</b> = ImGuiCol_TableBorderStrong, 
-<br />
-&#160;&#160;<b>TableBorderLight</b> = ImGuiCol_TableBorderLight, 
-<b>TableRowBackground</b> = ImGuiCol_TableRowBg, 
-<b>TableRowBackgroundAlt</b> = ImGuiCol_TableRowBgAlt, 
-<b>TextSelectedBackground</b> = ImGuiCol_TextSelectedBg, 
-<br />
-&#160;&#160;<b>DragDropTarget</b> = ImGuiCol_DragDropTarget, 
-<b>NavHighlight</b> = ImGuiCol_NavHighlight, 
-<b>NavWindowingHighlight</b> = ImGuiCol_NavWindowingHighlight, 
-<b>NavWindowingDimBackground</b> = ImGuiCol_NavWindowingDimBg, 
-<br />
-&#160;&#160;<b>ModalWindowDimBackground</b> = ImGuiCol_ModalWindowDimBg, 
-<b>DockingPreview</b> = ImGuiCol_DockingPreview, 
-<b>DockingBackground</b> = ImGuiCol_DockingEmptyBg
-<br />
- }</td></tr>
-<tr class="separator:af0078e3128b9c0ec1fbff69648c785db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85872109e59f955d14ee7c5eaf9bf4e2"><td class="memItemLeft" align="right" valign="top"><a id="a85872109e59f955d14ee7c5eaf9bf4e2"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Style</b> : int { <br />
-&#160;&#160;<b>Alpha</b> = ImGuiStyleVar_Alpha, 
-<b>WindowRounding</b> = ImGuiStyleVar_WindowRounding, 
-<b>WindowBorderSize</b> = ImGuiStyleVar_WindowBorderSize, 
-<b>ChildRounding</b> = ImGuiStyleVar_ChildRounding, 
-<br />
-&#160;&#160;<b>ChildBorderSize</b> = ImGuiStyleVar_ChildBorderSize, 
-<b>PopupRounding</b> = ImGuiStyleVar_PopupRounding, 
-<b>PopupBorderSize</b> = ImGuiStyleVar_PopupBorderSize, 
-<b>FrameRounding</b> = ImGuiStyleVar_FrameRounding, 
-<br />
-&#160;&#160;<b>FrameBorderSize</b> = ImGuiStyleVar_FrameBorderSize, 
-<b>IndentSpacing</b> = ImGuiStyleVar_IndentSpacing, 
-<b>ScrollbarSize</b> = ImGuiStyleVar_ScrollbarSize, 
-<b>ScrollbarRounding</b> = ImGuiStyleVar_ScrollbarRounding, 
-<br />
-&#160;&#160;<b>GrabMinSize</b> = ImGuiStyleVar_GrabMinSize, 
-<b>GrabRounding</b> = ImGuiStyleVar_GrabRounding, 
-<b>TabRounding</b> = ImGuiStyleVar_TabRounding, 
-<b>WindowPadding</b> = ImGuiStyleVar_WindowPadding, 
-<br />
-&#160;&#160;<b>WindowMinSize</b> = ImGuiStyleVar_WindowMinSize, 
-<b>WindowTitleAlign</b> = ImGuiStyleVar_WindowTitleAlign, 
-<b>FramePadding</b> = ImGuiStyleVar_FramePadding, 
-<b>ItemSpacing</b> = ImGuiStyleVar_ItemSpacing, 
-<br />
-&#160;&#160;<b>ItemInnerSpacing</b> = ImGuiStyleVar_ItemInnerSpacing, 
-<b>CellPadding</b> = ImGuiStyleVar_CellPadding, 
-<b>ButtonTextAlign</b> = ImGuiStyleVar_ButtonTextAlign, 
-<b>SelectableTextAlign</b> = ImGuiStyleVar_SelectableTextAlign
-<br />
- }</td></tr>
-<tr class="separator:a85872109e59f955d14ee7c5eaf9bf4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a918bc9291623fcfc037fd331190d9922"><td class="memItemLeft" align="right" valign="top"><a id="a918bc9291623fcfc037fd331190d9922"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>pf::ui::ig::style::isFloatStyle</b> (Style style)</td></tr>
-<tr class="separator:a918bc9291623fcfc037fd331190d9922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Enumerations for UI styling. </p>
 <dl class="section author"><dt>Author</dt><dd>Petr Flajšingr </dd></dl>
