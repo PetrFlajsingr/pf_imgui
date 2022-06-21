@@ -214,12 +214,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void moveToDock(DockSpace::Id dockSpaceId);
 
   /**
-   * Set font for Window and all elements inside - except for those that have their own font.
-   * @param fontPtr new font
-   */
-  void setFont(ImFont *fontPtr);
-
-  /**
    *
    * @return true if the window doesn't bring itself on top of others on focus
    */
@@ -251,7 +245,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   bool firstPass = true;
 
-  ImFont *font = nullptr;
 
   std::optional<ImGuiID> dockInto = std::nullopt;
 

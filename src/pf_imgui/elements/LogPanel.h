@@ -119,13 +119,13 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Resizable, public 
    * @param category category to modify
    * @param color new color of text
    */
-  void setCategoryTextColor(Category category, Color color);
+  void setCategoryTextColor(Category category, Color catTextColor);
   /**
    * Set a new background color for records in given category.
    * @param category category to modify
    * @param color new color of background
    */
-  void setCategoryBackgroundColor(Category category, Color color);
+  void setCategoryBackgroundColor(Category category, Color bkgColor);
   /**
    * Enable/disable category for record filtering.
    * @param category category to enable/disable
@@ -233,14 +233,14 @@ std::string LogPanel<Category, RecordLimit>::getText() const {
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-void LogPanel<Category, RecordLimit>::setCategoryTextColor(Category category, Color color) {
-  categoryTextColors[GetCategoryIndex(category)] = color;
+void LogPanel<Category, RecordLimit>::setCategoryTextColor(Category category, Color catTextColor) {
+  categoryTextColors[GetCategoryIndex(category)] = catTextColor;
 }
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-void LogPanel<Category, RecordLimit>::setCategoryBackgroundColor(Category category, Color color) {
-  categoryBackgroundColors[GetCategoryIndex(category)] = color;
+void LogPanel<Category, RecordLimit>::setCategoryBackgroundColor(Category category, Color bkgColor) {
+  categoryBackgroundColors[GetCategoryIndex(category)] = bkgColor;
 }
 
 template<Enum Category, std::size_t RecordLimit>
