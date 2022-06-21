@@ -1,6 +1,9 @@
-//
-// Created by Petr on 6/20/2022.
-//
+/**
+ * @file StyleOptions.h
+ * @brief StyleOptions for element styling.
+ * @author Petr Flajšingr
+ * @date 17.6.22
+ */
 
 #ifndef PF_IMGUI_STYLE_STYLEOPTIONS_H
 #define PF_IMGUI_STYLE_STYLEOPTIONS_H
@@ -10,9 +13,9 @@
 #include <pf_imgui/style/common.h>
 
 namespace pf::ui::ig {
-// FIXME: comments
+
 /**
- * @brief An interface to allow for changing style. It also provides functionality to apply these styles.
+ * @brief A structure storing styling data.
  * @tparam SupportedStyles list of types which are supported
  */
 template<StyleOf... SupportedStyles>

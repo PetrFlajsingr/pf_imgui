@@ -1,6 +1,9 @@
-//
-// Created by Petr on 6/17/2022.
-//
+/**
+ * @file ColorPalette.h
+ * @brief ColorPalette for element styling.
+ * @author Petr Flajšingr
+ * @date 17.6.22
+ */
 
 #ifndef PF_IMGUI_STYLE_COLORPALETTE_H
 #define PF_IMGUI_STYLE_COLORPALETTE_H
@@ -18,7 +21,7 @@ namespace pf::ui::ig {
 
 /**
  * @brief Color palette for imgui
- * @tparam SupportedColorTypes
+ * @tparam SupportedColorTypes types used in this palette
  */
 template<ColorOf... SupportedColorTypes>
 class PF_IMGUI_EXPORT ColorPalette {
@@ -83,6 +86,9 @@ class PF_IMGUI_EXPORT ColorPalette {
   bool modified = false;
 };
 
+/**
+ * Color palette containing every possible color.
+ */
 using FullColorPalette = ColorPalette<
     ColorOf::Text, ColorOf::TextDisabled, ColorOf::WindowBackground, ColorOf::ChildBackground, ColorOf::PopupBackground,
     ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
