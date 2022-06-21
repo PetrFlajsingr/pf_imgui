@@ -282,8 +282,9 @@ void Table<ColumnCount>::setSortFncForColumn(std::size_t columnIndex,
 
 template<std::size_t ColumnCount>
 void Table<ColumnCount>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndTable};
 

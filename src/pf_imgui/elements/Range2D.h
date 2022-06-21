@@ -26,18 +26,13 @@ namespace pf::ui::ig {
 /**
  * @brief Allows for selection of a 2D area - axis aligned.
  */
-class PF_IMGUI_EXPORT Range2D
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<math::Range<glm::vec2>>,
-      public Resizable,
-      public Savable,
-      public DragSource<math::Range<glm::vec2>>,
-      public DropTarget<math::Range<glm::vec2>>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
-                               style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Range2D : public ItemElement,
+                                public Labellable,
+                                public ValueObservable<math::Range<glm::vec2>>,
+                                public Resizable,
+                                public Savable,
+                                public DragSource<math::Range<glm::vec2>>,
+                                public DropTarget<math::Range<glm::vec2>> {
  public:
   /**
    * @brief Struct for construction of Range2D.
@@ -94,6 +89,12 @@ class PF_IMGUI_EXPORT Range2D
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
+               ColorOf::FrameBackgroundActive>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

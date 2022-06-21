@@ -34,8 +34,7 @@ struct TimeOfDayComparator {
 class TimePicker : public ItemElement,
                    public Labellable,
                    public ValueObservable<TimeOfDay, details::TimeOfDayComparator>,
-                   public Savable,
-                   public FontCustomizable {
+                   public Savable {
  public:
   /**
    * @brief Construction config for TimePicker.
@@ -66,6 +65,8 @@ class TimePicker : public ItemElement,
 
   toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

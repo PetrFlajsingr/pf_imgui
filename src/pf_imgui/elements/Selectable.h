@@ -23,19 +23,11 @@ namespace pf::ui::ig {
  *
  * It's basically a different kind of checkbox.
  */
-class PF_IMGUI_EXPORT Selectable
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<bool>,
-      public Resizable,
-      public Savable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
-                               style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::Header, style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive,
-                               style::ColorOf::NavHighlight>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::SelectableTextAlign>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Selectable : public ItemElement,
+                                   public Labellable,
+                                   public ValueObservable<bool>,
+                                   public Resizable,
+                                   public Savable {
  public:
   /**
    * @brief Struct for construction of Selectable.
@@ -66,6 +58,14 @@ class PF_IMGUI_EXPORT Selectable
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
+               ColorOf::FrameBackgroundActive, ColorOf::Header, ColorOf::HeaderHovered, ColorOf::HeaderActive,
+               ColorOf::NavHighlight>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::SelectableTextAlign>
+      style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

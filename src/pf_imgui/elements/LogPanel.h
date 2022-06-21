@@ -73,12 +73,7 @@ namespace pf::ui::ig {
  */
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)  // RecordLimit has to be power of two
-class PF_IMGUI_EXPORT LogPanel : public ElementWithID,
-                                 public Resizable,
-                                 public Savable,
-                                 public AllColorCustomizable,
-                                 public AllStyleCustomizable,
-                                 public FontCustomizable {
+class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Resizable, public Savable {
   struct Record {
     Category category;
     std::string text;
@@ -124,13 +119,13 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID,
    * @param category category to modify
    * @param color new color of text
    */
-  void setCategoryTextColor(Category category, Color color);
+  void setCategoryTextColor(Category category, Color catTextColor);
   /**
    * Set a new background color for records in given category.
    * @param category category to modify
    * @param color new color of background
    */
-  void setCategoryBackgroundColor(Category category, Color color);
+  void setCategoryBackgroundColor(Category category, Color bkgColor);
   /**
    * Enable/disable category for record filtering.
    * @param category category to enable/disable
@@ -146,6 +141,10 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID,
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  FullColorPalette color;
+  FullStyleOptions style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;
@@ -234,14 +233,14 @@ std::string LogPanel<Category, RecordLimit>::getText() const {
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-void LogPanel<Category, RecordLimit>::setCategoryTextColor(Category category, Color color) {
-  categoryTextColors[GetCategoryIndex(category)] = color;
+void LogPanel<Category, RecordLimit>::setCategoryTextColor(Category category, Color catTextColor) {
+  categoryTextColors[GetCategoryIndex(category)] = catTextColor;
 }
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-void LogPanel<Category, RecordLimit>::setCategoryBackgroundColor(Category category, Color color) {
-  categoryBackgroundColors[GetCategoryIndex(category)] = color;
+void LogPanel<Category, RecordLimit>::setCategoryBackgroundColor(Category category, Color bkgColor) {
+  categoryBackgroundColors[GetCategoryIndex(category)] = bkgColor;
 }
 
 template<Enum Category, std::size_t RecordLimit>
@@ -259,9 +258,9 @@ void LogPanel<Category, RecordLimit>::setCategoryAllowed(Category category, bool
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 void LogPanel<Category, RecordLimit>::renderImpl() {
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto filterChanged = false;
   ImGui::BeginHorizontal("layout", static_cast<ImVec2>(getSize()), 0);
   {

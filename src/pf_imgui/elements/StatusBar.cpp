@@ -4,6 +4,7 @@
 
 #include "StatusBar.h"
 #include <fmt/format.h>
+#include <imgui_internal.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -13,9 +14,9 @@ AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : ElementWithID(std::s
 AppStatusBar::AppStatusBar(const std::string &name) : ElementWithID(name) {}
 
 void AppStatusBar::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::GetFrameHeight();
   auto *viewport = reinterpret_cast<ImGuiViewportP *>(ImGui::GetMainViewport());
   ImGuiWindowFlags window_flags =

@@ -21,8 +21,8 @@ std::string_view Text::getText() const { return text; }
 void Text::setText(std::string newText) { setTextInner(std::move(newText)); }
 
 void Text::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
   if (wrap) {
     ImGui::TextWrapped("%s", text.c_str());
   } else {

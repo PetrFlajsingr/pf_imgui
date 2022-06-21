@@ -20,6 +20,7 @@ void DockSpace::render() {
     firstFrame = false;
     setId(ImGui::GetID(getName().c_str()));
   }
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
   Renderable::render();
 }
 

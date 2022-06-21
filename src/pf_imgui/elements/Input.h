@@ -14,7 +14,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/InputText.h>
 #include <pf_imgui/elements/details/InputDetails.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -36,19 +35,12 @@ namespace pf::ui::ig {
  * @tparam T Underlying type
  */
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
-class PF_IMGUI_EXPORT Input
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<T>,
-      public Savable,
-      public DragSource<T>,
-      public DropTarget<T>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::DragDropTarget, style::ColorOf::TextSelectedBackground,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Input : public ItemElement,
+                              public Labellable,
+                              public ValueObservable<T>,
+                              public Savable,
+                              public DragSource<T>,
+                              public DropTarget<T> {
   using StepType = input_details::UnderlyingType<T>;
 
  public:
@@ -89,6 +81,13 @@ class PF_IMGUI_EXPORT Input
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::TextSelectedBackground,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;
@@ -155,9 +154,9 @@ void Input<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 void Input<T>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
 

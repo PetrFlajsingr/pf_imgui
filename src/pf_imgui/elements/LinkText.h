@@ -17,11 +17,11 @@
 #include <utility>
 
 namespace pf::ui::ig {
-
+// TODO: styles
 /**
  * @brief Text element providing click detection.
  */
-class LinkText : public ItemElement, public Labellable, public Clickable, public FontCustomizable {
+class LinkText : public ItemElement, public Labellable, public Clickable {
  public:
   using LinkClickHandler = std::function<void(std::string_view)>;
   /**
@@ -53,6 +53,8 @@ class LinkText : public ItemElement, public Labellable, public Clickable, public
         linkClickHandler(std::forward<decltype(linkClickHandler)>(linkClickHandler)) {
     setTooltip(LinkText::link);
   }
+
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

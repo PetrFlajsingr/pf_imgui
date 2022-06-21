@@ -26,7 +26,7 @@ namespace pf::ui::ig {
  *
  * Allows for creation of child elements directly via templated methods.
  */
-class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer, public FontCustomizable {
+class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  public:
   ElementContainer() = default;
 

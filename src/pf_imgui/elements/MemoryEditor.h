@@ -10,7 +10,6 @@
 
 #include <imgui_memory_editor.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <string>
 
@@ -23,10 +22,7 @@ namespace pf::ui::ig {
  *
  * @todo: more options
  */
-class PF_IMGUI_EXPORT MemoryEditor : public ItemElement,
-                                     public AllColorCustomizable,
-                                     public AllStyleCustomizable,
-                                     public FontCustomizable {
+class PF_IMGUI_EXPORT MemoryEditor : public ItemElement {
  public:
   template<typename T>
   MemoryEditor(const std::string &elementName, std::span<T> newData);
@@ -74,6 +70,10 @@ class PF_IMGUI_EXPORT MemoryEditor : public ItemElement,
 
   [[nodiscard]] std::span<std::byte> getData() const;
   void setData(std::span<std::byte> newData);
+
+  FullColorPalette color;
+  FullStyleOptions style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

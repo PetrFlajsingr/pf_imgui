@@ -12,10 +12,10 @@
 #include <optional>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/style/ColorPalette.h>
 #include <ranges>
 #include <string>
 #include <vector>
@@ -27,15 +27,7 @@ namespace pf::ui::ig {
  *
  * @see PlotType
  */
-class PF_IMGUI_EXPORT SimplePlot
-    : public ElementWithID,
-      public Labellable,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::PlotLines,
-                               style::ColorOf::PlotLinesHovered, style::ColorOf::PlotHistogram,
-                               style::ColorOf::PlotHistogramHovered, style::ColorOf::Text,
-                               style::ColorOf::TextDisabled> {
+class PF_IMGUI_EXPORT SimplePlot : public ElementWithID, public Labellable, public Resizable {
  public:
   /**
    * @brief Struct for construction of SimplePlot.
@@ -96,6 +88,11 @@ class PF_IMGUI_EXPORT SimplePlot
    * Set new values, overwriting the old ones.
    */
   void setValues(const std::vector<float> &vals);
+
+  ColorPalette<ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive,
+               ColorOf::PlotLines, ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered,
+               ColorOf::Text, ColorOf::TextDisabled>
+      color;
 
  protected:
   void renderImpl() override;

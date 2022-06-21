@@ -11,7 +11,6 @@
 #include <glm/glm.hpp>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/elements/details/DragInputDetails.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -26,18 +25,7 @@ namespace pf::ui::ig {
  * @tparam M Matrix type
  */
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
-class MatrixDragInput
-    : public ItemElement,
-      public ValueObservable<M>,
-      public Labellable,
-      public Savable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
-                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::NavHighlight,
-                               style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::SliderGrab,
-                               style::ColorOf::SliderGrabActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class MatrixDragInput : public ItemElement, public ValueObservable<M>, public Labellable, public Savable {
  public:
   using ParamType = drag_details::UnderlyingType<typename M::col_type>;
   constexpr static auto Height = M::length();
@@ -75,6 +63,13 @@ class MatrixDragInput
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
+               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::Border,
+               ColorOf::BorderShadow, ColorOf::SliderGrab, ColorOf::SliderGrabActive>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;
@@ -118,9 +113,9 @@ void MatrixDragInput<M>::setFromToml(const toml::table &src) {
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 void MatrixDragInput<M>::renderImpl() {
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::BeginGroup();
   if (ImGui::BeginTable("lay", 1)) {
     auto valueChanged = false;

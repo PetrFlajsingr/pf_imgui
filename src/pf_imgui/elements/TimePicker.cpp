@@ -19,7 +19,7 @@ TimePicker::TimePicker(const std::string &name, const std::string &label, pf::ui
 }
 
 void TimePicker::renderImpl() {
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::BeginGroup();
   {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});

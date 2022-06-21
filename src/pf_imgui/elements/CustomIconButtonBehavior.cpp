@@ -16,18 +16,19 @@ Size CustomIconButtonBehavior::getSize() const { return size; }
 void CustomIconButtonBehavior::setSize(Size newSize) { size = newSize; }
 
 void CustomIconButtonBehavior::renderImpl() {
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
   auto drawList = ImGui::GetWindowDrawList();
   State state;
   if (isHovered() || keepHighlighted) {
     if (isHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
-      backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(style::ColorOf::ButtonActive))};
+      backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(ColorOf::ButtonActive))};
       state = State::MouseDown;
     } else {
-      backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(style::ColorOf::ButtonHovered))};
+      backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(ColorOf::ButtonHovered))};
       state = State::Hovered;
     }
   } else {
-    backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(style::ColorOf::Button))};
+    backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(ColorOf::Button))};
     state = State::None;
   }
   const auto cursorPos = ImGui::GetCursorScreenPos();

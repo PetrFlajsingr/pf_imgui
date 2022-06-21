@@ -11,7 +11,6 @@
 #include <imgui_color_gradient.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Color.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Focusable.h>
 #include <pf_imgui/interface/Hoverable.h>
@@ -57,8 +56,7 @@ class GradientEditor : public ElementWithID,
                        public ValueObservable<GradientPointsView, GradientPointsViewComparator>,
                        public Hoverable,
                        public Focusable,
-                       public Savable,
-                       public FontCustomizable {
+                       public Savable {
  public:
   /**
    * @brief Construction args for GradientEditor.
@@ -99,6 +97,8 @@ class GradientEditor : public ElementWithID,
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

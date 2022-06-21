@@ -10,7 +10,6 @@
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -21,16 +20,7 @@ namespace pf::ui::ig {
 /**
  * @brief A button similar in function to CheckBox, but it can belong to RadioGroup. @see RadioGroup
  */
-class PF_IMGUI_EXPORT RadioButton
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<bool>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::CheckMark, style::ColorOf::Border,
-                               style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT RadioButton : public ItemElement, public Labellable, public ValueObservable<bool> {
  public:
   friend class RadioGroup;
   /**
@@ -60,6 +50,13 @@ class PF_IMGUI_EXPORT RadioButton
    * @return true when the button is selected, false otherwise
    */
   [[nodiscard]] bool isSelected() const;
+
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::CheckMark, ColorOf::Border,
+               ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

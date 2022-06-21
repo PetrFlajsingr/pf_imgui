@@ -7,16 +7,13 @@
 
 #include <pf_imgui/Color.h>
 #include <pf_imgui/Size.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/styles/enums.h>
 
 namespace pf::ui::ig {
 
-class CustomIconButtonBehavior
-    : public ItemElement,
-      public ColorCustomizable<style::ColorOf::Button, style::ColorOf::ButtonActive, style::ColorOf::ButtonHovered> {
+class CustomIconButtonBehavior : public ItemElement {
  protected:
   enum class State { None, Hovered, MouseDown, Clicked };
 
@@ -24,6 +21,8 @@ class CustomIconButtonBehavior
   explicit CustomIconButtonBehavior(const std::string &elementName);
   [[nodiscard]] Color getIconColor() const;
   void setIconColor(Color newColor);
+
+  ColorPalette<ColorOf::Button, ColorOf::ButtonActive, ColorOf::ButtonHovered> color;
 
  protected:
   virtual void renderIcon(ImDrawList *drawList, ImVec2 cursorPos) = 0;

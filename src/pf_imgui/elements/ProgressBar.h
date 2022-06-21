@@ -12,7 +12,6 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -35,15 +34,7 @@ concept ProgressBarCompatible = requires(T t, float f) {
  * @tparam T type storing the progress value
  */
 template<ProgressBarCompatible T>
-class PF_IMGUI_EXPORT ProgressBar
-    : public ItemElement,
-      public ValueObservable<T>,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T>, public Resizable {
  public:
   /**
    * Construct ProgressBar
@@ -128,6 +119,12 @@ class PF_IMGUI_EXPORT ProgressBar
    */
   [[nodiscard]] float getCurrentPercentage() const;
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::Border, ColorOf::BorderShadow, ColorOf::PlotHistogram>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 
@@ -176,9 +173,9 @@ float ProgressBar<T>::getCurrentPercentage() const {
 
 template<ProgressBarCompatible T>
 void ProgressBar<T>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()), overlay.c_str());
 }
 

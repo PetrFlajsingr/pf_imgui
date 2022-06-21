@@ -3,6 +3,7 @@
 //
 
 #include "Notification.h"
+#include <imgui_internal.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -11,8 +12,9 @@ Notification::Notification(const std::string &name, const std::string &label, st
     : Renderable(name), Labellable(label), dismissDuration(duration) {}
 
 void Notification::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (firstRender) {
     firstRender = false;
     ImGui::SetNextWindowFocus();
@@ -34,7 +36,7 @@ void Notification::renderImpl() {
     RAII endTextWrap{ImGui::PopTextWrapPos};
 
     if (icon != nullptr) {
-      [[maybe_unused]] auto fontScoped = iconFont.applyScopedIfNotDefault();
+      [[maybe_unused]] auto iconFontScoped = iconFont.applyScopedIfNotDefault();
       ImGui::PushStyleColor(ImGuiCol_Text, *iconColor);
       RAII popColor{[&] { ImGui::PopStyleColor(1); }};
       ImGui::Text("%s", icon);

@@ -45,6 +45,8 @@ if (io.KeyShift && io.MouseDown[0] && mouseUVCoord.x >= 0.f && mouseUVCoord.y >=
 */
 #pragma once
 
+#include <imgui_internal.h>
+
 namespace ImageInspect
 {
     inline void histogram(const int width, const int height, const unsigned char* const bits)

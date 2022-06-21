@@ -66,8 +66,6 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
   void close() { shouldClose = true; }
 
  protected:
-  using AllColorCustomizable::setColorStack;
-  using AllStyleCustomizable::setStyleStack;
   void renderImpl() override;
 
   /**
@@ -115,9 +113,9 @@ void CustomCombobox<T, R>::setShownItemCount(ComboBoxCount shownItemCount) {
 
 template<typename T, std::derived_from<Renderable> R>
 void CustomCombobox<T, R>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = CustomItemBox<T, R>::applyFont();
+  [[maybe_unused]] auto colorScoped = this->color.applyScoped();
+  [[maybe_unused]] auto styleScoped = this->style.applyScoped();
+  [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   const char *previewPtr = previewValue.c_str();
   if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
     RAII end{ImGui::EndCombo};

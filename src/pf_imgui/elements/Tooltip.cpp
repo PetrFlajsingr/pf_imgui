@@ -13,9 +13,9 @@ Tooltip::Tooltip(Tooltip::Config &&config) : ElementWithID(std::string{config.na
 Tooltip::Tooltip(const std::string &elementName) : ElementWithID(elementName) {}
 
 void Tooltip::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::BeginTooltip();
   RAII end{ImGui::EndTooltip};
   std::ranges::for_each(getChildren(), &Renderable::render);

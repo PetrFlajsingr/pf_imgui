@@ -36,18 +36,13 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
  * @tparam T inner type of slider
  */
 template<OneOf<int, float> T>
-class PF_IMGUI_EXPORT Slider2D
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<details::Slider2DStorageType<T>>,
-      public Savable,
-      public DragSource<details::Slider2DStorageType<T>>,
-      public DropTarget<details::Slider2DStorageType<T>>,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
-                               style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Slider2D : public ItemElement,
+                                 public Labellable,
+                                 public ValueObservable<details::Slider2DStorageType<T>>,
+                                 public Savable,
+                                 public DragSource<details::Slider2DStorageType<T>>,
+                                 public DropTarget<details::Slider2DStorageType<T>>,
+                                 public Resizable {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -82,6 +77,12 @@ class PF_IMGUI_EXPORT Slider2D
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
+               ColorOf::FrameBackgroundActive>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;
@@ -124,9 +125,9 @@ void Slider2D<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<int, float> T>
 void Slider2D<T>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   auto address = ValueObservable<StorageType>::getValueAddress();
   const auto oldValue = *address;

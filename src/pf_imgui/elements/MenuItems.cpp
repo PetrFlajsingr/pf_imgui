@@ -31,16 +31,16 @@ MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string
     : MenuItem(elementName), Labellable(label) {}
 
 void MenuButtonItem::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
 }
 
 void SubMenu::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
   if (ImGui::BeginMenu(getLabel().c_str())) {
     RAII end{ImGui::EndMenu};
     renderItems();
@@ -78,9 +78,9 @@ MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::st
     : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
 
 void MenuCheckboxItem::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
   if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 
@@ -97,7 +97,7 @@ MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuI
 MenuSeparatorItem::MenuSeparatorItem(const std::string &elementName) : MenuItem(elementName) {}
 
 void MenuSeparatorItem::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
   ImGui::Separator();
 }
 

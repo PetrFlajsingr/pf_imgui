@@ -16,7 +16,9 @@ GroupBox::GroupBox(const std::string &name, const std::string &label, Size s)
     : ElementWithID(name), Labellable(label), Resizable(s) {}
 
 void GroupBox::renderImpl() {
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::BeginGroupPanel(getLabel().c_str(), static_cast<ImVec2>(getSize()));
   RAII end{ImGui::EndGroupPanel};
   std::ranges::for_each(getChildren(), &Renderable::render);

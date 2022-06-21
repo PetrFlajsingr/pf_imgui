@@ -15,7 +15,6 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Collapsible.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -65,14 +64,7 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
 /**
  * @brief Leaf of Tree. Behaves as Selectable.
  */
-class PF_IMGUI_EXPORT TreeLeaf
-    : public details::TreeRecord,
-      public ValueObservable<bool>,
-      public Savable,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::ItemSpacing, style::Style::FrameRounding>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::HeaderActive, style::ColorOf::HeaderHovered,
-                               style::ColorOf::Header>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueObservable<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of TreeLeaf.
@@ -104,6 +96,10 @@ class PF_IMGUI_EXPORT TreeLeaf
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  ColorPalette<ColorOf::Text, ColorOf::HeaderActive, ColorOf::HeaderHovered, ColorOf::Header> color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::ItemSpacing, StyleOf::FrameRounding> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 };
@@ -113,7 +109,7 @@ class PF_IMGUI_EXPORT TreeLeaf
  */
 template<>
 class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
-    : public details::TreeRecord, public RenderablesContainer, public Collapsible, public FontCustomizable {
+    : public details::TreeRecord, public RenderablesContainer, public Collapsible {
  public:
   /**
    * @brief Struct for construction of TreeNode.
@@ -197,9 +193,9 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
       : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, true, persistent) {}
 
   void renderImpl() override {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    [[maybe_unused]] auto scopedFont = applyFont();
+    [[maybe_unused]] auto colorScoped = color.applyScoped();
+    [[maybe_unused]] auto styleScoped = style.applyScoped();
+    [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
@@ -302,9 +298,9 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
       : TreeRecord(elementName, label, flags), Collapsible(allowCollapse, true, persistent) {}
 
   void renderImpl() override {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    [[maybe_unused]] auto scopedFont = applyFont();
+    [[maybe_unused]] auto colorScoped = color.applyScoped();
+    [[maybe_unused]] auto styleScoped = style.applyScoped();
+    [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!isCollapsed());
     setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
     RAII end{[this] {
@@ -359,7 +355,7 @@ class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
  * @tparam treeType
  */
 template<TreeType treeType>
-class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer, public FontCustomizable {
+class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
  public:
   /**
    * @brief Struct for construction of Tree.
@@ -480,9 +476,9 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer, 
 
  protected:
   void renderImpl() override {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    [[maybe_unused]] auto scopedFont = applyFont();
+    [[maybe_unused]] auto colorScoped = color.applyScoped();
+    [[maybe_unused]] auto styleScoped = style.applyScoped();
+    [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     layout.render();
   }
 

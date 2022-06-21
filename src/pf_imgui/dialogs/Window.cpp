@@ -22,8 +22,9 @@ Window::Window(std::string name, std::string label, Persistent persistent)
     : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto isNotClosed = true;
 
   if (sizeDirty) {
@@ -81,7 +82,6 @@ void Window::setSize(const Size &newSize) {
 
 void Window::render() {
   if (getVisibility() == Visibility::Visible) {
-    if (font != nullptr) { ImGui::PushFont(font); }
     ImGui::SetNextWindowSizeConstraints(static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
                                         static_cast<ImVec2>(maxSizeConstraint.value_or(Size{
                                             std::numeric_limits<float>::max(), std::numeric_limits<float>::max()})));
@@ -90,7 +90,6 @@ void Window::render() {
       dockInto = std::nullopt;
     }
     renderImpl();
-    if (font != nullptr) { ImGui::PopFont(); }
   }
 }
 
@@ -175,8 +174,6 @@ void Window::cancelMinSizeConstraint() { minSizeConstraint = std::nullopt; }
 void Window::cancelMaxSizeConstraint() { maxSizeConstraint = std::nullopt; }
 
 void Window::setMaxSizeConstraint(const Size &newSizeConstraint) { maxSizeConstraint = newSizeConstraint; }
-
-void Window::setFont(ImFont *fontPtr) { font = fontPtr; }
 
 bool Window::isDockable() const { return flags & ImGuiWindowFlags_NoDocking; }
 

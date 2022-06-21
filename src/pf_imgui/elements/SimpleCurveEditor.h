@@ -10,11 +10,12 @@
 
 #include <ImGuiCurveEditor.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 #include <range/v3/view/take_while.hpp>
 #include <range/v3/view/zip.hpp>
 
@@ -45,9 +46,7 @@ struct CurvePointsViewComparator {
 class SimpleCurveEditor : public ElementWithID,
                           public Resizable,
                           public Labellable,
-                          public ValueObservable<CurvePointsView, CurvePointsViewComparator>,
-                          public AllColorCustomizable,
-                          public AllStyleCustomizable {
+                          public ValueObservable<CurvePointsView, CurvePointsViewComparator> {
  public:
   /**
    * @brief Construction config for SimpleCurveEditor
@@ -96,6 +95,9 @@ class SimpleCurveEditor : public ElementWithID,
    * @return smoothed curve value at given position
    */
   [[nodiscard]] float getSmoothCurveValue(float x) const;
+
+  FullColorPalette color;
+  FullStyleOptions style;
 
  protected:
   void renderImpl() override;

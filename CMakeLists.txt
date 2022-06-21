@@ -329,7 +329,6 @@ set(INCLUDES
         src/pf_imgui/layouts/AnchorLayout.h
         src/pf_imgui/interface/RenderablesContainer.h
         src/pf_imgui/styles/enums.h
-        src/pf_imgui/interface/Customizable.h
         src/pf_imgui/elements/DockSpace.h
         src/pf_imgui/details/Spinner.h
         src/pf_imgui/elements/Spinner.h
@@ -399,7 +398,7 @@ set(INCLUDES
         src/pf_imgui/elements/details/OverlayGizmoBase.h
         src/pf_imgui/elements/OptionSlider.h
         src/pf_imgui/interface/Element.h
-        )
+        src/pf_imgui/style/ColorPalette.h src/pf_imgui/style/common.h src/pf_imgui/style/StyleOptions.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

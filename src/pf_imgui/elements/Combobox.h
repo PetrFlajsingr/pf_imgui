@@ -137,9 +137,6 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   void setFromToml(const toml::table &src) override;
 
  protected:
-  using AllColorCustomizable::setColorStack;
-  using AllStyleCustomizable::setStyleStack;
-
   void renderImpl() override;
 
  private:
@@ -220,9 +217,9 @@ void Combobox<T>::setFromToml(const toml::table &src) {
 
 template<ToStringConvertible T>
 void Combobox<T>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = CustomComboboxBase::applyFont();
+  [[maybe_unused]] auto colorScoped = this->color.applyScoped();
+  [[maybe_unused]] auto styleScoped = this->style.applyScoped();
+  [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   const char *previewPtr;
   if (selectedItemIndex.has_value()) {
     previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();

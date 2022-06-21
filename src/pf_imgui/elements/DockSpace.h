@@ -11,9 +11,9 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/style/ColorPalette.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -30,10 +30,7 @@ enum class DockType {
  * @brief An area to which dockable windows can be docked.
  * @warning DockSpace HAS TO BE RENDERED AS SOON AS POSSIBLE OTHERWISE YOU WON'T BE ABLE TO DOCK ANYTHING
  */
-class PF_IMGUI_EXPORT DockSpace
-    : public ElementWithID,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::DockingPreview, style::ColorOf::DockingBackground> {
+class PF_IMGUI_EXPORT DockSpace : public ElementWithID, public Resizable {
  public:
   using Id = ImGuiID;
   /**
@@ -62,6 +59,8 @@ class PF_IMGUI_EXPORT DockSpace
   [[nodiscard]] bool isInitialised() const;
 
   void render() override;
+
+  ColorPalette<ColorOf::DockingPreview, ColorOf::DockingBackground> color;
 
  protected:
   void renderImpl() override;

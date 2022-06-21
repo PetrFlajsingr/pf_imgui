@@ -18,21 +18,21 @@ void FileDialog::deserializeBookmark(const std::string &bookmarkStr) {
 #endif
 
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
-  for (const auto &[extNames, desc, color] : extSettings) {
+  for (const auto &[extNames, desc, extColor] : extSettings) {
     if (!desc.empty()) {
       filters += desc;
       filters += '{';
       for (const auto &extName : extNames) {
         const auto extString = fmt::format(".{}", extName.string());
         filters += fmt::format("{},", extString);
-        if (color.has_value()) { extColors.emplace_back(extString, *color); }
+        if (extColor.has_value()) { extColors.emplace_back(extString, *extColor); }
       }
       filters = filters.substr(0, filters.size() - 1);
       filters += "},";
     } else {
       for (const auto &extName : extNames) {
         filters += fmt::format("{},", extName.string());
-        if (color.has_value()) { extColors.emplace_back(extName.string(), *color); }
+        if (extColor.has_value()) { extColors.emplace_back(extName.string(), *extColor); }
       }
       filters = filters.substr(0, filters.size() - 1);
     }
@@ -42,8 +42,9 @@ void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSe
 
 void FileDialog::renderImpl() {
   if (done) { return; }
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   switch (modal) {
     case Modal::Yes:
       fileDialogInstance.OpenModal(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,

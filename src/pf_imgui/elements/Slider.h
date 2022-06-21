@@ -38,20 +38,12 @@ namespace pf::ui::ig {
  * @tparam T underlying type
  */
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Slider
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<T>,
-      public Savable,
-      public DragSource<T>,
-      public DropTarget<T>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
-                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
-                               style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Slider : public ItemElement,
+                               public Labellable,
+                               public ValueObservable<T>,
+                               public Savable,
+                               public DragSource<T>,
+                               public DropTarget<T> {
  public:
   using MinMaxType = slider_details::MinMaxType<T>;
   /**
@@ -109,6 +101,14 @@ class PF_IMGUI_EXPORT Slider
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
+               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,
+               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,
+               ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 
@@ -161,9 +161,9 @@ void Slider<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 void Slider<T>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   const auto address = ValueObservable<T>::getValueAddress();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;

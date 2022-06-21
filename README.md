@@ -36,8 +36,27 @@ window.createChild(DragInput<int>::Config{
 });
 ```
 
-## Common interfaces
-All of the functions which register an observer return an instance of `Subscription` which can be used to cancel the observer.
+## Common functionality
+All the functions which register an observer return an instance of `Subscription` which can be used to cancel the observer.
+
+### Style customization
+Many classes allow for changing their style/color via member variables, for example in `Button`:
+```cpp
+class Button : public ButtonBase, public Labellable, public Resizable {
+ public:
+  //...
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
+  Font font = Font::Default();
+  // ...
+};
+auto &button = window.createChild<Button>("button_id", "Click me");
+button.color.set<ColorOf::Button>(Color::Red);
+button.style.set<StyleOf::FramePadding>(ImVec2{10, 10});
+```
+
 ### Drag and drop
 Many elements provide drag and drop capabilities. For now, elements can only accept a payload of the same type as the source.
 ```cpp
@@ -95,14 +114,6 @@ window.addCollapseListener([](bool collapsed) {
 });
 // ...
 window.setCollapsed(true);
-```
-
-### Customizable
-This interface allows its derived classes to apply certain style/color changes. You can see which styles/colors can be modified in the base class list of the element you are to use.
-```cpp
-auto &button = window.createChild<Button>("button_id", "Click me");
-button.setColor<styles::ColorOf::Button>(Color::Red);
-button.setColor<styles::ColorOf::ButtonHovered>(Color::Green);
 ```
 
 ### ItemElement

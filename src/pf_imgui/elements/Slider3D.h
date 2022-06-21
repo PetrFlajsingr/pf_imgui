@@ -26,18 +26,13 @@ namespace pf::ui::ig {
  * @tparam T underlying type
  */
 template<OneOf<float> T>
-class PF_IMGUI_EXPORT Slider3D
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<glm::vec3>,
-      public Savable,
-      public DragSource<glm::vec3>,
-      public DropTarget<glm::vec3>,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::FrameBackground, style::ColorOf::Border,
-                               style::ColorOf::BorderShadow, style::ColorOf::FrameBackgroundActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Slider3D : public ItemElement,
+                                 public Labellable,
+                                 public ValueObservable<glm::vec3>,
+                                 public Savable,
+                                 public DragSource<glm::vec3>,
+                                 public DropTarget<glm::vec3>,
+                                 public Resizable {
  public:
   /**
    * @brief Struct for construction of Slider3D.
@@ -74,6 +69,12 @@ class PF_IMGUI_EXPORT Slider3D
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
+               ColorOf::FrameBackgroundActive>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;
@@ -118,9 +119,9 @@ void Slider3D<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<float> T>
 void Slider3D<T>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   auto address = ValueObservable<glm::vec3>::getValueAddress();
   const auto oldValue = *address;

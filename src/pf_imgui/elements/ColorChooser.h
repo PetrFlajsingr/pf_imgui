@@ -15,7 +15,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -42,19 +41,12 @@ namespace pf::ui::ig {
  *
  */
 template<ColorChooserType Type, ColorChooserFormat Format>
-class PF_IMGUI_EXPORT ColorChooser
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<Color>,
-      public Savable,
-      public DragSource<Color>,
-      public DropTarget<Color>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::DragDropTarget, style::ColorOf::NavHighlight, style::ColorOf::Border,
-                               style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
+                                     public Labellable,
+                                     public ValueObservable<Color>,
+                                     public Savable,
+                                     public DragSource<Color>,
+                                     public DropTarget<Color> {
  public:
   /**
    * @brief Struct for construction of ColorChooser.
@@ -97,6 +89,13 @@ class PF_IMGUI_EXPORT ColorChooser
 
   void setValue(const Color &newValue) override;
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::Border,
+               ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 
@@ -123,8 +122,8 @@ ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const s
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 toml::table ColorChooser<Type, Format>::toToml() const {
-  const auto color = ValueObservable::getValue();
-  return toml::table{{"color", static_cast<std::uint32_t>(color)}};
+  const auto val = ValueObservable::getValue();
+  return toml::table{{"color", static_cast<std::uint32_t>(val)}};
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
@@ -147,9 +146,9 @@ void ColorChooser<Type, Format>::setValue(const Color &newValue) {
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 void ColorChooser<Type, Format>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto flags = pickerEnabled ? ImGuiColorEditFlags{} : ImGuiColorEditFlags_NoPicker;
   auto valueChanged = false;
   if constexpr (Type == ColorChooserType::Edit) {

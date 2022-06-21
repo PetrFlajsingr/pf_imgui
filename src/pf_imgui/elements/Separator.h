@@ -9,8 +9,8 @@
 #define PF_IMGUI_ELEMENTS_SPLITTER_H
 
 #include <pf_common/Explicit.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
+#include <pf_imgui/style/ColorPalette.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -20,9 +20,7 @@ namespace pf::ui::ig {
  *
  * Automatically detects if it should be horizontal or vertical.
  */
-class PF_IMGUI_EXPORT Separator : public Element,
-                                  public ColorCustomizable<style::ColorOf::Separator, style::ColorOf::SeparatorHovered,
-                                                           style::ColorOf::SeparatorActive> {
+class PF_IMGUI_EXPORT Separator : public Element {
  public:
   /**
    * @brief Struct for construction of Separator.
@@ -41,6 +39,8 @@ class PF_IMGUI_EXPORT Separator : public Element,
    * @param name element ID
    */
   explicit Separator(const std::string &name);
+
+  ColorPalette<ColorOf::Separator, ColorOf::SeparatorHovered, ColorOf::SeparatorActive> color;
 
  protected:
   void renderImpl() override;
