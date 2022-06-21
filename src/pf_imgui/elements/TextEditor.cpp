@@ -125,7 +125,7 @@ std::string TextEditor::getText() const { return editor.GetText(); }
 void TextEditor::setText(const std::string &text) { editor.SetText(text); }
 
 void TextEditor::renderImpl() {
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
   editor.Render(getName().c_str(), static_cast<ImVec2>(getSize()));
   if (editor.IsTextChanged()) { observableText.notify(getText()); }
   if (editor.IsCursorPositionChanged()) { observableCursorPosition.notify(getCursor().getPosition()); }

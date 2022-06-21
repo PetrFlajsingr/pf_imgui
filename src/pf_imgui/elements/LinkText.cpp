@@ -13,7 +13,7 @@ LinkText::LinkText(pf::ui::ig::LinkText::Config &&config)
 }
 
 void LinkText::renderImpl() {
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   {
     if (isHovered()) {
       ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_SliderGrab]);

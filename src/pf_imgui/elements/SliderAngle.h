@@ -23,20 +23,12 @@ namespace pf::ui::ig {
  *
  * Angles are in radians.
  */
-class PF_IMGUI_EXPORT SliderAngle
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<float>,
-      public Savable,
-      public DragSource<float>,
-      public DropTarget<float>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
-                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::DragDropTarget,
-                               style::ColorOf::SliderGrab, style::ColorOf::SliderGrabActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
+                                    public Labellable,
+                                    public ValueObservable<float>,
+                                    public Savable,
+                                    public DragSource<float>,
+                                    public DropTarget<float> {
  public:
   /**
    * @brief Struct for construction of SliderAngle.
@@ -92,6 +84,14 @@ class PF_IMGUI_EXPORT SliderAngle
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
+               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,
+               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,
+               ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

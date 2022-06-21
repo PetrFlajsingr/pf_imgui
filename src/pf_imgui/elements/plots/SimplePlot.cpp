@@ -9,9 +9,9 @@
 namespace pf::ui::ig {
 
 SimplePlot::SimplePlot(SimplePlot::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}), Resizable(config.size),
-      plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow), scaleMax(config.scaleHigh),
-      overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
+    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+      Resizable(config.size), plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow),
+      scaleMax(config.scaleHigh), overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
 
 SimplePlot::SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
                        std::vector<float> values, std::optional<std::string> overlayText,
@@ -20,7 +20,7 @@ SimplePlot::SimplePlot(const std::string &elementName, const std::string &label,
       scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(overlayText)), historyLimit(historyLimit) {}
 
 void SimplePlot::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
   switch (plotType) {
     case PlotType::Lines:
       ImGui::PlotLines(getLabel().c_str(), values.data(), static_cast<int>(values.size()), 0,

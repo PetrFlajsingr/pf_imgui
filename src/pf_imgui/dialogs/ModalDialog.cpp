@@ -14,9 +14,9 @@ ModalDialog::ModalDialog(const std::string &elementName, const std::string &labe
 
 void ModalDialog::renderImpl() {
   if (closed) { return; }
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  if (font != nullptr) { ImGui::PushFont(font); }
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (sizeDirty) {
     sizeDirty = false;
     ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()));
@@ -32,7 +32,6 @@ void ModalDialog::renderImpl() {
   } else {
     close();
   }
-  if (font != nullptr) { ImGui::PopFont(); }
   firstRender = false;
 }
 
@@ -50,6 +49,5 @@ void ModalDialog::setPosition(Position pos) {
   Positionable::setPosition(pos);
 }
 
-void ModalDialog::setFont(ImFont *fontPtr) { font = fontPtr; }
 
 }  // namespace pf::ui::ig

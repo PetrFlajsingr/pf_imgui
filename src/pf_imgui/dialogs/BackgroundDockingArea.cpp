@@ -3,6 +3,7 @@
 //
 
 #include "BackgroundDockingArea.h"
+#include <imgui_internal.h>
 
 namespace pf::ui::ig {
 

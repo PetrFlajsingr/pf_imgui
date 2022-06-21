@@ -28,7 +28,7 @@ void CommandPalette::setSearchText(const std::string &text) {
   ImCmd::SetNextCommandPaletteSearch(text);
 }
 void CommandPalette::renderImpl() {
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImCmd::CommandPalette(getName().c_str());
   if (ImCmd::IsAnyItemSelected()) { observableInteract.notify(); }
 }

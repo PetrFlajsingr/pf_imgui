@@ -5,8 +5,8 @@
  * @date 14.02.22
  */
 
-#ifndef PF_IMGUI_DATEPICKER_H
-#define PF_IMGUI_DATEPICKER_H
+#ifndef PF_IMGUI_ELEMENTS_DATEPICKER_H
+#define PF_IMGUI_ELEMENTS_DATEPICKER_H
 
 #include <chrono>
 #include <memory>
@@ -27,8 +27,7 @@ namespace pf::ui::ig {
 class DatePicker : public ItemElement,
                    public Labellable,
                    public ValueObservable<std::chrono::year_month_day>,
-                   public Savable,
-                   public FontCustomizable {
+                   public Savable {
  public:
   /**
    * @brief Construction config for DatePicker
@@ -64,6 +63,8 @@ class DatePicker : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 
@@ -73,4 +74,4 @@ class DatePicker : public ItemElement,
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_DATEPICKER_H
+#endif  //PF_IMGUI_ELEMENTS_DATEPICKER_H

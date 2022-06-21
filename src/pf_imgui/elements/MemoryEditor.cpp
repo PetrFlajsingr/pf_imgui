@@ -27,9 +27,9 @@ std::span<std::byte> MemoryEditor::getData() const { return data; }
 void MemoryEditor::setData(std::span<std::byte> newData) { data = newData; }
 
 void MemoryEditor::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   memoryEditor.DrawContents(data.data(), data.size());
 }
 

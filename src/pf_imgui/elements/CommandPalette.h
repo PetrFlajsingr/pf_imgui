@@ -5,12 +5,11 @@
  * @date 8.2.22
  */
 
-#ifndef PF_IMGUI_COMMANDPALETTE_H
-#define PF_IMGUI_COMMANDPALETTE_H
+#ifndef PF_IMGUI_ELEMENTS_COMMANDPALETTE_H
+#define PF_IMGUI_ELEMENTS_COMMANDPALETTE_H
 
 #include <imcmd_command_palette.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <string>
@@ -22,7 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief A command palette like in sublime text or VSC
  */
-class CommandPalette : public ElementWithID, public FontCustomizable {
+class CommandPalette : public ElementWithID {
  public:
   /**
    * @brief Struct for construction of CommandPalette.
@@ -80,6 +79,8 @@ class CommandPalette : public ElementWithID, public FontCustomizable {
     return observableInteract.addListener(std::forward<decltype(listener)>(listener));
   }
 
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 
@@ -90,4 +91,4 @@ class CommandPalette : public ElementWithID, public FontCustomizable {
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_COMMANDPALETTE_H
+#endif  // PF_IMGUI_ELEMENTS_COMMANDPALETTE_H

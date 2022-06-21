@@ -14,7 +14,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
@@ -39,18 +38,12 @@ enum class TextTrigger { Character, Enter };
  * Typical text edit.
  * @todo: hint
  */
-class PF_IMGUI_EXPORT InputText
-    : public ItemElement,
-      public Labellable,
-      public ValueObservable<std::string_view>,
-      public Savable,
-      public DragSource<std::string>,
-      public DropTarget<std::string>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget,
-                               style::ColorOf::FrameBackground, style::ColorOf::FrameBackgroundHovered,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::TextSelectedBackground>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT InputText : public ItemElement,
+                                  public Labellable,
+                                  public ValueObservable<std::string_view>,
+                                  public Savable,
+                                  public DragSource<std::string>,
+                                  public DropTarget<std::string> {
  public:
   /**
    * @brief Struct for construction of InputText.
@@ -125,6 +118,12 @@ class PF_IMGUI_EXPORT InputText
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
+               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::TextSelectedBackground>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

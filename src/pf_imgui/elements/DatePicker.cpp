@@ -71,7 +71,7 @@ void DatePicker::setFromToml(const toml::table &src) {
 
 void DatePicker::renderImpl() {
   using namespace std::chrono;
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::DateChooser(getLabel().c_str(), *rawTime)) {
     const auto newDate =
         year_month_day{year{rawTime->tm_year + 1900}, month{static_cast<unsigned int>(rawTime->tm_mon + 1)},

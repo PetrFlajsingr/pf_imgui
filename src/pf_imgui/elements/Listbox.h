@@ -136,9 +136,6 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   void setFromToml(const toml::table &src) override;
 
  protected:
-  using AllColorCustomizable::setColorStack;
-  using AllStyleCustomizable::setStyleStack;
-
   void renderImpl() override;
 
   void refilterItems() override;
@@ -234,9 +231,9 @@ void Listbox<T>::setFromToml(const toml::table &src) {
 
 template<ToStringConvertible T>
 void Listbox<T>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = CustomListboxBase::applyFont();
+  [[maybe_unused]] auto colorScoped = this->color.applyScoped();
+  [[maybe_unused]] auto styleScoped = this->style.applyScoped();
+  [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   if (ImGui::BeginListBox(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {

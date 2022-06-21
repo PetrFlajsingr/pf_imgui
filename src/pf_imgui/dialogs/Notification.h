@@ -2,14 +2,13 @@
 // Created by xflajs00 on 16.11.2021.
 //
 
-#ifndef PF_IMGUI_NOTIFICATION_H
-#define PF_IMGUI_NOTIFICATION_H
+#ifndef PF_IMGUI_DIALOGS_NOTIFICATION_H
+#define PF_IMGUI_DIALOGS_NOTIFICATION_H
 
 #include <chrono>
 #include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Closeable.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
@@ -61,4 +60,4 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_NOTIFICATION_H
+#endif  // PF_IMGUI_DIALOGS_NOTIFICATION_H

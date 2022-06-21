@@ -77,7 +77,7 @@ void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
 }
 
 void GradientEditor::renderImpl() {
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) {
     setValueInner(getPointsView());
     notifyValueChanged();

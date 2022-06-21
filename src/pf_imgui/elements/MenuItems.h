@@ -11,7 +11,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
@@ -98,17 +97,7 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.
  */
-class PF_IMGUI_EXPORT MenuButtonItem
-    : public MenuItem,
-      public Labellable,
-      public Clickable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
-                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow,
-                               style::ColorOf::Header, style::ColorOf::HeaderHovered, style::ColorOf::HeaderActive>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, public Clickable {
  public:
   /**
    * Construct MenuButtonItem
@@ -131,23 +120,23 @@ class PF_IMGUI_EXPORT MenuButtonItem
    */
   MenuButtonItem(const std::string &elementName, const std::string &label);
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::Header, ColorOf::HeaderHovered,
+               ColorOf::HeaderActive>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 };
 /**
  * @brief An item, which can be clicked and it toggles its inner value.
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem
-    : public MenuItem,
-      public Labellable,
-      public ValueObservable<bool>,
-      public Savable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::CheckMark,
-                               style::ColorOf::FrameBackgroundActive, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::NavHighlight,
-                               style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
+                                         public Labellable,
+                                         public ValueObservable<bool>,
+                                         public Savable {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -176,16 +165,20 @@ class PF_IMGUI_EXPORT MenuCheckboxItem
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
+               ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
+               ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 };
 /**
  * @brief An item, which divides menus.
  */
-class PF_IMGUI_EXPORT MenuSeparatorItem
-    : public MenuItem,
-      public ColorCustomizable<style::ColorOf::Separator, style::ColorOf::SeparatorHovered,
-                               style::ColorOf::SeparatorActive> {
+class PF_IMGUI_EXPORT MenuSeparatorItem : public MenuItem {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -204,6 +197,8 @@ class PF_IMGUI_EXPORT MenuSeparatorItem
    * @param elementName ID of the element
    */
   explicit MenuSeparatorItem(const std::string &elementName);
+
+  ColorPalette<ColorOf::Separator, ColorOf::SeparatorHovered, ColorOf::SeparatorActive> color;
 
  protected:
   void renderImpl() override;

@@ -15,8 +15,8 @@ Spinner::Spinner(const std::string &elementName, float radius, int thickness)
     : ItemElement(elementName), radius(radius), thickness(thickness) {}
 
 void Spinner::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
   ImGui::Spinner(getName().c_str(), radius, thickness);
 }
 

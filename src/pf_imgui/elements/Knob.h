@@ -11,7 +11,6 @@
 #include <imgui-knobs.h>
 #include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -31,21 +30,14 @@ enum class KnobType {
   Stepped = ImGuiKnobVariant_Stepped,
   Space = ImGuiKnobVariant_Space
 };
-
+// TODO: styles
 /**
  * @brief ElementWithID similar to slider.
  * @tparam T underlying value type
  * @todo: more types
  */
 template<OneOf<int, float> T>
-class Knob : public ItemElement,
-             public Labellable,
-             public Resizable,
-             public ValueObservable<T>,
-             public Savable,
-             public ColorCustomizable<style::ColorOf::ButtonActive, style::ColorOf::ButtonHovered,
-                                      style::ColorOf::FrameBackground>,
-             public FontCustomizable {
+class Knob : public ItemElement, public Labellable, public Resizable, public ValueObservable<T>, public Savable {
  public:
   /**
    * @brief Construction args for Knob
@@ -83,8 +75,10 @@ class Knob : public ItemElement,
        T value = T{}, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
-
   void setFromToml(const toml::table &src) override;
+
+  ColorPalette<ColorOf::ButtonActive, ColorOf::ButtonHovered, ColorOf::FrameBackground> color;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;
@@ -123,8 +117,8 @@ void Knob<T>::setFromToml(const toml::table &src) {
 
 template<OneOf<int, float> T>
 void Knob<T>::renderImpl() {
-  [[maybe_unused]] auto color = setColorStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = isLabelVisible() ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
   const auto knobSize = std::min(static_cast<float>(getSize().width), static_cast<float>(getSize().height));
   auto valueChanged = false;

@@ -12,7 +12,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -101,16 +100,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
  *
  * A button with a text label.
  */
-class PF_IMGUI_EXPORT Button
-    : public ButtonBase,
-      public Labellable,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
-                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Button : public ButtonBase, public Labellable, public Resizable {
  public:
   /**
    * @brief Struct for construction of Button.
@@ -137,6 +127,12 @@ class PF_IMGUI_EXPORT Button
   Button(const std::string &name, const std::string &label, const Size &s = Size::Auto(),
          Repeatable isRepeatable = Repeatable::No);
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 };
@@ -146,15 +142,7 @@ class PF_IMGUI_EXPORT Button
  *
  * A button with a text label.
  */
-class PF_IMGUI_EXPORT SmallButton
-    : public ButtonBase,
-      public Labellable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
-                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT SmallButton : public ButtonBase, public Labellable {
  public:
   /**
    * @brief Struct for construction of SmallButton.
@@ -174,6 +162,12 @@ class PF_IMGUI_EXPORT SmallButton
    */
   SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable = Repeatable::No);
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
+  Font font = Font::Default();
+
  protected:
   void renderImpl() override;
 };
@@ -182,13 +176,7 @@ class PF_IMGUI_EXPORT SmallButton
  *
  * A button with an arrow rendered on top of it.
  */
-class PF_IMGUI_EXPORT ArrowButton
-    : public ButtonBase,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::Button,
-                               style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign> {
+class PF_IMGUI_EXPORT ArrowButton : public ButtonBase {
  public:
   enum class Dir { Up = ImGuiDir_Up, Left = ImGuiDir_Left, Right = ImGuiDir_Right, Down = ImGuiDir_Down };
   struct Config {
@@ -210,6 +198,11 @@ class PF_IMGUI_EXPORT ArrowButton
    */
   ArrowButton(const std::string &name, Dir direction, Repeatable isRepeatable = Repeatable::No);
 
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
+
  protected:
   void renderImpl() override;
 
@@ -221,13 +214,7 @@ class PF_IMGUI_EXPORT ArrowButton
  *
  * A button with an image rendered on top of it.
  */
-class PF_IMGUI_EXPORT ImageButton
-    : public ButtonBase,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::Button, style::ColorOf::ButtonHovered, style::ColorOf::ButtonActive,
-                               style::ColorOf::NavHighlight, style::ColorOf::Border, style::ColorOf::BorderShadow>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize,
-                               style::Style::ButtonTextAlign> {
+class PF_IMGUI_EXPORT ImageButton : public ButtonBase, public Resizable {
  public:
   struct Config {
     using Parent = ImageButton;
@@ -260,6 +247,11 @@ class PF_IMGUI_EXPORT ImageButton
    * Set UVs according to which the image will get sampled.
    */
   void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
+
+  ColorPalette<ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive, ColorOf::NavHighlight, ColorOf::Border,
+               ColorOf::BorderShadow>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
 
  protected:
   void renderImpl() override;

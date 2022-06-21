@@ -12,10 +12,10 @@
 #include <optional>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/style/ColorPalette.h>
 #include <string>
 #include <vector>
 
@@ -30,14 +30,7 @@ using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
  * @todo: style
  * @todo: styles for samples?
  */
-class PF_IMGUI_EXPORT FlameGraph
-    : public ElementWithID,
-      public Labellable,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::PlotHistogram, style::ColorOf::PlotHistogramHovered,
-                               style::ColorOf::FrameBackground, style::ColorOf::Border, style::ColorOf::BorderShadow,
-                               style::ColorOf::Text>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT FlameGraph : public ElementWithID, public Labellable, public Resizable {
  public:
   /**
    * @brief Struct for construction of FlameGraph.
@@ -79,6 +72,11 @@ class PF_IMGUI_EXPORT FlameGraph
    * @param newSamples samples
    */
   void setSamples(const std::vector<FlameGraphSample> &newSamples);
+
+  ColorPalette<ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered, ColorOf::FrameBackground, ColorOf::Border,
+               ColorOf::BorderShadow, ColorOf::Text>
+      color;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

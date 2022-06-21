@@ -12,7 +12,6 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -22,14 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief Progress bar with infinite animation.
  */
-class PF_IMGUI_EXPORT IndeterminateProgressBar
-    : public ItemElement,
-      public Resizable,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::FrameBackground,
-                               style::ColorOf::FrameBackgroundHovered, style::ColorOf::FrameBackgroundActive,
-                               style::ColorOf::Border, style::ColorOf::BorderShadow, style::ColorOf::PlotHistogram>,
-      public StyleCustomizable<style::Style::FramePadding, style::Style::FrameRounding, style::Style::FrameBorderSize>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT IndeterminateProgressBar : public ItemElement, public Resizable {
  public:
   /**
    * Construct IndeterminateProgressBar
@@ -65,6 +57,12 @@ class PF_IMGUI_EXPORT IndeterminateProgressBar
    * @return current speed of change
    */
   [[nodiscard]] float getSpeed() const;
+
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::Border, ColorOf::BorderShadow, ColorOf::PlotHistogram>
+      color;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

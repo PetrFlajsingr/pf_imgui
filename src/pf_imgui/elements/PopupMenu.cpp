@@ -22,9 +22,9 @@ void PopupMenu::close() {
 
 void PopupMenu::renderImpl() {
   if (opened) {
-    [[maybe_unused]] auto colorStyle = setColorStack();
-    [[maybe_unused]] auto style = setStyleStack();
-    [[maybe_unused]] auto scopedFont = applyFont();
+    [[maybe_unused]] auto colorScoped = color.applyScoped();
+    [[maybe_unused]] auto styleScoped = style.applyScoped();
+    [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     if (firstRender) { ImGui::OpenPopup(getName().c_str()); }
     if (ImGui::BeginPopup(getName().c_str())) {
       RAII end{ImGui::EndPopup};

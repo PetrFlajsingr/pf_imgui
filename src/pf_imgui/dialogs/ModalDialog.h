@@ -56,11 +56,6 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
 
   void setSize(const Size &newSize) override;
   void setPosition(Position pos) override;
-  /**
-   * Set font for ModalDialog and all elements inside - except for those that have their own font.
-   * @param fontPtr new font
-   */
-  void setFont(ImFont *fontPtr);
 
  protected:
   void renderImpl() override;
@@ -68,7 +63,6 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
  private:
   bool firstRender = true;
   bool closed = false;
-  ImFont *font = nullptr;
   bool sizeDirty = false;
   bool positionDirty = false;
 };

@@ -5,8 +5,8 @@
  * @date 1.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H
+#ifndef PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H
+#define PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H
 
 #include <algorithm>
 #include <pf_imgui/_export.h>
@@ -40,9 +40,6 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Labella
                 Size s = Size::Auto());
 
  protected:
-  using AllColorCustomizable::setColorStack;
-  using AllStyleCustomizable::setStyleStack;
-
   void renderImpl() override;
 };
 
@@ -54,9 +51,9 @@ CustomListbox<T, R>::CustomListbox(const std::string &elementName, const std::st
 
 template<typename T, std::derived_from<Renderable> R>
 void CustomListbox<T, R>::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto scopedFont = CustomItemBox<T, R>::applyFont();
+  [[maybe_unused]] auto colorScoped = this->color.applyScoped();
+  [[maybe_unused]] auto styleScoped = this->style.applyScoped();
+  [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   if (ImGui::BeginListBox(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
@@ -64,4 +61,4 @@ void CustomListbox<T, R>::renderImpl() {
 }
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H
+#endif  // PF_IMGUI_ELEMENTS_CUSTOMLISTBOX_H

@@ -10,12 +10,15 @@
 
 #include <ImGuiFileDialog.h>
 #include <filesystem>
+#include <pf_imgui/Color.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <utility>
@@ -57,11 +60,7 @@ enum class FileDialogType { Dir, File };
  * @todo: thumbnails
  * @todo: custom pane
  */
-class PF_IMGUI_EXPORT FileDialog : public Renderable,
-                                   public Labellable,
-                                   public Resizable,
-                                   public AllColorCustomizable,
-                                   public AllStyleCustomizable {
+class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public Resizable {
  public:
   /**
    * Construct FileDialog for files
@@ -119,6 +118,10 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable,
 
   void deserializeBookmark(const std::string &bookmarkStr);
 #endif
+
+  FullColorPalette color;
+  FullStyleOptions style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

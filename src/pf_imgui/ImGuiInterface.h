@@ -69,7 +69,7 @@ struct ImGuiConfig {
  * @todo: key bindings?
  * @todo: check if context is actually properly set where needed
  */
-class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomizable, public AllColorCustomizable {
+class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:
   /**
    * Construct ImGuiInterface with given flags.
@@ -241,8 +241,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   void removeBackgroundDockingArea();
   // TODO: change this to something not insane
   template<typename... Args>
-    requires(std::constructible_from<ViewportOverlayGizmo, Args...>)
-  [[nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
+    requires(std::constructible_from<ViewportOverlayGizmo, Args...>) [
+        [nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
     if (viewportGizmo == nullptr) {
       viewportGizmo = std::make_unique<ViewportOverlayGizmo>(std::forward<Args>(args)...);
     }
@@ -256,9 +256,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
    */
   virtual void updateFonts() = 0;
 
-  [[nodiscard]] Font getGlobalFont() const;
-  void setGlobalFont(Font globalFont);
-
   [[nodiscard]] FontManager &getFontManager();
   [[nodiscard]] const FontManager &getFontManager() const;
 
@@ -269,6 +266,10 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   [[nodiscard]] const DialogManager &getDialogManager() const;
 
   void render() override;
+
+  FullColorPalette color;
+  FullStyleOptions style;
+  Font font = Font::Default();
 
  protected:
   std::unique_ptr<AppMenuBar> menuBar = nullptr;
@@ -288,8 +289,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   bool shouldUpdateFontAtlas = false;
 
   void setContext() const;
-
-  Font globalFont = Font::Default();
 
  private:
   friend class FontManager;
@@ -316,7 +315,6 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable, public AllStyleCustomi
   std::unique_ptr<BackgroundDockingArea> backgroundDockingArea = nullptr;
 
   std::unique_ptr<ViewportOverlayGizmo> viewportGizmo{};
-
 };
 
 }  // namespace pf::ui::ig

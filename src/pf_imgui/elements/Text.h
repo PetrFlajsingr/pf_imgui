@@ -12,7 +12,6 @@
 #include <optional>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Customizable.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -24,12 +23,7 @@ namespace pf::ui::ig {
 /**
  * @brief Simple rendered text. May be colored.
  */
-class PF_IMGUI_EXPORT Text
-    : public ItemElement,
-      public DragSource<std::string>,
-      public DropTarget<std::string>,
-      public ColorCustomizable<style::ColorOf::Text, style::ColorOf::TextDisabled, style::ColorOf::DragDropTarget>,
-      public FontCustomizable {
+class PF_IMGUI_EXPORT Text : public ItemElement, public DragSource<std::string>, public DropTarget<std::string> {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -71,6 +65,9 @@ class PF_IMGUI_EXPORT Text
 
   [[nodiscard]] bool isWrap() const;
   void setWrap(bool textWrap);
+
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget> color;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;

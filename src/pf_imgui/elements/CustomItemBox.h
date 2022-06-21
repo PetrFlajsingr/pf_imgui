@@ -40,7 +40,7 @@ F, T > ;
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesContainer, public FontCustomizable {
+class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesContainer {
  public:
   /**
    * Construct CustomItemBox

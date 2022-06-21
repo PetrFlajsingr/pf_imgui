@@ -4,6 +4,7 @@
 
 #include "ItemElement.h"
 #include <imgui.h>
+#include <imgui_internal.h>
 #include <pf_imgui/elements/Text.h>
 #include <utility>
 

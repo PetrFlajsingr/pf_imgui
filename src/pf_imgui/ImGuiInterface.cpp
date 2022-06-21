@@ -166,8 +166,6 @@ std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName
 void ImGuiInterface::renderImpl() {
   ImGuizmo::BeginFrame();
   if (viewportGizmo != nullptr) { viewportGizmo->render(); }
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
   if (hasMenuBar()) {
     if (backgroundDockingArea != nullptr) { backgroundDockingArea->leftTopMargin = ImVec2{0, ImGui::GetFrameHeight()}; }
     menuBar->render();
@@ -222,10 +220,6 @@ BackgroundDockingArea &ImGuiInterface::createOrGetBackgroundDockingArea() {
 
 void ImGuiInterface::removeBackgroundDockingArea() { backgroundDockingArea = nullptr; }
 
-Font ImGuiInterface::getGlobalFont() const { return globalFont; }
-
-void ImGuiInterface::setGlobalFont(Font newFont) { globalFont = std::move(newFont); }
-
 FontManager &ImGuiInterface::getFontManager() { return fontManager; }
 
 const FontManager &ImGuiInterface::getFontManager() const { return fontManager; }
@@ -252,7 +246,9 @@ void ImGuiInterface::render() {
     if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) { updateMultiViewport(); }
   }};
   if (getVisibility() == Visibility::Visible) {
-    [[maybe_unused]] auto fontScoped = globalFont.applyScoped();
+    [[maybe_unused]] auto colorScoped = color.applyScoped();
+    [[maybe_unused]] auto styleScoped = style.applyScoped();
+    [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     if (getEnabled() == Enabled::No) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};

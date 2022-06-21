@@ -19,9 +19,9 @@ void IndeterminateProgressBar::setSpeed(float speed) { changeSpeed = speed; }
 float IndeterminateProgressBar::getSpeed() const { return changeSpeed; }
 
 void IndeterminateProgressBar::renderImpl() {
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::IndeterminateProgressBar(static_cast<float>(ImGui::GetTime()) * -changeSpeed, static_cast<ImVec2>(getSize()),
                                   overlay.c_str());
 }

@@ -15,8 +15,9 @@ WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDir
     : LinearLayout(elementName, size, showBorder), direction(layoutDirection) {}
 
 void WrapLayout::renderImpl() {
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto style = setStyleStack();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
@@ -40,16 +41,16 @@ void WrapLayout::renderLeftToRight() {
     const auto childrenSize = childrenView.size();
     std::size_t idx{};
     const auto windowVisibleX = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
-    const auto &style = ImGui::GetStyle();
+    const auto &imStyle = ImGui::GetStyle();
     std::ranges::for_each(childrenView, [&](auto &child) {
       child.render();
       const auto lastOriginX = ImGui::GetItemRectMin().x;
       const auto lastX = ImGui::GetItemRectMax().x;
       if (dimensionsCalculated && idx != childrenSize - 1) {
-        const auto nextXH = lastX + style.ItemSpacing.x + dimensionPreviousFrame[idx + 1];
+        const auto nextXH = lastX + imStyle.ItemSpacing.x + dimensionPreviousFrame[idx + 1];
         if (idx != childrenSize - 1 && nextXH < windowVisibleX) { ImGui::SameLine(); }
       } else {
-        const auto nextX = lastX + style.ItemSpacing.x + (lastX - lastOriginX);
+        const auto nextX = lastX + imStyle.ItemSpacing.x + (lastX - lastOriginX);
         if (idx != childrenSize - 1 && nextX < windowVisibleX) { ImGui::SameLine(); }
       }
       dimensionPreviousFrame[idx] = ImGui::GetItemRectSize().x;
@@ -66,7 +67,7 @@ void WrapLayout::renderTopToBottom() {
     float currentX = 0;
     float maxXInColumn = currentX;
     const auto windowVisibleY = ImGui::GetWindowPos().y + ImGui::GetWindowContentRegionMax().y;
-    const auto &style = ImGui::GetStyle();
+    const auto &imStyle = ImGui::GetStyle();
     std::size_t idx{};
     std::ranges::for_each(childrenView, [&](auto &child) {
       ImGui::SetCursorPosX(currentX);
@@ -77,13 +78,13 @@ void WrapLayout::renderTopToBottom() {
       if (dimensionsCalculated && idx != childrenSize - 1) {
         const auto nextYH = lastY + dimensionPreviousFrame[idx + 1];
         if (nextYH >= windowVisibleY) {
-          currentX = maxXInColumn + style.ItemSpacing.x;
+          currentX = maxXInColumn + imStyle.ItemSpacing.x;
           ImGui::SetCursorPosY(0);
         }
       } else {
-        const auto nextY = lastY + style.ItemSpacing.y + (lastY - lastOriginY);
+        const auto nextY = lastY + imStyle.ItemSpacing.y + (lastY - lastOriginY);
         if (nextY >= windowVisibleY) {
-          currentX = maxXInColumn + style.ItemSpacing.x;
+          currentX = maxXInColumn + imStyle.ItemSpacing.x;
           ImGui::SetCursorPosY(0);
         }
       }

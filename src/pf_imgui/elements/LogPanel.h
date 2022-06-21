@@ -73,12 +73,7 @@ namespace pf::ui::ig {
  */
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)  // RecordLimit has to be power of two
-class PF_IMGUI_EXPORT LogPanel : public ElementWithID,
-                                 public Resizable,
-                                 public Savable,
-                                 public AllColorCustomizable,
-                                 public AllStyleCustomizable,
-                                 public FontCustomizable {
+class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Resizable, public Savable {
   struct Record {
     Category category;
     std::string text;
@@ -146,6 +141,10 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID,
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  FullColorPalette color;
+  FullStyleOptions style;
+  Font font = Font::Default();
 
  protected:
   void renderImpl() override;
@@ -259,9 +258,9 @@ void LogPanel<Category, RecordLimit>::setCategoryAllowed(Category category, bool
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 void LogPanel<Category, RecordLimit>::renderImpl() {
-  [[maybe_unused]] auto style = setStyleStack();
-  [[maybe_unused]] auto colorStyle = setColorStack();
-  [[maybe_unused]] auto scopedFont = applyFont();
+  [[maybe_unused]] auto colorScoped = color.applyScoped();
+  [[maybe_unused]] auto styleScoped = style.applyScoped();
+  [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto filterChanged = false;
   ImGui::BeginHorizontal("layout", static_cast<ImVec2>(getSize()), 0);
   {
