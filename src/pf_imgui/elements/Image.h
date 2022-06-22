@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Texture.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -31,9 +32,9 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
    */
   struct Config {
     using Parent = Image;
-    Explicit<std::string_view> name; /*!< Unique name of the element */
-    Explicit<ImTextureID> textureId; /*!< Id of the texture to render */
-    Size size = Size::Auto();        /*!< Size of the element */
+    Explicit<std::string_view> name;            /*!< Unique name of the element */
+    Explicit<std::shared_ptr<Texture>> texture; /*!< Texture to render */
+    Size size = Size::Auto();                   /*!< Size of the element */
   };
   /**
    * Construct Image
@@ -43,17 +44,17 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
   /**
    * Construct Image.
    * @param elementName ID of the element
-   * @param imTextureId ID of a texture
+   * @param tex texture to render
    * @param size size of the image on screen
    */
-  Image(const std::string &elementName, ImTextureID imTextureId, Size size = Size::Auto());
+  Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size size = Size::Auto());
 
   /**
    * Change texture ID.
    * @param imTextureId new id
    */
-  void setTextureId(ImTextureID imTextureId);
-  [[nodiscard]] ImTextureID getTextureId() const;
+  void setTexture(std::shared_ptr<Texture> tex);
+  [[nodiscard]] const std::shared_ptr<Texture> &getTexture() const;
   /**
    * Set UVs according to which the image will get sampled.
    */
@@ -63,7 +64,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
   void renderImpl() override;
 
  private:
-  ImTextureID textureId;
+  std::shared_ptr<Texture> texture;
   ImVec2 uvLeftTop{0.f, 0.f};
   ImVec2 uvRightBottom{1.f, 1.f};
 };
@@ -84,8 +85,8 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
    */
   struct Config {
     using Parent = InspectableImage;
-    Explicit<std::string_view> name; /*!< Unique name of the element */
-    Explicit<ImTextureID> textureId; /*!< Id of the texture to render */
+    Explicit<std::string_view> name;            /*!< Unique name of the element */
+    Explicit<std::shared_ptr<Texture>> texture; /*!< Texture to render */
     Explicit<std::span<const std::byte>>
         rgbaData;                     /*!< Image data, the element won't store this, you needto keep the memory valid */
     Explicit<std::size_t> imageWidth; /*!< Width of the provided image */
@@ -103,21 +104,21 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
    * @param s size of the element
    * @param rgbaData image data, the element won't store this, you needto keep the memory valid
    * @param imgWidth width of the provided image
-   * @param texId texture id
+   * @param tex texture
    */
   InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData, std::size_t imgWidth,
-                   ImTextureID texId, Trigger trigger);
+                   std::shared_ptr<Texture> tex, Trigger trigger);
   /**
    * Set UVs according to which the image will get sampled.
    */
   void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
   /**
    * Set texture along with necessary information.
-   * @param texId texture id
+   * @param tex texture
    * @param rgbaData image data, the element won't store this, you needto keep the memory valid
    * @param imgWidth width of the provided image
    */
-  void setTexture(ImTextureID texId, std::span<const std::byte> rgbaData, std::size_t imgWidth);
+  void setTexture(std::shared_ptr<Texture> tex, std::span<const std::byte> rgbaData, std::size_t imgWidth);
 
   /**
    * Set amount of pixels zoomed in around selection.
@@ -131,7 +132,7 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
   std::span<const std::byte> imageRGBAData;
   int zoomSize = 20;
   std::size_t imageWidth;
-  ImTextureID textureId;
+  std::shared_ptr<Texture> texture;
   ImVec2 uvLeftTop{0.f, 0.f};
   ImVec2 uvRightBottom{1.f, 1.f};
   Trigger trig;

@@ -87,7 +87,7 @@ ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLink
     return result;
   }
   result.isValid = true;
-  result.user_texture_id = imageData->textureId;
+  result.user_texture_id = imageData->texture->getID();
 
   result.size = static_cast<ImVec2>(imageData->size);
 
