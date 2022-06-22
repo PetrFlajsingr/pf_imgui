@@ -103,16 +103,17 @@ $(function() {
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">if</span> constexpr (Type == BarType::Vertical) {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      ImPlot::PlotErrorBarsH(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  std::vector&lt;double&gt; error;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}  <span class="comment">// namespace pf::ui::ig::plot_type</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_ERRORBAR_H</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size(),</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                            ImPlotErrorBarsFlags_Horizontal);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  std::vector&lt;double&gt; error;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}  <span class="comment">// namespace pf::ui::ig::plot_type</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_PLOTS_TYPES_ERRORBAR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1plot__type_1_1details_1_1DefaultPlotDataSetting_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1plot__type_1_1details_1_1DefaultPlotDataSetting.html">pf::ui::ig::plot_type::details::DefaultPlotDataSetting</a></div><div class="ttdoc">Default setter for data storage.</div><div class="ttdef"><b>Definition:</b> PlotDataBase.h:56</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar.html">pf::ui::ig::plot_type::ErrorBar</a></div><div class="ttdoc">2D bar plot, which can either be horizontal or vertical. It shows error margin for each bar.</div><div class="ttdef"><b>Definition:</b> ErrorBar.h:25</div></div>
