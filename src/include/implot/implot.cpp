@@ -140,8 +140,12 @@ You can read releases logs https://github.com/epezent/implot/releases for more d
 // Clang/GCC warnings with -Weverything
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wformat-nonliteral"  // warning: format string is not a string literal
+#pragma clang diagnostic ignored "-Wparentheses"
+#pragma clang diagnostic ignored "-Wpointer-arith"
 #elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Wformat-nonliteral"    // warning: format not a string literal, format string not checked
+#pragma GCC diagnostic ignored "-Wparentheses"
+#pragma GCC diagnostic ignored "-Wpointer-arith"
 #endif
 
 // Global plot context
