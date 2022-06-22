@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['slider2dstoragetype_1932',['Slider2DStorageType',['../Slider2D_8h.html#a35435fe9588aaf9306072e1b03853554',1,'pf::ui::ig::details']]]
+  ['slider2dstoragetype_1934',['Slider2DStorageType',['../Slider2D_8h.html#a35435fe9588aaf9306072e1b03853554',1,'pf::ui::ig::details']]]
 ];
