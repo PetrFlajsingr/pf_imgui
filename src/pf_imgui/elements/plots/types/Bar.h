@@ -31,9 +31,10 @@ class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotD
  protected:
   void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
-      ImPlot::PlotBars(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
+      ImPlot::PlotBars(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67, 0.);
     } else {
-      ImPlot::PlotBarsH(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
+      ImPlot::PlotBars(getLabel().c_str(), xData.data(), yData.data(), xData.size(), 0.67, 0.,
+                       ImPlotBarsFlags_Horizontal);
     }
   }
 };

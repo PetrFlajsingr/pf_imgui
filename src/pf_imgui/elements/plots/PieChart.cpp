@@ -23,8 +23,8 @@ void PieChart::renderImpl() {
   }
 
   if (ImPlot::BeginPlot(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
-    RAII endPopup{[] { ImPlot::EndPlot(); }};
-    ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4, true);
+    RAII endPlot{[] { ImPlot::EndPlot(); }};
+    ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4);
   }
 }
 

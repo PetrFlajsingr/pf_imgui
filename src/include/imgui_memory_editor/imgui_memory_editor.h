@@ -313,7 +313,7 @@ struct MemoryEditor {
           ImGui::PushID((void *) addr);
           if (DataEditingTakeFocus) {
             ImGui::SetKeyboardFocusHere();
-            ImGui::CaptureKeyboardFromApp(true);
+            ImGui::SetNextFrameWantCaptureKeyboard(true);
             sprintf(AddrInputBuf, format_data, s.AddrDigitsCount, base_display_addr + addr);
             sprintf(DataInputBuf, format_byte, ReadFn ? ReadFn(mem_data, addr) : mem_data[addr]);
           }
