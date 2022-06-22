@@ -12,7 +12,7 @@ var searchData=
   ['line_2eh_477',['Line.h',['../Line_8h.html',1,'']]],
   ['linearlayout_478',['LinearLayout',['../classpf_1_1ui_1_1ig_1_1LinearLayout.html',1,'pf::ui::ig::LinearLayout'],['../classpf_1_1ui_1_1ig_1_1LinearLayout.html#adb30cfe0ce0f9b093af6520f3c68770a',1,'pf::ui::ig::LinearLayout::LinearLayout()']]],
   ['linearlayout_2eh_479',['LinearLayout.h',['../LinearLayout_8h.html',1,'']]],
-  ['link_480',['Link',['../classpf_1_1ui_1_1ig_1_1Link.html',1,'pf::ui::ig::Link'],['../structpf_1_1ui_1_1ig_1_1LinkText_1_1Config.html#aa8bcee71698c5dfc937b4eebe770e80e',1,'pf::ui::ig::LinkText::Config::link()'],['../classpf_1_1ui_1_1ig_1_1Link.html#ac7eb2288ffbd23d52af09cfcb9d316fb',1,'pf::ui::ig::Link::Link()']]],
+  ['link_480',['Link',['../classpf_1_1ui_1_1ig_1_1Link.html',1,'pf::ui::ig::Link'],['../classpf_1_1ui_1_1ig_1_1Link.html#ac7eb2288ffbd23d52af09cfcb9d316fb',1,'pf::ui::ig::Link::Link()'],['../structpf_1_1ui_1_1ig_1_1LinkText_1_1Config.html#aa8bcee71698c5dfc937b4eebe770e80e',1,'pf::ui::ig::LinkText::Config::link()']]],
   ['link_2eh_481',['Link.h',['../Link_8h.html',1,'']]],
   ['linkptrtoconstref_482',['LinkPtrToConstRef',['../structpf_1_1ui_1_1ig_1_1details_1_1LinkPtrToConstRef.html',1,'pf::ui::ig::details']]],
   ['linkptrtoref_483',['LinkPtrToRef',['../structpf_1_1ui_1_1ig_1_1details_1_1LinkPtrToRef.html',1,'pf::ui::ig::details']]],
