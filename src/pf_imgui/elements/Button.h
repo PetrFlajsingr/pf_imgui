@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Texture.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
@@ -218,10 +219,10 @@ class PF_IMGUI_EXPORT ImageButton : public ButtonBase, public Resizable {
  public:
   struct Config {
     using Parent = ImageButton;
-    Explicit<std::string_view> name; /*!< Unique name of the element */
-    Explicit<ImTextureID> textureId; /*!< Id of the texture to render */
-    Size size = Size::Auto();        /*!< Size of the element */
-    bool repeatable = false;         /*!< Enable repeated listener callback on mouse down */
+    Explicit<std::string_view> name;            /*!< Unique name of the element */
+    Explicit<std::shared_ptr<Texture>> texture; /*!< Texture to render */
+    Size size = Size::Auto();                   /*!< Size of the element */
+    bool repeatable = false;                    /*!< Enable repeated listener callback on mouse down */
   };
   /**
    * Construct ImageButton
@@ -231,18 +232,18 @@ class PF_IMGUI_EXPORT ImageButton : public ButtonBase, public Resizable {
   /**
    * Construct ArrowButton
    * @param name unique name of the element
-   * @param textureId texture to render
+   * @param tex texture to render
    * @param s size of the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  ImageButton(const std::string &name, ImTextureID texId, Size s = Size::Auto(),
+  ImageButton(const std::string &name, std::shared_ptr<Texture> tex, Size s = Size::Auto(),
               Repeatable isRepeatable = Repeatable::No);
 
   /**
-   * Change texture ID.
-   * @param imTextureId new id
+   * Change texture.
+   * @param tex new texture
    */
-  void setTextureId(ImTextureID imTextureId);
+  void setTexture(std::shared_ptr<Texture> tex);
   /**
    * Set UVs according to which the image will get sampled.
    */
@@ -257,7 +258,7 @@ class PF_IMGUI_EXPORT ImageButton : public ButtonBase, public Resizable {
   void renderImpl() override;
 
  private:
-  ImTextureID textureId;
+  std::shared_ptr<Texture> texture;
   ImVec2 uvLeftTop{0.f, 0.f};
   ImVec2 uvRightBottom{1.f, 1.f};
 };

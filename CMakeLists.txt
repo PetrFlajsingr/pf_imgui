@@ -398,7 +398,7 @@ set(INCLUDES
         src/pf_imgui/elements/details/OverlayGizmoBase.h
         src/pf_imgui/elements/OptionSlider.h
         src/pf_imgui/interface/Element.h
-        src/pf_imgui/style/ColorPalette.h src/pf_imgui/style/common.h src/pf_imgui/style/StyleOptions.h)
+        src/pf_imgui/style/ColorPalette.h src/pf_imgui/style/common.h src/pf_imgui/style/StyleOptions.h src/pf_imgui/Texture.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
