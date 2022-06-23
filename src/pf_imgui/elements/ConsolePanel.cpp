@@ -97,7 +97,7 @@ void ConsolePanel::renderImpl() {
 
 void ConsolePanel::handleSubmit() {
   if (inputBuffer[0] != '\0') {
-    records.emplace_back(RecordType::Input, Record{inputBuffer, std::nullopt});
+    records.emplace_back(RecordType::Input, Record{inputBuffer, std::nullopt, std::nullopt});
     if (auto response = inputHandler(std::string_view{inputBuffer}); response.has_value()) {
       records.emplace_back(RecordType::Output, std::move(*response));
     }
