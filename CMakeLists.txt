@@ -201,7 +201,7 @@ set(SOURCES
         src/pf_imgui/elements/OverlayGizmo.cpp
         src/pf_imgui/elements/details/OverlayGizmoBase.cpp
         src/pf_imgui/interface/Element.cpp
-        )
+        src/pf_imgui/elements/ConsolePanel.cpp src/pf_imgui/elements/ConsolePanel.h)
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
@@ -398,7 +398,7 @@ set(INCLUDES
         src/pf_imgui/elements/details/OverlayGizmoBase.h
         src/pf_imgui/elements/OptionSlider.h
         src/pf_imgui/interface/Element.h
-        src/pf_imgui/style/ColorPalette.h src/pf_imgui/style/common.h src/pf_imgui/style/StyleOptions.h)
+        src/pf_imgui/style/ColorPalette.h src/pf_imgui/style/common.h src/pf_imgui/style/StyleOptions.h src/pf_imgui/elements/ConsolePanel.cpp src/pf_imgui/elements/ConsolePanel.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
