@@ -52,7 +52,8 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
     if constexpr (Type == BarType::Vertical) {
       ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     } else {
-      ImPlot::PlotErrorBarsH(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size());
+      ImPlot::PlotErrorBars(getLabel().c_str(), xData.data(), yData.data(), error.data(), xData.size(),
+                            ImPlotErrorBarsFlags_Horizontal);
     }
   }
 

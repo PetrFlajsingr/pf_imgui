@@ -312,7 +312,7 @@ void LogPanel<Category, RecordLimit>::renderTextArea() {
   RAII end{ImGui::EndChild};
   const auto wrapEnabled = wrapTextToggle.getValue();
   if (ImGui::BeginChild(getName().c_str(), ImVec2{0, 0}, true,
-                        wrapTextToggle.getValue() ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
+                        wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
     for (std::size_t i = 0; i < records.readAvailable(); ++i) {
       const auto &record = records[i];
       if (!record.show) { continue; }

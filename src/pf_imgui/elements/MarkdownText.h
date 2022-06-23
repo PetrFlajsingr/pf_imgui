@@ -34,7 +34,7 @@ static inline FontData DefaultFontData;
 class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
  public:
   struct ImageData {
-    ImTextureID textureId;
+    std::shared_ptr<Texture> texture;
     Size size;
   };
   using ImageLoader = std::function<std::optional<ImageData>(std::string_view)>;

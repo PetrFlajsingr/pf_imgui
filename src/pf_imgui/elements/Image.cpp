@@ -9,16 +9,16 @@
 namespace pf::ui::ig {
 
 Image::Image(Image::Config &&config)
-    : ItemElement(std::string{config.name.value}), Resizable(config.size), textureId(config.textureId) {}
+    : ItemElement(std::string{config.name.value}), Resizable(config.size), texture(std::move(config.texture)) {}
 
-Image::Image(const std::string &elementName, ImTextureID imTextureId, Size size)
-    : ItemElement(elementName), Resizable(size), textureId(imTextureId) {}
+Image::Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size size)
+    : ItemElement(elementName), Resizable(size), texture(std::move(tex)) {}
 
-void Image::renderImpl() { ImGui::Image(textureId, static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom); }
+void Image::renderImpl() { ImGui::Image(texture->getID(), static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom); }
 
-void Image::setTextureId(ImTextureID imTextureId) { textureId = imTextureId; }
+void Image::setTexture(std::shared_ptr<Texture> tex) { texture = std::move(tex); }
 
-ImTextureID Image::getTextureId() const { return textureId; }
+const std::shared_ptr<Texture> &Image::getTexture() const { return texture; }
 
 void Image::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
   uvLeftTop = leftTop;
@@ -27,16 +27,16 @@ void Image::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
 
 InspectableImage::InspectableImage(InspectableImage::Config &&config)
     : InspectableImage(std::string{config.name.value}, config.size, config.rgbaData, config.imageWidth,
-                       config.textureId, config.trigger) {}
+                       std::move(config.texture), config.trigger) {}
 
 InspectableImage::InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData,
-                                   std::size_t imgWidth, ImTextureID texId, Trigger trigger)
-    : ItemElement(elementName), Resizable(s), imageRGBAData(rgbaData), imageWidth(imgWidth), textureId(texId),
+                                   std::size_t imgWidth, std::shared_ptr<Texture> tex, Trigger trigger)
+    : ItemElement(elementName), Resizable(s), imageRGBAData(rgbaData), imageWidth(imgWidth), texture(std::move(tex)),
       trig(trigger) {}
 
 void InspectableImage::renderImpl() {
   const auto cursorPos = ImGui::GetCursorPos();
-  ImGui::Image(textureId, static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom);
+  ImGui::Image(texture->getID(), static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom);
   auto &io = ImGui::GetIO();
   const auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
   ImGui::SetCursorPos(cursorPos);
@@ -63,8 +63,9 @@ void InspectableImage::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
   uvRightBottom = rightBottom;
 }
 
-void InspectableImage::setTexture(ImTextureID texId, std::span<const std::byte> rgbaData, std::size_t imgWidth) {
-  textureId = texId;
+void InspectableImage::setTexture(std::shared_ptr<Texture> tex, std::span<const std::byte> rgbaData,
+                                  std::size_t imgWidth) {
+  texture = std::move(tex);
   imageRGBAData = rgbaData;
   imageWidth = imgWidth;
 }
