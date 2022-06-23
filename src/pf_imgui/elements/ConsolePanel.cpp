@@ -97,7 +97,7 @@ void ConsolePanel::renderImpl() {
 
 void ConsolePanel::handleSubmit() {
   if (inputBuffer[0] != '\0') {
-    records.emplace_back(RecordType::Input, Record{inputBuffer, std::nullopt, std::nullopt});
+    records.emplace_back(RecordType::Input, Record{inputBuffer, inputTextColor, inputTextBackgroundColor});
     if (auto response = inputHandler(std::string_view{inputBuffer}); response.has_value()) {
       records.emplace_back(RecordType::Output, std::move(*response));
     }
@@ -159,5 +159,9 @@ void ConsolePanel::setFromToml(const toml::table &src) {
     if (const auto ptr = iter->second.as_boolean(); ptr != nullptr) { scrollToEndToggle.setValue(ptr->get()); }
   }
 }
+
+void ConsolePanel::setInputTextColor(Color newColor) { inputTextColor = newColor; }
+
+void ConsolePanel::setInputTextBackgroundColor(Color newColor) { inputTextBackgroundColor = newColor; }
 
 }  // namespace pf::ui::ig

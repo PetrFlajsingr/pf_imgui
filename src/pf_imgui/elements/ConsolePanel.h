@@ -10,12 +10,12 @@
 
 #include <pf_imgui/Color.h>
 #include <pf_imgui/details/CustomIconButtonImpls.h>
+#include <pf_imgui/elements/details/TextUtils.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
-#include <pf_imgui/elements/details/TextUtils.h>
 
 namespace pf::ui::ig {
 
@@ -76,6 +76,9 @@ class ConsolePanel : public ElementWithID, public Resizable, public Savable {
    */
   void addCompletionString(std::string str) { completionStrings.emplace_back(std::move(str)); }
 
+  void setInputTextColor(Color newColor);
+  void setInputTextBackgroundColor(Color newColor);
+
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
@@ -107,6 +110,9 @@ class ConsolePanel : public ElementWithID, public Resizable, public Savable {
   std::optional<std::size_t> historyIndex = std::nullopt;
 
   std::vector<std::string> completionStrings;
+
+  std::optional<Color> inputTextColor = std::nullopt;
+  std::optional<Color> inputTextBackgroundColor = std::nullopt;
 };
 
 }  // namespace pf::ui::ig
