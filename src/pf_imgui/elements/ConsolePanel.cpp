@@ -59,11 +59,13 @@ void ConsolePanel::renderImpl() {
           std::ranges::for_each(records, [&](const auto &record) {
             std::string prefix{};
             if (record.first == RecordType::Input) { prefix = "# "; }
+            if (record.second.color.has_value()) { ImGui::PushStyleColor(ImGuiCol_Text, *record.second.color); }
             if (wrapEnabled) {
               ImGui::TextWrapped((prefix + record.second.message).c_str());
             } else {
               ImGui::Text((prefix + record.second.message).c_str());
             }
+            if (record.second.color.has_value()) { ImGui::PopStyleColor(); }
           });
           if (scrollToEndToggle.getValue()) { ImGui::SetScrollHereY(1.0f); }
         }
