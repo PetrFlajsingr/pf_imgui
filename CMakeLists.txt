@@ -402,7 +402,7 @@ set(INCLUDES
         src/pf_imgui/style/common.h
         src/pf_imgui/Texture.h
         src/pf_imgui/style/StyleOptions.h
-        src/pf_imgui/elements/ConsolePanel.h)
+        src/pf_imgui/elements/ConsolePanel.h src/pf_imgui/elements/details/TextUtils.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

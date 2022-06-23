@@ -15,6 +15,7 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
+#include <pf_imgui/elements/details/TextUtils.h>
 
 namespace pf::ui::ig {
 
@@ -31,6 +32,7 @@ class ConsolePanel : public ElementWithID, public Resizable, public Savable {
   struct Record {
     std::string message;
     std::optional<Color> color;
+    std::optional<Color> backgroundColor;
   };
 
   /**

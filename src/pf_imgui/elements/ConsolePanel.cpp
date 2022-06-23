@@ -3,6 +3,7 @@
 //
 
 #include "ConsolePanel.h"
+#include <pf_imgui/elements/details/TextUtils.h>
 #include <range/v3/range/conversion.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
@@ -60,6 +61,9 @@ void ConsolePanel::renderImpl() {
             std::string prefix{};
             if (record.first == RecordType::Input) { prefix = "# "; }
             if (record.second.color.has_value()) { ImGui::PushStyleColor(ImGuiCol_Text, *record.second.color); }
+            if (record.second.backgroundColor.has_value()) {
+              drawTextBackground(record.second.message.c_str(), *record.second.backgroundColor, wrapEnabled, false);
+            }
             if (wrapEnabled) {
               ImGui::TextWrapped((prefix + record.second.message).c_str());
             } else {
