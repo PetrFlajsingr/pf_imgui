@@ -58,7 +58,7 @@ void ConsolePanel::renderImpl() {
                               wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
           std::ranges::for_each(records, [&](const auto &record) {
             std::string prefix{};
-            if (record.first == RecordType::Input) { prefix = "#"; }
+            if (record.first == RecordType::Input) { prefix = "# "; }
             if (wrapEnabled) {
               ImGui::TextWrapped((prefix + record.second.message).c_str());
             } else {
