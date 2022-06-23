@@ -201,7 +201,7 @@ set(SOURCES
         src/pf_imgui/elements/OverlayGizmo.cpp
         src/pf_imgui/elements/details/OverlayGizmoBase.cpp
         src/pf_imgui/interface/Element.cpp
-        )
+        src/pf_imgui/elements/ConsolePanel.cpp)
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
@@ -398,7 +398,11 @@ set(INCLUDES
         src/pf_imgui/elements/details/OverlayGizmoBase.h
         src/pf_imgui/elements/OptionSlider.h
         src/pf_imgui/interface/Element.h
-        src/pf_imgui/style/ColorPalette.h src/pf_imgui/style/common.h src/pf_imgui/style/StyleOptions.h src/pf_imgui/Texture.h)
+        src/pf_imgui/style/ColorPalette.h
+        src/pf_imgui/style/common.h
+        src/pf_imgui/Texture.h
+        src/pf_imgui/style/StyleOptions.h
+        src/pf_imgui/elements/ConsolePanel.h src/pf_imgui/elements/details/TextUtils.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h
@@ -728,7 +732,7 @@ if (BUILD_DOCS)
     find_package(Doxygen)
     if (DOXYGEN_FOUND)
         set(HTML_DYNAMIC_MENUS YES)
-        set(DOXYGEN_EXCLUDE_PATTERNS "*/src/pf_imgui/backends/*" "*/src/pf_imgui/details/*" )
+        set(DOXYGEN_EXCLUDE_PATTERNS "*/src/pf_imgui/backends/*" "*/src/pf_imgui/details/*")
         doxygen_add_docs(pf_imgui_doc ALL
                 ${CMAKE_SOURCE_DIR}/src/pf_imgui
                 )

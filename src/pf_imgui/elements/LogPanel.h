@@ -1,6 +1,6 @@
 /**
  * @file LogPanel.h
- * @brief ElementWithID to visualize log data.
+ * @brief Element to visualize log data.
  * @author Petr Flajšingr
  * @date 14.4.22
  */
@@ -17,6 +17,7 @@
 #include <pf_imgui/details/CustomIconButtonImpls.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/elements/details/TextUtils.h>
 #include <ringbuffer.hpp>
 #include <sstream>
 
@@ -158,8 +159,6 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Resizable, public 
   void refreshAllowedRecords();
   bool isAllowedCategory(Category category);
   bool isAllowedText(const std::string &text);
-
-  static void DrawTextBackground(const char *str, Color color, bool textWrapped, bool applyPadding);
 
   constexpr static std::size_t GetCategoryIndex(Category category);
 
@@ -318,7 +317,7 @@ void LogPanel<Category, RecordLimit>::renderTextArea() {
       if (!record.show) { continue; }
       ImGui::PushStyleColor(ImGuiCol_Text, record.color);
       if (record.backgroundColor.has_value()) {
-        DrawTextBackground(record.text.c_str(), *record.backgroundColor, wrapEnabled, false);
+        drawTextBackground(record.text.c_str(), *record.backgroundColor, wrapEnabled, false);
       }
       if (wrapEnabled) {
         ImGui::TextWrapped(record.text.c_str());
@@ -341,7 +340,7 @@ LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
     std::ranges::for_each(categoryEnabled, [&](bool &catEnabled) {
       if (!categoryAllowed[i]) { return; }
       if (categoryBackgroundColors[i].has_value()) {
-        DrawTextBackground(categoryStrings[i].c_str(), categoryBackgroundColors[i].value(), false, true);
+        drawTextBackground(categoryStrings[i].c_str(), categoryBackgroundColors[i].value(), false, true);
       }
       ImGui::PushStyleColor(ImGuiCol_Text, categoryTextColors[i]);
       const auto categoryChanged = ImGui::Checkbox(categoryStrings[i++].c_str(), &catEnabled);
@@ -378,18 +377,6 @@ template<Enum Category, std::size_t RecordLimit>
 LogPanel<Category, RecordLimit>::isAllowedText(const std::string &text) {
   if (filterStringSize == 0) { return true; }
   return text.find(std::string_view{filterBuffer, filterStringSize}) != std::string::npos;
-}
-
-template<Enum Category, std::size_t RecordLimit>
-  requires((RecordLimit & (RecordLimit - 1)) == 0)
-void LogPanel<Category, RecordLimit>::DrawTextBackground(const char *str, Color color, bool textWrapped,
-                                                         bool applyPadding) {
-  const auto maxWidth = ImGui::GetContentRegionAvail().x;
-  const auto textSize = ImGui::CalcTextSize(str, nullptr, false, textWrapped ? maxWidth : -1.f);
-  ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetCursorScreenPos(),
-                                            ImGui::GetCursorScreenPos() + ImVec2{maxWidth, textSize.y}
-                                                + (applyPadding ? ImGui::GetStyle().FramePadding * 2 : ImVec2{0, 0}),
-                                            static_cast<ImU32>(color));
 }
 
 template<Enum Category, std::size_t RecordLimit>
