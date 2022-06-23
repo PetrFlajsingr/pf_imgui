@@ -72,7 +72,6 @@ void ConsolePanel::renderImpl() {
       ImGui::BeginHorizontal("user_in", ImVec2{0, 0}, 0);
       {
         ImGui::SetNextItemWidth(-60.f);
-        // TODO: completion using callback
         if (ImGui::InputText("##input", inputBuffer, BUFFER_SIZE,
                              ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CallbackHistory
                                  | ImGuiInputTextFlags_CallbackCompletion,
