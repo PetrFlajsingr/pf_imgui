@@ -142,4 +142,17 @@ int ConsolePanel::CompletionCallback(ImGuiInputTextCallbackData *data) {
   return 0;
 }
 
+toml::table ConsolePanel::toToml() const {
+  return toml::table{{"textwrap", wrapTextToggle.getValue()}, {"autoscroll", scrollToEndToggle.getValue()}};
+}
+
+void ConsolePanel::setFromToml(const toml::table &src) {
+  if (const auto iter = src.find("textwrap"); iter != src.end()) {
+    if (const auto ptr = iter->second.as_boolean(); ptr != nullptr) { wrapTextToggle.setValue(ptr->get()); }
+  }
+  if (const auto iter = src.find("autoscroll"); iter != src.end()) {
+    if (const auto ptr = iter->second.as_boolean(); ptr != nullptr) { scrollToEndToggle.setValue(ptr->get()); }
+  }
+}
+
 }  // namespace pf::ui::ig

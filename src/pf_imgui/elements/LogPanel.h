@@ -1,6 +1,6 @@
 /**
  * @file LogPanel.h
- * @brief ElementWithID to visualize log data.
+ * @brief Element to visualize log data.
  * @author Petr Flajšingr
  * @date 14.4.22
  */

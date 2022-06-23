@@ -1,40 +1,81 @@
-//
-// Created by Petr on 6/23/2022.
-//
+/**
+ * @file ConsolePanel.h
+ * @brief A simple console element.
+ * @author Petr Flajšingr
+ * @date 23.6.22
+ */
 
 #ifndef PF_IMGUI_ELEMENTS_CONSOLEPANEL_H
 #define PF_IMGUI_ELEMENTS_CONSOLEPANEL_H
 
-#include <pf_imgui/details/CustomIconButtonImpls.h>
-#include <pf_imgui/style/ColorPalette.h>
-#include <pf_imgui/style/StyleOptions.h>
 #include <pf_imgui/Color.h>
+#include <pf_imgui/details/CustomIconButtonImpls.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 
 namespace pf::ui::ig {
 
+/**
+ * @brief A console element with command history and basic command completion.
+ */
 class ConsolePanel : public ElementWithID, public Resizable, public Savable {
   enum class RecordType { Input, Output };
 
  public:
+  /**
+   * @brief ConsolePanel's record.
+   */
   struct Record {
     std::string message;
     std::optional<Color> color;
   };
 
+  /**
+   * Construction args for ConsolePanel
+   */
+  struct Config {
+    using Parent = ConsolePanel;
+    Explicit<std::string> name; /*!< Unique name of the element */
+    Size size = Size::Auto();   /*!< Size of the element */
+    bool persistent = false;    /*!< Enable disk state saving */
+  };
+  /**
+   * Construct ConsolePanel with Config @see ConsolePanel::Config
+   * @param config construction args
+   */
+  ConsolePanel(Config &&config);
+  /**
+   * Construct ConsolePanel
+   * @param name unique name of the element
+   * @param size size of the element
+   * @param persistent enable disk state saving
+   */
   ConsolePanel(const std::string &name, Size size, Persistent persistent = Persistent::No);
 
+  /**
+   * Set handler for console inputs. Returned record is rendered after the request.
+   */
   void setInputHandler(std::invocable<std::string_view> auto &&fnc)
     requires(std::same_as<std::invoke_result_t<decltype(fnc), std::string_view>, std::optional<Record>>)
   {
     inputHandler = std::forward<decltype(fnc)>(fnc);
   }
 
+  /**
+   * Output rendered in text window as a single string.
+   */
   [[nodiscard]] std::string getOutput() const;
 
+  /**
+   * Add a string which can be used for completion.
+   */
   void addCompletionString(std::string str) { completionStrings.emplace_back(std::move(str)); }
+
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
   FullColorPalette color;
   FullStyleOptions style;
