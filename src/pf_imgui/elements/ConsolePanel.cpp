@@ -8,6 +8,10 @@
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
 
+#ifdef _MSC_VER
+#pragma warning(disable : 4996)
+#endif
+
 namespace pf::ui::ig {
 
 ConsolePanel::ConsolePanel(const std::string &name, Size size, Persistent persistent)
@@ -132,14 +136,14 @@ int ConsolePanel::CompletionCallback(ImGuiInputTextCallbackData *data) {
       if (const auto iter = std::ranges::find_if(self.completionStrings,
                                                  [data](const auto &str) { return str.starts_with(data->Buf); });
           iter != self.completionStrings.end()) {
-        strcpy_s(data->Buf, BUFFER_SIZE, iter->c_str());
+        strcpy(data->Buf, iter->c_str());
         data->BufDirty = true;
         data->BufTextLen = static_cast<int>(iter->size());
       }
       break;
   }
   if (historyChanged) {
-    strcpy_s(data->Buf, BUFFER_SIZE, self.history[*self.historyIndex].c_str());
+    strcpy(data->Buf, self.history[*self.historyIndex].c_str());
     data->BufDirty = true;
     data->BufTextLen = static_cast<int>(self.history[*self.historyIndex].size());
     data->CursorPos = data->BufTextLen;
