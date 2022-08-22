@@ -25,7 +25,6 @@ enum class DockType {
   AutoHideTabBar = 1 << 6
 };
 // TODO: somehow keep this alive when the parent is collapsed/invisible -
-// TODO: add dock builder impl
 /**
  * @brief An area to which dockable windows can be docked.
  * @warning DockSpace HAS TO BE RENDERED AS SOON AS POSSIBLE OTHERWISE YOU WON'T BE ABLE TO DOCK ANYTHING

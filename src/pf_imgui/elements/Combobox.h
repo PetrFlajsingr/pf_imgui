@@ -42,8 +42,6 @@ static_assert(CustomItemBoxFactory<ComboboxRowFactory<int>, int, Selectable>);
  * which allows for delimiting shown items without the need to rebuild them.
  *
  * @warning If there are multiple items which are the same some unexpected behavior may occur.
- *
- * @todo: keyboard controls on focus
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
