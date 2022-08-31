@@ -9,15 +9,15 @@
 namespace pf::ui::ig {
 
 SliderAngle::SliderAngle(SliderAngle::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
-      ValueObservable(config.value),
+    : ItemElement(std::string{config.name.value}), ValueObservable(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<float>(false), DropTarget<float>(false),
-      minDeg(config.min), maxDeg(config.max), format(std::move(config.format)) {}
+      label(std::string{config.label.value}), minDeg(config.min), maxDeg(config.max), format(std::move(config.format)) {
+}
 
 SliderAngle::SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value,
                          Persistent persistent, std::string format)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value),
-      Savable(persistent), DragSource<float>(false), DropTarget<float>(false), minDeg(min), maxDeg(max),
+    : ItemElement(elementName), ValueObservable(value),
+      Savable(persistent), DragSource<float>(false), DropTarget<float>(false), label(label), minDeg(min), maxDeg(max),
       format(std::move(format)) {}
 
 void SliderAngle::renderImpl() {
@@ -25,7 +25,7 @@ void SliderAngle::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
-  if (ImGui::SliderAngle(getLabel().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str(), flags)) {
+  if (ImGui::SliderAngle(label.get().c_str(), getValueAddress(), minDeg, maxDeg, format.c_str(), flags)) {
     ValueObservable::notifyValueChanged();
   }
   drag(getValue());

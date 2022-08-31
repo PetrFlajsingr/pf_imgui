@@ -13,11 +13,11 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/Visitor.h>
 #include <pf_common/enums.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/layouts/VerticalLayout.h>
 #include <string>
@@ -46,7 +46,7 @@ struct PF_IMGUI_EXPORT TreeSelectionLimiter {
   TreeLeaf *selected = nullptr;
 };
 
-class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
+class PF_IMGUI_EXPORT TreeRecord : public ItemElement {
   friend class TreeNode<TreeType::Simple>;
   friend class TreeNode<TreeType::Advanced>;
   friend class Tree<TreeType::Simple>;
@@ -54,6 +54,8 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement, public Labellable {
 
  public:
   TreeRecord(const std::string &elementName, const std::string &label, const Flags<ImGuiTreeNodeFlags_> &defaultFlags);
+
+  Label label;
 
  protected:
   Flags<ImGuiTreeNodeFlags_> flags{};
@@ -197,7 +199,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
     [[maybe_unused]] auto styleScoped = style.applyScoped();
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!isCollapsed());
-    setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
+    setCollapsed(!ImGui::TreeNodeEx(label.get().c_str(), *flags));
     RAII end{[this] {
       if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
     }};
@@ -302,7 +304,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     [[maybe_unused]] auto styleScoped = style.applyScoped();
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!isCollapsed());
-    setCollapsed(!ImGui::TreeNodeEx(getLabel().c_str(), *flags));
+    setCollapsed(!ImGui::TreeNodeEx(label.get().c_str(), *flags));
     RAII end{[this] {
       if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
     }};

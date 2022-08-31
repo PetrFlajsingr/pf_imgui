@@ -14,7 +14,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
 
@@ -101,7 +101,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
  *
  * A button with a text label.
  */
-class PF_IMGUI_EXPORT Button : public ButtonBase, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT Button : public ButtonBase, public Resizable {
  public:
   /**
    * @brief Struct for construction of Button.
@@ -133,6 +133,7 @@ class PF_IMGUI_EXPORT Button : public ButtonBase, public Labellable, public Resi
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -143,7 +144,7 @@ class PF_IMGUI_EXPORT Button : public ButtonBase, public Labellable, public Resi
  *
  * A button with a text label.
  */
-class PF_IMGUI_EXPORT SmallButton : public ButtonBase, public Labellable {
+class PF_IMGUI_EXPORT SmallButton : public ButtonBase {
  public:
   /**
    * @brief Struct for construction of SmallButton.
@@ -168,6 +169,7 @@ class PF_IMGUI_EXPORT SmallButton : public ButtonBase, public Labellable {
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

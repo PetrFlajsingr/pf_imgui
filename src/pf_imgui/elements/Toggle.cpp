@@ -9,10 +9,10 @@ namespace pf::ui::ig {
 
 Toggle::Toggle(Toggle::Config &&config)
     : ItemElement(std::string{config.name.value}), ValueObservable(config.enabled),
-      Labellable(std::string{config.label.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
 
 Toggle::Toggle(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
+    : ItemElement(elementName), ValueObservable(value), Savable(persistent), label(label) {}
 
 void Toggle::setSelected(bool selected) { setValueAndNotifyIfChanged(selected); }
 
@@ -32,7 +32,7 @@ void Toggle::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ToggleButton(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
+  if (ToggleButton(label.get().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 
 }  // namespace pf::ui::ig

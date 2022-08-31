@@ -10,7 +10,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
 
@@ -18,7 +18,7 @@ namespace pf::ui::ig {
 
 enum class NotificationPhase { FadeIn, Wait, FadeOut, Expired };
 
-class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer, public Labellable {
+class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer {
   friend class NotificationManager;
   constexpr static inline std::chrono::milliseconds DEFAULT_DURATION{3000};
   constexpr static inline std::chrono::milliseconds FADE_IN_TIME{150};
@@ -34,6 +34,8 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer,
 
   void setIcon(const char *icon, Font newIconFont = Font::Default());
   void setIconColor(Color newColor);
+
+  Label label;
 
  protected:
   void renderImpl() override;

@@ -8,7 +8,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -20,7 +20,7 @@ namespace pf::ui::ig {
  *
  * It saves it's state and provides it to listeners.
  */
-class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueObservable<bool>, public Labellable, public Savable {
+class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueObservable<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Toggle.
@@ -70,6 +70,7 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueObservable<bool>,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

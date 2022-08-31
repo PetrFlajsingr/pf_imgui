@@ -8,10 +8,10 @@
 namespace pf::ui::ig {
 
 Comment::Comment(const std::string &name, const std::string &label, Size initSize)
-    : NodeBase(name), Labellable(label), Resizable(initSize) {}
+    : NodeBase(name), Resizable(initSize), label(label) {}
 
 Comment::Comment(const std::string &name, const Position &initPosition, const std::string &label, const Size &s)
-    : NodeBase(name, initPosition), Labellable(label), Resizable(s) {}
+    : NodeBase(name, initPosition), Resizable(s), label(label) {}
 
 void Comment::setSize(const Size &s) {
   Resizable::setSize(s);
@@ -45,7 +45,7 @@ void Comment::renderImpl() {
       ImGui::BeginHorizontal("header");
       {
         ImGui::Spring(1);
-        ImGui::Text(getLabel().c_str());
+        ImGui::Text(label.get().c_str());
         ImGui::Spring(1);
       }
       ImGui::EndHorizontal();

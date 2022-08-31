@@ -38,32 +38,32 @@ void InvisibleButton::renderImpl() {
 
 Button::Button(Button::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Labellable(std::string{config.label.value}), Resizable(config.size) {}
+      Resizable(config.size), label(std::string{config.label.value}) {}
 
 Button::Button(const std::string &name, const std::string &label, const Size &s, Repeatable isRepeatable)
-    : ButtonBase(name, isRepeatable), Labellable(label), Resizable(s) {}
+    : ButtonBase(name, isRepeatable), Resizable(s), label(label) {}
 
 void Button::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::Button(getLabel().c_str(), static_cast<ImVec2>(getSize()))) { notifyOnClick(); }
+  if (ImGui::Button(label.get().c_str(), static_cast<ImVec2>(getSize()))) { notifyOnClick(); }
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Labellable(std::string{config.label.value}) {}
+      label(std::string{config.label.value}) {}
 
 SmallButton::SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable)
-    : ButtonBase(name, isRepeatable), Labellable(label) {}
+    : ButtonBase(name, isRepeatable), label(label) {}
 
 void SmallButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::SmallButton(getLabel().c_str())) { notifyOnClick(); }
+  if (ImGui::SmallButton(label.get().c_str())) { notifyOnClick(); }
 }
 
 ArrowButton::ArrowButton(ArrowButton::Config &&config)

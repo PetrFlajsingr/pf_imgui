@@ -12,7 +12,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -24,7 +24,6 @@ namespace pf::ui::ig {
  * Angles are in radians.
  */
 class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
-                                    public Labellable,
                                     public ValueObservable<float>,
                                     public Savable,
                                     public DragSource<float>,
@@ -92,6 +91,7 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

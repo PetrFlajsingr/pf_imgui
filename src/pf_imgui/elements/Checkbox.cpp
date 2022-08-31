@@ -10,16 +10,16 @@ namespace pf::ui::ig {
 
 Checkbox::Checkbox(Checkbox::Config &&config)
     : ItemElement(std::string{config.name.value}), ValueObservable(config.checked),
-      Labellable(std::string{config.label.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
 
 Checkbox::Checkbox(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(value), Labellable(label), Savable(persistent) {}
+    : ItemElement(elementName), ValueObservable(value), Savable(persistent), label(label) {}
 
 void Checkbox::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::Checkbox(getLabel().c_str(), getValueAddress())) { notifyValueChanged(); }
+  if (ImGui::Checkbox(label.get().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 
 void Checkbox::setSelected(bool selected) { setValueAndNotifyIfChanged(selected); }

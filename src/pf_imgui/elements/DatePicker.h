@@ -12,7 +12,7 @@
 #include <memory>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
@@ -25,7 +25,6 @@ namespace pf::ui::ig {
  * @brief Date picker element.
  */
 class DatePicker : public ItemElement,
-                   public Labellable,
                    public ValueObservable<std::chrono::year_month_day>,
                    public Savable {
  public:
@@ -64,6 +63,7 @@ class DatePicker : public ItemElement,
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

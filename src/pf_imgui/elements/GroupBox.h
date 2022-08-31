@@ -9,10 +9,10 @@
 #define PF_IMGUI_ELEMENTS_GROUPBOX_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
 
@@ -21,7 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief A group of elements with a border and a label.
  */
-class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer, public Resizable {
  public:
   /**
    * @brief Struct for construction of GroupBox.
@@ -44,6 +44,8 @@ class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer, 
    * @param s size of the GroupBox
    */
   GroupBox(const std::string &name, const std::string &label, Size s);
+
+  Label label;
 
  protected:
   void renderImpl() override;

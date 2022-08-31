@@ -11,9 +11,9 @@
 namespace pf::ui::ig {
 
 InputText::InputText(InputText::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}), ValueObservable(""),
+    : ItemElement(std::string{config.name.value}), ValueObservable(""),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<std::string>(false),
-      DropTarget<std::string>(false), text(std::move(config.value)),
+      DropTarget<std::string>(false), label(std::string{config.label.value}), text(std::move(config.value)),
       buffer(std::make_unique<char[]>(config.maxInputLength + 1)), bufferLength(config.maxInputLength),
       inputType(config.inputType) {
   setTextInner(text);
@@ -25,9 +25,10 @@ InputText::InputText(InputText::Config &&config)
 InputText::InputText(const std::string &elementName, std::string label, const std::string &value,
                      TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
                      const Flags<TextFilter> &filters, Persistent persistent)
-    : ItemElement(elementName), Labellable(std::move(label)), ValueObservable(""),
-      Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false), text(value),
-      buffer(std::make_unique<char[]>(inputLengthLimit + 1)), bufferLength(inputLengthLimit), inputType(textInputType) {
+    : ItemElement(elementName), ValueObservable(""),
+      Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false), label(std::move(label)),
+      text(value), buffer(std::make_unique<char[]>(inputLengthLimit + 1)), bufferLength(inputLengthLimit),
+      inputType(textInputType) {
   setTextInner(value);
   setValueInner(text);
   flags |= static_cast<ImGuiInputTextFlags>(*filters);
@@ -40,9 +41,9 @@ void InputText::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
-    valueChanged = ImGui::InputText(getLabel().c_str(), buffer.get(), 256, flags);
+    valueChanged = ImGui::InputText(label.get().c_str(), buffer.get(), 256, flags);
   } else {
-    valueChanged = ImGui::InputTextMultiline(getLabel().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
+    valueChanged = ImGui::InputTextMultiline(label.get().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
   }
   if (valueChanged && strcmp(buffer.get(), text.c_str()) != 0) {
     text = buffer.get();

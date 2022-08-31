@@ -15,7 +15,7 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -39,7 +39,6 @@ enum class TextTrigger { Character, Enter };
  * @todo: hint
  */
 class PF_IMGUI_EXPORT InputText : public ItemElement,
-                                  public Labellable,
                                   public ValueObservable<std::string_view>,
                                   public Savable,
                                   public DragSource<std::string>,
@@ -124,6 +123,7 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

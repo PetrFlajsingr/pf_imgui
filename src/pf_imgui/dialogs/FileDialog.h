@@ -14,7 +14,7 @@
 #include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/style/ColorPalette.h>
@@ -60,7 +60,7 @@ enum class FileDialogType { Dir, File };
  * @todo: thumbnails
  * @todo: custom pane
  */
-class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT FileDialog : public Renderable, public Resizable {
  public:
   /**
    * Construct FileDialog for files
@@ -80,7 +80,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
              std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
              Size size = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
-      : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
+      : Renderable(elementName), label(label), Resizable(size), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
         onFilesSelected(std::forward<decltype(onSelect)>(onSelect)),
         onSelectCanceled(std::forward<decltype(onCancel)>(onCancel)) {
@@ -103,7 +103,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
              std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
              Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
-      : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
+      : Renderable(elementName), label(label), Resizable(size), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
         maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
 
@@ -122,6 +122,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
   FullColorPalette color;
   FullStyleOptions style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

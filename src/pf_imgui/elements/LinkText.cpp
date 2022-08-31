@@ -7,7 +7,7 @@
 namespace pf::ui::ig {
 
 LinkText::LinkText(pf::ui::ig::LinkText::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+    : ItemElement(std::string{config.name.value}), label(std::string{config.label.value}),
       link(std::move(config.link)), linkClickHandler(std::move(config.clickHandler)) {
   setTooltip(link);
 }
@@ -21,7 +21,7 @@ void LinkText::renderImpl() {
       ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive]);
     }
     pf::RAII textColPop{[] { ImGui::PopStyleColor(); }};
-    ImGui::Text("%s", getLabel().c_str());
+    ImGui::Text("%s", label.get().c_str());
   }
   auto min = ImGui::GetItemRectMin();
   const auto max = ImGui::GetItemRectMax();

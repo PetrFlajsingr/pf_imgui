@@ -47,11 +47,11 @@ void FileDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,
+      fileDialogInstance.OpenModal(getName(), label.get(), fileType == FileType::File ? filters.c_str() : nullptr,
                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,
+      fileDialogInstance.OpenDialog(getName(), label.get(), fileType == FileType::File ? filters.c_str() : nullptr,
                                     openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
   }

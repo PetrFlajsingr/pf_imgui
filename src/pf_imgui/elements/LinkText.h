@@ -12,7 +12,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <string>
 #include <utility>
 
@@ -21,7 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief Text element providing click detection.
  */
-class LinkText : public ItemElement, public Labellable, public Clickable {
+class LinkText : public ItemElement, public Clickable {
  public:
   using LinkClickHandler = std::function<void(std::string_view)>;
   /**
@@ -49,12 +49,13 @@ class LinkText : public ItemElement, public Labellable, public Clickable {
    */
   LinkText(const std::string &elementName, const std::string &label, std::string link,
            std::invocable<std::string_view> auto &&linkClickHandler)
-      : ItemElement(elementName), Labellable(label), link(std::move(link)),
+      : ItemElement(elementName), label(label), link(std::move(link)),
         linkClickHandler(std::forward<decltype(linkClickHandler)>(linkClickHandler)) {
     setTooltip(LinkText::link);
   }
 
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

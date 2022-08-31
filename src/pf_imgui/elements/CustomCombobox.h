@@ -10,9 +10,9 @@
 
 #include <imgui.h>
 #include <pf_common/enums.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomItemBox.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <string>
 #include <utility>
 
@@ -33,7 +33,7 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labellable {
+class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
  public:
   /**
    * Construct CustomCombobox.
@@ -64,6 +64,8 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
    * Close the Combobox in the next render loop.
    */
   void close() { shouldClose = true; }
+
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -117,7 +119,7 @@ void CustomCombobox<T, R>::renderImpl() {
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   const char *previewPtr = previewValue.c_str();
-  if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+  if (ImGui::BeginCombo(label.get().c_str(), previewPtr, *flags)) {
     RAII end{ImGui::EndCombo};
     checkClose();
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });

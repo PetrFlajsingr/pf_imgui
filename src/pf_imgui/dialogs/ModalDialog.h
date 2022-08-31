@@ -11,7 +11,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/interface/Labellable.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/Resizable.h>
@@ -28,7 +28,6 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT ModalDialog : public Renderable,
                                     public ElementContainer,
-                                    public Labellable,
                                     public Resizable,
                                     public Positionable {
  public:
@@ -56,6 +55,8 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable,
 
   void setSize(const Size &newSize) override;
   void setPosition(Position pos) override;
+
+  Label label;
 
  protected:
   void renderImpl() override;
