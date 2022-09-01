@@ -3,6 +3,7 @@
 //
 
 #include "CustomIconButtonImpls.h"
+#include <imgui_internal.h>
 #include <pf_common/array.h>
 
 namespace pf::ui::ig {

@@ -3,6 +3,7 @@
 //
 
 #include "CustomIconButtonBehavior.h"
+#include <imgui_internal.h>
 
 namespace pf::ui::ig {
 CustomIconButtonBehavior::CustomIconButtonBehavior(const std::string &elementName) : ItemElement(elementName) {}
