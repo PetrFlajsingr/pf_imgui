@@ -609,7 +609,7 @@ static int open_libgl(void)
     libgl = LoadLibraryA("opengl32.dll");
     if (!libgl)
         return GL3W_ERROR_LIBRARY_OPEN;
-    //wgl_get_proc_address = (GL3WglGetProcAddr)GetProcAddress(libgl, "wglGetProcAddress");
+    wgl_get_proc_address = (GL3WglGetProcAddr)GetProcAddress(libgl, "wglGetProcAddress");
     return GL3W_OK;
 }
 
