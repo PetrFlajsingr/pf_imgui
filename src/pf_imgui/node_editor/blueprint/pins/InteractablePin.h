@@ -22,8 +22,9 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
   using ValueType = typename PinWithValue<typename T::ValueType>::ValueType;
 
   template<typename... Args>
-  InteractablePin(const std::string &name, const std::string &label, Color color, Width width, Args &&...args)
-      : PinWithValue<ValueType>(name, label, color),
+  InteractablePin(const std::string &elementName, const std::string &labelText, Color pinColor, Width width,
+                  Args &&...args)
+      : PinWithValue<ValueType>(elementName, labelText, pinColor),
         inputElement(std::make_unique<WidthDecorator<T>>(width, std::forward<Args>(args)...)) {}
 
   [[nodiscard]] ValueType getValue() const override { return inputElement->getValue(); }

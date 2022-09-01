@@ -65,15 +65,16 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
   /**
    * Construct Slider.
    * @param elementName ID of the slider
-   * @param label text rendered next to the slider
-   * @param min min value
-   * @param max max value
-   * @param value starting value
+   * @param labelText text rendered next to the slider
+   * @param minValue min value
+   * @param maxValue max value
+   * @param initialValue starting value
    * @param persistent enable state saving to disk
    * @param format printf-like format for rendering value over slider
    */
-  Slider(const std::string &elementName, const std::string &label, MinMaxType min, MinMaxType max, T value = T{},
-         Persistent persistent = Persistent::No, std::string format = slider_details::defaultFormat<MinMaxType>());
+  Slider(const std::string &elementName, const std::string &labelText, MinMaxType minValue, MinMaxType maxValue,
+         T initialValue = T{}, Persistent persistent = Persistent::No,
+         std::string numberFormat = slider_details::defaultFormat<MinMaxType>());
 
   /**
    * Get min slider value.
@@ -124,19 +125,18 @@ Slider<T>::Slider(Slider::Config &&config)
       label(std::string{config.label.value}), min(config.min), max(config.max), format(std::move(config.format)) {}
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
-Slider<T>::Slider(const std::string &elementName, const std::string &label, Slider::MinMaxType min,
-                  Slider::MinMaxType max, T value, Persistent persistent, std::string format)
-    : ItemElement(elementName), ValueObservable<T>(value),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(label), min(min), max(max),
-      format(std::move(format)) {}
+Slider<T>::Slider(const std::string &elementName, const std::string &labelText, Slider::MinMaxType minValue,
+                  Slider::MinMaxType maxValue, T initialValue, Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), ValueObservable<T>(initialValue),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), min(minValue), max(maxValue),
+      format(std::move(numberFormat)) {}
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 toml::table Slider<T>::toToml() const {
-  const auto value = ValueObservable<T>::getValue();
   if constexpr (OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
-    return toml::table{{"value", serializeGlmVec(value)}};
+    return toml::table{{"value", serializeGlmVec(ValueObservable<T>::getValue())}};
   } else {
-    return toml::table{{"value", value}};
+    return toml::table{{"value", ValueObservable<T>::getValue()}};
   }
 }
 

@@ -87,12 +87,12 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   /**
    * Construct Listbox.
    * @param elementName ID of the element
-   * @param label text rendered at the top of the list
+   * @param labelText text rendered at the top of the list
    * @param s size of the element
    * @param selectedIdx starting selected id
    * @param persistent enable/disable state saving to disk
    */
-  Listbox(const std::string &elementName, const std::string &label, Size s = Size::Auto(),
+  Listbox(const std::string &elementName, const std::string &labelText, Size s = Size::Auto(),
           std::optional<int> selectedIdx = std::nullopt, Persistent persistent = Persistent::No)
     requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
 
@@ -148,10 +148,10 @@ Listbox<T>::Listbox(Listbox::Config &&config)
   Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false) {}
 
 template<ToStringConvertible T>
-Listbox<T>::Listbox(const std::string &elementName, const std::string &label, Size s, std::optional<int> selectedIdx,
-                    Persistent persistent)
+Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText, Size s,
+                    std::optional<int> selectedIdx, Persistent persistent)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: CustomListboxBase(elementName, label, Factory{}, s), ValueObservable<T>(),
+: CustomListboxBase(elementName, labelText, Factory{}, s), ValueObservable<T>(),
   Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {}
 
 template<ToStringConvertible T>

@@ -44,15 +44,15 @@ class ViewportOverlayGizmo : public Renderable, public OverlayGizmoBase {
   /**
    * Construct ViewportOverlayGizmo.
    * @param name unique name of the element
-   * @param value initial value
-   * @param mode gizmo mode
-   * @param space gizmo space
-   * @param view camera view matrix
-   * @param projection camera projection matrix
+   * @param initialValue initial value
+   * @param gizmoMode gizmo mode
+   * @param spaceType gizmo space
+   * @param initialView camera view matrix
+   * @param initialProjection camera projection matrix
    * @param isProjectionOrthographic set true if projectionMatrix is ortho
    */
-  ViewportOverlayGizmo(const std::string &name, const glm::mat4 &value, ViewportGizmoMode mode,
-                       ViewportGizmoSpace space, const glm::mat4 &view, const glm::mat4 &projection,
+  ViewportOverlayGizmo(const std::string &name, const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode,
+                       ViewportGizmoSpace spaceType, const glm::mat4 &initialView, const glm::mat4 &initialProjection,
                        bool isProjectionOrthographic);
 
  protected:

@@ -65,11 +65,11 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
   /**
    * Construct ColorChooser.
    * @param elementName ID of the element
-   * @param label label next to the intractable parts
+   * @param labelText label next to the intractable parts
+   * @param initialValue starting value
    * @param persistent allow state saving to disk
-   * @param value starting value
    */
-  ColorChooser(const std::string &elementName, const std::string &label, Color value = Color::White,
+  ColorChooser(const std::string &elementName, const std::string &labelText, Color initialValue = Color::White,
                Persistent persistent = Persistent::No);
 
   /**
@@ -113,11 +113,11 @@ ColorChooser<Type, Format>::ColorChooser(ColorChooser::Config &&config)
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
-ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const std::string &label, Color value,
+ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const std::string &labelText, Color initialValue,
                                          Persistent persistent)
-    : ItemElement(elementName), ValueObservable(value), Savable(persistent), DragSource(false), DropTarget(false),
-      label(label) {
-  setValue(value);
+    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), DragSource(false),
+      DropTarget(false), label(labelText) {
+  setValue(initialValue);
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>

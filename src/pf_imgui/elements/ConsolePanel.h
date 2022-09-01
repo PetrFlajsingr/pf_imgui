@@ -51,11 +51,11 @@ class ConsolePanel : public ElementWithID, public Resizable, public Savable {
   ConsolePanel(Config &&config);
   /**
    * Construct ConsolePanel
-   * @param name unique name of the element
-   * @param size size of the element
+   * @param elementName unique name of the element
+   * @param initialSize size of the element
    * @param persistent enable disk state saving
    */
-  ConsolePanel(const std::string &name, Size size, Persistent persistent = Persistent::No);
+  ConsolePanel(const std::string &elementName, Size initialSize, Persistent persistent = Persistent::No);
 
   /**
    * Set handler for console inputs. Returned record is rendered after the request.

@@ -23,9 +23,9 @@ class PF_IMGUI_EXPORT Element : public Renderable {
  public:
   /**
    * Construct Element.
-   * @param name ID of the element.
+   * @param elementName ID of the element.
    */
-  explicit Element(const std::string &name);
+  explicit Element(const std::string &elementName);
   ~Element() override;
   Element(Element &&other) noexcept;
   Element &operator=(Element &&other) noexcept;

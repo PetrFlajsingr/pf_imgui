@@ -54,13 +54,13 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
    * Construct SpinInput.
    * @param elementName ID of the element
    * @param labelText text rendered next to the element
-   * @param value starting value
-   * @param step spin step
-   * @param stepFast fast spin step
+   * @param initialValue starting value
+   * @param valueStep spin step
+   * @param valueStepFast fast spin step
    * @param persistent enable/disable state saving od disk
    */
-  SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal, T value = T{}, T step = T{1},
-            const T &stepFast = T{100}, Persistent persistent = Persistent::No);
+  SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal, T initialValue = T{},
+            T valueStep = T{1}, const T &valueStepFast = T{100}, Persistent persistent = Persistent::No);
 
   [[nodiscard]] const T &getMin() const { return min; }
   void setMin(const T &minVal) { min = minVal; }
@@ -105,11 +105,11 @@ SpinInput<T>::SpinInput(SpinInput::Config &&config)
       max(config.max) {}
 
 template<OneOf<int, float> T>
-SpinInput<T>::SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal, T value, T step,
-                        const T &stepFast, Persistent persistent)
-    : ItemElement(elementName), ValueObservable<T>(value),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), step(step), stepFast(stepFast),
-      min(minVal), max(maxVal) {}
+SpinInput<T>::SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal,
+                        T initialValue, T valueStep, const T &valueStepFast, Persistent persistent)
+    : ItemElement(elementName), ValueObservable<T>(initialValue),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), step(valueStep),
+      stepFast(valueStepFast), min(minVal), max(maxVal) {}
 
 template<OneOf<int, float> T>
 void SpinInput<T>::setReadOnly(bool isReadOnly) {
@@ -154,9 +154,7 @@ void SpinInput<T>::renderImpl() {
   }
   DragSource<T>::drag(ValueObservable<T>::getValue());
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    const auto value = std::clamp(*drop, min, max);
-    ValueObservable<T>::setValueAndNotifyIfChanged(value);
-    return;
+    ValueObservable<T>::setValueAndNotifyIfChanged(std::clamp(*drop, min, max));
   }
 }
 

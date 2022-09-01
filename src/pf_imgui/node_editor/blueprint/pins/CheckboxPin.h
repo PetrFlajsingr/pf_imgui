@@ -14,7 +14,7 @@ namespace pf::ui::ig::bp {
 class CheckboxPin : public InteractablePin<Checkbox> {
  public:
   PF_IMGUI_BLUEPRINT_PIN_ID(CheckboxPin)
-  CheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width);
+  CheckboxPin(const std::string &elementName, const std::string &labelText, Color pinColor, const Width &width);
 
   [[nodiscard]] static std::unique_ptr<CheckboxPin> ConstructFromToml(ig::Node *parent, const toml::table &src);
 };

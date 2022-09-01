@@ -53,17 +53,17 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
   /**
    * Construct Slider3D.
    * @param elementName ID of the element
-   * @param label text rendered above the slider
+   * @param labelText text rendered above the slider
    * @param minMaxX extremes on X axis
    * @param minMaxY extremes on Y axis
    * @param minMaxZ extremes on Z axis
-   * @param value starting value
-   * @param size size of the rendered area
+   * @param initialValue starting value
+   * @param initialSize size of the rendered area
    * @param persistent enable state saving to disk
    */
-  Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX, const glm::vec2 &minMaxY,
-           const glm::vec2 &minMaxZ, const glm::vec3 &value = {}, Size size = Size::Auto(),
-           Persistent persistent = Persistent::No);
+  Slider3D(const std::string &elementName, const std::string &labelText, const glm::vec2 &minMaxX,
+           const glm::vec2 &minMaxY, const glm::vec2 &minMaxZ, const glm::vec3 &initialValue = {},
+           Size initialSize = Size::Auto(), Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -93,12 +93,12 @@ Slider3D<T>::Slider3D(Slider3D::Config &&config)
       extremesZ(config.min.value.z, config.max.value.z) {}
 
 template<OneOf<float> T>
-Slider3D<T>::Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX,
-                      const glm::vec2 &minMaxY, const glm::vec2 &minMaxZ, const glm::vec3 &value, Size size,
-                      Persistent persistent)
-    : ItemElement(elementName), ValueObservable<glm::vec3>(value),
-      Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size), label(label),
-      extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
+Slider3D<T>::Slider3D(const std::string &elementName, const std::string &labelText, const glm::vec2 &minMaxX,
+                      const glm::vec2 &minMaxY, const glm::vec2 &minMaxZ, const glm::vec3 &initialValue,
+                      Size initialSize, Persistent persistent)
+    : ItemElement(elementName), ValueObservable<glm::vec3>(initialValue),
+      Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(initialSize),
+      label(labelText), extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
 
 template<OneOf<float> T>
 toml::table Slider3D<T>::toToml() const {

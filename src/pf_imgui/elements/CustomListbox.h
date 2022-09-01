@@ -31,12 +31,12 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Resizab
   /**
    * Create CustomListbox
    * @param elementName id of the element
-   * @param label text rendered next to the element
+   * @param labelText text rendered next to the element
    * @param rowFactory factory for row creation
    * @param s size of the element
    */
-  CustomListbox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
-                Size s = Size::Auto());
+  CustomListbox(const std::string &elementName, const std::string &labelText,
+                CustomItemBoxFactory<T, R> auto &&rowFactory, Size s = Size::Auto());
 
   Label label;
 
@@ -45,9 +45,10 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Resizab
 };
 
 template<typename T, std::derived_from<Renderable> R>
-CustomListbox<T, R>::CustomListbox(const std::string &elementName, const std::string &label,
+CustomListbox<T, R>::CustomListbox(const std::string &elementName, const std::string &labelText,
                                    CustomItemBoxFactory<T, R> auto &&rowFactory, Size s)
-    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Resizable(s), label(label) {}
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Resizable(s), label(labelText) {
+}
 
 template<typename T, std::derived_from<Renderable> R>
 void CustomListbox<T, R>::renderImpl() {

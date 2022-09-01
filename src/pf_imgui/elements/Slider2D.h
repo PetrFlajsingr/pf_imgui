@@ -64,14 +64,16 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
   /**
    * Construct Slider2d.
    * @param elementName ID of the slider
-   * @param label text rendered above the slider
+   * @param labelText text rendered above the slider
    * @param minMaxX min and max values allowed on X axes
    * @param minMaxY min and max values allowed on Y axes
-   * @param value starting value
+   * @param initialValue starting value
+   * @param initialSize initial size
    * @param persistent enable state saving to disk
    */
-  Slider2D(const std::string &elementName, const std::string &label, StorageType minMaxX, StorageType minMaxY,
-           StorageType value = StorageType{}, Size size = Size::Auto(), Persistent persistent = Persistent::No);
+  Slider2D(const std::string &elementName, const std::string &labelText, StorageType minMaxX, StorageType minMaxY,
+           StorageType initialValue = StorageType{}, Size initialSize = Size::Auto(),
+           Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -99,16 +101,16 @@ Slider2D<T>::Slider2D(Slider2D::Config &&config)
       extremesX(config.min.value.x, config.max.value.x), extremesY(config.min.value.y, config.max.value.y) {}
 
 template<OneOf<int, float> T>
-Slider2D<T>::Slider2D(const std::string &elementName, const std::string &label, Slider2D::StorageType minMaxX,
-                      Slider2D::StorageType minMaxY, Slider2D::StorageType value, Size size, Persistent persistent)
-    : ItemElement(elementName), ValueObservable<StorageType>(value),
-      Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(size),
-      label(label), extremesX(minMaxX), extremesY(minMaxY) {}
+Slider2D<T>::Slider2D(const std::string &elementName, const std::string &labelText, Slider2D::StorageType minMaxX,
+                      Slider2D::StorageType minMaxY, Slider2D::StorageType initialValue, Size initialSize,
+                      Persistent persistent)
+    : ItemElement(elementName), ValueObservable<StorageType>(initialValue),
+      Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(initialSize),
+      label(labelText), extremesX(minMaxX), extremesY(minMaxY) {}
 
 template<OneOf<int, float> T>
 toml::table Slider2D<T>::toToml() const {
-  const auto value = ValueObservable<StorageType>::getValue();
-  return toml::table{{"value", serializeGlmVec(value)}};
+  return toml::table{{"value", serializeGlmVec(ValueObservable<StorageType>::getValue())}};
 }
 
 template<OneOf<int, float> T>

@@ -42,10 +42,10 @@ class NodeEditor : public ElementWithID, public Resizable {
   };
   /**
    * Construct NodeEditor
-   * @param name unique name of the element
-   * @param size size of the element
+   * @param elementName unique name of the element
+   * @param initialSize size of the element
    */
-  explicit NodeEditor(const std::string &name, Size size = Size::Auto());
+  explicit NodeEditor(const std::string &elementName, Size initialSize = Size::Auto());
   /**
    * Construct NodeEditor
    * @param config construction args @see NodeEditor::Config

@@ -99,11 +99,11 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Resizable {
    * @param modality modality of the dialog
    * @param maxSelectedDirs maximum amount of selected directories
    */
-  FileDialog(const std::string &elementName, const std::string &label,
+  FileDialog(const std::string &elementName, const std::string &labelText,
              std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
              Size initialSize = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
-      : Renderable(elementName), Resizable(initialSize), label(label), openPath(std::move(startPath)),
+      : Renderable(elementName), Resizable(initialSize), label(labelText), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
         maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
 

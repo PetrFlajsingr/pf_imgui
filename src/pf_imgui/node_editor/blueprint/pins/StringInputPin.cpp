@@ -17,10 +17,10 @@ struct InputConfig {
 };
  */
 
-StringInputPin::StringInputPin(const std::string &name, const std::string &label, Color color,
+StringInputPin::StringInputPin(const std::string &elementName, const std::string &labelText, Color pinColor,
                                StringInputPin::InputConfig &&config)
-    : InteractablePin<InputText>(name, label, color, config.width,
-                                 CreateInputConfig(uniqueId(), label, std::move(config))) {}
+    : InteractablePin<InputText>(elementName, labelText, pinColor, config.width,
+                                 CreateInputConfig(uniqueId(), labelText, std::move(config))) {}
 
 InputText::Config StringInputPin::CreateInputConfig(const std::string &name, const std::string &label,
                                                     StringInputPin::InputConfig &&config) {

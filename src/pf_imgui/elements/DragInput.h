@@ -72,17 +72,17 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
   /**
    * Construct DragInput.
    * @param elementName ID of the DragInput
-   * @param label text drawn next to the input
-   * @param speed frequency of value change based on mouse movement distance
-   * @param min minimum allowed value
-   * @param max maximum allowed value
+   * @param labelText text drawn next to the input
+   * @param valueSpeed frequency of value change based on mouse movement distance
+   * @param minValue minimum allowed value
+   * @param maxValue maximum allowed value
+   * @param initialValue starting value
    * @param persistent allow state saving to disk
-   * @param value starting value
    * @param format format for formatting value to string
    */
-  DragInput(const std::string &elementName, const std::string &label, ParamType speed, ParamType min, ParamType max,
-            T value = T{}, Persistent persistent = Persistent::No,
-            std::string format = drag_details::defaultFormat<T>());
+  DragInput(const std::string &elementName, const std::string &labelText, ParamType valueSpeed, ParamType minValue,
+            ParamType maxValue, T initialValue = T{}, Persistent persistent = Persistent::No,
+            std::string numberFormat = drag_details::defaultFormat<T>());
 
   /**
    * Get movement speed.
@@ -148,22 +148,23 @@ DragInput<T>::DragInput(DragInput::Config &&config)
       format(std::move(config.format)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
-DragInput<T>::DragInput(const std::string &elementName, const std::string &label, drag_details::UnderlyingType<T> speed,
-                        drag_details::UnderlyingType<T> min, drag_details::UnderlyingType<T> max, T value,
-                        Persistent persistent, std::string format)
-    : ItemElement(elementName), ValueObservable<T>(value),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(label), speed(speed), min(min), max(max),
-      format(std::move(format)) {}
+DragInput<T>::DragInput(const std::string &elementName, const std::string &labelText,
+                        drag_details::UnderlyingType<T> valueSpeed, drag_details::UnderlyingType<T> minValue,
+                        drag_details::UnderlyingType<T> maxValue, T initialValue, Persistent persistent,
+                        std::string numberFormat)
+    : ItemElement(elementName), ValueObservable<T>(initialValue),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), speed(valueSpeed),
+      min(minValue), max(maxValue), format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 toml::table DragInput<T>::toToml() const {
-  const auto value = ValueObservable<T>::getValue();
+  const auto val = ValueObservable<T>::getValue();
   if constexpr (OneOf<T, PF_IMGUI_DRAG_RANGE_TYPE_LIST>) {
-    return toml::table{{"value", toml::array{value.start, value.end}}};
+    return toml::table{{"value", toml::array{val.start, val.end}}};
   } else if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
-    return toml::table{{"value", serializeGlmVec(value)}};
+    return toml::table{{"value", serializeGlmVec(val)}};
   } else {
-    return toml::table{{"value", value}};
+    return toml::table{{"value", val}};
   }
 }
 

@@ -62,16 +62,16 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
   /**
    * Construct Input. For the following types: float, double.
    * @param elementName ID of the input
-   * @param label text drawn next to the input
+   * @param labelText text drawn next to the input
    * @param st step
    * @param fStep fast step
-   * @param format format for printing underlying float value
+   * @param initialValue starting value
    * @param persistent enable state saving to disk
-   * @param value starting value
+   * @param numberFormat format for printing underlying float value
    */
-  Input(const std::string &elementName, const std::string &label, StepType st = static_cast<StepType>(1),
-        StepType fStep = static_cast<StepType>(10), T value = T{}, Persistent persistent = Persistent::No,
-        std::string format = input_details::defaultFormat<T>());
+  Input(const std::string &elementName, const std::string &labelText, StepType st = static_cast<StepType>(1),
+        StepType fStep = static_cast<StepType>(10), T initialValue = T{}, Persistent persistent = Persistent::No,
+        std::string numberFormat = input_details::defaultFormat<T>());
 
   [[nodiscard]] bool isReadOnly() const { return readOnly; }
 
@@ -107,11 +107,11 @@ Input<T>::Input(Input::Config &&config)
       format(std::move(static_cast<std::string>(config.format))) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
-Input<T>::Input(const std::string &elementName, const std::string &label, Input::StepType st, Input::StepType fStep,
-                T value, Persistent persistent, std::string format)
-    : ItemElement(elementName), ValueObservable<T>(value),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(label), step(st), fastStep(fStep),
-      format(std::move(format)) {}
+Input<T>::Input(const std::string &elementName, const std::string &labelText, Input::StepType st, Input::StepType fStep,
+                T initialValue, Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), ValueObservable<T>(initialValue),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), step(st), fastStep(fStep),
+      format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 void Input<T>::setReadOnly(bool isReadOnly) {
@@ -125,11 +125,10 @@ void Input<T>::setReadOnly(bool isReadOnly) {
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 toml::table Input<T>::toToml() const {
-  const auto value = ValueObservable<T>::getValue();
   if constexpr (OneOf<T, PF_IMGUI_INPUT_GLM_TYPE_LIST>) {
-    return toml::table{{"value", serializeGlmVec(value)}};
+    return toml::table{{"value", serializeGlmVec(ValueObservable<T>::getValue())}};
   } else {
-    return toml::table{{"value", value}};
+    return toml::table{{"value", ValueObservable<T>::getValue()}};
   }
 }
 
@@ -210,18 +209,18 @@ class Input<std::string> : public InputText {
   /**
    * Construct Input<std::string>.
    * @param elementName ID of the input
-   * @param label text rendered next to the input
-   * @param text starting text in the input
+   * @param labelText text rendered next to the input
+   * @param initialValue starting text in the input
    * @param textInputType singleline or multiline support
    * @param filters character filters for input
    * @param persistent enable state saving to disk
    */
-  Input(const std::string &elementName, std::string label, const std::string &value = "",
+  Input(const std::string &elementName, std::string labelText, const std::string &initialValue = "",
         TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
         TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
         Persistent persistent = Persistent::No)
-      : InputText(elementName, std::move(label), value, textInputType, inputLengthLimit, trigger, filters, persistent) {
-  }
+      : InputText(elementName, std::move(labelText), initialValue, textInputType, inputLengthLimit, trigger, filters,
+                  persistent) {}
 };
 
 extern template class Input<float>;

@@ -16,8 +16,8 @@
 
 namespace pf::ui::ig {
 
-NodeEditor::NodeEditor(const std::string &name, Size size)
-    : ElementWithID(name), Resizable(size), context(ax::NodeEditor::CreateEditor()) {}
+NodeEditor::NodeEditor(const std::string &elementName, Size initialSize)
+    : ElementWithID(elementName), Resizable(initialSize), context(ax::NodeEditor::CreateEditor()) {}
 
 NodeEditor::NodeEditor(NodeEditor::Config &&config)
     : ElementWithID(std::move(config.name)), Resizable(config.size), context(ax::NodeEditor::CreateEditor()) {}

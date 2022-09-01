@@ -13,7 +13,7 @@ namespace pf::ui::ig::bp {
 class NodeWithLabel : public Node {
  public:
   PF_IMGUI_BLUEPRINT_NODE_ID(NodeWithLabel)
-  NodeWithLabel(const std::string &name, std::string label);
+  NodeWithLabel(const std::string &elementName, std::string labelText);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;

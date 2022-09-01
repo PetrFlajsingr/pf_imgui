@@ -32,10 +32,10 @@ class Dummy : public Element, public Resizable {
   inline Dummy(Config &&config) : Dummy(std::string{config.name.value}, config.size) {}
   /**
    * Construct Dummy.
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    * @param s size of the element
    */
-  inline Dummy(const std::string &name, Size s) : Element(name), Resizable(s) {}
+  inline Dummy(const std::string &elementName, Size s) : Element(elementName), Resizable(s) {}
 
  protected:
   inline void renderImpl() override {
