@@ -21,7 +21,7 @@ std::vector<Renderable *> AnchorLayout::getRenderables() {
 
 void AnchorLayout::setChildPosition(const std::string &childName, Position position) {
   if (auto foundChild = findIf(children | ranges::views::addressof,
-                          [childName](auto child) { return child->element->getName() == childName; });
+                               [childName](auto child) { return child->element->getName() == childName; });
       foundChild.has_value()) {
     (*foundChild)->positionable->setPosition(position);
   }

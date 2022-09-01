@@ -57,8 +57,8 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
    * @param persistent enable state saving to disk
    * @param numberFormat printf-like format for rendering current value over the slider
    */
-  SliderAngle(const std::string &elementName, const std::string &labelText, float min, float max, float initialValue = 0.0,
-              Persistent persistent = Persistent::No, std::string numberFormat = "%.0f deg");
+  SliderAngle(const std::string &elementName, const std::string &labelText, float min, float max,
+              float initialValue = 0.0, Persistent persistent = Persistent::No, std::string numberFormat = "%.0f deg");
 
   /**
    * Get min slider value.

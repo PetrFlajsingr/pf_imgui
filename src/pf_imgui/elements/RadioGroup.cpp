@@ -27,8 +27,7 @@ RadioGroup::RadioGroup(RadioGroup::Config &&config)
 RadioGroup::~RadioGroup() { std::ranges::for_each(destroyButtonSubscriptions, &Subscription::unsubscribe); }
 
 RadioGroup::RadioGroup(const std::string &name, std::vector<RadioButton *> childButtons, Persistent persistent)
-    : ValueObservable(nullptr), Savable(persistent), groupName(std::string{name}),
-      buttons(std::move(childButtons)) {
+    : ValueObservable(nullptr), Savable(persistent), groupName(std::string{name}), buttons(std::move(childButtons)) {
   std::ranges::for_each(buttons, [this](RadioButton *btn) { addDestroyListener(btn); });
 }
 

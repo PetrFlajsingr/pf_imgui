@@ -13,7 +13,8 @@ StretchLayout::StretchLayout(StretchLayout::Config &&config)
     : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       stretch(config.stretch) {}
 
-StretchLayout::StretchLayout(const std::string &elementName, const Size &initialSize, Stretch stretchType, ShowBorder showBorder)
+StretchLayout::StretchLayout(const std::string &elementName, const Size &initialSize, Stretch stretchType,
+                             ShowBorder showBorder)
     : Layout(elementName, initialSize, showBorder), stretch(stretchType) {}
 
 Stretch StretchLayout::getStretch() const { return stretch; }

@@ -10,7 +10,8 @@ namespace pf::ui::ig {
 Comment::Comment(const std::string &elementName, const std::string &labelText, Size initialSize)
     : NodeBase(elementName), Resizable(initialSize), label(labelText) {}
 
-Comment::Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText, const Size &s)
+Comment::Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText,
+                 const Size &s)
     : NodeBase(elementName, initPosition), Resizable(s), label(labelText) {}
 
 void Comment::setSize(const Size &s) {

@@ -31,7 +31,7 @@ void AbsoluteLayout::renderImpl() {
 }
 void AbsoluteLayout::setChildPosition(const std::string &childName, Position position) {
   if (auto foundChild = findIf(children | ranges::views::addressof,
-                          [childName](auto child) { return child->first->getName() == childName; });
+                               [childName](auto child) { return child->first->getName() == childName; });
       foundChild.has_value()) {
     (*foundChild)->second->setPosition(position);
   }

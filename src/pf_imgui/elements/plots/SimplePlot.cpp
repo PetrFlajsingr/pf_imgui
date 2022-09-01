@@ -17,8 +17,9 @@ SimplePlot::SimplePlot(const std::string &elementName, const std::string &labelT
                        std::vector<float> plotValues, std::optional<std::string> plotOverlayText,
                        const std::optional<std::size_t> &maxHistorySize, float scaleLow, float scaleHigh,
                        Size initialSize)
-    : ElementWithID(elementName), Resizable(initialSize), label(labelText), plotType(type), values(std::move(plotValues)),
-      scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(plotOverlayText)), historyLimit(maxHistorySize) {}
+    : ElementWithID(elementName), Resizable(initialSize), label(labelText), plotType(type),
+      values(std::move(plotValues)), scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(plotOverlayText)),
+      historyLimit(maxHistorySize) {}
 
 void SimplePlot::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

@@ -14,11 +14,11 @@ SliderAngle::SliderAngle(SliderAngle::Config &&config)
       label(std::string{config.label.value}), minDeg(config.min), maxDeg(config.max), format(std::move(config.format)) {
 }
 
-SliderAngle::SliderAngle(const std::string &elementName, const std::string &labelText, float min, float max, float initialValue,
-                         Persistent persistent, std::string numberFormat)
+SliderAngle::SliderAngle(const std::string &elementName, const std::string &labelText, float min, float max,
+                         float initialValue, Persistent persistent, std::string numberFormat)
     : ItemElement(elementName), ValueObservable(initialValue),
-      Savable(persistent), DragSource<float>(false), DropTarget<float>(false), label(labelText), minDeg(min), maxDeg(max),
-      format(std::move(numberFormat)) {}
+      Savable(persistent), DragSource<float>(false), DropTarget<float>(false), label(labelText), minDeg(min),
+      maxDeg(max), format(std::move(numberFormat)) {}
 
 void SliderAngle::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

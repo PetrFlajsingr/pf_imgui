@@ -10,9 +10,9 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/Label.h>
 #include <string>
 #include <utility>
 

@@ -240,8 +240,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   void removeBackgroundDockingArea();
   // TODO: change this to something not insane
   template<typename... Args>
-    requires(std::constructible_from<ViewportOverlayGizmo, Args...>) [
-        [nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
+    requires(std::constructible_from<ViewportOverlayGizmo, Args...>)
+  [[nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
     if (viewportGizmo == nullptr) {
       viewportGizmo = std::make_unique<ViewportOverlayGizmo>(std::forward<Args>(args)...);
     }

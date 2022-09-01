@@ -7,7 +7,8 @@
 
 namespace pf::ui::ig {
 
-NodeBase::NodeBase(const std::string &elementName) : Renderable(elementName), Positionable(Position{}), initSize(false) {}
+NodeBase::NodeBase(const std::string &elementName)
+    : Renderable(elementName), Positionable(Position{}), initSize(false) {}
 NodeBase::NodeBase(const std::string &elementName, Position initPosition)
     : Renderable(elementName), Positionable(initPosition), initSize(true) {}
 

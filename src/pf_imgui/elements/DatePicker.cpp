@@ -17,8 +17,8 @@ DatePicker::DatePicker(DatePicker::Config &&config)
   rawTime->tm_year = static_cast<int>(config.value.year()) - 1900;
 }
 
-DatePicker::DatePicker(const std::string &elementName, const std::string &labelText, std::chrono::year_month_day initialValue,
-                       Persistent persistent)
+DatePicker::DatePicker(const std::string &elementName, const std::string &labelText,
+                       std::chrono::year_month_day initialValue, Persistent persistent)
     : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText),
       rawTime(std::make_unique<tm>()) {
   rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(initialValue.day()));

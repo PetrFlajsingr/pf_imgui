@@ -328,7 +328,6 @@ set(INCLUDES
         src/pf_imgui/managers/FontManager.h
         src/pf_imgui/layouts/AnchorLayout.h
         src/pf_imgui/interface/RenderablesContainer.h
-        src/pf_imgui/styles/enums.h
         src/pf_imgui/elements/DockSpace.h
         src/pf_imgui/details/Spinner.h
         src/pf_imgui/elements/Spinner.h

@@ -50,8 +50,9 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID, public Resizable {
    * @param yLabelText label of y axis
    * @param initialSize size of the element
    */
-  Plot(const std::string &elementName, const std::string &labelText, std::optional<std::string> xLabelText = std::nullopt,
-       std::optional<std::string> yLabelText = std::nullopt, const Size &initialSize = Size::FillWidth());
+  Plot(const std::string &elementName, const std::string &labelText,
+       std::optional<std::string> xLabelText = std::nullopt, std::optional<std::string> yLabelText = std::nullopt,
+       const Size &initialSize = Size::FillWidth());
 
   /**
    * Add new set of data.

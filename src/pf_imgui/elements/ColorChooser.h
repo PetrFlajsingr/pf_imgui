@@ -113,8 +113,8 @@ ColorChooser<Type, Format>::ColorChooser(ColorChooser::Config &&config)
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
-ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const std::string &labelText, Color initialValue,
-                                         Persistent persistent)
+ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const std::string &labelText,
+                                         Color initialValue, Persistent persistent)
     : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), DragSource(false),
       DropTarget(false), label(labelText) {
   setValue(initialValue);

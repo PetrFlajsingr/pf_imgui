@@ -110,7 +110,10 @@ void NodeEditor::setFromToml(const toml::table &src) {
               commentHeight = static_cast<float>(heightToml->get());
             }
           }
-          if (!commentWidth.has_value() || !commentHeight.has_value() || !commentLabel.has_value() || !commentName.has_value()) { return; }
+          if (!commentWidth.has_value() || !commentHeight.has_value() || !commentLabel.has_value()
+              || !commentName.has_value()) {
+            return;
+          }
           auto &newComment = addComment(*commentName, *commentLabel, Size{*commentWidth, *commentHeight});
           if (position.has_value()) { newComment.setPosition(*position); }
         }

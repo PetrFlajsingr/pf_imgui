@@ -7,9 +7,9 @@
 #ifndef PF_IMGUI_ELEMENTS_MENUITEMS_H
 #define PF_IMGUI_ELEMENTS_MENUITEMS_H
 
-#include <pf_imgui/Label.h>
 #include <memory>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ElementContainer.h>
@@ -134,9 +134,7 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
 /**
  * @brief An item, which can be clicked and it toggles its inner value.
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
-                                         public ValueObservable<bool>,
-                                         public Savable {
+class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Checkbox.

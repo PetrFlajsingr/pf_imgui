@@ -7,7 +7,6 @@
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/styles/enums.h>
 #include <string>
 
 namespace pf::ui::ig {

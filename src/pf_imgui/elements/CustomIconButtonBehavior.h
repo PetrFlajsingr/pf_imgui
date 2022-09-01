@@ -9,7 +9,6 @@
 #include <pf_imgui/Size.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/styles/enums.h>
 
 namespace pf::ui::ig {
 

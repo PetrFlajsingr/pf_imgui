@@ -11,9 +11,9 @@
 #include "NodeBase.h"
 #include "fwd.h"
 #include <imgui_node_editor.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/Position.h>
 #include <pf_imgui/Size.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/Resizable.h>
 

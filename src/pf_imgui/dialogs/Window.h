@@ -246,7 +246,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   bool firstPass = true;
 
-
   std::optional<ImGuiID> dockInto = std::nullopt;
 
   ImGuiWindowFlags flags{};

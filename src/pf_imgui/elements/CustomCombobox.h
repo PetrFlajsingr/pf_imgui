@@ -43,8 +43,9 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
    * @param prevValue preview value
    * @param showItemCount amount of items shown when open
    */
-  CustomCombobox(const std::string &elementName, const std::string &labelText, CustomItemBoxFactory<T, R> auto &&rowFactory,
-                 std::string prevValue = "", ComboBoxCount showItemCount = ComboBoxCount::Items8);
+  CustomCombobox(const std::string &elementName, const std::string &labelText,
+                 CustomItemBoxFactory<T, R> auto &&rowFactory, std::string prevValue = "",
+                 ComboBoxCount showItemCount = ComboBoxCount::Items8);
 
   void setPreviewValue(std::string value);
   [[nodiscard]] const std::string &getPreviewValue() const { return previewValue; }
