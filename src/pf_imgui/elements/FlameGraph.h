@@ -11,9 +11,9 @@
 #include <imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <string>
@@ -30,7 +30,7 @@ using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
  * @todo: style
  * @todo: styles for samples?
  */
-class PF_IMGUI_EXPORT FlameGraph : public ElementWithID, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT FlameGraph : public ElementWithID, public Resizable {
  public:
   /**
    * @brief Struct for construction of FlameGraph.
@@ -50,12 +50,12 @@ class PF_IMGUI_EXPORT FlameGraph : public ElementWithID, public Labellable, publ
   /**
    * Construct FlameGraph.
    * @param elementName ID of the element
-   * @param label text drawn at the top of the graph
-   * @param size size of the graph
-   * @param overlay text render on top of the graph
+   * @param labelText text drawn at the top of the graph
+   * @param initialSize size of the graph
+   * @param graphOverlay text render on top of the graph
    */
-  FlameGraph(const std::string &elementName, const std::string &label, const Size &size = Size::Auto(),
-             std::optional<std::string> overlay = std::nullopt);
+  FlameGraph(const std::string &elementName, const std::string &labelText, const Size &initialSize = Size::Auto(),
+             std::optional<std::string> graphOverlay = std::nullopt);
 
   /**
    * Set text render on top of the graph.
@@ -77,6 +77,7 @@ class PF_IMGUI_EXPORT FlameGraph : public ElementWithID, public Labellable, publ
                ColorOf::BorderShadow, ColorOf::Text>
       color;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

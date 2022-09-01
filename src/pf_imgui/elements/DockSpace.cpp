@@ -10,8 +10,8 @@ namespace pf::ui::ig {
 DockSpace::DockSpace(Config &&config)
     : ElementWithID(std::string{config.name.value}), Resizable(config.size), flags(*config.flags) {}
 
-DockSpace::DockSpace(const std::string &name, Size s, const Flags<DockType> &dockFlags)
-    : ElementWithID(name), Resizable(s), flags(*dockFlags) {}
+DockSpace::DockSpace(const std::string &elementName, Size s, const Flags<DockType> &dockFlags)
+    : ElementWithID(elementName), Resizable(s), flags(*dockFlags) {}
 
 bool DockSpace::isInitialised() const { return !firstFrame; }
 

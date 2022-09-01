@@ -11,9 +11,9 @@
 #include <algorithm>
 #include <optional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <ranges>
@@ -27,7 +27,7 @@ namespace pf::ui::ig {
  *
  * @see PlotType
  */
-class PF_IMGUI_EXPORT SimplePlot : public ElementWithID, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT SimplePlot : public ElementWithID, public Resizable {
  public:
   /**
    * @brief Struct for construction of SimplePlot.
@@ -53,19 +53,19 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID, public Labellable, publ
   /**
    * Construct SimplePlot.
    * @param elementName ID of the plot
-   * @param text rendered above the plot
-   * @param plotType type of the plot @see PlotType
-   * @param values starting values of the plot
-   * @param overlayText text rendered on top of the plot
-   * @param historyLimit max count of values in plot, older ones are deleted first (FIFO)
+   * @param labelText rendered above the plot
+   * @param type type of the plot @see PlotType
+   * @param plotValues starting values of the plot
+   * @param plotOverlayText text rendered on top of the plot
+   * @param maxHistorySize max count of values in plot, older ones are deleted first (FIFO)
    * @param scaleLow min value
    * @param scaleHigh max value
-   * @param size size of the element
+   * @param initialSize size of the element
    */
-  SimplePlot(const std::string &elementName, const std::string &label, PlotType plotType,
-             std::vector<float> values = {}, std::optional<std::string> overlayText = std::nullopt,
-             const std::optional<std::size_t> &historyLimit = std::nullopt, float scaleLow = FLT_MAX,
-             float scaleHigh = FLT_MAX, Size size = Size::Auto());
+  SimplePlot(const std::string &elementName, const std::string &labelText, PlotType type,
+             std::vector<float> plotValues = {}, std::optional<std::string> plotOverlayText = std::nullopt,
+             const std::optional<std::size_t> &maxHistorySize = std::nullopt, float scaleLow = FLT_MAX,
+             float scaleHigh = FLT_MAX, Size initialSize = Size::Auto());
   /**
    * Add value to the end of the graph.
    * @param value value to be added
@@ -93,6 +93,7 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID, public Labellable, publ
                ColorOf::PlotLines, ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered,
                ColorOf::Text, ColorOf::TextDisabled>
       color;
+  Label label;
 
  protected:
   void renderImpl() override;

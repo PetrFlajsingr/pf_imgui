@@ -14,7 +14,7 @@ namespace pf::ui::ig::bp {
 class ExecPin : public Pin {
  public:
   PF_IMGUI_BLUEPRINT_PIN_ID(ExecPin)
-  ExecPin(const std::string &name, const std::string &label, Color pinColor);
+  ExecPin(const std::string &elementName, const std::string &labelText, Color pinColor);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 

@@ -11,8 +11,8 @@ Toggle::Toggle(Toggle::Config &&config)
     : ItemElement(std::string{config.name.value}), ValueObservable(config.enabled),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
 
-Toggle::Toggle(const std::string &elementName, const std::string &label, bool value, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(value), Savable(persistent), label(label) {}
+Toggle::Toggle(const std::string &elementName, const std::string &labelText, bool initialValue, Persistent persistent)
+    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText) {}
 
 void Toggle::setSelected(bool selected) { setValueAndNotifyIfChanged(selected); }
 

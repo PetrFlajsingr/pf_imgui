@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 
-SubDockBuilder::SubDockBuilder(Direction direction) : direction(direction) {}
+SubDockBuilder::SubDockBuilder(Direction dir) : direction(dir) {}
 
 HorizontalSplitBuilder &SubDockBuilder::split(HorizontalDirection splitDirection) {
   auto subBuilder = std::unique_ptr<HorizontalSplitBuilder>{

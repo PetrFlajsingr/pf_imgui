@@ -11,8 +11,8 @@ namespace pf::ui::ig {
 GroupBox::GroupBox(GroupBox::Config &&config)
     : ElementWithID(std::string{config.name.value}), Resizable(config.size), label(std::string{config.label.value}) {}
 
-GroupBox::GroupBox(const std::string &name, const std::string &label, Size s)
-    : ElementWithID(name), Resizable(s), label(label) {}
+GroupBox::GroupBox(const std::string &elementName, const std::string &labelValue, Size s)
+    : ElementWithID(elementName), Resizable(s), label(labelValue) {}
 
 void GroupBox::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

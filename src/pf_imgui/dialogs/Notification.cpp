@@ -9,8 +9,8 @@
 
 namespace pf::ui::ig {
 
-Notification::Notification(const std::string &name, const std::string &label, std::chrono::milliseconds duration)
-    : Renderable(name), label(label), dismissDuration(duration) {}
+Notification::Notification(const std::string &elementName, const std::string &labelText, std::chrono::milliseconds duration)
+    : Renderable(elementName), label(labelText), dismissDuration(duration) {}
 
 void Notification::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

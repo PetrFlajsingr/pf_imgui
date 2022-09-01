@@ -16,7 +16,6 @@
 #include <pf_imgui/elements/details/InputDetails.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
@@ -36,7 +35,6 @@ namespace pf::ui::ig {
  */
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 class PF_IMGUI_EXPORT Input : public ItemElement,
-                              public Labellable,
                               public ValueObservable<T>,
                               public Savable,
                               public DragSource<T>,
@@ -88,6 +86,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -102,16 +101,16 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(Input::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Labellable(std::string{config.label.value}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      step(config.step), fastStep(config.fastStep), format(std::move(static_cast<std::string>(config.format))) {}
+      label(std::string{config.label.value}), step(config.step), fastStep(config.fastStep),
+      format(std::move(static_cast<std::string>(config.format))) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(const std::string &elementName, const std::string &label, Input::StepType st, Input::StepType fStep,
                 T value, Persistent persistent, std::string format)
-    : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), step(st), fastStep(fStep),
+    : ItemElement(elementName), ValueObservable<T>(value),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(label), step(st), fastStep(fStep),
       format(std::move(format)) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
@@ -170,9 +169,9 @@ void Input<T>::renderImpl() {
   }
 
   if constexpr (!OneOf<T, PF_IMGUI_INPUT_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::InputScalar(getLabel().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
+    valueChanged = ImGui::InputScalar(label.get().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
   } else {
-    valueChanged = ImGui::InputScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
+    valueChanged = ImGui::InputScalarN(label.get().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
                                        &fastStep, format.c_str(), flags);
   }
 

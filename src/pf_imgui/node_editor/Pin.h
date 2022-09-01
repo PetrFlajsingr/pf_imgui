@@ -59,10 +59,10 @@ class Pin : public Renderable, public Hoverable {
   explicit Pin(Config &&config);
   /**
    * Construct Pin.
-   * @param name unique name of the element
-   * @param label text rendered next to the pin
+   * @param elementName unique name of the element
+   * @param labelText text rendered next to the pin
    */
-  Pin(const std::string &name, const std::string &label);
+  Pin(const std::string &elementName, const std::string &labelText);
 
   /**
    * Get internally used id of the pin.

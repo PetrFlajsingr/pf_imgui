@@ -165,9 +165,9 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
  public:
   /**
    * Construct DragSource.
-   * @param dragAllowed enable/disable drag
+   * @param dragEnabled enable/disable drag
    */
-  explicit DragSource(bool dragAllowed) : DragSourceBase(dragAllowed) {}
+  explicit DragSource(bool dragEnabled) : DragSourceBase(dragEnabled) {}
 
   /**
    * Set simple tooltip for dragging. If the text contains '{}' and T is ToStringConvertible than the value transferred is formatted to the string.
@@ -226,9 +226,9 @@ class PF_IMGUI_EXPORT DropTarget : public details::DropTargetBase {
  public:
   /**
    * Construct DropTarget.
-   * @param dropAllowed enable/disable drop target
+   * @param dropEnabled enable/disable drop target
    */
-  explicit DropTarget(bool dropAllowed) : DropTargetBase(dropAllowed) {}
+  explicit DropTarget(bool dropEnabled) : DropTargetBase(dropEnabled) {}
 
   /**
    * Add a listener for when value is dropped to this element.

@@ -24,7 +24,7 @@ namespace pf::ui::ig {
 /**
  * @brief Advanced plot for plotting 2D data.
  */
-class PF_IMGUI_EXPORT Plot : public ElementWithID, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT Plot : public ElementWithID, public Resizable {
  public:
   /**
    * @brief Struct for construction of Plot.
@@ -45,13 +45,13 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID, public Labellable, public Res
   /**
    * Construct Plot.
    * @param elementName ID of the plot
-   * @param label rendered above the plot
-   * @param xLabel label of x axis
-   * @param yLabel label of y axis
-   * @param size size of the element
+   * @param labelText rendered above the plot
+   * @param xLabelText label of x axis
+   * @param yLabelText label of y axis
+   * @param initialSize size of the element
    */
-  Plot(const std::string &elementName, const std::string &label, std::optional<std::string> xLabel = std::nullopt,
-       std::optional<std::string> yLabel = std::nullopt, const Size &size = Size::FillWidth());
+  Plot(const std::string &elementName, const std::string &labelText, std::optional<std::string> xLabelText = std::nullopt,
+       std::optional<std::string> yLabelText = std::nullopt, const Size &initialSize = Size::FillWidth());
 
   /**
    * Add new set of data.
@@ -71,13 +71,14 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID, public Labellable, public Res
 
   /**
    * Get data storage by its ID.
-   * @param name ID of the data storage
+   * @param dataName ID of the data storage
    * @return reference to data storage
    * @throw Exception when desired type doesn't match the storage data type
    */
   template<std::derived_from<plot_type::PlotData> T>
-  [[nodiscard]] std::optional<std::reference_wrapper<T>> dataByName(const std::string &name) {
-    if (const auto iter = std::ranges::find_if(datas, [name](const auto &data) { return data->getName() == name; });
+  [[nodiscard]] std::optional<std::reference_wrapper<T>> dataByName(const std::string &dataName) {
+    if (const auto iter =
+            std::ranges::find_if(datas, [dataName](const auto &data) { return data->getName() == dataName; });
         iter != datas.end()) {
       if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }
       return std::nullopt;
@@ -90,6 +91,8 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID, public Labellable, public Res
    * @param dataName ID of the data storage to be removed
    */
   void removeData(const std::string &dataName);
+
+  Label label;
 
  protected:
   void renderImpl() override;

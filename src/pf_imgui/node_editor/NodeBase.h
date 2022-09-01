@@ -29,15 +29,15 @@ class NodeBase : public Renderable, public Hoverable, public Positionable {
  public:
   /**
    * Construct NodeBase
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    */
-  NodeBase(const std::string &name);
+  explicit NodeBase(const std::string &elementName);
   /**
    * Construct NodeBase
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    * @param initPosition initial position
    */
-  NodeBase(const std::string &name, Position initPosition);
+  NodeBase(const std::string &elementName, Position initPosition);
 
   /**
    *

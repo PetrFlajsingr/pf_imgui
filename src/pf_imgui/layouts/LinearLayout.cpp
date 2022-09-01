@@ -8,8 +8,8 @@
 
 namespace pf::ui::ig {
 
-LinearLayout::LinearLayout(const std::string &name, Size size, ShowBorder showBorder)
-    : Layout(name, size, showBorder) {}
+LinearLayout::LinearLayout(const std::string &elementName, Size initialSize, ShowBorder showBorder)
+    : Layout(elementName, initialSize, showBorder) {}
 
 void LinearLayout::pushChild(std::unique_ptr<Element> child) { children.emplace_back(std::move(child)); }
 

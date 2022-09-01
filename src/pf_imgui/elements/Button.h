@@ -36,10 +36,10 @@ class PF_IMGUI_EXPORT ButtonBase : public ItemElement, public Clickable {
  public:
   /**
    * Construct ButtonBase.
-   * @param name ID of the button
+   * @param elementName ID of the button
    * @param isRepeatable enable/disable button can repeat its on click event when a user holds it
    */
-  explicit ButtonBase(const std::string &name, Repeatable isRepeatable = Repeatable::No);
+  explicit ButtonBase(const std::string &elementName, Repeatable isRepeatable = Repeatable::No);
 
   /**
    * Check whether the button is repeatable or not
@@ -120,12 +120,12 @@ class PF_IMGUI_EXPORT Button : public ButtonBase, public Resizable {
   explicit Button(Config &&config);
   /**
    * Construct Button
-   * @param name unique name of the element
-   * @param label text rendered on the button
+   * @param elementName unique name of the element
+   * @param labelText text rendered on the button
    * @param s size of the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  Button(const std::string &name, const std::string &label, const Size &s = Size::Auto(),
+  Button(const std::string &elementName, const std::string &labelText, const Size &s = Size::Auto(),
          Repeatable isRepeatable = Repeatable::No);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
@@ -158,11 +158,11 @@ class PF_IMGUI_EXPORT SmallButton : public ButtonBase {
   explicit SmallButton(Config &&config);
   /**
    * Construct SmallButton
-   * @param name unique name of the element
-   * @param label text rendered on the button
+   * @param elementName unique name of the element
+   * @param labelText text rendered on the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable = Repeatable::No);
+  SmallButton(const std::string &elementName, const std::string &labelText, Repeatable isRepeatable = Repeatable::No);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
                ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
@@ -195,11 +195,11 @@ class PF_IMGUI_EXPORT ArrowButton : public ButtonBase {
   explicit ArrowButton(Config &&config);
   /**
    * Construct ArrowButton
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    * @param direction direction of the arrow rendered on the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  ArrowButton(const std::string &name, Dir direction, Repeatable isRepeatable = Repeatable::No);
+  ArrowButton(const std::string &elementName, Dir direction, Repeatable isRepeatable = Repeatable::No);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
                ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
@@ -233,12 +233,12 @@ class PF_IMGUI_EXPORT ImageButton : public ButtonBase, public Resizable {
   explicit ImageButton(Config &&config);
   /**
    * Construct ArrowButton
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    * @param tex texture to render
    * @param s size of the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  ImageButton(const std::string &name, std::shared_ptr<Texture> tex, Size s = Size::Auto(),
+  ImageButton(const std::string &elementName, std::shared_ptr<Texture> tex, Size s = Size::Auto(),
               Repeatable isRepeatable = Repeatable::No);
 
   /**

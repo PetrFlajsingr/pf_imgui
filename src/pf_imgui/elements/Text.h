@@ -42,9 +42,9 @@ class PF_IMGUI_EXPORT Text : public ItemElement, public DragSource<std::string>,
   /**
   * Construct Text.
   * @param elementName ID of the element
-  * @param text text to be rendered
+  * @param textValue text to be rendered
   */
-  Text(const std::string &elementName, std::string text, bool wrapText = false);
+  Text(const std::string &elementName, std::string textValue, bool wrapText = false);
 
   /**
    * Get rendered text.

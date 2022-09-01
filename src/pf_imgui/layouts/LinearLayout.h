@@ -25,12 +25,12 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
  public:
   /**
    * Construct LinearLayout
-   * @param name unique name of the element
-   * @param size size of the layout
+   * @param elementName unique name of the element
+   * @param initialSize size of the layout
    * @param elementSpacing spaces between elements
    * @param showBorder render border around layout's area
    */
-  LinearLayout(const std::string &name, Size size, ShowBorder showBorder = ShowBorder::No);
+  LinearLayout(const std::string &elementName, Size initialSize, ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Get all children of the layout as references.

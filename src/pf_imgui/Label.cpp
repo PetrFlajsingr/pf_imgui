@@ -8,6 +8,12 @@ namespace pf::ui::ig {
 
 Label::Label(std::string value) : val(std::move(value)) {}
 
+Label &Label::operator=(const Label &other) {
+  val = other.val;
+  visibility = other.visibility;
+  return *this;
+}
+
 Label &Label::operator=(const std::string &other) {
   val = other;
   return *this;

@@ -8,16 +8,17 @@
 namespace pf::ui::ig {
 
 Expander::Expander(Expander::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
+    : ItemElement(std::string{config.name.value}),
       Collapsible(config.allowCollapse ? AllowCollapse::Yes : AllowCollapse::No,
-                  config.persistent ? Persistent::Yes : Persistent::No) {}
+                  config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}) {}
 
-Expander::Expander(const std::string &elementName, const std::string &label, Persistent persistent,
+Expander::Expander(const std::string &elementName, const std::string &labelText, Persistent persistent,
                    AllowCollapse allowCollapse)
-    : ItemElement(elementName), Labellable(label), Collapsible(allowCollapse, persistent) {}
+    : ItemElement(elementName), Collapsible(allowCollapse, persistent), label(labelText) {}
 
-Expander::Expander(const std::string &elementName, const std::string &label, AllowCollapse allowCollapse)
-    : Expander(elementName, label, Persistent::No, allowCollapse) {}
+Expander::Expander(const std::string &elementName, const std::string &labelText, AllowCollapse allowCollapse)
+    : Expander(elementName, labelText, Persistent::No, allowCollapse) {}
 
 void Expander::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -26,7 +27,7 @@ void Expander::renderImpl() {
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
-  setCollapsed(!ImGui::CollapsingHeader(getLabel().c_str(), flags));
+  setCollapsed(!ImGui::CollapsingHeader(label.get().c_str(), flags));
   if (!isCollapsed()) { std::ranges::for_each(getChildren(), &Renderable::render); }
 }
 

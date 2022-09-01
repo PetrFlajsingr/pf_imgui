@@ -32,9 +32,9 @@ class PF_IMGUI_EXPORT ElementWithID : public Element {
  public:
   /**
    * Construct ElementWithID.
-   * @param name ID of the element.
+   * @param elementName ID of the element.
    */
-  explicit ElementWithID(const std::string &name);
+  explicit ElementWithID(const std::string &elementName);
 
   /**
    * Only available after first render call.

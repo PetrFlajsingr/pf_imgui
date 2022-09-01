@@ -7,7 +7,8 @@
 
 namespace pf::ui::ig::bp {
 
-ExecPin::ExecPin(const std::string &name, const std::string &label, Color pinColor) : Pin(name, label, pinColor) {}
+ExecPin::ExecPin(const std::string &elementName, const std::string &labelText, Color pinColor)
+    : Pin(elementName, labelText, pinColor) {}
 
 void ExecPin::renderIcon() {
   ImVec2 iconSize{16, 16};

@@ -15,7 +15,6 @@
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -34,7 +33,7 @@ enum class TabMod {
 /**
  * @brief A button which looks like a Tab in TabBar.
  */
-class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public Clickable {
+class PF_IMGUI_EXPORT TabButton : public ItemElement, public Clickable {
  public:
   /**
    * @brief Struct for construction of TabButton.
@@ -51,9 +50,11 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Labellable, public 
    */
   explicit TabButton(Config &&config);
 
-  TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{});
+  TabButton(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods = Flags<TabMod>{});
 
   void setMods(const Flags<TabMod> &mods);
+
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -88,16 +89,16 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   * Construct Tab.
   * @param elementName ID of the Tab
   * @param mods modifiers
-  * @param label text rendered on the Tab
+  * @param labelText text rendered on the Tab
   */
-  Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods = Flags<TabMod>{},
+  Tab(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods = Flags<TabMod>{},
       bool closeable = false);
   /**
   * Construct Tab.
   * @param elementName ID of the Tab
-  * @param label text rendered on the Tab
+  * @param labelText text rendered on the Tab
   */
-  Tab(const std::string &elementName, const std::string &label, bool closeable = false);
+  Tab(const std::string &elementName, const std::string &labelText, bool closeable = false);
 
   ~Tab() override;
 

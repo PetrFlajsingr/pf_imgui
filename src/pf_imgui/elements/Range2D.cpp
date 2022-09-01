@@ -9,15 +9,14 @@
 namespace pf::ui::ig {
 
 Range2D::Range2D(Range2D::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
-      ValueObservable(config.value), Resizable(config.size),
+    : ItemElement(std::string{config.name.value}), ValueObservable(config.value), Resizable(config.size),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false), DropTarget(false),
-      minRange(config.min), maxRange(config.max) {}
+      label(std::string{config.label.value}), minRange(config.min), maxRange(config.max) {}
 
-Range2D::Range2D(const std::string &elementName, const std::string &label, const glm::vec2 &min, const glm::vec2 &max,
-                 const math::Range<glm::vec2> &value, const Size &s, Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value), Resizable(s), Savable(persistent),
-      DragSource(false), DropTarget(false), minRange(min), maxRange(max) {}
+Range2D::Range2D(const std::string &elementName, const std::string &labelText, const glm::vec2 &min,
+                 const glm::vec2 &max, const math::Range<glm::vec2> &initialValue, const Size &s, Persistent persistent)
+    : ItemElement(elementName), ValueObservable(initialValue), Resizable(s), Savable(persistent), DragSource(false),
+      DropTarget(false), label(labelText), minRange(min), maxRange(max) {}
 
 void Range2D::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -25,7 +24,7 @@ void Range2D::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto val = getValueAddress();
   const auto oldVal = getValue();
-  if (ImWidgets::RangeSelect2D(getLabel().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
+  if (ImWidgets::RangeSelect2D(label.get().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
                                minRange.y, maxRange.x, maxRange.y, static_cast<ImVec2>(getSize()))) {
     if (*val != oldVal) { notifyValueChanged(); }
   }

@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-Position::Position(float x, float y) : x(x), y(y) {}
+Position::Position(float initialX, float initialY) : x(initialX), y(initialY) {}
 
 Position::Position(ImVec2 pos) : x(pos.x), y(pos.y) {}
 

@@ -183,7 +183,7 @@ toml::array NodeEditor::commentsToToml() const {
   auto result = toml::array();
   std::ranges::for_each(comments, [&](const auto &comment) {
     result.push_back(toml::table{{"name", comment->getName()},
-                                 {"label", comment->getLabel()},
+                                 {"label", comment->label.get()},
                                  {"width", static_cast<float>(comment->getSize().width)},
                                  {"height", static_cast<float>(comment->getSize().height)},
                                  {"positionX", comment->getPosition().x},

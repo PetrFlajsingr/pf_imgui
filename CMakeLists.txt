@@ -14,7 +14,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 else ()
     list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
             "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
-            "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security")
+            "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security" "-Wshadow")
 endif ()
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")

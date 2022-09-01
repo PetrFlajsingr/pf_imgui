@@ -25,7 +25,7 @@ namespace pf::ui::ig {
 class SubMenu;
 class PF_IMGUI_EXPORT MenuItem : public ElementWithID {
  public:
-  explicit MenuItem(const std::string &name);
+  explicit MenuItem(const std::string &elementName);
 
   /**
    * Set if the parent menu is closed on interact - the menu might still get closed in some cases.
@@ -116,9 +116,9 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
   /**
    * Construct MenuButtonItem.
    * @param elementName ID of the element
-   * @param label text rendered on the button
+   * @param labelText text rendered on the button
    */
-  MenuButtonItem(const std::string &elementName, const std::string &label);
+  MenuButtonItem(const std::string &elementName, const std::string &labelText);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
                ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::Header, ColorOf::HeaderHovered,
@@ -157,9 +157,9 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
    * Construct MenuCheckboxItem.
    * @param elementName ID of the element
    * @param label text rendered on the button
-   * @param value starting value
+   * @param initialValue starting value
    */
-  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value = false,
+  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool initialValue = false,
                    Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
@@ -225,9 +225,9 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public MenuContainer {
   /**
    * Construct SubMenu.
    * @param elementName ID of the element
-   * @param label text rendered on the button
+   * @param labelText text rendered on the button
    */
-  SubMenu(const std::string &elementName, const std::string &label);
+  SubMenu(const std::string &elementName, const std::string &labelText);
 
   Label label;
 

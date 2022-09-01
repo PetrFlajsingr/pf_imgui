@@ -20,6 +20,11 @@
 # include <streambuf>
 # include <type_traits>
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#endif
+
 // https://stackoverflow.com/a/8597498
 # define DECLARE_HAS_NESTED(Name, Member)                                          \
                                                                                    \
@@ -5627,3 +5632,6 @@ void ed::Config::EndSave()
     if (EndSaveSession)
         EndSaveSession(UserPointer);
 }
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif

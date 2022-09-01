@@ -29,12 +29,12 @@ class Comment : public NodeBase, public Resizable {
  public:
   /**
    * Construct Comment
-   * @param name unique name of the element
-   * @param label text rendered in header of the Comment
-   * @param initSize initial size of the Comment area
+   * @param elementName unique name of the element
+   * @param labelText text rendered in header of the Comment
+   * @param initialSize initial size of the Comment area
    */
-  Comment(const std::string &name, const std::string &label, Size initSize);
-  Comment(const std::string &name, const Position &initPosition, const std::string &label, const Size &s);
+  Comment(const std::string &elementName, const std::string &labelText, Size initialSize);
+  Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText, const Size &s);
 
   void setSize(const Size &s) override;
 

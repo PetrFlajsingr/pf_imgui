@@ -11,8 +11,8 @@ namespace pf::ui::ig {
 Image::Image(Image::Config &&config)
     : ItemElement(std::string{config.name.value}), Resizable(config.size), texture(std::move(config.texture)) {}
 
-Image::Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size size)
-    : ItemElement(elementName), Resizable(size), texture(std::move(tex)) {}
+Image::Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size initialSize)
+    : ItemElement(elementName), Resizable(initialSize), texture(std::move(tex)) {}
 
 void Image::renderImpl() { ImGui::Image(texture->getID(), static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom); }
 

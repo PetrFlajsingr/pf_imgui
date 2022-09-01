@@ -46,11 +46,11 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
   ~RadioGroup() override;
   /**
    * Construct RadioGroup.
-   * @param groupName ID of the element
-   * @param buttons buttons in the group
+   * @param name ID of the element
+   * @param childButtons buttons in the group
    * @param persistent enable state saving to disk
    */
-  explicit RadioGroup(const std::string &groupName, std::vector<RadioButton *> buttons = {},
+  explicit RadioGroup(const std::string &name, std::vector<RadioButton *> childButtons = {},
                       Persistent persistent = Persistent::No);
 
   /**

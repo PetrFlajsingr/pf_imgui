@@ -9,7 +9,7 @@
 
 namespace pf::ui::ig {
 
-Renderable::Renderable(std::string name) : name(std::move(name)) {}
+Renderable::Renderable(std::string renderableName) : name(std::move(renderableName)) {}
 
 Renderable::Renderable(Renderable &&other) noexcept : visibility(other.visibility) {}
 

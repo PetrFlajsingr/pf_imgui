@@ -11,8 +11,8 @@ namespace pf::ui::ig {
 AnchorLayout::AnchorLayout(AnchorLayout::Config &&config)
     : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-AnchorLayout::AnchorLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
-    : Layout(elementName, size, showBorder) {}
+AnchorLayout::AnchorLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
+    : Layout(elementName, initialSize, showBorder) {}
 
 std::vector<Renderable *> AnchorLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.element.get(); })
@@ -20,10 +20,10 @@ std::vector<Renderable *> AnchorLayout::getRenderables() {
 }
 
 void AnchorLayout::setChildPosition(const std::string &childName, Position position) {
-  if (auto child = findIf(children | ranges::views::addressof,
+  if (auto foundChild = findIf(children | ranges::views::addressof,
                           [childName](auto child) { return child->element->getName() == childName; });
-      child.has_value()) {
-    (*child)->positionable->setPosition(position);
+      foundChild.has_value()) {
+    (*foundChild)->positionable->setPosition(position);
   }
 }
 

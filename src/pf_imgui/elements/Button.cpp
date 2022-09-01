@@ -9,8 +9,8 @@
 
 namespace pf::ui::ig {
 
-ButtonBase::ButtonBase(const std::string &name, Repeatable isRepeatable)
-    : ItemElement(name), repeatable(isRepeatable == Repeatable::Yes) {}
+ButtonBase::ButtonBase(const std::string &elementName, Repeatable isRepeatable)
+    : ItemElement(elementName), repeatable(isRepeatable == Repeatable::Yes) {}
 
 bool ButtonBase::isRepeatable() const { return repeatable; }
 
@@ -40,8 +40,8 @@ Button::Button(Button::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       Resizable(config.size), label(std::string{config.label.value}) {}
 
-Button::Button(const std::string &name, const std::string &label, const Size &s, Repeatable isRepeatable)
-    : ButtonBase(name, isRepeatable), Resizable(s), label(label) {}
+Button::Button(const std::string &elementName, const std::string &labelText, const Size &s, Repeatable isRepeatable)
+    : ButtonBase(elementName, isRepeatable), Resizable(s), label(labelText) {}
 
 void Button::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -55,8 +55,8 @@ SmallButton::SmallButton(SmallButton::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       label(std::string{config.label.value}) {}
 
-SmallButton::SmallButton(const std::string &name, const std::string &label, Repeatable isRepeatable)
-    : ButtonBase(name, isRepeatable), label(label) {}
+SmallButton::SmallButton(const std::string &elementName, const std::string &labelText, Repeatable isRepeatable)
+    : ButtonBase(elementName, isRepeatable), label(labelText) {}
 
 void SmallButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -70,8 +70,8 @@ ArrowButton::ArrowButton(ArrowButton::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       dir(config.direction) {}
 
-ArrowButton::ArrowButton(const std::string &name, ArrowButton::Dir direction, Repeatable isRepeatable)
-    : ButtonBase(name, isRepeatable), dir(direction) {}
+ArrowButton::ArrowButton(const std::string &elementName, ArrowButton::Dir direction, Repeatable isRepeatable)
+    : ButtonBase(elementName, isRepeatable), dir(direction) {}
 
 void ArrowButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -84,8 +84,8 @@ ImageButton::ImageButton(ImageButton::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       Resizable(config.size), texture(std::move(config.texture)) {}
 
-ImageButton::ImageButton(const std::string &name, std::shared_ptr<Texture> tex, Size s, Repeatable isRepeatable)
-    : ButtonBase(name, isRepeatable), Resizable(s), texture(std::move(tex)) {}
+ImageButton::ImageButton(const std::string &elementName, std::shared_ptr<Texture> tex, Size s, Repeatable isRepeatable)
+    : ButtonBase(elementName, isRepeatable), Resizable(s), texture(std::move(tex)) {}
 
 void ImageButton::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
   uvLeftTop = leftTop;

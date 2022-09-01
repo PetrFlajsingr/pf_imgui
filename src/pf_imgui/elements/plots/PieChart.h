@@ -12,7 +12,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <utility>
@@ -34,7 +33,7 @@ struct PF_IMGUI_EXPORT PieChartSample {
  *
  * Each sample shows as a percentage in the sum of all sample values.
  */
-class PF_IMGUI_EXPORT PieChart : public ElementWithID, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT PieChart : public ElementWithID, public Resizable {
  public:
   /**
    * @brief Struct for construction of PieChart.
@@ -52,11 +51,11 @@ class PF_IMGUI_EXPORT PieChart : public ElementWithID, public Labellable, public
   explicit PieChart(Config &&config);
   /**
    * Construct PieChart.
-   * @param name ID of the chart
-   * @param label text rendered above the chart
-   * @param size size on display
+   * @param elementName ID of the chart
+   * @param labelText text rendered above the chart
+   * @param initialSize size on display
    */
-  PieChart(const std::string &name, const std::string &label, const Size &size);
+  PieChart(const std::string &elementName, const std::string &labelText, const Size &initialSize);
   /**
    * Add a new sample to the graph.
    * @param sample sample to be added
@@ -66,6 +65,8 @@ class PF_IMGUI_EXPORT PieChart : public ElementWithID, public Labellable, public
     data.emplace_back(sample.label, static_cast<double>(sample.value));
     dataChanged = true;
   }
+
+  Label label;
 
  protected:
   void renderImpl() override;

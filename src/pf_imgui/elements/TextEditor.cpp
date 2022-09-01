@@ -111,8 +111,8 @@ TextEditor::TextEditor(TextEditor::Config &&config)
   editor.SetText(config.value);
 }
 
-TextEditor::TextEditor(const std::string &name, const std::string &value, Size s, Persistent persistent)
-    : ElementWithID(name), Savable(persistent), Resizable(s) {
+TextEditor::TextEditor(const std::string &elementName, const std::string &value, Size s, Persistent persistent)
+    : ElementWithID(elementName), Savable(persistent), Resizable(s) {
   editor.SetText(value);
 }
 

@@ -67,12 +67,12 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
    * Construct InputText.
    * @param elementName ID of the input
    * @param label text rendered next to the input
-   * @param text starting text in the input
+   * @param initialValue starting text in the input
    * @param textInputType singleline or multiline support
    * @param filters character filters for input
    * @param persistent enable state saving to disk
    */
-  InputText(const std::string &elementName, std::string label, const std::string &value = "",
+  InputText(const std::string &elementName, std::string label, const std::string &initialValue = "",
             TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
             TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
             Persistent persistent = Persistent::No);

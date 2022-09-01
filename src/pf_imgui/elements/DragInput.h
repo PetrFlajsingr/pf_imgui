@@ -18,7 +18,6 @@
 #include <pf_imgui/elements/details/DragInputDetails.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
@@ -44,7 +43,6 @@ namespace pf::ui::ig {
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 class PF_IMGUI_EXPORT DragInput : public ItemElement,
                                   public ValueObservable<T>,
-                                  public Labellable,
                                   public Savable,
                                   public DragSource<T>,
                                   public DropTarget<T> {
@@ -130,6 +128,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -144,16 +143,16 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(DragInput::Config &&config)
     : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
-      Labellable(std::string{config.label.value}),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      speed(config.speed), min(config.min), max(config.max), format(std::move(config.format)) {}
+      label(std::string{config.label.value}), speed(config.speed), min(config.min), max(config.max),
+      format(std::move(config.format)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(const std::string &elementName, const std::string &label, drag_details::UnderlyingType<T> speed,
                         drag_details::UnderlyingType<T> min, drag_details::UnderlyingType<T> max, T value,
                         Persistent persistent, std::string format)
-    : ItemElement(elementName), ValueObservable<T>(value), Labellable(label),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), speed(speed), min(min), max(max),
+    : ItemElement(elementName), ValueObservable<T>(value),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(label), speed(speed), min(min), max(max),
       format(std::move(format)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
@@ -217,20 +216,20 @@ void DragInput<T>::renderImpl() {
   }
 
   if constexpr (OneOf<T, int, float>) {
-    valueChanged = ImGui::DragScalar(getLabel().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
+    valueChanged = ImGui::DragScalar(label.get().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
                                      format.c_str(), flags);
   }
   if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::DragScalarN(getLabel().c_str(), dataType, glm::value_ptr(*address), T::length(),
+    valueChanged = ImGui::DragScalarN(label.get().c_str(), dataType, glm::value_ptr(*address), T::length(),
                                       static_cast<float>(speed), &min, &max, format.c_str(), flags);
   }
 
   if constexpr (std::same_as<T, math::Range<int>>) {
-    valueChanged = ImGui::DragIntRange2(getLabel().c_str(), &address->start, &address->end, static_cast<float>(speed),
+    valueChanged = ImGui::DragIntRange2(label.get().c_str(), &address->start, &address->end, static_cast<float>(speed),
                                         min, max, format.c_str(), nullptr, flags);
   }
   if constexpr (std::same_as<T, math::Range<float>>) {
-    valueChanged = ImGui::DragFloatRange2(getLabel().c_str(), &address->start, &address->end, speed, min, max,
+    valueChanged = ImGui::DragFloatRange2(label.get().c_str(), &address->start, &address->end, speed, min, max,
                                           format.c_str(), nullptr, flags);
   }
   DragSource<T>::drag(ValueObservable<T>::getValue());

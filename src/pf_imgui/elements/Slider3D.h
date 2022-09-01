@@ -15,7 +15,6 @@
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -27,7 +26,6 @@ namespace pf::ui::ig {
  */
 template<OneOf<float> T>
 class PF_IMGUI_EXPORT Slider3D : public ItemElement,
-                                 public Labellable,
                                  public ValueObservable<glm::vec3>,
                                  public Savable,
                                  public DragSource<glm::vec3>,
@@ -75,6 +73,7 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -87,18 +86,18 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
 
 template<OneOf<float> T>
 Slider3D<T>::Slider3D(Slider3D::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Labellable(std::string{config.label.value}), ValueObservable<glm::vec3>(config.value),
+    : ItemElement(std::string{config.name.value}), ValueObservable<glm::vec3>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<glm::vec3>(false),
-      DropTarget<glm::vec3>(false), Resizable(config.size), extremesX(config.min.value.x, config.max.value.x),
-      extremesY(config.min.value.y, config.max.value.y), extremesZ(config.min.value.z, config.max.value.z) {}
+      DropTarget<glm::vec3>(false), Resizable(config.size), label(std::string{config.label.value}),
+      extremesX(config.min.value.x, config.max.value.x), extremesY(config.min.value.y, config.max.value.y),
+      extremesZ(config.min.value.z, config.max.value.z) {}
 
 template<OneOf<float> T>
 Slider3D<T>::Slider3D(const std::string &elementName, const std::string &label, const glm::vec2 &minMaxX,
                       const glm::vec2 &minMaxY, const glm::vec2 &minMaxZ, const glm::vec3 &value, Size size,
                       Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable<glm::vec3>(value),
-      Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size),
+    : ItemElement(elementName), ValueObservable<glm::vec3>(value),
+      Savable(persistent), DragSource<glm::vec3>(false), DropTarget<glm::vec3>(false), Resizable(size), label(label),
       extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
 
 template<OneOf<float> T>
@@ -127,7 +126,7 @@ void Slider3D<T>::renderImpl() {
   const auto oldValue = *address;
   if constexpr (std::same_as<T, float>) {
     valueChanged =
-        ImWidgets::SliderScalar3D(getLabel().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
+        ImWidgets::SliderScalar3D(label.get().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
                                   extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, static_cast<ImVec2>(getSize()));
   }
   DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());

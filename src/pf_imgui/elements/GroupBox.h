@@ -39,11 +39,11 @@ class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer, 
   explicit GroupBox(Config &&config);
   /**
    * Construct GroupBox.
-   * @param name unique name of the element
-   * @param label label rendered on the top of the GroupBox
+   * @param elementName unique name of the element
+   * @param labelValue label rendered on the top of the GroupBox
    * @param s size of the GroupBox
    */
-  GroupBox(const std::string &name, const std::string &label, Size s);
+  GroupBox(const std::string &elementName, const std::string &labelValue, Size s);
 
   Label label;
 

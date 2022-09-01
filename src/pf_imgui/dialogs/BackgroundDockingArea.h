@@ -22,9 +22,9 @@ class BackgroundDockingArea : public Renderable {
  public:
   /**
    * Construct BackgroundDockingArea.
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    */
-  explicit BackgroundDockingArea(const std::string &name);
+  explicit BackgroundDockingArea(const std::string &elementName);
 
   /**
    * Get inner DockSpace. Can be used for building.

@@ -18,9 +18,9 @@ GridLayout::GridLayout(GridLayout::Config &&config)
   std::ranges::fill(cells, nullptr);
 }
 
-GridLayout::GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
+GridLayout::GridLayout(const std::string &elementName, const Size &initialSize, uint32_t gridWidth, uint32_t gridHeight,
                        ShowBorder showBorder)
-    : Layout(elementName, size, showBorder), width(width), height(height) {
+    : Layout(elementName, initialSize, showBorder), width(gridWidth), height(gridHeight) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
   std::ranges::fill(cells, nullptr);

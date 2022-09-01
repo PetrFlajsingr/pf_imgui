@@ -19,7 +19,7 @@ namespace pf::ui::ig {
  */
 struct PF_IMGUI_EXPORT Position {
   Position() = default;
-  Position(float x, float y);
+  Position(float initialX, float initialY);
   explicit Position(ImVec2 pos);
 
   [[nodiscard]] static Position LeftTop();

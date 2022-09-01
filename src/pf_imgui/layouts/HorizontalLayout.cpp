@@ -11,8 +11,9 @@ HorizontalLayout::HorizontalLayout(HorizontalLayout::Config &&config)
     : LinearLayout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       alignment(config.align) {}
 
-HorizontalLayout::HorizontalLayout(const std::string &name, Size size, HorizontalAlign align, ShowBorder showBorder)
-    : LinearLayout(name, size, showBorder), alignment(align) {}
+HorizontalLayout::HorizontalLayout(const std::string &elementName, Size initialSize, HorizontalAlign align,
+                                   ShowBorder showBorder)
+    : LinearLayout(elementName, initialSize, showBorder), alignment(align) {}
 
 void HorizontalLayout::renderImpl() {
   const auto flags =

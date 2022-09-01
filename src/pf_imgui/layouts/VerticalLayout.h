@@ -37,12 +37,12 @@ class VerticalLayout : public LinearLayout {
 
   /**
    * Construct HorizontalLayout
-   * @param name unique name of the element
-   * @param size size of the layout
+   * @param elementName unique name of the element
+   * @param initialSize size of the layout
    * @param align element alignment
    * @param showBorder render border around layout's area
    */
-  VerticalLayout(const std::string &name, Size size, VerticalAlign align = VerticalAlign::Left,
+  VerticalLayout(const std::string &elementName, Size initialSize, VerticalAlign align = VerticalAlign::Left,
                  ShowBorder showBorder = ShowBorder::No);
 
  protected:

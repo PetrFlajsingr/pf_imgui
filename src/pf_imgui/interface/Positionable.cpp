@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-Positionable::Positionable(const Position &position) : position(position) {}
+Positionable::Positionable(const Position &initialPosition) : position(initialPosition) {}
 
 Position Positionable::getPosition() const { return position; }
 

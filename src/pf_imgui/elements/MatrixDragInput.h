@@ -12,7 +12,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/elements/details/DragInputDetails.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
@@ -25,7 +24,7 @@ namespace pf::ui::ig {
  * @tparam M Matrix type
  */
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
-class MatrixDragInput : public ItemElement, public ValueObservable<M>, public Labellable, public Savable {
+class MatrixDragInput : public ItemElement, public ValueObservable<M>, public Savable {
  public:
   using ParamType = drag_details::UnderlyingType<typename M::col_type>;
   constexpr static auto Height = M::length();
@@ -70,6 +69,7 @@ class MatrixDragInput : public ItemElement, public ValueObservable<M>, public La
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -90,8 +90,8 @@ template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(const std::string &name, const std::string &label,
                                     MatrixDragInput::ParamType changeSpeed, MatrixDragInput::ParamType minVal,
                                     MatrixDragInput::ParamType maxVal, M initValue, Persistent persistent)
-    : ItemElement(name), ValueObservable<M>(initValue), Labellable(label), Savable(persistent), min(minVal),
-      max(maxVal), speed(changeSpeed) {
+    : ItemElement(name), ValueObservable<M>(initValue), Savable(persistent), label(label), min(minVal), max(maxVal),
+      speed(changeSpeed) {
   for (std::size_t i = 0; i < Height - 1; ++i) { dragNames[i] = std::string{"##drag_"} + std::to_string(i); }
 }
 
@@ -119,7 +119,7 @@ void MatrixDragInput<M>::renderImpl() {
   ImGui::BeginGroup();
   if (ImGui::BeginTable("lay", 1)) {
     auto valueChanged = false;
-    const auto firstDragName = getLabel() + "##drag";
+    const auto firstDragName = label.get() + "##drag";  // TODO: cache this
     for (typename M::length_type row = 0; row < Height; ++row) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();

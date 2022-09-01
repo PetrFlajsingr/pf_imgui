@@ -15,7 +15,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -27,7 +26,6 @@ namespace pf::ui::ig {
  * @brief Allows for selection of a 2D area - axis aligned.
  */
 class PF_IMGUI_EXPORT Range2D : public ItemElement,
-                                public Labellable,
                                 public ValueObservable<math::Range<glm::vec2>>,
                                 public Resizable,
                                 public Savable,
@@ -55,15 +53,15 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
   /**
    * Construct Range2D.
    * @param elementName ID of the element
-   * @param label text rendered next to the element
+   * @param labelText text rendered next to the element
    * @param minRange min allowed value
    * @param maxRange max allowed value
-   * @param value starting value
+   * @param initialValue starting value
    * @param s size on screen
    * @param persistent enable/disable state saving to disk
    */
-  Range2D(const std::string &elementName, const std::string &label, const glm::vec2 &minRange,
-          const glm::vec2 &maxRange, const math::Range<glm::vec2> &value = math::Range<glm::vec2>{},
+  Range2D(const std::string &elementName, const std::string &labelText, const glm::vec2 &minRange,
+          const glm::vec2 &maxRange, const math::Range<glm::vec2> &initialValue = math::Range<glm::vec2>{},
           const Size &s = Size::Auto(), Persistent persistent = Persistent::No);
 
   /**
@@ -95,6 +93,7 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

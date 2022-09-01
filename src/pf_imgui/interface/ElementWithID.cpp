@@ -9,7 +9,7 @@
 
 namespace pf::ui::ig {
 
-ElementWithID::ElementWithID(const std::string &name) : Element(name) {}//-V730
+ElementWithID::ElementWithID(const std::string &elementName) : Element(elementName) {}//-V730
 
 ImGuiID ElementWithID::getId() const { return id; }
 

@@ -45,9 +45,7 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
   /**
    * Construct CustomItemBox
    * @param elementName id of the element
-   * @param label text rendered next to the element
    * @param rowFactory factory for row creation
-   * @param s size of the element
    */
   CustomItemBox(const std::string &elementName, CustomItemBoxFactory<T, R> auto &&rowFactory);
 

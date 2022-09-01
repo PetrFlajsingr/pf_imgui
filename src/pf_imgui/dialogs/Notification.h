@@ -7,10 +7,10 @@
 
 #include <chrono>
 #include <pf_imgui/Font.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
 
@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer 
   constexpr static inline float PADDING_MESSAGE_Y = 10.f;
 
  public:
-  Notification(const std::string &name, const std::string &label,
+  Notification(const std::string &elementName, const std::string &labelText,
                std::chrono::milliseconds duration = DEFAULT_DURATION);
 
   void setIcon(const char *icon, Font newIconFont = Font::Default());

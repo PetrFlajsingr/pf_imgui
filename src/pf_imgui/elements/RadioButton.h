@@ -40,10 +40,10 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueObservable<b
   /**
    * Construct RadioButton.
    * @param elementName ID of the button
-   * @param label text rendered next to the button
-   * @param value starting value of the button
+   * @param labelText text rendered next to the button
+   * @param initialValue starting value of the button
    */
-  RadioButton(const std::string &elementName, const std::string &label, bool value = false);
+  RadioButton(const std::string &elementName, const std::string &labelText, bool initialValue = false);
 
   /**
    * Check if the button is selected.

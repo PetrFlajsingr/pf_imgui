@@ -10,13 +10,13 @@
 namespace pf::ui::ig {
 
 TabButton::TabButton(TabButton::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}), flags(*config.mods) {}
+    : ItemElement(std::string{config.name.value}), label(std::string{config.label.value}), flags(*config.mods) {}
 
-TabButton::TabButton(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods)
-    : ItemElement(elementName), Labellable(label), flags(*mods) {}
+TabButton::TabButton(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods)
+    : ItemElement(elementName), label(labelText), flags(*mods) {}
 
 void TabButton::renderImpl() {
-  if (ImGui::TabItemButton(getLabel().c_str(), flags)) { notifyOnClick(); }
+  if (ImGui::TabItemButton(label.get().c_str(), flags)) { notifyOnClick(); }
 }
 
 void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
@@ -25,11 +25,11 @@ Tab::Tab(Tab::Config &&config)
     : TabButton(std::string{config.name.value}, std::string{config.label.value}, config.mods),
       open(config.closeable ? new bool{true} : nullptr) {}
 
-Tab::Tab(const std::string &elementName, const std::string &label, const Flags<TabMod> &mods, bool closeable)
-    : TabButton(elementName, label, mods), open(closeable ? new bool{true} : nullptr) {}
+Tab::Tab(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods, bool closeable)
+    : TabButton(elementName, labelText, mods), open(closeable ? new bool{true} : nullptr) {}
 
-Tab::Tab(const std::string &elementName, const std::string &label, bool closeable)
-    : Tab(elementName, label, Flags<TabMod>{}, closeable) {}
+Tab::Tab(const std::string &elementName, const std::string &labelText, bool closeable)
+    : Tab(elementName, labelText, Flags<TabMod>{}, closeable) {}
 
 Tab::~Tab() { delete open; }
 
@@ -41,7 +41,7 @@ void Tab::renderImpl() {
   const auto wasOpen = isOpen();
   const auto wasSelected = selected;
   const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
-  selected = ImGui::BeginTabItem(getLabel().c_str(), open, frameFlags);
+  selected = ImGui::BeginTabItem(label.get().c_str(), open, frameFlags);
   if (selected) {
     RAII end{ImGui::EndTabItem};
     std::ranges::for_each(getChildren(), &Renderable::render);

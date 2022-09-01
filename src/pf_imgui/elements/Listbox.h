@@ -62,7 +62,6 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   using CustomListboxBase::addItems;
   using CustomListboxBase::clearFilter;
   using CustomListboxBase::getItems;
-  using CustomListboxBase::getLabel;
   using CustomListboxBase::getName;
   using CustomListboxBase::getSize;
   using CustomListboxBase::removeItem;
@@ -84,8 +83,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param config construction args @see Listbox::Config
    */
   explicit Listbox(Config &&config)
-    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-  ;
+    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
   /**
    * Construct Listbox.
    * @param elementName ID of the element
@@ -96,8 +94,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    */
   Listbox(const std::string &elementName, const std::string &label, Size s = Size::Auto(),
           std::optional<int> selectedIdx = std::nullopt, Persistent persistent = Persistent::No)
-    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-  ;
+    requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
 
   /**
    * Add item to the end of the list.
@@ -117,8 +114,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param itemToSelect item to select
    */
   void setSelectedItem(const T &itemToSelect)
-    requires(!std::same_as<T, std::string>)
-  ;
+    requires(!std::same_as<T, std::string>);
 
   /**
    * Set selected item by name. If no such item is found nothing happens.
@@ -191,7 +187,7 @@ void Listbox<T>::setSelectedItem(const T &itemToSelect)
 template<ToStringConvertible T>
 void Listbox<T>::setSelectedItem(const std::string &itemAsString) {
   if (const auto iter = std::ranges::find_if(
-          filteredItems, [itemAsString](const auto &item) { return item->second->getLabel() == itemAsString; });
+          filteredItems, [itemAsString](const auto &item) { return item->second->label.get() == itemAsString; });
       iter != filteredItems.end()) {
     const auto index = std::ranges::distance(filteredItems.begin(), iter);
     setSelectedItemByIndex(index);
@@ -215,7 +211,7 @@ toml::table Listbox<T>::toToml() const {
   auto result = toml::table{};
   if (selectedItemIndex.has_value()) {
     const auto selectedItem = filteredItems[*selectedItemIndex];
-    result.insert_or_assign("selected", selectedItem->second->getLabel());
+    result.insert_or_assign("selected", selectedItem->second->label.get());
   }
   return result;
 }
@@ -234,7 +230,7 @@ void Listbox<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = this->color.applyScoped();
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
-  if (ImGui::BeginListBox(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
+  if (ImGui::BeginListBox(this->label.get().c_str(), static_cast<ImVec2>(getSize()))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
       const auto &[idx, item] = itemIdx;

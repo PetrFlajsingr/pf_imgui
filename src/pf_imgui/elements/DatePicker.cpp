@@ -17,12 +17,13 @@ DatePicker::DatePicker(DatePicker::Config &&config)
   rawTime->tm_year = static_cast<int>(config.value.year()) - 1900;
 }
 
-DatePicker::DatePicker(const std::string &name, const std::string &label, std::chrono::year_month_day value,
+DatePicker::DatePicker(const std::string &elementName, const std::string &labelText, std::chrono::year_month_day initialValue,
                        Persistent persistent)
-    : ItemElement(name), ValueObservable(value), Savable(persistent), label(label), rawTime(std::make_unique<tm>()) {
-  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(value.day()));
-  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(value.month()) - 1);
-  rawTime->tm_year = static_cast<int>(value.year()) - 1900;
+    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText),
+      rawTime(std::make_unique<tm>()) {
+  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(initialValue.day()));
+  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(initialValue.month()) - 1);
+  rawTime->tm_year = static_cast<int>(initialValue.year()) - 1900;
 }
 
 void DatePicker::setValue(const std::chrono::year_month_day &newValue) {

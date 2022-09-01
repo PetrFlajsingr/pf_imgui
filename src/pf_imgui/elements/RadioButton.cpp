@@ -11,8 +11,8 @@ RadioButton::RadioButton(RadioButton::Config &&config)
     : ItemElement(std::string{config.name.value}), ValueObservable(config.selected),
       label(std::string{config.label.value}) {}
 
-RadioButton::RadioButton(const std::string &elementName, const std::string &label, bool value)
-    : ItemElement(elementName), ValueObservable(value), label(label) {}
+RadioButton::RadioButton(const std::string &elementName, const std::string &labelText, bool initialValue)
+    : ItemElement(elementName), ValueObservable(initialValue), label(labelText) {}
 
 void RadioButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

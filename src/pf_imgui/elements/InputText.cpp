@@ -22,14 +22,14 @@ InputText::InputText(InputText::Config &&config)
   if (config.eventTrigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
 }
 
-InputText::InputText(const std::string &elementName, std::string label, const std::string &value,
+InputText::InputText(const std::string &elementName, std::string labelText, const std::string &initialValue,
                      TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
                      const Flags<TextFilter> &filters, Persistent persistent)
     : ItemElement(elementName), ValueObservable(""),
-      Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false), label(std::move(label)),
-      text(value), buffer(std::make_unique<char[]>(inputLengthLimit + 1)), bufferLength(inputLengthLimit),
+      Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false), label(std::move(labelText)),
+      text(initialValue), buffer(std::make_unique<char[]>(inputLengthLimit + 1)), bufferLength(inputLengthLimit),
       inputType(textInputType) {
-  setTextInner(value);
+  setTextInner(initialValue);
   setValueInner(text);
   flags |= static_cast<ImGuiInputTextFlags>(*filters);
   if (trigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }

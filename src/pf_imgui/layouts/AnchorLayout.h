@@ -49,11 +49,11 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
   /**
    * Construct AnchorLayout.
    * @param elementName ID of the layout
-   * @param size size of the layout
+   * @param initialSize size of the layout
    * @param allowCollapse enable collapse button
    * @param showBorder draw border around the layout
    */
-  AnchorLayout(const std::string &elementName, const Size &size, ShowBorder showBorder = ShowBorder::No);
+  AnchorLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
   /**
     * Create a child and append it to the end of children.
     *
@@ -75,21 +75,21 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
     std::function<void(Width)> addToWidth = [](Width) {};
     if constexpr (std::derived_from<T, Resizable>) {
       addToWidth = [ptr = child.get()](float d) {
-        auto size = ptr->getSize();
-        size.width = std::clamp(size.width + d, 0.f, std::numeric_limits<float>::max());
-        ptr->setSize(size);
+        auto childSize = ptr->getSize();
+        childSize.width = std::clamp(childSize.width + d, 0.f, std::numeric_limits<float>::max());
+        ptr->setSize(childSize);
       };
       addToHeight = [ptr = child.get()](Height d) {
-        auto size = ptr->getSize();
-        size.height = size.height + d;
-        if (size.height < Height{0}) { size.height = 0; }
-        ptr->setSize(size);
+        auto childSize = ptr->getSize();
+        childSize.height = childSize.height + d;
+        if (childSize.height < Height{0}) { childSize.height = 0; }
+        ptr->setSize(childSize);
       };
     } else if constexpr (std::derived_from<T, WidthDecorator<T>>) {
       addToWidth = [ptr = child.get()](Width d) {
-        auto width = ptr->getWidth() + d;
-        if (width < Width{0}) { width = 0; }
-        ptr->setWidth(width);
+        auto childWidth = ptr->getWidth() + d;
+        if (childWidth < Width{0}) { childWidth = 0; }
+        ptr->setWidth(childWidth);
       };
     }
     children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr), static_cast<Anchor>(*anchors),

@@ -29,9 +29,10 @@ class PF_IMGUI_EXPORT Layout : public ElementWithID, public Resizable, public Re
   /**
    * Construct a layout.
    * @param elementName ID of the element
+   * @param initialSize size of the layout
    * @param showBorder when allowed a border is drawn at the edges of the layout area
    */
-  explicit Layout(const std::string &elementName, const Size &size, ShowBorder showBorder);
+  explicit Layout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder);
 
   /**
    * Check if border is drawn.

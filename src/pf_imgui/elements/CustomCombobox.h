@@ -91,7 +91,7 @@ template<typename T, std::derived_from<Renderable> R>
 CustomCombobox<T, R>::CustomCombobox(const std::string &elementName, const std::string &label,
                                      CustomItemBoxFactory<T, R> auto &&rowFactory, std::string prevValue,
                                      ComboBoxCount showItemCount)
-    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(label),
       flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
   if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
 }

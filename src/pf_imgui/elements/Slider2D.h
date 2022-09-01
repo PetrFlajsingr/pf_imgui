@@ -14,7 +14,6 @@
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
@@ -37,7 +36,6 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
  */
 template<OneOf<int, float> T>
 class PF_IMGUI_EXPORT Slider2D : public ItemElement,
-                                 public Labellable,
                                  public ValueObservable<details::Slider2DStorageType<T>>,
                                  public Savable,
                                  public DragSource<details::Slider2DStorageType<T>>,
@@ -83,6 +81,7 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -94,18 +93,17 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(Slider2D::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Labellable(std::string{config.label.value}), ValueObservable<StorageType>(config.value),
+    : ItemElement(std::string{config.name.value}), ValueObservable<StorageType>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<StorageType>(false),
-      DropTarget<StorageType>(false), Resizable(config.size), extremesX(config.min.value.x, config.max.value.x),
-      extremesY(config.min.value.y, config.max.value.y) {}
+      DropTarget<StorageType>(false), Resizable(config.size), label(std::string{config.label.value}),
+      extremesX(config.min.value.x, config.max.value.x), extremesY(config.min.value.y, config.max.value.y) {}
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(const std::string &elementName, const std::string &label, Slider2D::StorageType minMaxX,
                       Slider2D::StorageType minMaxY, Slider2D::StorageType value, Size size, Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable<StorageType>(value),
+    : ItemElement(elementName), ValueObservable<StorageType>(value),
       Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(size),
-      extremesX(minMaxX), extremesY(minMaxY) {}
+      label(label), extremesX(minMaxX), extremesY(minMaxY) {}
 
 template<OneOf<int, float> T>
 toml::table Slider2D<T>::toToml() const {
@@ -132,11 +130,11 @@ void Slider2D<T>::renderImpl() {
   auto address = ValueObservable<StorageType>::getValueAddress();
   const auto oldValue = *address;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImWidgets::Slider2DInt(getLabel().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
+    valueChanged = ImWidgets::Slider2DInt(label.get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
                                           &extremesY.x, &extremesY.y, static_cast<ImVec2>(getSize()));
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImWidgets::Slider2DFloat(getLabel().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
+    valueChanged = ImWidgets::Slider2DFloat(label.get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
                                             extremesY.x, extremesY.y, static_cast<ImVec2>(getSize()));
   }
   DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());
