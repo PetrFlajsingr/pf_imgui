@@ -32,8 +32,14 @@ class PF_IMGUI_EXPORT WrapLayout : public LinearLayout {
    * @param config construction args @see WrapLayout::Config
    */
   explicit WrapLayout(Config &&config);
-
-  WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
+  /**
+   * Construct WrapLayout
+   * @param elementName unique name of the element
+   * @param layoutDirection direction of the layout flow
+   * @param initialSize size of the layout
+   * @param showBorder enable/disable border draw
+   */
+  WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &initialSize,
              ShowBorder showBorder = ShowBorder::No);
 
  protected:

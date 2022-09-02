@@ -43,12 +43,12 @@ class PF_IMGUI_EXPORT GridLayout : public Layout {
   /**
    * Construct GridLayout.
    * @param elementName ID of the layout
-   * @param size size of the layout
-   * @param width width in cells - amount of cells in each row
-   * @param height height in cells - amount of cells in each column
+   * @param initialSize size of the layout
+   * @param gridWidth width in cells - amount of cells in each row
+   * @param gridHeight height in cells - amount of cells in each column
    * @param showBorder draw border around the layout
    */
-  GridLayout(const std::string &elementName, const Size &size, uint32_t width, uint32_t height,
+  GridLayout(const std::string &elementName, const Size &initialSize, uint32_t gridWidth, uint32_t gridHeight,
              ShowBorder showBorder = ShowBorder::No);
 
   /**
@@ -65,14 +65,14 @@ class PF_IMGUI_EXPORT GridLayout : public Layout {
    * @tparam Args constructor argument types for T
    * @param column column of the selected cell
    * @param row row of the selected cell
-   * @param name ID of the newly created layout
+   * @param layoutName ID of the newly created layout
    * @param args arguments passed to Ts constructor
    * @return reference to the newly created Layout
    */
   template<typename T, typename... Args>
     requires std::derived_from<T, Layout> && std::constructible_from<T, std::string, Args...>
-  T &createLayout(uint32_t column, uint32_t row, std::string name, Args &&...args) {
-    auto child = std::make_unique<T>(name, std::forward<Args>(args)...);
+  T &createLayout(uint32_t column, uint32_t row, std::string layoutName, Args &&...args) {
+    auto child = std::make_unique<T>(layoutName, std::forward<Args>(args)...);
     const auto ptr = child.get();
     const auto index = indexForCell(column, row);
     cells[index] = std::move(child);

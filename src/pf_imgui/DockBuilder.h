@@ -38,7 +38,7 @@ class SubDockBuilder {
   friend class DockBuilder;
 
  protected:
-  explicit SubDockBuilder(Direction direction);
+  explicit SubDockBuilder(Direction dir);
 
  public:
   SubDockBuilder(const SubDockBuilder &) = delete;
@@ -84,7 +84,7 @@ class HorizontalSplitBuilder : public SubDockBuilder {
  protected:
   friend class DockBuilder;
   friend class SubDockBuilder;
-  explicit HorizontalSplitBuilder(Direction direction) : SubDockBuilder(direction) {}
+  explicit HorizontalSplitBuilder(Direction dir) : SubDockBuilder(dir) {}
 
  public:
   /**
@@ -98,7 +98,7 @@ class VerticalSplitBuilder : public SubDockBuilder {
  protected:
   friend class DockBuilder;
   friend class SubDockBuilder;
-  explicit VerticalSplitBuilder(Direction direction) : SubDockBuilder(direction) {}
+  explicit VerticalSplitBuilder(Direction dir) : SubDockBuilder(dir) {}
 
  public:
   /**

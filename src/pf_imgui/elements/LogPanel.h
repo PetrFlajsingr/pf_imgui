@@ -15,9 +15,9 @@
 #include <pf_imgui/Color.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/details/CustomIconButtonImpls.h>
+#include <pf_imgui/elements/details/TextUtils.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Resizable.h>
-#include <pf_imgui/elements/details/TextUtils.h>
 #include <ringbuffer.hpp>
 #include <sstream>
 

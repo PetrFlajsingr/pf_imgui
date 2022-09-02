@@ -73,10 +73,9 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
  public:
   /**
    * Construct ImGuiInterface with given flags.
-   * @param flags
-   * @param tomlConfig config containing data of Savable elements
+   * @param configuration config containing data of Savable elements
    */
-  explicit ImGuiInterface(ImGuiConfig config);
+  explicit ImGuiInterface(ImGuiConfig configuration);
 
   ~ImGuiInterface() override;
 
@@ -241,8 +240,8 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   void removeBackgroundDockingArea();
   // TODO: change this to something not insane
   template<typename... Args>
-    requires(std::constructible_from<ViewportOverlayGizmo, Args...>) [
-        [nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
+    requires(std::constructible_from<ViewportOverlayGizmo, Args...>)
+  [[nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
     if (viewportGizmo == nullptr) {
       viewportGizmo = std::make_unique<ViewportOverlayGizmo>(std::forward<Args>(args)...);
     }

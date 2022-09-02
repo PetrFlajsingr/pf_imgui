@@ -7,10 +7,11 @@
 
 namespace pf::ui::ig {
 
-OverlayGizmoBase::OverlayGizmoBase(const glm::mat4 &value, ViewportGizmoMode mode, ViewportGizmoSpace space,
-                                   const glm::mat4 &view, const glm::mat4 &projection, bool isProjectionOrthographic)
-    : ValueObservable(value), mode(mode), space(space), view(view), projection(projection),
-      projectionOrthographic(isProjectionOrthographic) {}
+OverlayGizmoBase::OverlayGizmoBase(const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode,
+                                   ViewportGizmoSpace gizmoSpace, const glm::mat4 &initialView,
+                                   const glm::mat4 &initialProjection, bool isProjectionOrthographic)
+    : ValueObservable(initialValue), mode(gizmoMode), space(gizmoSpace), view(initialView),
+      projection(initialProjection), projectionOrthographic(isProjectionOrthographic) {}
 
 ViewportGizmoMode OverlayGizmoBase::getMode() const { return mode; }
 

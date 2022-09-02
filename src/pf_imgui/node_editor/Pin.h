@@ -11,9 +11,9 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Hoverable.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
@@ -26,7 +26,7 @@ namespace pf::ui::ig {
 /**
  * @brief A Pin to be placed inside Node. @see Node
  */
-class Pin : public Renderable, public Labellable, public Hoverable {
+class Pin : public Renderable, public Hoverable {
   friend class NodeEditor;
   friend class Node;
   /**
@@ -59,10 +59,10 @@ class Pin : public Renderable, public Labellable, public Hoverable {
   explicit Pin(Config &&config);
   /**
    * Construct Pin.
-   * @param name unique name of the element
-   * @param label text rendered next to the pin
+   * @param elementName unique name of the element
+   * @param labelText text rendered next to the pin
    */
-  Pin(const std::string &name, const std::string &label);
+  Pin(const std::string &elementName, const std::string &labelText);
 
   /**
    * Get internally used id of the pin.
@@ -203,6 +203,8 @@ class Pin : public Renderable, public Labellable, public Hoverable {
    * Remove PopupMenu of this node, no lon
    */
   void removePopupMenu();
+
+  Label label;
 
  protected:
   /**

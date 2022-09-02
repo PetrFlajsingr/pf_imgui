@@ -8,8 +8,8 @@
 
 namespace pf::ui::ig {
 
-ModalDialog::ModalDialog(const std::string &elementName, const std::string &label, Size dialogSize)
-    : Renderable(elementName), Labellable(label), Resizable(dialogSize), Positionable(Position{-1, -1}),
+ModalDialog::ModalDialog(const std::string &elementName, const std::string &labelText, Size dialogSize)
+    : Renderable(elementName), Resizable(dialogSize), Positionable(Position{-1, -1}), label(labelText),
       sizeDirty(dialogSize != Size::Auto()) {}
 
 void ModalDialog::renderImpl() {
@@ -25,8 +25,8 @@ void ModalDialog::renderImpl() {
     positionDirty = false;
     ImGui::SetNextWindowPos(static_cast<ImVec2>(getPosition()));
   }
-  if (firstRender) { ImGui::OpenPopup(getLabel().c_str()); }
-  if (ImGui::BeginPopupModal(getLabel().c_str())) {
+  if (firstRender) { ImGui::OpenPopup(label.get().c_str()); }
+  if (ImGui::BeginPopupModal(label.get().c_str())) {
     RAII endPopup{ImGui::EndPopup};
     std::ranges::for_each(getChildren(), &Renderable::render);
   } else {
@@ -48,6 +48,5 @@ void ModalDialog::setPosition(Position pos) {
   positionDirty = true;
   Positionable::setPosition(pos);
 }
-
 
 }  // namespace pf::ui::ig

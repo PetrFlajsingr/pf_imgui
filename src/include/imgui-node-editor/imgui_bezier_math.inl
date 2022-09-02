@@ -18,6 +18,10 @@
 # include "imgui_bezier_math.h"
 # include <map> // used in ImCubicBezierFixedStep
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#endif
 
 //------------------------------------------------------------------------------
 template <typename T>
@@ -670,6 +674,9 @@ inline void ImCubicBezierFixedStep(F& callback, const ImCubicBezierPoints& curve
     ImCubicBezierFixedStep(handler, &callback, curve.P0, curve.P1, curve.P2, curve.P3, step, overshoot, max_value_error, max_t_error);
 }
 
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
 
 //------------------------------------------------------------------------------
 # endif // __IMGUI_BEZIER_MATH_INL__

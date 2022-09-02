@@ -10,8 +10,9 @@ VerticalLayout::VerticalLayout(VerticalLayout::Config &&config)
     : LinearLayout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       alignment(config.align) {}
 
-VerticalLayout::VerticalLayout(const std::string &name, Size size, VerticalAlign align, ShowBorder showBorder)
-    : LinearLayout(name, size, showBorder), alignment(align) {}
+VerticalLayout::VerticalLayout(const std::string &elementName, Size initialSize, VerticalAlign align,
+                               ShowBorder showBorder)
+    : LinearLayout(elementName, initialSize, showBorder), alignment(align) {}
 
 void VerticalLayout::renderImpl() {
   const auto flags =

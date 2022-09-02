@@ -36,20 +36,21 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
    * Construct MessageDialog.
    * @param elementName ID of the dialog
    * @param title text rendered as a title
+   * @param initialSize initial size of the dialog
    * @param message message to show to the user
    * @param buttons allowed buttons, ButtonTypes must be bit masked
    * @param onDialogDone callback for buttons being pressed, If returns true then the dialog is closed
    * @param modal dialog modality
    */
-  MessageDialog(const std::string &elementName, const std::string &title, Size size, const std::string &message,
+  MessageDialog(const std::string &elementName, const std::string &title, Size initialSize, const std::string &message,
                 const Flags<MessageButtons> &buttons, std::invocable<MessageButtons> auto &&onDialogDone)
     requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
-  : MessageDialog(elementName, title, size, message, buttons) {
+  : MessageDialog(elementName, title, initialSize, message, buttons) {
     dialogDone = std::forward<decltype(onDialogDone)>(onDialogDone);
   }
 
  private:
-  MessageDialog(const std::string &elementName, const std::string &title, Size size, const std::string &message,
+  MessageDialog(const std::string &elementName, const std::string &title, Size initialSize, const std::string &message,
                 const Flags<MessageButtons> &buttons);
 
   std::function<bool(MessageButtons)> dialogDone;

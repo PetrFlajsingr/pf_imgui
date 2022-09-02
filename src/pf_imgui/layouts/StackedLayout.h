@@ -44,7 +44,7 @@ class PF_IMGUI_EXPORT StackedLayout : public Layout {
    */
   class Stack : public ElementContainer {
    public:
-    explicit Stack(StackedLayout &parent);
+    explicit Stack(StackedLayout &owner);
     void setActive();
 
    private:

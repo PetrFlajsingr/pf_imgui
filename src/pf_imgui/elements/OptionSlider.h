@@ -14,7 +14,6 @@
 #include <pf_imgui/elements/details/SliderDetails.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
@@ -26,7 +25,6 @@ namespace pf::ui::ig {
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
-                                     public Labellable,
                                      public ValueObservable<T>,
                                      public Savable,
                                      public DragSource<T>,
@@ -70,6 +68,7 @@ class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -87,9 +86,9 @@ OptionSlider<T>::OptionSlider(OptionSlider::Config &&config)
 template<ToStringConvertible T>
 OptionSlider<T>::OptionSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
                               Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable<T>(*std::ranges::begin(newValues)),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), values{std::ranges::begin(newValues),
-                                                                              std::ranges::end(newValues)},
+    : ItemElement(elementName), ValueObservable<T>(*std::ranges::begin(newValues)),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
+      label(label), values{std::ranges::begin(newValues), std::ranges::end(newValues)},
       selectedValueStr(toString(values[0])) {}
 
 template<ToStringConvertible T>
@@ -127,7 +126,7 @@ void OptionSlider<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
-  if (ImGui::SliderInt(getLabel().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),
+  if (ImGui::SliderInt(label.get().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),
                        selectedValueStr.c_str(), flags)) {
     selectedValueStr = toString(values[selectedValueIndex]);
     ValueObservable<T>::setValueAndNotifyIfChanged(values[selectedValueIndex]);

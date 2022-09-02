@@ -10,8 +10,8 @@
 
 #include <ImGuiCurveEditor.h>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/style/ColorPalette.h>
@@ -34,8 +34,8 @@ using CurvePointsView =
 struct CurvePointsViewComparator {
   [[nodiscard]] bool operator()(CurvePointsView lhs, CurvePointsView rhs) {
     return std::ranges::all_of(ranges::views::zip(lhs, rhs), [](const auto &val) {
-      const auto &[lhs, rhs] = val;
-      return lhs.x == rhs.x && lhs.y == rhs.y;
+      const auto &[lhsVal, rhsVal] = val;
+      return lhsVal.x == rhsVal.x && lhsVal.y == rhsVal.y;
     });
   }
 };
@@ -45,7 +45,6 @@ struct CurvePointsViewComparator {
  */
 class SimpleCurveEditor : public ElementWithID,
                           public Resizable,
-                          public Labellable,
                           public ValueObservable<CurvePointsView, CurvePointsViewComparator> {
  public:
   /**
@@ -66,12 +65,12 @@ class SimpleCurveEditor : public ElementWithID,
   explicit SimpleCurveEditor(Config &&config);
   /**
    * Construct SimpleCurveEditor
-   * @param name unique name of the element
-   * @param label label rendered as overlay over the editor
+   * @param elementName unique name of the element
+   * @param labelText label rendered as overlay over the editor
    * @param s size of the element
    * @param maxPointCount maximum allowed key points
    */
-  SimpleCurveEditor(const std::string &name, const std::string &label, Size s, std::size_t maxPointCount);
+  SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s, std::size_t maxPointCount);
 
   /**
    * Set maximum allowed key points.
@@ -98,6 +97,7 @@ class SimpleCurveEditor : public ElementWithID,
 
   FullColorPalette color;
   FullStyleOptions style;
+  Label label;
 
  protected:
   void renderImpl() override;

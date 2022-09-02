@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 
-Size::Size(Width width, Height height) : width(width), height(height) {}
+Size::Size(Width initialWidth, Height initialHeight) : width(initialWidth), height(initialHeight) {}
 
 bool Size::operator==(const Size &rhs) const { return width == rhs.width && height == rhs.height; }
 

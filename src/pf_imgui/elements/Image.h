@@ -45,9 +45,9 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
    * Construct Image.
    * @param elementName ID of the element
    * @param tex texture to render
-   * @param size size of the image on screen
+   * @param initialSize size of the image on screen
    */
-  Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size size = Size::Auto());
+  Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size initialSize = Size::Auto());
 
   /**
    * Change texture ID.

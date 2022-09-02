@@ -7,8 +7,10 @@
 
 namespace pf::ui::ig::bp {
 
-CheckboxPin::CheckboxPin(const std::string &name, const std::string &label, Color color, const Width &width)
-    : InteractablePin(name, label, color, width, Checkbox::Config{.name = uniqueId(), .label = label}) {}
+CheckboxPin::CheckboxPin(const std::string &elementName, const std::string &labelText, Color pinColor,
+                         const Width &width)
+    : InteractablePin(elementName, labelText, pinColor, width,
+                      Checkbox::Config{.name = uniqueId(), .label = labelText}) {}
 
 std::unique_ptr<CheckboxPin> CheckboxPin::ConstructFromToml(ig::Node *parent, const toml::table &src) {
   auto result = std::make_unique<CheckboxPin>("", "", Color::White, Width{0.f});

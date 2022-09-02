@@ -89,12 +89,12 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable, public 
   explicit TextEditor(Config &&config);
   /**
    * Construct TextEditor.
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    * @param value initial text
    * @param s size of the element
    * @param persistent allow state saving to disk
    */
-  TextEditor(const std::string &name, const std::string &value, Size s = Size::Auto(),
+  TextEditor(const std::string &elementName, const std::string &value, Size s = Size::Auto(),
              Persistent persistent = Persistent::No);
 
   /**

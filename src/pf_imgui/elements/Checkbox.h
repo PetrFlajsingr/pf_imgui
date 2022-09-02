@@ -9,9 +9,9 @@
 #define PF_IMGUI_ELEMENTS_CHECKBOX_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -23,7 +23,7 @@ namespace pf::ui::ig {
  *
  * A checkbox which saves it's state and provides it to listeners.
  */
-class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool>, public Labellable, public Savable {
+class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -43,11 +43,11 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
   /**
    * Construct Checkbox.
    * @param elementName ID of the checkbox
-   * @param label label drawn next to the checkbox
+   * @param labelText label drawn next to the checkbox
    * @param persistent allow value saving to disk
-   * @param value starting value
+   * @param initialValue starting value
    */
-  Checkbox(const std::string &elementName, const std::string &label, bool value = false,
+  Checkbox(const std::string &elementName, const std::string &labelText, bool initialValue = false,
            Persistent persistent = Persistent::No);
   /**
    * Set if the checkbox is selected or not.
@@ -73,6 +73,7 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueObservable<bool
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

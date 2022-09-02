@@ -12,10 +12,10 @@
 
 namespace pf::ui::ig {
 
-ImGuiInterface::ImGuiInterface(ImGuiConfig config)
+ImGuiInterface::ImGuiInterface(ImGuiConfig configuration)
     : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()),
-      io(ImGui::GetIO()), fontManager(*this), notificationManager(), config(std::move(config.config)) {
-  io.ConfigFlags = *config.flags;
+      io(ImGui::GetIO()), fontManager(*this), notificationManager(), config(std::move(configuration.config)) {
+  io.ConfigFlags = *configuration.flags;
   io.IniFilename = nullptr;
   ImGui::StyleColorsDark();
 }
@@ -122,7 +122,7 @@ void ImGuiInterface::removeWindow(const std::string &windowName) {
 }
 
 void ImGuiInterface::removeWindow(const Window &window) {
-  windows.erase(std::ranges::find(windows, &window, [](const auto &window) { return window.get(); }));
+  windows.erase(std::ranges::find(windows, &window, &std::unique_ptr<Window>::get));
 }
 
 CommandPaletteWindow &ImGuiInterface::createCommandPalette(const std::string &windowName) {
@@ -130,13 +130,15 @@ CommandPaletteWindow &ImGuiInterface::createCommandPalette(const std::string &wi
 }
 
 void ImGuiInterface::removePaletteWindow(const std::string &windowName) {
-  auto remove = std::ranges::remove(commandPalettes, windowName, [](const auto &window) { return window->getName(); });
-  commandPalettes.erase(remove.begin());  //-V539
+  const auto [rmBeg, rmEnd] =
+      std::ranges::remove(commandPalettes, windowName, [](const auto &window) { return window->getName(); });
+  commandPalettes.erase(rmBeg, rmEnd);  //-V539
 }
 
 void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
-  auto remove = std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
-  commandPalettes.erase(remove.begin(), remove.end());  //-V539
+  const auto [rmBeg, rmEnd] =
+      std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
+  commandPalettes.erase(rmBeg, rmEnd);  //-V539
 }
 
 DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
@@ -144,23 +146,21 @@ DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
 }
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
-  if (auto window = findIf(getWindows() | ranges::views::addressof,
-                           [windowName](const auto &window) { return window->getName() == windowName; });
-      window.has_value()) {
-    return **window;
-  } else {
-    return std::nullopt;
+  if (auto foundWindow = findIf(getWindows() | ranges::views::addressof,
+                                [windowName](const auto &window) { return window->getName() == windowName; });
+      foundWindow.has_value()) {
+    return **foundWindow;
   }
+  return std::nullopt;
 }
 
 std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName(const std::string &windowName) const {
-  if (auto window = findIf(getWindows() | ranges::views::addressof,
-                           [windowName](const auto &window) { return window->getName() == windowName; });
-      window.has_value()) {
-    return **window;
-  } else {
-    return std::nullopt;
+  if (auto foundWindow = findIf(getWindows() | ranges::views::addressof,
+                                [windowName](const auto &window) { return window->getName() == windowName; });
+      foundWindow.has_value()) {
+    return **foundWindow;
   }
+  return std::nullopt;
 }
 
 void ImGuiInterface::renderImpl() {

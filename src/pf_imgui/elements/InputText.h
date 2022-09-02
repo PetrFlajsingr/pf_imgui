@@ -13,9 +13,9 @@
 #include <memory>
 #include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -39,7 +39,6 @@ enum class TextTrigger { Character, Enter };
  * @todo: hint
  */
 class PF_IMGUI_EXPORT InputText : public ItemElement,
-                                  public Labellable,
                                   public ValueObservable<std::string_view>,
                                   public Savable,
                                   public DragSource<std::string>,
@@ -68,12 +67,12 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
    * Construct InputText.
    * @param elementName ID of the input
    * @param label text rendered next to the input
-   * @param text starting text in the input
+   * @param initialValue starting text in the input
    * @param textInputType singleline or multiline support
    * @param filters character filters for input
    * @param persistent enable state saving to disk
    */
-  InputText(const std::string &elementName, std::string label, const std::string &value = "",
+  InputText(const std::string &elementName, std::string label, const std::string &initialValue = "",
             TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
             TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
             Persistent persistent = Persistent::No);
@@ -124,6 +123,7 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

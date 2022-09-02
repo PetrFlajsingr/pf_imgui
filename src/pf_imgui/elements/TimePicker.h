@@ -12,7 +12,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/elements/SpinInput.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
@@ -31,10 +30,7 @@ struct TimeOfDayComparator {
 /**
  * @brief Simple HH MM SS 24 time picker.
  */
-class TimePicker : public ItemElement,
-                   public Labellable,
-                   public ValueObservable<TimeOfDay, details::TimeOfDayComparator>,
-                   public Savable {
+class TimePicker : public ItemElement, public ValueObservable<TimeOfDay, details::TimeOfDayComparator>, public Savable {
  public:
   /**
    * @brief Construction config for TimePicker.
@@ -53,20 +49,21 @@ class TimePicker : public ItemElement,
   explicit TimePicker(Config &&config);
   /**
    * Construct TimePicker
-   * @param name unique name of the element
-   * @param label text rendered next to the input
-   * @param value initial value
+   * @param elementName unique name of the element
+   * @param labelText text rendered next to the input
+   * @param initialValue initial value
    * @param persistent enable disk state saving
    */
-  TimePicker(const std::string &name, const std::string &label, TimeOfDay value,
+  TimePicker(const std::string &elementName, const std::string &labelText, TimeOfDay initialValue,
              Persistent persistent = Persistent::No);
 
   void setValue(const TimeOfDay &newValue) override;
 
-  toml::table toToml() const override;
+  [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

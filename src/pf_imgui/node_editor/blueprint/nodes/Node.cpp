@@ -39,10 +39,10 @@ void Node::setFromToml(const toml::table &src) {
       }
     }
   }
-  const auto pinFromToml = [&](const toml::table &src) -> std::optional<std::unique_ptr<Pin>> {
-    if (auto typeIter = src.find("type"); typeIter != src.end()) {
+  const auto pinFromToml = [&](const toml::table &pinSrc) -> std::optional<std::unique_ptr<Pin>> {
+    if (auto typeIter = pinSrc.find("type"); typeIter != pinSrc.end()) {
       if (auto typeValue = typeIter->second.as_string(); typeValue != nullptr) {
-        return NodeEditorLoading::Get()->constructPin(typeValue->get(), this, src);
+        return NodeEditorLoading::Get()->constructPin(typeValue->get(), this, pinSrc);
       }
     }
     return std::nullopt;

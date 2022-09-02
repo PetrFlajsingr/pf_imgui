@@ -31,7 +31,7 @@ namespace ImGuiKnobs {
         ImColor hovered;
         ImColor active;
 
-        color_set(ImColor base, ImColor hovered, ImColor active) : base(base), hovered(hovered), active(active) {}
+        color_set(ImColor baseColor, ImColor hoveredColor, ImColor activeColor) : base(baseColor), hovered(hoveredColor), active(activeColor) {}
 
         color_set(ImColor color) {
             base = color;

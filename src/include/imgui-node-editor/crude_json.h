@@ -30,6 +30,11 @@
 #     define CRUDE_JSON_IO 1
 # endif
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#endif
+
 namespace crude_json {
 
 struct value;
@@ -246,5 +251,7 @@ template <> inline       boolean* value::get_ptr<boolean>()       { if (m_Type =
 template <> inline       number*  value::get_ptr<number>()        { if (m_Type == type_t::number)  return number_ptr(m_Storage);  else return nullptr; }
 
 } // namespace crude_json
-
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
 # endif // __CRUDE_JSON_H__

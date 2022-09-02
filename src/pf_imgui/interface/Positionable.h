@@ -25,9 +25,9 @@ class PF_IMGUI_EXPORT Positionable {
  public:
   /**
    * Construct Positionable with starting position.
-   * @param position starting position
+   * @param initialPosition starting position
    */
-  explicit Positionable(const Position &position);
+  explicit Positionable(const Position &initialPosition);
 
   /**
    * Add a listener, which is called every time the elements' position is changed.

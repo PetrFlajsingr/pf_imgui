@@ -26,9 +26,9 @@ class PF_IMGUI_EXPORT Renderable {
  public:
   /**
    * Create Renderable with unique ID
-   * @param name unique ID for object
+   * @param renderableName unique ID for object
    */
-  explicit Renderable(std::string name);
+  explicit Renderable(std::string renderableName);
   Renderable(Renderable &&other) noexcept;
   Renderable &operator=(Renderable &&other) noexcept;
   Renderable(const Renderable &) = delete;

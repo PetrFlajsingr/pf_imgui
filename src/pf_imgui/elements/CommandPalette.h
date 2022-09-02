@@ -37,9 +37,9 @@ class CommandPalette : public ElementWithID {
   explicit CommandPalette(Config &&config);
   /**
    * Construct CommandPalette
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    */
-  explicit CommandPalette(const std::string &name);
+  explicit CommandPalette(const std::string &elementName);
   ~CommandPalette() override;
 
   /**
@@ -47,10 +47,10 @@ class CommandPalette : public ElementWithID {
    * @param commandName name of the command
    * @param callback callback of the command
    */
-  void addCommand(const std::string &name, std::invocable auto &&callback) {
+  void addCommand(const std::string &commandName, std::invocable auto &&callback) {
     ImCmd::SetCurrentContext(context);
     auto command = ImCmd::Command{};
-    command.Name = name;
+    command.Name = commandName;
     command.InitialCallback = std::forward<decltype(callback)>(callback);
     ImCmd::AddCommand(std::move(command));
   }

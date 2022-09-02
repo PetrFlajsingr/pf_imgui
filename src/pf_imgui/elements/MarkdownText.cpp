@@ -14,10 +14,10 @@ MarkdownText::MarkdownText(MarkdownText::Config &&config)
   configure();
 }
 
-MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdownSrc,
-                           float fontSize, std::optional<ImageLoader> imageLoader)
-    : ItemElement(elementName), imGuiInterface(imguiInterface), markdownSrc(std::move(markdownSrc)), fontSize(fontSize),
-      loadImage(std::move(imageLoader)) {
+MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdown,
+                           float defaultFontSize, std::optional<ImageLoader> imageLoader)
+    : ItemElement(elementName), imGuiInterface(imguiInterface), markdownSrc(std::move(markdown)),
+      fontSize(defaultFontSize), loadImage(std::move(imageLoader)) {
   loadHeaderFonts();
   configure();
 }

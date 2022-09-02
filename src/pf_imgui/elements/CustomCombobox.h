@@ -10,9 +10,9 @@
 
 #include <imgui.h>
 #include <pf_common/enums.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomItemBox.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <string>
 #include <utility>
 
@@ -33,18 +33,19 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labellable {
+class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
  public:
   /**
    * Construct CustomCombobox.
    * @param elementName ID of the element
-   * @param label text rendered next to the element
+   * @param labelText text rendered next to the element
    * @param rowFactory factory for renderable rows
    * @param prevValue preview value
    * @param showItemCount amount of items shown when open
    */
-  CustomCombobox(const std::string &elementName, const std::string &label, CustomItemBoxFactory<T, R> auto &&rowFactory,
-                 std::string prevValue = "", ComboBoxCount showItemCount = ComboBoxCount::Items8);
+  CustomCombobox(const std::string &elementName, const std::string &labelText,
+                 CustomItemBoxFactory<T, R> auto &&rowFactory, std::string prevValue = "",
+                 ComboBoxCount showItemCount = ComboBoxCount::Items8);
 
   void setPreviewValue(std::string value);
   [[nodiscard]] const std::string &getPreviewValue() const { return previewValue; }
@@ -64,6 +65,8 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
    * Close the Combobox in the next render loop.
    */
   void close() { shouldClose = true; }
+
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -86,10 +89,10 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R>, public Labell
 };
 
 template<typename T, std::derived_from<Renderable> R>
-CustomCombobox<T, R>::CustomCombobox(const std::string &elementName, const std::string &label,
+CustomCombobox<T, R>::CustomCombobox(const std::string &elementName, const std::string &labelText,
                                      CustomItemBoxFactory<T, R> auto &&rowFactory, std::string prevValue,
                                      ComboBoxCount showItemCount)
-    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Labellable(label),
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(labelText),
       flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
   if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
 }
@@ -117,7 +120,7 @@ void CustomCombobox<T, R>::renderImpl() {
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   const char *previewPtr = previewValue.c_str();
-  if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+  if (ImGui::BeginCombo(label.get().c_str(), previewPtr, *flags)) {
     RAII end{ImGui::EndCombo};
     checkClose();
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });

@@ -47,18 +47,18 @@ void FileDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,
+      fileDialogInstance.OpenModal(getName(), label.get(), fileType == FileType::File ? filters.c_str() : nullptr,
                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), getLabel(), fileType == FileType::File ? filters.c_str() : nullptr,
+      fileDialogInstance.OpenDialog(getName(), label.get(), fileType == FileType::File ? filters.c_str() : nullptr,
                                     openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
   }
 
   std::ranges::for_each(extColors, [this](const auto &extColor) {
-    const auto &[ext, color] = extColor;
-    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(color));
+    const auto &[ext, col] = extColor;
+    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(col));
   });
 
   if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(getSize()))) {

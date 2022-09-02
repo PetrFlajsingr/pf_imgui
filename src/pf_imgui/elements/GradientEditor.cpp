@@ -51,8 +51,8 @@ GradientEditor::GradientEditor(GradientEditor::Config &&config)
     : ElementWithID(std::string{config.name.value}), ValueObservable(getPointsView()),
       Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
 
-GradientEditor::GradientEditor(const std::string &name, Persistent persistent)
-    : ElementWithID(name), ValueObservable(getPointsView()), Savable(persistent) {}
+GradientEditor::GradientEditor(const std::string &elementName, Persistent persistent)
+    : ElementWithID(elementName), ValueObservable(getPointsView()), Savable(persistent) {}
 
 Color GradientEditor::getColorAt(float percentage) const {
   float color[4];

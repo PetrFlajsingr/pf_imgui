@@ -39,26 +39,25 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public Collapsible,
                                public Resizable,
                                public Positionable,
-                               public Labellable,
                                public Closeable {
  public:
   /**
    * Construct Window.
-   * @param name ID of the window
-   * @param label title
+   * @param elementName ID of the window
+   * @param titleLabel title on top of the window
    * @param allowCollapse
    * @param persistent saving state to disk
    */
-  Window(std::string name, std::string label, AllowCollapse allowCollapse = AllowCollapse::No,
+  Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse = AllowCollapse::No,
          Persistent persistent = Persistent::No);
 
   /**
    * Construct Window.
-   * @param name ID of the window
-   * @param label title
+   * @param elementName ID of the window
+   * @param titleLabel title on top of the window
    * @param persistent saving state to disk
    */
-  Window(std::string name, std::string label, Persistent persistent);
+  Window(std::string elementName, std::string titleLabel, Persistent persistent);
 
   /**
    * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
@@ -231,6 +230,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   // FIXME: remove this and fix up how this is handled in docking
   [[nodiscard]] inline std::string getImGuiName() const { return idLabel; }
 
+  Label label;
+
  protected:
   void renderImpl() override;
 
@@ -244,7 +245,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   bool isWindowDocked = false;
 
   bool firstPass = true;
-
 
   std::optional<ImGuiID> dockInto = std::nullopt;
 

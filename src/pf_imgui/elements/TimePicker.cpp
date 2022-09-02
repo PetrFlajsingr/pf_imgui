@@ -12,10 +12,10 @@ TimePicker::TimePicker(TimePicker::Config &&config)
   setValue(config.value);
 }
 
-TimePicker::TimePicker(const std::string &name, const std::string &label, pf::ui::ig::TimeOfDay value,
+TimePicker::TimePicker(const std::string &elementName, const std::string &labelText, pf::ui::ig::TimeOfDay initialValue,
                        pf::ui::ig::Persistent persistent)
-    : ItemElement(name), Labellable(label), ValueObservable(value), Savable(persistent) {
-  setValue(value);
+    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText) {
+  setValue(initialValue);
 }
 
 void TimePicker::renderImpl() {
@@ -46,7 +46,7 @@ void TimePicker::renderImpl() {
     }
   }
   ImGui::SameLine();
-  ImGui::Text("%s", getLabel().c_str());
+  ImGui::Text("%s", label.get().c_str());
   ImGui::EndGroup();
 }
 

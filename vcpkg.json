@@ -4,12 +4,12 @@
   "dependencies": [
     {
       "name": "pf-common",
-      "version>=": "1.2.5"
+      "version>=": "1.2.6"
     },
     {
       "name": "tomlplusplus",
       "version>=": "3.1.0"
     }
   ],
-  "builtin-baseline": "bae8f8c7d837c631ca72daec4b14e243824135a5"
+  "builtin-baseline": "4dacd997a589a9ed67a5d74ed580056ad0341775"
 }

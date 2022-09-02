@@ -18,7 +18,8 @@
 
 namespace pf::ui::ig::bp {
 
-NodeEditor::NodeEditor(const std::string &name, const Size &size) : ig::NodeEditor(name, size) {
+NodeEditor::NodeEditor(const std::string &elementName, const Size &initialSize)
+    : ig::NodeEditor(elementName, initialSize) {
   NodeEditorLoading::Get()->registerConstruction<ArrayPin<float>>();
   NodeEditorLoading::Get()->registerConstruction<ArrayPin<int>>();
   NodeEditorLoading::Get()->registerConstruction<CheckboxPin>();
@@ -54,8 +55,8 @@ toml::table NodeEditor::toToml() const {
 }
 
 void NodeEditor::setFromToml(const toml::table &src) {
-  const auto nodeFromToml = [&](const toml::table &src) -> std::optional<std::unique_ptr<Node>> {
-    if (auto typeIter = src.find("type"); typeIter != src.end()) {
+  const auto nodeFromToml = [&](const toml::table &nodeSrc) -> std::optional<std::unique_ptr<Node>> {
+    if (auto typeIter = nodeSrc.find("type"); typeIter != nodeSrc.end()) {
       if (auto typeValue = typeIter->second.as_string(); typeValue != nullptr) {
         return NodeEditorLoading::Get()->constructNode(typeValue->get(), this, src);
       }
@@ -78,13 +79,13 @@ void NodeEditor::setFromToml(const toml::table &src) {
     if (auto commentsToml = commentsIter->second.as_array(); commentsToml != nullptr) {
       std::ranges::for_each(*commentsToml, [&](const auto &item) {
         if (auto commentToml = item.as_table(); commentToml != nullptr) {
-          std::optional<Width> width = std::nullopt;
-          std::optional<Height> height = std::nullopt;
-          std::optional<std::string> label = std::nullopt;
-          std::optional<std::string> name = std::nullopt;
+          std::optional<Width> commentWidth = std::nullopt;
+          std::optional<Height> commentHeight = std::nullopt;
+          std::optional<std::string> commentLabel = std::nullopt;
+          std::optional<std::string> commentName = std::nullopt;
           std::optional<Position> position = std::nullopt;
           if (auto iter = commentToml->find("name"); iter != commentToml->end()) {
-            if (auto nameToml = iter->second.as_string(); nameToml != nullptr) { name = nameToml->get(); }
+            if (auto nameToml = iter->second.as_string(); nameToml != nullptr) { commentName = nameToml->get(); }
           }
           if (auto positionXIter = commentToml->find("positionX"); positionXIter != commentToml->end()) {
             if (auto positionXToml = positionXIter->second.as_floating_point(); positionXToml != nullptr) {
@@ -97,20 +98,23 @@ void NodeEditor::setFromToml(const toml::table &src) {
             }
           }
           if (auto iter = commentToml->find("label"); iter != commentToml->end()) {
-            if (auto labelToml = iter->second.as_string(); labelToml != nullptr) { label = labelToml->get(); }
+            if (auto labelToml = iter->second.as_string(); labelToml != nullptr) { commentLabel = labelToml->get(); }
           }
           if (auto iter = commentToml->find("width"); iter != commentToml->end()) {
             if (auto widthToml = iter->second.as_floating_point(); widthToml != nullptr) {
-              width = static_cast<float>(widthToml->get());
+              commentWidth = static_cast<float>(widthToml->get());
             }
           }
           if (auto iter = commentToml->find("height"); iter != commentToml->end()) {
             if (auto heightToml = iter->second.as_floating_point(); heightToml != nullptr) {
-              height = static_cast<float>(heightToml->get());
+              commentHeight = static_cast<float>(heightToml->get());
             }
           }
-          if (!width.has_value() || !height.has_value() || !label.has_value() || !name.has_value()) { return; }
-          auto &newComment = addComment(*name, *label, Size{*width, *height});
+          if (!commentWidth.has_value() || !commentHeight.has_value() || !commentLabel.has_value()
+              || !commentName.has_value()) {
+            return;
+          }
+          auto &newComment = addComment(*commentName, *commentLabel, Size{*commentWidth, *commentHeight});
           if (position.has_value()) { newComment.setPosition(*position); }
         }
       });
@@ -183,7 +187,7 @@ toml::array NodeEditor::commentsToToml() const {
   auto result = toml::array();
   std::ranges::for_each(comments, [&](const auto &comment) {
     result.push_back(toml::table{{"name", comment->getName()},
-                                 {"label", comment->getLabel()},
+                                 {"label", comment->label.get()},
                                  {"width", static_cast<float>(comment->getSize().width)},
                                  {"height", static_cast<float>(comment->getSize().height)},
                                  {"positionX", comment->getPosition().x},

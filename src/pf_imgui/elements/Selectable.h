@@ -10,7 +10,6 @@
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -23,11 +22,7 @@ namespace pf::ui::ig {
  *
  * It's basically a different kind of checkbox.
  */
-class PF_IMGUI_EXPORT Selectable : public ItemElement,
-                                   public Labellable,
-                                   public ValueObservable<bool>,
-                                   public Resizable,
-                                   public Savable {
+class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bool>, public Resizable, public Savable {
  public:
   /**
    * @brief Struct for construction of Selectable.
@@ -48,13 +43,13 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement,
   /**
    * Construct Selectable.
    * @param elementName ID of the element
-   * @param label text rendered on the element
-   * @param value true for selected, false for not selected
+   * @param labelText text rendered on the element
+   * @param initialValue true for selected, false for not selected
    * @param s size of the element
    * @param persistent allow value saving to disk
    */
-  Selectable(const std::string &elementName, const std::string &label, bool value = false, Size s = Size::Auto(),
-             Persistent persistent = Persistent::No);
+  Selectable(const std::string &elementName, const std::string &labelText, bool initialValue = false,
+             Size s = Size::Auto(), Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -66,6 +61,7 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement,
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::SelectableTextAlign>
       style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

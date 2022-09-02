@@ -11,8 +11,8 @@
 #include <chrono>
 #include <memory>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
@@ -24,10 +24,7 @@ namespace pf::ui::ig {
 /**
  * @brief Date picker element.
  */
-class DatePicker : public ItemElement,
-                   public Labellable,
-                   public ValueObservable<std::chrono::year_month_day>,
-                   public Savable {
+class DatePicker : public ItemElement, public ValueObservable<std::chrono::year_month_day>, public Savable {
  public:
   /**
    * @brief Construction config for DatePicker
@@ -48,13 +45,13 @@ class DatePicker : public ItemElement,
 
   /**
    * Construct DatePicker
-   * @param name unique name of the element
-   * @param label text rendered next to the element
-   * @param value initial value
+   * @param elementName unique name of the element
+   * @param labelText text rendered next to the element
+   * @param initialValue initial value
    * @param persistent allow state saving to disk
    */
-  DatePicker(const std::string &name, const std::string &label,
-             std::chrono::year_month_day value =
+  DatePicker(const std::string &elementName, const std::string &labelText,
+             std::chrono::year_month_day initialValue =
                  std::chrono::year_month_day{std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now())},
              Persistent persistent = Persistent::No);
 
@@ -64,6 +61,7 @@ class DatePicker : public ItemElement,
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

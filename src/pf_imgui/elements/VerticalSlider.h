@@ -2,15 +2,14 @@
 // Created by petr on 4/23/21.
 //
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H
+#ifndef PF_IMGUI_ELEMENTS_VERTICALSLIDER_H
+#define PF_IMGUI_ELEMENTS_VERTICALSLIDER_H
 
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
@@ -40,7 +39,6 @@ constexpr const char *defaultVSliderFormat() {
  */
 template<OneOf<float, int> T>
 class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
-                                       public Labellable,
                                        public ValueObservable<T>,
                                        public Savable,
                                        public Resizable,
@@ -57,7 +55,7 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
     Explicit<T> min;                                         /*!< Minimum allowed value */
     Explicit<T> max;                                         /*!< Maximum allowed value */
     T value{};                                               /*!< Initial value */
-    Size size;                                               /*!< Size of the element */
+    Explicit<Size> size;                                     /*!< Size of the element */
     std::string format = details::defaultVSliderFormat<T>(); /*!< Format string used to render value */
     bool persistent = false;                                 /*!< Allow state saving to disk */
   };
@@ -69,15 +67,17 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
   /**
    * Construct VerticalSlider.
    * @param elementName ID of the element
-   * @param label text rendered next to the slider
+   * @param labelText text rendered next to the slider
+   * @param initialSize initial size of the element
    * @param minVal min allowed value
    * @param maxVal max allowed value
-   * @param value starting value
+   * @param initialValue starting value
    * @param persistent enable state saving to disk
-   * @param format printf-like format for value
+   * @param numberFormat printf-like format for value
    */
-  VerticalSlider(const std::string &elementName, const std::string &label, Size size, T minVal, T maxVal, T value = T{},
-                 Persistent persistent = Persistent::No, std::string format = details::defaultVSliderFormat<T>());
+  VerticalSlider(const std::string &elementName, const std::string &labelText, Size initialSize, T minVal, T maxVal,
+                 T initialValue = T{}, Persistent persistent = Persistent::No,
+                 std::string numberFormat = details::defaultVSliderFormat<T>());
 
   /**
    * Get min slider value.
@@ -110,6 +110,7 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -122,18 +123,17 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Labellable(std::string{config.label.value}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      Resizable(config.size), DragSource<T>(false), DropTarget<T>(false), min(config.min), max(config.max),
-      format(std::move(config.format)) {}
+      Resizable(config.size.value), DragSource<T>(false), DropTarget<T>(false), label(std::string{config.label.value}),
+      min(config.min), max(config.max), format(std::move(config.format)) {}
 
 template<OneOf<float, int> T>
-VerticalSlider<T>::VerticalSlider(const std::string &elementName, const std::string &label, Size size, T minVal,
-                                  T maxVal, T value, Persistent persistent, std::string format)
-    : ItemElement(elementName), Labellable(label), ValueObservable<T>(value), Savable(persistent),
-      Resizable(size), DragSource<T>(false), DropTarget<T>(false), min(minVal), max(maxVal), format(std::move(format)) {
-}
+VerticalSlider<T>::VerticalSlider(const std::string &elementName, const std::string &labelText, Size initialSize,
+                                  T minVal, T maxVal, T initialValue, Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), ValueObservable<T>(initialValue), Savable(persistent),
+      Resizable(initialSize), DragSource<T>(false), DropTarget<T>(false), label(labelText), min(minVal), max(maxVal),
+      format(std::move(numberFormat)) {}
 
 template<OneOf<float, int> T>
 toml::table VerticalSlider<T>::toToml() const {
@@ -162,7 +162,7 @@ void VerticalSlider<T>::renderImpl() {
   } else {
     dataType = ImGuiDataType_S32;
   }
-  const auto valueChanged = ImGui::VSliderScalar(getLabel().c_str(), static_cast<ImVec2>(getSize()), dataType, address,
+  const auto valueChanged = ImGui::VSliderScalar(label.get().c_str(), static_cast<ImVec2>(getSize()), dataType, address,
                                                  &min, &max, format.c_str(), flags);
 
   DragSource<T>::drag(ValueObservable<T>::getValue());
@@ -178,4 +178,4 @@ extern template class VerticalSlider<float>;
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_VERTICALSLIDER_H
+#endif  // PF_IMGUI_ELEMENTS_VERTICALSLIDER_H

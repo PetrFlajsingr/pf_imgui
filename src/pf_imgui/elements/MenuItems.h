@@ -9,11 +9,11 @@
 
 #include <memory>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -25,7 +25,7 @@ namespace pf::ui::ig {
 class SubMenu;
 class PF_IMGUI_EXPORT MenuItem : public ElementWithID {
  public:
-  explicit MenuItem(const std::string &name);
+  explicit MenuItem(const std::string &elementName);
 
   /**
    * Set if the parent menu is closed on interact - the menu might still get closed in some cases.
@@ -97,7 +97,7 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.
  */
-class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, public Clickable {
+class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
  public:
   /**
    * Construct MenuButtonItem
@@ -116,9 +116,9 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, publi
   /**
    * Construct MenuButtonItem.
    * @param elementName ID of the element
-   * @param label text rendered on the button
+   * @param labelText text rendered on the button
    */
-  MenuButtonItem(const std::string &elementName, const std::string &label);
+  MenuButtonItem(const std::string &elementName, const std::string &labelText);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
                ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::Header, ColorOf::HeaderHovered,
@@ -126,6 +126,7 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, publi
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -133,10 +134,7 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Labellable, publi
 /**
  * @brief An item, which can be clicked and it toggles its inner value.
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
-                                         public Labellable,
-                                         public ValueObservable<bool>,
-                                         public Savable {
+class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -157,9 +155,9 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
    * Construct MenuCheckboxItem.
    * @param elementName ID of the element
    * @param label text rendered on the button
-   * @param value starting value
+   * @param initialValue starting value
    */
-  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value = false,
+  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool initialValue = false,
                    Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
@@ -171,6 +169,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -206,7 +205,7 @@ class PF_IMGUI_EXPORT MenuSeparatorItem : public MenuItem {
 /**
  * @brief Basically a button for a popup menu, which contains other elements as its items.
  */
-class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuContainer {
+class PF_IMGUI_EXPORT SubMenu : public MenuItem, public MenuContainer {
  public:
   /**
    * @brief Struct for construction of SubMenu.
@@ -224,9 +223,11 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public Labellable, public MenuC
   /**
    * Construct SubMenu.
    * @param elementName ID of the element
-   * @param label text rendered on the button
+   * @param labelText text rendered on the button
    */
-  SubMenu(const std::string &elementName, const std::string &label);
+  SubMenu(const std::string &elementName, const std::string &labelText);
+
+  Label label;
 
  protected:
   void renderImpl() override;

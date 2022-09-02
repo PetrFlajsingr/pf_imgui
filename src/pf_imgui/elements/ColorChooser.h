@@ -14,10 +14,10 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
@@ -42,7 +42,6 @@ namespace pf::ui::ig {
  */
 template<ColorChooserType Type, ColorChooserFormat Format>
 class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
-                                     public Labellable,
                                      public ValueObservable<Color>,
                                      public Savable,
                                      public DragSource<Color>,
@@ -66,11 +65,11 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
   /**
    * Construct ColorChooser.
    * @param elementName ID of the element
-   * @param label label next to the intractable parts
+   * @param labelText label next to the intractable parts
+   * @param initialValue starting value
    * @param persistent allow state saving to disk
-   * @param value starting value
    */
-  ColorChooser(const std::string &elementName, const std::string &label, Color value = Color::White,
+  ColorChooser(const std::string &elementName, const std::string &labelText, Color initialValue = Color::White,
                Persistent persistent = Persistent::No);
 
   /**
@@ -95,6 +94,7 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -106,18 +106,18 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 ColorChooser<Type, Format>::ColorChooser(ColorChooser::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
-      ValueObservable(config.value), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false),
-      DropTarget(false) {
+    : ItemElement(std::string{config.name.value}), ValueObservable(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false), DropTarget(false),
+      label(std::string{config.label.value}) {
   setValue(config.value);
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
-ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const std::string &label, Color value,
-                                         Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable(value), Savable(persistent), DragSource(false),
-      DropTarget(false) {
-  setValue(value);
+ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const std::string &labelText,
+                                         Color initialValue, Persistent persistent)
+    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), DragSource(false),
+      DropTarget(false), label(labelText) {
+  setValue(initialValue);
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
@@ -153,15 +153,15 @@ void ColorChooser<Type, Format>::renderImpl() {
   auto valueChanged = false;
   if constexpr (Type == ColorChooserType::Edit) {
     if constexpr (Format == ColorChooserFormat::RGB) {
-      valueChanged = ImGui::ColorEdit3(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorEdit3(label.get().c_str(), glm::value_ptr(valueStorage), flags);
     } else {
-      valueChanged = ImGui::ColorEdit4(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorEdit4(label.get().c_str(), glm::value_ptr(valueStorage), flags);
     }
   } else {
     if constexpr (Format == ColorChooserFormat::RGB) {
-      valueChanged = ImGui::ColorPicker3(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorPicker3(label.get().c_str(), glm::value_ptr(valueStorage), flags);
     } else {
-      valueChanged = ImGui::ColorPicker4(getLabel().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorPicker4(label.get().c_str(), glm::value_ptr(valueStorage), flags);
     }
   }
   DragSource::drag(ValueObservable::getValue());

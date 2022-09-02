@@ -48,11 +48,11 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   /**
    * Construct AbsoluteLayout.
    * @param elementName ID of the layout
-   * @param size size of the layout
+   * @param initialSize size of the layout
    * @param showBorder draw border around the layout
    * @param persistent enable state saving
    */
-  AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder = ShowBorder::No);
+  AbsoluteLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Get all children of the layout as references.

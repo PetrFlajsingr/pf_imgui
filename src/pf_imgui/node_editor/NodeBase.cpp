@@ -7,9 +7,10 @@
 
 namespace pf::ui::ig {
 
-NodeBase::NodeBase(const std::string &name) : Renderable(name), Positionable(Position{}), initSize(false) {}
-NodeBase::NodeBase(const std::string &name, Position initPosition)
-    : Renderable(name), Positionable(initPosition), initSize(true) {}
+NodeBase::NodeBase(const std::string &elementName)
+    : Renderable(elementName), Positionable(Position{}), initSize(false) {}
+NodeBase::NodeBase(const std::string &elementName, Position initPosition)
+    : Renderable(elementName), Positionable(initPosition), initSize(true) {}
 
 ax::NodeEditor::NodeId NodeBase::getId() const { return id; }
 

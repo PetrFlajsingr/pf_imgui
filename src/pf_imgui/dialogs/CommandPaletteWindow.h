@@ -23,9 +23,9 @@ class CommandPaletteWindow : public Renderable, public Closeable {
  public:
   /**
    * Construct CommandPalette
-   * @param name unique name of the window
+   * @param elementName unique name of the window
    */
-  explicit CommandPaletteWindow(const std::string &name);
+  explicit CommandPaletteWindow(const std::string &elementName);
   ~CommandPaletteWindow() override;
 
   /**

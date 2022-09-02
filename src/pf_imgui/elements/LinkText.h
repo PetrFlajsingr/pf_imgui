@@ -10,9 +10,9 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <string>
 #include <utility>
 
@@ -21,7 +21,7 @@ namespace pf::ui::ig {
 /**
  * @brief Text element providing click detection.
  */
-class LinkText : public ItemElement, public Labellable, public Clickable {
+class LinkText : public ItemElement, public Clickable {
  public:
   using LinkClickHandler = std::function<void(std::string_view)>;
   /**
@@ -43,18 +43,19 @@ class LinkText : public ItemElement, public Labellable, public Clickable {
   /**
    * Construct LinkText
    * @param elementName unique name of the element
-   * @param label text of the element
-   * @param link underlying link/url
-   * @param linkClickHandler handler for url interact
+   * @param labelText text of the element
+   * @param linkStr underlying link/url
+   * @param linkClickHandlerFnc handler for url interact
    */
-  LinkText(const std::string &elementName, const std::string &label, std::string link,
-           std::invocable<std::string_view> auto &&linkClickHandler)
-      : ItemElement(elementName), Labellable(label), link(std::move(link)),
-        linkClickHandler(std::forward<decltype(linkClickHandler)>(linkClickHandler)) {
+  LinkText(const std::string &elementName, const std::string &labelText, std::string linkStr,
+           std::invocable<std::string_view> auto &&linkClickHandlerFnc)
+      : ItemElement(elementName), label(labelText), link(std::move(linkStr)),
+        linkClickHandler(std::forward<decltype(linkClickHandlerFnc)>(linkClickHandlerFnc)) {
     setTooltip(LinkText::link);
   }
 
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

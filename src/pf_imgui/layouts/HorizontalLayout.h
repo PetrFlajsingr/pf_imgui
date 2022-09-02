@@ -36,12 +36,12 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
 
   /**
    * Construct HorizontalLayout
-   * @param name unique name of the element
-   * @param size size of the layout
+   * @param elementName unique name of the element
+   * @param initialSize size of the layout
    * @param align element alignment
    * @param showBorder render border around layout's area
    */
-  HorizontalLayout(const std::string &name, Size size, HorizontalAlign align = HorizontalAlign::Up,
+  HorizontalLayout(const std::string &elementName, Size initialSize, HorizontalAlign align = HorizontalAlign::Up,
                    ShowBorder showBorder = ShowBorder::No);
 
  protected:

@@ -14,7 +14,6 @@
 #include <pf_imgui/details/Spin.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -27,7 +26,6 @@ namespace pf::ui::ig {
  */
 template<OneOf<int, float> T>
 class PF_IMGUI_EXPORT SpinInput : public ItemElement,
-                                  public Labellable,
                                   public ValueObservable<T>,
                                   public Savable,
                                   public DragSource<T>,
@@ -55,14 +53,14 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
   /**
    * Construct SpinInput.
    * @param elementName ID of the element
-   * @param label texte rendered next to the element
-   * @param value starting value
-   * @param step spin step
-   * @param stepFast fast spin step
+   * @param labelText text rendered next to the element
+   * @param initialValue starting value
+   * @param valueStep spin step
+   * @param valueStepFast fast spin step
    * @param persistent enable/disable state saving od disk
    */
-  SpinInput(const std::string &elementName, const std::string &label, T minVal, T maxVal, T value = T{}, T step = T{1},
-            const T &stepFast = T{100}, Persistent persistent = Persistent::No);
+  SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal, T initialValue = T{},
+            T valueStep = T{1}, const T &valueStepFast = T{100}, Persistent persistent = Persistent::No);
 
   [[nodiscard]] const T &getMin() const { return min; }
   void setMin(const T &minVal) { min = minVal; }
@@ -84,6 +82,7 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;
@@ -100,17 +99,17 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
 
 template<OneOf<int, float> T>
 SpinInput<T>::SpinInput(SpinInput::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Labellable(std::string{config.label.value}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      step(config.step), stepFast(config.fastStep), min(config.min), max(config.max) {}
+      label(std::string{config.label.value}), step(config.step), stepFast(config.fastStep), min(config.min),
+      max(config.max) {}
 
 template<OneOf<int, float> T>
-SpinInput<T>::SpinInput(const std::string &elementName, const std::string &label, T minVal, T maxVal, T value, T step,
-                        const T &stepFast, Persistent persistent)
-    : ItemElement(elementName), Labellable(label), ValueObservable<T>(value),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), step(step), stepFast(stepFast), min(minVal),
-      max(maxVal) {}
+SpinInput<T>::SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal,
+                        T initialValue, T valueStep, const T &valueStepFast, Persistent persistent)
+    : ItemElement(elementName), ValueObservable<T>(initialValue),
+      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), step(valueStep),
+      stepFast(valueStepFast), min(minVal), max(maxVal) {}
 
 template<OneOf<int, float> T>
 void SpinInput<T>::setReadOnly(bool isReadOnly) {
@@ -143,10 +142,10 @@ void SpinInput<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGui::SpinInt(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
+    valueChanged = ImGui::SpinInt(label.get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGui::SpinFloat(getLabel().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
+    valueChanged = ImGui::SpinFloat(label.get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
                                     flags);  // TODO: user provided format
   }
   if (valueChanged) {
@@ -155,9 +154,7 @@ void SpinInput<T>::renderImpl() {
   }
   DragSource<T>::drag(ValueObservable<T>::getValue());
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    const auto value = std::clamp(*drop, min, max);
-    ValueObservable<T>::setValueAndNotifyIfChanged(value);
-    return;
+    ValueObservable<T>::setValueAndNotifyIfChanged(std::clamp(*drop, min, max));
   }
 }
 

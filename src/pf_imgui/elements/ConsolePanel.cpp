@@ -14,8 +14,8 @@
 
 namespace pf::ui::ig {
 
-ConsolePanel::ConsolePanel(const std::string &name, Size size, Persistent persistent)
-    : ElementWithID(name), Resizable(size), Savable(persistent), wrapTextToggle("wrapText"),
+ConsolePanel::ConsolePanel(const std::string &elementName, Size initialSize, Persistent persistent)
+    : ElementWithID(elementName), Resizable(initialSize), Savable(persistent), wrapTextToggle("wrapText"),
       scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
 
   clearButton.addClickListener([this] { records.clear(); });

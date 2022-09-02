@@ -7,8 +7,8 @@
 
 namespace pf::ui::ig {
 
-BackgroundDockingArea::BackgroundDockingArea(const std::string &name)
-    : Renderable(name), size(Size::Auto()), dockSpace(DockSpace{"background_dock"}) {}
+BackgroundDockingArea::BackgroundDockingArea(const std::string &elementName)
+    : Renderable(elementName), size(Size::Auto()), dockSpace(DockSpace{"background_dock"}) {}
 
 DockSpace &BackgroundDockingArea::getDockSpace() { return dockSpace; }
 

@@ -7,7 +7,8 @@
 
 namespace pf::ui::ig::bp {
 
-Pin::Pin(const std::string &name, const std::string &label, Color color) : ig::Pin(name, label), color(color) {}
+Pin::Pin(const std::string &elementName, const std::string &labelText, Color pinColor)
+    : ig::Pin(elementName, labelText), color(pinColor) {}
 
 Color Pin::getColor() const { return color; }
 
@@ -23,7 +24,7 @@ toml::table Pin::toToml() const {
   return toml::table{
       {"name", getName()},
       {"type", getPinTypeId()},
-      {"label", getLabel()},
+      {"label", label.get()},
       {"pinType", magic_enum::enum_name(getType())},
       {"color", static_cast<ImU32>(getColor())},
       {"validLinkColor", static_cast<ImU32>(getValidLinkPreviewColor())},
@@ -40,7 +41,7 @@ void Pin::setFromToml(const toml::table &src) {
     if (auto nameToml = nameIter->second.as_string(); nameToml != nullptr) { setName(nameToml->get()); }
   }
   if (auto labelIter = src.find("label"); labelIter != src.end()) {
-    if (auto labelToml = labelIter->second.as_string(); labelToml != nullptr) { setLabel(labelToml->get()); }
+    if (auto labelToml = labelIter->second.as_string(); labelToml != nullptr) { label = labelToml->get(); }
   }
   if (auto colorIter = src.find("color"); colorIter != src.end()) {
     if (auto colorToml = colorIter->second.as_integer(); colorToml != nullptr) {

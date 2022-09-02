@@ -12,9 +12,9 @@
 #include <filesystem>
 #include <pf_imgui/Color.h>
 #include <pf_imgui/Font.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/style/ColorPalette.h>
@@ -60,27 +60,27 @@ enum class FileDialogType { Dir, File };
  * @todo: thumbnails
  * @todo: custom pane
  */
-class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public Resizable {
+class PF_IMGUI_EXPORT FileDialog : public Renderable, public Resizable {
  public:
   /**
    * Construct FileDialog for files
    * @param elementName ID of the dialog
-   * @param label Title
+   * @param labelText Title
    * @param extSettings extension settings @see FileExtensionSettings
    * @param onSelect callback for when user selects files
    * @param onCancel callback for when user cancels selection
-   * @param size size of the dialog
+   * @param initialSize size of the dialog
    * @param startPath path in which the dialog opens
    * @param startName default name for selected file/dir
    * @param modality modality of the dialog
    * @param maxSelectedFiles maximum amount of selected files
    */
-  FileDialog(const std::string &elementName, const std::string &label,
+  FileDialog(const std::string &elementName, const std::string &labelText,
              const std::vector<FileExtensionSettings> &extSettings,
              std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
-             Size size = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "",
+             Size initialSize = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
-      : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
+      : Renderable(elementName), Resizable(initialSize), label(labelText), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
         onFilesSelected(std::forward<decltype(onSelect)>(onSelect)),
         onSelectCanceled(std::forward<decltype(onCancel)>(onCancel)) {
@@ -93,17 +93,17 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
    * @param label Title
    * @param onSelect callback for when user selects files
    * @param onCancel callback for when user cancels selection
-   * @param size size of the dialog
+   * @param initialSize size of the dialog
    * @param startPath path in which the dialog opens
    * @param startName default name for selected file/dir
    * @param modality modality of the dialog
    * @param maxSelectedDirs maximum amount of selected directories
    */
-  FileDialog(const std::string &elementName, const std::string &label,
+  FileDialog(const std::string &elementName, const std::string &labelText,
              std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
-             Size size = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
+             Size initialSize = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
-      : Renderable(elementName), Labellable(label), Resizable(size), openPath(std::move(startPath)),
+      : Renderable(elementName), Resizable(initialSize), label(labelText), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
         maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
 
@@ -122,6 +122,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable, public Labellable, public 
   FullColorPalette color;
   FullStyleOptions style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

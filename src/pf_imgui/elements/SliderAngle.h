@@ -9,10 +9,10 @@
 #define PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -24,7 +24,6 @@ namespace pf::ui::ig {
  * Angles are in radians.
  */
 class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
-                                    public Labellable,
                                     public ValueObservable<float>,
                                     public Savable,
                                     public DragSource<float>,
@@ -51,15 +50,15 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
   /**
    * Construct SliderAngle.
    * @param elementName ID of the slider
-   * @param label text rendered next to the slider
+   * @param labelText text rendered next to the slider
    * @param min min rad angle
    * @param max max rad angle
-   * @param value starting rad value
+   * @param initialValue starting rad value
    * @param persistent enable state saving to disk
-   * @param format printf-like format for rendering current value over the slider
+   * @param numberFormat printf-like format for rendering current value over the slider
    */
-  SliderAngle(const std::string &elementName, const std::string &label, float min, float max, float value = 0.0,
-              Persistent persistent = Persistent::No, std::string format = "%.0f deg");
+  SliderAngle(const std::string &elementName, const std::string &labelText, float min, float max,
+              float initialValue = 0.0, Persistent persistent = Persistent::No, std::string numberFormat = "%.0f deg");
 
   /**
    * Get min slider value.
@@ -92,6 +91,7 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

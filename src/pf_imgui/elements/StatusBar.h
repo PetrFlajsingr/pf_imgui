@@ -32,9 +32,9 @@ class PF_IMGUI_EXPORT AppStatusBar : public ElementWithID, public ElementContain
   explicit AppStatusBar(Config &&config);
   /**
    * Construct AppStatusBar.
-   * @param name unique name of the element
+   * @param elementName unique name of the element
    */
-  explicit AppStatusBar(const std::string &name);
+  explicit AppStatusBar(const std::string &elementName);
 
   [[nodiscard]] float getHeight() const;
 

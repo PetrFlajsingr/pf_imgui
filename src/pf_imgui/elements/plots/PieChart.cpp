@@ -9,10 +9,10 @@
 namespace pf::ui::ig {
 
 PieChart::PieChart(PieChart::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}), Resizable(config.size) {}
+    : ElementWithID(std::string{config.name.value}), Resizable(config.size), label(std::string{config.label.value}) {}
 
-PieChart::PieChart(const std::string &name, const std::string &label, const Size &size)
-    : ElementWithID(name), Labellable(label), Resizable(size) {}
+PieChart::PieChart(const std::string &elementName, const std::string &labelText, const Size &initialSize)
+    : ElementWithID(elementName), Resizable(initialSize), label(labelText) {}
 
 void PieChart::renderImpl() {
   if (dataChanged) {
@@ -22,7 +22,7 @@ void PieChart::renderImpl() {
     values = data | ranges::views::transform([](const auto &pair) { return pair.second; }) | ranges::to_vector;
   }
 
-  if (ImPlot::BeginPlot(getLabel().c_str(), static_cast<ImVec2>(getSize()))) {
+  if (ImPlot::BeginPlot(label.get().c_str(), static_cast<ImVec2>(getSize()))) {
     RAII endPlot{[] { ImPlot::EndPlot(); }};
     ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4);
   }

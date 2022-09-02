@@ -59,12 +59,12 @@ class PF_IMGUI_EXPORT MarkdownText : public ItemElement {
    * Construct MarkdownText.
    * @param elementName ID of the element
    * @param imguiInterface for automatic font upload @todo: change this
-   * @param markdownSrc markdown source to render
-   * @param fontSize size of font
+   * @param markdown markdown source to render
+   * @param defaultFontSize size of font
    * @param imageLoader function for image loading & texture creation, arg is path to load
    */
-  MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdownSrc = u8"",
-               float fontSize = 12.f, std::optional<ImageLoader> imageLoader = std::nullopt);
+  MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdown = u8"",
+               float defaultFontSize = 12.f, std::optional<ImageLoader> imageLoader = std::nullopt);
 
   /**
    * Get currently rendered markdown source.

@@ -58,15 +58,16 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   /**
    * Construct ProgressBar.
    * @param elementName ID of the progress bar
-   * @param stepValue step added to the current value when step() is called
-   * @param min min value - used as a starting value when no value is provided
-   * @param max max value
-   * @param value starting value - min <= value <=max
+   * @param valueStep step added to the current value when step() is called
+   * @param minValue min value - used as a starting value when no value is provided
+   * @param maxValue max value
+   * @param initialValue starting value - min <= value <=max
    * @param overlayStr text rendered on top of the element
-   * @param size size of the progress bar
+   * @param initialSize size of the progress bar
    */
-  ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value = std::nullopt,
-              std::string overlayStr = "", const Size &size = Size::Auto());
+  ProgressBar(const std::string &elementName, T valueStep, T minValue, T maxValue,
+              std::optional<T> initialValue = std::nullopt, std::string overlayStr = "",
+              const Size &initialSize = Size::Auto());
 
   /**
    * Set current percentage where min = 0% and max = 100%.
@@ -141,10 +142,10 @@ ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
       stepValue(config.step), min(config.min), max(config.max), overlay(std::move(config.overlay)) {}
 
 template<ProgressBarCompatible T>
-ProgressBar<T>::ProgressBar(const std::string &elementName, T stepValue, T min, T max, std::optional<T> value,
-                            std::string overlayStr, const Size &size)
-    : ItemElement(elementName), ValueObservable<T>(value.value_or(min)), Resizable(size), stepValue(stepValue),
-      min(min), max(max), overlay(std::move(overlayStr)) {}
+ProgressBar<T>::ProgressBar(const std::string &elementName, T valueStep, T minValue, T maxValue,
+                            std::optional<T> initialValue, std::string overlayStr, const Size &initialSize)
+    : ItemElement(elementName), ValueObservable<T>(initialValue.value_or(min)), Resizable(initialSize),
+      stepValue(valueStep), min(minValue), max(maxValue), overlay(std::move(overlayStr)) {}
 
 template<ProgressBarCompatible T>
 T ProgressBar<T>::setPercentage(float percentage) {

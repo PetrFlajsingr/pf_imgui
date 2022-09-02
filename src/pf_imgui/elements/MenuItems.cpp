@@ -12,7 +12,7 @@
 
 namespace pf::ui::ig {
 
-MenuItem::MenuItem(const std::string &name) : ElementWithID(name) {}
+MenuItem::MenuItem(const std::string &elementName) : ElementWithID(elementName) {}
 
 bool MenuItem::isCloseMenuOnInteract() const { return closeOnInteract; }
 
@@ -25,32 +25,33 @@ void MenuItem::render() {
 }
 
 MenuButtonItem::MenuButtonItem(MenuButtonItem::Config &&config)
-    : MenuItem(std::string{config.name.value}), Labellable(std::string{config.label.value}) {}
+    : MenuItem(std::string{config.name.value}), label(std::string{config.label.value}) {}
 
-MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string &label)
-    : MenuItem(elementName), Labellable(label) {}
+MenuButtonItem::MenuButtonItem(const std::string &elementName, const std::string &labelText)
+    : MenuItem(elementName), label(labelText) {}
 
 void MenuButtonItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(getLabel().c_str(), nullptr)) { notifyOnClick(); }
+  if (ImGui::MenuItem(label.get().c_str(), nullptr)) { notifyOnClick(); }
 }
 
 void SubMenu::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::BeginMenu(getLabel().c_str())) {
+  if (ImGui::BeginMenu(label.get().c_str())) {
     RAII end{ImGui::EndMenu};
     renderItems();
   }
 }
 
 SubMenu::SubMenu(SubMenu::Config &&config)
-    : MenuItem(std::string{config.name.value}), Labellable(std::string{config.label.value}) {}
+    : MenuItem(std::string{config.name.value}), label(std::string{config.label.value}) {}
 
-SubMenu::SubMenu(const std::string &elementName, const std::string &label) : MenuItem(elementName), Labellable(label) {}
+SubMenu::SubMenu(const std::string &elementName, const std::string &labelText)
+    : MenuItem(elementName), label(labelText) {}
 
 SubMenu &MenuContainer::addSubmenu(const std::string &name, const std::string &caption) {
   return addMenuItem<SubMenu>(name, caption);
@@ -70,18 +71,18 @@ MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return
 void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
 MenuCheckboxItem::MenuCheckboxItem(MenuCheckboxItem::Config &&config)
-    : MenuItem(std::string{config.name.value}), Labellable(std::string{config.label.value}),
-      ValueObservable(config.checked), Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
+    : MenuItem(std::string{config.name.value}), ValueObservable(config.checked),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
 
-MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &label, bool value,
+MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &labelText, bool initialValue,
                                    Persistent persistent)
-    : MenuItem(elementName), Labellable(label), ValueObservable(value), Savable(persistent) {}
+    : MenuItem(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText) {}
 
 void MenuCheckboxItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(getLabel().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
+  if (ImGui::MenuItem(label.get().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 
 toml::table MenuCheckboxItem::toToml() const { return toml::table{{"checked", getValue()}}; }

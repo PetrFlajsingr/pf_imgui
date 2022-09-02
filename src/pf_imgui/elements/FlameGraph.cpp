@@ -8,17 +8,17 @@
 namespace pf::ui::ig {
 
 FlameGraph::FlameGraph(FlameGraph::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Labellable(std::string{config.label.value}),
-      Resizable(config.size), overlay(std::move(config.overlay)) {}
+    : ElementWithID(std::string{config.name.value}), Resizable(config.size), label(std::string{config.label.value}),
+      overlay(std::move(config.overlay)) {}
 
-FlameGraph::FlameGraph(const std::string &elementName, const std::string &label, const Size &size,
-                       std::optional<std::string> overlay)
-    : ElementWithID(elementName), Labellable(label), Resizable(size), overlay(std::move(overlay)) {}
+FlameGraph::FlameGraph(const std::string &elementName, const std::string &labelText, const Size &initialSize,
+                       std::optional<std::string> graphOverlay)
+    : ElementWithID(elementName), Resizable(initialSize), label(labelText), overlay(std::move(graphOverlay)) {}
 
 void FlameGraph::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  ImGuiWidgetFlameGraph::PlotFlame(getLabel().c_str(), samples, overlay, FLT_MAX, FLT_MAX,
+  ImGuiWidgetFlameGraph::PlotFlame(label.get().c_str(), samples, overlay, FLT_MAX, FLT_MAX,
                                    static_cast<ImVec2>(getSize()));
 }
 

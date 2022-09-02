@@ -10,8 +10,8 @@ namespace pf::ui::ig {
 AbsoluteLayout::AbsoluteLayout(AbsoluteLayout::Config &&config)
     : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
-    : Layout(elementName, size, showBorder) {}
+AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
+    : Layout(elementName, initialSize, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -30,10 +30,10 @@ void AbsoluteLayout::renderImpl() {
   }
 }
 void AbsoluteLayout::setChildPosition(const std::string &childName, Position position) {
-  if (auto child = findIf(children | ranges::views::addressof,
-                          [childName](auto child) { return child->first->getName() == childName; });
-      child.has_value()) {
-    (*child)->second->setPosition(position);
+  if (auto foundChild = findIf(children | ranges::views::addressof,
+                               [childName](auto child) { return child->first->getName() == childName; });
+      foundChild.has_value()) {
+    (*foundChild)->second->setPosition(position);
   }
 }
 void AbsoluteLayout::removeChild(const std::string &childName) {

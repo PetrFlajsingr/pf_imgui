@@ -85,7 +85,7 @@ class PF_IMGUI_EXPORT Height {
  * @brief Size to be used for element sizes.
  */
 struct PF_IMGUI_EXPORT Size {
-  Size(Width width, Height height);
+  Size(Width initialWidth, Height initialHeight);
   /**
    * Conversion constructor.
    * @param vec size as ImVec2

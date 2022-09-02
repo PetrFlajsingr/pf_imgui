@@ -10,7 +10,7 @@
 
 namespace pf::ui::ig {
 
-details::DragSourceBase::DragSourceBase(bool dragAllowed) : dragAllowed(dragAllowed) {}
+details::DragSourceBase::DragSourceBase(bool dragEnabled) : dragAllowed(dragEnabled) {}
 
 bool details::DragSourceBase::isDragAllowed() const { return dragAllowed; }
 
@@ -73,7 +73,7 @@ void details::DragSourceBase::createSimpleTooltip(const std::string &fmt, bool i
 }
 bool details::DragSourceBase::hasFmtTooltip() const { return tooltipTextFmt.has_value(); }
 
-details::DropTargetBase::DropTargetBase(bool dropAllowed) : dropAllowed(dropAllowed) {}
+details::DropTargetBase::DropTargetBase(bool dropEnabled) : dropAllowed(dropEnabled) {}
 
 bool details::DropTargetBase::isDropAllowed() const { return dropAllowed; }
 

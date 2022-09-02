@@ -44,10 +44,10 @@ class PF_IMGUI_EXPORT IndeterminateProgressBar : public ItemElement, public Resi
    * @param elementName ID of the progress bar
    * @param overlayStr text rendered on top of the element
    * @param speed speed of change
-   * @param size size of the progress bar
+   * @param initialSize size of the progress bar
    */
   explicit IndeterminateProgressBar(const std::string &elementName, std::string overlayStr = "", float speed = 1.f,
-                                    const Size &size = Size::Auto());
+                                    const Size &initialSize = Size::Auto());
 
   /**
    * @param speed new speed of change

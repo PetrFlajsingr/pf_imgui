@@ -25,9 +25,9 @@ class DragPin : public InteractablePin<DragInput<T>> {
     std::string format = ui::ig::drag_details::defaultFormat<T>();
   };
 
-  DragPin(const std::string &name, const std::string &label, Color color, DragConfig &&config)
-      : InteractablePin<DragInput<T>>(name, label, color, config.width,
-                                      CreateDragConfig(uniqueId(), label, std::move(config))) {}
+  DragPin(const std::string &elementName, const std::string &labelText, Color pinColor, DragConfig &&config)
+      : InteractablePin<DragInput<T>>(elementName, labelText, pinColor, config.width,
+                                      CreateDragConfig(uniqueId(), labelText, std::move(config))) {}
 
   [[nodiscard]] static std::unique_ptr<DragPin> ConstructFromToml(ig::Node *parent, const toml::table &src) {
     auto result = std::make_unique<DragPin>("", "", Color::White, DragConfig{0, 0, 0, 0});

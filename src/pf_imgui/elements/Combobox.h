@@ -59,7 +59,6 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomComboboxBase::checkClose;
   using CustomComboboxBase::clearFilter;
   using CustomComboboxBase::getItems;
-  using CustomComboboxBase::getLabel;
   using CustomComboboxBase::getName;
   using CustomComboboxBase::getPreviewValue;
   using CustomComboboxBase::getShownItemCount;
@@ -98,8 +97,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent = Persistent::No)
-    requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>,
-                                 T> && std::is_default_constructible_v<T> && std::copy_constructible<T>)
+    requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
+             && std::is_default_constructible_v<T> && std::copy_constructible<T>)
   : CustomComboboxBase(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
     ValueObservable<T>(), Savable(persistent), DragSource<T>(false) {
     addItems(std::forward<decltype(newItems)>(newItems));
@@ -114,8 +113,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * @param item item to be selected
    */
   void setSelectedItem(const T &itemToSelect)
-    requires(!std::same_as<T, std::string>)
-  ;
+    requires(!std::same_as<T, std::string>);
   /**
    * Set selected item by its string value. If no such item is found the selection is cancelled.
    * @param itemAsString item to be selected
@@ -173,7 +171,7 @@ void Combobox<T>::setSelectedItem(const T &itemToSelect)
 template<ToStringConvertible T>
 void Combobox<T>::setSelectedItem(const std::string &itemAsString) {
   if (const auto iter = std::ranges::find_if(
-          items, [itemAsString](const auto &item) { return item.second->getLabel() == itemAsString; });
+          items, [itemAsString](const auto &item) { return item.second->label.get() == itemAsString; });
       iter != items.end()) {
     const auto index = std::ranges::distance(items.begin(), iter);
     setSelectedItemByIndex(index);
@@ -199,7 +197,7 @@ toml::table Combobox<T>::toToml() const {
   auto result = toml::table{};
   if (selectedItemIndex.has_value()) {
     const auto selectedItem = filteredItems[*selectedItemIndex];
-    result.insert_or_assign("selected", selectedItem->second->getLabel());
+    result.insert_or_assign("selected", selectedItem->second->label.get());
   }
   return result;
 }
@@ -220,11 +218,11 @@ void Combobox<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   const char *previewPtr;
   if (selectedItemIndex.has_value()) {
-    previewPtr = filteredItems[*selectedItemIndex]->second->getLabel().c_str();
+    previewPtr = filteredItems[*selectedItemIndex]->second->label.get().c_str();
   } else {
     previewPtr = getPreviewValue().c_str();
   }
-  if (ImGui::BeginCombo(getLabel().c_str(), previewPtr, *flags)) {
+  if (ImGui::BeginCombo(this->label.get().c_str(), previewPtr, *flags)) {
     RAII end{ImGui::EndCombo};
     checkClose();
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {

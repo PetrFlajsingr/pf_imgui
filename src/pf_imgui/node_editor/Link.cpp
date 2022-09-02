@@ -7,8 +7,8 @@
 
 namespace pf::ui::ig {
 
-Link::Link(const std::string &name, const ax::NodeEditor::LinkId &id, Pin *inputPin, Pin *outputPin)
-    : Renderable(name), id(id), inputPin(inputPin), outputPin(outputPin) {}
+Link::Link(const std::string &elementName, const ax::NodeEditor::LinkId &linkId, Pin *inputPinPtr, Pin *outputPinPtr)
+    : Renderable(elementName), id(linkId), inputPin(inputPinPtr), outputPin(outputPinPtr) {}
 
 Link::~Link() { valid = false; }
 

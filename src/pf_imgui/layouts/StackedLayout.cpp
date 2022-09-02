@@ -15,7 +15,7 @@ namespace pf::ui::ig {
 StackedLayout::StackedLayout(StackedLayout::Config &&config)
     : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-StackedLayout::Stack::Stack(StackedLayout &parent) : parent(parent) {}
+StackedLayout::Stack::Stack(StackedLayout &owner) : parent(owner) {}
 
 void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
 

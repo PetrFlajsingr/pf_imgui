@@ -21,6 +21,11 @@
 #     include <memory>
 # endif
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#endif
+
 namespace crude_json {
 
 value::value(value&& other)
@@ -885,6 +890,9 @@ bool value::save(const string& path, const int indent, const char indent_char) c
     return true;
 }
 
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
 # endif
 
 } // namespace crude_json

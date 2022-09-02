@@ -9,9 +9,9 @@
 #define PF_IMGUI_ELEMENTS_RADIOBUTTON_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Labellable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 
@@ -20,7 +20,7 @@ namespace pf::ui::ig {
 /**
  * @brief A button similar in function to CheckBox, but it can belong to RadioGroup. @see RadioGroup
  */
-class PF_IMGUI_EXPORT RadioButton : public ItemElement, public Labellable, public ValueObservable<bool> {
+class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueObservable<bool> {
  public:
   friend class RadioGroup;
   /**
@@ -40,10 +40,10 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public Labellable, publi
   /**
    * Construct RadioButton.
    * @param elementName ID of the button
-   * @param label text rendered next to the button
-   * @param value starting value of the button
+   * @param labelText text rendered next to the button
+   * @param initialValue starting value of the button
    */
-  RadioButton(const std::string &elementName, const std::string &label, bool value = false);
+  RadioButton(const std::string &elementName, const std::string &labelText, bool initialValue = false);
 
   /**
    * Check if the button is selected.
@@ -57,6 +57,7 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public Labellable, publi
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+  Label label;
 
  protected:
   void renderImpl() override;

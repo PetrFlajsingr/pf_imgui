@@ -14,7 +14,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 else ()
     list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
             "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
-            "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security")
+            "-Wpointer-arith" "-Wno-cast-qual" "-Wno-type-limits" "-fno-strict-aliasing" "-Wno-format-security" "-Wshadow")
 endif ()
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -109,7 +109,6 @@ set(SOURCES
         src/pf_imgui/elements/MarkdownText.cpp
         src/pf_imgui/interface/ElementContainer.cpp
         src/pf_imgui/interface/ElementWithID.cpp
-        src/pf_imgui/interface/Labellable.cpp
         src/pf_imgui/interface/Resizable.cpp
         src/pf_imgui/interface/Savable.cpp
         src/pf_imgui/interface/Clickable.cpp
@@ -201,7 +200,9 @@ set(SOURCES
         src/pf_imgui/elements/OverlayGizmo.cpp
         src/pf_imgui/elements/details/OverlayGizmoBase.cpp
         src/pf_imgui/interface/Element.cpp
-        src/pf_imgui/elements/ConsolePanel.cpp)
+        src/pf_imgui/elements/ConsolePanel.cpp
+        src/pf_imgui/Label.cpp
+        )
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
@@ -270,7 +271,6 @@ set(INCLUDES
         src/pf_imgui/elements/MemoryEditor.h
         src/pf_imgui/interface/ElementContainer.h
         src/pf_imgui/interface/ElementWithID.h
-        src/pf_imgui/interface/Labellable.h
         src/pf_imgui/interface/Resizable.h
         src/pf_imgui/interface/Savable.h
         src/pf_imgui/interface/Clickable.h
@@ -328,7 +328,6 @@ set(INCLUDES
         src/pf_imgui/managers/FontManager.h
         src/pf_imgui/layouts/AnchorLayout.h
         src/pf_imgui/interface/RenderablesContainer.h
-        src/pf_imgui/styles/enums.h
         src/pf_imgui/elements/DockSpace.h
         src/pf_imgui/details/Spinner.h
         src/pf_imgui/elements/Spinner.h
@@ -402,7 +401,10 @@ set(INCLUDES
         src/pf_imgui/style/common.h
         src/pf_imgui/Texture.h
         src/pf_imgui/style/StyleOptions.h
-        src/pf_imgui/elements/ConsolePanel.h src/pf_imgui/elements/details/TextUtils.h)
+        src/pf_imgui/elements/ConsolePanel.h
+        src/pf_imgui/elements/details/TextUtils.h
+        src/pf_imgui/Label.h
+        )
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

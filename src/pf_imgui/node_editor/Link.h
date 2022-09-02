@@ -27,12 +27,12 @@ class Link : public Renderable, public Hoverable {
  public:
   /**
    * Construct Link
-   * @param name unique name of the element
-   * @param id unique internal id
-   * @param inputPin input pin
-   * @param outputPin output pin
+   * @param elementName unique name of the element
+   * @param linkId unique internal id
+   * @param inputPinPtr input pin
+   * @param outputPinPtr output pin
    */
-  Link(const std::string &name, const ax::NodeEditor::LinkId &id, Pin *inputPin, Pin *outputPin);
+  Link(const std::string &elementName, const ax::NodeEditor::LinkId &linkId, Pin *inputPinPtr, Pin *outputPinPtr);
   ~Link() override;
 
   /**

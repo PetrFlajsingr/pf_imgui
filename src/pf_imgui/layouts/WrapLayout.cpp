@@ -10,9 +10,9 @@ WrapLayout::WrapLayout(WrapLayout::Config &&config)
     : LinearLayout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
       direction(config.layoutDirection) {}
 
-WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &size,
+WrapLayout::WrapLayout(const std::string &elementName, LayoutDirection layoutDirection, const Size &initialSize,
                        ShowBorder showBorder)
-    : LinearLayout(elementName, size, showBorder), direction(layoutDirection) {}
+    : LinearLayout(elementName, initialSize, showBorder), direction(layoutDirection) {}
 
 void WrapLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

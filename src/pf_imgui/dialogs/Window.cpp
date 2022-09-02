@@ -4,6 +4,7 @@
 
 #include "Window.h"
 #include <algorithm>
+#include <fmt/format.h>
 #include <imgui.h>
 #include <limits>
 #include <utility>
@@ -11,15 +12,15 @@
 
 namespace pf::ui::ig {
 
-Window::Window(std::string name, std::string label, AllowCollapse allowCollapse, Persistent persistent)
-    : Renderable(std::move(name)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
-      Positionable(Position{-1, -1}), Labellable(std::move(label)) {
+Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse, Persistent persistent)
+    : Renderable(std::move(elementName)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
+      Positionable(Position{-1, -1}), label(std::move(titleLabel)) {
   refreshIdLabel();
-  addLabelListener([this](auto) { refreshIdLabel(); });
+  label.addListener([this](auto) { refreshIdLabel(); });
 }
 
-Window::Window(std::string name, std::string label, Persistent persistent)
-    : Window(std::move(name), std::move(label), AllowCollapse::No, persistent) {}
+Window::Window(std::string elementName, std::string titleLabel, Persistent persistent)
+    : Window(std::move(elementName), std::move(titleLabel), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -215,7 +216,7 @@ void Window::setStayInBackground(bool stay) {
   }
 }
 
-void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", getLabel(), getName()); }
+void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", label.get(), getName()); }
 
 void Window::setCollapsible(bool newCollapsible) {
   if (newCollapsible) {

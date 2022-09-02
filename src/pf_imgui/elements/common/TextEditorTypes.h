@@ -13,7 +13,7 @@ enum class TextEditorHighlight { GLSL, HLSL, AngelScript, Lua, C, CPP, SQL };
 
 // TODO: implement properly in the text editor sometime
 // for now only works for line
-struct Breakpoint { //-V730
+struct Breakpoint {  //-V730
   std::uint32_t line;
   bool enabled = true;
   std::string text{};

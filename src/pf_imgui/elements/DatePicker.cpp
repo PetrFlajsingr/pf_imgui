@@ -9,21 +9,21 @@
 namespace pf::ui::ig {
 
 DatePicker::DatePicker(DatePicker::Config &&config)
-    : ItemElement(std::string{config.name.value}), Labellable(std::string{config.label.value}),
-      ValueObservable(config.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+    : ItemElement(std::string{config.name.value}), ValueObservable(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}),
       rawTime(std::make_unique<tm>()) {
   rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(config.value.day()));
   rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(config.value.month()) - 1);
   rawTime->tm_year = static_cast<int>(config.value.year()) - 1900;
 }
 
-DatePicker::DatePicker(const std::string &name, const std::string &label, std::chrono::year_month_day value,
-                       Persistent persistent)
-    : ItemElement(name), Labellable(label), ValueObservable(value), Savable(persistent),
+DatePicker::DatePicker(const std::string &elementName, const std::string &labelText,
+                       std::chrono::year_month_day initialValue, Persistent persistent)
+    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText),
       rawTime(std::make_unique<tm>()) {
-  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(value.day()));
-  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(value.month()) - 1);
-  rawTime->tm_year = static_cast<int>(value.year()) - 1900;
+  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(initialValue.day()));
+  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(initialValue.month()) - 1);
+  rawTime->tm_year = static_cast<int>(initialValue.year()) - 1900;
 }
 
 void DatePicker::setValue(const std::chrono::year_month_day &newValue) {
@@ -72,7 +72,7 @@ void DatePicker::setFromToml(const toml::table &src) {
 void DatePicker::renderImpl() {
   using namespace std::chrono;
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::DateChooser(getLabel().c_str(), *rawTime)) {
+  if (ImGui::DateChooser(label.get().c_str(), *rawTime)) {
     const auto newDate =
         year_month_day{year{rawTime->tm_year + 1900}, month{static_cast<unsigned int>(rawTime->tm_mon + 1)},
                        day{static_cast<unsigned int>(rawTime->tm_mday)}};

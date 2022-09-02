@@ -11,8 +11,8 @@ IndeterminateProgressBar::IndeterminateProgressBar(IndeterminateProgressBar::Con
     : IndeterminateProgressBar(std::string{config.name.value}, config.overlay, config.speed, config.size) {}
 
 IndeterminateProgressBar::IndeterminateProgressBar(const std::string &elementName, std::string overlayStr, float speed,
-                                                   const Size &size)
-    : ItemElement(elementName), Resizable(size), changeSpeed(speed), overlay(std::move(overlayStr)) {}
+                                                   const Size &initialSize)
+    : ItemElement(elementName), Resizable(initialSize), changeSpeed(speed), overlay(std::move(overlayStr)) {}
 
 void IndeterminateProgressBar::setSpeed(float speed) { changeSpeed = speed; }
 
