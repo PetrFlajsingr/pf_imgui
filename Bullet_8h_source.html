@@ -91,31 +91,30 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  };</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Bullet.html">Bullet</a>(Args &amp;&amp;...args)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a>(std::constructible_from&lt;T, Args...&gt;)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  ;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span>&lt;std::derived_from&lt;Element&gt; T&gt;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;Bullet&lt;T&gt;::Bullet(Args &amp;&amp;...args)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  requires(std::constructible_from&lt;T, Args...&gt;)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;: T(std::forward&lt;Args&gt;(args)...) {}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span>&lt;std::derived_from&lt;Element&gt; T&gt;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Bullet.html#a79371a6ad233fd741f8d5ba56f50995b">   54</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Bullet.html#a79371a6ad233fd741f8d5ba56f50995b">Bullet&lt;T&gt;::renderImpl</a>() {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  ImGui::Bullet();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  T::renderImpl();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_SRC_ELEMENTS_BULLET_H</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a>(std::constructible_from&lt;T, Args...&gt;);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;std::derived_from&lt;Element&gt; T&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;Bullet&lt;T&gt;::Bullet(Args &amp;&amp;...args)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  requires(std::constructible_from&lt;T, Args...&gt;)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;: T(std::forward&lt;Args&gt;(args)...) {}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;std::derived_from&lt;Element&gt; T&gt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Bullet.html#a79371a6ad233fd741f8d5ba56f50995b">   53</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Bullet.html#a79371a6ad233fd741f8d5ba56f50995b">Bullet&lt;T&gt;::renderImpl</a>() {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  ImGui::Bullet();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  T::renderImpl();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_SRC_ELEMENTS_BULLET_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Bullet_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Bullet.html">pf::ui::ig::Bullet</a></div><div class="ttdoc">Wrapper for an element rendering a bullet point next to it.</div><div class="ttdef"><b>Definition:</b> Bullet.h:23</div></div>
 <div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:185</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Bullet_html_a79371a6ad233fd741f8d5ba56f50995b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Bullet.html#a79371a6ad233fd741f8d5ba56f50995b">pf::ui::ig::Bullet::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Bullet.h:54</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Bullet_html_a79371a6ad233fd741f8d5ba56f50995b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Bullet.html#a79371a6ad233fd741f8d5ba56f50995b">pf::ui::ig::Bullet::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Bullet.h:53</div></div>
 <div class="ttc" id="aElementWithID_8h_html"><div class="ttname"><a href="ElementWithID_8h.html">ElementWithID.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements and need ID or/and a font.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Bullet_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Bullet_1_1Config.html">pf::ui::ig::Bullet::Config</a></div><div class="ttdoc">Struct for construction of Bullet.</div><div class="ttdef"><b>Definition:</b> Bullet.h:28</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Bullet_1_1Config_html_a9a55da4a031ce816839466fa6aaee683"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Bullet_1_1Config.html#a9a55da4a031ce816839466fa6aaee683">pf::ui::ig::Bullet::Config::config</a></div><div class="ttdeci">Explicit&lt; typename T::Config &gt; config</div><div class="ttdef"><b>Definition:</b> Bullet.h:30</div></div>

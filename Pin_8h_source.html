@@ -77,9 +77,9 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;fwd.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;imgui_node_editor.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="PopupMenu_8h.html">pf_imgui/elements/PopupMenu.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Hoverable_8h.html">pf_imgui/interface/Hoverable.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Labellable_8h.html">pf_imgui/interface/Labellable.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Label_8h.html">pf_imgui/Label.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="PopupMenu_8h.html">pf_imgui/elements/PopupMenu.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Hoverable_8h.html">pf_imgui/interface/Hoverable.h</a>&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Observable__impl_8h.html">pf_imgui/interface/Observable_impl.h</a>&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Renderable_8h.html">pf_imgui/interface/Renderable.h</a>&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/node_editor/details/LinkPtrToRef.h&gt;</span></div>
@@ -89,7 +89,7 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// TODO: customization</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// TODO: code link</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Pin.html">   29</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html">Pin</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">Hoverable</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Pin.html">   29</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html">Pin</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">Hoverable</a> {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1NodeEditor.html">NodeEditor</a>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Node.html">Node</a>;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  ranges::transform_view&lt;ranges::ref_view&lt;std::vector&lt;std::unique_ptr&lt;pf::ui::ig::Link&gt;&gt;&gt;, <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1LinkPtrToRef.html">details::LinkPtrToRef</a>&gt;</div>
@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Pin_1_1Config.html#a1a0abf84545ff2563b87c71750eeda82">   53</a></span>&#160;    Explicit&lt;std::string&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Pin_1_1Config.html#a1a0abf84545ff2563b87c71750eeda82">label</a>; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  };</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a63be97057b8a02315e4f29b18da0c072">Pin</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Pin_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a63be97057b8a02315e4f29b18da0c072">Pin</a>(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> std::string &amp;label);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a63be97057b8a02315e4f29b18da0c072">Pin</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;labelText);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  [[nodiscard]] ax::NodeEditor::PinId <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#aac7e9a60f9e81129858fbd847f4765ff">getId</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
@@ -167,38 +167,39 @@ $(function() {
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#af7e97b96872a6b28e7f1a35d64c4ebd9">hasPopupMenu</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a9e45a4d18446178251c42f55848b825f">removePopupMenu</a>();</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a09fcba7ce155cfbe90de4fa21a81d684">renderImpl</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#ae0d7776a995b3ca5c3480a5b048da3ef">renderIcon</a>();</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a79b8a7e0729034d0ea5ee5e6ec7ee66c">renderInfo</a>();</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a2c40ee8733a31582e75c3a000e2ee91b">addLink</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Link.html">Link</a> &amp;link);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  ax::NodeEditor::PinId id;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  Type type;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Node.html">Node</a> *parent;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> label;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a09fcba7ce155cfbe90de4fa21a81d684">renderImpl</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#ae0d7776a995b3ca5c3480a5b048da3ef">renderIcon</a>();</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a79b8a7e0729034d0ea5ee5e6ec7ee66c">renderInfo</a>();</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html#a2c40ee8733a31582e75c3a000e2ee91b">addLink</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Link.html">Link</a> &amp;link);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  ax::NodeEditor::PinId id;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  Type type;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> validLinkPreviewColor = Color::White;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <span class="keywordtype">float</span> validLinkPreviewThickness = 1.f;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> invalidLinkPreviewColor = Color::White;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <span class="keywordtype">float</span> invalidLinkPreviewThickness = 1.f;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> unconnectedLinkPreviewColor = Color::White;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="keywordtype">float</span> unconnectedLinkPreviewThickness = 1.f;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;Link &amp;&gt;</a> observableLink;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;&gt;</a> observableDoubleClick;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  std::unique_ptr&lt;PopupMenu&gt; popupMenu = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;};</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Node.html">Node</a> *parent;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> validLinkPreviewColor = Color::White;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <span class="keywordtype">float</span> validLinkPreviewThickness = 1.f;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> invalidLinkPreviewColor = Color::White;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keywordtype">float</span> invalidLinkPreviewThickness = 1.f;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> unconnectedLinkPreviewColor = Color::White;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="keywordtype">float</span> unconnectedLinkPreviewThickness = 1.f;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;Link &amp;&gt;</a> observableLink;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;&gt;</a> observableDoubleClick;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  std::unique_ptr&lt;PopupMenu&gt; popupMenu = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;};</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_NODE_EDITOR_PIN_H</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_NODE_EDITOR_PIN_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aLabellable_8h_html"><div class="ttname"><a href="Labellable_8h.html">Labellable.h</a></div><div class="ttdoc">Class providing label support.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a8836e804664b9b3b633d345d66b15325"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a8836e804664b9b3b633d345d66b15325">pf::ui::ig::Pin::createOrGetPopupMenu</a></div><div class="ttdeci">PopupMenu &amp; createOrGetPopupMenu()</div><div class="ttdef"><b>Definition:</b> Pin.cpp:39</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a0416c3f1fb9e26f775f133de514d60b6"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a0416c3f1fb9e26f775f133de514d60b6">pf::ui::ig::Pin::clearLinks</a></div><div class="ttdeci">void clearLinks()</div><div class="ttdef"><b>Definition:</b> Pin.cpp:30</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a5584e17a22cfac5c470532c7ad4fd2d6"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a5584e17a22cfac5c470532c7ad4fd2d6">pf::ui::ig::Pin::setUnconnectedLinkPreviewThickness</a></div><div class="ttdeci">void setUnconnectedLinkPreviewThickness(float thickness)</div><div class="ttdef"><b>Definition:</b> Pin.cpp:120</div></div>
@@ -218,9 +219,9 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Hoverable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></div><div class="ttdoc">Interface for hoverable elements.</div><div class="ttdef"><b>Definition:</b> Hoverable.h:21</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a2c40ee8733a31582e75c3a000e2ee91b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a2c40ee8733a31582e75c3a000e2ee91b">pf::ui::ig::Pin::addLink</a></div><div class="ttdeci">virtual void addLink(Link &amp;link)</div><div class="ttdef"><b>Definition:</b> Pin.cpp:96</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html">pf::ui::ig::Pin</a></div><div class="ttdoc">A Pin to be placed inside Node.</div><div class="ttdef"><b>Definition:</b> Pin.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html">pf::ui::ig::Label</a></div><div class="ttdoc">Label for UI elements.</div><div class="ttdef"><b>Definition:</b> Label.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html">pf::ui::ig::Link</a></div><div class="ttdoc">Link connecting two Pins in NodeEditor.</div><div class="ttdef"><b>Definition:</b> Link.h:23</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_aac7e9a60f9e81129858fbd847f4765ff"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#aac7e9a60f9e81129858fbd847f4765ff">pf::ui::ig::Pin::getId</a></div><div class="ttdeci">ax::NodeEditor::PinId getId() const</div><div class="ttdef"><b>Definition:</b> Pin.cpp:18</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:25</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_acc635ffde2ced4362cd5710d9287fabf"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#acc635ffde2ced4362cd5710d9287fabf">pf::ui::ig::Pin::setInvalidLinkPreviewColor</a></div><div class="ttdeci">void setInvalidLinkPreviewColor(Color color)</div><div class="ttdef"><b>Definition:</b> Pin.cpp:108</div></div>
 <div class="ttc" id="aHoverable_8h_html"><div class="ttname"><a href="Hoverable_8h.html">Hoverable.h</a></div><div class="ttdoc">Interface for elements which can be hovered.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a98be8f3a0a624e6f15d7b00bbfcddefb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a98be8f3a0a624e6f15d7b00bbfcddefb">pf::ui::ig::Pin::getValidLinkPreviewColor</a></div><div class="ttdeci">Color getValidLinkPreviewColor() const</div><div class="ttdef"><b>Definition:</b> Pin.cpp:98</div></div>
@@ -229,6 +230,7 @@ $(function() {
 <div class="ttc" id="aPopupMenu_8h_html"><div class="ttname"><a href="PopupMenu_8h.html">PopupMenu.h</a></div><div class="ttdoc">Popup menu usually shown when right clicking.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a9efad18925ef6f552f24eaa191ea00e3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a9efad18925ef6f552f24eaa191ea00e3">pf::ui::ig::Link::getInputPin</a></div><div class="ttdeci">Pin &amp; getInputPin() const</div><div class="ttdef"><b>Definition:</b> Link.cpp:17</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a05fad7d74a808ef52671f3e11a4bb507"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a05fad7d74a808ef52671f3e11a4bb507">pf::ui::ig::Pin::addLinkListener</a></div><div class="ttdeci">Subscription addLinkListener(std::invocable&lt; Link &amp; &gt; auto &amp;&amp;listener)</div><div class="ttdef"><b>Definition:</b> Pin.h:107</div></div>
+<div class="ttc" id="aLabel_8h_html"><div class="ttname"><a href="Label_8h.html">Label.h</a></div><div class="ttdoc">Class representing element's label.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:25</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a33b83af09d45051513d594d00fe65c01"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a33b83af09d45051513d594d00fe65c01">pf::ui::ig::Pin::setValidLinkPreviewColor</a></div><div class="ttdeci">void setValidLinkPreviewColor(Color color)</div><div class="ttdef"><b>Definition:</b> Pin.cpp:100</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1NodeEditor_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1NodeEditor.html">pf::ui::ig::NodeEditor</a></div><div class="ttdoc">Class allowing for node editing.</div><div class="ttdef"><b>Definition:</b> NodeEditor.h:33</div></div>
@@ -239,7 +241,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_af7e97b96872a6b28e7f1a35d64c4ebd9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#af7e97b96872a6b28e7f1a35d64c4ebd9">pf::ui::ig::Pin::hasPopupMenu</a></div><div class="ttdeci">bool hasPopupMenu() const</div><div class="ttdef"><b>Definition:</b> Pin.cpp:44</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a09fcba7ce155cfbe90de4fa21a81d684"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a09fcba7ce155cfbe90de4fa21a81d684">pf::ui::ig::Pin::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Pin.cpp:48</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_aa3a2fbd2716f43673608000de448d54a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#aa3a2fbd2716f43673608000de448d54a">pf::ui::ig::Pin::acceptsNewLinks</a></div><div class="ttdeci">virtual bool acceptsNewLinks() const</div><div class="ttdef"><b>Definition:</b> Pin.cpp:35</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Input_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Input.html">pf::ui::ig::Input</a></div><div class="ttdoc">Keyboard input for numeric types.</div><div class="ttdef"><b>Definition:</b> Input.h:38</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Input_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Input.html">pf::ui::ig::Input</a></div><div class="ttdoc">Keyboard input for numeric types.</div><div class="ttdef"><b>Definition:</b> Input.h:37</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">pf::ui::ig::Observable_impl</a></div><div class="ttdoc">Implementation of observable design pattern.</div><div class="ttdef"><b>Definition:</b> Observable_impl.h:27</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a40f493752b39d6346a55836055f3c93c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a40f493752b39d6346a55836055f3c93c">pf::ui::ig::Pin::getUnconnectedLinkPreviewThickness</a></div><div class="ttdeci">float getUnconnectedLinkPreviewThickness() const</div><div class="ttdef"><b>Definition:</b> Pin.cpp:118</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html_a807a93ba9788c569ff6a35b794462ff5"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html#a807a93ba9788c569ff6a35b794462ff5">pf::ui::ig::Pin::acceptsLinkWith</a></div><div class="ttdeci">virtual bool acceptsLinkWith([[maybe_unused]] Pin &amp;other) const</div><div class="ttdef"><b>Definition:</b> Pin.cpp:37</div></div>

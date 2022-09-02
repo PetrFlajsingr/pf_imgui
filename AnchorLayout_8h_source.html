@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1AnchorLayout_1_1Config.html#aa7d6d84ae47b639fa5f64941e0ddb5e0">   42</a></span>&#160;    <span class="keywordtype">bool</span> showBorder = <span class="keyword">false</span>;         </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  };</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">AnchorLayout</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1AnchorLayout_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">AnchorLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;size, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">AnchorLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;initialSize, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a> std::derived_from&lt;T, Element&gt; &amp;&amp; std::constructible_from&lt;T, Args...&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html#ae88e5ee1e9801d50beb7f316fc1c8d31">   69</a></span>&#160;  <span class="keyword">auto</span> &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html#ae88e5ee1e9801d50beb7f316fc1c8d31">createChild</a>(ImVec2 position, <span class="keyword">const</span> Flags&lt;Anchor&gt; &amp;anchors, Args &amp;&amp;...args) {</div>
@@ -112,21 +112,21 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::function&lt;void(<a class="code" href="classpf_1_1ui_1_1ig_1_1Width.html">Width</a>)&gt; addToWidth = [](<a class="code" href="classpf_1_1ui_1_1ig_1_1Width.html">Width</a>) {};</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span> constexpr (std::derived_from&lt;T, Resizable&gt;) {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      addToWidth = [ptr = child.get()](<span class="keywordtype">float</span> d) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">auto</span> size = ptr-&gt;getSize();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        size.width = std::clamp(size.width + d, 0.f, std::numeric_limits&lt;float&gt;::max());</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        ptr-&gt;setSize(size);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">auto</span> childSize = ptr-&gt;getSize();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        childSize.width = std::clamp(childSize.width + d, 0.f, std::numeric_limits&lt;float&gt;::max());</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        ptr-&gt;setSize(childSize);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      };</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      addToHeight = [ptr = child.get()](<a class="code" href="classpf_1_1ui_1_1ig_1_1Height.html">Height</a> d) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">auto</span> size = ptr-&gt;getSize();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        size.height = size.height + d;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">if</span> (size.height &lt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Height.html">Height</a>{0}) { size.height = 0; }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        ptr-&gt;setSize(size);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">auto</span> childSize = ptr-&gt;getSize();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        childSize.height = childSize.height + d;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">if</span> (childSize.height &lt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Height.html">Height</a>{0}) { childSize.height = 0; }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        ptr-&gt;setSize(childSize);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      };</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::derived_from&lt;T, WidthDecorator&lt;T&gt;&gt;) {</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      addToWidth = [ptr = child.get()](<a class="code" href="classpf_1_1ui_1_1ig_1_1Width.html">Width</a> d) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">auto</span> width = ptr-&gt;getWidth() + d;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">if</span> (width &lt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Width.html">Width</a>{0}) { width = 0; }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        ptr-&gt;setWidth(width);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">auto</span> childWidth = ptr-&gt;getWidth() + d;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">if</span> (childWidth &lt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Width.html">Width</a>{0}) { childWidth = 0; }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        ptr-&gt;setWidth(childWidth);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      };</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    children.emplace_back(std::move(child), <span class="keyword">dynamic_cast&lt;</span>Positionable *<span class="keyword">&gt;</span>(ptr), <span class="keyword">static_cast&lt;</span><a class="code" href="enums_8h.html#af4587c31d0bdffdd51e49105d50f0372">Anchor</a><span class="keyword">&gt;</span>(*anchors),</div>

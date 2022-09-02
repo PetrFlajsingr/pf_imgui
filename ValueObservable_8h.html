@@ -143,7 +143,7 @@ template&lt;typename T , ValueObservableComparator&lt; T &gt; Comparator = detai
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000019">Todo:</a></b></dt><dd>: drop the copy constructible requirement </dd></dl>
 <p>Construct ValueObservable with starting value. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>starting value</td></tr>
+    <tr><td class="paramname">initialValue</td><td>starting value</td></tr>
   </table>
   </dd>
 </dl>
@@ -203,10 +203,8 @@ template&lt;typename T , typename ValueType &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">    std::invocable&lt;T, ValueType, ValueType&gt; &amp;&amp; std::same_as &lt; std::invoke_result_t&lt;T, ValueType, ValueType&gt;,</div>
-<div class="line">        <span class="keywordtype">bool</span></div>
-<div class="line">&gt; &amp;&amp;std::is_default_constructible_v&lt;T&gt;</div>
+<b>Initial value:</b><div class="fragment"><div class="line">= std::invocable&lt;T, ValueType, ValueType&gt;</div>
+<div class="line">    &amp;&amp; std::same_as&lt;std::invoke_result_t&lt;T, ValueType, ValueType&gt;, <span class="keywordtype">bool</span>&gt; &amp;&amp; std::is_default_constructible_v&lt;T&gt;</div>
 </div><!-- fragment -->
 </div>
 </div>

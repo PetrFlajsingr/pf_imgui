@@ -87,7 +87,7 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Plot.html">   27</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html">Plot</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Labellable.html">Labellable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Plot.html">   27</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html">Plot</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Resizable.html">Resizable</a> {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Plot_1_1Config.html">   32</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1Plot_1_1Config.html">Config</a> {</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html">Plot</a>;</div>
@@ -98,57 +98,61 @@ $(function() {
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Plot_1_1Config.html#ac6669209d13a5532e0a1dd8c92ce7cc5">   38</a></span>&#160;    <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad4ddc0a823ca43fe57849d0c260d6c06">Size::FillWidth</a>();                    </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  };</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html">Plot</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Plot_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html">Plot</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, std::optional&lt;std::string&gt; xLabel = std::nullopt,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;       std::optional&lt;std::string&gt; yLabel = std::nullopt, <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;size = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad4ddc0a823ca43fe57849d0c260d6c06">Size::FillWidth</a>());</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">template</span>&lt;std::derived_from&lt;plot_type::PlotData&gt; T, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a> std::constructible_from&lt;T, Args...&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Plot.html#a74cb949c759b32c5c2f1ecbf2011143f">   65</a></span>&#160;  T &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html#a74cb949c759b32c5c2f1ecbf2011143f">addData</a>(Args &amp;&amp;...args) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">auto</span> data = std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = data.get();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    datas.emplace_back(std::move(data));</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keyword">template</span>&lt;std::derived_from&lt;plot_type::PlotData&gt; T&gt;</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Plot.html#a8578265dc5c914025f13743e3a2f732c">   79</a></span>&#160;  [[nodiscard]] std::optional&lt;std::reference_wrapper&lt;T&gt;&gt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html#a8578265dc5c914025f13743e3a2f732c">dataByName</a>(<span class="keyword">const</span> std::string &amp;name) {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter = std::ranges::find_if(datas, [name](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;data) { <span class="keywordflow">return</span> data-&gt;getName() == name; });</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        iter != datas.end()) {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">auto</span> result = <span class="keyword">dynamic_cast&lt;</span>T<span class="keyword">&gt;</span>(iter-&gt;get()); result != <span class="keyword">nullptr</span>) { <span class="keywordflow">return</span> *result; }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">void</span> removeData(<span class="keyword">const</span> std::string &amp;dataName);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  std::optional&lt;std::string&gt; xLabel = std::nullopt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  std::optional&lt;std::string&gt; yLabel = std::nullopt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html">Plot</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;labelText,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;       std::optional&lt;std::string&gt; xLabelText = std::nullopt, std::optional&lt;std::string&gt; yLabelText = std::nullopt,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;       <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;initialSize = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html#ad4ddc0a823ca43fe57849d0c260d6c06">Size::FillWidth</a>());</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keyword">template</span>&lt;std::derived_from&lt;plot_type::PlotData&gt; T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Plot.html#a74cb949c759b32c5c2f1ecbf2011143f">   66</a></span>&#160;  T &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html#a74cb949c759b32c5c2f1ecbf2011143f">addData</a>(Args &amp;&amp;...args) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">auto</span> data = std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = data.get();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    datas.emplace_back(std::move(data));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">template</span>&lt;std::derived_from&lt;plot_type::PlotData&gt; T&gt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Plot.html#a022c6052836cd55b8fd5cc6672ecb48d">   80</a></span>&#160;  [[nodiscard]] std::optional&lt;std::reference_wrapper&lt;T&gt;&gt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Plot.html#a022c6052836cd55b8fd5cc6672ecb48d">dataByName</a>(<span class="keyword">const</span> std::string &amp;dataName) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter =</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            std::ranges::find_if(datas, [dataName](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;data) { <span class="keywordflow">return</span> data-&gt;getName() == dataName; });</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        iter != datas.end()) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">auto</span> result = <span class="keyword">dynamic_cast&lt;</span>T<span class="keyword">&gt;</span>(iter-&gt;get()); result != <span class="keyword">nullptr</span>) { <span class="keywordflow">return</span> *result; }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">void</span> removeData(<span class="keyword">const</span> std::string &amp;dataName);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> label;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  std::vector&lt;std::unique_ptr&lt;plot_type::PlotData&gt;&gt; datas;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;};</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  std::optional&lt;std::string&gt; xLabel = std::nullopt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  std::optional&lt;std::string&gt; yLabel = std::nullopt;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_PLOTS_PLOT_H</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  std::vector&lt;std::unique_ptr&lt;plot_type::PlotData&gt;&gt; datas;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;};</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_PLOTS_PLOT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:185</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html_ad4ddc0a823ca43fe57849d0c260d6c06"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html#ad4ddc0a823ca43fe57849d0c260d6c06">pf::ui::ig::Size::FillWidth</a></div><div class="ttdeci">static Size FillWidth()</div><div class="ttdef"><b>Definition:</b> Size.cpp:21</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Plot_html_a022c6052836cd55b8fd5cc6672ecb48d"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Plot.html#a022c6052836cd55b8fd5cc6672ecb48d">pf::ui::ig::Plot::dataByName</a></div><div class="ttdeci">std::optional&lt; std::reference_wrapper&lt; T &gt; &gt; dataByName(const std::string &amp;dataName)</div><div class="ttdef"><b>Definition:</b> Plot.h:80</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Plot_1_1Config_html_a798816b589c7911cde0c1a1b6739b023"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Plot_1_1Config.html#a798816b589c7911cde0c1a1b6739b023">pf::ui::ig::Plot::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> Plot.h:34</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:87</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html">pf::ui::ig::Label</a></div><div class="ttdoc">Label for UI elements.</div><div class="ttdef"><b>Definition:</b> Label.h:20</div></div>
 <div class="ttc" id="aResizable_8h_html"><div class="ttname"><a href="Resizable_8h.html">Resizable.h</a></div><div class="ttdoc">Interface for elements which can be resized.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Resizable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Resizable.html">pf::ui::ig::Resizable</a></div><div class="ttdoc">Interface for resizable elements.</div><div class="ttdef"><b>Definition:</b> Resizable.h:25</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Labellable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Labellable.html">pf::ui::ig::Labellable</a></div><div class="ttdoc">Interface for labellable elements.</div><div class="ttdef"><b>Definition:</b> Labellable.h:25</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Plot_1_1Config_html_a6f420f025ecea9895b0b3de4648e9a61"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Plot_1_1Config.html#a6f420f025ecea9895b0b3de4648e9a61">pf::ui::ig::Plot::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> Plot.h:35</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Plot_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Plot_1_1Config.html">pf::ui::ig::Plot::Config</a></div><div class="ttdoc">Struct for construction of Plot.</div><div class="ttdef"><b>Definition:</b> Plot.h:32</div></div>
 <div class="ttc" id="aPlotDataBase_8h_html"><div class="ttname"><a href="PlotDataBase_8h.html">PlotDataBase.h</a></div><div class="ttdoc">Types for data storage in plots and base class used in most storage types.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Plot_html_a8578265dc5c914025f13743e3a2f732c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Plot.html#a8578265dc5c914025f13743e3a2f732c">pf::ui::ig::Plot::dataByName</a></div><div class="ttdeci">std::optional&lt; std::reference_wrapper&lt; T &gt; &gt; dataByName(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> Plot.h:79</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Plot_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Plot.html">pf::ui::ig::Plot</a></div><div class="ttdoc">Advanced plot for plotting 2D data.</div><div class="ttdef"><b>Definition:</b> Plot.h:27</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementWithID_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></div><div class="ttdoc">Interface for all ImGui elements with IDs.</div><div class="ttdef"><b>Definition:</b> ElementWithID.h:31</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Plot_html_a74cb949c759b32c5c2f1ecbf2011143f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Plot.html#a74cb949c759b32c5c2f1ecbf2011143f">pf::ui::ig::Plot::addData</a></div><div class="ttdeci">requires std::constructible_from&lt; T, Args... &gt; T &amp; addData(Args &amp;&amp;...args)</div><div class="ttdef"><b>Definition:</b> Plot.h:65</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Plot_html_a74cb949c759b32c5c2f1ecbf2011143f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Plot.html#a74cb949c759b32c5c2f1ecbf2011143f">pf::ui::ig::Plot::addData</a></div><div class="ttdeci">requires std::constructible_from&lt; T, Args... &gt; T &amp; addData(Args &amp;&amp;...args)</div><div class="ttdef"><b>Definition:</b> Plot.h:66</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
