@@ -15,7 +15,7 @@
 #include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/interface/Positionable.h>
+#include <pf_imgui/Position.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <string>
@@ -35,7 +35,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
                                public Collapsible,
                                public Resizable,
-                               public Positionable,
                                public Closeable {
  public:
   /**
@@ -108,8 +107,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void render() override;
 
   void setCollapsed(bool collapse) override;
-
-  void setPosition(Position pos) override;
 
   /**
    * Check if user can resize the window.
@@ -229,6 +226,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   ObservableProperty<Window, bool> hovered;
   ObservableProperty<Window, bool> focused;
+  Observable<Position> position;
 
  protected:
   void renderImpl() override;

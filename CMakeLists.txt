@@ -114,7 +114,6 @@ set(SOURCES
         src/pf_imgui/interface/ItemElement.cpp
         src/pf_imgui/interface/Collapsible.cpp
         src/pf_imgui/interface/Renderable.cpp
-        src/pf_imgui/interface/Positionable.cpp
         src/pf_imgui/layouts/GridLayout.cpp
         src/pf_imgui/layouts/StackedLayout.cpp
         src/pf_imgui/layouts/AbsoluteLayout.cpp
@@ -275,13 +274,11 @@ set(INCLUDES
         src/pf_imgui/reactive/Observable_impl.h
         src/pf_imgui/interface/Collapsible.h
         src/pf_imgui/interface/Renderable.h
-        src/pf_imgui/interface/Positionable.h
         src/pf_imgui/layouts.h
         src/pf_imgui/layouts/GridLayout.h
         src/pf_imgui/layouts/StackedLayout.h
         src/pf_imgui/layouts/AbsoluteLayout.h
         src/pf_imgui/layouts/StretchLayout.h
-        src/pf_imgui/interface/decorators/PositionDecorator.h
         src/pf_imgui/interface/decorators/WidthDecorator.h
         src/pf_imgui/interface/Layout.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h

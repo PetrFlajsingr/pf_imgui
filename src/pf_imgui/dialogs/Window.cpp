@@ -14,14 +14,13 @@ namespace pf::ui::ig {
 
 Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse, Persistent persistent)
     : Renderable(std::move(elementName)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
-      Positionable(Position{-1, -1}), label(std::move(titleLabel)) {
+      position(Position{-1, -1}), label(std::move(titleLabel)) {
   refreshIdLabel();
   label.addListener([this](auto) { refreshIdLabel(); });
-  focused.addListener([this] (bool isFocused) {
-    if (isFocused) {
-      ImGui::SetWindowFocus(idLabel.c_str());
-    }
+  focused.addListener([this](bool isFocused) {
+    if (isFocused) { ImGui::SetWindowFocus(idLabel.c_str()); }
   });
+  position.addListener([this](auto) { positionDirty = true; });
 }
 
 Window::Window(std::string elementName, std::string titleLabel, Persistent persistent)
@@ -39,7 +38,7 @@ void Window::renderImpl() {
   }
   if (positionDirty) {
     positionDirty = false;
-    ImGui::SetNextWindowPos(static_cast<ImVec2>(getPosition()));
+    ImGui::SetNextWindowPos(static_cast<ImVec2>(*position));
   }
 
   RAII endPopup{ImGui::End};
@@ -49,7 +48,7 @@ void Window::renderImpl() {
     if (firstPass) {
       firstPass = false;
       if (getSize() != Size::Auto()) { setSize(getSize()); }
-      if (getPosition().x != -1 && getPosition().y != -1) { setPosition(getPosition()); }  //-V550
+      if (position->x != -1 && position->y != -1) { positionDirty = true; }  //-V550
     }
     if (getEnabled() == Enabled::No) { ImGui::BeginDisabled(); }
     {
@@ -59,7 +58,8 @@ void Window::renderImpl() {
       *hovered.modify() = ImGui::IsWindowHovered();
       Collapsible::setCollapsed(ImGui::IsWindowCollapsed());
       *focused.modify() = ImGui::IsWindowFocused();
-      updatePosition(Position{ImGui::GetWindowPos()});
+      *position.modify() = Position{ImGui::GetWindowPos()};
+      positionDirty = false;
       if (!isCollapsed()) {
         if (hasMenuBar()) { menuBar->render(); }
         std::ranges::for_each(getChildren(), &Renderable::render);
@@ -102,11 +102,6 @@ void Window::render() {
 void Window::setCollapsed(bool collapse) {
   ImGui::SetWindowCollapsed(idLabel.c_str(), collapse);
   Collapsible::setCollapsed(collapse);
-}
-
-void Window::setPosition(Position pos) {
-  positionDirty = true;
-  Positionable::setPosition(pos);
 }
 
 bool Window::isUserResizable() const { return flags & ImGuiWindowFlags_NoResize; }

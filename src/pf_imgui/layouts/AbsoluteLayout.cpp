@@ -23,8 +23,8 @@ void AbsoluteLayout::renderImpl() {
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
     std::ranges::for_each(children, [](auto &childPair) {
-      auto &[child, positionable] = childPair;
-      ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));
+      const auto &[child, position] = childPair;
+      ImGui::SetCursorPos(static_cast<ImVec2>(position));
       child->render();
     });
   }
@@ -33,7 +33,7 @@ void AbsoluteLayout::setChildPosition(const std::string &childName, Position pos
   if (auto foundChild = findIf(children | ranges::views::addressof,
                                [childName](auto child) { return child->first->getName() == childName; });
       foundChild.has_value()) {
-    (*foundChild)->second->setPosition(position);
+    (*foundChild)->second = position;
   }
 }
 void AbsoluteLayout::removeChild(const std::string &childName) {

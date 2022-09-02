@@ -11,11 +11,11 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/Position.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/Size.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/reactive/Observable_impl.h>
-#include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Renderable.h>
 
 namespace pf::ui::ig {
@@ -23,7 +23,7 @@ namespace pf::ui::ig {
 /**
  * @brief Base class for node like objects in NodeEditor.
  */
-class NodeBase : public Renderable, public Positionable {
+class NodeBase : public Renderable {
   friend class NodeEditor;
 
  public:
@@ -65,11 +65,6 @@ class NodeBase : public Renderable, public Positionable {
     return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
   }
 
-  /**
-   * Set node position within editor.
-   * @param newPosition new position
-   */
-  void setPosition(Position newPosition) override;
   /**
    * Get Node's size.
    * @return size
@@ -128,9 +123,12 @@ class NodeBase : public Renderable, public Positionable {
   void render() override;
 
   ObservableProperty<NodeBase, bool> hovered;
+  Observable<Position> position;
 
  protected:
   void setHovered(bool newHovered);
+
+  void updateNodePositionImpl(Position newPosition);
 
   ax::NodeEditor::NodeId id;
   NodeEditor *parent;

@@ -23,7 +23,7 @@ void AnchorLayout::setChildPosition(const std::string &childName, Position posit
   if (auto foundChild = findIf(children | ranges::views::addressof,
                                [childName](auto child) { return child->element->getName() == childName; });
       foundChild.has_value()) {
-    (*foundChild)->positionable->setPosition(position);
+    (*foundChild)->position = position;
   }
 }
 
@@ -40,17 +40,17 @@ void AnchorLayout::setSize(const Size &s) {
   const auto deltaWidth = s.width - getSize().width;
   const auto deltaHeight = s.height - getSize().height;
   std::ranges::for_each(children, [&](auto &childData) {
-    auto &[child, positionable, anchor, addWidth, addHeight] = childData;
+    auto &[child, position, anchor, addWidth, addHeight] = childData;
     const auto anchorFlags = Flags{anchor};
     if (anchorFlags.is(Anchor::Left)) {
       if (anchorFlags.is(Anchor::Right)) { addWidth(deltaWidth); }
     } else if (anchorFlags.is(Anchor::Right)) {
-      positionable->setPosition(positionable->getPosition().moveDelta(static_cast<float>(deltaWidth), 0));
+      position = position.moveDelta(static_cast<float>(deltaWidth), 0);
     }
     if (anchorFlags.is(Anchor::Top)) {
       if (anchorFlags.is(Anchor::Bottom)) { addHeight(deltaHeight); }
     } else if (anchorFlags.is(Anchor::Bottom)) {
-      positionable->setPosition(positionable->getPosition().moveDelta(0, static_cast<float>(deltaHeight)));
+      position = position.moveDelta(0, static_cast<float>(deltaHeight));
     }
   });
   Resizable::setSize(s);
@@ -66,8 +66,8 @@ void AnchorLayout::renderImpl() {
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
     std::ranges::for_each(children, [](auto &childData) {
-      auto &[child, positionable, anchor, _1, _2] = childData;
-      ImGui::SetCursorPos(static_cast<ImVec2>(positionable->getPosition()));
+      auto &[child, position, anchor, _1, _2] = childData;
+      ImGui::SetCursorPos(static_cast<ImVec2>(position));
       child->render();
     });
   }

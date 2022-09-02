@@ -14,7 +14,6 @@
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Layout.h>
-#include <pf_imgui/interface/decorators/PositionDecorator.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
@@ -66,17 +65,16 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
     */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
-  auto &createChild(ImVec2 position, const Flags<Anchor> &anchors, Args &&...args) {
-    constexpr auto IsPositionable = std::derived_from<T, Positionable>;
-    using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
-    auto child = std::make_unique<CreateType>(position, std::forward<Args>(args)...);
+  auto &createChild(Position position, const Flags<Anchor> &anchors, Args &&...args) {
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     std::function<void(Height)> addToHeight = [](Height) {};
     std::function<void(Width)> addToWidth = [](Width) {};
     if constexpr (std::derived_from<T, Resizable>) {
-      addToWidth = [ptr = child.get()](float d) {
+      addToWidth = [ptr = child.get()](Width d) {
         auto childSize = ptr->getSize();
-        childSize.width = std::clamp(childSize.width + d, 0.f, std::numeric_limits<float>::max());
+        childSize.width = std::clamp(static_cast<float>(childSize.width) + static_cast<float>(d), 0.f,
+                                     std::numeric_limits<float>::max());
         ptr->setSize(childSize);
       };
       addToHeight = [ptr = child.get()](Height d) {
@@ -92,8 +90,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
         ptr->setWidth(childWidth);
       };
     }
-    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr), static_cast<Anchor>(*anchors),
-                          addToWidth, addToHeight);
+    children.emplace_back(std::move(child), position, static_cast<Anchor>(*anchors), addToWidth, addToHeight);
     return *ptr;
   }
 
@@ -136,7 +133,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
  private:
   struct AnchoredChild {
     std::unique_ptr<Element> element;
-    Positionable *positionable;
+    Position position;
     Flags<Anchor> anchors;
     std::function<void(Width)> addToWidth;
     std::function<void(Height)> addToHeight;
