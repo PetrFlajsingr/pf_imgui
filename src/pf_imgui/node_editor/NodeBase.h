@@ -13,7 +13,7 @@
 #include <pf_imgui/Position.h>
 #include <pf_imgui/Size.h>
 #include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/interface/Hoverable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Renderable.h>
@@ -23,7 +23,7 @@ namespace pf::ui::ig {
 /**
  * @brief Base class for node like objects in NodeEditor.
  */
-class NodeBase : public Renderable, public Hoverable, public Positionable {
+class NodeBase : public Renderable, public Positionable {
   friend class NodeEditor;
 
  public:
@@ -127,7 +127,11 @@ class NodeBase : public Renderable, public Hoverable, public Positionable {
 
   void render() override;
 
+  ObservableProperty<NodeBase, bool> hovered;
+
  protected:
+  void setHovered(bool newHovered);
+
   ax::NodeEditor::NodeId id;
   NodeEditor *parent;
 

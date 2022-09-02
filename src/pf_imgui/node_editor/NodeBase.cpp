@@ -82,4 +82,6 @@ void NodeBase::render() {
   }
 }
 
+void NodeBase::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
+
 }  // namespace pf::ui::ig

@@ -82,7 +82,7 @@ void GradientEditor::renderImpl() {
     setValueInner(getPointsView());
     notifyValueChanged();
   }
-  setHovered(gradient.hovered);
+  *hovered.modify() = gradient.hovered;
   updateFocused(gradient.focused);
   if (hasFocus() && ImGui::IsKeyPressed(ImGuiKey_Delete) && selectedMark != nullptr) {
     gradient.removeMark(selectedMark);

@@ -51,7 +51,7 @@ void Window::renderImpl() {
       auto raiiEnabled = pf::RAII([this] {
         if (getEnabled() == Enabled::No) { ImGui::EndDisabled(); }
       });
-      setHovered(ImGui::IsWindowHovered());
+      *hovered.modify() = ImGui::IsWindowHovered();
       Collapsible::setCollapsed(ImGui::IsWindowCollapsed());
       updateFocused(ImGui::IsWindowFocused());
       updatePosition(Position{ImGui::GetWindowPos()});

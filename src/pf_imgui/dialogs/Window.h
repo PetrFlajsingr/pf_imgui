@@ -16,7 +16,7 @@
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Focusable.h>
-#include <pf_imgui/interface/Hoverable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <string>
@@ -35,7 +35,6 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
                                public Focusable,
-                               public Hoverable,
                                public Collapsible,
                                public Resizable,
                                public Positionable,
@@ -231,6 +230,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   [[nodiscard]] inline std::string getImGuiName() const { return idLabel; }
 
   Label label;
+
+  ObservableProperty<Window, bool> hovered;
 
  protected:
   void renderImpl() override;

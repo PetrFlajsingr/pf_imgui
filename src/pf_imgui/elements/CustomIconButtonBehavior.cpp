@@ -20,8 +20,8 @@ void CustomIconButtonBehavior::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   auto drawList = ImGui::GetWindowDrawList();
   State state;
-  if (isHovered() || keepHighlighted) {
-    if (isHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+  if (*hovered || keepHighlighted) {
+    if (*hovered && ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
       backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(ColorOf::ButtonActive))};
       state = State::MouseDown;
     } else {
@@ -48,9 +48,7 @@ void CustomIconButton::update(CustomIconButtonBehavior::State state) {
   if (state == State::Clicked) { notifyClickEvent(); }
 }
 
-void CustomIconButton::notifyClickEvent() {
-  clickEvent.notify();
-}
+void CustomIconButton::notifyClickEvent() { clickEvent.notify(); }
 
 CustomIconToggle::CustomIconToggle(const std::string &elementName, bool initValue, Persistent persistent)
     : CustomIconButtonBehavior(elementName), ValueObservable(initValue), Savable(persistent) {

@@ -30,7 +30,7 @@ void ItemElement::render() {
   setHovered(ImGui::IsItemHovered());
   updateFocused(ImGui::IsItemFocused());
 
-  if (isHovered()) {
+  if (*hovered) {
     auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
     if (newMousePos.x != lastMousePosition.x && newMousePos.y != lastMousePosition.y) {  //-V550
       lastMousePosition = newMousePos;
@@ -39,10 +39,10 @@ void ItemElement::render() {
   }
 
   if (tooltip != nullptr) {
-    if (getVisibility() == Visibility::Visible && isHovered()) { tooltip->render(); }
+    if (getVisibility() == Visibility::Visible && *hovered) { tooltip->render(); }
   }
   if (popupMenu != nullptr) {
-    if (isHovered() && ImGui::GetIO().MouseClicked[1]) { popupMenu->open(); }
+    if (*hovered && ImGui::GetIO().MouseClicked[1]) { popupMenu->open(); }
     popupMenu->render();
   }
 }
@@ -78,5 +78,9 @@ PopupMenu &ItemElement::createOrGetPopupMenu() {
 bool ItemElement::hasPopupMenu() const { return popupMenu != nullptr; }
 
 void ItemElement::removePopupMenu() { popupMenu = nullptr; }
+
+void ItemElement::setHovered(bool newHovered) {
+  *hovered.modify() = newHovered;
+}
 
 }  // namespace pf::ui::ig

@@ -13,8 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/interface/Hoverable.h>
-#include <pf_imgui/reactive/Observable_impl.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
@@ -26,7 +25,7 @@ namespace pf::ui::ig {
 /**
  * @brief A Pin to be placed inside Node. @see Node
  */
-class Pin : public Renderable, public Hoverable {
+class Pin : public Renderable {
   friend class NodeEditor;
   friend class Node;
   /**
@@ -206,6 +205,8 @@ class Pin : public Renderable, public Hoverable {
 
   Label label;
 
+  ObservableProperty<Pin, bool> hovered;
+
  protected:
   /**
    * @warning Do not override unless you completely want to change the way pins look
@@ -224,6 +225,8 @@ class Pin : public Renderable, public Hoverable {
    * Called when NodeEditor decides a Link is to be added
    */
   virtual void addLink(Link &link);
+
+  void setHovered(bool newHovered);
 
   ax::NodeEditor::PinId id;
   Type type;

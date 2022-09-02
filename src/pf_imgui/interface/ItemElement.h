@@ -14,7 +14,7 @@
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Focusable.h>
-#include <pf_imgui/interface/Hoverable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 
@@ -25,7 +25,7 @@ namespace pf::ui::ig {
  *
  * Provides hover and focus changes. Adds an option to add a tooltip, which is shown when the item is hovered.
  */
-class PF_IMGUI_EXPORT ItemElement : public ElementWithID, public Focusable, public Hoverable {
+class PF_IMGUI_EXPORT ItemElement : public ElementWithID, public Focusable {
  public:
   /**
    * Construct ItemElement with the given ID.
@@ -98,6 +98,11 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID, public Focusable, publ
    * Set focus state and keyboard focus for this item.
    */
   void setFocus() override;
+
+  ObservableProperty<ItemElement, bool> hovered;
+
+ protected:
+  void setHovered(bool newHovered);
 
  private:
   std::unique_ptr<Tooltip> tooltip = nullptr;

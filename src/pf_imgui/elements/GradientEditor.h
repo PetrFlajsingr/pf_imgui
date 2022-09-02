@@ -14,9 +14,9 @@
 #include <pf_imgui/Font.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Focusable.h>
-#include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/transform.hpp>
 #include <range/v3/view/zip.hpp>
 
@@ -55,7 +55,6 @@ struct GradientPointsViewComparator {
  */
 class GradientEditor : public ElementWithID,
                        public ValueObservable<GradientPointsView, GradientPointsViewComparator>,
-                       public Hoverable,
                        public Focusable,
                        public Savable {
  public:
@@ -100,6 +99,8 @@ class GradientEditor : public ElementWithID,
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
+
+  ObservableProperty<GradientEditor, bool> hovered;
 
  protected:
   void renderImpl() override;

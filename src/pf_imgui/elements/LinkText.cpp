@@ -15,7 +15,7 @@ LinkText::LinkText(pf::ui::ig::LinkText::Config &&config)
 void LinkText::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   {
-    if (isHovered()) {
+    if (*hovered) {
       ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_SliderGrab]);
     } else {
       ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive]);
