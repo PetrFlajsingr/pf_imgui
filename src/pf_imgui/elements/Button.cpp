@@ -21,6 +21,8 @@ RAII ButtonBase::setButtonRepeat() {
   return RAII{ImGui::PopButtonRepeat};
 }
 
+void ButtonBase::notifyClickEvent() { clickEvent.notify(); }
+
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
       Resizable(config.size), clickBtn(config.clickButton) {}
@@ -32,7 +34,7 @@ InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, 
 void InvisibleButton::renderImpl() {
   [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(getSize()), static_cast<int>(clickBtn))) {
-    notifyOnClick();
+    notifyClickEvent();
   }
 }
 
@@ -48,7 +50,7 @@ void Button::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::Button(label.get().c_str(), static_cast<ImVec2>(getSize()))) { notifyOnClick(); }
+  if (ImGui::Button(label.get().c_str(), static_cast<ImVec2>(getSize()))) { notifyClickEvent(); }
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
@@ -63,7 +65,7 @@ void SmallButton::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::SmallButton(label.get().c_str())) { notifyOnClick(); }
+  if (ImGui::SmallButton(label.get().c_str())) { notifyClickEvent(); }
 }
 
 ArrowButton::ArrowButton(ArrowButton::Config &&config)
@@ -77,7 +79,7 @@ void ArrowButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { notifyOnClick(); }
+  if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { notifyClickEvent(); }
 }
 
 ImageButton::ImageButton(ImageButton::Config &&config)
@@ -99,7 +101,7 @@ void ImageButton::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::ImageButton(texture->getID(), static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom)) {
-    notifyOnClick();
+    notifyClickEvent();
   }
 }
 

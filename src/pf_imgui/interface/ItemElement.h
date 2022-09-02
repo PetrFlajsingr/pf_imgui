@@ -8,14 +8,13 @@
 #ifndef PF_IMGUI_INTERFACE_ITEMELEMENT_H
 #define PF_IMGUI_INTERFACE_ITEMELEMENT_H
 
-#include "ElementWithID.h"
-#include "Focusable.h"
-#include "Hoverable.h"
 #include <memory>
 #include <pf_imgui/Position.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/elements/Tooltip.h>
+#include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/ElementWithID.h>
+#include <pf_imgui/interface/Focusable.h>
+#include <pf_imgui/interface/Hoverable.h>
 #include <string>
 #include <utility>
 
@@ -33,6 +32,7 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID, public Focusable, publ
    * @param elementName ID
    */
   explicit ItemElement(const std::string &elementName);
+  ~ItemElement() override;
 
   ItemElement(ItemElement &&other) noexcept;
   ItemElement &operator=(ItemElement &&other) noexcept;

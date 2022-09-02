@@ -18,8 +18,8 @@ ConsolePanel::ConsolePanel(const std::string &elementName, Size initialSize, Per
     : ElementWithID(elementName), Resizable(initialSize), Savable(persistent), wrapTextToggle("wrapText"),
       scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
 
-  clearButton.addClickListener([this] { records.clear(); });
-  copyToClipboardButton.addClickListener([this] { ImGui::SetClipboardText(getOutput().c_str()); });
+  clearButton.clickEvent.addListener([this] { records.clear(); });
+  copyToClipboardButton.clickEvent.addListener([this] { ImGui::SetClipboardText(getOutput().c_str()); });
   clearButton.setTooltip("Clear output");
   copyToClipboardButton.setTooltip("Copy output to clipboard");
   wrapTextToggle.setTooltip("Wrap text");

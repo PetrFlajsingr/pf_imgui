@@ -11,7 +11,7 @@
 #include <imgui.h>
 #include <pf_imgui/Position.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <utility>
 
 namespace pf::ui::ig {

@@ -15,11 +15,13 @@ TabButton::TabButton(TabButton::Config &&config)
 TabButton::TabButton(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods)
     : ItemElement(elementName), label(labelText), flags(*mods) {}
 
+void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
+
 void TabButton::renderImpl() {
-  if (ImGui::TabItemButton(label.get().c_str(), flags)) { notifyOnClick(); }
+  if (ImGui::TabItemButton(label.get().c_str(), flags)) { clickEvent.notify(); }
 }
 
-void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
+void TabButton::notifyClickEvent() { clickEvent.notify(); }
 
 Tab::Tab(Tab::Config &&config)
     : TabButton(std::string{config.name.value}, std::string{config.label.value}, config.mods),
@@ -49,7 +51,7 @@ void Tab::renderImpl() {
   if (open != nullptr && *open != wasOpen) { openObservable.notify(*open); }
   if (wasSelected != selected) {
     selectedObservable.notify(selected);
-    notifyOnClick();
+    notifyClickEvent();
   }
   setSelectedInNextFrame = false;
 }

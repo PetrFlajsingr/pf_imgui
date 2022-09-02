@@ -12,12 +12,16 @@
 #include <glm/vec2.hpp>
 #include <pf_common/Explicit.h>
 #include <pf_common/math/Range.h>
+#include <pf_imgui/Font.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 #include <string>
 
 namespace pf::ui::ig {

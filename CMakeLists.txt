@@ -111,7 +111,6 @@ set(SOURCES
         src/pf_imgui/interface/ElementWithID.cpp
         src/pf_imgui/interface/Resizable.cpp
         src/pf_imgui/interface/Savable.cpp
-        src/pf_imgui/interface/Clickable.cpp
         src/pf_imgui/interface/ItemElement.cpp
         src/pf_imgui/interface/Focusable.cpp
         src/pf_imgui/interface/Hoverable.cpp
@@ -273,10 +272,9 @@ set(INCLUDES
         src/pf_imgui/interface/ElementWithID.h
         src/pf_imgui/interface/Resizable.h
         src/pf_imgui/interface/Savable.h
-        src/pf_imgui/interface/Clickable.h
         src/pf_imgui/interface/ValueObservable.h
         src/pf_imgui/interface/ItemElement.h
-        src/pf_imgui/interface/Observable_impl.h
+        src/pf_imgui/reactive/Observable_impl.h
         src/pf_imgui/interface/Focusable.h
         src/pf_imgui/interface/Hoverable.h
         src/pf_imgui/interface/Collapsible.h
@@ -404,7 +402,7 @@ set(INCLUDES
         src/pf_imgui/elements/ConsolePanel.h
         src/pf_imgui/elements/details/TextUtils.h
         src/pf_imgui/Label.h
-        )
+        src/pf_imgui/reactive/Event.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

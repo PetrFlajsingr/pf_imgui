@@ -9,7 +9,7 @@
 #define PF_IMGUI_LABEL_H
 
 #include <pf_imgui/enums.h>
-#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <string>
 
 namespace pf::ui::ig {

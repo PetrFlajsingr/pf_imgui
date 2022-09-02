@@ -5,8 +5,8 @@
  * @date 23.1.21
  */
 
-#ifndef PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
-#define PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
+#ifndef PF_IMGUI_REACTIVE_OBSERVABLE_IMPL_H
+#define PF_IMGUI_REACTIVE_OBSERVABLE_IMPL_H
 
 #include <algorithm>
 #include <memory>
@@ -94,4 +94,4 @@ void Observable_impl<Args...>::notify(const Args &...args) {
 }
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_INTERFACE_OBSERVABLE_IMPL_H
+#endif  // PF_IMGUI_REACTIVE_OBSERVABLE_IMPL_H

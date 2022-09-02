@@ -45,7 +45,11 @@ Color CustomIconButtonBehavior::getBackgroundColor() const { return backgroundCo
 CustomIconButton::CustomIconButton(const std::string &elementName) : CustomIconButtonBehavior(elementName) {}
 
 void CustomIconButton::update(CustomIconButtonBehavior::State state) {
-  if (state == State::Clicked) { notifyOnClick(); }
+  if (state == State::Clicked) { notifyClickEvent(); }
+}
+
+void CustomIconButton::notifyClickEvent() {
+  clickEvent.notify();
 }
 
 CustomIconToggle::CustomIconToggle(const std::string &elementName, bool initValue, Persistent persistent)

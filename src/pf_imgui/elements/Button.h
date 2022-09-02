@@ -10,12 +10,16 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/Texture.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
+#include <pf_imgui/style/common.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -32,7 +36,9 @@ class InvisibleButton;
  *
  * @see ButtonType
  */
-class PF_IMGUI_EXPORT ButtonBase : public ItemElement, public Clickable {
+class PF_IMGUI_EXPORT ButtonBase : public ItemElement {
+  using ClickEvent = ClassEvent<ButtonBase>;
+
  public:
   /**
    * Construct ButtonBase.
@@ -52,8 +58,12 @@ class PF_IMGUI_EXPORT ButtonBase : public ItemElement, public Clickable {
    */
   void setRepeatable(bool newRepeatable);
 
+  ClickEvent clickEvent;
+
  protected:
   [[nodiscard]] RAII setButtonRepeat();
+
+  void notifyClickEvent();
 
  private:
   bool repeatable;

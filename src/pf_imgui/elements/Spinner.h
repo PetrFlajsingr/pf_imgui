@@ -7,6 +7,9 @@
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
+#include <pf_imgui/style/common.h>
 #include <string>
 
 namespace pf::ui::ig {

@@ -11,7 +11,7 @@
 #include <imgui.h>
 #include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <string>
 #include <utility>
 

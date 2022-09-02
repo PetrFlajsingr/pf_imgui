@@ -34,7 +34,7 @@ void MenuButtonItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(label.get().c_str(), nullptr)) { notifyOnClick(); }
+  if (ImGui::MenuItem(label.get().c_str(), nullptr)) { clickEvent.notify(); }
 }
 
 void SubMenu::renderImpl() {

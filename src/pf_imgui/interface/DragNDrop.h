@@ -5,8 +5,8 @@
  * @date 20.4.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_INTERFACE_DRAGNDROP_H
-#define PF_IMGUI_SRC_PF_IMGUI_INTERFACE_DRAGNDROP_H
+#ifndef PF_IMGUI_INTERFACE_DRAGNDROP_H
+#define PF_IMGUI_INTERFACE_DRAGNDROP_H
 
 #include <algorithm>
 #include <concepts>
@@ -16,9 +16,8 @@
 #include <optional>
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/Tooltip.h>
 #include <pf_imgui/fwd.h>
-#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/unique_id.h>
 #include <ranges>
 #include <static_type_info.h>
@@ -45,6 +44,7 @@ class PF_IMGUI_EXPORT DragSourceBase {
    * @param dragAllowed enable/disable drag
    */
   explicit DragSourceBase(bool dragAllowed);
+
   /**
    * Check if dragging is allowed.
    * @return true if the drag is allowed
@@ -76,7 +76,7 @@ class PF_IMGUI_EXPORT DragSourceBase {
    */
   void removeDragTooltip();
 
-  virtual ~DragSourceBase() = default;
+  virtual ~DragSourceBase();
 
  protected:
   /**
@@ -324,4 +324,4 @@ class PF_IMGUI_EXPORT DragNDropGroup {
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_INTERFACE_DRAGNDROP_H
+#endif  // PF_IMGUI_INTERFACE_DRAGNDROP_H

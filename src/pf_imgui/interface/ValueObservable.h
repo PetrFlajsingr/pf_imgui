@@ -8,12 +8,12 @@
 #ifndef PF_IMGUI_INTERFACE_VALUEOBSERVABLE_H
 #define PF_IMGUI_INTERFACE_VALUEOBSERVABLE_H
 
-#include "Observable_impl.h"
 #include <algorithm>
 #include <concepts>
 #include <functional>
 #include <pf_common/Subscription.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <ranges>
 #include <string>
 #include <type_traits>

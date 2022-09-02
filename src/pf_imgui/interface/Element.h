@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_INTERFACE_ELEMENT_H
 #define PF_IMGUI_INTERFACE_ELEMENT_H
 
-#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
 
 namespace pf::ui::ig {

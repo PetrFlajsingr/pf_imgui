@@ -8,8 +8,8 @@
 #ifndef PF_IMGUI_INTERFACE_FOCUSABLE_H
 #define PF_IMGUI_INTERFACE_FOCUSABLE_H
 
-#include "Observable_impl.h"
 #include <pf_imgui/_export.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <utility>
 
 namespace pf::ui::ig {

@@ -7,10 +7,14 @@
 #include <imgui_internal.h>
 #include <pf_imgui/elements/Text.h>
 #include <utility>
+#include <pf_imgui/elements/PopupMenu.h>
+#include <pf_imgui/elements/Tooltip.h>
 
 namespace pf::ui::ig {
 
 ItemElement::ItemElement(const std::string &elementName) : ElementWithID(elementName) {}
+
+ItemElement::~ItemElement() = default;
 
 ItemElement::ItemElement(ItemElement &&other) noexcept
     : ElementWithID(std::move(other)), tooltip(std::move(other.tooltip)) {}

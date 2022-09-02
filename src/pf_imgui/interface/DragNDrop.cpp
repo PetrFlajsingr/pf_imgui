@@ -5,12 +5,15 @@
 #include "DragNDrop.h"
 #include <memory>
 #include <pf_imgui/elements/Text.h>
+#include <pf_imgui/elements/Tooltip.h>
 #include <string>
 #include <utility>
 
 namespace pf::ui::ig {
 
 details::DragSourceBase::DragSourceBase(bool dragEnabled) : dragAllowed(dragEnabled) {}
+
+details::DragSourceBase::~DragSourceBase() = default;
 
 bool details::DragSourceBase::isDragAllowed() const { return dragAllowed; }
 

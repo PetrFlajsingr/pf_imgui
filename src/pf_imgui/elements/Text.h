@@ -11,10 +11,12 @@
 #include <imgui.h>
 #include <optional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/style/ColorPalette.h>
 #include <string>
 #include <utility>
 

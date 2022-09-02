@@ -6,11 +6,15 @@
 #define PF_IMGUI_ELEMENTS_TOGGLE_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
+#include <pf_imgui/style/common.h>
 #include <string>
 
 namespace pf::ui::ig {

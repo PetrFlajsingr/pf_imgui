@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_INTERFACE_HOVERABLE_H
 #define PF_IMGUI_INTERFACE_HOVERABLE_H
 
-#include "Observable_impl.h"
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/_export.h>
 #include <utility>
 

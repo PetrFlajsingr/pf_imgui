@@ -200,8 +200,8 @@ LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size, Pe
   std::ranges::fill(categoryTextColors, Color::White);
   std::ranges::fill(categoryBackgroundColors, std::nullopt);
 
-  clearButton.addClickListener([this] { records.remove(records.readAvailable()); });
-  copyToClipboardButton.addClickListener([this] { ImGui::SetClipboardText(getText().c_str()); });
+  clearButton.clickEvent.addListener([this] { records.remove(records.readAvailable()); });
+  copyToClipboardButton.clickEvent.addListener([this] { ImGui::SetClipboardText(getText().c_str()); });
   clearButton.setTooltip("Clear log");
   copyToClipboardButton.setTooltip("Copy log to clipboard");
   wrapTextToggle.setTooltip("Wrap text");

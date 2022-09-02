@@ -11,6 +11,7 @@
 #include <imgui_color_gradient.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Color.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Focusable.h>
 #include <pf_imgui/interface/Hoverable.h>

@@ -10,11 +10,12 @@
 
 #include <memory>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/reactive/Event.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -33,7 +34,9 @@ enum class TabMod {
 /**
  * @brief A button which looks like a Tab in TabBar.
  */
-class PF_IMGUI_EXPORT TabButton : public ItemElement, public Clickable {
+class PF_IMGUI_EXPORT TabButton : public ItemElement {
+  using ClickEvent = ClassEvent<TabButton>;
+
  public:
   /**
    * @brief Struct for construction of TabButton.
@@ -56,8 +59,12 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Clickable {
 
   Label label;
 
+  ClickEvent clickEvent;
+
  protected:
   void renderImpl() override;
+
+  void notifyClickEvent();
 
   ImGuiTabItemFlags flags;
 };

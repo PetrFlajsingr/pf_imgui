@@ -11,6 +11,7 @@
 #include <chrono>
 #include <memory>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>

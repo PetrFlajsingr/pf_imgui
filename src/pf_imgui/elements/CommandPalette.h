@@ -10,8 +10,9 @@
 
 #include <imcmd_command_palette.h>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Font.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <string>
 #include <utility>
 

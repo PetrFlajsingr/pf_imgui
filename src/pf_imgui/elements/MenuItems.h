@@ -11,11 +11,11 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Clickable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/reactive/Event.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -97,7 +97,9 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.
  */
-class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
+class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
+  using ClickEvent = ClassEvent<MenuButtonItem>;
+
  public:
   /**
    * Construct MenuButtonItem
@@ -127,6 +129,8 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
   Label label;
+
+  ClickEvent clickEvent;
 
  protected:
   void renderImpl() override;

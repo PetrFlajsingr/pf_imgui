@@ -10,7 +10,7 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/ElementWithID.h>
+#include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/meta.h>
 #include <range/v3/view/transform.hpp>
@@ -22,7 +22,7 @@
 namespace pf::ui::ig {
 
 /**
- * @brief Interface for objects, which can contain instances of ElementWithID.
+ * @brief Interface for objects, which can contain instances of Element.
  *
  * Allows for creation of child elements directly via templated methods.
  */
@@ -36,10 +36,10 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   /**
    * Create a child and append it to the end of children.
    *
-   * @tparam T type of created ElementWithID
+   * @tparam T type of created Element
    * @tparam Args arguments to pass to the Ts constructor after its name
    * @param args arguments to pass to the Ts constructor after its nam
-   * @return reference to the newly created ElementWithID
+   * @return reference to the newly created Element
    */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
@@ -61,12 +61,12 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   /**
    * Create a child and append it to the end of children.
    *
-   * @tparam T type of created ElementWithID
+   * @tparam T type of created Element
    * @tparam Args arguments to pass to the Ts constructor after its name
    * @param index index to insert the newly created child at
    * @param name ID of the newly created element
    * @param args arguments to pass to the Ts constructor after its nam
-   * @return reference to the newly created ElementWithID
+   * @return reference to the newly created Element
    */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
@@ -115,7 +115,7 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   /**
    * Find a child by its name.
    *
-   * @tparam T type of the searched for child. ElementWithID can be used to assure no invalid cast occurs.
+   * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
    * @param name name of the searched for child
    * @return reference to the searched for child
    */
@@ -131,7 +131,7 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
   /**
    * Find a child by its name.
    *
-   * @tparam T type of the searched for child. ElementWithID can be used to assure no invalid cast occurs.
+   * @tparam T type of the searched for child. Element can be used to assure no invalid cast occurs.
    * @param name name of the searched for child
    * @return reference to the searched for child
    */

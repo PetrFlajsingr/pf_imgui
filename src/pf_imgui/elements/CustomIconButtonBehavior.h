@@ -9,6 +9,9 @@
 #include <pf_imgui/Size.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/style/ColorPalette.h>
 
 namespace pf::ui::ig {
 
@@ -42,12 +45,17 @@ class CustomIconButtonBehavior : public ItemElement {
   Size size{22, 22};
 };
 
-class CustomIconButton : public CustomIconButtonBehavior, public Clickable {
+class CustomIconButton : public CustomIconButtonBehavior {
+  using ClickEvent = ClassEvent<CustomIconButton>;
+
  public:
   explicit CustomIconButton(const std::string &elementName);
 
+  ClickEvent clickEvent;
+
  protected:
   void update(State state) override;
+  void notifyClickEvent();
 };
 
 class CustomIconToggle : public CustomIconButtonBehavior, public ValueObservable<bool>, public Savable {

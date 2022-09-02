@@ -14,7 +14,7 @@
 #include <pf_imgui/Label.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/interface/Hoverable.h>
-#include <pf_imgui/interface/Observable_impl.h>
+#include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>

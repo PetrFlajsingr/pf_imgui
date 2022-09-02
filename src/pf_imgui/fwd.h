@@ -48,6 +48,7 @@ class Window;
 class Tooltip;
 class PieMenu;
 class Spinner;
+class PopupMenu;
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_FWD_H
