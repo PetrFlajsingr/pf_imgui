@@ -17,6 +17,11 @@ Window::Window(std::string elementName, std::string titleLabel, AllowCollapse al
       Positionable(Position{-1, -1}), label(std::move(titleLabel)) {
   refreshIdLabel();
   label.addListener([this](auto) { refreshIdLabel(); });
+  focused.addListener([this] (bool isFocused) {
+    if (isFocused) {
+      ImGui::SetWindowFocus(idLabel.c_str());
+    }
+  });
 }
 
 Window::Window(std::string elementName, std::string titleLabel, Persistent persistent)
@@ -53,7 +58,7 @@ void Window::renderImpl() {
       });
       *hovered.modify() = ImGui::IsWindowHovered();
       Collapsible::setCollapsed(ImGui::IsWindowCollapsed());
-      updateFocused(ImGui::IsWindowFocused());
+      *focused.modify() = ImGui::IsWindowFocused();
       updatePosition(Position{ImGui::GetWindowPos()});
       if (!isCollapsed()) {
         if (hasMenuBar()) { menuBar->render(); }
@@ -97,11 +102,6 @@ void Window::render() {
 void Window::setCollapsed(bool collapse) {
   ImGui::SetWindowCollapsed(idLabel.c_str(), collapse);
   Collapsible::setCollapsed(collapse);
-}
-
-void Window::setFocus() {
-  ImGui::SetWindowFocus(idLabel.c_str());
-  Focusable::setFocus();
 }
 
 void Window::setPosition(Position pos) {

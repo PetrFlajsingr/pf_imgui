@@ -13,7 +13,6 @@
 #include <pf_imgui/Color.h>
 #include <pf_imgui/Font.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Focusable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Observable.h>
@@ -55,7 +54,6 @@ struct GradientPointsViewComparator {
  */
 class GradientEditor : public ElementWithID,
                        public ValueObservable<GradientPointsView, GradientPointsViewComparator>,
-                       public Focusable,
                        public Savable {
  public:
   /**
@@ -101,6 +99,7 @@ class GradientEditor : public ElementWithID,
   Font font = Font::Default();
 
   ObservableProperty<GradientEditor, bool> hovered;
+  ObservableProperty<GradientEditor, bool> focused;
 
  protected:
   void renderImpl() override;

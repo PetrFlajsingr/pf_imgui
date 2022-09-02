@@ -15,10 +15,9 @@
 #include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/interface/Focusable.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/interface/Positionable.h>
 #include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <vector>
 
@@ -34,7 +33,6 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
-                               public Focusable,
                                public Collapsible,
                                public Resizable,
                                public Positionable,
@@ -108,8 +106,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void setSize(const Size &size) override;
 
   void render() override;
-
-  void setFocus() override;
 
   void setCollapsed(bool collapse) override;
 
@@ -232,6 +228,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   Label label;
 
   ObservableProperty<Window, bool> hovered;
+  ObservableProperty<Window, bool> focused;
 
  protected:
   void renderImpl() override;

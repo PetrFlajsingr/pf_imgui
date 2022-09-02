@@ -28,7 +28,7 @@ ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
 void ItemElement::render() {
   ElementWithID::render();
   setHovered(ImGui::IsItemHovered());
-  updateFocused(ImGui::IsItemFocused());
+  setFocused(ImGui::IsItemFocused());
 
   if (*hovered) {
     auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
@@ -62,11 +62,6 @@ void ItemElement::setTooltip(std::string_view text) {
   tooltip->createChild<Text>("text", std::string(text));
 }
 
-void ItemElement::setFocus() {
-  ImGui::SetKeyboardFocusHere();
-  Focusable::setFocus();
-}
-
 void ItemElement::setTooltip(std::unique_ptr<Tooltip> &&newTooltip) { tooltip = std::move(newTooltip); }
 
 PopupMenu &ItemElement::createOrGetPopupMenu() {
@@ -81,6 +76,10 @@ void ItemElement::removePopupMenu() { popupMenu = nullptr; }
 
 void ItemElement::setHovered(bool newHovered) {
   *hovered.modify() = newHovered;
+}
+
+void ItemElement::setFocused(bool newFocused) {
+  *focused.modify() = newFocused;
 }
 
 }  // namespace pf::ui::ig

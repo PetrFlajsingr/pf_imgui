@@ -112,7 +112,6 @@ set(SOURCES
         src/pf_imgui/interface/Resizable.cpp
         src/pf_imgui/interface/Savable.cpp
         src/pf_imgui/interface/ItemElement.cpp
-        src/pf_imgui/interface/Focusable.cpp
         src/pf_imgui/interface/Collapsible.cpp
         src/pf_imgui/interface/Renderable.cpp
         src/pf_imgui/interface/Positionable.cpp
@@ -274,7 +273,6 @@ set(INCLUDES
         src/pf_imgui/interface/ValueObservable.h
         src/pf_imgui/interface/ItemElement.h
         src/pf_imgui/reactive/Observable_impl.h
-        src/pf_imgui/interface/Focusable.h
         src/pf_imgui/interface/Collapsible.h
         src/pf_imgui/interface/Renderable.h
         src/pf_imgui/interface/Positionable.h
