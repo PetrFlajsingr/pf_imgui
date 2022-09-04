@@ -46,7 +46,7 @@ void TimePicker::renderImpl() {
     }
   }
   ImGui::SameLine();
-  ImGui::Text("%s", label.get().c_str());
+  ImGui::Text("%s", label->get().c_str());
   ImGui::EndGroup();
 }
 

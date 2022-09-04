@@ -67,7 +67,7 @@ class PF_IMGUI_EXPORT PieChart : public ElementWithID {
     dataChanged = true;
   }
 
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

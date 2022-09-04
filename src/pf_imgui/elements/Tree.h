@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement {
   TreeRecord(const std::string &elementName, const std::string &treeLabel,
              const Flags<ImGuiTreeNodeFlags_> &defaultFlags);
 
-  Label label;
+  Observable<Label> label;
 
  protected:
   Flags<ImGuiTreeNodeFlags_> flags{};
@@ -200,7 +200,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
     [[maybe_unused]] auto styleScoped = style.applyScoped();
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!isCollapsed());
-    setCollapsed(!ImGui::TreeNodeEx(label.get().c_str(), *flags));
+    setCollapsed(!ImGui::TreeNodeEx(label->get().c_str(), *flags));
     RAII end{[this] {
       if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
     }};
@@ -306,7 +306,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     [[maybe_unused]] auto styleScoped = style.applyScoped();
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!isCollapsed());
-    setCollapsed(!ImGui::TreeNodeEx(label.get().c_str(), *flags));
+    setCollapsed(!ImGui::TreeNodeEx(label->get().c_str(), *flags));
     RAII end{[this] {
       if (!isCollapsed() && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
     }};

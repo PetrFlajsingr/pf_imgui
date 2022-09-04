@@ -21,7 +21,7 @@ void LinkText::renderImpl() {
       ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive]);
     }
     pf::RAII textColPop{[] { ImGui::PopStyleColor(); }};
-    ImGui::Text("%s", label.get().c_str());
+    ImGui::Text("%s", label->get().c_str());
   }
   auto min = ImGui::GetItemRectMin();
   const auto max = ImGui::GetItemRectMax();

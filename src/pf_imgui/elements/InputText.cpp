@@ -41,9 +41,9 @@ void InputText::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
-    valueChanged = ImGui::InputText(label.get().c_str(), buffer.get(), 256, flags);
+    valueChanged = ImGui::InputText(label->get().c_str(), buffer.get(), 256, flags);
   } else {
-    valueChanged = ImGui::InputTextMultiline(label.get().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
+    valueChanged = ImGui::InputTextMultiline(label->get().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
   }
   if (valueChanged && strcmp(buffer.get(), text.c_str()) != 0) {
     text = buffer.get();

@@ -27,7 +27,7 @@ void Expander::renderImpl() {
   const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
   ImGui::SetNextItemOpen(shouldBeOpen);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
-  setCollapsed(!ImGui::CollapsingHeader(label.get().c_str(), flags));
+  setCollapsed(!ImGui::CollapsingHeader(label->get().c_str(), flags));
   if (!isCollapsed()) { std::ranges::for_each(getChildren(), &Renderable::render); }
 }
 

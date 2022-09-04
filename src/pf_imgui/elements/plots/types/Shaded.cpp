@@ -9,7 +9,7 @@ namespace pf::ui::ig::plot_type {
 Shaded::Shaded(const std::string &elementName, const std::string &caption) : LabeledPlotData(elementName, caption) {}
 
 void Shaded::renderImpl() {
-  ImPlot::PlotShaded(label.get().c_str(), xData.data(), yData.data(), static_cast<int>(xData.size()));
+  ImPlot::PlotShaded(label->get().c_str(), xData.data(), yData.data(), static_cast<int>(xData.size()));
 }
 
 }  // namespace pf::ui::ig::plot_type

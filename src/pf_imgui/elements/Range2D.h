@@ -97,7 +97,7 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

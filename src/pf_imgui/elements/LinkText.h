@@ -58,7 +58,7 @@ class LinkText : public ItemElement {
   }
 
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   ClickEvent clickEvent;
 

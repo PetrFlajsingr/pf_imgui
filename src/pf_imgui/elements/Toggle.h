@@ -74,7 +74,7 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueObservable<bool>,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

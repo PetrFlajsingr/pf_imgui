@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueObservable<b
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

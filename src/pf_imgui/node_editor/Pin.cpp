@@ -11,7 +11,7 @@
 
 namespace pf::ui::ig {
 
-Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), label(std::move(config.label)) {}
+Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), label(std::move(config.label.value)) {}
 
 Pin::Pin(const std::string &elementName, const std::string &labelText) : Renderable(elementName), label(labelText) {}
 
@@ -91,7 +91,7 @@ void Pin::renderIcon() {
   ImGui::Text((prefix + infix + postfix).c_str());
 }
 
-void Pin::renderInfo() { ImGui::Text(label.get().c_str()); }
+void Pin::renderInfo() { ImGui::Text(label->get().c_str()); }
 
 void Pin::addLink(Link &link) { observableLink.notify(link); }
 

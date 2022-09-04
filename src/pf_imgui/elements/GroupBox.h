@@ -46,7 +46,7 @@ class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer {
    */
   GroupBox(const std::string &elementName, const std::string &labelValue, Size s);
 
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

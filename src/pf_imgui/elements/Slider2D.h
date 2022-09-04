@@ -82,7 +82,7 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 
@@ -133,11 +133,11 @@ void Slider2D<T>::renderImpl() {
   auto address = ValueObservable<StorageType>::getValueAddress();
   const auto oldValue = *address;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImWidgets::Slider2DInt(label.get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
+    valueChanged = ImWidgets::Slider2DInt(label->get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
                                           &extremesY.x, &extremesY.y, static_cast<ImVec2>(*size));
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImWidgets::Slider2DFloat(label.get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
+    valueChanged = ImWidgets::Slider2DFloat(label->get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
                                             extremesY.x, extremesY.y, static_cast<ImVec2>(*size));
   }
   DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());

@@ -24,6 +24,8 @@ Label &Label::operator=(std::string &&other) {
   return *this;
 }
 
+bool Label::operator==(const Label &other) const { return val == other.val; }
+
 const std::string &Label::get() const {
   if (visibility == Visibility::Visible) { return val; }
   return EMPTY_LABEL;

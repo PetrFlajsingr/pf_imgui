@@ -24,7 +24,7 @@ void Range2D::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto val = getValueAddress();
   const auto oldVal = getValue();
-  if (ImWidgets::RangeSelect2D(label.get().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
+  if (ImWidgets::RangeSelect2D(label->get().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
                                minRange.y, maxRange.x, maxRange.y, static_cast<ImVec2>(*size))) {
     if (*val != oldVal) { notifyValueChanged(); }
   }

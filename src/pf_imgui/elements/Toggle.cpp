@@ -32,7 +32,7 @@ void Toggle::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ToggleButton(label.get().c_str(), getValueAddress())) { notifyValueChanged(); }
+  if (ToggleButton(label->get().c_str(), getValueAddress())) { notifyValueChanged(); }
 }
 
 }  // namespace pf::ui::ig

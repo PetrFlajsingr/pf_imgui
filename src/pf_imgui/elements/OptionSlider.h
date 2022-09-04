@@ -68,7 +68,7 @@ class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -126,7 +126,7 @@ void OptionSlider<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
-  if (ImGui::SliderInt(label.get().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),
+  if (ImGui::SliderInt(label->get().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),
                        selectedValueStr.c_str(), flags)) {
     selectedValueStr = toString(values[selectedValueIndex]);
     ValueObservable<T>::setValueAndNotifyIfChanged(values[selectedValueIndex]);

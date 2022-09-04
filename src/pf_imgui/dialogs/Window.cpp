@@ -207,7 +207,7 @@ void Window::setStayInBackground(bool stay) {
   }
 }
 
-void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", label.get(), getName()); }
+void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", label->get(), getName()); }
 
 void Window::setCollapsible(bool newCollapsible) {
   if (newCollapsible) {

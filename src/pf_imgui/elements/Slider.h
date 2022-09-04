@@ -107,7 +107,7 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -175,9 +175,9 @@ void Slider<T>::renderImpl() {
   }
 
   if constexpr (!OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::SliderScalar(label.get().c_str(), dataType, address, &min, &max, format.c_str(), flags);
+    valueChanged = ImGui::SliderScalar(label->get().c_str(), dataType, address, &min, &max, format.c_str(), flags);
   } else {
-    valueChanged = ImGui::SliderScalarN(label.get().c_str(), dataType, glm::value_ptr(*address), T::length(), &min,
+    valueChanged = ImGui::SliderScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), T::length(), &min,
                                         &max, format.c_str(), flags);
   }
 

@@ -63,7 +63,7 @@ class TimePicker : public ItemElement, public ValueObservable<TimeOfDay, details
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

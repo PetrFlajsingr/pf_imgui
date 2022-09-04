@@ -57,7 +57,7 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement {
 
   void setMods(const Flags<TabMod> &mods);
 
-  Label label;
+  Observable<Label> label;
 
   ClickEvent clickEvent;
 

@@ -203,7 +203,7 @@ class Pin : public Renderable {
    */
   void removePopupMenu();
 
-  Label label;
+  Observable<Label> label;
 
   ObservableProperty<Pin, bool> hovered;
 

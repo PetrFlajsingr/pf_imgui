@@ -210,7 +210,7 @@ toml::table Listbox<T>::toToml() const {
   auto result = toml::table{};
   if (selectedItemIndex.has_value()) {
     const auto selectedItem = filteredItems[*selectedItemIndex];
-    result.insert_or_assign("selected", selectedItem->second->label.get());
+    result.insert_or_assign("selected", selectedItem->second->label->get());
   }
   return result;
 }
@@ -229,7 +229,7 @@ void Listbox<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = this->color.applyScoped();
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
-  if (ImGui::BeginListBox(this->label.get().c_str(), static_cast<ImVec2>(*this->size))) {
+  if (ImGui::BeginListBox(this->label->get().c_str(), static_cast<ImVec2>(*this->size))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
       const auto &[idx, item] = itemIdx;

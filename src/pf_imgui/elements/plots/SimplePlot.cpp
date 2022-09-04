@@ -24,12 +24,12 @@ void SimplePlot::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   switch (plotType) {
     case PlotType::Lines:
-      ImGui::PlotLines(label.get().c_str(), values.data(), static_cast<int>(values.size()), 0,
+      ImGui::PlotLines(label->get().c_str(), values.data(), static_cast<int>(values.size()), 0,
                        overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
                        static_cast<ImVec2>(*size));
       break;
     case PlotType::Histogram:
-      ImGui::PlotHistogram(label.get().c_str(), values.data(), static_cast<int>(values.size()), 0,
+      ImGui::PlotHistogram(label->get().c_str(), values.data(), static_cast<int>(values.size()), 0,
                            overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
                            static_cast<ImVec2>(*size));
       break;

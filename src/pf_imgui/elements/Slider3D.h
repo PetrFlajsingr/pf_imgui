@@ -72,7 +72,7 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 
@@ -127,7 +127,7 @@ void Slider3D<T>::renderImpl() {
   const auto oldValue = *address;
   if constexpr (std::same_as<T, float>) {
     valueChanged =
-        ImWidgets::SliderScalar3D(label.get().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
+        ImWidgets::SliderScalar3D(label->get().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
                                   extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, static_cast<ImVec2>(*size));
   }
   DragSource<glm::vec3>::drag(ValueObservable<glm::vec3>::getValue());

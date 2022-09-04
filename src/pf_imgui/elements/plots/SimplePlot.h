@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID {
                ColorOf::PlotLines, ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered,
                ColorOf::Text, ColorOf::TextDisabled>
       color;
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

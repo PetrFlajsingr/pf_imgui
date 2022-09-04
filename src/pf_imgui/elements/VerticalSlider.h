@@ -108,7 +108,7 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 
@@ -162,7 +162,7 @@ void VerticalSlider<T>::renderImpl() {
   } else {
     dataType = ImGuiDataType_S32;
   }
-  const auto valueChanged = ImGui::VSliderScalar(label.get().c_str(), static_cast<ImVec2>(*size), dataType, address,
+  const auto valueChanged = ImGui::VSliderScalar(label->get().c_str(), static_cast<ImVec2>(*size), dataType, address,
                                                  &min, &max, format.c_str(), flags);
 
   DragSource<T>::drag(ValueObservable<T>::getValue());

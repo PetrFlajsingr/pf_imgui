@@ -50,7 +50,7 @@ void Button::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::Button(label.get().c_str(), static_cast<ImVec2>(*size))) { notifyClickEvent(); }
+  if (ImGui::Button(label->get().c_str(), static_cast<ImVec2>(*size))) { notifyClickEvent(); }
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
@@ -65,7 +65,7 @@ void SmallButton::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::SmallButton(label.get().c_str())) { notifyClickEvent(); }
+  if (ImGui::SmallButton(label->get().c_str())) { notifyClickEvent(); }
 }
 
 ArrowButton::ArrowButton(ArrowButton::Config &&config)

@@ -28,7 +28,7 @@ void Selectable::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::Selectable(label.get().c_str(), getValueAddress(), 0, static_cast<ImVec2>(*size))) {
+  if (ImGui::Selectable(label->get().c_str(), getValueAddress(), 0, static_cast<ImVec2>(*size))) {
     notifyValueChanged();
   }
 }

@@ -87,7 +87,7 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -147,10 +147,10 @@ void SpinInput<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGui::SpinInt(label.get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
+    valueChanged = ImGui::SpinInt(label->get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGui::SpinFloat(label.get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
+    valueChanged = ImGui::SpinFloat(label->get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
                                     flags);  // TODO: user provided format
   }
   if (valueChanged) {

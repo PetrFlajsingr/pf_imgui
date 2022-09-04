@@ -18,7 +18,7 @@ FlameGraph::FlameGraph(const std::string &elementName, const std::string &labelT
 void FlameGraph::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  ImGuiWidgetFlameGraph::PlotFlame(label.get().c_str(), samples, overlay, FLT_MAX, FLT_MAX, static_cast<ImVec2>(*size));
+  ImGuiWidgetFlameGraph::PlotFlame(label->get().c_str(), samples, overlay, FLT_MAX, FLT_MAX, static_cast<ImVec2>(*size));
 }
 
 void FlameGraph::setOverlay(std::string text) { overlay = std::move(text); }

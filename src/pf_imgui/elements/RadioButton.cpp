@@ -19,7 +19,7 @@ void RadioButton::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto oldValue = getValue();
-  if (ImGui::RadioButton(label.get().c_str(), getValue())) { setValueInner(true); }
+  if (ImGui::RadioButton(label->get().c_str(), getValue())) { setValueInner(true); }
   if (oldValue != getValue()) { notifyValueChanged(); }
 }
 

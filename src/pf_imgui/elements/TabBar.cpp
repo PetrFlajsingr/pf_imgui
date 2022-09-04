@@ -18,7 +18,7 @@ TabButton::TabButton(const std::string &elementName, const std::string &labelTex
 void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
 
 void TabButton::renderImpl() {
-  if (ImGui::TabItemButton(label.get().c_str(), flags)) { clickEvent.notify(); }
+  if (ImGui::TabItemButton(label->get().c_str(), flags)) { clickEvent.notify(); }
 }
 
 void TabButton::notifyClickEvent() { clickEvent.notify(); }
@@ -43,7 +43,7 @@ void Tab::renderImpl() {
   const auto wasOpen = isOpen();
   const auto wasSelected = selected;
   const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
-  selected = ImGui::BeginTabItem(label.get().c_str(), open, frameFlags);
+  selected = ImGui::BeginTabItem(label->get().c_str(), open, frameFlags);
   if (selected) {
     RAII end{ImGui::EndTabItem};
     std::ranges::for_each(getChildren(), &Renderable::render);

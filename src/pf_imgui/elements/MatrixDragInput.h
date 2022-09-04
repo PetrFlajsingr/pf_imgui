@@ -69,7 +69,7 @@ class MatrixDragInput : public ItemElement, public ValueObservable<M>, public Sa
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -119,7 +119,7 @@ void MatrixDragInput<M>::renderImpl() {
   ImGui::BeginGroup();
   if (ImGui::BeginTable("lay", 1)) {
     auto valueChanged = false;
-    const auto firstDragName = label.get() + "##drag";  // TODO: cache this
+    const auto firstDragName = label->get() + "##drag";  // TODO: cache this
     for (typename M::length_type row = 0; row < Height; ++row) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();

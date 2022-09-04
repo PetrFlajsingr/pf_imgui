@@ -16,6 +16,7 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -128,7 +129,7 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   ClickEvent clickEvent;
 
@@ -173,7 +174,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -231,7 +232,7 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public MenuContainer {
    */
   SubMenu(const std::string &elementName, const std::string &labelText);
 
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

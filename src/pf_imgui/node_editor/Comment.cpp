@@ -45,7 +45,7 @@ void Comment::renderImpl() {
       ImGui::BeginHorizontal("header");
       {
         ImGui::Spring(1);
-        ImGui::Text(label.get().c_str());
+        ImGui::Text(label->get().c_str());
         ImGui::Spring(1);
       }
       ImGui::EndHorizontal();

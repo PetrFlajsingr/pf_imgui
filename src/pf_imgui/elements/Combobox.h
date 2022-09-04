@@ -197,7 +197,7 @@ toml::table Combobox<T>::toToml() const {
   auto result = toml::table{};
   if (selectedItemIndex.has_value()) {
     const auto selectedItem = filteredItems[*selectedItemIndex];
-    result.insert_or_assign("selected", selectedItem->second->label.get());
+    result.insert_or_assign("selected", selectedItem->second->label->get());
   }
   return result;
 }
@@ -218,11 +218,11 @@ void Combobox<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   const char *previewPtr;
   if (selectedItemIndex.has_value()) {
-    previewPtr = filteredItems[*selectedItemIndex]->second->label.get().c_str();
+    previewPtr = filteredItems[*selectedItemIndex]->second->label->get().c_str();
   } else {
     previewPtr = getPreviewValue().c_str();
   }
-  if (ImGui::BeginCombo(this->label.get().c_str(), previewPtr, *flags)) {
+  if (ImGui::BeginCombo(this->label->get().c_str(), previewPtr, *flags)) {
     RAII end{ImGui::EndCombo};
     checkClose();
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {

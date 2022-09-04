@@ -58,7 +58,7 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
    */
   Expander(const std::string &elementName, const std::string &labelText, AllowCollapse allowCollapse);
 
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

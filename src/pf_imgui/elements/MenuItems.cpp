@@ -34,14 +34,14 @@ void MenuButtonItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(label.get().c_str(), nullptr)) { clickEvent.notify(); }
+  if (ImGui::MenuItem(label->get().c_str(), nullptr)) { clickEvent.notify(); }
 }
 
 void SubMenu::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::BeginMenu(label.get().c_str())) {
+  if (ImGui::BeginMenu(label->get().c_str())) {
     RAII end{ImGui::EndMenu};
     renderItems();
   }
@@ -82,7 +82,7 @@ void MenuCheckboxItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(label.get().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
+  if (ImGui::MenuItem(label->get().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
 }
 
 toml::table MenuCheckboxItem::toToml() const { return toml::table{{"checked", getValue()}}; }

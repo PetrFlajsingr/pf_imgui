@@ -10,7 +10,7 @@ HeatMap::HeatMap(const std::string &elementName, const std::string &caption, dou
     : LabeledPlotData(elementName, caption), min(minVal), max(maxVal) {}
 
 void HeatMap::renderImpl() {
-  ImPlot::PlotHeatmap(label.get().c_str(), data.data(), static_cast<int>(rowSize), static_cast<int>(recordCount), min,
+  ImPlot::PlotHeatmap(label->get().c_str(), data.data(), static_cast<int>(rowSize), static_cast<int>(recordCount), min,
                       max);
 }
 

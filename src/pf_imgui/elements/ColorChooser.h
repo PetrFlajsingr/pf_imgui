@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -153,15 +153,15 @@ void ColorChooser<Type, Format>::renderImpl() {
   auto valueChanged = false;
   if constexpr (Type == ColorChooserType::Edit) {
     if constexpr (Format == ColorChooserFormat::RGB) {
-      valueChanged = ImGui::ColorEdit3(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorEdit3(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     } else {
-      valueChanged = ImGui::ColorEdit4(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorEdit4(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     }
   } else {
     if constexpr (Format == ColorChooserFormat::RGB) {
-      valueChanged = ImGui::ColorPicker3(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorPicker3(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     } else {
-      valueChanged = ImGui::ColorPicker4(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorPicker4(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     }
   }
   DragSource::drag(ValueObservable::getValue());

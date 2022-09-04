@@ -62,7 +62,7 @@ class DatePicker : public ItemElement, public ValueObservable<std::chrono::year_
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

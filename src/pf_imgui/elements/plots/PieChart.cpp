@@ -22,7 +22,7 @@ void PieChart::renderImpl() {
     values = data | ranges::views::transform([](const auto &pair) { return pair.second; }) | ranges::to_vector;
   }
 
-  if (ImPlot::BeginPlot(label.get().c_str(), static_cast<ImVec2>(*size))) {
+  if (ImPlot::BeginPlot(label->get().c_str(), static_cast<ImVec2>(*size))) {
     RAII endPlot{[] { ImPlot::EndPlot(); }};
     ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4);
   }

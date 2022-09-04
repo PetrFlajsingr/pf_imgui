@@ -37,7 +37,7 @@ class Comment : public NodeBase {
   Comment(const std::string &elementName, const std::string &labelText, Size initialSize);
   Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText, const Size &s);
 
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

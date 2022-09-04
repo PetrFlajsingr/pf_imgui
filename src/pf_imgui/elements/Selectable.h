@@ -67,7 +67,7 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bo
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::SelectableTextAlign>
       style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

@@ -219,7 +219,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   // FIXME: remove this and fix up how this is handled in docking
   [[nodiscard]] inline std::string getImGuiName() const { return idLabel; }
 
-  Label label;
+  Observable<Label> label;
 
   ObservableProperty<Window, bool> hovered;
   ObservableProperty<Window, bool> focused;

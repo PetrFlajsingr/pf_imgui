@@ -128,7 +128,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -217,20 +217,20 @@ void DragInput<T>::renderImpl() {
   }
 
   if constexpr (OneOf<T, int, float>) {
-    valueChanged = ImGui::DragScalar(label.get().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
+    valueChanged = ImGui::DragScalar(label->get().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
                                      format.c_str(), flags);
   }
   if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::DragScalarN(label.get().c_str(), dataType, glm::value_ptr(*address), T::length(),
+    valueChanged = ImGui::DragScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), T::length(),
                                       static_cast<float>(speed), &min, &max, format.c_str(), flags);
   }
 
   if constexpr (std::same_as<T, math::Range<int>>) {
-    valueChanged = ImGui::DragIntRange2(label.get().c_str(), &address->start, &address->end, static_cast<float>(speed),
+    valueChanged = ImGui::DragIntRange2(label->get().c_str(), &address->start, &address->end, static_cast<float>(speed),
                                         min, max, format.c_str(), nullptr, flags);
   }
   if constexpr (std::same_as<T, math::Range<float>>) {
-    valueChanged = ImGui::DragFloatRange2(label.get().c_str(), &address->start, &address->end, speed, min, max,
+    valueChanged = ImGui::DragFloatRange2(label->get().c_str(), &address->start, &address->end, speed, min, max,
                                           format.c_str(), nullptr, flags);
   }
   DragSource<T>::drag(ValueObservable<T>::getValue());

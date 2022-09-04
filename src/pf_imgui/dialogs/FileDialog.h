@@ -123,7 +123,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
   FullColorPalette color;
   FullStyleOptions style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

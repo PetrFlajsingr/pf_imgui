@@ -77,7 +77,7 @@ class Knob : public ItemElement, public ValueObservable<T>, public Savable {
 
   ColorPalette<ColorOf::ButtonActive, ColorOf::ButtonHovered, ColorOf::FrameBackground> color;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 
@@ -121,15 +121,15 @@ void Knob<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags =
-      label.getVisibility() == Visibility::Visible ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
+      label->getVisibility() == Visibility::Visible ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
   const auto knobSize = std::min(static_cast<float>(size->width), static_cast<float>(size->height));
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGuiKnobs::KnobInt(label.get().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
+    valueChanged = ImGuiKnobs::KnobInt(label->get().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
                                        nullptr, static_cast<ImGuiKnobVariant>(type), knobSize, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGuiKnobs::Knob(label.get().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
+    valueChanged = ImGuiKnobs::Knob(label->get().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
                                     nullptr, static_cast<ImGuiKnobVariant>(type), knobSize, flags);
   }
   if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }

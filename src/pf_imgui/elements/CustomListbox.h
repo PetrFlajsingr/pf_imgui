@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
   CustomListbox(const std::string &elementName, const std::string &labelText,
                 CustomItemBoxFactory<T, R> auto &&rowFactory, Size s = Size::Auto());
 
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 
@@ -55,7 +55,7 @@ void CustomListbox<T, R>::renderImpl() {
   [[maybe_unused]] auto colorScoped = this->color.applyScoped();
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
-  if (ImGui::BeginListBox(this->label.get().c_str(), static_cast<ImVec2>(*this->size))) {
+  if (ImGui::BeginListBox(this->label->get().c_str(), static_cast<ImVec2>(*this->size))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
   }

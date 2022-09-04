@@ -96,7 +96,7 @@ class SimpleCurveEditor : public ElementWithID, public ValueObservable<CurvePoin
 
   FullColorPalette color;
   FullStyleOptions style;
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 

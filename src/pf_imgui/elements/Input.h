@@ -86,7 +86,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;
@@ -168,9 +168,9 @@ void Input<T>::renderImpl() {
   }
 
   if constexpr (!OneOf<T, PF_IMGUI_INPUT_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::InputScalar(label.get().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
+    valueChanged = ImGui::InputScalar(label->get().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
   } else {
-    valueChanged = ImGui::InputScalarN(label.get().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
+    valueChanged = ImGui::InputScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
                                        &fastStep, format.c_str(), flags);
   }
 

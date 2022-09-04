@@ -79,7 +79,7 @@ class PF_IMGUI_EXPORT FlameGraph : public ElementWithID {
                ColorOf::BorderShadow, ColorOf::Text>
       color;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
 
   Observable<Size> size;
 
