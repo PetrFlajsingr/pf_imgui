@@ -29,7 +29,7 @@ void StackedLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
     if (selectedIndex.has_value()) {
       auto &activeStack = stacks[*selectedIndex];
@@ -66,7 +66,7 @@ std::vector<Renderable *> StackedLayout::getRenderables() {
       | ranges::to_vector;
 }
 
-std::size_t StackedLayout::size() const { return stacks.size(); }
+std::size_t StackedLayout::stackSize() const { return stacks.size(); }
 
 void StackedLayout::setStackActive(StackedLayout::Stack &stack) {
   for (const auto &[stackId, s] : ranges::views::enumerate(stacks)) {

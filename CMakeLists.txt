@@ -109,7 +109,6 @@ set(SOURCES
         src/pf_imgui/elements/MarkdownText.cpp
         src/pf_imgui/interface/ElementContainer.cpp
         src/pf_imgui/interface/ElementWithID.cpp
-        src/pf_imgui/interface/Resizable.cpp
         src/pf_imgui/interface/Savable.cpp
         src/pf_imgui/interface/ItemElement.cpp
         src/pf_imgui/interface/Collapsible.cpp
@@ -267,7 +266,6 @@ set(INCLUDES
         src/pf_imgui/elements/MemoryEditor.h
         src/pf_imgui/interface/ElementContainer.h
         src/pf_imgui/interface/ElementWithID.h
-        src/pf_imgui/interface/Resizable.h
         src/pf_imgui/interface/Savable.h
         src/pf_imgui/interface/ValueObservable.h
         src/pf_imgui/interface/ItemElement.h
@@ -397,7 +395,8 @@ set(INCLUDES
         src/pf_imgui/Label.h
         src/pf_imgui/reactive/Event.h
         src/pf_imgui/reactive/Observable.h
-        )
+        src/pf_imgui/concepts/HasSizeObservable.h
+        src/pf_imgui/concepts/ConfigConstruction.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

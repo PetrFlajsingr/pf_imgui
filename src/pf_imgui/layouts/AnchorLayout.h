@@ -13,6 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/concepts/HasSizeObservable.h>
 #include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 #include <range/v3/view/addressof.hpp>
@@ -70,31 +71,29 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
     const auto ptr = child.get();
     std::function<void(Height)> addToHeight = [](Height) {};
     std::function<void(Width)> addToWidth = [](Width) {};
-    if constexpr (std::derived_from<T, Resizable>) {
+    if constexpr (HasSizeObservable<T>) {
       addToWidth = [ptr = child.get()](Width d) {
-        auto childSize = ptr->getSize();
-        childSize.width = std::clamp(static_cast<float>(childSize.width) + static_cast<float>(d), 0.f,
+        auto childSize = *ptr->size;
+        childSize.width = std::clamp(static_cast<float>(childSize.width) + static_cast<float>(d), 0.1f,
                                      std::numeric_limits<float>::max());
-        ptr->setSize(childSize);
+        *ptr->size.modify() = childSize;
       };
       addToHeight = [ptr = child.get()](Height d) {
-        auto childSize = ptr->getSize();
+        auto childSize = *ptr->size;
         childSize.height = childSize.height + d;
-        if (childSize.height < Height{0}) { childSize.height = 0; }
-        ptr->setSize(childSize);
+        if (childSize.height < Height{0}) { childSize.height = 0.1f; }
+        *ptr->size.modify() = childSize;
       };
     } else if constexpr (std::derived_from<T, WidthDecorator<T>>) {
       addToWidth = [ptr = child.get()](Width d) {
         auto childWidth = ptr->getWidth() + d;
-        if (childWidth < Width{0}) { childWidth = 0; }
+        if (childWidth < Width{0}) { childWidth = 0.1f; }
         ptr->setWidth(childWidth);
       };
     }
     children.emplace_back(std::move(child), position, static_cast<Anchor>(*anchors), addToWidth, addToHeight);
     return *ptr;
   }
-
-  void setSize(const Size &s) override;
 
   /**
    * Get all children of the layout as references.
@@ -131,6 +130,8 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
   void renderImpl() override;
 
  private:
+  void onSizeUpdated(Size previousSize);
+
   struct AnchoredChild {
     std::unique_ptr<Element> element;
     Position position;

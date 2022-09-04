@@ -11,9 +11,10 @@
 #include <ImGuiCurveEditor.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Label.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <range/v3/view/take_while.hpp>
@@ -43,9 +44,7 @@ struct CurvePointsViewComparator {
 /**
  * @brief Simple curve editor allowing mouse control of key points and basic curve smoothing.
  */
-class SimpleCurveEditor : public ElementWithID,
-                          public Resizable,
-                          public ValueObservable<CurvePointsView, CurvePointsViewComparator> {
+class SimpleCurveEditor : public ElementWithID, public ValueObservable<CurvePointsView, CurvePointsViewComparator> {
  public:
   /**
    * @brief Construction config for SimpleCurveEditor
@@ -98,6 +97,8 @@ class SimpleCurveEditor : public ElementWithID,
   FullColorPalette color;
   FullStyleOptions style;
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

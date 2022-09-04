@@ -7,6 +7,7 @@
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 
+// TODO: get rid of many of these include and use forward declarations
 #include <imgui.h>
 #include <memory>
 #include <pf_imgui/DockBuilder.h>

@@ -10,10 +10,11 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/Texture.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
  *
  * Image rendering should be handled by the user when deriving from ImGuiInterface.
  */
-class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
+class PF_IMGUI_EXPORT Image : public ItemElement {
  public:
   /**
    * @brief Struct for construction of Image.
@@ -59,6 +60,8 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
    */
   void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
 
+  Observable<Size> size;
+
  protected:
   void renderImpl() override;
 
@@ -73,7 +76,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement, public Resizable {
  *
  * Image rendering should be handled by the user when deriving from ImGuiInterface.
  */
-class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
+class PF_IMGUI_EXPORT InspectableImage : public ItemElement {
  public:
   /**
    * @brief Trigger for inspection popup.
@@ -123,6 +126,8 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement, public Resizable {
    * Set amount of pixels zoomed in around selection.
    */
   void setZoomSize(std::uint32_t zoom);
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

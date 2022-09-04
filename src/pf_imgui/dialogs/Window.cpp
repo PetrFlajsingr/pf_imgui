@@ -13,7 +13,7 @@
 namespace pf::ui::ig {
 
 Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse, Persistent persistent)
-    : Renderable(std::move(elementName)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
+    : Renderable(std::move(elementName)), Collapsible(allowCollapse, persistent), size(Size::Auto()),
       position(Position{-1, -1}), label(std::move(titleLabel)) {
   refreshIdLabel();
   label.addListener([this](auto) { refreshIdLabel(); });
@@ -21,6 +21,7 @@ Window::Window(std::string elementName, std::string titleLabel, AllowCollapse al
     if (isFocused) { ImGui::SetWindowFocus(idLabel.c_str()); }
   });
   position.addListener([this](auto) { positionDirty = true; });
+  size.addListener([this](auto) { sizeDirty = true; });
 }
 
 Window::Window(std::string elementName, std::string titleLabel, Persistent persistent)
@@ -34,7 +35,7 @@ void Window::renderImpl() {
 
   if (sizeDirty) {
     sizeDirty = false;
-    ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()));
+    ImGui::SetNextWindowSize(static_cast<ImVec2>(*size));
   }
   if (positionDirty) {
     positionDirty = false;
@@ -47,7 +48,7 @@ void Window::renderImpl() {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
-      if (getSize() != Size::Auto()) { setSize(getSize()); }
+      if (*size != Size::Auto()) { sizeDirty = true; }
       if (position->x != -1 && position->y != -1) { positionDirty = true; }  //-V550
     }
     if (getEnabled() == Enabled::No) { ImGui::BeginDisabled(); }
@@ -80,11 +81,6 @@ WindowMenuBar &Window::createOrGetMenuBar() {
 bool Window::hasMenuBar() const { return menuBar != nullptr; }
 
 void Window::removeMenuBar() { menuBar = nullptr; }
-
-void Window::setSize(const Size &newSize) {
-  sizeDirty = true;
-  Resizable::setSize(newSize);
-}
 
 void Window::render() {
   if (getVisibility() == Visibility::Visible) {

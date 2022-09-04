@@ -15,7 +15,7 @@
 namespace pf::ui::ig {
 
 ConsolePanel::ConsolePanel(const std::string &elementName, Size initialSize, Persistent persistent)
-    : ElementWithID(elementName), Resizable(initialSize), Savable(persistent), wrapTextToggle("wrapText"),
+    : ElementWithID(elementName), Savable(persistent), size(initialSize), wrapTextToggle("wrapText"),
       scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
 
   clearButton.clickEvent.addListener([this] { records.clear(); });
@@ -36,7 +36,7 @@ void ConsolePanel::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
 
-  ImGui::BeginHorizontal("layout", static_cast<ImVec2>(getSize()), 0);
+  ImGui::BeginHorizontal("layout", static_cast<ImVec2>(*size), 0);
   {
     ImGui::BeginChild("controls_area", ImVec2{25, 0});
     {

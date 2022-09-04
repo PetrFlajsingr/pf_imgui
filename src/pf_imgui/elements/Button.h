@@ -12,11 +12,12 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Font.h>
 #include <pf_imgui/Label.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/Texture.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <pf_imgui/style/common.h>
@@ -72,7 +73,7 @@ class PF_IMGUI_EXPORT ButtonBase : public ItemElement {
 /**
  * @brief A button which is not rendered, can be used as a part of a new component for click&hover etc. detection.
  */
-class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
+class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase {
  public:
   /**
    * @brief Struct for construction of InvisibleButton.
@@ -99,6 +100,8 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
   explicit InvisibleButton(const std::string &elementName, const Size &s = Size::Auto(),
                            MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
 
+  Observable<Size> size;
+
  protected:
   void renderImpl() override;
 
@@ -111,7 +114,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase, public Resizable {
  *
  * A button with a text label.
  */
-class PF_IMGUI_EXPORT Button : public ButtonBase, public Resizable {
+class PF_IMGUI_EXPORT Button : public ButtonBase {
  public:
   /**
    * @brief Struct for construction of Button.
@@ -144,6 +147,8 @@ class PF_IMGUI_EXPORT Button : public ButtonBase, public Resizable {
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;
@@ -227,7 +232,7 @@ class PF_IMGUI_EXPORT ArrowButton : public ButtonBase {
  *
  * A button with an image rendered on top of it.
  */
-class PF_IMGUI_EXPORT ImageButton : public ButtonBase, public Resizable {
+class PF_IMGUI_EXPORT ImageButton : public ButtonBase {
  public:
   struct Config {
     using Parent = ImageButton;
@@ -265,6 +270,8 @@ class PF_IMGUI_EXPORT ImageButton : public ButtonBase, public Resizable {
                ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

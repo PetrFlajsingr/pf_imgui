@@ -12,9 +12,9 @@
 #include <fmt/format.h>
 #include <imGuIZMOquat.h>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -44,7 +44,6 @@ using GizmoValueType =
  */
 template<GizmoType Type>
 class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
-                                public Resizable,
                                 public ValueObservable<details::GizmoValueType<Type>>,
                                 public Savable {
   using ValueType = details::GizmoValueType<Type>;
@@ -72,7 +71,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
    * @param size size of the element, the smaller value will be used for both axis'
    * @param persistent enable state saving
    */
-  Gizmo3D(const std::string &name, ValueType value, const Size &size = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE},
+  Gizmo3D(const std::string &name, ValueType value, const Size &s = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE},
           Persistent persistent = Persistent::No);
 
   /**
@@ -82,10 +81,10 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
   void setMidObject(GizmoMid newObject)
     requires(Type != GizmoType::Direction);
 
-  void setSize(const Size &s) override;
-
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;
@@ -96,24 +95,30 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
-    : ItemElement(std::string{config.name.value}), Resizable(config.size), ValueObservable<ValueType>(config.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
+    : ItemElement(std::string{config.name.value}), ValueObservable<ValueType>(config.value),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), size(config.size) {
+  size.addListener([this](Size newSize) {
+    const auto min = std::min(static_cast<float>(newSize.width), static_cast<float>(newSize.height));
+    const auto fixedSize = Size{min, min};
+    if (fixedSize != newSize) { *size.modify() = fixedSize; }
+  });
+}
 
 template<GizmoType Type>
-Gizmo3D<Type>::Gizmo3D(const std::string &name, Gizmo3D::ValueType value, const Size &size, Persistent persistent)
-    : ItemElement(name), Resizable(size), ValueObservable<ValueType>(value), Savable(persistent) {}
+Gizmo3D<Type>::Gizmo3D(const std::string &name, Gizmo3D::ValueType value, const Size &s, Persistent persistent)
+    : ItemElement(name), ValueObservable<ValueType>(value), Savable(persistent), size(s) {
+  size.addListener([this](Size newSize) {
+    const auto min = std::min(static_cast<float>(newSize.width), static_cast<float>(newSize.height));
+    const auto fixedSize = Size{min, min};
+    if (fixedSize != newSize) { *size.modify() = fixedSize; }
+  });
+}
 
 template<GizmoType Type>
 void Gizmo3D<Type>::setMidObject(GizmoMid newObject)
   requires(Type != GizmoType::Direction)
 {
   mid = newObject;
-}
-
-template<GizmoType Type>
-void Gizmo3D<Type>::setSize(const Size &s) {
-  const auto min = std::min(static_cast<float>(s.width), static_cast<float>(s.height));
-  Resizable::setSize(Size{min, min});
 }
 
 template<GizmoType Type>
@@ -174,19 +179,19 @@ void Gizmo3D<Type>::renderImpl() {
   const auto flags = static_cast<int>(Type) | static_cast<int>(mid);
   if constexpr (Type == GizmoType::Axes3) {
     glm::quat quat = ValueObservable<ValueType>::getValue();
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, static_cast<float>(getSize().width), flags)) {
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, static_cast<float>(size->width), flags)) {
       ValueObservable<ValueType>::setValueAndNotifyIfChanged(quat);
     }
   }
   if constexpr (Type == GizmoType::Direction) {
     glm::vec3 dir = ValueObservable<ValueType>::getValue();
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, static_cast<float>(getSize().width), flags)) {
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, static_cast<float>(size->width), flags)) {
       ValueObservable<ValueType>::setValueAndNotifyIfChanged(dir);
     }
   }
   if constexpr (Type == GizmoType::Dual) {
     auto [quat, dir] = ValueObservable<ValueType>::getValue();
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, dir, static_cast<float>(getSize().width), flags)) {
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, dir, static_cast<float>(size->width), flags)) {
       ValueObservable<ValueType>::setValueAndNotifyIfChanged({quat, dir});
     }
   }

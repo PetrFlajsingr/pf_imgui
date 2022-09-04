@@ -17,7 +17,6 @@
 #include <pf_imgui/details/CustomIconButtonImpls.h>
 #include <pf_imgui/elements/details/TextUtils.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <ringbuffer.hpp>
 #include <sstream>
 
@@ -74,7 +73,7 @@ namespace pf::ui::ig {
  */
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)  // RecordLimit has to be power of two
-class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Resizable, public Savable {
+class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Savable {
   struct Record {
     Category category;
     std::string text;
@@ -147,6 +146,8 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Resizable, public 
   FullStyleOptions style;
   Font font = Font::Default();
 
+  Observable<Size> size;
+
  protected:
   void renderImpl() override;
 
@@ -189,7 +190,7 @@ LogPanel<Category, RecordLimit>::LogPanel(Config &&config)
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size, Persistent persistent)
-    : ElementWithID(name), Resizable(size), Savable(persistent), wrapTextToggle("wrapText"),
+    : ElementWithID(name), Savable(persistent), size(size), wrapTextToggle("wrapText"),
       scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
   std::size_t i = 0;
   for (const auto category : magic_enum::enum_values<Category>()) {
@@ -261,7 +262,7 @@ void LogPanel<Category, RecordLimit>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto filterChanged = false;
-  ImGui::BeginHorizontal("layout", static_cast<ImVec2>(getSize()), 0);
+  ImGui::BeginHorizontal("layout", static_cast<ImVec2>(*size), 0);
   {
     ImGui::BeginChild("controls_area", ImVec2{25, 0});
     {

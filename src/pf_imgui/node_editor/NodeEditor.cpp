@@ -17,17 +17,17 @@
 namespace pf::ui::ig {
 
 NodeEditor::NodeEditor(const std::string &elementName, Size initialSize)
-    : ElementWithID(elementName), Resizable(initialSize), context(ax::NodeEditor::CreateEditor()) {}
+    : ElementWithID(elementName), size(initialSize), context(ax::NodeEditor::CreateEditor()) {}
 
 NodeEditor::NodeEditor(NodeEditor::Config &&config)
-    : ElementWithID(std::move(config.name)), Resizable(config.size), context(ax::NodeEditor::CreateEditor()) {}
+    : ElementWithID(std::move(config.name)), size(config.size), context(ax::NodeEditor::CreateEditor()) {}
 
 NodeEditor::~NodeEditor() { ax::NodeEditor::DestroyEditor(context); }
 
 void NodeEditor::renderImpl() {
   {
     setContext();
-    ax::NodeEditor::Begin(getName().c_str(), static_cast<ImVec2>(getSize()));
+    ax::NodeEditor::Begin(getName().c_str(), static_cast<ImVec2>(*size));
     auto end = RAII{ax::NodeEditor::End};
     {
       std::ranges::for_each(nodes, [](auto &node) { node->render(); });

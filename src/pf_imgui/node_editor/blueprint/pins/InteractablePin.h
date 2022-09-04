@@ -38,7 +38,7 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
     auto result = Pin::toToml();
     if constexpr (std::derived_from<T, TomlSerializable>) {
       auto elementData = inputElement->toToml();
-      elementData.insert_or_assign("width", static_cast<float>(inputElement->getWidth()));
+      elementData.insert_or_assign("width", static_cast<float>(*inputElement->width));
       result.insert_or_assign("data", elementData);
     }
     return result;
@@ -52,7 +52,7 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
           inputElement->setFromToml(*dataTable);
           if (auto width = dataTable->find("width"); width != dataTable->end()) {
             if (auto widthVal = width->second.as_floating_point(); widthVal != nullptr) {
-              inputElement->setWidth(static_cast<float>(widthVal->get()));
+              *inputElement->width.modify() = static_cast<float>(widthVal->get());
             }
           }
         }

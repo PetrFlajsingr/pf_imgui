@@ -9,7 +9,7 @@
 namespace pf::ui::ig {
 
 SimplePlot::SimplePlot(SimplePlot::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Resizable(config.size), label(std::string{config.label.value}),
+    : ElementWithID(std::string{config.name.value}), size(config.size), label(std::string{config.label.value}),
       plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow), scaleMax(config.scaleHigh),
       overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
 
@@ -17,9 +17,8 @@ SimplePlot::SimplePlot(const std::string &elementName, const std::string &labelT
                        std::vector<float> plotValues, std::optional<std::string> plotOverlayText,
                        const std::optional<std::size_t> &maxHistorySize, float scaleLow, float scaleHigh,
                        Size initialSize)
-    : ElementWithID(elementName), Resizable(initialSize), label(labelText), plotType(type),
-      values(std::move(plotValues)), scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(plotOverlayText)),
-      historyLimit(maxHistorySize) {}
+    : ElementWithID(elementName), size(initialSize), label(labelText), plotType(type), values(std::move(plotValues)),
+      scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(plotOverlayText)), historyLimit(maxHistorySize) {}
 
 void SimplePlot::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -27,12 +26,12 @@ void SimplePlot::renderImpl() {
     case PlotType::Lines:
       ImGui::PlotLines(label.get().c_str(), values.data(), static_cast<int>(values.size()), 0,
                        overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
-                       static_cast<ImVec2>(getSize()));
+                       static_cast<ImVec2>(*size));
       break;
     case PlotType::Histogram:
       ImGui::PlotHistogram(label.get().c_str(), values.data(), static_cast<int>(values.size()), 0,
                            overlayText.has_value() ? overlayText->c_str() : nullptr, scaleMin, scaleMax,
-                           static_cast<ImVec2>(getSize()));
+                           static_cast<ImVec2>(*size));
       break;
   }
 }

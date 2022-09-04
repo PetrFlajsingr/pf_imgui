@@ -18,7 +18,7 @@ void VerticalLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
     ImGui::BeginVertical(getName().c_str(), ImVec2{0, 0}, alignmentAsFloat());
     auto endLayout = RAII{ImGui::EndVertical};

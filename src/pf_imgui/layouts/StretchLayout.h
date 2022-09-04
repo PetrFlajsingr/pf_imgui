@@ -10,9 +10,10 @@
 #include <memory>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/concepts/ConfigConstruction.h>
+#include <pf_imgui/concepts/HasSizeObservable.h>
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/Layout.h>
-#include <pf_imgui/meta.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -60,8 +61,8 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    * @return reference to the newly created ElementWithID
    *
    */
-  template<typename T, typename... Args>
-    requires std::derived_from<T, Element> && std::derived_from<T, Resizable> && std::constructible_from<T, Args...>
+  template<std::derived_from<Element> T, typename... Args>
+    requires HasSizeObservable<T> && std::constructible_from<T, Args...>
   T &createChild(Args &&...args) {
     auto origChild = std::make_unique<T>(std::forward<Args>(args)...);
     auto childPtr = origChild.get();
@@ -70,6 +71,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
   }
 
   template<ElementConstructConfig T>
+    requires HasSizeObservable<typename T::Parent>
   std::derived_from<Element> auto &createChild(T &&config) {
     auto origChild = std::make_unique<typename T::Parent>(std::forward<T>(config));
     const auto childPtr = origChild.get();
@@ -82,9 +84,10 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    * @param newChild
    */
   template<std::derived_from<Element> T>
+    requires HasSizeObservable<T>
   void setChild(std::unique_ptr<T> &&newChild) {
+    childSize = &newChild->size;
     child = std::move(newChild);
-    renderableChild = dynamic_cast<Renderable *>(child.get());
   }
 
   std::vector<Renderable *> getRenderables() override;
@@ -116,8 +119,8 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
 
  private:
   Stretch stretch;
-  std::unique_ptr<Resizable> child = nullptr;
-  Renderable *renderableChild = nullptr;
+  std::unique_ptr<Element> child = nullptr;
+  Observable<Size> *childSize = nullptr;
   ImVec2 previousSize;
 };
 }  // namespace pf::ui::ig

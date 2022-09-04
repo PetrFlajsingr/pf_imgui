@@ -39,8 +39,7 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
                                  public ValueObservable<details::Slider2DStorageType<T>>,
                                  public Savable,
                                  public DragSource<details::Slider2DStorageType<T>>,
-                                 public DropTarget<details::Slider2DStorageType<T>>,
-                                 public Resizable {
+                                 public DropTarget<details::Slider2DStorageType<T>> {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -85,6 +84,8 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
   Font font = Font::Default();
   Label label;
 
+  Observable<Size> size;
+
  protected:
   void renderImpl() override;
 
@@ -97,7 +98,7 @@ template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(Slider2D::Config &&config)
     : ItemElement(std::string{config.name.value}), ValueObservable<StorageType>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<StorageType>(false),
-      DropTarget<StorageType>(false), Resizable(config.size), label(std::string{config.label.value}),
+      DropTarget<StorageType>(false), size(config.size), label(std::string{config.label.value}),
       extremesX(config.min.value.x, config.max.value.x), extremesY(config.min.value.y, config.max.value.y) {}
 
 template<OneOf<int, float> T>
@@ -105,7 +106,7 @@ Slider2D<T>::Slider2D(const std::string &elementName, const std::string &labelTe
                       Slider2D::StorageType minMaxY, Slider2D::StorageType initialValue, Size initialSize,
                       Persistent persistent)
     : ItemElement(elementName), ValueObservable<StorageType>(initialValue),
-      Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(initialSize),
+      Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), size(initialSize),
       label(labelText), extremesX(minMaxX), extremesY(minMaxY) {}
 
 template<OneOf<int, float> T>
@@ -133,11 +134,11 @@ void Slider2D<T>::renderImpl() {
   const auto oldValue = *address;
   if constexpr (std::same_as<T, int>) {
     valueChanged = ImWidgets::Slider2DInt(label.get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
-                                          &extremesY.x, &extremesY.y, static_cast<ImVec2>(getSize()));
+                                          &extremesY.x, &extremesY.y, static_cast<ImVec2>(*size));
   }
   if constexpr (std::same_as<T, float>) {
     valueChanged = ImWidgets::Slider2DFloat(label.get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
-                                            extremesY.x, extremesY.y, static_cast<ImVec2>(getSize()));
+                                            extremesY.x, extremesY.y, static_cast<ImVec2>(*size));
   }
   DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());
   if (auto drop = DropTarget<StorageType>::dropAccept(); drop.has_value()) {

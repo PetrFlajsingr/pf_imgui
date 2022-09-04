@@ -10,9 +10,9 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/concepts/ConfigConstruction.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
-#include <pf_imgui/meta.h>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <unordered_map>

@@ -10,7 +10,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
@@ -41,7 +40,6 @@ template<OneOf<float, int> T>
 class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
                                        public ValueObservable<T>,
                                        public Savable,
-                                       public Resizable,
                                        public DragSource<T>,
                                        public DropTarget<T> {
  public:
@@ -112,6 +110,8 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
   Font font = Font::Default();
   Label label;
 
+  Observable<Size> size;
+
  protected:
   void renderImpl() override;
 
@@ -125,14 +125,14 @@ template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
     : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      Resizable(config.size.value), DragSource<T>(false), DropTarget<T>(false), label(std::string{config.label.value}),
+      size(config.size.value), DragSource<T>(false), DropTarget<T>(false), label(std::string{config.label.value}),
       min(config.min), max(config.max), format(std::move(config.format)) {}
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(const std::string &elementName, const std::string &labelText, Size initialSize,
                                   T minVal, T maxVal, T initialValue, Persistent persistent, std::string numberFormat)
     : ItemElement(elementName), ValueObservable<T>(initialValue), Savable(persistent),
-      Resizable(initialSize), DragSource<T>(false), DropTarget<T>(false), label(labelText), min(minVal), max(maxVal),
+      size(initialSize), DragSource<T>(false), DropTarget<T>(false), label(labelText), min(minVal), max(maxVal),
       format(std::move(numberFormat)) {}
 
 template<OneOf<float, int> T>
@@ -162,7 +162,7 @@ void VerticalSlider<T>::renderImpl() {
   } else {
     dataType = ImGuiDataType_S32;
   }
-  const auto valueChanged = ImGui::VSliderScalar(label.get().c_str(), static_cast<ImVec2>(getSize()), dataType, address,
+  const auto valueChanged = ImGui::VSliderScalar(label.get().c_str(), static_cast<ImVec2>(*size), dataType, address,
                                                  &min, &max, format.c_str(), flags);
 
   DragSource<T>::drag(ValueObservable<T>::getValue());

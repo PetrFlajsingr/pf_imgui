@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT StackedLayout : public Layout {
    * Count of stacks in the layout.
    * @return count of stacks
    */
-  [[nodiscard]] std::size_t size() const;
+  [[nodiscard]] std::size_t stackSize() const;
 
   /**
    * Get currently active stack.

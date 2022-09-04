@@ -7,12 +7,12 @@
 namespace pf::ui::ig {
 
 SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
-    : ElementWithID(config.name), Resizable(config.size), ValueObservable(getViewToCurveData()), label(config.label),
+    : ElementWithID(config.name), ValueObservable(getViewToCurveData()), size(config.size), label(config.label),
       curveData(config.maxPointCount + 1, ImVec2{0, 0}) {}
 
 SimpleCurveEditor::SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s,
                                      std::size_t maxPointCount)
-    : ElementWithID(elementName), Resizable(s), ValueObservable(getViewToCurveData()), label(labelText),
+    : ElementWithID(elementName), ValueObservable(getViewToCurveData()), size(s), label(labelText),
       curveData(maxPointCount + 1, ImVec2{0, 0}) {}
 
 void SimpleCurveEditor::setMaxPointCount(std::size_t count) { curveData.resize(count + 1); }
@@ -30,7 +30,7 @@ float SimpleCurveEditor::getSmoothCurveValue(float x) const {
 void SimpleCurveEditor::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
-  if (ImGui::Curve(label.get().c_str(), static_cast<ImVec2>(getSize()), static_cast<int>(getMaxPointCount()),
+  if (ImGui::Curve(label.get().c_str(), static_cast<ImVec2>(*size), static_cast<int>(getMaxPointCount()),
                    curveData.data())) {
     setValueInner(getViewToCurveData());
     notifyValueChanged();

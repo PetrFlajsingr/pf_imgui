@@ -12,9 +12,10 @@
 #include <optional>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Label.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <ranges>
 #include <string>
@@ -27,7 +28,7 @@ namespace pf::ui::ig {
  *
  * @see PlotType
  */
-class PF_IMGUI_EXPORT SimplePlot : public ElementWithID, public Resizable {
+class PF_IMGUI_EXPORT SimplePlot : public ElementWithID {
  public:
   /**
    * @brief Struct for construction of SimplePlot.
@@ -94,6 +95,8 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID, public Resizable {
                ColorOf::Text, ColorOf::TextDisabled>
       color;
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

@@ -25,32 +25,32 @@ void ButtonBase::notifyClickEvent() { clickEvent.notify(); }
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Resizable(config.size), clickBtn(config.clickButton) {}
+      size(config.size), clickBtn(config.clickButton) {}
 
 InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, MouseButton clickButton,
                                  Repeatable isRepeatable)
-    : ButtonBase(elementName, isRepeatable), Resizable(s), clickBtn(clickButton) {}
+    : ButtonBase(elementName, isRepeatable), size(s), clickBtn(clickButton) {}
 
 void InvisibleButton::renderImpl() {
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(getSize()), static_cast<int>(clickBtn))) {
+  if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(*size), static_cast<int>(clickBtn))) {
     notifyClickEvent();
   }
 }
 
 Button::Button(Button::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Resizable(config.size), label(std::string{config.label.value}) {}
+      size(config.size), label(std::string{config.label.value}) {}
 
 Button::Button(const std::string &elementName, const std::string &labelText, const Size &s, Repeatable isRepeatable)
-    : ButtonBase(elementName, isRepeatable), Resizable(s), label(labelText) {}
+    : ButtonBase(elementName, isRepeatable), size(s), label(labelText) {}
 
 void Button::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::Button(label.get().c_str(), static_cast<ImVec2>(getSize()))) { notifyClickEvent(); }
+  if (ImGui::Button(label.get().c_str(), static_cast<ImVec2>(*size))) { notifyClickEvent(); }
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
@@ -84,10 +84,10 @@ void ArrowButton::renderImpl() {
 
 ImageButton::ImageButton(ImageButton::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      Resizable(config.size), texture(std::move(config.texture)) {}
+      size(config.size), texture(std::move(config.texture)) {}
 
 ImageButton::ImageButton(const std::string &elementName, std::shared_ptr<Texture> tex, Size s, Repeatable isRepeatable)
-    : ButtonBase(elementName, isRepeatable), Resizable(s), texture(std::move(tex)) {}
+    : ButtonBase(elementName, isRepeatable), size(s), texture(std::move(tex)) {}
 
 void ImageButton::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
   uvLeftTop = leftTop;
@@ -100,7 +100,7 @@ void ImageButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::ImageButton(texture->getID(), static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom)) {
+  if (ImGui::ImageButton(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom)) {
     notifyClickEvent();
   }
 }

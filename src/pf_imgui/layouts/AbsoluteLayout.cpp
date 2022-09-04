@@ -20,7 +20,7 @@ void AbsoluteLayout::renderImpl() {
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
     std::ranges::for_each(children, [](auto &childPair) {
       const auto &[child, position] = childPair;

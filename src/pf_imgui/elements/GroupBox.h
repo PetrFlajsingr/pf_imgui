@@ -10,10 +10,11 @@
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Label.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -21,7 +22,7 @@ namespace pf::ui::ig {
 /**
  * @brief A group of elements with a border and a label.
  */
-class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer, public Resizable {
+class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer {
  public:
   /**
    * @brief Struct for construction of GroupBox.
@@ -46,6 +47,8 @@ class PF_IMGUI_EXPORT GroupBox : public ElementWithID, public ElementContainer, 
   GroupBox(const std::string &elementName, const std::string &labelValue, Size s);
 
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

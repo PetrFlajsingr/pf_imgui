@@ -12,7 +12,8 @@
 #include <pf_imgui/Font.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/Size.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/style/ColorPalette.h>
@@ -27,7 +28,7 @@ namespace pf::ui::ig {
  *
  * It's basically a different kind of checkbox.
  */
-class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bool>, public Resizable, public Savable {
+class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Selectable.
@@ -67,6 +68,8 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bo
       style;
   Font font = Font::Default();
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

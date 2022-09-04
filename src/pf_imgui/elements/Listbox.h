@@ -63,7 +63,6 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   using CustomListboxBase::clearFilter;
   using CustomListboxBase::getItems;
   using CustomListboxBase::getName;
-  using CustomListboxBase::getSize;
   using CustomListboxBase::removeItem;
   using CustomListboxBase::removeItemIf;
   using CustomListboxBase::setFilter;
@@ -230,7 +229,7 @@ void Listbox<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = this->color.applyScoped();
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
-  if (ImGui::BeginListBox(this->label.get().c_str(), static_cast<ImVec2>(getSize()))) {
+  if (ImGui::BeginListBox(this->label.get().c_str(), static_cast<ImVec2>(*this->size))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
       const auto &[idx, item] = itemIdx;

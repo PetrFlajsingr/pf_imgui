@@ -10,15 +10,16 @@
 
 #include <imgui.h>
 #include <pf_common/Explicit.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/interface/Element.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 
 namespace pf::ui::ig {
 
 /**
  * @brief An invisible element which just fills certain space.
  */
-class Dummy : public Element, public Resizable {
+class Dummy : public Element {
  public:
   struct Config {
     using Parent = Dummy;
@@ -35,11 +36,13 @@ class Dummy : public Element, public Resizable {
    * @param elementName unique name of the element
    * @param s size of the element
    */
-  inline Dummy(const std::string &elementName, Size s) : Element(elementName), Resizable(s) {}
+  inline Dummy(const std::string &elementName, Size s) : Element(elementName), size(s) {}
+
+  Observable<Size> size;
 
  protected:
   inline void renderImpl() override {
-    auto renderSize = static_cast<ImVec2>(getSize());
+    auto renderSize = static_cast<ImVec2>(*size);
     const auto availableSpace = ImGui::GetContentRegionAvail();
     if (renderSize.x < 0) { renderSize.x += availableSpace.x; }
     if (renderSize.y < 0) { renderSize.y += availableSpace.y; }

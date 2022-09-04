@@ -9,10 +9,20 @@
 namespace pf::ui::ig {
 
 AnchorLayout::AnchorLayout(AnchorLayout::Config &&config)
-    : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
+    : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {
+  size.addListener([this, previousSize = *size](Size newSize) mutable {
+    onSizeUpdated(previousSize);
+    previousSize = newSize;
+  });
+}
 
 AnchorLayout::AnchorLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
-    : Layout(elementName, initialSize, showBorder) {}
+    : Layout(elementName, initialSize, showBorder) {
+  size.addListener([this, previousSize = *size](Size newSize) mutable {
+    onSizeUpdated(previousSize);
+    previousSize = newSize;
+  });
+}
 
 std::vector<Renderable *> AnchorLayout::getRenderables() {
   return children | ranges::views::transform([](auto &child) -> Renderable * { return child.element.get(); })
@@ -35,10 +45,11 @@ void AnchorLayout::removeChild(const std::string &childName) {
   }
 }
 
-void AnchorLayout::setSize(const Size &s) {
+void AnchorLayout::onSizeUpdated(Size previousSize) {
   using namespace pf::enum_operators;
-  const auto deltaWidth = s.width - getSize().width;
-  const auto deltaHeight = s.height - getSize().height;
+  if (static_cast<float>(previousSize.width) <= 0 || static_cast<float>(previousSize.height) <= 0) { return; }
+  const auto deltaWidth = size->width - previousSize.width;
+  const auto deltaHeight = size->height - previousSize.height;
   std::ranges::for_each(children, [&](auto &childData) {
     auto &[child, position, anchor, addWidth, addHeight] = childData;
     const auto anchorFlags = Flags{anchor};
@@ -53,7 +64,6 @@ void AnchorLayout::setSize(const Size &s) {
       position = position.moveDelta(0, static_cast<float>(deltaHeight));
     }
   });
-  Resizable::setSize(s);
 }
 
 void AnchorLayout::renderImpl() {
@@ -63,10 +73,10 @@ void AnchorLayout::renderImpl() {
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
     std::ranges::for_each(children, [](auto &childData) {
-      auto &[child, position, anchor, _1, _2] = childData;
+      const auto &[child, position, anchor, _1, _2] = childData;
       ImGui::SetCursorPos(static_cast<ImVec2>(position));
       child->render();
     });

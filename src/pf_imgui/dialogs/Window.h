@@ -16,7 +16,7 @@
 #include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/Position.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <vector>
@@ -34,7 +34,6 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
                                public Collapsible,
-                               public Resizable,
                                public Closeable {
  public:
   /**
@@ -101,8 +100,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void cancelMinSizeConstraint();
 
   void cancelMaxSizeConstraint();
-
-  void setSize(const Size &size) override;
 
   void render() override;
 
@@ -227,6 +224,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   ObservableProperty<Window, bool> hovered;
   ObservableProperty<Window, bool> focused;
   Observable<Position> position;
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

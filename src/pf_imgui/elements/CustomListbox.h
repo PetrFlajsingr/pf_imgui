@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/CustomItemBox.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -26,7 +25,7 @@ namespace pf::ui::ig {
  * @tparam R type stored in each row
  */
 template<typename T, std::derived_from<Renderable> R>
-class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Resizable {
+class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
  public:
   /**
    * Create CustomListbox
@@ -40,6 +39,8 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Resizab
 
   Label label;
 
+  Observable<Size> size;
+
  protected:
   void renderImpl() override;
 };
@@ -47,15 +48,14 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R>, public Resizab
 template<typename T, std::derived_from<Renderable> R>
 CustomListbox<T, R>::CustomListbox(const std::string &elementName, const std::string &labelText,
                                    CustomItemBoxFactory<T, R> auto &&rowFactory, Size s)
-    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), Resizable(s), label(labelText) {
-}
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), size(s), label(labelText) {}
 
 template<typename T, std::derived_from<Renderable> R>
 void CustomListbox<T, R>::renderImpl() {
   [[maybe_unused]] auto colorScoped = this->color.applyScoped();
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
-  if (ImGui::BeginListBox(this->label.get().c_str(), static_cast<ImVec2>(getSize()))) {
+  if (ImGui::BeginListBox(this->label.get().c_str(), static_cast<ImVec2>(*this->size))) {
     RAII end{ImGui::EndListBox};
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
   }

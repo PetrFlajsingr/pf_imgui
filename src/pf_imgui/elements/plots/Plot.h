@@ -11,10 +11,10 @@
 #include <memory>
 #include <optional>
 #include <pf_common/Explicit.h>
-#include <pf_common/exceptions/Exceptions.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -24,7 +24,7 @@ namespace pf::ui::ig {
 /**
  * @brief Advanced plot for plotting 2D data.
  */
-class PF_IMGUI_EXPORT Plot : public ElementWithID, public Resizable {
+class PF_IMGUI_EXPORT Plot : public ElementWithID {
  public:
   /**
    * @brief Struct for construction of Plot.
@@ -94,6 +94,8 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID, public Resizable {
   void removeData(const std::string &dataName);
 
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

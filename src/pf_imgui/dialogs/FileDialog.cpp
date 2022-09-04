@@ -61,7 +61,7 @@ void FileDialog::renderImpl() {
     fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(col));
   });
 
-  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(getSize()))) {
+  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(*size))) {
     RAII end{[&] { fileDialogInstance.Close(); }};
     if (fileDialogInstance.IsOk()) {
       const auto filePathName = fileDialogInstance.GetFilePathName();

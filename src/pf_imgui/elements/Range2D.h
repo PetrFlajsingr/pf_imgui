@@ -14,12 +14,13 @@
 #include <pf_common/math/Range.h>
 #include <pf_imgui/Font.h>
 #include <pf_imgui/Label.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <string>
@@ -31,7 +32,6 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT Range2D : public ItemElement,
                                 public ValueObservable<math::Range<glm::vec2>>,
-                                public Resizable,
                                 public Savable,
                                 public DragSource<math::Range<glm::vec2>>,
                                 public DropTarget<math::Range<glm::vec2>> {
@@ -98,6 +98,8 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

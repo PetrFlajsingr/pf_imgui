@@ -37,16 +37,16 @@ void GridLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
-    const auto xCellSize = static_cast<float>(getSize().width) / static_cast<float>(width);
-    const auto yCellSize = static_cast<float>(getSize().height) / static_cast<float>(height);
+    const auto xCellSize = static_cast<float>(size->width) / static_cast<float>(width);
+    const auto yCellSize = static_cast<float>(size->height) / static_cast<float>(height);
     const auto cellSize = Size{xCellSize, yCellSize};
     for (uint32_t y = 0; y < height; ++y) {
       for (uint32_t x = 0; x < width; ++x) {
         const auto index = indexForCell(x, y);
         if (cells[index] != nullptr) {
-          cells[index]->setSize(cellSize);
+          *cells[index]->size.modify() = cellSize;
           ImGui::SetCursorPos(ImVec2{xCellSize * static_cast<float>(x), yCellSize * static_cast<float>(y)});
           cells[index]->render();
         }

@@ -9,9 +9,10 @@
 namespace pf::ui::ig {
 
 ModalDialog::ModalDialog(const std::string &elementName, const std::string &labelText, Size dialogSize)
-    : Renderable(elementName), Resizable(dialogSize), position(Position{-1, -1}), label(labelText),
+    : Renderable(elementName), size(dialogSize), position(Position{-1, -1}), label(labelText),
       sizeDirty(dialogSize != Size::Auto()) {
   position.addListener([this](auto) { positionDirty = true; });
+  size.addListener([this](auto) { sizeDirty = true; });
 }
 
 void ModalDialog::renderImpl() {
@@ -21,7 +22,7 @@ void ModalDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (sizeDirty) {
     sizeDirty = false;
-    ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()));
+    ImGui::SetNextWindowSize(static_cast<ImVec2>(*size));
   }
   if (positionDirty) {
     positionDirty = false;
@@ -40,10 +41,5 @@ void ModalDialog::renderImpl() {
 void ModalDialog::close() { closed = true; }
 
 bool ModalDialog::isClosed() const { return closed; }
-
-void ModalDialog::setSize(const Size &newSize) {
-  sizeDirty = true;
-  Resizable::setSize(newSize);
-}
 
 }  // namespace pf::ui::ig

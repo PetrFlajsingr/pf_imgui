@@ -15,7 +15,8 @@
 #include <pf_imgui/Position.h>
 #include <pf_imgui/Size.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/Size.h>
 
 namespace pf::ui::ig {
 
@@ -23,7 +24,7 @@ namespace pf::ui::ig {
  * @brief Comment which can contain nodes and move them around
  * TODO: ?detect what nodes are inside?
  */
-class Comment : public NodeBase, public Resizable {
+class Comment : public NodeBase {
   friend class NodeEditor;
 
  public:
@@ -36,9 +37,9 @@ class Comment : public NodeBase, public Resizable {
   Comment(const std::string &elementName, const std::string &labelText, Size initialSize);
   Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText, const Size &s);
 
-  void setSize(const Size &s) override;
-
   Label label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

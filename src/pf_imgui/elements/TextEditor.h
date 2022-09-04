@@ -14,10 +14,11 @@
 #include <pf_imgui/Color.h>
 #include <pf_imgui/Font.h>
 #include <pf_imgui/Position.h>
+#include <pf_imgui/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/transform.hpp>
 #include <string>
 
@@ -26,7 +27,7 @@ namespace pf::ui::ig {
 /**
  * @brief Text editor with highlighting.
  */
-class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable, public Resizable {
+class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
  public:
   /**
    * @brief Control struct for editor's cursor. Allows for control of its movement and selection adjustments.
@@ -241,6 +242,8 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable, public 
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;
