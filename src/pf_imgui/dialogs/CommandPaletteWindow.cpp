@@ -32,7 +32,7 @@ void CommandPaletteWindow::renderImpl() {
   bool open = true;
   ImCmd::CommandPaletteWindow(getName().c_str(), &open);
   if (!open) {
-    setVisibility(Visibility::Invisible);
+    *visibility.modify() = Visibility::Invisible;
   }
 }
 

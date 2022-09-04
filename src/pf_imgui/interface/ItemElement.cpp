@@ -39,7 +39,7 @@ void ItemElement::render() {
   }
 
   if (tooltip != nullptr) {
-    if (getVisibility() == Visibility::Visible && *hovered) { tooltip->render(); }
+    if (*visibility == Visibility::Visible && *hovered) { tooltip->render(); }
   }
   if (popupMenu != nullptr) {
     if (*hovered && ImGui::GetIO().MouseClicked[1]) { popupMenu->open(); }

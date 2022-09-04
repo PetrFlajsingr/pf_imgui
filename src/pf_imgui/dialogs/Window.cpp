@@ -50,10 +50,10 @@ void Window::renderImpl() {
       if (*size != Size::Auto()) { sizeDirty = true; }
       if (position->x != -1 && position->y != -1) { positionDirty = true; }  //-V550
     }
-    if (getEnabled() == Enabled::No) { ImGui::BeginDisabled(); }
+    if (!*enabled) { ImGui::BeginDisabled(); }
     {
       auto raiiEnabled = pf::RAII([this] {
-        if (getEnabled() == Enabled::No) { ImGui::EndDisabled(); }
+        if (!*enabled) { ImGui::EndDisabled(); }
       });
       *hovered.modify() = ImGui::IsWindowHovered();
       *collapsed.modify() = ImGui::IsWindowCollapsed();
@@ -68,7 +68,7 @@ void Window::renderImpl() {
   }
   if (!isNotClosed) {
     closeEvent.notify();
-    setVisibility(Visibility::Invisible);
+    *visibility.modify() = Visibility::Invisible;
   }
 }
 
@@ -82,7 +82,7 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::render() {
-  if (getVisibility() == Visibility::Visible) {
+  if (*visibility == Visibility::Visible) {
     ImGui::SetNextWindowSizeConstraints(static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
                                         static_cast<ImVec2>(maxSizeConstraint.value_or(Size{
                                             std::numeric_limits<float>::max(), std::numeric_limits<float>::max()})));

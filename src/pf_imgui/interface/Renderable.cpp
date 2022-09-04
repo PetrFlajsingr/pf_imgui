@@ -11,24 +11,17 @@ namespace pf::ui::ig {
 
 Renderable::Renderable(std::string renderableName) : name(std::move(renderableName)) {}
 
-Renderable::Renderable(Renderable &&other) noexcept : visibility(other.visibility) {}
+Renderable::Renderable(Renderable &&other) noexcept : visibility(std::move(other.visibility)) {}
 
 Renderable &Renderable::operator=(Renderable &&other) noexcept {
-  visibility = other.visibility;
+  visibility = std::move(other.visibility);
+  enabled = std::move(other.enabled);
   return *this;
 }
 
-Visibility Renderable::getVisibility() const { return visibility; }
-
-void Renderable::setVisibility(Visibility visi) { visibility = visi; }
-
-void Renderable::setEnabled(Enabled eleState) { enabled = eleState; }
-
-Enabled Renderable::getEnabled() const { return enabled; }
-
 void Renderable::render() {
-  if (visibility == Visibility::Visible) {
-    if (enabled == Enabled::No) {
+  if (*visibility == Visibility::Visible) {
+    if (!*enabled) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};
       renderImpl();

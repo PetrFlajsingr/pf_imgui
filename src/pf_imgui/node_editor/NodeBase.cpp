@@ -59,9 +59,9 @@ bool NodeBase::hasPopupMenu() const { return popupMenu != nullptr; }
 void NodeBase::removePopupMenu() { popupMenu = nullptr; }
 
 void NodeBase::render() {
-  if (getVisibility() == Visibility::Visible) {
+  if (*visibility == Visibility::Visible) {
     if (isInitialised) { *position.modify() = Position{ax::NodeEditor::GetNodePosition(getId())}; }
-    if (getEnabled() == Enabled::No) {
+    if (!*enabled) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};
       renderImpl();
