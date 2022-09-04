@@ -13,7 +13,6 @@
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/Closeable.h>
-#include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/Position.h>
 #include <pf_imgui/Size.h>
@@ -33,7 +32,6 @@ namespace pf::ui::ig {
  */
 class PF_IMGUI_EXPORT Window : public Renderable,
                                public ElementContainer,
-                               public Collapsible,
                                public Closeable {
  public:
   /**
@@ -41,18 +39,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    * @param elementName ID of the window
    * @param titleLabel title on top of the window
    * @param allowCollapse
-   * @param persistent saving state to disk
    */
-  Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse = AllowCollapse::No,
-         Persistent persistent = Persistent::No);
-
-  /**
-   * Construct Window.
-   * @param elementName ID of the window
-   * @param titleLabel title on top of the window
-   * @param persistent saving state to disk
-   */
-  Window(std::string elementName, std::string titleLabel, Persistent persistent);
+  Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse = AllowCollapse::No);
 
   /**
    * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
@@ -102,8 +90,6 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   void cancelMaxSizeConstraint();
 
   void render() override;
-
-  void setCollapsed(bool collapse) override;
 
   /**
    * Check if user can resize the window.
@@ -212,7 +198,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    */
   void setStayInBackground(bool stay);
 
-  void setCollapsible(bool newCollapsible) override;
+  void setCollapsible(bool newCollapsible);
 
   std::vector<Renderable *> getRenderables() override;
 
@@ -225,6 +211,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   ObservableProperty<Window, bool> focused;
   Observable<Position> position;
   Observable<Size> size;
+  Observable<bool> collapsed;
 
  protected:
   void renderImpl() override;

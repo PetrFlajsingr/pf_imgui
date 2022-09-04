@@ -12,20 +12,19 @@
 
 namespace pf::ui::ig {
 
-Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse, Persistent persistent)
-    : Renderable(std::move(elementName)), Collapsible(allowCollapse, persistent), size(Size::Auto()),
-      position(Position{-1, -1}), label(std::move(titleLabel)) {
+Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse)
+    : Renderable(std::move(elementName)), size(Size::Auto()), position(Position{-1, -1}),
+      label(std::move(titleLabel)) {
   refreshIdLabel();
+  setCollapsible(allowCollapse == AllowCollapse::Yes);
   label.addListener([this](auto) { refreshIdLabel(); });
   focused.addListener([this](bool isFocused) {
     if (isFocused) { ImGui::SetWindowFocus(idLabel.c_str()); }
   });
   position.addListener([this](auto) { positionDirty = true; });
   size.addListener([this](auto) { sizeDirty = true; });
+  collapsed.addListener([this](bool newCollapsed) { ImGui::SetWindowCollapsed(idLabel.c_str(), newCollapsed); });
 }
-
-Window::Window(std::string elementName, std::string titleLabel, Persistent persistent)
-    : Window(std::move(elementName), std::move(titleLabel), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -57,11 +56,11 @@ void Window::renderImpl() {
         if (getEnabled() == Enabled::No) { ImGui::EndDisabled(); }
       });
       *hovered.modify() = ImGui::IsWindowHovered();
-      Collapsible::setCollapsed(ImGui::IsWindowCollapsed());
+      *collapsed.modify() = ImGui::IsWindowCollapsed();
       *focused.modify() = ImGui::IsWindowFocused();
       *position.modify() = Position{ImGui::GetWindowPos()};
       positionDirty = false;
-      if (!isCollapsed()) {
+      if (!*collapsed) {
         if (hasMenuBar()) { menuBar->render(); }
         std::ranges::for_each(getChildren(), &Renderable::render);
       }
@@ -93,11 +92,6 @@ void Window::render() {
     }
     renderImpl();
   }
-}
-
-void Window::setCollapsed(bool collapse) {
-  ImGui::SetWindowCollapsed(idLabel.c_str(), collapse);
-  Collapsible::setCollapsed(collapse);
 }
 
 bool Window::isUserResizable() const { return flags & ImGuiWindowFlags_NoResize; }
@@ -215,7 +209,6 @@ void Window::setCollapsible(bool newCollapsible) {
   } else {
     flags |= ImGuiWindowFlags_NoCollapse;
   }
-  Collapsible::setCollapsible(newCollapsible);
 }
 
 }  // namespace pf::ui::ig

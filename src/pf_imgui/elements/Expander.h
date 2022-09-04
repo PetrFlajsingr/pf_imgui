@@ -11,7 +11,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
@@ -24,7 +23,7 @@ namespace pf::ui::ig {
  *
  * Elements are rendered in top-down order.
  */
-class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, public Collapsible {
+class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, public Savable {
  public:
   /**
    * @brief Struct for construction of Expander.
@@ -33,8 +32,7 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
     using Parent = Expander;
     Explicit<std::string_view> name;  /*!< Unique name of the element */
     Explicit<std::string_view> label; /*!< Text rendered in the header of the Expander */
-    bool allowCollapse = true;        /*!< Enable/disable collapse functionality */
-    bool persistent = false;          /*!< Allow state saving to disk */
+    bool persistent = false; /*!< Enable/disable state saving */
   };
   /**
    * Construct Expander
@@ -45,20 +43,15 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
    * Construct Expander.
    * @param elementName ID of the group
    * @param labelText text drawn on top of the Expander
-   * @param persistent enable state saving to disk
-   * @param allowCollapse show button for collapsing the Expander
+   * @param persistent enable/disable state saving
    */
-  Expander(const std::string &elementName, const std::string &labelText, Persistent persistent = Persistent::No,
-           AllowCollapse allowCollapse = AllowCollapse::Yes);
-  /**
-   * Construct Group.
-   * @param elementName ID of the group
-   * @param labelText text drawn on top of the group
-   * @param allowCollapse show button for collapsing the group
-   */
-  Expander(const std::string &elementName, const std::string &labelText, AllowCollapse allowCollapse);
+  Expander(const std::string &elementName, const std::string &labelText, Persistent persistent = Persistent::No);
+
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
 
   Observable<Label> label;
+  Observable<bool> collapsed;
 
  protected:
   void renderImpl() override;

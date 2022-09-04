@@ -9,7 +9,6 @@
 #define PF_IMGUI_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/reactive/Observable.h>

@@ -23,10 +23,10 @@ enum class IconPack {
 };
 
 namespace details {
-static ImWchar iconRangeFA[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
-static ImWchar iconRangeFK[] = {ICON_MIN_FK, ICON_MAX_FK, 0};
-static ImWchar iconRangeKI[] = {ICON_MIN_KI, ICON_MAX_KI, 0};
-static ImWchar iconRangeFAD[] = {ICON_MIN_FAD, ICON_MAX_FAD, 0};
+static inline ImWchar iconRangeFA[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
+static inline ImWchar iconRangeFK[] = {ICON_MIN_FK, ICON_MAX_FK, 0};
+static inline ImWchar iconRangeKI[] = {ICON_MIN_KI, ICON_MAX_KI, 0};
+static inline ImWchar iconRangeFAD[] = {ICON_MIN_FAD, ICON_MAX_FAD, 0};
 }  // namespace details
 
 struct PF_IMGUI_EXPORT IconFontConfig {
