@@ -71,9 +71,6 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement {
 
 /**
  * @brief Par of TabBar, when clicked it switches to the selected sub-layout.
- *
- * @todo: close & selected persistence
- * @todo: Closeable
  */
 class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  public:
@@ -110,36 +107,24 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   ~Tab() override;
 
   /**
-  * Called when a Tab's contents are in/visible.
-  * @param listener
-  */
-  void addOpenListener(std::invocable<bool> auto &&listener) {
-    openObservable.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
   *
   * @return true if the Tab is currently open
   */
   [[nodiscard]] bool isOpen() const;
 
-  [[nodiscard]] bool isSelected() const;
-
   void setOpen(bool newOpen);
-
-  void setSelected();
 
   [[nodiscard]] bool isDisplayDot() const;
   void setDisplayDot(bool displayDot);
+
+  Observable<bool> selected;
+  ClassEvent<Tab> closeEvent;
 
  protected:
   void renderImpl() override;
 
  private:
-  Observable_impl<bool> openObservable;
-  Observable_impl<bool> selectedObservable;
   bool *open;
-  bool selected = false;
   bool setSelectedInNextFrame = false;
 };
 

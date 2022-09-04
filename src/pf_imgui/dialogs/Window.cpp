@@ -42,7 +42,7 @@ void Window::renderImpl() {
   }
 
   RAII endPopup{ImGui::End};
-  if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr),
+  if (ImGui::Begin(idLabel.c_str(), (closeable ? &isNotClosed : nullptr),
                    flags | (hasMenuBar() ? ImGuiWindowFlags_MenuBar : 0))) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
@@ -67,7 +67,7 @@ void Window::renderImpl() {
     }
   }
   if (!isNotClosed) {
-    notifyClosed();
+    closeEvent.notify();
     setVisibility(Visibility::Invisible);
   }
 }
@@ -209,6 +209,10 @@ void Window::setCollapsible(bool newCollapsible) {
   } else {
     flags |= ImGuiWindowFlags_NoCollapse;
   }
+}
+
+void Window::setCloseable(bool newCloseable) {
+  closeable = newCloseable;
 }
 
 }  // namespace pf::ui::ig

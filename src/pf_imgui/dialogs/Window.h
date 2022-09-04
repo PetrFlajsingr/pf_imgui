@@ -12,11 +12,11 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/MenuBars.h>
-#include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/Position.h>
 #include <pf_imgui/Size.h>
 #include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/reactive/Event.h>
 #include <string>
 #include <vector>
 
@@ -31,8 +31,7 @@ namespace pf::ui::ig {
  * @TODO: ImGui::IsWindowDocked()
  */
 class PF_IMGUI_EXPORT Window : public Renderable,
-                               public ElementContainer,
-                               public Closeable {
+                               public ElementContainer {
  public:
   /**
    * Construct Window.
@@ -200,6 +199,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   void setCollapsible(bool newCollapsible);
 
+  void setCloseable(bool newCloseable);
+
   std::vector<Renderable *> getRenderables() override;
 
   // FIXME: remove this and fix up how this is handled in docking
@@ -212,6 +213,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
   Observable<Position> position;
   Observable<Size> size;
   Observable<bool> collapsed;
+  ClassEvent<Window> closeEvent;
 
  protected:
   void renderImpl() override;
@@ -233,6 +235,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   bool sizeDirty = false;
   bool positionDirty = false;
+
+  bool closeable = false;
 
   std::string idLabel{};
 };

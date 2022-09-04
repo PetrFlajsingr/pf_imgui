@@ -9,7 +9,6 @@
 #include <pf_imgui/Font.h>
 #include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/reactive/Observable.h>
