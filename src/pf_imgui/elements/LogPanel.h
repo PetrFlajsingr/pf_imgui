@@ -12,7 +12,7 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
-#include <pf_imgui/Color.h>
+#include <pf_imgui/common/Color.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/details/CustomIconButtonImpls.h>
 #include <pf_imgui/elements/details/TextUtils.h>

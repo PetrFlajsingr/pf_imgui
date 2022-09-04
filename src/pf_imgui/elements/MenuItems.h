@@ -9,11 +9,12 @@
 
 #include <memory>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Event.h>
 #include <pf_imgui/reactive/Observable.h>
@@ -139,7 +140,7 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
 /**
  * @brief An item, which can be clicked and it toggles its inner value.
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable<bool>, public Savable {
+class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueContainer<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -168,6 +169,13 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  void setValue(const bool &newValue) override;
+  [[nodiscard]] const bool &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(bool)> listener) override;
+
+ public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
                ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
                ColorOf::BorderShadow>
@@ -175,6 +183,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Observable<Label> label;
+  ObservableProperty<MenuCheckboxItem, bool> checked;
 
  protected:
   void renderImpl() override;

@@ -11,6 +11,7 @@
 #include "Observable_impl.h"
 #include <concepts>
 #include <pf_common/Subscription.h>
+#include <pf_common/concepts/OneOf.h>
 #include <pf_common/concepts/PointerLike.h>
 
 namespace pf::ui::ig {
@@ -142,13 +143,17 @@ class Observable {
   Observable_impl<value_type> observableImpl;
 };
 
+struct ReadOnlyTag {};
+
 /**
  * A wrapper which allows for observing changes in inner value and allows modification from owner class.
  * @tparam Owner owner
  * @tparam T stored type
+ * @tparam Tag access modifier tag, void for normal access, ReadOnlyTag for read only by other classes
  * @tparam Detector detector of value change
  */
-template<typename Owner, typename T, ObservableChangeDetector<T> Detector = DefaultChangeDetector<T>>
+template<typename Owner, typename T, OneOf<void, ReadOnlyTag> Tag = void,
+         ObservableChangeDetector<T> Detector = DefaultChangeDetector<T>>
 class ObservableProperty {
   friend Owner;
 
@@ -210,11 +215,26 @@ class ObservableProperty {
 
   [[nodiscard]] bool hasActiveTransactions() const { return activeTransactions != 0; }
 
+  /**
+   * Create a proxy object for manipulation of observable's value.
+   */
+  [[nodiscard]] Transaction modify()
+    requires(!std::same_as<Tag, ReadOnlyTag>)
+  {
+    return Transaction{*this};
+  }
+
  private:
   /**
    * Create a proxy object for manipulation of observable's value.
    */
-  [[nodiscard]] Transaction modify() { return Transaction{*this}; }
+  [[nodiscard]] Transaction modify()
+    requires(std::same_as<Tag, ReadOnlyTag>)
+  {
+    return Transaction{*this};
+  }
+
+  void triggerListeners() { observableImpl.notify(value); }
 
   value_type value;
 

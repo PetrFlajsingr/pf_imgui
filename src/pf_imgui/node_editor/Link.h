@@ -152,7 +152,7 @@ class Link : public Renderable {
 
   void setId(ax::NodeEditor::LinkId newId);
 
-  ObservableProperty<Link, bool> hovered;
+  ObservableProperty<Link, bool, ReadOnlyTag> hovered;
 
  protected:
   void renderImpl() override;

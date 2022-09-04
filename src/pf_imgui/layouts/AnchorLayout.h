@@ -13,6 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/concepts/ConfigConstruction.h>
 #include <pf_imgui/concepts/HasSizeObservable.h>
 #include <pf_imgui/interface/Layout.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
@@ -66,7 +67,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
     */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
-  auto &createChild(Position position, const Flags<Anchor> &anchors, Args &&...args) {
+  T &createChild(Position position, const Flags<Anchor> &anchors, Args &&...args) {
     auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
     std::function<void(Height)> addToHeight = [](Height) {};
@@ -93,6 +94,11 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
     }
     children.emplace_back(std::move(child), position, static_cast<Anchor>(*anchors), addToWidth, addToHeight);
     return *ptr;
+  }
+
+  template<ElementConstructConfig T>
+  typename T::Parent &createChild(Position position, const Flags<Anchor> &anchors, T &&config) {
+    return createChild<typename T::Parent>(position, anchors, std::move(config));
   }
 
   /**

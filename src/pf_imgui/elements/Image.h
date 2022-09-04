@@ -10,8 +10,8 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Size.h>
-#include <pf_imgui/Texture.h>
+#include <pf_imgui/common/Size.h>
+#include <pf_imgui/common/Texture.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/reactive/Observable.h>

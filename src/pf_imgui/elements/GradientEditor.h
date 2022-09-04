@@ -10,10 +10,11 @@
 
 #include <imgui_color_gradient.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Color.h>
-#include <pf_imgui/Font.h>
+#include <pf_imgui/common/Color.h>
+#include <pf_imgui/common/Font.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/transform.hpp>
@@ -98,8 +99,8 @@ class GradientEditor : public ElementWithID,
 
   Font font = Font::Default();
 
-  ObservableProperty<GradientEditor, bool> hovered;
-  ObservableProperty<GradientEditor, bool> focused;
+  ObservableProperty<GradientEditor, bool, ReadOnlyTag> hovered;
+  ObservableProperty<GradientEditor, bool, ReadOnlyTag> focused;
 
  protected:
   void renderImpl() override;

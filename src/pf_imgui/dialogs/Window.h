@@ -13,8 +13,8 @@
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/Position.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Position.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/reactive/Event.h>
 #include <string>
@@ -208,8 +208,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   Observable<Label> label;
 
-  ObservableProperty<Window, bool> hovered;
-  ObservableProperty<Window, bool> focused;
+  ObservableProperty<Window, bool, ReadOnlyTag> hovered;
+  ObservableProperty<Window, bool, ReadOnlyTag> focused;
   Observable<Position> position;
   Observable<Size> size;
   Observable<bool> collapsed;

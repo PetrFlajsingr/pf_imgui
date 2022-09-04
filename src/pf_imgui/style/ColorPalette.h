@@ -13,7 +13,7 @@
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/meta.h>
 #include <pf_common/tuple.h>
-#include <pf_imgui/Color.h>
+#include <pf_imgui/common/Color.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/style/common.h>
 

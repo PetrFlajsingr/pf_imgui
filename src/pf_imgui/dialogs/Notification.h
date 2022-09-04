@@ -6,8 +6,8 @@
 #define PF_IMGUI_DIALOGS_NOTIFICATION_H
 
 #include <chrono>
-#include <pf_imgui/Font.h>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Renderable.h>

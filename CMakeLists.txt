@@ -165,14 +165,14 @@ set(SOURCES
         src/pf_imgui/node_editor/Pin.cpp
         src/pf_imgui/node_editor/Comment.cpp
         src/pf_imgui/node_editor/NodeBase.cpp
-        src/pf_imgui/Size.cpp
-        src/pf_imgui/Position.cpp
-        src/pf_imgui/Color.cpp
+        src/pf_imgui/common/Size.cpp
+        src/pf_imgui/common/Position.cpp
+        src/pf_imgui/common/Color.cpp
         src/include/imgui_curve_editor/ImGuiCurveEditor.cpp
         src/pf_imgui/elements/SimpleCurveEditor.cpp
         src/include/imgui_color_gradient/imgui_color_gradient.cpp
         src/pf_imgui/elements/GradientEditor.cpp
-        src/pf_imgui/Font.cpp
+        src/pf_imgui/common/Font.cpp
         src/pf_imgui/layouts/HorizontalLayout.cpp
         src/pf_imgui/layouts/VerticalLayout.cpp
         src/pf_imgui/layouts/LinearLayout.cpp
@@ -194,7 +194,7 @@ set(SOURCES
         src/pf_imgui/elements/details/OverlayGizmoBase.cpp
         src/pf_imgui/interface/Element.cpp
         src/pf_imgui/elements/ConsolePanel.cpp
-        src/pf_imgui/Label.cpp
+        src/pf_imgui/common/Label.cpp
         )
 
 set(BLUEPRINT_SOURCES
@@ -265,7 +265,7 @@ set(INCLUDES
         src/pf_imgui/interface/ElementContainer.h
         src/pf_imgui/interface/ElementWithID.h
         src/pf_imgui/interface/Savable.h
-        src/pf_imgui/interface/ValueObservable.h
+        src/pf_imgui/interface/ValueContainer.h
         src/pf_imgui/interface/ItemElement.h
         src/pf_imgui/reactive/Observable_impl.h
         src/pf_imgui/interface/Renderable.h
@@ -346,16 +346,16 @@ set(INCLUDES
         src/pf_imgui/node_editor/details/LinkPtrToRef.h
         src/pf_imgui/node_editor/Comment.h
         src/pf_imgui/node_editor/NodeBase.h
-        src/pf_imgui/Size.h
-        src/pf_imgui/Position.h
-        src/pf_imgui/Color.h
+        src/pf_imgui/common/Size.h
+        src/pf_imgui/common/Position.h
+        src/pf_imgui/common/Color.h
         src/include/imgui_curve_editor/ImGuiCurveEditor.h
         src/pf_imgui/elements/SimpleCurveEditor.h
         src/include/imgui_color_gradient/imgui_color_gradient.h
         src/include/ringbuffer/ringbuffer.hpp
         src/include/ImGuizmo/ImGuizmo.h
         src/pf_imgui/elements/GradientEditor.h
-        src/pf_imgui/Font.h
+        src/pf_imgui/common/Font.h
         src/pf_imgui/layouts/HorizontalLayout.h
         src/pf_imgui/layouts/VerticalLayout.h
         src/pf_imgui/layouts/LinearLayout.h
@@ -384,11 +384,11 @@ set(INCLUDES
         src/pf_imgui/interface/Element.h
         src/pf_imgui/style/ColorPalette.h
         src/pf_imgui/style/common.h
-        src/pf_imgui/Texture.h
+        src/pf_imgui/common/Texture.h
         src/pf_imgui/style/StyleOptions.h
         src/pf_imgui/elements/ConsolePanel.h
         src/pf_imgui/elements/details/TextUtils.h
-        src/pf_imgui/Label.h
+        src/pf_imgui/common/Label.h
         src/pf_imgui/reactive/Event.h
         src/pf_imgui/reactive/Observable.h
         src/pf_imgui/concepts/HasSizeObservable.h

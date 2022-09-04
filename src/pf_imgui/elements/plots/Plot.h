@@ -11,7 +11,7 @@
 #include <memory>
 #include <optional>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
 #include <pf_imgui/reactive/Observable.h>

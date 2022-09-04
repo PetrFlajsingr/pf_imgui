@@ -9,28 +9,26 @@
 namespace pf::ui::ig {
 
 DatePicker::DatePicker(DatePicker::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable(config.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}),
-      rawTime(std::make_unique<tm>()) {
-  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(config.value.day()));
-  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(config.value.month()) - 1);
-  rawTime->tm_year = static_cast<int>(config.value.year()) - 1900;
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}), date(config.value), rawTime(std::make_unique<tm>()) {
+  updateRawTime();
+  date.addListener([this](auto) { updateRawTime(); });
 }
 
 DatePicker::DatePicker(const std::string &elementName, const std::string &labelText,
                        std::chrono::year_month_day initialValue, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText),
+    : ItemElement(elementName), Savable(persistent), label(labelText), date(initialValue),
       rawTime(std::make_unique<tm>()) {
-  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(initialValue.day()));
-  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(initialValue.month()) - 1);
-  rawTime->tm_year = static_cast<int>(initialValue.year()) - 1900;
+  updateRawTime();
+  date.addListener([this](auto) { updateRawTime(); });
 }
 
-void DatePicker::setValue(const std::chrono::year_month_day &newValue) {
-  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(newValue.day()));
-  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(newValue.month()) - 1);
-  rawTime->tm_year = static_cast<int>(newValue.year()) - 1900;
-  ValueObservable::setValue(newValue);
+void DatePicker::setValue(const std::chrono::year_month_day &newValue) { *date.modify() = newValue; }
+
+const std::chrono::year_month_day &DatePicker::getValue() const { return *date; }
+
+Subscription DatePicker::addValueListenerImpl(std::function<void(std::chrono::year_month_day)> listener) {
+  return date.addListener(std::move(listener));
 }
 
 toml::table DatePicker::toToml() const {
@@ -76,8 +74,14 @@ void DatePicker::renderImpl() {
     const auto newDate =
         year_month_day{year{rawTime->tm_year + 1900}, month{static_cast<unsigned int>(rawTime->tm_mon + 1)},
                        day{static_cast<unsigned int>(rawTime->tm_mday)}};
-    setValueAndNotifyIfChanged(newDate);
+    *date.modify() = newDate;
   }
+}
+
+void DatePicker::updateRawTime() {
+  rawTime->tm_mday = static_cast<int>(static_cast<unsigned int>(date->day()));
+  rawTime->tm_mon = static_cast<int>(static_cast<unsigned int>(date->month()) - 1);
+  rawTime->tm_year = static_cast<int>(date->year()) - 1900;
 }
 
 }  // namespace pf::ui::ig

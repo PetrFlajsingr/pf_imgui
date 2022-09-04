@@ -11,7 +11,7 @@
 #include <concepts>
 #include <filesystem>
 #include <functional>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/FileDialog.h>
 #include <string>

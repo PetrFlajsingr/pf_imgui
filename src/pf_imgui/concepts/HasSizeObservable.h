@@ -9,7 +9,7 @@
 #define PF_IMGUI_CONCEPTS_HASSIZEOBSERVABLE_H
 
 #include <concepts>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/reactive/Observable.h>
 
 namespace pf::ui::ig {

@@ -10,7 +10,7 @@
 
 #include <algorithm>
 #include <concepts>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/reactive/Observable.h>

@@ -10,9 +10,10 @@
 
 #include <ImGuiCurveEditor.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Label.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>

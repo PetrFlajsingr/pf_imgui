@@ -8,31 +8,35 @@
 namespace pf::ui::ig {
 
 Toggle::Toggle(Toggle::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable(config.enabled),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}), selected(config.enabled) {}
 
 Toggle::Toggle(const std::string &elementName, const std::string &labelText, bool initialValue, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText) {}
+    : ItemElement(elementName), Savable(persistent), label(labelText), selected(initialValue) {}
 
-void Toggle::setSelected(bool selected) { setValueAndNotifyIfChanged(selected); }
-
-bool Toggle::isSelected() const { return getValue(); }
-
-void Toggle::toggle() { setSelected(!isSelected()); }
+void Toggle::toggle() { *selected.modify() = !*selected; }
 
 toml::table Toggle::toToml() const { return toml::table{{"checked", getValue()}}; }
 
 void Toggle::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("checked"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { *selected.modify() = *newVal; }
   }
+}
+
+void Toggle::setValue(const bool &newValue) { *selected.modify() = newValue; }
+
+const bool &Toggle::getValue() const { return *selected; }
+
+Subscription Toggle::addValueListenerImpl(std::function<void(bool)> listener) {
+  return selected.addListener(std::move(listener));
 }
 
 void Toggle::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ToggleButton(label->get().c_str(), getValueAddress())) { notifyValueChanged(); }
+  if (ToggleButton(label->get().c_str(), &selected.value)) { selected.triggerListeners(); }
 }
 
 }  // namespace pf::ui::ig

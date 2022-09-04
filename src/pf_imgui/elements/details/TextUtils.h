@@ -6,7 +6,7 @@
 #define PF_IMGUI_ELEMENTS_DETAILS_TEXTUTILS_H
 
 #include <imgui_internal.h>
-#include <pf_imgui/Color.h>
+#include <pf_imgui/common/Color.h>
 
 namespace pf::ui::ig {
 

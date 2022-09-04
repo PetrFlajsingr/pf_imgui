@@ -5,10 +5,11 @@
 #ifndef PF_IMGUI_ELEMENTS_CUSTOMICONBUTTONBEHAVIOR_H
 #define PF_IMGUI_ELEMENTS_CUSTOMICONBUTTONBEHAVIOR_H
 
-#include <pf_imgui/Color.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Color.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Event.h>
 #include <pf_imgui/style/ColorPalette.h>

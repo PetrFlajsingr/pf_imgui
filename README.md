@@ -164,7 +164,7 @@ auto &checkbox = imgui->createChild<Checkbox>("id", "Checkbox", false, Persisten
 This interface is being derived from in each element, which holds an inner value.
 ```cpp
 auto &checkbox = imgui->createChild<Checkbox>("id", "Checkbox");
-checkbox.addValueListener([](bool isChecked){});
+checkbox.addValueListenerImpl([](bool isChecked){});
 // ...
 checkbox.setValue(false);
 ```
@@ -298,7 +298,7 @@ auto &button = window.createChild<Bullet<Button>>("button_id", "Click me");
 ### Checkbox
 ```cpp
 auto &checkbox = window.createChild<Checkbox>("checkbox_id", "Check me", false);
-checkbox.addValueListener([](bool selected) {
+checkbox.addValueListenerImpl([](bool selected) {
   print("Selected: {}", selected);
 });
 ```

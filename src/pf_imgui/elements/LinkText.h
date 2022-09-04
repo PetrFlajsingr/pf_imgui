@@ -10,8 +10,8 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Font.h>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/reactive/Event.h>
 #include <string>

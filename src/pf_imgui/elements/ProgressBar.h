@@ -13,6 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <string>
 

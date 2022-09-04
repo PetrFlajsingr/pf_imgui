@@ -14,11 +14,12 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
 #include <string>

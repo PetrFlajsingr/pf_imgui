@@ -19,7 +19,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/reactive/Observable.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
 #include <range/v3/view/filter.hpp>
 

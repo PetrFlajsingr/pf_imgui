@@ -10,6 +10,7 @@
 #include <imgui_internal.h>
 #include <pf_common/specializations.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 
@@ -31,7 +32,7 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
   void setValue(const ValueType &value) override { inputElement->setValue(value); }
 
   Subscription addValueListener(std::invocable<ValueType> auto &&listener) {
-    return inputElement->addValueListener(std::forward<decltype(listener)>(listener));
+    return inputElement->addValueListenerImpl(std::forward<decltype(listener)>(listener));
   }
 
   [[nodiscard]] toml::table toToml() const override {

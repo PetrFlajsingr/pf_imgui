@@ -9,7 +9,7 @@
 #define PF_IMGUI_INTERFACE_ITEMELEMENT_H
 
 #include <memory>
-#include <pf_imgui/Position.h>
+#include <pf_imgui/common/Position.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementWithID.h>
@@ -93,8 +93,8 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
     return mousePositionObservable.addListener(std::forward<decltype(listener)>(listener));
   }
 
-  ObservableProperty<ItemElement, bool> hovered;
-  ObservableProperty<ItemElement, bool> focused;
+  ObservableProperty<ItemElement, bool, ReadOnlyTag> hovered;
+  ObservableProperty<ItemElement, bool, ReadOnlyTag> focused;
 
  protected:
   void setHovered(bool newHovered);

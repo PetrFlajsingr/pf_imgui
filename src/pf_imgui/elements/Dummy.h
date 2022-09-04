@@ -10,7 +10,7 @@
 
 #include <imgui.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/reactive/Observable.h>
 

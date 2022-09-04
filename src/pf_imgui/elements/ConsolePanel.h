@@ -9,9 +9,9 @@
 #define PF_IMGUI_ELEMENTS_CONSOLEPANEL_H
 
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Color.h>
-#include <pf_imgui/Font.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Color.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/details/CustomIconButtonImpls.h>
 #include <pf_imgui/elements/details/TextUtils.h>
 #include <pf_imgui/interface/ElementWithID.h>

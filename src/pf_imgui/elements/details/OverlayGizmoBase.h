@@ -8,6 +8,7 @@
 #include <ImGuizmo.h>
 #include <glm/matrix.hpp>
 #include <optional>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {

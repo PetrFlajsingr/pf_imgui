@@ -11,7 +11,7 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/interface/Renderable.h>
@@ -205,7 +205,7 @@ class Pin : public Renderable {
 
   Observable<Label> label;
 
-  ObservableProperty<Pin, bool> hovered;
+  ObservableProperty<Pin, bool, ReadOnlyTag> hovered;
 
  protected:
   /**
