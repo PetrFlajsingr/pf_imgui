@@ -8,8 +8,8 @@
 #ifndef PF_IMGUI_INTERFACE_ELEMENT_H
 #define PF_IMGUI_INTERFACE_ELEMENT_H
 
-#include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/reactive/Event.h>
 
 namespace pf::ui::ig {
 
@@ -30,19 +30,11 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   Element(Element &&other) noexcept;
   Element &operator=(Element &&other) noexcept;
 
-  /**
-   * Add a listener called when this object is destroyed.
-   * Most of the object will be destroyed at this point.
-   *
-   * @param listener listener to call
-   * @return Subscription to allow for listener cancellation
-   */
-  Subscription addDestroyListener(std::invocable auto &&listener) {
-    return observableDestroy.addListener(std::forward<decltype(listener)>(listener));
-  }
 
- private:
-  Observable_impl<> observableDestroy;
+  /**
+   * Called during object's destruction. The object will be partially destroyed at this point.
+   */
+  ClassEvent<Element> destroyEvent;
 };
 
 }  // namespace pf::ui::ig

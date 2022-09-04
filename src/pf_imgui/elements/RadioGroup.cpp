@@ -84,7 +84,7 @@ void RadioGroup::setFromToml(const toml::table &src) {
 }
 
 void RadioGroup::addDestroyListener(RadioButton *button) {
-  destroyButtonSubscriptions.emplace_back(button->addDestroyListener(
+  destroyButtonSubscriptions.emplace_back(button->destroyEvent.addListener(
       [button, this] { buttons.erase(std::remove(buttons.begin(), buttons.end(), button), buttons.end()); }));
 }
 
