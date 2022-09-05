@@ -15,7 +15,6 @@
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/transform.hpp>
 #include <range/v3/view/zip.hpp>

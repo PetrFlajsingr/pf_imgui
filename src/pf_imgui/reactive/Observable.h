@@ -13,6 +13,7 @@
 #include <pf_common/Subscription.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_common/concepts/PointerLike.h>
+#include <pf_imgui/common/Tags.h>
 
 namespace pf::ui::ig {
 
@@ -40,6 +41,13 @@ class DefaultChangeDetector {
 
  private:
   T initialValue;
+};
+
+class AlwaysTrueChangeDetector {
+ public:
+  explicit AlwaysTrueChangeDetector(auto) {}
+
+  [[nodiscard]] bool hasValueChanged(auto) { return true; }
 };
 
 /**
@@ -143,16 +151,14 @@ class Observable {
   Observable_impl<value_type> observableImpl;
 };
 
-struct ReadOnlyTag {};
-
 /**
  * A wrapper which allows for observing changes in inner value and allows modification from owner class.
  * @tparam Owner owner
  * @tparam T stored type
- * @tparam Tag access modifier tag, void for normal access, ReadOnlyTag for read only by other classes
+ * @tparam Tag access modifier tag, ReadWriteTag for normal access, ReadOnlyTag for read only by other classes
  * @tparam Detector detector of value change
  */
-template<typename Owner, typename T, OneOf<void, ReadOnlyTag> Tag = void,
+template<typename Owner, typename T, OneOf<ReadWriteTag, ReadOnlyTag> Tag = ReadWriteTag,
          ObservableChangeDetector<T> Detector = DefaultChangeDetector<T>>
 class ObservableProperty {
   friend Owner;
@@ -219,7 +225,7 @@ class ObservableProperty {
    * Create a proxy object for manipulation of observable's value.
    */
   [[nodiscard]] Transaction modify()
-    requires(!std::same_as<Tag, ReadOnlyTag>)
+    requires(std::same_as<Tag, ReadWriteTag>)
   {
     return Transaction{*this};
   }

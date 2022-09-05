@@ -20,7 +20,6 @@
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/serialization.h>
 #include <string>
 #include <utility>

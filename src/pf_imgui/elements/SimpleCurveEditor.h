@@ -14,17 +14,17 @@
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <range/v3/view/take_while.hpp>
 #include <range/v3/view/zip.hpp>
+#include <glm/vec2.hpp>
 
 namespace pf::ui::ig {
 namespace details {
 struct IsValidCurvePoint {
-  bool operator()(const ImVec2 &point) { return point.x != -1; }  //-V550
+  bool operator()(const glm::vec2 &point) { return point.x != -1; }  //-V550
 };
 }  // namespace details
 
@@ -32,20 +32,12 @@ struct IsValidCurvePoint {
  * Type for range of curve points.
  */
 using CurvePointsView =
-    ranges::take_while_view<ranges::ref_view<const std::vector<ImVec2>>, details::IsValidCurvePoint>;
-struct CurvePointsViewComparator {
-  [[nodiscard]] bool operator()(CurvePointsView lhs, CurvePointsView rhs) {
-    return std::ranges::all_of(ranges::views::zip(lhs, rhs), [](const auto &val) {
-      const auto &[lhsVal, rhsVal] = val;
-      return lhsVal.x == rhsVal.x && lhsVal.y == rhsVal.y;
-    });
-  }
-};
+    ranges::take_while_view<ranges::ref_view<const std::vector<glm::vec2>>, details::IsValidCurvePoint>;
 
 /**
  * @brief Simple curve editor allowing mouse control of key points and basic curve smoothing.
  */
-class SimpleCurveEditor : public ElementWithID, public ValueObservable<CurvePointsView, CurvePointsViewComparator> {
+class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePointsView, ReadOnlyTag>, public Savable {
  public:
   /**
    * @brief Construction config for SimpleCurveEditor
@@ -95,18 +87,29 @@ class SimpleCurveEditor : public ElementWithID, public ValueObservable<CurvePoin
    */
   [[nodiscard]] float getSmoothCurveValue(float x) const;
 
+  [[nodiscard]] toml::table toToml() const override;
+  void setFromToml(const toml::table &src) override;
+
+  [[nodiscard]] const CurvePointsView &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(CurvePointsView)> listener) override;
+
+ public:
   FullColorPalette color;
   FullStyleOptions style;
   Observable<Label> label;
 
   Observable<Size> size;
 
+  ObservableProperty<SimpleCurveEditor, CurvePointsView, ReadOnlyTag, AlwaysTrueChangeDetector> curvePoints;
+
  protected:
   void renderImpl() override;
 
  private:
   [[nodiscard]] CurvePointsView getViewToCurveData() const;
-  std::vector<ImVec2> curveData;
+  std::vector<glm::vec2> curveData;
 };
 
 }  // namespace pf::ui::ig

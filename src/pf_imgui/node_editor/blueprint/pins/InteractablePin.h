@@ -11,7 +11,6 @@
 #include <pf_common/specializations.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 
 namespace pf::ui::ig::bp {

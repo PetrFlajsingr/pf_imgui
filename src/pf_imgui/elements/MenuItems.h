@@ -15,7 +15,6 @@
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <pf_imgui/interface/ValueObservable.h>
 #include <pf_imgui/reactive/Event.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <string>

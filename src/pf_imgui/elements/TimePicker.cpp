@@ -8,14 +8,13 @@ namespace pf::ui::ig {
 
 TimePicker::TimePicker(TimePicker::Config &&config)
     : TimePicker(std::string{config.name.value}, config.label, config.value,
-                 config.persistent ? Persistent::Yes : Persistent::No) {
-  setValue(config.value);
-}
+                 config.persistent ? Persistent::Yes : Persistent::No) {}
 
 TimePicker::TimePicker(const std::string &elementName, const std::string &labelText, pf::ui::ig::TimeOfDay initialValue,
                        pf::ui::ig::Persistent persistent)
-    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText) {
-  setValue(initialValue);
+    : ItemElement(elementName), Savable(persistent), label(labelText), time(initialValue) {
+  updateInnerValues();
+  time.addListener([this](auto) { updateInnerValues(); });
 }
 
 void TimePicker::renderImpl() {
@@ -50,17 +49,16 @@ void TimePicker::renderImpl() {
   ImGui::EndGroup();
 }
 
-void TimePicker::setValue(const pf::ui::ig::TimeOfDay &newValue) {
-  hours = static_cast<int>(duration_cast<std::chrono::hours>(newValue.to_duration()).count());
-  minutes = static_cast<int>(duration_cast<std::chrono::minutes>(newValue.to_duration()).count() % 60);
-  seconds = static_cast<int>(duration_cast<std::chrono::seconds>(newValue.to_duration()).count() % 60);
-  ValueObservable::setValue(newValue);
+void TimePicker::updateInnerValues() {
+  hours = static_cast<int>(duration_cast<std::chrono::hours>(time->to_duration()).count());
+  minutes = static_cast<int>(duration_cast<std::chrono::minutes>(time->to_duration()).count() % 60);
+  seconds = static_cast<int>(duration_cast<std::chrono::seconds>(time->to_duration()).count() % 60);
 }
 
 toml::table TimePicker::toToml() const {
-  return toml::table{{"hours", getValue().hours().count()},
-                     {"minutes", getValue().minutes().count() % 60},
-                     {"seconds", getValue().seconds().count() % 60}};
+  return toml::table{{"hours", time->hours().count()},
+                     {"minutes", time->minutes().count() % 60},
+                     {"seconds", time->seconds().count() % 60}};
 }
 
 void TimePicker::setFromToml(const toml::table &src) {
@@ -88,13 +86,23 @@ void TimePicker::setFromToml(const toml::table &src) {
   }
 
   if (partsFound == 3) {
-    setValue(TimeOfDay{std::chrono::hh_mm_ss<std::chrono::seconds>{newHours + newMinutes + newSeconds}});
+    *time.modify() = TimeOfDay{std::chrono::hh_mm_ss<std::chrono::seconds>{newHours + newMinutes + newSeconds}};
   }
 }
 
+void TimePicker::setValue(const TimeOfDay &newValue) {
+  *time.modify() = newValue;
+}
+
+const TimeOfDay &TimePicker::getValue() const { return *time; }
+
+Subscription TimePicker::addValueListenerImpl(std::function<void(TimeOfDay)> listener) {
+  return time.addListener(std::move(listener));
+}
+
 void TimePicker::inputChanged() {
-  const auto inputTime = std::chrono::hours{hours} + std::chrono::minutes{minutes} + std::chrono::seconds{seconds};
-  setValueAndNotifyIfChanged(TimeOfDay{std::chrono::hh_mm_ss<std::chrono::seconds>(inputTime)});
+  const auto inputTime = TimeOfDay{std::chrono::hours{hours} + std::chrono::minutes{minutes} + std::chrono::seconds{seconds}};
+  *time.modify() = inputTime;
 }
 
 }  // namespace pf::ui::ig
