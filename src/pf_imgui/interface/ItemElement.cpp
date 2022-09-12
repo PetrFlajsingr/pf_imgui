@@ -34,7 +34,7 @@ void ItemElement::render() {
     auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
     if (newMousePos.x != lastMousePosition.x && newMousePos.y != lastMousePosition.y) {  //-V550
       lastMousePosition = newMousePos;
-      mousePositionObservable.notify(Position{lastMousePosition});
+      *mousePosition.modify() = Position{lastMousePosition};
     }
   }
 

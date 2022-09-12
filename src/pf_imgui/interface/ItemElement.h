@@ -84,17 +84,9 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
    */
   void removePopupMenu();
 
-  /**
-   * Add a listener to mouse position. Returned value is distance from upper left corner of the element area.
-   * @param listener
-   * @return Subscription to allow for listener removal
-   */
-  Subscription addMousePositionListener(std::invocable<Position> auto &&listener) {
-    return mousePositionObservable.addListener(std::forward<decltype(listener)>(listener));
-  } // TODO: change this to observable property
-
   ObservableProperty<ItemElement, bool, ReadOnlyTag> hovered;
   ObservableProperty<ItemElement, bool, ReadOnlyTag> focused;
+  ObservableProperty<ItemElement, Position, ReadOnlyTag> mousePosition;
 
  protected:
   void setHovered(bool newHovered);
@@ -105,7 +97,6 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
   std::unique_ptr<PopupMenu> popupMenu;
 
   ImVec2 lastMousePosition{-1, -1};
-  Observable_impl<Position> mousePositionObservable;
 };
 
 }  // namespace pf::ui::ig
