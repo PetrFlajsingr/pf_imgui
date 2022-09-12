@@ -106,6 +106,10 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
 
   Observable<Size> size;
 
+ private:
+  std::vector<glm::vec2> curveData;
+
+ public:
   ObservableProperty<SimpleCurveEditor, CurvePointsView, ReadOnlyTag, AlwaysTrueChangeDetector> curvePoints;
 
  protected:
@@ -113,7 +117,6 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
 
  private:
   [[nodiscard]] CurvePointsView getViewToCurveData() const;
-  std::vector<glm::vec2> curveData;
 };
 
 }  // namespace pf::ui::ig
