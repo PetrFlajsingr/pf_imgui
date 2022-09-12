@@ -52,28 +52,21 @@ class PF_IMGUI_EXPORT Text : public ItemElement,
   */
   Text(const std::string &elementName, std::string textValue, bool wrapText = false);
 
-  /**
-   * Set new text for rendering
-   * @param text new text to set
-   * @param args values to insert into text using fmt::format
-   */
-  template<typename... Args>
-  void setText(fmt::format_string<Args...> fmt, Args &&...args) {
-    setTextInner(fmt::format(fmt, std::forward<Args>(args)...));
-  }
-
   [[nodiscard]] bool isWrap() const;
   void setWrap(bool textWrap);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget> color;
   Font font = Font::Default();
 
-  Obser
+  Observable<std::string> text;
+
+  [[nodiscard]] const std::string &getValue() const override;
+  void setValue(const std::string &newValue) override;
 
  protected:
-  void renderImpl() override;
+  Subscription addValueListenerImpl(std::function<void(const std::string &)> listener) override;
 
-  virtual void setTextInner(std::string txt);
+  void renderImpl() override;
 
  private:
   bool wrap;

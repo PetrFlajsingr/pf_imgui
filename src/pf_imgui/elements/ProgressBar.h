@@ -128,7 +128,12 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueContainer<T>
   Observable<Size> size;
   Observable<T> value;
 
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
+
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -178,6 +183,21 @@ void ProgressBar<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(*size), overlay.c_str());
+}
+
+template<ProgressBarCompatible T>
+const T &ProgressBar<T>::getValue() const {
+  return *value;
+}
+
+template<ProgressBarCompatible T>
+void ProgressBar<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
+}
+
+template<ProgressBarCompatible T>
+Subscription ProgressBar<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 extern template class ProgressBar<float>;
