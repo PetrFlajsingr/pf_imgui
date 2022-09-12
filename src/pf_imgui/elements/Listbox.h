@@ -149,10 +149,11 @@ Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText
   selectedItem.addListener([this](const auto &itemToSelect) {
     if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
     if constexpr (std::equality_comparable<T>) {
-      if (const auto iter = std::ranges::find_if(
-              filteredItems, [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
-          iter != filteredItems.end()) {
-        const auto index = std::ranges::distance(filteredItems.begin(), iter);
+      if (const auto iter =
+              std::ranges::find_if(CustomListboxBase::filteredItems,
+                                   [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
+          iter != CustomListboxBase::filteredItems.end()) {
+        const auto index = std::ranges::distance(CustomListboxBase::filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
       }
     } else {

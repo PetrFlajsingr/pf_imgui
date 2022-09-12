@@ -108,9 +108,10 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
       if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
       if constexpr (std::equality_comparable<T>) {
         if (const auto iter =
-                std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
-            iter != items.end()) {
-          const auto index = std::ranges::distance(items.begin(), iter);
+                std::ranges::find_if(CustomComboboxBase::filteredItems,
+                                     [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
+            iter != CustomComboboxBase::filteredItems.end()) {
+          const auto index = std::ranges::distance(CustomComboboxBase::filteredItems.begin(), iter);
           setSelectedItemByIndex(index);
         }
       } else {
