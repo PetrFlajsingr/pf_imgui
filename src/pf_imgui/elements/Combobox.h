@@ -103,14 +103,14 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     Savable(persistent), DragSource<T>(false), selectedItem(std::nullopt) {
     addItems(std::forward<decltype(newItems)>(newItems));
 
-    // TODO: clean this up - might not work for filtered items
+    // TODO: clean this up
     selectedItem.addListener([this](const auto &itemToSelect) {
       if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
       if constexpr (std::equality_comparable<T>) {
-        if (const auto iter = std::ranges::find_if(
-                CustomComboboxBase::items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
-            iter != CustomComboboxBase::items.end()) {
-          const auto index = std::distance(CustomComboboxBase::items.begin(), iter);
+        if (const auto iter =
+                std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
+            iter != items.end()) {
+          const auto index = std::ranges::distance(items.begin(), iter);
           setSelectedItemByIndex(index);
         }
       } else {
@@ -165,8 +165,6 @@ void Combobox<T>::setSelectedItemAsString(const std::string &itemAsString) {
       iter != items.end()) {
     const auto index = std::ranges::distance(items.begin(), iter);
     setSelectedItemByIndex(index);
-  } else {
-    cancelSelection();
   }
 }
 
