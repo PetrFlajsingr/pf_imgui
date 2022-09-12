@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
 template<typename T, std::derived_from<Renderable> R>
 CustomListbox<T, R>::CustomListbox(const std::string &elementName, const std::string &labelText,
                                    CustomItemBoxFactory<T, R> auto &&rowFactory, Size s)
-    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), size(s), label(labelText) {}
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(labelText), size(s) {}
 
 template<typename T, std::derived_from<Renderable> R>
 void CustomListbox<T, R>::renderImpl() {

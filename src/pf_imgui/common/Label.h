@@ -23,7 +23,8 @@ class Label {
    * Construct Label.
    * @param value initial value
    */
-  Label(std::string value = std::string{});
+  explicit(false) Label(std::string value = std::string{});
+  Label(const Label &other) = default;
 
   Label &operator=(const Label &other);
   Label &operator=(const std::string &other);

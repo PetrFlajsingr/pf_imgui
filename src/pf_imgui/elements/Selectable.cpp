@@ -9,12 +9,12 @@
 namespace pf::ui::ig {
 
 Selectable::Selectable(Selectable::Config &&config)
-    : ItemElement(std::string{config.name.value}), selected(config.selected), size(config.size),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}), size(config.size), selected(config.selected) {}
 
 Selectable::Selectable(const std::string &elementName, const std::string &labelText, bool initialValue, Size s,
                        Persistent persistent)
-    : ItemElement(elementName), selected(initialValue), size(s), Savable(persistent), label(labelText) {}
+    : ItemElement(elementName), Savable(persistent), label(labelText), size(s), selected(initialValue) {}
 
 toml::table Selectable::toToml() const { return toml::table{{"selected", getValue()}}; }
 

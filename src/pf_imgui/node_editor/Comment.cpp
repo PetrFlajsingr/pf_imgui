@@ -8,13 +8,13 @@
 namespace pf::ui::ig {
 
 Comment::Comment(const std::string &elementName, const std::string &labelText, Size initialSize)
-    : NodeBase(elementName), size(initialSize), label(labelText) {
+    : NodeBase(elementName), label(labelText), size(initialSize) {
   size.addListener([this](auto) { sizeDirty = true; });
 }
 
 Comment::Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText,
                  const Size &s)
-    : NodeBase(elementName, initPosition), size(s), label(labelText) {
+    : NodeBase(elementName, initPosition), label(labelText), size(s) {
   size.addListener([this](auto) { sizeDirty = true; });
 }
 

@@ -88,18 +88,37 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   /**
    * Construct Combobox.
    * @param elementName ID of the element
-   * @param label text rendered next to the element
+   * @param labelStr text rendered next to the element
    * @param prevValue preview value
    * @param newItems items to be converted and rendered
    * @param showItemCount amount of items shown when open
    * @param persistent enable/disable disk state saving
    */
-  Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
+  Combobox(const std::string &elementName, const std::string &labelStr, const std::string &prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent = Persistent::No)
     requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-             && std::is_default_constructible_v<T> && std::copy_constructible<T>);
-  ;
+             && std::is_default_constructible_v<T> && std::copy_constructible<T>)
+  : CustomComboboxBase(elementName, labelStr, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
+    Savable(persistent), DragSource<T>(false), selectedItem(std::nullopt) {
+    addItems(std::forward<decltype(newItems)>(newItems));
+
+    // TODO: clean this up - might not work for filtered items
+    selectedItem.addListener([this](const auto &itemToSelect) {
+      if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
+      if constexpr (std::equality_comparable<T>) {
+        if (const auto iter = std::ranges::find_if(
+                CustomComboboxBase::items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
+            iter != CustomComboboxBase::items.end()) {
+          const auto index = std::distance(CustomComboboxBase::items.begin(), iter);
+          setSelectedItemByIndex(index);
+        }
+      } else {
+        const auto itemAsString = toString(*itemToSelect);
+        setSelectedItemAsString(itemAsString);
+      }
+    });
+  }
 
   /**
    * Set selected item by its string value. If no such item is found the selection is cancelled.
@@ -138,32 +157,6 @@ Combobox<T>::Combobox(Combobox::Config &&config)
     : Combobox{std::string{config.name.value}, std::string{config.label.value},
                std::string{config.preview},    std::vector<T>{},
                config.shownItemCount,          config.persistent ? Persistent::Yes : Persistent::No} {}
-
-template<ToStringConvertible T>
-Combobox<T>::Combobox(const std::string &elementName, const std::string &label, const std::string &prevValue,
-                      std::ranges::range auto &&newItems, ComboBoxCount showItemCount, Persistent persistent)
-  requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T> && std::is_default_constructible_v<T>
-           && std::copy_constructible<T>)
-: CustomComboboxBase(elementName, label, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
-  Savable(persistent), DragSource<T>(false), selectedItem(std::nullopt) {
-  addItems(std::forward<decltype(newItems)>(newItems));
-
-  // TODO: clean this up
-  selectedItem.addListener([this](const auto &itemToSelect) {
-    if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
-    if constexpr (std::equality_comparable<T>) {
-      if (const auto iter =
-              std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
-          iter != items.end()) {
-        const auto index = std::distance(items.begin(), iter);
-        setSelectedItemByIndex(index);
-      }
-    } else {
-      const auto itemAsString = toString(*itemToSelect);
-      setSelectedItemAsString(itemAsString);
-    }
-  });
-}
 
 template<ToStringConvertible T>
 void Combobox<T>::setSelectedItemAsString(const std::string &itemAsString) {

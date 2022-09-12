@@ -9,10 +9,10 @@
 namespace pf::ui::ig {
 
 GroupBox::GroupBox(GroupBox::Config &&config)
-    : ElementWithID(std::string{config.name.value}), size(config.size), label(std::string{config.label.value}) {}
+    : ElementWithID(std::string{config.name.value}), label(std::string{config.label.value}), size(config.size) {}
 
 GroupBox::GroupBox(const std::string &elementName, const std::string &labelValue, Size s)
-    : ElementWithID(elementName), size(s), label(labelValue) {}
+    : ElementWithID(elementName), label(labelValue), size(s) {}
 
 void GroupBox::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

@@ -40,10 +40,10 @@ void InvisibleButton::renderImpl() {
 
 Button::Button(Button::Config &&config)
     : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      size(config.size), label(std::string{config.label.value}) {}
+      label(std::string{config.label.value}), size(config.size) {}
 
 Button::Button(const std::string &elementName, const std::string &labelText, const Size &s, Repeatable isRepeatable)
-    : ButtonBase(elementName, isRepeatable), size(s), label(labelText) {}
+    : ButtonBase(elementName, isRepeatable), label(labelText), size(s) {}
 
 void Button::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

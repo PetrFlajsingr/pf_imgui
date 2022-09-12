@@ -9,12 +9,12 @@
 namespace pf::ui::ig {
 
 Checkbox::Checkbox(Checkbox::Config &&config)
-    : ItemElement(std::string{config.name.value}), selected(config.selected),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}), selected(config.selected) {}
 
 Checkbox::Checkbox(const std::string &elementName, const std::string &labelText, bool initialValue,
                    Persistent persistent)
-    : ItemElement(elementName), selected(initialValue), Savable(persistent), label(labelText) {}
+    : ItemElement(elementName), Savable(persistent), label(labelText), selected(initialValue) {}
 
 void Checkbox::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

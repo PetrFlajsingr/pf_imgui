@@ -81,7 +81,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
              std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
              Size initialSize = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
-      : Renderable(elementName), size(initialSize), label(labelText), openPath(std::move(startPath)),
+      : Renderable(elementName), label(labelText), size(initialSize), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
         onFilesSelected(std::forward<decltype(onSelect)>(onSelect)),
         onSelectCanceled(std::forward<decltype(onCancel)>(onCancel)) {
@@ -104,7 +104,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
              std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
              Size initialSize = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
-      : Renderable(elementName), size(initialSize), label(labelText), openPath(std::move(startPath)),
+      : Renderable(elementName), label(labelText), size(initialSize), openPath(std::move(startPath)),
         defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
         maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
 

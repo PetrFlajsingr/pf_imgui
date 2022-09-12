@@ -9,10 +9,10 @@
 namespace pf::ui::ig {
 
 PieChart::PieChart(PieChart::Config &&config)
-    : ElementWithID(std::string{config.name.value}), size(config.size), label(std::string{config.label.value}) {}
+    : ElementWithID(std::string{config.name.value}), label(std::string{config.label.value}), size(config.size) {}
 
 PieChart::PieChart(const std::string &elementName, const std::string &labelText, const Size &initialSize)
-    : ElementWithID(elementName), size(initialSize), label(labelText) {}
+    : ElementWithID(elementName), label(labelText), size(initialSize) {}
 
 void PieChart::renderImpl() {
   if (dataChanged) {

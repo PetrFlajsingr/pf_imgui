@@ -145,14 +145,14 @@ Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText
 : CustomListboxBase(elementName, labelText, Factory{}, s),
   Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {
 
-  // TODO: clean this up
+  // TODO: clean this up, this might not work with filtering
   selectedItem.addListener([this](const auto &itemToSelect) {
     if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
     if constexpr (std::equality_comparable<T>) {
-      if (const auto iter =
-              std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
-          iter != items.end()) {
-        const auto index = std::ranges::distance(items.begin(), iter);
+      if (const auto iter = std::ranges::find_if(
+              CustomListboxBase::items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
+          iter != CustomListboxBase::items.end()) {
+        const auto index = std::ranges::distance(CustomListboxBase::items.begin(), iter);
         setSelectedItemByIndex(index);
       }
     } else {

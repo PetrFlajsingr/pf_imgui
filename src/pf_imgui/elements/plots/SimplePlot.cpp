@@ -9,7 +9,7 @@
 namespace pf::ui::ig {
 
 SimplePlot::SimplePlot(SimplePlot::Config &&config)
-    : ElementWithID(std::string{config.name.value}), size(config.size), label(std::string{config.label.value}),
+    : ElementWithID(std::string{config.name.value}), label(std::string{config.label.value}), size(config.size),
       plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow), scaleMax(config.scaleHigh),
       overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
 
@@ -17,7 +17,7 @@ SimplePlot::SimplePlot(const std::string &elementName, const std::string &labelT
                        std::vector<float> plotValues, std::optional<std::string> plotOverlayText,
                        const std::optional<std::size_t> &maxHistorySize, float scaleLow, float scaleHigh,
                        Size initialSize)
-    : ElementWithID(elementName), size(initialSize), label(labelText), plotType(type), values(std::move(plotValues)),
+    : ElementWithID(elementName), label(labelText), size(initialSize), plotType(type), values(std::move(plotValues)),
       scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(plotOverlayText)), historyLimit(maxHistorySize) {}
 
 void SimplePlot::renderImpl() {
