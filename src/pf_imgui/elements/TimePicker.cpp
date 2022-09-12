@@ -96,7 +96,7 @@ void TimePicker::setValue(const TimeOfDay &newValue) {
 
 const TimeOfDay &TimePicker::getValue() const { return *time; }
 
-Subscription TimePicker::addValueListenerImpl(std::function<void(TimeOfDay)> listener) {
+Subscription TimePicker::addValueListenerImpl(std::function<void(const TimeOfDay &)> listener) {
   return time.addListener(std::move(listener));
 }
 

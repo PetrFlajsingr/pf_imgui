@@ -172,7 +172,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueContainer<
   [[nodiscard]] const bool &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(bool)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
 
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,

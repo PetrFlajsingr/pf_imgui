@@ -33,7 +33,7 @@ concept ProgressBarCompatible = requires(T t, float f) {
  * @tparam T type storing the progress value
  */
 template<ProgressBarCompatible T>
-class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T> {
+class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueContainer<T> {
  public:
   /**
    * Construct ProgressBar
@@ -46,7 +46,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
     Explicit<T> min;                 /*!< Lowest value representing 0% */
     Explicit<T> max;                 /*!< Highest value representing 100% */
     T value = min;                   /*!< Initial value within [min, max] */
-    std::string overlay = "";        /*!< Text rendered on top of the element */
+    std::string overlay;             /*!< Text rendered on top of the element */
     Size size = Size::Auto();        /*!< Size of the element */
   };
   /**
@@ -126,6 +126,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   Font font = Font::Default();
 
   Observable<Size> size;
+  Observable<T> value;
 
  protected:
   void renderImpl() override;
@@ -139,38 +140,36 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value), size(config.size),
-      stepValue(config.step), min(config.min), max(config.max), overlay(std::move(config.overlay)) {}
+    : ItemElement(std::string{config.name.value}), size(config.size), value(config.value), stepValue(config.step),
+      min(config.min), max(config.max), overlay(std::move(config.overlay)) {
+  value.addListener([this](const auto &newValue) { *value.modify() = std::clamp(newValue, min, max); });
+}
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(const std::string &elementName, T valueStep, T minValue, T maxValue,
                             std::optional<T> initialValue, std::string overlayStr, const Size &initialSize)
-    : ItemElement(elementName), ValueObservable<T>(initialValue.value_or(min)), size(initialSize), stepValue(valueStep),
-      min(minValue), max(maxValue), overlay(std::move(overlayStr)) {}
+    : ItemElement(elementName), size(initialSize), value(initialValue.value_or(min)), stepValue(valueStep),
+      min(minValue), max(maxValue), overlay(std::move(overlayStr)) {
+  value.addListener([this](const auto &newValue) { *value.modify() = std::clamp(newValue, min, max); });
+}
 
 template<ProgressBarCompatible T>
 T ProgressBar<T>::setPercentage(float percentage) {
-  percentage = std::clamp(percentage, 0.f, 1.f);
-  const auto oldValue = ValueObservable<T>::getValue();
   const auto newValue = min + (max - min) * percentage;
-  ValueObservable<T>::setValueInner(static_cast<T>(newValue));
-  if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
-  return ValueObservable<T>::getValue();
+  *value.modify() = newValue;
+  return *value;
 }
 
 template<ProgressBarCompatible T>
 T ProgressBar<T>::step() {
-  const auto oldValue = ValueObservable<T>::getValue();
-  const auto newValue = std::clamp(oldValue + stepValue, min, max);
-  ValueObservable<T>::setValueInner(newValue);
-  if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
-  return newValue;
+  *value.modify() = *value + stepValue;
+  return *value;
 }
 
 template<ProgressBarCompatible T>
 float ProgressBar<T>::getCurrentPercentage() const {
   const auto diff = max - min;
-  return (ValueObservable<T>::getValue() - min) / static_cast<float>(diff);
+  return (*value - min) / static_cast<float>(diff);
 }
 
 template<ProgressBarCompatible T>

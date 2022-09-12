@@ -75,7 +75,7 @@ void InputText::setValue(const std::string &newValue) { *text.modify() = newValu
 
 const std::string &InputText::getValue() const { return *text; }
 
-Subscription InputText::addValueListenerImpl(std::function<void(std::string)> listener) {
+Subscription InputText::addValueListenerImpl(std::function<void(const std::string &)> listener) {
   return text.addListener(std::move(listener));
 }
 

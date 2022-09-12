@@ -71,7 +71,7 @@ class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public 
   [[nodiscard]] const TimeOfDay &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(TimeOfDay)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const TimeOfDay &)> listener) override;
 
  public:
   Font font = Font::Default();

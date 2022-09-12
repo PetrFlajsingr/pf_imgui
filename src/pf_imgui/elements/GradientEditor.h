@@ -53,7 +53,7 @@ struct GradientPointsViewComparator {
  * @brief Editor for gradient with color selection and an option to add more leading points. Selected poitns can be removed by pressing delete.
  */
 class GradientEditor : public ElementWithID,
-                       public ValueObservable<GradientPointsView, GradientPointsViewComparator>,
+                       public ValueContainer<GradientPointsView, ReadOnlyTag>,
                        public Savable {
  public:
   /**
@@ -100,8 +100,13 @@ class GradientEditor : public ElementWithID,
 
   ObservableProperty<GradientEditor, bool, ReadOnlyTag> hovered;
   ObservableProperty<GradientEditor, bool, ReadOnlyTag> focused;
+  ObservableProperty<GradientEditor, GradientPointsView, ReadOnlyTag, AlwaysTrueChangeDetector> points;
+
+  [[nodiscard]] const GradientPointsView &getValue() const override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const GradientPointsView &)> listener) override;
+
   void renderImpl() override;
 
  private:

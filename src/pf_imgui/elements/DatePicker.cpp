@@ -27,7 +27,7 @@ void DatePicker::setValue(const std::chrono::year_month_day &newValue) { *date.m
 
 const std::chrono::year_month_day &DatePicker::getValue() const { return *date; }
 
-Subscription DatePicker::addValueListenerImpl(std::function<void(std::chrono::year_month_day)> listener) {
+Subscription DatePicker::addValueListenerImpl(std::function<void(const std::chrono::year_month_day &)> listener) {
   return date.addListener(std::move(listener));
 }
 

@@ -9,17 +9,18 @@
 #define PF_IMGUI_ELEMENTS_SIMPLECURVEEDITOR_H
 
 #include <ImGuiCurveEditor.h>
+#include <glm/vec2.hpp>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/common/Label.h>
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
+#include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <range/v3/view/take_while.hpp>
 #include <range/v3/view/zip.hpp>
-#include <glm/vec2.hpp>
 
 namespace pf::ui::ig {
 namespace details {
@@ -48,6 +49,7 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
     Explicit<std::string> label;         /*!< Label rendered as overlay over the editor */
     Size size = Size::Auto();            /*!< Size of the element */
     Explicit<std::size_t> maxPointCount; /*!< Maximum allowed key points */
+    bool persistent = false;             /*!< Enable/disable state saving */
   };
 
   /**
@@ -61,8 +63,10 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
    * @param labelText label rendered as overlay over the editor
    * @param s size of the element
    * @param maxPointCount maximum allowed key points
+   * @param persistent enable/disable state saving
    */
-  SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s, std::size_t maxPointCount);
+  SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s, std::size_t maxPointCount,
+                    Persistent persistent = Persistent::No);
 
   /**
    * Set maximum allowed key points.
@@ -93,7 +97,7 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
   [[nodiscard]] const CurvePointsView &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(CurvePointsView)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const CurvePointsView &)> listener) override;
 
  public:
   FullColorPalette color;

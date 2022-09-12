@@ -61,7 +61,7 @@ class OverlayGizmoBase : public ValueContainer<glm::mat4> {
   const glm::mat4 &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(glm::mat4)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const glm::mat4 &)> listener) override;
 
  public:
   ObservableProperty<OverlayGizmoBase, glm::mat4> transform;

@@ -60,7 +60,7 @@ class DatePicker : public ItemElement, public ValueContainer<std::chrono::year_m
   [[nodiscard]] const std::chrono::year_month_day &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(std::chrono::year_month_day)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const std::chrono::year_month_day &)> listener) override;
 
  public:
   [[nodiscard]] toml::table toToml() const override;

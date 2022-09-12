@@ -97,7 +97,7 @@ void MenuCheckboxItem::setValue(const bool &newValue) { *checked.modify() = newV
 
 const bool &MenuCheckboxItem::getValue() const { return *checked; }
 
-Subscription MenuCheckboxItem::addValueListenerImpl(std::function<void(bool)> listener) {
+Subscription MenuCheckboxItem::addValueListenerImpl(std::function<void(const bool &)> listener) {
   return checked.addListener(std::move(listener));
 }
 

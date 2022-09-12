@@ -67,7 +67,7 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement {
 /**
  * @brief Leaf of Tree. Behaves as Selectable.
  */
-class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueObservable<bool>, public Savable {
+class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueContainer<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of TreeLeaf.
@@ -88,13 +88,12 @@ class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueObserva
    * Create TreeLeaf.
    * @param elementName unique name of the element
    * @param label label rendered on the element
-   * @param selected
+   * @param initialValue
    * @param persistent enable/disable disk saving
    */
-  TreeLeaf(const std::string &elementName, const std::string &label, bool selected = false,
+  TreeLeaf(const std::string &elementName, const std::string &label, bool initialValue = false,
            Persistent persistent = Persistent::No);
 
-  void setValue(const bool &newValue) override;
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -102,8 +101,14 @@ class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueObserva
   ColorPalette<ColorOf::Text, ColorOf::HeaderActive, ColorOf::HeaderHovered, ColorOf::Header> color;
   StyleOptions<StyleOf::FramePadding, StyleOf::ItemSpacing, StyleOf::FrameRounding> style;
   Font font = Font::Default();
+  ObservableProperty<TreeLeaf, bool> selected;
+
+  [[nodiscard]] const bool &getValue() const override;
+  void setValue(const bool &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
   void renderImpl() override;
 };
 

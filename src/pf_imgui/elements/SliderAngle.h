@@ -9,9 +9,9 @@
 #define PF_IMGUI_ELEMENTS_SLIDERANGLE_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/common/Font.h>
 #include <pf_imgui/common/Label.h>
-#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
@@ -27,7 +27,7 @@ namespace pf::ui::ig {
  * Angles are in radians.
  */
 class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
-                                    public ValueObservable<float>,
+                                    public ValueContainer<float>,
                                     public Savable,
                                     public DragSource<float>,
                                     public DropTarget<float> {
@@ -95,8 +95,14 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Observable<Label> label;
+  ObservableProperty<SliderAngle, float> angle;
+
+  [[nodiscard]] const float &getValue() const override;
+  void setValue(const float &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const float &)> listener) override;
+
   void renderImpl() override;
 
  private:

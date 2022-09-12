@@ -30,6 +30,9 @@ class PF_IMGUI_EXPORT ValueContainer
     : public std::conditional_t<std::same_as<Tag, ReadWriteTag>, details::ValueContainerSetValue<T>,
                                 details::ValueContainerEmptyBase> {
  public:
+  using ValueType = T;
+  constexpr static bool ReadOnly = std::same_as<Tag, ReadOnlyTag>;
+
   virtual ~ValueContainer() = default;
 
   [[nodiscard]] virtual const T &getValue() const = 0;
@@ -38,7 +41,7 @@ class PF_IMGUI_EXPORT ValueContainer
   }
 
  protected:
-  virtual Subscription addValueListenerImpl(std::function<void(T)> listener) = 0;
+  virtual Subscription addValueListenerImpl(std::function<void(const T &)> listener) = 0;
 };
 
 }  // namespace pf::ui::ig

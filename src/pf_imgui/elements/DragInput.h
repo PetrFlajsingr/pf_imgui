@@ -42,7 +42,7 @@ namespace pf::ui::ig {
  */
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 class PF_IMGUI_EXPORT DragInput : public ItemElement,
-                                  public ValueObservable<T>,
+                                  public ValueContainer<T>,
                                   public Savable,
                                   public DragSource<T>,
                                   public DropTarget<T> {
@@ -129,8 +129,14 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Observable<Label> label;
+  ObservableProperty<DragInput, T> value;
+
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -142,23 +148,22 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(DragInput::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), speed(config.speed), min(config.min), max(config.max),
-      format(std::move(config.format)) {}
+      label(std::string{config.label.value}), value(config.value), speed(config.speed), min(config.min),
+      max(config.max), format(std::move(config.format)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(const std::string &elementName, const std::string &labelText,
                         drag_details::UnderlyingType<T> valueSpeed, drag_details::UnderlyingType<T> minValue,
                         drag_details::UnderlyingType<T> maxValue, T initialValue, Persistent persistent,
                         std::string numberFormat)
-    : ItemElement(elementName), ValueObservable<T>(initialValue),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), speed(valueSpeed),
-      min(minValue), max(maxValue), format(std::move(numberFormat)) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
+      value(initialValue), speed(valueSpeed), min(minValue), max(maxValue), format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 toml::table DragInput<T>::toToml() const {
-  const auto val = ValueObservable<T>::getValue();
+  const auto val = *value;
   if constexpr (OneOf<T, PF_IMGUI_DRAG_RANGE_TYPE_LIST>) {
     return toml::table{{"value", toml::array{val.start, val.end}}};
   } else if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
@@ -181,21 +186,19 @@ void DragInput<T>::setFromToml(const toml::table &src) {
         if (auto newRangeEnd = newVal->get(1)->value<ParamType>(); newRangeEnd.has_value()) {
           range.end = newRangeEnd.value();
         }
-        ValueObservable<T>::setValueAndNotifyIfChanged(range);
+        *value.modify() = range;
       }
     }
   } else if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(*vecValue); }
+        if (vecValue.has_value()) { *value.modify() = *vecValue; }
       }
     }
   } else {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-      }
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) { *value.modify() = *newVal; }
     }
   }
 }
@@ -206,7 +209,7 @@ void DragInput<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   bool valueChanged = false;
-  const auto address = ValueObservable<T>::getValueAddress();
+  const auto address = &value.value;
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
@@ -233,12 +236,33 @@ void DragInput<T>::renderImpl() {
     valueChanged = ImGui::DragFloatRange2(label->get().c_str(), &address->start, &address->end, speed, min, max,
                                           format.c_str(), nullptr, flags);
   }
-  DragSource<T>::drag(ValueObservable<T>::getValue());
+  DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+  if (valueChanged) { value.triggerListeners(); }
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>, int, glm::ivec2, glm::ivec3, glm::ivec4,
+               math::Range<int>>
+             T>
+const T &DragInput<T>::getValue() const {
+  return *value;
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>, int, glm::ivec2, glm::ivec3, glm::ivec4,
+               math::Range<int>>
+             T>
+void DragInput<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>, int, glm::ivec2, glm::ivec3, glm::ivec4,
+               math::Range<int>>
+             T>
+Subscription DragInput<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 extern template class DragInput<float>;

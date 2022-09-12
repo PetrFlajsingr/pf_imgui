@@ -13,39 +13,45 @@ details::TreeRecord::TreeRecord(const std::string &elementName, const std::strin
 
 TreeLeaf::TreeLeaf(TreeLeaf::Config &&config)
     : TreeRecord(std::string{config.name.value}, std::string{config.label.value}, ImGuiTreeNodeFlags_Leaf),
-      ValueObservable(config.selected), Savable(config.persistent ? Persistent::Yes : Persistent::No) {
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), selected(config.selected) {
   if (config.selected) {
     flags |= ImGuiTreeNodeFlags_Selected;
   } else {
     flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
   }
+  selected.addListener([this](const auto newValue) {
+    if (newValue) {
+      flags |= ImGuiTreeNodeFlags_Selected;
+    } else {
+      flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
+    }
+    if (limiter != nullptr && newValue) { limiter->selected = this; }
+  });
 }
 
-TreeLeaf::TreeLeaf(const std::string &elementName, const std::string &labelText, bool selected, Persistent persistent)
-    : TreeRecord(elementName, labelText, ImGuiTreeNodeFlags_Leaf), ValueObservable(selected), Savable(persistent) {
-  if (selected) {
+TreeLeaf::TreeLeaf(const std::string &elementName, const std::string &labelText, bool initialValue,
+                   Persistent persistent)
+    : TreeRecord(elementName, labelText, ImGuiTreeNodeFlags_Leaf), Savable(persistent), selected(initialValue) {
+  if (*selected) {
     flags |= ImGuiTreeNodeFlags_Selected;
   } else {
     flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
   }
-}
-
-void TreeLeaf::setValue(const bool &newValue) {
-  if (newValue == getValue()) { return; }
-  if (newValue) {
-    flags |= ImGuiTreeNodeFlags_Selected;
-  } else {
-    flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
-  }
-  if (limiter != nullptr && newValue) { limiter->selected = this; }
-  ValueObservable::setValue(newValue);
+  selected.addListener([this](const auto newValue) {
+    if (newValue) {
+      flags |= ImGuiTreeNodeFlags_Selected;
+    } else {
+      flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
+    }
+    if (limiter != nullptr && newValue) { limiter->selected = this; }
+  });
 }
 
 toml::table TreeLeaf::toToml() const { return toml::table{{"value", getValue()}}; }
 
 void TreeLeaf::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValue(*newVal); }
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { *selected.modify() = *newVal; }
   }
 }
 
@@ -57,8 +63,16 @@ void TreeLeaf::renderImpl() {
   RAII end{[pop] {
     if (pop) { ImGui::TreePop(); }
   }};
-  if (ImGui::IsItemClicked()) { setValue(!getValue()); }
-  if (limiter != nullptr && limiter->selected != this) { setValue(false); }
+  if (ImGui::IsItemClicked()) { *selected.modify() = !*selected; }
+  if (limiter != nullptr && limiter->selected != this) { *selected.modify() = false; }
+}
+
+const bool &TreeLeaf::getValue() const { return *selected; }
+
+void TreeLeaf::setValue(const bool &newValue) { *selected.modify() = newValue; }
+
+Subscription TreeLeaf::addValueListenerImpl(std::function<void(const bool &)> listener) {
+  return selected.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

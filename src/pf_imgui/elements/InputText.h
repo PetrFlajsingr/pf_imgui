@@ -124,7 +124,7 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
   [[nodiscard]] const std::string &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(std::string)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const std::string &)> listener) override;
 
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,

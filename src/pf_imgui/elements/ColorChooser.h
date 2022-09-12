@@ -90,7 +90,7 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
   [[nodiscard]] const Color &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(Color)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const Color &)> listener) override;
 
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
@@ -195,7 +195,7 @@ const Color &ColorChooser<Type, Format>::getValue() const {
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
-Subscription ColorChooser<Type, Format>::addValueListenerImpl(std::function<void(Color)> listener) {
+Subscription ColorChooser<Type, Format>::addValueListenerImpl(std::function<void(const Color &)> listener) {
   return chosenColor.addListener(std::move(listener));
 }
 

@@ -6,9 +6,9 @@
 #define PF_IMGUI_ELEMENTS_TOGGLE_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/common/Font.h>
 #include <pf_imgui/common/Label.h>
-#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
@@ -62,7 +62,7 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueContainer<bool>, 
   [[nodiscard]] const bool &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(bool)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
 
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,

@@ -84,7 +84,7 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
   [[nodiscard]] const T &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(T)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
 
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::Button, ColorOf::ButtonHovered,
@@ -180,7 +180,7 @@ const T &SpinInput<T>::getValue() const {
 }
 
 template<OneOf<int, float> T>
-Subscription SpinInput<T>::addValueListenerImpl(std::function<void(T)> listener) {
+Subscription SpinInput<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
   return value.addListener(std::move(listener));
 }
 

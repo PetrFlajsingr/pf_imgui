@@ -9,12 +9,12 @@
 namespace pf::ui::ig {
 
 SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
-    : ElementWithID(config.name), size(config.size), curvePoints(getViewToCurveData()), label(config.label.value),
+    : ElementWithID(config.name), Savable(config.persistent ? Persistent::Yes : Persistent::No), size(config.size), curvePoints(getViewToCurveData()), label(config.label.value),
       curveData(config.maxPointCount + 1, glm::vec2{0, 0}) {}
 
 SimpleCurveEditor::SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s,
-                                     std::size_t maxPointCount)
-    : ElementWithID(elementName), size(s), curvePoints(getViewToCurveData()), label(labelText),
+                                     std::size_t maxPointCount, Persistent persistent)
+    : ElementWithID(elementName), Savable(persistent), size(s), curvePoints(getViewToCurveData()), label(labelText),
       curveData(maxPointCount + 1, glm::vec2{0, 0}) {}
 
 void SimpleCurveEditor::setMaxPointCount(std::size_t count) { curveData.resize(count + 1); }
@@ -55,13 +55,13 @@ void SimpleCurveEditor::setFromToml(const toml::table &src) {
   curveData.clear();
   if (auto valuesIter = src.find("values"); valuesIter != src.end()) {
     if (auto valuesVal = valuesIter->second.as_array(); valuesVal != nullptr) {
-      std::ranges::for_each(*valuesVal, [this](auto point) {
+      std::ranges::for_each(*valuesVal, [this](auto &point) {
         if (auto pointArr = point.as_array(); pointArr != nullptr) {
           if (pointArr->size() == 2) {
             auto newPoint = glm::vec2{};
-            if (pointArr->get(0)->as_floating_point() && pointArr[1]->as_floating_point()) {
+            if (pointArr->get(0)->as_floating_point() && pointArr->get(1)->as_floating_point()) {
               curveData.emplace_back(
-                  glm::vec2{*pointArr->get(0)->as_floating_point(), *pointArr[1]->as_floating_point()});
+                  glm::vec2{**pointArr->get(0)->as_floating_point(), **pointArr->get(1)->as_floating_point()});
             }
           }
         }
@@ -72,7 +72,7 @@ void SimpleCurveEditor::setFromToml(const toml::table &src) {
 
 const CurvePointsView &SimpleCurveEditor::getValue() const { return *curvePoints; }
 
-Subscription SimpleCurveEditor::addValueListenerImpl(std::function<void(CurvePointsView)> listener) {
+Subscription SimpleCurveEditor::addValueListenerImpl(std::function<void(const CurvePointsView &)> listener) {
   return curvePoints.addListener(std::move(listener));
 }
 

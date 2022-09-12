@@ -16,7 +16,7 @@
 namespace pf::ui::ig::bp {
 
 template<std::derived_from<Renderable> T>
-  requires derived_specialization_of<T, ValueObservable>
+  requires derived_specialization_of<T, ValueContainer>
 class InteractablePin : public PinWithValue<typename T::ValueType> {
  public:
   using ValueType = typename PinWithValue<typename T::ValueType>::ValueType;

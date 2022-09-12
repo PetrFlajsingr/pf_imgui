@@ -58,16 +58,22 @@ class CustomIconButton : public CustomIconButtonBehavior {
   void notifyClickEvent();
 };
 
-class CustomIconToggle : public CustomIconButtonBehavior, public ValueObservable<bool>, public Savable {
+class CustomIconToggle : public CustomIconButtonBehavior, public ValueContainer<bool>, public Savable {
  public:
   explicit CustomIconToggle(const std::string &elementName, bool initValue = false,
                             Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
-
   void setFromToml(const toml::table &src) override;
 
+  Observable<bool> checked;
+
+  [[nodiscard]] const bool &getValue() const override;
+  void setValue(const bool &newValue) override;
+
  protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
   void update(State state) override;
 };
 

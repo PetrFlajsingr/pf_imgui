@@ -28,7 +28,7 @@ namespace pf::ui::ig {
  *
  * It's basically a different kind of checkbox.
  */
-class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bool>, public Savable {
+class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueContainer<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Selectable.
@@ -70,8 +70,14 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bo
   Observable<Label> label;
 
   Observable<Size> size;
+  ObservableProperty<Selectable, bool> selected;
+
+  [[nodiscard]] const bool &getValue() const override;
+  void setValue(const bool &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
   void renderImpl() override;
 };
 

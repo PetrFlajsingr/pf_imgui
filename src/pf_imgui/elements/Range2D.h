@@ -31,7 +31,7 @@ namespace pf::ui::ig {
  * @brief Allows for selection of a 2D area - axis aligned.
  */
 class PF_IMGUI_EXPORT Range2D : public ItemElement,
-                                public ValueObservable<math::Range<glm::vec2>>,
+                                public ValueContainer<math::Range<glm::vec2>>,
                                 public Savable,
                                 public DragSource<math::Range<glm::vec2>>,
                                 public DropTarget<math::Range<glm::vec2>> {
@@ -100,8 +100,14 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
   Observable<Label> label;
 
   Observable<Size> size;
+  ObservableProperty<Range2D, math::Range<glm::vec2>> range;
+
+  [[nodiscard]] const math::Range<glm::vec2> &getValue() const override;
+  void setValue(const math::Range<glm::vec2> &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const math::Range<glm::vec2> &)> listener) override;
+
   void renderImpl() override;
 
  private:

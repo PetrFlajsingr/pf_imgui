@@ -47,7 +47,7 @@ static_assert(CustomItemBoxFactory<ListboxRowFactory<int>, int, Selectable>);
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
-                                public ValueObservable<T>,
+                                public ValueContainer<std::optional<T>>,
                                 public Savable,
                                 public DragSource<T>,
                                 public DropTarget<T> {
@@ -88,11 +88,10 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param elementName ID of the element
    * @param labelText text rendered at the top of the list
    * @param s size of the element
-   * @param selectedIdx starting selected id
    * @param persistent enable/disable state saving to disk
    */
   Listbox(const std::string &elementName, const std::string &labelText, Size s = Size::Auto(),
-          std::optional<int> selectedIdx = std::nullopt, Persistent persistent = Persistent::No)
+          Persistent persistent = Persistent::No)
     requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
 
   /**
@@ -102,24 +101,12 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * and observers are notified
    */
   Selectable &addItem(const T &item, Selected selected);
-  /**
-   * Get and item currently selected by the user.
-   * @param data
-   */
-  [[nodiscard]] std::optional<std::reference_wrapper<T>> getSelectedItem() const;
-
-  /**
-   * Set selected item by name. If no such item is found nothing happens.
-   * @param itemToSelect item to select
-   */
-  void setSelectedItem(const T &itemToSelect)
-    requires(!std::same_as<T, std::string>);
 
   /**
    * Set selected item by name. If no such item is found nothing happens.
    * @param itemAsString string representation of item to select
    */
-  void setSelectedItem(const std::string &itemAsString);
+  void setSelectedItemAsString(const std::string &itemAsString);
 
   /**
    * Select item by its index.
@@ -130,7 +117,14 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  ObservableProperty<Listbox, std::optional<T>> selectedItem;
+
+  [[nodiscard]] const std::optional<T> &getValue() const override;
+  void setValue(const std::optional<T> &newValue) override;
+
  protected:
+  Subscription addValueListenerImpl(std::function<void(const std::optional<T> &)> listener) override;
+
   void renderImpl() override;
 
   void refilterItems() override;
@@ -142,16 +136,31 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
 template<ToStringConvertible T>
 Listbox<T>::Listbox(Listbox::Config &&config)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: CustomListboxBase(std::string{config.name.value}, std::string{config.label.value}, Factory{}, config.size),
-  ValueObservable<T>(),
-  Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false) {}
+: Listbox{std::string{config.name.value}, std::string{config.label.value}, config.size,
+          config.persistent ? Persistent::Yes : Persistent::No} {}
 
 template<ToStringConvertible T>
-Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText, Size s,
-                    std::optional<int> selectedIdx, Persistent persistent)
+Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText, Size s, Persistent persistent)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: CustomListboxBase(elementName, labelText, Factory{}, s), ValueObservable<T>(),
-  Savable(persistent), DragSource<T>(false), DropTarget<T>(false), selectedItemIndex(selectedIdx) {}
+: CustomListboxBase(elementName, labelText, Factory{}, s),
+  Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {
+
+  // TODO: clean this up
+  selectedItem.addListener([this](const auto &itemToSelect) {
+    if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
+    if constexpr (std::equality_comparable<T>) {
+      if (const auto iter =
+              std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
+          iter != items.end()) {
+        const auto index = std::ranges::distance(items.begin(), iter);
+        setSelectedItemByIndex(index);
+      }
+    } else {
+      const auto itemAsString = toString(*itemToSelect);
+      setSelectedItemAsString(itemAsString);
+    }
+  });
+}
 
 template<ToStringConvertible T>
 Selectable &Listbox<T>::addItem(const T &item, Selected selected) {
@@ -161,30 +170,7 @@ Selectable &Listbox<T>::addItem(const T &item, Selected selected) {
 }
 
 template<ToStringConvertible T>
-std::optional<std::reference_wrapper<T>> Listbox<T>::getSelectedItem() const {
-  if (selectedItemIndex.has_value()) { return filteredItems[*selectedItemIndex]->first; }
-  return std::nullopt;
-}
-
-template<ToStringConvertible T>
-void Listbox<T>::setSelectedItem(const T &itemToSelect)
-  requires(!std::same_as<T, std::string>)
-{
-  if constexpr (std::equality_comparable<T>) {
-    if (const auto iter =
-            std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item->first == itemToSelect; });
-        iter != items.end()) {
-      const auto index = std::ranges::distance(items.begin(), iter);
-      setSelectedItemByIndex(index);
-    }
-  } else {
-    const auto itemAsString = toString(itemToSelect);
-    setSelectedItem(itemAsString);
-  }
-}
-
-template<ToStringConvertible T>
-void Listbox<T>::setSelectedItem(const std::string &itemAsString) {
+void Listbox<T>::setSelectedItemAsString(const std::string &itemAsString) {
   if (const auto iter = std::ranges::find_if(
           filteredItems, [itemAsString](const auto &item) { return item->second->label.get() == itemAsString; });
       iter != filteredItems.end()) {
@@ -200,8 +186,9 @@ void Listbox<T>::setSelectedItemByIndex(std::size_t index) {
     if (selectedItemIndex.has_value()) { filteredItems[*selectedItemIndex]->second->setValue(false); }
     selectedItemIndex = index;
     filteredItems[*selectedItemIndex]->second->setValue(true);
-    ValueObservable<T>::setValueInner(filteredItems[index]->first);
-    ValueObservable<T>::notifyValueChanged();
+    *selectedItem.modify() = filteredItems[index]->first;
+  } else {
+    *selectedItem.modify() = std::nullopt;
   }
 }
 
@@ -209,8 +196,8 @@ template<ToStringConvertible T>
 toml::table Listbox<T>::toToml() const {
   auto result = toml::table{};
   if (selectedItemIndex.has_value()) {
-    const auto selectedItem = filteredItems[*selectedItemIndex];
-    result.insert_or_assign("selected", selectedItem->second->label->get());
+    const auto currentItem = filteredItems[*selectedItemIndex];
+    result.insert_or_assign("selected", currentItem->second->label->get());
   }
   return result;
 }
@@ -219,7 +206,7 @@ template<ToStringConvertible T>
 void Listbox<T>::setFromToml(const toml::table &src) {
   if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
     if (auto selectedVal = selectedValIter->second.value<std::string>(); selectedVal.has_value()) {
-      setSelectedItem(selectedVal.value());
+      *selectedItem.modify() = selectedVal.value();
     }
   }
 }
@@ -255,6 +242,21 @@ void Listbox<T>::refilterItems() {
       }
     }
   }
+}
+
+template<ToStringConvertible T>
+const std::optional<T> &Listbox<T>::getValue() const {
+  return *selectedItem;
+}
+
+template<ToStringConvertible T>
+void Listbox<T>::setValue(const std::optional<T> &newValue) {
+  *selectedItem.modify() = newValue;
+}
+
+template<ToStringConvertible T>
+Subscription Listbox<T>::addValueListenerImpl(std::function<void(const std::optional<T> &)> listener) {
+  return selectedItem.addListener(std::move(listener));
 }
 
 extern template class Listbox<std::string>;

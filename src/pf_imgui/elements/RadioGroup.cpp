@@ -11,7 +11,7 @@
 namespace pf::ui::ig {
 
 RadioGroup::RadioGroup(RadioGroup::Config &&config)
-    : ValueObservable(nullptr), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+    : Savable(config.persistent ? Persistent::Yes : Persistent::No), activeButton(nullptr),
       groupName(std::string{config.groupName.value}), buttons(std::move(config.buttons)) {
   bool wasAnySelected = false;
   std::ranges::for_each(buttons, [this, &wasAnySelected](RadioButton *btn) {
@@ -27,7 +27,7 @@ RadioGroup::RadioGroup(RadioGroup::Config &&config)
 RadioGroup::~RadioGroup() { std::ranges::for_each(destroyButtonSubscriptions, &Subscription::unsubscribe); }
 
 RadioGroup::RadioGroup(const std::string &name, std::vector<RadioButton *> childButtons, Persistent persistent)
-    : ValueObservable(nullptr), Savable(persistent), groupName(std::string{name}), buttons(std::move(childButtons)) {
+    : Savable(persistent), activeButton(nullptr), groupName(std::string{name}), buttons(std::move(childButtons)) {
   std::ranges::for_each(buttons, [this](RadioButton *btn) { addDestroyListener(btn); });
 }
 
@@ -35,16 +35,17 @@ void RadioGroup::frame() {
   RadioButton *newSelection = nullptr;
   std::ranges::for_each(buttons | ranges::views::enumerate, [&](const auto &idxBtn) {
     const auto &[idx, btn] = idxBtn;
-    if (btn->isSelected()) {
+    if (*btn->selected) {
       if (getValue() != btn) { newSelection = btn; }
     }
   });
   if (newSelection != nullptr) {
     std::ranges::for_each(buttons, [&](auto &button) {
-      if (button != newSelection) { button->setValueAndNotifyIfChanged(false); }
+      if (button != newSelection) { *button->selected.modify() = false; }
     });
-    setValueInner(newSelection);
-    notifyValueChanged();
+    *activeButton.modify() = newSelection;
+  } else {
+    *activeButton.modify() = nullptr;
   }
 }
 
@@ -55,7 +56,7 @@ void RadioGroup::addButton(RadioButton &button) {
   if (getValue() != nullptr) {
     button.setValue(false);
   } else if (button.getValue()) {
-    setValueAndNotifyIfChanged(buttons.back());
+    *activeButton.modify() = buttons.back();
   }
 }
 
@@ -74,10 +75,9 @@ void RadioGroup::setFromToml(const toml::table &src) {
       const auto btnIter = std::ranges::find(buttons, name, &RadioButton::getName);
       if (btnIter == buttons.end()) { return; }
       auto selectedButton = *btnIter;
-      selectedButton->setValueInner(true);
-      setValueAndNotifyIfChanged(selectedButton);
+      *selectedButton->selected.modify() = true;
       std::ranges::for_each(buttons, [&](auto button) {
-        if (button != selectedButton) { button->setValueInner(false); }
+        if (button != selectedButton) { *button->selected.modify() = false; }
       });
     }
   }
@@ -86,6 +86,12 @@ void RadioGroup::setFromToml(const toml::table &src) {
 void RadioGroup::addDestroyListener(RadioButton *button) {
   destroyButtonSubscriptions.emplace_back(button->destroyEvent.addListener(
       [button, this] { buttons.erase(std::remove(buttons.begin(), buttons.end(), button), buttons.end()); }));
+}
+
+RadioButton *const &RadioGroup::getValue() const { return *activeButton; }
+
+Subscription RadioGroup::addValueListenerImpl(std::function<void(RadioButton *const &)> listener) {
+  return activeButton.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

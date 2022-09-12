@@ -28,7 +28,7 @@ void Toggle::setValue(const bool &newValue) { *selected.modify() = newValue; }
 
 const bool &Toggle::getValue() const { return *selected; }
 
-Subscription Toggle::addValueListenerImpl(std::function<void(bool)> listener) {
+Subscription Toggle::addValueListenerImpl(std::function<void(const bool &)> listener) {
   return selected.addListener(std::move(listener));
 }
 

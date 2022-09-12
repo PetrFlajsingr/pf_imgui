@@ -48,11 +48,11 @@ bool GradientPointsViewComparator::operator()(GradientPointsView lhs, GradientPo
 }
 
 GradientEditor::GradientEditor(GradientEditor::Config &&config)
-    : ElementWithID(std::string{config.name.value}), ValueObservable(getPointsView()),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No) {}
+    : ElementWithID(std::string{config.name.value}),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), points(getPointsView()) {}
 
 GradientEditor::GradientEditor(const std::string &elementName, Persistent persistent)
-    : ElementWithID(elementName), ValueObservable(getPointsView()), Savable(persistent) {}
+    : ElementWithID(elementName), Savable(persistent), points(getPointsView()) {}
 
 Color GradientEditor::getColorAt(float percentage) const {
   float color[4];
@@ -65,13 +65,13 @@ void GradientEditor::addGradientPoint(GradientPoint gradientPoint) {
 }
 
 void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
-  auto points = getPointsView();
-  auto iter = points.begin();
-  for (; iter != points.end(); ++iter) {
+  auto tomlPoints = getPointsView();
+  auto iter = tomlPoints.begin();
+  for (; iter != tomlPoints.end(); ++iter) {
     if (*iter == gradientPoint) { break; }
   }
-  if (iter == points.end()) { return; }
-  const auto removeIndex = std::ranges::distance(points.begin(), iter);
+  if (iter == tomlPoints.end()) { return; }
+  const auto removeIndex = std::ranges::distance(tomlPoints.begin(), iter);
   const auto removeIter = std::ranges::next(gradient.getMarks().begin(), removeIndex);
   gradient.removeMark(*removeIter);
 }
@@ -79,22 +79,20 @@ void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
 void GradientEditor::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) {
-    setValueInner(getPointsView());
-    notifyValueChanged();
+    *points.modify() = getPointsView();
   }
   *hovered.modify() = gradient.hovered;
   *focused.modify() = gradient.focused;
   if (*focused && ImGui::IsKeyPressed(ImGuiKey_Delete) && selectedMark != nullptr) {
     gradient.removeMark(selectedMark);
-    setValueInner(getPointsView());
-    notifyValueChanged();
+    *points.modify() = getPointsView();
   }
 }
 
 toml::table GradientEditor::toToml() const {
-  auto points = toml::array{};
-  std::ranges::for_each(getPointsView(), [&points](const auto &point) { points.push_back(point.toToml()); });
-  return toml::table{{"points", points}};
+  auto tomlPoints = toml::array{};
+  std::ranges::for_each(getPointsView(), [&tomlPoints](const auto &point) { tomlPoints.push_back(point.toToml()); });
+  return toml::table{{"points", tomlPoints}};
 }
 
 void GradientEditor::setFromToml(const toml::table &src) {
@@ -111,6 +109,11 @@ void GradientEditor::setFromToml(const toml::table &src) {
 
 GradientPointsView GradientEditor::getPointsView() const {
   return gradient.getMarks() | ranges::views::transform(details::GradientMarkToGradientPoint{});
+}
+const GradientPointsView &GradientEditor::getValue() const { return *points; }
+
+Subscription GradientEditor::addValueListenerImpl(std::function<void(const GradientPointsView &)> listener) {
+  return points.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

@@ -62,7 +62,7 @@ void OverlayGizmoBase::setValue(const glm::mat4 &newValue) { *transform.modify()
 
 const glm::mat4 &OverlayGizmoBase::getValue() const { return *transform; }
 
-Subscription OverlayGizmoBase::addValueListenerImpl(std::function<void(glm::mat4)> listener) {
+Subscription OverlayGizmoBase::addValueListenerImpl(std::function<void(const glm::mat4 &)> listener) {
   return transform.addListener(std::move(listener));
 }
 
