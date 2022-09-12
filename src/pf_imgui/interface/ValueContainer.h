@@ -11,6 +11,7 @@
 #include <concepts>
 #include <functional>
 #include <pf_common/Subscription.h>
+#include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/common/Tags.h>
 

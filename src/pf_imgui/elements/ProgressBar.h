@@ -156,7 +156,7 @@ ProgressBar<T>::ProgressBar(const std::string &elementName, T valueStep, T minVa
 template<ProgressBarCompatible T>
 T ProgressBar<T>::setPercentage(float percentage) {
   const auto newValue = min + (max - min) * percentage;
-  *value.modify() = newValue;
+  *value.modify() = static_cast<T>(newValue);
   return *value;
 }
 

@@ -150,7 +150,7 @@ Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText
     if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
     if constexpr (std::equality_comparable<T>) {
       if (const auto iter =
-              std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
+              std::ranges::find_if(items, [&itemToSelect](const auto &item) { return item.first == *itemToSelect; });
           iter != items.end()) {
         const auto index = std::ranges::distance(items.begin(), iter);
         setSelectedItemByIndex(index);
@@ -165,7 +165,7 @@ Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText
 template<ToStringConvertible T>
 Selectable &Listbox<T>::addItem(const T &item, Selected selected) {
   auto &result = addItem(item);
-  if (selected == Selected::Yes) { setSelectedItem(item); }
+  if (selected == Selected::Yes) { *selectedItem.modify() = item; }
   return result;
 }
 

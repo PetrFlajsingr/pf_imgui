@@ -35,7 +35,7 @@ enum class KnobType {
  * @todo: more types
  */
 template<OneOf<int, float> T>
-class Knob : public ItemElement, public ValueObservable<T>, public Savable {
+class Knob : public ItemElement, public ValueContainer<T>, public Savable {
  public:
   /**
    * @brief Construction args for Knob
@@ -80,8 +80,14 @@ class Knob : public ItemElement, public ValueObservable<T>, public Savable {
   Observable<Label> label;
 
   Observable<Size> size;
+  ObservableProperty<Knob, T> value;
+
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -99,20 +105,18 @@ Knob<T>::Knob(Knob::Config &&config)
 template<OneOf<int, float> T>
 Knob<T>::Knob(const std::string &name, const std::string &label, KnobType type, Size s, T min, T max, float speed,
               T value, Persistent persistent)
-    : ItemElement(name), ValueObservable<T>(value), Savable(persistent), label(label), size(s), min(min), max(max),
-      speed(speed), type(type) {}
+    : ItemElement(name), Savable(persistent), label(label), size(s), value(value), min(min), max(max), speed(speed),
+      type(type) {}
 
 template<OneOf<int, float> T>
 toml::table Knob<T>::toToml() const {
-  return toml::table{{"value", ValueObservable<T>::getValue()}};
+  return toml::table{{"value", *value}};
 }
 
 template<OneOf<int, float> T>
 void Knob<T>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-    }
+    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) { *value.modify() = *newVal; }
   }
 }
 
@@ -125,14 +129,29 @@ void Knob<T>::renderImpl() {
   const auto knobSize = std::min(static_cast<float>(size->width), static_cast<float>(size->height));
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGuiKnobs::KnobInt(label->get().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
-                                       nullptr, static_cast<ImGuiKnobVariant>(type), knobSize, flags);
+    valueChanged = ImGuiKnobs::KnobInt(label->get().c_str(), &value.value, min, max, speed, nullptr,
+                                       static_cast<ImGuiKnobVariant>(type), knobSize, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGuiKnobs::Knob(label->get().c_str(), ValueObservable<T>::getValueAddress(), min, max, speed,
-                                    nullptr, static_cast<ImGuiKnobVariant>(type), knobSize, flags);
+    valueChanged = ImGuiKnobs::Knob(label->get().c_str(), &value.value, min, max, speed, nullptr,
+                                    static_cast<ImGuiKnobVariant>(type), knobSize, flags);
   }
-  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+  if (valueChanged) { value.triggerListeners(); }
+}
+
+template<OneOf<int, float> T>
+const T &Knob<T>::getValue() const {
+  return *value;
+}
+
+template<OneOf<int, float> T>
+void Knob<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
+}
+
+template<OneOf<int, float> T>
+Subscription Knob<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

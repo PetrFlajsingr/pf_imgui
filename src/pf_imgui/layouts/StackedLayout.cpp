@@ -19,8 +19,8 @@ StackedLayout::Stack::Stack(StackedLayout &owner) : parent(owner) {}
 
 void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
 
-StackedLayout::StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder)
-    : Layout(elementName, size, showBorder) {}
+StackedLayout::StackedLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
+    : Layout(elementName, initialSize, showBorder) {}
 
 void StackedLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

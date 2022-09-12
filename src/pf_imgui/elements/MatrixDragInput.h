@@ -24,7 +24,7 @@ namespace pf::ui::ig {
  * @tparam M Matrix type
  */
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
-class MatrixDragInput : public ItemElement, public ValueObservable<M>, public Savable {
+class MatrixDragInput : public ItemElement, public ValueContainer<M>, public Savable {
  public:
   using ParamType = drag_details::UnderlyingType<typename M::col_type>;
   constexpr static auto Height = M::length();
@@ -70,8 +70,14 @@ class MatrixDragInput : public ItemElement, public ValueObservable<M>, public Sa
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Observable<Label> label;
+  ObservableProperty<MatrixDragInput, M> value;
+
+  [[nodiscard]] const M &getValue() const override;
+  void setValue(const M &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const M &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -90,14 +96,14 @@ template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(const std::string &name, const std::string &label,
                                     MatrixDragInput::ParamType changeSpeed, MatrixDragInput::ParamType minVal,
                                     MatrixDragInput::ParamType maxVal, M initValue, Persistent persistent)
-    : ItemElement(name), ValueObservable<M>(initValue), Savable(persistent), label(label), min(minVal), max(maxVal),
+    : ItemElement(name), Savable(persistent), label(label), value(initValue), min(minVal), max(maxVal),
       speed(changeSpeed) {
   for (std::size_t i = 0; i < Height - 1; ++i) { dragNames[i] = std::string{"##drag_"} + std::to_string(i); }
 }
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 toml::table MatrixDragInput<M>::toToml() const {
-  return toml::table{{"value", serializeGlmMat(ValueObservable<M>::getValue())}};
+  return toml::table{{"value", serializeGlmMat(*value)}};
 }
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
@@ -105,7 +111,7 @@ void MatrixDragInput<M>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
       if (const auto matValue = safeDeserializeGlmMat<M>(*newVal); matValue.has_value()) {
-        ValueObservable<M>::setValueAndNotifyIfChanged(*matValue);
+        *value.modify() = *matValue;
       }
     }
   }
@@ -127,16 +133,30 @@ void MatrixDragInput<M>::renderImpl() {
       const char *dragName = firstDragName.c_str();
       if (row > 0) { dragName = dragNames[row - 1].c_str(); }
 
-      const auto rowValueChanged =
-          ImGui::DragScalarN(dragName, ImGuiDataType_Float,
-                             glm::value_ptr((*ValueObservable<M>::getValueAddress())[row]), Width, speed, &min, &max);
+      const auto rowValueChanged = ImGui::DragScalarN(dragName, ImGuiDataType_Float, glm::value_ptr((value.value)[row]),
+                                                      Width, speed, &min, &max);
 
       valueChanged = valueChanged || rowValueChanged;
     }
-    if (valueChanged) { ValueObservable<M>::notifyValueChanged(); }
+    if (valueChanged) { value.triggerListeners(); }
     ImGui::EndTable();
   }
   ImGui::EndGroup();
+}
+
+template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
+const M &MatrixDragInput<M>::getValue() const {
+  return *value;
+}
+
+template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
+void MatrixDragInput<M>::setValue(const M &newValue) {
+  *value.modify() = newValue;
+}
+
+template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
+Subscription MatrixDragInput<M>::addValueListenerImpl(std::function<void(const M &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig
