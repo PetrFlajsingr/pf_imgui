@@ -10,7 +10,7 @@ endif ()
 
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    list(APPEND flags "/std:c++latest" "/W4" "/wd4201")
+    list(APPEND flags "/std:c++latest" "/W4" "/wd4201" "/wd4996")
 else ()
     list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
             "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"

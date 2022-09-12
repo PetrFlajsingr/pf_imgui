@@ -91,7 +91,7 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
    */
   Subscription addMousePositionListener(std::invocable<Position> auto &&listener) {
     return mousePositionObservable.addListener(std::forward<decltype(listener)>(listener));
-  }
+  } // TODO: change this to observable property
 
   ObservableProperty<ItemElement, bool, ReadOnlyTag> hovered;
   ObservableProperty<ItemElement, bool, ReadOnlyTag> focused;
@@ -101,8 +101,8 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
   void setFocused(bool newFocused);
 
  private:
-  std::unique_ptr<Tooltip> tooltip = nullptr;
-  std::unique_ptr<PopupMenu> popupMenu = nullptr;
+  std::unique_ptr<Tooltip> tooltip;
+  std::unique_ptr<PopupMenu> popupMenu;
 
   ImVec2 lastMousePosition{-1, -1};
   Observable_impl<Position> mousePositionObservable;

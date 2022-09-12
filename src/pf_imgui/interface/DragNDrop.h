@@ -111,7 +111,7 @@ class PF_IMGUI_EXPORT DragSourceBase {
  private:
   bool dragged = false;
   bool ownsPayload = false;
-  std::unique_ptr<Tooltip> tooltip = nullptr;
+  std::unique_ptr<Tooltip> tooltip;
   std::optional<std::pair<std::string, Text *>> tooltipTextFmt;
 };
 
