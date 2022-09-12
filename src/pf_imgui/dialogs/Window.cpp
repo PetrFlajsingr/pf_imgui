@@ -13,8 +13,7 @@
 namespace pf::ui::ig {
 
 Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse)
-    : Renderable(std::move(elementName)), size(Size::Auto()), position(Position{-1, -1}),
-      label(std::move(titleLabel)) {
+    : Renderable(std::move(elementName)), size(Size::Auto()), position(Position{-1, -1}), label(std::move(titleLabel)) {
   refreshIdLabel();
   setCollapsible(allowCollapse == AllowCollapse::Yes);
   label.addListener([this](auto) { refreshIdLabel(); });
@@ -211,8 +210,6 @@ void Window::setCollapsible(bool newCollapsible) {
   }
 }
 
-void Window::setCloseable(bool newCloseable) {
-  closeable = newCloseable;
-}
+void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 }  // namespace pf::ui::ig

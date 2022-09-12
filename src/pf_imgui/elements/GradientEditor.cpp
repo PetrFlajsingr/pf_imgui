@@ -48,8 +48,8 @@ bool GradientPointsViewComparator::operator()(GradientPointsView lhs, GradientPo
 }
 
 GradientEditor::GradientEditor(GradientEditor::Config &&config)
-    : ElementWithID(std::string{config.name.value}),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), points(getPointsView()) {}
+    : ElementWithID(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      points(getPointsView()) {}
 
 GradientEditor::GradientEditor(const std::string &elementName, Persistent persistent)
     : ElementWithID(elementName), Savable(persistent), points(getPointsView()) {}
@@ -78,9 +78,7 @@ void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
 
 void GradientEditor::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) {
-    *points.modify() = getPointsView();
-  }
+  if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) { *points.modify() = getPointsView(); }
   *hovered.modify() = gradient.hovered;
   *focused.modify() = gradient.focused;
   if (*focused && ImGui::IsKeyPressed(ImGuiKey_Delete) && selectedMark != nullptr) {

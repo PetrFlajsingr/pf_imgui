@@ -42,7 +42,6 @@ class Label {
 
   [[nodiscard]] Visibility getVisibility() const;
 
-
  private:
   inline static std::string EMPTY_LABEL;
   std::string val;

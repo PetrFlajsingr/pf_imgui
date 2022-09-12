@@ -13,8 +13,8 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/Visitor.h>
 #include <pf_common/enums.h>
-#include <pf_imgui/common/Label.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
@@ -93,7 +93,6 @@ class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueContain
    */
   TreeLeaf(const std::string &elementName, const std::string &label, bool initialValue = false,
            Persistent persistent = Persistent::No);
-
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -357,8 +356,7 @@ class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
    * @param label label rendered on the element
    * @param persistent enable/disable disk saving
    */
-  TreeHeaderNode(const std::string &elementName, const std::string &label,
-            Persistent persistent = Persistent::No)
+  TreeHeaderNode(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No)
       : TreeNode<treeType>(elementName, label, persistent, ImGuiTreeNodeFlags_CollapsingHeader) {}
 };
 

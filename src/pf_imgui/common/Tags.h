@@ -10,6 +10,6 @@ namespace pf::ui::ig {
 struct ReadOnlyTag {};
 struct ReadWriteTag {};
 
-}
+}  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_COMMON_TAGS

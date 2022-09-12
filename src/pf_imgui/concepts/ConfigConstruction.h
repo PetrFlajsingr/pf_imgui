@@ -19,6 +19,6 @@ concept ElementConstructConfig = requires { typename T::Parent; }
 template<typename T>
 concept ConfigConstructible = requires { typename T::Config; } && ElementConstructConfig<typename T::Config>;
 
-}
+}  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_CONCEPTS_CONFIGCONSTRUCTION_H

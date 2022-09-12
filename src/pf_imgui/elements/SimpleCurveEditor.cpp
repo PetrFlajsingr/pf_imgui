@@ -9,7 +9,8 @@
 namespace pf::ui::ig {
 
 SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
-    : ElementWithID(config.name), Savable(config.persistent ? Persistent::Yes : Persistent::No), size(config.size), curvePoints(getViewToCurveData()), label(config.label.value),
+    : ElementWithID(config.name), Savable(config.persistent ? Persistent::Yes : Persistent::No), size(config.size),
+      curvePoints(getViewToCurveData()), label(config.label.value),
       curveData(config.maxPointCount + 1, glm::vec2{0, 0}) {}
 
 SimpleCurveEditor::SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s,

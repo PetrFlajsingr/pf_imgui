@@ -13,9 +13,9 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/common/Label.h>
 #include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {

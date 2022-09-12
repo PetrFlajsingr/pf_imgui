@@ -10,13 +10,13 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Position.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/common/Position.h>
-#include <pf_imgui/common/Size.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <vector>
 
@@ -30,8 +30,7 @@ namespace pf::ui::ig {
  * @TODO: ImGui::GetWindowDockId()-> need to have a getter for that and somehow change that to Dock name
  * @TODO: ImGui::IsWindowDocked()
  */
-class PF_IMGUI_EXPORT Window : public Renderable,
-                               public ElementContainer {
+class PF_IMGUI_EXPORT Window : public Renderable, public ElementContainer {
  public:
   /**
    * Construct Window.

@@ -141,9 +141,7 @@ toml::table SpinInput<T>::toToml() const {
 template<OneOf<int, float> T>
 void SpinInput<T>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-      *value.modify() = *newVal;
-    }
+    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) { *value.modify() = *newVal; }
   }
 }
 
@@ -165,9 +163,7 @@ void SpinInput<T>::renderImpl() {
     value.triggerListeners();
   }
   DragSource<T>::drag(*value);
-  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    *value.modify() = std::clamp(*drop, min, max);
-  }
+  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { *value.modify() = std::clamp(*drop, min, max); }
 }
 template<OneOf<int, float> T>
 void SpinInput<T>::setValue(const T &newValue) {

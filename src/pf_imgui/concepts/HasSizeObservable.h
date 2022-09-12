@@ -16,7 +16,7 @@ namespace pf::ui::ig {
 
 template<typename T>
 concept HasSizeObservable = requires(T t) {
-                              { &t.size } -> std::same_as<Observable<Size>*>;
+                              { &t.size } -> std::same_as<Observable<Size> *>;
                             };
 
 }

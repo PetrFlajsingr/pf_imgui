@@ -9,9 +9,9 @@
 #define PF_IMGUI_ELEMENTS_CHECKBOX_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/common/Font.h>
 #include <pf_imgui/common/Label.h>
-#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
@@ -36,7 +36,7 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueContainer<bool>
     using Parent = Checkbox;
     Explicit<std::string_view> name;  /*!< Unique name of the element */
     Explicit<std::string_view> label; /*!< Text rendered next to the checkbox */
-    bool selected = false;             /*!< Initial state of the checkbox */
+    bool selected = false;            /*!< Initial state of the checkbox */
     bool persistent = false;          /*!< Allow state saving to disk */
   };
   /**

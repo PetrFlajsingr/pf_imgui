@@ -9,9 +9,9 @@
 #define PF_IMGUI_ELEMENTS_RADIOBUTTON_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/_export.h>
 #include <pf_imgui/common/Font.h>
 #include <pf_imgui/common/Label.h>
-#include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/style/ColorPalette.h>
@@ -49,7 +49,6 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueContainer<bo
    */
   RadioButton(const std::string &elementName, const std::string &labelText, bool initialValue = false);
 
-
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
                ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::CheckMark, ColorOf::Border,
                ColorOf::BorderShadow>
@@ -63,7 +62,7 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueContainer<bo
   void setValue(const bool &newValue) override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(const bool&)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
 
   void renderImpl() override;
 };

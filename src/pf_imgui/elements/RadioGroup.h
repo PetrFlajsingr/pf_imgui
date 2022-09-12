@@ -74,7 +74,7 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnly
   [[nodiscard]] RadioButton *const &getValue() const override;
 
  protected:
-  Subscription addValueListenerImpl(std::function<void(RadioButton *const&)> listener) override;
+  Subscription addValueListenerImpl(std::function<void(RadioButton *const &)> listener) override;
 
  private:
   void addDestroyListener(RadioButton *button);

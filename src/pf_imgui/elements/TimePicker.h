@@ -63,7 +63,6 @@ class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public 
   TimePicker(const std::string &elementName, const std::string &labelText, TimeOfDay initialValue,
              Persistent persistent = Persistent::No);
 
-
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 

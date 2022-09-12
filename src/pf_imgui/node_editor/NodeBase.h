@@ -11,12 +11,11 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/common/Position.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/elements/PopupMenu.h>
+#include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/reactive/Observable_impl.h>
-#include <pf_imgui/interface/Renderable.h>
 
 namespace pf::ui::ig {
 

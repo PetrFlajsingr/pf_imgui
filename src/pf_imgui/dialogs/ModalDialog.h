@@ -8,13 +8,13 @@
 #ifndef PF_IMGUI_ELEMENTS_DIALOG_H
 #define PF_IMGUI_ELEMENTS_DIALOG_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/common/Label.h>
 #include <pf_imgui/common/Position.h>
-#include <pf_imgui/_export.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/common/Size.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <string>
 

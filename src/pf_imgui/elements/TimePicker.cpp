@@ -90,9 +90,7 @@ void TimePicker::setFromToml(const toml::table &src) {
   }
 }
 
-void TimePicker::setValue(const TimeOfDay &newValue) {
-  *time.modify() = newValue;
-}
+void TimePicker::setValue(const TimeOfDay &newValue) { *time.modify() = newValue; }
 
 const TimeOfDay &TimePicker::getValue() const { return *time; }
 
@@ -101,7 +99,8 @@ Subscription TimePicker::addValueListenerImpl(std::function<void(const TimeOfDay
 }
 
 void TimePicker::inputChanged() {
-  const auto inputTime = TimeOfDay{std::chrono::hours{hours} + std::chrono::minutes{minutes} + std::chrono::seconds{seconds}};
+  const auto inputTime =
+      TimeOfDay{std::chrono::hours{hours} + std::chrono::minutes{minutes} + std::chrono::seconds{seconds}};
   *time.modify() = inputTime;
 }
 

@@ -30,7 +30,6 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   Element(Element &&other) noexcept;
   Element &operator=(Element &&other) noexcept;
 
-
   /**
    * Called during object's destruction. The object will be partially destroyed at this point.
    */

@@ -52,9 +52,7 @@ struct GradientPointsViewComparator {
 /**
  * @brief Editor for gradient with color selection and an option to add more leading points. Selected poitns can be removed by pressing delete.
  */
-class GradientEditor : public ElementWithID,
-                       public ValueContainer<GradientPointsView, ReadOnlyTag>,
-                       public Savable {
+class GradientEditor : public ElementWithID, public ValueContainer<GradientPointsView, ReadOnlyTag>, public Savable {
  public:
   /**
    * @brief Construction args for GradientEditor.

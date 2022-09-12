@@ -16,7 +16,6 @@
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/reactive/Observable.h>
-#include <pf_imgui/common/Size.h>
 
 namespace pf::ui::ig {
 
