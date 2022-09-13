@@ -3,7 +3,6 @@
 //
 
 #include "StretchLayout.h"
-#include <pf_common/exceptions/Exceptions.h>
 #include <string>
 #include <vector>
 
