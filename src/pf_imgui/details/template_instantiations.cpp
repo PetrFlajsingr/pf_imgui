@@ -62,7 +62,7 @@ template class Slider<glm::vec4>;
 template class Slider2D<int>;
 template class Slider2D<float>;
 
-template class Slider3D<float>;
+template class Slider3D<glm::vec3>;
 
 template class SpinInput<int>;
 template class SpinInput<float>;

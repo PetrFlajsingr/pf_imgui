@@ -10,9 +10,8 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <string>
 #include <utility>
 
@@ -39,9 +38,8 @@ constexpr const char *defaultVSliderFormat() {
  */
 template<OneOf<float, int> T>
 class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
-                                       public ValueObservable<T>,
+                                       public ValueContainer<T>,
                                        public Savable,
-                                       public Resizable,
                                        public DragSource<T>,
                                        public DropTarget<T> {
  public:
@@ -110,9 +108,17 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  Observable<Size> size;
+  ObservableProperty<VerticalSlider, T> value;
+
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -123,28 +129,26 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      Resizable(config.size.value), DragSource<T>(false), DropTarget<T>(false), label(std::string{config.label.value}),
-      min(config.min), max(config.max), format(std::move(config.format)) {}
+    : ItemElement(std::string{config.name.value}),
+      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
+      label(std::string{config.label.value}), size(config.size.value), value(config.value), min(config.min),
+      max(config.max), format(std::move(config.format)) {}
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(const std::string &elementName, const std::string &labelText, Size initialSize,
                                   T minVal, T maxVal, T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), ValueObservable<T>(initialValue), Savable(persistent),
-      Resizable(initialSize), DragSource<T>(false), DropTarget<T>(false), label(labelText), min(minVal), max(maxVal),
-      format(std::move(numberFormat)) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
+      size(initialSize), value(initialValue), min(minVal), max(maxVal), format(std::move(numberFormat)) {}
 
 template<OneOf<float, int> T>
 toml::table VerticalSlider<T>::toToml() const {
-  return toml::table{{"value", ValueObservable<T>::getValue()}};
+  return toml::table{{"value", *value}};
 }
+
 template<OneOf<float, int> T>
 void VerticalSlider<T>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-    }
+    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) { *value.modify() = *newVal; }
   }
 }
 
@@ -153,7 +157,7 @@ void VerticalSlider<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto address = ValueObservable<T>::getValueAddress();
+  const auto address = &value.value;
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
@@ -162,15 +166,30 @@ void VerticalSlider<T>::renderImpl() {
   } else {
     dataType = ImGuiDataType_S32;
   }
-  const auto valueChanged = ImGui::VSliderScalar(label.get().c_str(), static_cast<ImVec2>(getSize()), dataType, address,
+  const auto valueChanged = ImGui::VSliderScalar(label->get().c_str(), static_cast<ImVec2>(*size), dataType, address,
                                                  &min, &max, format.c_str(), flags);
 
-  DragSource<T>::drag(ValueObservable<T>::getValue());
+  DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+  if (valueChanged) { value.triggerListeners(); }
+}
+
+template<OneOf<float, int> T>
+const T &VerticalSlider<T>::getValue() const {
+  return *value;
+}
+
+template<OneOf<float, int> T>
+void VerticalSlider<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
+}
+
+template<OneOf<float, int> T>
+Subscription VerticalSlider<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 extern template class VerticalSlider<int>;

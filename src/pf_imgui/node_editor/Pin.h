@@ -11,12 +11,11 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/interface/Hoverable.h>
-#include <pf_imgui/interface/Observable_impl.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/node_editor/details/LinkPtrToRef.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/filter.hpp>
 
 namespace pf::ui::ig {
@@ -26,7 +25,7 @@ namespace pf::ui::ig {
 /**
  * @brief A Pin to be placed inside Node. @see Node
  */
-class Pin : public Renderable, public Hoverable {
+class Pin : public Renderable {
   friend class NodeEditor;
   friend class Node;
   /**
@@ -204,7 +203,9 @@ class Pin : public Renderable, public Hoverable {
    */
   void removePopupMenu();
 
-  Label label;
+  Observable<Label> label;
+
+  ObservableProperty<Pin, bool, ReadOnlyTag> hovered;
 
  protected:
   /**
@@ -224,6 +225,8 @@ class Pin : public Renderable, public Hoverable {
    * Called when NodeEditor decides a Link is to be added
    */
   virtual void addLink(Link &link);
+
+  void setHovered(bool newHovered);
 
   ax::NodeEditor::PinId id;
   Type type;

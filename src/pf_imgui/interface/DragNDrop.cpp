@@ -5,12 +5,15 @@
 #include "DragNDrop.h"
 #include <memory>
 #include <pf_imgui/elements/Text.h>
+#include <pf_imgui/elements/Tooltip.h>
 #include <string>
 #include <utility>
 
 namespace pf::ui::ig {
 
 details::DragSourceBase::DragSourceBase(bool dragEnabled) : dragAllowed(dragEnabled) {}
+
+details::DragSourceBase::~DragSourceBase() = default;
 
 bool details::DragSourceBase::isDragAllowed() const { return dragAllowed; }
 
@@ -58,7 +61,7 @@ void details::DragSourceBase::removeDragTooltip() {
 bool details::DragSourceBase::drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
                                             const std::string &value) {
   if (!dragged && tooltipTextFmt.has_value()) {
-    tooltipTextFmt->second->setText(fmt::vformat(tooltipTextFmt->first, fmt::make_format_args(value)));
+    *tooltipTextFmt->second->text.modify() = fmt::vformat(tooltipTextFmt->first, fmt::make_format_args(value));
   }
   return drag_impl(typeName, sourceData, dataSize);
 }

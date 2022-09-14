@@ -53,10 +53,10 @@ class PF_IMGUI_EXPORT StackedLayout : public Layout {
   /**
    * Construct StackedLayout.
    * @param elementName ID of the layout
-   * @param size size of the layout
+   * @param initialSize size of the layout
    * @param showBorder draw border around the layout
    */
-  StackedLayout(const std::string &elementName, const Size &size, ShowBorder showBorder = ShowBorder::No);
+  StackedLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Push a new element container to the last index.
@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT StackedLayout : public Layout {
    * Count of stacks in the layout.
    * @return count of stacks
    */
-  [[nodiscard]] std::size_t size() const;
+  [[nodiscard]] std::size_t stackSize() const;
 
   /**
    * Get currently active stack.

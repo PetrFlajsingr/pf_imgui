@@ -13,11 +13,13 @@
 #include <memory>
 #include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -39,7 +41,7 @@ enum class TextTrigger { Character, Enter };
  * @todo: hint
  */
 class PF_IMGUI_EXPORT InputText : public ItemElement,
-                                  public ValueObservable<std::string_view>,
+                                  public ValueContainer<std::string>,
                                   public Savable,
                                   public DragSource<std::string>,
                                   public DropTarget<std::string> {
@@ -82,8 +84,6 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
    */
   void clear();
 
-  void setValue(const std::string_view &newValue) override;
-
   /**
    * Check if the input is read only.
    * @return true if read only
@@ -118,12 +118,20 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  void setValue(const std::string &newValue) override;
+  [[nodiscard]] const std::string &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(const std::string &)> listener) override;
+
+ public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
                ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::TextSelectedBackground>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  ObservableProperty<InputText, std::string> text;
 
  protected:
   void renderImpl() override;
@@ -131,7 +139,6 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
   void setTextInner(std::string txt);
 
  private:
-  std::string text;
   std::unique_ptr<char[]> buffer;
   std::size_t bufferLength;
   TextInputType inputType;

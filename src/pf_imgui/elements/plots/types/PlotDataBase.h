@@ -10,9 +10,10 @@
 
 #include <algorithm>
 #include <concepts>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ElementWithID.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <range/v3/algorithm/minmax.hpp>
 #include <range/v3/core.hpp>
 #include <range/v3/view/join.hpp>
@@ -95,7 +96,7 @@ class PF_IMGUI_EXPORT LabeledPlotData : public PlotData {
  public:
   LabeledPlotData(const std::string &elementName, const std::string &caption);
 
-  Label label;
+  Observable<Label> label;
 };
 
 }  // namespace pf::ui::ig::plot_type

@@ -10,8 +10,8 @@ namespace pf::ui::ig {
 OverlayGizmoBase::OverlayGizmoBase(const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode,
                                    ViewportGizmoSpace gizmoSpace, const glm::mat4 &initialView,
                                    const glm::mat4 &initialProjection, bool isProjectionOrthographic)
-    : ValueObservable(initialValue), mode(gizmoMode), space(gizmoSpace), view(initialView),
-      projection(initialProjection), projectionOrthographic(isProjectionOrthographic) {}
+    : transform(initialValue), mode(gizmoMode), space(gizmoSpace), view(initialView), projection(initialProjection),
+      projectionOrthographic(isProjectionOrthographic) {}
 
 ViewportGizmoMode OverlayGizmoBase::getMode() const { return mode; }
 
@@ -44,18 +44,26 @@ void OverlayGizmoBase::drawImpl(bool isEnabled) {
   ImGuizmo::DrawGrid(glm::value_ptr(view), glm::value_ptr(projection), glm::value_ptr(identity), 100.f);
   ImGuizmo::DrawCubes(glm::value_ptr(view), glm::value_ptr(projection), glm::value_ptr(*getValueAddress()), 1);*/
   if (ImGuizmo::Manipulate(glm::value_ptr(view), glm::value_ptr(projection), static_cast<ImGuizmo::OPERATION>(mode),
-                           static_cast<ImGuizmo::MODE>(space), glm::value_ptr(*getValueAddress()), nullptr,
+                           static_cast<ImGuizmo::MODE>(space), glm::value_ptr(transform.value), nullptr,
                            snapValues.has_value() ? glm::value_ptr(*snapValues) : nullptr)) {
-    notifyValueChanged();
+    transform.triggerListeners();
   }
   const auto isUsing = ImGuizmo::IsUsing();
   if (isUsing && !wasUsing) {
-    inUseObservableImpl.notify(true);
+    *inUse.modify() = true;
     wasUsing = true;
   } else if (!isUsing && wasUsing) {
-    inUseObservableImpl.notify(false);
+    *inUse.modify() = false;
     wasUsing = false;
   }
+}
+
+void OverlayGizmoBase::setValue(const glm::mat4 &newValue) { *transform.modify() = newValue; }
+
+const glm::mat4 &OverlayGizmoBase::getValue() const { return *transform; }
+
+Subscription OverlayGizmoBase::addValueListenerImpl(std::function<void(const glm::mat4 &)> listener) {
+  return transform.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

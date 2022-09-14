@@ -12,16 +12,20 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 #include <string>
 
 namespace pf::ui::ig {
 /**
  * @brief Progress bar with infinite animation.
  */
-class PF_IMGUI_EXPORT IndeterminateProgressBar : public ItemElement, public Resizable {
+class PF_IMGUI_EXPORT IndeterminateProgressBar : public ItemElement {
  public:
   /**
    * Construct IndeterminateProgressBar
@@ -63,6 +67,8 @@ class PF_IMGUI_EXPORT IndeterminateProgressBar : public ItemElement, public Resi
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

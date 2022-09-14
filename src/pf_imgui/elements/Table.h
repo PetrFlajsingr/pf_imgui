@@ -15,7 +15,6 @@
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <range/v3/range/conversion.hpp>
 #include <range/v3/view/cache1.hpp>
 #include <range/v3/view/join.hpp>
@@ -194,7 +193,7 @@ class PF_IMGUI_EXPORT TableRowBuilder {
  * @tparam ColumnCount static column count of the table
  */
 template<std::size_t ColumnCount>
-class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer, public Resizable {
+class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer {
   friend class TableRowBuilder<ColumnCount, 0>;
   friend class TableRow<ColumnCount>;
 
@@ -236,6 +235,8 @@ class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer,
    */
   void setSortFncForColumn(std::size_t columnIndex, std::predicate<const Element &, const Element &> auto &&pred);
 
+  Observable<Size> size;
+
  protected:
   void renderImpl() override;
 
@@ -259,12 +260,12 @@ class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer,
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(Table::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Resizable(config.settings.size), header(config.settings.header),
+    : ElementWithID(std::string{config.name.value}), size(config.settings.size), header(config.settings.header),
       flags(CreateFlags(config.settings.border, config.settings.options)) {}
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(const std::string &elementName, const TableSettings<ColumnCount> &settings)
-    : ElementWithID(elementName), Resizable(settings.size), header(settings.header),
+    : ElementWithID(elementName), size(settings.size), header(settings.header),
       flags(CreateFlags(settings.border, settings.options)) {}
 
 template<std::size_t ColumnCount>
@@ -285,7 +286,7 @@ void Table<ColumnCount>::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(getSize()))) {
+  if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(*size))) {
     RAII end{ImGui::EndTable};
 
     std::ranges::for_each(std::views::iota(std::size_t{0}, ColumnCount), [&](const auto index) {

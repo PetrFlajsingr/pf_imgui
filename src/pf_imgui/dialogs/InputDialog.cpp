@@ -13,11 +13,11 @@ InputDialog::InputDialog(const std::string &elementName, const std::string &titl
   auto &input = createChild<InputText>("input", "", "");
   createChild<Dummy>("area_fill", Size{Width::Auto(), Height::Fill(25)});
   auto &btnLayout = createChild<HorizontalLayout>("hor_layout", Size{Width::Auto(), Height::Fill(0)});
-  btnLayout.createChild<Button>("button_ok", "Ok").addClickListener([this, &input] {
+  btnLayout.createChild<Button>("button_ok", "Ok").clickEvent.addListener([this, &input] {
     inputDone(input.getValue());
     close();
   });
-  btnLayout.createChild<Button>("button_cancel", "Cancel").addClickListener([this] {
+  btnLayout.createChild<Button>("button_cancel", "Cancel").clickEvent.addListener([this] {
     cancelClicked();
     close();
   });

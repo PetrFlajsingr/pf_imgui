@@ -15,18 +15,25 @@ TabButton::TabButton(TabButton::Config &&config)
 TabButton::TabButton(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods)
     : ItemElement(elementName), label(labelText), flags(*mods) {}
 
+void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
+
 void TabButton::renderImpl() {
-  if (ImGui::TabItemButton(label.get().c_str(), flags)) { notifyOnClick(); }
+  if (ImGui::TabItemButton(label->get().c_str(), flags)) { clickEvent.notify(); }
 }
 
-void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
+void TabButton::notifyClickEvent() { clickEvent.notify(); }
 
 Tab::Tab(Tab::Config &&config)
     : TabButton(std::string{config.name.value}, std::string{config.label.value}, config.mods),
       open(config.closeable ? new bool{true} : nullptr) {}
 
 Tab::Tab(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods, bool closeable)
-    : TabButton(elementName, labelText, mods), open(closeable ? new bool{true} : nullptr) {}
+    : TabButton(elementName, labelText, mods), open(closeable ? new bool{true} : nullptr) {
+  selected.addListener([this](auto newSelected) {
+    if (newSelected) { notifyClickEvent(); }
+    setSelectedInNextFrame = newSelected;
+  });
+}
 
 Tab::Tab(const std::string &elementName, const std::string &labelText, bool closeable)
     : Tab(elementName, labelText, Flags<TabMod>{}, closeable) {}
@@ -39,18 +46,13 @@ void Tab::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
 
   const auto wasOpen = isOpen();
-  const auto wasSelected = selected;
   const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
-  selected = ImGui::BeginTabItem(label.get().c_str(), open, frameFlags);
-  if (selected) {
+  *selected.modify() = ImGui::BeginTabItem(label->get().c_str(), open, frameFlags);
+  if (*selected) {
     RAII end{ImGui::EndTabItem};
     std::ranges::for_each(getChildren(), &Renderable::render);
   }
-  if (open != nullptr && *open != wasOpen) { openObservable.notify(*open); }
-  if (wasSelected != selected) {
-    selectedObservable.notify(selected);
-    notifyOnClick();
-  }
+  if (open != nullptr && !*open && *open != wasOpen) { closeEvent.notify(); }
   setSelectedInNextFrame = false;
 }
 
@@ -59,10 +61,6 @@ bool Tab::isOpen() const { return open == nullptr || *open; }
 void Tab::setOpen(bool newOpen) {
   if (open != nullptr) { *open = newOpen; }
 }
-
-bool Tab::isSelected() const { return selected; }
-
-void Tab::setSelected() { setSelectedInNextFrame = true; }
 
 bool Tab::isDisplayDot() const { return flags & ImGuiTabItemFlags_UnsavedDocument; }
 
@@ -115,7 +113,7 @@ void TabBar::removeTab(const std::string &tabName) {
 
 Tab &TabBar::getSelectedTab() {
   return dynamic_cast<Tab &>(**std::ranges::find_if(tabs, [](const auto &tab) {
-    if (auto t = dynamic_cast<Tab *>(tab.get()); t != nullptr) { return t->isSelected(); }
+    if (auto t = dynamic_cast<Tab *>(tab.get()); t != nullptr) { return *t->selected; }
     return false;
   }));
 }
@@ -123,7 +121,7 @@ Tab &TabBar::getSelectedTab() {
 void TabBar::setSelectedTab(std::string_view tabName) {
   if (const auto iter = std::ranges::find_if(tabs, [tabName](auto &tab) { return tab->getName() == tabName; });
       iter != tabs.end()) {
-    if (auto t = dynamic_cast<Tab *>((*iter).get()); t != nullptr) { t->setSelected(); }
+    if (auto t = dynamic_cast<Tab *>((*iter).get()); t != nullptr) { *t->selected.modify() = true; }
   }
 }
 

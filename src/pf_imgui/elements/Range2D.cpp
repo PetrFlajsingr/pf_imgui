@@ -9,27 +9,27 @@
 namespace pf::ui::ig {
 
 Range2D::Range2D(Range2D::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable(config.value), Resizable(config.size),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false), DropTarget(false),
-      label(std::string{config.label.value}), minRange(config.min), maxRange(config.max) {}
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      DragSource(false), DropTarget(false), label(std::string{config.label.value}), size(config.size),
+      range(config.value), minRange(config.min), maxRange(config.max) {}
 
 Range2D::Range2D(const std::string &elementName, const std::string &labelText, const glm::vec2 &min,
                  const glm::vec2 &max, const math::Range<glm::vec2> &initialValue, const Size &s, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(initialValue), Resizable(s), Savable(persistent), DragSource(false),
-      DropTarget(false), label(labelText), minRange(min), maxRange(max) {}
+    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false), label(labelText), size(s),
+      range(initialValue), minRange(min), maxRange(max) {}
 
 void Range2D::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  auto val = getValueAddress();
-  const auto oldVal = getValue();
-  if (ImWidgets::RangeSelect2D(label.get().c_str(), &val->start.x, &val->start.y, &val->end.x, &val->end.y, minRange.x,
-                               minRange.y, maxRange.x, maxRange.y, static_cast<ImVec2>(getSize()))) {
-    if (*val != oldVal) { notifyValueChanged(); }
+  auto &val = range.value;
+  const auto oldVal = range.value;
+  if (ImWidgets::RangeSelect2D(label->get().c_str(), &val.start.x, &val.start.y, &val.end.x, &val.end.y, minRange.x,
+                               minRange.y, maxRange.x, maxRange.y, static_cast<ImVec2>(*size))) {
+    if (val != oldVal) { range.triggerListeners(); }
   }
   drag(getValue());
-  if (auto drop = dropAccept(); drop.has_value()) { setValueAndNotifyIfChanged(*drop); }
+  if (auto drop = dropAccept(); drop.has_value()) { *range.modify() = *drop; }
 }
 
 const glm::vec2 &Range2D::getMin() const { return minRange; }
@@ -56,11 +56,19 @@ void Range2D::setFromToml(const toml::table &src) {
           if (newValEnd->size() != 2) { return; }
           const auto end = safeDeserializeGlmVec<glm::vec2>(*newValEnd);
           if (!end.has_value()) { return; }
-          setValueAndNotifyIfChanged({*start, *end});
+          *range.modify() = {*start, *end};
         }
       }
     }
   }
+}
+
+const math::Range<glm::vec2> &Range2D::getValue() const { return *range; }
+
+void Range2D::setValue(const math::Range<glm::vec2> &newValue) { *range.modify() = newValue; }
+
+Subscription Range2D::addValueListenerImpl(std::function<void(const math::Range<glm::vec2> &)> listener) {
+  return range.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

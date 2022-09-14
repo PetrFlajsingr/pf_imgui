@@ -8,11 +8,9 @@
 #ifndef PF_IMGUI_INTERFACE_ELEMENT_WITH_ID_H
 #define PF_IMGUI_INTERFACE_ELEMENT_WITH_ID_H
 
-#include <pf_imgui/Font.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/Element.h>
-#include <pf_imgui/interface/Observable_impl.h>
 #include <string>
 
 namespace pf::ui::ig {

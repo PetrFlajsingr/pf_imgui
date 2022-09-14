@@ -11,7 +11,7 @@
 #include <imgui_internal.h>
 #include <memory>
 #include <pf_common/Visitor.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/enums.h>
 #include <string>

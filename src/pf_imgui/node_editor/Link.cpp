@@ -56,5 +56,9 @@ void Link::renderImpl() {
   ax::NodeEditor::Link(id, outputPin->getId(), inputPin->getId(), static_cast<ImVec4>(color), thickness);
   if (isFlowEnabled()) { ax::NodeEditor::Flow(id); }
 }
+
 void Link::setId(ax::NodeEditor::LinkId newId) { id = newId; }
+
+void Link::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
+
 }  // namespace pf::ui::ig

@@ -11,10 +11,11 @@
 #include <memory>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/reactive/Event.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -33,7 +34,9 @@ enum class TabMod {
 /**
  * @brief A button which looks like a Tab in TabBar.
  */
-class PF_IMGUI_EXPORT TabButton : public ItemElement, public Clickable {
+class PF_IMGUI_EXPORT TabButton : public ItemElement {
+  using ClickEvent = ClassEvent<TabButton>;
+
  public:
   /**
    * @brief Struct for construction of TabButton.
@@ -54,19 +57,20 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement, public Clickable {
 
   void setMods(const Flags<TabMod> &mods);
 
-  Label label;
+  Observable<Label> label;
+
+  ClickEvent clickEvent;
 
  protected:
   void renderImpl() override;
+
+  void notifyClickEvent();
 
   ImGuiTabItemFlags flags;
 };
 
 /**
  * @brief Par of TabBar, when clicked it switches to the selected sub-layout.
- *
- * @todo: close & selected persistence
- * @todo: Closeable
  */
 class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  public:
@@ -103,36 +107,24 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   ~Tab() override;
 
   /**
-  * Called when a Tab's contents are in/visible.
-  * @param listener
-  */
-  void addOpenListener(std::invocable<bool> auto &&listener) {
-    openObservable.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
   *
   * @return true if the Tab is currently open
   */
   [[nodiscard]] bool isOpen() const;
 
-  [[nodiscard]] bool isSelected() const;
-
   void setOpen(bool newOpen);
-
-  void setSelected();
 
   [[nodiscard]] bool isDisplayDot() const;
   void setDisplayDot(bool displayDot);
+
+  Observable<bool> selected;
+  ClassEvent<Tab> closeEvent;
 
  protected:
   void renderImpl() override;
 
  private:
-  Observable_impl<bool> openObservable;
-  Observable_impl<bool> selectedObservable;
   bool *open;
-  bool selected = false;
   bool setSelectedInNextFrame = false;
 };
 

@@ -6,12 +6,12 @@
 #define PF_IMGUI_DIALOGS_NOTIFICATION_H
 
 #include <chrono>
-#include <pf_imgui/Font.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Closeable.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -35,7 +35,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer 
   void setIcon(const char *icon, Font newIconFont = Font::Default());
   void setIconColor(Color newColor);
 
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

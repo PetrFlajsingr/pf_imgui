@@ -7,26 +7,20 @@
 
 namespace pf::ui::ig {
 
-NodeBase::NodeBase(const std::string &elementName)
-    : Renderable(elementName), Positionable(Position{}), initSize(false) {}
+NodeBase::NodeBase(const std::string &elementName) : Renderable(elementName), position(Position{}), initSize(false) {
+  position.addListener([this](Position pos) { updateNodePositionImpl(pos); });
+}
+
 NodeBase::NodeBase(const std::string &elementName, Position initPosition)
-    : Renderable(elementName), Positionable(initPosition), initSize(true) {}
+    : Renderable(elementName), position(initPosition), initSize(true) {
+  position.addListener([this](Position pos) { updateNodePositionImpl(pos); });
+}
 
 ax::NodeEditor::NodeId NodeBase::getId() const { return id; }
 
 NodeEditor &NodeBase::getNodeEditor() { return *parent; }
 
 const NodeEditor &NodeBase::getNodeEditor() const { return *parent; }
-
-void NodeBase::setPosition(Position newPosition) {
-  if (isInitialised) {
-    parent->setContext();
-    ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(newPosition));
-  } else {
-    initSize = true;
-  }
-  Positionable::setPosition(newPosition);
-}
 
 Size NodeBase::getNodeSize() const {
   parent->setContext();
@@ -65,9 +59,9 @@ bool NodeBase::hasPopupMenu() const { return popupMenu != nullptr; }
 void NodeBase::removePopupMenu() { popupMenu = nullptr; }
 
 void NodeBase::render() {
-  if (getVisibility() == Visibility::Visible) {
-    if (isInitialised) { setPosition(Position{ax::NodeEditor::GetNodePosition(getId())}); }
-    if (getEnabled() == Enabled::No) {
+  if (*visibility == Visibility::Visible) {
+    if (isInitialised) { *position.modify() = Position{ax::NodeEditor::GetNodePosition(getId())}; }
+    if (!*enabled) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};
       renderImpl();
@@ -75,10 +69,21 @@ void NodeBase::render() {
       renderImpl();
     }
     if (initSize) {
-      ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(getPosition()));
+      ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(*position));
       initSize = false;
     }
     isInitialised = true;
+  }
+}
+
+void NodeBase::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
+
+void NodeBase::updateNodePositionImpl(Position newPosition) {
+  if (isInitialised) {
+    parent->setContext();
+    ax::NodeEditor::SetNodePosition(getId(), static_cast<ImVec2>(newPosition));
+  } else {
+    initSize = true;
   }
 }
 

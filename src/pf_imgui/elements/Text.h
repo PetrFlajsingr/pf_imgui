@@ -12,9 +12,12 @@
 #include <optional>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/style/ColorPalette.h>
 #include <string>
 #include <utility>
 
@@ -23,7 +26,10 @@ namespace pf::ui::ig {
 /**
  * @brief Simple rendered text. May be colored.
  */
-class PF_IMGUI_EXPORT Text : public ItemElement, public DragSource<std::string>, public DropTarget<std::string> {
+class PF_IMGUI_EXPORT Text : public ItemElement,
+                             public ValueContainer<std::string>,
+                             public DragSource<std::string>,
+                             public DropTarget<std::string> {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -46,36 +52,23 @@ class PF_IMGUI_EXPORT Text : public ItemElement, public DragSource<std::string>,
   */
   Text(const std::string &elementName, std::string textValue, bool wrapText = false);
 
-  /**
-   * Get rendered text.
-   * @return text
-   */
-  [[nodiscard]] std::string_view getText() const;
-
-  void setText(std::string newText);
-  /**
-   * Set new text for rendering
-   * @param text new text to set
-   * @param args values to insert into text using fmt::format
-   */
-  template<typename... Args>
-  void setText(fmt::format_string<Args...> fmt, Args &&...args) {
-    setTextInner(fmt::format(fmt, std::forward<Args>(args)...));
-  }
-
   [[nodiscard]] bool isWrap() const;
   void setWrap(bool textWrap);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget> color;
   Font font = Font::Default();
 
+  Observable<std::string> text;
+
+  [[nodiscard]] const std::string &getValue() const override;
+  void setValue(const std::string &newValue) override;
+
  protected:
+  Subscription addValueListenerImpl(std::function<void(const std::string &)> listener) override;
+
   void renderImpl() override;
 
-  virtual void setTextInner(std::string txt);
-
  private:
-  std::string text;
   bool wrap;
 };
 

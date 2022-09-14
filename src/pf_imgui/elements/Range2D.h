@@ -13,11 +13,16 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/math/Range.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -26,8 +31,7 @@ namespace pf::ui::ig {
  * @brief Allows for selection of a 2D area - axis aligned.
  */
 class PF_IMGUI_EXPORT Range2D : public ItemElement,
-                                public ValueObservable<math::Range<glm::vec2>>,
-                                public Resizable,
+                                public ValueContainer<math::Range<glm::vec2>>,
                                 public Savable,
                                 public DragSource<math::Range<glm::vec2>>,
                                 public DropTarget<math::Range<glm::vec2>> {
@@ -93,9 +97,17 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  Observable<Size> size;
+  ObservableProperty<Range2D, math::Range<glm::vec2>> range;
+
+  [[nodiscard]] const math::Range<glm::vec2> &getValue() const override;
+  void setValue(const math::Range<glm::vec2> &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const math::Range<glm::vec2> &)> listener) override;
+
   void renderImpl() override;
 
  private:

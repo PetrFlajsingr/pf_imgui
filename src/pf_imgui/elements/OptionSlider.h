@@ -15,7 +15,7 @@
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 
 namespace pf::ui::ig {
 
@@ -25,7 +25,7 @@ namespace pf::ui::ig {
  */
 template<ToStringConvertible T>
 class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
-                                     public ValueObservable<T>,
+                                     public ValueContainer<T>,
                                      public Savable,
                                      public DragSource<T>,
                                      public DropTarget<T> {
@@ -55,8 +55,6 @@ class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
   OptionSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
                Persistent persistent = Persistent::No);
 
-  void setValue(const T &newValue) override;
-
   [[nodiscard]] toml::table toToml() const override;
 
   void setFromToml(const toml::table &src) override;
@@ -68,9 +66,15 @@ class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  Observable<T> value;
+
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -86,21 +90,19 @@ OptionSlider<T>::OptionSlider(OptionSlider::Config &&config)
 template<ToStringConvertible T>
 OptionSlider<T>::OptionSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
                               Persistent persistent)
-    : ItemElement(elementName), ValueObservable<T>(*std::ranges::begin(newValues)),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(label), values{std::ranges::begin(newValues), std::ranges::end(newValues)},
-      selectedValueStr(toString(values[0])) {}
-
-template<ToStringConvertible T>
-void OptionSlider<T>::setValue(const T &newValue) {
-  if (const auto iter =
-          std::ranges::find_if(values, [&](const auto &val) { return toString(val) == toString(newValue); });
-      iter != values.end()) {
-    selectedValueIndex = static_cast<int>(iter - values.begin());
-    selectedValueStr = toString(values[selectedValueIndex]);
-    ValueObservable<T>::setValue(values[selectedValueIndex]);
-  }
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(label),
+      value(*std::ranges::begin(newValues)), values{std::ranges::begin(newValues), std::ranges::end(newValues)},
+      selectedValueStr(toString(values[0])) {
+  value.addListener([this](const auto &newValue) {
+    if (const auto iter =
+            std::ranges::find_if(values, [&](const auto &val) { return toString(val) == toString(newValue); });
+        iter != values.end()) {
+      selectedValueIndex = static_cast<int>(iter - values.begin());
+      selectedValueStr = toString(values[selectedValueIndex]);
+    }
+  });
 }
+
 template<ToStringConvertible T>
 toml::table OptionSlider<T>::toToml() const {
   return toml::table{{"selected", selectedValueStr}};
@@ -114,6 +116,7 @@ void OptionSlider<T>::setFromToml(const toml::table &src) {
           iter != values.end()) {
         selectedValueIndex = static_cast<int>(iter - values.begin());
         selectedValueStr = toString(values[selectedValueIndex]);
+        *value.modify() = values[selectedValueIndex];
       }
     }
   }
@@ -126,16 +129,29 @@ void OptionSlider<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
-  if (ImGui::SliderInt(label.get().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),
+  if (ImGui::SliderInt(label->get().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),
                        selectedValueStr.c_str(), flags)) {
     selectedValueStr = toString(values[selectedValueIndex]);
-    ValueObservable<T>::setValueAndNotifyIfChanged(values[selectedValueIndex]);
+    *value.modify() = values[selectedValueIndex];
   }
 
-  DragSource<T>::drag(ValueObservable<T>::getValue());
-  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
-  }
+  DragSource<T>::drag(*value);
+  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { *value.modify() = *drop; }
+}
+
+template<ToStringConvertible T>
+const T &OptionSlider<T>::getValue() const {
+  return *value;
+}
+
+template<ToStringConvertible T>
+Subscription OptionSlider<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
+}
+
+template<ToStringConvertible T>
+void OptionSlider<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
 }
 
 }  // namespace pf::ui::ig

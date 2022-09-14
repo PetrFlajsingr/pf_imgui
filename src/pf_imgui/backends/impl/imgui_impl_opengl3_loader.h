@@ -76,6 +76,11 @@ typedef unsigned long long     khronos_uint64_t;
 #endif
 #endif  // __khrplatform_h_
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-function-type"
+#endif
+
 #ifndef __gl_glcorearb_h_
 #define __gl_glcorearb_h_ 1
 #ifdef __cplusplus
@@ -782,5 +787,8 @@ static void load_procs(GL3WGetProcAddressProc proc)
 
 #ifdef __cplusplus
 }
+#endif
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
 #endif
 #endif

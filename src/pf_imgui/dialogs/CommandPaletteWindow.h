@@ -9,7 +9,6 @@
 #define PF_IMGUI_COMMANDPALETTEWINDOW_H
 
 #include <imcmd_command_palette.h>
-#include <pf_imgui/interface/Closeable.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
 #include <utility>
@@ -19,7 +18,7 @@ namespace pf::ui::ig {
 /**
  * @brief A command palette like in sublime text or VSC
  */
-class CommandPaletteWindow : public Renderable, public Closeable {
+class CommandPaletteWindow : public Renderable {
  public:
   /**
    * Construct CommandPalette
@@ -56,20 +55,10 @@ class CommandPaletteWindow : public Renderable, public Closeable {
    */
   void setSearchText(const std::string &text);
 
-  /**
-   * Hide the element.
-   */
-  void close();
-  /**
-   * Make the element visible.
-   */
-  void show();
-
  protected:
   void renderImpl() override;
 
  private:
-  bool open = true;
   ImCmd::Context *context = nullptr;
 };
 

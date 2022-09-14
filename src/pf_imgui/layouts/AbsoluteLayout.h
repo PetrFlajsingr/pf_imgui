@@ -12,9 +12,9 @@
 #include <pf_common/Explicit.h>
 #include <pf_common/algorithms.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Position.h>
+#include <pf_imgui/concepts/ConfigConstruction.h>
 #include <pf_imgui/interface/Layout.h>
-#include <pf_imgui/interface/decorators/PositionDecorator.h>
-#include <pf_imgui/meta.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>
@@ -81,22 +81,18 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
     */
   template<typename T, typename... Args>
     requires std::derived_from<T, Element> && std::constructible_from<T, Args...>
-  auto &createChild(ImVec2 position, Args &&...args) {
-    constexpr auto IsPositionable = std::derived_from<T, Positionable>;
-    using CreateType = std::conditional_t<IsPositionable, T, PositionDecorator<T>>;
-    auto child = std::make_unique<CreateType>(position, std::forward<Args>(args)...);
+  auto &createChild(Position position, Args &&...args) {
+    auto child = std::make_unique<T>(std::forward<Args>(args)...);
     const auto ptr = child.get();
-    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
+    children.emplace_back(std::move(child), position);
     return *ptr;
   }
 
   template<ElementConstructConfig T>
-  typename T::Parent &createChild(ImVec2 position, T &&config) {
-    constexpr auto IsPositionable = std::derived_from<typename T::Parent, Positionable>;
-    using CreateType = std::conditional_t<IsPositionable, typename T::Parent, PositionDecorator<typename T::Parent>>;
-    auto child = std::make_unique<CreateType>(position, std::forward<T>(config));
+  typename T::Parent &createChild(Position position, T &&config) {
+    auto child = std::make_unique<T>(std::forward<T>(config));
     const auto ptr = child.get();
-    children.emplace_back(std::move(child), dynamic_cast<Positionable *>(ptr));
+    children.emplace_back(std::move(child), position);
     return *ptr;
   }
 
@@ -120,7 +116,7 @@ class PF_IMGUI_EXPORT AbsoluteLayout : public Layout {
   void renderImpl() override;
 
  private:
-  std::vector<std::pair<std::unique_ptr<Element>, Positionable *>> children;
+  std::vector<std::pair<std::unique_ptr<Element>, Position>> children;
 };
 }  // namespace pf::ui::ig
 

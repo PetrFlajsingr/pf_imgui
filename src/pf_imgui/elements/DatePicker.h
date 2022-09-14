@@ -11,10 +11,11 @@
 #include <chrono>
 #include <memory>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 
 namespace pf::ui::ig {
 
@@ -24,7 +25,7 @@ namespace pf::ui::ig {
 /**
  * @brief Date picker element.
  */
-class DatePicker : public ItemElement, public ValueObservable<std::chrono::year_month_day>, public Savable {
+class DatePicker : public ItemElement, public ValueContainer<std::chrono::year_month_day>, public Savable {
  public:
   /**
    * @brief Construction config for DatePicker
@@ -56,17 +57,25 @@ class DatePicker : public ItemElement, public ValueObservable<std::chrono::year_
              Persistent persistent = Persistent::No);
 
   void setValue(const std::chrono::year_month_day &newValue) override;
+  [[nodiscard]] const std::chrono::year_month_day &getValue() const override;
 
+ protected:
+  Subscription addValueListenerImpl(std::function<void(const std::chrono::year_month_day &)> listener) override;
+
+ public:
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  Observable<std::chrono::year_month_day> date;
 
  protected:
   void renderImpl() override;
 
  private:
+  void updateRawTime();
   std::unique_ptr<tm> rawTime;
 };
 

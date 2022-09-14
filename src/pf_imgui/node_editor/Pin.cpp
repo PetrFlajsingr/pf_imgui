@@ -11,7 +11,7 @@
 
 namespace pf::ui::ig {
 
-Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), label(std::move(config.label)) {}
+Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), label(std::move(config.label.value)) {}
 
 Pin::Pin(const std::string &elementName, const std::string &labelText) : Renderable(elementName), label(labelText) {}
 
@@ -91,7 +91,7 @@ void Pin::renderIcon() {
   ImGui::Text((prefix + infix + postfix).c_str());
 }
 
-void Pin::renderInfo() { ImGui::Text(label.get().c_str()); }
+void Pin::renderInfo() { ImGui::Text(label->get().c_str()); }
 
 void Pin::addLink(Link &link) { observableLink.notify(link); }
 
@@ -126,8 +126,11 @@ Pin::getAllLinks() {
 
 ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
                        details::LinkPtrToConstRef>
+
 Pin::getAllLinks() const {
   return getNode().getNodeEditor().getLinks();
 }
+
+void Pin::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
 
 }  // namespace pf::ui::ig

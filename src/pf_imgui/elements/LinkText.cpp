@@ -15,13 +15,13 @@ LinkText::LinkText(pf::ui::ig::LinkText::Config &&config)
 void LinkText::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   {
-    if (isHovered()) {
+    if (*hovered) {
       ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_SliderGrab]);
     } else {
       ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive]);
     }
     pf::RAII textColPop{[] { ImGui::PopStyleColor(); }};
-    ImGui::Text("%s", label.get().c_str());
+    ImGui::Text("%s", label->get().c_str());
   }
   auto min = ImGui::GetItemRectMin();
   const auto max = ImGui::GetItemRectMax();
@@ -29,7 +29,7 @@ void LinkText::renderImpl() {
   if (ImGui::IsItemHovered()) {
     if (ImGui::IsMouseClicked(0)) {
       linkClickHandler(link);
-      notifyOnClick();
+      clickEvent.notify();
     }
     const auto underlineColor = ImGui::ColorConvertFloat4ToU32(ImGui::GetStyle().Colors[ImGuiCol_SliderGrab]);
     ImGui::GetWindowDrawList()->AddLine(min, max, underlineColor, 1.0f);

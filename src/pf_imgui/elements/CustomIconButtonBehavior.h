@@ -5,10 +5,13 @@
 #ifndef PF_IMGUI_ELEMENTS_CUSTOMICONBUTTONBEHAVIOR_H
 #define PF_IMGUI_ELEMENTS_CUSTOMICONBUTTONBEHAVIOR_H
 
-#include <pf_imgui/Color.h>
-#include <pf_imgui/Size.h>
+#include <pf_imgui/common/Color.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/style/ColorPalette.h>
 
 namespace pf::ui::ig {
 
@@ -42,24 +45,35 @@ class CustomIconButtonBehavior : public ItemElement {
   Size size{22, 22};
 };
 
-class CustomIconButton : public CustomIconButtonBehavior, public Clickable {
+class CustomIconButton : public CustomIconButtonBehavior {
+  using ClickEvent = ClassEvent<CustomIconButton>;
+
  public:
   explicit CustomIconButton(const std::string &elementName);
 
+  ClickEvent clickEvent;
+
  protected:
   void update(State state) override;
+  void notifyClickEvent();
 };
 
-class CustomIconToggle : public CustomIconButtonBehavior, public ValueObservable<bool>, public Savable {
+class CustomIconToggle : public CustomIconButtonBehavior, public ValueContainer<bool>, public Savable {
  public:
   explicit CustomIconToggle(const std::string &elementName, bool initValue = false,
                             Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
-
   void setFromToml(const toml::table &src) override;
 
+  Observable<bool> checked;
+
+  [[nodiscard]] const bool &getValue() const override;
+  void setValue(const bool &newValue) override;
+
  protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
   void update(State state) override;
 };
 

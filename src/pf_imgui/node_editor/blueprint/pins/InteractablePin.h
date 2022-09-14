@@ -10,13 +10,13 @@
 #include <imgui_internal.h>
 #include <pf_common/specializations.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 
 namespace pf::ui::ig::bp {
 
 template<std::derived_from<Renderable> T>
-  requires derived_specialization_of<T, ValueObservable>
+  requires derived_specialization_of<T, ValueContainer>
 class InteractablePin : public PinWithValue<typename T::ValueType> {
  public:
   using ValueType = typename PinWithValue<typename T::ValueType>::ValueType;
@@ -31,14 +31,14 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
   void setValue(const ValueType &value) override { inputElement->setValue(value); }
 
   Subscription addValueListener(std::invocable<ValueType> auto &&listener) {
-    return inputElement->addValueListener(std::forward<decltype(listener)>(listener));
+    return inputElement->addValueListenerImpl(std::forward<decltype(listener)>(listener));
   }
 
   [[nodiscard]] toml::table toToml() const override {
     auto result = Pin::toToml();
     if constexpr (std::derived_from<T, TomlSerializable>) {
       auto elementData = inputElement->toToml();
-      elementData.insert_or_assign("width", static_cast<float>(inputElement->getWidth()));
+      elementData.insert_or_assign("width", static_cast<float>(*inputElement->width));
       result.insert_or_assign("data", elementData);
     }
     return result;
@@ -52,7 +52,7 @@ class InteractablePin : public PinWithValue<typename T::ValueType> {
           inputElement->setFromToml(*dataTable);
           if (auto width = dataTable->find("width"); width != dataTable->end()) {
             if (auto widthVal = width->second.as_floating_point(); widthVal != nullptr) {
-              inputElement->setWidth(static_cast<float>(widthVal->get()));
+              *inputElement->width.modify() = static_cast<float>(widthVal->get());
             }
           }
         }

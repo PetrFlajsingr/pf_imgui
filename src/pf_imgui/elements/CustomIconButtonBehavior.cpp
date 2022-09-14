@@ -20,8 +20,8 @@ void CustomIconButtonBehavior::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   auto drawList = ImGui::GetWindowDrawList();
   State state;
-  if (isHovered() || keepHighlighted) {
-    if (isHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+  if (*hovered || keepHighlighted) {
+    if (*hovered && ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
       backgroundColor = Color{ImGui::GetColorU32(static_cast<ImGuiCol>(ColorOf::ButtonActive))};
       state = State::MouseDown;
     } else {
@@ -45,25 +45,35 @@ Color CustomIconButtonBehavior::getBackgroundColor() const { return backgroundCo
 CustomIconButton::CustomIconButton(const std::string &elementName) : CustomIconButtonBehavior(elementName) {}
 
 void CustomIconButton::update(CustomIconButtonBehavior::State state) {
-  if (state == State::Clicked) { notifyOnClick(); }
+  if (state == State::Clicked) { notifyClickEvent(); }
 }
 
+void CustomIconButton::notifyClickEvent() { clickEvent.notify(); }
+
 CustomIconToggle::CustomIconToggle(const std::string &elementName, bool initValue, Persistent persistent)
-    : CustomIconButtonBehavior(elementName), ValueObservable(initValue), Savable(persistent) {
-  keepHighlighted = getValue();
+    : CustomIconButtonBehavior(elementName), Savable(persistent), checked(initValue) {
+  keepHighlighted = *checked;
 }
 
 toml::table CustomIconToggle::toToml() const { return toml::table{{"checked", getValue()}}; }
 
 void CustomIconToggle::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("checked"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { *checked.modify() = *newVal; }
   }
 }
 
 void CustomIconToggle::update(CustomIconButtonBehavior::State state) {
-  if (state == State::Clicked) { setValueAndNotifyIfChanged(!getValue()); }
+  if (state == State::Clicked) { *checked.modify() = !*checked; }
   keepHighlighted = getValue();
+}
+
+const bool &CustomIconToggle::getValue() const { return *checked; }
+
+void CustomIconToggle::setValue(const bool &newValue) { *checked.modify() = newValue; }
+
+Subscription CustomIconToggle::addValueListenerImpl(std::function<void(const bool &)> listener) {
+  return checked.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

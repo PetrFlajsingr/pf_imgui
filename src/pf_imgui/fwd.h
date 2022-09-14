@@ -8,46 +8,73 @@
 #define PF_IMGUI_FWD_H
 
 // TODO: add missing, use where possible to improve compilation times
+// TODO: add templated classes
 namespace pf::ui::ig {
 
 class ImGuiInterface;
 class FontManager;
+class DialogManager;
+class NotificationManager;
 
+class Element;
 class ElementWithID;
 class ElementContainer;
-class Labellable;
-class Resizable;
 class Savable;
+class DragNDrop;
+class ItemElement;
+class Layout;
+class Renderable;
+class RenderablesContainer;
+class TomlSerializable;
 
-class ResizableLayout;
-
-class BoxLayout;
 class AbsoluteLayout;
 class GridLayout;
 class StackedLayout;
 class StretchLayout;
 
-class Button;
+class BackgroundDockingArea;
+class CommandPaletteWindow;
+class FileDialog;
+class InputDialog;
+class MessageDialog;
 class ModalDialog;
+class Notification;
+class Window;
+
+class Button;
+class Checkbox;
+class CommandPalette;
+class ConsolePanel;
+class DatePicker;
+class DockSpace;
 class Expander;
+class Dummy;
+class FlameGraph;
+class GradientEditor;
+class GroupBox;
 class Image;
+class InspectableImage;
+class IndeterminateProgressBar;
 class InputText;
-class Memo;
-class MenuContainer;
-class MenuItem;
-class SubMenu;
-class WindowMenuBar;
-class AppMenuBar;
-class MenuBars;
-class SimplePlot;
+class LinkText;
+class MarkdownText;
+class MemoryEditor;
+class OverlayGizmo;
+class PopupMenu;
 class RadioButton;
-class Tab;
+class RadioGroup;
+class Range2D;
+class Separator;
+class SimpleCurveEditor;
+class SliderAngle;
+class Spinner;
+class StatusBar;
 class TabBar;
 class Text;
-class Window;
+class TextEditor;
+class TimePicker;
+class Toggle;
 class Tooltip;
-class PieMenu;
-class Spinner;
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_FWD_H

@@ -1,16 +1,14 @@
 /**
- * @file meta.h
- * @brief Meta helpers for pf_imgui.
+ * @file ConfigConstruction.h
+ * @brief Concepts for config construction.
  * @author Petr Flajšingr
- * @date 12.4.21
+ * @date 4.9.22
  */
 
-#ifndef PF_IMGUI_META_H
-#define PF_IMGUI_META_H
+#ifndef PF_IMGUI_CONCEPTS_CONFIGCONSTRUCTION_H
+#define PF_IMGUI_CONCEPTS_CONFIGCONSTRUCTION_H
 
-#include <pf_common/specializations.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/ValueObservable.h>
 
 namespace pf::ui::ig {
 
@@ -21,13 +19,6 @@ concept ElementConstructConfig = requires { typename T::Parent; }
 template<typename T>
 concept ConfigConstructible = requires { typename T::Config; } && ElementConstructConfig<typename T::Config>;
 
-/**
- * Check if the type is a specialization of ValueObservable.
- * @tparam T type to be checked
- */
-template<typename T>
-constexpr auto IsValueObservable = derived_specialization_of<T, ValueObservable>;
-
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_META_H
+#endif  //PF_IMGUI_CONCEPTS_CONFIGCONSTRUCTION_H

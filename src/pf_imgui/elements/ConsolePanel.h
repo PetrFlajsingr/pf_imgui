@@ -8,12 +8,15 @@
 #ifndef PF_IMGUI_ELEMENTS_CONSOLEPANEL_H
 #define PF_IMGUI_ELEMENTS_CONSOLEPANEL_H
 
-#include <pf_imgui/Color.h>
+#include <pf_common/Explicit.h>
+#include <pf_imgui/common/Color.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/details/CustomIconButtonImpls.h>
 #include <pf_imgui/elements/details/TextUtils.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 
@@ -22,7 +25,7 @@ namespace pf::ui::ig {
 /**
  * @brief A console element with command history and basic command completion.
  */
-class ConsolePanel : public ElementWithID, public Resizable, public Savable {
+class ConsolePanel : public ElementWithID, public Savable {
   enum class RecordType { Input, Output };
 
  public:
@@ -85,6 +88,8 @@ class ConsolePanel : public ElementWithID, public Resizable, public Savable {
   FullColorPalette color;
   FullStyleOptions style;
   Font font = Font::Default();
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

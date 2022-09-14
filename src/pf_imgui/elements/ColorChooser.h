@@ -14,12 +14,12 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/serialization.h>
 #include <string>
 
@@ -42,7 +42,7 @@ namespace pf::ui::ig {
  */
 template<ColorChooserType Type, ColorChooserFormat Format>
 class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
-                                     public ValueObservable<Color>,
+                                     public ValueContainer<Color>,
                                      public Savable,
                                      public DragSource<Color>,
                                      public DropTarget<Color> {
@@ -87,61 +87,59 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
   void setFromToml(const toml::table &src) override;
 
   void setValue(const Color &newValue) override;
+  [[nodiscard]] const Color &getValue() const override;
 
+ protected:
+  Subscription addValueListenerImpl(std::function<void(const Color &)> listener) override;
+
+ public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
                ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::Border,
                ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  Observable<Color> chosenColor;
 
  protected:
   void renderImpl() override;
 
  private:
+  void updateValueStorage();
   bool pickerEnabled = true;
   std::conditional_t<Format == ColorChooserFormat::RGB, glm::vec3, glm::vec4> valueStorage;
 };
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 ColorChooser<Type, Format>::ColorChooser(ColorChooser::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable(config.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false), DropTarget(false),
-      label(std::string{config.label.value}) {
-  setValue(config.value);
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      DragSource(false), DropTarget(false), label(std::string{config.label.value}), chosenColor(config.value) {
+  updateValueStorage();
+  chosenColor.addListener([this](auto) { updateValueStorage(); });
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 ColorChooser<Type, Format>::ColorChooser(const std::string &elementName, const std::string &labelText,
                                          Color initialValue, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(initialValue), Savable(persistent), DragSource(false),
-      DropTarget(false), label(labelText) {
-  setValue(initialValue);
+    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false), label(labelText),
+      chosenColor(initialValue) {
+  updateValueStorage();
+  chosenColor.addListener([this](auto) { updateValueStorage(); });
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 toml::table ColorChooser<Type, Format>::toToml() const {
-  const auto val = ValueObservable::getValue();
-  return toml::table{{"color", static_cast<std::uint32_t>(val)}};
+  return toml::table{{"color", static_cast<std::uint32_t>(*chosenColor)}};
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 void ColorChooser<Type, Format>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("color"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.as_integer(); newVal != nullptr) {
-      ValueObservable::setValueAndNotifyIfChanged(Color{static_cast<ImU32>(newVal->get())});
+      *chosenColor.modify() = Color{static_cast<ImU32>(newVal->get())};
     }
   }
-}
-
-template<ColorChooserType Type, ColorChooserFormat Format>
-void ColorChooser<Type, Format>::setValue(const Color &newValue) {
-  valueStorage.r = newValue.red();
-  valueStorage.g = newValue.green();
-  valueStorage.b = newValue.blue();
-  if constexpr (Format == ColorChooserFormat::RGBA) { valueStorage.a = newValue.alpha(); }
-  ValueObservable::setValue(newValue);
 }
 
 template<ColorChooserType Type, ColorChooserFormat Format>
@@ -153,30 +151,52 @@ void ColorChooser<Type, Format>::renderImpl() {
   auto valueChanged = false;
   if constexpr (Type == ColorChooserType::Edit) {
     if constexpr (Format == ColorChooserFormat::RGB) {
-      valueChanged = ImGui::ColorEdit3(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorEdit3(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     } else {
-      valueChanged = ImGui::ColorEdit4(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorEdit4(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     }
   } else {
     if constexpr (Format == ColorChooserFormat::RGB) {
-      valueChanged = ImGui::ColorPicker3(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorPicker3(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     } else {
-      valueChanged = ImGui::ColorPicker4(label.get().c_str(), glm::value_ptr(valueStorage), flags);
+      valueChanged = ImGui::ColorPicker4(label->get().c_str(), glm::value_ptr(valueStorage), flags);
     }
   }
-  DragSource::drag(ValueObservable::getValue());
+  DragSource::drag(*chosenColor);
   if (auto drop = DropTarget::dropAccept(); drop.has_value()) {
-    ValueObservable::setValueAndNotifyIfChanged(*drop);
+    *chosenColor.modify() = *drop;
     return;
   }
   if (valueChanged) {
     if constexpr (Format == ColorChooserFormat::RGB) {
-      ValueObservable::setValueAndNotifyIfChanged(Color::RGB(valueStorage.r, valueStorage.g, valueStorage.b));
+      *chosenColor.modify() = Color::RGB(valueStorage.r, valueStorage.g, valueStorage.b);
     } else {
-      ValueObservable::setValueAndNotifyIfChanged(
-          Color::RGB(valueStorage.r, valueStorage.g, valueStorage.b, valueStorage.a));
+      *chosenColor.modify() = Color::RGB(valueStorage.r, valueStorage.g, valueStorage.b, valueStorage.a);
     }
   }
+}
+
+template<ColorChooserType Type, ColorChooserFormat Format>
+void ColorChooser<Type, Format>::updateValueStorage() {
+  valueStorage.r = chosenColor->red();
+  valueStorage.g = chosenColor->green();
+  valueStorage.b = chosenColor->blue();
+  if constexpr (Format == ColorChooserFormat::RGBA) { valueStorage.a = chosenColor->alpha(); }
+}
+
+template<ColorChooserType Type, ColorChooserFormat Format>
+void ColorChooser<Type, Format>::setValue(const Color &newValue) {
+  *chosenColor.modify() = newValue;
+}
+
+template<ColorChooserType Type, ColorChooserFormat Format>
+const Color &ColorChooser<Type, Format>::getValue() const {
+  return *chosenColor;
+}
+
+template<ColorChooserType Type, ColorChooserFormat Format>
+Subscription ColorChooser<Type, Format>::addValueListenerImpl(std::function<void(const Color &)> listener) {
+  return chosenColor.addListener(std::move(listener));
 }
 
 /**

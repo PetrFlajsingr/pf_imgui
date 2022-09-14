@@ -9,13 +9,14 @@
 
 #include <memory>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -97,7 +98,9 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
 /**
  * @brief An item, which can be clicked. It is basically a popup menu item.
  */
-class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
+class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
+  using ClickEvent = ClassEvent<MenuButtonItem>;
+
  public:
   /**
    * Construct MenuButtonItem
@@ -126,7 +129,9 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  ClickEvent clickEvent;
 
  protected:
   void renderImpl() override;
@@ -134,7 +139,7 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem, public Clickable {
 /**
  * @brief An item, which can be clicked and it toggles its inner value.
  */
-class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable<bool>, public Savable {
+class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueContainer<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Checkbox.
@@ -163,13 +168,21 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueObservable
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  void setValue(const bool &newValue) override;
+  [[nodiscard]] const bool &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
+ public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
                ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
                ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  ObservableProperty<MenuCheckboxItem, bool> checked;
 
  protected:
   void renderImpl() override;
@@ -227,7 +240,7 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public MenuContainer {
    */
   SubMenu(const std::string &elementName, const std::string &labelText);
 
-  Label label;
+  Observable<Label> label;
 
  protected:
   void renderImpl() override;

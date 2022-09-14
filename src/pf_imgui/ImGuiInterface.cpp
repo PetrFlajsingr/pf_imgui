@@ -245,11 +245,11 @@ void ImGuiInterface::render() {
     renderDrawData_impl(ImGui::GetDrawData());
     if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) { updateMultiViewport(); }
   }};
-  if (getVisibility() == Visibility::Visible) {
+  if (*visibility == Visibility::Visible) {
     [[maybe_unused]] auto colorScoped = color.applyScoped();
     [[maybe_unused]] auto styleScoped = style.applyScoped();
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-    if (getEnabled() == Enabled::No) {
+    if (!*enabled) {
       ImGui::BeginDisabled();
       RAII raiiEnabled{ImGui::EndDisabled};
       renderImpl();

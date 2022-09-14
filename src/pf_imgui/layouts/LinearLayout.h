@@ -11,8 +11,8 @@
 #include <memory>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/concepts/ConfigConstruction.h>
 #include <pf_imgui/interface/Layout.h>
-#include <pf_imgui/meta.h>
 #include <range/v3/view/transform.hpp>
 #include <vector>
 

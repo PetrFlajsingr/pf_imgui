@@ -13,8 +13,7 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -34,7 +33,7 @@ concept ProgressBarCompatible = requires(T t, float f) {
  * @tparam T type storing the progress value
  */
 template<ProgressBarCompatible T>
-class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T>, public Resizable {
+class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueContainer<T> {
  public:
   /**
    * Construct ProgressBar
@@ -47,7 +46,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
     Explicit<T> min;                 /*!< Lowest value representing 0% */
     Explicit<T> max;                 /*!< Highest value representing 100% */
     T value = min;                   /*!< Initial value within [min, max] */
-    std::string overlay = "";        /*!< Text rendered on top of the element */
+    std::string overlay;             /*!< Text rendered on top of the element */
     Size size = Size::Auto();        /*!< Size of the element */
   };
   /**
@@ -126,7 +125,15 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
 
+  Observable<Size> size;
+  Observable<T> value;
+
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
+
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -138,38 +145,36 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueObservable<T
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value), Resizable(config.size),
-      stepValue(config.step), min(config.min), max(config.max), overlay(std::move(config.overlay)) {}
+    : ItemElement(std::string{config.name.value}), size(config.size), value(config.value), stepValue(config.step),
+      min(config.min), max(config.max), overlay(std::move(config.overlay)) {
+  value.addListener([this](const auto &newValue) { *value.modify() = std::clamp(newValue, min, max); });
+}
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(const std::string &elementName, T valueStep, T minValue, T maxValue,
                             std::optional<T> initialValue, std::string overlayStr, const Size &initialSize)
-    : ItemElement(elementName), ValueObservable<T>(initialValue.value_or(min)), Resizable(initialSize),
-      stepValue(valueStep), min(minValue), max(maxValue), overlay(std::move(overlayStr)) {}
+    : ItemElement(elementName), size(initialSize), value(initialValue.value_or(min)), stepValue(valueStep),
+      min(minValue), max(maxValue), overlay(std::move(overlayStr)) {
+  value.addListener([this](const auto &newValue) { *value.modify() = std::clamp(newValue, min, max); });
+}
 
 template<ProgressBarCompatible T>
 T ProgressBar<T>::setPercentage(float percentage) {
-  percentage = std::clamp(percentage, 0.f, 1.f);
-  const auto oldValue = ValueObservable<T>::getValue();
   const auto newValue = min + (max - min) * percentage;
-  ValueObservable<T>::setValueInner(static_cast<T>(newValue));
-  if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
-  return ValueObservable<T>::getValue();
+  *value.modify() = static_cast<T>(newValue);
+  return *value;
 }
 
 template<ProgressBarCompatible T>
 T ProgressBar<T>::step() {
-  const auto oldValue = ValueObservable<T>::getValue();
-  const auto newValue = std::clamp(oldValue + stepValue, min, max);
-  ValueObservable<T>::setValueInner(newValue);
-  if (ValueObservable<T>::getValue() != oldValue) { ValueObservable<T>::notifyValueChanged(); }
-  return newValue;
+  *value.modify() = *value + stepValue;
+  return *value;
 }
 
 template<ProgressBarCompatible T>
 float ProgressBar<T>::getCurrentPercentage() const {
   const auto diff = max - min;
-  return (ValueObservable<T>::getValue() - min) / static_cast<float>(diff);
+  return (*value - min) / static_cast<float>(diff);
 }
 
 template<ProgressBarCompatible T>
@@ -177,7 +182,22 @@ void ProgressBar<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(getSize()), overlay.c_str());
+  ImGui::ProgressBar(getCurrentPercentage(), static_cast<ImVec2>(*size), overlay.c_str());
+}
+
+template<ProgressBarCompatible T>
+const T &ProgressBar<T>::getValue() const {
+  return *value;
+}
+
+template<ProgressBarCompatible T>
+void ProgressBar<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
+}
+
+template<ProgressBarCompatible T>
+Subscription ProgressBar<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 extern template class ProgressBar<float>;

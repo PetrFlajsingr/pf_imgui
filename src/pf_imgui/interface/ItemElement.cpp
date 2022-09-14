@@ -5,12 +5,16 @@
 #include "ItemElement.h"
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <pf_imgui/elements/PopupMenu.h>
 #include <pf_imgui/elements/Text.h>
+#include <pf_imgui/elements/Tooltip.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
 ItemElement::ItemElement(const std::string &elementName) : ElementWithID(elementName) {}
+
+ItemElement::~ItemElement() = default;
 
 ItemElement::ItemElement(ItemElement &&other) noexcept
     : ElementWithID(std::move(other)), tooltip(std::move(other.tooltip)) {}
@@ -24,21 +28,21 @@ ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
 void ItemElement::render() {
   ElementWithID::render();
   setHovered(ImGui::IsItemHovered());
-  updateFocused(ImGui::IsItemFocused());
+  setFocused(ImGui::IsItemFocused());
 
-  if (isHovered()) {
+  if (*hovered) {
     auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
     if (newMousePos.x != lastMousePosition.x && newMousePos.y != lastMousePosition.y) {  //-V550
       lastMousePosition = newMousePos;
-      mousePositionObservable.notify(Position{lastMousePosition});
+      *mousePosition.modify() = Position{lastMousePosition};
     }
   }
 
   if (tooltip != nullptr) {
-    if (getVisibility() == Visibility::Visible && isHovered()) { tooltip->render(); }
+    if (*visibility == Visibility::Visible && *hovered) { tooltip->render(); }
   }
   if (popupMenu != nullptr) {
-    if (isHovered() && ImGui::GetIO().MouseClicked[1]) { popupMenu->open(); }
+    if (*hovered && ImGui::GetIO().MouseClicked[1]) { popupMenu->open(); }
     popupMenu->render();
   }
 }
@@ -58,11 +62,6 @@ void ItemElement::setTooltip(std::string_view text) {
   tooltip->createChild<Text>("text", std::string(text));
 }
 
-void ItemElement::setFocus() {
-  ImGui::SetKeyboardFocusHere();
-  Focusable::setFocus();
-}
-
 void ItemElement::setTooltip(std::unique_ptr<Tooltip> &&newTooltip) { tooltip = std::move(newTooltip); }
 
 PopupMenu &ItemElement::createOrGetPopupMenu() {
@@ -74,5 +73,9 @@ PopupMenu &ItemElement::createOrGetPopupMenu() {
 bool ItemElement::hasPopupMenu() const { return popupMenu != nullptr; }
 
 void ItemElement::removePopupMenu() { popupMenu = nullptr; }
+
+void ItemElement::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
+
+void ItemElement::setFocused(bool newFocused) { *focused.modify() = newFocused; }
 
 }  // namespace pf::ui::ig

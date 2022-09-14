@@ -8,15 +8,14 @@
 namespace pf::ui::ig {
 
 Comment::Comment(const std::string &elementName, const std::string &labelText, Size initialSize)
-    : NodeBase(elementName), Resizable(initialSize), label(labelText) {}
+    : NodeBase(elementName), label(labelText), size(initialSize) {
+  size.addListener([this](auto) { sizeDirty = true; });
+}
 
 Comment::Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText,
                  const Size &s)
-    : NodeBase(elementName, initPosition), Resizable(s), label(labelText) {}
-
-void Comment::setSize(const Size &s) {
-  Resizable::setSize(s);
-  sizeDirty = true;
+    : NodeBase(elementName, initPosition), label(labelText), size(s) {
+  size.addListener([this](auto) { sizeDirty = true; });
 }
 
 void Comment::renderImpl() {
@@ -41,18 +40,19 @@ void Comment::renderImpl() {
     {
       if (sizeDirty) {
         sizeDirty = false;
-        ax::NodeEditor::SetGroupSize(getId(), static_cast<ImVec2>(getSize()));
+        ax::NodeEditor::SetGroupSize(getId(), static_cast<ImVec2>(*size));
       }
       ImGui::BeginHorizontal("header");
       {
         ImGui::Spring(1);
-        ImGui::Text(label.get().c_str());
+        ImGui::Text(label->get().c_str());
         ImGui::Spring(1);
       }
       ImGui::EndHorizontal();
-      ax::NodeEditor::Group(static_cast<ImVec2>(getSize()));
+      ax::NodeEditor::Group(static_cast<ImVec2>(*size));
       const auto commentSize = ax::NodeEditor::GetNodeSize(getId());
-      setSizeInner(Size{commentSize});
+      *size.modify() = Size{commentSize};
+      sizeDirty = false;
     }
     ImGui::EndVertical();
   }

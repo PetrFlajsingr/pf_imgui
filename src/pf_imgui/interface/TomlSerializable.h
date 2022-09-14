@@ -13,7 +13,8 @@ namespace pf::ui::ig {
 /**
  * @todo Turn this into an interface which creates types fit for de/serialization by de/serializer interface
  */
-struct PF_IMGUI_EXPORT TomlSerializable {
+class PF_IMGUI_EXPORT TomlSerializable {
+ public:
   /**
    * Save data to toml.
    * @return toml::table if saving is enabled, nullopt otherwise

@@ -17,7 +17,7 @@
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/serialization.h>
 #include <string>
 #include <utility>
@@ -35,7 +35,7 @@ namespace pf::ui::ig {
  */
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 class PF_IMGUI_EXPORT Input : public ItemElement,
-                              public ValueObservable<T>,
+                              public ValueContainer<T>,
                               public Savable,
                               public DragSource<T>,
                               public DropTarget<T> {
@@ -86,9 +86,15 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  ObservableProperty<Input, T> value;
+
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -101,17 +107,16 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(Input::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), step(config.step), fastStep(config.fastStep),
+      label(std::string{config.label.value}), value(config.value), step(config.step), fastStep(config.fastStep),
       format(std::move(static_cast<std::string>(config.format))) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(const std::string &elementName, const std::string &labelText, Input::StepType st, Input::StepType fStep,
                 T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), ValueObservable<T>(initialValue),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), step(st), fastStep(fStep),
-      format(std::move(numberFormat)) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
+      value(initialValue), step(st), fastStep(fStep), format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 void Input<T>::setReadOnly(bool isReadOnly) {
@@ -126,9 +131,9 @@ void Input<T>::setReadOnly(bool isReadOnly) {
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 toml::table Input<T>::toToml() const {
   if constexpr (OneOf<T, PF_IMGUI_INPUT_GLM_TYPE_LIST>) {
-    return toml::table{{"value", serializeGlmVec(ValueObservable<T>::getValue())}};
+    return toml::table{{"value", serializeGlmVec(*value)}};
   } else {
-    return toml::table{{"value", ValueObservable<T>::getValue()}};
+    return toml::table{{"value", *value}};
   }
 }
 
@@ -138,14 +143,12 @@ void Input<T>::setFromToml(const toml::table &src) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(*vecValue); }
+        if (vecValue.has_value()) { *value.modify() = *vecValue; }
       }
     }
   } else {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-      }
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) { *value.modify() = *newVal; }
     }
   }
 }
@@ -156,7 +159,7 @@ void Input<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  const auto address = ValueObservable<T>::getValueAddress();
+  const auto address = &value.value;
 
   ImGuiDataType_ dataType;
   if constexpr (OneOf<T, PF_IMGUI_INPUT_FLOAT_TYPE_LIST>) {
@@ -168,18 +171,33 @@ void Input<T>::renderImpl() {
   }
 
   if constexpr (!OneOf<T, PF_IMGUI_INPUT_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::InputScalar(label.get().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
+    valueChanged = ImGui::InputScalar(label->get().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
   } else {
-    valueChanged = ImGui::InputScalarN(label.get().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
+    valueChanged = ImGui::InputScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
                                        &fastStep, format.c_str(), flags);
   }
 
-  DragSource<T>::drag(ValueObservable<T>::getValue());
+  DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+  if (valueChanged) { value.triggerListeners(); }
+}
+
+template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
+const T &Input<T>::getValue() const {
+  return *value;
+}
+
+template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
+void Input<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
+}
+
+template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
+Subscription Input<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 template<>

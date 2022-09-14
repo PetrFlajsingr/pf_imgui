@@ -9,12 +9,12 @@
 namespace pf::ui::ig {
 
 Image::Image(Image::Config &&config)
-    : ItemElement(std::string{config.name.value}), Resizable(config.size), texture(std::move(config.texture)) {}
+    : ItemElement(std::string{config.name.value}), size(config.size), texture(std::move(config.texture)) {}
 
 Image::Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size initialSize)
-    : ItemElement(elementName), Resizable(initialSize), texture(std::move(tex)) {}
+    : ItemElement(elementName), size(initialSize), texture(std::move(tex)) {}
 
-void Image::renderImpl() { ImGui::Image(texture->getID(), static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom); }
+void Image::renderImpl() { ImGui::Image(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom); }
 
 void Image::setTexture(std::shared_ptr<Texture> tex) { texture = std::move(tex); }
 
@@ -31,16 +31,16 @@ InspectableImage::InspectableImage(InspectableImage::Config &&config)
 
 InspectableImage::InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData,
                                    std::size_t imgWidth, std::shared_ptr<Texture> tex, Trigger trigger)
-    : ItemElement(elementName), Resizable(s), imageRGBAData(rgbaData), imageWidth(imgWidth), texture(std::move(tex)),
+    : ItemElement(elementName), size(s), imageRGBAData(rgbaData), imageWidth(imgWidth), texture(std::move(tex)),
       trig(trigger) {}
 
 void InspectableImage::renderImpl() {
   const auto cursorPos = ImGui::GetCursorPos();
-  ImGui::Image(texture->getID(), static_cast<ImVec2>(getSize()), uvLeftTop, uvRightBottom);
+  ImGui::Image(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom);
   auto &io = ImGui::GetIO();
   const auto rc = ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
   ImGui::SetCursorPos(cursorPos);
-  ImGui::InvisibleButton("ignore_btn", static_cast<ImVec2>(getSize()));
+  ImGui::InvisibleButton("ignore_btn", static_cast<ImVec2>(*size));
   auto mouseUVCoord = (io.MousePos - rc.Min) / rc.GetSize();
 
   bool inspectActive = ImGui::IsItemHovered();

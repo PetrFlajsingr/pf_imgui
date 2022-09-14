@@ -9,10 +9,16 @@
 #define PF_IMGUI_ELEMENTS_SELECTABLE_H
 
 #include <pf_common/Explicit.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
+#include <pf_imgui/style/common.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -22,7 +28,7 @@ namespace pf::ui::ig {
  *
  * It's basically a different kind of checkbox.
  */
-class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bool>, public Resizable, public Savable {
+class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueContainer<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Selectable.
@@ -61,9 +67,17 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueObservable<bo
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::SelectableTextAlign>
       style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  Observable<Size> size;
+  ObservableProperty<Selectable, bool> selected;
+
+  [[nodiscard]] const bool &getValue() const override;
+  void setValue(const bool &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
   void renderImpl() override;
 };
 

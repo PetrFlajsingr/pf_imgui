@@ -5,14 +5,15 @@
  * @date 2.5.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
-#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
+#ifndef PF_IMGUI_INTERFACE_DECORATORS_WIDTHDECORATOR_H
+#define PF_IMGUI_INTERFACE_DECORATORS_WIDTHDECORATOR_H
 
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 
@@ -23,7 +24,6 @@ namespace pf::ui::ig {
  *
  */
 template<std::derived_from<ItemElement> T>
-  requires(!std::derived_from<T, Resizable>)
 class PF_IMGUI_EXPORT WidthDecorator : public T {
  public:
   struct Config {
@@ -44,22 +44,14 @@ class PF_IMGUI_EXPORT WidthDecorator : public T {
 
   explicit WidthDecorator(Config &&config) : T(std::move(config.config)), width(config.width) {}
 
-  /**
-   * Get current element width.
-   * @return current element width.
-   */
-  [[nodiscard]] Width getWidth() const { return width; }
-  void setWidth(Width newWidth) { width = newWidth; }
+  Observable<Width> width;
 
  protected:
   void renderImpl() override {
-    ImGui::SetNextItemWidth(static_cast<float>(width));
+    ImGui::SetNextItemWidth(static_cast<float>(*width));
     T::renderImpl();
   }
-
- private:
-  Width width;
 };
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H
+#endif  // PF_IMGUI_INTERFACE_DECORATORS_WIDTHDECORATOR_H

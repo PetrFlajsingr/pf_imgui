@@ -15,7 +15,7 @@
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/serialization.h>
 #include <string>
 #include <type_traits>
@@ -36,11 +36,10 @@ using Slider2DStorageType = std::conditional_t<std::same_as<T, int>, glm::ivec2,
  */
 template<OneOf<int, float> T>
 class PF_IMGUI_EXPORT Slider2D : public ItemElement,
-                                 public ValueObservable<details::Slider2DStorageType<T>>,
+                                 public ValueContainer<details::Slider2DStorageType<T>>,
                                  public Savable,
                                  public DragSource<details::Slider2DStorageType<T>>,
-                                 public DropTarget<details::Slider2DStorageType<T>>,
-                                 public Resizable {
+                                 public DropTarget<details::Slider2DStorageType<T>> {
  public:
   using StorageType = details::Slider2DStorageType<T>;
   /**
@@ -83,9 +82,17 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  Observable<Size> size;
+  ObservableProperty<Slider2D, details::Slider2DStorageType<T>> value;
+
+  [[nodiscard]] const details::Slider2DStorageType<T> &getValue() const override;
+  void setValue(const details::Slider2DStorageType<T> &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const details::Slider2DStorageType<T> &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -95,22 +102,21 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(Slider2D::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<StorageType>(config.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<StorageType>(false),
-      DropTarget<StorageType>(false), Resizable(config.size), label(std::string{config.label.value}),
-      extremesX(config.min.value.x, config.max.value.x), extremesY(config.min.value.y, config.max.value.y) {}
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      DragSource<StorageType>(false), DropTarget<StorageType>(false), label(std::string{config.label.value}),
+      size(config.size), value(config.value), extremesX(config.min.value.x, config.max.value.x),
+      extremesY(config.min.value.y, config.max.value.y) {}
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(const std::string &elementName, const std::string &labelText, Slider2D::StorageType minMaxX,
                       Slider2D::StorageType minMaxY, Slider2D::StorageType initialValue, Size initialSize,
                       Persistent persistent)
-    : ItemElement(elementName), ValueObservable<StorageType>(initialValue),
-      Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false), Resizable(initialSize),
-      label(labelText), extremesX(minMaxX), extremesY(minMaxY) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false),
+      label(labelText), size(initialSize), value(initialValue), extremesX(minMaxX), extremesY(minMaxY) {}
 
 template<OneOf<int, float> T>
 toml::table Slider2D<T>::toToml() const {
-  return toml::table{{"value", serializeGlmVec(ValueObservable<StorageType>::getValue())}};
+  return toml::table{{"value", serializeGlmVec(*value)}};
 }
 
 template<OneOf<int, float> T>
@@ -118,7 +124,7 @@ void Slider2D<T>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
       const auto vecValue = safeDeserializeGlmVec<StorageType>(*newVal);
-      if (vecValue.has_value()) { ValueObservable<StorageType>::setValueAndNotifyIfChanged(*vecValue); }
+      if (vecValue.has_value()) { *value.modify() = *vecValue; }
     }
   }
 }
@@ -129,22 +135,37 @@ void Slider2D<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  auto address = ValueObservable<StorageType>::getValueAddress();
+  auto address = &value.value;
   const auto oldValue = *address;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImWidgets::Slider2DInt(label.get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
-                                          &extremesY.x, &extremesY.y, static_cast<ImVec2>(getSize()));
+    valueChanged = ImWidgets::Slider2DInt(label->get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
+                                          &extremesY.x, &extremesY.y, static_cast<ImVec2>(*size));
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImWidgets::Slider2DFloat(label.get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
-                                            extremesY.x, extremesY.y, static_cast<ImVec2>(getSize()));
+    valueChanged = ImWidgets::Slider2DFloat(label->get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
+                                            extremesY.x, extremesY.y, static_cast<ImVec2>(*size));
   }
-  DragSource<StorageType>::drag(ValueObservable<StorageType>::getValue());
+  DragSource<StorageType>::drag(*value);
   if (auto drop = DropTarget<StorageType>::dropAccept(); drop.has_value()) {
-    ValueObservable<StorageType>::setValueAndNotifyIfChanged(*drop);
+    *value.modify() = *drop;
     return;
   }
-  if (valueChanged && oldValue != *address) { ValueObservable<StorageType>::notifyValueChanged(); }
+  if (valueChanged && oldValue != *address) { value.triggerListeners(); }
+}
+
+template<OneOf<int, float> T>
+const details::Slider2DStorageType<T> &Slider2D<T>::getValue() const {
+  return *value;
+}
+
+template<OneOf<int, float> T>
+Subscription Slider2D<T>::addValueListenerImpl(std::function<void(const details::Slider2DStorageType<T> &)> listener) {
+  return value.addListener(std::move(listener));
+}
+
+template<OneOf<int, float> T>
+void Slider2D<T>::setValue(const details::Slider2DStorageType<T> &newValue) {
+  *value.modify() = newValue;
 }
 
 extern template class Slider2D<int>;

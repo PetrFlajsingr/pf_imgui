@@ -34,14 +34,14 @@ void MenuButtonItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(label.get().c_str(), nullptr)) { notifyOnClick(); }
+  if (ImGui::MenuItem(label->get().c_str(), nullptr)) { clickEvent.notify(); }
 }
 
 void SubMenu::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::BeginMenu(label.get().c_str())) {
+  if (ImGui::BeginMenu(label->get().c_str())) {
     RAII end{ImGui::EndMenu};
     renderItems();
   }
@@ -71,26 +71,34 @@ MenuSeparatorItem &MenuContainer::addSeparator(const std::string &name) { return
 void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
 MenuCheckboxItem::MenuCheckboxItem(MenuCheckboxItem::Config &&config)
-    : MenuItem(std::string{config.name.value}), ValueObservable(config.checked),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
+    : MenuItem(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}), checked(config.checked) {}
 
 MenuCheckboxItem::MenuCheckboxItem(const std::string &elementName, const std::string &labelText, bool initialValue,
                                    Persistent persistent)
-    : MenuItem(elementName), ValueObservable(initialValue), Savable(persistent), label(labelText) {}
+    : MenuItem(elementName), Savable(persistent), label(labelText), checked(initialValue) {}
 
 void MenuCheckboxItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(label.get().c_str(), nullptr, getValueAddress())) { notifyValueChanged(); }
+  if (ImGui::MenuItem(label->get().c_str(), nullptr, &checked.value)) { checked.triggerListeners(); }
 }
 
 toml::table MenuCheckboxItem::toToml() const { return toml::table{{"checked", getValue()}}; }
 
 void MenuCheckboxItem::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("checked"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { *checked.modify() = *newVal; }
   }
+}
+
+void MenuCheckboxItem::setValue(const bool &newValue) { *checked.modify() = newValue; }
+
+const bool &MenuCheckboxItem::getValue() const { return *checked; }
+
+Subscription MenuCheckboxItem::addValueListenerImpl(std::function<void(const bool &)> listener) {
+  return checked.addListener(std::move(listener));
 }
 
 MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuItem(std::string{config.name.value}) {}

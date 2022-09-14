@@ -13,16 +13,22 @@
 #include <pf_imgui/elements/SpinInput.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 
 namespace pf::ui::ig {
 
 using TimeOfDay = std::chrono::hh_mm_ss<std::chrono::seconds>;
 namespace details {
-struct TimeOfDayComparator {
-  [[nodiscard]] inline bool operator()(TimeOfDay lhs, TimeOfDay rhs) const {
-    return lhs.to_duration() == rhs.to_duration();
+class TimeOfDayChangeDetector {
+ public:
+  explicit TimeOfDayChangeDetector(TimeOfDay value) : initialValue(value) {}
+
+  [[nodiscard]] bool hasValueChanged(const TimeOfDay &newValue) {
+    return initialValue.to_duration() != newValue.to_duration();
   }
+
+ private:
+  TimeOfDay initialValue;
 };
 }  // namespace details
 
@@ -30,7 +36,7 @@ struct TimeOfDayComparator {
 /**
  * @brief Simple HH MM SS 24 time picker.
  */
-class TimePicker : public ItemElement, public ValueObservable<TimeOfDay, details::TimeOfDayComparator>, public Savable {
+class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public Savable {
  public:
   /**
    * @brief Construction config for TimePicker.
@@ -57,19 +63,28 @@ class TimePicker : public ItemElement, public ValueObservable<TimeOfDay, details
   TimePicker(const std::string &elementName, const std::string &labelText, TimeOfDay initialValue,
              Persistent persistent = Persistent::No);
 
-  void setValue(const TimeOfDay &newValue) override;
-
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  void setValue(const TimeOfDay &newValue) override;
+  [[nodiscard]] const TimeOfDay &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(const TimeOfDay &)> listener) override;
+
+ public:
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  ObservableProperty<TimePicker, TimeOfDay, ReadWriteTag, details::TimeOfDayChangeDetector> time;
 
  protected:
   void renderImpl() override;
 
  private:
   void inputChanged();
+
+  void updateInnerValues();
 
   int hours;
   int minutes;

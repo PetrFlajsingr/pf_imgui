@@ -17,7 +17,7 @@
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/serialization.h>
 #include <string>
 #include <utility>
@@ -38,7 +38,7 @@ namespace pf::ui::ig {
  */
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 class PF_IMGUI_EXPORT Slider : public ItemElement,
-                               public ValueObservable<T>,
+                               public ValueContainer<T>,
                                public Savable,
                                public DragSource<T>,
                                public DropTarget<T> {
@@ -107,9 +107,15 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  ObservableProperty<Slider, T> value;
+
+  [[nodiscard]] const T &getValue() const override;
+  void setValue(const T &newValue) override;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
   void renderImpl() override;
 
  private:
@@ -120,23 +126,23 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 Slider<T>::Slider(Slider::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), min(config.min), max(config.max), format(std::move(config.format)) {}
+      label(std::string{config.label.value}), value(config.value), min(config.min), max(config.max),
+      format(std::move(config.format)) {}
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 Slider<T>::Slider(const std::string &elementName, const std::string &labelText, Slider::MinMaxType minValue,
                   Slider::MinMaxType maxValue, T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), ValueObservable<T>(initialValue),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), min(minValue), max(maxValue),
-      format(std::move(numberFormat)) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
+      value(initialValue), min(minValue), max(maxValue), format(std::move(numberFormat)) {}
 
 template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
 toml::table Slider<T>::toToml() const {
   if constexpr (OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
-    return toml::table{{"value", serializeGlmVec(ValueObservable<T>::getValue())}};
+    return toml::table{{"value", serializeGlmVec(*value)}};
   } else {
-    return toml::table{{"value", ValueObservable<T>::getValue()}};
+    return toml::table{{"value", *value}};
   }
 }
 
@@ -146,14 +152,12 @@ void Slider<T>::setFromToml(const toml::table &src) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         const auto vecValue = safeDeserializeGlmVec<T>(*newVal);
-        if (vecValue.has_value()) { ValueObservable<T>::setValueAndNotifyIfChanged(*vecValue); }
+        if (vecValue.has_value()) { *value.modify() = *vecValue; }
       }
     }
   } else {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
-      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-        ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-      }
+      if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) { *value.modify() = *newVal; }
     }
   }
 }
@@ -164,7 +168,7 @@ void Slider<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  const auto address = ValueObservable<T>::getValueAddress();
+  const auto address = &value.value;
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
@@ -175,18 +179,33 @@ void Slider<T>::renderImpl() {
   }
 
   if constexpr (!OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::SliderScalar(label.get().c_str(), dataType, address, &min, &max, format.c_str(), flags);
+    valueChanged = ImGui::SliderScalar(label->get().c_str(), dataType, address, &min, &max, format.c_str(), flags);
   } else {
-    valueChanged = ImGui::SliderScalarN(label.get().c_str(), dataType, glm::value_ptr(*address), T::length(), &min,
+    valueChanged = ImGui::SliderScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), T::length(), &min,
                                         &max, format.c_str(), flags);
   }
 
-  DragSource<T>::drag(ValueObservable<T>::getValue());
+  DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    ValueObservable<T>::setValueAndNotifyIfChanged(*drop);
+    *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { ValueObservable<T>::notifyValueChanged(); }
+  if (valueChanged) { value.triggerListeners(); }
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+const T &Slider<T>::getValue() const {
+  return *value;
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+Subscription Slider<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
+}
+
+template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+void Slider<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
 }
 
 extern template class Slider<int>;

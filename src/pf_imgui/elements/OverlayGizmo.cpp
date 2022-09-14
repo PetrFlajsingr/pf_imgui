@@ -21,7 +21,7 @@ void ViewportOverlayGizmo::renderImpl() {
 
   auto &io = ImGui::GetIO();
   ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
-  drawImpl(getEnabled() == pf::Enabled::Yes);
+  drawImpl(*enabled);
 }
 
 AreaOverlayGizmo::AreaOverlayGizmo(AreaOverlayGizmo::Config &&config)
@@ -43,7 +43,7 @@ void AreaOverlayGizmo::renderImpl() {
   const auto windowWidth = static_cast<float>(ImGui::GetWindowWidth());
   const auto windowHeight = static_cast<float>(ImGui::GetWindowHeight());
   ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
-  drawImpl(getEnabled() == pf::Enabled::Yes);
+  drawImpl(*enabled);
   if (wasUsing) {
     if (!wasWindowMovable.has_value()) { wasWindowMovable = parentWindow.isUserMovable(); }
     parentWindow.setUserMovable(false);

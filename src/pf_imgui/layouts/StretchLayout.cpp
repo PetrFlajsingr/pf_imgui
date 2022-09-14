@@ -3,7 +3,6 @@
 //
 
 #include "StretchLayout.h"
-#include <pf_common/exceptions/Exceptions.h>
 #include <string>
 #include <vector>
 
@@ -18,12 +17,13 @@ StretchLayout::StretchLayout(const std::string &elementName, const Size &initial
     : Layout(elementName, initialSize, showBorder), stretch(stretchType) {}
 
 Stretch StretchLayout::getStretch() const { return stretch; }
+
 void StretchLayout::setStretch(Stretch newStretch) {
   stretch = newStretch;
   switch (stretch) {
-    case Stretch::Width: setSize({Width::Auto(), getSize().height}); break;
-    case Stretch::Height: setSize({getSize().width, Height::Auto()}); break;
-    case Stretch::All: setSize(Size::Auto()); break;
+    case Stretch::Width: *size.modify() = {Width::Auto(), size->height}; break;
+    case Stretch::Height: *size.modify() = {size->width, Height::Auto()}; break;
+    case Stretch::All: *size.modify() = Size::Auto(); break;
   }
 }
 
@@ -39,14 +39,15 @@ void StretchLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   RAII end{ImGui::EndChild};
-  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(getSize()), isDrawBorder(), flags)) {
+  if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
+    if (child == nullptr) { return; }
     auto scrollApplier = applyScroll();
     const auto newSize = ImGui::GetContentRegionMax();
     if (newSize.x != previousSize.x && newSize.y != previousSize.y) {  //-V550
-      child->setSize(newSize);
+      *childSize->modify() = newSize;
       previousSize = newSize;
     }
-    if (renderableChild != nullptr) { renderableChild->render(); }
+    child->render();
   }
 }
 

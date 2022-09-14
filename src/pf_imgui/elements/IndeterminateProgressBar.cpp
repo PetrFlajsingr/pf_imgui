@@ -12,7 +12,7 @@ IndeterminateProgressBar::IndeterminateProgressBar(IndeterminateProgressBar::Con
 
 IndeterminateProgressBar::IndeterminateProgressBar(const std::string &elementName, std::string overlayStr, float speed,
                                                    const Size &initialSize)
-    : ItemElement(elementName), Resizable(initialSize), changeSpeed(speed), overlay(std::move(overlayStr)) {}
+    : ItemElement(elementName), size(initialSize), changeSpeed(speed), overlay(std::move(overlayStr)) {}
 
 void IndeterminateProgressBar::setSpeed(float speed) { changeSpeed = speed; }
 
@@ -22,7 +22,7 @@ void IndeterminateProgressBar::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  ImGui::IndeterminateProgressBar(static_cast<float>(ImGui::GetTime()) * -changeSpeed, static_cast<ImVec2>(getSize()),
+  ImGui::IndeterminateProgressBar(static_cast<float>(ImGui::GetTime()) * -changeSpeed, static_cast<ImVec2>(*size),
                                   overlay.c_str());
 }
 

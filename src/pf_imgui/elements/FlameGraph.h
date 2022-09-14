@@ -11,10 +11,12 @@
 #include <imgui_widget_flamegraph.h>
 #include <optional>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <string>
 #include <vector>
@@ -30,7 +32,7 @@ using FlameGraphSample = ImGuiWidgetFlameGraph::FlameGraphSample;
  * @todo: style
  * @todo: styles for samples?
  */
-class PF_IMGUI_EXPORT FlameGraph : public ElementWithID, public Resizable {
+class PF_IMGUI_EXPORT FlameGraph : public ElementWithID {
  public:
   /**
    * @brief Struct for construction of FlameGraph.
@@ -77,7 +79,9 @@ class PF_IMGUI_EXPORT FlameGraph : public ElementWithID, public Resizable {
                ColorOf::BorderShadow, ColorOf::Text>
       color;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

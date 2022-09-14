@@ -6,11 +6,15 @@
 #define PF_IMGUI_ELEMENTS_TOGGLE_H
 
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
+#include <pf_imgui/style/common.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -20,7 +24,7 @@ namespace pf::ui::ig {
  *
  * It saves it's state and provides it to listeners.
  */
-class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueObservable<bool>, public Savable {
+class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueContainer<bool>, public Savable {
  public:
   /**
    * @brief Struct for construction of Toggle.
@@ -47,16 +51,6 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueObservable<bool>,
   Toggle(const std::string &elementName, const std::string &labelText, bool initialValue = false,
          Persistent persistent = Persistent::No);
   /**
-   * Set if the checkbox is selected or not.
-   * @param selected new value
-   */
-  void setSelected(bool selected);
-  /**
-   * Check if the checkbox is selected.
-   * @return true if the checkbox is selected, false otherwise
-   */
-  [[nodiscard]] bool isSelected() const;
-  /**
    * Toggle the checkboxes state. True becomes false, false becomes true.
    */
   void toggle();
@@ -64,13 +58,21 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueObservable<bool>,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  void setValue(const bool &newValue) override;
+  [[nodiscard]] const bool &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
+ public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
                ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
                ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  ObservableProperty<Toggle, bool> selected;
 
  protected:
   void renderImpl() override;

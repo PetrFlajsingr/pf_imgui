@@ -11,28 +11,26 @@
 namespace pf::ui::ig {
 
 InputText::InputText(InputText::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable(""),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<std::string>(false),
-      DropTarget<std::string>(false), label(std::string{config.label.value}), text(std::move(config.value)),
-      buffer(std::make_unique<char[]>(config.maxInputLength + 1)), bufferLength(config.maxInputLength),
-      inputType(config.inputType) {
-  setTextInner(text);
-  setValueInner(text);
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      DragSource<std::string>(false), DropTarget<std::string>(false), label(std::string{config.label.value}),
+      text(std::move(config.value)), buffer(std::make_unique<char[]>(config.maxInputLength + 1)),
+      bufferLength(config.maxInputLength), inputType(config.inputType) {
+  setTextInner(*text);
   flags |= static_cast<ImGuiInputTextFlags>(*config.filters);
   if (config.eventTrigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
+  text.addListener([this](const auto &newText) { setTextInner(newText); });
 }
 
 InputText::InputText(const std::string &elementName, std::string labelText, const std::string &initialValue,
                      TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
                      const Flags<TextFilter> &filters, Persistent persistent)
-    : ItemElement(elementName), ValueObservable(""),
-      Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false), label(std::move(labelText)),
-      text(initialValue), buffer(std::make_unique<char[]>(inputLengthLimit + 1)), bufferLength(inputLengthLimit),
-      inputType(textInputType) {
+    : ItemElement(elementName), Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false),
+      label(std::move(labelText)), text(initialValue), buffer(std::make_unique<char[]>(inputLengthLimit + 1)),
+      bufferLength(inputLengthLimit), inputType(textInputType) {
   setTextInner(initialValue);
-  setValueInner(text);
   flags |= static_cast<ImGuiInputTextFlags>(*filters);
   if (trigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }
+  text.addListener([this](const auto &newText) { setTextInner(newText); });
 }
 
 void InputText::renderImpl() {
@@ -41,52 +39,44 @@ void InputText::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   if (inputType == TextInputType::SingleLine) {
-    valueChanged = ImGui::InputText(label.get().c_str(), buffer.get(), 256, flags);
+    valueChanged = ImGui::InputText(label->get().c_str(), buffer.get(), 256, flags);
   } else {
-    valueChanged = ImGui::InputTextMultiline(label.get().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
+    valueChanged = ImGui::InputTextMultiline(label->get().c_str(), buffer.get(), 256, ImVec2(0, 0), flags);
   }
-  if (valueChanged && strcmp(buffer.get(), text.c_str()) != 0) {
-    text = buffer.get();
+  if (valueChanged && strcmp(buffer.get(), text->c_str()) != 0) {
     setTextInner(buffer.get());
-    setValueInner(text);
-    notifyValueChanged();
+    *text.modify() = buffer.get();
   }
-  drag(text);
+  drag(*text);
   if (auto drop = dropAccept(); drop.has_value()) {
-    if (text != *drop) {
-      text = *drop;
+    if (*text != *drop) {
       setTextInner(buffer.get());
-      setValueInner(text);
-      notifyValueChanged();
+      *text.modify() = *drop;
     }
   }
 }
 
 void InputText::clear() {
-  text.clear();
   buffer[0] = '\0';
+  text.modify()->clear();
 }
 
-toml::table InputText::toToml() const { return toml::table{{"text", text}}; }
+toml::table InputText::toToml() const { return toml::table{{"text", *text}}; }
 
 void InputText::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("text"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) {
-      text = *newVal;
-      setValueAndNotifyIfChanged(text);
-    }
+    if (auto newVal = newValIter->second.value<std::string>(); newVal.has_value()) { *text.modify() = *newVal; }
   }
 
-  std::snprintf(buffer.get(), text.size(), "%s", text.c_str());
+  std::snprintf(buffer.get(), text->size(), "%s", text->c_str());
 }
 
-void InputText::setValue(const std::string_view &newValue) {
-  if (text != newValue) {
-    text = newValue;
-    setTextInner(text);
-    setValueInner(text);
-    notifyValueChanged();
-  }
+void InputText::setValue(const std::string &newValue) { *text.modify() = newValue; }
+
+const std::string &InputText::getValue() const { return *text; }
+
+Subscription InputText::addValueListenerImpl(std::function<void(const std::string &)> listener) {
+  return text.addListener(std::move(listener));
 }
 
 bool InputText::isReadOnly() const { return readOnly; }

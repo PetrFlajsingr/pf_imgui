@@ -9,18 +9,18 @@
 namespace pf::ui::ig {
 
 Selectable::Selectable(Selectable::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable(config.selected), Resizable(config.size),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), label(std::string{config.label.value}) {}
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}), size(config.size), selected(config.selected) {}
 
 Selectable::Selectable(const std::string &elementName, const std::string &labelText, bool initialValue, Size s,
                        Persistent persistent)
-    : ItemElement(elementName), ValueObservable(initialValue), Resizable(s), Savable(persistent), label(labelText) {}
+    : ItemElement(elementName), Savable(persistent), label(labelText), size(s), selected(initialValue) {}
 
 toml::table Selectable::toToml() const { return toml::table{{"selected", getValue()}}; }
 
 void Selectable::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("selected"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { setValueAndNotifyIfChanged(*newVal); }
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { *selected.modify() = *newVal; }
   }
 }
 
@@ -28,9 +28,16 @@ void Selectable::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::Selectable(label.get().c_str(), getValueAddress(), 0, static_cast<ImVec2>(getSize()))) {
-    notifyValueChanged();
+  if (ImGui::Selectable(label->get().c_str(), &selected.value, 0, static_cast<ImVec2>(*size))) {
+    selected.triggerListeners();
   }
+}
+const bool &Selectable::getValue() const { return *selected; }
+
+void Selectable::setValue(const bool &newValue) { *selected.modify() = newValue; }
+
+Subscription Selectable::addValueListenerImpl(std::function<void(const bool &)> listener) {
+  return selected.addListener(std::move(listener));
 }
 
 }  // namespace pf::ui::ig

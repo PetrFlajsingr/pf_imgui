@@ -10,7 +10,10 @@
 
 #include <imgui_memory_editor.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
 #include <string>
 
 namespace pf::ui::ig {

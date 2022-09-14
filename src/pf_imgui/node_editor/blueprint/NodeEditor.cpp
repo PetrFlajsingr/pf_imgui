@@ -115,7 +115,7 @@ void NodeEditor::setFromToml(const toml::table &src) {
             return;
           }
           auto &newComment = addComment(*commentName, *commentLabel, Size{*commentWidth, *commentHeight});
-          if (position.has_value()) { newComment.setPosition(*position); }
+          if (position.has_value()) { *newComment.position.modify() = *position; }
         }
       });
     }
@@ -187,11 +187,11 @@ toml::array NodeEditor::commentsToToml() const {
   auto result = toml::array();
   std::ranges::for_each(comments, [&](const auto &comment) {
     result.push_back(toml::table{{"name", comment->getName()},
-                                 {"label", comment->label.get()},
-                                 {"width", static_cast<float>(comment->getSize().width)},
-                                 {"height", static_cast<float>(comment->getSize().height)},
-                                 {"positionX", comment->getPosition().x},
-                                 {"positionY", comment->getPosition().y}});
+                                 {"label", comment->label->get()},
+                                 {"width", static_cast<float>(comment->size->width)},
+                                 {"height", static_cast<float>(comment->size->height)},
+                                 {"positionX", comment->position->x},
+                                 {"positionY", comment->position->y}});
   });
   return result;
 }

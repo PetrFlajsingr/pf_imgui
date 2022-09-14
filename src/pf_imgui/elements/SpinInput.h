@@ -11,11 +11,16 @@
 #include <algorithm>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/details/Spin.h>
 #include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/style/ColorPalette.h>
+#include <pf_imgui/style/StyleOptions.h>
+#include <pf_imgui/style/common.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -26,7 +31,7 @@ namespace pf::ui::ig {
  */
 template<OneOf<int, float> T>
 class PF_IMGUI_EXPORT SpinInput : public ItemElement,
-                                  public ValueObservable<T>,
+                                  public ValueContainer<T>,
                                   public Savable,
                                   public DragSource<T>,
                                   public DropTarget<T> {
@@ -75,6 +80,13 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
+  void setValue(const T &newValue) override;
+  [[nodiscard]] const T &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(const T &)> listener) override;
+
+ public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::Button, ColorOf::ButtonHovered,
                ColorOf::ButtonActive, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
                ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::Border,
@@ -82,7 +94,8 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+  ObservableProperty<SpinInput, T> value;
 
  protected:
   void renderImpl() override;
@@ -99,17 +112,16 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
 
 template<OneOf<int, float> T>
 SpinInput<T>::SpinInput(SpinInput::Config &&config)
-    : ItemElement(std::string{config.name.value}), ValueObservable<T>(config.value),
+    : ItemElement(std::string{config.name.value}),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), step(config.step), stepFast(config.fastStep), min(config.min),
-      max(config.max) {}
+      label(std::string{config.label.value}), value(config.value), step(config.step), stepFast(config.fastStep),
+      min(config.min), max(config.max) {}
 
 template<OneOf<int, float> T>
 SpinInput<T>::SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal,
                         T initialValue, T valueStep, const T &valueStepFast, Persistent persistent)
-    : ItemElement(elementName), ValueObservable<T>(initialValue),
-      Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText), step(valueStep),
-      stepFast(valueStepFast), min(minVal), max(maxVal) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
+      value(initialValue), step(valueStep), stepFast(valueStepFast), min(minVal), max(maxVal) {}
 
 template<OneOf<int, float> T>
 void SpinInput<T>::setReadOnly(bool isReadOnly) {
@@ -123,15 +135,13 @@ void SpinInput<T>::setReadOnly(bool isReadOnly) {
 
 template<OneOf<int, float> T>
 toml::table SpinInput<T>::toToml() const {
-  return toml::table{{"value", ValueObservable<T>::getValue()}};
+  return toml::table{{"value", *value}};
 }
 
 template<OneOf<int, float> T>
 void SpinInput<T>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
-    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) {
-      ValueObservable<T>::setValueAndNotifyIfChanged(*newVal);
-    }
+    if (auto newVal = newValIter->second.value<T>(); newVal.has_value()) { *value.modify() = *newVal; }
   }
 }
 
@@ -142,20 +152,32 @@ void SpinInput<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGui::SpinInt(label.get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, flags);
+    valueChanged = ImGui::SpinInt(label->get().c_str(), &value.value, step, stepFast, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGui::SpinFloat(label.get().c_str(), ValueObservable<T>::getValueAddress(), step, stepFast, "%.3f",
+    valueChanged = ImGui::SpinFloat(label->get().c_str(), &value.value, step, stepFast, "%.3f",
                                     flags);  // TODO: user provided format
   }
   if (valueChanged) {
-    ValueObservable<T>::setValueInner(std::clamp(ValueObservable<T>::getValue(), min, max));
-    ValueObservable<T>::notifyValueChanged();
+    value.value = std::clamp(value.value, min, max);
+    value.triggerListeners();
   }
-  DragSource<T>::drag(ValueObservable<T>::getValue());
-  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
-    ValueObservable<T>::setValueAndNotifyIfChanged(std::clamp(*drop, min, max));
-  }
+  DragSource<T>::drag(*value);
+  if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { *value.modify() = std::clamp(*drop, min, max); }
+}
+template<OneOf<int, float> T>
+void SpinInput<T>::setValue(const T &newValue) {
+  *value.modify() = newValue;
+}
+
+template<OneOf<int, float> T>
+const T &SpinInput<T>::getValue() const {
+  return *value;
+}
+
+template<OneOf<int, float> T>
+Subscription SpinInput<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
+  return value.addListener(std::move(listener));
 }
 
 extern template class SpinInput<int>;

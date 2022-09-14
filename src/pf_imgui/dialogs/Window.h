@@ -10,15 +10,13 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Position.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/MenuBars.h>
-#include <pf_imgui/interface/Closeable.h>
-#include <pf_imgui/interface/Collapsible.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/interface/Focusable.h>
-#include <pf_imgui/interface/Hoverable.h>
-#include <pf_imgui/interface/Positionable.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Event.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <vector>
 
@@ -32,32 +30,15 @@ namespace pf::ui::ig {
  * @TODO: ImGui::GetWindowDockId()-> need to have a getter for that and somehow change that to Dock name
  * @TODO: ImGui::IsWindowDocked()
  */
-class PF_IMGUI_EXPORT Window : public Renderable,
-                               public ElementContainer,
-                               public Focusable,
-                               public Hoverable,
-                               public Collapsible,
-                               public Resizable,
-                               public Positionable,
-                               public Closeable {
+class PF_IMGUI_EXPORT Window : public Renderable, public ElementContainer {
  public:
   /**
    * Construct Window.
    * @param elementName ID of the window
    * @param titleLabel title on top of the window
    * @param allowCollapse
-   * @param persistent saving state to disk
    */
-  Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse = AllowCollapse::No,
-         Persistent persistent = Persistent::No);
-
-  /**
-   * Construct Window.
-   * @param elementName ID of the window
-   * @param titleLabel title on top of the window
-   * @param persistent saving state to disk
-   */
-  Window(std::string elementName, std::string titleLabel, Persistent persistent);
+  Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse = AllowCollapse::No);
 
   /**
    * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
@@ -106,15 +87,7 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   void cancelMaxSizeConstraint();
 
-  void setSize(const Size &size) override;
-
   void render() override;
-
-  void setFocus() override;
-
-  void setCollapsed(bool collapse) override;
-
-  void setPosition(Position pos) override;
 
   /**
    * Check if user can resize the window.
@@ -223,14 +196,23 @@ class PF_IMGUI_EXPORT Window : public Renderable,
    */
   void setStayInBackground(bool stay);
 
-  void setCollapsible(bool newCollapsible) override;
+  void setCollapsible(bool newCollapsible);
+
+  void setCloseable(bool newCloseable);
 
   std::vector<Renderable *> getRenderables() override;
 
   // FIXME: remove this and fix up how this is handled in docking
   [[nodiscard]] inline std::string getImGuiName() const { return idLabel; }
 
-  Label label;
+  Observable<Label> label;
+
+  ObservableProperty<Window, bool, ReadOnlyTag> hovered;
+  ObservableProperty<Window, bool, ReadOnlyTag> focused;
+  Observable<Position> position;
+  Observable<Size> size;
+  Observable<bool> collapsed;
+  ClassEvent<Window> closeEvent;
 
  protected:
   void renderImpl() override;
@@ -252,6 +234,8 @@ class PF_IMGUI_EXPORT Window : public Renderable,
 
   bool sizeDirty = false;
   bool positionDirty = false;
+
+  bool closeable = false;
 
   std::string idLabel{};
 };

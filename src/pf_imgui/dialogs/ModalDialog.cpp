@@ -9,8 +9,11 @@
 namespace pf::ui::ig {
 
 ModalDialog::ModalDialog(const std::string &elementName, const std::string &labelText, Size dialogSize)
-    : Renderable(elementName), Resizable(dialogSize), Positionable(Position{-1, -1}), label(labelText),
-      sizeDirty(dialogSize != Size::Auto()) {}
+    : Renderable(elementName), label(labelText), position(Position{-1, -1}), size(dialogSize),
+      sizeDirty(dialogSize != Size::Auto()) {
+  position.addListener([this](auto) { positionDirty = true; });
+  size.addListener([this](auto) { sizeDirty = true; });
+}
 
 void ModalDialog::renderImpl() {
   if (closed) { return; }
@@ -19,14 +22,14 @@ void ModalDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (sizeDirty) {
     sizeDirty = false;
-    ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()));
+    ImGui::SetNextWindowSize(static_cast<ImVec2>(*size));
   }
   if (positionDirty) {
     positionDirty = false;
-    ImGui::SetNextWindowPos(static_cast<ImVec2>(getPosition()));
+    ImGui::SetNextWindowPos(static_cast<ImVec2>(*position));
   }
-  if (firstRender) { ImGui::OpenPopup(label.get().c_str()); }
-  if (ImGui::BeginPopupModal(label.get().c_str())) {
+  if (firstRender) { ImGui::OpenPopup(label->get().c_str()); }
+  if (ImGui::BeginPopupModal(label->get().c_str())) {
     RAII endPopup{ImGui::EndPopup};
     std::ranges::for_each(getChildren(), &Renderable::render);
   } else {
@@ -38,15 +41,5 @@ void ModalDialog::renderImpl() {
 void ModalDialog::close() { closed = true; }
 
 bool ModalDialog::isClosed() const { return closed; }
-
-void ModalDialog::setSize(const Size &newSize) {
-  sizeDirty = true;
-  Resizable::setSize(newSize);
-}
-
-void ModalDialog::setPosition(Position pos) {
-  positionDirty = true;
-  Positionable::setPosition(pos);
-}
 
 }  // namespace pf::ui::ig

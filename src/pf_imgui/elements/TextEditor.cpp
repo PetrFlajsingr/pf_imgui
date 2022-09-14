@@ -107,12 +107,12 @@ bool TextEditor::Cursor::hasSelection() const { return owner.editor.HasSelection
 
 TextEditor::TextEditor(TextEditor::Config &&config)
     : ElementWithID(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      Resizable(config.size) {
+      size(config.size) {
   editor.SetText(config.value);
 }
 
 TextEditor::TextEditor(const std::string &elementName, const std::string &value, Size s, Persistent persistent)
-    : ElementWithID(elementName), Savable(persistent), Resizable(s) {
+    : ElementWithID(elementName), Savable(persistent), size(s) {
   editor.SetText(value);
 }
 
@@ -126,7 +126,7 @@ void TextEditor::setText(const std::string &text) { editor.SetText(text); }
 
 void TextEditor::renderImpl() {
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  editor.Render(getName().c_str(), static_cast<ImVec2>(getSize()));
+  editor.Render(getName().c_str(), static_cast<ImVec2>(*size));
   if (editor.IsTextChanged()) { observableText.notify(getText()); }
   if (editor.IsCursorPositionChanged()) { observableCursorPosition.notify(getCursor().getPosition()); }
 }

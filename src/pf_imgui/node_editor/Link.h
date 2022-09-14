@@ -11,8 +11,8 @@
 #include "fwd.h"
 #include <imgui_node_editor.h>
 #include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Renderable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -20,7 +20,7 @@ namespace pf::ui::ig {
 /**
  * @brief Link connecting two Pins in NodeEditor.
  */
-class Link : public Renderable, public Hoverable {
+class Link : public Renderable {
   friend class NodeEditor;
   friend class Pin;
 
@@ -152,8 +152,12 @@ class Link : public Renderable, public Hoverable {
 
   void setId(ax::NodeEditor::LinkId newId);
 
+  ObservableProperty<Link, bool, ReadOnlyTag> hovered;
+
  protected:
   void renderImpl() override;
+
+  void setHovered(bool newHovered);
 
   ax::NodeEditor::LinkId id;
 

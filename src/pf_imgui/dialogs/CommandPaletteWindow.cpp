@@ -7,9 +7,7 @@
 namespace pf::ui::ig {
 
 CommandPaletteWindow::CommandPaletteWindow(const std::string &elementName)
-    : Renderable(elementName), context(ImCmd::CreateContext()) {
-  setCloseable(true);
-}
+    : Renderable(elementName), context(ImCmd::CreateContext()) {}
 
 CommandPaletteWindow::~CommandPaletteWindow() { ImCmd::DestroyContext(context); }
 
@@ -28,23 +26,11 @@ void CommandPaletteWindow::setSearchText(const std::string &text) {
   ImCmd::SetNextCommandPaletteSearch(text);
 }
 
-void CommandPaletteWindow::close() {
-  setVisibility(Visibility::Invisible);
-  notifyClosed();
-}
-
-void CommandPaletteWindow::show() {
-  open = true;
-  setVisibility(Visibility::Visible);
-}
-
 void CommandPaletteWindow::renderImpl() {
   ImCmd::SetCurrentContext(context);
+  bool open = true;
   ImCmd::CommandPaletteWindow(getName().c_str(), &open);
-  if (isCloseable() && !open) {
-    setVisibility(Visibility::Invisible);
-    notifyClosed();
-  }
+  if (!open) { *visibility.modify() = Visibility::Invisible; }
 }
 
 }  // namespace pf::ui::ig

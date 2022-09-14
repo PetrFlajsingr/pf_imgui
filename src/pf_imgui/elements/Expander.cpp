@@ -8,27 +8,28 @@
 namespace pf::ui::ig {
 
 Expander::Expander(Expander::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Collapsible(config.allowCollapse ? AllowCollapse::Yes : AllowCollapse::No,
-                  config.persistent ? Persistent::Yes : Persistent::No),
-      label(std::string{config.label.value}) {}
+    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+      label(std::string{config.label.value}), collapsed(false) {}
 
-Expander::Expander(const std::string &elementName, const std::string &labelText, Persistent persistent,
-                   AllowCollapse allowCollapse)
-    : ItemElement(elementName), Collapsible(allowCollapse, persistent), label(labelText) {}
-
-Expander::Expander(const std::string &elementName, const std::string &labelText, AllowCollapse allowCollapse)
-    : Expander(elementName, labelText, Persistent::No, allowCollapse) {}
+Expander::Expander(const std::string &elementName, const std::string &labelText, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), label(labelText), collapsed(false) {}
 
 void Expander::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto shouldBeOpen = !isCollapsed() || !isCollapsible();
-  ImGui::SetNextItemOpen(shouldBeOpen);
+  ImGui::SetNextItemOpen(!*collapsed);
   const auto flags = ImGuiTreeNodeFlags_DefaultOpen;
-  setCollapsed(!ImGui::CollapsingHeader(label.get().c_str(), flags));
-  if (!isCollapsed()) { std::ranges::for_each(getChildren(), &Renderable::render); }
+  *collapsed.modify() = !ImGui::CollapsingHeader(label->get().c_str(), flags);
+  if (!*collapsed) { std::ranges::for_each(getChildren(), &Renderable::render); }
+}
+
+toml::table Expander::toToml() const { return toml::table({{"collapsed", *collapsed}}); }
+
+void Expander::setFromToml(const toml::table &src) {
+  if (auto newValIter = src.find("collapsed"); newValIter != src.end()) {
+    if (auto newVal = newValIter->second.value<bool>(); newVal.has_value()) { *collapsed.modify() = *newVal; }
+  }
 }
 
 }  // namespace pf::ui::ig

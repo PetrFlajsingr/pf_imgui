@@ -10,12 +10,12 @@
 
 #include <imgui_color_gradient.h>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Color.h>
+#include <pf_imgui/common/Color.h>
+#include <pf_imgui/common/Font.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Focusable.h>
-#include <pf_imgui/interface/Hoverable.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/interface/ValueObservable.h>
+#include <pf_imgui/interface/ValueContainer.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/transform.hpp>
 #include <range/v3/view/zip.hpp>
 
@@ -52,11 +52,7 @@ struct GradientPointsViewComparator {
 /**
  * @brief Editor for gradient with color selection and an option to add more leading points. Selected poitns can be removed by pressing delete.
  */
-class GradientEditor : public ElementWithID,
-                       public ValueObservable<GradientPointsView, GradientPointsViewComparator>,
-                       public Hoverable,
-                       public Focusable,
-                       public Savable {
+class GradientEditor : public ElementWithID, public ValueContainer<GradientPointsView, ReadOnlyTag>, public Savable {
  public:
   /**
    * @brief Construction args for GradientEditor.
@@ -100,7 +96,15 @@ class GradientEditor : public ElementWithID,
 
   Font font = Font::Default();
 
+  ObservableProperty<GradientEditor, bool, ReadOnlyTag> hovered;
+  ObservableProperty<GradientEditor, bool, ReadOnlyTag> focused;
+  ObservableProperty<GradientEditor, GradientPointsView, ReadOnlyTag, AlwaysTrueChangeDetector> points;
+
+  [[nodiscard]] const GradientPointsView &getValue() const override;
+
  protected:
+  Subscription addValueListenerImpl(std::function<void(const GradientPointsView &)> listener) override;
+
   void renderImpl() override;
 
  private:

@@ -9,10 +9,10 @@
 #define PF_IMGUI_LAYOUTS_LAYOUT_H
 
 #include <pf_imgui/_export.h>
-#include <pf_imgui/interface/Collapsible.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <vector>
 
@@ -24,7 +24,7 @@ namespace pf::ui::ig {
  *
  * Provides basic functionality for layouts - border drawing and scrolling.
  */
-class PF_IMGUI_EXPORT Layout : public ElementWithID, public Resizable, public RenderablesContainer {
+class PF_IMGUI_EXPORT Layout : public ElementWithID, public RenderablesContainer {
  public:
   /**
    * Construct a layout.
@@ -81,6 +81,8 @@ class PF_IMGUI_EXPORT Layout : public ElementWithID, public Resizable, public Re
    * @todo implement
    */
   void setHorizontalScrollEnabled(bool horizontalScroll);
+
+  Observable<Size> size;
 
  protected:
   [[nodiscard]] RAII applyScroll();

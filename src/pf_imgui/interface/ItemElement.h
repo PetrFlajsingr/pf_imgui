@@ -8,14 +8,12 @@
 #ifndef PF_IMGUI_INTERFACE_ITEMELEMENT_H
 #define PF_IMGUI_INTERFACE_ITEMELEMENT_H
 
-#include "ElementWithID.h"
-#include "Focusable.h"
-#include "Hoverable.h"
 #include <memory>
-#include <pf_imgui/Position.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/elements/PopupMenu.h>
-#include <pf_imgui/elements/Tooltip.h>
+#include <pf_imgui/common/Position.h>
+#include <pf_imgui/fwd.h>
+#include <pf_imgui/interface/ElementWithID.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 
@@ -26,13 +24,14 @@ namespace pf::ui::ig {
  *
  * Provides hover and focus changes. Adds an option to add a tooltip, which is shown when the item is hovered.
  */
-class PF_IMGUI_EXPORT ItemElement : public ElementWithID, public Focusable, public Hoverable {
+class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
  public:
   /**
    * Construct ItemElement with the given ID.
    * @param elementName ID
    */
   explicit ItemElement(const std::string &elementName);
+  ~ItemElement() override;
 
   ItemElement(ItemElement &&other) noexcept;
   ItemElement &operator=(ItemElement &&other) noexcept;
@@ -85,26 +84,19 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID, public Focusable, publ
    */
   void removePopupMenu();
 
-  /**
-   * Add a listener to mouse position. Returned value is distance from upper left corner of the element area.
-   * @param listener
-   * @return Subscription to allow for listener removal
-   */
-  Subscription addMousePositionListener(std::invocable<Position> auto &&listener) {
-    return mousePositionObservable.addListener(std::forward<decltype(listener)>(listener));
-  }
+  ObservableProperty<ItemElement, bool, ReadOnlyTag> hovered;
+  ObservableProperty<ItemElement, bool, ReadOnlyTag> focused;
+  ObservableProperty<ItemElement, Position, ReadOnlyTag> mousePosition;
 
-  /**
-   * Set focus state and keyboard focus for this item.
-   */
-  void setFocus() override;
+ protected:
+  void setHovered(bool newHovered);
+  void setFocused(bool newFocused);
 
  private:
-  std::unique_ptr<Tooltip> tooltip = nullptr;
-  std::unique_ptr<PopupMenu> popupMenu = nullptr;
+  std::unique_ptr<Tooltip> tooltip;
+  std::unique_ptr<PopupMenu> popupMenu;
 
   ImVec2 lastMousePosition{-1, -1};
-  Observable_impl<Position> mousePositionObservable;
 };
 
 }  // namespace pf::ui::ig

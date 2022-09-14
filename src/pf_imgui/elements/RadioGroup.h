@@ -27,7 +27,7 @@ namespace pf::ui::ig {
  *
  * Only create this through ImGuiInterface::CreateRadioGroup
  */
-class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public Savable {
+class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnlyTag>, public Savable {
  public:
   /**
    * @brief Struct for construction of RadioGroup.
@@ -68,6 +68,13 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueObservable<RadioButton *>, public
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
+
+  ObservableProperty<RadioGroup, RadioButton *> activeButton;
+
+  [[nodiscard]] RadioButton *const &getValue() const override;
+
+ protected:
+  Subscription addValueListenerImpl(std::function<void(RadioButton *const &)> listener) override;
 
  private:
   void addDestroyListener(RadioButton *button);

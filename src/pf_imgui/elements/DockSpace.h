@@ -11,8 +11,9 @@
 #include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/interface/Resizable.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <string>
 
@@ -29,7 +30,7 @@ enum class DockType {
  * @brief An area to which dockable windows can be docked.
  * @warning DockSpace HAS TO BE RENDERED AS SOON AS POSSIBLE OTHERWISE YOU WON'T BE ABLE TO DOCK ANYTHING
  */
-class PF_IMGUI_EXPORT DockSpace : public ElementWithID, public Resizable {
+class PF_IMGUI_EXPORT DockSpace : public ElementWithID {
  public:
   using Id = ImGuiID;
   /**
@@ -60,6 +61,8 @@ class PF_IMGUI_EXPORT DockSpace : public ElementWithID, public Resizable {
   void render() override;
 
   ColorPalette<ColorOf::DockingPreview, ColorOf::DockingBackground> color;
+
+  Observable<Size> size;
 
  protected:
   void renderImpl() override;

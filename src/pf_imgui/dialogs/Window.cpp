@@ -12,15 +12,19 @@
 
 namespace pf::ui::ig {
 
-Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse, Persistent persistent)
-    : Renderable(std::move(elementName)), Collapsible(allowCollapse, persistent), Resizable(Size::Auto()),
-      Positionable(Position{-1, -1}), label(std::move(titleLabel)) {
+Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse)
+    : Renderable(std::move(elementName)), label(std::move(titleLabel)), hovered{false}, focused{false},
+      position(Position{-1, -1}), size(Size::Auto()), collapsed{false} {
   refreshIdLabel();
+  setCollapsible(allowCollapse == AllowCollapse::Yes);
   label.addListener([this](auto) { refreshIdLabel(); });
+  focused.addListener([this](bool isFocused) {
+    if (isFocused) { ImGui::SetWindowFocus(idLabel.c_str()); }
+  });
+  position.addListener([this](auto) { positionDirty = true; });
+  size.addListener([this](auto) { sizeDirty = true; });
+  collapsed.addListener([this](bool newCollapsed) { ImGui::SetWindowCollapsed(idLabel.c_str(), newCollapsed); });
 }
-
-Window::Window(std::string elementName, std::string titleLabel, Persistent persistent)
-    : Window(std::move(elementName), std::move(titleLabel), AllowCollapse::No, persistent) {}
 
 void Window::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -30,40 +34,41 @@ void Window::renderImpl() {
 
   if (sizeDirty) {
     sizeDirty = false;
-    ImGui::SetNextWindowSize(static_cast<ImVec2>(getSize()));
+    ImGui::SetNextWindowSize(static_cast<ImVec2>(*size));
   }
   if (positionDirty) {
     positionDirty = false;
-    ImGui::SetNextWindowPos(static_cast<ImVec2>(getPosition()));
+    ImGui::SetNextWindowPos(static_cast<ImVec2>(*position));
   }
 
   RAII endPopup{ImGui::End};
-  if (ImGui::Begin(idLabel.c_str(), (isCloseable() ? &isNotClosed : nullptr),
+  if (ImGui::Begin(idLabel.c_str(), (closeable ? &isNotClosed : nullptr),
                    flags | (hasMenuBar() ? ImGuiWindowFlags_MenuBar : 0))) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
-      if (getSize() != Size::Auto()) { setSize(getSize()); }
-      if (getPosition().x != -1 && getPosition().y != -1) { setPosition(getPosition()); }  //-V550
+      if (*size != Size::Auto()) { sizeDirty = true; }
+      if (position->x != -1 && position->y != -1) { positionDirty = true; }  //-V550
     }
-    if (getEnabled() == Enabled::No) { ImGui::BeginDisabled(); }
+    if (!*enabled) { ImGui::BeginDisabled(); }
     {
       auto raiiEnabled = pf::RAII([this] {
-        if (getEnabled() == Enabled::No) { ImGui::EndDisabled(); }
+        if (!*enabled) { ImGui::EndDisabled(); }
       });
-      setHovered(ImGui::IsWindowHovered());
-      Collapsible::setCollapsed(ImGui::IsWindowCollapsed());
-      updateFocused(ImGui::IsWindowFocused());
-      updatePosition(Position{ImGui::GetWindowPos()});
-      if (!isCollapsed()) {
+      *hovered.modify() = ImGui::IsWindowHovered();
+      *collapsed.modify() = ImGui::IsWindowCollapsed();
+      *focused.modify() = ImGui::IsWindowFocused();
+      *position.modify() = Position{ImGui::GetWindowPos()};
+      positionDirty = false;
+      if (!*collapsed) {
         if (hasMenuBar()) { menuBar->render(); }
         std::ranges::for_each(getChildren(), &Renderable::render);
       }
     }
   }
   if (!isNotClosed) {
-    notifyClosed();
-    setVisibility(Visibility::Invisible);
+    closeEvent.notify();
+    *visibility.modify() = Visibility::Invisible;
   }
 }
 
@@ -76,13 +81,8 @@ bool Window::hasMenuBar() const { return menuBar != nullptr; }
 
 void Window::removeMenuBar() { menuBar = nullptr; }
 
-void Window::setSize(const Size &newSize) {
-  sizeDirty = true;
-  Resizable::setSize(newSize);
-}
-
 void Window::render() {
-  if (getVisibility() == Visibility::Visible) {
+  if (*visibility == Visibility::Visible) {
     ImGui::SetNextWindowSizeConstraints(static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
                                         static_cast<ImVec2>(maxSizeConstraint.value_or(Size{
                                             std::numeric_limits<float>::max(), std::numeric_limits<float>::max()})));
@@ -92,21 +92,6 @@ void Window::render() {
     }
     renderImpl();
   }
-}
-
-void Window::setCollapsed(bool collapse) {
-  ImGui::SetWindowCollapsed(idLabel.c_str(), collapse);
-  Collapsible::setCollapsed(collapse);
-}
-
-void Window::setFocus() {
-  ImGui::SetWindowFocus(idLabel.c_str());
-  Focusable::setFocus();
-}
-
-void Window::setPosition(Position pos) {
-  positionDirty = true;
-  Positionable::setPosition(pos);
 }
 
 bool Window::isUserResizable() const { return flags & ImGuiWindowFlags_NoResize; }
@@ -216,7 +201,7 @@ void Window::setStayInBackground(bool stay) {
   }
 }
 
-void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", label.get(), getName()); }
+void Window::refreshIdLabel() { idLabel = fmt::format("{}##{}", label->get(), getName()); }
 
 void Window::setCollapsible(bool newCollapsible) {
   if (newCollapsible) {
@@ -224,7 +209,8 @@ void Window::setCollapsible(bool newCollapsible) {
   } else {
     flags |= ImGuiWindowFlags_NoCollapse;
   }
-  Collapsible::setCollapsible(newCollapsible);
 }
+
+void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 }  // namespace pf::ui::ig

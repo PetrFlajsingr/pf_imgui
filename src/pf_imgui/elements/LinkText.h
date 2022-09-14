@@ -10,9 +10,10 @@
 
 #include <functional>
 #include <pf_common/Explicit.h>
-#include <pf_imgui/Label.h>
-#include <pf_imgui/interface/Clickable.h>
+#include <pf_imgui/common/Font.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/interface/ItemElement.h>
+#include <pf_imgui/reactive/Event.h>
 #include <string>
 #include <utility>
 
@@ -21,7 +22,9 @@ namespace pf::ui::ig {
 /**
  * @brief Text element providing click detection.
  */
-class LinkText : public ItemElement, public Clickable {
+class LinkText : public ItemElement {
+  using ClickEvent = ClassEvent<LinkText>;
+
  public:
   using LinkClickHandler = std::function<void(std::string_view)>;
   /**
@@ -55,7 +58,9 @@ class LinkText : public ItemElement, public Clickable {
   }
 
   Font font = Font::Default();
-  Label label;
+  Observable<Label> label;
+
+  ClickEvent clickEvent;
 
  protected:
   void renderImpl() override;

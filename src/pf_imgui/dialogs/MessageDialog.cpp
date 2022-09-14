@@ -18,7 +18,7 @@ MessageDialog::MessageDialog(const std::string &elementName, const std::string &
     btnLayout
         .createChild<Button>("button" + std::to_string(static_cast<int>(buttonType)),
                              std::string{magic_enum::enum_name(buttonType)})
-        .addClickListener([this, buttonType] {
+        .clickEvent.addListener([this, buttonType] {
           if (dialogDone(buttonType)) { close(); }
         });
   });

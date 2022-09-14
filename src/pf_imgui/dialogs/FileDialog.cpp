@@ -47,11 +47,11 @@ void FileDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), label.get(), fileType == FileType::File ? filters.c_str() : nullptr,
+      fileDialogInstance.OpenModal(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), label.get(), fileType == FileType::File ? filters.c_str() : nullptr,
+      fileDialogInstance.OpenDialog(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
                                     openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
   }
@@ -61,7 +61,7 @@ void FileDialog::renderImpl() {
     fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(col));
   });
 
-  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(getSize()))) {
+  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(*size))) {
     RAII end{[&] { fileDialogInstance.Close(); }};
     if (fileDialogInstance.IsOk()) {
       const auto filePathName = fileDialogInstance.GetFilePathName();

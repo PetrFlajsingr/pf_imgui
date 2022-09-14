@@ -11,6 +11,7 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/reactive/Observable.h>
 #include <string>
 
 namespace pf::ui::ig {
@@ -46,36 +47,13 @@ class PF_IMGUI_EXPORT Renderable {
   virtual ~Renderable() = default;
 
   /**
-   * Get current visibility.
-   * @details When an object is invisible it is no longer rendered.
-   * @return visibility of the renderable
-   */
-  [[nodiscard]] Visibility getVisibility() const;
-  /**
-   * Set new visibility.
-   * @details When an object is invisible it is no longer rendered.
-   * @param visibility new visibility
-   */
-  void setVisibility(Visibility visibility);
-
-  /**
-   * Get current enabled state.
-   * @details When an object is not enabled it is still rendered, but it doesn't accept any user input. It is visually distinguished.
-   * @return enabled state
-   */
-  [[nodiscard]] Enabled getEnabled() const;
-  /**
-   * Set enabled state.
-   * @details When an object is not enabled it is still rendered, but it doesn't accept any user input. It is visually distinguished.
-   * @param eleState new enabled state
-   */
-  void setEnabled(Enabled eleState);
-
-  /**
    * Unique name of an element.
    * @return
    */
   [[nodiscard]] const std::string &getName() const;
+
+  Observable<Visibility> visibility{Visibility::Visible};
+  Observable<bool> enabled{true};
 
  protected:
   /**
@@ -86,8 +64,6 @@ class PF_IMGUI_EXPORT Renderable {
   void setName(std::string newName);
 
  private:
-  Visibility visibility = Visibility::Visible;
-  Enabled enabled = Enabled::Yes;
   std::string name;
 };
 

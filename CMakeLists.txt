@@ -10,7 +10,7 @@ endif ()
 
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    list(APPEND flags "/std:c++latest" "/W4" "/wd4201")
+    list(APPEND flags "/std:c++latest" "/W4" "/wd4201" "/wd4996")
 else ()
     list(APPEND flags "-fconcepts" "-fconcepts-diagnostics-depth=10" "-Werror=return-type" "-fcoroutines"
             "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wno-unknown-pragmas" "-Wno-unused-function"
@@ -109,15 +109,9 @@ set(SOURCES
         src/pf_imgui/elements/MarkdownText.cpp
         src/pf_imgui/interface/ElementContainer.cpp
         src/pf_imgui/interface/ElementWithID.cpp
-        src/pf_imgui/interface/Resizable.cpp
         src/pf_imgui/interface/Savable.cpp
-        src/pf_imgui/interface/Clickable.cpp
         src/pf_imgui/interface/ItemElement.cpp
-        src/pf_imgui/interface/Focusable.cpp
-        src/pf_imgui/interface/Hoverable.cpp
-        src/pf_imgui/interface/Collapsible.cpp
         src/pf_imgui/interface/Renderable.cpp
-        src/pf_imgui/interface/Positionable.cpp
         src/pf_imgui/layouts/GridLayout.cpp
         src/pf_imgui/layouts/StackedLayout.cpp
         src/pf_imgui/layouts/AbsoluteLayout.cpp
@@ -151,7 +145,6 @@ set(SOURCES
         src/pf_imgui/elements/StatusBar.cpp
         src/pf_imgui/dialogs/Notification.cpp
         src/pf_imgui/managers/NotificationManager.cpp
-        src/pf_imgui/interface/Closeable.cpp
         src/pf_imgui/details/GroupBox.cpp
         src/pf_imgui/elements/GroupBox.cpp
         src/pf_imgui/elements/TextEditor.cpp
@@ -172,14 +165,14 @@ set(SOURCES
         src/pf_imgui/node_editor/Pin.cpp
         src/pf_imgui/node_editor/Comment.cpp
         src/pf_imgui/node_editor/NodeBase.cpp
-        src/pf_imgui/Size.cpp
-        src/pf_imgui/Position.cpp
-        src/pf_imgui/Color.cpp
+        src/pf_imgui/common/Size.cpp
+        src/pf_imgui/common/Position.cpp
+        src/pf_imgui/common/Color.cpp
         src/include/imgui_curve_editor/ImGuiCurveEditor.cpp
         src/pf_imgui/elements/SimpleCurveEditor.cpp
         src/include/imgui_color_gradient/imgui_color_gradient.cpp
         src/pf_imgui/elements/GradientEditor.cpp
-        src/pf_imgui/Font.cpp
+        src/pf_imgui/common/Font.cpp
         src/pf_imgui/layouts/HorizontalLayout.cpp
         src/pf_imgui/layouts/VerticalLayout.cpp
         src/pf_imgui/layouts/LinearLayout.cpp
@@ -201,7 +194,7 @@ set(SOURCES
         src/pf_imgui/elements/details/OverlayGizmoBase.cpp
         src/pf_imgui/interface/Element.cpp
         src/pf_imgui/elements/ConsolePanel.cpp
-        src/pf_imgui/Label.cpp
+        src/pf_imgui/common/Label.cpp
         )
 
 set(BLUEPRINT_SOURCES
@@ -271,23 +264,16 @@ set(INCLUDES
         src/pf_imgui/elements/MemoryEditor.h
         src/pf_imgui/interface/ElementContainer.h
         src/pf_imgui/interface/ElementWithID.h
-        src/pf_imgui/interface/Resizable.h
         src/pf_imgui/interface/Savable.h
-        src/pf_imgui/interface/Clickable.h
-        src/pf_imgui/interface/ValueObservable.h
+        src/pf_imgui/interface/ValueContainer.h
         src/pf_imgui/interface/ItemElement.h
-        src/pf_imgui/interface/Observable_impl.h
-        src/pf_imgui/interface/Focusable.h
-        src/pf_imgui/interface/Hoverable.h
-        src/pf_imgui/interface/Collapsible.h
+        src/pf_imgui/reactive/Observable_impl.h
         src/pf_imgui/interface/Renderable.h
-        src/pf_imgui/interface/Positionable.h
         src/pf_imgui/layouts.h
         src/pf_imgui/layouts/GridLayout.h
         src/pf_imgui/layouts/StackedLayout.h
         src/pf_imgui/layouts/AbsoluteLayout.h
         src/pf_imgui/layouts/StretchLayout.h
-        src/pf_imgui/interface/decorators/PositionDecorator.h
         src/pf_imgui/interface/decorators/WidthDecorator.h
         src/pf_imgui/interface/Layout.h
         ${IMGUI_FILE_DIALOG_DIR}/ImGuiFileDialog.h
@@ -334,7 +320,6 @@ set(INCLUDES
         src/pf_imgui/elements/StatusBar.h
         src/pf_imgui/dialogs/Notification.h
         src/pf_imgui/managers/NotificationManager.h
-        src/pf_imgui/interface/Closeable.h
         src/pf_imgui/details/GroupBox.h
         src/pf_imgui/elements/GroupBox.h
         src/pf_imgui/elements/Gizmo3D.h
@@ -361,16 +346,16 @@ set(INCLUDES
         src/pf_imgui/node_editor/details/LinkPtrToRef.h
         src/pf_imgui/node_editor/Comment.h
         src/pf_imgui/node_editor/NodeBase.h
-        src/pf_imgui/Size.h
-        src/pf_imgui/Position.h
-        src/pf_imgui/Color.h
+        src/pf_imgui/common/Size.h
+        src/pf_imgui/common/Position.h
+        src/pf_imgui/common/Color.h
         src/include/imgui_curve_editor/ImGuiCurveEditor.h
         src/pf_imgui/elements/SimpleCurveEditor.h
         src/include/imgui_color_gradient/imgui_color_gradient.h
         src/include/ringbuffer/ringbuffer.hpp
         src/include/ImGuizmo/ImGuizmo.h
         src/pf_imgui/elements/GradientEditor.h
-        src/pf_imgui/Font.h
+        src/pf_imgui/common/Font.h
         src/pf_imgui/layouts/HorizontalLayout.h
         src/pf_imgui/layouts/VerticalLayout.h
         src/pf_imgui/layouts/LinearLayout.h
@@ -399,12 +384,15 @@ set(INCLUDES
         src/pf_imgui/interface/Element.h
         src/pf_imgui/style/ColorPalette.h
         src/pf_imgui/style/common.h
-        src/pf_imgui/Texture.h
+        src/pf_imgui/common/Texture.h
         src/pf_imgui/style/StyleOptions.h
         src/pf_imgui/elements/ConsolePanel.h
         src/pf_imgui/elements/details/TextUtils.h
-        src/pf_imgui/Label.h
-        )
+        src/pf_imgui/common/Label.h
+        src/pf_imgui/reactive/Event.h
+        src/pf_imgui/reactive/Observable.h
+        src/pf_imgui/concepts/HasSizeObservable.h
+        src/pf_imgui/concepts/ConfigConstruction.h src/pf_imgui/common/Tags.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

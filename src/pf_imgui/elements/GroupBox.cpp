@@ -9,16 +9,16 @@
 namespace pf::ui::ig {
 
 GroupBox::GroupBox(GroupBox::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Resizable(config.size), label(std::string{config.label.value}) {}
+    : ElementWithID(std::string{config.name.value}), label(std::string{config.label.value}), size(config.size) {}
 
 GroupBox::GroupBox(const std::string &elementName, const std::string &labelValue, Size s)
-    : ElementWithID(elementName), Resizable(s), label(labelValue) {}
+    : ElementWithID(elementName), label(labelValue), size(s) {}
 
 void GroupBox::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  ImGui::BeginGroupPanel(label.get().c_str(), static_cast<ImVec2>(getSize()));
+  ImGui::BeginGroupPanel(label->get().c_str(), static_cast<ImVec2>(*size));
   RAII end{ImGui::EndGroupPanel};
   std::ranges::for_each(getChildren(), &Renderable::render);
 }
