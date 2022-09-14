@@ -81,13 +81,13 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="DragNDrop_8h.html">pf_imgui/interface/DragNDrop.h</a>&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Savable_8h.html">pf_imgui/interface/Savable.h</a>&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueObservable_8h.html">pf_imgui/interface/ValueObservable.h</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ValueContainer_8h.html">pf_imgui/interface/ValueContainer.h</a>&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html">   27</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html">OptionSlider</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                     <span class="keyword">public</span> ValueObservable&lt;T&gt;,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                     <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">ValueContainer</a>&lt;T&gt;,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                                     <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>,</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                                     <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html">DragSource</a>&lt;T&gt;,</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                                     <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget</a>&lt;T&gt; {</div>
@@ -103,116 +103,135 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html">OptionSlider</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, RangeOf&lt;T&gt; <span class="keyword">auto</span> &amp;&amp;newValues,</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;               <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> T &amp;newValue) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  [[nodiscard]] toml::table toToml() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  [[nodiscard]] toml::table toToml() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> setFromToml(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">void</span> setFromToml(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">ColorPalette</a>&lt;ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;               ColorOf::BorderShadow&gt;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      color;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt;</a> style;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a> font = Font::Default();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> label;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  std::vector&lt;T&gt; values;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">int</span> selectedValueIndex{};</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  std::string selectedValueStr;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">   83</a></span>&#160;<a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">OptionSlider&lt;T&gt;::OptionSlider</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config.html">OptionSlider::Config</a> &amp;&amp;config)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    : <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html">OptionSlider</a>(config.name, config.label, config.values, config.persistent ? <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a>::Yes : <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a>::No) {}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">ColorPalette</a>&lt;ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;               ColorOf::BorderShadow&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      color;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt;</a> style;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a> font = Font::Default();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Label&gt;</a> label;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;T&gt;</a> value;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  [[nodiscard]] <span class="keyword">const</span> T &amp;getValue() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> T &amp;newValue) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  Subscription addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; listener) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  std::vector&lt;T&gt; values;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordtype">int</span> selectedValueIndex{};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  std::string selectedValueStr;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a5803f81436f8461844c81a943b368be6">   87</a></span>&#160;<a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">OptionSlider&lt;T&gt;::OptionSlider</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, RangeOf&lt;T&gt; <span class="keyword">auto</span> &amp;&amp;newValues,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                              <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent)</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), ValueObservable&lt;T&gt;(*std::ranges::begin(newValues)),</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent), <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html">DragSource</a>&lt;T&gt;(false), <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget</a>&lt;T&gt;(false),</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      label(label), values{std::ranges::begin(newValues), std::ranges::end(newValues)},</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      selectedValueStr(toString(values[0])) {}</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> OptionSlider&lt;T&gt;::setValue(<span class="keyword">const</span> T &amp;newValue) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter =</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;          std::ranges::find_if(values, [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;val) { <span class="keywordflow">return</span> toString(val) == toString(newValue); });</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      iter != values.end()) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    selectedValueIndex = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(iter - values.begin());</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    selectedValueStr = toString(values[selectedValueIndex]);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    ValueObservable&lt;T&gt;::setValue(values[selectedValueIndex]);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a45d5748b24bc03c351b7aff6650b76d0">  105</a></span>&#160;toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a45d5748b24bc03c351b7aff6650b76d0">OptionSlider&lt;T&gt;::toToml</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">return</span> toml::table{{<span class="stringliteral">&quot;selected&quot;</span>, selectedValueStr}};</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#ad1ddb005402d36cd064bde65be6645f7">  109</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#ad1ddb005402d36cd064bde65be6645f7">OptionSlider&lt;T&gt;::setFromToml</a>(<span class="keyword">const</span> toml::table &amp;src) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedValIter = src.find(<span class="stringliteral">&quot;selected&quot;</span>); selectedValIter != src.end()) {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedVal = selectedValIter-&gt;second.as_string(); selectedVal != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter =</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;              std::ranges::find_if(values, [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;val) { <span class="keywordflow">return</span> toString(val) == *selectedVal; });</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;          iter != values.end()) {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        selectedValueIndex = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(iter - values.begin());</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        selectedValueStr = toString(values[selectedValueIndex]);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a9dc944f3c8e4fcddde763dde2c47ecd7">  123</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a9dc944f3c8e4fcddde763dde2c47ecd7">OptionSlider&lt;T&gt;::renderImpl</a>() {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> colorScoped = color.applyScoped();</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = style.applyScoped();</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = font.applyScopedIfNotDefault();</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> flags = ImGuiSliderFlags_AlwaysClamp;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordflow">if</span> (ImGui::SliderInt(label.get().c_str(), &amp;selectedValueIndex, 0, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(values.size() - 1),</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                       selectedValueStr.c_str(), flags)) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    selectedValueStr = toString(values[selectedValueIndex]);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(values[selectedValueIndex]);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(ValueObservable&lt;T&gt;::getValue());</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> drop = <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget&lt;T&gt;::dropAccept</a>(); drop.has_value()) {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    ValueObservable&lt;T&gt;::setValueAndNotifyIfChanged(*drop);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_ELEMENTS_OPTION_SLIDER</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">   87</a></span>&#160;<a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">OptionSlider&lt;T&gt;::OptionSlider</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config.html">OptionSlider::Config</a> &amp;&amp;config)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    : <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html">OptionSlider</a>(config.name, config.label, config.values, config.persistent ? <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a>::Yes : <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a>::No) {}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a5803f81436f8461844c81a943b368be6">   91</a></span>&#160;<a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">OptionSlider&lt;T&gt;::OptionSlider</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;label, RangeOf&lt;T&gt; <span class="keyword">auto</span> &amp;&amp;newValues,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                              <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    : <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(elementName), <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a>(persistent), <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html">DragSource</a>&lt;T&gt;(false), <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget</a>&lt;T&gt;(false), label(label),</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      value(*std::ranges::begin(newValues)), values{std::ranges::begin(newValues), std::ranges::end(newValues)},</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      selectedValueStr(toString(values[0])) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  value.addListener([<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;newValue) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter =</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            std::ranges::find_if(values, [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;val) { <span class="keywordflow">return</span> toString(val) == toString(newValue); });</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        iter != values.end()) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      selectedValueIndex = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(iter - values.begin());</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      selectedValueStr = toString(values[selectedValueIndex]);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  });</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a45d5748b24bc03c351b7aff6650b76d0">  107</a></span>&#160;toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a45d5748b24bc03c351b7aff6650b76d0">OptionSlider&lt;T&gt;::toToml</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordflow">return</span> toml::table{{<span class="stringliteral">&quot;selected&quot;</span>, selectedValueStr}};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#ad1ddb005402d36cd064bde65be6645f7">  111</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#ad1ddb005402d36cd064bde65be6645f7">OptionSlider&lt;T&gt;::setFromToml</a>(<span class="keyword">const</span> toml::table &amp;src) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedValIter = src.find(<span class="stringliteral">&quot;selected&quot;</span>); selectedValIter != src.end()) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedVal = selectedValIter-&gt;second.as_string(); selectedVal != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter =</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;              std::ranges::find_if(values, [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;val) { <span class="keywordflow">return</span> toString(val) == *selectedVal; });</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;          iter != values.end()) {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        selectedValueIndex = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(iter - values.begin());</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        selectedValueStr = toString(values[selectedValueIndex]);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = values[selectedValueIndex];</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a9dc944f3c8e4fcddde763dde2c47ecd7">  126</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a9dc944f3c8e4fcddde763dde2c47ecd7">OptionSlider&lt;T&gt;::renderImpl</a>() {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> colorScoped = color.applyScoped();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = style.<a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html#ab50aea3c0f3cd9bad80ed18c041849f9">applyScoped</a>();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = font.applyScopedIfNotDefault();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> flags = ImGuiSliderFlags_AlwaysClamp;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordflow">if</span> (ImGui::SliderInt(label-&gt;get().c_str(), &amp;selectedValueIndex, 0, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(values.size() - 1),</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                       selectedValueStr.c_str(), flags)) {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    selectedValueStr = toString(values[selectedValueIndex]);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = values[selectedValueIndex];</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  }</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(*value);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> drop = <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget&lt;T&gt;::dropAccept</a>(); drop.has_value()) { *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = *drop; }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">const</span> T &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1OptionSlider.html">OptionSlider&lt;T&gt;::getValue</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <span class="keywordflow">return</span> *value;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;Subscription OptionSlider&lt;T&gt;::addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; listener) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordflow">return</span> value.addListener(std::move(listener));</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keywordtype">void</span> OptionSlider&lt;T&gt;::setValue(<span class="keyword">const</span> T &amp;newValue) {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = newValue;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_ELEMENTS_OPTION_SLIDER</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config_html_a6fcefab44e05029fa431a2fa985969a5"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config.html#a6fcefab44e05029fa431a2fa985969a5">pf::ui::ig::OptionSlider::Config::values</a></div><div class="ttdeci">Explicit&lt; std::vector&lt; T &gt; &gt; values</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:40</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
-<div class="ttc" id="aValueObservable_8h_html"><div class="ttname"><a href="ValueObservable_8h.html">ValueObservable.h</a></div><div class="ttdoc">Interface for providing observable support to elements.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorPalette_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">pf::ui::ig::ColorPalette</a></div><div class="ttdoc">Color palette for imgui.</div><div class="ttdef"><b>Definition:</b> ColorPalette.h:27</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:164</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:194</div></div>
+<div class="ttc" id="aValueContainer_8h_html"><div class="ttname"><a href="ValueContainer_8h.html">ValueContainer.h</a></div><div class="ttdoc">Interface for providing inner value access.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleOptions_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">pf::ui::ig::StyleOptions&lt; StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize &gt;</a></div></div>
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:64</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html">pf::ui::ig::Label</a></div><div class="ttdoc">Label for UI elements.</div><div class="ttdef"><b>Definition:</b> Label.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Font_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Font.html">pf::ui::ig::Font</a></div><div class="ttdoc">Abstraction of fonts for Elements.</div><div class="ttdef"><b>Definition:</b> Font.h:19</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_a45d5748b24bc03c351b7aff6650b76d0"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a45d5748b24bc03c351b7aff6650b76d0">pf::ui::ig::OptionSlider::toToml</a></div><div class="ttdeci">toml::table toToml() const override</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:105</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_ad1ddb005402d36cd064bde65be6645f7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#ad1ddb005402d36cd064bde65be6645f7">pf::ui::ig::OptionSlider::setFromToml</a></div><div class="ttdeci">void setFromToml(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:109</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_a45d5748b24bc03c351b7aff6650b76d0"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a45d5748b24bc03c351b7aff6650b76d0">pf::ui::ig::OptionSlider::toToml</a></div><div class="ttdeci">toml::table toToml() const override</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:107</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleOptions_html_ab50aea3c0f3cd9bad80ed18c041849f9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleOptions.html#ab50aea3c0f3cd9bad80ed18c041849f9">pf::ui::ig::StyleOptions::applyScoped</a></div><div class="ttdeci">RAII applyScoped()</div><div class="ttdef"><b>Definition:</b> StyleOptions.h:65</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_ad1ddb005402d36cd064bde65be6645f7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#ad1ddb005402d36cd064bde65be6645f7">pf::ui::ig::OptionSlider::setFromToml</a></div><div class="ttdeci">void setFromToml(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:111</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html">pf::ui::ig::OptionSlider</a></div><div class="ttdoc">A slider class with predefined options.</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:27</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:225</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_a9dc944f3c8e4fcddde763dde2c47ecd7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a9dc944f3c8e4fcddde763dde2c47ecd7">pf::ui::ig::OptionSlider::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:123</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_a9dc944f3c8e4fcddde763dde2c47ecd7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a9dc944f3c8e4fcddde763dde2c47ecd7">pf::ui::ig::OptionSlider::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:126</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:24</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config_html_acb5a8fbed04e5222508b29dc4244729a"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config.html#acb5a8fbed04e5222508b29dc4244729a">pf::ui::ig::OptionSlider::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string &gt; name</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:38</div></div>
 <div class="ttc" id="aDragNDrop_8h_html"><div class="ttname"><a href="DragNDrop_8h.html">DragNDrop.h</a></div><div class="ttdoc">Definitions for drag and drop interface.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html_a6718aa6ec417dad0902ac12324fb25a8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">pf::ui::ig::Observable::modify</a></div><div class="ttdeci">Transaction modify()</div><div class="ttdef"><b>Definition:</b> Observable.h:142</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config.html">pf::ui::ig::OptionSlider::Config</a></div><div class="ttdoc">Construction args for OptionSlider /.</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:36</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config_html_a3618170ab7d018cb38533cf35e14fc27"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1OptionSlider_1_1Config.html#a3618170ab7d018cb38533cf35e14fc27">pf::ui::ig::OptionSlider::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string &gt; label</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:39</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_a0ae45d9cbf7986cd8b81c745a816124e"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">pf::ui::ig::OptionSlider::OptionSlider</a></div><div class="ttdeci">OptionSlider(Config &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:83</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1OptionSlider_html_a0ae45d9cbf7986cd8b81c745a816124e"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1OptionSlider.html#a0ae45d9cbf7986cd8b81c745a816124e">pf::ui::ig::OptionSlider::OptionSlider</a></div><div class="ttdeci">OptionSlider(Config &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> OptionSlider.h:87</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

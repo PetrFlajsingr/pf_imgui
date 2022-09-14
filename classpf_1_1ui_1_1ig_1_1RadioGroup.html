@@ -69,6 +69,8 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classpf_1_1ui_1_1ig_1_1RadioGroup-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">pf::ui::ig::RadioGroup Class Reference</div>  </div>
@@ -85,8 +87,9 @@ Inheritance diagram for pf::ui::ig::RadioGroup:</div>
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1RadioGroup.png" usemap="#pf::ui::ig::RadioGroup_map" alt=""/>
   <map id="pf::ui::ig::RadioGroup_map" name="pf::ui::ig::RadioGroup_map">
-<area href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="pf::ui::ig::Savable" shape="rect" coords="224,56,438,80"/>
-<area href="structpf_1_1ui_1_1ig_1_1TomlSerializable.html" alt="pf::ui::ig::TomlSerializable" shape="rect" coords="224,0,438,24"/>
+<area href="classpf_1_1ui_1_1ig_1_1ValueContainer.html" alt="pf::ui::ig::ValueContainer&lt; RadioButton *, ReadOnlyTag &gt;" shape="rect" coords="0,56,827,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="pf::ui::ig::Savable" shape="rect" coords="837,56,1664,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1TomlSerializable.html" alt="pf::ui::ig::TomlSerializable" shape="rect" coords="837,0,1664,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -113,6 +116,16 @@ const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>ge
 <tr class="separator:a83775714ac9d7a996f4da902d4c3529d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af469626334b2edfcc4b9760dd1293309"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html#af469626334b2edfcc4b9760dd1293309">setFromToml</a> (const toml::table &amp;src) override</td></tr>
 <tr class="separator:af469626334b2edfcc4b9760dd1293309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac73b8aab9c622a1fa3e8f51e1a8fe996"><td class="memItemLeft" align="right" valign="top"><a id="ac73b8aab9c622a1fa3e8f51e1a8fe996"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html">RadioButton</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> () const override</td></tr>
+<tr class="separator:ac73b8aab9c622a1fa3e8f51e1a8fe996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; RadioButton *, ReadOnlyTag &gt;</a></td></tr>
+<tr class="memitem:a9034f0009cd580952dad0fe4dbd3fb79 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a9034f0009cd580952dad0fe4dbd3fb79"></a>
+virtual const <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html">RadioButton</a> * &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> () const=0</td></tr>
+<tr class="separator:a9034f0009cd580952dad0fe4dbd3fb79 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c45c254d2b0380984ca17ad113c8da inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a11c45c254d2b0380984ca17ad113c8da"></a>
+Subscription&#160;</td><td class="memItemRight" valign="bottom"><b>addValueListener</b> (std::invocable&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html">RadioButton</a> * &gt; auto &amp;&amp;listener)</td></tr>
+<tr class="separator:a11c45c254d2b0380984ca17ad113c8da inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Savable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></td></tr>
 <tr class="memitem:ac79821fa0060c61aeaa38c74054c70ad inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#ac79821fa0060c61aeaa38c74054c70ad">Savable</a> (<a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent)</td></tr>
 <tr class="separator:ac79821fa0060c61aeaa38c74054c70ad inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,6 +140,29 @@ const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>ge
 <tr class="memitem:ad79bed46434afdb038dba8ec2d787a0f inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top"><a id="ad79bed46434afdb038dba8ec2d787a0f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPersistent</b> (bool persistent)</td></tr>
 <tr class="separator:ad79bed46434afdb038dba8ec2d787a0f inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aa3eff4901561120e25209dc334768ae9"><td class="memItemLeft" align="right" valign="top"><a id="aa3eff4901561120e25209dc334768ae9"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html">RadioGroup</a>, <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html">RadioButton</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>activeButton</b></td></tr>
+<tr class="separator:aa3eff4901561120e25209dc334768ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a8aff11ef5fb7bb6ab0f69131848e05e0"><td class="memItemLeft" align="right" valign="top"><a id="a8aff11ef5fb7bb6ab0f69131848e05e0"></a>
+Subscription&#160;</td><td class="memItemRight" valign="bottom"><b>addValueListenerImpl</b> (std::function&lt; void(<a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html">RadioButton</a> *const &amp;)&gt; listener) override</td></tr>
+<tr class="separator:a8aff11ef5fb7bb6ab0f69131848e05e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; RadioButton *, ReadOnlyTag &gt;</a></td></tr>
+<tr class="memitem:a5b1ea9540ad53c190e8e9d19fc788630 inherit pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a5b1ea9540ad53c190e8e9d19fc788630"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ValueType</b> = <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html">RadioButton</a> *</td></tr>
+<tr class="separator:a5b1ea9540ad53c190e8e9d19fc788630 inherit pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; RadioButton *, ReadOnlyTag &gt;</a></td></tr>
+<tr class="memitem:a77eec43633c73cd9bc055fe79348f1c9 inherit pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a77eec43633c73cd9bc055fe79348f1c9"></a>
+constexpr static bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnly</b></td></tr>
+<tr class="separator:a77eec43633c73cd9bc055fe79348f1c9 inherit pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Group of <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html" title="A button similar in function to CheckBox, but it can belong to RadioGroup.">RadioButton</a>. </p>
@@ -290,7 +326,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setPersistent</b> (bo
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="structpf_1_1ui_1_1ig_1_1TomlSerializable.html#aba0bee96c7a644b34f1f38bc24237f3c">pf::ui::ig::TomlSerializable</a>.</p>
+<p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1TomlSerializable.html#aba0bee96c7a644b34f1f38bc24237f3c">pf::ui::ig::TomlSerializable</a>.</p>
 
 </div>
 </div>
@@ -318,7 +354,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setPersistent</b> (bo
 </div><div class="memdoc">
 <p>Save data to toml. </p><dl class="section return"><dt>Returns</dt><dd>toml::table if saving is enabled, nullopt otherwise </dd></dl>
 
-<p>Implements <a class="el" href="structpf_1_1ui_1_1ig_1_1TomlSerializable.html#a4a816893c22cb7853f9058960d86e66b">pf::ui::ig::TomlSerializable</a>.</p>
+<p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1TomlSerializable.html#a4a816893c22cb7853f9058960d86e66b">pf::ui::ig::TomlSerializable</a>.</p>
 
 </div>
 </div>

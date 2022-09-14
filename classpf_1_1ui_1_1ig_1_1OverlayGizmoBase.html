@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classpf_1_1ui_1_1ig_1_1OverlayGizmoBase-members.html">List of all members</a>  </div>
@@ -81,8 +82,9 @@ Inheritance diagram for pf::ui::ig::OverlayGizmoBase:</div>
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1OverlayGizmoBase.png" usemap="#pf::ui::ig::OverlayGizmoBase_map" alt=""/>
   <map id="pf::ui::ig::OverlayGizmoBase_map" name="pf::ui::ig::OverlayGizmoBase_map">
-<area href="classpf_1_1ui_1_1ig_1_1AreaOverlayGizmo.html" title="Gizmo overlaying its window/layout." alt="pf::ui::ig::AreaOverlayGizmo" shape="rect" coords="0,112,191,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html" title="Gizmo overlaying the main viewport." alt="pf::ui::ig::ViewportOverlayGizmo" shape="rect" coords="201,112,392,136"/>
+<area href="classpf_1_1ui_1_1ig_1_1ValueContainer.html" alt="pf::ui::ig::ValueContainer&lt; glm::mat4 &gt;" shape="rect" coords="433,56,1290,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1AreaOverlayGizmo.html" title="Gizmo overlaying its window/layout." alt="pf::ui::ig::AreaOverlayGizmo" shape="rect" coords="0,168,857,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ViewportOverlayGizmo.html" title="Gizmo overlaying the main viewport." alt="pf::ui::ig::ViewportOverlayGizmo" shape="rect" coords="867,168,1724,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -118,12 +120,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setProjection</b> (co
 <tr class="memitem:ab57341ef238bb59bb0c6f5e11c9ccd1a"><td class="memItemLeft" align="right" valign="top"><a id="ab57341ef238bb59bb0c6f5e11c9ccd1a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSnapValues</b> (float translate, float rotate, float scale)</td></tr>
 <tr class="separator:ab57341ef238bb59bb0c6f5e11c9ccd1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e5e36d4d09bae22af45c979f09b767a"><td class="memItemLeft" align="right" valign="top"><a id="a9e5e36d4d09bae22af45c979f09b767a"></a>
-Subscription&#160;</td><td class="memItemRight" valign="bottom"><b>addInUseListener</b> (std::invocable&lt; bool &gt; auto &amp;&amp;listener)</td></tr>
-<tr class="separator:a9e5e36d4d09bae22af45c979f09b767a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d431b55fbdf900ecf9b4b20c236802"><td class="memItemLeft" align="right" valign="top"><a id="ab4d431b55fbdf900ecf9b4b20c236802"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</b> (const glm::mat4 &amp;newValue) override</td></tr>
+<tr class="separator:ab4d431b55fbdf900ecf9b4b20c236802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80b68a60a1bdd6450511a98faf60f27f"><td class="memItemLeft" align="right" valign="top"><a id="a80b68a60a1bdd6450511a98faf60f27f"></a>
+const glm::mat4 &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> () const override</td></tr>
+<tr class="separator:a80b68a60a1bdd6450511a98faf60f27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; glm::mat4 &gt;</a></td></tr>
+<tr class="memitem:a9034f0009cd580952dad0fe4dbd3fb79 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a9034f0009cd580952dad0fe4dbd3fb79"></a>
+virtual const glm::mat4 &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> () const=0</td></tr>
+<tr class="separator:a9034f0009cd580952dad0fe4dbd3fb79 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c45c254d2b0380984ca17ad113c8da inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a11c45c254d2b0380984ca17ad113c8da"></a>
+Subscription&#160;</td><td class="memItemRight" valign="bottom"><b>addValueListener</b> (std::invocable&lt; glm::mat4 &gt; auto &amp;&amp;listener)</td></tr>
+<tr class="separator:a11c45c254d2b0380984ca17ad113c8da inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a6d0f13d20909e3570a7b4792bafb8116"><td class="memItemLeft" align="right" valign="top"><a id="a6d0f13d20909e3570a7b4792bafb8116"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1OverlayGizmoBase.html">OverlayGizmoBase</a>, glm::mat4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>transform</b></td></tr>
+<tr class="separator:a6d0f13d20909e3570a7b4792bafb8116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab92b63a37748fdaa340738b452450385"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1OverlayGizmoBase.html#ab92b63a37748fdaa340738b452450385">inUse</a></td></tr>
+<tr class="separator:ab92b63a37748fdaa340738b452450385"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac1b63735f89c64bf263ab5adc363d38b"><td class="memItemLeft" align="right" valign="top"><a id="ac1b63735f89c64bf263ab5adc363d38b"></a>
+Subscription&#160;</td><td class="memItemRight" valign="bottom"><b>addValueListenerImpl</b> (std::function&lt; void(const glm::mat4 &amp;)&gt; listener) override</td></tr>
+<tr class="separator:ac1b63735f89c64bf263ab5adc363d38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e93c12a1bde7fe2a8c0e24c5c643342"><td class="memItemLeft" align="right" valign="top"><a id="a0e93c12a1bde7fe2a8c0e24c5c643342"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>drawImpl</b> (bool isEnabled)</td></tr>
 <tr class="separator:a0e93c12a1bde7fe2a8c0e24c5c643342"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,10 +174,34 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>projectionOrthographi
 <tr class="memitem:a1d7909d6cd9f5a4598dfbc22ed272f71"><td class="memItemLeft" align="right" valign="top"><a id="a1d7909d6cd9f5a4598dfbc22ed272f71"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>wasUsing</b> = false</td></tr>
 <tr class="separator:a1d7909d6cd9f5a4598dfbc22ed272f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d936e21038c53dea6b3cd638b3b5ae3"><td class="memItemLeft" align="right" valign="top"><a id="a7d936e21038c53dea6b3cd638b3b5ae3"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>inUseObservableImpl</b></td></tr>
-<tr class="separator:a7d936e21038c53dea6b3cd638b3b5ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; glm::mat4 &gt;</a></td></tr>
+<tr class="memitem:a5b1ea9540ad53c190e8e9d19fc788630 inherit pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a5b1ea9540ad53c190e8e9d19fc788630"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ValueType</b> = glm::mat4</td></tr>
+<tr class="separator:a5b1ea9540ad53c190e8e9d19fc788630 inherit pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; glm::mat4 &gt;</a></td></tr>
+<tr class="memitem:a77eec43633c73cd9bc055fe79348f1c9 inherit pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a77eec43633c73cd9bc055fe79348f1c9"></a>
+constexpr static bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnly</b></td></tr>
+<tr class="separator:a77eec43633c73cd9bc055fe79348f1c9 inherit pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab92b63a37748fdaa340738b452450385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab92b63a37748fdaa340738b452450385">&#9670;&nbsp;</a></span>inUse</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt;bool&gt; pf::ui::ig::OverlayGizmoBase::inUse</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gizmo is actively being interacted with </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/pf_imgui/elements/details/<a class="el" href="OverlayGizmoBase_8h_source.html">OverlayGizmoBase.h</a></li>
 <li>src/pf_imgui/elements/details/OverlayGizmoBase.cpp</li>

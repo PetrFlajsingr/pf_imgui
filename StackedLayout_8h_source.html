@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;   <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a> &amp;parent;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  };</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;size, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;initialSize, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;pushStack();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> popStack();</div>
@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  [[nodiscard]] std::size_t getCurrentIndex() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordtype">void</span> setIndex(std::size_t index);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  [[nodiscard]] std::size_t size() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  [[nodiscard]] std::size_t stackSize() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;getCurrentStack();</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;getStackAtIndex(std::size_t index);</div>
@@ -130,7 +130,7 @@ $(function() {
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of ElementWithID.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:29</div></div>
 <div class="ttc" id="aenums_8h_html_a8bbe7dfc4a6fb580f03f46237d91dadb"><div class="ttname"><a href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">pf::ui::ig::ShowBorder</a></div><div class="ttdeci">ShowBorder</div><div class="ttdef"><b>Definition:</b> enums.h:85</div></div>
 <div class="ttc" id="aLayout_8h_html"><div class="ttname"><a href="Layout_8h.html">Layout.h</a></div><div class="ttdoc">Base class for layouts.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:87</div></div>

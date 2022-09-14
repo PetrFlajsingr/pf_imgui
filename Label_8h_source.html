@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pf_imgui: src/pf_imgui/Label.h Source File</title>
+<title>pf_imgui: src/pf_imgui/common/Label.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f6ad17bfb418c6fd7766758ad579103c.html">pf_imgui</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f6ad17bfb418c6fd7766758ad579103c.html">pf_imgui</a></li><li class="navelem"><a class="el" href="dir_8ce8077a2bb02243514c1ee4b34fa348.html">common</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -75,52 +75,46 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_LABEL_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="enums_8h.html">pf_imgui/enums.h</a>&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Observable__impl_8h.html">pf_imgui/interface/Observable_impl.h</a>&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Observable__impl_8h.html">pf_imgui/reactive/Observable_impl.h</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Label.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html#a11d3198a777b5aebf6bce3849d9c0a60">Label</a>(std::string value = std::string{});</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;operator=(<span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;other);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;operator=(<span class="keyword">const</span> std::string &amp;other);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;operator=(std::string &amp;&amp;other);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  [[nodiscard]] <span class="keyword">const</span> std::string &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html#a8a686e8fb72698fde64d4c2a2473d667">get</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">void</span> setVisibility(<a class="code" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> vis);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">void</span> show();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">void</span> hide();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  [[nodiscard]] <a class="code" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> getVisibility() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Label.html#ade4d45e90e87d4feb86f357cd43660ea">   48</a></span>&#160;  Subscription <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html#ade4d45e90e87d4feb86f357cd43660ea">addListener</a>(std::invocable&lt;std::string_view&gt; <span class="keyword">auto</span> &amp;&amp;listener) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> observableImpl.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#af2379ee32d569a27be587a102e956685">addListener</a>(std::forward&lt;decltype(listener)&gt;(listener));</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keyword">explicit</span>(<span class="keyword">false</span>) <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html#ab819c9a0aeb2fe9dd133da67f1bd525b">Label</a>(std::string value = std::string{});</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html#ab819c9a0aeb2fe9dd133da67f1bd525b">Label</a>(<span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;operator=(<span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;other);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;operator=(<span class="keyword">const</span> std::string &amp;other);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;operator=(std::string &amp;&amp;other);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &amp;other) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  [[nodiscard]] <span class="keyword">const</span> std::string &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html#a8a686e8fb72698fde64d4c2a2473d667">get</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">void</span> setVisibility(<a class="code" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> vis);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">void</span> show();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">void</span> hide();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  [[nodiscard]] <a class="code" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> getVisibility() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> std::string EMPTY_LABEL;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  std::string val;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> visibility = Visibility::Visible;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> std::string EMPTY_LABEL;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  std::string val;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> visibility = Visibility::Visible;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;std::string_view&gt;</a> observableImpl;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aenums_8h_html_ab410df4930e8cfbbc9b07653dc3653d0"><div class="ttname"><a href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">pf::ui::ig::Visibility</a></div><div class="ttdeci">Visibility</div><div class="ttdef"><b>Definition:</b> enums.h:41</div></div>
 <div class="ttc" id="aObservable__impl_8h_html"><div class="ttname"><a href="Observable__impl_8h.html">Observable_impl.h</a></div><div class="ttdoc">Implementation of observable.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html_af2379ee32d569a27be587a102e956685"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#af2379ee32d569a27be587a102e956685">pf::ui::ig::Observable_impl::addListener</a></div><div class="ttdeci">Subscription addListener(std::invocable&lt; const Args &amp;... &gt; auto &amp;&amp;fnc)</div><div class="ttdef"><b>Definition:</b> Observable_impl.h:80</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html_a11d3198a777b5aebf6bce3849d9c0a60"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html#a11d3198a777b5aebf6bce3849d9c0a60">pf::ui::ig::Label::Label</a></div><div class="ttdeci">Label(std::string value=std::string{})</div><div class="ttdef"><b>Definition:</b> Label.cpp:9</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html">pf::ui::ig::Label</a></div><div class="ttdoc">Label for UI elements.</div><div class="ttdef"><b>Definition:</b> Label.h:20</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html_ade4d45e90e87d4feb86f357cd43660ea"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html#ade4d45e90e87d4feb86f357cd43660ea">pf::ui::ig::Label::addListener</a></div><div class="ttdeci">Subscription addListener(std::invocable&lt; std::string_view &gt; auto &amp;&amp;listener)</div><div class="ttdef"><b>Definition:</b> Label.h:48</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html_ab819c9a0aeb2fe9dd133da67f1bd525b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html#ab819c9a0aeb2fe9dd133da67f1bd525b">pf::ui::ig::Label::Label</a></div><div class="ttdeci">explicit(false) Label(std Label(const Label &amp;other)=default</div><div class="ttdef"><b>Definition:</b> Label.cpp:9</div></div>
 <div class="ttc" id="aenums_8h_html"><div class="ttname"><a href="enums_8h.html">enums.h</a></div><div class="ttdoc">Library's enums.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">pf::ui::ig::Observable_impl&lt; std::string_view &gt;</a></div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html_a8a686e8fb72698fde64d4c2a2473d667"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html#a8a686e8fb72698fde64d4c2a2473d667">pf::ui::ig::Label::get</a></div><div class="ttdeci">const std::string &amp; get() const</div><div class="ttdef"><b>Definition:</b> Label.cpp:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html_a8a686e8fb72698fde64d4c2a2473d667"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html#a8a686e8fb72698fde64d4c2a2473d667">pf::ui::ig::Label::get</a></div><div class="ttdeci">const std::string &amp; get() const</div><div class="ttdef"><b>Definition:</b> Label.cpp:29</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

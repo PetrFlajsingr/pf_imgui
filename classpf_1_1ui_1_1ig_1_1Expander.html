@@ -87,16 +87,13 @@ Inheritance diagram for pf::ui::ig::Expander:</div>
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1Expander.png" usemap="#pf::ui::ig::Expander_map" alt=""/>
   <map id="pf::ui::ig::Expander_map" name="pf::ui::ig::Expander_map">
-<area href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="pf::ui::ig::ItemElement" shape="rect" coords="197,168,384,192"/>
-<area href="classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of ElementWithID." alt="pf::ui::ig::ElementContainer" shape="rect" coords="591,168,778,192"/>
-<area href="classpf_1_1ui_1_1ig_1_1Collapsible.html" title="Interface for collapsible elements." alt="pf::ui::ig::Collapsible" shape="rect" coords="788,168,975,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="pf::ui::ig::ItemElement" shape="rect" coords="0,168,187,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ElementContainer.html" title="Interface for objects, which can contain instances of Element." alt="pf::ui::ig::ElementContainer" shape="rect" coords="197,168,384,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="pf::ui::ig::Savable" shape="rect" coords="394,168,581,192"/>
 <area href="classpf_1_1ui_1_1ig_1_1ElementWithID.html" title="Interface for all ImGui elements with IDs." alt="pf::ui::ig::ElementWithID" shape="rect" coords="0,112,187,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="pf::ui::ig::Focusable" shape="rect" coords="197,112,384,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="pf::ui::ig::Hoverable" shape="rect" coords="394,112,581,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html" alt="pf::ui::ig::RenderablesContainer" shape="rect" coords="591,112,778,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Savable.html" title="Interface for savable elements." alt="pf::ui::ig::Savable" shape="rect" coords="788,112,975,136"/>
+<area href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html" alt="pf::ui::ig::RenderablesContainer" shape="rect" coords="197,112,384,136"/>
+<area href="classpf_1_1ui_1_1ig_1_1TomlSerializable.html" alt="pf::ui::ig::TomlSerializable" shape="rect" coords="394,112,581,136"/>
 <area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Base class for anythin which can be considered a UI element." alt="pf::ui::ig::Element" shape="rect" coords="0,56,187,80"/>
-<area href="structpf_1_1ui_1_1ig_1_1TomlSerializable.html" alt="pf::ui::ig::TomlSerializable" shape="rect" coords="788,56,975,80"/>
 <area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,187,24"/>
   </map>
 </div></div>
@@ -111,10 +108,12 @@ Classes</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12080f35b4591658a308dfdcf51790c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html#a12080f35b4591658a308dfdcf51790c0">Expander</a> (<a class="el" href="structpf_1_1ui_1_1ig_1_1Expander_1_1Config.html">Config</a> &amp;&amp;config)</td></tr>
 <tr class="separator:a12080f35b4591658a308dfdcf51790c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f688f0a45549cc69bb4c4b423ef1275"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html#a1f688f0a45549cc69bb4c4b423ef1275">Expander</a> (const std::string &amp;elementName, const std::string &amp;labelText, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No, <a class="el" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a> allowCollapse=AllowCollapse::Yes)</td></tr>
-<tr class="separator:a1f688f0a45549cc69bb4c4b423ef1275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6cef8300d86cad0bf1d37b86674b43f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html#af6cef8300d86cad0bf1d37b86674b43f">Expander</a> (const std::string &amp;elementName, const std::string &amp;labelText, <a class="el" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a> allowCollapse)</td></tr>
-<tr class="separator:af6cef8300d86cad0bf1d37b86674b43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebf80d8a74de8ba44aeff7a4e10c70a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html#aebf80d8a74de8ba44aeff7a4e10c70a3">Expander</a> (const std::string &amp;elementName, const std::string &amp;labelText, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent=Persistent::No)</td></tr>
+<tr class="separator:aebf80d8a74de8ba44aeff7a4e10c70a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd055b0c33e64573de84eb71e7291974"><td class="memItemLeft" align="right" valign="top">toml::table&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html#abd055b0c33e64573de84eb71e7291974">toToml</a> () const override</td></tr>
+<tr class="separator:abd055b0c33e64573de84eb71e7291974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c9304aa25b4ee709c6492e4fc971ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html#aa7c9304aa25b4ee709c6492e4fc971ad">setFromToml</a> (const toml::table &amp;src) override</td></tr>
+<tr class="separator:aa7c9304aa25b4ee709c6492e4fc971ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
 <tr class="memitem:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a1edd037f3e2d9f55121f68ffd6d3cba4">ItemElement</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,10 +141,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a97864bd674c475b0b24ae9a2af48fee5 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4554babdbc9c49bb027fa5b79cf7d4b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a4554babdbc9c49bb027fa5b79cf7d4b6">removePopupMenu</a> ()</td></tr>
 <tr class="separator:a4554babdbc9c49bb027fa5b79cf7d4b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ce9f9c88cf4b73b7993b44edfc7106a inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a0ce9f9c88cf4b73b7993b44edfc7106a">addMousePositionListener</a> (std::invocable&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1Position.html">Position</a> &gt; auto &amp;&amp;listener)</td></tr>
-<tr class="separator:a0ce9f9c88cf4b73b7993b44edfc7106a inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b3eaacffd38c10c2a86f40ec7b229de inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a8b3eaacffd38c10c2a86f40ec7b229de">setFocus</a> () override</td></tr>
-<tr class="separator:a8b3eaacffd38c10c2a86f40ec7b229de inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></td></tr>
 <tr class="memitem:a4707ae1423bc3b21a47173d5a1e0980b inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html#a4707ae1423bc3b21a47173d5a1e0980b">ElementWithID</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a4707ae1423bc3b21a47173d5a1e0980b inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,8 +155,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab00c55dce8388ed474d25837edf45f4b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top"><a id="ab00c55dce8388ed474d25837edf45f4b"></a>
 <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:ab00c55dce8388ed474d25837edf45f4b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae8287690fc67018d6bb27c92b1e0c6a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html#aae8287690fc67018d6bb27c92b1e0c6a">addDestroyListener</a> (std::invocable auto &amp;&amp;listener)</td></tr>
-<tr class="separator:aae8287690fc67018d6bb27c92b1e0c6a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
 <tr class="memitem:a8be4a9c177ee4132e4aa3d78cfa78744 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a8be4a9c177ee4132e4aa3d78cfa78744">Renderable</a> (std::string renderableName)</td></tr>
 <tr class="separator:a8be4a9c177ee4132e4aa3d78cfa78744 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,26 +170,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a355a184142f7804afc0f4fd3ab138a58 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="a355a184142f7804afc0f4fd3ab138a58"></a>
 <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> &amp;)=delete</td></tr>
 <tr class="separator:a355a184142f7804afc0f4fd3ab138a58 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5215efda8d593b7ef93b01313dbb5b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#aa5215efda8d593b7ef93b01313dbb5b6">getVisibility</a> () const</td></tr>
-<tr class="separator:aa5215efda8d593b7ef93b01313dbb5b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a873dc0bfab4ca1ac284d8c66f5f34665 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a873dc0bfab4ca1ac284d8c66f5f34665">setVisibility</a> (<a class="el" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> visibility)</td></tr>
-<tr class="separator:a873dc0bfab4ca1ac284d8c66f5f34665 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5490528c2f74496d4af9123cd5641282 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">Enabled&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a5490528c2f74496d4af9123cd5641282">getEnabled</a> () const</td></tr>
-<tr class="separator:a5490528c2f74496d4af9123cd5641282 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15edd6bdbb7f00ab46463cac159c34fc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a15edd6bdbb7f00ab46463cac159c34fc">setEnabled</a> (Enabled eleState)</td></tr>
-<tr class="separator:a15edd6bdbb7f00ab46463cac159c34fc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a188cf4479c7cd627091002ab64833b02 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a188cf4479c7cd627091002ab64833b02">getName</a> () const</td></tr>
 <tr class="separator:a188cf4479c7cd627091002ab64833b02 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Focusable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></td></tr>
-<tr class="memitem:aa997595e3f952fa1e5a6fc6039e9e303 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#aa997595e3f952fa1e5a6fc6039e9e303">addFocusListener</a> (std::invocable&lt; bool &gt; auto &amp;&amp;fnc)</td></tr>
-<tr class="separator:aa997595e3f952fa1e5a6fc6039e9e303 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8eb245af274ec3ec27f8f68d6dd7c0a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#ad8eb245af274ec3ec27f8f68d6dd7c0a">hasFocus</a> () const</td></tr>
-<tr class="separator:ad8eb245af274ec3ec27f8f68d6dd7c0a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></td></tr>
-<tr class="memitem:ad9cfb9a90d18af9742fd3a9f0370a29b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#ad9cfb9a90d18af9742fd3a9f0370a29b">addHoverListener</a> (std::invocable&lt; bool &gt; auto &amp;&amp;fnc)</td></tr>
-<tr class="separator:ad9cfb9a90d18af9742fd3a9f0370a29b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09a1fd0d83c03710f28e84d52be99bcc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#a09a1fd0d83c03710f28e84d52be99bcc">isHovered</a> () const</td></tr>
-<tr class="separator:a09a1fd0d83c03710f28e84d52be99bcc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ElementContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ElementContainer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></td></tr>
 <tr class="memitem:aec4814b83513146905fdf06fbe3e8fb1 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementContainer"><td class="memItemLeft" align="right" valign="top"><a id="aec4814b83513146905fdf06fbe3e8fb1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ElementContainer</b> (<a class="el" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> &amp;&amp;other) noexcept</td></tr>
@@ -240,25 +215,6 @@ template&lt;ElementConstructConfig T&gt; </td></tr>
 <tr class="separator:ab19d0be250ed459dc48476712dfeeebc inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88c621bc4da0aeeefdc9f6bae510405e inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementContainer"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html#a88c621bc4da0aeeefdc9f6bae510405e">getRenderables</a> () override</td></tr>
 <tr class="separator:a88c621bc4da0aeeefdc9f6bae510405e inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html">pf::ui::ig::Collapsible</a></td></tr>
-<tr class="memitem:adafbaa08f4af5fc5f9c41978ec59cdeb inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#adafbaa08f4af5fc5f9c41978ec59cdeb">Collapsible</a> (<a class="el" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a> allowCollapse, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent)</td></tr>
-<tr class="separator:adafbaa08f4af5fc5f9c41978ec59cdeb inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8712e06d999137c0547292c56232e365 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a8712e06d999137c0547292c56232e365">Collapsible</a> (<a class="el" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a> allowCollapse, bool initCollapsed, <a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent)</td></tr>
-<tr class="separator:a8712e06d999137c0547292c56232e365 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a786ad391cf8bd98ca50b87c87eb5084c inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a786ad391cf8bd98ca50b87c87eb5084c">addCollapseListener</a> (std::invocable&lt; bool &gt; auto &amp;&amp;listener)</td></tr>
-<tr class="separator:a786ad391cf8bd98ca50b87c87eb5084c inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21e5a77d248e087d56a1abf93b0a2ef9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a21e5a77d248e087d56a1abf93b0a2ef9">isCollapsed</a> () const</td></tr>
-<tr class="separator:a21e5a77d248e087d56a1abf93b0a2ef9 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a705ca72e9ab61b0679f692ef38373254 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a705ca72e9ab61b0679f692ef38373254">setCollapsed</a> (bool collapsed)</td></tr>
-<tr class="separator:a705ca72e9ab61b0679f692ef38373254 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affb0e55ec3b71e226ac0bf7a3386fff6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#affb0e55ec3b71e226ac0bf7a3386fff6">isCollapsible</a> () const</td></tr>
-<tr class="separator:affb0e55ec3b71e226ac0bf7a3386fff6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a180927aa2931ab6cd27e16848ab9f277 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a180927aa2931ab6cd27e16848ab9f277">setCollapsible</a> (bool collapsible)</td></tr>
-<tr class="separator:a180927aa2931ab6cd27e16848ab9f277 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44b755e443bd9500d43c3d574d8f1d45 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">toml::table&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a44b755e443bd9500d43c3d574d8f1d45">toToml</a> () const override</td></tr>
-<tr class="separator:a44b755e443bd9500d43c3d574d8f1d45 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72d9f79e58c54114b8bc32e46491b829 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Collapsible.html#a72d9f79e58c54114b8bc32e46491b829">setFromToml</a> (const toml::table &amp;src) override</td></tr>
-<tr class="separator:a72d9f79e58c54114b8bc32e46491b829 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Collapsible"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Savable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></td></tr>
 <tr class="memitem:ac79821fa0060c61aeaa38c74054c70ad inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Savable.html#ac79821fa0060c61aeaa38c74054c70ad">Savable</a> (<a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent)</td></tr>
 <tr class="separator:ac79821fa0060c61aeaa38c74054c70ad inherit pub_methods_classpf_1_1ui_1_1ig_1_1Savable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,9 +232,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setPersistent</b> (bo
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4f71173383eab113135d111ad709e473"><td class="memItemLeft" align="right" valign="top"><a id="a4f71173383eab113135d111ad709e473"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a>&#160;</td><td class="memItemRight" valign="bottom"><b>label</b></td></tr>
-<tr class="separator:a4f71173383eab113135d111ad709e473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29aab1360ab650c47926fee127f8f195"><td class="memItemLeft" align="right" valign="top"><a id="a29aab1360ab650c47926fee127f8f195"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>label</b></td></tr>
+<tr class="separator:a29aab1360ab650c47926fee127f8f195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a2ae75b2747da1a0858833c42ad34a9"><td class="memItemLeft" align="right" valign="top"><a id="a7a2ae75b2747da1a0858833c42ad34a9"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>collapsed</b></td></tr>
+<tr class="separator:a7a2ae75b2747da1a0858833c42ad34a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
+<tr class="memitem:a704cf594f8a78cf765e370837d9f5969 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="a704cf594f8a78cf765e370837d9f5969"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, bool, <a class="el" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hovered</b></td></tr>
+<tr class="separator:a704cf594f8a78cf765e370837d9f5969 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b5a9611cb20ac8c4ce8022d55a95d8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="a96b5a9611cb20ac8c4ce8022d55a95d8"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, bool, <a class="el" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>focused</b></td></tr>
+<tr class="separator:a96b5a9611cb20ac8c4ce8022d55a95d8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0dfc943bf8c9cc7bf713847b9efb1a5 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="ad0dfc943bf8c9cc7bf713847b9efb1a5"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <a class="el" href="structpf_1_1ui_1_1ig_1_1Position.html">Position</a>, <a class="el" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mousePosition</b></td></tr>
+<tr class="separator:ad0dfc943bf8c9cc7bf713847b9efb1a5 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classpf_1_1ui_1_1ig_1_1Element"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classpf_1_1ui_1_1ig_1_1Element')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></td></tr>
+<tr class="memitem:a81613e80bf3d2b85bf4264bc0e9405dc inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top">ClassEvent&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html#a81613e80bf3d2b85bf4264bc0e9405dc">destroyEvent</a></td></tr>
+<tr class="separator:a81613e80bf3d2b85bf4264bc0e9405dc inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
+<tr class="memitem:ac7b013e9f6616aa9c6dc0d6fb3bc2ed8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="ac7b013e9f6616aa9c6dc0d6fb3bc2ed8"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; <a class="el" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>visibility</b> {Visibility::Visible}</td></tr>
+<tr class="separator:ac7b013e9f6616aa9c6dc0d6fb3bc2ed8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf96ce7bba378907684f97398566919 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="acdf96ce7bba378907684f97398566919"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>enabled</b> {true}</td></tr>
+<tr class="separator:acdf96ce7bba378907684f97398566919 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classpf_1_1ui_1_1ig_1_1RenderablesContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classpf_1_1ui_1_1ig_1_1RenderablesContainer')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1RenderablesContainer.html">pf::ui::ig::RenderablesContainer</a></td></tr>
 <tr class="memitem:a48c56eac13bfdb71dc52326b71612e38 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1RenderablesContainer"><td class="memItemLeft" align="right" valign="top"><a id="a48c56eac13bfdb71dc52326b71612e38"></a>
 <a class="el" href="ColorPalette_8h.html#a468a3baee5e4709df9dee89cf4e641c8">FullColorPalette</a>&#160;</td><td class="memItemRight" valign="bottom"><b>color</b></td></tr>
@@ -294,6 +273,13 @@ Public Attributes</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:aee38c83838caa54808cf72bfd335e18f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html#aee38c83838caa54808cf72bfd335e18f">renderImpl</a> () override</td></tr>
 <tr class="separator:aee38c83838caa54808cf72bfd335e18f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
+<tr class="memitem:ab681c9adb274fb8ac8e019e24138187e inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="ab681c9adb274fb8ac8e019e24138187e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setHovered</b> (bool newHovered)</td></tr>
+<tr class="separator:ab681c9adb274fb8ac8e019e24138187e inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e115868ebfd0a3e54dd43c0ba05d0df inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="a2e115868ebfd0a3e54dd43c0ba05d0df"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFocused</b> (bool newFocused)</td></tr>
+<tr class="separator:a2e115868ebfd0a3e54dd43c0ba05d0df inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ElementWithID')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></td></tr>
 <tr class="memitem:a2c460e4e242aef394e25636cb3ae25a1 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td class="memItemLeft" align="right" valign="top"><a id="a2c460e4e242aef394e25636cb3ae25a1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (ImGuiID newId)</td></tr>
@@ -302,19 +288,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (ImGuiID ne
 <tr class="memitem:a4449139cf826dd07f5a7766cf0ccd8da inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="a4449139cf826dd07f5a7766cf0ccd8da"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::string newName)</td></tr>
 <tr class="separator:a4449139cf826dd07f5a7766cf0ccd8da inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Focusable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></td></tr>
-<tr class="memitem:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a5e95eaf5fa6175bfa7fe2e86648e1f92">updateFocused</a> (bool focus)</td></tr>
-<tr class="separator:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></td></tr>
-<tr class="memitem:a6465fd6427653055a8ef5c52bdb4109c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#a6465fd6427653055a8ef5c52bdb4109c">setHovered</a> (bool hover)</td></tr>
-<tr class="separator:a6465fd6427653055a8ef5c52bdb4109c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Group of elements which is visually delimited with a header. </p>
 <p>Elements are rendered in top-down order. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a12080f35b4591658a308dfdcf51790c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12080f35b4591658a308dfdcf51790c0">&#9670;&nbsp;</a></span>Expander() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a12080f35b4591658a308dfdcf51790c0">&#9670;&nbsp;</a></span>Expander() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -346,8 +326,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::str
 
 </div>
 </div>
-<a id="a1f688f0a45549cc69bb4c4b423ef1275"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f688f0a45549cc69bb4c4b423ef1275">&#9670;&nbsp;</a></span>Expander() <span class="overload">[2/3]</span></h2>
+<a id="aebf80d8a74de8ba44aeff7a4e10c70a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebf80d8a74de8ba44aeff7a4e10c70a3">&#9670;&nbsp;</a></span>Expander() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -368,13 +348,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::str
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a>&#160;</td>
-          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a>&#160;</td>
-          <td class="paramname"><em>allowCollapse</em> = <code>AllowCollapse::Yes</code>&#160;</td>
+          <td class="paramname"><em>persistent</em> = <code>Persistent::No</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -387,50 +361,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::str
   <table class="params">
     <tr><td class="paramname">elementName</td><td>ID of the group </td></tr>
     <tr><td class="paramname">labelText</td><td>text drawn on top of the <a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html" title="Group of elements which is visually delimited with a header.">Expander</a> </td></tr>
-    <tr><td class="paramname">persistent</td><td>enable state saving to disk </td></tr>
-    <tr><td class="paramname">allowCollapse</td><td>show button for collapsing the <a class="el" href="classpf_1_1ui_1_1ig_1_1Expander.html" title="Group of elements which is visually delimited with a header.">Expander</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="af6cef8300d86cad0bf1d37b86674b43f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6cef8300d86cad0bf1d37b86674b43f">&#9670;&nbsp;</a></span>Expander() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pf::ui::ig::Expander::Expander </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>elementName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>labelText</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="enums_8h.html#a9ddf60f30df4e231fc6ee7a52e8cfac3">AllowCollapse</a>&#160;</td>
-          <td class="paramname"><em>allowCollapse</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Construct Group. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">elementName</td><td>ID of the group </td></tr>
-    <tr><td class="paramname">labelText</td><td>text drawn on top of the group </td></tr>
-    <tr><td class="paramname">allowCollapse</td><td>show button for collapsing the group </td></tr>
+    <tr><td class="paramname">persistent</td><td>enable/disable state saving </td></tr>
   </table>
   </dd>
 </dl>
@@ -463,6 +394,68 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::str
 <p>Implementation of rendering without checks for visibility etc. This should do pure rendering, nothing else. </p>
 
 <p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a34318266adce6dae02e29a762cb4287c">pf::ui::ig::Renderable</a>.</p>
+
+</div>
+</div>
+<a id="aa7c9304aa25b4ee709c6492e4fc971ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7c9304aa25b4ee709c6492e4fc971ad">&#9670;&nbsp;</a></span>setFromToml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pf::ui::ig::Expander::setFromToml </td>
+          <td>(</td>
+          <td class="paramtype">const toml::table &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Load data from toml. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>source toml data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1TomlSerializable.html#aba0bee96c7a644b34f1f38bc24237f3c">pf::ui::ig::TomlSerializable</a>.</p>
+
+</div>
+</div>
+<a id="abd055b0c33e64573de84eb71e7291974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd055b0c33e64573de84eb71e7291974">&#9670;&nbsp;</a></span>toToml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">toml::table pf::ui::ig::Expander::toToml </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Save data to toml. </p><dl class="section return"><dt>Returns</dt><dd>toml::table if saving is enabled, nullopt otherwise </dd></dl>
+
+<p>Implements <a class="el" href="classpf_1_1ui_1_1ig_1_1TomlSerializable.html#a4a816893c22cb7853f9058960d86e66b">pf::ui::ig::TomlSerializable</a>.</p>
 
 </div>
 </div>

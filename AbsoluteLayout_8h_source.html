@@ -78,9 +78,9 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_common/algorithms.h&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Layout_8h.html">pf_imgui/interface/Layout.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="PositionDecorator_8h.html">pf_imgui/interface/decorators/PositionDecorator.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="meta_8h.html">pf_imgui/meta.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Position_8h.html">pf_imgui/common/Position.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ConfigConstruction_8h.html">pf_imgui/concepts/ConfigConstruction.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Layout_8h.html">pf_imgui/interface/Layout.h</a>&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;range/v3/view/addressof.hpp&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;range/v3/view/transform.hpp&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
@@ -109,55 +109,51 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a> std::derived_from&lt;T, Element&gt; &amp;&amp; std::constructible_from&lt;T, Args...&gt;</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a6a3a715878a9640b45e8ed46e87753b7">   84</a></span>&#160;  <span class="keyword">auto</span> &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a6a3a715878a9640b45e8ed46e87753b7">createChild</a>(ImVec2 position, Args &amp;&amp;...args) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    constexpr <span class="keyword">auto</span> IsPositionable = std::derived_from&lt;T, Positionable&gt;;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">using</span> CreateType = std::conditional_t&lt;IsPositionable, T, PositionDecorator&lt;T&gt;&gt;;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">auto</span> child = std::make_unique&lt;CreateType&gt;(position, std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = child.get();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    children.emplace_back(std::move(child), <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classpf_1_1ui_1_1ig_1_1Positionable.html">Positionable</a> *<span class="keyword">&gt;</span>(ptr));</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keyword">template</span>&lt;ElementConstructConfig T&gt;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keyword">typename</span> T::Parent &amp;createChild(ImVec2 position, T &amp;&amp;config) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    constexpr <span class="keyword">auto</span> IsPositionable = std::derived_from&lt;typename T::Parent, Positionable&gt;;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">using</span> CreateType = std::conditional_t&lt;IsPositionable, typename T::Parent, PositionDecorator&lt;typename T::Parent&gt;&gt;;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span> child = std::make_unique&lt;CreateType&gt;(position, std::forward&lt;T&gt;(config));</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = child.get();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    children.emplace_back(std::move(child), <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classpf_1_1ui_1_1ig_1_1Positionable.html">Positionable</a> *<span class="keyword">&gt;</span>(ptr));</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordtype">void</span> setChildPosition(<span class="keyword">const</span> std::string &amp;childName, Position position);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordtype">void</span> removeChild(<span class="keyword">const</span> std::string &amp;childName);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  std::vector&lt;std::pair&lt;std::unique_ptr&lt;Element&gt;, Positionable *&gt;&gt; children;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a8a5b1e3a97364be89b24145cad220db7">   84</a></span>&#160;  <span class="keyword">auto</span> &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a8a5b1e3a97364be89b24145cad220db7">createChild</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Position.html">Position</a> position, Args &amp;&amp;...args) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">auto</span> child = std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = child.get();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    children.emplace_back(std::move(child), position);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">template</span>&lt;ElementConstructConfig T&gt;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keyword">typename</span> T::Parent &amp;createChild(<a class="code" href="structpf_1_1ui_1_1ig_1_1Position.html">Position</a> position, T &amp;&amp;config) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">auto</span> child = std::make_unique&lt;T&gt;(std::forward&lt;T&gt;(config));</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> ptr = child.get();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    children.emplace_back(std::move(child), position);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> *ptr;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordtype">void</span> setChildPosition(<span class="keyword">const</span> std::string &amp;childName, Position position);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordtype">void</span> removeChild(<span class="keyword">const</span> std::string &amp;childName);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  std::vector&lt;std::pair&lt;std::unique_ptr&lt;Element&gt;, Position&gt;&gt; children;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;};</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_LAYOUTS_ABSOLUTELAYOUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aPositionDecorator_8h_html"><div class="ttname"><a href="PositionDecorator_8h.html">PositionDecorator.h</a></div><div class="ttdoc">Decorator for non-positionable elements.</div></div>
+<div class="ttc" id="aConfigConstruction_8h_html"><div class="ttname"><a href="ConfigConstruction_8h.html">ConfigConstruction.h</a></div><div class="ttdoc">Concepts for config construction.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1AbsoluteLayout_1_1Config_html_aaad8484a73e36dc51415a305e396a633"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1AbsoluteLayout_1_1Config.html#aaad8484a73e36dc51415a305e396a633">pf::ui::ig::AbsoluteLayout::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:39</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AbsoluteLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html">pf::ui::ig::AbsoluteLayout</a></div><div class="ttdoc">A layout which positions it's children in their given coordinates.</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:32</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1AbsoluteLayout_1_1Config_html_abb1ca808bdb1d3e2524982e40d02ab6a"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1AbsoluteLayout_1_1Config.html#abb1ca808bdb1d3e2524982e40d02ab6a">pf::ui::ig::AbsoluteLayout::Config::size</a></div><div class="ttdeci">Explicit&lt; Size &gt; size</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:40</div></div>
-<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:185</div></div>
+<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:186</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Base class for anythin which can be considered a UI element.</div><div class="ttdef"><b>Definition:</b> Element.h:22</div></div>
 <div class="ttc" id="aenums_8h_html_a8bbe7dfc4a6fb580f03f46237d91dadb"><div class="ttname"><a href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">pf::ui::ig::ShowBorder</a></div><div class="ttdeci">ShowBorder</div><div class="ttdef"><b>Definition:</b> enums.h:85</div></div>
 <div class="ttc" id="aLayout_8h_html"><div class="ttname"><a href="Layout_8h.html">Layout.h</a></div><div class="ttdoc">Base class for layouts.</div></div>
-<div class="ttc" id="ameta_8h_html"><div class="ttname"><a href="meta_8h.html">meta.h</a></div><div class="ttdoc">Meta helpers for pf_imgui.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:87</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1AbsoluteLayout_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1AbsoluteLayout_1_1Config.html">pf::ui::ig::AbsoluteLayout::Config</a></div><div class="ttdoc">Struct for construction of AbsoluteLayout.</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:37</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AbsoluteLayout_html_a42c0f305d49bd1112eb29c8cbf0242e7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a42c0f305d49bd1112eb29c8cbf0242e7">pf::ui::ig::AbsoluteLayout::getChildren</a></div><div class="ttdeci">auto getChildren()</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:61</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AbsoluteLayout_html_a6a3a715878a9640b45e8ed46e87753b7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a6a3a715878a9640b45e8ed46e87753b7">pf::ui::ig::AbsoluteLayout::createChild</a></div><div class="ttdeci">requires std::derived_from&lt; T, Element &gt; &amp;&amp;std::constructible_from&lt; T, Args... &gt; auto &amp; createChild(ImVec2 position, Args &amp;&amp;...args)</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:84</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Positionable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Positionable.html">pf::ui::ig::Positionable</a></div><div class="ttdoc">Interface for positionable elements.</div><div class="ttdef"><b>Definition:</b> Positionable.h:24</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AbsoluteLayout_html_a8a5b1e3a97364be89b24145cad220db7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#a8a5b1e3a97364be89b24145cad220db7">pf::ui::ig::AbsoluteLayout::createChild</a></div><div class="ttdeci">requires std::derived_from&lt; T, Element &gt; &amp;&amp;std::constructible_from&lt; T, Args... &gt; auto &amp; createChild(Position position, Args &amp;&amp;...args)</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:84</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Position_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Position.html">pf::ui::ig::Position</a></div><div class="ttdoc">Position relative to left top corner of some area.</div><div class="ttdef"><b>Definition:</b> Position.h:20</div></div>
+<div class="ttc" id="aPosition_8h_html"><div class="ttname"><a href="Position_8h.html">Position.h</a></div><div class="ttdoc">Type used for position in pf_imgui.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AbsoluteLayout_html_af9add2a520642aa0e634a7deacffe3a9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AbsoluteLayout.html#af9add2a520642aa0e634a7deacffe3a9">pf::ui::ig::AbsoluteLayout::getChildren</a></div><div class="ttdeci">auto getChildren() const</div><div class="ttdef"><b>Definition:</b> AbsoluteLayout.h:68</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Layout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></div><div class="ttdoc">Base class for layouts.</div><div class="ttdef"><b>Definition:</b> Layout.h:27</div></div>
 <!-- start footer part -->

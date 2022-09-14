@@ -74,69 +74,65 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_INTERFACE_ITEMELEMENT_H</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_INTERFACE_ITEMELEMENT_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ElementWithID_8h.html">ElementWithID.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Focusable_8h.html">Focusable.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Hoverable_8h.html">Hoverable.h</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Position_8h.html">pf_imgui/Position.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="PopupMenu_8h.html">pf_imgui/elements/PopupMenu.h</a>&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Tooltip_8h.html">pf_imgui/elements/Tooltip.h</a>&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Position_8h.html">pf_imgui/common/Position.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="fwd_8h.html">pf_imgui/fwd.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementWithID_8h.html">pf_imgui/interface/ElementWithID.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Observable_8h.html">pf_imgui/reactive/Observable.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">   29</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Focusable.html">Focusable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">Hoverable</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(<span class="keyword">const</span> std::string &amp;elementName);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> &amp;&amp;other) noexcept;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> &amp;operator=(<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> &amp;&amp;other) noexcept;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1Tooltip.html">Tooltip</a> &amp;createOrGetTooltip();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasTooltip() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> removeTooltip();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordtype">void</span> setTooltip(std::string_view text);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> setTooltip(std::unique_ptr&lt;Tooltip&gt; &amp;&amp;newTooltip);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">PopupMenu</a> &amp;createOrGetPopupMenu();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasPopupMenu() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordtype">void</span> removePopupMenu();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a0ce9f9c88cf4b73b7993b44edfc7106a">   93</a></span>&#160;  Subscription <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a0ce9f9c88cf4b73b7993b44edfc7106a">addMousePositionListener</a>(std::invocable&lt;Position&gt; <span class="keyword">auto</span> &amp;&amp;listener) {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> mousePositionObservable.addListener(std::forward&lt;decltype(listener)&gt;(listener));</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">void</span> setFocus() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">   27</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a> {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(<span class="keyword">const</span> std::string &amp;elementName);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  ~<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> &amp;&amp;other) noexcept;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> &amp;operator=(<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> &amp;&amp;other) noexcept;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">void</span> render() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1Tooltip.html">Tooltip</a> &amp;createOrGetTooltip();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasTooltip() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> removeTooltip();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> setTooltip(std::string_view text);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> setTooltip(std::unique_ptr&lt;Tooltip&gt; &amp;&amp;newTooltip);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">PopupMenu</a> &amp;createOrGetPopupMenu();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasPopupMenu() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordtype">void</span> removePopupMenu();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty&lt;ItemElement, bool, ReadOnlyTag&gt;</a> hovered;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty&lt;ItemElement, bool, ReadOnlyTag&gt;</a> focused;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty&lt;ItemElement, Position, ReadOnlyTag&gt;</a> mousePosition;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">void</span> setHovered(<span class="keywordtype">bool</span> newHovered);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">void</span> setFocused(<span class="keywordtype">bool</span> newFocused);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  std::unique_ptr&lt;Tooltip&gt; tooltip;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  std::unique_ptr&lt;PopupMenu&gt; popupMenu;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  ImVec2 lastMousePosition{-1, -1};</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  std::unique_ptr&lt;Tooltip&gt; tooltip = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  std::unique_ptr&lt;PopupMenu&gt; popupMenu = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  ImVec2 lastMousePosition{-1, -1};</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  Observable_impl&lt;Position&gt; mousePositionObservable;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_INTERFACE_ITEMELEMENT_H</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_INTERFACE_ITEMELEMENT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aFocusable_8h_html"><div class="ttname"><a href="Focusable_8h.html">Focusable.h</a></div><div class="ttdoc">Interface for elements which can hold focus.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html_a0ce9f9c88cf4b73b7993b44edfc7106a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a0ce9f9c88cf4b73b7993b44edfc7106a">pf::ui::ig::ItemElement::addMousePositionListener</a></div><div class="ttdeci">Subscription addMousePositionListener(std::invocable&lt; Position &gt; auto &amp;&amp;listener)</div><div class="ttdef"><b>Definition:</b> ItemElement.h:93</div></div>
-<div class="ttc" id="aTooltip_8h_html"><div class="ttname"><a href="Tooltip_8h.html">Tooltip.h</a></div><div class="ttdoc">Tooltip element.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Hoverable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></div><div class="ttdoc">Interface for hoverable elements.</div><div class="ttdef"><b>Definition:</b> Hoverable.h:21</div></div>
+<div class="ttc" id="afwd_8h_html"><div class="ttname"><a href="fwd_8h.html">fwd.h</a></div><div class="ttdoc">Forward declarations.</div></div>
 <div class="ttc" id="aElementWithID_8h_html"><div class="ttname"><a href="ElementWithID_8h.html">ElementWithID.h</a></div><div class="ttdoc">Base class for objects which can be considered UI elements and need ID or/and a font.</div></div>
-<div class="ttc" id="aHoverable_8h_html"><div class="ttname"><a href="Hoverable_8h.html">Hoverable.h</a></div><div class="ttdoc">Interface for elements which can be hovered.</div></div>
-<div class="ttc" id="aPopupMenu_8h_html"><div class="ttname"><a href="PopupMenu_8h.html">PopupMenu.h</a></div><div class="ttdoc">Popup menu usually shown when right clicking.</div></div>
+<div class="ttc" id="aObservable_8h_html"><div class="ttname"><a href="Observable_8h.html">Observable.h</a></div><div class="ttdoc">Observable properties.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
 <div class="ttc" id="aPosition_8h_html"><div class="ttname"><a href="Position_8h.html">Position.h</a></div><div class="ttdoc">Type used for position in pf_imgui.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Focusable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></div><div class="ttdoc">Interface for focusable elements.</div><div class="ttdef"><b>Definition:</b> Focusable.h:21</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementWithID_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></div><div class="ttdoc">Interface for all ImGui elements with IDs.</div><div class="ttdef"><b>Definition:</b> ElementWithID.h:31</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementWithID_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></div><div class="ttdoc">Interface for all ImGui elements with IDs.</div><div class="ttdef"><b>Definition:</b> ElementWithID.h:29</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1PopupMenu_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1PopupMenu.html">pf::ui::ig::PopupMenu</a></div><div class="ttdoc">Popup menu to be used for example when right clicking an element.</div><div class="ttdef"><b>Definition:</b> PopupMenu.h:22</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Tooltip_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Tooltip.html">pf::ui::ig::Tooltip</a></div><div class="ttdoc">Tooltip to display when hovering over elements.</div><div class="ttdef"><b>Definition:</b> Tooltip.h:23</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

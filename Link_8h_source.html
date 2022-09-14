@@ -77,13 +77,13 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;fwd.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;imgui_node_editor.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="PopupMenu_8h.html">pf_imgui/elements/PopupMenu.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Hoverable_8h.html">pf_imgui/interface/Hoverable.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Renderable_8h.html">pf_imgui/interface/Renderable.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Renderable_8h.html">pf_imgui/interface/Renderable.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Observable_8h.html">pf_imgui/reactive/Observable.h</a>&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Link.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Link.html">Link</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">Hoverable</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Link.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Link.html">Link</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1NodeEditor.html">NodeEditor</a>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html">Pin</a>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
@@ -127,31 +127,35 @@ $(function() {
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordtype">void</span> setId(ax::NodeEditor::LinkId newId);</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Link.html#a7324bbb5f86f8f477b1659b14a0c14e8">renderImpl</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  ax::NodeEditor::LinkId id;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty&lt;Link, bool, ReadOnlyTag&gt;</a> hovered;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Link.html#a7324bbb5f86f8f477b1659b14a0c14e8">renderImpl</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html">Pin</a> *inputPin;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html">Pin</a> *outputPin;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> color = Color::White;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordtype">float</span> thickness = 1.0f;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keywordtype">bool</span> flowEnabled = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  std::unique_ptr&lt;PopupMenu&gt; popupMenu = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keywordtype">bool</span> selected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> observableSelected;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;&gt;</a> observableDelete;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;&gt;</a> observableDoubleClick;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;};</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_NODE_EDITOR_LINK_H</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordtype">void</span> setHovered(<span class="keywordtype">bool</span> newHovered);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  ax::NodeEditor::LinkId id;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html">Pin</a> *inputPin;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Pin.html">Pin</a> *outputPin;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> color = Color::White;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordtype">float</span> thickness = 1.0f;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keywordtype">bool</span> flowEnabled = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  std::unique_ptr&lt;PopupMenu&gt; popupMenu = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">bool</span> selected = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;bool&gt;</a> observableSelected;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;&gt;</a> observableDelete;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">Observable_impl&lt;&gt;</a> observableDoubleClick;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;};</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_NODE_EDITOR_LINK_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a5b1be14fdba256fe5bd66cda0499919a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a5b1be14fdba256fe5bd66cda0499919a">pf::ui::ig::Link::setColor</a></div><div class="ttdeci">void setColor(Color newColor)</div><div class="ttdef"><b>Definition:</b> Link.cpp:27</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_aa0b3b11319549729395743c7e8cae4b7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#aa0b3b11319549729395743c7e8cae4b7">pf::ui::ig::Link::select</a></div><div class="ttdeci">void select(bool appendToSelection=false)</div><div class="ttdef"><b>Definition:</b> Link.cpp:44</div></div>
@@ -167,19 +171,19 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_ab593c5fa454830da76760f49108d4d57"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#ab593c5fa454830da76760f49108d4d57">pf::ui::ig::Link::disableFlow</a></div><div class="ttdeci">void disableFlow()</div><div class="ttdef"><b>Definition:</b> Link.cpp:50</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_ab98b7c2bbb59df067c33ba9ef1fb0a12"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#ab98b7c2bbb59df067c33ba9ef1fb0a12">pf::ui::ig::Link::createOrGetPopupMenu</a></div><div class="ttdeci">PopupMenu &amp; createOrGetPopupMenu()</div><div class="ttdef"><b>Definition:</b> Link.cpp:33</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_af687967944e6308e7c339e76b07fd56a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#af687967944e6308e7c339e76b07fd56a">pf::ui::ig::Link::getThickness</a></div><div class="ttdeci">float getThickness() const</div><div class="ttdef"><b>Definition:</b> Link.cpp:29</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Hoverable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></div><div class="ttdoc">Interface for hoverable elements.</div><div class="ttdef"><b>Definition:</b> Hoverable.h:21</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html">pf::ui::ig::Pin</a></div><div class="ttdoc">A Pin to be placed inside Node.</div><div class="ttdef"><b>Definition:</b> Pin.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Pin_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Pin.html">pf::ui::ig::Pin</a></div><div class="ttdoc">A Pin to be placed inside Node.</div><div class="ttdef"><b>Definition:</b> Pin.h:28</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a730ef508b70a30d537f4baf9ce456447"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a730ef508b70a30d537f4baf9ce456447">pf::ui::ig::Link::setThickness</a></div><div class="ttdeci">void setThickness(float newThickness)</div><div class="ttdef"><b>Definition:</b> Link.cpp:31</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html">pf::ui::ig::Link</a></div><div class="ttdoc">Link connecting two Pins in NodeEditor.</div><div class="ttdef"><b>Definition:</b> Link.h:23</div></div>
-<div class="ttc" id="aHoverable_8h_html"><div class="ttname"><a href="Hoverable_8h.html">Hoverable.h</a></div><div class="ttdoc">Interface for elements which can be hovered.</div></div>
+<div class="ttc" id="aObservable_8h_html"><div class="ttname"><a href="Observable_8h.html">Observable.h</a></div><div class="ttdoc">Observable properties.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a8bac95c34a6002a1236afb15328f585f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a8bac95c34a6002a1236afb15328f585f">pf::ui::ig::Link::deselect</a></div><div class="ttdeci">void deselect()</div><div class="ttdef"><b>Definition:</b> Link.cpp:46</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a3af4eec74409b92f6f2a3ec9c38571eb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a3af4eec74409b92f6f2a3ec9c38571eb">pf::ui::ig::Link::isValid</a></div><div class="ttdeci">bool isValid() const</div><div class="ttdef"><b>Definition:</b> Link.cpp:21</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a7324bbb5f86f8f477b1659b14a0c14e8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a7324bbb5f86f8f477b1659b14a0c14e8">pf::ui::ig::Link::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Link.cpp:54</div></div>
 <div class="ttc" id="aPopupMenu_8h_html"><div class="ttname"><a href="PopupMenu_8h.html">PopupMenu.h</a></div><div class="ttdoc">Popup menu usually shown when right clicking.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a9efad18925ef6f552f24eaa191ea00e3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a9efad18925ef6f552f24eaa191ea00e3">pf::ui::ig::Link::getInputPin</a></div><div class="ttdeci">Pin &amp; getInputPin() const</div><div class="ttdef"><b>Definition:</b> Link.cpp:17</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:25</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:26</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a7237b8649e39b0f02d75e93e649805c8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a7237b8649e39b0f02d75e93e649805c8">pf::ui::ig::Link::removePopupMenu</a></div><div class="ttdeci">void removePopupMenu()</div><div class="ttdef"><b>Definition:</b> Link.cpp:40</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1NodeEditor_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1NodeEditor.html">pf::ui::ig::NodeEditor</a></div><div class="ttdoc">Class allowing for node editing.</div><div class="ttdef"><b>Definition:</b> NodeEditor.h:33</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1NodeEditor_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1NodeEditor.html">pf::ui::ig::NodeEditor</a></div><div class="ttdoc">Class allowing for node editing.</div><div class="ttdef"><b>Definition:</b> NodeEditor.h:34</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a5421b219c7915ffc18a358fe977b5ec5"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a5421b219c7915ffc18a358fe977b5ec5">pf::ui::ig::Link::enableFlow</a></div><div class="ttdeci">void enableFlow()</div><div class="ttdef"><b>Definition:</b> Link.cpp:48</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Link_html_a1907da72a14a3043fecdaae5f63e87bd"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Link.html#a1907da72a14a3043fecdaae5f63e87bd">pf::ui::ig::Link::getColor</a></div><div class="ttdeci">Color getColor() const</div><div class="ttdef"><b>Definition:</b> Link.cpp:25</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html">pf::ui::ig::Observable_impl&lt; bool &gt;</a></div></div>

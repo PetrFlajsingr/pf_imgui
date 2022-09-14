@@ -76,8 +76,8 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/enums.h&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Label_8h.html">pf_imgui/Label.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Label_8h.html">pf_imgui/common/Label.h</a>&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="CustomItemBox_8h.html">pf_imgui/elements/CustomItemBox.h</a>&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
@@ -106,7 +106,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a23e2943b6326ba078b6e866a3c88b65d">   67</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a23e2943b6326ba078b6e866a3c88b65d">close</a>() { shouldClose = <span class="keyword">true</span>; }</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> label;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Label&gt;</a> label;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
@@ -154,7 +154,7 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = this-&gt;style.applyScoped();</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = this-&gt;font.applyScopedIfNotDefault();</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *previewPtr = previewValue.c_str();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginCombo(label.get().c_str(), previewPtr, *flags)) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginCombo(label-&gt;get().c_str(), previewPtr, *flags)) {</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    RAII end{ImGui::EndCombo};</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    checkClose();</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    std::ranges::for_each(<a class="code" href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">CustomItemBox&lt;T, R&gt;::filteredItems</a>, [](<span class="keyword">auto</span> item) { item-&gt;second-&gt;<a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">render</a>(); });</div>
@@ -175,12 +175,12 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomItemBox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomItemBox.html">pf::ui::ig::CustomItemBox</a></div><div class="ttdoc">Box containing items provided by user based on stored type.</div><div class="ttdef"><b>Definition:</b> CustomItemBox.h:42</div></div>
 <div class="ttc" id="aCustomItemBox_8h_html"><div class="ttname"><a href="CustomItemBox_8h.html">CustomItemBox.h</a></div><div class="ttdoc">Customizable item container.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html_a23e2943b6326ba078b6e866a3c88b65d"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a23e2943b6326ba078b6e866a3c88b65d">pf::ui::ig::CustomCombobox::close</a></div><div class="ttdeci">void close()</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:67</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Label_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Label.html">pf::ui::ig::Label</a></div><div class="ttdoc">Label for UI elements.</div><div class="ttdef"><b>Definition:</b> Label.h:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html">pf::ui::ig::CustomCombobox</a></div><div class="ttdoc">Combobox where rows can be whatever is provided by the user.</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:36</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
 <div class="ttc" id="aLabel_8h_html"><div class="ttname"><a href="Label_8h.html">Label.h</a></div><div class="ttdoc">Class representing element's label.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html_ac3dbf1e85cf69d7338d62a371c2b3c17"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#ac3dbf1e85cf69d7338d62a371c2b3c17">pf::ui::ig::CustomCombobox::CustomCombobox</a></div><div class="ttdeci">CustomCombobox(const std::string &amp;elementName, const std::string &amp;labelText, CustomItemBoxFactory&lt; T, R &gt; auto &amp;&amp;rowFactory, std::string prevValue=&quot;&quot;, ComboBoxCount showItemCount=ComboBoxCount::Items8)</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:92</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html_a771e463a254223e73652e894bd0a472b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html#a771e463a254223e73652e894bd0a472b">pf::ui::ig::CustomCombobox::closeNow</a></div><div class="ttdeci">void closeNow()</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:77</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html_ac9485e0ac1206b1a271525c74cba08f9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">pf::ui::ig::ItemElement::render</a></div><div class="ttdeci">void render() override</div><div class="ttdef"><b>Definition:</b> ItemElement.cpp:24</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html_ac9485e0ac1206b1a271525c74cba08f9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html#ac9485e0ac1206b1a271525c74cba08f9">pf::ui::ig::ItemElement::render</a></div><div class="ttdeci">void render() override</div><div class="ttdef"><b>Definition:</b> ItemElement.cpp:28</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

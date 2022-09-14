@@ -71,54 +71,55 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="WidthDecorator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_INTERFACE_DECORATORS_WIDTHDECORATOR_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_INTERFACE_DECORATORS_WIDTHDECORATOR_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Resizable_8h.html">pf_imgui/interface/Resizable.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;std::derived_from&lt;ItemElement&gt; T&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a>(!std::derived_from&lt;T, Resizable&gt;)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT WidthDecorator : <span class="keyword">public</span> T {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Size_8h.html">pf_imgui/common/Size.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Observable_8h.html">pf_imgui/reactive/Observable.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;std::derived_from&lt;ItemElement&gt; T&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html">   27</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html">WidthDecorator</a> : <span class="keyword">public</span> T {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">struct </span>Config {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">using</span> Parent = WidthDecorator;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1WidthDecorator_1_1Config.html">   29</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1WidthDecorator_1_1Config.html">Config</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html">WidthDecorator</a>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    Explicit&lt;Width&gt; width;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">typename</span> T::Config config;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">operator</span> <span class="keyword">typename</span> T::Config() { <span class="keywordflow">return</span> config; }</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  };</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a> std::constructible_from&lt;T, Args...&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">explicit</span> WidthDecorator(Width elementWidth, Args &amp;&amp;...args) : T(std::forward&lt;Args&gt;(args)...), width(elementWidth) {}</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html#a0ec4fa3e6e69ab4d16d71f12c2ca4575">   43</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html#a0ec4fa3e6e69ab4d16d71f12c2ca4575">WidthDecorator</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Width.html">Width</a> elementWidth, Args &amp;&amp;...args) : T(std::forward&lt;Args&gt;(args)...), width(elementWidth) {}</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">explicit</span> WidthDecorator(Config &amp;&amp;config) : T(std::move(config.config)), width(config.width) {}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html">WidthDecorator</a>(Config &amp;&amp;config) : T(std::move(config.config)), width(config.width) {}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  [[nodiscard]] Width getWidth()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> width; }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">void</span> setWidth(Width newWidth) { width = newWidth; }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordtype">void</span> renderImpl()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    ImGui::SetNextItemWidth(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(width));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    T::renderImpl();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  Width width;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_SRC_PF_IMGUI_ELEMENTS_DECORATORS_RESIZABLEDECORATOR_H</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  Observable&lt;Width&gt; width;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">void</span> renderImpl()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ImGui::SetNextItemWidth(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*width));</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    T::renderImpl();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_INTERFACE_DECORATORS_WIDTHDECORATOR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:185</div></div>
-<div class="ttc" id="aResizable_8h_html"><div class="ttname"><a href="Resizable_8h.html">Resizable.h</a></div><div class="ttdoc">Interface for elements which can be resized.</div></div>
+<div class="ttc" id="aSize_8h_html"><div class="ttname"><a href="Size_8h.html">Size.h</a></div><div class="ttdoc">Type representing size in pf_imgui.</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1WidthDecorator_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1WidthDecorator_1_1Config.html">pf::ui::ig::WidthDecorator::Config</a></div><div class="ttdef"><b>Definition:</b> WidthDecorator.h:29</div></div>
+<div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:186</div></div>
+<div class="ttc" id="aObservable_8h_html"><div class="ttname"><a href="Observable_8h.html">Observable.h</a></div><div class="ttdoc">Observable properties.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Width_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Width.html">pf::ui::ig::Width</a></div><div class="ttdef"><b>Definition:</b> Size.h:19</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1WidthDecorator_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html">pf::ui::ig::WidthDecorator</a></div><div class="ttdoc">Decorator to change element width.</div><div class="ttdef"><b>Definition:</b> WidthDecorator.h:27</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1WidthDecorator_html_a0ec4fa3e6e69ab4d16d71f12c2ca4575"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1WidthDecorator.html#a0ec4fa3e6e69ab4d16d71f12c2ca4575">pf::ui::ig::WidthDecorator::WidthDecorator</a></div><div class="ttdeci">requires std::constructible_from&lt; T, Args... &gt; WidthDecorator(Width elementWidth, Args &amp;&amp;...args)</div><div class="ttdef"><b>Definition:</b> WidthDecorator.h:43</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -88,12 +88,11 @@ Inheritance diagram for pf::ui::ig::RadioButton:</div>
  <div class="center">
   <img src="classpf_1_1ui_1_1ig_1_1RadioButton.png" usemap="#pf::ui::ig::RadioButton_map" alt=""/>
   <map id="pf::ui::ig::RadioButton_map" name="pf::ui::ig::RadioButton_map">
-<area href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="pf::ui::ig::ItemElement" shape="rect" coords="169,168,328,192"/>
-<area href="classpf_1_1ui_1_1ig_1_1ElementWithID.html" title="Interface for all ImGui elements with IDs." alt="pf::ui::ig::ElementWithID" shape="rect" coords="0,112,159,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Focusable.html" title="Interface for focusable elements." alt="pf::ui::ig::Focusable" shape="rect" coords="169,112,328,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Hoverable.html" title="Interface for hoverable elements." alt="pf::ui::ig::Hoverable" shape="rect" coords="338,112,497,136"/>
-<area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Base class for anythin which can be considered a UI element." alt="pf::ui::ig::Element" shape="rect" coords="0,56,159,80"/>
-<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,159,24"/>
+<area href="classpf_1_1ui_1_1ig_1_1ItemElement.html" title="Interface for elements, which are &#39;leaves&#39; in the UI tree." alt="pf::ui::ig::ItemElement" shape="rect" coords="0,168,830,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ValueContainer.html" alt="pf::ui::ig::ValueContainer&lt; bool &gt;" shape="rect" coords="840,168,1670,192"/>
+<area href="classpf_1_1ui_1_1ig_1_1ElementWithID.html" title="Interface for all ImGui elements with IDs." alt="pf::ui::ig::ElementWithID" shape="rect" coords="0,112,830,136"/>
+<area href="classpf_1_1ui_1_1ig_1_1Element.html" title="Base class for anythin which can be considered a UI element." alt="pf::ui::ig::Element" shape="rect" coords="0,56,830,80"/>
+<area href="classpf_1_1ui_1_1ig_1_1Renderable.html" title="Interface for all renderables." alt="pf::ui::ig::Renderable" shape="rect" coords="0,0,830,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -109,8 +108,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4e465a564f222aa0d7d490b0d6af7c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56dc6557fbd4d5220c54ef98ae4e83a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html#a56dc6557fbd4d5220c54ef98ae4e83a5">RadioButton</a> (const std::string &amp;elementName, const std::string &amp;labelText, bool initialValue=false)</td></tr>
 <tr class="separator:a56dc6557fbd4d5220c54ef98ae4e83a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a003a82f2c449530846ba6c57b07afa34"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html#a003a82f2c449530846ba6c57b07afa34">isSelected</a> () const</td></tr>
-<tr class="separator:a003a82f2c449530846ba6c57b07afa34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a8054a055fce9657243cfc50112c8bb"><td class="memItemLeft" align="right" valign="top"><a id="a0a8054a055fce9657243cfc50112c8bb"></a>
+const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> () const override</td></tr>
+<tr class="separator:a0a8054a055fce9657243cfc50112c8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0600c3c6df2dd303ad1d6c060dd09ecb"><td class="memItemLeft" align="right" valign="top"><a id="a0600c3c6df2dd303ad1d6c060dd09ecb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</b> (const bool &amp;newValue) override</td></tr>
+<tr class="separator:a0600c3c6df2dd303ad1d6c060dd09ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
 <tr class="memitem:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a1edd037f3e2d9f55121f68ffd6d3cba4">ItemElement</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a1edd037f3e2d9f55121f68ffd6d3cba4 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,10 +141,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a97864bd674c475b0b24ae9a2af48fee5 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4554babdbc9c49bb027fa5b79cf7d4b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a4554babdbc9c49bb027fa5b79cf7d4b6">removePopupMenu</a> ()</td></tr>
 <tr class="separator:a4554babdbc9c49bb027fa5b79cf7d4b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ce9f9c88cf4b73b7993b44edfc7106a inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a0ce9f9c88cf4b73b7993b44edfc7106a">addMousePositionListener</a> (std::invocable&lt; <a class="el" href="structpf_1_1ui_1_1ig_1_1Position.html">Position</a> &gt; auto &amp;&amp;listener)</td></tr>
-<tr class="separator:a0ce9f9c88cf4b73b7993b44edfc7106a inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b3eaacffd38c10c2a86f40ec7b229de inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html#a8b3eaacffd38c10c2a86f40ec7b229de">setFocus</a> () override</td></tr>
-<tr class="separator:a8b3eaacffd38c10c2a86f40ec7b229de inherit pub_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></td></tr>
 <tr class="memitem:a4707ae1423bc3b21a47173d5a1e0980b inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html#a4707ae1423bc3b21a47173d5a1e0980b">ElementWithID</a> (const std::string &amp;elementName)</td></tr>
 <tr class="separator:a4707ae1423bc3b21a47173d5a1e0980b inherit pub_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +155,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab00c55dce8388ed474d25837edf45f4b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top"><a id="ab00c55dce8388ed474d25837edf45f4b"></a>
 <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:ab00c55dce8388ed474d25837edf45f4b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae8287690fc67018d6bb27c92b1e0c6a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html#aae8287690fc67018d6bb27c92b1e0c6a">addDestroyListener</a> (std::invocable auto &amp;&amp;listener)</td></tr>
-<tr class="separator:aae8287690fc67018d6bb27c92b1e0c6a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
 <tr class="memitem:a8be4a9c177ee4132e4aa3d78cfa78744 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a8be4a9c177ee4132e4aa3d78cfa78744">Renderable</a> (std::string renderableName)</td></tr>
 <tr class="separator:a8be4a9c177ee4132e4aa3d78cfa78744 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,26 +170,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a355a184142f7804afc0f4fd3ab138a58 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="a355a184142f7804afc0f4fd3ab138a58"></a>
 <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> &amp;)=delete</td></tr>
 <tr class="separator:a355a184142f7804afc0f4fd3ab138a58 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5215efda8d593b7ef93b01313dbb5b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#aa5215efda8d593b7ef93b01313dbb5b6">getVisibility</a> () const</td></tr>
-<tr class="separator:aa5215efda8d593b7ef93b01313dbb5b6 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a873dc0bfab4ca1ac284d8c66f5f34665 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a873dc0bfab4ca1ac284d8c66f5f34665">setVisibility</a> (<a class="el" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> visibility)</td></tr>
-<tr class="separator:a873dc0bfab4ca1ac284d8c66f5f34665 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5490528c2f74496d4af9123cd5641282 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">Enabled&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a5490528c2f74496d4af9123cd5641282">getEnabled</a> () const</td></tr>
-<tr class="separator:a5490528c2f74496d4af9123cd5641282 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15edd6bdbb7f00ab46463cac159c34fc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a15edd6bdbb7f00ab46463cac159c34fc">setEnabled</a> (Enabled eleState)</td></tr>
-<tr class="separator:a15edd6bdbb7f00ab46463cac159c34fc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a188cf4479c7cd627091002ab64833b02 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html#a188cf4479c7cd627091002ab64833b02">getName</a> () const</td></tr>
 <tr class="separator:a188cf4479c7cd627091002ab64833b02 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Focusable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></td></tr>
-<tr class="memitem:aa997595e3f952fa1e5a6fc6039e9e303 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#aa997595e3f952fa1e5a6fc6039e9e303">addFocusListener</a> (std::invocable&lt; bool &gt; auto &amp;&amp;fnc)</td></tr>
-<tr class="separator:aa997595e3f952fa1e5a6fc6039e9e303 inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8eb245af274ec3ec27f8f68d6dd7c0a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#ad8eb245af274ec3ec27f8f68d6dd7c0a">hasFocus</a> () const</td></tr>
-<tr class="separator:ad8eb245af274ec3ec27f8f68d6dd7c0a inherit pub_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></td></tr>
-<tr class="memitem:ad9cfb9a90d18af9742fd3a9f0370a29b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memItemLeft" align="right" valign="top">Subscription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#ad9cfb9a90d18af9742fd3a9f0370a29b">addHoverListener</a> (std::invocable&lt; bool &gt; auto &amp;&amp;fnc)</td></tr>
-<tr class="separator:ad9cfb9a90d18af9742fd3a9f0370a29b inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09a1fd0d83c03710f28e84d52be99bcc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#a09a1fd0d83c03710f28e84d52be99bcc">isHovered</a> () const</td></tr>
-<tr class="separator:a09a1fd0d83c03710f28e84d52be99bcc inherit pub_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; bool &gt;</a></td></tr>
+<tr class="memitem:a9034f0009cd580952dad0fe4dbd3fb79 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a9034f0009cd580952dad0fe4dbd3fb79"></a>
+virtual const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> () const=0</td></tr>
+<tr class="separator:a9034f0009cd580952dad0fe4dbd3fb79 inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c45c254d2b0380984ca17ad113c8da inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a11c45c254d2b0380984ca17ad113c8da"></a>
+Subscription&#160;</td><td class="memItemRight" valign="bottom"><b>addValueListener</b> (std::invocable&lt; bool &gt; auto &amp;&amp;listener)</td></tr>
+<tr class="separator:a11c45c254d2b0380984ca17ad113c8da inherit pub_methods_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -205,14 +191,47 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aaff3d3665e027e28acc2fb53e1cb157d"><td class="memItemLeft" align="right" valign="top"><a id="aaff3d3665e027e28acc2fb53e1cb157d"></a>
 <a class="el" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a>&#160;</td><td class="memItemRight" valign="bottom"><b>font</b> = Font::Default()</td></tr>
 <tr class="separator:aaff3d3665e027e28acc2fb53e1cb157d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73c6d2150b8cdc2afd67e92364b5a633"><td class="memItemLeft" align="right" valign="top"><a id="a73c6d2150b8cdc2afd67e92364b5a633"></a>
-<a class="el" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a>&#160;</td><td class="memItemRight" valign="bottom"><b>label</b></td></tr>
-<tr class="separator:a73c6d2150b8cdc2afd67e92364b5a633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6252cea3f415ffe1eff642ddbdc593"><td class="memItemLeft" align="right" valign="top"><a id="add6252cea3f415ffe1eff642ddbdc593"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Label.html">Label</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>label</b></td></tr>
+<tr class="separator:add6252cea3f415ffe1eff642ddbdc593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dd82de6ef48d584a265f54e943f4902"><td class="memItemLeft" align="right" valign="top"><a id="a0dd82de6ef48d584a265f54e943f4902"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>selected</b></td></tr>
+<tr class="separator:a0dd82de6ef48d584a265f54e943f4902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
+<tr class="memitem:a704cf594f8a78cf765e370837d9f5969 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="a704cf594f8a78cf765e370837d9f5969"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, bool, <a class="el" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hovered</b></td></tr>
+<tr class="separator:a704cf594f8a78cf765e370837d9f5969 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b5a9611cb20ac8c4ce8022d55a95d8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="a96b5a9611cb20ac8c4ce8022d55a95d8"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, bool, <a class="el" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>focused</b></td></tr>
+<tr class="separator:a96b5a9611cb20ac8c4ce8022d55a95d8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0dfc943bf8c9cc7bf713847b9efb1a5 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="ad0dfc943bf8c9cc7bf713847b9efb1a5"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a>, <a class="el" href="structpf_1_1ui_1_1ig_1_1Position.html">Position</a>, <a class="el" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mousePosition</b></td></tr>
+<tr class="separator:ad0dfc943bf8c9cc7bf713847b9efb1a5 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classpf_1_1ui_1_1ig_1_1Element"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classpf_1_1ui_1_1ig_1_1Element')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></td></tr>
+<tr class="memitem:a81613e80bf3d2b85bf4264bc0e9405dc inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Element"><td class="memItemLeft" align="right" valign="top">ClassEvent&lt; <a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Element.html#a81613e80bf3d2b85bf4264bc0e9405dc">destroyEvent</a></td></tr>
+<tr class="separator:a81613e80bf3d2b85bf4264bc0e9405dc inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></td></tr>
+<tr class="memitem:ac7b013e9f6616aa9c6dc0d6fb3bc2ed8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="ac7b013e9f6616aa9c6dc0d6fb3bc2ed8"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; <a class="el" href="enums_8h.html#ab410df4930e8cfbbc9b07653dc3653d0">Visibility</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>visibility</b> {Visibility::Visible}</td></tr>
+<tr class="separator:ac7b013e9f6616aa9c6dc0d6fb3bc2ed8 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf96ce7bba378907684f97398566919 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="acdf96ce7bba378907684f97398566919"></a>
+<a class="el" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>enabled</b> {true}</td></tr>
+<tr class="separator:acdf96ce7bba378907684f97398566919 inherit pub_attribs_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac043f97eb95378bee04b6f6ab806b5b3"><td class="memItemLeft" align="right" valign="top"><a id="ac043f97eb95378bee04b6f6ab806b5b3"></a>
+Subscription&#160;</td><td class="memItemRight" valign="bottom"><b>addValueListenerImpl</b> (std::function&lt; void(const bool &amp;)&gt; listener) override</td></tr>
+<tr class="separator:ac043f97eb95378bee04b6f6ab806b5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0df8717382667f9e1bd14c874e37b4a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1RadioButton.html#a0df8717382667f9e1bd14c874e37b4a1">renderImpl</a> () override</td></tr>
 <tr class="separator:a0df8717382667f9e1bd14c874e37b4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></td></tr>
+<tr class="memitem:ab681c9adb274fb8ac8e019e24138187e inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="ab681c9adb274fb8ac8e019e24138187e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setHovered</b> (bool newHovered)</td></tr>
+<tr class="separator:ab681c9adb274fb8ac8e019e24138187e inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e115868ebfd0a3e54dd43c0ba05d0df inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memItemLeft" align="right" valign="top"><a id="a2e115868ebfd0a3e54dd43c0ba05d0df"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFocused</b> (bool newFocused)</td></tr>
+<tr class="separator:a2e115868ebfd0a3e54dd43c0ba05d0df inherit pro_methods_classpf_1_1ui_1_1ig_1_1ItemElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1ElementWithID')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">pf::ui::ig::ElementWithID</a></td></tr>
 <tr class="memitem:a2c460e4e242aef394e25636cb3ae25a1 inherit pro_methods_classpf_1_1ui_1_1ig_1_1ElementWithID"><td class="memItemLeft" align="right" valign="top"><a id="a2c460e4e242aef394e25636cb3ae25a1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (ImGuiID newId)</td></tr>
@@ -221,18 +240,23 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (ImGuiID ne
 <tr class="memitem:a4449139cf826dd07f5a7766cf0ccd8da inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memItemLeft" align="right" valign="top"><a id="a4449139cf826dd07f5a7766cf0ccd8da"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::string newName)</td></tr>
 <tr class="separator:a4449139cf826dd07f5a7766cf0ccd8da inherit pro_methods_classpf_1_1ui_1_1ig_1_1Renderable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Focusable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html">pf::ui::ig::Focusable</a></td></tr>
-<tr class="memitem:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Focusable.html#a5e95eaf5fa6175bfa7fe2e86648e1f92">updateFocused</a> (bool focus)</td></tr>
-<tr class="separator:a5e95eaf5fa6175bfa7fe2e86648e1f92 inherit pro_methods_classpf_1_1ui_1_1ig_1_1Focusable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html">pf::ui::ig::Hoverable</a></td></tr>
-<tr class="memitem:a6465fd6427653055a8ef5c52bdb4109c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1Hoverable.html#a6465fd6427653055a8ef5c52bdb4109c">setHovered</a> (bool hover)</td></tr>
-<tr class="separator:a6465fd6427653055a8ef5c52bdb4109c inherit pro_methods_classpf_1_1ui_1_1ig_1_1Hoverable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a908a5e1574e914ca0957bda41093e3d1"><td class="memItemLeft" align="right" valign="top"><a id="a908a5e1574e914ca0957bda41093e3d1"></a>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>RadioGroup</b></td></tr>
 <tr class="separator:a908a5e1574e914ca0957bda41093e3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; bool &gt;</a></td></tr>
+<tr class="memitem:a5b1ea9540ad53c190e8e9d19fc788630 inherit pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a5b1ea9540ad53c190e8e9d19fc788630"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ValueType</b> = bool</td></tr>
+<tr class="separator:a5b1ea9540ad53c190e8e9d19fc788630 inherit pub_types_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer&lt; bool &gt;</a></td></tr>
+<tr class="memitem:a77eec43633c73cd9bc055fe79348f1c9 inherit pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memItemLeft" align="right" valign="top"><a id="a77eec43633c73cd9bc055fe79348f1c9"></a>
+constexpr static bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnly</b></td></tr>
+<tr class="separator:a77eec43633c73cd9bc055fe79348f1c9 inherit pub_static_attribs_classpf_1_1ui_1_1ig_1_1ValueContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A button similar in function to CheckBox, but it can belong to <a class="el" href="classpf_1_1ui_1_1ig_1_1RadioGroup.html" title="Group of RadioButton.">RadioGroup</a>. </p>
@@ -314,24 +338,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>RadioGroup</b></td><
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a003a82f2c449530846ba6c57b07afa34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a003a82f2c449530846ba6c57b07afa34">&#9670;&nbsp;</a></span>isSelected()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool pf::ui::ig::RadioButton::isSelected </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Check if the button is selected. </p><dl class="section return"><dt>Returns</dt><dd>true when the button is selected, false otherwise </dd></dl>
-
-</div>
-</div>
 <a id="a0df8717382667f9e1bd14c874e37b4a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0df8717382667f9e1bd14c874e37b4a1">&#9670;&nbsp;</a></span>renderImpl()</h2>
 
