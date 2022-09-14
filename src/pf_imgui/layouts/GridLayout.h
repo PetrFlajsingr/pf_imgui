@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT GridLayout : public Layout {
    * @param gridHeight height in cells - amount of cells in each column
    * @param showBorder draw border around the layout
    */
-  GridLayout(const std::string &elementName, const Size &initialSize, uint32_t gridWidth, uint32_t gridHeight,
+  GridLayout(std::string_view elementName, const Size &initialSize, uint32_t gridWidth, uint32_t gridHeight,
              ShowBorder showBorder = ShowBorder::No);
 
   /**

@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
    * Construct ItemElement with the given ID.
    * @param elementName ID
    */
-  explicit ItemElement(const std::string &elementName);
+  explicit ItemElement(std::string_view elementName);
   ~ItemElement() override;
 
   ItemElement(ItemElement &&other) noexcept;

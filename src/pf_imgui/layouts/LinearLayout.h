@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
    * @param elementSpacing spaces between elements
    * @param showBorder render border around layout's area
    */
-  LinearLayout(const std::string &elementName, Size initialSize, ShowBorder showBorder = ShowBorder::No);
+  LinearLayout(std::string_view elementName, Size initialSize, ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Get all children of the layout as references.

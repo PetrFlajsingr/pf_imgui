@@ -12,8 +12,8 @@
 
 namespace pf::ui::ig {
 
-Window::Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse)
-    : Renderable(std::move(elementName)), label(std::move(titleLabel)), hovered{false}, focused{false},
+Window::Window(std::string_view elementName, std::string_view titleLabel, AllowCollapse allowCollapse)
+    : Renderable(elementName), label(std::string{titleLabel}), hovered{false}, focused{false},
       position(Position{-1, -1}), size(Size::Auto()), collapsed{false} {
   refreshIdLabel();
   setCollapsible(allowCollapse == AllowCollapse::Yes);

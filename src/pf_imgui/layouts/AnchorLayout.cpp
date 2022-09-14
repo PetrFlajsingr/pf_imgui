@@ -9,14 +9,14 @@
 namespace pf::ui::ig {
 
 AnchorLayout::AnchorLayout(AnchorLayout::Config &&config)
-    : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {
+    : Layout(config.name.value, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {
   size.addListener([this, previousSize = *size](Size newSize) mutable {
     onSizeUpdated(previousSize);
     previousSize = newSize;
   });
 }
 
-AnchorLayout::AnchorLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
+AnchorLayout::AnchorLayout(std::string_view elementName, const Size &initialSize, ShowBorder showBorder)
     : Layout(elementName, initialSize, showBorder) {
   size.addListener([this, previousSize = *size](Size newSize) mutable {
     onSizeUpdated(previousSize);

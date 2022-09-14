@@ -8,8 +8,8 @@
 
 namespace pf::ui::ig {
 
-ModalDialog::ModalDialog(const std::string &elementName, const std::string &labelText, Size dialogSize)
-    : Renderable(elementName), label(labelText), position(Position{-1, -1}), size(dialogSize),
+ModalDialog::ModalDialog(std::string_view elementName, std::string_view labelText, Size dialogSize)
+    : Renderable(elementName), label(std::string{labelText}), position(Position{-1, -1}), size(dialogSize),
       sizeDirty(dialogSize != Size::Auto()) {
   position.addListener([this](auto) { positionDirty = true; });
   size.addListener([this](auto) { sizeDirty = true; });

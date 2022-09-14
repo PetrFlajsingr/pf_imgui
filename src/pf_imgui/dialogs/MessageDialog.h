@@ -42,7 +42,7 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
    * @param onDialogDone callback for buttons being pressed, If returns true then the dialog is closed
    * @param modal dialog modality
    */
-  MessageDialog(const std::string &elementName, const std::string &title, Size initialSize, const std::string &message,
+  MessageDialog(std::string_view elementName, std::string_view title, Size initialSize, std::string_view message,
                 const Flags<MessageButtons> &buttons, std::invocable<MessageButtons> auto &&onDialogDone)
     requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
   : MessageDialog(elementName, title, initialSize, message, buttons) {
@@ -50,7 +50,7 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
   }
 
  private:
-  MessageDialog(const std::string &elementName, const std::string &title, Size initialSize, const std::string &message,
+  MessageDialog(std::string_view elementName, std::string_view title, Size initialSize, std::string_view message,
                 const Flags<MessageButtons> &buttons);
 
   std::function<bool(MessageButtons)> dialogDone;

@@ -9,13 +9,15 @@
 
 namespace pf::ui::ig {
 
-Renderable::Renderable(std::string renderableName) : name(std::move(renderableName)) {}
+Renderable::Renderable(std::string_view renderableName) : name(std::string{renderableName}) {}
 
-Renderable::Renderable(Renderable &&other) noexcept : visibility(std::move(other.visibility)) {}
+Renderable::Renderable(Renderable &&other) noexcept
+    : visibility(std::move(other.visibility)), enabled(std::move(other.enabled)), name(std::move(other.name)) {}
 
 Renderable &Renderable::operator=(Renderable &&other) noexcept {
   visibility = std::move(other.visibility);
   enabled = std::move(other.enabled);
+  name = std::move(other.name);
   return *this;
 }
 

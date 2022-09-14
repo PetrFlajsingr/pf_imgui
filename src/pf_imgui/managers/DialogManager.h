@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT DialogManager {
    * @param caption title
    * @return reference to the created dialog
    */
-  ModalDialog &createDialog(const std::string &elementName, const std::string &caption);
+  ModalDialog &createDialog(std::string_view elementName, std::string_view caption);
 
   /**
    * Create a builder for MessageDialog.

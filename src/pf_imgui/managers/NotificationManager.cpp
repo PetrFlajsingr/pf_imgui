@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-Notification &NotificationManager::createNotification(const std::string &name, const std::string &label,
+Notification &NotificationManager::createNotification(std::string_view name, std::string_view label,
                                                       std::chrono::milliseconds duration) {
   return *newNotifications.emplace_back(std::make_unique<Notification>(name, label, duration));
 }

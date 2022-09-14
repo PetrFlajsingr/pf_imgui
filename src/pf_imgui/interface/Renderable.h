@@ -12,7 +12,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
 #include <pf_imgui/reactive/Observable.h>
-#include <string>
+#include <string_view>
 
 namespace pf::ui::ig {
 
@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT Renderable {
    * Create Renderable with unique ID
    * @param renderableName unique ID for object
    */
-  explicit Renderable(std::string renderableName);
+  explicit Renderable(std::string_view renderableName);
   Renderable(Renderable &&other) noexcept;
   Renderable &operator=(Renderable &&other) noexcept;
   Renderable(const Renderable &) = delete;

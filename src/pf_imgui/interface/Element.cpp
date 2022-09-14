@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-Element::Element(const std::string &elementName) : Renderable(elementName) {}
+Element::Element(std::string_view elementName) : Renderable(elementName) {}
 
 Element::~Element() { destroyEvent.notify(); }
 

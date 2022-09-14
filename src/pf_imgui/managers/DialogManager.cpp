@@ -13,7 +13,7 @@ void DialogManager::addFileDialog(std::unique_ptr<FileDialog> &&dialog) {
   if (fileDialogBookmark.has_value()) { dialogRef->deserializeBookmark(*fileDialogBookmark); }
 }
 
-ModalDialog &DialogManager::createDialog(const std::string &elementName, const std::string &caption) {
+ModalDialog &DialogManager::createDialog(std::string_view elementName, std::string_view caption) {
   auto dialog = std::make_unique<ModalDialog>(elementName, caption);
   const auto ptr = dialog.get();
   dialogs.emplace_back(std::move(dialog));

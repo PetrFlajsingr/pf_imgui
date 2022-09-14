@@ -34,7 +34,7 @@ class PF_IMGUI_EXPORT NotificationManager {
    * @param duration lifetime
    * @return reference to the new notification
    */
-  [[nodiscard]] Notification &createNotification(const std::string &name, const std::string &label,
+  [[nodiscard]] Notification &createNotification(std::string_view name, std::string_view label,
                                                  std::chrono::milliseconds duration = Notification::DEFAULT_DURATION);
 
  private:

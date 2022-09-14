@@ -42,7 +42,7 @@ class VerticalLayout : public LinearLayout {
    * @param align element alignment
    * @param showBorder render border around layout's area
    */
-  VerticalLayout(const std::string &elementName, Size initialSize, VerticalAlign align = VerticalAlign::Left,
+  VerticalLayout(std::string_view elementName, Size initialSize, VerticalAlign align = VerticalAlign::Left,
                  ShowBorder showBorder = ShowBorder::No);
 
  protected:

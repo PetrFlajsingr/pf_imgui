@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT Layout : public ElementWithID, public RenderablesContainer
    * @param initialSize size of the layout
    * @param showBorder when allowed a border is drawn at the edges of the layout area
    */
-  explicit Layout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder);
+  explicit Layout(std::string_view elementName, const Size &initialSize, ShowBorder showBorder);
 
   /**
    * Check if border is drawn.

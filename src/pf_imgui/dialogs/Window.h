@@ -38,7 +38,7 @@ class PF_IMGUI_EXPORT Window : public Renderable, public ElementContainer {
    * @param titleLabel title on top of the window
    * @param allowCollapse
    */
-  Window(std::string elementName, std::string titleLabel, AllowCollapse allowCollapse = AllowCollapse::No);
+  Window(std::string_view elementName, std::string_view titleLabel, AllowCollapse allowCollapse = AllowCollapse::No);
 
   /**
    * Provides Windows menu bar. If the menu bar doesn't exist new one is created.

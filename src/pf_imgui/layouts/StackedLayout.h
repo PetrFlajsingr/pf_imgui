@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT StackedLayout : public Layout {
    * @param initialSize size of the layout
    * @param showBorder draw border around the layout
    */
-  StackedLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
+  StackedLayout(std::string_view elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
 
   /**
    * Push a new element container to the last index.

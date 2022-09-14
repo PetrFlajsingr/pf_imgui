@@ -54,7 +54,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
    * @param allowCollapse enable collapse button
    * @param showBorder draw border around the layout
    */
-  AnchorLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
+  AnchorLayout(std::string_view elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
   /**
     * Create a child and append it to the end of children.
     *

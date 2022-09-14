@@ -8,9 +8,9 @@
 namespace pf::ui::ig {
 
 AbsoluteLayout::AbsoluteLayout(AbsoluteLayout::Config &&config)
-    : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
+    : Layout(config.name.value, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-AbsoluteLayout::AbsoluteLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
+AbsoluteLayout::AbsoluteLayout(std::string_view elementName, const Size &initialSize, ShowBorder showBorder)
     : Layout(elementName, initialSize, showBorder) {}
 
 void AbsoluteLayout::renderImpl() {
