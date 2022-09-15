@@ -53,8 +53,7 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement {
   friend class Tree<TreeType::Advanced>;
 
  public:
-  TreeRecord(const std::string &elementName, const std::string &treeLabel,
-             const Flags<ImGuiTreeNodeFlags_> &defaultFlags);
+  TreeRecord(std::string_view elementName, std::string_view treeLabel, Flags<ImGuiTreeNodeFlags_> defaultFlags);
 
   Observable<Label> label;
 
@@ -91,7 +90,7 @@ class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueContain
    * @param initialValue
    * @param persistent enable/disable disk saving
    */
-  TreeLeaf(const std::string &elementName, const std::string &label, bool initialValue = false,
+  TreeLeaf(std::string_view elementName, std::string_view label, bool initialValue = false,
            Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
@@ -132,15 +131,15 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
    * @param config construction args @see TreeNode::Config
    */
   explicit TreeNode(Config &&config)
-      : TreeNode(std::string{config.name.value}, std::string{config.label.value},
-                 config.persistent ? Persistent::Yes : Persistent::No, Flags<ImGuiTreeNodeFlags_>{}) {}
+      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
+                 Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
    * Construct TreeNode.
    * @param elementName unique name of the element
    * @param labelText label rendered on the element
    * @param persistent enable/disable disk saving
    */
-  TreeNode(const std::string &elementName, const std::string &labelText, Persistent persistent = Persistent::No)
+  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent = Persistent::No)
       : TreeNode(elementName, labelText, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
 
   /**
@@ -149,7 +148,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
    * @param nodeLabel label rendered on the element
    * @return reference to the newly created node
    */
-  TreeNode<TreeType::Simple> &addNode(const std::string &nodeName, const std::string &nodeLabel) {
+  TreeNode<TreeType::Simple> &addNode(std::string_view nodeName, std::string_view nodeLabel) {
     auto &node = elementContainer.createChild<TreeNode<TreeType::Simple>>(
         nodeName, nodeLabel, isPersistent() ? Persistent::Yes : Persistent::No);
     node.limiter = limiter;
@@ -163,7 +162,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
    * @param selected
    * @return reference to the newly created leaf
    */
-  TreeLeaf &addLeaf(const std::string &leafName, const std::string &leafLabel, bool selected = false) {
+  TreeLeaf &addLeaf(std::string_view leafName, std::string_view leafLabel, bool selected = false) {
     auto &leaf = elementContainer.createChild<TreeLeaf>(leafName, leafLabel, selected,
                                                         isPersistent() ? Persistent::Yes : Persistent::No);
     leaf.limiter = limiter;
@@ -198,7 +197,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   Observable<bool> collapsed;
 
  protected:
-  TreeNode(const std::string &elementName, const std::string &labelText, Persistent persistent,
+  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent,
            const Flags<ImGuiTreeNodeFlags_> &treeFlags)
       : TreeRecord(elementName, labelText, treeFlags), Savable(persistent), collapsed(true) {}
 
@@ -242,15 +241,15 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @param config construction args @see TreeNode::Config
    */
   explicit TreeNode(Config &&config)
-      : TreeNode(std::string{config.name.value}, std::string{config.label.value},
-                 config.persistent ? Persistent::Yes : Persistent::No, Flags<ImGuiTreeNodeFlags_>{}) {}
+      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
+                 Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
    * Construct TreeNode.
    * @param elementName unique name of the element
    * @param labelText label rendered on the element
    * @param persistent enable/disable disk saving
    */
-  TreeNode(const std::string &elementName, const std::string &labelText, Persistent persistent = Persistent::No)
+  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent = Persistent::No)
       : TreeNode(elementName, labelText, persistent, Flags<ImGuiTreeNodeFlags_>{}) {}
 
   /**
@@ -259,7 +258,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @param nodeLabel label rendered on the element
    * @return reference to the newly created node
    */
-  TreeNode<TreeType::Advanced> &addNode(const std::string &nodeName, const std::string &nodeLabel) {
+  TreeNode<TreeType::Advanced> &addNode(std::string_view nodeName, std::string_view nodeLabel) {
     auto &node = createChild<TreeNode<TreeType::Advanced>>(nodeName, nodeLabel,
                                                            isPersistent() ? Persistent::Yes : Persistent::No);
     node.limiter = limiter;
@@ -273,7 +272,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @param selected
    * @return reference to the newly created leaf
    */
-  TreeLeaf &addLeaf(const std::string &leafName, const std::string &leafLabel, bool selected = false) {
+  TreeLeaf &addLeaf(std::string_view leafName, std::string_view leafLabel, bool selected = false) {
     auto &leaf =
         createChild<TreeLeaf>(leafName, leafLabel, selected, isPersistent() ? Persistent::Yes : Persistent::No);
     leaf.limiter = limiter;
@@ -307,7 +306,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
   Observable<bool> collapsed;
 
  protected:
-  TreeNode(const std::string &elementName, const std::string &labelText, Persistent persistent,
+  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent,
            const Flags<ImGuiTreeNodeFlags_> &treeFlags)
       : TreeRecord(elementName, labelText, treeFlags), Savable(persistent), collapsed(true) {}
 
@@ -348,15 +347,15 @@ class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
    * @param config construction args @see TreeHeaderNode::Config
    */
   explicit TreeHeaderNode(Config &&config)
-      : TreeNode<treeType>(std::string{config.name.value}, std::string{config.label.value},
-                           config.persistent ? Persistent::Yes : Persistent::No, ImGuiTreeNodeFlags_CollapsingHeader) {}
+      : TreeNode<treeType>(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
+                           ImGuiTreeNodeFlags_CollapsingHeader) {}
   /**
    * Construct TreeHeaderNode.
    * @param elementName unique name of the element
    * @param label label rendered on the element
    * @param persistent enable/disable disk saving
    */
-  TreeHeaderNode(const std::string &elementName, const std::string &label, Persistent persistent = Persistent::No)
+  TreeHeaderNode(std::string_view elementName, std::string_view label, Persistent persistent = Persistent::No)
       : TreeNode<treeType>(elementName, label, persistent, ImGuiTreeNodeFlags_CollapsingHeader) {}
 };
 
@@ -381,10 +380,8 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param config construction args @see Tree::Config
    */
   explicit Tree(Config &&config)
-      : ElementWithID(std::string{config.name.value}), persistent(config.persistent ? Persistent::Yes : Persistent::No),
-        layout({.name = "layout",
-                .size = Size::Auto(),
-                .showBorder = config.showBorder ? ShowBorder::Yes : ShowBorder::No}) {}
+      : Tree(config.name, config.showBorder ? ShowBorder::Yes : ShowBorder::No,
+             config.persistent ? Persistent::Yes : Persistent::No) {}
   /**
    * Construct tree.
    * @param elementName unique name of the element
@@ -392,7 +389,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param showBorder render a border around the tree area
    * @param persistence enable/disable disk saving
    */
-  explicit Tree(const std::string &elementName, ShowBorder showBorder = ShowBorder::No,
+  explicit Tree(std::string_view elementName, ShowBorder showBorder = ShowBorder::No,
                 Persistent persistence = Persistent::No)
       : ElementWithID(elementName), persistent(persistence),
         layout({.name = "layout", .size = Size::Auto(), .showBorder = showBorder == ShowBorder::Yes}) {}
@@ -403,7 +400,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param label label rendered on the element
    * @return reference to the newly created node
    */
-  TreeNode<treeType> &addNode(const std::string &elementName, const std::string &label) {
+  TreeNode<treeType> &addNode(std::string_view elementName, std::string_view label) {
     auto &node = layout.createChild<TreeNode<treeType>>(elementName, label, persistent);
     node.limiter = limiter.get();
     return node;
@@ -415,7 +412,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param label label rendered on the element
    * @return reference to the newly created node
    */
-  TreeHeaderNode<treeType> &addHeaderNode(const std::string &nodeName, const std::string &label) {
+  TreeHeaderNode<treeType> &addHeaderNode(std::string_view nodeName, std::string_view label) {
     auto &node = layout.createChild<TreeHeaderNode<treeType>>(nodeName, label, persistent);
     node.limiter = limiter.get();
     return node;
@@ -428,7 +425,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param selected
    * @return reference to the newly created leaf
    */
-  TreeLeaf &addLeaf(const std::string &leafName, const std::string &label, bool selected = false) {
+  TreeLeaf &addLeaf(std::string_view leafName, std::string_view label, bool selected = false) {
     auto &leaf = layout.createChild<TreeLeaf>(leafName, label, selected, persistent);
     leaf.limiter = limiter.get();
     return leaf;

@@ -7,9 +7,9 @@
 
 namespace pf::ui::ig {
 
-Separator::Separator(Separator::Config &&config) : Element(std::string{config.name.value}) {}
+Separator::Separator(Separator::Config &&config) : Separator(config.name) {}
 
-Separator::Separator(const std::string &elementName) : Element(elementName) {}
+Separator::Separator(std::string_view elementName) : Element(elementName) {}
 
 void Separator::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

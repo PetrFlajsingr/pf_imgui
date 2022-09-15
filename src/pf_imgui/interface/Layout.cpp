@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 
-Layout::Layout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
+Layout::Layout(std::string_view elementName, const Size &initialSize, ShowBorder showBorder)
     : ElementWithID(elementName), size(initialSize), drawBorder(showBorder == ShowBorder::Yes) {}
 
 bool Layout::isDrawBorder() const { return drawBorder; }

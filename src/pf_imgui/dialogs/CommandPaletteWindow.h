@@ -24,7 +24,7 @@ class CommandPaletteWindow : public Renderable {
    * Construct CommandPalette
    * @param elementName unique name of the window
    */
-  explicit CommandPaletteWindow(const std::string &elementName);
+  explicit CommandPaletteWindow(std::string_view elementName);
   ~CommandPaletteWindow() override;
 
   /**
@@ -32,10 +32,10 @@ class CommandPaletteWindow : public Renderable {
    * @param commandName name of the command
    * @param callback callback of the command
    */
-  void addCommand(const std::string &commandName, std::invocable auto &&callback) {
+  void addCommand(std::string commandName, std::invocable auto &&callback) {
     ImCmd::SetCurrentContext(context);
     auto command = ImCmd::Command{};
-    command.Name = commandName;
+    command.Name = std::move(commandName);
     command.InitialCallback = std::forward<decltype(callback)>(callback);
     ImCmd::AddCommand(std::move(command));
   }

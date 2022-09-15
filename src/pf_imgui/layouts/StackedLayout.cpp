@@ -13,14 +13,14 @@
 namespace pf::ui::ig {
 
 StackedLayout::StackedLayout(StackedLayout::Config &&config)
-    : Layout(std::string{config.name.value}, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
+    : StackedLayout(config.name, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
+
+StackedLayout::StackedLayout(std::string_view elementName, Size initialSize, ShowBorder showBorder)
+    : Layout(elementName, initialSize, showBorder) {}
 
 StackedLayout::Stack::Stack(StackedLayout &owner) : parent(owner) {}
 
 void StackedLayout::Stack::setActive() { parent.setStackActive(*this); }
-
-StackedLayout::StackedLayout(const std::string &elementName, const Size &initialSize, ShowBorder showBorder)
-    : Layout(elementName, initialSize, showBorder) {}
 
 void StackedLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

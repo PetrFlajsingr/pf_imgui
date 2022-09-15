@@ -38,7 +38,7 @@ class PF_IMGUI_EXPORT Tooltip : public ElementWithID, public ElementContainer {
    * Construct Tooltip.
    * @param elementName ID of the tooltip
    */
-  explicit Tooltip(const std::string &elementName);
+  explicit Tooltip(std::string_view elementName);
 
  protected:
   void renderImpl() override;

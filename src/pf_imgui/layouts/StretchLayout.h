@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
    * @param stretchType dimension to which the layout stretches
    * @param showBorder draw border around the layout
    */
-  StretchLayout(const std::string &elementName, const Size &initialSize, Stretch stretchType,
+  StretchLayout(std::string_view elementName, Size initialSize, Stretch stretchType,
                 ShowBorder showBorder = ShowBorder::No);
 
   /**

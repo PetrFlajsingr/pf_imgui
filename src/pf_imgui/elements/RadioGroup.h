@@ -50,7 +50,7 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnly
    * @param childButtons buttons in the group
    * @param persistent enable state saving to disk
    */
-  explicit RadioGroup(const std::string &name, std::vector<RadioButton *> childButtons = {},
+  explicit RadioGroup(std::string_view name, std::vector<RadioButton *> childButtons = {},
                       Persistent persistent = Persistent::No);
 
   /**

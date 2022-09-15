@@ -38,7 +38,7 @@ class PF_IMGUI_EXPORT Spinner : public ItemElement {
    * @param spinnerRadius radius of the spin circle
    * @param spinnerThickness thickness of the spin line
    */
-  Spinner(const std::string &elementName, float spinnerRadius, int spinnerThickness);
+  Spinner(std::string_view elementName, float spinnerRadius, int spinnerThickness);
 
   ColorPalette<ColorOf::PlotHistogram> color;
   StyleOptions<StyleOf::FramePadding> style;

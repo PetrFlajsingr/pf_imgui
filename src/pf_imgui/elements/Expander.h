@@ -45,7 +45,7 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
    * @param labelText text drawn on top of the Expander
    * @param persistent enable/disable state saving
    */
-  Expander(const std::string &elementName, const std::string &labelText, Persistent persistent = Persistent::No);
+  Expander(std::string_view elementName, std::string_view labelText, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;

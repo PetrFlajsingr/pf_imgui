@@ -6,10 +6,9 @@
 
 namespace pf::ui::ig {
 
-CommandPalette::CommandPalette(CommandPalette::Config &&config)
-    : ElementWithID(std::string{config.name.value}), context(ImCmd::CreateContext()) {}
+CommandPalette::CommandPalette(CommandPalette::Config &&config) : CommandPalette(config.name) {}
 
-CommandPalette::CommandPalette(const std::string &elementName)
+CommandPalette::CommandPalette(std::string_view elementName)
     : ElementWithID(elementName), context(ImCmd::CreateContext()) {}
 
 CommandPalette::~CommandPalette() { ImCmd::DestroyContext(context); }
@@ -24,10 +23,11 @@ void CommandPalette::moveFocusToSearchBox() {
   ImCmd::SetNextCommandPaletteSearchBoxFocused();
 }
 
-void CommandPalette::setSearchText(const std::string &text) {
+void CommandPalette::setSearchText(std::string_view text) {
   ImCmd::SetCurrentContext(context);
-  ImCmd::SetNextCommandPaletteSearch(text);
+  ImCmd::SetNextCommandPaletteSearch(std::string{text});
 }
+
 void CommandPalette::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImCmd::CommandPalette(getName().c_str());

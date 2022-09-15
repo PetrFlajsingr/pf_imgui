@@ -51,7 +51,7 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueContainer<bool>
    * @param persistent allow value saving to disk
    * @param initialValue starting value
    */
-  Checkbox(const std::string &elementName, const std::string &labelText, bool initialValue = false,
+  Checkbox(std::string_view elementName, std::string_view labelText, bool initialValue = false,
            Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;

@@ -7,11 +7,10 @@
 
 namespace pf::ui::ig {
 
-RadioButton::RadioButton(RadioButton::Config &&config)
-    : ItemElement(std::string{config.name.value}), label(std::string{config.label.value}), selected(config.selected) {}
+RadioButton::RadioButton(RadioButton::Config &&config) : RadioButton(config.name, config.label, config.selected) {}
 
-RadioButton::RadioButton(const std::string &elementName, const std::string &labelText, bool initialValue)
-    : ItemElement(elementName), label(labelText), selected(initialValue) {}
+RadioButton::RadioButton(std::string_view elementName, std::string_view labelText, bool initialValue)
+    : ItemElement(elementName), label(std::string{labelText}), selected(initialValue) {}
 
 void RadioButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

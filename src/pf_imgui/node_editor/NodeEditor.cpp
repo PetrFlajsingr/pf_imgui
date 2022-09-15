@@ -16,11 +16,11 @@
 
 namespace pf::ui::ig {
 
-NodeEditor::NodeEditor(const std::string &elementName, Size initialSize)
+NodeEditor::NodeEditor(std::string_view elementName, Size initialSize)
     : ElementWithID(elementName), size(initialSize), context(ax::NodeEditor::CreateEditor()) {}
 
 NodeEditor::NodeEditor(NodeEditor::Config &&config)
-    : ElementWithID(std::move(config.name)), size(config.size), context(ax::NodeEditor::CreateEditor()) {}
+    : ElementWithID(config.name.value), size(config.size), context(ax::NodeEditor::CreateEditor()) {}
 
 NodeEditor::~NodeEditor() { ax::NodeEditor::DestroyEditor(context); }
 

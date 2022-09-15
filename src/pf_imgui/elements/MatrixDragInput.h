@@ -50,14 +50,14 @@ class MatrixDragInput : public ItemElement, public ValueContainer<M>, public Sav
   /**
    * Construct MatrixDragInput.
    * @param name unique name of the element
-   * @param label text rendered next to the element
+   * @param labelStr text rendered next to the element
    * @param speed value change speed
    * @param min minimum allowed value for each cell
    * @param max maximum allowed value for each cell
    * @param value initial value
    * @param persistent enable state saving
    */
-  MatrixDragInput(const std::string &name, const std::string &label, ParamType changeSpeed, ParamType minVal,
+  MatrixDragInput(std::string_view name, std::string_view labelStr, ParamType changeSpeed, ParamType minVal,
                   ParamType maxVal, M initValue, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
@@ -89,14 +89,14 @@ class MatrixDragInput : public ItemElement, public ValueContainer<M>, public Sav
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(MatrixDragInput::Config &&config)
-    : MatrixDragInput(std::string{config.name.value}, std::string{config.label.value}, config.speed, config.min,
-                      config.max, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : MatrixDragInput(config.name, config.label, config.speed, config.min, config.max, config.value,
+                      config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
-MatrixDragInput<M>::MatrixDragInput(const std::string &name, const std::string &label,
+MatrixDragInput<M>::MatrixDragInput(std::string_view name, std::string_view labelStr,
                                     MatrixDragInput::ParamType changeSpeed, MatrixDragInput::ParamType minVal,
                                     MatrixDragInput::ParamType maxVal, M initValue, Persistent persistent)
-    : ItemElement(name), Savable(persistent), label(label), value(initValue), min(minVal), max(maxVal),
+    : ItemElement(name), Savable(persistent), label(std::string{labelStr}), value(initValue), min(minVal), max(maxVal),
       speed(changeSpeed) {
   for (std::size_t i = 0; i < Height - 1; ++i) { dragNames[i] = std::string{"##drag_"} + std::to_string(i); }
 }

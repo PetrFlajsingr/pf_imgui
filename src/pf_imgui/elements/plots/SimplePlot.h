@@ -63,7 +63,7 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID {
    * @param scaleHigh max value
    * @param initialSize size of the element
    */
-  SimplePlot(const std::string &elementName, const std::string &labelText, PlotType type,
+  SimplePlot(std::string_view elementName, std::string_view labelText, PlotType type,
              std::vector<float> plotValues = {}, std::optional<std::string> plotOverlayText = std::nullopt,
              const std::optional<std::size_t> &maxHistorySize = std::nullopt, float scaleLow = FLT_MAX,
              float scaleHigh = FLT_MAX, Size initialSize = Size::Auto());

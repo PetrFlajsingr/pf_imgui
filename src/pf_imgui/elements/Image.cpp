@@ -8,10 +8,9 @@
 
 namespace pf::ui::ig {
 
-Image::Image(Image::Config &&config)
-    : ItemElement(std::string{config.name.value}), size(config.size), texture(std::move(config.texture)) {}
+Image::Image(Image::Config &&config) : Image(config.name, config.texture, config.size) {}
 
-Image::Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size initialSize)
+Image::Image(std::string_view elementName, std::shared_ptr<Texture> tex, Size initialSize)
     : ItemElement(elementName), size(initialSize), texture(std::move(tex)) {}
 
 void Image::renderImpl() { ImGui::Image(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom); }
@@ -26,10 +25,10 @@ void Image::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
 }
 
 InspectableImage::InspectableImage(InspectableImage::Config &&config)
-    : InspectableImage(std::string{config.name.value}, config.size, config.rgbaData, config.imageWidth,
-                       std::move(config.texture), config.trigger) {}
+    : InspectableImage(config.name.value, config.size, config.rgbaData, config.imageWidth, std::move(config.texture),
+                       config.trigger) {}
 
-InspectableImage::InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData,
+InspectableImage::InspectableImage(std::string_view elementName, Size s, std::span<const std::byte> rgbaData,
                                    std::size_t imgWidth, std::shared_ptr<Texture> tex, Trigger trigger)
     : ItemElement(elementName), size(s), imageRGBAData(rgbaData), imageWidth(imgWidth), texture(std::move(tex)),
       trig(trigger) {}

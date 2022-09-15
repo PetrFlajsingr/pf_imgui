@@ -14,7 +14,10 @@
 
 namespace pf::ui::ig {
 
-ConsolePanel::ConsolePanel(const std::string &elementName, Size initialSize, Persistent persistent)
+ConsolePanel::ConsolePanel(ConsolePanel::Config &&config)
+    : ConsolePanel(config.name.value, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
+
+ConsolePanel::ConsolePanel(std::string_view elementName, Size initialSize, Persistent persistent)
     : ElementWithID(elementName), Savable(persistent), size(initialSize), wrapTextToggle("wrapText"),
       scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
 
@@ -165,7 +168,6 @@ void ConsolePanel::setFromToml(const toml::table &src) {
 }
 
 void ConsolePanel::setInputTextColor(Color newColor) { inputTextColor = newColor; }
-
 void ConsolePanel::setInputTextBackgroundColor(Color newColor) { inputTextBackgroundColor = newColor; }
 
 }  // namespace pf::ui::ig

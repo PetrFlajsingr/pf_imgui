@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig::bp {
 
-SimpleNode::SimpleNode(const std::string &elementName) : Node(elementName) {}
+SimpleNode::SimpleNode(std::string_view elementName) : Node(elementName) {}
 
 void SimpleNode::renderMiddle() {
   ImGui::BeginVertical((getName() + "_mid").c_str());

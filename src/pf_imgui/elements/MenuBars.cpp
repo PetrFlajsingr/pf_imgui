@@ -7,9 +7,9 @@
 
 namespace pf::ui::ig {
 
-WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : ElementWithID(std::string{config.name.value}) {}
+WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : WindowMenuBar(config.name) {}
 
-WindowMenuBar::WindowMenuBar(const std::string &elementName) : ElementWithID(elementName) {}
+WindowMenuBar::WindowMenuBar(std::string_view elementName) : ElementWithID(elementName) {}
 
 void WindowMenuBar::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -21,9 +21,9 @@ void WindowMenuBar::renderImpl() {
   }
 }
 
-AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : ElementWithID(std::string{config.name.value}) {}
+AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : AppMenuBar(config.name) {}
 
-AppMenuBar::AppMenuBar(const std::string &elementName) : ElementWithID(elementName) {}
+AppMenuBar::AppMenuBar(std::string_view elementName) : ElementWithID(elementName) {}
 
 void AppMenuBar::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

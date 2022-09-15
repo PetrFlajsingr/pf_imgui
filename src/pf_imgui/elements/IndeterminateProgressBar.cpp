@@ -8,10 +8,10 @@
 namespace pf::ui::ig {
 
 IndeterminateProgressBar::IndeterminateProgressBar(IndeterminateProgressBar::Config &&config)
-    : IndeterminateProgressBar(std::string{config.name.value}, config.overlay, config.speed, config.size) {}
+    : IndeterminateProgressBar(config.name.value, config.overlay, config.speed, config.size) {}
 
-IndeterminateProgressBar::IndeterminateProgressBar(const std::string &elementName, std::string overlayStr, float speed,
-                                                   const Size &initialSize)
+IndeterminateProgressBar::IndeterminateProgressBar(std::string_view elementName, std::string overlayStr, float speed,
+                                                   Size initialSize)
     : ItemElement(elementName), size(initialSize), changeSpeed(speed), overlay(std::move(overlayStr)) {}
 
 void IndeterminateProgressBar::setSpeed(float speed) { changeSpeed = speed; }

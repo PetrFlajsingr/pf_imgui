@@ -33,7 +33,7 @@ class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
    * @param onInput callback for user input
    * @param onCancel callback for user cancel
    */
-  InputDialog(const std::string &elementName, const std::string &title, Size s, const std::string &message,
+  InputDialog(std::string_view elementName, std::string_view title, Size s, std::string_view message,
               std::invocable<std::string_view> auto &&onInput, std::invocable auto &&onCancel)
       : InputDialog(elementName, title, s, message) {
     inputDone = std::forward<decltype(onInput)>(onInput);
@@ -41,7 +41,7 @@ class PF_IMGUI_EXPORT InputDialog : public ModalDialog {
   }
 
  private:
-  InputDialog(const std::string &elementName, const std::string &title, Size s, const std::string &message);
+  InputDialog(std::string_view elementName, std::string_view title, Size s, std::string_view message);
 
   std::function<void(std::string_view)> inputDone;
   std::function<void()> cancelClicked;

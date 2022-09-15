@@ -12,7 +12,7 @@
 
 namespace pf::ui::ig {
 
-ItemElement::ItemElement(const std::string &elementName) : ElementWithID(elementName) {}
+ItemElement::ItemElement(std::string_view elementName) : ElementWithID(elementName) {}
 
 ItemElement::~ItemElement() = default;
 
@@ -59,7 +59,7 @@ void ItemElement::removeTooltip() { tooltip = nullptr; }
 
 void ItemElement::setTooltip(std::string_view text) {
   tooltip = std::make_unique<Tooltip>("tooltip");
-  tooltip->createChild<Text>("text", std::string(text));
+  tooltip->createChild<Text>("text", std::string{text});
 }
 
 void ItemElement::setTooltip(std::unique_ptr<Tooltip> &&newTooltip) { tooltip = std::move(newTooltip); }

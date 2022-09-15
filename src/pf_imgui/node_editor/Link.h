@@ -32,7 +32,7 @@ class Link : public Renderable {
    * @param inputPinPtr input pin
    * @param outputPinPtr output pin
    */
-  Link(const std::string &elementName, const ax::NodeEditor::LinkId &linkId, Pin *inputPinPtr, Pin *outputPinPtr);
+  Link(std::string_view elementName, const ax::NodeEditor::LinkId &linkId, Pin *inputPinPtr, Pin *outputPinPtr);
   ~Link() override;
 
   /**

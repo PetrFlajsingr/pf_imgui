@@ -8,11 +8,10 @@
 namespace pf::ui::ig {
 
 Expander::Expander(Expander::Config &&config)
-    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      label(std::string{config.label.value}), collapsed(false) {}
+    : Expander(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No) {}
 
-Expander::Expander(const std::string &elementName, const std::string &labelText, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), label(labelText), collapsed(false) {}
+Expander::Expander(std::string_view elementName, std::string_view labelText, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), label(std::string{labelText}), collapsed(false) {}
 
 void Expander::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

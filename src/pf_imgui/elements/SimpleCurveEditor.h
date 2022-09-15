@@ -45,8 +45,8 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
    */
   struct Config {
     using Parent = SimpleCurveEditor;
-    Explicit<std::string> name;          /*!< Unique name of the element */
-    Explicit<std::string> label;         /*!< Label rendered as overlay over the editor */
+    Explicit<std::string_view> name;     /*!< Unique name of the element */
+    Explicit<std::string_view> label;    /*!< Label rendered as overlay over the editor */
     Size size = Size::Auto();            /*!< Size of the element */
     Explicit<std::size_t> maxPointCount; /*!< Maximum allowed key points */
     bool persistent = false;             /*!< Enable/disable state saving */
@@ -65,7 +65,7 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
    * @param maxPointCount maximum allowed key points
    * @param persistent enable/disable state saving
    */
-  SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s, std::size_t maxPointCount,
+  SimpleCurveEditor(std::string_view elementName, std::string_view labelText, Size s, std::size_t maxPointCount,
                     Persistent persistent = Persistent::No);
 
   /**

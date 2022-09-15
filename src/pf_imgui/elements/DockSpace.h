@@ -53,8 +53,7 @@ class PF_IMGUI_EXPORT DockSpace : public ElementWithID {
    * @param s size of the area
    * @param dockFlags flags
    */
-  explicit DockSpace(const std::string &name, Size s = Size::Auto(),
-                     const Flags<DockType> &dockFlags = Flags<DockType>{});
+  explicit DockSpace(std::string_view name, Size s = Size::Auto(), Flags<DockType> dockFlags = Flags<DockType>{});
 
   [[nodiscard]] bool isInitialised() const;
 

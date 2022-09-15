@@ -8,13 +8,9 @@
 namespace pf::ui::ig {
 
 MarkdownText::MarkdownText(MarkdownText::Config &&config)
-    : ItemElement(std::string{config.name.value}), imGuiInterface(config.imguiInterface),
-      markdownSrc(std::move(config.markdownText)), fontSize(config.fontSize), loadImage(std::move(config.imageLoader)) {
-  loadHeaderFonts();
-  configure();
-}
+    : MarkdownText(config.name, config.imguiInterface, config.markdownText, config.fontSize, config.imageLoader) {}
 
-MarkdownText::MarkdownText(const std::string &elementName, ImGuiInterface &imguiInterface, std::u8string markdown,
+MarkdownText::MarkdownText(std::string_view elementName, ImGuiInterface &imguiInterface, std::u8string markdown,
                            float defaultFontSize, std::optional<ImageLoader> imageLoader)
     : ItemElement(elementName), imGuiInterface(imguiInterface), markdownSrc(std::move(markdown)),
       fontSize(defaultFontSize), loadImage(std::move(imageLoader)) {
@@ -56,9 +52,9 @@ void MarkdownText::configure() {
   markdownConfig.formatCallback = MarkdownFormatCallback;
 }
 
-const std::u8string &MarkdownText::getMarkdownSrc() const { return markdownSrc; }
+std::u8string_view MarkdownText::getMarkdownSrc() const { return markdownSrc; }
 
-void MarkdownText::setMarkdownSrc(const std::u8string &markdown) { markdownSrc = markdown; }
+void MarkdownText::setMarkdownSrc(std::u8string markdown) { markdownSrc = std::move(markdown); }
 
 float MarkdownText::getFontSize() const { return fontSize; }
 

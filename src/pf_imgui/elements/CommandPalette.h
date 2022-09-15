@@ -40,7 +40,7 @@ class CommandPalette : public ElementWithID {
    * Construct CommandPalette
    * @param elementName unique name of the element
    */
-  explicit CommandPalette(const std::string &elementName);
+  explicit CommandPalette(std::string_view elementName);
   ~CommandPalette() override;
 
   /**
@@ -48,10 +48,10 @@ class CommandPalette : public ElementWithID {
    * @param commandName name of the command
    * @param callback callback of the command
    */
-  void addCommand(const std::string &commandName, std::invocable auto &&callback) {
+  void addCommand(std::string_view commandName, std::invocable auto &&callback) {
     ImCmd::SetCurrentContext(context);
     auto command = ImCmd::Command{};
-    command.Name = commandName;
+    command.Name = std::string{commandName};
     command.InitialCallback = std::forward<decltype(callback)>(callback);
     ImCmd::AddCommand(std::move(command));
   }
@@ -69,7 +69,7 @@ class CommandPalette : public ElementWithID {
    * Prepare text into palette's search field.
    * @param text search text
    */
-  void setSearchText(const std::string &text);
+  void setSearchText(std::string_view text);
 
   /**
    * Add a listener which gets triggered when user selects a command.

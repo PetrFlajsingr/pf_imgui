@@ -24,7 +24,7 @@ class PF_IMGUI_EXPORT Shaded : public LabeledPlotData, public details::DefaultPl
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  Shaded(const std::string &elementName, const std::string &caption);
+  Shaded(std::string_view elementName, std::string_view caption);
 
  protected:
   void renderImpl() override;

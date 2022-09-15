@@ -43,10 +43,10 @@ class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public 
    */
   struct Config {
     using Parent = TimePicker;
-    Explicit<std::string_view> name; /*!< Unique name of the element */
-    Explicit<std::string> label;     /*!< Text rendered next to the input */
-    TimeOfDay value{};               /*!< Initial value */
-    bool persistent = false;         /*!< Enable disk state saving */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the input */
+    TimeOfDay value{};                /*!< Initial value */
+    bool persistent = false;          /*!< Enable disk state saving */
   };
   /**
    * Construct TimePicker
@@ -60,7 +60,7 @@ class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public 
    * @param initialValue initial value
    * @param persistent enable disk state saving
    */
-  TimePicker(const std::string &elementName, const std::string &labelText, TimeOfDay initialValue,
+  TimePicker(std::string_view elementName, std::string_view labelText, TimeOfDay initialValue,
              Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;

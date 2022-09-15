@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueContainer<bool>, 
    * @param initialValue starting value
    * @param persistent allow value saving to disk
    */
-  Toggle(const std::string &elementName, const std::string &labelText, bool initialValue = false,
+  Toggle(std::string_view elementName, std::string_view labelText, bool initialValue = false,
          Persistent persistent = Persistent::No);
   /**
    * Toggle the checkboxes state. True becomes false, false becomes true.

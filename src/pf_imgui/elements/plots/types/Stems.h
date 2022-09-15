@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT Stems : public LabeledPlotData, public details::DefaultPlo
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  Stems(const std::string &elementName, const std::string &caption);
+  Stems(std::string_view elementName, std::string_view caption);
 
  protected:
   void renderImpl() override;

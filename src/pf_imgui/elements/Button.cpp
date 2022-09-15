@@ -9,7 +9,7 @@
 
 namespace pf::ui::ig {
 
-ButtonBase::ButtonBase(const std::string &elementName, Repeatable isRepeatable)
+ButtonBase::ButtonBase(std::string_view elementName, Repeatable isRepeatable)
     : ItemElement(elementName), repeatable(isRepeatable == Repeatable::Yes) {}
 
 bool ButtonBase::isRepeatable() const { return repeatable; }
@@ -24,11 +24,10 @@ RAII ButtonBase::setButtonRepeat() {
 void ButtonBase::notifyClickEvent() { clickEvent.notify(); }
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      size(config.size), clickBtn(config.clickButton) {}
+    : InvisibleButton(config.name, config.size, config.clickButton,
+                      config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
-InvisibleButton::InvisibleButton(const std::string &elementName, const Size &s, MouseButton clickButton,
-                                 Repeatable isRepeatable)
+InvisibleButton::InvisibleButton(std::string_view elementName, Size s, MouseButton clickButton, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), size(s), clickBtn(clickButton) {}
 
 void InvisibleButton::renderImpl() {
@@ -39,11 +38,10 @@ void InvisibleButton::renderImpl() {
 }
 
 Button::Button(Button::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      label(std::string{config.label.value}), size(config.size) {}
+    : Button(config.name, config.label, config.size, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
-Button::Button(const std::string &elementName, const std::string &labelText, const Size &s, Repeatable isRepeatable)
-    : ButtonBase(elementName, isRepeatable), label(labelText), size(s) {}
+Button::Button(std::string_view elementName, std::string_view labelText, Size s, Repeatable isRepeatable)
+    : ButtonBase(elementName, isRepeatable), label(std::string{labelText}), size(s) {}
 
 void Button::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -54,11 +52,10 @@ void Button::renderImpl() {
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      label(std::string{config.label.value}) {}
+    : SmallButton(config.name, config.label, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
-SmallButton::SmallButton(const std::string &elementName, const std::string &labelText, Repeatable isRepeatable)
-    : ButtonBase(elementName, isRepeatable), label(labelText) {}
+SmallButton::SmallButton(std::string_view elementName, std::string_view labelText, Repeatable isRepeatable)
+    : ButtonBase(elementName, isRepeatable), label(std::string{labelText}) {}
 
 void SmallButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -69,10 +66,9 @@ void SmallButton::renderImpl() {
 }
 
 ArrowButton::ArrowButton(ArrowButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      dir(config.direction) {}
+    : ArrowButton(config.name, config.direction, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
-ArrowButton::ArrowButton(const std::string &elementName, ArrowButton::Dir direction, Repeatable isRepeatable)
+ArrowButton::ArrowButton(std::string_view elementName, ArrowButton::Dir direction, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), dir(direction) {}
 
 void ArrowButton::renderImpl() {
@@ -83,10 +79,9 @@ void ArrowButton::renderImpl() {
 }
 
 ImageButton::ImageButton(ImageButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      size(config.size), texture(std::move(config.texture)) {}
+    : ImageButton(config.name, config.texture, config.size, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
-ImageButton::ImageButton(const std::string &elementName, std::shared_ptr<Texture> tex, Size s, Repeatable isRepeatable)
+ImageButton::ImageButton(std::string_view elementName, std::shared_ptr<Texture> tex, Size s, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), size(s), texture(std::move(tex)) {}
 
 void ImageButton::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {

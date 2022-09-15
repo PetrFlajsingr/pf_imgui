@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-CheckboxPin::CheckboxPin(const std::string &elementName, const std::string &labelText, Color pinColor,
-                         const Width &width)
+CheckboxPin::CheckboxPin(std::string_view elementName, std::string_view labelText, Color pinColor, Width width)
     : InteractablePin(elementName, labelText, pinColor, width,
                       Checkbox::Config{.name = uniqueId(), .label = labelText}) {}
 

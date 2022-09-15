@@ -33,8 +33,8 @@ class Comment : public NodeBase {
    * @param labelText text rendered in header of the Comment
    * @param initialSize initial size of the Comment area
    */
-  Comment(const std::string &elementName, const std::string &labelText, Size initialSize);
-  Comment(const std::string &elementName, const Position &initPosition, const std::string &labelText, const Size &s);
+  Comment(std::string_view elementName, std::string_view labelText, Size initialSize);
+  Comment(std::string_view elementName, Position initPosition, std::string_view labelText, Size s);
 
   Observable<Label> label;
 

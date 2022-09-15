@@ -7,12 +7,11 @@
 namespace pf::ui::ig {
 
 TimePicker::TimePicker(TimePicker::Config &&config)
-    : TimePicker(std::string{config.name.value}, config.label, config.value,
-                 config.persistent ? Persistent::Yes : Persistent::No) {}
+    : TimePicker(config.name, config.label, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
 
-TimePicker::TimePicker(const std::string &elementName, const std::string &labelText, pf::ui::ig::TimeOfDay initialValue,
-                       pf::ui::ig::Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), label(labelText), time(initialValue) {
+TimePicker::TimePicker(std::string_view elementName, std::string_view labelText, TimeOfDay initialValue,
+                       Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), label(std::string{labelText}), time(initialValue) {
   updateInnerValues();
   time.addListener([this](auto) { updateInnerValues(); });
 }

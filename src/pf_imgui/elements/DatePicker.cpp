@@ -9,15 +9,11 @@
 namespace pf::ui::ig {
 
 DatePicker::DatePicker(DatePicker::Config &&config)
-    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      label(std::string{config.label.value}), date(config.value), rawTime(std::make_unique<tm>()) {
-  updateRawTime();
-  date.addListener([this](auto) { updateRawTime(); });
-}
+    : DatePicker(config.name, config.label, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
 
-DatePicker::DatePicker(const std::string &elementName, const std::string &labelText,
+DatePicker::DatePicker(std::string_view elementName, std::string_view labelText,
                        std::chrono::year_month_day initialValue, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), label(labelText), date(initialValue),
+    : ItemElement(elementName), Savable(persistent), label(std::string{labelText}), date(initialValue),
       rawTime(std::make_unique<tm>()) {
   updateRawTime();
   date.addListener([this](auto) { updateRawTime(); });

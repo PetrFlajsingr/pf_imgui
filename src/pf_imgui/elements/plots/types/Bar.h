@@ -26,7 +26,7 @@ class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotD
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  Bar(const std::string &elementName, const std::string &caption) : LabeledPlotData(elementName, caption) {}
+  Bar(std::string_view elementName, std::string_view caption) : LabeledPlotData(elementName, caption) {}
 
  protected:
   void renderImpl() override {

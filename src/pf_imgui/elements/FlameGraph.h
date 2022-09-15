@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT FlameGraph : public ElementWithID {
    * @param initialSize size of the graph
    * @param graphOverlay text render on top of the graph
    */
-  FlameGraph(const std::string &elementName, const std::string &labelText, const Size &initialSize = Size::Auto(),
+  FlameGraph(std::string_view elementName, std::string_view labelText, Size initialSize = Size::Auto(),
              std::optional<std::string> graphOverlay = std::nullopt);
 
   /**

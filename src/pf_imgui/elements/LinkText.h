@@ -50,9 +50,9 @@ class LinkText : public ItemElement {
    * @param linkStr underlying link/url
    * @param linkClickHandlerFnc handler for url interact
    */
-  LinkText(const std::string &elementName, const std::string &labelText, std::string linkStr,
+  LinkText(std::string_view elementName, std::string_view labelText, std::string linkStr,
            std::invocable<std::string_view> auto &&linkClickHandlerFnc)
-      : ItemElement(elementName), label(labelText), link(std::move(linkStr)),
+      : ItemElement(elementName), label(std::string{labelText}), link(std::move(linkStr)),
         linkClickHandler(std::forward<decltype(linkClickHandlerFnc)>(linkClickHandlerFnc)) {
     setTooltip(LinkText::link);
   }

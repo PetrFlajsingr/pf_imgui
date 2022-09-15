@@ -46,7 +46,7 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
    * @param elementName id of the element
    * @param rowFactory factory for row creation
    */
-  CustomItemBox(const std::string &elementName, CustomItemBoxFactory<T, R> auto &&rowFactory);
+  CustomItemBox(std::string_view elementName, CustomItemBoxFactory<T, R> auto &&rowFactory);
 
   /**
    * Add item to the end of the list.
@@ -142,7 +142,7 @@ class PF_IMGUI_EXPORT CustomItemBox : public ItemElement, public RenderablesCont
 };
 
 template<typename T, std::derived_from<Renderable> R>
-CustomItemBox<T, R>::CustomItemBox(const std::string &elementName, CustomItemBoxFactory<T, R> auto &&rowFactory)
+CustomItemBox<T, R>::CustomItemBox(std::string_view elementName, CustomItemBoxFactory<T, R> auto &&rowFactory)
     : ItemElement(elementName), factory(std::forward<decltype(rowFactory)>(rowFactory)) {}
 
 template<typename T, std::derived_from<Renderable> R>

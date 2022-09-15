@@ -23,7 +23,7 @@ class StringInputPin : public InteractablePin<InputText> {
     Flags<TextFilter> filters = TextFilter::None;
   };
 
-  StringInputPin(const std::string &elementName, const std::string &labelText, Color pinColor, InputConfig &&config);
+  StringInputPin(std::string_view elementName, std::string_view labelText, Color pinColor, InputConfig &&config);
 
   [[nodiscard]] static std::unique_ptr<StringInputPin> ConstructFromToml(ig::Node *parent, const toml::table &src);
 
@@ -31,7 +31,7 @@ class StringInputPin : public InteractablePin<InputText> {
   void setFromToml(const toml::table &src) override;
 
  private:
-  static typename InputText::Config CreateInputConfig(const std::string &name, const std::string &label,
+  static typename InputText::Config CreateInputConfig(std::string_view name, std::string_view label,
                                                       InputConfig &&config);
 };
 

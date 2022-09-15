@@ -6,10 +6,10 @@
 
 namespace pf::ui::ig {
 ViewportOverlayGizmo::ViewportOverlayGizmo(ViewportOverlayGizmo::Config &&config)
-    : ViewportOverlayGizmo(std::string{config.name.value}, config.value, config.mode, config.space, config.viewMatrix,
+    : ViewportOverlayGizmo(config.name, config.value, config.mode, config.space, config.viewMatrix,
                            config.projectionMatrix, config.isProjectionOrthographic) {}
 
-ViewportOverlayGizmo::ViewportOverlayGizmo(const std::string &elementName, const glm::mat4 &initialValue,
+ViewportOverlayGizmo::ViewportOverlayGizmo(std::string_view elementName, const glm::mat4 &initialValue,
                                            ViewportGizmoMode gizmoMode, ViewportGizmoSpace spaceType,
                                            const glm::mat4 &initialView, const glm::mat4 &initialProjection,
                                            bool isProjectionOrthographic)
@@ -28,7 +28,7 @@ AreaOverlayGizmo::AreaOverlayGizmo(AreaOverlayGizmo::Config &&config)
     : AreaOverlayGizmo(std::string{config.name.value}, config.owningWindow, config.value, config.mode, config.space,
                        config.viewMatrix, config.projectionMatrix, config.isProjectionOrthographic) {}
 
-AreaOverlayGizmo::AreaOverlayGizmo(const std::string &elementName, Window &owningWindow, const glm::mat4 &initialValue,
+AreaOverlayGizmo::AreaOverlayGizmo(std::string_view elementName, Window &owningWindow, const glm::mat4 &initialValue,
                                    ViewportGizmoMode gizmoMode, ViewportGizmoSpace gizmoSpace,
                                    const glm::mat4 &initialView, const glm::mat4 &initialProjection,
                                    bool isProjectionOrthographic)

@@ -9,16 +9,16 @@
 namespace pf::ui::ig {
 
 SimplePlot::SimplePlot(SimplePlot::Config &&config)
-    : ElementWithID(std::string{config.name.value}), label(std::string{config.label.value}), size(config.size),
-      plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow), scaleMax(config.scaleHigh),
-      overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
+    : SimplePlot(config.name, config.label, config.type, config.values, config.overlay, config.maxHistoryCount,
+                 config.scaleLow, config.scaleHigh, config.size) {}
 
-SimplePlot::SimplePlot(const std::string &elementName, const std::string &labelText, PlotType type,
+SimplePlot::SimplePlot(std::string_view elementName, std::string_view labelText, PlotType type,
                        std::vector<float> plotValues, std::optional<std::string> plotOverlayText,
                        const std::optional<std::size_t> &maxHistorySize, float scaleLow, float scaleHigh,
                        Size initialSize)
-    : ElementWithID(elementName), label(labelText), size(initialSize), plotType(type), values(std::move(plotValues)),
-      scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(plotOverlayText)), historyLimit(maxHistorySize) {}
+    : ElementWithID(elementName), label(std::string{labelText}), size(initialSize), plotType(type),
+      values(std::move(plotValues)), scaleMin(scaleLow), scaleMax(scaleHigh), overlayText(std::move(plotOverlayText)),
+      historyLimit(maxHistorySize) {}
 
 void SimplePlot::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

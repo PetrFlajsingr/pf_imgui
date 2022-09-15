@@ -18,7 +18,7 @@ class Pin : public ig::Pin, public TomlSerializable {
   friend class NodeEditor;
 
  public:
-  Pin(const std::string &elementName, const std::string &labelText, Color pinColor);
+  Pin(std::string_view elementName, std::string_view labelText, Color pinColor);
 
   [[nodiscard]] Color getColor() const;
   void setColor(Color newColor);

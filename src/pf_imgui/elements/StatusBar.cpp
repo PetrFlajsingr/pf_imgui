@@ -9,9 +9,9 @@
 
 namespace pf::ui::ig {
 
-AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : ElementWithID(std::string{config.name.value}) {}
+AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : AppStatusBar(config.name) {}
 
-AppStatusBar::AppStatusBar(const std::string &elementName) : ElementWithID(elementName) {}
+AppStatusBar::AppStatusBar(std::string_view elementName) : ElementWithID(elementName) {}
 
 void AppStatusBar::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

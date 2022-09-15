@@ -86,7 +86,7 @@ class PF_IMGUI_EXPORT DefaultPlotDataSetting {
  */
 class PF_IMGUI_EXPORT PlotData : public ElementWithID {
  public:
-  explicit PlotData(const std::string &elementName);
+  explicit PlotData(std::string_view elementName);
 };
 
 /**
@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT PlotData : public ElementWithID {
  */
 class PF_IMGUI_EXPORT LabeledPlotData : public PlotData {
  public:
-  LabeledPlotData(const std::string &elementName, const std::string &caption);
+  LabeledPlotData(std::string_view elementName, std::string_view caption);
 
   Observable<Label> label;
 };

@@ -9,14 +9,13 @@
 namespace pf::ui::ig {
 
 Range2D::Range2D(Range2D::Config &&config)
-    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      DragSource(false), DropTarget(false), label(std::string{config.label.value}), size(config.size),
-      range(config.value), minRange(config.min), maxRange(config.max) {}
+    : Range2D(config.name, config.label, config.min, config.max, config.value, config.size,
+              config.persistent ? Persistent::Yes : Persistent::No) {}
 
-Range2D::Range2D(const std::string &elementName, const std::string &labelText, const glm::vec2 &min,
-                 const glm::vec2 &max, const math::Range<glm::vec2> &initialValue, const Size &s, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false), label(labelText), size(s),
-      range(initialValue), minRange(min), maxRange(max) {}
+Range2D::Range2D(std::string_view elementName, std::string_view labelText, glm::vec2 min, glm::vec2 max,
+                 const math::Range<glm::vec2> &initialValue, Size s, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false),
+      label(std::string{labelText}), size(s), range(initialValue), minRange(min), maxRange(max) {}
 
 void Range2D::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

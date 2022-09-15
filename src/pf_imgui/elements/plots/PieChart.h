@@ -56,7 +56,7 @@ class PF_IMGUI_EXPORT PieChart : public ElementWithID {
    * @param labelText text rendered above the chart
    * @param initialSize size on display
    */
-  PieChart(const std::string &elementName, const std::string &labelText, const Size &initialSize);
+  PieChart(std::string_view elementName, std::string_view labelText, Size initialSize);
   /**
    * Add a new sample to the graph.
    * @param sample sample to be added

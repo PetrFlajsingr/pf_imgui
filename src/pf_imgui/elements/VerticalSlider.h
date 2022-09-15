@@ -73,7 +73,7 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
    * @param persistent enable state saving to disk
    * @param numberFormat printf-like format for value
    */
-  VerticalSlider(const std::string &elementName, const std::string &labelText, Size initialSize, T minVal, T maxVal,
+  VerticalSlider(std::string_view elementName, std::string_view labelText, Size initialSize, T minVal, T maxVal,
                  T initialValue = T{}, Persistent persistent = Persistent::No,
                  std::string numberFormat = details::defaultVSliderFormat<T>());
 
@@ -129,16 +129,15 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), size(config.size.value), value(config.value), min(config.min),
-      max(config.max), format(std::move(config.format)) {}
+    : VerticalSlider(config.name, config.label, config.size, config.min, config.max, config.value,
+                     config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<float, int> T>
-VerticalSlider<T>::VerticalSlider(const std::string &elementName, const std::string &labelText, Size initialSize,
-                                  T minVal, T maxVal, T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
-      size(initialSize), value(initialValue), min(minVal), max(maxVal), format(std::move(numberFormat)) {}
+VerticalSlider<T>::VerticalSlider(std::string_view elementName, std::string_view labelText, Size initialSize, T minVal,
+                                  T maxVal, T initialValue, Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
+      label(std::string{labelText}), size(initialSize), value(initialValue), min(minVal), max(maxVal),
+      format(std::move(numberFormat)) {}
 
 template<OneOf<float, int> T>
 toml::table VerticalSlider<T>::toToml() const {

@@ -80,7 +80,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
    * @param persistent allow state saving to disk
    * @param format format for formatting value to string
    */
-  DragInput(const std::string &elementName, const std::string &labelText, ParamType valueSpeed, ParamType minValue,
+  DragInput(std::string_view elementName, std::string_view labelText, ParamType valueSpeed, ParamType minValue,
             ParamType maxValue, T initialValue = T{}, Persistent persistent = Persistent::No,
             std::string numberFormat = drag_details::defaultFormat<T>());
 
@@ -148,18 +148,17 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(DragInput::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), value(config.value), speed(config.speed), min(config.min),
-      max(config.max), format(std::move(config.format)) {}
+    : DragInput(config.name, config.label, config.speed, config.min, config.max, config.value,
+                config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
-DragInput<T>::DragInput(const std::string &elementName, const std::string &labelText,
+DragInput<T>::DragInput(std::string_view elementName, std::string_view labelText,
                         drag_details::UnderlyingType<T> valueSpeed, drag_details::UnderlyingType<T> minValue,
                         drag_details::UnderlyingType<T> maxValue, T initialValue, Persistent persistent,
                         std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
-      value(initialValue), speed(valueSpeed), min(minValue), max(maxValue), format(std::move(numberFormat)) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
+      label(std::string{labelText}), value(initialValue), speed(valueSpeed), min(minValue), max(maxValue),
+      format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 toml::table DragInput<T>::toToml() const {

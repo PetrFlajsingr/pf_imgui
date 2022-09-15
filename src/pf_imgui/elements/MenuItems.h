@@ -26,7 +26,7 @@ namespace pf::ui::ig {
 class SubMenu;
 class PF_IMGUI_EXPORT MenuItem : public ElementWithID {
  public:
-  explicit MenuItem(const std::string &elementName);
+  explicit MenuItem(std::string_view elementName);
 
   /**
    * Set if the parent menu is closed on interact - the menu might still get closed in some cases.
@@ -58,14 +58,14 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
     * @param caption text of the SubMenu
     * @return reference to the created SubMenu
     */
-  SubMenu &addSubmenu(const std::string &name, const std::string &caption);
+  SubMenu &addSubmenu(std::string_view name, std::string_view caption);
   /**
     * Create an instance of MenuButtonItem and add it to the end of children/
     * @param name ID of the MenuButtonItem
     * @param caption text of the MenuButtonItem
     * @return reference to the created MenuButtonItem
     */
-  MenuButtonItem &addButtonItem(const std::string &name, const std::string &caption);
+  MenuButtonItem &addButtonItem(std::string_view name, std::string_view caption);
   /**
     * Create an instance of MenuCheckboxItem and add it to the end of children/
     * @param name ID of the MenuCheckboxItem
@@ -73,14 +73,14 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
     * @param value starting value
     * @return reference to the created MenuButtonItem
     */
-  MenuCheckboxItem &addCheckboxItem(const std::string &name, const std::string &caption, bool value = false,
+  MenuCheckboxItem &addCheckboxItem(std::string_view name, std::string_view caption, bool value = false,
                                     Persistent persistent = Persistent::No);
   /**
     * Create an instance of MenuSeparatorItem and add it to the end of children/
     * @param name ID of the MenuSeparatorItem
     * @return reference to the created MenuSeparatorItem
     */
-  MenuSeparatorItem &addSeparator(const std::string &name);
+  MenuSeparatorItem &addSeparator(std::string_view name);
 
   template<std::derived_from<MenuItem> T, typename... Args>
   T &addMenuItem(Args &&...args)
@@ -121,7 +121,7 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
    * @param elementName ID of the element
    * @param labelText text rendered on the button
    */
-  MenuButtonItem(const std::string &elementName, const std::string &labelText);
+  MenuButtonItem(std::string_view elementName, std::string_view labelText);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
                ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::Header, ColorOf::HeaderHovered,
@@ -162,7 +162,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueContainer<
    * @param label text rendered on the button
    * @param initialValue starting value
    */
-  MenuCheckboxItem(const std::string &elementName, const std::string &label, bool initialValue = false,
+  MenuCheckboxItem(std::string_view elementName, std::string_view label, bool initialValue = false,
                    Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
@@ -208,7 +208,7 @@ class PF_IMGUI_EXPORT MenuSeparatorItem : public MenuItem {
    * Construct MenuSeparatorItem.
    * @param elementName ID of the element
    */
-  explicit MenuSeparatorItem(const std::string &elementName);
+  explicit MenuSeparatorItem(std::string_view elementName);
 
   ColorPalette<ColorOf::Separator, ColorOf::SeparatorHovered, ColorOf::SeparatorActive> color;
 
@@ -238,7 +238,7 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public MenuContainer {
    * @param elementName ID of the element
    * @param labelText text rendered on the button
    */
-  SubMenu(const std::string &elementName, const std::string &labelText);
+  SubMenu(std::string_view elementName, std::string_view labelText);
 
   Observable<Label> label;
 

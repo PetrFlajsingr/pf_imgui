@@ -29,7 +29,7 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  ErrorBar(const std::string &elementName, const std::string &caption) : LabeledPlotData(elementName, caption) {}
+  ErrorBar(std::string_view elementName, std::string_view caption) : LabeledPlotData(elementName, caption) {}
 
   /**
    * Set new plot data.

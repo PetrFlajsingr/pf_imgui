@@ -34,13 +34,13 @@ class Node : public NodeBase {
    * Construct Node
    * @param elementName unique name of the element
    */
-  explicit Node(const std::string &elementName);
+  explicit Node(std::string_view elementName);
   /**
    * Construct Node
    * @param elementName unique name of the element
    * @param initPosition initial position
    */
-  Node(const std::string &elementName, const Position &initPosition);
+  Node(std::string_view elementName, Position initPosition);
 
   /**
    * Get all input pins

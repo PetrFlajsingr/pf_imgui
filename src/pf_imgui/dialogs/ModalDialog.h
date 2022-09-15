@@ -36,7 +36,7 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable, public ElementContainer {
    * @param modal modality
    * @param dialogSize dialog size
    */
-  ModalDialog(const std::string &elementName, const std::string &labelText, Size dialogSize = Size::Auto());
+  ModalDialog(std::string_view elementName, std::string_view labelText, Size dialogSize = Size::Auto());
 
   /**
    * Set flag for closing the dialog, which invalidates the dialog.

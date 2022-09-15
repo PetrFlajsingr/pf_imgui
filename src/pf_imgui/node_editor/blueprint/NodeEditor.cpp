@@ -18,7 +18,7 @@
 
 namespace pf::ui::ig::bp {
 
-NodeEditor::NodeEditor(const std::string &elementName, const Size &initialSize)
+NodeEditor::NodeEditor(std::string_view elementName, Size initialSize)
     : ig::NodeEditor(elementName, initialSize) {
   NodeEditorLoading::Get()->registerConstruction<ArrayPin<float>>();
   NodeEditorLoading::Get()->registerConstruction<ArrayPin<int>>();
@@ -42,7 +42,7 @@ NodeEditor::NodeEditor(const std::string &elementName, const Size &initialSize)
   NodeEditorLoading::Get()->registerConstruction<NodeWithLabel>();
 }
 
-NodeEditor::NodeEditor(Config &&config) : NodeEditor(std::string{config.name.value}, config.size) {}
+NodeEditor::NodeEditor(Config &&config) : NodeEditor(config.name.value, config.size) {}
 
 toml::table NodeEditor::toToml() const {
   auto nodesToml = toml::array{};

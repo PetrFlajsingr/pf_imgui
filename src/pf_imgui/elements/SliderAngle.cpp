@@ -9,15 +9,13 @@
 namespace pf::ui::ig {
 
 SliderAngle::SliderAngle(SliderAngle::Config &&config)
-    : ItemElement(std::string{config.name.value}),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<float>(false), DropTarget<float>(false),
-      label(std::string{config.label.value}), angle(config.value), minDeg(config.min), maxDeg(config.max),
-      format(std::move(config.format)) {}
+    : SliderAngle(config.name, config.label, config.min, config.max, config.value,
+                  config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
-SliderAngle::SliderAngle(const std::string &elementName, const std::string &labelText, float min, float max,
+SliderAngle::SliderAngle(std::string_view elementName, std::string_view labelText, float min, float max,
                          float initialValue, Persistent persistent, std::string numberFormat)
     : ItemElement(elementName), Savable(persistent), DragSource<float>(false), DropTarget<float>(false),
-      label(labelText), angle(initialValue), minDeg(min), maxDeg(max), format(std::move(numberFormat)) {}
+      label(std::string{labelText}), angle(initialValue), minDeg(min), maxDeg(max), format(std::move(numberFormat)) {}
 
 void SliderAngle::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

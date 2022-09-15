@@ -76,7 +76,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
     using Parent = Combobox;
     Explicit<std::string_view> name;                      /*!< Unique name of the element */
     Explicit<std::string_view> label;                     /*!< Text rendered next to the Combobox */
-    Explicit<std::string> preview;                        /*!< Preview value shown when no item is selected */
+    Explicit<std::string_view> preview;                   /*!< Preview value shown when no item is selected */
     ComboBoxCount shownItemCount = ComboBoxCount::Items8; /*!< Amount of items shown when Combobox is open */
     bool persistent = false;                              /*!< Allow state saving to disk */
   };
@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * @param showItemCount amount of items shown when open
    * @param persistent enable/disable disk state saving
    */
-  Combobox(const std::string &elementName, const std::string &labelStr, const std::string &prevValue,
+  Combobox(std::string_view elementName, std::string_view labelStr, std::string_view prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent = Persistent::No)
     requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
@@ -155,9 +155,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
 
 template<ToStringConvertible T>
 Combobox<T>::Combobox(Combobox::Config &&config)
-    : Combobox{std::string{config.name.value}, std::string{config.label.value},
-               std::string{config.preview},    std::vector<T>{},
-               config.shownItemCount,          config.persistent ? Persistent::Yes : Persistent::No} {}
+    : Combobox(config.name, config.label, config.preview, std::vector<T>{}, config.shownItemCount,
+               config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<ToStringConvertible T>
 void Combobox<T>::setSelectedItemAsString(const std::string &itemAsString) {
@@ -236,7 +235,6 @@ template<ToStringConvertible T>
 void Combobox<T>::setValue(const std::optional<T> &newValue) {
   *selectedItem.modify() = newValue;
 }
-
 template<ToStringConvertible T>
 void Combobox<T>::cancelSelection() {
   selectedItemIndex = std::nullopt;

@@ -7,10 +7,10 @@
 
 namespace pf::ui::ig {
 
-MessageDialog::MessageDialog(const std::string &elementName, const std::string &title, Size initialSize,
-                             const std::string &message, const Flags<MessageButtons> &buttons)
+MessageDialog::MessageDialog(std::string_view elementName, std::string_view title, Size initialSize,
+                             std::string_view message, const Flags<MessageButtons> &buttons)
     : ModalDialog(elementName, title, initialSize) {
-  createChild<Text>("text", message).setWrap(true);
+  createChild<Text>("text", std::string{message}).setWrap(true);
   createChild<Dummy>("area_fill", Size{Width::Auto(), Height::Fill(25)});
   auto &btnLayout = createChild<HorizontalLayout>("hor_layout", Size{Width::Auto(), 20}, HorizontalAlign::Down);
   auto enabledButtons = buttons.getSetFlags();
