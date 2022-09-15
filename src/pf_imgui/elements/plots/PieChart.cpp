@@ -9,7 +9,7 @@
 namespace pf::ui::ig {
 
 PieChart::PieChart(PieChart::Config &&config)
-    : ElementWithID(config.name.value), label(std::string{config.label.value}), size(config.size) {}
+    : PieChart(config.name, config.label, config.size) {}
 
 PieChart::PieChart(std::string_view elementName, std::string_view labelText, Size initialSize)
     : ElementWithID(elementName), label(std::string{labelText}), size(initialSize) {}

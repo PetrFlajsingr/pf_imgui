@@ -9,12 +9,10 @@
 
 namespace pf::ui::ig {
 
-Plot::Plot(Plot::Config &&config)
-    : ElementWithID(config.name.value), label(std::string{config.label.value}), size(config.size),
-      xLabel(std::move(config.xLabel)), yLabel(std::move(config.yLabel)) {}
+Plot::Plot(Plot::Config &&config) : Plot(config.name, config.label, config.xLabel, config.yLabel, config.size) {}
 
 Plot::Plot(std::string_view elementName, std::string_view labelText, std::optional<std::string> xLabelText,
-           std::optional<std::string> yLabelText, const Size &initialSize)
+           std::optional<std::string> yLabelText, Size initialSize)
     : ElementWithID(elementName), label(std::string{labelText}), size(initialSize), xLabel(std::move(xLabelText)),
       yLabel(std::move(yLabelText)) {}
 

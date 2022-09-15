@@ -51,7 +51,7 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID {
    * @param initialSize size of the element
    */
   Plot(std::string_view elementName, std::string_view labelText, std::optional<std::string> xLabelText = std::nullopt,
-       std::optional<std::string> yLabelText = std::nullopt, const Size &initialSize = Size::FillWidth());
+       std::optional<std::string> yLabelText = std::nullopt, Size initialSize = Size::FillWidth());
 
   /**
    * Add new set of data.

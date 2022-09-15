@@ -9,9 +9,8 @@
 namespace pf::ui::ig {
 
 SimplePlot::SimplePlot(SimplePlot::Config &&config)
-    : ElementWithID(config.name.value), label(std::string{config.label.value}), size(config.size),
-      plotType(config.type), values(std::move(config.values)), scaleMin(config.scaleLow), scaleMax(config.scaleHigh),
-      overlayText(std::move(config.overlay)), historyLimit(config.maxHistoryCount) {}
+    : SimplePlot(config.name, config.label, config.type, config.values, config.overlay, config.maxHistoryCount,
+                 config.scaleLow, config.scaleHigh, config.size) {}
 
 SimplePlot::SimplePlot(std::string_view elementName, std::string_view labelText, PlotType type,
                        std::vector<float> plotValues, std::optional<std::string> plotOverlayText,
