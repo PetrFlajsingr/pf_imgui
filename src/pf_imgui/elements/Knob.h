@@ -99,14 +99,14 @@ class Knob : public ItemElement, public ValueContainer<T>, public Savable {
 
 template<OneOf<int, float> T>
 Knob<T>::Knob(Knob::Config &&config)
-    : Knob(config.name.value, config.label.value, config.type, config.size, config.minValue,
-           config.maxValue, config.speed, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : Knob(config.name, config.label, config.type, config.size, config.minValue, config.maxValue, config.speed,
+           config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<int, float> T>
-Knob<T>::Knob(std::string_view name, std::string_view label, KnobType type, Size s, T min, T max, float speed,
-              T value, Persistent persistent)
-    : ItemElement(name), Savable(persistent), label(std::string{label}), size(s), value(value), min(min), max(max), speed(speed),
-      type(type) {}
+Knob<T>::Knob(std::string_view name, std::string_view label, KnobType type, Size s, T min, T max, float speed, T value,
+              Persistent persistent)
+    : ItemElement(name), Savable(persistent), label(std::string{label}), size(s), value(value), min(min), max(max),
+      speed(speed), type(type) {}
 
 template<OneOf<int, float> T>
 toml::table Knob<T>::toToml() const {

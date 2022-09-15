@@ -80,7 +80,7 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
   struct Config {
     using Parent = TextEditor;
     Explicit<std::string_view> name; /*!< Unique name of the element */
-    std::string value{};             /*!< Initial text inside the editor */
+    std::string_view value{};        /*!< Initial text inside the editor */
     Size size = Size::Auto();        /*!< Size of the element */
     bool persistent = false;         /*!< Allow state saving to disk */
   };

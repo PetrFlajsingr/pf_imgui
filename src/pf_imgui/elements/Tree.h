@@ -131,7 +131,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
    * @param config construction args @see TreeNode::Config
    */
   explicit TreeNode(Config &&config)
-      : TreeNode(config.name.value, config.label.value, config.persistent ? Persistent::Yes : Persistent::No,
+      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
                  Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
    * Construct TreeNode.
@@ -241,7 +241,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @param config construction args @see TreeNode::Config
    */
   explicit TreeNode(Config &&config)
-      : TreeNode(config.name.value, config.label.value, config.persistent ? Persistent::Yes : Persistent::No,
+      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
                  Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
    * Construct TreeNode.
@@ -347,8 +347,8 @@ class PF_IMGUI_EXPORT TreeHeaderNode : public TreeNode<treeType> {
    * @param config construction args @see TreeHeaderNode::Config
    */
   explicit TreeHeaderNode(Config &&config)
-      : TreeNode<treeType>(config.name.value, config.label.value,
-                           config.persistent ? Persistent::Yes : Persistent::No, ImGuiTreeNodeFlags_CollapsingHeader) {}
+      : TreeNode<treeType>(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
+                           ImGuiTreeNodeFlags_CollapsingHeader) {}
   /**
    * Construct TreeHeaderNode.
    * @param elementName unique name of the element
@@ -380,10 +380,8 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param config construction args @see Tree::Config
    */
   explicit Tree(Config &&config)
-      : ElementWithID(config.name.value), persistent(config.persistent ? Persistent::Yes : Persistent::No),
-        layout({.name = "layout",
-                .size = Size::Auto(),
-                .showBorder = config.showBorder ? ShowBorder::Yes : ShowBorder::No}) {}
+      : Tree(config.name, config.showBorder ? ShowBorder::Yes : ShowBorder::No,
+             config.persistent ? Persistent::Yes : Persistent::No) {}
   /**
    * Construct tree.
    * @param elementName unique name of the element

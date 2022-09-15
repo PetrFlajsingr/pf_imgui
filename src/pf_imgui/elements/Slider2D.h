@@ -102,10 +102,9 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(Slider2D::Config &&config)
-    : ItemElement(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      DragSource<StorageType>(false), DropTarget<StorageType>(false), label(std::string{config.label.value}),
-      size(config.size), value(config.value), extremesX(config.min.value.x, config.max.value.x),
-      extremesY(config.min.value.y, config.max.value.y) {}
+    : Slider2D(config.name, config.label, {config.min.value.x, config.max.value.x},
+               {config.min.value.y, config.max.value.y}, config.value, config.size,
+               config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(std::string_view elementName, std::string_view labelText, Slider2D::StorageType minMaxX,

@@ -9,8 +9,8 @@
 namespace pf::ui::ig {
 
 Selectable::Selectable(Selectable::Config &&config)
-    : ItemElement(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      label(std::string{config.label.value}), size(config.size), selected(config.selected) {}
+    : Selectable(config.name, config.label, config.selected, config.size,
+                 config.persistent ? Persistent::Yes : Persistent::No) {}
 
 Selectable::Selectable(std::string_view elementName, std::string_view labelText, bool initialValue, Size s,
                        Persistent persistent)

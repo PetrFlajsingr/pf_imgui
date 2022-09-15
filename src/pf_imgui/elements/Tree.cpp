@@ -12,25 +12,9 @@ details::TreeRecord::TreeRecord(std::string_view elementName, std::string_view t
     : ItemElement(elementName), label(std::string{treeLabel}), flags(defaultFlags) {}
 
 TreeLeaf::TreeLeaf(TreeLeaf::Config &&config)
-    : TreeRecord(config.name.value, config.label.value, ImGuiTreeNodeFlags_Leaf),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), selected(config.selected) {
-  if (config.selected) {
-    flags |= ImGuiTreeNodeFlags_Selected;
-  } else {
-    flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
-  }
-  selected.addListener([this](const auto newValue) {
-    if (newValue) {
-      flags |= ImGuiTreeNodeFlags_Selected;
-    } else {
-      flags &= static_cast<ImGuiTreeNodeFlags_>(~ImGuiTreeNodeFlags_Selected);
-    }
-    if (limiter != nullptr && newValue) { limiter->selected = this; }
-  });
-}
+    : TreeLeaf(config.name, config.label, config.selected, config.persistent ? Persistent::Yes : Persistent::No) {}
 
-TreeLeaf::TreeLeaf(std::string_view elementName, std::string_view labelText, bool initialValue,
-                   Persistent persistent)
+TreeLeaf::TreeLeaf(std::string_view elementName, std::string_view labelText, bool initialValue, Persistent persistent)
     : TreeRecord(elementName, labelText, ImGuiTreeNodeFlags_Leaf), Savable(persistent), selected(initialValue) {
   if (*selected) {
     flags |= ImGuiTreeNodeFlags_Selected;

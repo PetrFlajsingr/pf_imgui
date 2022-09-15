@@ -93,11 +93,9 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
 
 template<OneOf<glm::vec3> T>
 Slider3D<T>::Slider3D(Slider3D::Config &&config)
-    : ItemElement(config.name.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), size(config.size), value(config.value),
-      extremesX(config.min.value.x, config.max.value.x), extremesY(config.min.value.y, config.max.value.y),
-      extremesZ(config.min.value.z, config.max.value.z) {}
+    : Slider3D(config.name, config.label, {config.min.value.x, config.max.value.x},
+               {config.min.value.y, config.max.value.y}, {config.min.value.z, config.max.value.z}, config.value,
+               config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<glm::vec3> T>
 Slider3D<T>::Slider3D(std::string_view elementName, std::string_view labelText, glm::vec2 minMaxX, glm::vec2 minMaxY,

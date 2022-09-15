@@ -5,8 +5,8 @@
  * @date 10.4.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_VERTICALLAYOUT_H
-#define IMGUI_EXPERIMENTS_VERTICALLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_VERTICALLAYOUT_H
+#define PF_IMGUI_LAYOUTS_VERTICALLAYOUT_H
 
 #include "LinearLayout.h"
 #include <pf_common/Explicit.h>
@@ -55,4 +55,4 @@ class VerticalLayout : public LinearLayout {
 };
 
 }  // namespace pf::ui::ig
-#endif  //IMGUI_EXPERIMENTS_VERTICALLAYOUT_H
+#endif  //PF_IMGUI_LAYOUTS_VERTICALLAYOUT_H

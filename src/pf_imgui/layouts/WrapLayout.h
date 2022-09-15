@@ -5,8 +5,8 @@
  * @date 2.9.22
  */
 
-#ifndef PF_IMGUI_WRAPLAYOUT_H
-#define PF_IMGUI_WRAPLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_WRAPLAYOUT_H
+#define PF_IMGUI_LAYOUTS_WRAPLAYOUT_H
 
 #include "LinearLayout.h"
 #include <pf_common/Explicit.h>
@@ -39,7 +39,7 @@ class PF_IMGUI_EXPORT WrapLayout : public LinearLayout {
    * @param initialSize size of the layout
    * @param showBorder enable/disable border draw
    */
-  WrapLayout(std::string_view elementName, LayoutDirection layoutDirection, const Size &initialSize,
+  WrapLayout(std::string_view elementName, LayoutDirection layoutDirection, Size initialSize,
              ShowBorder showBorder = ShowBorder::No);
 
  protected:
@@ -56,4 +56,4 @@ class PF_IMGUI_EXPORT WrapLayout : public LinearLayout {
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_WRAPLAYOUT_H
+#endif  //PF_IMGUI_LAYOUTS_WRAPLAYOUT_H

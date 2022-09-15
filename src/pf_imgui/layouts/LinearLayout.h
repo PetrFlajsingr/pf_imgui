@@ -5,8 +5,8 @@
  * @date 10.4.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_LINEARLAYOUT_H
-#define IMGUI_EXPERIMENTS_LINEARLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_LINEARLAYOUT_H
+#define PF_IMGUI_LAYOUTS_LINEARLAYOUT_H
 
 #include <memory>
 #include <pf_common/enums.h>
@@ -125,4 +125,4 @@ class PF_IMGUI_EXPORT LinearLayout : public Layout {
 };
 
 }  // namespace pf::ui::ig
-#endif  //IMGUI_EXPERIMENTS_LINEARLAYOUT_H
+#endif  //PF_IMGUI_LAYOUTS_LINEARLAYOUT_H

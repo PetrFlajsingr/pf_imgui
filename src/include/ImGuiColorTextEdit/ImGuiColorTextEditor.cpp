@@ -1051,7 +1051,7 @@ void TextEditor::Render(const char *aTitle, const ImVec2 &aSize, bool aBorder) {
   mWithinRender = false;
 }
 
-void TextEditor::SetText(const std::string &aText) {
+void TextEditor::SetText(std::string_view aText) {
   mLines.clear();
   mLines.emplace_back(Line());
   for (auto chr : aText) {

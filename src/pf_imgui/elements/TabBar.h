@@ -97,14 +97,6 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   */
   Tab(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods = Flags<TabMod>{},
       bool closeable = false);
-  /**
-  * Construct Tab.
-  * @param elementName ID of the Tab
-  * @param labelText text rendered on the Tab
-  */
-  Tab(std::string_view elementName, std::string_view labelText, bool closeable = false);
-
-  ~Tab() override;
 
   /**
   *
@@ -124,7 +116,7 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   void renderImpl() override;
 
  private:
-  bool *open;
+  std::unique_ptr<bool> open;
   bool setSelectedInNextFrame = false;
 };
 
@@ -182,8 +174,7 @@ class PF_IMGUI_EXPORT TabBar : public ElementWithID, public RenderablesContainer
    * @param caption text rendered on the TabButton
    * @return reference to the newly created TabButton
    */
-  TabButton &addTabButton(std::string_view buttonName, std::string_view caption,
-                          Flags<TabMod> mods = Flags<TabMod>{});
+  TabButton &addTabButton(std::string_view buttonName, std::string_view caption, Flags<TabMod> mods = Flags<TabMod>{});
   /**
    * Remove a tab with the given ID.
    * If no such Tab exists nothing happens.

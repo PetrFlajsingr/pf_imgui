@@ -11,14 +11,10 @@
 namespace pf::ui::ig {
 
 GridLayout::GridLayout(GridLayout::Config &&config)
-    : Layout(config.name.value, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
-      width(config.widthInCells), height(config.heightInCells) {
-  const auto cellCount = width * height;
-  cells.resize(cellCount);
-  std::ranges::fill(cells, nullptr);
-}
+    : GridLayout(config.name, config.size, config.widthInCells, config.heightInCells,
+                 config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-GridLayout::GridLayout(std::string_view elementName, const Size &initialSize, uint32_t gridWidth, uint32_t gridHeight,
+GridLayout::GridLayout(std::string_view elementName, Size initialSize, uint32_t gridWidth, uint32_t gridHeight,
                        ShowBorder showBorder)
     : Layout(elementName, initialSize, showBorder), width(gridWidth), height(gridHeight) {
   const auto cellCount = width * height;

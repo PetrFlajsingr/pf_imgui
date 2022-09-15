@@ -104,14 +104,11 @@ TextEditor::Cursor &TextEditor::Cursor::selectAll() {
 bool TextEditor::Cursor::hasSelection() const { return owner.editor.HasSelection(); }
 
 TextEditor::TextEditor(TextEditor::Config &&config)
-    : ElementWithID(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      size(config.size) {
-  editor.SetText(config.value);
-}
+    : TextEditor(config.name, config.value, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 TextEditor::TextEditor(std::string_view elementName, std::string_view value, Size s, Persistent persistent)
     : ElementWithID(elementName), Savable(persistent), size(s) {
-  editor.SetText(std::string{value});
+  editor.SetText(value);
 }
 
 ImGuiColorTextEdit::TextEditor &TextEditor::getEditor() { return editor; }

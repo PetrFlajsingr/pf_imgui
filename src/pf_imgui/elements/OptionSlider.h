@@ -5,8 +5,8 @@
  * @date 15.6.22
  */
 
-#ifndef PF_IMGUI_ELEMENTS_OPTION_SLIDER
-#define PF_IMGUI_ELEMENTS_OPTION_SLIDER
+#ifndef PF_IMGUI_ELEMENTS_OPTION_SLIDER_H
+#define PF_IMGUI_ELEMENTS_OPTION_SLIDER_H
 
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_common/concepts/ranges.h>
@@ -157,4 +157,4 @@ void OptionSlider<T>::setValue(const T &newValue) {
 
 }  // namespace pf::ui::ig
 
-#endif  //PF_IMGUI_ELEMENTS_OPTION_SLIDER
+#endif  //PF_IMGUI_ELEMENTS_OPTION_SLIDER_H

@@ -6,8 +6,7 @@
 
 namespace pf::ui::ig {
 
-CommandPalette::CommandPalette(CommandPalette::Config &&config)
-    : ElementWithID(config.name.value), context(ImCmd::CreateContext()) {}
+CommandPalette::CommandPalette(CommandPalette::Config &&config) : CommandPalette(config.name) {}
 
 CommandPalette::CommandPalette(std::string_view elementName)
     : ElementWithID(elementName), context(ImCmd::CreateContext()) {}

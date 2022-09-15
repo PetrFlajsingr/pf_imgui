@@ -113,11 +113,7 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 ColorChooser<Type, Format>::ColorChooser(ColorChooser::Config &&config)
-    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      DragSource(false), DropTarget(false), label(std::string{config.label.value}), chosenColor(config.value) {
-  updateValueStorage();
-  chosenColor.addListener([this](auto) { updateValueStorage(); });
-}
+    : ColorChooser(config.name, config.label, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<ColorChooserType Type, ColorChooserFormat Format>
 ColorChooser<Type, Format>::ColorChooser(std::string_view elementName, std::string_view labelText, Color initialValue,

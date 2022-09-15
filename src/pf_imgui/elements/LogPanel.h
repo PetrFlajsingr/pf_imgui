@@ -185,7 +185,7 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Savable {
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 LogPanel<Category, RecordLimit>::LogPanel(Config &&config)
-    : LogPanel(std::string{config.name.value}, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : LogPanel(config.name, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)

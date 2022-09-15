@@ -5,8 +5,8 @@
  * @date 13.6.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
-#define PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
+#define PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
 
 #include <limits>
 #include <memory>
@@ -54,7 +54,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
    * @param allowCollapse enable collapse button
    * @param showBorder draw border around the layout
    */
-  AnchorLayout(std::string_view elementName, const Size &initialSize, ShowBorder showBorder = ShowBorder::No);
+  AnchorLayout(std::string_view elementName, Size initialSize, ShowBorder showBorder = ShowBorder::No);
   /**
     * Create a child and append it to the end of children.
     *
@@ -150,4 +150,4 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H
+#endif  // PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H

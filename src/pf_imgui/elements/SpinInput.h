@@ -112,10 +112,8 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
 
 template<OneOf<int, float> T>
 SpinInput<T>::SpinInput(SpinInput::Config &&config)
-    : ItemElement(config.name.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), value(config.value), step(config.step), stepFast(config.fastStep),
-      min(config.min), max(config.max) {}
+    : SpinInput(config.name, config.label, config.min, config.max, config.value, config.step, config.fastStep,
+                config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<int, float> T>
 SpinInput<T>::SpinInput(std::string_view elementName, std::string_view labelText, T minVal, T maxVal, T initialValue,

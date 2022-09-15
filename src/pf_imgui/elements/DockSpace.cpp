@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig {
 
-DockSpace::DockSpace(Config &&config)
-    : ElementWithID(config.name.value), size(config.size), flags(*config.flags) {}
+DockSpace::DockSpace(Config &&config) : DockSpace(config.name, config.size, config.flags) {}
 
 DockSpace::DockSpace(std::string_view elementName, Size s, Flags<DockType> dockFlags)
     : ElementWithID(elementName), size(s), flags(*dockFlags) {}
@@ -21,7 +20,7 @@ void DockSpace::render() {
     setId(ImGui::GetID(getName().c_str()));
   }
   [[maybe_unused]] auto colorScoped = color.applyScoped();
-  Renderable::render(); // NOLINT(bugprone-parent-virtual-call)
+  Renderable::render();  // NOLINT(bugprone-parent-virtual-call)
 }
 
 void DockSpace::renderImpl() { setId(ImGui::DockSpace(getId(), static_cast<ImVec2>(*size), flags)); }

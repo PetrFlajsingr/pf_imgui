@@ -145,10 +145,7 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueContainer<T>
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
-    : ItemElement(std::string{config.name.value}), size(config.size), value(config.value), stepValue(config.step),
-      min(config.min), max(config.max), overlay(std::move(config.overlay)) {
-  value.addListener([this](const auto &newValue) { *value.modify() = std::clamp(newValue, min, max); });
-}
+    : ProgressBar(config.name, config.step, config.min, config.max, config.value, config.overlay, config.size) {}
 
 template<ProgressBarCompatible T>
 ProgressBar<T>::ProgressBar(std::string_view elementName, T valueStep, T minValue, T maxValue,

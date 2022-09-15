@@ -8,8 +8,7 @@
 
 namespace pf::ui::ig {
 
-Image::Image(Image::Config &&config)
-    : ItemElement(config.name.value), size(config.size), texture(std::move(config.texture)) {}
+Image::Image(Image::Config &&config) : Image(config.name, config.texture, config.size) {}
 
 Image::Image(std::string_view elementName, std::shared_ptr<Texture> tex, Size initialSize)
     : ItemElement(elementName), size(initialSize), texture(std::move(tex)) {}

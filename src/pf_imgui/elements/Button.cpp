@@ -24,11 +24,10 @@ RAII ButtonBase::setButtonRepeat() {
 void ButtonBase::notifyClickEvent() { clickEvent.notify(); }
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      size(config.size), clickBtn(config.clickButton) {}
+    : InvisibleButton(config.name, config.size, config.clickButton,
+                      config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
-InvisibleButton::InvisibleButton(std::string_view elementName, const Size &s, MouseButton clickButton,
-                                 Repeatable isRepeatable)
+InvisibleButton::InvisibleButton(std::string_view elementName, Size s, MouseButton clickButton, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), size(s), clickBtn(clickButton) {}
 
 void InvisibleButton::renderImpl() {
@@ -39,10 +38,9 @@ void InvisibleButton::renderImpl() {
 }
 
 Button::Button(Button::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      label(std::string{config.label.value}), size(config.size) {}
+    : Button(config.name, config.label, config.size, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
-Button::Button(std::string_view elementName, std::string_view labelText, const Size &s, Repeatable isRepeatable)
+Button::Button(std::string_view elementName, std::string_view labelText, Size s, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), label(std::string{labelText}), size(s) {}
 
 void Button::renderImpl() {
@@ -54,8 +52,7 @@ void Button::renderImpl() {
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      label(std::string{config.label.value}) {}
+    : SmallButton(config.name, config.label, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
 SmallButton::SmallButton(std::string_view elementName, std::string_view labelText, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), label(std::string{labelText}) {}
@@ -69,8 +66,7 @@ void SmallButton::renderImpl() {
 }
 
 ArrowButton::ArrowButton(ArrowButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      dir(config.direction) {}
+    : ArrowButton(config.name, config.direction, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
 ArrowButton::ArrowButton(std::string_view elementName, ArrowButton::Dir direction, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), dir(direction) {}
@@ -83,8 +79,7 @@ void ArrowButton::renderImpl() {
 }
 
 ImageButton::ImageButton(ImageButton::Config &&config)
-    : ButtonBase(std::string{config.name.value}, config.repeatable ? Repeatable::Yes : Repeatable::No),
-      size(config.size), texture(std::move(config.texture)) {}
+    : ImageButton(config.name, config.texture, config.size, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
 ImageButton::ImageButton(std::string_view elementName, std::shared_ptr<Texture> tex, Size s, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), size(s), texture(std::move(tex)) {}

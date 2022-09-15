@@ -8,8 +8,7 @@
 
 namespace pf::ui::ig {
 
-GroupBox::GroupBox(GroupBox::Config &&config)
-    : ElementWithID(config.name.value), label(std::string{config.label.value}), size(config.size) {}
+GroupBox::GroupBox(GroupBox::Config &&config) : GroupBox(config.name, config.label, config.size) {}
 
 GroupBox::GroupBox(std::string_view elementName, std::string_view labelValue, Size s)
     : ElementWithID(elementName), label(std::string{labelValue}), size(s) {}

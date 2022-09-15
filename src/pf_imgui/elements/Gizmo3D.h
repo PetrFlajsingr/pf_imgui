@@ -101,14 +101,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
-    : ItemElement(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No), size(config.size),
-      value(config.value) {
-  size.addListener([this](Size newSize) {
-    const auto min = std::min(static_cast<float>(newSize.width), static_cast<float>(newSize.height));
-    const auto fixedSize = Size{min, min};
-    if (fixedSize != newSize) { *size.modify() = fixedSize; }
-  });
-}
+    : Gizmo3D(config.name, config.value, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(std::string_view name, Gizmo3D::ValueType value, Size s, Persistent persistent)

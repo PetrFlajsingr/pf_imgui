@@ -9,9 +9,8 @@
 namespace pf::ui::ig {
 
 Range2D::Range2D(Range2D::Config &&config)
-    : ItemElement(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource(false),
-      DropTarget(false), label(std::string{config.label.value}), size(config.size), range(config.value),
-      minRange(config.min), maxRange(config.max) {}
+    : Range2D(config.name, config.label, config.min, config.max, config.value, config.size,
+              config.persistent ? Persistent::Yes : Persistent::No) {}
 
 Range2D::Range2D(std::string_view elementName, std::string_view labelText, glm::vec2 min, glm::vec2 max,
                  const math::Range<glm::vec2> &initialValue, Size s, Persistent persistent)

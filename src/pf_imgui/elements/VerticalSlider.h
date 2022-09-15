@@ -129,10 +129,8 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
-    : ItemElement(config.name.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), size(config.size.value), value(config.value), min(config.min),
-      max(config.max), format(std::move(config.format)) {}
+    : VerticalSlider(config.name, config.label, config.size, config.min, config.max, config.value,
+                     config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<float, int> T>
 VerticalSlider<T>::VerticalSlider(std::string_view elementName, std::string_view labelText, Size initialSize, T minVal,

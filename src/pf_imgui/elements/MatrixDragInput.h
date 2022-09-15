@@ -89,8 +89,8 @@ class MatrixDragInput : public ItemElement, public ValueContainer<M>, public Sav
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(MatrixDragInput::Config &&config)
-    : MatrixDragInput(config.name.value, config.label.value, config.speed, config.min,
-                      config.max, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : MatrixDragInput(config.name, config.label, config.speed, config.min, config.max, config.value,
+                      config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 MatrixDragInput<M>::MatrixDragInput(std::string_view name, std::string_view labelStr,

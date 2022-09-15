@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig {
 
-RadioButton::RadioButton(RadioButton::Config &&config)
-    : ItemElement(config.name.value), label(std::string{config.label.value}), selected(config.selected) {}
+RadioButton::RadioButton(RadioButton::Config &&config) : RadioButton(config.name, config.label, config.selected) {}
 
 RadioButton::RadioButton(std::string_view elementName, std::string_view labelText, bool initialValue)
     : ItemElement(elementName), label(std::string{labelText}), selected(initialValue) {}

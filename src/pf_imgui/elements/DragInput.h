@@ -148,10 +148,8 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(DragInput::Config &&config)
-    : ItemElement(config.name.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), value(config.value), speed(config.speed), min(config.min),
-      max(config.max), format(std::move(config.format)) {}
+    : DragInput(config.name, config.label, config.speed, config.min, config.max, config.value,
+                config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 DragInput<T>::DragInput(std::string_view elementName, std::string_view labelText,

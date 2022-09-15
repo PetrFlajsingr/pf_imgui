@@ -107,10 +107,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(Input::Config &&config)
-    : ItemElement(config.name.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), value(config.value), step(config.step), fastStep(config.fastStep),
-      format(std::move(static_cast<std::string>(config.format))) {}
+    : Input(config.name, config.label, config.step, config.fastStep, config.value,
+            config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(std::string_view elementName, std::string_view labelText, Input::StepType st, Input::StepType fStep,

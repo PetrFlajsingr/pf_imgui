@@ -8,8 +8,7 @@
 namespace pf::ui::ig {
 
 Toggle::Toggle(Toggle::Config &&config)
-    : ItemElement(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      label(std::string{config.label.value}), selected(config.enabled) {}
+    : Toggle(config.name, config.label, config.enabled, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 Toggle::Toggle(std::string_view elementName, std::string_view labelText, bool initialValue, Persistent persistent)
     : ItemElement(elementName), Savable(persistent), label(std::string{labelText}), selected(initialValue) {}

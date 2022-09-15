@@ -9,8 +9,7 @@
 
 namespace pf::ui::ig {
 
-TabButton::TabButton(TabButton::Config &&config)
-    : ItemElement(std::string{config.name.value}), label(std::string{config.label.value}), flags(*config.mods) {}
+TabButton::TabButton(TabButton::Config &&config) : TabButton(config.name, config.label, config.mods) {}
 
 TabButton::TabButton(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods)
     : ItemElement(elementName), label(std::string{labelText}), flags(*mods) {}
@@ -23,9 +22,7 @@ void TabButton::renderImpl() {
 
 void TabButton::notifyClickEvent() { clickEvent.notify(); }
 
-Tab::Tab(Tab::Config &&config)
-    : TabButton(std::string{config.name.value}, std::string{config.label.value}, config.mods),
-      open(config.closeable ? new bool{true} : nullptr) {}
+Tab::Tab(Tab::Config &&config) : Tab(config.name, config.label, config.mods, config.closeable) {}
 
 Tab::Tab(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods, bool closeable)
     : TabButton(elementName, labelText, mods), open(closeable ? new bool{true} : nullptr) {
@@ -35,11 +32,6 @@ Tab::Tab(std::string_view elementName, std::string_view labelText, Flags<TabMod>
   });
 }
 
-Tab::Tab(std::string_view elementName, std::string_view labelText, bool closeable)
-    : Tab(elementName, labelText, Flags<TabMod>{}, closeable) {}
-
-Tab::~Tab() { delete open; }
-
 void Tab::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
@@ -47,7 +39,7 @@ void Tab::renderImpl() {
 
   const auto wasOpen = isOpen();
   const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
-  *selected.modify() = ImGui::BeginTabItem(label->get().c_str(), open, frameFlags);
+  *selected.modify() = ImGui::BeginTabItem(label->get().c_str(), open.get(), frameFlags);
   if (*selected) {
     RAII end{ImGui::EndTabItem};
     std::ranges::for_each(getChildren(), &Renderable::render);
@@ -72,9 +64,7 @@ void Tab::setDisplayDot(bool displayDot) {
   }
 }
 
-TabBar::TabBar(TabBar::Config &&config) : ElementWithID(std::string{config.name.value}) {
-  setTabListAllowed(config.allowTabList);
-}
+TabBar::TabBar(TabBar::Config &&config) : TabBar(config.name, config.allowTabList) {}
 
 TabBar::TabBar(std::string_view elementName, bool allowTabList) : ElementWithID(elementName) {
   setTabListAllowed(allowTabList);

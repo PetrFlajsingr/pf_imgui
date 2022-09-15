@@ -76,7 +76,7 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
    */
   InputText(std::string_view elementName, std::string_view label, std::string_view initialValue = "",
             TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
-            TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
+            TextTrigger trigger = TextTrigger::Character, Flags<TextFilter> filters = TextFilter::None,
             Persistent persistent = Persistent::No);
 
   /**

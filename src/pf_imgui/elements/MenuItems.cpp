@@ -24,8 +24,7 @@ void MenuItem::render() {
   ImGui::PopItemFlag();
 }
 
-MenuButtonItem::MenuButtonItem(MenuButtonItem::Config &&config)
-    : MenuItem(std::string{config.name.value}), label(std::string{config.label.value}) {}
+MenuButtonItem::MenuButtonItem(MenuButtonItem::Config &&config) : MenuButtonItem(config.name, config.label) {}
 
 MenuButtonItem::MenuButtonItem(std::string_view elementName, std::string_view labelText)
     : MenuItem(elementName), label(std::string{labelText}) {}
@@ -47,8 +46,7 @@ void SubMenu::renderImpl() {
   }
 }
 
-SubMenu::SubMenu(SubMenu::Config &&config)
-    : MenuItem(std::string{config.name.value}), label(std::string{config.label.value}) {}
+SubMenu::SubMenu(SubMenu::Config &&config) : SubMenu(config.name, config.label) {}
 
 SubMenu::SubMenu(std::string_view elementName, std::string_view labelText)
     : MenuItem(elementName), label(std::string{labelText}) {}
@@ -71,8 +69,8 @@ MenuSeparatorItem &MenuContainer::addSeparator(std::string_view name) { return a
 void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
 MenuCheckboxItem::MenuCheckboxItem(MenuCheckboxItem::Config &&config)
-    : MenuItem(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      label(std::string{config.label.value}), checked(config.checked) {}
+    : MenuCheckboxItem(config.name, config.label, config.checked,
+                       config.persistent ? Persistent::Yes : Persistent::No) {}
 
 MenuCheckboxItem::MenuCheckboxItem(std::string_view elementName, std::string_view labelText, bool initialValue,
                                    Persistent persistent)
@@ -101,7 +99,7 @@ Subscription MenuCheckboxItem::addValueListenerImpl(std::function<void(const boo
   return checked.addListener(std::move(listener));
 }
 
-MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuItem(std::string{config.name.value}) {}
+MenuSeparatorItem::MenuSeparatorItem(MenuSeparatorItem::Config &&config) : MenuSeparatorItem(config.name) {}
 
 MenuSeparatorItem::MenuSeparatorItem(std::string_view elementName) : MenuItem(elementName) {}
 

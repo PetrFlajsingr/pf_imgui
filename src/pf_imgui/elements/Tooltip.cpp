@@ -8,7 +8,7 @@
 
 namespace pf::ui::ig {
 
-Tooltip::Tooltip(Tooltip::Config &&config) : ElementWithID(config.name.value) {}
+Tooltip::Tooltip(Tooltip::Config &&config) : Tooltip(config.name) {}
 
 Tooltip::Tooltip(std::string_view elementName) : ElementWithID(elementName) {}
 

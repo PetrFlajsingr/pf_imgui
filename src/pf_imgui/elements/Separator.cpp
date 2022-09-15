@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 
-Separator::Separator(Separator::Config &&config) : Element(config.name.value) {}
+Separator::Separator(Separator::Config &&config) : Separator(config.name) {}
 
 Separator::Separator(std::string_view elementName) : Element(elementName) {}
 

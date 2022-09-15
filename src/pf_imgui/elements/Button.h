@@ -97,7 +97,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase {
    * @param clickButton mouse button to register as a click
    * @param isRepeatable enable/disable button can repeat its on click event when a user holds it
    */
-  explicit InvisibleButton(std::string_view elementName, const Size &s = Size::Auto(),
+  explicit InvisibleButton(std::string_view elementName, Size s = Size::Auto(),
                            MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
 
   Observable<Size> size;
@@ -138,7 +138,7 @@ class PF_IMGUI_EXPORT Button : public ButtonBase {
    * @param s size of the button
    * @param isRepeatable if No, then only click notifies, otherwise mouse down repeatedly calls listeners
    */
-  Button(std::string_view elementName, std::string_view labelText, const Size &s = Size::Auto(),
+  Button(std::string_view elementName, std::string_view labelText, Size s = Size::Auto(),
          Repeatable isRepeatable = Repeatable::No);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,

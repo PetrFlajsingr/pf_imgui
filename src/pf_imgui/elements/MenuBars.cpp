@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig {
 
-WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : ElementWithID(config.name.value) {}
+WindowMenuBar::WindowMenuBar(WindowMenuBar::Config &&config) : WindowMenuBar(config.name) {}
 
 WindowMenuBar::WindowMenuBar(std::string_view elementName) : ElementWithID(elementName) {}
 
@@ -21,7 +21,7 @@ void WindowMenuBar::renderImpl() {
   }
 }
 
-AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : ElementWithID(config.name.value) {}
+AppMenuBar::AppMenuBar(AppMenuBar::Config &&config) : AppMenuBar(config.name) {}
 
 AppMenuBar::AppMenuBar(std::string_view elementName) : ElementWithID(elementName) {}
 

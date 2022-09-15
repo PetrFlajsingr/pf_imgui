@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <map>
 #include <regex>
+#include <string_view>
 #include "imgui.h"
 namespace ImGuiColorTextEdit {
 class TextEditor {
@@ -173,7 +174,7 @@ class TextEditor {
   const WarningMarkers &GetWarningMarkers() const { return mWarningMarkers; }
 
   void Render(const char *aTitle, const ImVec2 &aSize = ImVec2(), bool aBorder = false);
-  void SetText(const std::string &aText);
+  void SetText(std::string_view aText);
   std::string GetText() const;
 
   void SetTextLines(const std::vector<std::string> &aLines);

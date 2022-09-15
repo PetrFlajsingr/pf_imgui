@@ -11,25 +11,23 @@
 namespace pf::ui::ig {
 
 RadioGroup::RadioGroup(RadioGroup::Config &&config)
-    : Savable(config.persistent ? Persistent::Yes : Persistent::No), activeButton(nullptr),
-      groupName(config.groupName.value), buttons(std::move(config.buttons)) {
+    : RadioGroup(config.groupName, config.buttons, config.persistent ? Persistent::Yes : Persistent::No) {}
+
+RadioGroup::RadioGroup(std::string_view name, std::vector<RadioButton *> childButtons, Persistent persistent)
+    : Savable(persistent), activeButton(nullptr), groupName(std::string{name}), buttons(std::move(childButtons)) {
   bool wasAnySelected = false;
   std::ranges::for_each(buttons, [this, &wasAnySelected](RadioButton *btn) {
     if (wasAnySelected) {
       btn->setValue(false);
     } else {
       wasAnySelected = btn->getValue();
+      if (wasAnySelected) { *activeButton.modify() = btn; }
     }
     addDestroyListener(btn);
   });
 }
 
 RadioGroup::~RadioGroup() { std::ranges::for_each(destroyButtonSubscriptions, &Subscription::unsubscribe); }
-
-RadioGroup::RadioGroup(std::string_view name, std::vector<RadioButton *> childButtons, Persistent persistent)
-    : Savable(persistent), activeButton(nullptr), groupName(std::string{name}), buttons(std::move(childButtons)) {
-  std::ranges::for_each(buttons, [this](RadioButton *btn) { addDestroyListener(btn); });
-}
 
 void RadioGroup::frame() {
   RadioButton *newSelection = nullptr;

@@ -8,8 +8,7 @@
 namespace pf::ui::ig {
 
 HorizontalLayout::HorizontalLayout(HorizontalLayout::Config &&config)
-    : LinearLayout(config.name.value, config.size, config.showBorder ? ShowBorder::Yes : ShowBorder::No),
-      alignment(config.align) {}
+    : HorizontalLayout(config.name, config.size, config.align, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
 HorizontalLayout::HorizontalLayout(std::string_view elementName, Size initialSize, HorizontalAlign align,
                                    ShowBorder showBorder)

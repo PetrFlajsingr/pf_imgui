@@ -136,8 +136,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
 template<ToStringConvertible T>
 Listbox<T>::Listbox(Listbox::Config &&config)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: Listbox{std::string{config.name.value}, std::string{config.label.value}, config.size,
-          config.persistent ? Persistent::Yes : Persistent::No} {}
+: Listbox{config.name, config.label, config.size, config.persistent ? Persistent::Yes : Persistent::No} {}
 
 template<ToStringConvertible T>
 Listbox<T>::Listbox(std::string_view elementName, std::string_view labelText, Size s, Persistent persistent)

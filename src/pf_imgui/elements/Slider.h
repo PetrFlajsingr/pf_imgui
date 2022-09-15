@@ -126,10 +126,8 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
 
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 Slider<T>::Slider(Slider::Config &&config)
-    : ItemElement(config.name.value),
-      Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{config.label.value}), value(config.value), min(config.min), max(config.max),
-      format(std::move(config.format)) {}
+    : Slider(config.name, config.label, config.min, config.max, config.value,
+             config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 Slider<T>::Slider(std::string_view elementName, std::string_view labelText, Slider::MinMaxType minValue,

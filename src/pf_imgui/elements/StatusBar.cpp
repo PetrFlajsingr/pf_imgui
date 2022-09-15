@@ -9,7 +9,7 @@
 
 namespace pf::ui::ig {
 
-AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : ElementWithID(std::string{config.name.value}) {}
+AppStatusBar::AppStatusBar(AppStatusBar::Config &&config) : AppStatusBar(config.name) {}
 
 AppStatusBar::AppStatusBar(std::string_view elementName) : ElementWithID(elementName) {}
 

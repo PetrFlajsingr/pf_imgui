@@ -7,10 +7,7 @@
 namespace pf::ui::ig {
 
 LinkText::LinkText(LinkText::Config &&config)
-    : ItemElement(config.name.value), label(std::string{config.label.value}), link(std::move(config.link)),
-      linkClickHandler(std::move(config.clickHandler)) {
-  setTooltip(link);
-}
+    : LinkText(config.name, config.label, config.link, config.clickHandler.value) {}
 
 void LinkText::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();

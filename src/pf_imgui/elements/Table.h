@@ -259,9 +259,7 @@ class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer 
 };
 
 template<std::size_t ColumnCount>
-Table<ColumnCount>::Table(Table::Config &&config)
-    : ElementWithID(std::string{config.name.value}), size(config.settings.size), header(config.settings.header),
-      flags(CreateFlags(config.settings.border, config.settings.options)) {}
+Table<ColumnCount>::Table(Table::Config &&config) : Table(config.name, config.settings) {}
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(std::string_view elementName, const TableSettings<ColumnCount> &settings)

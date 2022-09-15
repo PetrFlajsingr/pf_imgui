@@ -6,7 +6,7 @@
 
 namespace pf::ui::ig {
 ViewportOverlayGizmo::ViewportOverlayGizmo(ViewportOverlayGizmo::Config &&config)
-    : ViewportOverlayGizmo(std::string{config.name.value}, config.value, config.mode, config.space, config.viewMatrix,
+    : ViewportOverlayGizmo(config.name, config.value, config.mode, config.space, config.viewMatrix,
                            config.projectionMatrix, config.isProjectionOrthographic) {}
 
 ViewportOverlayGizmo::ViewportOverlayGizmo(std::string_view elementName, const glm::mat4 &initialValue,

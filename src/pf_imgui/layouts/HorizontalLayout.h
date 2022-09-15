@@ -5,8 +5,8 @@
  * @date 10.4.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
-#define IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
+#ifndef PF_IMGUI_LAYOUTS_HORIZONTALLAYOUT_H
+#define PF_IMGUI_LAYOUTS_HORIZONTALLAYOUT_H
 
 #include "LinearLayout.h"
 #include <pf_common/Explicit.h>
@@ -54,4 +54,4 @@ class PF_IMGUI_EXPORT HorizontalLayout : public LinearLayout {
 };
 }  // namespace pf::ui::ig
 
-#endif  //IMGUI_EXPERIMENTS_HORIZONTALLAYOUT_H
+#endif  //PF_IMGUI_LAYOUTS_HORIZONTALLAYOUT_H
