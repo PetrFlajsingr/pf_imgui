@@ -182,7 +182,7 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
    * @return Subscription for listener cancellation
    */
   Subscription addDragListener(std::invocable<T> auto &&listener) {
-    return dragListeners.template addListener(std::forward<decltype(listener)>(listener));
+    return dragListeners.addListener(std::forward<decltype(listener)>(listener));
   }
 
  protected:
@@ -236,7 +236,7 @@ class PF_IMGUI_EXPORT DropTarget : public details::DropTargetBase {
    * @return Subscription for listener cancellation
    */
   Subscription addDropListener(std::invocable<T> auto &&listener) {
-    return dropListeners.template addListener(std::forward<decltype(listener)>(listener));
+    return dropListeners.addListener(std::forward<decltype(listener)>(listener));
   }
 
  protected:
