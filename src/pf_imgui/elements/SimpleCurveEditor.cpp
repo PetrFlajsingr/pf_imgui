@@ -9,13 +9,13 @@
 namespace pf::ui::ig {
 
 SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
-    : ElementWithID(config.name), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+    : ElementWithID(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
       label(config.label.value), size(config.size), curveData(config.maxPointCount + 1, glm::vec2{0, 0}),
       curvePoints(getViewToCurveData()) {}
 
-SimpleCurveEditor::SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s,
+SimpleCurveEditor::SimpleCurveEditor(std::string_view elementName, std::string_view labelText, Size s,
                                      std::size_t maxPointCount, Persistent persistent)
-    : ElementWithID(elementName), Savable(persistent), label(labelText), size(s),
+    : ElementWithID(elementName), Savable(persistent), label(std::string{labelText}), size(s),
       curveData(maxPointCount + 1, glm::vec2{0, 0}), curvePoints(getViewToCurveData()) {}
 
 void SimpleCurveEditor::setMaxPointCount(std::size_t count) { curveData.resize(count + 1); }

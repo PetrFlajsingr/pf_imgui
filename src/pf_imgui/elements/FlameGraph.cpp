@@ -8,12 +8,12 @@
 namespace pf::ui::ig {
 
 FlameGraph::FlameGraph(FlameGraph::Config &&config)
-    : ElementWithID(std::string{config.name.value}), label(std::string{config.label.value}), size(config.size),
+    : ElementWithID(config.name.value), label(std::string{config.label.value}), size(config.size),
       overlay(std::move(config.overlay)) {}
 
-FlameGraph::FlameGraph(const std::string &elementName, const std::string &labelText, const Size &initialSize,
+FlameGraph::FlameGraph(std::string_view elementName, std::string_view labelText, Size initialSize,
                        std::optional<std::string> graphOverlay)
-    : ElementWithID(elementName), label(labelText), size(initialSize), overlay(std::move(graphOverlay)) {}
+    : ElementWithID(elementName), label(std::string{labelText}), size(initialSize), overlay(std::move(graphOverlay)) {}
 
 void FlameGraph::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

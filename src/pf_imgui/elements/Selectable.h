@@ -54,8 +54,8 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueContainer<boo
    * @param s size of the element
    * @param persistent allow value saving to disk
    */
-  Selectable(const std::string &elementName, const std::string &labelText, bool initialValue = false,
-             Size s = Size::Auto(), Persistent persistent = Persistent::No);
+  Selectable(std::string_view elementName, std::string_view labelText, bool initialValue = false, Size s = Size::Auto(),
+             Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;

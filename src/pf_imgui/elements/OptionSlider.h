@@ -52,7 +52,7 @@ class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
    * @param newValues possible options
    * @param persistent enable disk state saving
    */
-  OptionSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
+  OptionSlider(std::string_view elementName, std::string_view label, RangeOf<T> auto &&newValues,
                Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
@@ -88,9 +88,10 @@ OptionSlider<T>::OptionSlider(OptionSlider::Config &&config)
     : OptionSlider(config.name, config.label, config.values, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<ToStringConvertible T>
-OptionSlider<T>::OptionSlider(const std::string &elementName, const std::string &label, RangeOf<T> auto &&newValues,
+OptionSlider<T>::OptionSlider(std::string_view elementName, std::string_view label, RangeOf<T> auto &&newValues,
                               Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(label),
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
+      label(std::string{label}),
       value(*std::ranges::begin(newValues)), values{std::ranges::begin(newValues), std::ranges::end(newValues)},
       selectedValueStr(toString(values[0])) {
   value.addListener([this](const auto &newValue) {

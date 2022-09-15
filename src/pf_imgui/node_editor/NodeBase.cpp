@@ -7,11 +7,11 @@
 
 namespace pf::ui::ig {
 
-NodeBase::NodeBase(const std::string &elementName) : Renderable(elementName), position(Position{}), initSize(false) {
+NodeBase::NodeBase(std::string_view elementName) : Renderable(elementName), position(Position{}), initSize(false) {
   position.addListener([this](Position pos) { updateNodePositionImpl(pos); });
 }
 
-NodeBase::NodeBase(const std::string &elementName, Position initPosition)
+NodeBase::NodeBase(std::string_view elementName, Position initPosition)
     : Renderable(elementName), position(initPosition), initSize(true) {
   position.addListener([this](Position pos) { updateNodePositionImpl(pos); });
 }

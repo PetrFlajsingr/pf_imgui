@@ -51,7 +51,7 @@ class DatePicker : public ItemElement, public ValueContainer<std::chrono::year_m
    * @param initialValue initial value
    * @param persistent allow state saving to disk
    */
-  DatePicker(const std::string &elementName, const std::string &labelText,
+  DatePicker(std::string_view elementName, std::string_view labelText,
              std::chrono::year_month_day initialValue =
                  std::chrono::year_month_day{std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now())},
              Persistent persistent = Persistent::No);

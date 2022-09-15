@@ -64,9 +64,9 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueContainer<T>
    * @param overlayStr text rendered on top of the element
    * @param initialSize size of the progress bar
    */
-  ProgressBar(const std::string &elementName, T valueStep, T minValue, T maxValue,
+  ProgressBar(std::string_view elementName, T valueStep, T minValue, T maxValue,
               std::optional<T> initialValue = std::nullopt, std::string overlayStr = "",
-              const Size &initialSize = Size::Auto());
+              Size initialSize = Size::Auto());
 
   /**
    * Set current percentage where min = 0% and max = 100%.
@@ -151,8 +151,8 @@ ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
 }
 
 template<ProgressBarCompatible T>
-ProgressBar<T>::ProgressBar(const std::string &elementName, T valueStep, T minValue, T maxValue,
-                            std::optional<T> initialValue, std::string overlayStr, const Size &initialSize)
+ProgressBar<T>::ProgressBar(std::string_view elementName, T valueStep, T minValue, T maxValue,
+                            std::optional<T> initialValue, std::string overlayStr, Size initialSize)
     : ItemElement(elementName), size(initialSize), value(initialValue.value_or(min)), stepValue(valueStep),
       min(minValue), max(maxValue), overlay(std::move(overlayStr)) {
   value.addListener([this](const auto &newValue) { *value.modify() = std::clamp(newValue, min, max); });

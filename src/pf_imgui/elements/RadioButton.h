@@ -47,7 +47,7 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueContainer<bo
    * @param labelText text rendered next to the button
    * @param initialValue starting value of the button
    */
-  RadioButton(const std::string &elementName, const std::string &labelText, bool initialValue = false);
+  RadioButton(std::string_view elementName, std::string_view labelText, bool initialValue = false);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
                ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::CheckMark, ColorOf::Border,

@@ -6,7 +6,7 @@
 #include <imgui_internal.h>
 
 namespace pf::ui::ig {
-CustomIconButtonBehavior::CustomIconButtonBehavior(const std::string &elementName) : ItemElement(elementName) {}
+CustomIconButtonBehavior::CustomIconButtonBehavior(std::string_view elementName) : ItemElement(elementName) {}
 
 Color CustomIconButtonBehavior::getIconColor() const { return iconColor; }
 
@@ -42,7 +42,7 @@ void CustomIconButtonBehavior::renderImpl() {
 
 Color CustomIconButtonBehavior::getBackgroundColor() const { return backgroundColor; }
 
-CustomIconButton::CustomIconButton(const std::string &elementName) : CustomIconButtonBehavior(elementName) {}
+CustomIconButton::CustomIconButton(std::string_view elementName) : CustomIconButtonBehavior(elementName) {}
 
 void CustomIconButton::update(CustomIconButtonBehavior::State state) {
   if (state == State::Clicked) { notifyClickEvent(); }
@@ -50,7 +50,7 @@ void CustomIconButton::update(CustomIconButtonBehavior::State state) {
 
 void CustomIconButton::notifyClickEvent() { clickEvent.notify(); }
 
-CustomIconToggle::CustomIconToggle(const std::string &elementName, bool initValue, Persistent persistent)
+CustomIconToggle::CustomIconToggle(std::string_view elementName, bool initValue, Persistent persistent)
     : CustomIconButtonBehavior(elementName), Savable(persistent), checked(initValue) {
   keepHighlighted = *checked;
 }

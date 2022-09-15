@@ -64,9 +64,9 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
    * @param s size on screen
    * @param persistent enable/disable state saving to disk
    */
-  Range2D(const std::string &elementName, const std::string &labelText, const glm::vec2 &minRange,
-          const glm::vec2 &maxRange, const math::Range<glm::vec2> &initialValue = math::Range<glm::vec2>{},
-          const Size &s = Size::Auto(), Persistent persistent = Persistent::No);
+  Range2D(std::string_view elementName, std::string_view labelText, glm::vec2 minRange,
+          glm::vec2 maxRange, const math::Range<glm::vec2> &initialValue = math::Range<glm::vec2>{},
+          Size s = Size::Auto(), Persistent persistent = Persistent::No);
 
   /**
    * Get min allowed value.

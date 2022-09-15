@@ -34,7 +34,7 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
    * @param rowFactory factory for row creation
    * @param s size of the element
    */
-  CustomListbox(const std::string &elementName, const std::string &labelText,
+  CustomListbox(std::string_view elementName, std::string_view labelText,
                 CustomItemBoxFactory<T, R> auto &&rowFactory, Size s = Size::Auto());
 
   Observable<Label> label;
@@ -46,9 +46,9 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
 };
 
 template<typename T, std::derived_from<Renderable> R>
-CustomListbox<T, R>::CustomListbox(const std::string &elementName, const std::string &labelText,
+CustomListbox<T, R>::CustomListbox(std::string_view elementName, std::string_view labelText,
                                    CustomItemBoxFactory<T, R> auto &&rowFactory, Size s)
-    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(labelText), size(s) {}
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(std::string{labelText}), size(s) {}
 
 template<typename T, std::derived_from<Renderable> R>
 void CustomListbox<T, R>::renderImpl() {

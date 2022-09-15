@@ -5,8 +5,8 @@
  * @date 20.4.21
  */
 
-#ifndef PF_IMGUI_SRC_ELEMENTS_BULLET_H
-#define PF_IMGUI_SRC_ELEMENTS_BULLET_H
+#ifndef PF_IMGUI_ELEMENTS_BULLET_H
+#define PF_IMGUI_ELEMENTS_BULLET_H
 
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
@@ -56,4 +56,4 @@ void Bullet<T>::renderImpl() {
 }
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_ELEMENTS_BULLET_H
+#endif  // PF_IMGUI_ELEMENTS_BULLET_H

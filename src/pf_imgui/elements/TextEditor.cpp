@@ -82,10 +82,8 @@ TextEditor::Cursor &TextEditor::Cursor::setPosition(TextCursorPosition position)
 }
 
 TextCursorPosition TextEditor::Cursor::getPosition() const {
-  TextCursorPosition result;
-  result.line = owner.editor.GetCursorPosition().mLine;
-  result.column = owner.editor.GetCursorPosition().mColumn;
-  return result;
+  return {.line = static_cast<uint32_t>(owner.editor.GetCursorPosition().mLine),
+          .column = static_cast<uint32_t>(owner.editor.GetCursorPosition().mColumn)};
 }
 
 TextEditor::Cursor &TextEditor::Cursor::setSelectionStart(TextCursorPosition position) {
@@ -111,9 +109,9 @@ TextEditor::TextEditor(TextEditor::Config &&config)
   editor.SetText(config.value);
 }
 
-TextEditor::TextEditor(const std::string &elementName, const std::string &value, Size s, Persistent persistent)
+TextEditor::TextEditor(std::string_view elementName, std::string_view value, Size s, Persistent persistent)
     : ElementWithID(elementName), Savable(persistent), size(s) {
-  editor.SetText(value);
+  editor.SetText(std::string{value});
 }
 
 ImGuiColorTextEdit::TextEditor &TextEditor::getEditor() { return editor; }

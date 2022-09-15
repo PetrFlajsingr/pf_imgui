@@ -53,7 +53,7 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement {
    */
   explicit TabButton(Config &&config);
 
-  TabButton(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods = Flags<TabMod>{});
+  TabButton(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods = Flags<TabMod>{});
 
   void setMods(const Flags<TabMod> &mods);
 
@@ -95,14 +95,14 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   * @param mods modifiers
   * @param labelText text rendered on the Tab
   */
-  Tab(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods = Flags<TabMod>{},
+  Tab(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods = Flags<TabMod>{},
       bool closeable = false);
   /**
   * Construct Tab.
   * @param elementName ID of the Tab
   * @param labelText text rendered on the Tab
   */
-  Tab(const std::string &elementName, const std::string &labelText, bool closeable = false);
+  Tab(std::string_view elementName, std::string_view labelText, bool closeable = false);
 
   ~Tab() override;
 
@@ -158,7 +158,7 @@ class PF_IMGUI_EXPORT TabBar : public ElementWithID, public RenderablesContainer
    * @param elementName ID of the TabBar
    * @param allowTabList set if tab list on the left side is allowed
    */
-  explicit TabBar(const std::string &elementName, bool allowTabList = false);
+  explicit TabBar(std::string_view elementName, bool allowTabList = false);
 
   /**
    * Create a new Tab.
@@ -167,7 +167,7 @@ class PF_IMGUI_EXPORT TabBar : public ElementWithID, public RenderablesContainer
    * @param mods modifiers
    * @return reference to the newly created Tab
    */
-  Tab &addTab(const std::string &tabName, const std::string &caption, const Flags<TabMod> &mods = Flags<TabMod>{},
+  Tab &addTab(std::string_view tabName, std::string_view caption, Flags<TabMod> mods = Flags<TabMod>{},
               bool closeable = false);
   /**
    * Create a new Tab.
@@ -175,15 +175,15 @@ class PF_IMGUI_EXPORT TabBar : public ElementWithID, public RenderablesContainer
    * @param caption text rendered on the Tab
    * @return reference to the newly created Tab
    */
-  Tab &addTab(const std::string &tabName, const std::string &caption, bool closeable);
+  Tab &addTab(std::string_view tabName, std::string_view caption, bool closeable);
   /**
    * Create a new TabButton.
    * @param buttonName ID of the TabButton
    * @param caption text rendered on the TabButton
    * @return reference to the newly created TabButton
    */
-  TabButton &addTabButton(const std::string &buttonName, const std::string &caption,
-                          const Flags<TabMod> &mods = Flags<TabMod>{});
+  TabButton &addTabButton(std::string_view buttonName, std::string_view caption,
+                          Flags<TabMod> mods = Flags<TabMod>{});
   /**
    * Remove a tab with the given ID.
    * If no such Tab exists nothing happens.

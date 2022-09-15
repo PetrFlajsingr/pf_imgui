@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * @param showItemCount amount of items shown when open
    * @param persistent enable/disable disk state saving
    */
-  Combobox(const std::string &elementName, const std::string &labelStr, const std::string &prevValue,
+  Combobox(std::string_view elementName, std::string_view labelStr, std::string_view prevValue,
            std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
            Persistent persistent = Persistent::No)
     requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>

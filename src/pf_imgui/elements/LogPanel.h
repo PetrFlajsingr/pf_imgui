@@ -103,7 +103,7 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Savable {
    * @param size size of the element
    * @param persistent enable toggle buttons state saving
    */
-  LogPanel(const std::string &name, Size size, Persistent persistent = Persistent::No);
+  LogPanel(std::string_view name, Size size, Persistent persistent = Persistent::No);
   /**
    * Add a record to the output,
    * @param category logging category
@@ -189,7 +189,7 @@ LogPanel<Category, RecordLimit>::LogPanel(Config &&config)
 
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
-LogPanel<Category, RecordLimit>::LogPanel(const std::string &name, Size size, Persistent persistent)
+LogPanel<Category, RecordLimit>::LogPanel(std::string_view name, Size size, Persistent persistent)
     : ElementWithID(name), Savable(persistent), size(size), wrapTextToggle("wrapText"),
       scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
   std::size_t i = 0;

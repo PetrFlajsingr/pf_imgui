@@ -37,7 +37,7 @@ class PF_IMGUI_EXPORT PopupMenu : public ElementWithID, public MenuContainer {
    * Construct PopupMenu.
    * @param elementName id of the element
    */
-  explicit PopupMenu(const std::string &elementName);
+  explicit PopupMenu(std::string_view elementName);
 
   /**
    * Make the menu render.

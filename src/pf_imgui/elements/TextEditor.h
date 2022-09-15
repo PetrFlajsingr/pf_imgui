@@ -96,7 +96,7 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
    * @param s size of the element
    * @param persistent allow state saving to disk
    */
-  TextEditor(const std::string &elementName, const std::string &value, Size s = Size::Auto(),
+  TextEditor(std::string_view elementName, std::string_view value, Size s = Size::Auto(),
              Persistent persistent = Persistent::No);
 
   /**

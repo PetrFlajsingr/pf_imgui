@@ -50,7 +50,7 @@ class PF_IMGUI_EXPORT Text : public ItemElement,
   * @param elementName ID of the element
   * @param textValue text to be rendered
   */
-  Text(const std::string &elementName, std::string textValue, bool wrapText = false);
+  Text(std::string_view elementName, std::string textValue, bool wrapText = false);
 
   [[nodiscard]] bool isWrap() const;
   void setWrap(bool textWrap);

@@ -28,7 +28,7 @@ namespace pf::ui::ig {
 class PF_IMGUI_EXPORT MemoryEditor : public ItemElement {
  public:
   template<typename T>
-  MemoryEditor(const std::string &elementName, std::span<T> newData);
+  MemoryEditor(std::string_view elementName, std::span<T> newData);
 
   /**
    * Check if editor is read only.
@@ -87,7 +87,7 @@ class PF_IMGUI_EXPORT MemoryEditor : public ItemElement {
 };
 
 template<typename T>
-MemoryEditor::MemoryEditor(const std::string &elementName, std::span<T> newData)
+MemoryEditor::MemoryEditor(std::string_view elementName, std::span<T> newData)
     : ItemElement(elementName),
       data(std::span{reinterpret_cast<const std::byte *>(newData.data()), newData.size() * sizeof(T)}) {}
 

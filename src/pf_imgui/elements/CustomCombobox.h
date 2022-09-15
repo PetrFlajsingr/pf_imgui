@@ -43,9 +43,8 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
    * @param prevValue preview value
    * @param showItemCount amount of items shown when open
    */
-  CustomCombobox(const std::string &elementName, const std::string &labelText,
-                 CustomItemBoxFactory<T, R> auto &&rowFactory, std::string prevValue = "",
-                 ComboBoxCount showItemCount = ComboBoxCount::Items8);
+  CustomCombobox(std::string_view elementName, std::string_view labelText, CustomItemBoxFactory<T, R> auto &&rowFactory,
+                 std::string_view prevValue = "", ComboBoxCount showItemCount = ComboBoxCount::Items8);
 
   void setPreviewValue(std::string value);
   [[nodiscard]] const std::string &getPreviewValue() const { return previewValue; }
@@ -89,11 +88,11 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
 };
 
 template<typename T, std::derived_from<Renderable> R>
-CustomCombobox<T, R>::CustomCombobox(const std::string &elementName, const std::string &labelText,
-                                     CustomItemBoxFactory<T, R> auto &&rowFactory, std::string prevValue,
+CustomCombobox<T, R>::CustomCombobox(std::string_view elementName, std::string_view labelText,
+                                     CustomItemBoxFactory<T, R> auto &&rowFactory, std::string_view prevValue,
                                      ComboBoxCount showItemCount)
-    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(labelText),
-      flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::move(prevValue)) {
+    : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(std::string{labelText}),
+      flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::string{prevValue}) {
   if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }
 }
 

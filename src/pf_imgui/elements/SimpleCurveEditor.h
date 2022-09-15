@@ -65,7 +65,7 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
    * @param maxPointCount maximum allowed key points
    * @param persistent enable/disable state saving
    */
-  SimpleCurveEditor(const std::string &elementName, const std::string &labelText, Size s, std::size_t maxPointCount,
+  SimpleCurveEditor(std::string_view elementName, std::string_view labelText, Size s, std::size_t maxPointCount,
                     Persistent persistent = Persistent::No);
 
   /**

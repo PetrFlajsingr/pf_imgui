@@ -72,7 +72,7 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
    * @param persistent enable state saving to disk
    * @param format printf-like format for rendering value over slider
    */
-  Slider(const std::string &elementName, const std::string &labelText, MinMaxType minValue, MinMaxType maxValue,
+  Slider(std::string_view elementName, std::string_view labelText, MinMaxType minValue, MinMaxType maxValue,
          T initialValue = T{}, Persistent persistent = Persistent::No,
          std::string numberFormat = slider_details::defaultFormat<MinMaxType>());
 
@@ -124,20 +124,21 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
   std::string format;
 };
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 Slider<T>::Slider(Slider::Config &&config)
-    : ItemElement(std::string{config.name.value}),
+    : ItemElement(config.name.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       label(std::string{config.label.value}), value(config.value), min(config.min), max(config.max),
       format(std::move(config.format)) {}
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
-Slider<T>::Slider(const std::string &elementName, const std::string &labelText, Slider::MinMaxType minValue,
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
+Slider<T>::Slider(std::string_view elementName, std::string_view labelText, Slider::MinMaxType minValue,
                   Slider::MinMaxType maxValue, T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
-      value(initialValue), min(minValue), max(maxValue), format(std::move(numberFormat)) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
+      label(std::string{labelText}), value(initialValue), min(minValue), max(maxValue),
+      format(std::move(numberFormat)) {}
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 toml::table Slider<T>::toToml() const {
   if constexpr (OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
     return toml::table{{"value", serializeGlmVec(*value)}};
@@ -146,7 +147,7 @@ toml::table Slider<T>::toToml() const {
   }
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 void Slider<T>::setFromToml(const toml::table &src) {
   if constexpr (OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
     if (auto newValIter = src.find("value"); newValIter != src.end()) {
@@ -193,17 +194,17 @@ void Slider<T>::renderImpl() {
   if (valueChanged) { value.triggerListeners(); }
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 const T &Slider<T>::getValue() const {
   return *value;
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 Subscription Slider<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
   return value.addListener(std::move(listener));
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, int, glm::ivec2, glm::ivec3, glm::ivec4> T>
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 void Slider<T>::setValue(const T &newValue) {
   *value.modify() = newValue;
 }

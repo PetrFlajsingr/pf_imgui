@@ -7,12 +7,12 @@
 
 namespace pf::ui::ig {
 
-details::TreeRecord::TreeRecord(const std::string &elementName, const std::string &treeLabel,
-                                const Flags<ImGuiTreeNodeFlags_> &defaultFlags)
-    : ItemElement(elementName), label(treeLabel), flags(defaultFlags) {}
+details::TreeRecord::TreeRecord(std::string_view elementName, std::string_view treeLabel,
+                                Flags<ImGuiTreeNodeFlags_> defaultFlags)
+    : ItemElement(elementName), label(std::string{treeLabel}), flags(defaultFlags) {}
 
 TreeLeaf::TreeLeaf(TreeLeaf::Config &&config)
-    : TreeRecord(std::string{config.name.value}, std::string{config.label.value}, ImGuiTreeNodeFlags_Leaf),
+    : TreeRecord(config.name.value, config.label.value, ImGuiTreeNodeFlags_Leaf),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), selected(config.selected) {
   if (config.selected) {
     flags |= ImGuiTreeNodeFlags_Selected;
@@ -29,7 +29,7 @@ TreeLeaf::TreeLeaf(TreeLeaf::Config &&config)
   });
 }
 
-TreeLeaf::TreeLeaf(const std::string &elementName, const std::string &labelText, bool initialValue,
+TreeLeaf::TreeLeaf(std::string_view elementName, std::string_view labelText, bool initialValue,
                    Persistent persistent)
     : TreeRecord(elementName, labelText, ImGuiTreeNodeFlags_Leaf), Savable(persistent), selected(initialValue) {
   if (*selected) {

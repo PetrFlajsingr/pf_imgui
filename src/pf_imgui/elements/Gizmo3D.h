@@ -71,7 +71,7 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
    * @param size size of the element, the smaller value will be used for both axis'
    * @param persistent enable state saving
    */
-  Gizmo3D(const std::string &name, ValueType value, const Size &s = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE},
+  Gizmo3D(std::string_view name, ValueType value, Size s = Size{IMGUIZMO_DEF_SIZE, IMGUIZMO_DEF_SIZE},
           Persistent persistent = Persistent::No);
 
   /**
@@ -101,8 +101,8 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
 
 template<GizmoType Type>
 Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
-    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
-      size(config.size), value(config.value) {
+    : ItemElement(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No), size(config.size),
+      value(config.value) {
   size.addListener([this](Size newSize) {
     const auto min = std::min(static_cast<float>(newSize.width), static_cast<float>(newSize.height));
     const auto fixedSize = Size{min, min};
@@ -111,7 +111,7 @@ Gizmo3D<Type>::Gizmo3D(Gizmo3D::Config &&config)
 }
 
 template<GizmoType Type>
-Gizmo3D<Type>::Gizmo3D(const std::string &name, Gizmo3D::ValueType value, const Size &s, Persistent persistent)
+Gizmo3D<Type>::Gizmo3D(std::string_view name, Gizmo3D::ValueType value, Size s, Persistent persistent)
     : ItemElement(name), Savable(persistent), size(s), value(value) {
   size.addListener([this](Size newSize) {
     const auto min = std::min(static_cast<float>(newSize.width), static_cast<float>(newSize.height));

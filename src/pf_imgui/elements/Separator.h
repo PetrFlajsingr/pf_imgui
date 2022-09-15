@@ -38,7 +38,7 @@ class PF_IMGUI_EXPORT Separator : public Element {
    * Construct Separator.
    * @param elementName element ID
    */
-  explicit Separator(const std::string &elementName);
+  explicit Separator(std::string_view elementName);
 
   ColorPalette<ColorOf::Separator, ColorOf::SeparatorHovered, ColorOf::SeparatorActive> color;
 

@@ -14,7 +14,7 @@ namespace pf::ui::ig::bp {
 class EventPin : public Pin {
  public:
   PF_IMGUI_BLUEPRINT_PIN_ID(EventPin)
-  EventPin(const std::string &elementName, const std::string &labelText, Color pinColor);
+  EventPin(std::string_view elementName, std::string_view labelText, Color pinColor);
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override;
 

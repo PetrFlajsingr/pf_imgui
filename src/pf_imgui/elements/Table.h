@@ -216,7 +216,7 @@ class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer 
    * @param elementName unique name of the element
    * @param settings rendering and behavioral settings
    */
-  Table(const std::string &elementName, const TableSettings<ColumnCount> &settings);
+  Table(std::string_view elementName, const TableSettings<ColumnCount> &settings);
   /**
    * @return builder object to create a new row @see TableRowBuilder
    */
@@ -264,7 +264,7 @@ Table<ColumnCount>::Table(Table::Config &&config)
       flags(CreateFlags(config.settings.border, config.settings.options)) {}
 
 template<std::size_t ColumnCount>
-Table<ColumnCount>::Table(const std::string &elementName, const TableSettings<ColumnCount> &settings)
+Table<ColumnCount>::Table(std::string_view elementName, const TableSettings<ColumnCount> &settings)
     : ElementWithID(elementName), size(settings.size), header(settings.header),
       flags(CreateFlags(settings.border, settings.options)) {}
 

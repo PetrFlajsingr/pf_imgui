@@ -8,9 +8,9 @@
 
 namespace pf::ui::ig {
 
-Tooltip::Tooltip(Tooltip::Config &&config) : ElementWithID(std::string{config.name.value}) {}
+Tooltip::Tooltip(Tooltip::Config &&config) : ElementWithID(config.name.value) {}
 
-Tooltip::Tooltip(const std::string &elementName) : ElementWithID(elementName) {}
+Tooltip::Tooltip(std::string_view elementName) : ElementWithID(elementName) {}
 
 void Tooltip::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

@@ -12,8 +12,8 @@ namespace pf::ui::ig {
 TabButton::TabButton(TabButton::Config &&config)
     : ItemElement(std::string{config.name.value}), label(std::string{config.label.value}), flags(*config.mods) {}
 
-TabButton::TabButton(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods)
-    : ItemElement(elementName), label(labelText), flags(*mods) {}
+TabButton::TabButton(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods)
+    : ItemElement(elementName), label(std::string{labelText}), flags(*mods) {}
 
 void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
 
@@ -27,7 +27,7 @@ Tab::Tab(Tab::Config &&config)
     : TabButton(std::string{config.name.value}, std::string{config.label.value}, config.mods),
       open(config.closeable ? new bool{true} : nullptr) {}
 
-Tab::Tab(const std::string &elementName, const std::string &labelText, const Flags<TabMod> &mods, bool closeable)
+Tab::Tab(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods, bool closeable)
     : TabButton(elementName, labelText, mods), open(closeable ? new bool{true} : nullptr) {
   selected.addListener([this](auto newSelected) {
     if (newSelected) { notifyClickEvent(); }
@@ -35,7 +35,7 @@ Tab::Tab(const std::string &elementName, const std::string &labelText, const Fla
   });
 }
 
-Tab::Tab(const std::string &elementName, const std::string &labelText, bool closeable)
+Tab::Tab(std::string_view elementName, std::string_view labelText, bool closeable)
     : Tab(elementName, labelText, Flags<TabMod>{}, closeable) {}
 
 Tab::~Tab() { delete open; }
@@ -76,7 +76,7 @@ TabBar::TabBar(TabBar::Config &&config) : ElementWithID(std::string{config.name.
   setTabListAllowed(config.allowTabList);
 }
 
-TabBar::TabBar(const std::string &elementName, bool allowTabList) : ElementWithID(elementName) {
+TabBar::TabBar(std::string_view elementName, bool allowTabList) : ElementWithID(elementName) {
   setTabListAllowed(allowTabList);
 }
 
@@ -90,16 +90,16 @@ void TabBar::renderImpl() {
   }
 }
 
-Tab &TabBar::addTab(const std::string &tabName, const std::string &caption, const Flags<TabMod> &mods, bool closeable) {
+Tab &TabBar::addTab(std::string_view tabName, std::string_view caption, Flags<TabMod> mods, bool closeable) {
   tabs.emplace_back(std::make_unique<Tab>(tabName, caption, mods, closeable));
   return dynamic_cast<Tab &>(*tabs.back());
 }
 
-Tab &TabBar::addTab(const std::string &tabName, const std::string &caption, bool closeable) {
+Tab &TabBar::addTab(std::string_view tabName, std::string_view caption, bool closeable) {
   return addTab(tabName, caption, Flags<TabMod>{}, closeable);
 }
 
-TabButton &TabBar::addTabButton(const std::string &buttonName, const std::string &caption, const Flags<TabMod> &mods) {
+TabButton &TabBar::addTabButton(std::string_view buttonName, std::string_view caption, Flags<TabMod> mods) {
   tabs.emplace_back(std::make_unique<TabButton>(buttonName, caption, mods));
   return *tabs.back();
 }

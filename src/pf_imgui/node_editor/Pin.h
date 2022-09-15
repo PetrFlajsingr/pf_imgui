@@ -31,10 +31,11 @@ class Pin : public Renderable {
   /**
    * Get all Links in NodeEditor. It's done this way to avoid circular dependency.
    */
-  ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToRef>
+  [[nodiscard]] ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
+                                       details::LinkPtrToRef>
   getAllLinks();
-  ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
-                         details::LinkPtrToConstRef>
+  [[nodiscard]] ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
+                                       details::LinkPtrToConstRef>
   getAllLinks() const;
 
  public:
@@ -48,8 +49,8 @@ class Pin : public Renderable {
     */
   struct Config {
     using Parent = Pin;
-    Explicit<std::string> name;  /*!< Unique name of the element */
-    Explicit<std::string> label; /*!< Text rendered next to the pin */
+    Explicit<std::string_view> name;  /*!< Unique name of the element */
+    Explicit<std::string_view> label; /*!< Text rendered next to the pin */
   };
   /**
     * Construct Node
@@ -61,7 +62,7 @@ class Pin : public Renderable {
    * @param elementName unique name of the element
    * @param labelText text rendered next to the pin
    */
-  Pin(const std::string &elementName, const std::string &labelText);
+  Pin(std::string_view elementName, std::string_view labelText);
 
   /**
    * Get internally used id of the pin.

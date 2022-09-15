@@ -48,7 +48,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement {
    * @param tex texture to render
    * @param initialSize size of the image on screen
    */
-  Image(const std::string &elementName, std::shared_ptr<Texture> tex, Size initialSize = Size::Auto());
+  Image(std::string_view elementName, std::shared_ptr<Texture> tex, Size initialSize = Size::Auto());
 
   /**
    * Change texture ID.
@@ -109,7 +109,7 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement {
    * @param imgWidth width of the provided image
    * @param tex texture
    */
-  InspectableImage(const std::string &elementName, Size s, std::span<const std::byte> rgbaData, std::size_t imgWidth,
+  InspectableImage(std::string_view elementName, Size s, std::span<const std::byte> rgbaData, std::size_t imgWidth,
                    std::shared_ptr<Texture> tex, Trigger trigger);
   /**
    * Set UVs according to which the image will get sampled.

@@ -72,7 +72,7 @@ class GradientEditor : public ElementWithID, public ValueContainer<GradientPoint
    * @param elementName unique name of the element
    * @param persistent enable disk state saving
    */
-  explicit GradientEditor(const std::string &elementName, Persistent persistent = Persistent::No);
+  explicit GradientEditor(std::string_view elementName, Persistent persistent = Persistent::No);
 
   /**
    * Calculate color of gradient at given position.

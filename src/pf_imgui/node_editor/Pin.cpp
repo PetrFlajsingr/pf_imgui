@@ -11,9 +11,9 @@
 
 namespace pf::ui::ig {
 
-Pin::Pin(Pin::Config &&config) : Renderable(std::move(config.name)), label(std::move(config.label.value)) {}
+Pin::Pin(Pin::Config &&config) : Renderable(config.name.value), label(std::string{config.label.value}) {}
 
-Pin::Pin(const std::string &elementName, const std::string &labelText) : Renderable(elementName), label(labelText) {}
+Pin::Pin(std::string_view elementName, std::string_view labelText) : Renderable(elementName), label(std::string{labelText}) {}
 
 ax::NodeEditor::PinId Pin::getId() const { return id; }
 

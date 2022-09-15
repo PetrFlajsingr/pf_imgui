@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-Pin::Pin(const std::string &elementName, const std::string &labelText, Color pinColor)
+Pin::Pin(std::string_view elementName, std::string_view labelText, Color pinColor)
     : ig::Pin(elementName, labelText), color(pinColor) {}
 
 Color Pin::getColor() const { return color; }

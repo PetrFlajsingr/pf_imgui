@@ -12,9 +12,9 @@
 
 namespace pf::ui::ig {
 
-Node::Node(const std::string &elementName) : NodeBase(elementName) {}
+Node::Node(std::string_view elementName) : NodeBase(elementName) {}
 
-Node::Node(const std::string &elementName, const Position &initPosition) : NodeBase(elementName, initPosition) {}
+Node::Node(std::string_view elementName, Position initPosition) : NodeBase(elementName, initPosition) {}
 
 void Node::clearLinks() {
   std::ranges::for_each(ranges::views::concat(getInputPins(), getOutputPins()), [](Pin &pin) { pin.clearLinks(); });

@@ -20,7 +20,7 @@ class CustomIconButtonBehavior : public ItemElement {
   enum class State { None, Hovered, MouseDown, Clicked };
 
  public:
-  explicit CustomIconButtonBehavior(const std::string &elementName);
+  explicit CustomIconButtonBehavior(std::string_view elementName);
   [[nodiscard]] Color getIconColor() const;
   void setIconColor(Color newColor);
 
@@ -49,7 +49,7 @@ class CustomIconButton : public CustomIconButtonBehavior {
   using ClickEvent = ClassEvent<CustomIconButton>;
 
  public:
-  explicit CustomIconButton(const std::string &elementName);
+  explicit CustomIconButton(std::string_view elementName);
 
   ClickEvent clickEvent;
 
@@ -60,7 +60,7 @@ class CustomIconButton : public CustomIconButtonBehavior {
 
 class CustomIconToggle : public CustomIconButtonBehavior, public ValueContainer<bool>, public Savable {
  public:
-  explicit CustomIconToggle(const std::string &elementName, bool initValue = false,
+  explicit CustomIconToggle(std::string_view elementName, bool initValue = false,
                             Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;

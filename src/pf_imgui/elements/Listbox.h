@@ -90,7 +90,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param s size of the element
    * @param persistent enable/disable state saving to disk
    */
-  Listbox(const std::string &elementName, const std::string &labelText, Size s = Size::Auto(),
+  Listbox(std::string_view elementName, std::string_view labelText, Size s = Size::Auto(),
           Persistent persistent = Persistent::No)
     requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
 
@@ -140,7 +140,7 @@ Listbox<T>::Listbox(Listbox::Config &&config)
           config.persistent ? Persistent::Yes : Persistent::No} {}
 
 template<ToStringConvertible T>
-Listbox<T>::Listbox(const std::string &elementName, const std::string &labelText, Size s, Persistent persistent)
+Listbox<T>::Listbox(std::string_view elementName, std::string_view labelText, Size s, Persistent persistent)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
 : CustomListboxBase(elementName, labelText, Factory{}, s),
   Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {

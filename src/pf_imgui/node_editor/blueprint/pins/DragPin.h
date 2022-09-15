@@ -25,7 +25,7 @@ class DragPin : public InteractablePin<DragInput<T>> {
     std::string format = ui::ig::drag_details::defaultFormat<T>();
   };
 
-  DragPin(const std::string &elementName, const std::string &labelText, Color pinColor, DragConfig &&config)
+  DragPin(std::string_view elementName, std::string_view labelText, Color pinColor, DragConfig &&config)
       : InteractablePin<DragInput<T>>(elementName, labelText, pinColor, config.width,
                                       CreateDragConfig(uniqueId(), labelText, std::move(config))) {}
 
@@ -78,7 +78,7 @@ class DragPin : public InteractablePin<DragInput<T>> {
   }
 
  protected:
-  static typename DragInput<T>::Config CreateDragConfig(const std::string &name, const std::string &label,
+  static typename DragInput<T>::Config CreateDragConfig(std::string_view name, std::string_view label,
                                                         DragConfig &&config) {
     return {.name = name,
             .label = label,

@@ -18,10 +18,10 @@ class NodeEditor : public ig::NodeEditor, public TomlSerializable {
    */
   struct Config {
     using Parent = NodeEditor;
-    Explicit<std::string> name; /*!< Unique name of the element */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
     Size size = Size::Auto();   /*!< Size of the element */
   };
-  NodeEditor(const std::string &elementName, const Size &initialSize);
+  NodeEditor(std::string_view elementName, Size initialSize);
   explicit NodeEditor(Config &&config);
 
   [[nodiscard]] toml::table toToml() const override;

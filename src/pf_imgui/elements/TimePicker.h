@@ -60,7 +60,7 @@ class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public 
    * @param initialValue initial value
    * @param persistent enable disk state saving
    */
-  TimePicker(const std::string &elementName, const std::string &labelText, TimeOfDay initialValue,
+  TimePicker(std::string_view elementName, std::string_view labelText, TimeOfDay initialValue,
              Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;

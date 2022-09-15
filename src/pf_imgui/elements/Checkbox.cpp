@@ -12,9 +12,8 @@ Checkbox::Checkbox(Checkbox::Config &&config)
     : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
       label(std::string{config.label.value}), selected(config.selected) {}
 
-Checkbox::Checkbox(const std::string &elementName, const std::string &labelText, bool initialValue,
-                   Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), label(labelText), selected(initialValue) {}
+Checkbox::Checkbox(std::string_view elementName, std::string_view labelText, bool initialValue, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), label(std::string{labelText}), selected(initialValue) {}
 
 void Checkbox::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();

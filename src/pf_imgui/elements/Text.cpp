@@ -9,10 +9,10 @@
 namespace pf::ui::ig {
 
 Text::Text(Text::Config &&config)
-    : ItemElement(std::string{config.name.value}), DragSource<std::string>(false), DropTarget<std::string>(false),
+    : ItemElement(config.name.value), DragSource<std::string>(false), DropTarget<std::string>(false),
       text(std::move(config.text)), wrap(config.wrapText) {}
 
-Text::Text(const std::string &elementName, std::string textValue, bool wrapText)
+Text::Text(std::string_view elementName, std::string textValue, bool wrapText)
     : ItemElement(elementName), DragSource<std::string>(false), DropTarget<std::string>(false),
       text(std::move(textValue)), wrap(wrapText) {}
 

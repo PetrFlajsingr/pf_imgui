@@ -30,13 +30,13 @@ class NodeBase : public Renderable {
    * Construct NodeBase
    * @param elementName unique name of the element
    */
-  explicit NodeBase(const std::string &elementName);
+  explicit NodeBase(std::string_view elementName);
   /**
    * Construct NodeBase
    * @param elementName unique name of the element
    * @param initPosition initial position
    */
-  NodeBase(const std::string &elementName, Position initPosition);
+  NodeBase(std::string_view elementName, Position initPosition);
 
   /**
    *

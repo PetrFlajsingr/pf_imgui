@@ -43,7 +43,7 @@ class PF_IMGUI_EXPORT WindowMenuBar : public ElementWithID, public MenuContainer
    * Construct WindowMenuBar.
    * @param elementName ID of the element
    */
-  explicit WindowMenuBar(const std::string &elementName);
+  explicit WindowMenuBar(std::string_view elementName);
 
  protected:
   void renderImpl() override;
@@ -64,7 +64,7 @@ class PF_IMGUI_EXPORT AppMenuBar : public ElementWithID, public MenuContainer {
    * Construct AppMenuBar.
    * @param elementName ID of the element
    */
-  explicit AppMenuBar(const std::string &elementName);
+  explicit AppMenuBar(std::string_view elementName);
 
  protected:
   void renderImpl() override;

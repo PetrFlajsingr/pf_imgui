@@ -6,8 +6,8 @@
 
 namespace pf::ui::ig {
 
-LinkText::LinkText(pf::ui::ig::LinkText::Config &&config)
-    : ItemElement(std::string{config.name.value}), label(std::string{config.label.value}), link(std::move(config.link)),
+LinkText::LinkText(LinkText::Config &&config)
+    : ItemElement(config.name.value), label(std::string{config.label.value}), link(std::move(config.link)),
       linkClickHandler(std::move(config.clickHandler)) {
   setTooltip(link);
 }

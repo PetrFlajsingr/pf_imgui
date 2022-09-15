@@ -69,7 +69,7 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
    * @param persistent enable state saving to disk
    * @param numberFormat format for printing underlying float value
    */
-  Input(const std::string &elementName, const std::string &labelText, StepType st = static_cast<StepType>(1),
+  Input(std::string_view elementName, std::string_view labelText, StepType st = static_cast<StepType>(1),
         StepType fStep = static_cast<StepType>(10), T initialValue = T{}, Persistent persistent = Persistent::No,
         std::string numberFormat = input_details::defaultFormat<T>());
 
@@ -107,16 +107,16 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(Input::Config &&config)
-    : ItemElement(std::string{config.name.value}),
+    : ItemElement(config.name.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       label(std::string{config.label.value}), value(config.value), step(config.step), fastStep(config.fastStep),
       format(std::move(static_cast<std::string>(config.format))) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
-Input<T>::Input(const std::string &elementName, const std::string &labelText, Input::StepType st, Input::StepType fStep,
+Input<T>::Input(std::string_view elementName, std::string_view labelText, Input::StepType st, Input::StepType fStep,
                 T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
-      value(initialValue), step(st), fastStep(fStep), format(std::move(numberFormat)) {}
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
+      label(std::string{labelText}), value(initialValue), step(st), fastStep(fStep), format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 void Input<T>::setReadOnly(bool isReadOnly) {

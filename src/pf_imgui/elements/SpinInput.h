@@ -64,7 +64,7 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
    * @param valueStepFast fast spin step
    * @param persistent enable/disable state saving od disk
    */
-  SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal, T initialValue = T{},
+  SpinInput(std::string_view elementName, std::string_view labelText, T minVal, T maxVal, T initialValue = T{},
             T valueStep = T{1}, const T &valueStepFast = T{100}, Persistent persistent = Persistent::No);
 
   [[nodiscard]] const T &getMin() const { return min; }
@@ -112,16 +112,17 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
 
 template<OneOf<int, float> T>
 SpinInput<T>::SpinInput(SpinInput::Config &&config)
-    : ItemElement(std::string{config.name.value}),
+    : ItemElement(config.name.value),
       Savable(config.persistent ? Persistent::Yes : Persistent::No), DragSource<T>(false), DropTarget<T>(false),
       label(std::string{config.label.value}), value(config.value), step(config.step), stepFast(config.fastStep),
       min(config.min), max(config.max) {}
 
 template<OneOf<int, float> T>
-SpinInput<T>::SpinInput(const std::string &elementName, const std::string &labelText, T minVal, T maxVal,
-                        T initialValue, T valueStep, const T &valueStepFast, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(labelText),
-      value(initialValue), step(valueStep), stepFast(valueStepFast), min(minVal), max(maxVal) {}
+SpinInput<T>::SpinInput(std::string_view elementName, std::string_view labelText, T minVal, T maxVal, T initialValue,
+                        T valueStep, const T &valueStepFast, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
+      label(std::string{labelText}), value(initialValue), step(valueStep), stepFast(valueStepFast), min(minVal),
+      max(maxVal) {}
 
 template<OneOf<int, float> T>
 void SpinInput<T>::setReadOnly(bool isReadOnly) {

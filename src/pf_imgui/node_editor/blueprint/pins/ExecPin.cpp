@@ -7,7 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-ExecPin::ExecPin(const std::string &elementName, const std::string &labelText, Color pinColor)
+ExecPin::ExecPin(std::string_view elementName, std::string_view labelText, Color pinColor)
     : Pin(elementName, labelText, pinColor) {}
 
 void ExecPin::renderIcon() {

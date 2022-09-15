@@ -43,9 +43,9 @@ class ConsolePanel : public ElementWithID, public Savable {
    */
   struct Config {
     using Parent = ConsolePanel;
-    Explicit<std::string> name; /*!< Unique name of the element */
-    Size size = Size::Auto();   /*!< Size of the element */
-    bool persistent = false;    /*!< Enable disk state saving */
+    Explicit<std::string_view> name; /*!< Unique name of the element */
+    Size size = Size::Auto();        /*!< Size of the element */
+    bool persistent = false;         /*!< Enable disk state saving */
   };
   /**
    * Construct ConsolePanel with Config @see ConsolePanel::Config
@@ -58,7 +58,7 @@ class ConsolePanel : public ElementWithID, public Savable {
    * @param initialSize size of the element
    * @param persistent enable disk state saving
    */
-  ConsolePanel(const std::string &elementName, Size initialSize, Persistent persistent = Persistent::No);
+  ConsolePanel(std::string_view elementName, Size initialSize, Persistent persistent = Persistent::No);
 
   /**
    * Set handler for console inputs. Returned record is rendered after the request.

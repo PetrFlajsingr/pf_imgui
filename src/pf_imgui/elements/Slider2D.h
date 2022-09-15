@@ -70,7 +70,7 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
    * @param initialSize initial size
    * @param persistent enable state saving to disk
    */
-  Slider2D(const std::string &elementName, const std::string &labelText, StorageType minMaxX, StorageType minMaxY,
+  Slider2D(std::string_view elementName, std::string_view labelText, StorageType minMaxX, StorageType minMaxY,
            StorageType initialValue = StorageType{}, Size initialSize = Size::Auto(),
            Persistent persistent = Persistent::No);
 
@@ -102,17 +102,17 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(Slider2D::Config &&config)
-    : ItemElement(std::string{config.name.value}), Savable(config.persistent ? Persistent::Yes : Persistent::No),
+    : ItemElement(config.name.value), Savable(config.persistent ? Persistent::Yes : Persistent::No),
       DragSource<StorageType>(false), DropTarget<StorageType>(false), label(std::string{config.label.value}),
       size(config.size), value(config.value), extremesX(config.min.value.x, config.max.value.x),
       extremesY(config.min.value.y, config.max.value.y) {}
 
 template<OneOf<int, float> T>
-Slider2D<T>::Slider2D(const std::string &elementName, const std::string &labelText, Slider2D::StorageType minMaxX,
+Slider2D<T>::Slider2D(std::string_view elementName, std::string_view labelText, Slider2D::StorageType minMaxX,
                       Slider2D::StorageType minMaxY, Slider2D::StorageType initialValue, Size initialSize,
                       Persistent persistent)
     : ItemElement(elementName), Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false),
-      label(labelText), size(initialSize), value(initialValue), extremesX(minMaxX), extremesY(minMaxY) {}
+      label(std::string{labelText}), size(initialSize), value(initialValue), extremesX(minMaxX), extremesY(minMaxY) {}
 
 template<OneOf<int, float> T>
 toml::table Slider2D<T>::toToml() const {

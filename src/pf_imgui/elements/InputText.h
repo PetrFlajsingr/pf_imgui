@@ -74,7 +74,7 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
    * @param filters character filters for input
    * @param persistent enable state saving to disk
    */
-  InputText(const std::string &elementName, std::string label, const std::string &initialValue = "",
+  InputText(std::string_view elementName, std::string_view label, std::string_view initialValue = "",
             TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
             TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
             Persistent persistent = Persistent::No);

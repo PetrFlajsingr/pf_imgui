@@ -51,7 +51,7 @@ class ViewportOverlayGizmo : public Renderable, public OverlayGizmoBase {
    * @param initialProjection camera projection matrix
    * @param isProjectionOrthographic set true if projectionMatrix is ortho
    */
-  ViewportOverlayGizmo(const std::string &name, const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode,
+  ViewportOverlayGizmo(std::string_view name, const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode,
                        ViewportGizmoSpace spaceType, const glm::mat4 &initialView, const glm::mat4 &initialProjection,
                        bool isProjectionOrthographic);
 
@@ -94,7 +94,7 @@ class AreaOverlayGizmo : public ElementWithID, public OverlayGizmoBase {
    * @param projection camera projection matrix
    * @param isProjectionOrthographic set true if projectionMatrix is ortho
    */
-  AreaOverlayGizmo(const std::string &name, Window &owningWindow, const glm::mat4 &value, ViewportGizmoMode mode,
+  AreaOverlayGizmo(std::string_view name, Window &owningWindow, const glm::mat4 &value, ViewportGizmoMode mode,
                    ViewportGizmoSpace space, const glm::mat4 &view, const glm::mat4 &projection,
                    bool isProjectionOrthographic);
 
