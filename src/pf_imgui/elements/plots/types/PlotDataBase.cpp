@@ -7,9 +7,9 @@
 
 namespace pf::ui::ig::plot_type {
 
-LabeledPlotData::LabeledPlotData(const std::string &elementName, const std::string &caption)
-    : PlotData(elementName), label(caption) {}
+LabeledPlotData::LabeledPlotData(std::string_view elementName, std::string_view caption)
+    : PlotData(elementName), label(std::string{caption}) {}
 
-PlotData::PlotData(const std::string &elementName) : ElementWithID(elementName) {}
+PlotData::PlotData(std::string_view elementName) : ElementWithID(elementName) {}
 
 }  // namespace pf::ui::ig::plot_type

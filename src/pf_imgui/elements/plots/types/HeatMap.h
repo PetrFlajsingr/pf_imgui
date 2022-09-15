@@ -30,7 +30,7 @@ class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
    * @param minVal 'coldest' value
    * @param maxVal 'hottest' vlaue
    */
-  HeatMap(const std::string &elementName, const std::string &caption, double minVal = 0.0, double maxVal = 0.0);
+  HeatMap(std::string_view elementName, std::string_view caption, double minVal = 0.0, double maxVal = 0.0);
 
   /**
   * Set new plot data.

@@ -25,7 +25,7 @@ class PF_IMGUI_EXPORT Digital : public LabeledPlotData, public details::DefaultP
    * @param elementName ID of the plot
    * @param caption text rendered above the plot
    */
-  Digital(const std::string &elementName, const std::string &caption);
+  Digital(std::string_view elementName, std::string_view caption);
 
  protected:
   void renderImpl() override;
