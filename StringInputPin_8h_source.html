@@ -95,7 +95,7 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    Flags&lt;TextFilter&gt; filters = TextFilter::None;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  };</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1bp_1_1StringInputPin.html">StringInputPin</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;labelText, <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> pinColor, <a class="code" href="structpf_1_1ui_1_1ig_1_1bp_1_1StringInputPin_1_1InputConfig.html">InputConfig</a> &amp;&amp;config);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1bp_1_1StringInputPin.html">StringInputPin</a>(std::string_view elementName, std::string_view labelText, <a class="code" href="classpf_1_1ui_1_1ig_1_1Color.html">Color</a> pinColor, <a class="code" href="structpf_1_1ui_1_1ig_1_1bp_1_1StringInputPin_1_1InputConfig.html">InputConfig</a> &amp;&amp;config);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  [[nodiscard]] <span class="keyword">static</span> std::unique_ptr&lt;StringInputPin&gt; ConstructFromToml(<a class="code" href="classpf_1_1ui_1_1ig_1_1Node.html">ig::Node</a> *parent, <span class="keyword">const</span> toml::table &amp;src);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
@@ -103,7 +103,7 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keywordtype">void</span> setFromToml(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">static</span> <span class="keyword">typename</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1InputText_1_1Config.html">InputText::Config</a> CreateInputConfig(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> std::string &amp;label,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">static</span> <span class="keyword">typename</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1InputText_1_1Config.html">InputText::Config</a> CreateInputConfig(std::string_view name, std::string_view label,</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                                      <a class="code" href="structpf_1_1ui_1_1ig_1_1bp_1_1StringInputPin_1_1InputConfig.html">InputConfig</a> &amp;&amp;config);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>

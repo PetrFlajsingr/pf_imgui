@@ -71,8 +71,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="WrapLayout_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_WRAPLAYOUT_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_WRAPLAYOUT_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_LAYOUTS_WRAPLAYOUT_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_LAYOUTS_WRAPLAYOUT_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="LinearLayout_8h.html">LinearLayout.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
@@ -88,7 +88,7 @@ $(function() {
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1WrapLayout_1_1Config.html#a59c5066b9feb76e17ce2b01e089e8df9">   28</a></span>&#160;    <span class="keywordtype">bool</span> showBorder = <span class="keyword">false</span>;                   </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  };</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1WrapLayout.html">WrapLayout</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1WrapLayout_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1WrapLayout.html">WrapLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <a class="code" href="enums_8h.html#ac19407d035790c4200a17a2f993f45e8">LayoutDirection</a> layoutDirection, <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;initialSize,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1WrapLayout.html">WrapLayout</a>(std::string_view elementName, <a class="code" href="enums_8h.html#ac19407d035790c4200a17a2f993f45e8">LayoutDirection</a> layoutDirection, <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> initialSize,</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;             <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; <span class="keyword">protected</span>:</div>
@@ -105,7 +105,7 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_WRAPLAYOUT_H</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_LAYOUTS_WRAPLAYOUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1WrapLayout_1_1Config_html_aba718938f935c705ae468a4f033704c2"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1WrapLayout_1_1Config.html#aba718938f935c705ae468a4f033704c2">pf::ui::ig::WrapLayout::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> WrapLayout.h:25</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1WrapLayout_1_1Config_html_a34c8a458ca7861c39d143e6f29ea9bff"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1WrapLayout_1_1Config.html#a34c8a458ca7861c39d143e6f29ea9bff">pf::ui::ig::WrapLayout::Config::layoutDirection</a></div><div class="ttdeci">Explicit&lt; LayoutDirection &gt; layoutDirection</div><div class="ttdef"><b>Definition:</b> WrapLayout.h:26</div></div>

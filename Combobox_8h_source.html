@@ -131,12 +131,12 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox</a>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a51b75eb6106904a0e2103ed18f8a8b29">   77</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a51b75eb6106904a0e2103ed18f8a8b29">name</a>;                      </div>
 <div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#aea4136f4915608d0fc57497ddc1dfc12">   78</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#aea4136f4915608d0fc57497ddc1dfc12">label</a>;                     </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a6448db4080f65d0f3bb225bf99459a69">   79</a></span>&#160;    Explicit&lt;std::string&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a6448db4080f65d0f3bb225bf99459a69">preview</a>;                        </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a15b0a50778d6e25677743c6632af129c">   79</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a15b0a50778d6e25677743c6632af129c">preview</a>;                   </div>
 <div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a4597b4cdbc812916e726f3fb3510644b">   80</a></span>&#160;    ComboBoxCount shownItemCount = ComboBoxCount::Items8; </div>
 <div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a102586641b9584cb6806a893ed3de373">   81</a></span>&#160;    <span class="keywordtype">bool</span> persistent = <span class="keyword">false</span>;                              </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  };</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a0a0d34b549d2be0dcaa12012bf4988b0">   97</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a0a0d34b549d2be0dcaa12012bf4988b0">Combobox</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;labelStr, <span class="keyword">const</span> std::string &amp;prevValue,</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a872b64d2d62029fc441bbeb49129169b">   97</a></span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a872b64d2d62029fc441bbeb49129169b">Combobox</a>(std::string_view elementName, std::string_view labelStr, std::string_view prevValue,</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;           std::ranges::range <span class="keyword">auto</span> &amp;&amp;newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;           <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No)</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a>(std::convertible_to&lt;std::ranges::range_value_t&lt;decltype(newItems)&gt;, T&gt;</div>
@@ -186,123 +186,121 @@ $(function() {
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
 <div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a78c0897ea2d09c2e3069d97b8fb3c446">  157</a></span>&#160;<a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a78c0897ea2d09c2e3069d97b8fb3c446">Combobox&lt;T&gt;::Combobox</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html">Combobox::Config</a> &amp;&amp;config)</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    : <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox</a>{std::string{config.name.value}, std::string{config.label.value},</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;               std::string{config.preview},    std::vector&lt;T&gt;{},</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;               config.shownItemCount,          config.persistent ? Persistent::Yes : Persistent::No} {}</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a6f021ac3a465ed2a064da79d4922863a">  163</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a6f021ac3a465ed2a064da79d4922863a">Combobox&lt;T&gt;::setSelectedItemAsString</a>(<span class="keyword">const</span> std::string &amp;itemAsString) {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter = std::ranges::find_if(</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;          items, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item.second-&gt;label.get() == itemAsString; });</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      iter != items.end()) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> index = std::ranges::distance(items.begin(), iter);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    setSelectedItemByIndex(index);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  }</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a29fa111f12677dfa86d67e7afc75d2f3">  173</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a29fa111f12677dfa86d67e7afc75d2f3">Combobox&lt;T&gt;::setSelectedItemByIndex</a>(std::size_t index) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  assert(index &lt; items.size());</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordflow">if</span> (index != selectedItemIndex) {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">if</span> (selectedItemIndex.has_value()) { filteredItems[*selectedItemIndex]-&gt;second-&gt;setValue(<span class="keyword">false</span>); }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    selectedItemIndex = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(index);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    filteredItems[*selectedItemIndex]-&gt;second-&gt;setValue(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    *selectedItem.modify() = filteredItems[index]-&gt;first;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  }</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;}</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#acd0bd9a7d846bbd60b1c6fa84c6d14ce">  184</a></span>&#160;toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#acd0bd9a7d846bbd60b1c6fa84c6d14ce">Combobox&lt;T&gt;::toToml</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keyword">auto</span> result = toml::table{};</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> currentItem = filteredItems[*selectedItemIndex];</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    result.insert_or_assign(<span class="stringliteral">&quot;selected&quot;</span>, currentItem-&gt;second-&gt;label-&gt;get());</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00194"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a66e5197ea29d817c12ffe7af1dfec49f">  194</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a66e5197ea29d817c12ffe7af1dfec49f">Combobox&lt;T&gt;::setFromToml</a>(<span class="keyword">const</span> toml::table &amp;src) {</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedValIter = src.find(<span class="stringliteral">&quot;selected&quot;</span>); selectedValIter != src.end()) {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedVal = selectedValIter-&gt;second.value&lt;std::string&gt;(); selectedVal.has_value()) {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;      *selectedItem.modify() = selectedVal.value();</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  }</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00203"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a432244d797c0a0611dbe0827551d3db3">  203</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a432244d797c0a0611dbe0827551d3db3">Combobox&lt;T&gt;::renderImpl</a>() {</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> colorScoped = this-&gt;color.applyScoped();</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = this-&gt;style.applyScoped();</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = this-&gt;font.applyScopedIfNotDefault();</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *previewPtr;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    previewPtr = filteredItems[*selectedItemIndex]-&gt;second-&gt;label-&gt;get().c_str();</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    previewPtr = getPreviewValue().c_str();</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  }</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginCombo(this-&gt;label-&gt;get().c_str(), previewPtr, *flags)) {</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    RAII end{ImGui::EndCombo};</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    checkClose();</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    std::ranges::for_each(filteredItems | ranges::views::enumerate, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;itemIdx) {</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> &amp;[idx, item] = itemIdx;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;      item-&gt;second-&gt;render();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;      <span class="keywordflow">if</span> (item-&gt;second-&gt;getValue()) { setSelectedItemByIndex(idx); }</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    });</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  }</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keywordflow">if</span> (selectedItemIndex.has_value()) { <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(filteredItems[*selectedItemIndex]-&gt;first); }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;}</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="keyword">const</span> std::optional&lt;T&gt; &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox&lt;T&gt;::getValue</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordflow">return</span> *selectedItem;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;}</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;Subscription Combobox&lt;T&gt;::addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> std::optional&lt;T&gt; &amp;)&gt; listener) {</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <span class="keywordflow">return</span> selectedItem.addListener(std::move(listener));</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;}</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keywordtype">void</span> Combobox&lt;T&gt;::setValue(<span class="keyword">const</span> std::optional&lt;T&gt; &amp;newValue) {</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  *selectedItem.modify() = newValue;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;}</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
-<div class="line"><a name="l00241"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#aeef9de1d1ea5c3bb40f37f79f9d6843f">  241</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#aeef9de1d1ea5c3bb40f37f79f9d6843f">Combobox&lt;T&gt;::cancelSelection</a>() {</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  selectedItemIndex = std::nullopt;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  *selectedItem.modify() = std::nullopt;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    : <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox</a>(config.name, config.label, config.preview, std::vector&lt;T&gt;{}, config.shownItemCount,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;               config.persistent ? Persistent::Yes : Persistent::No) {}</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a6f021ac3a465ed2a064da79d4922863a">  162</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a6f021ac3a465ed2a064da79d4922863a">Combobox&lt;T&gt;::setSelectedItemAsString</a>(<span class="keyword">const</span> std::string &amp;itemAsString) {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> iter = std::ranges::find_if(</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;          items, [itemAsString](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;item) { <span class="keywordflow">return</span> item.second-&gt;label.get() == itemAsString; });</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      iter != items.end()) {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> index = std::ranges::distance(items.begin(), iter);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    setSelectedItemByIndex(index);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  }</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a29fa111f12677dfa86d67e7afc75d2f3">  172</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a29fa111f12677dfa86d67e7afc75d2f3">Combobox&lt;T&gt;::setSelectedItemByIndex</a>(std::size_t index) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  assert(index &lt; items.size());</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordflow">if</span> (index != selectedItemIndex) {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">if</span> (selectedItemIndex.has_value()) { filteredItems[*selectedItemIndex]-&gt;second-&gt;setValue(<span class="keyword">false</span>); }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    selectedItemIndex = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(index);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    filteredItems[*selectedItemIndex]-&gt;second-&gt;setValue(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    *selectedItem.modify() = filteredItems[index]-&gt;first;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  }</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#acd0bd9a7d846bbd60b1c6fa84c6d14ce">  183</a></span>&#160;toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#acd0bd9a7d846bbd60b1c6fa84c6d14ce">Combobox&lt;T&gt;::toToml</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keyword">auto</span> result = toml::table{};</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> currentItem = filteredItems[*selectedItemIndex];</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    result.insert_or_assign(<span class="stringliteral">&quot;selected&quot;</span>, currentItem-&gt;second-&gt;label-&gt;get());</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a66e5197ea29d817c12ffe7af1dfec49f">  193</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a66e5197ea29d817c12ffe7af1dfec49f">Combobox&lt;T&gt;::setFromToml</a>(<span class="keyword">const</span> toml::table &amp;src) {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedValIter = src.find(<span class="stringliteral">&quot;selected&quot;</span>); selectedValIter != src.end()) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> selectedVal = selectedValIter-&gt;second.value&lt;std::string&gt;(); selectedVal.has_value()) {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;      *selectedItem.modify() = selectedVal.value();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a432244d797c0a0611dbe0827551d3db3">  202</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#a432244d797c0a0611dbe0827551d3db3">Combobox&lt;T&gt;::renderImpl</a>() {</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> colorScoped = this-&gt;color.applyScoped();</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = this-&gt;style.applyScoped();</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = this-&gt;font.applyScopedIfNotDefault();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *previewPtr;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="keywordflow">if</span> (selectedItemIndex.has_value()) {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    previewPtr = filteredItems[*selectedItemIndex]-&gt;second-&gt;label-&gt;get().c_str();</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    previewPtr = getPreviewValue().c_str();</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  }</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordflow">if</span> (ImGui::BeginCombo(this-&gt;label-&gt;get().c_str(), previewPtr, *flags)) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    RAII end{ImGui::EndCombo};</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    checkClose();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    std::ranges::for_each(filteredItems | ranges::views::enumerate, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;itemIdx) {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> &amp;[idx, item] = itemIdx;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;      item-&gt;second-&gt;render();</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;      <span class="keywordflow">if</span> (item-&gt;second-&gt;getValue()) { setSelectedItemByIndex(idx); }</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    });</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  }</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="keywordflow">if</span> (selectedItemIndex.has_value()) { <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(filteredItems[*selectedItemIndex]-&gt;first); }</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">const</span> std::optional&lt;T&gt; &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox&lt;T&gt;::getValue</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordflow">return</span> *selectedItem;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;}</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;Subscription Combobox&lt;T&gt;::addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> std::optional&lt;T&gt; &amp;)&gt; listener) {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordflow">return</span> selectedItem.addListener(std::move(listener));</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;}</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keywordtype">void</span> Combobox&lt;T&gt;::setValue(<span class="keyword">const</span> std::optional&lt;T&gt; &amp;newValue) {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  *selectedItem.modify() = newValue;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">template</span>&lt;ToStringConvertible T&gt;</div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Combobox.html#aeef9de1d1ea5c3bb40f37f79f9d6843f">  239</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html#aeef9de1d1ea5c3bb40f37f79f9d6843f">Combobox&lt;T&gt;::cancelSelection</a>() {</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  selectedItemIndex = std::nullopt;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  *selectedItem.modify() = std::nullopt;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox&lt;std::string&gt;</a>;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1Combobox.html">Combobox&lt;std::string&gt;</a>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_COMBOBOX_H</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_COMBOBOX_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Combobox_1_1Config_html_a6448db4080f65d0f3bb225bf99459a69"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a6448db4080f65d0f3bb225bf99459a69">pf::ui::ig::Combobox::Config::preview</a></div><div class="ttdeci">Explicit&lt; std::string &gt; preview</div><div class="ttdef"><b>Definition:</b> Combobox.h:79</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Selectable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Selectable.html">pf::ui::ig::Selectable</a></div><div class="ttdoc">A labeled area which can be de/selected.</div><div class="ttdef"><b>Definition:</b> Selectable.h:31</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
 <div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:186</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_aeef9de1d1ea5c3bb40f37f79f9d6843f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#aeef9de1d1ea5c3bb40f37f79f9d6843f">pf::ui::ig::Combobox::cancelSelection</a></div><div class="ttdeci">void cancelSelection()</div><div class="ttdef"><b>Definition:</b> Combobox.h:241</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_aeef9de1d1ea5c3bb40f37f79f9d6843f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#aeef9de1d1ea5c3bb40f37f79f9d6843f">pf::ui::ig::Combobox::cancelSelection</a></div><div class="ttdeci">void cancelSelection()</div><div class="ttdef"><b>Definition:</b> Combobox.h:239</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:164</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:194</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a872b64d2d62029fc441bbeb49129169b"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a872b64d2d62029fc441bbeb49129169b">pf::ui::ig::Combobox::Combobox</a></div><div class="ttdeci">Combobox(std::string_view elementName, std::string_view labelStr, std::string_view prevValue, std::ranges::range auto &amp;&amp;newItems, ComboBoxCount showItemCount=ComboBoxCount::Items8, Persistent persistent=Persistent::No) requires(std</div><div class="ttdef"><b>Definition:</b> Combobox.h:97</div></div>
 <div class="ttc" id="aunique__id_8h_html_a87ffe4f5445ef5271806aa3f212ce999"><div class="ttname"><a href="unique__id_8h.html#a87ffe4f5445ef5271806aa3f212ce999">pf::ui::ig::uniqueId</a></div><div class="ttdeci">std::string uniqueId(std::size_t length=10)</div><div class="ttdef"><b>Definition:</b> unique_id.h:42</div></div>
 <div class="ttc" id="aValueContainer_8h_html"><div class="ttname"><a href="ValueContainer_8h.html">ValueContainer.h</a></div><div class="ttdoc">Interface for providing inner value access.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a66e5197ea29d817c12ffe7af1dfec49f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a66e5197ea29d817c12ffe7af1dfec49f">pf::ui::ig::Combobox::setFromToml</a></div><div class="ttdeci">void setFromToml(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> Combobox.h:194</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a66e5197ea29d817c12ffe7af1dfec49f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a66e5197ea29d817c12ffe7af1dfec49f">pf::ui::ig::Combobox::setFromToml</a></div><div class="ttdeci">void setFromToml(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> Combobox.h:193</div></div>
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:64</div></div>
 <div class="ttc" id="aCustomCombobox_8h_html"><div class="ttname"><a href="CustomCombobox_8h.html">CustomCombobox.h</a></div><div class="ttdoc">Customizable combobox.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a78c0897ea2d09c2e3069d97b8fb3c446"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a78c0897ea2d09c2e3069d97b8fb3c446">pf::ui::ig::Combobox::Combobox</a></div><div class="ttdeci">Combobox(Config &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> Combobox.h:157</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1details_1_1ComboboxRowFactory_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1details_1_1ComboboxRowFactory.html">pf::ui::ig::details::ComboboxRowFactory</a></div><div class="ttdef"><b>Definition:</b> Combobox.h:28</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomCombobox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomCombobox.html">pf::ui::ig::CustomCombobox</a></div><div class="ttdoc">Combobox where rows can be whatever is provided by the user.</div><div class="ttdef"><b>Definition:</b> CustomCombobox.h:36</div></div>
 <div class="ttc" id="aSelectable_8h_html"><div class="ttname"><a href="Selectable_8h.html">Selectable.h</a></div><div class="ttdoc">Selectable element.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a29fa111f12677dfa86d67e7afc75d2f3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a29fa111f12677dfa86d67e7afc75d2f3">pf::ui::ig::Combobox::setSelectedItemByIndex</a></div><div class="ttdeci">void setSelectedItemByIndex(std::size_t index)</div><div class="ttdef"><b>Definition:</b> Combobox.h:173</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Combobox_1_1Config_html_a15b0a50778d6e25677743c6632af129c"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a15b0a50778d6e25677743c6632af129c">pf::ui::ig::Combobox::Config::preview</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; preview</div><div class="ttdef"><b>Definition:</b> Combobox.h:79</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a29fa111f12677dfa86d67e7afc75d2f3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a29fa111f12677dfa86d67e7afc75d2f3">pf::ui::ig::Combobox::setSelectedItemByIndex</a></div><div class="ttdeci">void setSelectedItemByIndex(std::size_t index)</div><div class="ttdef"><b>Definition:</b> Combobox.h:172</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Combobox_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html">pf::ui::ig::Combobox::Config</a></div><div class="ttdoc">Struct for construction of Combobox.</div><div class="ttdef"><b>Definition:</b> Combobox.h:75</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a6f021ac3a465ed2a064da79d4922863a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a6f021ac3a465ed2a064da79d4922863a">pf::ui::ig::Combobox::setSelectedItemAsString</a></div><div class="ttdeci">void setSelectedItemAsString(const std::string &amp;itemAsString)</div><div class="ttdef"><b>Definition:</b> Combobox.h:163</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a6f021ac3a465ed2a064da79d4922863a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a6f021ac3a465ed2a064da79d4922863a">pf::ui::ig::Combobox::setSelectedItemAsString</a></div><div class="ttdeci">void setSelectedItemAsString(const std::string &amp;itemAsString)</div><div class="ttdef"><b>Definition:</b> Combobox.h:162</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Combobox_1_1Config_html_a51b75eb6106904a0e2103ed18f8a8b29"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#a51b75eb6106904a0e2103ed18f8a8b29">pf::ui::ig::Combobox::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> Combobox.h:77</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a432244d797c0a0611dbe0827551d3db3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a432244d797c0a0611dbe0827551d3db3">pf::ui::ig::Combobox::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Combobox.h:203</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a0a0d34b549d2be0dcaa12012bf4988b0"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a0a0d34b549d2be0dcaa12012bf4988b0">pf::ui::ig::Combobox::Combobox</a></div><div class="ttdeci">Combobox(const std::string &amp;elementName, const std::string &amp;labelStr, const std::string &amp;prevValue, std::ranges::range auto &amp;&amp;newItems, ComboBoxCount showItemCount=ComboBoxCount::Items8, Persistent persistent=Persistent::No) requires(std</div><div class="ttdef"><b>Definition:</b> Combobox.h:97</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_acd0bd9a7d846bbd60b1c6fa84c6d14ce"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#acd0bd9a7d846bbd60b1c6fa84c6d14ce">pf::ui::ig::Combobox::toToml</a></div><div class="ttdeci">toml::table toToml() const override</div><div class="ttdef"><b>Definition:</b> Combobox.h:184</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_a432244d797c0a0611dbe0827551d3db3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#a432244d797c0a0611dbe0827551d3db3">pf::ui::ig::Combobox::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> Combobox.h:202</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Combobox_html_acd0bd9a7d846bbd60b1c6fa84c6d14ce"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Combobox.html#acd0bd9a7d846bbd60b1c6fa84c6d14ce">pf::ui::ig::Combobox::toToml</a></div><div class="ttdeci">toml::table toToml() const override</div><div class="ttdef"><b>Definition:</b> Combobox.h:183</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:24</div></div>
 <div class="ttc" id="aDragNDrop_8h_html"><div class="ttname"><a href="DragNDrop_8h.html">DragNDrop.h</a></div><div class="ttdoc">Definitions for drag and drop interface.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Combobox_1_1Config_html_aea4136f4915608d0fc57497ddc1dfc12"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Combobox_1_1Config.html#aea4136f4915608d0fc57497ddc1dfc12">pf::ui::ig::Combobox::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> Combobox.h:78</div></div>

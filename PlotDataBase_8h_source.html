@@ -128,12 +128,12 @@ $(function() {
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html">   87</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html">PlotData</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementWithID.html">ElementWithID</a> {</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html">PlotData</a>(<span class="keyword">const</span> std::string &amp;elementName);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html">PlotData</a>(std::string_view elementName);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html">   95</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html">LabeledPlotData</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1PlotData.html">PlotData</a> {</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html">LabeledPlotData</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> std::string &amp;caption);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1LabeledPlotData.html">LabeledPlotData</a>(std::string_view elementName, std::string_view caption);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Label&gt;</a> label;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>

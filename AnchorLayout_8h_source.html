@@ -71,8 +71,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="AnchorLayout_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1AnchorLayout_1_1Config.html#aa7d6d84ae47b639fa5f64941e0ddb5e0">   43</a></span>&#160;    <span class="keywordtype">bool</span> showBorder = <span class="keyword">false</span>;         </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  };</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">AnchorLayout</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1AnchorLayout_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">AnchorLayout</a>(<span class="keyword">const</span> std::string &amp;elementName, <span class="keyword">const</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> &amp;initialSize, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">AnchorLayout</a>(std::string_view elementName, <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> initialSize, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a> std::derived_from&lt;T, Element&gt; &amp;&amp; std::constructible_from&lt;T, Args...&gt;</div>
 <div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html#a6eaaf70d131dc2d4379e498adc6c39ee">   70</a></span>&#160;  T &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html#a6eaaf70d131dc2d4379e498adc6c39ee">createChild</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1Position.html">Position</a> position, <span class="keyword">const</span> Flags&lt;Anchor&gt; &amp;anchors, Args &amp;&amp;...args) {</div>
@@ -169,7 +169,7 @@ $(function() {
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_SRC_PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_LAYOUTS_ANCHORLAYOUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aConfigConstruction_8h_html"><div class="ttname"><a href="ConfigConstruction_8h.html">ConfigConstruction.h</a></div><div class="ttdoc">Concepts for config construction.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AnchorLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AnchorLayout.html">pf::ui::ig::AnchorLayout</a></div><div class="ttdoc">Layout containing elements which can be placed in custom location and their size is changed based on ...</div><div class="ttdef"><b>Definition:</b> AnchorLayout.h:34</div></div>
