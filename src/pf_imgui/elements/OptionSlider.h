@@ -66,8 +66,8 @@ class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  Observable<T> value;
+  Property<Label> label;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;

@@ -20,7 +20,7 @@ class NodeWithLabel : public Node {
 
   [[nodiscard]] static std::unique_ptr<NodeWithLabel> ConstructFromToml(ig::NodeEditor *parent, const toml::table &src);
 
-  Observable<Label> label;
+  Property<Label> label;
 
  protected:
   void renderHeader() override;

@@ -94,9 +94,9 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID {
                ColorOf::PlotLines, ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered,
                ColorOf::Text, ColorOf::TextDisabled>
       color;
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

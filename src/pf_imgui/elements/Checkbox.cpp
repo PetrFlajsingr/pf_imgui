@@ -18,7 +18,7 @@ void Checkbox::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::Checkbox(label->get().c_str(), &selected.value)) { selected.triggerListeners(); }
+  if (ImGui::Checkbox(label->get().c_str(), &Prop_value(selected))) { Prop_triggerListeners(selected); }
 }
 
 toml::table Checkbox::toToml() const { return toml::table{{"checked", getValue()}}; }

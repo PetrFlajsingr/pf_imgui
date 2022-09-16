@@ -58,7 +58,7 @@ class PF_IMGUI_EXPORT Text : public ItemElement,
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget> color;
   Font font = Font::Default();
 
-  Observable<std::string> text;
+  Property<std::string> text;
 
   [[nodiscard]] const std::string &getValue() const override;
   void setValue(const std::string &newValue) override;

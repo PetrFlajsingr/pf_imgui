@@ -82,7 +82,7 @@ class PF_IMGUI_EXPORT Layout : public ElementWithID, public RenderablesContainer
    */
   void setHorizontalScrollEnabled(bool horizontalScroll);
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   [[nodiscard]] RAII applyScroll();
@@ -94,7 +94,7 @@ class PF_IMGUI_EXPORT Layout : public ElementWithID, public RenderablesContainer
 
  private:
   bool drawBorder;
-  bool scrollable = false;  // @todo: turn into an interface?
+  bool scrollable = false;
   bool horizontalScrollEnabled = false;
 };
 

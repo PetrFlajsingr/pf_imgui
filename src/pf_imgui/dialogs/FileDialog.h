@@ -123,9 +123,9 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
   FullColorPalette color;
   FullStyleOptions style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

@@ -38,9 +38,7 @@ PopupMenu &Link::createOrGetPopupMenu() {
 bool Link::hasPopupMenu() const { return popupMenu != nullptr; }
 
 void Link::removePopupMenu() { popupMenu = nullptr; }
-
-bool Link::isSelected() const { return selected; }
-
+// move to addListener
 void Link::select(bool appendToSelection) { ax::NodeEditor::SelectLink(getId(), appendToSelection); }
 
 void Link::deselect() { ax::NodeEditor::DeselectLink(getId()); }
@@ -59,6 +57,6 @@ void Link::renderImpl() {
 
 void Link::setId(ax::NodeEditor::LinkId newId) { id = newId; }
 
-void Link::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
+void Link::setHovered(bool newHovered) { *Prop_modify(hovered) = newHovered; }
 
 }  // namespace pf::ui::ig

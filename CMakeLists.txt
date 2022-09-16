@@ -392,7 +392,7 @@ set(INCLUDES
         src/pf_imgui/reactive/Event.h
         src/pf_imgui/reactive/Observable.h
         src/pf_imgui/concepts/HasSizeObservable.h
-        src/pf_imgui/concepts/ConfigConstruction.h src/pf_imgui/common/Tags.h src/pf_imgui/reactive/PropertyOwner.h)
+        src/pf_imgui/concepts/ConfigConstruction.h src/pf_imgui/common/Tags.h src/pf_imgui/reactive/PropertyOwner.h src/pf_imgui/reactive/EventOwner.h)
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

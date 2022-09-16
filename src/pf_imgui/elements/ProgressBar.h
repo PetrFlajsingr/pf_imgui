@@ -125,8 +125,8 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueContainer<T>
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
 
-  Observable<Size> size;
-  Observable<T> value;
+  Property<Size> size;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;

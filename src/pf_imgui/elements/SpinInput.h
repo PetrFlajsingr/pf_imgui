@@ -94,8 +94,8 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<SpinInput, T> value;
+  Property<Label> label;
+  Property<T> value;
 
  protected:
   void renderImpl() override;
@@ -151,16 +151,13 @@ void SpinInput<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGui::SpinInt(label->get().c_str(), &value.value, step, stepFast, flags);
+    valueChanged = ImGui::SpinInt(label->get().c_str(), &Prop_value(value), step, stepFast, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGui::SpinFloat(label->get().c_str(), &value.value, step, stepFast, "%.3f",
+    valueChanged = ImGui::SpinFloat(label->get().c_str(), &Prop_value(value), step, stepFast, "%.3f",
                                     flags);  // TODO: user provided format
   }
-  if (valueChanged) {
-    value.value = std::clamp(value.value, min, max);
-    value.triggerListeners();
-  }
+  if (valueChanged) { *value.modify() = std::clamp(Prop_value(value), min, max); }
   DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) { *value.modify() = std::clamp(*drop, min, max); }
 }

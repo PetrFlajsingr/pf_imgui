@@ -55,6 +55,8 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   using CustomListboxBase::filter;
   using CustomListboxBase::filteredItems;
   using CustomListboxBase::items;
+  using PropertyOwner::Property;
+  using PropertyOwner::ReadOnlyProperty;
 
  public:
   using Factory = details::ListboxRowFactory<T>;
@@ -117,7 +119,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ObservableProperty<Listbox, std::optional<T>> selectedItem;
+  Property<std::optional<T>> selectedItem;
 
   [[nodiscard]] const std::optional<T> &getValue() const override;
   void setValue(const std::optional<T> &newValue) override;

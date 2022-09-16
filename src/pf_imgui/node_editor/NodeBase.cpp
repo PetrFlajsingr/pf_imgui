@@ -32,8 +32,6 @@ void NodeBase::centerOnScreen() {
   ax::NodeEditor::CenterNodeOnScreen(getId());
 }
 
-bool NodeBase::isSelected() const { return selected; }
-
 void NodeBase::select(bool appendToSelection) {
   parent->setContext();
   ax::NodeEditor::SelectNode(getId(), appendToSelection);
@@ -76,7 +74,7 @@ void NodeBase::render() {
   }
 }
 
-void NodeBase::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
+void NodeBase::setHovered(bool newHovered) { *Prop_modify(hovered) = newHovered; }
 
 void NodeBase::updateNodePositionImpl(Position newPosition) {
   if (isInitialised) {

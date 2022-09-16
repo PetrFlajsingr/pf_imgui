@@ -77,12 +77,12 @@ void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
 
 void GradientEditor::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) { *points.modify() = getPointsView(); }
-  *hovered.modify() = gradient.hovered;
-  *focused.modify() = gradient.focused;
+  if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) { *Prop_modify(points) = getPointsView(); }
+  *Prop_modify(hovered) = gradient.hovered;
+  *Prop_modify(focused) = gradient.focused;
   if (*focused && ImGui::IsKeyPressed(ImGuiKey_Delete) && selectedMark != nullptr) {
     gradient.removeMark(selectedMark);
-    *points.modify() = getPointsView();
+    *Prop_modify(points) = getPointsView();
   }
 }
 

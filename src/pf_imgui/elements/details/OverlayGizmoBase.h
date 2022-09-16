@@ -10,6 +10,7 @@
 #include <optional>
 #include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/reactive/PropertyOwner.h>
 
 namespace pf::ui::ig {
 
@@ -38,7 +39,7 @@ enum class ViewportGizmoMode : int {
 
 enum class ViewportGizmoSpace { Local = ImGuizmo::LOCAL, World = ImGuizmo::WORLD };
 
-class OverlayGizmoBase : public ValueContainer<glm::mat4> {
+class OverlayGizmoBase : public ValueContainer<glm::mat4>, protected PropertyOwner {
  public:
   OverlayGizmoBase(const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode, ViewportGizmoSpace gizmoSpace,
                    const glm::mat4 &initialView, const glm::mat4 &initialProjection, bool isProjectionOrthographic);
@@ -58,17 +59,15 @@ class OverlayGizmoBase : public ValueContainer<glm::mat4> {
   void setSnapValues(float translate, float rotate, float scale);
 
   void setValue(const glm::mat4 &newValue) override;
-  const glm::mat4 &getValue() const override;
+  [[nodiscard]] const glm::mat4 &getValue() const override;
+
+  Property<glm::mat4> transform;
+  /** Gizmo is actively being interacted with */
+  Property<bool> inUse;
 
  protected:
   Subscription addValueListenerImpl(std::function<void(const glm::mat4 &)> listener) override;
 
- public:
-  ObservableProperty<OverlayGizmoBase, glm::mat4> transform;
-  /** Gizmo is actively being interacted with */
-  Observable<bool> inUse;
-
- protected:
   void drawImpl(bool isEnabled);
 
   ViewportGizmoMode mode;

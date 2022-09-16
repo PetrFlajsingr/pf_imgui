@@ -13,7 +13,6 @@
 #include <pf_imgui/common/Position.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <utility>
 
@@ -84,13 +83,9 @@ class PF_IMGUI_EXPORT ItemElement : public ElementWithID {
    */
   void removePopupMenu();
 
-  ObservableProperty<ItemElement, bool, ReadOnlyTag> hovered;
-  ObservableProperty<ItemElement, bool, ReadOnlyTag> focused;
-  ObservableProperty<ItemElement, Position, ReadOnlyTag> mousePosition;
-
- protected:
-  void setHovered(bool newHovered);
-  void setFocused(bool newFocused);
+  ReadOnlyProperty<bool> hovered;
+  ReadOnlyProperty<bool> focused;
+  ReadOnlyProperty<Position> mousePosition;
 
  private:
   std::unique_ptr<Tooltip> tooltip;

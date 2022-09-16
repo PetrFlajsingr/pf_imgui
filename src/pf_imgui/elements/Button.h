@@ -38,8 +38,6 @@ class InvisibleButton;
  * @see ButtonType
  */
 class PF_IMGUI_EXPORT ButtonBase : public ItemElement {
-  using ClickEvent = ClassEvent<ButtonBase>;
-
  public:
   /**
    * Construct ButtonBase.
@@ -59,7 +57,7 @@ class PF_IMGUI_EXPORT ButtonBase : public ItemElement {
    */
   void setRepeatable(bool newRepeatable);
 
-  ClickEvent clickEvent;
+  Event<> clickEvent;
 
  protected:
   [[nodiscard]] RAII setButtonRepeat();
@@ -100,7 +98,7 @@ class PF_IMGUI_EXPORT InvisibleButton : public ButtonBase {
   explicit InvisibleButton(std::string_view elementName, Size s = Size::Auto(),
                            MouseButton clickButton = MouseButton::Left, Repeatable isRepeatable = Repeatable::No);
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;
@@ -146,9 +144,9 @@ class PF_IMGUI_EXPORT Button : public ButtonBase {
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;
@@ -184,7 +182,7 @@ class PF_IMGUI_EXPORT SmallButton : public ButtonBase {
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
  protected:
   void renderImpl() override;
@@ -271,7 +269,7 @@ class PF_IMGUI_EXPORT ImageButton : public ButtonBase {
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

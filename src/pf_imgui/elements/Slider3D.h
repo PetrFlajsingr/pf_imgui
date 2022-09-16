@@ -72,10 +72,10 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
-  ObservableProperty<Slider3D, T> value;
+  Property<Size> size;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;
@@ -125,7 +125,7 @@ void Slider3D<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  auto address = &value.value;
+  auto address = &Prop_value(value);
   const auto oldValue = *address;
   if constexpr (std::same_as<T, float>) {
     valueChanged =
@@ -137,7 +137,7 @@ void Slider3D<T>::renderImpl() {
     *value.modify() = *drop;
     return;
   }
-  if (valueChanged && oldValue != *address) { value.triggerListeners(); }
+  if (valueChanged && oldValue != *address) { Prop_triggerListeners(value); }
 }
 
 template<OneOf<glm::vec3> T>

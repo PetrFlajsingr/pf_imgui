@@ -84,8 +84,8 @@ class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  Observable<Size> size;
-  Observable<ValueType> value;
+  Property<Size> size;
+  Property<ValueType> value;
 
   void setValue(const details::GizmoValueType<Type> &newValue) override;
   [[nodiscard]] const details::GizmoValueType<Type> &getValue() const override;

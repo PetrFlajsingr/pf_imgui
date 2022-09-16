@@ -46,23 +46,6 @@ class NodeBase : public Renderable {
 
   [[nodiscard]] NodeEditor &getNodeEditor();
   [[nodiscard]] const NodeEditor &getNodeEditor() const;
-  /**
-   * Add a listener called when the Node is de/selected.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addSelectionListener(std::invocable<bool> auto &&listener) {
-    return observableSelected.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
-   * Add a listener called when the Node is double clicked.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addDoubleClickListener(std::invocable auto &&listener) {
-    return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
-  }
 
   /**
    * Get Node's size.
@@ -74,12 +57,6 @@ class NodeBase : public Renderable {
    * Center Node in the middle of the currently viewed are of editor.
    */
   void centerOnScreen();
-
-  /**
-   * Check if the Node is selected in editor.
-   * @return true if selected, false otherwise
-   */
-  [[nodiscard]] bool isSelected() const;
   /**
    * Mark node as selected.
    * @param appendToSelection append to the current selection
@@ -94,15 +71,6 @@ class NodeBase : public Renderable {
    * Remove the Node from NodeEditor.
    */
   void deleteNode();
-
-  /**
-   * Add a listener called when the Node is deleted.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addDeleteListener(std::invocable auto &&listener) {
-    return observableDelete.addListener(std::forward<decltype(listener)>(listener));
-  }
 
   // TODO: change this in ItemElement too
   /**
@@ -121,8 +89,11 @@ class NodeBase : public Renderable {
 
   void render() override;
 
-  ObservableProperty<NodeBase, bool, ReadOnlyTag> hovered;
-  Observable<Position> position;
+  ReadOnlyProperty<bool> hovered;
+  Property<Position> position;
+  ReadOnlyProperty<bool> selected;
+  Event<> deleteEvent;
+  Event<> doubleClickEvent;
 
  protected:
   void setHovered(bool newHovered);
@@ -134,11 +105,7 @@ class NodeBase : public Renderable {
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
 
-  bool selected = false;
-  Observable_impl<bool> observableSelected;
-  Observable_impl<> observableDelete;
   bool markedForDelete = false;
-  Observable_impl<> observableDoubleClick;
   bool isInitialised = false;
   bool initSize;
 };

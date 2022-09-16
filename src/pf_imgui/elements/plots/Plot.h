@@ -92,9 +92,9 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID {
    */
   void removeData(const std::string &dataName);
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

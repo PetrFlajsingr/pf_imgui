@@ -31,7 +31,7 @@ void CommandPalette::setSearchText(std::string_view text) {
 void CommandPalette::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImCmd::CommandPalette(getName().c_str());
-  if (ImCmd::IsAnyItemSelected()) { observableInteract.notify(); }
+  if (ImCmd::IsAnyItemSelected()) { Event_notify(interactEvent); }
 }
 
 }  // namespace pf::ui::ig

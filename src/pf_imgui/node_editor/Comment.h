@@ -36,9 +36,9 @@ class Comment : public NodeBase {
   Comment(std::string_view elementName, std::string_view labelText, Size initialSize);
   Comment(std::string_view elementName, Position initPosition, std::string_view labelText, Size s);
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

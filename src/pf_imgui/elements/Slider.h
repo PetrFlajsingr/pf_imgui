@@ -107,8 +107,8 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<Slider, T> value;
+  Property<Label> label;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;
@@ -167,7 +167,7 @@ void Slider<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  const auto address = &value.value;
+  const auto address = &Prop_value(value);
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
@@ -189,7 +189,7 @@ void Slider<T>::renderImpl() {
     *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { value.triggerListeners(); }
+  if (valueChanged) { Prop_triggerListeners(value); }
 }
 
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>

@@ -42,7 +42,7 @@ void StretchLayout::renderImpl() {
     auto scrollApplier = applyScroll();
     const auto newSize = ImGui::GetContentRegionMax();
     if (newSize.x != previousSize.x && newSize.y != previousSize.y) {  //-V550
-      *childSize->modify() = newSize;
+      updateChildSize(newSize);
       previousSize = newSize;
     }
     child->render();

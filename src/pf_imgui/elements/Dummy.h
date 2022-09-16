@@ -30,7 +30,7 @@ class Dummy : public Element {
    * Construct Dummy.
    * @param config construction args @see Dummy::Config
    */
-  inline Dummy(Config &&config) : Dummy(config.name.value, config.size) {}
+  inline Dummy(Config &&config) : Dummy(config.name, config.size) {}
   /**
    * Construct Dummy.
    * @param elementName unique name of the element
@@ -38,7 +38,7 @@ class Dummy : public Element {
    */
   inline Dummy(std::string_view elementName, Size s) : Element(elementName), size(s) {}
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   inline void renderImpl() override {

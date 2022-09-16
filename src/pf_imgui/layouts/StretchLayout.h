@@ -86,7 +86,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
   template<std::derived_from<Element> T>
     requires HasSizeObservable<T>
   void setChild(std::unique_ptr<T> &&newChild) {
-    childSize = &newChild->size;
+    updateChildSize = [this, &childSize = newChild->size](Size newSize) { *childSize.modify() = newSize; };
     child = std::move(newChild);
   }
 
@@ -120,7 +120,7 @@ class PF_IMGUI_EXPORT StretchLayout : public Layout {
  private:
   Stretch stretch;
   std::unique_ptr<Element> child = nullptr;
-  Observable<Size> *childSize = nullptr;
+  std::function<void(Size)> updateChildSize = nullptr;
   ImVec2 previousSize;
 };
 }  // namespace pf::ui::ig

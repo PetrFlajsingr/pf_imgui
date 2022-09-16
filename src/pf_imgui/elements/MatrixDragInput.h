@@ -69,8 +69,8 @@ class MatrixDragInput : public ItemElement, public ValueContainer<M>, public Sav
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<MatrixDragInput, M> value;
+  Property<Label> label;
+  Property<M> value;
 
   [[nodiscard]] const M &getValue() const override;
   void setValue(const M &newValue) override;
@@ -133,12 +133,12 @@ void MatrixDragInput<M>::renderImpl() {
       const char *dragName = firstDragName.c_str();
       if (row > 0) { dragName = dragNames[row - 1].c_str(); }
 
-      const auto rowValueChanged = ImGui::DragScalarN(dragName, ImGuiDataType_Float, glm::value_ptr((value.value)[row]),
-                                                      Width, speed, &min, &max);
+      const auto rowValueChanged = ImGui::DragScalarN(dragName, ImGuiDataType_Float,
+                                                      glm::value_ptr(Prop_value(value)[row]), Width, speed, &min, &max);
 
       valueChanged = valueChanged || rowValueChanged;
     }
-    if (valueChanged) { value.triggerListeners(); }
+    if (valueChanged) { Prop_triggerListeners(value); }
     ImGui::EndTable();
   }
   ImGui::EndGroup();

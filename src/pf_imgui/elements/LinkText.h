@@ -23,8 +23,6 @@ namespace pf::ui::ig {
  * @brief Text element providing click detection.
  */
 class LinkText : public ItemElement {
-  using ClickEvent = ClassEvent<LinkText>;
-
  public:
   using LinkClickHandler = std::function<void(std::string_view)>;
   /**
@@ -58,9 +56,9 @@ class LinkText : public ItemElement {
   }
 
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  ClickEvent clickEvent;
+  Event<> clickEvent;
 
  protected:
   void renderImpl() override;

@@ -55,7 +55,7 @@ class PF_IMGUI_EXPORT TreeRecord : public ItemElement {
  public:
   TreeRecord(std::string_view elementName, std::string_view treeLabel, Flags<ImGuiTreeNodeFlags_> defaultFlags);
 
-  Observable<Label> label;
+  Property<Label> label;
 
  protected:
   Flags<ImGuiTreeNodeFlags_> flags{};
@@ -99,7 +99,7 @@ class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueContain
   ColorPalette<ColorOf::Text, ColorOf::HeaderActive, ColorOf::HeaderHovered, ColorOf::Header> color;
   StyleOptions<StyleOf::FramePadding, StyleOf::ItemSpacing, StyleOf::FrameRounding> style;
   Font font = Font::Default();
-  ObservableProperty<TreeLeaf, bool> selected;
+  Property<bool> selected;
 
   [[nodiscard]] const bool &getValue() const override;
   void setValue(const bool &newValue) override;
@@ -194,7 +194,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
     }
   }
 
-  Observable<bool> collapsed;
+  Property<bool> collapsed;
 
  protected:
   TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent,
@@ -303,7 +303,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     }
   }
 
-  Observable<bool> collapsed;
+  Property<bool> collapsed;
 
  protected:
   TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent,

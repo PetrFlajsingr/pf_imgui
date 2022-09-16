@@ -55,10 +55,10 @@ void Window::renderImpl() {
       auto raiiEnabled = pf::RAII([this] {
         if (!*enabled) { ImGui::EndDisabled(); }
       });
-      *hovered.modify() = ImGui::IsWindowHovered();
-      *collapsed.modify() = ImGui::IsWindowCollapsed();
-      *focused.modify() = ImGui::IsWindowFocused();
-      *position.modify() = Position{ImGui::GetWindowPos()};
+      *Prop_modify(hovered) = ImGui::IsWindowHovered();
+      *Prop_modify(collapsed) = ImGui::IsWindowCollapsed();
+      *Prop_modify(focused) = ImGui::IsWindowFocused();
+      *Prop_modify(position) = Position{ImGui::GetWindowPos()};
       positionDirty = false;
       if (!*collapsed) {
         if (hasMenuBar()) { menuBar->render(); }
@@ -67,7 +67,7 @@ void Window::renderImpl() {
     }
   }
   if (!isNotClosed) {
-    closeEvent.notify();
+    Event_notify(closeEvent);
     *visibility.modify() = Visibility::Invisible;
   }
 }

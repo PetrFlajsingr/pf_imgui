@@ -22,8 +22,8 @@ void SliderAngle::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
-  if (ImGui::SliderAngle(label->get().c_str(), &angle.value, minDeg, maxDeg, format.c_str(), flags)) {
-    angle.triggerListeners();
+  if (ImGui::SliderAngle(label->get().c_str(), &Prop_value(angle), minDeg, maxDeg, format.c_str(), flags)) {
+    Prop_triggerListeners(angle);
   }
   drag(getValue());
   if (auto drop = dropAccept(); drop.has_value()) {

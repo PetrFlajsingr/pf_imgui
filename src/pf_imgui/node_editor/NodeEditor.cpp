@@ -200,10 +200,14 @@ void NodeEditor::handleNodeDeletion() {
 void NodeEditor::removeMarkedElements() {
   if (linksDirty) {
     std::ranges::for_each(getLinks() | ranges::views::filter([](const auto &link) { return !link.isValid(); }),
-                          [](auto &link) {
-                            link.observableDelete.notify();
-                            if (link.inputPin != nullptr) { link.getInputPin().observableLink.notify(link); }
-                            if (link.outputPin != nullptr) { link.getOutputPin().observableLink.notify(link); }
+                          [](Link &link) {
+                            Link::Event_notify(link.deleteEvent);
+                            if (link.inputPin != nullptr) {
+                              Link::Event_notify(link.getInputPin().linkChangedEvent, link, false);
+                            }
+                            if (link.outputPin != nullptr) {
+                              Link::Event_notify(link.getOutputPin().linkChangedEvent, link, false);
+                            }
                           });
     auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
     links.erase(beginRm, endRm);
@@ -230,14 +234,14 @@ void NodeEditor::removeMarkedElements() {
         });
       });
 
-      std::ranges::for_each(markedNodes, [](auto &node) { node.observableDelete.notify(); });
+      std::ranges::for_each(markedNodes, [](auto &node) { Node::Event_notify(node.deleteEvent); });
       auto [beginRm, endRm] = std::ranges::remove_if(nodes, [](const auto &node) { return node->markedForDelete; });
       nodes.erase(beginRm, endRm);
     }
     {
       auto markedComments =
           getComments() | ranges::views::filter([](const auto &node) { return node.markedForDelete; });
-      std::ranges::for_each(markedComments, [](auto &comment) { comment.observableDelete.notify(); });
+      std::ranges::for_each(markedComments, [](auto &comment) { Comment::Event_notify(comment.deleteEvent); });
       auto [beginRm, endRm] =
           std::ranges::remove_if(comments, [](const auto &comment) { return comment->markedForDelete; });
       comments.erase(beginRm, endRm);
@@ -256,13 +260,10 @@ void NodeEditor::handleSelectionChange() {
       std::ranges::for_each(nodes | ranges::views::filter([&](const auto &node) {
                               const auto isSelected =
                                   std::ranges::find(selectedNodeIds, node->getId()) != selectedNodeIds.end();
-                              const auto wasSelected = node->isSelected();
+                              const auto wasSelected = *node->selected;
                               return isSelected != wasSelected;
                             }),
-                            [](const auto &node) {
-                              node->selected = !node->selected;
-                              node->observableSelected.notify(node->selected);
-                            });
+                            [](const auto &node) { *Node::Prop_modify(node->selected) = !*node->selected; });
     }
     {
       auto selectedLinkIds = std::vector<ax::NodeEditor::LinkId>(selectedObjectCount);
@@ -271,13 +272,10 @@ void NodeEditor::handleSelectionChange() {
       std::ranges::for_each(links | ranges::views::filter([&](const auto &link) {
                               const auto isSelected =
                                   std::ranges::find(selectedLinkIds, link->getId()) != selectedLinkIds.end();
-                              const auto wasSelected = link->isSelected();
+                              const auto wasSelected = *link->selected;
                               return isSelected != wasSelected;
                             }),
-                            [](const auto &link) {
-                              link->selected = !link->selected;
-                              link->observableSelected.notify(link->selected);
-                            });
+                            [](const auto &link) { *Link::Prop_modify(link->selected) = !*link->selected; });
     }
   }
 }
@@ -411,19 +409,19 @@ void NodeEditor::handleClickEvents() {
   const auto doubleClickedLink = ax::NodeEditor::GetDoubleClickedLink();
   if (doubleClickedNode.Get() != 0) {
     if (auto node = findNodeById(doubleClickedNode); node.has_value()) {
-      (*node)->observableDoubleClick.notify();
+      Node::Event_notify((*node)->doubleClickEvent);
     } else if (auto comment = findCommentById(doubleClickedNode); comment.has_value()) {
-      (*comment)->observableDoubleClick.notify();
+      Comment::Event_notify((*comment)->doubleClickEvent);
     }
   }
   if (doubleClickedPin.Get() != 0) {
-    if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { (*pin)->observableDoubleClick.notify(); }
+    if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { Pin::Event_notify((*pin)->doubleClickEvent); }
   }
   if (doubleClickedLink.Get() != 0) {
-    if (auto link = findLinkById(doubleClickedLink); link.has_value()) { (*link)->observableDoubleClick.notify(); }
+    if (auto link = findLinkById(doubleClickedLink); link.has_value()) { Link::Event_notify((*link)->doubleClickEvent); }
   }
-  if (ax::NodeEditor::IsBackgroundClicked()) { observableBackgroundClick.notify(); }
-  if (ax::NodeEditor::IsBackgroundDoubleClicked()) { observableBackgroundDoubleClick.notify(); }
+  if (ax::NodeEditor::IsBackgroundClicked()) { Event_notify(backgroundClickEvent); }
+  if (ax::NodeEditor::IsBackgroundDoubleClicked()) { Event_notify(backgroundDoubleClickEvent); }
 }
 
 void NodeEditor::handleHoverEvents() {

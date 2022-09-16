@@ -27,7 +27,9 @@ namespace pf::ui::ig {
  *
  * Only create this through ImGuiInterface::CreateRadioGroup
  */
-class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnlyTag>, public Savable {
+class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnlyTag>,
+                                   public Savable,
+                                   protected PropertyOwner {
  public:
   /**
    * @brief Struct for construction of RadioGroup.
@@ -69,7 +71,7 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnly
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ObservableProperty<RadioGroup, RadioButton *> activeButton;
+  Property<RadioButton *> activeButton;
 
   [[nodiscard]] RadioButton *const &getValue() const override;
 

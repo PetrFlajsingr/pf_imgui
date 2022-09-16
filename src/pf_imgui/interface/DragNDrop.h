@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_INTERFACE_DRAGNDROP_H
 #define PF_IMGUI_INTERFACE_DRAGNDROP_H
 
+#include <pf_imgui/reactive/Event.h>
 #include <algorithm>
 #include <concepts>
 #include <fmt/ostream.h>
@@ -176,14 +177,8 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
   void setDragTooltip(std::string_view text) {
     createSimpleTooltip(std::string(text), text.find("{}") != std::string_view::npos);
   }
-  /**
-   * Add a listener for when value is dragged from this element.
-   * @param listener listener
-   * @return Subscription for listener cancellation
-   */
-  Subscription addDragListener(std::invocable<T> auto &&listener) {
-    return dragListeners.addListener(std::forward<decltype(listener)>(listener));
-  }
+
+  ClassEvent<DragSource, T> startDragEvent;
 
  protected:
   /**
@@ -209,12 +204,9 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
     } else {
       result = drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
     }
-    if (!wasDragged && wasDragged != isDragged()) { dragListeners.notify(sourceData); }
+    if (!wasDragged && wasDragged != isDragged()) { startDragEvent.notify(sourceData); }
     return result;
   }
-
- private:
-  Observable_impl<T> dragListeners;
 };
 
 /**
@@ -230,14 +222,7 @@ class PF_IMGUI_EXPORT DropTarget : public details::DropTargetBase {
    */
   explicit DropTarget(bool dropEnabled) : DropTargetBase(dropEnabled) {}
 
-  /**
-   * Add a listener for when value is dropped to this element.
-   * @param listener listener
-   * @return Subscription for listener cancellation
-   */
-  Subscription addDropListener(std::invocable<T> auto &&listener) {
-    return dropListeners.addListener(std::forward<decltype(listener)>(listener));
-  }
+  ClassEvent<DropTarget, T> dropEvent;
 
  protected:
   /**
@@ -253,14 +238,11 @@ class PF_IMGUI_EXPORT DropTarget : public details::DropTargetBase {
     const auto dropResult = dropAccept_impl(typeID);
     if (dropResult.has_value()) {
       const auto value = *reinterpret_cast<const T *>(*dropResult);
-      dropListeners.notify(value);
+      dropEvent.notify(value);
       return value;
     }
     return std::nullopt;
   }
-
- private:
-  Observable_impl<T> dropListeners;
 };
 
 /**

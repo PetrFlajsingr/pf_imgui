@@ -77,10 +77,10 @@ class Knob : public ItemElement, public ValueContainer<T>, public Savable {
 
   ColorPalette<ColorOf::ButtonActive, ColorOf::ButtonHovered, ColorOf::FrameBackground> color;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
-  ObservableProperty<Knob, T> value;
+  Property<Size> size;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;
@@ -129,14 +129,14 @@ void Knob<T>::renderImpl() {
   const auto knobSize = std::min(static_cast<float>(size->width), static_cast<float>(size->height));
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGuiKnobs::KnobInt(label->get().c_str(), &value.value, min, max, speed, nullptr,
+    valueChanged = ImGuiKnobs::KnobInt(label->get().c_str(), &Prop_value(value), min, max, speed, nullptr,
                                        static_cast<ImGuiKnobVariant>(type), knobSize, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGuiKnobs::Knob(label->get().c_str(), &value.value, min, max, speed, nullptr,
+    valueChanged = ImGuiKnobs::Knob(label->get().c_str(), &Prop_value(value), min, max, speed, nullptr,
                                     static_cast<ImGuiKnobVariant>(type), knobSize, flags);
   }
-  if (valueChanged) { value.triggerListeners(); }
+  if (valueChanged) { Prop_triggerListeners(value); }
 }
 
 template<OneOf<int, float> T>

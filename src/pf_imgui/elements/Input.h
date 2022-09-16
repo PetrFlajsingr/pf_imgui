@@ -86,8 +86,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<Input, T> value;
+  Property<Label> label;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;
@@ -157,7 +157,7 @@ void Input<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  const auto address = &value.value;
+  const auto address = &Prop_value(value);
 
   ImGuiDataType_ dataType;
   if constexpr (OneOf<T, PF_IMGUI_INPUT_FLOAT_TYPE_LIST>) {
@@ -180,7 +180,7 @@ void Input<T>::renderImpl() {
     *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { value.triggerListeners(); }
+  if (valueChanged) { Prop_triggerListeners(value); }
 }
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>

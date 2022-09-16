@@ -146,7 +146,7 @@ class PF_IMGUI_EXPORT LogPanel : public ElementWithID, public Savable {
   FullStyleOptions style;
   Font font = Font::Default();
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

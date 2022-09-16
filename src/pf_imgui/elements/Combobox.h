@@ -52,6 +52,8 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   using CustomComboboxBase::filteredItems;
   using CustomComboboxBase::flags;
   using CustomComboboxBase::items;
+  using PropertyOwner::Property;
+  using PropertyOwner::ReadOnlyProperty;
 
  public:
   using CustomComboboxBase::addItem;
@@ -139,7 +141,7 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ObservableProperty<Combobox, std::optional<T>> selectedItem;
+  Property<std::optional<T>> selectedItem;
 
   [[nodiscard]] const std::optional<T> &getValue() const override;
   void setValue(const std::optional<T> &newValue) override;

@@ -10,13 +10,16 @@
 
 #include <concepts>
 #include <pf_imgui/common/Size.h>
+#include <pf_common/specializations.h>
 #include <pf_imgui/reactive/Observable.h>
 
 namespace pf::ui::ig {
 
 template<typename T>
 concept HasSizeObservable = requires(T t) {
-                              { &t.size } -> std::same_as<Observable<Size> *>;
+                              { t.size };
+                              direct_specialization_of<std::remove_cvref<decltype(t.size)>, ObservableProperty>;
+                              std::same_as<typename decltype(t.size)::value_type, Size>;
                             };
 
 }

@@ -97,10 +97,10 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
-  ObservableProperty<Range2D, math::Range<glm::vec2>> range;
+  Property<Size> size;
+  Property<math::Range<glm::vec2>> range;
 
   [[nodiscard]] const math::Range<glm::vec2> &getValue() const override;
   void setValue(const math::Range<glm::vec2> &newValue) override;

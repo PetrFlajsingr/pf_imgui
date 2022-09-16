@@ -48,7 +48,7 @@ void CustomIconButton::update(CustomIconButtonBehavior::State state) {
   if (state == State::Clicked) { notifyClickEvent(); }
 }
 
-void CustomIconButton::notifyClickEvent() { clickEvent.notify(); }
+void CustomIconButton::notifyClickEvent() { Event_notify(clickEvent); }
 
 CustomIconToggle::CustomIconToggle(std::string_view elementName, bool initValue, Persistent persistent)
     : CustomIconButtonBehavior(elementName), Savable(persistent), checked(initValue) {

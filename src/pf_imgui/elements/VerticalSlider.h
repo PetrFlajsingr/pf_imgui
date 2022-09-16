@@ -108,10 +108,10 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
-  ObservableProperty<VerticalSlider, T> value;
+  Property<Size> size;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;
@@ -156,7 +156,7 @@ void VerticalSlider<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto address = &value.value;
+  const auto address = &Prop_value(value);
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
@@ -173,7 +173,7 @@ void VerticalSlider<T>::renderImpl() {
     *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { value.triggerListeners(); }
+  if (valueChanged) { Prop_triggerListeners(value); }
 }
 
 template<OneOf<float, int> T>

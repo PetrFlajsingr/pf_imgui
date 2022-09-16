@@ -36,7 +36,7 @@ void SimpleCurveEditor::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   if (ImGui::Curve(label->get().c_str(), static_cast<ImVec2>(*size), static_cast<int>(getMaxPointCount()),
                    reinterpret_cast<ImVec2 *>(curveData.data()))) {
-    *curvePoints.modify() = getViewToCurveData();
+    *Prop_modify(curvePoints) = getViewToCurveData();
   }
 }
 

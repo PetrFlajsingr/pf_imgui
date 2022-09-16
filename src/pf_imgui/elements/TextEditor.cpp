@@ -74,25 +74,22 @@ TextEditor::Cursor &TextEditor::Cursor::deleteSelection() {
 
 std::string TextEditor::Cursor::getSelectedText() const { return owner.editor.GetSelectedText(); }
 
-TextEditor::Cursor::Cursor(TextEditor &parent) : owner(parent) {}
+TextEditor::Cursor::Cursor(TextEditor &parent)
+    : owner(parent),
+      position(TextCursorPosition{.line = static_cast<uint32_t>(parent.editor.GetCursorPosition().mLine),
+                                  .column = static_cast<uint32_t>(parent.editor.GetCursorPosition().mColumn)}) {
+  position.addListener([this](auto newPosition) {
+    owner.editor.SetCursorPosition({static_cast<int>(newPosition.line), static_cast<int>(newPosition.column)});
+  });
+}
 
-TextEditor::Cursor &TextEditor::Cursor::setPosition(TextCursorPosition position) {
-  owner.editor.SetCursorPosition({static_cast<int>(position.line), static_cast<int>(position.column)});
+TextEditor::Cursor &TextEditor::Cursor::setSelectionStart(TextCursorPosition newPosition) {
+  owner.editor.SetSelectionStart({static_cast<int>(newPosition.line), static_cast<int>(newPosition.column)});
   return *this;
 }
 
-TextCursorPosition TextEditor::Cursor::getPosition() const {
-  return {.line = static_cast<uint32_t>(owner.editor.GetCursorPosition().mLine),
-          .column = static_cast<uint32_t>(owner.editor.GetCursorPosition().mColumn)};
-}
-
-TextEditor::Cursor &TextEditor::Cursor::setSelectionStart(TextCursorPosition position) {
-  owner.editor.SetSelectionStart({static_cast<int>(position.line), static_cast<int>(position.column)});
-  return *this;
-}
-
-TextEditor::Cursor &TextEditor::Cursor::setSelectionEnd(TextCursorPosition position) {
-  owner.editor.SetSelectionEnd({static_cast<int>(position.line), static_cast<int>(position.column)});
+TextEditor::Cursor &TextEditor::Cursor::setSelectionEnd(TextCursorPosition newPosition) {
+  owner.editor.SetSelectionEnd({static_cast<int>(newPosition.line), static_cast<int>(newPosition.column)});
   return *this;
 }
 
@@ -122,8 +119,11 @@ void TextEditor::setText(const std::string &text) { editor.SetText(text); }
 void TextEditor::renderImpl() {
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
   editor.Render(getName().c_str(), static_cast<ImVec2>(*size));
-  if (editor.IsTextChanged()) { observableText.notify(getText()); }
-  if (editor.IsCursorPositionChanged()) { observableCursorPosition.notify(getCursor().getPosition()); }
+  if (editor.IsTextChanged()) { Event_notify(textChangeEvent, std::string_view{getText()}); }
+  if (editor.IsCursorPositionChanged()) {
+    *cursor.position.modify() = TextCursorPosition{.line = static_cast<uint32_t>(editor.GetCursorPosition().mLine),
+                                                   .column = static_cast<uint32_t>(editor.GetCursorPosition().mColumn)};
+  }
 }
 
 void TextEditor::setHighlighting(TextEditorHighlight language) {
@@ -208,8 +208,6 @@ void TextEditor::removeWarningMarker(std::uint32_t line) {
 std::uint32_t TextEditor::getTabSize() const { return static_cast<std::uint32_t>(editor.GetTabSize()); }
 
 void TextEditor::setTabSize(std::uint32_t tabSize) { editor.SetTabSize(static_cast<int>(tabSize)); }
-
-TextEditor::Cursor TextEditor::getCursor() { return Cursor{*this}; }
 
 bool TextEditor::canUndo() const { return editor.CanUndo(); }
 

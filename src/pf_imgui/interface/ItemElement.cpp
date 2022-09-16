@@ -27,14 +27,14 @@ ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
 
 void ItemElement::render() {
   ElementWithID::render();
-  setHovered(ImGui::IsItemHovered());
-  setFocused(ImGui::IsItemFocused());
+  *Prop_modify(hovered) = ImGui::IsItemHovered();
+  *Prop_modify(focused) = ImGui::IsItemFocused();
 
   if (*hovered) {
     auto newMousePos = ImGui::GetMousePos() - ImGui::GetItemRectMin();
     if (newMousePos.x != lastMousePosition.x && newMousePos.y != lastMousePosition.y) {  //-V550
       lastMousePosition = newMousePos;
-      *mousePosition.modify() = Position{lastMousePosition};
+      *Prop_modify(mousePosition) = Position{lastMousePosition};
     }
   }
 
@@ -73,9 +73,5 @@ PopupMenu &ItemElement::createOrGetPopupMenu() {
 bool ItemElement::hasPopupMenu() const { return popupMenu != nullptr; }
 
 void ItemElement::removePopupMenu() { popupMenu = nullptr; }
-
-void ItemElement::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
-
-void ItemElement::setFocused(bool newFocused) { *focused.modify() = newFocused; }
 
 }  // namespace pf::ui::ig

@@ -68,7 +68,7 @@ class PF_IMGUI_EXPORT IndeterminateProgressBar : public ItemElement {
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

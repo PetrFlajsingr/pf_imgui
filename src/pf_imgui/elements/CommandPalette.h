@@ -71,23 +71,15 @@ class CommandPalette : public ElementWithID {
    */
   void setSearchText(std::string_view text);
 
-  /**
-   * Add a listener which gets triggered when user selects a command.
-   * @param listener callback
-   * @return Subscription allowing for listener cancellation
-   */
-  Subscription addInteractListener(std::invocable auto &&listener) {
-    return observableInteract.addListener(std::forward<decltype(listener)>(listener));
-  }
-
   Font font = Font::Default();
+
+  Event<> interactEvent;
 
  protected:
   void renderImpl() override;
 
  private:
   ImCmd::Context *context = nullptr;
-  Observable_impl<> observableInteract{};
 };
 
 }  // namespace pf::ui::ig

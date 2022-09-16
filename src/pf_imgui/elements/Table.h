@@ -235,7 +235,7 @@ class PF_IMGUI_EXPORT Table : public ElementWithID, public RenderablesContainer 
    */
   void setSortFncForColumn(std::size_t columnIndex, std::predicate<const Element &, const Element &> auto &&pred);
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

@@ -99,8 +99,6 @@ class PF_IMGUI_EXPORT MenuContainer : public ElementContainer {
  * @brief An item, which can be clicked. It is basically a popup menu item.
  */
 class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
-  using ClickEvent = ClassEvent<MenuButtonItem>;
-
  public:
   /**
    * Construct MenuButtonItem
@@ -129,9 +127,9 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  ClickEvent clickEvent;
+  Event<> clickEvent;
 
  protected:
   void renderImpl() override;
@@ -181,8 +179,8 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueContainer<
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<MenuCheckboxItem, bool> checked;
+  Property<Label> label;
+  Property<bool> checked;
 
  protected:
   void renderImpl() override;
@@ -240,7 +238,7 @@ class PF_IMGUI_EXPORT SubMenu : public MenuItem, public MenuContainer {
    */
   SubMenu(std::string_view elementName, std::string_view labelText);
 
-  Observable<Label> label;
+  Property<Label> label;
 
  protected:
   void renderImpl() override;

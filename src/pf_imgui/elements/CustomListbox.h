@@ -26,6 +26,9 @@ namespace pf::ui::ig {
  */
 template<typename T, std::derived_from<Renderable> R>
 class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
+  using PropertyOwner::Property;
+  using PropertyOwner::ReadOnlyProperty;
+
  public:
   /**
    * Create CustomListbox
@@ -37,9 +40,9 @@ class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
   CustomListbox(std::string_view elementName, std::string_view labelText, CustomItemBoxFactory<T, R> auto &&rowFactory,
                 Size s = Size::Auto());
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

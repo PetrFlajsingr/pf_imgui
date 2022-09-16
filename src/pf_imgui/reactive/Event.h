@@ -23,7 +23,7 @@ class PF_IMGUI_EXPORT ClassEvent {
   }
 
  private:
-  void notify(Args &&...args) { observableImpl.notify(std::forward<Args>(args)...); }
+  void notify(const Args &...args) { observableImpl.notify(args...); }
 
   Observable_impl<Args...> observableImpl;
 };
