@@ -101,14 +101,6 @@ class Pin : public Renderable {
   [[nodiscard]] const Node &getNode() const;
 
   /**
-   * Add a listener for new link connections.
-   * @param listener listener
-   */
-  Subscription addLinkListener(std::invocable<Link &> auto &&listener) {
-    return observableLink.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
    * @return true if Pin has any active links
    */
   [[nodiscard]] bool hasAnyValidLinks() const;
@@ -182,15 +174,6 @@ class Pin : public Renderable {
   void setUnconnectedLinkPreviewThickness(float thickness);
 
   /**
-   * Add a listener called when the Pin is double clicked.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addDoubleClickListener(std::invocable auto &&listener) {
-    return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
    * Create or get PopupMenu which is shown when the node is right clicked.
    */
   [[nodiscard]] PopupMenu &createOrGetPopupMenu();
@@ -204,9 +187,12 @@ class Pin : public Renderable {
    */
   void removePopupMenu();
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  ObservableProperty<Pin, bool, ReadOnlyTag> hovered;
+  ReadOnlyProperty<bool> hovered;
+
+  Event<Link &, bool> linkChangedEvent;
+  Event<> doubleClickEvent;
 
  protected:
   /**
@@ -233,7 +219,7 @@ class Pin : public Renderable {
   Type type;
 
   Node *parent;
-
+  // TODO: just make these public
   Color validLinkPreviewColor = Color::White;
   float validLinkPreviewThickness = 1.f;
 
@@ -242,9 +228,6 @@ class Pin : public Renderable {
 
   Color unconnectedLinkPreviewColor = Color::White;
   float unconnectedLinkPreviewThickness = 1.f;
-
-  Observable_impl<Link &> observableLink;
-  Observable_impl<> observableDoubleClick;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
 };

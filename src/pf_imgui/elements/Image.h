@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT Image : public ItemElement {
    */
   void setUVs(ImVec2 leftTop, ImVec2 rightBottom);
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;
@@ -128,7 +128,7 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement {
    */
   void setZoomSize(std::uint32_t zoom);
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

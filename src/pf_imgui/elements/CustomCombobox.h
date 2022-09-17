@@ -34,6 +34,9 @@ enum class ComboBoxCount { Items4 = 1 << 1, Items8 = 1 << 2, Items20 = 1 << 3, I
  */
 template<typename T, std::derived_from<Renderable> R>
 class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
+ protected:
+  PF_IMGUI_PROPERTY_OWNER_ALIASES(U)
+
  public:
   /**
    * Construct CustomCombobox.
@@ -65,7 +68,7 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
    */
   void close() { shouldClose = true; }
 
-  Observable<Label> label;
+  Property<Label> label;
 
  protected:
   void renderImpl() override;

@@ -96,9 +96,9 @@ class GradientEditor : public ElementWithID, public ValueContainer<GradientPoint
 
   Font font = Font::Default();
 
-  ObservableProperty<GradientEditor, bool, ReadOnlyTag> hovered;
-  ObservableProperty<GradientEditor, bool, ReadOnlyTag> focused;
-  ObservableProperty<GradientEditor, GradientPointsView, ReadOnlyTag, AlwaysTrueChangeDetector> points;
+  ReadOnlyProperty<bool> hovered;
+  ReadOnlyProperty<bool> focused;
+  ReadOnlyProperty<GradientPointsView, AlwaysTrueChangeDetector> points;
 
   [[nodiscard]] const GradientPointsView &getValue() const override;
 

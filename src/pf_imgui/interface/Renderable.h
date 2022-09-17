@@ -11,7 +11,8 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
-#include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/reactive/EventOwner.h>
+#include <pf_imgui/reactive/PropertyOwner.h>
 #include <string_view>
 
 namespace pf::ui::ig {
@@ -23,7 +24,7 @@ namespace pf::ui::ig {
  *
  * @warning If there are duplicate IDs in the render tree the program may have some undefined behavior for functions which use IDs.
  */
-class PF_IMGUI_EXPORT Renderable {
+class PF_IMGUI_EXPORT Renderable : protected PropertyOwner, protected EventOwner {
  public:
   /**
    * Create Renderable with unique ID
@@ -52,8 +53,8 @@ class PF_IMGUI_EXPORT Renderable {
    */
   [[nodiscard]] const std::string &getName() const;
 
-  Observable<Visibility> visibility{Visibility::Visible};
-  Observable<bool> enabled{true};
+  Property<Visibility> visibility{Visibility::Visible};
+  Property<bool> enabled{true};
 
  protected:
   /**

@@ -130,8 +130,8 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<InputText, std::string> text;
+  Property<Label> label;
+  Property<std::string> text;
 
  protected:
   void renderImpl() override;

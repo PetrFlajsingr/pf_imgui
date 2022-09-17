@@ -17,10 +17,10 @@ TabButton::TabButton(std::string_view elementName, std::string_view labelText, F
 void TabButton::setMods(const Flags<TabMod> &mods) { flags = *mods; }
 
 void TabButton::renderImpl() {
-  if (ImGui::TabItemButton(label->get().c_str(), flags)) { clickEvent.notify(); }
+  if (ImGui::TabItemButton(label->get().c_str(), flags)) { Event_notify(clickEvent); }
 }
 
-void TabButton::notifyClickEvent() { clickEvent.notify(); }
+void TabButton::notifyClickEvent() { Event_notify(clickEvent); }
 
 Tab::Tab(Tab::Config &&config) : Tab(config.name, config.label, config.mods, config.closeable) {}
 
@@ -44,7 +44,7 @@ void Tab::renderImpl() {
     RAII end{ImGui::EndTabItem};
     std::ranges::for_each(getChildren(), &Renderable::render);
   }
-  if (open != nullptr && !*open && *open != wasOpen) { closeEvent.notify(); }
+  if (open != nullptr && !*open && *open != wasOpen) { Event_notify(closeEvent); }
   setSelectedInNextFrame = false;
 }
 

@@ -99,8 +99,8 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  Observable<Color> chosenColor;
+  Property<Label> label;
+  Property<Color> chosenColor;
 
  protected:
   void renderImpl() override;

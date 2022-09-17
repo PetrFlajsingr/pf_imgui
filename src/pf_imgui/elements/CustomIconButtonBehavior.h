@@ -46,12 +46,10 @@ class CustomIconButtonBehavior : public ItemElement {
 };
 
 class CustomIconButton : public CustomIconButtonBehavior {
-  using ClickEvent = ClassEvent<CustomIconButton>;
-
  public:
   explicit CustomIconButton(std::string_view elementName);
 
-  ClickEvent clickEvent;
+  Event<> clickEvent;
 
  protected:
   void update(State state) override;
@@ -66,7 +64,7 @@ class CustomIconToggle : public CustomIconButtonBehavior, public ValueContainer<
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  Observable<bool> checked;
+  Property<bool> checked;
 
   [[nodiscard]] const bool &getValue() const override;
   void setValue(const bool &newValue) override;

@@ -74,9 +74,9 @@ class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public 
 
  public:
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  ObservableProperty<TimePicker, TimeOfDay, ReadWriteTag, details::TimeOfDayChangeDetector> time;
+  Property<TimeOfDay, details::TimeOfDayChangeDetector> time;
 
  protected:
   void renderImpl() override;

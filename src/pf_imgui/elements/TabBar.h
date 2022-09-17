@@ -35,8 +35,6 @@ enum class TabMod {
  * @brief A button which looks like a Tab in TabBar.
  */
 class PF_IMGUI_EXPORT TabButton : public ItemElement {
-  using ClickEvent = ClassEvent<TabButton>;
-
  public:
   /**
    * @brief Struct for construction of TabButton.
@@ -57,9 +55,9 @@ class PF_IMGUI_EXPORT TabButton : public ItemElement {
 
   void setMods(const Flags<TabMod> &mods);
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  ClickEvent clickEvent;
+  Event<> clickEvent;
 
  protected:
   void renderImpl() override;
@@ -109,8 +107,8 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   [[nodiscard]] bool isDisplayDot() const;
   void setDisplayDot(bool displayDot);
 
-  Observable<bool> selected;
-  ClassEvent<Tab> closeEvent;
+  Property<bool> selected;
+  Event<> closeEvent;
 
  protected:
   void renderImpl() override;

@@ -10,7 +10,7 @@ namespace pf::ui::ig {
 
 Element::Element(std::string_view elementName) : Renderable(elementName) {}
 
-Element::~Element() { destroyEvent.notify(); }
+Element::~Element() { Event_notify(destroyEvent); }
 
 Element::Element(Element &&other) noexcept  //-V730
     : Renderable(std::move(other)), destroyEvent(std::move(other.destroyEvent)) {}

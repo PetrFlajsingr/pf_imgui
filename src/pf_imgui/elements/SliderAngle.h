@@ -94,8 +94,8 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<SliderAngle, float> angle;
+  Property<Label> label;
+  Property<float> angle;
 
   [[nodiscard]] const float &getValue() const override;
   void setValue(const float &newValue) override;

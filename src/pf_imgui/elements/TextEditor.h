@@ -23,7 +23,7 @@
 #include <string>
 
 namespace pf::ui::ig {
-
+// TODO: change observables to properties
 /**
  * @brief Text editor with highlighting.
  */
@@ -32,7 +32,7 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
   /**
    * @brief Control struct for editor's cursor. Allows for control of its movement and selection adjustments.
    */
-  class Cursor {
+  class Cursor : protected PropertyOwner {
     friend class TextEditor;
 
    public:
@@ -52,23 +52,20 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
     Cursor &moveBottom(bool addToSelection = false);
     Cursor &moveHome(bool addToSelection = false);
     Cursor &moveEnd(bool addToSelection = false);
-    Cursor &setPosition(TextCursorPosition position);
     /**
      * Selection constrols.
      */
-    Cursor &setSelectionStart(TextCursorPosition position);
-    Cursor &setSelectionEnd(TextCursorPosition position);
+    Cursor &setSelectionStart(TextCursorPosition newPosition);
+    Cursor &setSelectionEnd(TextCursorPosition newPosition);
     Cursor &selectAll();
     [[nodiscard]] bool hasSelection() const;
     Cursor &selectCurrentWord();
     Cursor &cutToClipboard();
     Cursor &pasteFromClipboard();
     Cursor &deleteSelection();
-    [[nodiscard]] TextCursorPosition getPosition() const;
     [[nodiscard]] std::string getSelectedText() const;
-    Subscription addPositionListener(std::invocable<TextCursorPosition> auto &&listener) {
-      return owner.observableCursorPosition.addListener(std::forward<decltype(listener)>(listener));
-    }
+
+    Property<TextCursorPosition> position;
 
    private:
     explicit Cursor(TextEditor &parent);
@@ -180,10 +177,6 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
    * Set tab size used for text rendering.
    */
   void setTabSize(std::uint32_t tabSize);
-  /**
-   * Get control structure for cursor.
-   */
-  [[nodiscard]] Cursor getCursor();
 
   [[nodiscard]] ImGuiColorTextEdit::TextEditor &getEditor();
   [[nodiscard]] const ImGuiColorTextEdit::TextEditor &getEditor() const;
@@ -195,14 +188,6 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
    * Set text in the editor, replacing the old one.
    */
   void setText(const std::string &text);
-  /**
-   * Add a listener for text value changes.
-   * @param listener listener
-   * @return subscription object to allow for listener destruction
-   */
-  Subscription addTextListener(std::invocable<std::string_view> auto &&listener) {
-    return observableText.addListener(std::forward<decltype(listener)>(listener));
-  }
   /**
    * @return true if undo can be used, false otherwise
    */
@@ -243,15 +228,18 @@ class PF_IMGUI_EXPORT TextEditor : public ElementWithID, public Savable {
 
   Font font = Font::Default();
 
-  Observable<Size> size;
+ private:
+  ImGuiColorTextEdit::TextEditor editor;
+
+ public:
+  Cursor cursor{*this};
+
+  Property<Size> size;
+
+  Event<std::string_view> textChangeEvent;  // TODO: maybe replace with property with custom getter&setter?
 
  protected:
   void renderImpl() override;
-
- private:
-  ImGuiColorTextEdit::TextEditor editor;
-  Observable_impl<std::string_view> observableText;
-  Observable_impl<TextCursorPosition> observableCursorPosition;
 };
 
 }  // namespace pf::ui::ig

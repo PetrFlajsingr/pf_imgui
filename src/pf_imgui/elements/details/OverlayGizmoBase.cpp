@@ -44,9 +44,9 @@ void OverlayGizmoBase::drawImpl(bool isEnabled) {
   ImGuizmo::DrawGrid(glm::value_ptr(view), glm::value_ptr(projection), glm::value_ptr(identity), 100.f);
   ImGuizmo::DrawCubes(glm::value_ptr(view), glm::value_ptr(projection), glm::value_ptr(*getValueAddress()), 1);*/
   if (ImGuizmo::Manipulate(glm::value_ptr(view), glm::value_ptr(projection), static_cast<ImGuizmo::OPERATION>(mode),
-                           static_cast<ImGuizmo::MODE>(space), glm::value_ptr(transform.value), nullptr,
+                           static_cast<ImGuizmo::MODE>(space), glm::value_ptr(Prop_value(transform)), nullptr,
                            snapValues.has_value() ? glm::value_ptr(*snapValues) : nullptr)) {
-    transform.triggerListeners();
+    Prop_triggerListeners(transform);
   }
   const auto isUsing = ImGuizmo::IsUsing();
   if (isUsing && !wasUsing) {

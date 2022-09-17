@@ -15,8 +15,6 @@
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/elements/MenuBars.h>
 #include <pf_imgui/interface/ElementContainer.h>
-#include <pf_imgui/reactive/Event.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <string>
 #include <vector>
 
@@ -205,14 +203,14 @@ class PF_IMGUI_EXPORT Window : public Renderable, public ElementContainer {
   // FIXME: remove this and fix up how this is handled in docking
   [[nodiscard]] inline std::string getImGuiName() const { return idLabel; }
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  ObservableProperty<Window, bool, ReadOnlyTag> hovered;
-  ObservableProperty<Window, bool, ReadOnlyTag> focused;
-  Observable<Position> position;
-  Observable<Size> size;
-  Observable<bool> collapsed;
-  ClassEvent<Window> closeEvent;
+  ReadOnlyProperty<bool> hovered;
+  ReadOnlyProperty<bool> focused;
+  Property<Position> position;
+  Property<Size> size;
+  Property<bool> collapsed;
+  Event<> closeEvent;
 
  protected:
   void renderImpl() override;

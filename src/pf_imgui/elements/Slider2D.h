@@ -82,10 +82,10 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
-  ObservableProperty<Slider2D, details::Slider2DStorageType<T>> value;
+  Property<Size> size;
+  Property<details::Slider2DStorageType<T>> value;
 
   [[nodiscard]] const details::Slider2DStorageType<T> &getValue() const override;
   void setValue(const details::Slider2DStorageType<T> &newValue) override;
@@ -134,7 +134,7 @@ void Slider2D<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  auto address = &value.value;
+  auto address = &Prop_value(value);
   const auto oldValue = *address;
   if constexpr (std::same_as<T, int>) {
     valueChanged = ImWidgets::Slider2DInt(label->get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
@@ -149,7 +149,7 @@ void Slider2D<T>::renderImpl() {
     *value.modify() = *drop;
     return;
   }
-  if (valueChanged && oldValue != *address) { value.triggerListeners(); }
+  if (valueChanged && oldValue != *address) { Prop_triggerListeners(value); }
 }
 
 template<OneOf<int, float> T>

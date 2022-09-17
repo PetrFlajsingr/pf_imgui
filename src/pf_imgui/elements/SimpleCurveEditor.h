@@ -96,27 +96,22 @@ class SimpleCurveEditor : public ElementWithID, public ValueContainer<CurvePoint
 
   [[nodiscard]] const CurvePointsView &getValue() const override;
 
+  FullColorPalette color;
+  FullStyleOptions style;
+  Property<Label> label;
+
+  Property<Size> size;
+  ReadOnlyProperty<CurvePointsView, AlwaysTrueChangeDetector> curvePoints;
+
  protected:
   Subscription addValueListenerImpl(std::function<void(const CurvePointsView &)> listener) override;
 
- public:
-  FullColorPalette color;
-  FullStyleOptions style;
-  Observable<Label> label;
-
-  Observable<Size> size;
-
- private:
-  std::vector<glm::vec2> curveData;
-
- public:
-  ObservableProperty<SimpleCurveEditor, CurvePointsView, ReadOnlyTag, AlwaysTrueChangeDetector> curvePoints;
-
- protected:
   void renderImpl() override;
 
  private:
   [[nodiscard]] CurvePointsView getViewToCurveData() const;
+
+  std::vector<glm::vec2> curveData;
 };
 
 }  // namespace pf::ui::ig

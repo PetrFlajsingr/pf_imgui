@@ -67,10 +67,10 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueContainer<boo
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::SelectableTextAlign>
       style;
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
-  ObservableProperty<Selectable, bool> selected;
+  Property<Size> size;
+  Property<bool> selected;
 
   [[nodiscard]] const bool &getValue() const override;
   void setValue(const bool &newValue) override;

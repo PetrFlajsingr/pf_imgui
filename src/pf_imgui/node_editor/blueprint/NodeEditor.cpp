@@ -18,8 +18,7 @@
 
 namespace pf::ui::ig::bp {
 
-NodeEditor::NodeEditor(std::string_view elementName, Size initialSize)
-    : ig::NodeEditor(elementName, initialSize) {
+NodeEditor::NodeEditor(std::string_view elementName, Size initialSize) : ig::NodeEditor(elementName, initialSize) {
   NodeEditorLoading::Get()->registerConstruction<ArrayPin<float>>();
   NodeEditorLoading::Get()->registerConstruction<ArrayPin<int>>();
   NodeEditorLoading::Get()->registerConstruction<CheckboxPin>();

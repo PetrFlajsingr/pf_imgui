@@ -14,8 +14,10 @@ SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
 
 SimpleCurveEditor::SimpleCurveEditor(std::string_view elementName, std::string_view labelText, Size s,
                                      std::size_t maxPointCount, Persistent persistent)
-    : ElementWithID(elementName), Savable(persistent), label(std::string{labelText}), size(s),
-      curveData(maxPointCount + 1, glm::vec2{0, 0}), curvePoints(getViewToCurveData()) {}
+    : ElementWithID(elementName), Savable(persistent), label(std::string{labelText}), size(s), curvePoints(),
+      curveData(maxPointCount + 1, glm::vec2{0, 0}) {
+  *Prop_modify(curvePoints) = getViewToCurveData();
+}
 
 void SimpleCurveEditor::setMaxPointCount(std::size_t count) { curveData.resize(count + 1); }
 
@@ -36,7 +38,7 @@ void SimpleCurveEditor::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   if (ImGui::Curve(label->get().c_str(), static_cast<ImVec2>(*size), static_cast<int>(getMaxPointCount()),
                    reinterpret_cast<ImVec2 *>(curveData.data()))) {
-    *curvePoints.modify() = getViewToCurveData();
+    *Prop_modify(curvePoints) = getViewToCurveData();
   }
 }
 

@@ -35,7 +35,7 @@ void Toggle::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ToggleButton(label->get().c_str(), &selected.value)) { selected.triggerListeners(); }
+  if (ToggleButton(label->get().c_str(), &Prop_value(selected))) { Prop_triggerListeners(selected); }
 }
 
 }  // namespace pf::ui::ig

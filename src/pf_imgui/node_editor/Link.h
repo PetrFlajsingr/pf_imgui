@@ -94,12 +94,6 @@ class Link : public Renderable {
    * Remove PopupMenu of this node, no lon
    */
   void removePopupMenu();
-
-  /**
-   * Check if the Link is selected in editor.
-   * @return true if selected, false otherwise
-   */
-  [[nodiscard]] bool isSelected() const;
   /**
    * Mark Link as selected.
    * @param appendToSelection append to the current selection
@@ -109,33 +103,6 @@ class Link : public Renderable {
    * Remove this Link from selection.
    */
   void deselect();
-  /**
-   * Add a listener called when the Link is de/selected.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addSelectionListener(std::invocable<bool> auto &&listener) {
-    return observableSelected.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
-   * Add a listener called when the Link is deleted.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addDeleteListener(std::invocable auto &&listener) {
-    return observableDelete.addListener(std::forward<decltype(listener)>(listener));
-  }
-
-  /**
-   * Add a listener called when the Link is double clicked.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addDoubleClickListener(std::invocable auto &&listener) {
-    return observableDoubleClick.addListener(std::forward<decltype(listener)>(listener));
-  }
-
   /**
    * Enable visual flow for the Link.
    */
@@ -152,7 +119,10 @@ class Link : public Renderable {
 
   void setId(ax::NodeEditor::LinkId newId);
 
-  ObservableProperty<Link, bool, ReadOnlyTag> hovered;
+  ReadOnlyProperty<bool> hovered;
+  ReadOnlyProperty<bool> selected;
+  Event<> deleteEvent;
+  Event<> doubleClickEvent;
 
  protected:
   void renderImpl() override;
@@ -171,11 +141,6 @@ class Link : public Renderable {
   bool flowEnabled = false;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
-
-  bool selected = false;
-  Observable_impl<bool> observableSelected;
-  Observable_impl<> observableDelete;
-  Observable_impl<> observableDoubleClick;
 };
 
 }  // namespace pf::ui::ig

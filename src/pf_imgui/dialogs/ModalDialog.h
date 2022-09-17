@@ -51,10 +51,10 @@ class PF_IMGUI_EXPORT ModalDialog : public Renderable, public ElementContainer {
    */
   [[nodiscard]] bool isClosed() const;
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Position> position;
-  Observable<Size> size;
+  Property<Position> position;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

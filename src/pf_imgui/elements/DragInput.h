@@ -128,8 +128,8 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<DragInput, T> value;
+  Property<Label> label;
+  Property<T> value;
 
   [[nodiscard]] const T &getValue() const override;
   void setValue(const T &newValue) override;
@@ -208,7 +208,7 @@ void DragInput<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   bool valueChanged = false;
-  const auto address = &value.value;
+  const auto address = &Prop_value(value);
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
   ImGuiDataType_ dataType;
@@ -240,26 +240,20 @@ void DragInput<T>::renderImpl() {
     *value.modify() = *drop;
     return;
   }
-  if (valueChanged) { value.triggerListeners(); }
+  if (valueChanged) { Prop_triggerListeners(value); }
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>, int, glm::ivec2, glm::ivec3, glm::ivec4,
-               math::Range<int>>
-             T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 const T &DragInput<T>::getValue() const {
   return *value;
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>, int, glm::ivec2, glm::ivec3, glm::ivec4,
-               math::Range<int>>
-             T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 void DragInput<T>::setValue(const T &newValue) {
-  *value.modify() = newValue;
+  *Prop_modify(value) = newValue;
 }
 
-template<OneOf<float, glm::vec2, glm::vec3, glm::vec4, math::Range<float>, int, glm::ivec2, glm::ivec3, glm::ivec4,
-               math::Range<int>>
-             T>
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 Subscription DragInput<T>::addValueListenerImpl(std::function<void(const T &)> listener) {
   return value.addListener(std::move(listener));
 }

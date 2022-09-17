@@ -33,7 +33,7 @@ void MenuButtonItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(label->get().c_str(), nullptr)) { clickEvent.notify(); }
+  if (ImGui::MenuItem(label->get().c_str(), nullptr)) { Event_notify(clickEvent); }
 }
 
 void SubMenu::renderImpl() {
@@ -80,7 +80,7 @@ void MenuCheckboxItem::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
-  if (ImGui::MenuItem(label->get().c_str(), nullptr, &checked.value)) { checked.triggerListeners(); }
+  if (ImGui::MenuItem(label->get().c_str(), nullptr, &Prop_value(checked))) { Prop_triggerListeners(checked); }
 }
 
 toml::table MenuCheckboxItem::toToml() const { return toml::table{{"checked", getValue()}}; }

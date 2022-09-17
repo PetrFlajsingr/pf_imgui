@@ -33,7 +33,7 @@ class PF_IMGUI_EXPORT Element : public Renderable {
   /**
    * Called during object's destruction. The object will be partially destroyed at this point.
    */
-  ClassEvent<Element> destroyEvent;
+  Event<> destroyEvent;
 };
 
 }  // namespace pf::ui::ig

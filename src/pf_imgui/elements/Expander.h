@@ -50,8 +50,8 @@ class PF_IMGUI_EXPORT Expander : public ItemElement, public ElementContainer, pu
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  Observable<Label> label;
-  Observable<bool> collapsed;
+  Property<Label> label;
+  Property<bool> collapsed;
 
  protected:
   void renderImpl() override;

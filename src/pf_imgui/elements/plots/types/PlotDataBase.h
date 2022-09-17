@@ -96,7 +96,7 @@ class PF_IMGUI_EXPORT LabeledPlotData : public PlotData {
  public:
   LabeledPlotData(std::string_view elementName, std::string_view caption);
 
-  Observable<Label> label;
+  Property<Label> label;
 };
 
 }  // namespace pf::ui::ig::plot_type

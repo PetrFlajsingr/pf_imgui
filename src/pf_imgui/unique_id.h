@@ -5,8 +5,8 @@
  * @date 20.4.21
  */
 
-#ifndef PF_IMGUI_SRC_PF_IMGUI_UNIQUE_ID_H
-#define PF_IMGUI_SRC_PF_IMGUI_UNIQUE_ID_H
+#ifndef PF_IMGUI_UNIQUE_ID_H
+#define PF_IMGUI_UNIQUE_ID_H
 
 #include <random>
 #include <string>
@@ -23,7 +23,7 @@ static inline std::size_t uniqueIdCounter{};
 inline std::string random_string(std::size_t length) {
   static auto randGen = std::minstd_rand{465768687};  // NOLINT(cert-msc51-cpp)
   auto randchar = []() -> char {
-    const char charset[] = "0123456789"
+    constexpr char charset[] = "0123456789"
                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                            "abcdefghijklmnopqrstuvwxyz";
     const size_t max_index = (sizeof(charset) - 1);
@@ -44,4 +44,4 @@ inline std::string uniqueId(std::size_t length = 10) {
 }
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_SRC_PF_IMGUI_UNIQUE_ID_H
+#endif  // PF_IMGUI_UNIQUE_ID_H

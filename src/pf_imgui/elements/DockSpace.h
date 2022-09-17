@@ -61,7 +61,7 @@ class PF_IMGUI_EXPORT DockSpace : public ElementWithID {
 
   ColorPalette<ColorOf::DockingPreview, ColorOf::DockingBackground> color;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

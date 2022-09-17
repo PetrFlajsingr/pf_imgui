@@ -21,7 +21,7 @@ RAII ButtonBase::setButtonRepeat() {
   return RAII{ImGui::PopButtonRepeat};
 }
 
-void ButtonBase::notifyClickEvent() { clickEvent.notify(); }
+void ButtonBase::notifyClickEvent() { Event_notify(clickEvent); }
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
     : InvisibleButton(config.name, config.size, config.clickButton,

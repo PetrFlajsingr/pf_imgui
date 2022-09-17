@@ -67,9 +67,9 @@ class DatePicker : public ItemElement, public ValueContainer<std::chrono::year_m
   void setFromToml(const toml::table &src) override;
 
   Font font = Font::Default();
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<std::chrono::year_month_day> date;
+  Property<std::chrono::year_month_day> date;
 
  protected:
   void renderImpl() override;

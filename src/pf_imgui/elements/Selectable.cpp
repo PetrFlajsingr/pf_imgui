@@ -28,8 +28,8 @@ void Selectable::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::Selectable(label->get().c_str(), &selected.value, 0, static_cast<ImVec2>(*size))) {
-    selected.triggerListeners();
+  if (ImGui::Selectable(label->get().c_str(), &Prop_value(selected), 0, static_cast<ImVec2>(*size))) {
+    Prop_triggerListeners(selected);
   }
 }
 const bool &Selectable::getValue() const { return *selected; }

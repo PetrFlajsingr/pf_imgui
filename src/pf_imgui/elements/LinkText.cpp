@@ -26,7 +26,7 @@ void LinkText::renderImpl() {
   if (ImGui::IsItemHovered()) {
     if (ImGui::IsMouseClicked(0)) {
       linkClickHandler(link);
-      clickEvent.notify();
+      Event_notify(clickEvent);
     }
     const auto underlineColor = ImGui::ColorConvertFloat4ToU32(ImGui::GetStyle().Colors[ImGuiCol_SliderGrab]);
     ImGui::GetWindowDrawList()->AddLine(min, max, underlineColor, 1.0f);

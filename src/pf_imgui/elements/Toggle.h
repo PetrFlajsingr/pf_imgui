@@ -61,9 +61,6 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueContainer<bool>, 
   void setValue(const bool &newValue) override;
   [[nodiscard]] const bool &getValue() const override;
 
- protected:
-  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
-
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
                ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
@@ -71,10 +68,12 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueContainer<bool>, 
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  ObservableProperty<Toggle, bool> selected;
+  Property<Label> label;
+  Property<bool> selected;
 
  protected:
+  Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
+
   void renderImpl() override;
 };
 

@@ -39,7 +39,7 @@ class NodeEditor : public ElementWithID {
   struct Config {
     using Parent = NodeEditor;
     Explicit<std::string_view> name; /*!< Unique name of the element */
-    Size size = Size::Auto();   /*!< Size of the element */
+    Size size = Size::Auto();        /*!< Size of the element */
   };
   /**
    * Construct NodeEditor
@@ -164,7 +164,7 @@ class NodeEditor : public ElementWithID {
    * @return view to all selected nodes
    */
   [[nodiscard]] auto getSelectedNodes() {
-    return nodes | ranges::views::filter([](const auto &node) { return node->isSelected(); })
+    return nodes | ranges::views::filter([](const auto &node) { return *node->selected; })
         | ranges::views::transform([](const auto &node) -> Node & { return *node; });
   }
   /**
@@ -172,7 +172,7 @@ class NodeEditor : public ElementWithID {
    * @return view to all selected nodes
    */
   [[nodiscard]] auto getSelectedNodes() const {
-    return nodes | ranges::views::filter([](const auto &node) { return node->isSelected(); })
+    return nodes | ranges::views::filter([](const auto &node) { return *node->selected; })
         | ranges::views::transform([](const auto &node) -> const Node & { return *node; });
   }
 
@@ -181,7 +181,7 @@ class NodeEditor : public ElementWithID {
    * @return view to all selected links
    */
   [[nodiscard]] auto getSelectedLinks() {
-    return links | ranges::views::filter([](const auto &link) { return link->isSelected(); })
+    return links | ranges::views::filter([](const auto &link) { return *link->selected; })
         | ranges::views::transform([](const auto &link) -> Link & { return *link; });
   }
   /**
@@ -189,7 +189,7 @@ class NodeEditor : public ElementWithID {
    * @return view to all selected links
    */
   [[nodiscard]] auto getSelectedLinks() const {
-    return links | ranges::views::filter([](const auto &link) { return link->isSelected(); })
+    return links | ranges::views::filter([](const auto &link) { return *link->selected; })
         | ranges::views::transform([](const auto &link) -> const Link & { return *link; });
   }
 
@@ -209,23 +209,6 @@ class NodeEditor : public ElementWithID {
    * @param animationLength optional length of zoom animation
    */
   void navigateToSelection(bool zoomIn = true, std::optional<std::chrono::milliseconds> animationLength = std::nullopt);
-
-  /**
-   * Add a listener called when editor's background is clicked.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addBackgroundClickListener(std::invocable auto &&listener) {
-    return observableBackgroundClick.addListener(std::forward<decltype(listener)>(listener));
-  }
-  /**
-   * Add a listener called when editor's background is double clicked.
-   * @param listener listener
-   * @return Subscription for listener unsubscription
-   */
-  Subscription addBackgroundDoubleClickListener(std::invocable auto &&listener) {
-    return observableBackgroundDoubleClick.addListener(std::forward<decltype(listener)>(listener));
-  }
 
   /**
    * Create or get PopupMenu which is shown when the node is right clicked.
@@ -252,7 +235,10 @@ class NodeEditor : public ElementWithID {
 
   void setContext() const;
 
-  Observable<Size> size;
+  Property<Size> size;
+
+  Event<> backgroundClickEvent;
+  Event<> backgroundDoubleClickEvent;
 
  protected:
   void renderImpl() override;
@@ -312,8 +298,6 @@ class NodeEditor : public ElementWithID {
   bool nodesDirty = false;
 
   std::unique_ptr<PopupMenu> popupMenu = nullptr;
-  Observable_impl<> observableBackgroundClick;
-  Observable_impl<> observableBackgroundDoubleClick;
 };
 
 }  // namespace pf::ui::ig

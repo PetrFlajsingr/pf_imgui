@@ -13,7 +13,8 @@ namespace pf::ui::ig {
 
 Pin::Pin(Pin::Config &&config) : Renderable(config.name.value), label(std::string{config.label.value}) {}
 
-Pin::Pin(std::string_view elementName, std::string_view labelText) : Renderable(elementName), label(std::string{labelText}) {}
+Pin::Pin(std::string_view elementName, std::string_view labelText)
+    : Renderable(elementName), label(std::string{labelText}) {}
 
 ax::NodeEditor::PinId Pin::getId() const { return id; }
 
@@ -93,7 +94,7 @@ void Pin::renderIcon() {
 
 void Pin::renderInfo() { ImGui::Text(label->get().c_str()); }
 
-void Pin::addLink(Link &link) { observableLink.notify(link); }
+void Pin::addLink(Link &link) { Event_notify(linkChangedEvent, link, true); }
 
 Color Pin::getValidLinkPreviewColor() const { return validLinkPreviewColor; }
 
@@ -131,6 +132,6 @@ Pin::getAllLinks() const {
   return getNode().getNodeEditor().getLinks();
 }
 
-void Pin::setHovered(bool newHovered) { *hovered.modify() = newHovered; }
+void Pin::setHovered(bool newHovered) { *Prop_modify(hovered) = newHovered; }
 
 }  // namespace pf::ui::ig

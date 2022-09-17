@@ -67,9 +67,9 @@ class PF_IMGUI_EXPORT PieChart : public ElementWithID {
     dataChanged = true;
   }
 
-  Observable<Label> label;
+  Property<Label> label;
 
-  Observable<Size> size;
+  Property<Size> size;
 
  protected:
   void renderImpl() override;

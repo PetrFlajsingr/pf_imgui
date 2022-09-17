@@ -27,6 +27,7 @@ struct TextEditorMarker {
 struct TextCursorPosition {
   std::uint32_t line;
   std::uint32_t column;
+  auto operator<=>(const TextCursorPosition &) const = default;
 };
 
 enum class TextEditorColor {

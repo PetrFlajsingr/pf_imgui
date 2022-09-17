@@ -35,7 +35,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer 
   void setIcon(const char *icon, Font newIconFont = Font::Default());
   void setIconColor(Color newColor);
 
-  Observable<Label> label;
+  Property<Label> label;
 
  protected:
   void renderImpl() override;

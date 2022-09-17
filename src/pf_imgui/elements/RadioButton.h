@@ -55,8 +55,8 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueContainer<bo
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
-  Observable<Label> label;
-  Observable<bool> selected;
+  Property<Label> label;
+  Property<bool> selected;
 
   [[nodiscard]] const bool &getValue() const override;
   void setValue(const bool &newValue) override;
