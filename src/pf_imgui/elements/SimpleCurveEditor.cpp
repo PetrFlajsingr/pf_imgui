@@ -14,8 +14,10 @@ SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
 
 SimpleCurveEditor::SimpleCurveEditor(std::string_view elementName, std::string_view labelText, Size s,
                                      std::size_t maxPointCount, Persistent persistent)
-    : ElementWithID(elementName), Savable(persistent), label(std::string{labelText}), size(s),
-      curvePoints(getViewToCurveData()), curveData(maxPointCount + 1, glm::vec2{0, 0}) {}
+    : ElementWithID(elementName), Savable(persistent), label(std::string{labelText}), size(s), curvePoints(),
+      curveData(maxPointCount + 1, glm::vec2{0, 0}) {
+  *Prop_modify(curvePoints) = getViewToCurveData();
+}
 
 void SimpleCurveEditor::setMaxPointCount(std::size_t count) { curveData.resize(count + 1); }
 
