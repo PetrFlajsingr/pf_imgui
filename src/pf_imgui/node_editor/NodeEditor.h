@@ -39,7 +39,7 @@ class NodeEditor : public ElementWithID {
   struct Config {
     using Parent = NodeEditor;
     Explicit<std::string_view> name; /*!< Unique name of the element */
-    Size size = Size::Auto();   /*!< Size of the element */
+    Size size = Size::Auto();        /*!< Size of the element */
   };
   /**
    * Construct NodeEditor

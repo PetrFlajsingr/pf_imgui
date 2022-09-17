@@ -8,7 +8,6 @@
 #ifndef PF_IMGUI_INTERFACE_DRAGNDROP_H
 #define PF_IMGUI_INTERFACE_DRAGNDROP_H
 
-#include <pf_imgui/reactive/Event.h>
 #include <algorithm>
 #include <concepts>
 #include <fmt/ostream.h>
@@ -18,6 +17,7 @@
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
+#include <pf_imgui/reactive/Event.h>
 #include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/unique_id.h>
 #include <ranges>

@@ -418,7 +418,9 @@ void NodeEditor::handleClickEvents() {
     if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { Pin::Event_notify((*pin)->doubleClickEvent); }
   }
   if (doubleClickedLink.Get() != 0) {
-    if (auto link = findLinkById(doubleClickedLink); link.has_value()) { Link::Event_notify((*link)->doubleClickEvent); }
+    if (auto link = findLinkById(doubleClickedLink); link.has_value()) {
+      Link::Event_notify((*link)->doubleClickEvent);
+    }
   }
   if (ax::NodeEditor::IsBackgroundClicked()) { Event_notify(backgroundClickEvent); }
   if (ax::NodeEditor::IsBackgroundDoubleClicked()) { Event_notify(backgroundDoubleClickEvent); }

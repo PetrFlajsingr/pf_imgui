@@ -24,13 +24,12 @@ concept _Derived_from_specialization_of = requires(const _Ty& _Obj) {
                                           };*/
 
 template<typename T>
-concept HasSizeObservable =
-    requires(T t) {
-      { t.size };
-     // FIXME: this dies : requires _Derived_from_specialization_of<std::remove_cvref<decltype(t.size)>, ObservableProperty>;
-      requires std::same_as<typename decltype(t.size)::value_type, Size>;
-    };
+concept HasSizeObservable = requires(T t) {
+                              { t.size };
+                              // FIXME: this dies : requires _Derived_from_specialization_of<std::remove_cvref<decltype(t.size)>, ObservableProperty>;
+                              requires std::same_as<typename decltype(t.size)::value_type, Size>;
+                            };
 
-}
+}  // namespace pf::ui::ig
 
 #endif  //PF_IMGUI_CONCEPTS_HASSIZEOBSERVABLE_H

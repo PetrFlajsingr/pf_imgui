@@ -9,8 +9,7 @@
 
 namespace pf::ui::ig {
 
-Notification::Notification(std::string_view elementName, std::string_view labelText,
-                           std::chrono::milliseconds duration)
+Notification::Notification(std::string_view elementName, std::string_view labelText, std::chrono::milliseconds duration)
     : Renderable(elementName), label(std::string{labelText}), dismissDuration(duration) {}
 
 void Notification::renderImpl() {

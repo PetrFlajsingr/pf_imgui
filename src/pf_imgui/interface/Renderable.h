@@ -11,8 +11,8 @@
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
-#include <pf_imgui/reactive/PropertyOwner.h>
 #include <pf_imgui/reactive/EventOwner.h>
+#include <pf_imgui/reactive/PropertyOwner.h>
 #include <string_view>
 
 namespace pf::ui::ig {
