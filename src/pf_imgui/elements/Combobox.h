@@ -48,12 +48,12 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
                                  public ValueContainer<std::optional<T>>,
                                  public Savable,
                                  public DragSource<T> {
+ protected:
+  PF_IMGUI_PROPERTY_OWNER_ALIASES(U)
   using CustomComboboxBase = CustomCombobox<T, Selectable>;
   using CustomComboboxBase::filteredItems;
   using CustomComboboxBase::flags;
   using CustomComboboxBase::items;
-  using PropertyOwner::Property;
-  using PropertyOwner::ReadOnlyProperty;
 
  public:
   using CustomComboboxBase::addItem;

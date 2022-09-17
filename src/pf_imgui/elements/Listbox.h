@@ -51,12 +51,12 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
                                 public Savable,
                                 public DragSource<T>,
                                 public DropTarget<T> {
+ protected:
+  PF_IMGUI_PROPERTY_OWNER_ALIASES(U)
   using CustomListboxBase = CustomListbox<T, Selectable>;
   using CustomListboxBase::filter;
   using CustomListboxBase::filteredItems;
   using CustomListboxBase::items;
-  using PropertyOwner::Property;
-  using PropertyOwner::ReadOnlyProperty;
 
  public:
   using Factory = details::ListboxRowFactory<T>;

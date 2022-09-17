@@ -75,9 +75,9 @@ TextEditor::Cursor &TextEditor::Cursor::deleteSelection() {
 std::string TextEditor::Cursor::getSelectedText() const { return owner.editor.GetSelectedText(); }
 
 TextEditor::Cursor::Cursor(TextEditor &parent)
-    : owner(parent),
-      position(TextCursorPosition{.line = static_cast<uint32_t>(parent.editor.GetCursorPosition().mLine),
-                                  .column = static_cast<uint32_t>(parent.editor.GetCursorPosition().mColumn)}) {
+    : position(TextCursorPosition{.line = static_cast<uint32_t>(parent.editor.GetCursorPosition().mLine),
+                                  .column = static_cast<uint32_t>(parent.editor.GetCursorPosition().mColumn)}),
+      owner(parent) {
   position.addListener([this](auto newPosition) {
     owner.editor.SetCursorPosition({static_cast<int>(newPosition.line), static_cast<int>(newPosition.column)});
   });

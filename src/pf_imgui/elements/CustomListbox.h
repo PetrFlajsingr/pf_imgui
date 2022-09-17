@@ -26,8 +26,8 @@ namespace pf::ui::ig {
  */
 template<typename T, std::derived_from<Renderable> R>
 class PF_IMGUI_EXPORT CustomListbox : public CustomItemBox<T, R> {
-  using PropertyOwner::Property;
-  using PropertyOwner::ReadOnlyProperty;
+ protected:
+  PF_IMGUI_PROPERTY_OWNER_ALIASES(U)
 
  public:
   /**
