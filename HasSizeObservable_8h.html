@@ -76,6 +76,7 @@ $(function() {
 <p>Concept checking for member <code>Observable&lt;Size&gt; size</code>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;concepts&gt;</code><br />
+<code>#include &lt;pf_common/specializations.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="Size_8h_source.html">pf_imgui/common/Size.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="Observable_8h_source.html">pf_imgui/reactive/Observable.h</a>&gt;</code><br />
 </div>
@@ -106,7 +107,9 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a>(T t) {</div>
-<div class="line">                              { &amp;t.size } -&gt; std::same_as&lt;Observable&lt;Size&gt; *&gt;;</div>
+<div class="line">                              { t.size };</div>
+<div class="line">                              </div>
+<div class="line">                              <a class="code" href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">requires</a> std::same_as&lt;<span class="keyword">typename</span> decltype(t.size)::value_type, Size&gt;;</div>
 <div class="line">                            }</div>
 </div><!-- fragment -->
 </div>

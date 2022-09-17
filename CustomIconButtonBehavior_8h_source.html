@@ -118,46 +118,44 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomIconButton.html">   48</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconButton.html">CustomIconButton</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconButtonBehavior.html">CustomIconButtonBehavior</a> {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">using</span> ClickEvent = ClassEvent&lt;CustomIconButton&gt;;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconButton.html">CustomIconButton</a>(std::string_view elementName);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconButton.html">CustomIconButton</a>(std::string_view elementName);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  Event&lt;&gt; clickEvent;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  ClickEvent clickEvent;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> update(State state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> notifyClickEvent();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">   61</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">CustomIconToggle</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconButtonBehavior.html">CustomIconButtonBehavior</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">ValueContainer</a>&lt;bool&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">CustomIconToggle</a>(std::string_view elementName, <span class="keywordtype">bool</span> initValue = <span class="keyword">false</span>,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                            <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  [[nodiscard]] toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html#abcf813a35aeaf36edac6a69c189d6bff">toToml</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html#ade318b3ee96ec1443c8acc04a8caa85d">setFromToml</a>(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordtype">void</span> update(State state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">void</span> notifyClickEvent();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">   59</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">CustomIconToggle</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconButtonBehavior.html">CustomIconButtonBehavior</a>, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">ValueContainer</a>&lt;bool&gt;, <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Savable.html">Savable</a> {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">CustomIconToggle</a>(std::string_view elementName, <span class="keywordtype">bool</span> initValue = <span class="keyword">false</span>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                            <a class="code" href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">Persistent</a> persistent = Persistent::No);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  [[nodiscard]] toml::table <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html#abcf813a35aeaf36edac6a69c189d6bff">toToml</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html#ade318b3ee96ec1443c8acc04a8caa85d">setFromToml</a>(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">Property&lt;bool&gt;</a> checked;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;bool&gt;</a> checked;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  [[nodiscard]] <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;getValue() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;newValue) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  Subscription addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;)&gt; listener) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordtype">void</span> update(State state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  [[nodiscard]] <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;getValue() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;newValue) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  Subscription addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;)&gt; listener) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">void</span> update(State state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_ELEMENTS_CUSTOMICONBUTTONBEHAVIOR_H</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_ELEMENTS_CUSTOMICONBUTTONBEHAVIOR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomIconButtonBehavior_html_a22248a9e9766ad0e74d8ff8bc1f586a0"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomIconButtonBehavior.html#a22248a9e9766ad0e74d8ff8bc1f586a0">pf::ui::ig::CustomIconButtonBehavior::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> CustomIconButtonBehavior.cpp:19</div></div>
 <div class="ttc" id="aSize_8h_html"><div class="ttname"><a href="Size_8h.html">Size.h</a></div><div class="ttdoc">Type representing size in pf_imgui.</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Color_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Color.html">pf::ui::ig::Color</a></div><div class="ttdoc">Color for pf_imgui, optimized compared to using ImVec4. TODO: blend functions etc.</div><div class="ttdef"><b>Definition:</b> Color.h:23</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomIconToggle_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">pf::ui::ig::CustomIconToggle</a></div><div class="ttdef"><b>Definition:</b> CustomIconButtonBehavior.h:61</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomIconToggle_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html">pf::ui::ig::CustomIconToggle</a></div><div class="ttdef"><b>Definition:</b> CustomIconButtonBehavior.h:59</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorPalette_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">pf::ui::ig::ColorPalette&lt; ColorOf::Button, ColorOf::ButtonActive, ColorOf::ButtonHovered &gt;</a></div></div>
 <div class="ttc" id="aValueContainer_8h_html"><div class="ttname"><a href="ValueContainer_8h.html">ValueContainer.h</a></div><div class="ttdoc">Interface for providing inner value access.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomIconToggle_html_abcf813a35aeaf36edac6a69c189d6bff"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html#abcf813a35aeaf36edac6a69c189d6bff">pf::ui::ig::CustomIconToggle::toToml</a></div><div class="ttdeci">toml::table toToml() const override</div><div class="ttdef"><b>Definition:</b> CustomIconButtonBehavior.cpp:58</div></div>
@@ -165,15 +163,15 @@ $(function() {
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:87</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomIconButtonBehavior_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomIconButtonBehavior.html">pf::ui::ig::CustomIconButtonBehavior</a></div><div class="ttdef"><b>Definition:</b> CustomIconButtonBehavior.h:18</div></div>
 <div class="ttc" id="aEvent_8h_html"><div class="ttname"><a href="Event_8h.html">Event.h</a></div><div class="ttdoc">Events.</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomIconToggle_html_ade318b3ee96ec1443c8acc04a8caa85d"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomIconToggle.html#ade318b3ee96ec1443c8acc04a8caa85d">pf::ui::ig::CustomIconToggle::setFromToml</a></div><div class="ttdeci">void setFromToml(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> CustomIconButtonBehavior.cpp:60</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable&lt; bool &gt;</a></div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aColor_8h_html"><div class="ttname"><a href="Color_8h.html">Color.h</a></div><div class="ttdoc">Color.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:24</div></div>
 <div class="ttc" id="aColorPalette_8h_html"><div class="ttname"><a href="ColorPalette_8h.html">ColorPalette.h</a></div><div class="ttdoc">ColorPalette for element styling.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CustomIconButton_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CustomIconButton.html">pf::ui::ig::CustomIconButton</a></div><div class="ttdef"><b>Definition:</b> CustomIconButtonBehavior.h:48</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

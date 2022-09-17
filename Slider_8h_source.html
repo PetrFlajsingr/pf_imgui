@@ -132,8 +132,8 @@ $(function() {
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      color;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt;</a> style;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a> font = Font::Default();</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Label&gt;</a> label;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty&lt;Slider, T&gt;</a> value;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  Property&lt;Label&gt; label;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  Property&lt;T&gt; value;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  [[nodiscard]] <span class="keyword">const</span> T &amp;getValue() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> T &amp;newValue) <span class="keyword">override</span>;</div>
@@ -176,12 +176,12 @@ $(function() {
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> newValIter = src.find(<span class="stringliteral">&quot;value&quot;</span>); newValIter != src.end()) {</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">auto</span> newVal = newValIter-&gt;second.as_array(); newVal != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> vecValue = safeDeserializeGlmVec&lt;T&gt;(*newVal);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">if</span> (vecValue.has_value()) { *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>() = *vecValue; }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">if</span> (vecValue.has_value()) { *value.modify() = *vecValue; }</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;      }</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> newValIter = src.find(<span class="stringliteral">&quot;value&quot;</span>); newValIter != src.end()) {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">auto</span> newVal = newValIter-&gt;second.value&lt;T&gt;(); newVal.has_value()) { *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>() = *newVal; }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      <span class="keywordflow">if</span> (<span class="keyword">auto</span> newVal = newValIter-&gt;second.value&lt;T&gt;(); newVal.has_value()) { *value.modify() = *newVal; }</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  }</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
@@ -192,7 +192,7 @@ $(function() {
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = style.<a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html#ab50aea3c0f3cd9bad80ed18c041849f9">applyScoped</a>();</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = font.applyScopedIfNotDefault();</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> address = &amp;value.value;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> address = &amp;Prop_value(value);</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> flags = ImGuiSliderFlags_AlwaysClamp;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  ImGuiDataType_ dataType;</div>
@@ -211,10 +211,10 @@ $(function() {
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(*value);</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> drop = <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget&lt;T&gt;::dropAccept</a>(); drop.has_value()) {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>() = *drop;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    *value.modify() = *drop;</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  }</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keywordflow">if</span> (valueChanged) { value.triggerListeners(); }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keywordflow">if</span> (valueChanged) { Prop_triggerListeners(value); }</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;PF_IMGUI_SLIDER_TYPE_LIST&gt; T&gt;</div>
@@ -229,7 +229,7 @@ $(function() {
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;PF_IMGUI_SLIDER_TYPE_LIST&gt; T&gt;</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keywordtype">void</span> Slider&lt;T&gt;::setValue(<span class="keyword">const</span> T &amp;newValue) {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>() = newValue;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  *value.modify() = newValue;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>Slider&lt;int&gt;;</div>
@@ -253,8 +253,8 @@ $(function() {
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Slider_1_1Config_html_aed094bb89908ed17f9ab69caeb2c61b9"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Slider_1_1Config.html#aed094bb89908ed17f9ab69caeb2c61b9">pf::ui::ig::Slider::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> Slider.h:53</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html">pf::ui::ig::Slider</a></div><div class="ttdoc">Slider supporting multiple types.</div><div class="ttdef"><b>Definition:</b> Slider.h:40</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorPalette_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">pf::ui::ig::ColorPalette</a></div><div class="ttdoc">Color palette for imgui.</div><div class="ttdef"><b>Definition:</b> ColorPalette.h:27</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:164</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:194</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:165</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:189</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_abbae4bb410a936974069bd94747b0ddd"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#abbae4bb410a936974069bd94747b0ddd">pf::ui::ig::Slider::getMax</a></div><div class="ttdeci">MinMaxType getMax() const</div><div class="ttdef"><b>Definition:</b> Slider.h:93</div></div>
 <div class="ttc" id="aValueContainer_8h_html"><div class="ttname"><a href="ValueContainer_8h.html">ValueContainer.h</a></div><div class="ttdoc">Interface for providing inner value access.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleOptions_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">pf::ui::ig::StyleOptions&lt; StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize &gt;</a></div></div>
@@ -265,20 +265,17 @@ $(function() {
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Slider_1_1Config_html_a28d7105532e5d995537acfaca7226509"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Slider_1_1Config.html#a28d7105532e5d995537acfaca7226509">pf::ui::ig::Slider::Config::max</a></div><div class="ttdeci">Explicit&lt; MinMaxType &gt; max</div><div class="ttdef"><b>Definition:</b> Slider.h:55</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StyleOptions_html_ab50aea3c0f3cd9bad80ed18c041849f9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StyleOptions.html#ab50aea3c0f3cd9bad80ed18c041849f9">pf::ui::ig::StyleOptions::applyScoped</a></div><div class="ttdeci">RAII applyScoped()</div><div class="ttdef"><b>Definition:</b> StyleOptions.h:65</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_a1d24c0827a8affe948b8ca569b973d0a"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#a1d24c0827a8affe948b8ca569b973d0a">pf::ui::ig::Slider::Slider</a></div><div class="ttdeci">Slider(Config &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> Slider.h:128</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:225</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:217</div></div>
 <div class="ttc" id="aserialization_8h_html_a827e52c35c0f6324bb84a9d4c24919f4"><div class="ttname"><a href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">pf::ui::ig::serializeGlmVec</a></div><div class="ttdeci">PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &amp;vec)</div><div class="ttdef"><b>Definition:</b> serialization.h:121</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Slider_1_1Config_html_aadf417c4de7846ab935fea725fd9b687"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Slider_1_1Config.html#aadf417c4de7846ab935fea725fd9b687">pf::ui::ig::Slider::Config::min</a></div><div class="ttdeci">Explicit&lt; MinMaxType &gt; min</div><div class="ttdef"><b>Definition:</b> Slider.h:54</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html_a958efec65ad17b45c82d04ad30529eab"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">pf::ui::ig::ObservableProperty::modify</a></div><div class="ttdeci">Transaction modify() requires(std</div><div class="ttdef"><b>Definition:</b> Observable.h:227</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Slider_html_ad47e4d3e242cc627442e0badf8ee7783"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Slider.html#ad47e4d3e242cc627442e0badf8ee7783">pf::ui::ig::Slider::setMax</a></div><div class="ttdeci">void setMax(MinMaxType newMax)</div><div class="ttdef"><b>Definition:</b> Slider.h:98</div></div>
 <div class="ttc" id="aserialization_8h_html"><div class="ttname"><a href="serialization_8h.html">serialization.h</a></div><div class="ttdoc">Serialization of UI tree to toml.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:24</div></div>
 <div class="ttc" id="aDragNDrop_8h_html"><div class="ttname"><a href="DragNDrop_8h.html">DragNDrop.h</a></div><div class="ttdoc">Definitions for drag and drop interface.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Slider_1_1Config_html_af7b50bc3134862ad7b6e5c7579dbf9ef"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Slider_1_1Config.html#af7b50bc3134862ad7b6e5c7579dbf9ef">pf::ui::ig::Slider::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> Slider.h:52</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

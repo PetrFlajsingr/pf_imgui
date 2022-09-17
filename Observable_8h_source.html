@@ -254,10 +254,10 @@ $(function() {
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasActiveTransactions()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> activeTransactions != 0; }</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">  227</a></span>&#160;  [[nodiscard]] Transaction <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>()</div>
+<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">  227</a></span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>()</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    requires(std::same_as&lt;Tag, <a class="code" href="structpf_1_1ui_1_1ig_1_1ReadWriteTag.html">ReadWriteTag</a>&gt;)</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  {</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">return</span> Transaction{*<span class="keyword">this</span>};</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>{*<span class="keyword">this</span>};</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  }</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; <span class="keyword">private</span>:</div>

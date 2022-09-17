@@ -110,8 +110,8 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      color;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt;</a> style;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a> font = Font::Default();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Label&gt;</a> label;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty&lt;Checkbox, bool&gt;</a> selected;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">Property&lt;Label&gt;</a> label;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">Property&lt;bool&gt;</a> selected;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  [[nodiscard]] <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;getValue() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;newValue) <span class="keyword">override</span>;</div>
@@ -135,7 +135,6 @@ $(function() {
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:64</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Font_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Font.html">pf::ui::ig::Font</a></div><div class="ttdoc">Abstraction of fonts for Elements.</div><div class="ttdef"><b>Definition:</b> Font.h:19</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
 <div class="ttc" id="aLabel_8h_html"><div class="ttname"><a href="Label_8h.html">Label.h</a></div><div class="ttdoc">Class representing element's label.</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:24</div></div>
@@ -143,7 +142,7 @@ $(function() {
 <div class="ttc" id="aColorPalette_8h_html"><div class="ttname"><a href="ColorPalette_8h.html">ColorPalette.h</a></div><div class="ttdoc">ColorPalette for element styling.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Checkbox_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Checkbox.html">pf::ui::ig::Checkbox</a></div><div class="ttdoc">A typical checkbox.</div><div class="ttdef"><b>Definition:</b> Checkbox.h:30</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

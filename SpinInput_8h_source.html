@@ -139,8 +139,8 @@ $(function() {
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      color;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign&gt; style;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  Font font = Font::Default();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  Observable&lt;Label&gt; label;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  ObservableProperty&lt;SpinInput, T&gt; value;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  Property&lt;Label&gt; label;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  Property&lt;T&gt; value;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
@@ -196,56 +196,53 @@ $(function() {
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = font.applyScopedIfNotDefault();</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, int&gt;) {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    valueChanged = ImGui::SpinInt(label-&gt;get().c_str(), &amp;value.value, step, stepFast, flags);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    valueChanged = ImGui::SpinInt(label-&gt;get().c_str(), &amp;Prop_value(value), step, stepFast, flags);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  }</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">if</span> constexpr (std::same_as&lt;T, float&gt;) {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    valueChanged = ImGui::SpinFloat(label-&gt;get().c_str(), &amp;value.value, step, stepFast, <span class="stringliteral">&quot;%.3f&quot;</span>,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    valueChanged = ImGui::SpinFloat(label-&gt;get().c_str(), &amp;Prop_value(value), step, stepFast, <span class="stringliteral">&quot;%.3f&quot;</span>,</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                    flags);  <span class="comment">// TODO: user provided format</span></div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  }</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordflow">if</span> (valueChanged) {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    value.value = std::clamp(value.value, min, max);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    value.triggerListeners();</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(*value);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> drop = <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget&lt;T&gt;::dropAccept</a>(); drop.has_value()) { *value.modify() = std::clamp(*drop, min, max); }</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">int</span>, <span class="keywordtype">float</span>&gt; T&gt;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1SpinInput.html">SpinInput&lt;T&gt;::setValue</a>(<span class="keyword">const</span> T &amp;newValue) {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  *value.modify() = newValue;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">int</span>, <span class="keywordtype">float</span>&gt; T&gt;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keyword">const</span> T &amp;SpinInput&lt;T&gt;::getValue()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordflow">return</span> *value;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">int</span>, <span class="keywordtype">float</span>&gt; T&gt;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;Subscription SpinInput&lt;T&gt;::addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; listener) {</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordflow">return</span> value.addListener(std::move(listener));</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordflow">if</span> (valueChanged) { *value.modify() = std::clamp(Prop_value(value), min, max); }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">DragSource&lt;T&gt;::drag</a>(*value);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keywordflow">if</span> (<span class="keyword">auto</span> drop = <a class="code" href="classpf_1_1ui_1_1ig_1_1DropTarget.html">DropTarget&lt;T&gt;::dropAccept</a>(); drop.has_value()) { *value.modify() = std::clamp(*drop, min, max); }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">int</span>, <span class="keywordtype">float</span>&gt; T&gt;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1SpinInput.html">SpinInput&lt;T&gt;::setValue</a>(<span class="keyword">const</span> T &amp;newValue) {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  *value.modify() = newValue;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;}</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">int</span>, <span class="keywordtype">float</span>&gt; T&gt;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">const</span> T &amp;SpinInput&lt;T&gt;::getValue()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keywordflow">return</span> *value;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;}</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">int</span>, <span class="keywordtype">float</span>&gt; T&gt;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;Subscription SpinInput&lt;T&gt;::addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; listener) {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordflow">return</span> value.addListener(std::move(listener));</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>SpinInput&lt;int&gt;;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>SpinInput&lt;float&gt;;</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>SpinInput&lt;int&gt;;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>SpinInput&lt;float&gt;;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_SPININPUT_H</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_SPININPUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SpinInput_html_a3da5a4d48013ea183d1ae1cdc7efba62"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SpinInput.html#a3da5a4d48013ea183d1ae1cdc7efba62">pf::ui::ig::SpinInput::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> SpinInput.h:148</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1SpinInput_1_1Config_html_ae2954ad03e849d9b9c2d7ef067155217"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1SpinInput_1_1Config.html#ae2954ad03e849d9b9c2d7ef067155217">pf::ui::ig::SpinInput::Config::max</a></div><div class="ttdeci">Explicit&lt; T &gt; max</div><div class="ttdef"><b>Definition:</b> SpinInput.h:47</div></div>
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1SpinInput_1_1Config_html_a962a3b8bbd4bd80c60832ada99d29276"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1SpinInput_1_1Config.html#a962a3b8bbd4bd80c60832ada99d29276">pf::ui::ig::SpinInput::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> SpinInput.h:44</div></div>
 <div class="ttc" id="aStyleOptions_8h_html"><div class="ttname"><a href="StyleOptions_8h.html">StyleOptions.h</a></div><div class="ttdoc">StyleOptions for element styling.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:164</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:165</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SpinInput_html_a7b2d360979271c33c24d025b09b56bc4"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SpinInput.html#a7b2d360979271c33c24d025b09b56bc4">pf::ui::ig::SpinInput::toToml</a></div><div class="ttdeci">toml::table toToml() const override</div><div class="ttdef"><b>Definition:</b> SpinInput.h:136</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:194</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:189</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1SpinInput_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1SpinInput_1_1Config.html">pf::ui::ig::SpinInput::Config</a></div><div class="ttdoc">Struct for construction of SpinInput.</div><div class="ttdef"><b>Definition:</b> SpinInput.h:42</div></div>
 <div class="ttc" id="aValueContainer_8h_html"><div class="ttname"><a href="ValueContainer_8h.html">ValueContainer.h</a></div><div class="ttdoc">Interface for providing inner value access.</div></div>
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:64</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SpinInput_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SpinInput.html">pf::ui::ig::SpinInput</a></div><div class="ttdoc">Spinner for numeric types.</div><div class="ttdef"><b>Definition:</b> SpinInput.h:33</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1SpinInput_1_1Config_html_a8ccd6138a8ffe29e98049a9bb5a4412a"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1SpinInput_1_1Config.html#a8ccd6138a8ffe29e98049a9bb5a4412a">pf::ui::ig::SpinInput::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> SpinInput.h:45</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SpinInput_html_a1392266609b0d45b63073aede49082e9"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SpinInput.html#a1392266609b0d45b63073aede49082e9">pf::ui::ig::SpinInput::SpinInput</a></div><div class="ttdeci">SpinInput(Config &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> SpinInput.h:114</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:225</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:217</div></div>
 <div class="ttc" id="aLabel_8h_html"><div class="ttname"><a href="Label_8h.html">Label.h</a></div><div class="ttdoc">Class representing element's label.</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:24</div></div>
@@ -254,7 +251,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1SpinInput_html_ac1c3e4b5b923281732150355c8a9163e"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1SpinInput.html#ac1c3e4b5b923281732150355c8a9163e">pf::ui::ig::SpinInput::setFromToml</a></div><div class="ttdeci">void setFromToml(const toml::table &amp;src) override</div><div class="ttdef"><b>Definition:</b> SpinInput.h:141</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1SpinInput_1_1Config_html_a98e9fe122db2ea8fa9f2d74ca884c824"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1SpinInput_1_1Config.html#a98e9fe122db2ea8fa9f2d74ca884c824">pf::ui::ig::SpinInput::Config::min</a></div><div class="ttdeci">Explicit&lt; T &gt; min</div><div class="ttdef"><b>Definition:</b> SpinInput.h:46</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

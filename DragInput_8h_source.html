@@ -143,8 +143,8 @@ $(function() {
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;      color;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt; style;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  Font font = Font::Default();</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  Observable&lt;Label&gt; label;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  ObservableProperty&lt;DragInput, T&gt; value;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  Property&lt;Label&gt; label;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  Property&lt;T&gt; value;</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  [[nodiscard]] <span class="keyword">const</span> T &amp;getValue() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> T &amp;newValue) <span class="keyword">override</span>;</div>
@@ -223,7 +223,7 @@ $(function() {
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = style.applyScoped();</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = font.applyScopedIfNotDefault();</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="keywordtype">bool</span> valueChanged = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> address = &amp;value.value;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> address = &amp;Prop_value(value);</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> flags = ImGuiSliderFlags_AlwaysClamp;</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  ImGuiDataType_ dataType;</div>
@@ -255,43 +255,37 @@ $(function() {
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    *value.modify() = *drop;</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  }</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keywordflow">if</span> (valueChanged) { value.triggerListeners(); }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keywordflow">if</span> (valueChanged) { Prop_triggerListeners(value); }</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">float</span>, glm::vec2, glm::vec3, glm::vec4, math::Range&lt;<span class="keywordtype">float</span>&gt;, <span class="keywordtype">int</span>, glm::ivec2, glm::ivec3, glm::ivec4,</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;               math::Range&lt;<span class="keywordtype">int</span>&gt;&gt;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;             T&gt;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">const</span> T &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html">DragInput&lt;T&gt;::getValue</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <span class="keywordflow">return</span> *value;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;}</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">float</span>, glm::vec2, glm::vec3, glm::vec4, math::Range&lt;<span class="keywordtype">float</span>&gt;, <span class="keywordtype">int</span>, glm::ivec2, glm::ivec3, glm::ivec4,</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;               math::Range&lt;<span class="keywordtype">int</span>&gt;&gt;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;             T&gt;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="keywordtype">void</span> DragInput&lt;T&gt;::setValue(<span class="keyword">const</span> T &amp;newValue) {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  *value.modify() = newValue;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;}</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;<span class="keywordtype">float</span>, glm::vec2, glm::vec3, glm::vec4, math::Range&lt;<span class="keywordtype">float</span>&gt;, <span class="keywordtype">int</span>, glm::ivec2, glm::ivec3, glm::ivec4,</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;               math::Range&lt;<span class="keywordtype">int</span>&gt;&gt;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;             T&gt;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;Subscription DragInput&lt;T&gt;::addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; listener) {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <span class="keywordflow">return</span> value.addListener(std::move(listener));</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;}</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;float&gt;;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::vec2&gt;;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::vec3&gt;;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::vec4&gt;;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;math::Range&lt;float&gt;&gt;;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;int&gt;;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::ivec2&gt;;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::ivec3&gt;;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::ivec4&gt;;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;math::Range&lt;int&gt;&gt;;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;PF_IMGUI_DRAG_TYPE_LIST&gt; T&gt;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="keyword">const</span> T &amp;<a class="code" href="classpf_1_1ui_1_1ig_1_1DragInput.html">DragInput&lt;T&gt;::getValue</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="keywordflow">return</span> *value;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;}</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;PF_IMGUI_DRAG_TYPE_LIST&gt; T&gt;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keywordtype">void</span> DragInput&lt;T&gt;::setValue(<span class="keyword">const</span> T &amp;newValue) {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  *Prop_modify(value) = newValue;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;}</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;PF_IMGUI_DRAG_TYPE_LIST&gt; T&gt;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;Subscription DragInput&lt;T&gt;::addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; listener) {</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="keywordflow">return</span> value.addListener(std::move(listener));</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;}</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;float&gt;;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::vec2&gt;;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::vec3&gt;;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::vec4&gt;;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;math::Range&lt;float&gt;&gt;;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;int&gt;;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::ivec2&gt;;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::ivec3&gt;;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;glm::ivec4&gt;;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class </span>DragInput&lt;math::Range&lt;int&gt;&gt;;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_DRAGINPUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_a024acc2c633d092757a53c7cee1df4e8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#a024acc2c633d092757a53c7cee1df4e8">pf::ui::ig::DragInput::DragInput</a></div><div class="ttdeci">DragInput(Config &amp;&amp;config)</div><div class="ttdef"><b>Definition:</b> DragInput.h:150</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_a3472e0c52769734b597323c0e4f325f0"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#a3472e0c52769734b597323c0e4f325f0">pf::ui::ig::DragInput::setMax</a></div><div class="ttdeci">void setMax(ParamType newMax)</div><div class="ttdef"><b>Definition:</b> DragInput.h:116</div></div>
@@ -299,8 +293,8 @@ $(function() {
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DragInput_1_1Config_html_a7f1a3986a9a786a8f395a1612d6fd1e9"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DragInput_1_1Config.html#a7f1a3986a9a786a8f395a1612d6fd1e9">pf::ui::ig::DragInput::Config::min</a></div><div class="ttdeci">Explicit&lt; ParamType &gt; min</div><div class="ttdef"><b>Definition:</b> DragInput.h:60</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_abb319c8f381e5ac057d00e1eca1575c0"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#abb319c8f381e5ac057d00e1eca1575c0">pf::ui::ig::DragInput::getMax</a></div><div class="ttdeci">ParamType getMax() const</div><div class="ttdef"><b>Definition:</b> DragInput.h:111</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:164</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:194</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:165</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:189</div></div>
 <div class="ttc" id="aValueContainer_8h_html"><div class="ttname"><a href="ValueContainer_8h.html">ValueContainer.h</a></div><div class="ttdoc">Interface for providing inner value access.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DragInput_1_1Config_html_a98b3b0e08a1468d573456faeea9e49af"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DragInput_1_1Config.html#a98b3b0e08a1468d573456faeea9e49af">pf::ui::ig::DragInput::Config::max</a></div><div class="ttdeci">Explicit&lt; ParamType &gt; max</div><div class="ttdef"><b>Definition:</b> DragInput.h:61</div></div>
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:64</div></div>
@@ -311,7 +305,7 @@ $(function() {
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DragInput_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DragInput_1_1Config.html">pf::ui::ig::DragInput::Config</a></div><div class="ttdoc">Struct for construction of DragInput.</div><div class="ttdef"><b>Definition:</b> DragInput.h:55</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_a6fc52ba0efa0aba6e310b539a7ee2681"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#a6fc52ba0efa0aba6e310b539a7ee2681">pf::ui::ig::DragInput::getSpeed</a></div><div class="ttdeci">ParamType getSpeed() const</div><div class="ttdef"><b>Definition:</b> DragInput.h:91</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html_a4c05f2b85aac7e17d55a350559a4dd52"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html#a4c05f2b85aac7e17d55a350559a4dd52">pf::ui::ig::DragInput::setSpeed</a></div><div class="ttdeci">void setSpeed(ParamType newSpeed)</div><div class="ttdef"><b>Definition:</b> DragInput.h:96</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:225</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:217</div></div>
 <div class="ttc" id="aserialization_8h_html_a827e52c35c0f6324bb84a9d4c24919f4"><div class="ttname"><a href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">pf::ui::ig::serializeGlmVec</a></div><div class="ttdeci">PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &amp;vec)</div><div class="ttdef"><b>Definition:</b> serialization.h:121</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1DragInput_1_1Config_html_ac12d40fc5002a7f553622893454e00f8"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1DragInput_1_1Config.html#ac12d40fc5002a7f553622893454e00f8">pf::ui::ig::DragInput::Config::speed</a></div><div class="ttdeci">Explicit&lt; ParamType &gt; speed</div><div class="ttdef"><b>Definition:</b> DragInput.h:59</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
@@ -322,7 +316,7 @@ $(function() {
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragInput_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragInput.html">pf::ui::ig::DragInput</a></div><div class="ttdoc">Numeric input supporting either keyboard input or mouse drag.</div><div class="ttdef"><b>Definition:</b> DragInput.h:44</div></div>
 <div class="ttc" id="aDragNDrop_8h_html"><div class="ttname"><a href="DragNDrop_8h.html">DragNDrop.h</a></div><div class="ttdoc">Definitions for drag and drop interface.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

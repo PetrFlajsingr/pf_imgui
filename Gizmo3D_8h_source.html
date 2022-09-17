@@ -125,8 +125,8 @@ $(function() {
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  [[nodiscard]] toml::table toToml() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordtype">void</span> setFromToml(<span class="keyword">const</span> toml::table &amp;src) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Size&gt;</a> size;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;ValueType&gt;</a> value;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  Property&lt;Size&gt; size;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  Property&lt;ValueType&gt; value;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> details::GizmoValueType&lt;Type&gt; &amp;newValue) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  [[nodiscard]] <span class="keyword">const</span> details::GizmoValueType&lt;Type&gt; &amp;getValue() <span class="keyword">const override</span>;</div>
@@ -150,7 +150,7 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  size.addListener([<span class="keyword">this</span>](<a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> newSize) {</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> min = std::min(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(newSize.width), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(newSize.height));</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> fixedSize = <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a>{min, min};</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">if</span> (fixedSize != newSize) { *size.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = fixedSize; }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">if</span> (fixedSize != newSize) { *size.modify() = fixedSize; }</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  });</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
@@ -203,9 +203,9 @@ $(function() {
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  }</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Direction) { *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = direction; }</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Axes3) { *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = quaternion; }</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Dual) { *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = std::make_pair(quaternion, direction); }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Direction) { *value.modify() = direction; }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Axes3) { *value.modify() = quaternion; }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Dual) { *value.modify() = std::make_pair(quaternion, direction); }</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">template</span>&lt;GizmoType Type&gt;</div>
@@ -214,25 +214,25 @@ $(function() {
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Axes3) {</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    glm::quat quat = *value;</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">if</span> (ImGui::gizmo3D(fmt::format(<span class="stringliteral">&quot;##{}&quot;</span>, getName()).c_str(), quat, <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size-&gt;width), flags)) {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = quat;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      *value.modify() = quat;</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Direction) {</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    glm::vec3 dir = *value;</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">if</span> (ImGui::gizmo3D(fmt::format(<span class="stringliteral">&quot;##{}&quot;</span>, getName()).c_str(), dir, <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size-&gt;width), flags)) {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = dir;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      *value.modify() = dir;</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  }</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordflow">if</span> constexpr (Type == GizmoType::Dual) {</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keyword">auto</span> [quat, dir] = *value;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">if</span> (ImGui::gizmo3D(fmt::format(<span class="stringliteral">&quot;##{}&quot;</span>, getName()).c_str(), quat, dir, <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size-&gt;width), flags)) {</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;      *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = {quat, dir};</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;      *value.modify() = {quat, dir};</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  }</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keyword">template</span>&lt;GizmoType Type&gt;</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keywordtype">void</span> Gizmo3D&lt;Type&gt;::setValue(<span class="keyword">const</span> details::GizmoValueType&lt;Type&gt; &amp;newValue) {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  *value.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">modify</a>() = newValue;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  *value.modify() = newValue;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword">template</span>&lt;GizmoType Type&gt;</div>
@@ -265,14 +265,12 @@ $(function() {
 <div class="ttc" id="aserialization_8h_html_a899165e20329389dda22c1e7b4f19358"><div class="ttname"><a href="serialization_8h.html#a899165e20329389dda22c1e7b4f19358">pf::ui::ig::serializeGlmQuat</a></div><div class="ttdeci">PF_IMGUI_EXPORT toml::array serializeGlmQuat(const glm::quat &amp;quat)</div><div class="ttdef"><b>Definition:</b> serialization.h:131</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Gizmo3D_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Gizmo3D.html">pf::ui::ig::Gizmo3D</a></div><div class="ttdoc">A 3D gizmo allowing the user to modify rotation or a direction by rendering axis'/direction arrow....</div><div class="ttdef"><b>Definition:</b> Gizmo3D.h:46</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Gizmo3D_html_a25f72cef4e6f31d9e4b440a71895666c"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Gizmo3D.html#a25f72cef4e6f31d9e4b440a71895666c">pf::ui::ig::Gizmo3D::toToml</a></div><div class="ttdeci">toml::table toToml() const override</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
 <div class="ttc" id="aserialization_8h_html_a827e52c35c0f6324bb84a9d4c24919f4"><div class="ttname"><a href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">pf::ui::ig::serializeGlmVec</a></div><div class="ttdeci">PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &amp;vec)</div><div class="ttdef"><b>Definition:</b> serialization.h:121</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Gizmo3D_html_a45c111ba2597dd4de596103df421ee76"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Gizmo3D.html#a45c111ba2597dd4de596103df421ee76">pf::ui::ig::Gizmo3D::setFromToml</a></div><div class="ttdeci">void setFromToml(const toml::table &amp;src) override</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Savable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Savable.html">pf::ui::ig::Savable</a></div><div class="ttdoc">Interface for savable elements.</div><div class="ttdef"><b>Definition:</b> Savable.h:24</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html_a6718aa6ec417dad0902ac12324fb25a8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">pf::ui::ig::Observable::modify</a></div><div class="ttdeci">Transaction modify()</div><div class="ttdef"><b>Definition:</b> Observable.h:142</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

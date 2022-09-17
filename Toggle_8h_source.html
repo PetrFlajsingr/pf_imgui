@@ -111,26 +111,25 @@ $(function() {
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;newValue) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  [[nodiscard]] <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;getValue() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  Subscription addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;)&gt; listener) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">ColorPalette</a>&lt;ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;               ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;               ColorOf::BorderShadow&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      color;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt;</a> style;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a> font = Font::Default();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Label&gt;</a> label;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty&lt;Toggle, bool&gt;</a> selected;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">ColorPalette</a>&lt;ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;               ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;               ColorOf::BorderShadow&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      color;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StyleOptions.html">StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt;</a> style;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Font.html">Font</a> font = Font::Default();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">Property&lt;Label&gt;</a> label;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">Property&lt;bool&gt;</a> selected;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  Subscription addValueListenerImpl(std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;)&gt; listener) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_TOGGLE_H</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_TOGGLE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aSavable_8h_html"><div class="ttname"><a href="Savable_8h.html">Savable.h</a></div><div class="ttdoc">Interface for elements which can save their state.</div></div>
 <div class="ttc" id="aStyleOptions_8h_html"><div class="ttname"><a href="StyleOptions_8h.html">StyleOptions.h</a></div><div class="ttdoc">StyleOptions for element styling.</div></div>
@@ -141,7 +140,6 @@ $(function() {
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:64</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Font_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Font.html">pf::ui::ig::Font</a></div><div class="ttdoc">Abstraction of fonts for Elements.</div><div class="ttdef"><b>Definition:</b> Font.h:19</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
 <div class="ttc" id="aLabel_8h_html"><div class="ttname"><a href="Label_8h.html">Label.h</a></div><div class="ttdoc">Class representing element's label.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Toggle_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Toggle_1_1Config.html">pf::ui::ig::Toggle::Config</a></div><div class="ttdoc">Struct for construction of Toggle.</div><div class="ttdef"><b>Definition:</b> Toggle.h:32</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
@@ -150,7 +148,7 @@ $(function() {
 <div class="ttc" id="aColorPalette_8h_html"><div class="ttname"><a href="ColorPalette_8h.html">ColorPalette.h</a></div><div class="ttdoc">ColorPalette for element styling.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Toggle_1_1Config_html_a4cf5225ed6124469782637236a8a7f75"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Toggle_1_1Config.html#a4cf5225ed6124469782637236a8a7f75">pf::ui::ig::Toggle::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> Toggle.h:35</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

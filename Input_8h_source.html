@@ -129,8 +129,8 @@ $(function() {
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      color;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  StyleOptions&lt;StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize&gt; style;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  Font font = Font::Default();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  Observable&lt;Label&gt; label;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  ObservableProperty&lt;Input, T&gt; value;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  Property&lt;Label&gt; label;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  Property&lt;T&gt; value;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  [[nodiscard]] <span class="keyword">const</span> T &amp;getValue() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">void</span> setValue(<span class="keyword">const</span> T &amp;newValue) <span class="keyword">override</span>;</div>
@@ -200,7 +200,7 @@ $(function() {
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> styleScoped = style.applyScoped();</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  [[maybe_unused]] <span class="keyword">auto</span> fontScoped = font.applyScopedIfNotDefault();</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keyword">auto</span> valueChanged = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> address = &amp;value.value;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> address = &amp;Prop_value(value);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  ImGuiDataType_ dataType;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordflow">if</span> constexpr (OneOf&lt;T, PF_IMGUI_INPUT_FLOAT_TYPE_LIST&gt;) {</div>
@@ -223,7 +223,7 @@ $(function() {
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    *value.modify() = *drop;</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="keywordflow">if</span> (valueChanged) { value.triggerListeners(); }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="keywordflow">if</span> (valueChanged) { Prop_triggerListeners(value); }</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keyword">template</span>&lt;OneOf&lt;PF_IMGUI_INPUT_TYPE_LIST, std::<span class="keywordtype">string</span>&gt; T&gt;</div>
@@ -290,12 +290,12 @@ $(function() {
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1InputText_1_1Config_html_abfd969ff3c42b293ec86dde0c938ed54"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1InputText_1_1Config.html#abfd969ff3c42b293ec86dde0c938ed54">pf::ui::ig::InputText::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> InputText.h:54</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1InputText_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1InputText.html">pf::ui::ig::InputText</a></div><div class="ttdoc">Input for text with support for multiline strings.</div><div class="ttdef"><b>Definition:</b> InputText.h:43</div></div>
 <div class="ttc" id="aInputText_8h_html"><div class="ttname"><a href="InputText_8h.html">InputText.h</a></div><div class="ttdoc">InputText element.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:164</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:194</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html">pf::ui::ig::DragSource</a></div><div class="ttdoc">Class providing the ability for derived to be a source of data for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:165</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DragSource_html_a9fb055a24a1346474708fc93b0f9bf64"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DragSource.html#a9fb055a24a1346474708fc93b0f9bf64">pf::ui::ig::DragSource::drag</a></div><div class="ttdeci">bool drag(const T &amp;sourceData)</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:189</div></div>
 <div class="ttc" id="aValueContainer_8h_html"><div class="ttname"><a href="ValueContainer_8h.html">ValueContainer.h</a></div><div class="ttdoc">Interface for providing inner value access.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Input_1_1Config_html_a72fff770a01a433b84a1da1336f4bf34"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Input_1_1Config.html#a72fff770a01a433b84a1da1336f4bf34">pf::ui::ig::Input::Config::value</a></div><div class="ttdeci">T value</div><div class="ttdef"><b>Definition:</b> Input.h:52</div></div>
 <div class="ttc" id="aenums_8h_html_aec88ef01b4aef44ac4396703cc96205e"><div class="ttname"><a href="enums_8h.html#aec88ef01b4aef44ac4396703cc96205e">pf::ui::ig::Persistent</a></div><div class="ttdeci">Persistent</div><div class="ttdef"><b>Definition:</b> enums.h:64</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:225</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DropTarget_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DropTarget.html">pf::ui::ig::DropTarget</a></div><div class="ttdoc">Target for drag and drop operation.</div><div class="ttdef"><b>Definition:</b> DragNDrop.h:217</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Input_3_01std_1_1string_01_4_1_1Config_html_accaf9b2c6b0878653be13d068f3c5c5b"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Input_3_01std_1_1string_01_4_1_1Config.html#accaf9b2c6b0878653be13d068f3c5c5b">pf::ui::ig::Input&lt; std::string &gt;::Config::label</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; label</div><div class="ttdef"><b>Definition:</b> Input.h:210</div></div>
 <div class="ttc" id="aserialization_8h_html_a827e52c35c0f6324bb84a9d4c24919f4"><div class="ttname"><a href="serialization_8h.html#a827e52c35c0f6324bb84a9d4c24919f4">pf::ui::ig::serializeGlmVec</a></div><div class="ttdeci">PF_IMGUI_EXPORT toml::array serializeGlmVec(const T &amp;vec)</div><div class="ttdef"><b>Definition:</b> serialization.h:121</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1InputText_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1InputText_1_1Config.html">pf::ui::ig::InputText::Config</a></div><div class="ttdoc">Struct for construction of InputText.</div><div class="ttdef"><b>Definition:</b> InputText.h:52</div></div>
@@ -312,7 +312,7 @@ $(function() {
 <div class="ttc" id="aDragNDrop_8h_html"><div class="ttname"><a href="DragNDrop_8h.html">DragNDrop.h</a></div><div class="ttdoc">Definitions for drag and drop interface.</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Input_1_1Config_html_a54d19f7cf595d26a0d4020636a407391"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Input_1_1Config.html#a54d19f7cf595d26a0d4020636a407391">pf::ui::ig::Input::Config::persistent</a></div><div class="ttdeci">bool persistent</div><div class="ttdef"><b>Definition:</b> Input.h:54</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ValueContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ValueContainer.html">pf::ui::ig::ValueContainer</a></div><div class="ttdef"><b>Definition:</b> ValueContainer.h:30</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

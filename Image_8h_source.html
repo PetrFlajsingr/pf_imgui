@@ -102,7 +102,7 @@ $(function() {
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  [[nodiscard]] <span class="keyword">const</span> std::shared_ptr&lt;Texture&gt; &amp;getTexture() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">void</span> setUVs(ImVec2 leftTop, ImVec2 rightBottom);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Size&gt;</a> size;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">Property&lt;Size&gt;</a> size;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
@@ -134,7 +134,7 @@ $(function() {
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordtype">void</span> setZoomSize(std::uint32_t zoom);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Observable.html">Observable&lt;Size&gt;</a> size;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  Property&lt;Size&gt; size;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
@@ -161,7 +161,7 @@ $(function() {
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config_html_acf13e50ba7a1b406ae4c7e2e6bc376b8"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html#acf13e50ba7a1b406ae4c7e2e6bc376b8">pf::ui::ig::InspectableImage::Config::imageWidth</a></div><div class="ttdeci">Explicit&lt; std::size_t &gt; imageWidth</div><div class="ttdef"><b>Definition:</b> Image.h:95</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Image_1_1Config_html_a9859ca3665449296e3fbce68a9dcc3fd"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Image_1_1Config.html#a9859ca3665449296e3fbce68a9dcc3fd">pf::ui::ig::Image::Config::texture</a></div><div class="ttdeci">Explicit&lt; std::shared_ptr&lt; Texture &gt; &gt; texture</div><div class="ttdef"><b>Definition:</b> Image.h:37</div></div>
 <div class="ttc" id="aObservable_8h_html"><div class="ttname"><a href="Observable_8h.html">Observable.h</a></div><div class="ttdoc">Observable properties.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1InspectableImage_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1InspectableImage.html">pf::ui::ig::InspectableImage</a></div><div class="ttdoc">Image rendered from a texture, has a special tooltip zooming on pixels and providing info.</div><div class="ttdef"><b>Definition:</b> Image.h:80</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Image_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Image_1_1Config.html">pf::ui::ig::Image::Config</a></div><div class="ttdoc">Struct for construction of Image.</div><div class="ttdef"><b>Definition:</b> Image.h:34</div></div>
@@ -170,7 +170,7 @@ $(function() {
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config_html_abf06e0f35133bbbdfb8cff5cf90b7b6f"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html#abf06e0f35133bbbdfb8cff5cf90b7b6f">pf::ui::ig::InspectableImage::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> Image.h:91</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Image_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Image.html">pf::ui::ig::Image</a></div><div class="ttdoc">Image rendered from a texture. For button version see ImageButton.</div><div class="ttdef"><b>Definition:</b> Image.h:29</div></div>
 <div class="ttc" id="astructpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config_html_aa89fa7cb84aece0093a3a2d6e28b51d6"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1InspectableImage_1_1Config.html#aa89fa7cb84aece0093a3a2d6e28b51d6">pf::ui::ig::InspectableImage::Config::rgbaData</a></div><div class="ttdeci">Explicit&lt; std::span&lt; const std::byte &gt; &gt; rgbaData</div><div class="ttdef"><b>Definition:</b> Image.h:94</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1InspectableImage_html_ad9b3a53fe7a55c3f1d72c177d16db6fd"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1InspectableImage.html#ad9b3a53fe7a55c3f1d72c177d16db6fd">pf::ui::ig::InspectableImage::Trigger</a></div><div class="ttdeci">Trigger</div><div class="ttdoc">Trigger for inspection popup.</div><div class="ttdef"><b>Definition:</b> Image.h:85</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
