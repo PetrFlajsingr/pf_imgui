@@ -5,7 +5,6 @@
 #include "Notification.h"
 #include <fmt/format.h>
 #include <imgui_internal.h>
-#include <string>
 
 namespace pf::ui::ig {
 

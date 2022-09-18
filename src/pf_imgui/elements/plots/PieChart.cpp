@@ -5,6 +5,8 @@
 #include "PieChart.h"
 #include <implot.h>
 #include <pf_common/RAII.h>
+#include <range/v3/range/conversion.hpp>
+#include <range/v3/view/transform.hpp>
 
 namespace pf::ui::ig {
 

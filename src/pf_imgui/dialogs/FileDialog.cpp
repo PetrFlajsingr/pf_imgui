@@ -3,19 +3,35 @@
 //
 
 #include "FileDialog.h"
+#include <ImGuiFileDialog.h>
+#include <fmt/format.h>
 #include <pf_imgui/managers/DialogManager.h>
+#include <utility>
 
 namespace pf::ui::ig {
 // TODO: fix multi dir selection - when using GetSelection() it returns invalid path
 
+FileDialog::FileDialog(FileType fileType, std::string_view elementName, std::string_view labelText,
+                       const std::vector<FileExtensionSettings> &extSettings,
+                       std::function<void(std::vector<std::filesystem::path>)> onSelect, std::function<void()> onCancel,
+                       Size initialSize, std::filesystem::path startPath, std::string startName, Modal modality,
+                       uint32_t maxSelected)
+    : Renderable(elementName), label(std::string{labelText}), size(initialSize), openPath(std::move(startPath)),
+      defaultName(std::move(startName)), modal(modality), fileType(fileType), maxSelectCount(maxSelected),
+      onFilesSelected(std::move(onSelect)), onSelectCanceled(std::move(onCancel)),
+      fileDialogInstance(new IGFD::FileDialog{}) {
+  if (fileType == FileType::File) { prepareExtInfos(extSettings); }
+}
+
+FileDialog::~FileDialog() = default;
+
 bool FileDialog::isDone() const { return done; }
 
-#ifdef USE_BOOKMARK
-std::string FileDialog::serializeBookmark() { return fileDialogInstance.SerializeBookmarks(); }
+std::string FileDialog::serializeBookmark() { return fileDialogInstance->SerializeBookmarks(); }
+
 void FileDialog::deserializeBookmark(const std::string &bookmarkStr) {
-  fileDialogInstance.DeserializeBookmarks(bookmarkStr);
+  fileDialogInstance->DeserializeBookmarks(bookmarkStr);
 }
-#endif
 
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
   for (const auto &[extNames, desc, extColor] : extSettings) {
@@ -47,25 +63,25 @@ void FileDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance.OpenModal(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
-                                   openPath.string(), defaultName, static_cast<int>(maxSelectCount));
+      fileDialogInstance->OpenModal(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
+                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance.OpenDialog(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
-                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
+      fileDialogInstance->OpenDialog(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
+                                     openPath.string(), defaultName, static_cast<int>(maxSelectCount));
       break;
   }
 
   std::ranges::for_each(extColors, [this](const auto &extColor) {
     const auto &[ext, col] = extColor;
-    fileDialogInstance.SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(col));
+    fileDialogInstance->SetFileStyle(IGFD_FileStyleByExtention, ext.c_str(), static_cast<ImVec4>(col));
   });
 
-  if (fileDialogInstance.Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(*size))) {
-    RAII end{[&] { fileDialogInstance.Close(); }};
-    if (fileDialogInstance.IsOk()) {
-      const auto filePathName = fileDialogInstance.GetFilePathName();
-      const auto selection = fileDialogInstance.GetSelection();
+  if (fileDialogInstance->Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(*size))) {
+    RAII end{[&] { fileDialogInstance->Close(); }};
+    if (fileDialogInstance->IsOk()) {
+      const auto filePathName = fileDialogInstance->GetFilePathName();
+      const auto selection = fileDialogInstance->GetSelection();
 
       if (!selection.empty() && fileType != FileType::Directory) {
         auto selectionVec = std::vector<std::filesystem::path>();
@@ -81,5 +97,4 @@ void FileDialog::renderImpl() {
     done = true;
   }
 }
-
 }  // namespace pf::ui::ig

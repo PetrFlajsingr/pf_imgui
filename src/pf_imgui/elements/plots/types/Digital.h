@@ -8,10 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_TYPES_DIGITAL_H
 #define PF_IMGUI_ELEMENTS_PLOTS_TYPES_DIGITAL_H
 
-#include <implot.h>
-#include <list>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
-#include <string>
 
 namespace pf::ui::ig::plot_type {
 

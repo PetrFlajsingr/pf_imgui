@@ -15,10 +15,8 @@
 #include <pf_imgui/common/Label.h>
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <ranges>
-#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

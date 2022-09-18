@@ -9,8 +9,10 @@
 #define PF_IMGUI_ELEMENTS_PLOTS_TYPES_HEATMAP_H
 
 #include <algorithm>
-#include <implot.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
+#include <range/v3/view/join.hpp>
+#include <range/v3/view/transform.hpp>
+#include <range/v3/range/conversion.hpp>
 #include <string>
 #include <vector>
 

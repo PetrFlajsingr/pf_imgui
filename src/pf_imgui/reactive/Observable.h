@@ -169,6 +169,7 @@ class ObservableProperty {
   using const_reference = const T &;
   using pointer = T *;
   using const_pointer = const T *;
+  constexpr static bool is_read_only = std::same_as<Tag, ReadOnlyTag>;
   /**
    * @brief Proxy for observable manipulation.
    */
@@ -225,7 +226,7 @@ class ObservableProperty {
    * Create a proxy object for manipulation of observable's value.
    */
   [[nodiscard]] Transaction modify()
-    requires(std::same_as<Tag, ReadWriteTag>)
+    requires(!is_read_only)
   {
     return Transaction{*this};
   }
@@ -235,7 +236,7 @@ class ObservableProperty {
    * Create a proxy object for manipulation of observable's value.
    */
   [[nodiscard]] Transaction modify()
-    requires(std::same_as<Tag, ReadOnlyTag>)
+    requires(is_read_only)
   {
     return Transaction{*this};
   }
@@ -244,7 +245,7 @@ class ObservableProperty {
 
   value_type value;
 
-  std::size_t activeTransactions = 0;
+  std::uint8_t activeTransactions = 0;
 
   Observable_impl<value_type> observableImpl;
 };

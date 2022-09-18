@@ -4,6 +4,7 @@
 
 #include "BackgroundDockingArea.h"
 #include <imgui_internal.h>
+#include <imcmd_command_palette.h>
 
 namespace pf::ui::ig {
 
@@ -12,15 +13,13 @@ BackgroundDockingArea::BackgroundDockingArea(std::string_view elementName)
 
 DockSpace &BackgroundDockingArea::getDockSpace() { return dockSpace; }
 
-Size BackgroundDockingArea::getSize() const { return size; }
-
 void BackgroundDockingArea::renderImpl() {
   RAII end{ImGui::End};
   ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size - leftTopMargin - bottomRightMargin);
   ImGui::SetNextWindowPos(ImGui::GetMainViewport()->Pos + leftTopMargin);
   if (ImGui::Begin("##background_dock_window", nullptr, flags)) {
     const auto viewportSize = ImGui::GetMainViewport()->Size;
-    size = Size{Width{viewportSize.x}, Height{viewportSize.y}};
+    *Prop_modify(size) = Size{Width{viewportSize.x}, Height{viewportSize.y}};
     dockSpace.render();
   }
 }

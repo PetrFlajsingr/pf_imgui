@@ -8,11 +8,17 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_TYPES_BAR_H
 #define PF_IMGUI_ELEMENTS_PLOTS_TYPES_BAR_H
 
-#include <implot.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
 #include <string>
 
 namespace pf::ui::ig::plot_type {
+
+namespace details {
+void renderPlotBarsVertical(const char *label, const double *xData, const double *yData, std::size_t size,
+                            double barSize);
+void renderPlotBarsHorizontal(const char *label, const double *xData, const double *yData, std::size_t size,
+                              double barSize);
+}  // namespace details
 
 /**
  * @brief 2D bar plot, which can either be horizontal or vertical.
@@ -31,10 +37,9 @@ class PF_IMGUI_EXPORT Bar : public LabeledPlotData, public details::DefaultPlotD
  protected:
   void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
-      ImPlot::PlotBars(label->get().c_str(), xData.data(), yData.data(), xData.size(), 0.67, 0.);
+      details::renderPlotBarsVertical(label->get().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
     } else {
-      ImPlot::PlotBars(label->get().c_str(), xData.data(), yData.data(), xData.size(), 0.67, 0.,
-                       ImPlotBarsFlags_Horizontal);
+      details::renderPlotBarsHorizontal(label->get().c_str(), xData.data(), yData.data(), xData.size(), 0.67);
     }
   }
 };

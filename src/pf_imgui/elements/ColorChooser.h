@@ -11,7 +11,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
-#include <imgui.h>
 #include <pf_common/Explicit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/_export.h>
