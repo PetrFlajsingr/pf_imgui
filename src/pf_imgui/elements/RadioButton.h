@@ -17,7 +17,6 @@
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <pf_imgui/style/common.h>
-#include <string>
 
 namespace pf::ui::ig {
 

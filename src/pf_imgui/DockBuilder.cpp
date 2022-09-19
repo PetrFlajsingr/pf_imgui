@@ -4,6 +4,7 @@
 
 #include "DockBuilder.h"
 #include <pf_imgui/dialogs/Window.h>
+#include <pf_imgui/elements/DockSpace.h>
 
 namespace pf::ui::ig {
 

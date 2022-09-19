@@ -11,18 +11,15 @@
 #include <algorithm>
 #include <concepts>
 #include <fmt/ostream.h>
-#include <imgui.h>
 #include <memory>
 #include <optional>
 #include <pf_common/concepts/StringConvertible.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/reactive/Event.h>
-#include <pf_imgui/reactive/Observable_impl.h>
 #include <pf_imgui/unique_id.h>
 #include <ranges>
 #include <static_type_info.h>
-#include <string>
 #include <utility>
 #include <vector>
 

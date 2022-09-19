@@ -9,6 +9,7 @@
 #include <imgui_markdown.h>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/ImGuiInterface.h>
+#include <pf_imgui/common/Texture.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <string>
 #include <utility>

@@ -10,11 +10,6 @@
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/ModalDialog.h>
-#include <pf_imgui/elements/Button.h>
-#include <pf_imgui/elements/InputText.h>
-#include <pf_imgui/elements/Text.h>
-#include <pf_imgui/layouts/HorizontalLayout.h>
-#include <string>
 #include <utility>
 
 namespace pf::ui::ig {

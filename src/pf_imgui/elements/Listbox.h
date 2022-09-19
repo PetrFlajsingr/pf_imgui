@@ -21,7 +21,6 @@
 #include <pf_imgui/unique_id.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/enumerate.hpp>
-#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

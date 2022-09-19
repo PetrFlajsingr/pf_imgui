@@ -3,6 +3,7 @@
 //
 
 #include "CommandPaletteWindow.h"
+#include <imcmd_command_palette.h>
 
 namespace pf::ui::ig {
 
@@ -31,6 +32,14 @@ void CommandPaletteWindow::renderImpl() {
   bool open = true;
   ImCmd::CommandPaletteWindow(getName().c_str(), &open);
   if (!open) { *visibility.modify() = Visibility::Invisible; }
+}
+
+void CommandPaletteWindow::addCommandImpl(std::string commandName, std::function<void()> callback) {
+  ImCmd::SetCurrentContext(context);
+  auto command = ImCmd::Command{};
+  command.Name = std::move(commandName);
+  command.InitialCallback = std::forward<decltype(callback)>(callback);
+  ImCmd::AddCommand(std::move(command));
 }
 
 }  // namespace pf::ui::ig

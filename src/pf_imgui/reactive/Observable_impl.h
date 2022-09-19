@@ -53,21 +53,20 @@ class PF_IMGUI_EXPORT Observable_impl {
   using ListenerId = uint32_t;
   using Callback = std::function<void(const Args &...)>;
   using ListenerRecord = std::pair<ListenerId, Callback>;
-  ListenerId generateListenerId() { return idCounter++; }
+  static ListenerId generateListenerId() { return idCounter++; }
 
   std::vector<ListenerRecord> listeners{};
-  ListenerId idCounter{};
+  inline static ListenerId idCounter{};
   std::shared_ptr<bool> exists = std::make_shared<bool>(true);
 };
 
 template<typename... Args>
 Observable_impl<Args...>::Observable_impl(Observable_impl &&other) noexcept
-    : listeners(std::move(other.listeners)), idCounter(other.idCounter) {}
+    : listeners(std::move(other.listeners)) {}
 
 template<typename... Args>
 Observable_impl<Args...> &Observable_impl<Args...>::operator=(Observable_impl &&rhs) noexcept {
   listeners = std::move(rhs.listeners);
-  idCounter = rhs.idCounter;
   return *this;
 }
 

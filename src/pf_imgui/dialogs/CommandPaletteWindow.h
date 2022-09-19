@@ -5,13 +5,17 @@
  * @date 8.2.22
  */
 
-#ifndef PF_IMGUI_COMMANDPALETTEWINDOW_H
-#define PF_IMGUI_COMMANDPALETTEWINDOW_H
+#ifndef PF_IMGUI_DIALOGS_COMMANDPALETTEWINDOW_H
+#define PF_IMGUI_DIALOGS_COMMANDPALETTEWINDOW_H
 
-#include <imcmd_command_palette.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <string>
 #include <utility>
+
+// fwd for command palette implementation
+namespace ImCmd {
+struct Context;
+}
 
 namespace pf::ui::ig {
 
@@ -33,11 +37,7 @@ class CommandPaletteWindow : public Renderable {
    * @param callback callback of the command
    */
   void addCommand(std::string commandName, std::invocable auto &&callback) {
-    ImCmd::SetCurrentContext(context);
-    auto command = ImCmd::Command{};
-    command.Name = std::move(commandName);
-    command.InitialCallback = std::forward<decltype(callback)>(callback);
-    ImCmd::AddCommand(std::move(command));
+    addCommandImpl(std::move(commandName), std::forward<decltype(callback)>(callback));
   }
   /**
    * Remove given command from the palette
@@ -59,8 +59,10 @@ class CommandPaletteWindow : public Renderable {
   void renderImpl() override;
 
  private:
+  void addCommandImpl(std::string commandName, std::function<void()> callback);
+
   ImCmd::Context *context = nullptr;
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_COMMANDPALETTEWINDOW_H
+#endif  // PF_IMGUI_DIALOGS_COMMANDPALETTEWINDOW_H

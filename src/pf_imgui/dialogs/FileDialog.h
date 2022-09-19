@@ -5,10 +5,9 @@
  * @date 7.11.20
  */
 
-#ifndef PF_IMGUI_ELEMENTS_FILEDIALOG_H
-#define PF_IMGUI_ELEMENTS_FILEDIALOG_H
+#ifndef PF_IMGUI_DIALOGS_FILEDIALOG_H
+#define PF_IMGUI_DIALOGS_FILEDIALOG_H
 
-#include <ImGuiFileDialog.h>
 #include <filesystem>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/common/Color.h>
@@ -17,13 +16,16 @@
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
-#include <range/v3/view/transform.hpp>
 #include <string>
 #include <utility>
 #include <vector>
+
+// fwd for ImGuiFileDialog
+namespace IGFD {
+class FileDialog;
+}
 
 namespace pf::ui::ig {
 
@@ -81,12 +83,9 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
              std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
              Size initialSize = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
-      : Renderable(elementName), label(std::string{labelText}), size(initialSize), openPath(std::move(startPath)),
-        defaultName(std::move(startName)), modal(modality), fileType(FileType::File), maxSelectCount(maxSelectedFiles),
-        onFilesSelected(std::forward<decltype(onSelect)>(onSelect)),
-        onSelectCanceled(std::forward<decltype(onCancel)>(onCancel)) {
-    prepareExtInfos(extSettings);
-  }
+      : FileDialog(FileType::File, elementName, labelText, extSettings, std::forward<decltype(onSelect)>(onSelect),
+                   std::forward<decltype(onCancel)>(onCancel), initialSize, startPath, startName, modality,
+                   maxSelectedFiles) {}
 
   /**
    * Construct FileDialog for directories
@@ -101,12 +100,14 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
    * @param maxSelectedDirs maximum amount of selected directories
    */
   FileDialog(std::string_view elementName, std::string_view labelText,
-             std::invocable<std::vector<std::filesystem::path>> auto onSelect, std::invocable auto onCancel,
+             std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
              Size initialSize = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
              Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
-      : Renderable(elementName), label(std::string{labelText}), size(initialSize), openPath(std::move(startPath)),
-        defaultName(std::move(startName)), modal(modality), fileType(FileType::Directory),
-        maxSelectCount(maxSelectedDirs), onFilesSelected(onSelect), onSelectCanceled(onCancel) {}
+      : FileDialog(FileType::Directory, elementName, labelText, {}, std::forward<decltype(onSelect)>(onSelect),
+                   std::forward<decltype(onCancel)>(onCancel), initialSize, startPath, startName, modality,
+                   maxSelectedDirs) {}
+
+  ~FileDialog() override;
 
   /**
    * Check if the dialog has been closed.
@@ -114,11 +115,9 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
    */
   [[nodiscard]] bool isDone() const;
 
-#ifdef USE_BOOKMARK
   [[nodiscard]] std::string serializeBookmark();
 
   void deserializeBookmark(const std::string &bookmarkStr);
-#endif
 
   FullColorPalette color;
   FullStyleOptions style;
@@ -131,6 +130,14 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
   void renderImpl() override;
 
  private:
+  /**
+   * Constructor to hide implementation.
+   */
+  FileDialog(FileType dialogFileType, std::string_view elementName, std::string_view labelText,
+             const std::vector<FileExtensionSettings> &extSettings,
+             std::function<void(std::vector<std::filesystem::path>)> onSelect, std::function<void()> onCancel,
+             Size initialSize, std::filesystem::path startPath, std::string startName, Modal modality,
+             uint32_t maxSelected);
   /**
    * Transform extension settings into filter strings.
    * @param extSettings
@@ -149,11 +156,11 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
   std::function<void(std::vector<std::filesystem::path>)> onFilesSelected;
   std::function<void()> onSelectCanceled;
 
-  ImGuiFileDialog fileDialogInstance;
+  std::unique_ptr<IGFD::FileDialog> fileDialogInstance;
 
   bool done = false;
 };
 
 }  // namespace pf::ui::ig
 
-#endif  // PF_IMGUI_ELEMENTS_FILEDIALOG_H
+#endif  // PF_IMGUI_DIALOGS_FILEDIALOG_H

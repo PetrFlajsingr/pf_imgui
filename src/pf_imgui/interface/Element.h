@@ -9,7 +9,6 @@
 #define PF_IMGUI_INTERFACE_ELEMENT_H
 
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/reactive/Event.h>
 
 namespace pf::ui::ig {
 

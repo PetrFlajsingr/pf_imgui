@@ -5,8 +5,8 @@
  * @date 6.5.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_INPUTDIALOGBUILDER_H
-#define IMGUI_EXPERIMENTS_INPUTDIALOGBUILDER_H
+#ifndef PF_IMGUI_DIALOGS_BUILDERS_INPUTDIALOGBUILDER_H
+#define PF_IMGUI_DIALOGS_BUILDERS_INPUTDIALOGBUILDER_H
 
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/InputDialog.h>
@@ -67,4 +67,4 @@ class PF_IMGUI_EXPORT InputDialogBuilder {
 
 }  // namespace pf::ui::ig
 
-#endif  //IMGUI_EXPERIMENTS_INPUTDIALOGBUILDER_H
+#endif  //PF_IMGUI_DIALOGS_BUILDERS_INPUTDIALOGBUILDER_H

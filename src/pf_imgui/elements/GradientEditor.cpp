@@ -3,6 +3,7 @@
 //
 
 #include "GradientEditor.h"
+#include <imgui_color_gradient.h>
 
 namespace pf::ui::ig {
 
@@ -55,12 +56,12 @@ GradientEditor::GradientEditor(std::string_view elementName, Persistent persiste
 
 Color GradientEditor::getColorAt(float percentage) const {
   float color[4];
-  gradient.getColorAt(percentage, color);
+  gradient->getColorAt(percentage, color);
   return Color::RGB(color[0], color[1], color[2], color[3]);
 }
 
 void GradientEditor::addGradientPoint(GradientPoint gradientPoint) {
-  gradient.addMark(gradientPoint.position, static_cast<ImVec4>(gradientPoint.color));
+  gradient->addMark(gradientPoint.position, static_cast<ImVec4>(gradientPoint.color));
 }
 
 void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
@@ -71,17 +72,17 @@ void GradientEditor::removeGradientPoint(GradientPoint gradientPoint) {
   }
   if (iter == tomlPoints.end()) { return; }
   const auto removeIndex = std::ranges::distance(tomlPoints.begin(), iter);
-  const auto removeIter = std::ranges::next(gradient.getMarks().begin(), removeIndex);
-  gradient.removeMark(*removeIter);
+  const auto removeIter = std::ranges::next(gradient->getMarks().begin(), removeIndex);
+  gradient->removeMark(*removeIter);
 }
 
 void GradientEditor::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  if (ImGui::GradientEditor(&gradient, draggingMark, selectedMark)) { *Prop_modify(points) = getPointsView(); }
-  *Prop_modify(hovered) = gradient.hovered;
-  *Prop_modify(focused) = gradient.focused;
+  if (ImGui::GradientEditor(gradient.get(), draggingMark, selectedMark)) { *Prop_modify(points) = getPointsView(); }
+  *Prop_modify(hovered) = gradient->hovered;
+  *Prop_modify(focused) = gradient->focused;
   if (*focused && ImGui::IsKeyPressed(ImGuiKey_Delete) && selectedMark != nullptr) {
-    gradient.removeMark(selectedMark);
+    gradient->removeMark(selectedMark);
     *Prop_modify(points) = getPointsView();
   }
 }
@@ -105,7 +106,7 @@ void GradientEditor::setFromToml(const toml::table &src) {
 }
 
 GradientPointsView GradientEditor::getPointsView() const {
-  return gradient.getMarks() | ranges::views::transform(details::GradientMarkToGradientPoint{});
+  return gradient->getMarks() | ranges::views::transform(details::GradientMarkToGradientPoint{});
 }
 const GradientPointsView &GradientEditor::getValue() const { return *points; }
 

@@ -8,26 +8,20 @@
 #ifndef PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 #define PF_IMGUI_ELEMENTS_PLOTS_TYPES_PLOTDATABASE_H
 
+#include "Plottable.h"
 #include <algorithm>
 #include <concepts>
+#include <pf_common/concepts/ranges.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/common/Label.h>
-#include <pf_imgui/interface/ElementWithID.h>
-#include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/interface/Renderable.h>
 #include <range/v3/algorithm/minmax.hpp>
-#include <range/v3/core.hpp>
-#include <range/v3/view/join.hpp>
+#include <range/v3/range/conversion.hpp>
 #include <range/v3/view/transform.hpp>
 #include <string>
 #include <vector>
 
 namespace pf::ui::ig::plot_type {
-/**
- * @brief A type which can be rendered using Plot and its descendants.
- */
-template<typename T>
-concept Plottable = std::convertible_to<T, double>;
-
 /**
  * @brief Simple 2D data sample.
  */
@@ -63,9 +57,7 @@ class PF_IMGUI_EXPORT DefaultPlotDataSetting {
    * @todo plot data settings (line width etc.)
    */
   template<Plottable T>
-  void setData(const std::ranges::range auto &newData)
-    requires(std::same_as<std::ranges::range_value_t<decltype(newData)>, XYPlotData<T>>)
-  {
+  void setData(const RangeOf<XYPlotData<T>> auto &newData) {
     xData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); })
         | ranges::to_vector;
     const auto extremes = ranges::minmax(xData);
@@ -84,7 +76,7 @@ class PF_IMGUI_EXPORT DefaultPlotDataSetting {
 /**
  * @brief Base class for all types of plot data.
  */
-class PF_IMGUI_EXPORT PlotData : public ElementWithID {
+class PF_IMGUI_EXPORT PlotData : public Renderable {
  public:
   explicit PlotData(std::string_view elementName);
 };

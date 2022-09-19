@@ -14,7 +14,7 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
-#include <pf_imgui/reactive/Observable.h>
+#include <pf_imgui/interface/ElementWithID.h>
 #include <string>
 #include <utility>
 #include <vector>

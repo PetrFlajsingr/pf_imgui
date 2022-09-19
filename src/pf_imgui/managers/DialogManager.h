@@ -5,8 +5,8 @@
  * @date 5.5.22
  */
 
-#ifndef IMGUI_EXPERIMENTS_DIALOGMANAGER_H
-#define IMGUI_EXPERIMENTS_DIALOGMANAGER_H
+#ifndef PF_IMGUI_MANAGERS_DIALOGMANAGER_H
+#define PF_IMGUI_MANAGERS_DIALOGMANAGER_H
 
 #include <memory>
 #include <pf_imgui/_export.h>
@@ -84,4 +84,4 @@ class PF_IMGUI_EXPORT DialogManager {
 
 }  // namespace pf::ui::ig
 
-#endif  //IMGUI_EXPERIMENTS_DIALOGMANAGER_H
+#endif  //PF_IMGUI_MANAGERS_DIALOGMANAGER_H

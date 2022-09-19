@@ -10,10 +10,11 @@
 
 #include <memory>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Label.h>
 #include <pf_imgui/common/Position.h>
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/elements/DockSpace.h>
-#include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <string>
 #include <vector>
@@ -37,6 +38,7 @@ class PF_IMGUI_EXPORT Window : public Renderable, public ElementContainer {
    * @param allowCollapse
    */
   Window(std::string_view elementName, std::string_view titleLabel, AllowCollapse allowCollapse = AllowCollapse::No);
+  ~Window();
 
   /**
    * Provides Windows menu bar. If the menu bar doesn't exist new one is created.
@@ -218,7 +220,7 @@ class PF_IMGUI_EXPORT Window : public Renderable, public ElementContainer {
  private:
   void refreshIdLabel();
 
-  std::unique_ptr<WindowMenuBar> menuBar = nullptr;
+  std::unique_ptr<WindowMenuBar> menuBar;
   std::optional<Size> minSizeConstraint = std::nullopt;
   std::optional<Size> maxSizeConstraint = std::nullopt;
 

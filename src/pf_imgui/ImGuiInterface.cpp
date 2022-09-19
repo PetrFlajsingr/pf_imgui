@@ -9,6 +9,14 @@
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/filter.hpp>
 #include <utility>
+#include <pf_imgui/dialogs/BackgroundDockingArea.h>
+#include <pf_imgui/dialogs/CommandPaletteWindow.h>
+#include <pf_imgui/dialogs/Window.h>
+#include <pf_imgui/elements/MenuBars.h>
+#include <pf_imgui/elements/OverlayGizmo.h>
+#include <pf_imgui/elements/RadioGroup.h>
+#include <pf_imgui/elements/StatusBar.h>
+#include <pf_imgui/interface/DragNDrop.h>
 
 namespace pf::ui::ig {
 

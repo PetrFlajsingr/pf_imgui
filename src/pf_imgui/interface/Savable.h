@@ -11,7 +11,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/TomlSerializable.h>
-#include <string>
 #include <toml++/toml.h>
 
 namespace pf::ui::ig {

@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_ELEMENTS_GRADIENTEDITOR_H
 #define PF_IMGUI_ELEMENTS_GRADIENTEDITOR_H
 
-#include <imgui_color_gradient.h>
+#include <list>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/common/Color.h>
 #include <pf_imgui/common/Font.h>
@@ -18,6 +18,10 @@
 #include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/transform.hpp>
 #include <range/v3/view/zip.hpp>
+
+// fwd to avoid including implementation
+struct ImGradientMark;
+class ImGradient;
 
 namespace pf::ui::ig {
 
@@ -43,7 +47,7 @@ struct GradientMarkToGradientPoint {
  * View of gradient points in GradientEditor.
  */
 using GradientPointsView =
-    ranges::transform_view<ranges::ref_view<const std::list<ImGradientMark *>>, details::GradientMarkToGradientPoint>;
+    ranges::transform_view<ranges::ref_view<std::list<ImGradientMark *>>, details::GradientMarkToGradientPoint>;
 struct GradientPointsViewComparator {
   [[nodiscard]] bool operator()(GradientPointsView lhs, GradientPointsView rhs);
 };
@@ -110,7 +114,7 @@ class GradientEditor : public ElementWithID, public ValueContainer<GradientPoint
  private:
   [[nodiscard]] GradientPointsView getPointsView() const;
 
-  ImGradient gradient;
+  std::unique_ptr<ImGradient> gradient;
   ImGradientMark *draggingMark = nullptr;
   ImGradientMark *selectedMark = nullptr;
 };

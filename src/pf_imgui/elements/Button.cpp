@@ -12,16 +12,10 @@ namespace pf::ui::ig {
 ButtonBase::ButtonBase(std::string_view elementName, Repeatable isRepeatable)
     : ItemElement(elementName), repeatable(isRepeatable == Repeatable::Yes) {}
 
-bool ButtonBase::isRepeatable() const { return repeatable; }
-
-void ButtonBase::setRepeatable(bool newRepeatable) { repeatable = newRepeatable; }
-
 RAII ButtonBase::setButtonRepeat() {
-  ImGui::PushButtonRepeat(isRepeatable());
+  ImGui::PushButtonRepeat(repeatable);
   return RAII{ImGui::PopButtonRepeat};
 }
-
-void ButtonBase::notifyClickEvent() { Event_notify(clickEvent); }
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
     : InvisibleButton(config.name, config.size, config.clickButton,
@@ -33,7 +27,7 @@ InvisibleButton::InvisibleButton(std::string_view elementName, Size s, MouseButt
 void InvisibleButton::renderImpl() {
   [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(*size), static_cast<int>(clickBtn))) {
-    notifyClickEvent();
+    Event_notify(clickEvent);
   }
 }
 
@@ -48,7 +42,7 @@ void Button::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::Button(label->get().c_str(), static_cast<ImVec2>(*size))) { notifyClickEvent(); }
+  if (ImGui::Button(label->get().c_str(), static_cast<ImVec2>(*size))) { Event_notify(clickEvent); }
 }
 
 SmallButton::SmallButton(SmallButton::Config &&config)
@@ -62,7 +56,7 @@ void SmallButton::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::SmallButton(label->get().c_str())) { notifyClickEvent(); }
+  if (ImGui::SmallButton(label->get().c_str())) { Event_notify(clickEvent); }
 }
 
 ArrowButton::ArrowButton(ArrowButton::Config &&config)
@@ -75,7 +69,7 @@ void ArrowButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { notifyClickEvent(); }
+  if (ImGui::ArrowButton(getName().c_str(), static_cast<ImGuiDir>(dir))) { Event_notify(clickEvent); }
 }
 
 ImageButton::ImageButton(ImageButton::Config &&config)
@@ -96,7 +90,7 @@ void ImageButton::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto repeat = setButtonRepeat();
   if (ImGui::ImageButton(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom)) {
-    notifyClickEvent();
+    Event_notify(clickEvent);
   }
 }
 

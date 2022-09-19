@@ -3,6 +3,7 @@
 //
 
 #include "Stairs.h"
+#include <implot.h>
 
 namespace pf::ui::ig::plot_type {
 

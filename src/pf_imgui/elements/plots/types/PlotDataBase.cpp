@@ -10,6 +10,6 @@ namespace pf::ui::ig::plot_type {
 LabeledPlotData::LabeledPlotData(std::string_view elementName, std::string_view caption)
     : PlotData(elementName), label(std::string{caption}) {}
 
-PlotData::PlotData(std::string_view elementName) : ElementWithID(elementName) {}
+PlotData::PlotData(std::string_view elementName) : Renderable(elementName) {}
 
 }  // namespace pf::ui::ig::plot_type

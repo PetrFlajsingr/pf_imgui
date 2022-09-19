@@ -12,11 +12,8 @@
 #include <pf_imgui/common/Label.h>
 #include <pf_imgui/common/Position.h>
 #include <pf_imgui/common/Size.h>
-#include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Renderable.h>
-#include <pf_imgui/reactive/Observable.h>
-#include <string>
 
 namespace pf::ui::ig {
 

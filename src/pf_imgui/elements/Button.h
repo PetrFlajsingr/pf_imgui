@@ -8,7 +8,6 @@
 #ifndef PF_IMGUI_ELEMENTS_BUTTON_H
 #define PF_IMGUI_ELEMENTS_BUTTON_H
 
-#include <functional>
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/common/Font.h>
@@ -16,12 +15,8 @@
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/common/Texture.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/reactive/Event.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
-#include <pf_imgui/style/common.h>
-#include <string>
 
 namespace pf::ui::ig {
 /** Button types in this file: */
@@ -46,26 +41,12 @@ class PF_IMGUI_EXPORT ButtonBase : public ItemElement {
    */
   explicit ButtonBase(std::string_view elementName, Repeatable isRepeatable = Repeatable::No);
 
-  /**
-   * Check whether the button is repeatable or not
-   * @return
-   */
-  [[nodiscard]] bool isRepeatable() const;
-  /**
-   * Set repeatable. If true then the button can be held by the user to trigger click events.
-   * @param repeatable new state
-   */
-  void setRepeatable(bool newRepeatable);
+  bool repeatable;
 
   Event<> clickEvent;
 
  protected:
   [[nodiscard]] RAII setButtonRepeat();
-
-  void notifyClickEvent();
-
- private:
-  bool repeatable;
 };
 
 /**

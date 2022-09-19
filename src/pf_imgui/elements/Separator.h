@@ -11,7 +11,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/style/ColorPalette.h>
-#include <string>
 
 namespace pf::ui::ig {
 

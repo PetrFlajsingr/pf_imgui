@@ -13,7 +13,6 @@
 #include <pf_imgui/common/Position.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/ElementWithID.h>
-#include <string>
 #include <utility>
 
 namespace pf::ui::ig {

@@ -11,7 +11,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/interface/Element.h>
-#include <string>
 
 namespace pf::ui::ig {
 

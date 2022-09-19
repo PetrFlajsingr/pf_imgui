@@ -14,7 +14,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <string>
 
 namespace pf::ui::ig {
 /**

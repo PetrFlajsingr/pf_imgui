@@ -19,8 +19,6 @@
 #include <pf_imgui/interface/decorators/WidthDecorator.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
-#include <string>
-#include <tuple>
 #include <utility>
 #include <vector>
 

@@ -4,6 +4,9 @@
 
 #include "MessageDialog.h"
 #include <pf_imgui/elements/Dummy.h>
+#include <pf_imgui/elements/Button.h>
+#include <pf_imgui/elements/Text.h>
+#include <pf_imgui/layouts/HorizontalLayout.h>
 
 namespace pf::ui::ig {
 

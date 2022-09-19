@@ -8,6 +8,7 @@
 #ifndef PF_IMGUI_DIALOGS_BACKGROUNDDOCKINGAREA_H
 #define PF_IMGUI_DIALOGS_BACKGROUNDDOCKINGAREA_H
 
+#include <pf_imgui/_export.h>
 #include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/interface/Renderable.h>
 
@@ -16,7 +17,7 @@ namespace pf::ui::ig {
 /**
  * @brief A special type of window, which acts as docking area for the whole main viewport. It is always in the background.
  */
-class BackgroundDockingArea : public Renderable {
+class PF_IMGUI_EXPORT BackgroundDockingArea : public Renderable {
   friend class ImGuiInterface;
 
  public:
@@ -32,7 +33,8 @@ class BackgroundDockingArea : public Renderable {
    */
   [[nodiscard]] DockSpace &getDockSpace();
 
-  [[nodiscard]] Size getSize() const;
+  /** Size automatically computed to fit the viewport */
+  ReadOnlyProperty<Size> size;
 
  protected:
   void renderImpl() override;
@@ -40,7 +42,6 @@ class BackgroundDockingArea : public Renderable {
  private:
   ImVec2 leftTopMargin = ImVec2{0, 0};
   ImVec2 bottomRightMargin = ImVec2{0, 0};
-  Size size;
   DockSpace dockSpace;
   constexpr static auto flags = ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoResize
       | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar;

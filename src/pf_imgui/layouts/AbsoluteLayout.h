@@ -17,7 +17,6 @@
 #include <pf_imgui/interface/Layout.h>
 #include <range/v3/view/addressof.hpp>
 #include <range/v3/view/transform.hpp>
-#include <string>
 #include <utility>
 #include <vector>
 

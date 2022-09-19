@@ -13,7 +13,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/common/Label.h>
 #include <pf_imgui/elements/CustomItemBox.h>
-#include <string>
 #include <utility>
 
 namespace pf::ui::ig {

@@ -9,12 +9,20 @@
 #define PF_IMGUI_ELEMENTS_PLOTS_TYPES_ERRORBAR_H
 
 #include <algorithm>
-#include <implot.h>
+#include <pf_common/concepts/ranges.h>
 #include <pf_imgui/elements/plots/types/PlotDataBase.h>
-#include <string>
+#include <range/v3/range/conversion.hpp>
+#include <range/v3/view/transform.hpp>
 #include <vector>
 
 namespace pf::ui::ig::plot_type {
+
+namespace details {
+void renderErrorBarVertical(const char *label, const double *xData, const double *yData, const double *errorData,
+                            int size);
+void renderErrorBarHorizontal(const char *label, const double *xData, const double *yData, const double *errorData,
+                              int size);
+}  // namespace details
 
 /**
  * @brief 2D bar plot, which can either be horizontal or vertical. It shows error margin for each bar.
@@ -37,9 +45,7 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
    * @tparam type of data to plot
    */
   template<Plottable T>
-  void setData(const std::ranges::range auto &newData)
-    requires(std::same_as<std::ranges::range_value_t<decltype(newData)>, XYErrorPlotData<T>>)
-  {
+  void setData(const RangeOf<XYErrorPlotData<T>> auto &newData) {
     const auto xyData = newData | ranges::views::transform([](const auto &data) { return XYPlotData(data.x, data.y); })
         | ranges::to_vector;
     details::DefaultPlotDataSetting::setData(xyData);
@@ -50,10 +56,9 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
  protected:
   void renderImpl() override {
     if constexpr (Type == BarType::Vertical) {
-      ImPlot::PlotErrorBars(label->get().c_str(), xData.data(), yData.data(), error.data(), xData.size());
+      details::renderErrorBarVertical(label->get().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     } else {
-      ImPlot::PlotErrorBars(label->get().c_str(), xData.data(), yData.data(), error.data(), xData.size(),
-                            ImPlotErrorBarsFlags_Horizontal);
+      details::renderErrorBarHorizontal(label->get().c_str(), xData.data(), yData.data(), error.data(), xData.size());
     }
   }
 

@@ -9,7 +9,6 @@
 #define PF_IMGUI_COLOR_H
 
 #include <concepts>
-#include <cstdint>
 #include <imgui.h>
 #include <pf_common/concepts/Integral.h>
 #include <pf_imgui/_export.h>
