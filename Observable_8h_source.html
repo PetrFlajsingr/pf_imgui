@@ -205,94 +205,93 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keyword">using</span> const_reference = <span class="keyword">const</span> T &amp;;</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keyword">using</span> pointer = T *;</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keyword">using</span> const_pointer = <span class="keyword">const</span> T *;</div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">  175</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a> {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;   <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a> &amp;observable) : owner(observable), detector(observable.value) {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;      ++owner.activeTransactions;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    ~<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>() {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      <span class="keywordflow">if</span> (isLastTransaction()) {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">if</span> (detector.hasValueChanged(owner.value)) { owner.observableImpl.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2">notify</a>(owner.value); }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      --owner.activeTransactions;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    }</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    [[nodiscard]] reference get() { <span class="keywordflow">return</span> owner.value; }</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    [[nodiscard]] pointer operator-&gt;() { <span class="keywordflow">return</span> &amp;owner.value; }</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    [[nodiscard]] reference operator*() { <span class="keywordflow">return</span> owner.value; }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;   <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    [[nodiscard]] <span class="keywordtype">bool</span> isLastTransaction()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> owner.activeTransactions == 1; }</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a> &amp;owner;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    Detector detector;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  };</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>()</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    requires(std::is_default_constructible_v&lt;value_type&gt;)</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  : value{} {}</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keyword">explicit</span> ObservableProperty(value_type val) : value(std::move(val)) {}</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  ~ObservableProperty() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  ObservableProperty(ObservableProperty &amp;&amp;other) noexcept</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;      : value(std::move(other.value)), observableImpl(std::move(other.observableImpl)) {}</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  ObservableProperty &amp;operator=(ObservableProperty &amp;&amp;other) noexcept {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    value = std::move(other.value);</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    observableImpl = std::move(other.observableImpl);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  }</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="comment">// explicit copy construction, because it loses observers</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  [[nodiscard]] ObservableProperty copy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> Observable{value}; }</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  Subscription addListener(std::invocable&lt;const_reference&gt; <span class="keyword">auto</span> &amp;&amp;listener) {</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keywordflow">return</span> observableImpl.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#af2379ee32d569a27be587a102e956685">addListener</a>(std::forward&lt;decltype(listener)&gt;(listener));</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  }</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  [[nodiscard]] const_reference operator*()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> value; }</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  [[nodiscard]] const_pointer operator-&gt;()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> &amp;value; }</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  [[nodiscard]] const_reference get()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> value; }</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasActiveTransactions()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> activeTransactions != 0; }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">  227</a></span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>()</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    requires(std::same_as&lt;Tag, <a class="code" href="structpf_1_1ui_1_1ig_1_1ReadWriteTag.html">ReadWriteTag</a>&gt;)</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  {</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>{*<span class="keyword">this</span>};</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  }</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  [[nodiscard]] Transaction <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a>()</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    requires(std::same_as&lt;Tag, <a class="code" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a>&gt;)</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  {</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">return</span> Transaction{*<span class="keyword">this</span>};</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  }</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keywordtype">void</span> triggerListeners() { observableImpl.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2">notify</a>(value); }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  value_type value;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  std::size_t activeTransactions = 0;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  Observable_impl&lt;value_type&gt; observableImpl;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;};</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_REACTIVE_OBSERVABLE_H</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  constexpr <span class="keyword">static</span> <span class="keywordtype">bool</span> is_read_only = std::same_as&lt;Tag, ReadOnlyTag&gt;;</div>
+<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">  176</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a> {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a> &amp;observable) : owner(observable), detector(observable.value) {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;      ++owner.activeTransactions;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    ~<a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>() {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      <span class="keywordflow">if</span> (isLastTransaction()) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordflow">if</span> (detector.hasValueChanged(owner.value)) { owner.observableImpl.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2">notify</a>(owner.value); }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      --owner.activeTransactions;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    [[nodiscard]] reference get() { <span class="keywordflow">return</span> owner.value; }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    [[nodiscard]] pointer operator-&gt;() { <span class="keywordflow">return</span> &amp;owner.value; }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    [[nodiscard]] reference operator*() { <span class="keywordflow">return</span> owner.value; }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    [[nodiscard]] <span class="keywordtype">bool</span> isLastTransaction()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> owner.activeTransactions == 1; }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a> &amp;owner;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    Detector detector;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  };</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">ObservableProperty</a>()</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    requires(std::is_default_constructible_v&lt;value_type&gt;)</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  : value{} {}</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="keyword">explicit</span> ObservableProperty(value_type val) : value(std::move(val)) {}</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  ~ObservableProperty() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  ObservableProperty(ObservableProperty &amp;&amp;other) noexcept</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      : value(std::move(other.value)), observableImpl(std::move(other.observableImpl)) {}</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  ObservableProperty &amp;operator=(ObservableProperty &amp;&amp;other) noexcept {</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    value = std::move(other.value);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    observableImpl = std::move(other.observableImpl);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  }</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="comment">// explicit copy construction, because it loses observers</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  [[nodiscard]] ObservableProperty copy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> Observable{value}; }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  Subscription addListener(std::invocable&lt;const_reference&gt; <span class="keyword">auto</span> &amp;&amp;listener) {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keywordflow">return</span> observableImpl.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#af2379ee32d569a27be587a102e956685">addListener</a>(std::forward&lt;decltype(listener)&gt;(listener));</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  [[nodiscard]] const_reference operator*()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> value; }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  [[nodiscard]] const_pointer operator-&gt;()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> &amp;value; }</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  [[nodiscard]] const_reference get()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> value; }</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  [[nodiscard]] <span class="keywordtype">bool</span> hasActiveTransactions()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> activeTransactions != 0; }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a2fe5e2214c4d3c221a692fdd8457c9d3">  228</a></span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a2fe5e2214c4d3c221a692fdd8457c9d3">modify</a>()</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    requires(!is_read_only)</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>{*<span class="keyword">this</span>};</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  }</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  [[nodiscard]] Transaction <a class="code" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a2fe5e2214c4d3c221a692fdd8457c9d3">modify</a>()</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    requires(is_read_only)</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordflow">return</span> Transaction{*<span class="keyword">this</span>};</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keywordtype">void</span> triggerListeners() { observableImpl.<a class="code" href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2">notify</a>(value); }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  value_type value;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  std::uint8_t activeTransactions = 0;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  Observable_impl&lt;value_type&gt; observableImpl;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;};</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_REACTIVE_OBSERVABLE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aObservable_8h_html_aaa55338fc1cef22fdf32108aa071c97e"><div class="ttname"><a href="Observable_8h.html#aaa55338fc1cef22fdf32108aa071c97e">pf::ui::ig::ObservableChangeDetector</a></div><div class="ttdeci">concept ObservableChangeDetector</div><div class="ttdef"><b>Definition:</b> Observable.h:25</div></div>
 <div class="ttc" id="aObservable__impl_8h_html"><div class="ttname"><a href="Observable__impl_8h.html">Observable_impl.h</a></div><div class="ttdoc">Implementation of observable.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html_af2379ee32d569a27be587a102e956685"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#af2379ee32d569a27be587a102e956685">pf::ui::ig::Observable_impl::addListener</a></div><div class="ttdeci">Subscription addListener(std::invocable&lt; const Args &amp;... &gt; auto &amp;&amp;fnc)</div><div class="ttdef"><b>Definition:</b> Observable_impl.h:80</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html_af2379ee32d569a27be587a102e956685"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#af2379ee32d569a27be587a102e956685">pf::ui::ig::Observable_impl::addListener</a></div><div class="ttdeci">Subscription addListener(std::invocable&lt; const Args &amp;... &gt; auto &amp;&amp;fnc)</div><div class="ttdef"><b>Definition:</b> Observable_impl.h:79</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_1_1Transaction_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable_1_1Transaction.html">pf::ui::ig::Observable::Transaction</a></div><div class="ttdoc">Proxy for observable manipulation.</div><div class="ttdef"><b>Definition:</b> Observable.h:92</div></div>
 <div class="ttc" id="aLogPanel_8h_html_afd594de6fdf0c9e84f8a1cec12f93c27"><div class="ttname"><a href="LogPanel_8h.html#afd594de6fdf0c9e84f8a1cec12f93c27">pf::ui::ig::requires</a></div><div class="ttdeci">requires((RecordLimit &amp;(RecordLimit - 1))==0) class PF_IMGUI_EXPORT LogPanel requires((RecordLimit &amp;(RecordLimit - 1))==0) LogPanel&lt; Category</div><div class="ttdoc">An element displaying log data.</div><div class="ttdef"><b>Definition:</b> LogPanel.h:186</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1ReadOnlyTag_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">pf::ui::ig::ReadOnlyTag</a></div><div class="ttdef"><b>Definition:</b> Tags.h:10</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html_a8d7a95f4a909450c12512472d5e7bea2"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2">pf::ui::ig::Observable_impl::notify</a></div><div class="ttdeci">void notify(const Args &amp;...args)</div><div class="ttdef"><b>Definition:</b> Observable_impl.h:91</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1ReadWriteTag_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1ReadWriteTag.html">pf::ui::ig::ReadWriteTag</a></div><div class="ttdef"><b>Definition:</b> Tags.h:11</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">pf::ui::ig::ObservableProperty::Transaction</a></div><div class="ttdoc">Proxy for observable manipulation.</div><div class="ttdef"><b>Definition:</b> Observable.h:175</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable__impl_html_a8d7a95f4a909450c12512472d5e7bea2"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable__impl.html#a8d7a95f4a909450c12512472d5e7bea2">pf::ui::ig::Observable_impl::notify</a></div><div class="ttdeci">void notify(const Args &amp;...args)</div><div class="ttdef"><b>Definition:</b> Observable_impl.h:90</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html_a2fe5e2214c4d3c221a692fdd8457c9d3"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a2fe5e2214c4d3c221a692fdd8457c9d3">pf::ui::ig::ObservableProperty::modify</a></div><div class="ttdeci">Transaction modify() requires(!is_read_only)</div><div class="ttdef"><b>Definition:</b> Observable.h:228</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">pf::ui::ig::ObservableProperty::Transaction</a></div><div class="ttdoc">Proxy for observable manipulation.</div><div class="ttdef"><b>Definition:</b> Observable.h:176</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1AlwaysTrueChangeDetector_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1AlwaysTrueChangeDetector.html">pf::ui::ig::AlwaysTrueChangeDetector</a></div><div class="ttdef"><b>Definition:</b> Observable.h:46</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html">pf::ui::ig::ObservableProperty</a></div><div class="ttdef"><b>Definition:</b> Observable.h:163</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html">pf::ui::ig::Observable</a></div><div class="ttdef"><b>Definition:</b> Observable.h:82</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ObservableProperty_html_a958efec65ad17b45c82d04ad30529eab"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">pf::ui::ig::ObservableProperty::modify</a></div><div class="ttdeci">Transaction modify() requires(std</div><div class="ttdef"><b>Definition:</b> Observable.h:227</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Observable_html_a6718aa6ec417dad0902ac12324fb25a8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8">pf::ui::ig::Observable::modify</a></div><div class="ttdeci">Transaction modify()</div><div class="ttdef"><b>Definition:</b> Observable.h:142</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1DefaultChangeDetector_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1DefaultChangeDetector.html">pf::ui::ig::DefaultChangeDetector</a></div><div class="ttdef"><b>Definition:</b> Observable.h:36</div></div>
 <!-- start footer part -->

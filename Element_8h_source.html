@@ -75,28 +75,26 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_INTERFACE_ELEMENT_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Renderable_8h.html">pf_imgui/interface/Renderable.h</a>&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Event_8h.html">pf_imgui/reactive/Event.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Element.html">   22</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>(std::string_view elementName);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  ~<a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&amp;other) noexcept;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;operator=(<a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&amp;other) noexcept;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Element.html#a915b96898a32983417b3d2e4bd4ccdff">   36</a></span>&#160;  Event&lt;&gt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html#a915b96898a32983417b3d2e4bd4ccdff">destroyEvent</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_INTERFACE_ELEMENT_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Element.html">   21</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>(std::string_view elementName);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  ~<a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&amp;other) noexcept;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;operator=(<a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html">Element</a> &amp;&amp;other) noexcept;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1Element.html#a915b96898a32983417b3d2e4bd4ccdff">   35</a></span>&#160;  Event&lt;&gt; <a class="code" href="classpf_1_1ui_1_1ig_1_1Element.html#a915b96898a32983417b3d2e4bd4ccdff">destroyEvent</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_INTERFACE_ELEMENT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Base class for anythin which can be considered a UI element.</div><div class="ttdef"><b>Definition:</b> Element.h:22</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html">pf::ui::ig::Element</a></div><div class="ttdoc">Base class for anythin which can be considered a UI element.</div><div class="ttdef"><b>Definition:</b> Element.h:21</div></div>
 <div class="ttc" id="aRenderable_8h_html"><div class="ttname"><a href="Renderable_8h.html">Renderable.h</a></div><div class="ttdoc">Base class for renderables.</div></div>
-<div class="ttc" id="aEvent_8h_html"><div class="ttname"><a href="Event_8h.html">Event.h</a></div><div class="ttdoc">Events.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html_a915b96898a32983417b3d2e4bd4ccdff"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html#a915b96898a32983417b3d2e4bd4ccdff">pf::ui::ig::Element::destroyEvent</a></div><div class="ttdeci">Event destroyEvent</div><div class="ttdef"><b>Definition:</b> Element.h:36</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Element_html_a915b96898a32983417b3d2e4bd4ccdff"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Element.html#a915b96898a32983417b3d2e4bd4ccdff">pf::ui::ig::Element::destroyEvent</a></div><div class="ttdeci">Event destroyEvent</div><div class="ttdef"><b>Definition:</b> Element.h:35</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:27</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -70,6 +70,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classpf_1_1ui_1_1ig_1_1ObservableProperty-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">pf::ui::ig::ObservableProperty&lt; Owner, T, Tag, Detector &gt; Class Template Reference</div>  </div>
@@ -131,8 +132,14 @@ const_reference&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()
 <tr class="memitem:a26a81746800e0fae29fa47a01ff2d1fb"><td class="memItemLeft" align="right" valign="top"><a id="a26a81746800e0fae29fa47a01ff2d1fb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasActiveTransactions</b> () const</td></tr>
 <tr class="separator:a26a81746800e0fae29fa47a01ff2d1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a958efec65ad17b45c82d04ad30529eab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a958efec65ad17b45c82d04ad30529eab">modify</a> () requires(std</td></tr>
-<tr class="separator:a958efec65ad17b45c82d04ad30529eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fe5e2214c4d3c221a692fdd8457c9d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty_1_1Transaction.html">Transaction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a2fe5e2214c4d3c221a692fdd8457c9d3">modify</a> () requires(!is_read_only)</td></tr>
+<tr class="separator:a2fe5e2214c4d3c221a692fdd8457c9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a8b7dc89e4e4602a39d56b2481c2de38d"><td class="memItemLeft" align="right" valign="top"><a id="a8b7dc89e4e4602a39d56b2481c2de38d"></a>
+constexpr static bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_read_only</b> = std::same_as&lt;Tag, <a class="el" href="structpf_1_1ui_1_1ig_1_1ReadOnlyTag.html">ReadOnlyTag</a>&gt;</td></tr>
+<tr class="separator:a8b7dc89e4e4602a39d56b2481c2de38d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Owner, typename T, OneOf&lt; ReadWriteTag, ReadOnlyTag &gt; Tag = ReadWriteTag, ObservableChangeDetector&lt; T &gt; Detector = DefaultChangeDetector&lt;T&gt;&gt;<br />
@@ -148,8 +155,8 @@ class pf::ui::ig::ObservableProperty&lt; Owner, T, Tag, Detector &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a958efec65ad17b45c82d04ad30529eab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a958efec65ad17b45c82d04ad30529eab">&#9670;&nbsp;</a></span>modify()</h2>
+<a id="a2fe5e2214c4d3c221a692fdd8457c9d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fe5e2214c4d3c221a692fdd8457c9d3">&#9670;&nbsp;</a></span>modify()</h2>
 
 <div class="memitem">
 <div class="memproto">

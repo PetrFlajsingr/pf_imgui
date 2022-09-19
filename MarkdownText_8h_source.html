@@ -81,87 +81,89 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;imgui_markdown.h&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;pf_common/Explicit.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ImGuiInterface_8h.html">pf_imgui/ImGuiInterface.h</a>&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>details {</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">   18</a></span>&#160;<span class="keyword">struct </span>PF_IMGUI_EXPORT <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">FontData</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  ImFont *fontH1 = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  ImFont *fontH2 = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  ImFont *fontH3 = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">FontData</a> DefaultFontData;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}  <span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">   34</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData.html">   36</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData.html">ImageData</a> {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::shared_ptr&lt;Texture&gt; texture;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">using</span> ImageLoader = std::function&lt;std::optional&lt;ImageData&gt;(std::string_view)&gt;;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">struct </span>FontDefault;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">   45</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">Config</a> {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#ab3c0b3b233a50c0fe548cec639a721e3">   47</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#ab3c0b3b233a50c0fe548cec639a721e3">name</a>;                       </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a8f32d7d08dddeebd01b832f6dbb34d23">   48</a></span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;<a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a8f32d7d08dddeebd01b832f6dbb34d23">imguiInterface</a>;                        </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a36ae6a1c12f6da884e95db1647b082a7">   49</a></span>&#160;    std::u8string markdownText{};                          </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a01604085f3c62a249d2f9ca289ce2419">   50</a></span>&#160;    <span class="keywordtype">float</span> fontSize = 12.f;                                 </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#aab867dd191713bd171dc283898455688">   51</a></span>&#160;    std::optional&lt;ImageLoader&gt; imageLoader = std::nullopt; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  };</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a>(std::string_view elementName, <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;imguiInterface, std::u8string markdown = u8<span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;               <span class="keywordtype">float</span> defaultFontSize = 12.f, std::optional&lt;ImageLoader&gt; imageLoader = std::nullopt);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  [[nodiscard]] std::u8string_view getMarkdownSrc() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">void</span> setMarkdownSrc(std::u8string markdownSrc);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  [[nodiscard]] <span class="keywordtype">float</span> getFontSize() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordtype">void</span> setFontSize(<span class="keywordtype">float</span> fontSize);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#abfc5ddfac57dead0f51bcfbd736290c8">   94</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#abfc5ddfac57dead0f51bcfbd736290c8">setOnLinkClicked</a>(std::invocable&lt;std::string_view, bool&gt; <span class="keyword">auto</span> &amp;&amp;callback) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    onLinkClicked = std::forward&lt;decltype(callback)&gt;(callback);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordtype">void</span> setImageLoader(ImageLoader imageLoader);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// TODO: static void SetFont(ImFont *font, ImGuiInterface &amp;imGuiInterface);</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordtype">void</span> configure();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordtype">void</span> loadHeaderFonts();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> MarkdownFormatCallback(<span class="keyword">const</span> ImGui::MarkdownFormatInfo &amp;markdownFormatInfo, <span class="keywordtype">bool</span> start);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keyword">static</span> ImGui::MarkdownImageData MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  ImGui::MarkdownConfig markdownConfig;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;imGuiInterface;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  std::u8string markdownSrc{};</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordtype">float</span> fontSize = 12.f;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  std::function&lt;void(std::string_view, <span class="keywordtype">bool</span>)&gt; onLinkClicked = [](<span class="keyword">auto</span>, <span class="keyword">auto</span>) {};</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  std::optional&lt;ImageLoader&gt; loadImage = std::nullopt;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;};</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_MARKDOWNTEXT_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Texture_8h.html">pf_imgui/common/Texture.h</a>&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ItemElement_8h.html">pf_imgui/interface/ItemElement.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>details {</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">   19</a></span>&#160;<span class="keyword">struct </span>PF_IMGUI_EXPORT <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">FontData</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  ImFont *fontH1 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  ImFont *fontH2 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  ImFont *fontH3 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">FontData</a> DefaultFontData;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}  <span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">   35</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ItemElement.html">ItemElement</a> {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData.html">   37</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData.html">ImageData</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::shared_ptr&lt;Texture&gt; texture;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> size;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  };</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">using</span> ImageLoader = std::function&lt;std::optional&lt;ImageData&gt;(std::string_view)&gt;;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">struct </span>FontDefault;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">   46</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">Config</a> {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#ab3c0b3b233a50c0fe548cec639a721e3">   48</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#ab3c0b3b233a50c0fe548cec639a721e3">name</a>;                       </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a8f32d7d08dddeebd01b832f6dbb34d23">   49</a></span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;<a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a8f32d7d08dddeebd01b832f6dbb34d23">imguiInterface</a>;                        </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a36ae6a1c12f6da884e95db1647b082a7">   50</a></span>&#160;    std::u8string markdownText{};                          </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a01604085f3c62a249d2f9ca289ce2419">   51</a></span>&#160;    <span class="keywordtype">float</span> fontSize = 12.f;                                 </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#aab867dd191713bd171dc283898455688">   52</a></span>&#160;    std::optional&lt;ImageLoader&gt; imageLoader = std::nullopt; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  };</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">Config</a> &amp;&amp;config);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">MarkdownText</a>(std::string_view elementName, <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;imguiInterface, std::u8string markdown = u8<span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;               <span class="keywordtype">float</span> defaultFontSize = 12.f, std::optional&lt;ImageLoader&gt; imageLoader = std::nullopt);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  [[nodiscard]] std::u8string_view getMarkdownSrc() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">void</span> setMarkdownSrc(std::u8string markdownSrc);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  [[nodiscard]] <span class="keywordtype">float</span> getFontSize() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordtype">void</span> setFontSize(<span class="keywordtype">float</span> fontSize);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#abfc5ddfac57dead0f51bcfbd736290c8">   95</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#abfc5ddfac57dead0f51bcfbd736290c8">setOnLinkClicked</a>(std::invocable&lt;std::string_view, bool&gt; <span class="keyword">auto</span> &amp;&amp;callback) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    onLinkClicked = std::forward&lt;decltype(callback)&gt;(callback);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordtype">void</span> setImageLoader(ImageLoader imageLoader);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="comment">// TODO: static void SetFont(ImFont *font, ImGuiInterface &amp;imGuiInterface);</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordtype">void</span> configure();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordtype">void</span> loadHeaderFonts();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> MarkdownFormatCallback(<span class="keyword">const</span> ImGui::MarkdownFormatInfo &amp;markdownFormatInfo, <span class="keywordtype">bool</span> start);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keyword">static</span> ImGui::MarkdownImageData MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  ImGui::MarkdownConfig markdownConfig;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">ImGuiInterface</a> &amp;imGuiInterface;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  std::u8string markdownSrc{};</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordtype">float</span> fontSize = 12.f;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  std::function&lt;void(std::string_view, <span class="keywordtype">bool</span>)&gt; onLinkClicked = [](<span class="keyword">auto</span>, <span class="keyword">auto</span>) {};</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  std::optional&lt;ImageLoader&gt; loadImage = std::nullopt;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_ELEMENTS_MARKDOWNTEXT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config_html_a8f32d7d08dddeebd01b832f6dbb34d23"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a8f32d7d08dddeebd01b832f6dbb34d23">pf::ui::ig::MarkdownText::Config::imguiInterface</a></div><div class="ttdeci">ImGuiInterface &amp; imguiInterface</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:48</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config_html_ab3c0b3b233a50c0fe548cec639a721e3"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#ab3c0b3b233a50c0fe548cec639a721e3">pf::ui::ig::MarkdownText::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:47</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">pf::ui::ig::MarkdownText::Config</a></div><div class="ttdoc">Struct for construction of MarkdownText.</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:45</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MarkdownText_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">pf::ui::ig::MarkdownText</a></div><div class="ttdoc">Markdown text render area.</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:34</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">pf::ui::ig::ImGuiInterface</a></div><div class="ttdoc">Root class of an entire UI tree. Provides an ability to create windows and dialogs.</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:73</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:87</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MarkdownText_html_abfc5ddfac57dead0f51bcfbd736290c8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#abfc5ddfac57dead0f51bcfbd736290c8">pf::ui::ig::MarkdownText::setOnLinkClicked</a></div><div class="ttdeci">void setOnLinkClicked(std::invocable&lt; std::string_view, bool &gt; auto &amp;&amp;callback)</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:94</div></div>
+<div class="ttc" id="aTexture_8h_html"><div class="ttname"><a href="Texture_8h.html">Texture.h</a></div><div class="ttdoc">Type representing a texture in pf_imgui.</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config_html_a8f32d7d08dddeebd01b832f6dbb34d23"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#a8f32d7d08dddeebd01b832f6dbb34d23">pf::ui::ig::MarkdownText::Config::imguiInterface</a></div><div class="ttdeci">ImGuiInterface &amp; imguiInterface</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:49</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config_html_ab3c0b3b233a50c0fe548cec639a721e3"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html#ab3c0b3b233a50c0fe548cec639a721e3">pf::ui::ig::MarkdownText::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:48</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1Config.html">pf::ui::ig::MarkdownText::Config</a></div><div class="ttdoc">Struct for construction of MarkdownText.</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:46</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MarkdownText_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MarkdownText.html">pf::ui::ig::MarkdownText</a></div><div class="ttdoc">Markdown text render area.</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:35</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ImGuiInterface_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ImGuiInterface.html">pf::ui::ig::ImGuiInterface</a></div><div class="ttdoc">Root class of an entire UI tree. Provides an ability to create windows and dialogs.</div><div class="ttdef"><b>Definition:</b> ImGuiInterface.h:60</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:86</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1MarkdownText_html_abfc5ddfac57dead0f51bcfbd736290c8"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1MarkdownText.html#abfc5ddfac57dead0f51bcfbd736290c8">pf::ui::ig::MarkdownText::setOnLinkClicked</a></div><div class="ttdeci">void setOnLinkClicked(std::invocable&lt; std::string_view, bool &gt; auto &amp;&amp;callback)</div><div class="ttdef"><b>Definition:</b> MarkdownText.h:95</div></div>
 <div class="ttc" id="aImGuiInterface_8h_html"><div class="ttname"><a href="ImGuiInterface_8h.html">ImGuiInterface.h</a></div><div class="ttdoc">Main class of the library.</div></div>
 <div class="ttc" id="aItemElement_8h_html"><div class="ttname"><a href="ItemElement_8h.html">ItemElement.h</a></div><div class="ttdoc">Base class for elements on the lowest level.</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData.html">pf::ui::ig::MarkdownText::ImageData</a></div><div class="ttdef"><b>Definition:</b> MarkdownText.h:36</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1details_1_1FontData_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">pf::ui::ig::details::FontData</a></div><div class="ttdef"><b>Definition:</b> MarkdownText.h:18</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:26</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1MarkdownText_1_1ImageData.html">pf::ui::ig::MarkdownText::ImageData</a></div><div class="ttdef"><b>Definition:</b> MarkdownText.h:37</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1details_1_1FontData_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1details_1_1FontData.html">pf::ui::ig::details::FontData</a></div><div class="ttdef"><b>Definition:</b> MarkdownText.h:19</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ItemElement_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ItemElement.html">pf::ui::ig::ItemElement</a></div><div class="ttdoc">Interface for elements, which are 'leaves' in the UI tree.</div><div class="ttdef"><b>Definition:</b> ItemElement.h:25</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

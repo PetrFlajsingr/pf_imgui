@@ -71,27 +71,27 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="CommandPaletteWindow_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_COMMANDPALETTEWINDOW_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_COMMANDPALETTEWINDOW_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_DIALOGS_COMMANDPALETTEWINDOW_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define PF_IMGUI_DIALOGS_COMMANDPALETTEWINDOW_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;imcmd_command_palette.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Renderable_8h.html">pf_imgui/interface/Renderable.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">CommandPaletteWindow</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a5c4f2057c46b67ea0ca4b5f237e7b374">CommandPaletteWindow</a>(std::string_view elementName);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  ~<a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">CommandPaletteWindow</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a7f8e095a1eb82db26e1b53a25cf0eceb">   35</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a7f8e095a1eb82db26e1b53a25cf0eceb">addCommand</a>(std::string commandName, std::invocable <span class="keyword">auto</span> &amp;&amp;callback) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ImCmd::SetCurrentContext(context);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">auto</span> command = ImCmd::Command{};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    command.Name = std::move(commandName);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    command.InitialCallback = std::forward&lt;decltype(callback)&gt;(callback);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ImCmd::AddCommand(std::move(command));</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Renderable_8h.html">pf_imgui/interface/Renderable.h</a>&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// fwd for command palette implementation</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>ImCmd {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">struct </span>Context;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">CommandPaletteWindow</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Renderable.html">Renderable</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a5c4f2057c46b67ea0ca4b5f237e7b374">CommandPaletteWindow</a>(std::string_view elementName);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  ~<a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">CommandPaletteWindow</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a7f8e095a1eb82db26e1b53a25cf0eceb">   39</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a7f8e095a1eb82db26e1b53a25cf0eceb">addCommand</a>(std::string commandName, std::invocable <span class="keyword">auto</span> &amp;&amp;callback) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    addCommandImpl(std::move(commandName), std::forward&lt;decltype(callback)&gt;(callback));</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  }</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a74058769833882adb3ccc4755a1ab8a7">removeCommand</a>(<span class="keyword">const</span> std::string &amp;commandName);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
@@ -102,21 +102,23 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a80aa2ff44aa542cbf75bb355846580a2">renderImpl</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  ImCmd::Context *context = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_COMMANDPALETTEWINDOW_H</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">void</span> addCommandImpl(std::string commandName, std::function&lt;<span class="keywordtype">void</span>()&gt; callback);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  ImCmd::Context *context = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_DIALOGS_COMMANDPALETTEWINDOW_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">pf::ui::ig::CommandPaletteWindow</a></div><div class="ttdoc">A command palette like in sublime text or VSC.</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.h:21</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a74058769833882adb3ccc4755a1ab8a7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a74058769833882adb3ccc4755a1ab8a7">pf::ui::ig::CommandPaletteWindow::removeCommand</a></div><div class="ttdeci">void removeCommand(const std::string &amp;commandName)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:14</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a5c4f2057c46b67ea0ca4b5f237e7b374"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a5c4f2057c46b67ea0ca4b5f237e7b374">pf::ui::ig::CommandPaletteWindow::CommandPaletteWindow</a></div><div class="ttdeci">CommandPaletteWindow(std::string_view elementName)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:9</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a80aa2ff44aa542cbf75bb355846580a2"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a80aa2ff44aa542cbf75bb355846580a2">pf::ui::ig::CommandPaletteWindow::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html">pf::ui::ig::CommandPaletteWindow</a></div><div class="ttdoc">A command palette like in sublime text or VSC.</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.h:25</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a74058769833882adb3ccc4755a1ab8a7"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a74058769833882adb3ccc4755a1ab8a7">pf::ui::ig::CommandPaletteWindow::removeCommand</a></div><div class="ttdeci">void removeCommand(const std::string &amp;commandName)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:15</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a5c4f2057c46b67ea0ca4b5f237e7b374"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a5c4f2057c46b67ea0ca4b5f237e7b374">pf::ui::ig::CommandPaletteWindow::CommandPaletteWindow</a></div><div class="ttdeci">CommandPaletteWindow(std::string_view elementName)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:10</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a80aa2ff44aa542cbf75bb355846580a2"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a80aa2ff44aa542cbf75bb355846580a2">pf::ui::ig::CommandPaletteWindow::renderImpl</a></div><div class="ttdeci">void renderImpl() override</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:30</div></div>
 <div class="ttc" id="aRenderable_8h_html"><div class="ttname"><a href="Renderable_8h.html">Renderable.h</a></div><div class="ttdoc">Base class for renderables.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a18808dc2a86d66548c01c86a5ff4c01f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a18808dc2a86d66548c01c86a5ff4c01f">pf::ui::ig::CommandPaletteWindow::moveFocusToSearchBox</a></div><div class="ttdeci">void moveFocusToSearchBox()</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:19</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a18808dc2a86d66548c01c86a5ff4c01f"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a18808dc2a86d66548c01c86a5ff4c01f">pf::ui::ig::CommandPaletteWindow::moveFocusToSearchBox</a></div><div class="ttdeci">void moveFocusToSearchBox()</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:20</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Renderable_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Renderable.html">pf::ui::ig::Renderable</a></div><div class="ttdoc">Interface for all renderables.</div><div class="ttdef"><b>Definition:</b> Renderable.h:27</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a1465f0578fad4449bc50ccf2ce540e54"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a1465f0578fad4449bc50ccf2ce540e54">pf::ui::ig::CommandPaletteWindow::setSearchText</a></div><div class="ttdeci">void setSearchText(const std::string &amp;text)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:24</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a7f8e095a1eb82db26e1b53a25cf0eceb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a7f8e095a1eb82db26e1b53a25cf0eceb">pf::ui::ig::CommandPaletteWindow::addCommand</a></div><div class="ttdeci">void addCommand(std::string commandName, std::invocable auto &amp;&amp;callback)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.h:35</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a1465f0578fad4449bc50ccf2ce540e54"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a1465f0578fad4449bc50ccf2ce540e54">pf::ui::ig::CommandPaletteWindow::setSearchText</a></div><div class="ttdeci">void setSearchText(const std::string &amp;text)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.cpp:25</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1CommandPaletteWindow_html_a7f8e095a1eb82db26e1b53a25cf0eceb"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a7f8e095a1eb82db26e1b53a25cf0eceb">pf::ui::ig::CommandPaletteWindow::addCommand</a></div><div class="ttdeci">void addCommand(std::string commandName, std::invocable auto &amp;&amp;callback)</div><div class="ttdef"><b>Definition:</b> CommandPaletteWindow.h:39</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

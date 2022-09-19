@@ -76,7 +76,7 @@ $(function() {
 
 <p>Gradient editor.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;imgui_color_gradient.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;list&gt;</code><br />
 <code>#include &lt;pf_common/Explicit.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="Color_8h_source.html">pf_imgui/common/Color.h</a>&gt;</code><br />
 <code>#include &lt;pf_imgui/common/Font.h&gt;</code><br />
@@ -107,22 +107,22 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aeab1250486fff5358f85d73650a0110c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GradientEditor_8h.html#aeab1250486fff5358f85d73650a0110c">pf::ui::ig::GradientPointsView</a> = ranges::transform_view&lt; ranges::ref_view&lt; const std::list&lt; ImGradientMark * &gt; &gt;, details::GradientMarkToGradientPoint &gt;</td></tr>
-<tr class="separator:aeab1250486fff5358f85d73650a0110c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ef111ac0cb2630c6206d5ea49f19e4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GradientEditor_8h.html#a66ef111ac0cb2630c6206d5ea49f19e4">pf::ui::ig::GradientPointsView</a> = ranges::transform_view&lt; ranges::ref_view&lt; std::list&lt; ImGradientMark * &gt; &gt;, details::GradientMarkToGradientPoint &gt;</td></tr>
+<tr class="separator:a66ef111ac0cb2630c6206d5ea49f19e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Gradient editor. </p>
 <dl class="section author"><dt>Author</dt><dd>Petr Flajšingr </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>3.4.22 </dd></dl>
 </div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="aeab1250486fff5358f85d73650a0110c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeab1250486fff5358f85d73650a0110c">&#9670;&nbsp;</a></span>GradientPointsView</h2>
+<a id="a66ef111ac0cb2630c6206d5ea49f19e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66ef111ac0cb2630c6206d5ea49f19e4">&#9670;&nbsp;</a></span>GradientPointsView</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="GradientEditor_8h.html#aeab1250486fff5358f85d73650a0110c">pf::ui::ig::GradientPointsView</a> = typedef ranges::transform_view&lt;ranges::ref_view&lt;const std::list&lt;ImGradientMark *&gt; &gt;, details::GradientMarkToGradientPoint&gt;</td>
+          <td class="memname">using <a class="el" href="GradientEditor_8h.html#a66ef111ac0cb2630c6206d5ea49f19e4">pf::ui::ig::GradientPointsView</a> = typedef ranges::transform_view&lt;ranges::ref_view&lt;std::list&lt;ImGradientMark *&gt; &gt;, details::GradientMarkToGradientPoint&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">

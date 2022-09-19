@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pf_imgui: src/pf_imgui/elements/plots/types/ErrorBar.h File Reference</title>
+<title>pf_imgui: src/pf_imgui/elements/plots/types/Plottable.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,45 +66,26 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">ErrorBar.h File Reference</div>  </div>
+<div class="title">Plottable.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>ErrorBar graph data.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;pf_common/concepts/ranges.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="PlotDataBase_8h_source.html">pf_imgui/elements/plots/types/PlotDataBase.h</a>&gt;</code><br />
-<code>#include &lt;range/v3/range/conversion.hpp&gt;</code><br />
-<code>#include &lt;range/v3/view/transform.hpp&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-</div>
-<p><a href="ErrorBar_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar.html">pf::ui::ig::plot_type::ErrorBar&lt; Type &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D bar plot, which can either be horizontal or vertical. It shows error margin for each bar.  <a href="classpf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a7d14f4cd89ab9ba9da37cb245c4a3d53"><td class="memItemLeft" align="right" valign="top"><a id="a7d14f4cd89ab9ba9da37cb245c4a3d53"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pf::ui::ig::plot_type::details::renderErrorBarVertical</b> (const char *label, const double *xData, const double *yData, const double *errorData, int size)</td></tr>
-<tr class="separator:a7d14f4cd89ab9ba9da37cb245c4a3d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6692280f031aff797959796d2993f01b"><td class="memItemLeft" align="right" valign="top"><a id="a6692280f031aff797959796d2993f01b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pf::ui::ig::plot_type::details::renderErrorBarHorizontal</b> (const char *label, const double *xData, const double *yData, const double *errorData, int size)</td></tr>
-<tr class="separator:a6692280f031aff797959796d2993f01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ErrorBar graph data. </p>
-<dl class="section author"><dt>Author</dt><dd>Petr Flajšingr </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>8.11.20 </dd></dl>
-</div></div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by xflajs00 on 18.09.2022.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PF_IMGUI_PLOTS_TYPES_PLOTTABLE_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PF_IMGUI_PLOTS_TYPES_PLOTTABLE_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>pf::ui::ig::plot_type {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;concept Plottable = std::convertible_to&lt;T, double&gt;;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}  <span class="comment">// namespace pf::ui::ig::plot_type</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_PLOTS_TYPES_PLOTTABLE_H</span></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

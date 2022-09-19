@@ -79,68 +79,67 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;pf_imgui/_export.h&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ElementContainer_8h.html">pf_imgui/interface/ElementContainer.h</a>&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="Layout_8h.html">pf_imgui/interface/Layout.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">   26</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Layout.html">Layout</a> {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">   31</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">Config</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ad6a5ce08e32eeb6cbd878bcb873fd600">   33</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ad6a5ce08e32eeb6cbd878bcb873fd600">name</a>; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#a40493dee19f106b1e0c0edb732db7d1f">   34</a></span>&#160;    Explicit&lt;Size&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#a40493dee19f106b1e0c0edb732db7d1f">size</a>;             </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ae4e2e011948e3b1e673113495ec5be5d">   35</a></span>&#160;    <span class="keywordtype">bool</span> showBorder = <span class="keyword">false</span>;         </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  };</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">Config</a> &amp;&amp;config);</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">   45</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;   <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a> &amp;owner);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> setActive();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;   <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a> &amp;parent;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  };</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>(std::string_view elementName, <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> initialSize, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;pushStack();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> popStack();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> removeStack(std::size_t index);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keywordtype">void</span> moveStack(std::size_t srcIndex, std::size_t dstIndex);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  [[nodiscard]] std::size_t getCurrentIndex() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordtype">void</span> setIndex(std::size_t index);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  [[nodiscard]] std::size_t stackSize() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;getCurrentStack();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;getStackAtIndex(std::size_t index);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordtype">void</span> setStackActive(<a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;stack);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  std::optional&lt;std::size_t&gt; selectedIndex = std::nullopt;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  std::vector&lt;std::unique_ptr&lt;Stack&gt;&gt; stacks;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;};</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>pf::ui::ig {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">   25</a></span>&#160;<span class="keyword">class </span>PF_IMGUI_EXPORT <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1Layout.html">Layout</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">   30</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">Config</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">Parent</a> = <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ad6a5ce08e32eeb6cbd878bcb873fd600">   32</a></span>&#160;    Explicit&lt;std::string_view&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ad6a5ce08e32eeb6cbd878bcb873fd600">name</a>; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#a40493dee19f106b1e0c0edb732db7d1f">   33</a></span>&#160;    Explicit&lt;Size&gt; <a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#a40493dee19f106b1e0c0edb732db7d1f">size</a>;             </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ae4e2e011948e3b1e673113495ec5be5d">   34</a></span>&#160;    <span class="keywordtype">bool</span> showBorder = <span class="keyword">false</span>;         </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  };</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>(<a class="code" href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">Config</a> &amp;&amp;config);</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">   44</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> : <span class="keyword">public</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">ElementContainer</a> {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a>(<a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a> &amp;owner);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> setActive();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a> &amp;parent;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  };</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">StackedLayout</a>(std::string_view elementName, <a class="code" href="structpf_1_1ui_1_1ig_1_1Size.html">Size</a> initialSize, <a class="code" href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">ShowBorder</a> showBorder = ShowBorder::No);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;pushStack();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> popStack();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">void</span> removeStack(std::size_t index);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordtype">void</span> moveStack(std::size_t srcIndex, std::size_t dstIndex);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  [[nodiscard]] std::size_t getCurrentIndex() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordtype">void</span> setIndex(std::size_t index);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  [[nodiscard]] std::size_t stackSize() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;getCurrentStack();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  [[nodiscard]] <a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;getStackAtIndex(std::size_t index);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">void</span> setStackActive(<a class="code" href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">Stack</a> &amp;stack);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  std::vector&lt;Renderable *&gt; getRenderables() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordtype">void</span> renderImpl() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  std::optional&lt;std::size_t&gt; selectedIndex = std::nullopt;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  std::vector&lt;std::unique_ptr&lt;Stack&gt;&gt; stacks;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#endif  // PF_IMGUI_LAYOUTS_STACKEDLAYOUT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:29</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ElementContainer_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ElementContainer.html">pf::ui::ig::ElementContainer</a></div><div class="ttdoc">Interface for objects, which can contain instances of Element.</div><div class="ttdef"><b>Definition:</b> ElementContainer.h:28</div></div>
 <div class="ttc" id="aenums_8h_html_a8bbe7dfc4a6fb580f03f46237d91dadb"><div class="ttname"><a href="enums_8h.html#a8bbe7dfc4a6fb580f03f46237d91dadb">pf::ui::ig::ShowBorder</a></div><div class="ttdeci">ShowBorder</div><div class="ttdef"><b>Definition:</b> enums.h:85</div></div>
 <div class="ttc" id="aLayout_8h_html"><div class="ttname"><a href="Layout_8h.html">Layout.h</a></div><div class="ttdoc">Base class for layouts.</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:87</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1Size_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1Size.html">pf::ui::ig::Size</a></div><div class="ttdoc">Size to be used for element sizes.</div><div class="ttdef"><b>Definition:</b> Size.h:86</div></div>
 <div class="ttc" id="aElementContainer_8h_html"><div class="ttname"><a href="ElementContainer_8h.html">ElementContainer.h</a></div><div class="ttdoc">Base class for objects which can hold arbitrary elements.</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">pf::ui::ig::StackedLayout::Stack</a></div><div class="ttdoc">A container for data within the layout.</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:45</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config_html_ad6a5ce08e32eeb6cbd878bcb873fd600"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ad6a5ce08e32eeb6cbd878bcb873fd600">pf::ui::ig::StackedLayout::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:33</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config_html_a40493dee19f106b1e0c0edb732db7d1f"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#a40493dee19f106b1e0c0edb732db7d1f">pf::ui::ig::StackedLayout::Config::size</a></div><div class="ttdeci">Explicit&lt; Size &gt; size</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:34</div></div>
-<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">pf::ui::ig::StackedLayout::Config</a></div><div class="ttdoc">Struct for construction of StackedLayout.</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:31</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StackedLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">pf::ui::ig::StackedLayout</a></div><div class="ttdoc">A layout that uses stacks to show different 'pages', of which only one can be shown.</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:26</div></div>
-<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Layout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></div><div class="ttdoc">Base class for layouts.</div><div class="ttdef"><b>Definition:</b> Layout.h:27</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StackedLayout_1_1Stack.html">pf::ui::ig::StackedLayout::Stack</a></div><div class="ttdoc">A container for data within the layout.</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:44</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config_html_ad6a5ce08e32eeb6cbd878bcb873fd600"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#ad6a5ce08e32eeb6cbd878bcb873fd600">pf::ui::ig::StackedLayout::Config::name</a></div><div class="ttdeci">Explicit&lt; std::string_view &gt; name</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:32</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config_html_a40493dee19f106b1e0c0edb732db7d1f"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html#a40493dee19f106b1e0c0edb732db7d1f">pf::ui::ig::StackedLayout::Config::size</a></div><div class="ttdeci">Explicit&lt; Size &gt; size</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:33</div></div>
+<div class="ttc" id="astructpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config_html"><div class="ttname"><a href="structpf_1_1ui_1_1ig_1_1StackedLayout_1_1Config.html">pf::ui::ig::StackedLayout::Config</a></div><div class="ttdoc">Struct for construction of StackedLayout.</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:30</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1StackedLayout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1StackedLayout.html">pf::ui::ig::StackedLayout</a></div><div class="ttdoc">A layout that uses stacks to show different 'pages', of which only one can be shown.</div><div class="ttdef"><b>Definition:</b> StackedLayout.h:25</div></div>
+<div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Layout_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Layout.html">pf::ui::ig::Layout</a></div><div class="ttdoc">Base class for layouts.</div><div class="ttdef"><b>Definition:</b> Layout.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
