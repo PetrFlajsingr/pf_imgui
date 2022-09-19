@@ -133,7 +133,7 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
   /**
    * Constructor to hide implementation.
    */
-  FileDialog(FileType fileType, std::string_view elementName, std::string_view labelText,
+  FileDialog(FileType dialogFileType, std::string_view elementName, std::string_view labelText,
              const std::vector<FileExtensionSettings> &extSettings,
              std::function<void(std::vector<std::filesystem::path>)> onSelect, std::function<void()> onCancel,
              Size initialSize, std::filesystem::path startPath, std::string startName, Modal modality,

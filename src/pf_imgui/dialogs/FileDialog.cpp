@@ -11,13 +11,13 @@
 namespace pf::ui::ig {
 // TODO: fix multi dir selection - when using GetSelection() it returns invalid path
 
-FileDialog::FileDialog(FileType fileType, std::string_view elementName, std::string_view labelText,
+FileDialog::FileDialog(FileType dialogFileType, std::string_view elementName, std::string_view labelText,
                        const std::vector<FileExtensionSettings> &extSettings,
                        std::function<void(std::vector<std::filesystem::path>)> onSelect, std::function<void()> onCancel,
                        Size initialSize, std::filesystem::path startPath, std::string startName, Modal modality,
                        uint32_t maxSelected)
     : Renderable(elementName), label(std::string{labelText}), size(initialSize), openPath(std::move(startPath)),
-      defaultName(std::move(startName)), modal(modality), fileType(fileType), maxSelectCount(maxSelected),
+      defaultName(std::move(startName)), modal(modality), fileType(dialogFileType), maxSelectCount(maxSelected),
       onFilesSelected(std::move(onSelect)), onSelectCanceled(std::move(onCancel)),
       fileDialogInstance(new IGFD::FileDialog{}) {
   if (fileType == FileType::File) { prepareExtInfos(extSettings); }
