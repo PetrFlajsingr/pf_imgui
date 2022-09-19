@@ -20,7 +20,6 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/reactive/Observable.h>
 #include <range/v3/view/transform.hpp>
-#include <string>
 
 namespace pf::ui::ig {
 // TODO: change observables to properties

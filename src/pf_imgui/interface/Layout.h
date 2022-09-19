@@ -13,7 +13,6 @@
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <pf_imgui/reactive/Observable.h>
-#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

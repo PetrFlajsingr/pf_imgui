@@ -4,8 +4,8 @@
  * @author Petr Flajšingr
  * @date 12.6.21
  */
-#ifndef PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
-#define PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
+#ifndef PF_IMGUI_MANAGERS_FONTMANAGER_H
+#define PF_IMGUI_MANAGERS_FONTMANAGER_H
 
 #include <filesystem>
 #include <functional>
@@ -235,4 +235,4 @@ class PF_IMGUI_EXPORT FontManager {
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_SRC_PF_IMGUI_INTERFACE_FONTMANAGER_H
+#endif  // PF_IMGUI_MANAGERS_FONTMANAGER_H

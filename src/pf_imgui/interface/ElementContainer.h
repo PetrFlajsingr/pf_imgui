@@ -14,7 +14,6 @@
 #include <pf_imgui/interface/Element.h>
 #include <pf_imgui/interface/RenderablesContainer.h>
 #include <range/v3/view/transform.hpp>
-#include <string>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -175,6 +174,7 @@ class PF_IMGUI_EXPORT ElementContainer : public RenderablesContainer {
  private:
   /**
    * Main storage of children. Stored as an unordered_map for quick access by ID.
+   * @todo: this might actually be detrimental
    */
   std::unordered_map<std::string, std::unique_ptr<Element>> children;
   /**

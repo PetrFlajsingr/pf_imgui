@@ -7,26 +7,13 @@
 #ifndef PF_IMGUI_IMGUIINTERFACE_H
 #define PF_IMGUI_IMGUIINTERFACE_H
 
-// TODO: get rid of many of these include and use forward declarations
 #include <imgui.h>
 #include <memory>
 #include <pf_imgui/DockBuilder.h>
 #include <pf_imgui/_export.h>
-#include <pf_imgui/dialogs/BackgroundDockingArea.h>
-#include <pf_imgui/dialogs/CommandPaletteWindow.h>
-#include <pf_imgui/dialogs/FileDialog.h>
-#include <pf_imgui/dialogs/InputDialog.h>
-#include <pf_imgui/dialogs/MessageDialog.h>
-#include <pf_imgui/dialogs/ModalDialog.h>
 #include <pf_imgui/dialogs/Window.h>
-#include <pf_imgui/elements/MenuBars.h>
-#include <pf_imgui/elements/OverlayGizmo.h>
-#include <pf_imgui/elements/RadioGroup.h>
-#include <pf_imgui/elements/StatusBar.h>
 #include <pf_imgui/fwd.h>
 #include <pf_imgui/icons.h>
-#include <pf_imgui/interface/DragNDrop.h>
-#include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/managers/DialogManager.h>
 #include <pf_imgui/managers/FontManager.h>
 #include <pf_imgui/managers/NotificationManager.h>
@@ -272,7 +259,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   Font font = Font::Default();
 
  protected:
-  std::unique_ptr<AppMenuBar> menuBar = nullptr;
+  std::unique_ptr<AppMenuBar> menuBar;
 
   virtual void newFrame_impl() = 0;
 
@@ -302,19 +289,19 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   std::size_t idCounter{};
 
   std::vector<std::unique_ptr<Window>> windows{};
-  std::unique_ptr<AppStatusBar> statusBar = nullptr;
+  std::unique_ptr<AppStatusBar> statusBar;
 
   toml::table config;
 
-  std::vector<std::unique_ptr<DragNDropGroup>> dragNDropGroups{};
-  std::vector<std::unique_ptr<RadioGroup>> radioGroups{};
+  std::vector<std::unique_ptr<DragNDropGroup>> dragNDropGroups;
+  std::vector<std::unique_ptr<RadioGroup>> radioGroups;
 
-  std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes{};
+  std::vector<std::unique_ptr<CommandPaletteWindow>> commandPalettes;
 
-  std::vector<std::unique_ptr<DockBuilder>> dockBuilders{};
-  std::unique_ptr<BackgroundDockingArea> backgroundDockingArea = nullptr;
+  std::vector<std::unique_ptr<DockBuilder>> dockBuilders;
+  std::unique_ptr<BackgroundDockingArea> backgroundDockingArea;
 
-  std::unique_ptr<ViewportOverlayGizmo> viewportGizmo{};
+  std::unique_ptr<ViewportOverlayGizmo> viewportGizmo;
 };
 
 }  // namespace pf::ui::ig

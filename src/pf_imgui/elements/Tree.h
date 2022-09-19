@@ -20,8 +20,6 @@
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/layouts/VerticalLayout.h>
-#include <string>
-#include <variant>
 #include <vector>
 
 namespace pf::ui::ig {

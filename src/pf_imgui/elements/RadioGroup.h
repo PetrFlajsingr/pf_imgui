@@ -13,7 +13,6 @@
 #include <pf_common/Explicit.h>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/Savable.h>
-#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

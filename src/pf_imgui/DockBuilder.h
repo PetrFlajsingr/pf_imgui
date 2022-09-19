@@ -12,8 +12,8 @@
 #include <memory>
 #include <pf_common/Visitor.h>
 #include <pf_imgui/common/Size.h>
-#include <pf_imgui/elements/DockSpace.h>
 #include <pf_imgui/enums.h>
+#include <pf_imgui/fwd.h>
 #include <string>
 #include <variant>
 #include <vector>

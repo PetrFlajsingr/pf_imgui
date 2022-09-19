@@ -13,7 +13,6 @@
 #include <pf_imgui/_export.h>
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/Layout.h>
-#include <string>
 #include <vector>
 
 namespace pf::ui::ig {

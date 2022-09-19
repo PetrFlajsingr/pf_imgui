@@ -14,7 +14,6 @@
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
-#include <string>
 
 namespace pf::ui::ig {
 

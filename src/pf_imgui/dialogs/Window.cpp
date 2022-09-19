@@ -7,6 +7,7 @@
 #include <fmt/format.h>
 #include <imgui.h>
 #include <limits>
+#include <pf_imgui/elements/MenuBars.h>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -24,6 +25,8 @@ Window::Window(std::string_view elementName, std::string_view titleLabel, AllowC
   size.addListener([this](auto) { sizeDirty = true; });
   collapsed.addListener([this](bool newCollapsed) { ImGui::SetWindowCollapsed(idLabel.c_str(), newCollapsed); });
 }
+
+Window::~Window() = default;
 
 void Window::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -209,7 +212,6 @@ void Window::setCollapsible(bool newCollapsible) {
     flags |= ImGuiWindowFlags_NoCollapse;
   }
 }
-
 void Window::setCloseable(bool newCloseable) { closeable = newCloseable; }
 
 }  // namespace pf::ui::ig

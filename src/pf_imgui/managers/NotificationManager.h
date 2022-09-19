@@ -4,14 +4,12 @@
  * @author Petr Flajšingr
  * @date 16.11.21
  */
-#ifndef PF_IMGUI_NOTIFICATIONMANAGER_H
-#define PF_IMGUI_NOTIFICATIONMANAGER_H
+#ifndef PF_IMGUI_MANAGERS_NOTIFICATIONMANAGER_H
+#define PF_IMGUI_MANAGERS_NOTIFICATIONMANAGER_H
 
 #include <memory>
 #include <pf_imgui/_export.h>
 #include <pf_imgui/dialogs/Notification.h>
-#include <pf_imgui/managers/FontManager.h>
-#include <string>
 #include <vector>
 
 namespace pf::ui::ig {
@@ -46,4 +44,4 @@ class PF_IMGUI_EXPORT NotificationManager {
 };
 
 }  // namespace pf::ui::ig
-#endif  // PF_IMGUI_NOTIFICATIONMANAGER_H
+#endif  // PF_IMGUI_MANAGERS_NOTIFICATIONMANAGER_H

@@ -41,12 +41,15 @@ class ModalDialog;
 class Notification;
 class Window;
 
+class AppMenuBar;
+class AppStatusBar;
 class Button;
 class Checkbox;
 class CommandPalette;
 class ConsolePanel;
 class DatePicker;
 class DockSpace;
+class DragNDropGroup;
 class Expander;
 class Dummy;
 class FlameGraph;
@@ -75,6 +78,8 @@ class TextEditor;
 class TimePicker;
 class Toggle;
 class Tooltip;
+class ViewportOverlayGizmo;
+class WindowMenuBar;
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_FWD_H

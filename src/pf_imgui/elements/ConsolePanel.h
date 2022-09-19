@@ -13,10 +13,8 @@
 #include <pf_imgui/common/Font.h>
 #include <pf_imgui/common/Size.h>
 #include <pf_imgui/details/CustomIconButtonImpls.h>
-#include <pf_imgui/elements/details/TextUtils.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 

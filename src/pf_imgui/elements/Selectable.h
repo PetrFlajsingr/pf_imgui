@@ -15,11 +15,9 @@
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <pf_imgui/style/common.h>
-#include <string>
 
 namespace pf::ui::ig {
 

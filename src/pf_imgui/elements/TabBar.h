@@ -15,8 +15,6 @@
 #include <pf_imgui/interface/ElementContainer.h>
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/ItemElement.h>
-#include <pf_imgui/reactive/Event.h>
-#include <string>
 #include <utility>
 #include <vector>
 

@@ -10,7 +10,6 @@
 
 #include <compare>
 #include <concepts>
-#include <cstdint>
 #include <imgui.h>
 #include <pf_imgui/_export.h>
 

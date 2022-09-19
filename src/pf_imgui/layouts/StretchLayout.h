@@ -14,7 +14,6 @@
 #include <pf_imgui/concepts/HasSizeObservable.h>
 #include <pf_imgui/enums.h>
 #include <pf_imgui/interface/Layout.h>
-#include <string>
 #include <utility>
 #include <vector>
 

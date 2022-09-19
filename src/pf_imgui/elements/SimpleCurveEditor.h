@@ -16,7 +16,6 @@
 #include <pf_imgui/interface/ElementWithID.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
-#include <pf_imgui/reactive/Observable.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
 #include <range/v3/view/take_while.hpp>

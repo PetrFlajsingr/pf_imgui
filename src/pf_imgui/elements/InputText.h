@@ -8,19 +8,19 @@
 #ifndef PF_IMGUI_ELEMENTS_INPUTTEXT_H
 #define PF_IMGUI_ELEMENTS_INPUTTEXT_H
 
-#include "Text.h"
 #include <functional>
 #include <memory>
 #include <pf_common/Explicit.h>
 #include <pf_common/enums.h>
 #include <pf_imgui/_export.h>
+#include <pf_imgui/common/Font.h>
 #include <pf_imgui/common/Label.h>
+#include <pf_imgui/interface/DragNDrop.h>
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/Savable.h>
 #include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/style/ColorPalette.h>
 #include <pf_imgui/style/StyleOptions.h>
-#include <string>
 
 namespace pf::ui::ig {
 

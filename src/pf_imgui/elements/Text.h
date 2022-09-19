@@ -18,7 +18,6 @@
 #include <pf_imgui/interface/ItemElement.h>
 #include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/style/ColorPalette.h>
-#include <string>
 #include <utility>
 
 namespace pf::ui::ig {
