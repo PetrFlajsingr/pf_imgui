@@ -26,11 +26,9 @@ class ArrowButton;
 class InvisibleButton;
 
 /**
- * @brief A typical button element.
+ * @brief Base class for buttons.
  *
- * A button with a text label and an option to change its render type by using enum ButtonType.
- *
- * @see ButtonType
+ * A button with click event and an option to control repeatable click trigger.
  */
 class PF_IMGUI_EXPORT ButtonBase : public ItemElement {
  public:
