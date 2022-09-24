@@ -3,7 +3,7 @@
 //
 
 #include "SimpleCurveEditor.h"
-#include "toml++/toml.h"
+#include <toml++/toml.h>
 #include <pf_imgui/serialization.h>
 
 namespace pf::ui::ig {
