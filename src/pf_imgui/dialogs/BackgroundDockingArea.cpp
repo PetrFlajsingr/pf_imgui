@@ -9,19 +9,12 @@
 namespace pf::ui::ig {
 
 BackgroundDockingArea::BackgroundDockingArea(std::string_view elementName)
-    : Renderable(elementName), size(Size::Auto()), dockSpace(DockSpace{"background_dock"}) {}
-
-DockSpace &BackgroundDockingArea::getDockSpace() { return dockSpace; }
+    : Renderable(elementName) {}
 
 void BackgroundDockingArea::renderImpl() {
-  RAII end{ImGui::End};
-  ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size - leftTopMargin - bottomRightMargin);
-  ImGui::SetNextWindowPos(ImGui::GetMainViewport()->Pos + leftTopMargin);
-  if (ImGui::Begin("##background_dock_window", nullptr, flags)) {
-    const auto viewportSize = ImGui::GetMainViewport()->Size;
-    *Prop_modify(size) = Size{Width{viewportSize.x}, Height{viewportSize.y}};
-    dockSpace.render();
-  }
+  [[maybe_unused]] const auto colorScoped = color.applyScoped();
+  ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+
 }
 
 }  // namespace pf::ui::ig
