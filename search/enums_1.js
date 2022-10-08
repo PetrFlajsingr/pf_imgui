@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bartype_1863',['BarType',['../PlotDataBase_8h.html#aaded9ecd8ddbeff6e925287bc24b55a4',1,'pf::ui::ig::plot_type']]]
+  ['bartype_1861',['BarType',['../PlotDataBase_8h.html#aaded9ecd8ddbeff6e925287bc24b55a4',1,'pf::ui::ig::plot_type']]]
 ];
