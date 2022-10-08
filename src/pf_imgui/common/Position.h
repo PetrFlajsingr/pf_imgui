@@ -18,11 +18,11 @@ namespace pf::ui::ig {
  * @brief Position relative to left top corner of some area.
  */
 struct PF_IMGUI_EXPORT Position {
-  Position() = default;
-  Position(float initialX, float initialY);
-  explicit Position(ImVec2 pos);
+  constexpr Position() = default;
+  constexpr Position(float initialX, float initialY) : x(initialX), y(initialY) {}
+  constexpr explicit Position(ImVec2 pos) : x(pos.x), y(pos.y) {}
 
-  [[nodiscard]] static Position LeftTop();
+  [[nodiscard]] static Position LeftTop() { return {0.f, 0.f}; }
 
   /**
    * Create a position moved by given parameters.
@@ -30,14 +30,14 @@ struct PF_IMGUI_EXPORT Position {
    * @param deltaY difference on Y axis
    * @return calculated Position
    */
-  [[nodiscard]] Position moveDelta(float deltaX, float deltaY) const;
+  [[nodiscard]] constexpr Position moveDelta(float deltaX, float deltaY) const { return {x + deltaX, y + deltaY}; }
 
-  float x;
-  float y;
+  float x{};
+  float y{};
 
-  auto operator<=>(const Position &) const = default;
+  constexpr auto operator<=>(const Position &) const = default;
 
-  explicit operator ImVec2() const;
+  constexpr explicit operator ImVec2() const { return {x, y}; }
 };
 
 }  // namespace pf::ui::ig
