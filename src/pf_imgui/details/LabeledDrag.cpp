@@ -9,7 +9,7 @@
 
 bool ImGui::LabeledDragScalar(const char *label, ImGuiDataType data_type, void *p_data, float v_speed,
                               const void *p_min, const void *p_max, const char *format, const char *componentLabel,
-                              ImColor componentColor, ImGuiSliderFlags flags) {
+                              ImU32 componentColor, ImGuiSliderFlags flags) {
   static const float DRAG_MOUSE_THRESHOLD_FACTOR =
       0.50f;  // Multiplier for the default value of io.MouseDragThreshold to make DragFloat/DragInt react faster to mouse drags.
   ImGuiWindow *window = GetCurrentWindow();
@@ -27,7 +27,7 @@ bool ImGui::LabeledDragScalar(const char *label, ImGuiDataType data_type, void *
                         window->DC.CursorPos + ImVec2(w, label_size.y + style.FramePadding.y * 2.0f));
   const ImRect total_bb(frame_bb.Min - /*ADDED*/ ImVec2{componentLabelSize.x + 2 * style.FramePadding.x, 0.f},
                         frame_bb.Max
-                        + ImVec2(label_size.x > 0.0f ? style.ItemInnerSpacing.x + label_size.x : 0.0f, 0.0f));
+                            + ImVec2(label_size.x > 0.0f ? style.ItemInnerSpacing.x + label_size.x : 0.0f, 0.0f));
 
   const bool temp_input_allowed = (flags & ImGuiSliderFlags_NoInput) == 0;
   ItemSize(total_bb, style.FramePadding.y);
@@ -70,15 +70,15 @@ bool ImGui::LabeledDragScalar(const char *label, ImGuiDataType data_type, void *
   if (temp_input_is_active) {
     // Only clamp CTRL+Click input when ImGuiSliderFlags_AlwaysClamp is set
     const bool is_clamp_input = (flags & ImGuiSliderFlags_AlwaysClamp) != 0
-                                && (p_min == NULL || p_max == NULL || DataTypeCompare(data_type, p_min, p_max) < 0);
+        && (p_min == NULL || p_max == NULL || DataTypeCompare(data_type, p_min, p_max) < 0);
     return TempInputScalar(frame_bb, id, label, data_type, p_data, format, is_clamp_input ? p_min : NULL,
                            is_clamp_input ? p_max : NULL);
   }
 
   // Draw frame
   const ImU32 frame_col = GetColorU32(g.ActiveId == id ? ImGuiCol_FrameBgActive
-                                                       : hovered    ? ImGuiCol_FrameBgHovered
-                                                                    : ImGuiCol_FrameBg);
+                                          : hovered    ? ImGuiCol_FrameBgHovered
+                                                       : ImGuiCol_FrameBg);
   RenderNavHighlight(frame_bb, id);
   RenderFrame(frame_bb.Min, frame_bb.Max, frame_col, true, style.FrameRounding);
 
@@ -87,9 +87,9 @@ bool ImGui::LabeledDragScalar(const char *label, ImGuiDataType data_type, void *
   if (value_changed) MarkItemEdited(id);
 
   // ADDED display component label
-  const auto componentLabelBB = ImRect{total_bb.Min, {total_bb.Min.x + componentLabelSize.x + 2 * style.FramePadding.x, total_bb.Max.y}};
-  RenderFrame(componentLabelBB.Min, componentLabelBB.Max, static_cast<ImU32>(componentColor), true,
-              style.FrameRounding);
+  const auto componentLabelBB =
+      ImRect{total_bb.Min, {total_bb.Min.x + componentLabelSize.x + 2 * style.FramePadding.x, total_bb.Max.y}};
+  RenderFrame(componentLabelBB.Min, componentLabelBB.Max, componentColor, true, style.FrameRounding);
   RenderTextClipped(componentLabelBB.Min, componentLabelBB.Max, componentLabel,
                     componentLabel + std::strlen(componentLabel), nullptr, ImVec2(0.5f, 0.5f));
 
@@ -109,7 +109,7 @@ bool ImGui::LabeledDragScalar(const char *label, ImGuiDataType data_type, void *
 
 bool ImGui::LabeledDragScalarN(const char *label, ImGuiDataType data_type, void *p_data, int components, float v_speed,
                                const void *p_min, const void *p_max, const char *format, const char **componentLabels,
-                               const ImColor *componentColors, ImGuiSliderFlags flags) {
+                               const ImU32 *componentColors, ImGuiSliderFlags flags) {
   ImGuiWindow *window = GetCurrentWindow();
   if (window->SkipItems) return false;
 
