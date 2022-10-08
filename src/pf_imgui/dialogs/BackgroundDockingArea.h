@@ -27,24 +27,10 @@ class PF_IMGUI_EXPORT BackgroundDockingArea : public Renderable {
    */
   explicit BackgroundDockingArea(std::string_view elementName);
 
-  /**
-   * Get inner DockSpace. Can be used for building.
-   * @return inner DockSpace
-   */
-  [[nodiscard]] DockSpace &getDockSpace();
-
-  /** Size automatically computed to fit the viewport */
-  ReadOnlyProperty<Size> size;
+  ColorPalette<ColorOf::DockingPreview, ColorOf::DockingBackground> color;
 
  protected:
   void renderImpl() override;
-
- private:
-  ImVec2 leftTopMargin = ImVec2{0, 0};
-  ImVec2 bottomRightMargin = ImVec2{0, 0};
-  DockSpace dockSpace;
-  constexpr static auto flags = ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoResize
-      | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar;
 };
 
 }  // namespace pf::ui::ig

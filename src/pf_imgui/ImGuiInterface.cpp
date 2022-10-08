@@ -175,17 +175,7 @@ void ImGuiInterface::renderImpl() {
   ImGuizmo::BeginFrame();
   if (viewportGizmo != nullptr) { viewportGizmo->render(); }
   if (hasMenuBar()) {
-    if (backgroundDockingArea != nullptr) { backgroundDockingArea->leftTopMargin = ImVec2{0, ImGui::GetFrameHeight()}; }
     menuBar->render();
-  } else {
-    if (backgroundDockingArea != nullptr) { backgroundDockingArea->leftTopMargin = ImVec2{0, 0}; }
-  }
-  if (hasStatusBar()) {
-    if (backgroundDockingArea != nullptr) {
-      backgroundDockingArea->bottomRightMargin = ImVec2{0, ImGui::GetFrameHeight()};
-    }
-  } else {
-    if (backgroundDockingArea != nullptr) { backgroundDockingArea->bottomRightMargin = ImVec2{0, 0}; }
   }
   if (backgroundDockingArea != nullptr) { backgroundDockingArea->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
