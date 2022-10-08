@@ -35,6 +35,10 @@ namespace pf::ui::ig::drag_details {
  */
 #define PF_IMGUI_DRAG_TYPE_LIST PF_IMGUI_DRAG_FLOAT_TYPE_LIST, PF_IMGUI_DRAG_INT_TYPE_LIST
 /**
+ * All allowed types for LabeledDragInput
+ */
+#define PF_IMGUI_LABELEDDRAG_TYPE_LIST PF_IMGUI_DRAG_GLM_TYPE_LIST, int, float
+/**
  * Underlying type of supported types.
  */
 template<typename T>
@@ -51,6 +55,14 @@ constexpr const char *defaultFormat() {
   } else {
     return "%d";
   }
+}
+
+
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
+consteval std::size_t getComponentCount() {
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) { return T::length(); }
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_RANGE_TYPE_LIST>) { return 2; }
+  return 1;
 }
 }  // namespace pf::ui::ig::drag_details
 

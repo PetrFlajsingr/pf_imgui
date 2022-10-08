@@ -195,7 +195,10 @@ set(SOURCES
         src/pf_imgui/interface/Element.cpp
         src/pf_imgui/elements/ConsolePanel.cpp
         src/pf_imgui/common/Label.cpp
-        src/pf_imgui/elements/plots/types/plot_types_impls.cpp)
+        src/pf_imgui/elements/plots/types/plot_types_impls.cpp
+        src/pf_imgui/details/LabeledDrag.cpp
+        src/pf_imgui/details/LabeledSlider.cpp
+        )
 
 set(BLUEPRINT_SOURCES
         src/pf_imgui/node_editor/blueprint/pins/CheckboxPin.cpp
@@ -395,7 +398,12 @@ set(INCLUDES
         src/pf_imgui/concepts/ConfigConstruction.h
         src/pf_imgui/common/Tags.h
         src/pf_imgui/reactive/PropertyOwner.h
-        src/pf_imgui/reactive/EventOwner.h src/pf_imgui/elements/plots/types/Plottable.h)
+        src/pf_imgui/reactive/EventOwner.h
+        src/pf_imgui/elements/plots/types/Plottable.h
+        src/pf_imgui/details/LabeledDrag.h
+        src/pf_imgui/details/DataTypeSize.h
+        src/pf_imgui/details/LabeledSlider.h
+        )
 
 set(BLUEPRINT_INCLUDES
         src/pf_imgui/node_editor/blueprint/common.h

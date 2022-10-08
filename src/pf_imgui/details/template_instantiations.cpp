@@ -2,7 +2,6 @@
 // Created by petr on 6/23/21.
 //
 
-#include <pf_imgui/dialogs/MessageDialog.h>
 #include <pf_imgui/elements/ColorChooser.h>
 #include <pf_imgui/elements/Combobox.h>
 #include <pf_imgui/elements/DragInput.h>
@@ -37,6 +36,15 @@ template class DragInput<glm::ivec3>;
 template class DragInput<glm::ivec4>;
 template class DragInput<math::Range<int>>;
 
+template class LabeledDragInput<float>;
+template class LabeledDragInput<glm::vec2>;
+template class LabeledDragInput<glm::vec3>;
+template class LabeledDragInput<glm::vec4>;
+template class LabeledDragInput<int>;
+template class LabeledDragInput<glm::ivec2>;
+template class LabeledDragInput<glm::ivec3>;
+template class LabeledDragInput<glm::ivec4>;
+
 template class Input<float>;
 template class Input<glm::vec2>;
 template class Input<glm::vec3>;
@@ -58,6 +66,15 @@ template class Slider<float>;
 template class Slider<glm::vec2>;
 template class Slider<glm::vec3>;
 template class Slider<glm::vec4>;
+
+template class LabeledSlider<int>;
+template class LabeledSlider<glm::ivec2>;
+template class LabeledSlider<glm::ivec3>;
+template class LabeledSlider<glm::ivec4>;
+template class LabeledSlider<float>;
+template class LabeledSlider<glm::vec2>;
+template class LabeledSlider<glm::vec3>;
+template class LabeledSlider<glm::vec4>;
 
 template class Slider2D<int>;
 template class Slider2D<float>;
