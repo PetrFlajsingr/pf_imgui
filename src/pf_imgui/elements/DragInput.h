@@ -26,14 +26,6 @@
 #include <utility>
 
 namespace pf::ui::ig {
-namespace details {
-template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
-consteval std::size_t getDragComponentCount() {
-  if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) { return T::length(); }
-  if constexpr (OneOf<T, PF_IMGUI_DRAG_RANGE_TYPE_LIST>) { return 2; }
-  return 1;
-}
-}  // namespace details
 
 // TODO:
 // ImGuiSliderFlags_Logarithmic
@@ -57,7 +49,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
                                   public DropTarget<T> {
  public:
   using ParamType = drag_details::UnderlyingType<T>;
-  constexpr static std::size_t ComponentCount = details::getDragComponentCount<T>();
+  constexpr static std::size_t ComponentCount = drag_details::getComponentCount<T>();
 
   /**
    * @brief Struct for construction of DragInput.
@@ -160,7 +152,7 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
  * @tparam T underlying value
  */
 template<OneOf<PF_IMGUI_LABELEDDRAG_TYPE_LIST> T>
-class LabeledDragInput : public DragInput<T> {
+class PF_IMGUI_EXPORT LabeledDragInput : public DragInput<T> {
  public:
   using ParamType = typename DragInput<T>::ParamType;
   using DragInput<T>::ComponentCount;

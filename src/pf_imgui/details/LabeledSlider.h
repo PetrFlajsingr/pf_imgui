@@ -10,12 +10,12 @@
 namespace ImGui {
 
 bool LabeledSliderScalar(const char *label, ImGuiDataType data_type, void *p_data, const void *p_min, const void *p_max,
-                         const char *format, const char *componentLabel, ImColor componentColor,
+                         const char *format, const char *componentLabel, ImU32 componentColor,
                          ImGuiSliderFlags flags);
 
 bool LabeledSliderScalarN(const char *label, ImGuiDataType data_type, void *v, int components, const void *v_min,
                           const void *v_max, const char *format, const char **componentLabels,
-                          const ImColor *componentColors, ImGuiSliderFlags flags);
+                          const ImU32 *componentColors, ImGuiSliderFlags flags);
 
 }  // namespace ImGui
 

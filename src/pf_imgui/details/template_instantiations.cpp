@@ -67,6 +67,15 @@ template class Slider<glm::vec2>;
 template class Slider<glm::vec3>;
 template class Slider<glm::vec4>;
 
+template class LabeledSlider<int>;
+template class LabeledSlider<glm::ivec2>;
+template class LabeledSlider<glm::ivec3>;
+template class LabeledSlider<glm::ivec4>;
+template class LabeledSlider<float>;
+template class LabeledSlider<glm::vec2>;
+template class LabeledSlider<glm::vec3>;
+template class LabeledSlider<glm::vec4>;
+
 template class Slider2D<int>;
 template class Slider2D<float>;
 

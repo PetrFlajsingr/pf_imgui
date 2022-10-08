@@ -30,6 +30,10 @@ namespace pf::ui::ig::slider_details {
  */
 #define PF_IMGUI_SLIDER_TYPE_LIST PF_IMGUI_SLIDER_FLOAT_TYPE_LIST, PF_IMGUI_SLIDER_INT_TYPE_LIST
 /**
+ * All types supported by LabeledSlider.
+ */
+#define PF_IMGUI_LABELEDSLIDER_TYPE_LIST PF_IMGUI_SLIDER_FLOAT_TYPE_LIST, PF_IMGUI_SLIDER_INT_TYPE_LIST
+/**
  * Detection for underlying type.
  */
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
@@ -47,6 +51,12 @@ constexpr const char *defaultFormat() {
   } else {
     return "%d";
   }
+}
+
+template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
+consteval std::size_t getComponentCount() {
+  if constexpr (OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) { return T::length(); }
+  return 1;
 }
 }  // namespace pf::ui::ig::slider_details
 

@@ -56,6 +56,14 @@ constexpr const char *defaultFormat() {
     return "%d";
   }
 }
+
+
+template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
+consteval std::size_t getComponentCount() {
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) { return T::length(); }
+  if constexpr (OneOf<T, PF_IMGUI_DRAG_RANGE_TYPE_LIST>) { return 2; }
+  return 1;
+}
 }  // namespace pf::ui::ig::drag_details
 
 #endif  //PF_IMGUI_ELEMENTS_DETAILS_DRAGINPUT_H

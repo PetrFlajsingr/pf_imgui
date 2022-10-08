@@ -9,7 +9,7 @@
 
 namespace ImGui {
 bool LabeledSliderScalar(const char *label, ImGuiDataType data_type, void *p_data, const void *p_min, const void *p_max,
-                         const char *format, const char *componentLabel, ImColor componentColor,
+                         const char *format, const char *componentLabel, ImU32 componentColor,
                          ImGuiSliderFlags flags) {
   ImGuiWindow *window = GetCurrentWindow();
   if (window->SkipItems) return false;
@@ -78,7 +78,7 @@ bool LabeledSliderScalar(const char *label, ImGuiDataType data_type, void *p_dat
   // ADDED display component label
   const auto componentLabelBB =
       ImRect{total_bb.Min, {total_bb.Min.x + componentLabelSize.x + 2 * style.FramePadding.x, total_bb.Max.y}};
-  RenderFrame(componentLabelBB.Min, componentLabelBB.Max, static_cast<ImU32>(componentColor), true,
+  RenderFrame(componentLabelBB.Min, componentLabelBB.Max, componentColor, true,
               style.FrameRounding);
   RenderTextClipped(componentLabelBB.Min, componentLabelBB.Max, componentLabel,
                     componentLabel + std::strlen(componentLabel), nullptr, ImVec2(0.5f, 0.5f));
@@ -105,7 +105,7 @@ bool LabeledSliderScalar(const char *label, ImGuiDataType data_type, void *p_dat
 
 bool LabeledSliderScalarN(const char *label, ImGuiDataType data_type, void *v, int components, const void *v_min,
                           const void *v_max, const char *format, const char **componentLabels,
-                          const ImColor *componentColors, ImGuiSliderFlags flags) {
+                          const ImU32 *componentColors, ImGuiSliderFlags flags) {
   ImGuiWindow *window = GetCurrentWindow();
   if (window->SkipItems) return false;
 
