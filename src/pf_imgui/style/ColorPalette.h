@@ -71,7 +71,8 @@ class PF_IMGUI_EXPORT ColorPalette {
     iterateTuple(
         [&index, &popCount](const auto &value) {
           if (value.has_value()) {
-            ImGui::PushStyleColor(static_cast<int>(varArgValueForIndex<SupportedColorTypes...>(index)), *value);
+            ImGui::PushStyleColor(static_cast<int>(varArgValueForIndex<SupportedColorTypes...>(index)),
+                                  static_cast<ImU32>(*value));
             ++popCount;
           }
           ++index;

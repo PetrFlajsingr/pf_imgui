@@ -316,7 +316,7 @@ void LogPanel<Category, RecordLimit>::renderTextArea() {
     for (std::size_t i = 0; i < records.readAvailable(); ++i) {
       const auto &record = records[i];
       if (!record.show) { continue; }
-      ImGui::PushStyleColor(ImGuiCol_Text, record.color);
+      ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(record.color));
       if (record.backgroundColor.has_value()) {
         drawTextBackground(record.text.c_str(), *record.backgroundColor, wrapEnabled, false);
       }
@@ -343,7 +343,7 @@ LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
       if (categoryBackgroundColors[i].has_value()) {
         drawTextBackground(categoryStrings[i].c_str(), categoryBackgroundColors[i].value(), false, true);
       }
-      ImGui::PushStyleColor(ImGuiCol_Text, categoryTextColors[i]);
+      ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(categoryTextColors[i]));
       const auto categoryChanged = ImGui::Checkbox(categoryStrings[i++].c_str(), &catEnabled);
       filterChanged = filterChanged || categoryChanged;
       ImGui::PopStyleColor(1);
