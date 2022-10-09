@@ -33,8 +33,8 @@ void CustomIconButtonBehavior::renderImpl() {
     state = State::None;
   }
   const auto cursorPos = ImGui::GetCursorScreenPos();
-  drawList->AddRectFilled(cursorPos + ImVec2{0, 0}, cursorPos + static_cast<ImVec2>(size), backgroundColor,
-                          ImGui::GetStyle().FrameRounding);
+  drawList->AddRectFilled(cursorPos + ImVec2{0, 0}, cursorPos + static_cast<ImVec2>(size),
+                          static_cast<ImU32>(backgroundColor), ImGui::GetStyle().FrameRounding);
   renderIcon(drawList, cursorPos);
   if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(size))) { state = State::Clicked; }
   update(state);

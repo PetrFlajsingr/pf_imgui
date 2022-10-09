@@ -159,7 +159,7 @@ Color TextEditor::getColor(TextEditorColor colorType) const {
 
 void TextEditor::setColor(TextEditorColor colorType, Color color) {
   auto palette = editor.GetPalette();
-  palette[static_cast<int>(colorType)] = color;
+  palette[static_cast<int>(colorType)] = static_cast<ImU32>(color);
   editor.SetPalette(palette);
 }
 

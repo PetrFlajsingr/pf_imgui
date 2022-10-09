@@ -47,6 +47,7 @@ class PF_IMGUI_EXPORT Width {
  private:
   float value;
 };
+
 class PF_IMGUI_EXPORT Height {
  public:
   constexpr explicit(false) Height(float height) : value(height) {}
@@ -84,36 +85,36 @@ class PF_IMGUI_EXPORT Height {
  * @brief Size to be used for element sizes.
  */
 struct PF_IMGUI_EXPORT Size {
-  Size(Width initialWidth, Height initialHeight);
+  constexpr Size(Width initialWidth, Height initialHeight) : width(initialWidth), height(initialHeight) {}
   /**
    * Conversion constructor.
    * @param vec size as ImVec2
    */
-  explicit(false) Size(ImVec2 vec);
+  constexpr explicit(false) Size(ImVec2 vec) : width(vec.x), height(vec.y) {}
   /**
    * Automatic size detection.
    * @return
    */
-  static Size Auto();
+  constexpr static Size Auto() { return {Width::Auto(), Height::Auto()}; }
   /**
    * Fill.
    */
-  static Size Fill();
+  constexpr static Size Fill() { return {Width::Fill(), Height::Fill()}; }
   /**
    * Fill on X, auto on Y.
    */
-  static Size FillWidth();
+  constexpr static Size FillWidth() { return {Width::Fill(), Height::Auto()}; }
   /**
    * Fill on Y, auto on X.
    */
-  static Size FillHeight();
-  bool operator==(const Size &rhs) const;
-  bool operator!=(const Size &rhs) const;
+  constexpr static Size FillHeight() { return {Width::Auto(), Height::Fill()}; }
+  constexpr bool operator==(const Size &rhs) const { return width == rhs.width && height == rhs.height; }
+  constexpr bool operator!=(const Size &rhs) const { return !(rhs == *this); }
   /**
    * Convert to ImVec, mostly for internal use.
    * @return size as ImVec
    */
-  explicit operator ImVec2() const;
+  constexpr explicit operator ImVec2() const { return ImVec2{static_cast<float>(width), static_cast<float>(height)}; }
   Width width;
   Height height;
 };

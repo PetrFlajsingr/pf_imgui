@@ -67,7 +67,9 @@ void ConsolePanel::renderImpl() {
           std::ranges::for_each(records, [&](const auto &record) {
             std::string prefix{};
             if (record.first == RecordType::Input) { prefix = "# "; }
-            if (record.second.color.has_value()) { ImGui::PushStyleColor(ImGuiCol_Text, *record.second.color); }
+            if (record.second.color.has_value()) {
+              ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(*record.second.color));
+            }
             if (record.second.backgroundColor.has_value()) {
               drawTextBackground(record.second.message.c_str(), *record.second.backgroundColor, wrapEnabled, false);
             }

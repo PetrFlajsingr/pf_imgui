@@ -37,7 +37,7 @@ void Notification::renderImpl() {
 
     if (icon != nullptr) {
       [[maybe_unused]] auto iconFontScoped = iconFont.applyScopedIfNotDefault();
-      ImGui::PushStyleColor(ImGuiCol_Text, *iconColor);
+      ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(*iconColor));
       RAII popColor{[&] { ImGui::PopStyleColor(1); }};
       ImGui::Text("%s", icon);
       ImGui::SameLine();

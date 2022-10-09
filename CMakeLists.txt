@@ -165,9 +165,6 @@ set(SOURCES
         src/pf_imgui/node_editor/Pin.cpp
         src/pf_imgui/node_editor/Comment.cpp
         src/pf_imgui/node_editor/NodeBase.cpp
-        src/pf_imgui/common/Size.cpp
-        src/pf_imgui/common/Position.cpp
-        src/pf_imgui/common/Color.cpp
         src/include/imgui_curve_editor/ImGuiCurveEditor.cpp
         src/pf_imgui/elements/SimpleCurveEditor.cpp
         src/include/imgui_color_gradient/imgui_color_gradient.cpp
