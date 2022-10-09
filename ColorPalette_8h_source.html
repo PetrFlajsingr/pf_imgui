@@ -118,39 +118,40 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    iterateTuple(</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        [&amp;index, &amp;popCount](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;value) {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;          <span class="keywordflow">if</span> (value.has_value()) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            ImGui::PushStyleColor(static_cast&lt;int&gt;(varArgValueForIndex&lt;SupportedColorTypes...&gt;(index)), *value);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            ++popCount;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;          }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          ++index;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        },</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        colorValues);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> RAII{[popCount] { ImGui::PopStyleColor(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(popCount)); }};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  std::tuple&lt;details::ColorOfAsOptionalColor&lt;SupportedColorTypes&gt;...&gt; colorValues;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordtype">bool</span> modified = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">using</span> FullColorPalette = ColorPalette&lt;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    ColorOf::Text, ColorOf::TextDisabled, ColorOf::WindowBackground, ColorOf::ChildBackground, ColorOf::PopupBackground,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ColorOf::FrameBackgroundActive, ColorOf::TitleBackground, ColorOf::TitleBackgroundActive,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    ColorOf::TitleBackgroundCollapsed, ColorOf::MenuBarBackground, ColorOf::ScrollbarBackground, ColorOf::ScrollbarGrab,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ColorOf::ScrollbarGrabHovered, ColorOf::ScrollbarGrabActive, ColorOf::CheckMark, ColorOf::SliderGrab,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    ColorOf::SliderGrabActive, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive, ColorOf::Header,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    ColorOf::HeaderHovered, ColorOf::HeaderActive, ColorOf::Separator, ColorOf::SeparatorHovered,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    ColorOf::SeparatorActive, ColorOf::ResizeGrip, ColorOf::ResizeGripHovered, ColorOf::ResizeGripActive, ColorOf::Tab,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    ColorOf::TabHovered, ColorOf::TabActive, ColorOf::TabUnfocused, ColorOf::TabUnfocusedActive, ColorOf::PlotLines,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered, ColorOf::TableHeaderBackground,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    ColorOf::TableBorderStrong, ColorOf::TableBorderLight, ColorOf::TableRowBackground, ColorOf::TableRowBackgroundAlt,</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    ColorOf::TextSelectedBackground, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::NavWindowingHighlight,</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="ColorPalette_8h.html#a468a3baee5e4709df9dee89cf4e641c8">  105</a></span>&#160;    ColorOf::NavWindowingDimBackground, ColorOf::ModalWindowDimBackground&gt;;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_STYLE_COLORPALETTE_H</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            ImGui::PushStyleColor(static_cast&lt;int&gt;(varArgValueForIndex&lt;SupportedColorTypes...&gt;(index)),</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                  static_cast&lt;ImU32&gt;(*value));</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            ++popCount;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;          ++index;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        },</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        colorValues);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> RAII{[popCount] { ImGui::PopStyleColor(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(popCount)); }};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  std::tuple&lt;details::ColorOfAsOptionalColor&lt;SupportedColorTypes&gt;...&gt; colorValues;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keywordtype">bool</span> modified = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">using</span> FullColorPalette = ColorPalette&lt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    ColorOf::Text, ColorOf::TextDisabled, ColorOf::WindowBackground, ColorOf::ChildBackground, ColorOf::PopupBackground,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    ColorOf::FrameBackgroundActive, ColorOf::TitleBackground, ColorOf::TitleBackgroundActive,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ColorOf::TitleBackgroundCollapsed, ColorOf::MenuBarBackground, ColorOf::ScrollbarBackground, ColorOf::ScrollbarGrab,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    ColorOf::ScrollbarGrabHovered, ColorOf::ScrollbarGrabActive, ColorOf::CheckMark, ColorOf::SliderGrab,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    ColorOf::SliderGrabActive, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive, ColorOf::Header,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    ColorOf::HeaderHovered, ColorOf::HeaderActive, ColorOf::Separator, ColorOf::SeparatorHovered,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    ColorOf::SeparatorActive, ColorOf::ResizeGrip, ColorOf::ResizeGripHovered, ColorOf::ResizeGripActive, ColorOf::Tab,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    ColorOf::TabHovered, ColorOf::TabActive, ColorOf::TabUnfocused, ColorOf::TabUnfocusedActive, ColorOf::PlotLines,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered, ColorOf::TableHeaderBackground,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    ColorOf::TableBorderStrong, ColorOf::TableBorderLight, ColorOf::TableRowBackground, ColorOf::TableRowBackgroundAlt,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    ColorOf::TextSelectedBackground, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::NavWindowingHighlight,</div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="ColorPalette_8h.html#a468a3baee5e4709df9dee89cf4e641c8">  106</a></span>&#160;    ColorOf::NavWindowingDimBackground, ColorOf::ModalWindowDimBackground&gt;;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}  <span class="comment">// namespace pf::ui::ig</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif  //PF_IMGUI_STYLE_COLORPALETTE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1Color_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1Color.html">pf::ui::ig::Color</a></div><div class="ttdoc">Color for pf_imgui, optimized compared to using ImVec4. TODO: blend functions etc.</div><div class="ttdef"><b>Definition:</b> Color.h:22</div></div>
 <div class="ttc" id="aclasspf_1_1ui_1_1ig_1_1ColorPalette_html"><div class="ttname"><a href="classpf_1_1ui_1_1ig_1_1ColorPalette.html">pf::ui::ig::ColorPalette</a></div><div class="ttdoc">Color palette for imgui.</div><div class="ttdef"><b>Definition:</b> ColorPalette.h:27</div></div>

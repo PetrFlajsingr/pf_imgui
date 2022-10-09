@@ -12,7 +12,7 @@ var searchData=
   ['modal_1544',['modal',['../classpf_1_1ui_1_1ig_1_1FileDialogBuilder.html#a64a1c8c3894b27b06c062509cbc314a0',1,'pf::ui::ig::FileDialogBuilder']]],
   ['modaldialog_1545',['ModalDialog',['../classpf_1_1ui_1_1ig_1_1ModalDialog.html#a33caed613b9d45bf8ac45a6afc95b67f',1,'pf::ui::ig::ModalDialog']]],
   ['modify_1546',['modify',['../classpf_1_1ui_1_1ig_1_1Observable.html#a6718aa6ec417dad0902ac12324fb25a8',1,'pf::ui::ig::Observable::modify()'],['../classpf_1_1ui_1_1ig_1_1ObservableProperty.html#a2fe5e2214c4d3c221a692fdd8457c9d3',1,'pf::ui::ig::ObservableProperty::modify()']]],
-  ['movedelta_1547',['moveDelta',['../structpf_1_1ui_1_1ig_1_1Position.html#a00691ddc3d04784cec7b71ad78fc3c33',1,'pf::ui::ig::Position']]],
+  ['movedelta_1547',['moveDelta',['../structpf_1_1ui_1_1ig_1_1Position.html#a47ff3df1d7501517a6265a29e921f8f4',1,'pf::ui::ig::Position']]],
   ['movedown_1548',['moveDown',['../classpf_1_1ui_1_1ig_1_1TableRow.html#adc5f4be5f49da82976bae818117a6ed0',1,'pf::ui::ig::TableRow']]],
   ['movefocustosearchbox_1549',['moveFocusToSearchBox',['../classpf_1_1ui_1_1ig_1_1CommandPaletteWindow.html#a18808dc2a86d66548c01c86a5ff4c01f',1,'pf::ui::ig::CommandPaletteWindow::moveFocusToSearchBox()'],['../classpf_1_1ui_1_1ig_1_1CommandPalette.html#acdb10b55f89740c86e8c27e521ed5d21',1,'pf::ui::ig::CommandPalette::moveFocusToSearchBox()']]],
   ['movestack_1550',['moveStack',['../classpf_1_1ui_1_1ig_1_1StackedLayout.html#a92a0bf9831c619216387d520dd5b7322',1,'pf::ui::ig::StackedLayout']]],

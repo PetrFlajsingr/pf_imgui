@@ -7,6 +7,6 @@ var searchData=
   ['enqueuechildremoval_1387',['enqueueChildRemoval',['../classpf_1_1ui_1_1ig_1_1ElementContainer.html#ac60a6136a25cab27c99a9e9ec0f3ed92',1,'pf::ui::ig::ElementContainer']]],
   ['errorbar_1388',['ErrorBar',['../classpf_1_1ui_1_1ig_1_1plot__type_1_1ErrorBar.html#a24a880992699f3a630c1ac15033cc0fd',1,'pf::ui::ig::plot_type::ErrorBar']]],
   ['expander_1389',['Expander',['../classpf_1_1ui_1_1ig_1_1Expander.html#a12080f35b4591658a308dfdcf51790c0',1,'pf::ui::ig::Expander::Expander(Config &amp;&amp;config)'],['../classpf_1_1ui_1_1ig_1_1Expander.html#a02bfb2187a5b5a84e1a4a594ba15f04d',1,'pf::ui::ig::Expander::Expander(std::string_view elementName, std::string_view labelText, Persistent persistent=Persistent::No)']]],
-  ['explicit_1390',['explicit',['../structpf_1_1ui_1_1ig_1_1Size.html#af0407af5420ad9b7bc5c84adbba3534e',1,'pf::ui::ig::Size']]],
+  ['explicit_1390',['explicit',['../structpf_1_1ui_1_1ig_1_1Size.html#a66e88752ea046e0bfaa477afb5bf13d9',1,'pf::ui::ig::Size']]],
   ['extension_1391',['extension',['../classpf_1_1ui_1_1ig_1_1FileDialogBuilder.html#a7141b7c4ee88dde224258bfe53eb701d',1,'pf::ui::ig::FileDialogBuilder']]]
 ];
