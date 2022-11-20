@@ -63,8 +63,9 @@ void FileDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance->OpenModal(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
-                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
+      fileDialogInstance->OpenDialog(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
+                                     openPath.string(), defaultName, static_cast<int>(maxSelectCount), nullptr,
+                                     ImGuiFileDialogFlags_Modal);
       break;
     case Modal::No:
       fileDialogInstance->OpenDialog(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,

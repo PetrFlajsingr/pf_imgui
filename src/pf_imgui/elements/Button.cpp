@@ -89,7 +89,7 @@ void ImageButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::ImageButton(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom)) {
+  if (ImGui::ImageButton(getName().c_str(), texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom)) {
     Event_notify(clickEvent);
   }
 }
