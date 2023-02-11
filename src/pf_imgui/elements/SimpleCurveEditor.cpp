@@ -3,8 +3,8 @@
 //
 
 #include "SimpleCurveEditor.h"
-#include <toml++/toml.h>
 #include <pf_imgui/serialization.h>
+#include <toml++/toml.h>
 
 namespace pf::ui::ig {
 
@@ -12,8 +12,8 @@ SimpleCurveEditor::SimpleCurveEditor(SimpleCurveEditor::Config &&config)
     : SimpleCurveEditor(config.name, config.label, config.size, config.maxPointCount,
                         config.persistent ? Persistent::Yes : Persistent::No) {}
 
-SimpleCurveEditor::SimpleCurveEditor(std::string_view elementName, std::string_view labelText, Size s,
-                                     std::size_t maxPointCount, Persistent persistent)
+SimpleCurveEditor::SimpleCurveEditor(std::string_view elementName, std::string_view labelText, Size s, std::size_t maxPointCount,
+                                     Persistent persistent)
     : ElementWithID(elementName), Savable(persistent), label(std::string{labelText}), size(s), curvePoints(),
       curveData(maxPointCount + 1, glm::vec2{0, 0}) {
   *Prop_modify(curvePoints) = getViewToCurveData();
@@ -24,13 +24,11 @@ void SimpleCurveEditor::setMaxPointCount(std::size_t count) { curveData.resize(c
 std::size_t SimpleCurveEditor::getMaxPointCount() const { return curveData.size() - 1; }
 
 float SimpleCurveEditor::getCurveValue(float x) const {
-  return ImGui::CurveValue(x, static_cast<int>(curveData.size() - 1),
-                           reinterpret_cast<const ImVec2 *>(curveData.data()));
+  return ImGui::CurveValue(x, static_cast<int>(curveData.size() - 1), reinterpret_cast<const ImVec2 *>(curveData.data()));
 }
 
 float SimpleCurveEditor::getSmoothCurveValue(float x) const {
-  return ImGui::CurveValueSmooth(x, static_cast<int>(curveData.size() - 1),
-                                 reinterpret_cast<const ImVec2 *>(curveData.data()));
+  return ImGui::CurveValueSmooth(x, static_cast<int>(curveData.size() - 1), reinterpret_cast<const ImVec2 *>(curveData.data()));
 }
 
 void SimpleCurveEditor::renderImpl() {
@@ -48,8 +46,7 @@ CurvePointsView SimpleCurveEditor::getViewToCurveData() const {
 
 toml::table SimpleCurveEditor::toToml() const {
   auto valuesToml = toml::array{};
-  std::ranges::for_each(getViewToCurveData(),
-                        [&](glm::vec2 point) { valuesToml.emplace_back<toml::array>(serializeGlmVec(point)); });
+  std::ranges::for_each(getViewToCurveData(), [&](glm::vec2 point) { valuesToml.emplace_back<toml::array>(serializeGlmVec(point)); });
   return toml::table{{"values", valuesToml}};
 }
 
@@ -61,8 +58,7 @@ void SimpleCurveEditor::setFromToml(const toml::table &src) {
         if (auto pointArr = point.as_array(); pointArr != nullptr) {
           if (pointArr->size() == 2) {
             if (pointArr->get(0)->as_floating_point() && pointArr->get(1)->as_floating_point()) {
-              curveData.emplace_back(
-                  glm::vec2{**pointArr->get(0)->as_floating_point(), **pointArr->get(1)->as_floating_point()});
+              curveData.emplace_back(glm::vec2{**pointArr->get(0)->as_floating_point(), **pointArr->get(1)->as_floating_point()});
             }
           }
         }

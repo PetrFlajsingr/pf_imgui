@@ -31,18 +31,13 @@ class Pin : public Renderable {
   /**
    * Get all Links in NodeEditor. It's done this way to avoid circular dependency.
    */
-  [[nodiscard]] ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
-                                       details::LinkPtrToRef>
+  [[nodiscard]] ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToRef>
   getAllLinks();
-  [[nodiscard]] ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
-                                       details::LinkPtrToConstRef>
+  [[nodiscard]] ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToConstRef>
   getAllLinks() const;
 
  public:
-  enum class Type {
-    Input = static_cast<int>(ax::NodeEditor::PinKind::Input),
-    Output = static_cast<int>(ax::NodeEditor::PinKind::Output)
-  };
+  enum class Type { Input = static_cast<int>(ax::NodeEditor::PinKind::Input), Output = static_cast<int>(ax::NodeEditor::PinKind::Output) };
 
   /**
     * @brief Struct for construction of Node.

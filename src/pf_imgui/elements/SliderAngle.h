@@ -86,10 +86,9 @@ class PF_IMGUI_EXPORT SliderAngle : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
-               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,
-               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::SliderGrab, ColorOf::SliderGrabActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();

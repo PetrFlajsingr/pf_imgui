@@ -199,9 +199,7 @@ class PF_IMGUI_EXPORT FontManager {
    * @return all fonts currently available inside FontManager
    */
   [[nodiscard]] auto getFonts() const {
-    return fonts | ranges::views::transform([](const auto &fontRecord) {
-             return Font{fontRecord.second, fontRecord.first};
-           });
+    return fonts | ranges::views::transform([](const auto &fontRecord) { return Font{fontRecord.second, fontRecord.first}; });
   }
 
   /**

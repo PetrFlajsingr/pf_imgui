@@ -28,8 +28,7 @@ class PF_IMGUI_EXPORT ValueContainerEmptyBase {};
 
 template<typename T, OneOf<ReadOnlyTag, ReadWriteTag> Tag = ReadWriteTag>
 class PF_IMGUI_EXPORT ValueContainer
-    : public std::conditional_t<std::same_as<Tag, ReadWriteTag>, details::ValueContainerSetValue<T>,
-                                details::ValueContainerEmptyBase> {
+    : public std::conditional_t<std::same_as<Tag, ReadWriteTag>, details::ValueContainerSetValue<T>, details::ValueContainerEmptyBase> {
  public:
   using ValueType = T;
   constexpr static bool ReadOnly = std::same_as<Tag, ReadOnlyTag>;

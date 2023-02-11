@@ -93,8 +93,7 @@ class PF_IMGUI_EXPORT DragSourceBase {
    * @param value string to be inserted into simple tooltip
    * @return true if content is being dragged, false otherwise
    */
-  bool drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize,
-                     const std::string &value);
+  bool drag_impl_fmt(const std::string &typeName, const void *sourceData, std::size_t dataSize, const std::string &value);
   bool dragAllowed;
 
   /**
@@ -171,9 +170,7 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
    * Set simple tooltip for dragging. If the text contains '{}' and T is ToStringConvertible than the value transferred is formatted to the string.
    * @param text text on tooltip
    */
-  void setDragTooltip(std::string_view text) {
-    createSimpleTooltip(std::string(text), text.find("{}") != std::string_view::npos);
-  }
+  void setDragTooltip(std::string_view text) { createSimpleTooltip(std::string(text), text.find("{}") != std::string_view::npos); }
 
   ClassEvent<DragSource, T> startDragEvent;
 
@@ -193,8 +190,7 @@ class PF_IMGUI_EXPORT DragSource : public details::DragSourceBase {
     bool result;
     if constexpr (ToStringConvertible<T>) {
       if (hasFmtTooltip()) {
-        result =
-            drag_impl_fmt(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
+        result = drag_impl_fmt(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T), toString(sourceData));
       } else {
         result = drag_impl(typeID, reinterpret_cast<const void *>(&sourceData), sizeof(const T));
       }

@@ -49,8 +49,7 @@ class PF_IMGUI_EXPORT RadioButton : public ItemElement, public ValueContainer<bo
   RadioButton(std::string_view elementName, std::string_view labelText, bool initialValue = false);
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
-               ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::CheckMark, ColorOf::Border,
-               ColorOf::BorderShadow>
+               ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::CheckMark, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();

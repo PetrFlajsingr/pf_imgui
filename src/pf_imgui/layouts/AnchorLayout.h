@@ -73,8 +73,7 @@ class PF_IMGUI_EXPORT AnchorLayout : public Layout {
     if constexpr (HasSizeObservable<T>) {
       addToWidth = [ptr = child.get()](Width d) {
         auto childSize = *ptr->size;
-        childSize.width = std::clamp(static_cast<float>(childSize.width) + static_cast<float>(d), 0.1f,
-                                     std::numeric_limits<float>::max());
+        childSize.width = std::clamp(static_cast<float>(childSize.width) + static_cast<float>(d), 0.1f, std::numeric_limits<float>::max());
         *ptr->size.modify() = childSize;
       };
       addToHeight = [ptr = child.get()](Height d) {

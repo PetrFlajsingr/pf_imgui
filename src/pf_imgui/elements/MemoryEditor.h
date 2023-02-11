@@ -88,8 +88,7 @@ class PF_IMGUI_EXPORT MemoryEditor : public ItemElement {
 
 template<typename T>
 MemoryEditor::MemoryEditor(std::string_view elementName, std::span<T> newData)
-    : ItemElement(elementName),
-      data(std::span{reinterpret_cast<const std::byte *>(newData.data()), newData.size() * sizeof(T)}) {}
+    : ItemElement(elementName), data(std::span{reinterpret_cast<const std::byte *>(newData.data()), newData.size() * sizeof(T)}) {}
 
 }  // namespace pf::ui::ig
 

@@ -90,8 +90,7 @@ void NodeEditor::setFromToml(const toml::table &src) {
             if (auto positionXToml = positionXIter->second.as_floating_point(); positionXToml != nullptr) {
               if (auto positionYIter = commentToml->find("positionY"); positionYIter != commentToml->end()) {
                 if (auto positionYToml = positionYIter->second.as_floating_point(); positionYToml != nullptr) {
-                  position =
-                      Position{static_cast<float>(positionXToml->get()), static_cast<float>(positionYToml->get())};
+                  position = Position{static_cast<float>(positionXToml->get()), static_cast<float>(positionYToml->get())};
                 }
               }
             }
@@ -109,10 +108,7 @@ void NodeEditor::setFromToml(const toml::table &src) {
               commentHeight = static_cast<float>(heightToml->get());
             }
           }
-          if (!commentWidth.has_value() || !commentHeight.has_value() || !commentLabel.has_value()
-              || !commentName.has_value()) {
-            return;
-          }
+          if (!commentWidth.has_value() || !commentHeight.has_value() || !commentLabel.has_value() || !commentName.has_value()) { return; }
           auto &newComment = addComment(*commentName, *commentLabel, Size{*commentWidth, *commentHeight});
           if (position.has_value()) { *newComment.position.modify() = *position; }
         }
@@ -144,17 +140,14 @@ void NodeEditor::setFromToml(const toml::table &src) {
             }
           }
           if (auto iter = linkToml->find("color"); iter != linkToml->end()) {
-            if (auto colorToml = iter->second.as_integer(); colorToml != nullptr) {
-              color = Color{static_cast<ImU32>(colorToml->get())};
-            }
+            if (auto colorToml = iter->second.as_integer(); colorToml != nullptr) { color = Color{static_cast<ImU32>(colorToml->get())}; }
           }
           if (auto iter = linkToml->find("thickness"); iter != linkToml->end()) {
             if (auto thicknessToml = iter->second.as_floating_point(); thicknessToml != nullptr) {
               thickness = static_cast<float>(thicknessToml->get());
             }
           }
-          if (!linkName.has_value() || !inputPin.has_value() || !outputPin.has_value() || !color.has_value()
-              || !thickness.has_value()) {
+          if (!linkName.has_value() || !inputPin.has_value() || !outputPin.has_value() || !color.has_value() || !thickness.has_value()) {
             return;
           }
           auto &newLink = addLink(*linkName, **inputPin, **outputPin);

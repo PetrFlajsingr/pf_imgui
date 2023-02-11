@@ -25,32 +25,26 @@ class Pin;
 }  // namespace bp
 }  // namespace pf::ui::ig
 
-#define PF_IMGUI_BLUEPRINT_NODE_ID(type)                                                                               \
-  [[nodiscard]] static inline NodeTypeIdentifier UniqueNodeIdentifier() { return pf::TypeNameCstr<type>(); }           \
+#define PF_IMGUI_BLUEPRINT_NODE_ID(type)                                                                                                   \
+  [[nodiscard]] static inline NodeTypeIdentifier UniqueNodeIdentifier() { return pf::TypeNameCstr<type>(); }                               \
   [[nodiscard]] inline NodeTypeIdentifier getNodeTypeId() const override { return UniqueNodeIdentifier(); }
-#define PF_IMGUI_BLUEPRINT_PIN_ID(type)                                                                                \
-  [[nodiscard]] static inline PinTypeIdentifier UniquePinIdentifier() { return pf::TypeNameCstr<type>(); }             \
+#define PF_IMGUI_BLUEPRINT_PIN_ID(type)                                                                                                    \
+  [[nodiscard]] static inline PinTypeIdentifier UniquePinIdentifier() { return pf::TypeNameCstr<type>(); }                                 \
   [[nodiscard]] inline PinTypeIdentifier getPinTypeId() const override { return UniquePinIdentifier(); }
 
 namespace pf::ui::ig::bp {
 namespace details {
 
 template<typename T>
-concept TomlConstructiblePin =
-    std::derived_from<T, pf::ui::ig::bp::Pin> && requires(ig::Node *parent, const toml::table &src) {
-                                                   {
-                                                     T::ConstructFromToml(parent, src)
-                                                     } -> std::same_as<std::unique_ptr<T>>;
-                                                   { T::UniquePinIdentifier() } -> std::same_as<NodeTypeIdentifier>;
-                                                 };
+concept TomlConstructiblePin = std::derived_from<T, pf::ui::ig::bp::Pin> && requires(ig::Node *parent, const toml::table &src) {
+  { T::ConstructFromToml(parent, src) } -> std::same_as<std::unique_ptr<T>>;
+  { T::UniquePinIdentifier() } -> std::same_as<NodeTypeIdentifier>;
+};
 template<typename T>
-concept TomlConstructibleNode =
-    std::derived_from<T, pf::ui::ig::bp::Node> && requires(ig::NodeEditor *parent, const toml::table &src) {
-                                                    {
-                                                      T::ConstructFromToml(parent, src)
-                                                      } -> std::same_as<std::unique_ptr<T>>;
-                                                    { T::UniqueNodeIdentifier() } -> std::same_as<PinTypeIdentifier>;
-                                                  };
+concept TomlConstructibleNode = std::derived_from<T, pf::ui::ig::bp::Node> && requires(ig::NodeEditor *parent, const toml::table &src) {
+  { T::ConstructFromToml(parent, src) } -> std::same_as<std::unique_ptr<T>>;
+  { T::UniqueNodeIdentifier() } -> std::same_as<PinTypeIdentifier>;
+};
 
 }  // namespace details
 
@@ -79,17 +73,14 @@ class NodeEditorLoading {
     nodeConstructors[typeId] = &NodeType::ConstructFromToml;
   }
 
-  [[nodiscard]] std::optional<std::unique_ptr<Pin>> constructPin(PinTypeIdentifier typeId, ig::Node *parent,
-                                                                 const toml::table &src);
+  [[nodiscard]] std::optional<std::unique_ptr<Pin>> constructPin(PinTypeIdentifier typeId, ig::Node *parent, const toml::table &src);
   [[nodiscard]] std::optional<std::unique_ptr<Node>> constructNode(NodeTypeIdentifier typeId, ig::NodeEditor *parent,
                                                                    const toml::table &src);
 
  private:
   static inline std::unique_ptr<NodeEditorLoading> instance = nullptr;
-  std::unordered_map<PinTypeIdentifier, std::function<std::unique_ptr<Pin>(ig::Node *, const toml::table &)>>
-      pinConstructors;
-  std::unordered_map<NodeTypeIdentifier, std::function<std::unique_ptr<Node>(ig::NodeEditor *, const toml::table &)>>
-      nodeConstructors;
+  std::unordered_map<PinTypeIdentifier, std::function<std::unique_ptr<Pin>(ig::Node *, const toml::table &)>> pinConstructors;
+  std::unordered_map<NodeTypeIdentifier, std::function<std::unique_ptr<Node>(ig::NodeEditor *, const toml::table &)>> nodeConstructors;
 };
 
 }  // namespace pf::ui::ig::bp

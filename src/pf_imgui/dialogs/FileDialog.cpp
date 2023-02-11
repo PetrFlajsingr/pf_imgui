@@ -13,13 +13,11 @@ namespace pf::ui::ig {
 
 FileDialog::FileDialog(FileType dialogFileType, std::string_view elementName, std::string_view labelText,
                        const std::vector<FileExtensionSettings> &extSettings,
-                       std::function<void(std::vector<std::filesystem::path>)> onSelect, std::function<void()> onCancel,
-                       Size initialSize, std::filesystem::path startPath, std::string startName, Modal modality,
-                       uint32_t maxSelected)
+                       std::function<void(std::vector<std::filesystem::path>)> onSelect, std::function<void()> onCancel, Size initialSize,
+                       std::filesystem::path startPath, std::string startName, Modal modality, uint32_t maxSelected)
     : Renderable(elementName), label(std::string{labelText}), size(initialSize), openPath(std::move(startPath)),
       defaultName(std::move(startName)), modal(modality), fileType(dialogFileType), maxSelectCount(maxSelected),
-      onFilesSelected(std::move(onSelect)), onSelectCanceled(std::move(onCancel)),
-      fileDialogInstance(new IGFD::FileDialog{}) {
+      onFilesSelected(std::move(onSelect)), onSelectCanceled(std::move(onCancel)), fileDialogInstance(new IGFD::FileDialog{}) {
   if (fileType == FileType::File) { prepareExtInfos(extSettings); }
 }
 
@@ -29,9 +27,7 @@ bool FileDialog::isDone() const { return done; }
 
 std::string FileDialog::serializeBookmark() { return fileDialogInstance->SerializeBookmarks(); }
 
-void FileDialog::deserializeBookmark(const std::string &bookmarkStr) {
-  fileDialogInstance->DeserializeBookmarks(bookmarkStr);
-}
+void FileDialog::deserializeBookmark(const std::string &bookmarkStr) { fileDialogInstance->DeserializeBookmarks(bookmarkStr); }
 
 void FileDialog::prepareExtInfos(const std::vector<FileExtensionSettings> &extSettings) {
   for (const auto &[extNames, desc, extColor] : extSettings) {
@@ -63,12 +59,12 @@ void FileDialog::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   switch (modal) {
     case Modal::Yes:
-      fileDialogInstance->OpenModal(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
-                                    openPath.string(), defaultName, static_cast<int>(maxSelectCount));
+      fileDialogInstance->OpenModal(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr, openPath.string(),
+                                    defaultName, static_cast<int>(maxSelectCount));
       break;
     case Modal::No:
-      fileDialogInstance->OpenDialog(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr,
-                                     openPath.string(), defaultName, static_cast<int>(maxSelectCount));
+      fileDialogInstance->OpenDialog(getName(), label->get(), fileType == FileType::File ? filters.c_str() : nullptr, openPath.string(),
+                                     defaultName, static_cast<int>(maxSelectCount));
       break;
   }
 

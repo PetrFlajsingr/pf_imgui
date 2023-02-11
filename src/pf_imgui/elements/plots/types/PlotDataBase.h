@@ -58,12 +58,10 @@ class PF_IMGUI_EXPORT DefaultPlotDataSetting {
    */
   template<Plottable T>
   void setData(const RangeOf<XYPlotData<T>> auto &newData) {
-    xData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); })
-        | ranges::to_vector;
+    xData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.x); }) | ranges::to_vector;
     const auto extremes = ranges::minmax(xData);
     width = extremes.max - extremes.min;
-    yData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.y); })
-        | ranges::to_vector;
+    yData = newData | ranges::views::transform([](const auto &val) { return static_cast<double>(val.y); }) | ranges::to_vector;
   }
 
  protected:

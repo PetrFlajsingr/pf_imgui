@@ -26,8 +26,8 @@ MessageDialogBuilder &MessageDialogBuilder::message(std::string dialogMessage) {
 
 void MessageDialogBuilder::build() {
   using namespace std::string_literals;
-  dialogManager->addMessageDialog(std::make_unique<MessageDialog>(
-      "MessageDialog_"s + std::to_string(IdCounter++), title_, size_, message_, buttons_, std::move(onDone_)));
+  dialogManager->addMessageDialog(std::make_unique<MessageDialog>("MessageDialog_"s + std::to_string(IdCounter++), title_, size_, message_,
+                                                                  buttons_, std::move(onDone_)));
 }
 
 }  // namespace pf::ui::ig

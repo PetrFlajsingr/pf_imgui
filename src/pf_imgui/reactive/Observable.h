@@ -23,10 +23,8 @@ namespace pf::ui::ig {
  */
 template<typename T, typename ValueType>
 concept ObservableChangeDetector = std::constructible_from<T, ValueType> && requires(T t, const ValueType &newValue) {
-                                                                              {
-                                                                                t.hasValueChanged(newValue)
-                                                                                } -> std::same_as<bool>;
-                                                                            };
+  { t.hasValueChanged(newValue) } -> std::same_as<bool>;
+};
 
 /**
  * Default ObservableChangeDetector. Uses operator!= to detect change.
@@ -91,9 +89,7 @@ class Observable {
    */
   class Transaction {
    public:
-    explicit Transaction(Observable &observable) : owner(observable), detector(observable.value) {
-      ++owner.activeTransactions;
-    }
+    explicit Transaction(Observable &observable) : owner(observable), detector(observable.value) { ++owner.activeTransactions; }
     ~Transaction() {
       if (isLastTransaction()) {
         if (detector.hasValueChanged(owner.value)) { owner.observableImpl.notify(owner.value); }
@@ -113,12 +109,11 @@ class Observable {
 
   Observable()
     requires(std::is_default_constructible_v<value_type>)
-  : value{} {}
+      : value{} {}
   explicit Observable(value_type val) : value(std::move(val)) {}
   ~Observable() = default;
 
-  Observable(Observable &&other) noexcept
-      : value(std::move(other.value)), observableImpl(std::move(other.observableImpl)) {}
+  Observable(Observable &&other) noexcept : value(std::move(other.value)), observableImpl(std::move(other.observableImpl)) {}
   Observable &operator=(Observable &&other) noexcept {
     value = std::move(other.value);
     observableImpl = std::move(other.observableImpl);
@@ -175,9 +170,7 @@ class ObservableProperty {
    */
   class Transaction {
    public:
-    explicit Transaction(ObservableProperty &observable) : owner(observable), detector(observable.value) {
-      ++owner.activeTransactions;
-    }
+    explicit Transaction(ObservableProperty &observable) : owner(observable), detector(observable.value) { ++owner.activeTransactions; }
     ~Transaction() {
       if (isLastTransaction()) {
         if (detector.hasValueChanged(owner.value)) { owner.observableImpl.notify(owner.value); }
@@ -197,7 +190,7 @@ class ObservableProperty {
 
   ObservableProperty()
     requires(std::is_default_constructible_v<value_type>)
-  : value{} {}
+      : value{} {}
   explicit ObservableProperty(value_type val) : value(std::move(val)) {}
   ~ObservableProperty() = default;
 

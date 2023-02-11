@@ -26,8 +26,7 @@ void ImGuiSDLInterface::processInput() {
   SDL_PumpEvents();
   constexpr static auto MAX_EVENTS = 10;
   std::array<SDL_Event, MAX_EVENTS> events;
-  const auto eventCount =
-      SDL_PeepEvents(events.data(), events.size(), SDL_eventaction::SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT);
+  const auto eventCount = SDL_PeepEvents(events.data(), events.size(), SDL_eventaction::SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT);
   for (int i = 0; i < eventCount; ++i) { ImGui_ImplSDL2_ProcessEvent(&events[i]); }
 }
 

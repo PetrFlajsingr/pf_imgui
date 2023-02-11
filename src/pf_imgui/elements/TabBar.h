@@ -91,8 +91,7 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
   * @param mods modifiers
   * @param labelText text rendered on the Tab
   */
-  Tab(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods = Flags<TabMod>{},
-      bool closeable = false);
+  Tab(std::string_view elementName, std::string_view labelText, Flags<TabMod> mods = Flags<TabMod>{}, bool closeable = false);
 
   /**
   *
@@ -124,10 +123,7 @@ class PF_IMGUI_EXPORT Tab : public TabButton, public ElementContainer {
  */
 class PF_IMGUI_EXPORT TabBar : public ElementWithID, public RenderablesContainer {
  public:
-  enum class ResizePolicy {
-    ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown,
-    Scroll = ImGuiTabBarFlags_FittingPolicyScroll
-  };
+  enum class ResizePolicy { ResizeDown = ImGuiTabBarFlags_FittingPolicyResizeDown, Scroll = ImGuiTabBarFlags_FittingPolicyScroll };
   /**
    * @brief Struct for construction of TabBar.
    */
@@ -155,8 +151,7 @@ class PF_IMGUI_EXPORT TabBar : public ElementWithID, public RenderablesContainer
    * @param mods modifiers
    * @return reference to the newly created Tab
    */
-  Tab &addTab(std::string_view tabName, std::string_view caption, Flags<TabMod> mods = Flags<TabMod>{},
-              bool closeable = false);
+  Tab &addTab(std::string_view tabName, std::string_view caption, Flags<TabMod> mods = Flags<TabMod>{}, bool closeable = false);
   /**
    * Create a new Tab.
    * @param tabName ID of the Tab

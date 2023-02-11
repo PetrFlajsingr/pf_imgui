@@ -29,9 +29,8 @@ enum class GizmoMid { Cube = imguiGizmo::cubeAtOrigin, Sphere = imguiGizmo::sphe
 
 namespace details {
 template<GizmoType Type>
-using GizmoValueType =
-    std::conditional_t<Type == GizmoType::Axes3, glm::quat,
-                       std::conditional_t<Type == GizmoType::Direction, glm::vec3, std::pair<glm::quat, glm::vec3>>>;
+using GizmoValueType = std::conditional_t<Type == GizmoType::Axes3, glm::quat,
+                                          std::conditional_t<Type == GizmoType::Direction, glm::vec3, std::pair<glm::quat, glm::vec3>>>;
 }
 
 /**
@@ -42,9 +41,7 @@ using GizmoValueType =
  * @tparam Type
  */
 template<GizmoType Type>
-class PF_IMGUI_EXPORT Gizmo3D : public ItemElement,
-                                public ValueContainer<details::GizmoValueType<Type>>,
-                                public Savable {
+class PF_IMGUI_EXPORT Gizmo3D : public ItemElement, public ValueContainer<details::GizmoValueType<Type>>, public Savable {
   using ValueType = details::GizmoValueType<Type>;
 
  public:
@@ -171,15 +168,11 @@ void Gizmo3D<Type>::renderImpl() {
   const auto flags = static_cast<int>(Type) | static_cast<int>(mid);
   if constexpr (Type == GizmoType::Axes3) {
     glm::quat quat = *value;
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, static_cast<float>(size->width), flags)) {
-      *value.modify() = quat;
-    }
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), quat, static_cast<float>(size->width), flags)) { *value.modify() = quat; }
   }
   if constexpr (Type == GizmoType::Direction) {
     glm::vec3 dir = *value;
-    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, static_cast<float>(size->width), flags)) {
-      *value.modify() = dir;
-    }
+    if (ImGui::gizmo3D(fmt::format("##{}", getName()).c_str(), dir, static_cast<float>(size->width), flags)) { *value.modify() = dir; }
   }
   if constexpr (Type == GizmoType::Dual) {
     auto [quat, dir] = *value;

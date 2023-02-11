@@ -38,8 +38,7 @@ void ImGui::Spinner(const char *label, float radius, int thickness) {
 
   for (int i = 0; i < num_segments; i++) {
     const float a = a_min + ((float) i / (float) num_segments) * (a_max - a_min);
-    window->DrawList->PathLineTo(
-        ImVec2(centre.x + ImCos(a + g.Time * 8) * radius, centre.y + ImSin(a + g.Time * 8) * radius));
+    window->DrawList->PathLineTo(ImVec2(centre.x + ImCos(a + g.Time * 8) * radius, centre.y + ImSin(a + g.Time * 8) * radius));
   }
 
   window->DrawList->PathStroke(GetColorU32(ImGuiCol_PlotHistogram), false, static_cast<float>(thickness));

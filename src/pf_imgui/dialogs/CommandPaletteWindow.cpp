@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig {
 
-CommandPaletteWindow::CommandPaletteWindow(std::string_view elementName)
-    : Renderable(elementName), context(ImCmd::CreateContext()) {}
+CommandPaletteWindow::CommandPaletteWindow(std::string_view elementName) : Renderable(elementName), context(ImCmd::CreateContext()) {}
 
 CommandPaletteWindow::~CommandPaletteWindow() { ImCmd::DestroyContext(context); }
 

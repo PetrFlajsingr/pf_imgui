@@ -34,8 +34,7 @@ void StretchLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto flags =
-      isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  const auto flags = isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     if (child == nullptr) { return; }

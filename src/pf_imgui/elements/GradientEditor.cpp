@@ -15,8 +15,8 @@ std::optional<GradientPoint> GradientPoint::FromToml(const toml::table &src) {
   GradientPoint result;
   if (auto colorIter = src.find("color"); colorIter != src.end()) {
     if (auto colorArr = colorIter->second.as_array(); colorArr != nullptr && colorArr->size() == 4) {
-      result.color = Color::RGB((*colorArr)[0].value_or(1.f), (*colorArr)[1].value_or(1.f),
-                                (*colorArr)[2].value_or(1.f), (*colorArr)[3].value_or(1.f));
+      result.color = Color::RGB((*colorArr)[0].value_or(1.f), (*colorArr)[1].value_or(1.f), (*colorArr)[2].value_or(1.f),
+                                (*colorArr)[3].value_or(1.f));
     } else {
       return std::nullopt;
     }
@@ -36,8 +36,7 @@ std::optional<GradientPoint> GradientPoint::FromToml(const toml::table &src) {
 }
 
 toml::table GradientPoint::toToml() const {
-  return toml::table{{"color", toml::array{color.red(), color.green(), color.blue(), color.alpha()}},
-                     {"position", position}};
+  return toml::table{{"color", toml::array{color.red(), color.green(), color.blue(), color.alpha()}}, {"position", position}};
 }
 
 GradientPoint details::GradientMarkToGradientPoint::operator()(ImGradientMark *mark) const {

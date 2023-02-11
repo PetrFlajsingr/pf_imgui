@@ -26,8 +26,7 @@ void StackedLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto flags =
-      isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  const auto flags = isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
@@ -61,9 +60,8 @@ StackedLayout::Stack &StackedLayout::getCurrentStack() { return *stacks[*selecte
 StackedLayout::Stack &StackedLayout::getStackAtIndex(std::size_t index) { return *stacks[index]; }
 
 std::vector<Renderable *> StackedLayout::getRenderables() {
-  return stacks | ranges::views::transform([](auto &stack) { return stack->getChildren() | ranges::views::all; })
-      | ranges::views::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
-      | ranges::to_vector;
+  return stacks | ranges::views::transform([](auto &stack) { return stack->getChildren() | ranges::views::all; }) | ranges::views::join
+      | ranges::views::transform([](auto &child) -> Renderable * { return &child; }) | ranges::to_vector;
 }
 
 std::size_t StackedLayout::stackSize() const { return stacks.size(); }

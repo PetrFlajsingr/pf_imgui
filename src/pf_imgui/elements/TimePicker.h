@@ -23,9 +23,7 @@ class TimeOfDayChangeDetector {
  public:
   explicit TimeOfDayChangeDetector(TimeOfDay value) : initialValue(value) {}
 
-  [[nodiscard]] bool hasValueChanged(const TimeOfDay &newValue) {
-    return initialValue.to_duration() != newValue.to_duration();
-  }
+  [[nodiscard]] bool hasValueChanged(const TimeOfDay &newValue) { return initialValue.to_duration() != newValue.to_duration(); }
 
  private:
   TimeOfDay initialValue;
@@ -60,8 +58,7 @@ class TimePicker : public ItemElement, public ValueContainer<TimeOfDay>, public 
    * @param initialValue initial value
    * @param persistent enable disk state saving
    */
-  TimePicker(std::string_view elementName, std::string_view labelText, TimeOfDay initialValue,
-             Persistent persistent = Persistent::No);
+  TimePicker(std::string_view elementName, std::string_view labelText, TimeOfDay initialValue, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;

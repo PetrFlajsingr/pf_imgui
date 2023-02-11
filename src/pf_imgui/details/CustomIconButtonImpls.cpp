@@ -19,9 +19,8 @@ void WrapTextToggle::renderIcon(ImDrawList *drawList, ImVec2 cursorPos) {
   drawList->AddRectFilled(cursorPos + ImVec2{6, 11}, cursorPos + ImVec2{16, 13}, static_cast<ImU32>(getIconColor()));
   drawList->AddRectFilled(cursorPos + ImVec2{6, 16}, cursorPos + ImVec2{9, 18}, static_cast<ImU32>(getIconColor()));
 
-  const auto points =
-      make_array<ImVec2>(cursorPos + ImVec2{16, 12}, cursorPos + ImVec2{18, 14}, cursorPos + ImVec2{18, 15},
-                         cursorPos + ImVec2{16, 17}, cursorPos + ImVec2{14, 17});
+  const auto points = make_array<ImVec2>(cursorPos + ImVec2{16, 12}, cursorPos + ImVec2{18, 14}, cursorPos + ImVec2{18, 15},
+                                         cursorPos + ImVec2{16, 17}, cursorPos + ImVec2{14, 17});
   drawList->AddPolyline(points.data(), static_cast<int>(points.size()), static_cast<ImU32>(getIconColor()), {}, 2.f);
   drawList->AddTriangleFilled(cursorPos + ImVec2{14, 19}, cursorPos + ImVec2{14, 15}, cursorPos + ImVec2{12, 17},
                               static_cast<ImU32>(getIconColor()));

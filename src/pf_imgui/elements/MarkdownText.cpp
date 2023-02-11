@@ -10,10 +10,10 @@ namespace pf::ui::ig {
 MarkdownText::MarkdownText(MarkdownText::Config &&config)
     : MarkdownText(config.name, config.imguiInterface, config.markdownText, config.fontSize, config.imageLoader) {}
 
-MarkdownText::MarkdownText(std::string_view elementName, ImGuiInterface &imguiInterface, std::u8string markdown,
-                           float defaultFontSize, std::optional<ImageLoader> imageLoader)
-    : ItemElement(elementName), imGuiInterface(imguiInterface), markdownSrc(std::move(markdown)),
-      fontSize(defaultFontSize), loadImage(std::move(imageLoader)) {
+MarkdownText::MarkdownText(std::string_view elementName, ImGuiInterface &imguiInterface, std::u8string markdown, float defaultFontSize,
+                           std::optional<ImageLoader> imageLoader)
+    : ItemElement(elementName), imGuiInterface(imguiInterface), markdownSrc(std::move(markdown)), fontSize(defaultFontSize),
+      loadImage(std::move(imageLoader)) {
   loadHeaderFonts();
   configure();
 }
@@ -65,8 +65,7 @@ void MarkdownText::setFontSize(float size) {
 }
 
 void MarkdownText::MarkdownLinkCallback(ImGui::MarkdownLinkCallbackData data) {
-  reinterpret_cast<MarkdownText *>(data.userData)
-      ->onLinkClicked(std::string_view(data.link, data.linkLength), data.isImage);
+  reinterpret_cast<MarkdownText *>(data.userData)->onLinkClicked(std::string_view(data.link, data.linkLength), data.isImage);
 }
 
 ImGui::MarkdownImageData MarkdownText::MarkdownImageCallback(ImGui::MarkdownLinkCallbackData data) {

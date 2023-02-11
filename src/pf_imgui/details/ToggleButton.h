@@ -38,12 +38,10 @@ inline bool ToggleButton(const char *str_id, bool *v) {
     col.z *= 1.1f;
     col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.78f, 0.78f, 0.78f, 1.0f), col, t));
   } else {
-    col_bg = ImGui::GetColorU32(
-        ImLerp(ImVec4(0.85f, 0.85f, 0.85f, 1.0f), ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive], t));
+    col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.85f, 0.85f, 0.85f, 1.0f), ImGui::GetStyle().Colors[ImGuiCol_SliderGrabActive], t));
   }
   draw_list->AddRectFilled(p, ImVec2(p.x + width, p.y + height), col_bg, height * 0.5f);
-  draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (width - radius * 2.0f), p.y + radius), radius - 1.5f,
-                             IM_COL32(255, 255, 255, 255));
+  draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (width - radius * 2.0f), p.y + radius), radius - 1.5f, IM_COL32(255, 255, 255, 255));
   return wasClicked;
 }
 }  // namespace pf::ui::ig

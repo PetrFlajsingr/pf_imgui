@@ -17,12 +17,7 @@
 
 namespace pf::ui::ig {
 
-enum class DockType {
-  DisableCentralNode = 1 << 2,
-  DisableAreaSplit = 1 << 4,
-  DisableAreaResize = 1 << 5,
-  AutoHideTabBar = 1 << 6
-};
+enum class DockType { DisableCentralNode = 1 << 2, DisableAreaSplit = 1 << 4, DisableAreaResize = 1 << 5, AutoHideTabBar = 1 << 6 };
 // TODO: somehow keep this alive when the parent is collapsed/invisible -
 /**
  * @brief An area to which dockable windows can be docked.

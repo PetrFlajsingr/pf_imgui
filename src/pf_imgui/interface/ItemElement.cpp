@@ -16,8 +16,7 @@ ItemElement::ItemElement(std::string_view elementName) : ElementWithID(elementNa
 
 ItemElement::~ItemElement() = default;
 
-ItemElement::ItemElement(ItemElement &&other) noexcept
-    : ElementWithID(std::move(other)), tooltip(std::move(other.tooltip)) {}
+ItemElement::ItemElement(ItemElement &&other) noexcept : ElementWithID(std::move(other)), tooltip(std::move(other.tooltip)) {}
 
 ItemElement &ItemElement::operator=(ItemElement &&other) noexcept {
   tooltip = std::move(other.tooltip);

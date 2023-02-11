@@ -52,17 +52,15 @@ class PF_IMGUI_EXPORT OptionSlider : public ItemElement,
    * @param newValues possible options
    * @param persistent enable disk state saving
    */
-  OptionSlider(std::string_view elementName, std::string_view label, RangeOf<T> auto &&newValues,
-               Persistent persistent = Persistent::No);
+  OptionSlider(std::string_view elementName, std::string_view label, RangeOf<T> auto &&newValues, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
 
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
-               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,
-               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::SliderGrab, ColorOf::SliderGrabActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
@@ -88,15 +86,12 @@ OptionSlider<T>::OptionSlider(OptionSlider::Config &&config)
     : OptionSlider(config.name, config.label, config.values, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<ToStringConvertible T>
-OptionSlider<T>::OptionSlider(std::string_view elementName, std::string_view label, RangeOf<T> auto &&newValues,
-                              Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{label}),
+OptionSlider<T>::OptionSlider(std::string_view elementName, std::string_view label, RangeOf<T> auto &&newValues, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(std::string{label}),
       value(*std::ranges::begin(newValues)), values{std::ranges::begin(newValues), std::ranges::end(newValues)},
       selectedValueStr(toString(values[0])) {
   value.addListener([this](const auto &newValue) {
-    if (const auto iter =
-            std::ranges::find_if(values, [&](const auto &val) { return toString(val) == toString(newValue); });
+    if (const auto iter = std::ranges::find_if(values, [&](const auto &val) { return toString(val) == toString(newValue); });
         iter != values.end()) {
       selectedValueIndex = static_cast<int>(iter - values.begin());
       selectedValueStr = toString(values[selectedValueIndex]);
@@ -112,8 +107,7 @@ template<ToStringConvertible T>
 void OptionSlider<T>::setFromToml(const toml::table &src) {
   if (auto selectedValIter = src.find("selected"); selectedValIter != src.end()) {
     if (auto selectedVal = selectedValIter->second.as_string(); selectedVal != nullptr) {
-      if (const auto iter =
-              std::ranges::find_if(values, [&](const auto &val) { return toString(val) == *selectedVal; });
+      if (const auto iter = std::ranges::find_if(values, [&](const auto &val) { return toString(val) == *selectedVal; });
           iter != values.end()) {
         selectedValueIndex = static_cast<int>(iter - values.begin());
         selectedValueStr = toString(values[selectedValueIndex]);
@@ -130,8 +124,8 @@ void OptionSlider<T>::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = ImGuiSliderFlags_AlwaysClamp;
 
-  if (ImGui::SliderInt(label->get().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1),
-                       selectedValueStr.c_str(), flags)) {
+  if (ImGui::SliderInt(label->get().c_str(), &selectedValueIndex, 0, static_cast<int>(values.size() - 1), selectedValueStr.c_str(),
+                       flags)) {
     selectedValueStr = toString(values[selectedValueIndex]);
     *value.modify() = values[selectedValueIndex];
   }

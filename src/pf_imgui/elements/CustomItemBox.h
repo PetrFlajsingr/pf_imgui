@@ -183,8 +183,7 @@ void CustomItemBox<T, R>::setItemFactory(CustomItemBoxFactory<T, R> auto &&rowFa
 
 template<typename T, std::derived_from<Renderable> R>
 std::vector<Renderable *> CustomItemBox<T, R>::getRenderables() {
-  return items | std::views::transform([](auto &child) -> Renderable * { return child.second.get(); })
-      | ranges::to_vector;
+  return items | std::views::transform([](auto &child) -> Renderable * { return child.second.get(); }) | ranges::to_vector;
 }
 
 template<typename T, std::derived_from<Renderable> R>

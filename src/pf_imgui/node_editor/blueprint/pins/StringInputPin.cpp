@@ -22,8 +22,7 @@ StringInputPin::StringInputPin(std::string_view elementName, std::string_view la
     : InteractablePin<InputText>(elementName, labelText, pinColor, config.width,
                                  CreateInputConfig(uniqueId(), labelText, std::move(config))) {}
 
-InputText::Config StringInputPin::CreateInputConfig(std::string_view name, std::string_view label,
-                                                    StringInputPin::InputConfig &&config) {
+InputText::Config StringInputPin::CreateInputConfig(std::string_view name, std::string_view label, StringInputPin::InputConfig &&config) {
   return {.name = name,
           .label = label,
           .value = config.value,
@@ -57,16 +56,14 @@ void StringInputPin::setFromToml(const toml::table &src) {
     if (auto dataTable = data->second.as_table(); dataTable != nullptr) {
       if (auto inputType = dataTable->find("inputType"); inputType != dataTable->end()) {
         if (auto inputTypeValue = inputType->second.as_string(); inputTypeValue != nullptr) {
-          if (auto inputTypeEnum = magic_enum::enum_cast<TextInputType>(inputTypeValue->get());
-              inputTypeEnum.has_value()) {
+          if (auto inputTypeEnum = magic_enum::enum_cast<TextInputType>(inputTypeValue->get()); inputTypeEnum.has_value()) {
             InteractablePin::inputElement->setInputType(inputTypeEnum.value());
           }
         }
       }
       if (auto eventTrigger = dataTable->find("eventTrigger"); eventTrigger != dataTable->end()) {
         if (auto eventTriggerValue = eventTrigger->second.as_string(); eventTriggerValue != nullptr) {
-          if (auto eventTriggerEnum = magic_enum::enum_cast<TextTrigger>(eventTriggerValue->get());
-              eventTriggerEnum.has_value()) {
+          if (auto eventTriggerEnum = magic_enum::enum_cast<TextTrigger>(eventTriggerValue->get()); eventTriggerEnum.has_value()) {
             InteractablePin::inputElement->setInputTrigger(eventTriggerEnum.value());
           }
         }

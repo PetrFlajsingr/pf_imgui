@@ -34,12 +34,10 @@ struct PropertyOwner {
   }
 };
 
-#define PF_IMGUI_PROPERTY_OWNER_ALIASES(template_typename)                                                             \
-  template<typename template_typename,                                                                                 \
-           ObservableChangeDetector<template_typename> Detector = DefaultChangeDetector<U>>                            \
-  using ReadOnlyProperty = PropertyOwner::ReadOnlyProperty<template_typename, Detector>;                               \
-  template<typename template_typename,                                                                                 \
-           ObservableChangeDetector<template_typename> Detector = DefaultChangeDetector<U>>                            \
+#define PF_IMGUI_PROPERTY_OWNER_ALIASES(template_typename)                                                                                 \
+  template<typename template_typename, ObservableChangeDetector<template_typename> Detector = DefaultChangeDetector<U>>                    \
+  using ReadOnlyProperty = PropertyOwner::ReadOnlyProperty<template_typename, Detector>;                                                   \
+  template<typename template_typename, ObservableChangeDetector<template_typename> Detector = DefaultChangeDetector<U>>                    \
   using Property = PropertyOwner::Property<template_typename, Detector>;
 
 }  // namespace pf::ui::ig

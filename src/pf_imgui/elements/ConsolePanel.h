@@ -97,9 +97,7 @@ class ConsolePanel : public ElementWithID, public Savable {
 
   static int CompletionCallback(ImGuiInputTextCallbackData *data);
   std::vector<std::pair<RecordType, Record>> records;
-  std::function<std::optional<Record>(std::string_view)> inputHandler = [](auto) -> std::optional<Record> {
-    return {};
-  };
+  std::function<std::optional<Record>(std::string_view)> inputHandler = [](auto) -> std::optional<Record> { return {}; };
 
   WrapTextToggle wrapTextToggle;
   ScrollToEndToggle scrollToEndToggle;

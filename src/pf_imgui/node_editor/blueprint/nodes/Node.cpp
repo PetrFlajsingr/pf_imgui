@@ -9,10 +9,7 @@
 namespace pf::ui::ig::bp {
 
 toml::table Node::toToml() const {
-  auto result = toml::table{{"name", getName()},
-                            {"type", getNodeTypeId()},
-                            {"positionX", position->x},
-                            {"positionY", position->y}};
+  auto result = toml::table{{"name", getName()}, {"type", getNodeTypeId()}, {"positionX", position->x}, {"positionY", position->y}};
   auto inputPinsArray = toml::array{};
   std::ranges::for_each(getInputPins(), [&](const ig::Pin &inputPin) {
     if (auto pin = dynamic_cast<const Pin *>(&inputPin); pin != nullptr) { inputPinsArray.push_back(pin->toToml()); }
@@ -34,8 +31,7 @@ void Node::setFromToml(const toml::table &src) {
     if (auto positionXToml = positionXIter->second.as_floating_point(); positionXToml != nullptr) {
       if (auto positionYIter = src.find("positionY"); positionYIter != src.end()) {
         if (auto positionYToml = positionYIter->second.as_floating_point(); positionYToml != nullptr) {
-          *position.modify() =
-              Position{static_cast<float>(positionXToml->get()), static_cast<float>(positionYToml->get())};
+          *position.modify() = Position{static_cast<float>(positionXToml->get()), static_cast<float>(positionYToml->get())};
         }
       }
     }

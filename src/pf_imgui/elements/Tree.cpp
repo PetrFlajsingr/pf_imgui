@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig {
 
-details::TreeRecord::TreeRecord(std::string_view elementName, std::string_view treeLabel,
-                                Flags<ImGuiTreeNodeFlags_> defaultFlags)
+details::TreeRecord::TreeRecord(std::string_view elementName, std::string_view treeLabel, Flags<ImGuiTreeNodeFlags_> defaultFlags)
     : ItemElement(elementName), label(std::string{treeLabel}), flags(defaultFlags) {}
 
 TreeLeaf::TreeLeaf(TreeLeaf::Config &&config)

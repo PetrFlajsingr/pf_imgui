@@ -48,19 +48,15 @@ void SubMenu::renderImpl() {
 
 SubMenu::SubMenu(SubMenu::Config &&config) : SubMenu(config.name, config.label) {}
 
-SubMenu::SubMenu(std::string_view elementName, std::string_view labelText)
-    : MenuItem(elementName), label(std::string{labelText}) {}
+SubMenu::SubMenu(std::string_view elementName, std::string_view labelText) : MenuItem(elementName), label(std::string{labelText}) {}
 
-SubMenu &MenuContainer::addSubmenu(std::string_view name, std::string_view caption) {
-  return addMenuItem<SubMenu>(name, caption);
-}
+SubMenu &MenuContainer::addSubmenu(std::string_view name, std::string_view caption) { return addMenuItem<SubMenu>(name, caption); }
 
 MenuButtonItem &MenuContainer::addButtonItem(std::string_view name, std::string_view caption) {
   return addMenuItem<MenuButtonItem>(name, caption);
 }
 
-MenuCheckboxItem &MenuContainer::addCheckboxItem(std::string_view name, std::string_view caption, bool value,
-                                                 Persistent persistent) {
+MenuCheckboxItem &MenuContainer::addCheckboxItem(std::string_view name, std::string_view caption, bool value, Persistent persistent) {
   return addMenuItem<MenuCheckboxItem>(name, caption, value, persistent);
 }
 
@@ -69,11 +65,9 @@ MenuSeparatorItem &MenuContainer::addSeparator(std::string_view name) { return a
 void MenuContainer::renderItems() { std::ranges::for_each(getChildren(), &Renderable::render); }
 
 MenuCheckboxItem::MenuCheckboxItem(MenuCheckboxItem::Config &&config)
-    : MenuCheckboxItem(config.name, config.label, config.checked,
-                       config.persistent ? Persistent::Yes : Persistent::No) {}
+    : MenuCheckboxItem(config.name, config.label, config.checked, config.persistent ? Persistent::Yes : Persistent::No) {}
 
-MenuCheckboxItem::MenuCheckboxItem(std::string_view elementName, std::string_view labelText, bool initialValue,
-                                   Persistent persistent)
+MenuCheckboxItem::MenuCheckboxItem(std::string_view elementName, std::string_view labelText, bool initialValue, Persistent persistent)
     : MenuItem(elementName), Savable(persistent), label(std::string{labelText}), checked(initialValue) {}
 
 void MenuCheckboxItem::renderImpl() {

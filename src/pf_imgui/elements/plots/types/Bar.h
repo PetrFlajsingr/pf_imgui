@@ -14,10 +14,8 @@
 namespace pf::ui::ig::plot_type {
 
 namespace details {
-void renderPlotBarsVertical(const char *label, const double *xData, const double *yData, std::size_t size,
-                            double barSize);
-void renderPlotBarsHorizontal(const char *label, const double *xData, const double *yData, std::size_t size,
-                              double barSize);
+void renderPlotBarsVertical(const char *label, const double *xData, const double *yData, std::size_t size, double barSize);
+void renderPlotBarsHorizontal(const char *label, const double *xData, const double *yData, std::size_t size, double barSize);
 }  // namespace details
 
 /**

@@ -9,18 +9,16 @@ namespace pf::ui::ig {
 VerticalLayout::VerticalLayout(VerticalLayout::Config &&config)
     : VerticalLayout(config.name, config.size, config.align, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-VerticalLayout::VerticalLayout(std::string_view elementName, Size initialSize, VerticalAlign align,
-                               ShowBorder showBorder)
+VerticalLayout::VerticalLayout(std::string_view elementName, Size initialSize, VerticalAlign align, ShowBorder showBorder)
     : LinearLayout(elementName, initialSize, showBorder), alignment(align) {}
 
 void VerticalLayout::renderImpl() {
-  const auto flags =
-      isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  const auto flags = isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     [[maybe_unused]] auto scrollApplier = applyScroll();
     ImGui::BeginVertical(getName().c_str(), ImVec2{0, 0}, alignmentAsFloat());
-    [[maybe_unused]]  auto endLayout = ScopeExit{&ImGui::EndVertical};
+    [[maybe_unused]] auto endLayout = ScopeExit{&ImGui::EndVertical};
     {
       auto elements = getChildren();
       std::ranges::for_each_n(elements.begin(), static_cast<int>(elements.size() - 1), [this](auto &child) {

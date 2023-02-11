@@ -60,8 +60,7 @@ struct ComboFilterState {
   bool selectionChanged; /*!< Flag to help focus the correct item when selecting active item */
 };
 
-static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unused]] int START, const char **ENTRIES,
-                                          int ENTRY_COUNT) {
+static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unused]] int START, const char **ENTRIES, int ENTRY_COUNT) {
   bool clicked = 0;
 
   // Grab the position for the popup
@@ -126,8 +125,7 @@ static inline bool ComboFilter__DrawPopup(ComboFilterState &state, [[maybe_unuse
   return clicked;
 }
 
-static inline bool ComboFilter(const char *id, char *buffer, int bufferlen, const char **hints, int num_hints,
-                               ComboFilterState &s) {
+static inline bool ComboFilter(const char *id, char *buffer, int bufferlen, const char **hints, int num_hints, ComboFilterState &s) {
   struct fuzzy {
     static int score(const char *str1, const char *str2) {
       int score = 0, consecutive = 0, maxerrors = 0;
@@ -166,8 +164,7 @@ static inline bool ComboFilter(const char *id, char *buffer, int bufferlen, cons
       return best;
     }
   };
-  bool done =
-      ImGui::InputText(id, buffer, bufferlen, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue);
+  bool done = ImGui::InputText(id, buffer, bufferlen, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue);
   bool hot = s.activeIdx >= 0 && strcmp(buffer, hints[s.activeIdx]);
   if (hot) {
     int new_idx = fuzzy::search(buffer, num_hints, hints);

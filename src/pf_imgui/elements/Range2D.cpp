@@ -14,8 +14,8 @@ Range2D::Range2D(Range2D::Config &&config)
 
 Range2D::Range2D(std::string_view elementName, std::string_view labelText, glm::vec2 min, glm::vec2 max,
                  const math::Range<glm::vec2> &initialValue, Size s, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false),
-      label(std::string{labelText}), size(s), range(initialValue), minRange(min), maxRange(max) {}
+    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false), label(std::string{labelText}), size(s),
+      range(initialValue), minRange(min), maxRange(max) {}
 
 void Range2D::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -23,8 +23,8 @@ void Range2D::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto &val = Prop_value(range);
   const auto oldVal = *range;
-  if (ImWidgets::RangeSelect2D(label->get().c_str(), &val.start.x, &val.start.y, &val.end.x, &val.end.y, minRange.x,
-                               minRange.y, maxRange.x, maxRange.y, static_cast<ImVec2>(*size))) {
+  if (ImWidgets::RangeSelect2D(label->get().c_str(), &val.start.x, &val.start.y, &val.end.x, &val.end.y, minRange.x, minRange.y, maxRange.x,
+                               maxRange.y, static_cast<ImVec2>(*size))) {
     if (val != oldVal) { Prop_triggerListeners(range); }
   }
   drag(getValue());

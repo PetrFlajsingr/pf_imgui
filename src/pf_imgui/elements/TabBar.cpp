@@ -66,9 +66,7 @@ void Tab::setDisplayDot(bool displayDot) {
 
 TabBar::TabBar(TabBar::Config &&config) : TabBar(config.name, config.allowTabList) {}
 
-TabBar::TabBar(std::string_view elementName, bool allowTabList) : ElementWithID(elementName) {
-  setTabListAllowed(allowTabList);
-}
+TabBar::TabBar(std::string_view elementName, bool allowTabList) : ElementWithID(elementName) { setTabListAllowed(allowTabList); }
 
 void TabBar::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -95,8 +93,7 @@ TabButton &TabBar::addTabButton(std::string_view buttonName, std::string_view ca
 }
 
 void TabBar::removeTab(const std::string &tabName) {
-  if (const auto iter = std::ranges::find_if(tabs, [tabName](const auto &tab) { return tab->getName() == tabName; });
-      iter != tabs.cend()) {
+  if (const auto iter = std::ranges::find_if(tabs, [tabName](const auto &tab) { return tab->getName() == tabName; }); iter != tabs.cend()) {
     tabs.erase(iter);
   }
 }
@@ -109,8 +106,7 @@ Tab &TabBar::getSelectedTab() {
 }
 
 void TabBar::setSelectedTab(std::string_view tabName) {
-  if (const auto iter = std::ranges::find_if(tabs, [tabName](auto &tab) { return tab->getName() == tabName; });
-      iter != tabs.end()) {
+  if (const auto iter = std::ranges::find_if(tabs, [tabName](auto &tab) { return tab->getName() == tabName; }); iter != tabs.end()) {
     if (auto t = dynamic_cast<Tab *>((*iter).get()); t != nullptr) { *t->selected.modify() = true; }
   }
 }

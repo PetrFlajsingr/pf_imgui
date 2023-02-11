@@ -26,9 +26,8 @@ InputDialogBuilder &InputDialogBuilder::message(std::string dialogMessage) {
 
 void InputDialogBuilder::build() {
   using namespace std::string_literals;
-  dialogManager->addInputDialog(std::make_unique<InputDialog>("InputDialog_"s + std::to_string(IdCounter++), title_,
-                                                              size_, message_, std::move(onInput_),
-                                                              std::move(onCancel_)));
+  dialogManager->addInputDialog(std::make_unique<InputDialog>("InputDialog_"s + std::to_string(IdCounter++), title_, size_, message_,
+                                                              std::move(onInput_), std::move(onCancel_)));
 }
 
 }  // namespace pf::ui::ig

@@ -109,10 +109,9 @@ using ColorOfAsOptionalColor = std::optional<ColorOfAsColor<ColorType>>;
 
 constexpr bool isFloatStyle(StyleOf style) {
   constexpr auto FLOAT_STYLES = make_array<StyleOf>(
-      StyleOf::Alpha, StyleOf::WindowRounding, StyleOf::WindowBorderSize, StyleOf::ChildRounding,
-      StyleOf::ChildBorderSize, StyleOf::PopupRounding, StyleOf::PopupBorderSize, StyleOf::FrameRounding,
-      StyleOf::FrameBorderSize, StyleOf::IndentSpacing, StyleOf::ScrollbarSize, StyleOf::ScrollbarRounding,
-      StyleOf::GrabMinSize, StyleOf::GrabRounding, StyleOf::TabRounding);
+      StyleOf::Alpha, StyleOf::WindowRounding, StyleOf::WindowBorderSize, StyleOf::ChildRounding, StyleOf::ChildBorderSize,
+      StyleOf::PopupRounding, StyleOf::PopupBorderSize, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::IndentSpacing,
+      StyleOf::ScrollbarSize, StyleOf::ScrollbarRounding, StyleOf::GrabMinSize, StyleOf::GrabRounding, StyleOf::TabRounding);
   return contains(FLOAT_STYLES, style);
 }
 

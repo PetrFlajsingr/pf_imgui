@@ -47,7 +47,7 @@ template<std::derived_from<Element> T>
 template<typename... Args>
 Bullet<T>::Bullet(Args &&...args)
   requires(std::constructible_from<T, Args...>)
-: T(std::forward<Args>(args)...) {}
+    : T(std::forward<Args>(args)...) {}
 
 template<std::derived_from<Element> T>
 void Bullet<T>::renderImpl() {

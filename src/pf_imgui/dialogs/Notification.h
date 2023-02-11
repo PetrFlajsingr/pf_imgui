@@ -27,8 +27,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer 
   constexpr static inline float PADDING_MESSAGE_Y = 10.f;
 
  public:
-  Notification(std::string_view elementName, std::string_view labelText,
-               std::chrono::milliseconds duration = DEFAULT_DURATION);
+  Notification(std::string_view elementName, std::string_view labelText, std::chrono::milliseconds duration = DEFAULT_DURATION);
 
   void setIcon(const char *icon, Font newIconFont = Font::Default());
   void setIconColor(Color newColor);
@@ -51,8 +50,7 @@ class PF_IMGUI_EXPORT Notification : public Renderable, public ElementContainer 
 
   bool firstRender = true;
 
-  inline static const ImGuiWindowFlags flags =
-      ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoNav;
+  inline static const ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoNav;
 
   void checkPhase();
 

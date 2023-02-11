@@ -11,10 +11,9 @@ namespace pf::ui::ig {
 DatePicker::DatePicker(DatePicker::Config &&config)
     : DatePicker(config.name, config.label, config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
 
-DatePicker::DatePicker(std::string_view elementName, std::string_view labelText,
-                       std::chrono::year_month_day initialValue, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), label(std::string{labelText}), date(initialValue),
-      rawTime(std::make_unique<tm>()) {
+DatePicker::DatePicker(std::string_view elementName, std::string_view labelText, std::chrono::year_month_day initialValue,
+                       Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), label(std::string{labelText}), date(initialValue), rawTime(std::make_unique<tm>()) {
   updateRawTime();
   date.addListener([this](auto) { updateRawTime(); });
 }
@@ -67,9 +66,8 @@ void DatePicker::renderImpl() {
   using namespace std::chrono;
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::DateChooser(label->get().c_str(), *rawTime)) {
-    const auto newDate =
-        year_month_day{year{rawTime->tm_year + 1900}, month{static_cast<unsigned int>(rawTime->tm_mon + 1)},
-                       day{static_cast<unsigned int>(rawTime->tm_mday)}};
+    const auto newDate = year_month_day{year{rawTime->tm_year + 1900}, month{static_cast<unsigned int>(rawTime->tm_mon + 1)},
+                                        day{static_cast<unsigned int>(rawTime->tm_mday)}};
     *date.modify() = newDate;
   }
 }

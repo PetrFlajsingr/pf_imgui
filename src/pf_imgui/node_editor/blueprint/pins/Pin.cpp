@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-Pin::Pin(std::string_view elementName, std::string_view labelText, Color pinColor)
-    : ig::Pin(elementName, labelText), color(pinColor) {}
+Pin::Pin(std::string_view elementName, std::string_view labelText, Color pinColor) : ig::Pin(elementName, labelText), color(pinColor) {}
 
 Color Pin::getColor() const { return color; }
 
@@ -44,15 +43,11 @@ void Pin::setFromToml(const toml::table &src) {
     if (auto labelToml = labelIter->second.as_string(); labelToml != nullptr) { *label.modify() = labelToml->get(); }
   }
   if (auto colorIter = src.find("color"); colorIter != src.end()) {
-    if (auto colorToml = colorIter->second.as_integer(); colorToml != nullptr) {
-      setColor(Color{static_cast<ImU32>(colorToml->get())});
-    }
+    if (auto colorToml = colorIter->second.as_integer(); colorToml != nullptr) { setColor(Color{static_cast<ImU32>(colorToml->get())}); }
   }
   if (auto pinTypeIter = src.find("pinType"); pinTypeIter != src.end()) {
     if (auto pinTypeToml = pinTypeIter->second.as_string(); pinTypeToml != nullptr) {
-      if (auto pinType = magic_enum::enum_cast<Pin::Type>(pinTypeToml->get()); pinType.has_value()) {
-        type = pinType.value();
-      }
+      if (auto pinType = magic_enum::enum_cast<Pin::Type>(pinTypeToml->get()); pinType.has_value()) { type = pinType.value(); }
     }
   }
   if (auto colorIter = src.find("validLinkColor"); colorIter != src.end()) {
@@ -89,8 +84,7 @@ void Pin::setFromToml(const toml::table &src) {
 
 void Pin::addLink(Link &link) {
   if (getType() == Pin::Type::Input) {
-    std::ranges::for_each(getLinks()
-                              | ranges::views::filter([&link](const auto &l) { return l.getId() != link.getId(); }),
+    std::ranges::for_each(getLinks() | ranges::views::filter([&link](const auto &l) { return l.getId() != link.getId(); }),
                           [](auto &l) { l.invalidate(); });
   }
   ig::Pin::addLink(link);

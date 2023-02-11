@@ -86,13 +86,12 @@ class PF_IMGUI_EXPORT InspectableImage : public ItemElement {
    */
   struct Config {
     using Parent = InspectableImage;
-    Explicit<std::string_view> name;            /*!< Unique name of the element */
-    Explicit<std::shared_ptr<Texture>> texture; /*!< Texture to render */
-    Explicit<std::span<const std::byte>>
-        rgbaData;                     /*!< Image data, the element won't store this, you needto keep the memory valid */
-    Explicit<std::size_t> imageWidth; /*!< Width of the provided image */
-    Size size = Size::Auto();         /*!< Size of the element */
-    Trigger trigger = Trigger::Hover; /*!< Trigger for inspect overlay popup */
+    Explicit<std::string_view> name;               /*!< Unique name of the element */
+    Explicit<std::shared_ptr<Texture>> texture;    /*!< Texture to render */
+    Explicit<std::span<const std::byte>> rgbaData; /*!< Image data, the element won't store this, you needto keep the memory valid */
+    Explicit<std::size_t> imageWidth;              /*!< Width of the provided image */
+    Size size = Size::Auto();                      /*!< Size of the element */
+    Trigger trigger = Trigger::Hover;              /*!< Trigger for inspect overlay popup */
   };
   /**
    * Construct InspectableImage.

@@ -94,8 +94,7 @@ enum class TableBorder : int {
   HorizontalOuter = ImGuiTableFlags_BordersOuterH,
   VerticalOuter = ImGuiTableFlags_BordersOuterV,
   Outer = ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_BordersOuterV,
-  Full = ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_BordersOuterH
-      | ImGuiTableFlags_BordersOuterV
+  Full = ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_BordersOuterV
 };
 /**
  * Enum for options of interaction with a table

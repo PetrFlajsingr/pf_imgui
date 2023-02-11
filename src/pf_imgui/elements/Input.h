@@ -33,11 +33,7 @@ namespace pf::ui::ig {
  * @tparam T Underlying type
  */
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
-class PF_IMGUI_EXPORT Input : public ItemElement,
-                              public ValueContainer<T>,
-                              public Savable,
-                              public DragSource<T>,
-                              public DropTarget<T> {
+class PF_IMGUI_EXPORT Input : public ItemElement, public ValueContainer<T>, public Savable, public DragSource<T>, public DropTarget<T> {
   using StepType = input_details::UnderlyingType<T>;
 
  public:
@@ -80,8 +76,8 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
   void setFromToml(const toml::table &src) override;
 
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
-               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::TextSelectedBackground,
-               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::TextSelectedBackground, ColorOf::NavHighlight,
+               ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
@@ -106,14 +102,14 @@ class PF_IMGUI_EXPORT Input : public ItemElement,
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 Input<T>::Input(Input::Config &&config)
-    : Input(config.name, config.label, config.step, config.fastStep, config.value,
-            config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
+    : Input(config.name, config.label, config.step, config.fastStep, config.value, config.persistent ? Persistent::Yes : Persistent::No,
+            config.format) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
-Input<T>::Input(std::string_view elementName, std::string_view labelText, Input::StepType st, Input::StepType fStep,
-                T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{labelText}), value(initialValue), step(st), fastStep(fStep), format(std::move(numberFormat)) {}
+Input<T>::Input(std::string_view elementName, std::string_view labelText, Input::StepType st, Input::StepType fStep, T initialValue,
+                Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(std::string{labelText}),
+      value(initialValue), step(st), fastStep(fStep), format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_INPUT_TYPE_LIST, std::string> T>
 void Input<T>::setReadOnly(bool isReadOnly) {
@@ -170,8 +166,8 @@ void Input<T>::renderImpl() {
   if constexpr (!OneOf<T, PF_IMGUI_INPUT_GLM_TYPE_LIST>) {
     valueChanged = ImGui::InputScalar(label->get().c_str(), dataType, address, &step, &fastStep, format.c_str(), flags);
   } else {
-    valueChanged = ImGui::InputScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), T::length(), &step,
-                                       &fastStep, format.c_str(), flags);
+    valueChanged =
+        ImGui::InputScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), T::length(), &step, &fastStep, format.c_str(), flags);
   }
 
   DragSource<T>::drag(*value);
@@ -219,8 +215,8 @@ class Input<std::string> : public InputText {
    * @param config construction args @see Input<std::string>::Config
    */
   explicit Input(Config &&config)
-      : InputText(InputText::Config{config.name, config.label, config.value, config.inputType, config.maxInputLength,
-                                    config.eventTrigger, config.filters, config.persistent}) {}
+      : InputText(InputText::Config{config.name, config.label, config.value, config.inputType, config.maxInputLength, config.eventTrigger,
+                                    config.filters, config.persistent}) {}
   /**
    * Construct Input<std::string>.
    * @param elementName ID of the input
@@ -234,8 +230,7 @@ class Input<std::string> : public InputText {
         TextInputType textInputType = TextInputType::SingleLine, std::size_t inputLengthLimit = 256,
         TextTrigger trigger = TextTrigger::Character, const Flags<TextFilter> &filters = TextFilter::None,
         Persistent persistent = Persistent::No)
-      : InputText(elementName, std::move(labelText), initialValue, textInputType, inputLengthLimit, trigger, filters,
-                  persistent) {}
+      : InputText(elementName, std::move(labelText), initialValue, textInputType, inputLengthLimit, trigger, filters, persistent) {}
 };
 
 extern template class Input<float>;

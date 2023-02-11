@@ -5,8 +5,8 @@
 #ifndef PF_IMGUI_DETAILS_DATATYPESIZE_H
 #define PF_IMGUI_DETAILS_DATATYPESIZE_H
 
-#include <imgui.h>
 #include <cstddef>
+#include <imgui.h>
 
 namespace ImGui {
 
@@ -27,6 +27,6 @@ constexpr std::size_t SizeForDataType(ImGuiDataType dataType) {
   return {};
 }
 
-}
+}  // namespace ImGui
 
 #endif  //PF_IMGUI_DETAILS_DATATYPESIZE_H

@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-ExecPin::ExecPin(std::string_view elementName, std::string_view labelText, Color pinColor)
-    : Pin(elementName, labelText, pinColor) {}
+ExecPin::ExecPin(std::string_view elementName, std::string_view labelText, Color pinColor) : Pin(elementName, labelText, pinColor) {}
 
 void ExecPin::renderIcon() {
   ImVec2 iconSize{16, 16};
@@ -34,8 +33,7 @@ std::unique_ptr<ExecPin> ExecPin::ConstructFromToml(ig::Node *parent, const toml
 }
 
 void ExecPin::addLink(Link &link) {
-  std::ranges::for_each(getLinks()
-                            | ranges::views::filter([&link](const auto &l) { return l.getId() != link.getId(); }),
+  std::ranges::for_each(getLinks() | ranges::views::filter([&link](const auto &l) { return l.getId() != link.getId(); }),
                         [](auto &l) { l.invalidate(); });
   ig::Pin::addLink(link);  // NOLINT(bugprone-parent-virtual-call)
 }

@@ -27,8 +27,7 @@ void Plot::renderImpl() {
 }
 
 void Plot::removeData(const std::string &dataName) {
-  if (const auto iter =
-          std::ranges::find_if(datas, [dataName](const auto &data) { return data->getName() == dataName; });
+  if (const auto iter = std::ranges::find_if(datas, [dataName](const auto &data) { return data->getName() == dataName; });
       iter != datas.end()) {
     datas.erase(iter);
   }

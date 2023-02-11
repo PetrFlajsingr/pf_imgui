@@ -29,11 +29,7 @@ namespace pf::ui::ig {
  * @todo: format for float
  */
 template<OneOf<int, float> T>
-class PF_IMGUI_EXPORT SpinInput : public ItemElement,
-                                  public ValueContainer<T>,
-                                  public Savable,
-                                  public DragSource<T>,
-                                  public DropTarget<T> {
+class PF_IMGUI_EXPORT SpinInput : public ItemElement, public ValueContainer<T>, public Savable, public DragSource<T>, public DropTarget<T> {
  public:
   /**
    * @brief Struct for construction of SpinInput.
@@ -63,8 +59,8 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
    * @param valueStepFast fast spin step
    * @param persistent enable/disable state saving od disk
    */
-  SpinInput(std::string_view elementName, std::string_view labelText, T minVal, T maxVal, T initialValue = T{},
-            T valueStep = T{1}, const T &valueStepFast = T{100}, Persistent persistent = Persistent::No);
+  SpinInput(std::string_view elementName, std::string_view labelText, T minVal, T maxVal, T initialValue = T{}, T valueStep = T{1},
+            const T &valueStepFast = T{100}, Persistent persistent = Persistent::No);
 
   [[nodiscard]] const T &getMin() const { return min; }
   void setMin(const T &minVal) { min = minVal; }
@@ -87,9 +83,8 @@ class PF_IMGUI_EXPORT SpinInput : public ItemElement,
 
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::Button, ColorOf::ButtonHovered,
-               ColorOf::ButtonActive, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
-               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow, ColorOf::TextSelectedBackground>
+               ColorOf::ButtonActive, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive,
+               ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::TextSelectedBackground>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
@@ -115,11 +110,10 @@ SpinInput<T>::SpinInput(SpinInput::Config &&config)
                 config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<int, float> T>
-SpinInput<T>::SpinInput(std::string_view elementName, std::string_view labelText, T minVal, T maxVal, T initialValue,
-                        T valueStep, const T &valueStepFast, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{labelText}), value(initialValue), step(valueStep), stepFast(valueStepFast), min(minVal),
-      max(maxVal) {}
+SpinInput<T>::SpinInput(std::string_view elementName, std::string_view labelText, T minVal, T maxVal, T initialValue, T valueStep,
+                        const T &valueStepFast, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(std::string{labelText}),
+      value(initialValue), step(valueStep), stepFast(valueStepFast), min(minVal), max(maxVal) {}
 
 template<OneOf<int, float> T>
 void SpinInput<T>::setReadOnly(bool isReadOnly) {
@@ -149,9 +143,7 @@ void SpinInput<T>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   auto valueChanged = false;
-  if constexpr (std::same_as<T, int>) {
-    valueChanged = ImGui::SpinInt(label->get().c_str(), &Prop_value(value), step, stepFast, flags);
-  }
+  if constexpr (std::same_as<T, int>) { valueChanged = ImGui::SpinInt(label->get().c_str(), &Prop_value(value), step, stepFast, flags); }
   if constexpr (std::same_as<T, float>) {
     valueChanged = ImGui::SpinFloat(label->get().c_str(), &Prop_value(value), step, stepFast, "%.3f",
                                     flags);  // TODO: user provided format

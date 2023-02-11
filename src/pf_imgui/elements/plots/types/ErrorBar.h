@@ -18,10 +18,8 @@
 namespace pf::ui::ig::plot_type {
 
 namespace details {
-void renderErrorBarVertical(const char *label, const double *xData, const double *yData, const double *errorData,
-                            int size);
-void renderErrorBarHorizontal(const char *label, const double *xData, const double *yData, const double *errorData,
-                              int size);
+void renderErrorBarVertical(const char *label, const double *xData, const double *yData, const double *errorData, int size);
+void renderErrorBarHorizontal(const char *label, const double *xData, const double *yData, const double *errorData, int size);
 }  // namespace details
 
 /**
@@ -46,11 +44,9 @@ class PF_IMGUI_EXPORT ErrorBar : public LabeledPlotData, details::DefaultPlotDat
    */
   template<Plottable T>
   void setData(const RangeOf<XYErrorPlotData<T>> auto &newData) {
-    const auto xyData = newData | ranges::views::transform([](const auto &data) { return XYPlotData(data.x, data.y); })
-        | ranges::to_vector;
+    const auto xyData = newData | ranges::views::transform([](const auto &data) { return XYPlotData(data.x, data.y); }) | ranges::to_vector;
     details::DefaultPlotDataSetting::setData(xyData);
-    error = newData | ranges::views::transform([](const auto &data) { return static_cast<double>(data.error); })
-        | ranges::to_vector;
+    error = newData | ranges::views::transform([](const auto &data) { return static_cast<double>(data.error); }) | ranges::to_vector;
   }
 
  protected:

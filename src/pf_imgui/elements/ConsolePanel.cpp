@@ -18,8 +18,8 @@ ConsolePanel::ConsolePanel(ConsolePanel::Config &&config)
     : ConsolePanel(config.name.value, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 ConsolePanel::ConsolePanel(std::string_view elementName, Size initialSize, Persistent persistent)
-    : ElementWithID(elementName), Savable(persistent), size(initialSize), wrapTextToggle("wrapText"),
-      scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
+    : ElementWithID(elementName), Savable(persistent), size(initialSize), wrapTextToggle("wrapText"), scrollToEndToggle("scrollToEnd"),
+      copyToClipboardButton("copyToClipboard"), clearButton("clear") {
 
   clearButton.clickEvent.addListener([this] { records.clear(); });
   copyToClipboardButton.clickEvent.addListener([this] { ImGui::SetClipboardText(getOutput().c_str()); });
@@ -30,8 +30,8 @@ ConsolePanel::ConsolePanel(std::string_view elementName, Size initialSize, Persi
 }
 
 std::string ConsolePanel::getOutput() const {
-  return records | ranges::views::transform(&std::pair<RecordType, Record>::second)
-      | ranges::views::transform(&Record::message) | ranges::views::join('\n') | ranges::to<std::string>();
+  return records | ranges::views::transform(&std::pair<RecordType, Record>::second) | ranges::views::transform(&Record::message)
+      | ranges::views::join('\n') | ranges::to<std::string>();
 }
 
 void ConsolePanel::renderImpl() {
@@ -62,14 +62,11 @@ void ConsolePanel::renderImpl() {
       {
         ScopeExit end{&ImGui::EndChild};
         const auto wrapEnabled = wrapTextToggle.getValue();
-        if (ImGui::BeginChild("out_w", ImVec2{0, -25}, true,
-                              wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
+        if (ImGui::BeginChild("out_w", ImVec2{0, -25}, true, wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
           std::ranges::for_each(records, [&](const auto &record) {
             std::string prefix{};
             if (record.first == RecordType::Input) { prefix = "# "; }
-            if (record.second.color.has_value()) {
-              ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(*record.second.color));
-            }
+            if (record.second.color.has_value()) { ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(*record.second.color)); }
             if (record.second.backgroundColor.has_value()) {
               drawTextBackground(record.second.message.c_str(), *record.second.backgroundColor, wrapEnabled, false);
             }
@@ -138,8 +135,7 @@ int ConsolePanel::CompletionCallback(ImGuiInputTextCallbackData *data) {
       }
       break;
     case ImGuiKey_Tab:
-      if (const auto iter = std::ranges::find_if(self.completionStrings,
-                                                 [data](const auto &str) { return str.starts_with(data->Buf); });
+      if (const auto iter = std::ranges::find_if(self.completionStrings, [data](const auto &str) { return str.starts_with(data->Buf); });
           iter != self.completionStrings.end()) {
         strcpy(data->Buf, iter->c_str());
         data->BufDirty = true;

@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig {
 
-FileDialogBuilder::FileDialogBuilder(DialogManager *parent, FileDialogType dialogType)
-    : dialogManager(parent), type(dialogType) {}
+FileDialogBuilder::FileDialogBuilder(DialogManager *parent, FileDialogType dialogType) : dialogManager(parent), type(dialogType) {}
 
 FileDialogBuilder &FileDialogBuilder::label(std::string dialogLabel) {
   label_ = std::move(dialogLabel);
@@ -49,14 +48,13 @@ void FileDialogBuilder::build() {
   using namespace std::string_literals;
   switch (type) {
     case FileDialogType::Dir:
-      dialogManager->addFileDialog(std::make_unique<FileDialog>("FileDialog_"s + std::to_string(IdCounter++), label_,
-                                                                onSelect_, onCancel_, size_, startPath_,
-                                                                defaultFilename_, modal_, maxFilesSelected_));
+      dialogManager->addFileDialog(std::make_unique<FileDialog>("FileDialog_"s + std::to_string(IdCounter++), label_, onSelect_, onCancel_,
+                                                                size_, startPath_, defaultFilename_, modal_, maxFilesSelected_));
       break;
     case FileDialogType::File:
-      dialogManager->addFileDialog(std::make_unique<FileDialog>(
-          "FileDialog"s + std::to_string(IdCounter++), label_, extensionSettings_, onSelect_, onCancel_, size_,
-          startPath_, defaultFilename_, modal_, maxFilesSelected_));
+      dialogManager->addFileDialog(std::make_unique<FileDialog>("FileDialog"s + std::to_string(IdCounter++), label_, extensionSettings_,
+                                                                onSelect_, onCancel_, size_, startPath_, defaultFilename_, modal_,
+                                                                maxFilesSelected_));
       break;
   }
 }

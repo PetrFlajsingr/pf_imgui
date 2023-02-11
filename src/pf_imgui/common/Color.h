@@ -36,32 +36,28 @@ class PF_IMGUI_EXPORT Color {
   [[nodiscard]] constexpr bool operator==(const Color &rhs) const { return color == rhs.color; }
   [[nodiscard]] constexpr bool operator!=(const Color &rhs) const { return !(rhs == *this); }
 
-  [[nodiscard]] constexpr static Color RGB(IntType auto red, IntType auto green, IntType auto blue,
-                                           IntType auto alpha) {
+  [[nodiscard]] constexpr static Color RGB(IntType auto red, IntType auto green, IntType auto blue, IntType auto alpha) {
     return Color{IM_COL32(red, green, blue, alpha)};
   }
   [[nodiscard]] constexpr static Color RGB(IntType auto red, IntType auto green, IntType auto blue) {
     return Color{IM_COL32(red, green, blue, 255)};
   }
-  [[nodiscard]] constexpr static Color RGB(FloatType auto red, FloatType auto green, FloatType auto blue,
-                                           FloatType auto alpha) {
+  [[nodiscard]] constexpr static Color RGB(FloatType auto red, FloatType auto green, FloatType auto blue, FloatType auto alpha) {
     return Color{ImColor(red, green, blue, alpha)};
   }
   [[nodiscard]] constexpr static Color RGB(FloatType auto red, FloatType auto green, FloatType auto blue) {
     return Color{ImColor(red, green, blue, 1.f)};
   }
 
-  [[nodiscard]] constexpr static Color HSV(Integral auto hue, Integral auto saturation, Integral auto value,
-                                           Integral auto alpha = 255u) {
+  [[nodiscard]] constexpr static Color HSV(Integral auto hue, Integral auto saturation, Integral auto value, Integral auto alpha = 255u) {
     float r;
     float g;
     float b;
-    ImGui::ColorConvertHSVtoRGB(static_cast<float>(hue) / 255.f, static_cast<float>(saturation) / 255.f,
-                                static_cast<float>(value) / 255.f, r, g, b);
+    ImGui::ColorConvertHSVtoRGB(static_cast<float>(hue) / 255.f, static_cast<float>(saturation) / 255.f, static_cast<float>(value) / 255.f,
+                                r, g, b);
     return RGB(r, g, b, alpha);
   }
-  [[nodiscard]] constexpr static Color HSV(FloatType auto hue, FloatType auto saturation, FloatType auto value,
-                                           FloatType auto alpha) {
+  [[nodiscard]] constexpr static Color HSV(FloatType auto hue, FloatType auto saturation, FloatType auto value, FloatType auto alpha) {
     float r;
     float g;
     float b;

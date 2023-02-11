@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-NodeWithLabel::NodeWithLabel(std::string_view elementName, std::string_view labelText)
-    : Node(elementName), label(std::string{labelText}) {}
+NodeWithLabel::NodeWithLabel(std::string_view elementName, std::string_view labelText) : Node(elementName), label(std::string{labelText}) {}
 
 toml::table NodeWithLabel::toToml() const {
   auto result = Node::toToml();

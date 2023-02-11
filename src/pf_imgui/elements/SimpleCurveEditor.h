@@ -31,8 +31,7 @@ struct IsValidCurvePoint {
 /**
  * Type for range of curve points.
  */
-using CurvePointsView =
-    ranges::take_while_view<ranges::ref_view<const std::vector<glm::vec2>>, details::IsValidCurvePoint>;
+using CurvePointsView = ranges::take_while_view<ranges::ref_view<const std::vector<glm::vec2>>, details::IsValidCurvePoint>;
 
 /**
  * @brief Simple curve editor allowing mouse control of key points and basic curve smoothing.

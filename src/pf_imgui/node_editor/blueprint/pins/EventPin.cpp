@@ -7,8 +7,7 @@
 
 namespace pf::ui::ig::bp {
 
-EventPin::EventPin(std::string_view elementName, std::string_view labelText, Color pinColor)
-    : Pin(elementName, labelText, pinColor) {}
+EventPin::EventPin(std::string_view elementName, std::string_view labelText, Color pinColor) : Pin(elementName, labelText, pinColor) {}
 
 bool EventPin::acceptsLinkWith(ig::Pin &other) const {
   if (!Pin::acceptsLinkWith(other)) { return false; }

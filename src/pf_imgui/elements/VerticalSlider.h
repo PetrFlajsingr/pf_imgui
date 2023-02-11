@@ -72,9 +72,8 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
    * @param persistent enable state saving to disk
    * @param numberFormat printf-like format for value
    */
-  VerticalSlider(std::string_view elementName, std::string_view labelText, Size initialSize, T minVal, T maxVal,
-                 T initialValue = T{}, Persistent persistent = Persistent::No,
-                 std::string numberFormat = details::defaultVSliderFormat<T>());
+  VerticalSlider(std::string_view elementName, std::string_view labelText, Size initialSize, T minVal, T maxVal, T initialValue = T{},
+                 Persistent persistent = Persistent::No, std::string numberFormat = details::defaultVSliderFormat<T>());
 
   /**
    * Get min slider value.
@@ -100,10 +99,9 @@ class PF_IMGUI_EXPORT VerticalSlider : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
-               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,
-               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::SliderGrab, ColorOf::SliderGrabActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
@@ -132,11 +130,10 @@ VerticalSlider<T>::VerticalSlider(VerticalSlider::Config &&config)
                      config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<float, int> T>
-VerticalSlider<T>::VerticalSlider(std::string_view elementName, std::string_view labelText, Size initialSize, T minVal,
-                                  T maxVal, T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{labelText}), size(initialSize), value(initialValue), min(minVal), max(maxVal),
-      format(std::move(numberFormat)) {}
+VerticalSlider<T>::VerticalSlider(std::string_view elementName, std::string_view labelText, Size initialSize, T minVal, T maxVal,
+                                  T initialValue, Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(std::string{labelText}),
+      size(initialSize), value(initialValue), min(minVal), max(maxVal), format(std::move(numberFormat)) {}
 
 template<OneOf<float, int> T>
 toml::table VerticalSlider<T>::toToml() const {
@@ -164,8 +161,8 @@ void VerticalSlider<T>::renderImpl() {
   } else {
     dataType = ImGuiDataType_S32;
   }
-  const auto valueChanged = ImGui::VSliderScalar(label->get().c_str(), static_cast<ImVec2>(*size), dataType, address,
-                                                 &min, &max, format.c_str(), flags);
+  const auto valueChanged =
+      ImGui::VSliderScalar(label->get().c_str(), static_cast<ImVec2>(*size), dataType, address, &min, &max, format.c_str(), flags);
 
   DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {

@@ -86,13 +86,11 @@ class PF_IMGUI_EXPORT StyleOptions {
 };
 
 using FullStyleOptions =
-    StyleOptions<StyleOf::Alpha, StyleOf::WindowRounding, StyleOf::WindowBorderSize, StyleOf::ChildRounding,
-                 StyleOf::ChildBorderSize, StyleOf::PopupRounding, StyleOf::PopupBorderSize, StyleOf::FrameRounding,
-                 StyleOf::FrameBorderSize, StyleOf::IndentSpacing, StyleOf::ScrollbarSize, StyleOf::ScrollbarRounding,
-                 StyleOf::GrabMinSize, StyleOf::GrabRounding, StyleOf::TabRounding, StyleOf::WindowPadding,
-                 StyleOf::WindowMinSize, StyleOf::WindowTitleAlign, StyleOf::FramePadding, StyleOf::ItemSpacing,
-                 StyleOf::ItemInnerSpacing, StyleOf::CellPadding, StyleOf::ButtonTextAlign,
-                 StyleOf::SelectableTextAlign>;
+    StyleOptions<StyleOf::Alpha, StyleOf::WindowRounding, StyleOf::WindowBorderSize, StyleOf::ChildRounding, StyleOf::ChildBorderSize,
+                 StyleOf::PopupRounding, StyleOf::PopupBorderSize, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::IndentSpacing,
+                 StyleOf::ScrollbarSize, StyleOf::ScrollbarRounding, StyleOf::GrabMinSize, StyleOf::GrabRounding, StyleOf::TabRounding,
+                 StyleOf::WindowPadding, StyleOf::WindowMinSize, StyleOf::WindowTitleAlign, StyleOf::FramePadding, StyleOf::ItemSpacing,
+                 StyleOf::ItemInnerSpacing, StyleOf::CellPadding, StyleOf::ButtonTextAlign, StyleOf::SelectableTextAlign>;
 
 }  // namespace pf::ui::ig
 

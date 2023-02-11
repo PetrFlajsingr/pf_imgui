@@ -78,14 +78,12 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
    * @param modality modality of the dialog
    * @param maxSelectedFiles maximum amount of selected files
    */
-  FileDialog(std::string_view elementName, std::string_view labelText,
-             const std::vector<FileExtensionSettings> &extSettings,
+  FileDialog(std::string_view elementName, std::string_view labelText, const std::vector<FileExtensionSettings> &extSettings,
              std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
-             Size initialSize = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "",
-             Modal modality = Modal::No, uint32_t maxSelectedFiles = 1)
+             Size initialSize = {500, 400}, std::filesystem::path startPath = ".", std::string startName = "", Modal modality = Modal::No,
+             uint32_t maxSelectedFiles = 1)
       : FileDialog(FileType::File, elementName, labelText, extSettings, std::forward<decltype(onSelect)>(onSelect),
-                   std::forward<decltype(onCancel)>(onCancel), initialSize, startPath, startName, modality,
-                   maxSelectedFiles) {}
+                   std::forward<decltype(onCancel)>(onCancel), initialSize, startPath, startName, modality, maxSelectedFiles) {}
 
   /**
    * Construct FileDialog for directories
@@ -99,13 +97,11 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
    * @param modality modality of the dialog
    * @param maxSelectedDirs maximum amount of selected directories
    */
-  FileDialog(std::string_view elementName, std::string_view labelText,
-             std::invocable<std::vector<std::filesystem::path>> auto &&onSelect, std::invocable auto &&onCancel,
-             Size initialSize = {200, 150}, std::filesystem::path startPath = ".", std::string startName = "",
-             Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
+  FileDialog(std::string_view elementName, std::string_view labelText, std::invocable<std::vector<std::filesystem::path>> auto &&onSelect,
+             std::invocable auto &&onCancel, Size initialSize = {200, 150}, std::filesystem::path startPath = ".",
+             std::string startName = "", Modal modality = Modal::No, uint32_t maxSelectedDirs = 1)
       : FileDialog(FileType::Directory, elementName, labelText, {}, std::forward<decltype(onSelect)>(onSelect),
-                   std::forward<decltype(onCancel)>(onCancel), initialSize, startPath, startName, modality,
-                   maxSelectedDirs) {}
+                   std::forward<decltype(onCancel)>(onCancel), initialSize, startPath, startName, modality, maxSelectedDirs) {}
 
   ~FileDialog() override;
 
@@ -134,9 +130,8 @@ class PF_IMGUI_EXPORT FileDialog : public Renderable {
    * Constructor to hide implementation.
    */
   FileDialog(FileType dialogFileType, std::string_view elementName, std::string_view labelText,
-             const std::vector<FileExtensionSettings> &extSettings,
-             std::function<void(std::vector<std::filesystem::path>)> onSelect, std::function<void()> onCancel,
-             Size initialSize, std::filesystem::path startPath, std::string startName, Modal modality,
+             const std::vector<FileExtensionSettings> &extSettings, std::function<void(std::vector<std::filesystem::path>)> onSelect,
+             std::function<void()> onCancel, Size initialSize, std::filesystem::path startPath, std::string startName, Modal modality,
              uint32_t maxSelected);
   /**
    * Transform extension settings into filter strings.

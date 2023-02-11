@@ -7,9 +7,8 @@
 
 namespace pf::ui::ig {
 
-OverlayGizmoBase::OverlayGizmoBase(const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode,
-                                   ViewportGizmoSpace gizmoSpace, const glm::mat4 &initialView,
-                                   const glm::mat4 &initialProjection, bool isProjectionOrthographic)
+OverlayGizmoBase::OverlayGizmoBase(const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode, ViewportGizmoSpace gizmoSpace,
+                                   const glm::mat4 &initialView, const glm::mat4 &initialProjection, bool isProjectionOrthographic)
     : transform(initialValue), mode(gizmoMode), space(gizmoSpace), view(initialView), projection(initialProjection),
       projectionOrthographic(isProjectionOrthographic) {}
 
@@ -32,9 +31,7 @@ void OverlayGizmoBase::setProjection(const glm::mat4 &newProjection, bool isOrth
   projectionOrthographic = isOrthographic;
 }
 
-void OverlayGizmoBase::setSnapValues(float translate, float rotate, float scale) {
-  snapValues = glm::vec3{translate, rotate, scale};
-}
+void OverlayGizmoBase::setSnapValues(float translate, float rotate, float scale) { snapValues = glm::vec3{translate, rotate, scale}; }
 
 void OverlayGizmoBase::drawImpl(bool isEnabled) {
   ImGuizmo::Enable(isEnabled);

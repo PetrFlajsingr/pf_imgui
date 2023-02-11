@@ -36,8 +36,7 @@ namespace pf::ui::ig::input_details {
 /**
  * All types supported by Input.
  */
-#define PF_IMGUI_INPUT_TYPE_LIST                                                                                       \
-  PF_IMGUI_INPUT_FLOAT_TYPE_LIST, PF_IMGUI_INPUT_INT_TYPE_LIST, PF_IMGUI_INPUT_DOUBLE_TYPE_LIST
+#define PF_IMGUI_INPUT_TYPE_LIST PF_IMGUI_INPUT_FLOAT_TYPE_LIST, PF_IMGUI_INPUT_INT_TYPE_LIST, PF_IMGUI_INPUT_DOUBLE_TYPE_LIST
 
 /**
  * Underlying type of supported types.

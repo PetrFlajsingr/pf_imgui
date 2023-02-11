@@ -24,11 +24,7 @@ namespace pf::ui::ig {
  * @tparam T underlying type
  */
 template<OneOf<glm::vec3> T>
-class PF_IMGUI_EXPORT Slider3D : public ItemElement,
-                                 public ValueContainer<T>,
-                                 public Savable,
-                                 public DragSource<T>,
-                                 public DropTarget<T> {
+class PF_IMGUI_EXPORT Slider3D : public ItemElement, public ValueContainer<T>, public Savable, public DragSource<T>, public DropTarget<T> {
  public:
   /**
    * @brief Struct for construction of Slider3D.
@@ -59,16 +55,13 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
    * @param initialSize size of the rendered area
    * @param persistent enable state saving to disk
    */
-  Slider3D(std::string_view elementName, std::string_view labelText, glm::vec2 minMaxX, glm::vec2 minMaxY,
-           glm::vec2 minMaxZ, const T &initialValue = {}, Size initialSize = Size::Auto(),
-           Persistent persistent = Persistent::No);
+  Slider3D(std::string_view elementName, std::string_view labelText, glm::vec2 minMaxX, glm::vec2 minMaxY, glm::vec2 minMaxZ,
+           const T &initialValue = {}, Size initialSize = Size::Auto(), Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
-               ColorOf::FrameBackgroundActive>
-      color;
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackgroundActive> color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Property<Label> label;
@@ -92,16 +85,14 @@ class PF_IMGUI_EXPORT Slider3D : public ItemElement,
 
 template<OneOf<glm::vec3> T>
 Slider3D<T>::Slider3D(Slider3D::Config &&config)
-    : Slider3D(config.name, config.label, {config.min.value.x, config.max.value.x},
-               {config.min.value.y, config.max.value.y}, {config.min.value.z, config.max.value.z}, config.value,
-               config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : Slider3D(config.name, config.label, {config.min.value.x, config.max.value.x}, {config.min.value.y, config.max.value.y},
+               {config.min.value.z, config.max.value.z}, config.value, config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<glm::vec3> T>
-Slider3D<T>::Slider3D(std::string_view elementName, std::string_view labelText, glm::vec2 minMaxX, glm::vec2 minMaxY,
-                      glm::vec2 minMaxZ, const T &initialValue, Size initialSize, Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{labelText}), size(initialSize), value(initialValue), extremesX(minMaxX), extremesY(minMaxY),
-      extremesZ(minMaxZ) {}
+Slider3D<T>::Slider3D(std::string_view elementName, std::string_view labelText, glm::vec2 minMaxX, glm::vec2 minMaxY, glm::vec2 minMaxZ,
+                      const T &initialValue, Size initialSize, Persistent persistent)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(std::string{labelText}),
+      size(initialSize), value(initialValue), extremesX(minMaxX), extremesY(minMaxY), extremesZ(minMaxZ) {}
 
 template<OneOf<glm::vec3> T>
 toml::table Slider3D<T>::toToml() const {
@@ -127,9 +118,8 @@ void Slider3D<T>::renderImpl() {
   auto address = &Prop_value(value);
   const auto oldValue = *address;
   if constexpr (std::same_as<T, float>) {
-    valueChanged =
-        ImWidgets::SliderScalar3D(label->get().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
-                                  extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, static_cast<ImVec2>(*size));
+    valueChanged = ImWidgets::SliderScalar3D(label->get().c_str(), &address->x, &address->y, &address->z, extremesX.x, extremesX.y,
+                                             extremesY.x, extremesY.y, extremesZ.x, extremesZ.y, static_cast<ImVec2>(*size));
   }
   DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {

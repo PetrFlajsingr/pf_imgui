@@ -21,11 +21,9 @@ void Notification::renderImpl() {
     if (!iconColor.has_value()) { iconColor = Color{ImGui::GetStyleColorVec4(ImGuiCol_Text)}; }
   }
   checkPhase();
-  const auto vp_pos =
-      ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable ? ImGui::GetMainViewport()->Pos : ImVec2{0, 0};
+  const auto vp_pos = ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable ? ImGui::GetMainViewport()->Pos : ImVec2{0, 0};
   const auto vp_size = ImGui::GetMainViewport()->Size;
-  ImGui::SetNextWindowPos(vp_pos + ImVec2(vp_size.x - PADDING_X, vp_size.y - PADDING_Y - height), ImGuiCond_Always,
-                          ImVec2(1.0f, 1.0f));
+  ImGui::SetNextWindowPos(vp_pos + ImVec2(vp_size.x - PADDING_X, vp_size.y - PADDING_Y - height), ImGuiCond_Always, ImVec2(1.0f, 1.0f));
 
   const auto opacity = getOpacity();
   ImGui::SetNextWindowBgAlpha(opacity);
@@ -60,8 +58,7 @@ void Notification::setIcon(const char *newIcon, Font newIconFont) {
 void Notification::setIconColor(Color newColor) { iconColor = newColor; }
 
 void Notification::checkPhase() {
-  const auto timeElapsed =
-      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - creationTime);
+  const auto timeElapsed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - creationTime);
   if (timeElapsed > FADE_IN_TIME + FADE_OUT_TIME + dismissDuration) {
     currentPhase = NotificationPhase::Expired;
   } else if (timeElapsed > FADE_IN_TIME + dismissDuration) {
@@ -77,8 +74,7 @@ float Notification::getOpacity() const {
   using namespace std::chrono;
   const auto timeElapsed = duration_cast<milliseconds>(steady_clock::now() - creationTime);
   switch (currentPhase) {
-    case NotificationPhase::FadeIn:
-      return (static_cast<float>(timeElapsed.count()) / static_cast<float>(FADE_IN_TIME.count()));
+    case NotificationPhase::FadeIn: return (static_cast<float>(timeElapsed.count()) / static_cast<float>(FADE_IN_TIME.count()));
     case NotificationPhase::FadeOut:
       return (1.f
               - ((static_cast<float>(timeElapsed.count()) - static_cast<float>(FADE_IN_TIME.count())

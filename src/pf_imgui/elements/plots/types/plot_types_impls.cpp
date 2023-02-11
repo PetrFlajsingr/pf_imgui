@@ -12,12 +12,10 @@ void renderPlotBarsHorizontal(const char *label, const double *xData, const doub
   ImPlot::PlotBars(label, xData, yData, size, barSize, ImPlotBarsFlags_Horizontal);
 }
 
-void renderErrorBarVertical(const char *label, const double *xData, const double *yData, const double *errorData,
-                            int size) {
+void renderErrorBarVertical(const char *label, const double *xData, const double *yData, const double *errorData, int size) {
   ImPlot::PlotErrorBars(label, xData, yData, errorData, size);
 }
-void renderErrorBarHorizontal(const char *label, const double *xData, const double *yData, const double *errorData,
-                              int size) {
+void renderErrorBarHorizontal(const char *label, const double *xData, const double *yData, const double *errorData, int size) {
   ImPlot::PlotErrorBars(label, xData, yData, errorData, size, ImPlotErrorBarsFlags_Horizontal);
 }
 

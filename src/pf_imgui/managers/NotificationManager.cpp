@@ -8,8 +8,7 @@
 
 namespace pf::ui::ig {
 
-Notification &NotificationManager::createNotification(std::string_view name, std::string_view label,
-                                                      std::chrono::milliseconds duration) {
+Notification &NotificationManager::createNotification(std::string_view name, std::string_view label, std::chrono::milliseconds duration) {
   return *newNotifications.emplace_back(std::make_unique<Notification>(name, label, duration));
 }
 
@@ -23,8 +22,8 @@ void NotificationManager::renderNotifications() {
     notification->render();
     height = notification->height;
   });
-  auto remove = std::ranges::remove(notifications, NotificationPhase::Expired,
-                                    [](const auto &notification) { return notification->currentPhase; });
+  auto remove =
+      std::ranges::remove(notifications, NotificationPhase::Expired, [](const auto &notification) { return notification->currentPhase; });
   notifications.erase(remove.begin(), remove.end());  //-V539
 }
 

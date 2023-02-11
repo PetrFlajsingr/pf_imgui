@@ -24,8 +24,8 @@ inline std::string random_string(std::size_t length) {
   static auto randGen = std::minstd_rand{465768687};  // NOLINT(cert-msc51-cpp)
   auto randchar = []() -> char {
     constexpr char charset[] = "0123456789"
-                           "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                           "abcdefghijklmnopqrstuvwxyz";
+                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                               "abcdefghijklmnopqrstuvwxyz";
     const size_t max_index = (sizeof(charset) - 1);
     return charset[randGen() % max_index];
   };
@@ -39,9 +39,7 @@ inline std::string random_string(std::size_t length) {
  * @param length length of the id
  * @return ID
  */
-inline std::string uniqueId(std::size_t length = 10) {
-  return details::random_string(length) + std::to_string(details::uniqueIdCounter++);
-}
+inline std::string uniqueId(std::size_t length = 10) { return details::random_string(length) + std::to_string(details::uniqueIdCounter++); }
 }  // namespace pf::ui::ig
 
 #endif  // PF_IMGUI_UNIQUE_ID_H

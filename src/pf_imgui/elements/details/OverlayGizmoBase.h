@@ -41,8 +41,8 @@ enum class ViewportGizmoSpace { Local = ImGuizmo::LOCAL, World = ImGuizmo::WORLD
 
 class OverlayGizmoBase : public ValueContainer<glm::mat4>, protected PropertyOwner {
  public:
-  OverlayGizmoBase(const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode, ViewportGizmoSpace gizmoSpace,
-                   const glm::mat4 &initialView, const glm::mat4 &initialProjection, bool isProjectionOrthographic);
+  OverlayGizmoBase(const glm::mat4 &initialValue, ViewportGizmoMode gizmoMode, ViewportGizmoSpace gizmoSpace, const glm::mat4 &initialView,
+                   const glm::mat4 &initialProjection, bool isProjectionOrthographic);
 
   [[nodiscard]] ViewportGizmoMode getMode() const;
   void setMode(ViewportGizmoMode newMode);

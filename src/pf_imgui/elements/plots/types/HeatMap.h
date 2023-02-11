@@ -50,8 +50,8 @@ class PF_IMGUI_EXPORT HeatMap : public LabeledPlotData {
     recordCount = newData.size();
     rowSize = newData[0].size();
     std::ranges::for_each(newData, [this](const auto &row) { assert(row.size() == rowSize); });
-    data = newData | ranges::views::join
-        | ranges::views::transform([](const auto &val) { return static_cast<double>(val); }) | ranges::to_vector;
+    data = newData | ranges::views::join | ranges::views::transform([](const auto &val) { return static_cast<double>(val); })
+        | ranges::to_vector;
   }
 
  protected:

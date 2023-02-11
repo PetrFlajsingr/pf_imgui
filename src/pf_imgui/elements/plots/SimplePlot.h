@@ -33,16 +33,15 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID {
    */
   struct Config {
     using Parent = SimplePlot;
-    Explicit<std::string_view> name;                   /*!< Unique name of the element */
-    Explicit<std::string_view> label;                  /*!< Text rendered above the plot */
-    Explicit<PlotType> type;                           /*!< Type of the plot @see PlotType */
-    std::vector<float> values{};                       /*!< Initial values displayed on the plot */
-    std::optional<std::string> overlay = std::nullopt; /*!< Text rendered on top of the plot */
-    std::optional<std::size_t> maxHistoryCount =
-        std::nullopt;          /*!< Maximum amount of values rendered in the plot FIFO */
-    float scaleLow = FLT_MAX;  /*!< Lowest displayed value */
-    float scaleHigh = FLT_MAX; /*!< Highest displayed value */
-    Size size = Size::Auto();  /*!< Size of the element */
+    Explicit<std::string_view> name;                           /*!< Unique name of the element */
+    Explicit<std::string_view> label;                          /*!< Text rendered above the plot */
+    Explicit<PlotType> type;                                   /*!< Type of the plot @see PlotType */
+    std::vector<float> values{};                               /*!< Initial values displayed on the plot */
+    std::optional<std::string> overlay = std::nullopt;         /*!< Text rendered on top of the plot */
+    std::optional<std::size_t> maxHistoryCount = std::nullopt; /*!< Maximum amount of values rendered in the plot FIFO */
+    float scaleLow = FLT_MAX;                                  /*!< Lowest displayed value */
+    float scaleHigh = FLT_MAX;                                 /*!< Highest displayed value */
+    Size size = Size::Auto();                                  /*!< Size of the element */
   };
   /**
    * Construct SimplePlot.
@@ -61,10 +60,9 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID {
    * @param scaleHigh max value
    * @param initialSize size of the element
    */
-  SimplePlot(std::string_view elementName, std::string_view labelText, PlotType type,
-             std::vector<float> plotValues = {}, std::optional<std::string> plotOverlayText = std::nullopt,
-             const std::optional<std::size_t> &maxHistorySize = std::nullopt, float scaleLow = FLT_MAX,
-             float scaleHigh = FLT_MAX, Size initialSize = Size::Auto());
+  SimplePlot(std::string_view elementName, std::string_view labelText, PlotType type, std::vector<float> plotValues = {},
+             std::optional<std::string> plotOverlayText = std::nullopt, const std::optional<std::size_t> &maxHistorySize = std::nullopt,
+             float scaleLow = FLT_MAX, float scaleHigh = FLT_MAX, Size initialSize = Size::Auto());
   /**
    * Add value to the end of the graph.
    * @param value value to be added
@@ -88,9 +86,8 @@ class PF_IMGUI_EXPORT SimplePlot : public ElementWithID {
    */
   void setValues(const std::vector<float> &vals);
 
-  ColorPalette<ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive,
-               ColorOf::PlotLines, ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered,
-               ColorOf::Text, ColorOf::TextDisabled>
+  ColorPalette<ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::PlotLines,
+               ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered, ColorOf::Text, ColorOf::TextDisabled>
       color;
   Property<Label> label;
 

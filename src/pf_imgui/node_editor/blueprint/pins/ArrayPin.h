@@ -18,8 +18,7 @@ class ArrayPin : public Pin {
   using ValueType = std::vector<T>;
   PF_IMGUI_BLUEPRINT_PIN_ID(ArrayPin)
 
-  ArrayPin(std::string_view elementName, std::string_view labelText, Color pinColor)
-      : Pin(elementName, labelText, pinColor) {}
+  ArrayPin(std::string_view elementName, std::string_view labelText, Color pinColor) : Pin(elementName, labelText, pinColor) {}
 
   [[nodiscard]] bool acceptsLinkWith(ig::Pin &other) const override {
     if (!Pin::acceptsLinkWith(other)) { return false; }

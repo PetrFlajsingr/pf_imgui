@@ -11,15 +11,14 @@
 namespace pf::ui::ig {
 
 InputText::InputText(InputText::Config &&config)
-    : InputText(config.name, config.label, config.value, config.inputType, config.maxInputLength, config.eventTrigger,
-                config.filters, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : InputText(config.name, config.label, config.value, config.inputType, config.maxInputLength, config.eventTrigger, config.filters,
+                config.persistent ? Persistent::Yes : Persistent::No) {}
 
-InputText::InputText(std::string_view elementName, std::string_view labelText, std::string_view initialValue,
-                     TextInputType textInputType, std::size_t inputLengthLimit, TextTrigger trigger,
-                     Flags<TextFilter> filters, Persistent persistent)
+InputText::InputText(std::string_view elementName, std::string_view labelText, std::string_view initialValue, TextInputType textInputType,
+                     std::size_t inputLengthLimit, TextTrigger trigger, Flags<TextFilter> filters, Persistent persistent)
     : ItemElement(elementName), Savable(persistent), DragSource<std::string>(false), DropTarget<std::string>(false),
-      label(std::string{labelText}), text(std::string{initialValue}),
-      buffer(std::make_unique<char[]>(inputLengthLimit + 1)), bufferLength(inputLengthLimit), inputType(textInputType) {
+      label(std::string{labelText}), text(std::string{initialValue}), buffer(std::make_unique<char[]>(inputLengthLimit + 1)),
+      bufferLength(inputLengthLimit), inputType(textInputType) {
   setTextInner(*text);
   flags |= static_cast<ImGuiInputTextFlags>(*filters);
   if (trigger == TextTrigger::Enter) { flags |= ImGuiInputTextFlags_EnterReturnsTrue; }

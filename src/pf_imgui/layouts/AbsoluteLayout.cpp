@@ -17,8 +17,8 @@ void AbsoluteLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
-                                    : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  const auto flags =
+      isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     [[maybe_unused]] auto scrollApplier = applyScroll();
@@ -31,22 +31,19 @@ void AbsoluteLayout::renderImpl() {
 }
 void AbsoluteLayout::setChildPosition(const std::string &childName, Position position) {
   auto childrenAddr = children | ranges::views::addressof;
-  if (const auto iter =
-          std::ranges::find_if(childrenAddr, [childName](auto child) { return child->first->getName() == childName; });
+  if (const auto iter = std::ranges::find_if(childrenAddr, [childName](auto child) { return child->first->getName() == childName; });
       iter != childrenAddr.end()) {
     (*iter)->second = position;
   }
 }
 void AbsoluteLayout::removeChild(const std::string &childName) {
-  if (auto iter = std::ranges::find_if(children,
-                                       [childName](const auto &child) { return child.first->getName() == childName; });
+  if (auto iter = std::ranges::find_if(children, [childName](const auto &child) { return child.first->getName() == childName; });
       iter != children.end()) {
     children.erase(iter);
   }
 }
 std::vector<Renderable *> AbsoluteLayout::getRenderables() {
-  return children | ranges::views::transform([](auto &child) -> Renderable * { return child.first.get(); })
-      | ranges::to_vector;
+  return children | ranges::views::transform([](auto &child) -> Renderable * { return child.first.get(); }) | ranges::to_vector;
 }
 
 }  // namespace pf::ui::ig

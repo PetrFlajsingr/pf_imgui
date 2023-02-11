@@ -118,9 +118,8 @@ class PF_IMGUI_EXPORT MenuButtonItem : public MenuItem {
    */
   MenuButtonItem(std::string_view elementName, std::string_view labelText);
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive,
-               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::Header, ColorOf::HeaderHovered,
-               ColorOf::HeaderActive>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive, ColorOf::NavHighlight,
+               ColorOf::Border, ColorOf::BorderShadow, ColorOf::Header, ColorOf::HeaderHovered, ColorOf::HeaderActive>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::ButtonTextAlign> style;
   Font font = Font::Default();
@@ -157,8 +156,7 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueContainer<
    * @param label text rendered on the button
    * @param initialValue starting value
    */
-  MenuCheckboxItem(std::string_view elementName, std::string_view label, bool initialValue = false,
-                   Persistent persistent = Persistent::No);
+  MenuCheckboxItem(std::string_view elementName, std::string_view label, bool initialValue = false, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -170,9 +168,8 @@ class PF_IMGUI_EXPORT MenuCheckboxItem : public MenuItem, public ValueContainer<
   Subscription addValueListenerImpl(std::function<void(const bool &)> listener) override;
 
  public:
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
-               ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive, ColorOf::FrameBackground,
+               ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();

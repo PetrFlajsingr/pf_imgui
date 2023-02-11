@@ -31,8 +31,7 @@ void drawPinCircle(ImDrawList *drawList, ImVec2 center, ImColor color, bool fill
 }
 
 void drawPinArrow(ImDrawList *drawList, ImVec2 position, ImColor color) {  //-V813
-  drawList->AddTriangleFilled(position + PinArrowVertices[0], position + PinArrowVertices[1],
-                              position + PinArrowVertices[2], color);
+  drawList->AddTriangleFilled(position + PinArrowVertices[0], position + PinArrowVertices[1], position + PinArrowVertices[2], color);
 }
 
 void drawPinQuad(ImDrawList *drawList, ImVec2 position, ImColor color, bool filled) {  //-V813
@@ -49,19 +48,17 @@ void drawPin3by3Quads(ImDrawList *drawList, ImVec2 position, ImColor color, bool
   for (int y = 0; y < 3; ++y) {
     for (int x = 0; x < 3; ++x) {
       if (x == 1 && y == 1 && !filled) { continue; }
-      drawList->AddQuadFilled(
-          position + PinSmallQuadVertices[0] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f},
-          position + PinSmallQuadVertices[1] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f},
-          position + PinSmallQuadVertices[2] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f},
-          position + PinSmallQuadVertices[3] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f}, color);
+      drawList->AddQuadFilled(position + PinSmallQuadVertices[0] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f},
+                              position + PinSmallQuadVertices[1] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f},
+                              position + PinSmallQuadVertices[2] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f},
+                              position + PinSmallQuadVertices[3] + ImVec2{static_cast<float>(x) * 4.f, static_cast<float>(y) * 4.f}, color);
     }
   }
 }
 
 void drawPinExec(ImDrawList *drawList, ImVec2 position, ImColor color, bool filled) {  //-V813
   auto currentVertices = PinExecVertices;
-  std::ranges::transform(currentVertices, currentVertices.begin(),
-                         [offset = position](ImVec2 vertex) { return vertex + offset; });
+  std::ranges::transform(currentVertices, currentVertices.begin(), [offset = position](ImVec2 vertex) { return vertex + offset; });
   if (filled) {
     drawList->AddConvexPolyFilled(currentVertices.data(), static_cast<int>(currentVertices.size()), color);
   } else {

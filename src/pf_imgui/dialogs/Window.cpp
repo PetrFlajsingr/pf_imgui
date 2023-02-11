@@ -13,8 +13,8 @@
 namespace pf::ui::ig {
 
 Window::Window(std::string_view elementName, std::string_view titleLabel, AllowCollapse allowCollapse)
-    : Renderable(elementName), label(std::string{titleLabel}), hovered{false}, focused{false},
-      position(Position{-1, -1}), size(Size::Auto()), collapsed{false} {
+    : Renderable(elementName), label(std::string{titleLabel}), hovered{false}, focused{false}, position(Position{-1, -1}),
+      size(Size::Auto()), collapsed{false} {
   refreshIdLabel();
   setCollapsible(allowCollapse == AllowCollapse::Yes);
   label.addListener([this](auto) { refreshIdLabel(); });
@@ -44,8 +44,7 @@ void Window::renderImpl() {
   }
 
   ScopeExit endPopup{&ImGui::End};
-  if (ImGui::Begin(idLabel.c_str(), (closeable ? &isNotClosed : nullptr),
-                   flags | (hasMenuBar() ? ImGuiWindowFlags_MenuBar : 0))) {
+  if (ImGui::Begin(idLabel.c_str(), (closeable ? &isNotClosed : nullptr), flags | (hasMenuBar() ? ImGuiWindowFlags_MenuBar : 0))) {
     isWindowDocked = ImGui::IsWindowDocked();
     if (firstPass) {
       firstPass = false;
@@ -85,9 +84,9 @@ void Window::removeMenuBar() { menuBar = nullptr; }
 
 void Window::render() {
   if (*visibility == Visibility::Visible) {
-    ImGui::SetNextWindowSizeConstraints(static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
-                                        static_cast<ImVec2>(maxSizeConstraint.value_or(Size{
-                                            std::numeric_limits<float>::max(), std::numeric_limits<float>::max()})));
+    ImGui::SetNextWindowSizeConstraints(
+        static_cast<ImVec2>(minSizeConstraint.value_or(Size{0, 0})),
+        static_cast<ImVec2>(maxSizeConstraint.value_or(Size{std::numeric_limits<float>::max(), std::numeric_limits<float>::max()})));
     if (dockInto.has_value()) {
       ImGui::SetNextWindowDockID(*dockInto);
       dockInto = std::nullopt;

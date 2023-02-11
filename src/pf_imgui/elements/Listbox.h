@@ -91,8 +91,7 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
    * @param s size of the element
    * @param persistent enable/disable state saving to disk
    */
-  Listbox(std::string_view elementName, std::string_view labelText, Size s = Size::Auto(),
-          Persistent persistent = Persistent::No)
+  Listbox(std::string_view elementName, std::string_view labelText, Size s = Size::Auto(), Persistent persistent = Persistent::No)
     requires(std::is_default_constructible_v<T> && std::copy_constructible<T>);
 
   /**
@@ -137,21 +136,19 @@ class PF_IMGUI_EXPORT Listbox : public CustomListbox<T, Selectable>,
 template<ToStringConvertible T>
 Listbox<T>::Listbox(Listbox::Config &&config)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: Listbox{config.name, config.label, config.size, config.persistent ? Persistent::Yes : Persistent::No} {}
+    : Listbox{config.name, config.label, config.size, config.persistent ? Persistent::Yes : Persistent::No} {}
 
 template<ToStringConvertible T>
 Listbox<T>::Listbox(std::string_view elementName, std::string_view labelText, Size s, Persistent persistent)
   requires(std::is_default_constructible_v<T> && std::copy_constructible<T>)
-: CustomListboxBase(elementName, labelText, Factory{}, s),
-  Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {
+    : CustomListboxBase(elementName, labelText, Factory{}, s), Savable(persistent), DragSource<T>(false), DropTarget<T>(false) {
 
   // TODO: clean this up
   selectedItem.addListener([this](const auto &itemToSelect) {
     if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
     if constexpr (std::equality_comparable<T>) {
-      if (const auto iter =
-              std::ranges::find_if(CustomListboxBase::filteredItems,
-                                   [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
+      if (const auto iter = std::ranges::find_if(CustomListboxBase::filteredItems,
+                                                 [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
           iter != CustomListboxBase::filteredItems.end()) {
         const auto index = std::ranges::distance(CustomListboxBase::filteredItems.begin(), iter);
         setSelectedItemByIndex(index);
@@ -172,8 +169,8 @@ Selectable &Listbox<T>::addItem(const T &item, Selected selected) {
 
 template<ToStringConvertible T>
 void Listbox<T>::setSelectedItemAsString(const std::string &itemAsString) {
-  if (const auto iter = std::ranges::find_if(
-          filteredItems, [itemAsString](const auto &item) { return item->second->label.get() == itemAsString; });
+  if (const auto iter =
+          std::ranges::find_if(filteredItems, [itemAsString](const auto &item) { return item->second->label.get() == itemAsString; });
       iter != filteredItems.end()) {
     const auto index = std::ranges::distance(filteredItems.begin(), iter);
     setSelectedItemByIndex(index);

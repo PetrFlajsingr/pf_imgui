@@ -22,9 +22,7 @@ ModalDialog &DialogManager::createDialog(std::string_view elementName, std::stri
 
 MessageDialogBuilder DialogManager::buildMessageDialog() { return MessageDialogBuilder(this); }
 
-void DialogManager::addMessageDialog(std::unique_ptr<MessageDialog> &&dialog) {
-  dialogs.emplace_back(std::move(dialog));
-}
+void DialogManager::addMessageDialog(std::unique_ptr<MessageDialog> &&dialog) { dialogs.emplace_back(std::move(dialog)); }
 
 InputDialogBuilder DialogManager::buildInputDialog() { return InputDialogBuilder(this); }
 
@@ -32,21 +30,18 @@ void DialogManager::addInputDialog(std::unique_ptr<InputDialog> &&dialog) { dial
 
 void DialogManager::renderDialogs() {
   std::ranges::for_each(fileDialogs, &FileDialog::render);
-  if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog->isDone(); });
-      iter != fileDialogs.end()) {
+  if (const auto iter = std::ranges::find_if(fileDialogs, [](auto &dialog) { return dialog->isDone(); }); iter != fileDialogs.end()) {
     fileDialogBookmark = (*iter)->serializeBookmark();
     fileDialogs.erase(iter);
   }
   std::ranges::for_each(dialogs, [](auto &dialog) { dialog->render(); });
-  if (const auto iter = std::ranges::find_if(dialogs, [](auto &dialog) { return dialog->isClosed(); });
-      iter != dialogs.end()) {
+  if (const auto iter = std::ranges::find_if(dialogs, [](auto &dialog) { return dialog->isClosed(); }); iter != dialogs.end()) {
     dialogs.erase(iter);
   }
 }
 
 void DialogManager::removeDialog(ModalDialog &dialog) {
-  if (const auto iter = std::ranges::find_if(dialogs, [&dialog](const auto &ptr) { return ptr.get() == &dialog; });
-      iter != dialogs.end()) {
+  if (const auto iter = std::ranges::find_if(dialogs, [&dialog](const auto &ptr) { return ptr.get() == &dialog; }); iter != dialogs.end()) {
     dialogs.erase(iter);
   }
 }

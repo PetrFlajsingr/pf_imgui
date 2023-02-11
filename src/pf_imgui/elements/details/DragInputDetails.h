@@ -57,7 +57,6 @@ constexpr const char *defaultFormat() {
   }
 }
 
-
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 consteval std::size_t getComponentCount() {
   if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) { return T::length(); }

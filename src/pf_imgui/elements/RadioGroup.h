@@ -26,9 +26,7 @@ namespace pf::ui::ig {
  *
  * Only create this through ImGuiInterface::CreateRadioGroup
  */
-class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnlyTag>,
-                                   public Savable,
-                                   protected PropertyOwner {
+class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnlyTag>, public Savable, protected PropertyOwner {
  public:
   /**
    * @brief Struct for construction of RadioGroup.
@@ -51,8 +49,7 @@ class PF_IMGUI_EXPORT RadioGroup : public ValueContainer<RadioButton *, ReadOnly
    * @param childButtons buttons in the group
    * @param persistent enable state saving to disk
    */
-  explicit RadioGroup(std::string_view name, std::vector<RadioButton *> childButtons = {},
-                      Persistent persistent = Persistent::No);
+  explicit RadioGroup(std::string_view name, std::vector<RadioButton *> childButtons = {}, Persistent persistent = Persistent::No);
 
   /**
    * Create a new button and add it to the group.

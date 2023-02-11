@@ -25,13 +25,11 @@ void Image::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
 }
 
 InspectableImage::InspectableImage(InspectableImage::Config &&config)
-    : InspectableImage(config.name.value, config.size, config.rgbaData, config.imageWidth, std::move(config.texture),
-                       config.trigger) {}
+    : InspectableImage(config.name.value, config.size, config.rgbaData, config.imageWidth, std::move(config.texture), config.trigger) {}
 
-InspectableImage::InspectableImage(std::string_view elementName, Size s, std::span<const std::byte> rgbaData,
-                                   std::size_t imgWidth, std::shared_ptr<Texture> tex, Trigger trigger)
-    : ItemElement(elementName), size(s), imageRGBAData(rgbaData), imageWidth(imgWidth), texture(std::move(tex)),
-      trig(trigger) {}
+InspectableImage::InspectableImage(std::string_view elementName, Size s, std::span<const std::byte> rgbaData, std::size_t imgWidth,
+                                   std::shared_ptr<Texture> tex, Trigger trigger)
+    : ItemElement(elementName), size(s), imageRGBAData(rgbaData), imageWidth(imgWidth), texture(std::move(tex)), trig(trigger) {}
 
 void InspectableImage::renderImpl() {
   const auto cursorPos = ImGui::GetCursorPos();
@@ -52,8 +50,7 @@ void InspectableImage::renderImpl() {
   if (inspectActive && mouseUVCoord.x >= 0.f && mouseUVCoord.y >= 0.f) {
     const auto dataPtr = imageRGBAData.data();
     ImageInspect::inspect(static_cast<int>(imageWidth), static_cast<int>(imageRGBAData.size() / 4 / imageWidth - 1),
-                          reinterpret_cast<const unsigned char *>(dataPtr), mouseUVCoord,
-                          ImVec2{rc.GetWidth(), rc.GetHeight()}, zoomSize);
+                          reinterpret_cast<const unsigned char *>(dataPtr), mouseUVCoord, ImVec2{rc.GetWidth(), rc.GetHeight()}, zoomSize);
   }
 }
 
@@ -62,8 +59,7 @@ void InspectableImage::setUVs(ImVec2 leftTop, ImVec2 rightBottom) {
   uvRightBottom = rightBottom;
 }
 
-void InspectableImage::setTexture(std::shared_ptr<Texture> tex, std::span<const std::byte> rgbaData,
-                                  std::size_t imgWidth) {
+void InspectableImage::setTexture(std::shared_ptr<Texture> tex, std::span<const std::byte> rgbaData, std::size_t imgWidth) {
   texture = std::move(tex);
   imageRGBAData = rgbaData;
   imageWidth = imgWidth;

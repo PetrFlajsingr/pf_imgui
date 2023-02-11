@@ -131,9 +131,7 @@ void TextEditor::setHighlighting(TextEditorHighlight language) {
   switch (language) {
     case GLSL: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::GLSL()); break;
     case HLSL: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::HLSL()); break;
-    case AngelScript:
-      editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::AngelScript());
-      break;
+    case AngelScript: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::AngelScript()); break;
     case Lua: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::Lua()); break;
     case C: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::C()); break;
     case CPP: editor.SetLanguageDefinition(ImGuiColorTextEdit::TextEditor::LanguageDefinition::CPlusPlus()); break;
@@ -153,9 +151,7 @@ void TextEditor::setFromToml(const toml::table &src) {
   }
 }
 
-Color TextEditor::getColor(TextEditorColor colorType) const {
-  return Color{editor.GetPalette()[static_cast<int>(colorType)]};
-}
+Color TextEditor::getColor(TextEditorColor colorType) const { return Color{editor.GetPalette()[static_cast<int>(colorType)]}; }
 
 void TextEditor::setColor(TextEditorColor colorType, Color color) {
   auto palette = editor.GetPalette();

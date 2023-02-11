@@ -96,22 +96,20 @@ class PF_IMGUI_EXPORT Combobox : public CustomCombobox<T, Selectable>,
    * @param showItemCount amount of items shown when open
    * @param persistent enable/disable disk state saving
    */
-  Combobox(std::string_view elementName, std::string_view labelStr, std::string_view prevValue,
-           std::ranges::range auto &&newItems, ComboBoxCount showItemCount = ComboBoxCount::Items8,
-           Persistent persistent = Persistent::No)
-    requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T>
-             && std::is_default_constructible_v<T> && std::copy_constructible<T>)
-  : CustomComboboxBase(elementName, labelStr, details::ComboboxRowFactory<T>{}, prevValue, showItemCount),
-    Savable(persistent), DragSource<T>(false), selectedItem(std::nullopt) {
+  Combobox(std::string_view elementName, std::string_view labelStr, std::string_view prevValue, std::ranges::range auto &&newItems,
+           ComboBoxCount showItemCount = ComboBoxCount::Items8, Persistent persistent = Persistent::No)
+    requires(std::convertible_to<std::ranges::range_value_t<decltype(newItems)>, T> && std::is_default_constructible_v<T>
+             && std::copy_constructible<T>)
+      : CustomComboboxBase(elementName, labelStr, details::ComboboxRowFactory<T>{}, prevValue, showItemCount), Savable(persistent),
+        DragSource<T>(false), selectedItem(std::nullopt) {
     addItems(std::forward<decltype(newItems)>(newItems));
 
     // TODO: clean this up
     selectedItem.addListener([this](const auto &itemToSelect) {
       if (!itemToSelect.has_value()) { selectedItemIndex = std::nullopt; }
       if constexpr (std::equality_comparable<T>) {
-        if (const auto iter =
-                std::ranges::find_if(CustomComboboxBase::filteredItems,
-                                     [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
+        if (const auto iter = std::ranges::find_if(CustomComboboxBase::filteredItems,
+                                                   [&itemToSelect](const auto &item) { return item->first == *itemToSelect; });
             iter != CustomComboboxBase::filteredItems.end()) {
           const auto index = std::ranges::distance(CustomComboboxBase::filteredItems.begin(), iter);
           setSelectedItemByIndex(index);
@@ -162,8 +160,7 @@ Combobox<T>::Combobox(Combobox::Config &&config)
 
 template<ToStringConvertible T>
 void Combobox<T>::setSelectedItemAsString(const std::string &itemAsString) {
-  if (const auto iter = std::ranges::find_if(
-          items, [itemAsString](const auto &item) { return item.second->label.get() == itemAsString; });
+  if (const auto iter = std::ranges::find_if(items, [itemAsString](const auto &item) { return item.second->label.get() == itemAsString; });
       iter != items.end()) {
     const auto index = std::ranges::distance(items.begin(), iter);
     setSelectedItemByIndex(index);

@@ -72,8 +72,7 @@ class PF_IMGUI_EXPORT ColorPalette {
     iterateTuple(
         [&index, &popCount](const auto &value) {
           if (value.has_value()) {
-            ImGui::PushStyleColor(static_cast<int>(varArgValueForIndex<SupportedColorTypes...>(index)),
-                                  static_cast<ImU32>(*value));
+            ImGui::PushStyleColor(static_cast<int>(varArgValueForIndex<SupportedColorTypes...>(index)), static_cast<ImU32>(*value));
             ++popCount;
           }
           ++index;
@@ -92,19 +91,17 @@ class PF_IMGUI_EXPORT ColorPalette {
  * Color palette containing every possible color.
  */
 using FullColorPalette = ColorPalette<
-    ColorOf::Text, ColorOf::TextDisabled, ColorOf::WindowBackground, ColorOf::ChildBackground, ColorOf::PopupBackground,
-    ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
-    ColorOf::FrameBackgroundActive, ColorOf::TitleBackground, ColorOf::TitleBackgroundActive,
-    ColorOf::TitleBackgroundCollapsed, ColorOf::MenuBarBackground, ColorOf::ScrollbarBackground, ColorOf::ScrollbarGrab,
-    ColorOf::ScrollbarGrabHovered, ColorOf::ScrollbarGrabActive, ColorOf::CheckMark, ColorOf::SliderGrab,
-    ColorOf::SliderGrabActive, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive, ColorOf::Header,
-    ColorOf::HeaderHovered, ColorOf::HeaderActive, ColorOf::Separator, ColorOf::SeparatorHovered,
-    ColorOf::SeparatorActive, ColorOf::ResizeGrip, ColorOf::ResizeGripHovered, ColorOf::ResizeGripActive, ColorOf::Tab,
-    ColorOf::TabHovered, ColorOf::TabActive, ColorOf::TabUnfocused, ColorOf::TabUnfocusedActive, ColorOf::PlotLines,
-    ColorOf::PlotLinesHovered, ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered, ColorOf::TableHeaderBackground,
-    ColorOf::TableBorderStrong, ColorOf::TableBorderLight, ColorOf::TableRowBackground, ColorOf::TableRowBackgroundAlt,
-    ColorOf::TextSelectedBackground, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::NavWindowingHighlight,
-    ColorOf::NavWindowingDimBackground, ColorOf::ModalWindowDimBackground>;
+    ColorOf::Text, ColorOf::TextDisabled, ColorOf::WindowBackground, ColorOf::ChildBackground, ColorOf::PopupBackground, ColorOf::Border,
+    ColorOf::BorderShadow, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive,
+    ColorOf::TitleBackground, ColorOf::TitleBackgroundActive, ColorOf::TitleBackgroundCollapsed, ColorOf::MenuBarBackground,
+    ColorOf::ScrollbarBackground, ColorOf::ScrollbarGrab, ColorOf::ScrollbarGrabHovered, ColorOf::ScrollbarGrabActive, ColorOf::CheckMark,
+    ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::Button, ColorOf::ButtonHovered, ColorOf::ButtonActive, ColorOf::Header,
+    ColorOf::HeaderHovered, ColorOf::HeaderActive, ColorOf::Separator, ColorOf::SeparatorHovered, ColorOf::SeparatorActive,
+    ColorOf::ResizeGrip, ColorOf::ResizeGripHovered, ColorOf::ResizeGripActive, ColorOf::Tab, ColorOf::TabHovered, ColorOf::TabActive,
+    ColorOf::TabUnfocused, ColorOf::TabUnfocusedActive, ColorOf::PlotLines, ColorOf::PlotLinesHovered, ColorOf::PlotHistogram,
+    ColorOf::PlotHistogramHovered, ColorOf::TableHeaderBackground, ColorOf::TableBorderStrong, ColorOf::TableBorderLight,
+    ColorOf::TableRowBackground, ColorOf::TableRowBackgroundAlt, ColorOf::TextSelectedBackground, ColorOf::DragDropTarget,
+    ColorOf::NavHighlight, ColorOf::NavWindowingHighlight, ColorOf::NavWindowingDimBackground, ColorOf::ModalWindowDimBackground>;
 
 }  // namespace pf::ui::ig
 

@@ -88,8 +88,7 @@ class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueContain
    * @param initialValue
    * @param persistent enable/disable disk saving
    */
-  TreeLeaf(std::string_view elementName, std::string_view label, bool initialValue = false,
-           Persistent persistent = Persistent::No);
+  TreeLeaf(std::string_view elementName, std::string_view label, bool initialValue = false, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -112,8 +111,7 @@ class PF_IMGUI_EXPORT TreeLeaf : public details::TreeRecord, public ValueContain
  * @brief A Tree node containing other nodes or leaves.
  */
 template<>
-class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
-    : public details::TreeRecord, public RenderablesContainer, public Savable {
+class PF_IMGUI_EXPORT TreeNode<TreeType::Simple> : public details::TreeRecord, public RenderablesContainer, public Savable {
  public:
   /**
    * @brief Struct for construction of TreeNode.
@@ -129,8 +127,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
    * @param config construction args @see TreeNode::Config
    */
   explicit TreeNode(Config &&config)
-      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
-                 Flags<ImGuiTreeNodeFlags_>{}) {}
+      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No, Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
    * Construct TreeNode.
    * @param elementName unique name of the element
@@ -147,8 +144,8 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
    * @return reference to the newly created node
    */
   TreeNode<TreeType::Simple> &addNode(std::string_view nodeName, std::string_view nodeLabel) {
-    auto &node = elementContainer.createChild<TreeNode<TreeType::Simple>>(
-        nodeName, nodeLabel, isPersistent() ? Persistent::Yes : Persistent::No);
+    auto &node =
+        elementContainer.createChild<TreeNode<TreeType::Simple>>(nodeName, nodeLabel, isPersistent() ? Persistent::Yes : Persistent::No);
     node.limiter = limiter;
     return node;
   }
@@ -161,17 +158,15 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
    * @return reference to the newly created leaf
    */
   TreeLeaf &addLeaf(std::string_view leafName, std::string_view leafLabel, bool selected = false) {
-    auto &leaf = elementContainer.createChild<TreeLeaf>(leafName, leafLabel, selected,
-                                                        isPersistent() ? Persistent::Yes : Persistent::No);
+    auto &leaf = elementContainer.createChild<TreeLeaf>(leafName, leafLabel, selected, isPersistent() ? Persistent::Yes : Persistent::No);
     leaf.limiter = limiter;
     return leaf;
   }
   [[nodiscard]] std::vector<Renderable *> getRenderables() override { return elementContainer.getRenderables(); }
 
   [[nodiscard]] auto getTreeNodes() {
-    return elementContainer.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
-             return dynamic_cast<details::TreeRecord &>(child);
-           });
+    return elementContainer.getChildren()
+        | ranges::views::transform([](auto &child) -> details::TreeRecord & { return dynamic_cast<details::TreeRecord &>(child); });
   }
 
   /**
@@ -195,8 +190,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
   Property<bool> collapsed;
 
  protected:
-  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent,
-           const Flags<ImGuiTreeNodeFlags_> &treeFlags)
+  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent, const Flags<ImGuiTreeNodeFlags_> &treeFlags)
       : TreeRecord(elementName, labelText, treeFlags), Savable(persistent), collapsed(true) {}
 
   void renderImpl() override {
@@ -221,8 +215,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
  * @brief A Tree node containing other nodes or leaves.
  */
 template<>
-class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
-    : public details::TreeRecord, public ElementContainer, public Savable {
+class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced> : public details::TreeRecord, public ElementContainer, public Savable {
  public:
   /**
    * @brief Struct for construction of TreeNode.
@@ -239,8 +232,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @param config construction args @see TreeNode::Config
    */
   explicit TreeNode(Config &&config)
-      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No,
-                 Flags<ImGuiTreeNodeFlags_>{}) {}
+      : TreeNode(config.name, config.label, config.persistent ? Persistent::Yes : Persistent::No, Flags<ImGuiTreeNodeFlags_>{}) {}
   /**
    * Construct TreeNode.
    * @param elementName unique name of the element
@@ -257,8 +249,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @return reference to the newly created node
    */
   TreeNode<TreeType::Advanced> &addNode(std::string_view nodeName, std::string_view nodeLabel) {
-    auto &node = createChild<TreeNode<TreeType::Advanced>>(nodeName, nodeLabel,
-                                                           isPersistent() ? Persistent::Yes : Persistent::No);
+    auto &node = createChild<TreeNode<TreeType::Advanced>>(nodeName, nodeLabel, isPersistent() ? Persistent::Yes : Persistent::No);
     node.limiter = limiter;
     return node;
   }
@@ -271,8 +262,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
    * @return reference to the newly created leaf
    */
   TreeLeaf &addLeaf(std::string_view leafName, std::string_view leafLabel, bool selected = false) {
-    auto &leaf =
-        createChild<TreeLeaf>(leafName, leafLabel, selected, isPersistent() ? Persistent::Yes : Persistent::No);
+    auto &leaf = createChild<TreeLeaf>(leafName, leafLabel, selected, isPersistent() ? Persistent::Yes : Persistent::No);
     leaf.limiter = limiter;
     return leaf;
   }
@@ -289,9 +279,8 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
   }
 
   [[nodiscard]] auto getTreeNodes() {
-    return getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
-             return dynamic_cast<details::TreeRecord &>(child);
-           });
+    return getChildren()
+        | ranges::views::transform([](auto &child) -> details::TreeRecord & { return dynamic_cast<details::TreeRecord &>(child); });
   }
 
   [[nodiscard]] toml::table toToml() const override { return toml::table({{"collapsed", *collapsed}}); }
@@ -304,8 +293,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
   Property<bool> collapsed;
 
  protected:
-  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent,
-           const Flags<ImGuiTreeNodeFlags_> &treeFlags)
+  TreeNode(std::string_view elementName, std::string_view labelText, Persistent persistent, const Flags<ImGuiTreeNodeFlags_> &treeFlags)
       : TreeRecord(elementName, labelText, treeFlags), Savable(persistent), collapsed(true) {}
 
   void renderImpl() override {
@@ -378,8 +366,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param config construction args @see Tree::Config
    */
   explicit Tree(Config &&config)
-      : Tree(config.name, config.showBorder ? ShowBorder::Yes : ShowBorder::No,
-             config.persistent ? Persistent::Yes : Persistent::No) {}
+      : Tree(config.name, config.showBorder ? ShowBorder::Yes : ShowBorder::No, config.persistent ? Persistent::Yes : Persistent::No) {}
   /**
    * Construct tree.
    * @param elementName unique name of the element
@@ -387,8 +374,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
    * @param showBorder render a border around the tree area
    * @param persistence enable/disable disk saving
    */
-  explicit Tree(std::string_view elementName, ShowBorder showBorder = ShowBorder::No,
-                Persistent persistence = Persistent::No)
+  explicit Tree(std::string_view elementName, ShowBorder showBorder = ShowBorder::No, Persistent persistence = Persistent::No)
       : ElementWithID(elementName), persistent(persistence),
         layout({.name = "layout", .size = Size::Auto(), .showBorder = showBorder == ShowBorder::Yes}) {}
 
@@ -432,9 +418,8 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
   [[nodiscard]] std::vector<Renderable *> getRenderables() override { return layout.getRenderables(); }
 
   [[nodiscard]] auto getTreeNodes() {
-    return layout.getChildren() | ranges::views::transform([](auto &child) -> details::TreeRecord & {
-             return dynamic_cast<details::TreeRecord &>(child);
-           });
+    return layout.getChildren()
+        | ranges::views::transform([](auto &child) -> details::TreeRecord & { return dynamic_cast<details::TreeRecord &>(child); });
   }
 
   /**
@@ -494,8 +479,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
   void traversePreOrderImpl(details::TreeRecord &node, F &&callable, std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
       if (!callable(nodePtr, depth)) { return; }
-      std::ranges::for_each(nodePtr->getTreeNodes(),
-                            [&](auto &record) { traversePreOrderImpl(record, callable, depth + 1); });
+      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traversePreOrderImpl(record, callable, depth + 1); });
     } else if (auto leafPtr = dynamic_cast<TreeLeaf *>(&node); leafPtr != nullptr) {
       callable(leafPtr, depth);
     }
@@ -504,8 +488,7 @@ class PF_IMGUI_EXPORT Tree : public ElementWithID, public RenderablesContainer {
     requires(std::invocable<F, TreeLeaf *, std::size_t> && std::invocable<F, TreeNode<treeType> *, std::size_t>)
   void traversePosOrderImpl(details::TreeRecord &node, F &&callable, std::size_t depth) {
     if (auto nodePtr = dynamic_cast<TreeNode<treeType> *>(&node); nodePtr != nullptr) {
-      std::ranges::for_each(nodePtr->getTreeNodes(),
-                            [&](auto &record) { traversePosOrderImpl(record, callable, depth + 1); });
+      std::ranges::for_each(nodePtr->getTreeNodes(), [&](auto &record) { traversePosOrderImpl(record, callable, depth + 1); });
       callable(nodePtr, depth);
     } else if (auto leafPtr = dynamic_cast<TreeLeaf *>(&node); leafPtr != nullptr) {
       callable(leafPtr, depth);

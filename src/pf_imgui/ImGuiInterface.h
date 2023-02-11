@@ -230,9 +230,7 @@ class PF_IMGUI_EXPORT ImGuiInterface : public Renderable {
   template<typename... Args>
     requires(std::constructible_from<ViewportOverlayGizmo, Args...>)
   [[nodiscard]] ViewportOverlayGizmo &createOrGetViewportGizmo(Args &&...args) {
-    if (viewportGizmo == nullptr) {
-      viewportGizmo = std::make_unique<ViewportOverlayGizmo>(std::forward<Args>(args)...);
-    }
+    if (viewportGizmo == nullptr) { viewportGizmo = std::make_unique<ViewportOverlayGizmo>(std::forward<Args>(args)...); }
     return *viewportGizmo;
   }
 

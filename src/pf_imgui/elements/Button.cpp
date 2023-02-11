@@ -13,17 +13,14 @@ ButtonBase::ButtonBase(std::string_view elementName, Repeatable isRepeatable)
     : ItemElement(elementName), repeatable(isRepeatable == Repeatable::Yes) {}
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
-    : InvisibleButton(config.name, config.size, config.clickButton,
-                      config.repeatable ? Repeatable::Yes : Repeatable::No) {}
+    : InvisibleButton(config.name, config.size, config.clickButton, config.repeatable ? Repeatable::Yes : Repeatable::No) {}
 
 InvisibleButton::InvisibleButton(std::string_view elementName, Size s, MouseButton clickButton, Repeatable isRepeatable)
     : ButtonBase(elementName, isRepeatable), size(s), clickBtn(clickButton) {}
 
 void InvisibleButton::renderImpl() {
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(*size), static_cast<int>(clickBtn))) {
-    Event_notify(clickEvent);
-  }
+  if (ImGui::InvisibleButton(getName().c_str(), static_cast<ImVec2>(*size), static_cast<int>(clickBtn))) { Event_notify(clickEvent); }
 }
 
 Button::Button(Button::Config &&config)
@@ -84,9 +81,7 @@ void ImageButton::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto repeat = setButtonRepeat();
-  if (ImGui::ImageButton(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom)) {
-    Event_notify(clickEvent);
-  }
+  if (ImGui::ImageButton(texture->getID(), static_cast<ImVec2>(*size), uvLeftTop, uvRightBottom)) { Event_notify(clickEvent); }
 }
 
 }  // namespace pf::ui::ig

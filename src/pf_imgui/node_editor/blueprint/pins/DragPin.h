@@ -54,8 +54,7 @@ class DragPin : public InteractablePin<DragInput<T>> {
       if (auto dataTable = data->second.as_table(); dataTable != nullptr) {
         if (auto speed = dataTable->find("speed"); speed != dataTable->end()) {
           if (auto speedValue = speed->second.as_floating_point(); speedValue != nullptr) {
-            InteractablePin<DragInput<T>>::inputElement->setSpeed(
-                static_cast<DragInput<T>::ParamType>(speedValue->get()));
+            InteractablePin<DragInput<T>>::inputElement->setSpeed(static_cast<DragInput<T>::ParamType>(speedValue->get()));
           }
         }
         if (auto min = dataTable->find("min"); min != dataTable->end()) {
@@ -78,8 +77,7 @@ class DragPin : public InteractablePin<DragInput<T>> {
   }
 
  protected:
-  static typename DragInput<T>::Config CreateDragConfig(std::string_view name, std::string_view label,
-                                                        DragConfig &&config) {
+  static typename DragInput<T>::Config CreateDragConfig(std::string_view name, std::string_view label, DragConfig &&config) {
     return {.name = name,
             .label = label,
             .speed = config.speed,

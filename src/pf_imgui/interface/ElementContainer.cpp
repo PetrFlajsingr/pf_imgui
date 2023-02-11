@@ -46,8 +46,7 @@ void ElementContainer::clear() {
   childrenToRemove.clear();
 }
 std::vector<Renderable *> ElementContainer::getRenderables() {
-  return children | ranges::views::transform([](auto &child) -> Renderable * { return child.second.get(); })
-      | ranges::to_vector;
+  return children | ranges::views::transform([](auto &child) -> Renderable * { return child.second.get(); }) | ranges::to_vector;
 }
 
 }  // namespace pf::ui::ig

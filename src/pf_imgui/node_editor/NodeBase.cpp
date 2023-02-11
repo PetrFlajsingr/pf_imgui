@@ -11,8 +11,7 @@ NodeBase::NodeBase(std::string_view elementName) : Renderable(elementName), posi
   position.addListener([this](Position pos) { updateNodePositionImpl(pos); });
 }
 
-NodeBase::NodeBase(std::string_view elementName, Position initPosition)
-    : Renderable(elementName), position(initPosition), initSize(true) {
+NodeBase::NodeBase(std::string_view elementName, Position initPosition) : Renderable(elementName), position(initPosition), initSize(true) {
   position.addListener([this](Position pos) { updateNodePositionImpl(pos); });
 }
 

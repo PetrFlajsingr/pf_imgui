@@ -13,4 +13,4 @@ void IndeterminateProgressBar(float fraction, const ImVec2 &size_arg, const char
 
 }  // namespace ImGui
 
-#endif // PF_IMGUI_DETAIL_INDETERMINATEPGORESSBAR_H
+#endif  // PF_IMGUI_DETAIL_INDETERMINATEPGORESSBAR_H

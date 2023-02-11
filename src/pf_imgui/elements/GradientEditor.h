@@ -46,8 +46,7 @@ struct GradientMarkToGradientPoint {
 /**
  * View of gradient points in GradientEditor.
  */
-using GradientPointsView =
-    ranges::transform_view<ranges::ref_view<std::list<ImGradientMark *>>, details::GradientMarkToGradientPoint>;
+using GradientPointsView = ranges::transform_view<ranges::ref_view<std::list<ImGradientMark *>>, details::GradientMarkToGradientPoint>;
 struct GradientPointsViewComparator {
   [[nodiscard]] bool operator()(GradientPointsView lhs, GradientPointsView rhs);
 };

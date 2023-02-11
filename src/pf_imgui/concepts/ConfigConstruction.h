@@ -13,8 +13,8 @@
 namespace pf::ui::ig {
 
 template<typename T>
-concept ElementConstructConfig = requires { typename T::Parent; }
-    && std::derived_from<typename T::Parent, Element> && std::constructible_from<typename T::Parent, T>;
+concept ElementConstructConfig =
+    requires { typename T::Parent; } && std::derived_from<typename T::Parent, Element> && std::constructible_from<typename T::Parent, T>;
 
 template<typename T>
 concept ConfigConstructible = requires { typename T::Config; } && ElementConstructConfig<typename T::Config>;

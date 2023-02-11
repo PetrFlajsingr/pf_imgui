@@ -74,8 +74,8 @@ class PF_IMGUI_EXPORT FlameGraph : public ElementWithID {
    */
   void setSamples(const std::vector<FlameGraphSample> &newSamples);
 
-  ColorPalette<ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered, ColorOf::FrameBackground, ColorOf::Border,
-               ColorOf::BorderShadow, ColorOf::Text>
+  ColorPalette<ColorOf::PlotHistogram, ColorOf::PlotHistogramHovered, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
+               ColorOf::Text>
       color;
   Font font = Font::Default();
   Property<Label> label;

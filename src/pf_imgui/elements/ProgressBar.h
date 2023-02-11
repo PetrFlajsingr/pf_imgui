@@ -22,10 +22,10 @@ namespace pf::ui::ig {
  */
 template<typename T>
 concept ProgressBarCompatible = requires(T t, float f) {
-                                  { t + t } -> std::same_as<T>;
-                                  { t *= f };
-                                  { std::clamp(t, t, t) } -> std::convertible_to<T>;
-                                } && std::convertible_to<float, T>;
+  { t + t } -> std::same_as<T>;
+  { t *= f };
+  { std::clamp(t, t, t) } -> std::convertible_to<T>;
+} && std::convertible_to<float, T>;
 
 /**
  * @brief Progress bar for notifying a user of operation progress.
@@ -63,9 +63,8 @@ class PF_IMGUI_EXPORT ProgressBar : public ItemElement, public ValueContainer<T>
    * @param overlayStr text rendered on top of the element
    * @param initialSize size of the progress bar
    */
-  ProgressBar(std::string_view elementName, T valueStep, T minValue, T maxValue,
-              std::optional<T> initialValue = std::nullopt, std::string overlayStr = "",
-              Size initialSize = Size::Auto());
+  ProgressBar(std::string_view elementName, T valueStep, T minValue, T maxValue, std::optional<T> initialValue = std::nullopt,
+              std::string overlayStr = "", Size initialSize = Size::Auto());
 
   /**
    * Set current percentage where min = 0% and max = 100%.
@@ -147,10 +146,10 @@ ProgressBar<T>::ProgressBar(ProgressBar::Config &&config)
     : ProgressBar(config.name, config.step, config.min, config.max, config.value, config.overlay, config.size) {}
 
 template<ProgressBarCompatible T>
-ProgressBar<T>::ProgressBar(std::string_view elementName, T valueStep, T minValue, T maxValue,
-                            std::optional<T> initialValue, std::string overlayStr, Size initialSize)
-    : ItemElement(elementName), size(initialSize), value(initialValue.value_or(min)), stepValue(valueStep),
-      min(minValue), max(maxValue), overlay(std::move(overlayStr)) {
+ProgressBar<T>::ProgressBar(std::string_view elementName, T valueStep, T minValue, T maxValue, std::optional<T> initialValue,
+                            std::string overlayStr, Size initialSize)
+    : ItemElement(elementName), size(initialSize), value(initialValue.value_or(min)), stepValue(valueStep), min(minValue), max(maxValue),
+      overlay(std::move(overlayStr)) {
   value.addListener([this](const auto &newValue) { *value.modify() = std::clamp(newValue, min, max); });
 }
 

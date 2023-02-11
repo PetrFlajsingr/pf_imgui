@@ -90,9 +90,7 @@ class PF_IMGUI_EXPORT Range2D : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
-               ColorOf::FrameBackgroundActive>
-      color;
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackgroundActive> color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Property<Label> label;

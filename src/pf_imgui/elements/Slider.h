@@ -37,11 +37,7 @@ namespace pf::ui::ig {
  * @tparam T underlying type
  */
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
-class PF_IMGUI_EXPORT Slider : public ItemElement,
-                               public ValueContainer<T>,
-                               public Savable,
-                               public DragSource<T>,
-                               public DropTarget<T> {
+class PF_IMGUI_EXPORT Slider : public ItemElement, public ValueContainer<T>, public Savable, public DragSource<T>, public DropTarget<T> {
  public:
   using MinMaxType = slider_details::MinMaxType<T>;
   constexpr static std::size_t ComponentCount = slider_details::getComponentCount<T>();
@@ -73,9 +69,8 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
    * @param persistent enable state saving to disk
    * @param format printf-like format for rendering value over slider
    */
-  Slider(std::string_view elementName, std::string_view labelText, MinMaxType minValue, MinMaxType maxValue,
-         T initialValue = T{}, Persistent persistent = Persistent::No,
-         std::string numberFormat = slider_details::defaultFormat<MinMaxType>());
+  Slider(std::string_view elementName, std::string_view labelText, MinMaxType minValue, MinMaxType maxValue, T initialValue = T{},
+         Persistent persistent = Persistent::No, std::string numberFormat = slider_details::defaultFormat<MinMaxType>());
 
   /**
    * Get min slider value.
@@ -101,10 +96,9 @@ class PF_IMGUI_EXPORT Slider : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
-               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget,
-               ColorOf::SliderGrab, ColorOf::SliderGrabActive, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::SliderGrab, ColorOf::SliderGrabActive,
+               ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
@@ -166,9 +160,8 @@ class PF_IMGUI_EXPORT LabeledSlider : public Slider<T> {
    * @param format printf-like format for rendering value over slider
    */
   LabeledSlider(std::string_view elementName, std::string_view labelText, MinMaxType minValue, MinMaxType maxValue,
-                std::array<std::string, ComponentCount> componentLabels,
-                std::array<Color, ComponentCount> componentLabelColors, T initialValue = T{},
-                Persistent persistent = Persistent::No,
+                std::array<std::string, ComponentCount> componentLabels, std::array<Color, ComponentCount> componentLabelColors,
+                T initialValue = T{}, Persistent persistent = Persistent::No,
                 std::string numberFormat = slider_details::defaultFormat<MinMaxType>());
 
   void setComponentLabels(std::array<std::string, ComponentCount> componentLabels);
@@ -189,15 +182,14 @@ class PF_IMGUI_EXPORT LabeledSlider : public Slider<T> {
 
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 Slider<T>::Slider(Slider::Config &&config)
-    : Slider(config.name, config.label, config.min, config.max, config.value,
-             config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
+    : Slider(config.name, config.label, config.min, config.max, config.value, config.persistent ? Persistent::Yes : Persistent::No,
+             config.format) {}
 
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
-Slider<T>::Slider(std::string_view elementName, std::string_view labelText, Slider::MinMaxType minValue,
-                  Slider::MinMaxType maxValue, T initialValue, Persistent persistent, std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{labelText}), value(initialValue), min(minValue), max(maxValue),
-      format(std::move(numberFormat)) {}
+Slider<T>::Slider(std::string_view elementName, std::string_view labelText, Slider::MinMaxType minValue, Slider::MinMaxType maxValue,
+                  T initialValue, Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(std::string{labelText}),
+      value(initialValue), min(minValue), max(maxValue), format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_SLIDER_TYPE_LIST> T>
 toml::table Slider<T>::toToml() const {
@@ -243,8 +235,8 @@ void Slider<T>::renderImpl() {
   if constexpr (!OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
     valueChanged = ImGui::SliderScalar(label->get().c_str(), dataType, address, &min, &max, format.c_str(), flags);
   } else {
-    valueChanged = ImGui::SliderScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), ComponentCount, &min,
-                                        &max, format.c_str(), flags);
+    valueChanged =
+        ImGui::SliderScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), ComponentCount, &min, &max, format.c_str(), flags);
   }
 
   DragSource<T>::drag(*value);
@@ -272,18 +264,15 @@ void Slider<T>::setValue(const T &newValue) {
 
 template<OneOf<PF_IMGUI_LABELEDSLIDER_TYPE_LIST> T>
 LabeledSlider<T>::LabeledSlider(LabeledSlider::Config &&config)
-    : LabeledSlider(config.name, config.label, config.min, config.max, config.componentLabels,
-                    config.componentLabelColors, config.value, config.persistent ? Persistent::Yes : Persistent::No,
-                    config.format) {}
+    : LabeledSlider(config.name, config.label, config.min, config.max, config.componentLabels, config.componentLabelColors, config.value,
+                    config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<PF_IMGUI_LABELEDSLIDER_TYPE_LIST> T>
-LabeledSlider<T>::LabeledSlider(std::string_view elementName, std::string_view labelText,
-                                LabeledSlider::MinMaxType minValue, LabeledSlider::MinMaxType maxValue,
-                                std::array<std::string, ComponentCount> componentLabels,
-                                std::array<Color, ComponentCount> componentLabelColors, T initialValue,
-                                Persistent persistent, std::string numberFormat)
-    : Slider<T>(elementName, labelText, minValue, maxValue, initialValue, persistent, numberFormat),
-      labels(componentLabels) {
+LabeledSlider<T>::LabeledSlider(std::string_view elementName, std::string_view labelText, LabeledSlider::MinMaxType minValue,
+                                LabeledSlider::MinMaxType maxValue, std::array<std::string, ComponentCount> componentLabels,
+                                std::array<Color, ComponentCount> componentLabelColors, T initialValue, Persistent persistent,
+                                std::string numberFormat)
+    : Slider<T>(elementName, labelText, minValue, maxValue, initialValue, persistent, numberFormat), labels(componentLabels) {
   loadCstrLabels();
   setComponentLabelColors(componentLabelColors);
 }
@@ -316,12 +305,11 @@ void LabeledSlider<T>::renderImpl() {
   }
 
   if constexpr (!OneOf<T, PF_IMGUI_SLIDER_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::LabeledSliderScalar(this->label->get().c_str(), dataType, address, &this->min, &this->max,
-                                              this->format.c_str(), labelsCstr[0], labelColors[0], flags);
+    valueChanged = ImGui::LabeledSliderScalar(this->label->get().c_str(), dataType, address, &this->min, &this->max, this->format.c_str(),
+                                              labelsCstr[0], labelColors[0], flags);
   } else {
-    valueChanged = ImGui::LabeledSliderScalarN(this->label->get().c_str(), dataType, glm::value_ptr(*address),
-                                               ComponentCount, &this->min, &this->max, this->format.c_str(),
-                                               labelsCstr.data(), labelColors.data(), flags);
+    valueChanged = ImGui::LabeledSliderScalarN(this->label->get().c_str(), dataType, glm::value_ptr(*address), ComponentCount, &this->min,
+                                               &this->max, this->format.c_str(), labelsCstr.data(), labelColors.data(), flags);
   }
 
   DragSource<T>::drag(*this->value);

@@ -94,17 +94,12 @@ void EndGroupPanel() {
       // right half-plane
       case 1: ImGui::PushClipRect(ImVec2(labelRect.Max.x, -FLT_MAX), ImVec2(FLT_MAX, FLT_MAX), true); break;
       // top
-      case 2:
-        ImGui::PushClipRect(ImVec2(labelRect.Min.x, -FLT_MAX), ImVec2(labelRect.Max.x, labelRect.Min.y), true);
-        break;
+      case 2: ImGui::PushClipRect(ImVec2(labelRect.Min.x, -FLT_MAX), ImVec2(labelRect.Max.x, labelRect.Min.y), true); break;
       // bottom
-      case 3:
-        ImGui::PushClipRect(ImVec2(labelRect.Min.x, labelRect.Max.y), ImVec2(labelRect.Max.x, FLT_MAX), true);
-        break;
+      case 3: ImGui::PushClipRect(ImVec2(labelRect.Min.x, labelRect.Max.y), ImVec2(labelRect.Max.x, FLT_MAX), true); break;
     }
 
-    ImGui::GetWindowDrawList()->AddRect(frameRect.Min, frameRect.Max,
-                                        ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), halfFrame.x);
+    ImGui::GetWindowDrawList()->AddRect(frameRect.Min, frameRect.Max, ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), halfFrame.x);
 
     ImGui::PopClipRect();
   }

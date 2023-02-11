@@ -13,8 +13,7 @@ namespace pf::ui::ig {
 
 Pin::Pin(Pin::Config &&config) : Renderable(config.name.value), label(std::string{config.label.value}) {}
 
-Pin::Pin(std::string_view elementName, std::string_view labelText)
-    : Renderable(elementName), label(std::string{labelText}) {}
+Pin::Pin(std::string_view elementName, std::string_view labelText) : Renderable(elementName), label(std::string{labelText}) {}
 
 ax::NodeEditor::PinId Pin::getId() const { return id; }
 
@@ -120,13 +119,11 @@ float Pin::getUnconnectedLinkPreviewThickness() const { return unconnectedLinkPr
 
 void Pin::setUnconnectedLinkPreviewThickness(float thickness) { unconnectedLinkPreviewThickness = thickness; }
 
-ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToRef>
-Pin::getAllLinks() {
+ranges::transform_view<ranges::ref_view<std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToRef> Pin::getAllLinks() {
   return getNode().getNodeEditor().getLinks();
 }
 
-ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>,
-                       details::LinkPtrToConstRef>
+ranges::transform_view<ranges::ref_view<const std::vector<std::unique_ptr<pf::ui::ig::Link>>>, details::LinkPtrToConstRef>
 
 Pin::getAllLinks() const {
   return getNode().getNodeEditor().getLinks();

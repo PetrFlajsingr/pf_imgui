@@ -140,8 +140,7 @@ class PF_IMGUI_EXPORT TableRowBuilder {
   };
 
  public:
-  explicit TableRowBuilder(Table<ColumnCount> *ownerTable, Cells &&initCells)
-      : table(ownerTable), cells(std::move(initCells)) {}
+  explicit TableRowBuilder(Table<ColumnCount> *ownerTable, Cells &&initCells) : table(ownerTable), cells(std::move(initCells)) {}
   /**
    * Create a new element within the cell. This invalidates the current builder and returns a new one.
    * @tparam T type of ElementWithID to create
@@ -262,19 +261,16 @@ Table<ColumnCount>::Table(Table::Config &&config) : Table(config.name, config.se
 
 template<std::size_t ColumnCount>
 Table<ColumnCount>::Table(std::string_view elementName, const TableSettings<ColumnCount> &settings)
-    : ElementWithID(elementName), size(settings.size), header(settings.header),
-      flags(CreateFlags(settings.border, settings.options)) {}
+    : ElementWithID(elementName), size(settings.size), header(settings.header), flags(CreateFlags(settings.border, settings.options)) {}
 
 template<std::size_t ColumnCount>
 std::vector<Renderable *> Table<ColumnCount>::getRenderables() {
-  return rows | ranges::views::transform([](auto &row) { return row->getCells(); }) | ranges::views::cache1
-      | ranges::views::join | ranges::views::transform([](auto &child) -> Renderable * { return &child; })
-      | ranges::to_vector;
+  return rows | ranges::views::transform([](auto &row) { return row->getCells(); }) | ranges::views::cache1 | ranges::views::join
+      | ranges::views::transform([](auto &child) -> Renderable * { return &child; }) | ranges::to_vector;
 }
 
 template<std::size_t ColumnCount>
-void Table<ColumnCount>::setSortFncForColumn(std::size_t columnIndex,
-                                             std::predicate<const Element &, const Element &> auto &&pred) {
+void Table<ColumnCount>::setSortFncForColumn(std::size_t columnIndex, std::predicate<const Element &, const Element &> auto &&pred) {
   columnSortFunctions[columnIndex] = std::forward<decltype(pred)>(pred);
 }
 
@@ -289,8 +285,7 @@ void Table<ColumnCount>::renderImpl() {
     std::ranges::for_each(std::views::iota(std::size_t{0}, ColumnCount), [&](const auto index) {
       const char *name = nullptr;
       if (header.has_value()) { name = (*header)[index].c_str(); }
-      const auto columnFlags =
-          columnSortFunctions[index].has_value() ? ImGuiTableColumnFlags_None : ImGuiTableColumnFlags_NoSort;
+      const auto columnFlags = columnSortFunctions[index].has_value() ? ImGuiTableColumnFlags_None : ImGuiTableColumnFlags_NoSort;
       ImGui::TableSetupColumn(name, columnFlags, 0.f, static_cast<ImGuiID>(index));
     });
     if (header.has_value()) { ImGui::TableHeadersRow(); }
@@ -324,8 +319,7 @@ void Table<ColumnCount>::renderImpl() {
 }
 
 template<std::size_t ColumnCount>
-ImGuiTableFlags Table<ColumnCount>::CreateFlags(const Flags<TableBorder> &tableBorder,
-                                                const Flags<TableOptions> &options) {
+ImGuiTableFlags Table<ColumnCount>::CreateFlags(const Flags<TableBorder> &tableBorder, const Flags<TableOptions> &options) {
   return ImGuiTableFlags{*tableBorder | *options | ImGuiTableFlags_Sortable};
 }
 
@@ -354,8 +348,7 @@ void TableRow<ColumnCount>::swapWith(std::size_t index) {
 
 template<std::size_t ColumnCount>
 void TableRow<ColumnCount>::moveImpl(std::int32_t delta) {
-  const auto targetIndex =
-      std::clamp(static_cast<std::int32_t>(getIndex()) + delta, 0, static_cast<std::int32_t>(table->rows.size()));
+  const auto targetIndex = std::clamp(static_cast<std::int32_t>(getIndex()) + delta, 0, static_cast<std::int32_t>(table->rows.size()));
   const auto targetPosIter = table->rows.begin() + targetIndex;
   const auto targetIter = table->rows.insert(targetPosIter, nullptr);
 

@@ -60,8 +60,7 @@ std::optional<Comment *> NodeEditor::findCommentById(ax::NodeEditor::NodeId node
 
 std::optional<Pin *> NodeEditor::findPinById(ax::NodeEditor::PinId pinId) {
   const auto getPinId = [](auto &pin) { return pin->id; };
-  auto pins = nodes
-      | ranges::views::transform([](auto &node) { return ranges::views::concat(node->inputPins, node->outputPins); })
+  auto pins = nodes | ranges::views::transform([](auto &node) { return ranges::views::concat(node->inputPins, node->outputPins); })
       | ranges::views::cache1 | ranges::views::join;
   if (auto iter = std::ranges::find(pins, pinId, getPinId); iter != pins.end()) { return iter->get(); }
   return std::nullopt;
@@ -87,8 +86,7 @@ std::optional<Comment *> NodeEditor::findCommentByName(const std::string &nodeNa
 
 std::optional<Pin *> NodeEditor::findPinByName(const std::string &pinName) {
   const auto getPinName = [](auto &pin) { return pin->getName(); };
-  auto pins = nodes
-      | ranges::views::transform([](auto &node) { return ranges::views::concat(node->inputPins, node->outputPins); })
+  auto pins = nodes | ranges::views::transform([](auto &node) { return ranges::views::concat(node->inputPins, node->outputPins); })
       | ranges::views::cache1 | ranges::views::join;
   if (auto iter = std::ranges::find(pins, pinName, getPinName); iter != pins.end()) { return iter->get(); }
   return std::nullopt;
@@ -110,8 +108,7 @@ void NodeEditor::handleCreation() {
 
 void NodeEditor::handleLinkCreation() {
   const static auto rejectLink = [](Pin &originPin) {
-    ax::NodeEditor::RejectNewItem(static_cast<ImVec4>(originPin.getInvalidLinkPreviewColor()),
-                                  originPin.getInvalidLinkPreviewThickness());
+    ax::NodeEditor::RejectNewItem(static_cast<ImVec4>(originPin.getInvalidLinkPreviewColor()), originPin.getInvalidLinkPreviewThickness());
   };
   ax::NodeEditor::PinId inPinId;
   ax::NodeEditor::PinId outPinId;
@@ -133,11 +130,8 @@ void NodeEditor::handleLinkCreation() {
           return;
         }
 
-        if (ax::NodeEditor::AcceptNewItem(static_cast<ImVec4>(inPin->getValidLinkPreviewColor()),
-                                          inPin->getValidLinkPreviewThickness())) {
-          if (inPin->getType() == Pin::Type::Output && outPin->getType() == Pin::Type::Input) {
-            std::swap(inPin, outPin);
-          }
+        if (ax::NodeEditor::AcceptNewItem(static_cast<ImVec4>(inPin->getValidLinkPreviewColor()), inPin->getValidLinkPreviewThickness())) {
+          if (inPin->getType() == Pin::Type::Output && outPin->getType() == Pin::Type::Input) { std::swap(inPin, outPin); }
           addLink(uniqueId(), *inPin, *outPin);
         }
       }
@@ -199,16 +193,11 @@ void NodeEditor::handleNodeDeletion() {
 
 void NodeEditor::removeMarkedElements() {
   if (linksDirty) {
-    std::ranges::for_each(getLinks() | ranges::views::filter([](const auto &link) { return !link.isValid(); }),
-                          [](Link &link) {
-                            Link::Event_notify(link.deleteEvent);
-                            if (link.inputPin != nullptr) {
-                              Link::Event_notify(link.getInputPin().linkChangedEvent, link, false);
-                            }
-                            if (link.outputPin != nullptr) {
-                              Link::Event_notify(link.getOutputPin().linkChangedEvent, link, false);
-                            }
-                          });
+    std::ranges::for_each(getLinks() | ranges::views::filter([](const auto &link) { return !link.isValid(); }), [](Link &link) {
+      Link::Event_notify(link.deleteEvent);
+      if (link.inputPin != nullptr) { Link::Event_notify(link.getInputPin().linkChangedEvent, link, false); }
+      if (link.outputPin != nullptr) { Link::Event_notify(link.getOutputPin().linkChangedEvent, link, false); }
+    });
     auto [beginRm, endRm] = std::ranges::remove_if(links, [](const auto &link) { return !link->isValid(); });
     links.erase(beginRm, endRm);
     linksDirty = false;
@@ -217,16 +206,14 @@ void NodeEditor::removeMarkedElements() {
   if (nodesDirty) {
     {
       auto markedNodes = getNodes() | ranges::views::filter([](const auto &node) { return node.markedForDelete; });
-      auto inputPins =
-          markedNodes | ranges::views::transform([](auto &node) { return node.getInputPins(); }) | ranges::views::join;
+      auto inputPins = markedNodes | ranges::views::transform([](auto &node) { return node.getInputPins(); }) | ranges::views::join;
       std::ranges::for_each(inputPins, [](auto &pin) {
         std::ranges::for_each(pin.getLinks(), [](auto &link) {
           link.invalidate();
           link.inputPin = nullptr;
         });
       });
-      auto outputPins =
-          markedNodes | ranges::views::transform([](auto &node) { return node.getOutputPins(); }) | ranges::views::join;
+      auto outputPins = markedNodes | ranges::views::transform([](auto &node) { return node.getOutputPins(); }) | ranges::views::join;
       std::ranges::for_each(outputPins, [](auto &pin) {
         std::ranges::for_each(pin.getLinks(), [](auto &link) {
           link.invalidate();
@@ -239,11 +226,9 @@ void NodeEditor::removeMarkedElements() {
       nodes.erase(beginRm, endRm);
     }
     {
-      auto markedComments =
-          getComments() | ranges::views::filter([](const auto &node) { return node.markedForDelete; });
+      auto markedComments = getComments() | ranges::views::filter([](const auto &node) { return node.markedForDelete; });
       std::ranges::for_each(markedComments, [](auto &comment) { Comment::Event_notify(comment.deleteEvent); });
-      auto [beginRm, endRm] =
-          std::ranges::remove_if(comments, [](const auto &comment) { return comment->markedForDelete; });
+      auto [beginRm, endRm] = std::ranges::remove_if(comments, [](const auto &comment) { return comment->markedForDelete; });
       comments.erase(beginRm, endRm);
     }
     nodesDirty = false;
@@ -258,8 +243,7 @@ void NodeEditor::handleSelectionChange() {
       selectedNodeIds.resize(ax::NodeEditor::GetSelectedNodes(selectedNodeIds.data(), selectedObjectCount));
 
       std::ranges::for_each(nodes | ranges::views::filter([&](const auto &node) {
-                              const auto isSelected =
-                                  std::ranges::find(selectedNodeIds, node->getId()) != selectedNodeIds.end();
+                              const auto isSelected = std::ranges::find(selectedNodeIds, node->getId()) != selectedNodeIds.end();
                               const auto wasSelected = *node->selected;
                               return isSelected != wasSelected;
                             }),
@@ -270,8 +254,7 @@ void NodeEditor::handleSelectionChange() {
       selectedLinkIds.resize(ax::NodeEditor::GetSelectedLinks(selectedLinkIds.data(), selectedObjectCount));
 
       std::ranges::for_each(links | ranges::views::filter([&](const auto &link) {
-                              const auto isSelected =
-                                  std::ranges::find(selectedLinkIds, link->getId()) != selectedLinkIds.end();
+                              const auto isSelected = std::ranges::find(selectedLinkIds, link->getId()) != selectedLinkIds.end();
                               const auto wasSelected = *link->selected;
                               return isSelected != wasSelected;
                             }),
@@ -309,14 +292,13 @@ void NodeEditor::clearSelection() {
 
 void NodeEditor::navigateToContent(std::optional<std::chrono::milliseconds> animationLength) {
   setContext();
-  ax::NodeEditor::NavigateToContent(
-      static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
+  ax::NodeEditor::NavigateToContent(static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
 }
 
 void NodeEditor::navigateToSelection(bool zoomIn, std::optional<std::chrono::milliseconds> animationLength) {
   setContext();
-  ax::NodeEditor::NavigateToSelection(
-      zoomIn, static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
+  ax::NodeEditor::NavigateToSelection(zoomIn,
+                                      static_cast<float>(animationLength.value_or(std::chrono::milliseconds{-1000}).count()) / 1000.f);
 }
 
 PopupMenu &NodeEditor::createOrGetPopupMenu() {
@@ -418,9 +400,7 @@ void NodeEditor::handleClickEvents() {
     if (auto pin = findPinById(doubleClickedPin); pin.has_value()) { Pin::Event_notify((*pin)->doubleClickEvent); }
   }
   if (doubleClickedLink.Get() != 0) {
-    if (auto link = findLinkById(doubleClickedLink); link.has_value()) {
-      Link::Event_notify((*link)->doubleClickEvent);
-    }
+    if (auto link = findLinkById(doubleClickedLink); link.has_value()) { Link::Event_notify((*link)->doubleClickEvent); }
   }
   if (ax::NodeEditor::IsBackgroundClicked()) { Event_notify(backgroundClickEvent); }
   if (ax::NodeEditor::IsBackgroundDoubleClicked()) { Event_notify(backgroundDoubleClickEvent); }

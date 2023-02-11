@@ -42,11 +42,7 @@ namespace pf::ui::ig {
  * @tparam T Underlying type
  */
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
-class PF_IMGUI_EXPORT DragInput : public ItemElement,
-                                  public ValueContainer<T>,
-                                  public Savable,
-                                  public DragSource<T>,
-                                  public DropTarget<T> {
+class PF_IMGUI_EXPORT DragInput : public ItemElement, public ValueContainer<T>, public Savable, public DragSource<T>, public DropTarget<T> {
  public:
   using ParamType = drag_details::UnderlyingType<T>;
   constexpr static std::size_t ComponentCount = drag_details::getComponentCount<T>();
@@ -82,9 +78,8 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
    * @param persistent allow state saving to disk
    * @param format format for formatting value to string
    */
-  DragInput(std::string_view elementName, std::string_view labelText, ParamType valueSpeed, ParamType minValue,
-            ParamType maxValue, T initialValue = T{}, Persistent persistent = Persistent::No,
-            std::string numberFormat = drag_details::defaultFormat<T>());
+  DragInput(std::string_view elementName, std::string_view labelText, ParamType valueSpeed, ParamType minValue, ParamType maxValue,
+            T initialValue = T{}, Persistent persistent = Persistent::No, std::string numberFormat = drag_details::defaultFormat<T>());
 
   /**
    * Get movement speed.
@@ -124,9 +119,9 @@ class PF_IMGUI_EXPORT DragInput : public ItemElement,
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
-               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow, ColorOf::SliderGrab, ColorOf::SliderGrabActive>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::SliderGrab,
+               ColorOf::SliderGrabActive>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
@@ -190,10 +185,10 @@ class PF_IMGUI_EXPORT LabeledDragInput : public DragInput<T> {
    * @param persistent allow state saving to disk
    * @param format format for formatting value to string
    */
-  LabeledDragInput(std::string_view elementName, std::string_view labelText, ParamType valueSpeed, ParamType minValue,
-                   ParamType maxValue, std::array<std::string, ComponentCount> componentLabels,
-                   std::array<Color, ComponentCount> componentLabelColors, T initialValue = T{},
-                   Persistent persistent = Persistent::No, std::string numberFormat = drag_details::defaultFormat<T>());
+  LabeledDragInput(std::string_view elementName, std::string_view labelText, ParamType valueSpeed, ParamType minValue, ParamType maxValue,
+                   std::array<std::string, ComponentCount> componentLabels, std::array<Color, ComponentCount> componentLabelColors,
+                   T initialValue = T{}, Persistent persistent = Persistent::No,
+                   std::string numberFormat = drag_details::defaultFormat<T>());
 
   void setComponentLabels(std::array<std::string, ComponentCount> componentLabels);
   void setComponentLabelColors(std::array<Color, ComponentCount> componentColors);
@@ -217,13 +212,11 @@ DragInput<T>::DragInput(DragInput::Config &&config)
                 config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
-DragInput<T>::DragInput(std::string_view elementName, std::string_view labelText,
-                        drag_details::UnderlyingType<T> valueSpeed, drag_details::UnderlyingType<T> minValue,
-                        drag_details::UnderlyingType<T> maxValue, T initialValue, Persistent persistent,
-                        std::string numberFormat)
-    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false),
-      label(std::string{labelText}), value(initialValue), speed(valueSpeed), min(minValue), max(maxValue),
-      format(std::move(numberFormat)) {}
+DragInput<T>::DragInput(std::string_view elementName, std::string_view labelText, drag_details::UnderlyingType<T> valueSpeed,
+                        drag_details::UnderlyingType<T> minValue, drag_details::UnderlyingType<T> maxValue, T initialValue,
+                        Persistent persistent, std::string numberFormat)
+    : ItemElement(elementName), Savable(persistent), DragSource<T>(false), DropTarget<T>(false), label(std::string{labelText}),
+      value(initialValue), speed(valueSpeed), min(minValue), max(maxValue), format(std::move(numberFormat)) {}
 
 template<OneOf<PF_IMGUI_DRAG_TYPE_LIST> T>
 toml::table DragInput<T>::toToml() const {
@@ -244,12 +237,8 @@ void DragInput<T>::setFromToml(const toml::table &src) {
       if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
         if (newVal->size() != 2) { return; }
         auto range = T{};
-        if (auto newRangeStart = newVal->get(0)->value<ParamType>(); newRangeStart.has_value()) {
-          range.start = newRangeStart.value();
-        }
-        if (auto newRangeEnd = newVal->get(1)->value<ParamType>(); newRangeEnd.has_value()) {
-          range.end = newRangeEnd.value();
-        }
+        if (auto newRangeStart = newVal->get(0)->value<ParamType>(); newRangeStart.has_value()) { range.start = newRangeStart.value(); }
+        if (auto newRangeEnd = newVal->get(1)->value<ParamType>(); newRangeEnd.has_value()) { range.end = newRangeEnd.value(); }
         *value.modify() = range;
       }
     }
@@ -284,21 +273,20 @@ void DragInput<T>::renderImpl() {
   }
 
   if constexpr (OneOf<T, int, float>) {
-    valueChanged = ImGui::DragScalar(label->get().c_str(), dataType, address, static_cast<float>(speed), &min, &max,
-                                     format.c_str(), flags);
+    valueChanged = ImGui::DragScalar(label->get().c_str(), dataType, address, static_cast<float>(speed), &min, &max, format.c_str(), flags);
   }
   if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::DragScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), ComponentCount,
-                                      static_cast<float>(speed), &min, &max, format.c_str(), flags);
+    valueChanged = ImGui::DragScalarN(label->get().c_str(), dataType, glm::value_ptr(*address), ComponentCount, static_cast<float>(speed),
+                                      &min, &max, format.c_str(), flags);
   }
 
   if constexpr (std::same_as<T, math::Range<int>>) {
-    valueChanged = ImGui::DragIntRange2(label->get().c_str(), &address->start, &address->end, static_cast<float>(speed),
-                                        min, max, format.c_str(), nullptr, flags);
+    valueChanged = ImGui::DragIntRange2(label->get().c_str(), &address->start, &address->end, static_cast<float>(speed), min, max,
+                                        format.c_str(), nullptr, flags);
   }
   if constexpr (std::same_as<T, math::Range<float>>) {
-    valueChanged = ImGui::DragFloatRange2(label->get().c_str(), &address->start, &address->end, speed, min, max,
-                                          format.c_str(), nullptr, flags);
+    valueChanged =
+        ImGui::DragFloatRange2(label->get().c_str(), &address->start, &address->end, speed, min, max, format.c_str(), nullptr, flags);
   }
   DragSource<T>::drag(*value);
   if (auto drop = DropTarget<T>::dropAccept(); drop.has_value()) {
@@ -325,17 +313,15 @@ Subscription DragInput<T>::addValueListenerImpl(std::function<void(const T &)> l
 
 template<OneOf<PF_IMGUI_LABELEDDRAG_TYPE_LIST> T>
 LabeledDragInput<T>::LabeledDragInput(LabeledDragInput::Config &&config)
-    : LabeledDragInput(config.name, config.label, config.speed, config.min, config.max, config.componentLabels,
-                       config.componentLabelColors, config.value, config.persistent ? Persistent::Yes : Persistent::No,
-                       config.format) {}
+    : LabeledDragInput(config.name, config.label, config.speed, config.min, config.max, config.componentLabels, config.componentLabelColors,
+                       config.value, config.persistent ? Persistent::Yes : Persistent::No, config.format) {}
 
 template<OneOf<PF_IMGUI_LABELEDDRAG_TYPE_LIST> T>
-LabeledDragInput<T>::LabeledDragInput(std::string_view elementName, std::string_view labelText,
-                                      LabeledDragInput::ParamType valueSpeed, LabeledDragInput::ParamType minValue,
-                                      LabeledDragInput::ParamType maxValue,
+LabeledDragInput<T>::LabeledDragInput(std::string_view elementName, std::string_view labelText, LabeledDragInput::ParamType valueSpeed,
+                                      LabeledDragInput::ParamType minValue, LabeledDragInput::ParamType maxValue,
                                       std::array<std::string, ComponentCount> componentLabels,
-                                      std::array<Color, ComponentCount> componentLabelColors, T initialValue,
-                                      Persistent persistent, std::string numberFormat)
+                                      std::array<Color, ComponentCount> componentLabelColors, T initialValue, Persistent persistent,
+                                      std::string numberFormat)
     : DragInput<T>{elementName, labelText, valueSpeed, minValue, maxValue, initialValue, persistent, numberFormat},
       labels{componentLabels} {
   loadCstrLabels();
@@ -370,14 +356,13 @@ void LabeledDragInput<T>::renderImpl() {
   }
 
   if constexpr (OneOf<T, int, float>) {
-    valueChanged =
-        ImGui::LabeledDragScalar(this->label->get().c_str(), dataType, address, static_cast<float>(this->speed),
-                                 &this->min, &this->max, this->format.c_str(), labelsCstr[0], labelColors[0], flags);
+    valueChanged = ImGui::LabeledDragScalar(this->label->get().c_str(), dataType, address, static_cast<float>(this->speed), &this->min,
+                                            &this->max, this->format.c_str(), labelsCstr[0], labelColors[0], flags);
   }
   if constexpr (OneOf<T, PF_IMGUI_DRAG_GLM_TYPE_LIST>) {
-    valueChanged = ImGui::LabeledDragScalarN(this->label->get().c_str(), dataType, glm::value_ptr(*address),
-                                             ComponentCount, static_cast<float>(this->speed), &this->min, &this->max,
-                                             this->format.c_str(), labelsCstr.data(), labelColors.data(), flags);
+    valueChanged = ImGui::LabeledDragScalarN(this->label->get().c_str(), dataType, glm::value_ptr(*address), ComponentCount,
+                                             static_cast<float>(this->speed), &this->min, &this->max, this->format.c_str(),
+                                             labelsCstr.data(), labelColors.data(), flags);
   }
 
   DragSource<T>::drag(*this->value);

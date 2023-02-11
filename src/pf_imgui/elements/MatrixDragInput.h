@@ -16,8 +16,7 @@
 #include <pf_imgui/interface/ValueContainer.h>
 
 namespace pf::ui::ig {
-#define PF_IMGUI_GLM_MAT_TYPES                                                                                         \
-  glm::mat2, glm::mat3, glm::mat4, glm::mat2x3, glm::mat2x4, glm::mat3x2, glm::mat3x4, glm::mat4x2, glm::mat4x3
+#define PF_IMGUI_GLM_MAT_TYPES glm::mat2, glm::mat3, glm::mat4, glm::mat2x3, glm::mat2x4, glm::mat3x2, glm::mat3x4, glm::mat4x2, glm::mat4x3
 
 /**
  * @brief Drag input element for glm matrices.
@@ -57,15 +56,15 @@ class MatrixDragInput : public ItemElement, public ValueContainer<M>, public Sav
    * @param value initial value
    * @param persistent enable state saving
    */
-  MatrixDragInput(std::string_view name, std::string_view labelStr, ParamType changeSpeed, ParamType minVal,
-                  ParamType maxVal, M initValue, Persistent persistent = Persistent::No);
+  MatrixDragInput(std::string_view name, std::string_view labelStr, ParamType changeSpeed, ParamType minVal, ParamType maxVal, M initValue,
+                  Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
-               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow, ColorOf::SliderGrab, ColorOf::SliderGrabActive>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow, ColorOf::SliderGrab,
+               ColorOf::SliderGrabActive>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
@@ -93,11 +92,10 @@ MatrixDragInput<M>::MatrixDragInput(MatrixDragInput::Config &&config)
                       config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
-MatrixDragInput<M>::MatrixDragInput(std::string_view name, std::string_view labelStr,
-                                    MatrixDragInput::ParamType changeSpeed, MatrixDragInput::ParamType minVal,
-                                    MatrixDragInput::ParamType maxVal, M initValue, Persistent persistent)
-    : ItemElement(name), Savable(persistent), label(std::string{labelStr}), value(initValue), min(minVal), max(maxVal),
-      speed(changeSpeed) {
+MatrixDragInput<M>::MatrixDragInput(std::string_view name, std::string_view labelStr, MatrixDragInput::ParamType changeSpeed,
+                                    MatrixDragInput::ParamType minVal, MatrixDragInput::ParamType maxVal, M initValue,
+                                    Persistent persistent)
+    : ItemElement(name), Savable(persistent), label(std::string{labelStr}), value(initValue), min(minVal), max(maxVal), speed(changeSpeed) {
   for (std::size_t i = 0; i < Height - 1; ++i) { dragNames[i] = std::string{"##drag_"} + std::to_string(i); }
 }
 
@@ -110,9 +108,7 @@ template<OneOf<PF_IMGUI_GLM_MAT_TYPES> M>
 void MatrixDragInput<M>::setFromToml(const toml::table &src) {
   if (auto newValIter = src.find("value"); newValIter != src.end()) {
     if (auto newVal = newValIter->second.as_array(); newVal != nullptr) {
-      if (const auto matValue = safeDeserializeGlmMat<M>(*newVal); matValue.has_value()) {
-        *value.modify() = *matValue;
-      }
+      if (const auto matValue = safeDeserializeGlmMat<M>(*newVal); matValue.has_value()) { *value.modify() = *matValue; }
     }
   }
 }
@@ -133,8 +129,8 @@ void MatrixDragInput<M>::renderImpl() {
       const char *dragName = firstDragName.c_str();
       if (row > 0) { dragName = dragNames[row - 1].c_str(); }
 
-      const auto rowValueChanged = ImGui::DragScalarN(dragName, ImGuiDataType_Float,
-                                                      glm::value_ptr(Prop_value(value)[row]), Width, speed, &min, &max);
+      const auto rowValueChanged =
+          ImGui::DragScalarN(dragName, ImGuiDataType_Float, glm::value_ptr(Prop_value(value)[row]), Width, speed, &min, &max);
 
       valueChanged = valueChanged || rowValueChanged;
     }

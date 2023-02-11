@@ -8,8 +8,7 @@
 
 namespace pf::ui::ig {
 
-ImGuiGlfwOpenGLInterface::ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config)
-    : ImGuiInterface(std::move(config.imgui)) {
+ImGuiGlfwOpenGLInterface::ImGuiGlfwOpenGLInterface(ImGuiGlfwOpenGLConfig config) : ImGuiInterface(std::move(config.imgui)) {
   ImGui_ImplGlfw_InitForOpenGL(config.windowHandle, true);
   ImGui_ImplOpenGL3_Init();
   updateFonts();

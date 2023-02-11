@@ -192,12 +192,10 @@ LogPanel<Category, RecordLimit>::LogPanel(Config &&config)
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 LogPanel<Category, RecordLimit>::LogPanel(std::string_view name, Size size, Persistent persistent)
-    : ElementWithID(name), Savable(persistent), size(size), wrapTextToggle("wrapText"),
-      scrollToEndToggle("scrollToEnd"), copyToClipboardButton("copyToClipboard"), clearButton("clear") {
+    : ElementWithID(name), Savable(persistent), size(size), wrapTextToggle("wrapText"), scrollToEndToggle("scrollToEnd"),
+      copyToClipboardButton("copyToClipboard"), clearButton("clear") {
   std::size_t i = 0;
-  for (const auto category : magic_enum::enum_values<Category>()) {
-    categoryStrings[i++] = magic_enum::enum_name(category);
-  }
+  for (const auto category : magic_enum::enum_values<Category>()) { categoryStrings[i++] = magic_enum::enum_name(category); }
   std::ranges::fill(categoryEnabled, true);
   std::ranges::fill(categoryAllowed, true);
   std::ranges::fill(categoryTextColors, Color::White);
@@ -216,8 +214,7 @@ template<Enum Category, std::size_t RecordLimit>
 void LogPanel<Category, RecordLimit>::addRecord(Category category, std::string_view text) {
   if (records.writeAvailable() == 0) { records.remove(); }
   const auto categoryIndex = GetCategoryIndex(category);
-  auto newRecord =
-      Record{category, std::string{text}, categoryTextColors[categoryIndex], categoryBackgroundColors[categoryIndex]};
+  auto newRecord = Record{category, std::string{text}, categoryTextColors[categoryIndex], categoryBackgroundColors[categoryIndex]};
   newRecord.show = isAllowedRecord(newRecord);
   records.insert(newRecord);
 }
@@ -313,15 +310,12 @@ template<Enum Category, std::size_t RecordLimit>
 void LogPanel<Category, RecordLimit>::renderTextArea() {
   ScopeExit end{&ImGui::EndChild};
   const auto wrapEnabled = wrapTextToggle.getValue();
-  if (ImGui::BeginChild(getName().c_str(), ImVec2{0, 0}, true,
-                        wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
+  if (ImGui::BeginChild(getName().c_str(), ImVec2{0, 0}, true, wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {
     for (std::size_t i = 0; i < records.readAvailable(); ++i) {
       const auto &record = records[i];
       if (!record.show) { continue; }
       ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(record.color));
-      if (record.backgroundColor.has_value()) {
-        drawTextBackground(record.text.c_str(), *record.backgroundColor, wrapEnabled, false);
-      }
+      if (record.backgroundColor.has_value()) { drawTextBackground(record.text.c_str(), *record.backgroundColor, wrapEnabled, false); }
       if (wrapEnabled) {
         ImGui::TextWrapped(record.text.c_str());
       } else {
@@ -334,8 +328,8 @@ void LogPanel<Category, RecordLimit>::renderTextArea() {
 }
 
 template<Enum Category, std::size_t RecordLimit>
-  requires((RecordLimit & (RecordLimit - 1)) == 0) bool
-LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
+bool LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
   bool filterChanged = false;
   std::size_t i = 0;
   ImGui::SetNextItemWidth(120);
@@ -357,8 +351,8 @@ LogPanel<Category, RecordLimit>::renderCategoryCombobox() {
 }
 
 template<Enum Category, std::size_t RecordLimit>
-  requires((RecordLimit & (RecordLimit - 1)) == 0) bool
-LogPanel<Category, RecordLimit>::isAllowedRecord(const LogPanel::Record &record) {
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
+bool LogPanel<Category, RecordLimit>::isAllowedRecord(const LogPanel::Record &record) {
   return isAllowedCategory(record.category) && isAllowedText(record.text);
 }
 
@@ -369,15 +363,15 @@ void LogPanel<Category, RecordLimit>::refreshAllowedRecords() {
 }
 
 template<Enum Category, std::size_t RecordLimit>
-  requires((RecordLimit & (RecordLimit - 1)) == 0) bool
-LogPanel<Category, RecordLimit>::isAllowedCategory(Category category) {
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
+bool LogPanel<Category, RecordLimit>::isAllowedCategory(Category category) {
   const auto catIndex = *magic_enum::enum_index(category);
   return categoryEnabled[catIndex] && categoryAllowed[catIndex];
 }
 
 template<Enum Category, std::size_t RecordLimit>
-  requires((RecordLimit & (RecordLimit - 1)) == 0) bool
-LogPanel<Category, RecordLimit>::isAllowedText(const std::string &text) {
+  requires((RecordLimit & (RecordLimit - 1)) == 0)
+bool LogPanel<Category, RecordLimit>::isAllowedText(const std::string &text) {
   if (filterStringSize == 0) { return true; }
   return text.find(std::string_view{filterBuffer, filterStringSize}) != std::string::npos;
 }

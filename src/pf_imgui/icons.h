@@ -14,13 +14,7 @@
 #include <vector>
 
 namespace pf::ui::ig {
-enum class IconPack {
-  FontAwesome5Regular = 1 << 0,
-  FontAwesome5Solid = 1 << 1,
-  ForkAwesome = 1 << 2,
-  Kenney = 1 << 3,
-  Fontaudio = 1 << 4
-};
+enum class IconPack { FontAwesome5Regular = 1 << 0, FontAwesome5Solid = 1 << 1, ForkAwesome = 1 << 2, Kenney = 1 << 3, Fontaudio = 1 << 4 };
 
 namespace details {
 static inline ImWchar iconRangeFA[] = {ICON_MIN_FA, ICON_MAX_FA, 0};

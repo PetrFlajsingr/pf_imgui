@@ -47,8 +47,7 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueContainer<bool>, 
    * @param initialValue starting value
    * @param persistent allow value saving to disk
    */
-  Toggle(std::string_view elementName, std::string_view labelText, bool initialValue = false,
-         Persistent persistent = Persistent::No);
+  Toggle(std::string_view elementName, std::string_view labelText, bool initialValue = false, Persistent persistent = Persistent::No);
   /**
    * Toggle the checkboxes state. True becomes false, false becomes true.
    */
@@ -61,9 +60,8 @@ class PF_IMGUI_EXPORT Toggle : public ItemElement, public ValueContainer<bool>, 
   [[nodiscard]] const bool &getValue() const override;
 
  public:
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
-               ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive, ColorOf::FrameBackground,
+               ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();

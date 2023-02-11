@@ -31,8 +31,7 @@ void ImGui::IndeterminateProgressBar(float fraction, const ImVec2 &size_arg, con
   // Render
   RenderFrame(bb.Min, bb.Max, GetColorU32(ImGuiCol_FrameBg), true, style.FrameRounding);
   bb.Expand(ImVec2(-style.FrameBorderSize, -style.FrameBorderSize));
-  RenderRectFilledRangeH(window->DrawList, bb, GetColorU32(ImGuiCol_PlotHistogram), bar_begin, bar_end,
-                         style.FrameRounding);
+  RenderRectFilledRangeH(window->DrawList, bb, GetColorU32(ImGuiCol_PlotHistogram), bar_begin, bar_end, style.FrameRounding);
 
   // Don't display text for indeterminate bars by default
   if (!indeterminate || overlay) {
@@ -46,12 +45,10 @@ void ImGui::IndeterminateProgressBar(float fraction, const ImVec2 &size_arg, con
     const ImVec2 overlay_size = CalcTextSize(overlay, NULL);
     if (overlay_size.x > 0.0f) {
       const ImVec2 fill_br =
-          ImVec2(indeterminate ? (bb.Min.x + bb.Max.x - overlay_size.x) * 0.5f : ImLerp(bb.Min.x, bb.Max.x, bar_end),
-                 bb.Max.y);
-      RenderTextClipped(ImVec2(ImClamp(fill_br.x + style.ItemSpacing.x, bb.Min.x,
-                                       bb.Max.x - overlay_size.x - style.ItemInnerSpacing.x),
-                               bb.Min.y),
-                        bb.Max, overlay, NULL, &overlay_size, ImVec2(0.0f, 0.5f), &bb);
+          ImVec2(indeterminate ? (bb.Min.x + bb.Max.x - overlay_size.x) * 0.5f : ImLerp(bb.Min.x, bb.Max.x, bar_end), bb.Max.y);
+      RenderTextClipped(
+          ImVec2(ImClamp(fill_br.x + style.ItemSpacing.x, bb.Min.x, bb.Max.x - overlay_size.x - style.ItemInnerSpacing.x), bb.Min.y),
+          bb.Max, overlay, NULL, &overlay_size, ImVec2(0.0f, 0.5f), &bb);
     }
   }
 }

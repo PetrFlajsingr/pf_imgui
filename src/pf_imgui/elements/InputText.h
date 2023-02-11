@@ -24,13 +24,7 @@
 
 namespace pf::ui::ig {
 
-enum class TextFilter : uint32_t {
-  None,
-  Math = 1 << 0,
-  Hexadecimal = 1 << 1,
-  NoWhiteChar = 1 << 3,
-  Scientific = 1 << 17
-};
+enum class TextFilter : uint32_t { None, Math = 1 << 0, Hexadecimal = 1 << 1, NoWhiteChar = 1 << 3, Scientific = 1 << 17 };
 
 enum class TextTrigger { Character, Enter };
 
@@ -125,8 +119,8 @@ class PF_IMGUI_EXPORT InputText : public ItemElement,
   Subscription addValueListenerImpl(std::function<void(const std::string &)> listener) override;
 
  public:
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground,
-               ColorOf::FrameBackgroundHovered, ColorOf::FrameBackgroundActive, ColorOf::TextSelectedBackground>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::DragDropTarget, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
+               ColorOf::FrameBackgroundActive, ColorOf::TextSelectedBackground>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();

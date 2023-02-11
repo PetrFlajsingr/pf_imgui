@@ -93,8 +93,7 @@ class PF_IMGUI_EXPORT ColorChooser : public ItemElement,
 
  public:
   ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered,
-               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+               ColorOf::FrameBackgroundActive, ColorOf::DragDropTarget, ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
@@ -117,8 +116,8 @@ ColorChooser<Type, Format>::ColorChooser(ColorChooser::Config &&config)
 template<ColorChooserType Type, ColorChooserFormat Format>
 ColorChooser<Type, Format>::ColorChooser(std::string_view elementName, std::string_view labelText, Color initialValue,
                                          Persistent persistent)
-    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false),
-      label(std::string{labelText}), chosenColor(initialValue) {
+    : ItemElement(elementName), Savable(persistent), DragSource(false), DropTarget(false), label(std::string{labelText}),
+      chosenColor(initialValue) {
   updateValueStorage();
   chosenColor.addListener([this](auto) { updateValueStorage(); });
 }

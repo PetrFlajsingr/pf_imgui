@@ -61,8 +61,7 @@ class PF_IMGUI_EXPORT Observable_impl {
 };
 
 template<typename... Args>
-Observable_impl<Args...>::Observable_impl(Observable_impl &&other) noexcept
-    : listeners(std::move(other.listeners)) {}
+Observable_impl<Args...>::Observable_impl(Observable_impl &&other) noexcept : listeners(std::move(other.listeners)) {}
 
 template<typename... Args>
 Observable_impl<Args...> &Observable_impl<Args...>::operator=(Observable_impl &&rhs) noexcept {

@@ -90,9 +90,8 @@ class PF_IMGUI_EXPORT CustomCombobox : public CustomItemBox<T, R> {
 };
 
 template<typename T, std::derived_from<Renderable> R>
-CustomCombobox<T, R>::CustomCombobox(std::string_view elementName, std::string_view labelText,
-                                     CustomItemBoxFactory<T, R> auto &&rowFactory, std::string_view prevValue,
-                                     ComboBoxCount showItemCount)
+CustomCombobox<T, R>::CustomCombobox(std::string_view elementName, std::string_view labelText, CustomItemBoxFactory<T, R> auto &&rowFactory,
+                                     std::string_view prevValue, ComboBoxCount showItemCount)
     : CustomItemBox<T, R>(elementName, std::forward<decltype(rowFactory)>(rowFactory)), label(std::string{labelText}),
       flags(static_cast<ImGuiComboFlags_>(showItemCount)), previewValue(std::string{prevValue}) {
   if (previewValue.empty()) { flags |= ImGuiComboFlags_::ImGuiComboFlags_NoPreview; }

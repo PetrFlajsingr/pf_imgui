@@ -70,15 +70,12 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
    * @param persistent enable state saving to disk
    */
   Slider2D(std::string_view elementName, std::string_view labelText, StorageType minMaxX, StorageType minMaxY,
-           StorageType initialValue = StorageType{}, Size initialSize = Size::Auto(),
-           Persistent persistent = Persistent::No);
+           StorageType initialValue = StorageType{}, Size initialSize = Size::Auto(), Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
-               ColorOf::FrameBackgroundActive>
-      color;
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackgroundActive> color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();
   Property<Label> label;
@@ -101,14 +98,12 @@ class PF_IMGUI_EXPORT Slider2D : public ItemElement,
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(Slider2D::Config &&config)
-    : Slider2D(config.name, config.label, {config.min.value.x, config.max.value.x},
-               {config.min.value.y, config.max.value.y}, config.value, config.size,
-               config.persistent ? Persistent::Yes : Persistent::No) {}
+    : Slider2D(config.name, config.label, {config.min.value.x, config.max.value.x}, {config.min.value.y, config.max.value.y}, config.value,
+               config.size, config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<int, float> T>
 Slider2D<T>::Slider2D(std::string_view elementName, std::string_view labelText, Slider2D::StorageType minMaxX,
-                      Slider2D::StorageType minMaxY, Slider2D::StorageType initialValue, Size initialSize,
-                      Persistent persistent)
+                      Slider2D::StorageType minMaxY, Slider2D::StorageType initialValue, Size initialSize, Persistent persistent)
     : ItemElement(elementName), Savable(persistent), DragSource<StorageType>(false), DropTarget<StorageType>(false),
       label(std::string{labelText}), size(initialSize), value(initialValue), extremesX(minMaxX), extremesY(minMaxY) {}
 
@@ -136,12 +131,12 @@ void Slider2D<T>::renderImpl() {
   auto address = &Prop_value(value);
   const auto oldValue = *address;
   if constexpr (std::same_as<T, int>) {
-    valueChanged = ImWidgets::Slider2DInt(label->get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y,
-                                          &extremesY.x, &extremesY.y, static_cast<ImVec2>(*size));
+    valueChanged = ImWidgets::Slider2DInt(label->get().c_str(), &address->x, &address->y, &extremesX.x, &extremesX.y, &extremesY.x,
+                                          &extremesY.y, static_cast<ImVec2>(*size));
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImWidgets::Slider2DFloat(label->get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y,
-                                            extremesY.x, extremesY.y, static_cast<ImVec2>(*size));
+    valueChanged = ImWidgets::Slider2DFloat(label->get().c_str(), &address->x, &address->y, extremesX.x, extremesX.y, extremesY.x,
+                                            extremesY.y, static_cast<ImVec2>(*size));
   }
   DragSource<StorageType>::drag(*value);
   if (auto drop = DropTarget<StorageType>::dropAccept(); drop.has_value()) {

@@ -58,12 +58,10 @@ class PF_IMGUI_EXPORT Selectable : public ItemElement, public ValueContainer<boo
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow,
-               ColorOf::FrameBackgroundActive, ColorOf::Header, ColorOf::HeaderHovered, ColorOf::HeaderActive,
-               ColorOf::NavHighlight>
+  ColorPalette<ColorOf::Text, ColorOf::FrameBackground, ColorOf::Border, ColorOf::BorderShadow, ColorOf::FrameBackgroundActive,
+               ColorOf::Header, ColorOf::HeaderHovered, ColorOf::HeaderActive, ColorOf::NavHighlight>
       color;
-  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::SelectableTextAlign>
-      style;
+  StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize, StyleOf::SelectableTextAlign> style;
   Font font = Font::Default();
   Property<Label> label;
 

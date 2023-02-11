@@ -14,8 +14,7 @@ GridLayout::GridLayout(GridLayout::Config &&config)
     : GridLayout(config.name, config.size, config.widthInCells, config.heightInCells,
                  config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-GridLayout::GridLayout(std::string_view elementName, Size initialSize, uint32_t gridWidth, uint32_t gridHeight,
-                       ShowBorder showBorder)
+GridLayout::GridLayout(std::string_view elementName, Size initialSize, uint32_t gridWidth, uint32_t gridHeight, ShowBorder showBorder)
     : Layout(elementName, initialSize, showBorder), width(gridWidth), height(gridHeight) {
   const auto cellCount = width * height;
   cells.resize(cellCount);
@@ -30,8 +29,7 @@ void GridLayout::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto flags =
-      isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  const auto flags = isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();

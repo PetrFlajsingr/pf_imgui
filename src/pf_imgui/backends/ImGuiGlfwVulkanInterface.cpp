@@ -14,8 +14,7 @@ void checkVkResult(VkResult err) {
 }
 }  // namespace details
 
-ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config)
-    : ImGuiInterface(std::move(config.imgui)), config(config) {
+ImGuiGlfwVulkanInterface::ImGuiGlfwVulkanInterface(ImGuiVulkanGlfwConfig config) : ImGuiInterface(std::move(config.imgui)), config(config) {
   setupDescriptorPool();
   ImGui_ImplGlfw_InitForVulkan(config.handle, true);
   auto init_info = ImGui_ImplVulkan_InitInfo();
@@ -82,9 +81,7 @@ void ImGuiGlfwVulkanInterface::updateFonts() {
   fenceConfig.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
   fenceConfig.pNext = nullptr;
   fenceConfig.flags = 0;
-  if (vkCreateFence(config.device, &fenceConfig, nullptr, &fence) != VK_SUCCESS) {
-    throw std::runtime_error("Fence creation failed");
-  }
+  if (vkCreateFence(config.device, &fenceConfig, nullptr, &fence) != VK_SUCCESS) { throw std::runtime_error("Fence creation failed"); }
   auto submitInfo = VkSubmitInfo{};
   submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
   submitInfo.commandBufferCount = 1;

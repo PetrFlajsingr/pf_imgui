@@ -51,15 +51,13 @@ class PF_IMGUI_EXPORT Checkbox : public ItemElement, public ValueContainer<bool>
    * @param persistent allow value saving to disk
    * @param initialValue starting value
    */
-  Checkbox(std::string_view elementName, std::string_view labelText, bool initialValue = false,
-           Persistent persistent = Persistent::No);
+  Checkbox(std::string_view elementName, std::string_view labelText, bool initialValue = false, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
 
-  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive,
-               ColorOf::FrameBackground, ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border,
-               ColorOf::BorderShadow>
+  ColorPalette<ColorOf::Text, ColorOf::TextDisabled, ColorOf::CheckMark, ColorOf::FrameBackgroundActive, ColorOf::FrameBackground,
+               ColorOf::FrameBackgroundHovered, ColorOf::NavHighlight, ColorOf::Border, ColorOf::BorderShadow>
       color;
   StyleOptions<StyleOf::FramePadding, StyleOf::FrameRounding, StyleOf::FrameBorderSize> style;
   Font font = Font::Default();

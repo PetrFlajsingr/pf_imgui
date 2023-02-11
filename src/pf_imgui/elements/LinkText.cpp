@@ -6,8 +6,7 @@
 
 namespace pf::ui::ig {
 
-LinkText::LinkText(LinkText::Config &&config)
-    : LinkText(config.name, config.label, config.link, config.clickHandler.value) {}
+LinkText::LinkText(LinkText::Config &&config) : LinkText(config.name, config.label, config.link, config.clickHandler.value) {}
 
 void LinkText::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();

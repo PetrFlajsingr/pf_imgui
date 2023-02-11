@@ -8,8 +8,7 @@ namespace pf::ui::ig {
 
 CommandPalette::CommandPalette(CommandPalette::Config &&config) : CommandPalette(config.name) {}
 
-CommandPalette::CommandPalette(std::string_view elementName)
-    : ElementWithID(elementName), context(ImCmd::CreateContext()) {}
+CommandPalette::CommandPalette(std::string_view elementName) : ElementWithID(elementName), context(ImCmd::CreateContext()) {}
 
 CommandPalette::~CommandPalette() { ImCmd::DestroyContext(context); }
 

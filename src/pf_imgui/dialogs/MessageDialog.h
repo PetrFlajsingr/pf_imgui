@@ -41,7 +41,7 @@ class PF_IMGUI_EXPORT MessageDialog : public ModalDialog {
   MessageDialog(std::string_view elementName, std::string_view title, Size initialSize, std::string_view message,
                 const Flags<MessageButtons> &buttons, std::invocable<MessageButtons> auto &&onDialogDone)
     requires(std::is_invocable_r_v<bool, decltype(onDialogDone), MessageButtons>)
-  : MessageDialog(elementName, title, initialSize, message, buttons) {
+      : MessageDialog(elementName, title, initialSize, message, buttons) {
     dialogDone = std::forward<decltype(onDialogDone)>(onDialogDone);
   }
 

@@ -77,8 +77,7 @@ class PF_IMGUI_EXPORT Plot : public ElementWithID {
    */
   template<std::derived_from<plot_type::PlotData> T>
   [[nodiscard]] std::optional<std::reference_wrapper<T>> dataByName(const std::string &dataName) {
-    if (const auto iter =
-            std::ranges::find_if(datas, [dataName](const auto &data) { return data->getName() == dataName; });
+    if (const auto iter = std::ranges::find_if(datas, [dataName](const auto &data) { return data->getName() == dataName; });
         iter != datas.end()) {
       if (auto result = dynamic_cast<T>(iter->get()); result != nullptr) { return *result; }
       return std::nullopt;

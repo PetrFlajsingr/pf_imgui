@@ -31,8 +31,7 @@ class StringInputPin : public InteractablePin<InputText> {
   void setFromToml(const toml::table &src) override;
 
  private:
-  static typename InputText::Config CreateInputConfig(std::string_view name, std::string_view label,
-                                                      InputConfig &&config);
+  static typename InputText::Config CreateInputConfig(std::string_view name, std::string_view label, InputConfig &&config);
 };
 
 }  // namespace pf::ui::ig::bp

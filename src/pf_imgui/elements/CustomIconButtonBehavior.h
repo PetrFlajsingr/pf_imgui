@@ -57,8 +57,7 @@ class CustomIconButton : public CustomIconButtonBehavior {
 
 class CustomIconToggle : public CustomIconButtonBehavior, public ValueContainer<bool>, public Savable {
  public:
-  explicit CustomIconToggle(std::string_view elementName, bool initValue = false,
-                            Persistent persistent = Persistent::No);
+  explicit CustomIconToggle(std::string_view elementName, bool initValue = false, Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;

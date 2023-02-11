@@ -23,8 +23,7 @@ namespace details {
 inline void traverseImGuiTree_impl(Renderable &element, std::invocable<Renderable &> auto callback) {
   callback(element);
   if (auto ptrContainer = dynamic_cast<RenderablesContainer *>(&element); ptrContainer != nullptr) {
-    std::ranges::for_each(ptrContainer->getRenderables(),
-                          [&callback](const auto &child) { traverseImGuiTree_impl(*child, callback); });
+    std::ranges::for_each(ptrContainer->getRenderables(), [&callback](const auto &child) { traverseImGuiTree_impl(*child, callback); });
   }
 }
 }  // namespace details

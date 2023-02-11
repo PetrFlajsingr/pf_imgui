@@ -21,8 +21,8 @@
 namespace pf::ui::ig {
 
 ImGuiInterface::ImGuiInterface(ImGuiConfig configuration)
-    : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()),
-      io(ImGui::GetIO()), fontManager(*this), notificationManager(), config(std::move(configuration.config)) {
+    : Renderable("imgui_interface"), imguiContext(ImGui::CreateContext()), imPlotContext(ImPlot::CreateContext()), io(ImGui::GetIO()),
+      fontManager(*this), notificationManager(), config(std::move(configuration.config)) {
   io.ConfigFlags = *configuration.flags;
   io.IniFilename = nullptr;
   ImGui::StyleColorsDark();
@@ -64,9 +64,7 @@ void ImGuiInterface::updateConfig() {
       for (const auto &[key, value] : serialisedAppBar) { config.insert_or_assign(key, value); }
     }
   });
-  if (dialogManager.fileDialogBookmark.has_value()) {
-    config.insert_or_assign("file_dialog_bookmark", *dialogManager.fileDialogBookmark);
-  }
+  if (dialogManager.fileDialogBookmark.has_value()) { config.insert_or_assign("file_dialog_bookmark", *dialogManager.fileDialogBookmark); }
   std::ranges::for_each(radioGroups, [this](const auto &radioGroup) {
     if (radioGroup->isPersistent()) { config.insert_or_assign(radioGroup->getGroupName(), radioGroup->toToml()); }
   });
@@ -85,9 +83,7 @@ void ImGuiInterface::setStateFromConfig() {
       if (auto ptrSavable = dynamic_cast<Savable *>(&renderable); ptrSavable != nullptr && ptrSavable->isPersistent()) {
         if (auto ptrElement = dynamic_cast<Element *>(&renderable); ptrElement != nullptr) {
           if (auto elemDataIter = config.find(ptrElement->getName()); elemDataIter != config.end()) {
-            if (auto elemData = elemDataIter->second.as_table(); elemData != nullptr) {
-              ptrSavable->setFromToml(*elemData);
-            }
+            if (auto elemData = elemDataIter->second.as_table(); elemData != nullptr) { ptrSavable->setFromToml(*elemData); }
           }
         }
       }
@@ -138,14 +134,12 @@ CommandPaletteWindow &ImGuiInterface::createCommandPalette(const std::string &wi
 }
 
 void ImGuiInterface::removePaletteWindow(const std::string &windowName) {
-  const auto [rmBeg, rmEnd] =
-      std::ranges::remove(commandPalettes, windowName, [](const auto &window) { return window->getName(); });
+  const auto [rmBeg, rmEnd] = std::ranges::remove(commandPalettes, windowName, [](const auto &window) { return window->getName(); });
   commandPalettes.erase(rmBeg, rmEnd);  //-V539
 }
 
 void ImGuiInterface::removePaletteWindow(const CommandPaletteWindow &window) {
-  const auto [rmBeg, rmEnd] =
-      std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
+  const auto [rmBeg, rmEnd] = std::ranges::remove(commandPalettes, &window, &std::unique_ptr<CommandPaletteWindow>::get);
   commandPalettes.erase(rmBeg, rmEnd);  //-V539
 }
 
@@ -155,8 +149,7 @@ DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
   auto childrenAddr = getWindows() | ranges::views::addressof;
-  if (const auto iter = std::ranges::find_if(
-          childrenAddr, [windowName](const auto &window) { return window->getName() == windowName; });
+  if (const auto iter = std::ranges::find_if(childrenAddr, [windowName](const auto &window) { return window->getName() == windowName; });
       iter != childrenAddr.end()) {
     return **iter;
   }
@@ -165,8 +158,7 @@ std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const
 
 std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName(const std::string &windowName) const {
   auto childrenAddr = getWindows() | ranges::views::addressof;
-  if (const auto iter = std::ranges::find_if(
-          childrenAddr, [windowName](const auto &window) { return window->getName() == windowName; });
+  if (const auto iter = std::ranges::find_if(childrenAddr, [windowName](const auto &window) { return window->getName() == windowName; });
       iter != childrenAddr.end()) {
     return **iter;
   }
@@ -184,16 +176,15 @@ void ImGuiInterface::renderImpl() {
   std::ranges::for_each(radioGroups, &RadioGroup::frame, &std::unique_ptr<RadioGroup>::get);
 
   auto anyDockBuilderRun = false;
-  std::ranges::for_each(dockBuilders | ranges::views::filter([](std::unique_ptr<DockBuilder> &builder) {
-                          return builder->dockSpaceRef.isInitialised();
-                        }),
-                        [&anyDockBuilderRun](std::unique_ptr<DockBuilder> &builder) {
-                          builder->run();
-                          anyDockBuilderRun = true;
-                        });
+  std::ranges::for_each(
+      dockBuilders | ranges::views::filter([](std::unique_ptr<DockBuilder> &builder) { return builder->dockSpaceRef.isInitialised(); }),
+      [&anyDockBuilderRun](std::unique_ptr<DockBuilder> &builder) {
+        builder->run();
+        anyDockBuilderRun = true;
+      });
   if (anyDockBuilderRun) {
-    const auto [rmBeg, rmEnd] = std::ranges::remove_if(
-        dockBuilders, [](std::unique_ptr<DockBuilder> &builder) { return builder->dockSpaceRef.isInitialised(); });
+    const auto [rmBeg, rmEnd] =
+        std::ranges::remove_if(dockBuilders, [](std::unique_ptr<DockBuilder> &builder) { return builder->dockSpaceRef.isInitialised(); });
     dockBuilders.erase(rmBeg, rmEnd);
   }
   if (statusBar != nullptr) { statusBar->render(); }
@@ -201,18 +192,14 @@ void ImGuiInterface::renderImpl() {
   notificationManager.renderNotifications();
 }
 
-DragNDropGroup &ImGuiInterface::createDragNDropGroup() {
-  return *dragNDropGroups.emplace_back(std::make_unique<DragNDropGroup>());
-}
+DragNDropGroup &ImGuiInterface::createDragNDropGroup() { return *dragNDropGroups.emplace_back(std::make_unique<DragNDropGroup>()); }
 
 RadioGroup &ImGuiInterface::createRadioGroup(const std::string &groupName, Persistent persistent) {
   return *radioGroups.emplace_back(std::make_unique<RadioGroup>(groupName, std::vector<RadioButton *>{}, persistent));
 }
 
 BackgroundDockingArea &ImGuiInterface::createOrGetBackgroundDockingArea() {
-  if (backgroundDockingArea == nullptr) {
-    backgroundDockingArea = std::make_unique<BackgroundDockingArea>("background_docking_area");
-  }
+  if (backgroundDockingArea == nullptr) { backgroundDockingArea = std::make_unique<BackgroundDockingArea>("background_docking_area"); }
   return *backgroundDockingArea;
 }
 

@@ -10,18 +10,16 @@ namespace pf::ui::ig {
 HorizontalLayout::HorizontalLayout(HorizontalLayout::Config &&config)
     : HorizontalLayout(config.name, config.size, config.align, config.showBorder ? ShowBorder::Yes : ShowBorder::No) {}
 
-HorizontalLayout::HorizontalLayout(std::string_view elementName, Size initialSize, HorizontalAlign align,
-                                   ShowBorder showBorder)
+HorizontalLayout::HorizontalLayout(std::string_view elementName, Size initialSize, HorizontalAlign align, ShowBorder showBorder)
     : LinearLayout(elementName, initialSize, showBorder), alignment(align) {}
 
 void HorizontalLayout::renderImpl() {
-  const auto flags =
-      isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+  const auto flags = isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
   ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     [[maybe_unused]] auto scrollApplier = applyScroll();
     ImGui::BeginHorizontal(getName().c_str(), ImVec2{0, 0}, alignmentAsFloat());
-    [[maybe_unused]]  auto endLayout = ScopeExit{&ImGui::EndHorizontal};
+    [[maybe_unused]] auto endLayout = ScopeExit{&ImGui::EndHorizontal};
     {
       auto elements = getChildren();
       std::ranges::for_each_n(elements.begin(), static_cast<int>(elements.size() - 1), [this](auto &child) {

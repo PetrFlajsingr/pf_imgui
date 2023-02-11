@@ -69,8 +69,8 @@ class Knob : public ItemElement, public ValueContainer<T>, public Savable {
    * @param value initial value
    * @param persistent enable state saving to disk
    */
-  Knob(std::string_view name, std::string_view label, KnobType type, Size s, T min, T max, float speed = 1.f,
-       T value = T{}, Persistent persistent = Persistent::No);
+  Knob(std::string_view name, std::string_view label, KnobType type, Size s, T min, T max, float speed = 1.f, T value = T{},
+       Persistent persistent = Persistent::No);
 
   [[nodiscard]] toml::table toToml() const override;
   void setFromToml(const toml::table &src) override;
@@ -99,14 +99,14 @@ class Knob : public ItemElement, public ValueContainer<T>, public Savable {
 
 template<OneOf<int, float> T>
 Knob<T>::Knob(Knob::Config &&config)
-    : Knob(config.name, config.label, config.type, config.size, config.minValue, config.maxValue, config.speed,
-           config.value, config.persistent ? Persistent::Yes : Persistent::No) {}
+    : Knob(config.name, config.label, config.type, config.size, config.minValue, config.maxValue, config.speed, config.value,
+           config.persistent ? Persistent::Yes : Persistent::No) {}
 
 template<OneOf<int, float> T>
 Knob<T>::Knob(std::string_view name, std::string_view label, KnobType type, Size s, T min, T max, float speed, T value,
               Persistent persistent)
-    : ItemElement(name), Savable(persistent), label(std::string{label}), size(s), value(value), min(min), max(max),
-      speed(speed), type(type) {}
+    : ItemElement(name), Savable(persistent), label(std::string{label}), size(s), value(value), min(min), max(max), speed(speed),
+      type(type) {}
 
 template<OneOf<int, float> T>
 toml::table Knob<T>::toToml() const {
@@ -124,8 +124,7 @@ template<OneOf<int, float> T>
 void Knob<T>::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
-  const auto flags =
-      label->getVisibility() == Visibility::Visible ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
+  const auto flags = label->getVisibility() == Visibility::Visible ? ImGuiKnobFlags_{} : ImGuiKnobFlags_::ImGuiKnobFlags_NoTitle;
   const auto knobSize = std::min(static_cast<float>(size->width), static_cast<float>(size->height));
   auto valueChanged = false;
   if constexpr (std::same_as<T, int>) {
@@ -133,8 +132,8 @@ void Knob<T>::renderImpl() {
                                        static_cast<ImGuiKnobVariant>(type), knobSize, flags);
   }
   if constexpr (std::same_as<T, float>) {
-    valueChanged = ImGuiKnobs::Knob(label->get().c_str(), &Prop_value(value), min, max, speed, nullptr,
-                                    static_cast<ImGuiKnobVariant>(type), knobSize, flags);
+    valueChanged = ImGuiKnobs::Knob(label->get().c_str(), &Prop_value(value), min, max, speed, nullptr, static_cast<ImGuiKnobVariant>(type),
+                                    knobSize, flags);
   }
   if (valueChanged) { Prop_triggerListeners(value); }
 }

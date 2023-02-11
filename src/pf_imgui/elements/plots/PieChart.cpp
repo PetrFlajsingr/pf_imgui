@@ -18,8 +18,7 @@ PieChart::PieChart(std::string_view elementName, std::string_view labelText, Siz
 void PieChart::renderImpl() {
   if (dataChanged) {
     dataChanged = false;
-    labelsCstr =
-        data | ranges::views::transform([](const auto &pair) { return pair.first.c_str(); }) | ranges::to_vector;
+    labelsCstr = data | ranges::views::transform([](const auto &pair) { return pair.first.c_str(); }) | ranges::to_vector;
     values = data | ranges::views::transform([](const auto &pair) { return pair.second; }) | ranges::to_vector;
   }
 

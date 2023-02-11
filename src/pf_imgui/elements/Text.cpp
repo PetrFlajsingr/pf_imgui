@@ -11,8 +11,8 @@ namespace pf::ui::ig {
 Text::Text(Text::Config &&config) : Text(config.name, config.text, config.wrapText) {}
 
 Text::Text(std::string_view elementName, std::string textValue, bool wrapText)
-    : ItemElement(elementName), DragSource<std::string>(false), DropTarget<std::string>(false),
-      text(std::move(textValue)), wrap(wrapText) {}
+    : ItemElement(elementName), DragSource<std::string>(false), DropTarget<std::string>(false), text(std::move(textValue)), wrap(wrapText) {
+}
 
 void Text::renderImpl() {
   [[maybe_unused]] auto colorScoped = color.applyScoped();
@@ -34,8 +34,6 @@ const std::string &Text::getValue() const { return *text; }
 
 void Text::setValue(const std::string &newValue) { *text.modify() = newValue; }
 
-Subscription Text::addValueListenerImpl(std::function<void(const std::string &)> listener) {
-  return text.addListener(std::move(listener));
-}
+Subscription Text::addValueListenerImpl(std::function<void(const std::string &)> listener) { return text.addListener(std::move(listener)); }
 
 }  // namespace pf::ui::ig
