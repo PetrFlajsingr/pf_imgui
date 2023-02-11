@@ -4,11 +4,23 @@
   "dependencies": [
     {
       "name": "pf-common",
-      "version>=": "1.3.1"
+      "version>=": "1.3.2"
     },
     {
       "name": "tomlplusplus",
       "version>=": "3.1.0"
+    },
+    {
+      "name": "range-v3",
+      "version>=": "0.12.0"
+    },
+    {
+      "name": "glm",
+      "version>=": "0.9.9.8#2"
+    },
+    {
+      "name": "fmt",
+      "version>=": "9.1.0#1"
     }
   ],
   "builtin-baseline": "36fb23307e10cc6ffcec566c46c4bb3f567c82c6"
