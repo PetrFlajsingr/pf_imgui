@@ -4,7 +4,7 @@
 
 #include "PieChart.h"
 #include <implot.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 #include <range/v3/range/conversion.hpp>
 #include <range/v3/view/transform.hpp>
 
@@ -24,7 +24,7 @@ void PieChart::renderImpl() {
   }
 
   if (ImPlot::BeginPlot(label->get().c_str(), static_cast<ImVec2>(*size))) {
-    RAII endPlot{[] { ImPlot::EndPlot(); }};
+    ScopeExit endPlot{[] { ImPlot::EndPlot(); }};
     ImPlot::PlotPieChart(labelsCstr.data(), values.data(), static_cast<int>(values.size()), 0.5, 0.5, 0.4);
   }
 }

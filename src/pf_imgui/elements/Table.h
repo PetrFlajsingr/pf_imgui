@@ -284,7 +284,7 @@ void Table<ColumnCount>::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::BeginTable(getName().c_str(), ColumnCount, flags, static_cast<ImVec2>(*size))) {
-    RAII end{ImGui::EndTable};
+    ScopeExit end{&ImGui::EndTable};
 
     std::ranges::for_each(std::views::iota(std::size_t{0}, ColumnCount), [&](const auto index) {
       const char *name = nullptr;

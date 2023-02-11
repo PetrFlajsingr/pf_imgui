@@ -212,7 +212,7 @@ void Combobox<T>::renderImpl() {
     previewPtr = getPreviewValue().c_str();
   }
   if (ImGui::BeginCombo(this->label->get().c_str(), previewPtr, *flags)) {
-    RAII end{ImGui::EndCombo};
+    ScopeExit end{&ImGui::EndCombo};
     checkClose();
     std::ranges::for_each(filteredItems | ranges::views::enumerate, [this](const auto &itemIdx) {
       const auto &[idx, item] = itemIdx;

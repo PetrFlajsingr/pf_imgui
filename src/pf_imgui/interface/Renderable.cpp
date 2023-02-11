@@ -4,7 +4,7 @@
 
 #include "Renderable.h"
 #include <imgui.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 #include <utility>
 
 namespace pf::ui::ig {
@@ -25,7 +25,7 @@ void Renderable::render() {
   if (*visibility == Visibility::Visible) {
     if (!*enabled) {
       ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
+      ScopeExit ScopeExitEnabled{&ImGui::EndDisabled};
       renderImpl();
     } else {
       renderImpl();

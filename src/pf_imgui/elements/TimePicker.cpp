@@ -21,7 +21,7 @@ void TimePicker::renderImpl() {
   ImGui::BeginGroup();
   {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
-    pf::RAII popStyleVar{[] { ImGui::PopStyleVar(); }};
+    pf::ScopeExit popStyleVar{[] { ImGui::PopStyleVar(); }};
     ImGui::SetNextItemWidth(65);
     if (ImGui::SpinInt("##hours", &hours, 1, 2)) {
       if (hours >= 24) { hours = 0; }

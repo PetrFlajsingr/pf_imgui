@@ -3,7 +3,7 @@
 //
 
 #include "DockSpace.h"
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 
 namespace pf::ui::ig {
 

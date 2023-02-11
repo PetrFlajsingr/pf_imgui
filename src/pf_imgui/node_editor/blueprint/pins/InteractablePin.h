@@ -8,7 +8,7 @@
 #include "PinWithValue.h"
 #include <concepts>
 #include <imgui_internal.h>
-#include <pf_common/specializations.h>
+#include <pf_common/concepts/specializations.h>
 #include <pf_imgui/interface/Renderable.h>
 #include <pf_imgui/interface/ValueContainer.h>
 #include <pf_imgui/interface/decorators/WidthDecorator.h>

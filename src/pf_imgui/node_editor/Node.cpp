@@ -6,7 +6,7 @@
 #include "Link.h"
 #include "NodeEditor.h"
 #include "Pin.h"
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 #include <range/v3/view/cache1.hpp>
 #include <range/v3/view/concat.hpp>
 
@@ -22,7 +22,7 @@ void Node::clearLinks() {
 
 void Node::renderImpl() {
   ax::NodeEditor::BeginNode(getId());
-  [[maybe_unused]] auto endNode = RAII{ax::NodeEditor::EndNode};
+  [[maybe_unused]] auto endNode = ScopeExit{&ax::NodeEditor::EndNode};
 
   ImGui::BeginVertical("header_vert");
   {

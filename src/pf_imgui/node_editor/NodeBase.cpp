@@ -61,7 +61,7 @@ void NodeBase::render() {
     if (isInitialised) { *position.modify() = Position{ax::NodeEditor::GetNodePosition(getId())}; }
     if (!*enabled) {
       ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
+      ScopeExit ScopeExitEnabled{&ImGui::EndDisabled};
       renderImpl();
     } else {
       renderImpl();

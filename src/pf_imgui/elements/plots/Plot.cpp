@@ -5,7 +5,7 @@
 #include "Plot.h"
 #include <algorithm>
 #include <implot.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 
 namespace pf::ui::ig {
 
@@ -19,7 +19,7 @@ Plot::Plot(std::string_view elementName, std::string_view labelText, std::option
 // TODO: flags
 void Plot::renderImpl() {
   if (ImPlot::BeginPlot(label->get().c_str(), static_cast<ImVec2>(*size))) {
-    RAII endPopup{[] { ImPlot::EndPlot(); }};
+    ScopeExit endPopup{[] { ImPlot::EndPlot(); }};
     ImPlot::SetupAxis(ImAxis_X1, xLabel.has_value() ? xLabel->c_str() : nullptr);
     ImPlot::SetupAxis(ImAxis_Y1, yLabel.has_value() ? yLabel->c_str() : nullptr);
     std::ranges::for_each(datas, [](auto &data) { data->render(); });

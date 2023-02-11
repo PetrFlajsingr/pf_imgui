@@ -30,15 +30,15 @@ void Notification::renderImpl() {
   const auto opacity = getOpacity();
   ImGui::SetNextWindowBgAlpha(opacity);
 
-  RAII end{ImGui::End};
+  ScopeExit end{&ImGui::End};
   if (ImGui::Begin(fmt::format("##{}", getName()).c_str(), nullptr, flags)) {
     ImGui::PushTextWrapPos(vp_size.x / 3.f);
-    RAII endTextWrap{ImGui::PopTextWrapPos};
+    ScopeExit endTextWrap{&ImGui::PopTextWrapPos};
 
     if (icon != nullptr) {
       [[maybe_unused]] auto iconFontScoped = iconFont.applyScopedIfNotDefault();
       ImGui::PushStyleColor(ImGuiCol_Text, static_cast<ImU32>(*iconColor));
-      RAII popColor{[&] { ImGui::PopStyleColor(1); }};
+      ScopeExit popColor{[&] { ImGui::PopStyleColor(1); }};
       ImGui::Text("%s", icon);
       ImGui::SameLine();
     }

@@ -17,7 +17,7 @@ void Tooltip::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::BeginTooltip();
-  RAII end{ImGui::EndTooltip};
+  ScopeExit end{&ImGui::EndTooltip};
   std::ranges::for_each(getChildren(), &Renderable::render);
 }
 

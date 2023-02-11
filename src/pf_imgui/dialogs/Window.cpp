@@ -43,7 +43,7 @@ void Window::renderImpl() {
     ImGui::SetNextWindowPos(static_cast<ImVec2>(*position));
   }
 
-  RAII endPopup{ImGui::End};
+  ScopeExit endPopup{&ImGui::End};
   if (ImGui::Begin(idLabel.c_str(), (closeable ? &isNotClosed : nullptr),
                    flags | (hasMenuBar() ? ImGuiWindowFlags_MenuBar : 0))) {
     isWindowDocked = ImGui::IsWindowDocked();
@@ -54,7 +54,7 @@ void Window::renderImpl() {
     }
     if (!*enabled) { ImGui::BeginDisabled(); }
     {
-      auto raiiEnabled = pf::RAII([this] {
+      auto ScopeExitEnabled = pf::ScopeExit([this] {
         if (!*enabled) { ImGui::EndDisabled(); }
       });
       *Prop_modify(hovered) = ImGui::IsWindowHovered();

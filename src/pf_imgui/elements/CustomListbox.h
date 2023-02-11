@@ -60,7 +60,7 @@ void CustomListbox<T, R>::renderImpl() {
   [[maybe_unused]] auto styleScoped = this->style.applyScoped();
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   if (ImGui::BeginListBox(this->label->get().c_str(), static_cast<ImVec2>(*this->size))) {
-    RAII end{ImGui::EndListBox};
+    ScopeExit end{&ImGui::EndListBox};
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](const auto &item) { item->second->render(); });
   }
 }

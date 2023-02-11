@@ -60,7 +60,7 @@ void ConsolePanel::renderImpl() {
     ImGui::BeginVertical("output", ImVec2{0, 0}, 0);
     {
       {
-        RAII end{ImGui::EndChild};
+        ScopeExit end{&ImGui::EndChild};
         const auto wrapEnabled = wrapTextToggle.getValue();
         if (ImGui::BeginChild("out_w", ImVec2{0, -25}, true,
                               wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {

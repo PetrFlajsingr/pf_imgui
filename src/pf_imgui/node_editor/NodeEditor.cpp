@@ -6,7 +6,7 @@
 #include "Link.h"
 #include "Node.h"
 #include "Pin.h"
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 #include <pf_imgui/unique_id.h>
 #include <range/v3/view/cache1.hpp>
 #include <range/v3/view/concat.hpp>
@@ -28,7 +28,7 @@ void NodeEditor::renderImpl() {
   {
     setContext();
     ax::NodeEditor::Begin(getName().c_str(), static_cast<ImVec2>(*size));
-    auto end = RAII{ax::NodeEditor::End};
+    auto end = ScopeExit{&ax::NodeEditor::End};
     {
       std::ranges::for_each(nodes, [](auto &node) { node->render(); });
       std::ranges::for_each(comments, [](auto &comment) { comment->render(); });
@@ -101,7 +101,7 @@ std::optional<Link *> NodeEditor::findLinkByName(const std::string &linkName) {
 }
 
 void NodeEditor::handleCreation() {
-  [[maybe_unused]] auto endCreate = RAII{ax::NodeEditor::EndCreate};
+  [[maybe_unused]] auto endCreate = ScopeExit{&ax::NodeEditor::EndCreate};
   if (ax::NodeEditor::BeginCreate()) {
     handleLinkCreation();
     handleNodeCreation();
@@ -160,7 +160,7 @@ void NodeEditor::handleNodeCreation() {
 }
 
 void NodeEditor::handleDeletion() {
-  [[maybe_unused]] auto endDelete = RAII{ax::NodeEditor::EndDelete};
+  [[maybe_unused]] auto endDelete = ScopeExit{&ax::NodeEditor::EndDelete};
   if (ax::NodeEditor::BeginDelete()) {
     handleLinkDeletion();
     handleNodeDeletion();

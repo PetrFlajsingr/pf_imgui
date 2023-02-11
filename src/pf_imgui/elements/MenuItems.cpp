@@ -41,7 +41,7 @@ void SubMenu::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto scopedFont = font.applyScopedIfNotDefault();
   if (ImGui::BeginMenu(label->get().c_str())) {
-    RAII end{ImGui::EndMenu};
+    ScopeExit end{&ImGui::EndMenu};
     renderItems();
   }
 }

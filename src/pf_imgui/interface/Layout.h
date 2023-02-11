@@ -84,7 +84,18 @@ class PF_IMGUI_EXPORT Layout : public ElementWithID, public RenderablesContainer
   Property<Size> size;
 
  protected:
-  [[nodiscard]] RAII applyScroll();
+  [[nodiscard]] direct_specialization_of<ScopeExit> auto applyScroll() {
+    if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Top) {
+      ImGui::SetScrollHereY(0.0f);
+      nextFrameScrollPosition.reset();
+    }
+    return ScopeExit{[this] {
+      if (nextFrameScrollPosition.has_value() && *nextFrameScrollPosition == ScrollPosition::Bottom) {
+        ImGui::SetScrollHereY(1.0f);
+        nextFrameScrollPosition.reset();
+      }
+    }};
+  }
 
   /**
    * This needs to be used while rendering inherited layouts.

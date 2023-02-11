@@ -30,7 +30,7 @@ void ModalDialog::renderImpl() {
   }
   if (firstRender) { ImGui::OpenPopup(label->get().c_str()); }
   if (ImGui::BeginPopupModal(label->get().c_str())) {
-    RAII endPopup{ImGui::EndPopup};
+    ScopeExit endPopup{&ImGui::EndPopup};
     std::ranges::for_each(getChildren(), &Renderable::render);
   } else {
     close();

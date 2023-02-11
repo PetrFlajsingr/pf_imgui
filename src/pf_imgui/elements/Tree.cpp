@@ -44,7 +44,7 @@ void TreeLeaf::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto pop = ImGui::TreeNodeEx(label->get().c_str(), *flags);
-  RAII end{[pop] {
+  ScopeExit end{[pop] {
     if (pop) { ImGui::TreePop(); }
   }};
   if (ImGui::IsItemClicked()) { *selected.modify() = !*selected; }

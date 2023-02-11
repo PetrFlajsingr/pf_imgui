@@ -25,10 +25,11 @@ std::vector<Renderable *> AnchorLayout::getRenderables() {
 }
 
 void AnchorLayout::setChildPosition(const std::string &childName, Position position) {
-  if (auto foundChild = findIf(children | ranges::views::addressof,
-                               [childName](auto child) { return child->element->getName() == childName; });
-      foundChild.has_value()) {
-    (*foundChild)->position = position;
+  auto childrenAddr = children | ranges::views::addressof;
+  if (const auto iter = std::ranges::find_if(
+          childrenAddr, [childName](auto child) { return child->element->getName() == childName; });
+      iter != childrenAddr.end()) {
+    (*iter)->position = position;
   }
 }
 
@@ -67,7 +68,7 @@ void AnchorLayout::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-  RAII end{ImGui::EndChild};
+  ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
     auto scrollApplier = applyScroll();
     std::ranges::for_each(children, [](auto &childData) {

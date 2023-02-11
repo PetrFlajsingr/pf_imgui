@@ -4,7 +4,7 @@
 
 #include "Element.h"
 #include <imgui_internal.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 
 namespace pf::ui::ig {
 

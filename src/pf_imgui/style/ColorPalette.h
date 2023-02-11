@@ -9,8 +9,9 @@
 #define PF_IMGUI_STYLE_COLORPALETTE_H
 
 #include <imgui.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 #include <pf_common/concepts/OneOf.h>
+#include <pf_common/concepts/specializations.h>
 #include <pf_common/meta.h>
 #include <pf_common/tuple.h>
 #include <pf_imgui/_export.h>
@@ -59,12 +60,12 @@ class PF_IMGUI_EXPORT ColorPalette {
   }
 
   /**
-   * Add color options on imgui stack and return an instance of RAII which resets it.
-   * @return RAII resetting the stack
+   * Add color options on imgui stack and return an instance of ScopeExit which resets it.
+   * @return ScopeExit resetting the stack
    */
-  [[nodiscard]] RAII applyScoped() {
+  [[nodiscard]] ScopeExit<std::function<void()>> applyScoped() {
     if (!modified) {
-      return RAII{[] {}};
+      return ScopeExit<std::function<void()>>{[] {}};
     }
     std::size_t popCount = 0;
     auto index = std::size_t{};
@@ -79,7 +80,7 @@ class PF_IMGUI_EXPORT ColorPalette {
         },
         colorValues);
 
-    return RAII{[popCount] { ImGui::PopStyleColor(static_cast<int>(popCount)); }};
+    return ScopeExit<std::function<void()>>{[popCount] { ImGui::PopStyleColor(static_cast<int>(popCount)); }};
   }
 
  private:

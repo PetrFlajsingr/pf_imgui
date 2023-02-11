@@ -78,7 +78,7 @@ void FileDialog::renderImpl() {
   });
 
   if (fileDialogInstance->Display(getName(), ImGuiWindowFlags_NoCollapse, static_cast<ImVec2>(*size))) {
-    RAII end{[&] { fileDialogInstance->Close(); }};
+    ScopeExit end{[&] { fileDialogInstance->Close(); }};
     if (fileDialogInstance->IsOk()) {
       const auto filePathName = fileDialogInstance->GetFilePathName();
       const auto selection = fileDialogInstance->GetSelection();

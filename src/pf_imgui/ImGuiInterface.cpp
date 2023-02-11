@@ -5,10 +5,6 @@
 #include <ImGuizmo.h>
 #include <implot.h>
 #include <pf_imgui/ImGuiInterface.h>
-#include <pf_imgui/serialization.h>
-#include <range/v3/view/addressof.hpp>
-#include <range/v3/view/filter.hpp>
-#include <utility>
 #include <pf_imgui/dialogs/BackgroundDockingArea.h>
 #include <pf_imgui/dialogs/CommandPaletteWindow.h>
 #include <pf_imgui/dialogs/Window.h>
@@ -17,6 +13,10 @@
 #include <pf_imgui/elements/RadioGroup.h>
 #include <pf_imgui/elements/StatusBar.h>
 #include <pf_imgui/interface/DragNDrop.h>
+#include <pf_imgui/serialization.h>
+#include <range/v3/view/addressof.hpp>
+#include <range/v3/view/filter.hpp>
+#include <utility>
 
 namespace pf::ui::ig {
 
@@ -154,19 +154,21 @@ DockBuilder &ImGuiInterface::createDockBuilder(DockSpace &dockSpace) {
 }
 
 std::optional<std::reference_wrapper<Window>> ImGuiInterface::windowByName(const std::string &windowName) {
-  if (auto foundWindow = findIf(getWindows() | ranges::views::addressof,
-                                [windowName](const auto &window) { return window->getName() == windowName; });
-      foundWindow.has_value()) {
-    return **foundWindow;
+  auto childrenAddr = getWindows() | ranges::views::addressof;
+  if (const auto iter = std::ranges::find_if(
+          childrenAddr, [windowName](const auto &window) { return window->getName() == windowName; });
+      iter != childrenAddr.end()) {
+    return **iter;
   }
   return std::nullopt;
 }
 
 std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName(const std::string &windowName) const {
-  if (auto foundWindow = findIf(getWindows() | ranges::views::addressof,
-                                [windowName](const auto &window) { return window->getName() == windowName; });
-      foundWindow.has_value()) {
-    return **foundWindow;
+  auto childrenAddr = getWindows() | ranges::views::addressof;
+  if (const auto iter = std::ranges::find_if(
+          childrenAddr, [windowName](const auto &window) { return window->getName() == windowName; });
+      iter != childrenAddr.end()) {
+    return **iter;
   }
   return std::nullopt;
 }
@@ -174,9 +176,7 @@ std::optional<std::reference_wrapper<const Window>> ImGuiInterface::windowByName
 void ImGuiInterface::renderImpl() {
   ImGuizmo::BeginFrame();
   if (viewportGizmo != nullptr) { viewportGizmo->render(); }
-  if (hasMenuBar()) {
-    menuBar->render();
-  }
+  if (hasMenuBar()) { menuBar->render(); }
   if (backgroundDockingArea != nullptr) { backgroundDockingArea->render(); }
   std::ranges::for_each(windows, [](auto &window) { window->render(); });
   std::ranges::for_each(commandPalettes, [](auto &window) { window->render(); });
@@ -238,7 +238,7 @@ void ImGuiInterface::render() {
   }
   newFrame_impl();
   ImGui::NewFrame();
-  RAII endFrameRAII{[&] {
+  ScopeExit endFrameScopeExit{[&] {
     ImGui::Render();
     renderDrawData_impl(ImGui::GetDrawData());
     if (getIo().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) { updateMultiViewport(); }
@@ -249,7 +249,7 @@ void ImGuiInterface::render() {
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     if (!*enabled) {
       ImGui::BeginDisabled();
-      RAII raiiEnabled{ImGui::EndDisabled};
+      ScopeExit endEnabled{&ImGui::EndDisabled};
       renderImpl();
     } else {
       renderImpl();

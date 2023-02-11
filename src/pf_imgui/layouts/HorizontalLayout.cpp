@@ -17,11 +17,11 @@ HorizontalLayout::HorizontalLayout(std::string_view elementName, Size initialSiz
 void HorizontalLayout::renderImpl() {
   const auto flags =
       isScrollable() ? ImGuiWindowFlags_{} : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-  RAII end{ImGui::EndChild};
+  ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
-    auto scrollApplier = applyScroll();
+    [[maybe_unused]] auto scrollApplier = applyScroll();
     ImGui::BeginHorizontal(getName().c_str(), ImVec2{0, 0}, alignmentAsFloat());
-    auto endLayout = RAII{ImGui::EndHorizontal};
+    [[maybe_unused]]  auto endLayout = ScopeExit{&ImGui::EndHorizontal};
     {
       auto elements = getChildren();
       std::ranges::for_each_n(elements.begin(), static_cast<int>(elements.size() - 1), [this](auto &child) {

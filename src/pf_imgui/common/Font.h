@@ -6,7 +6,8 @@
 #define IMGUI_EXPERIMENTS_FONT_H
 
 #include <imgui.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
+#include <pf_common/concepts/specializations.h>
 #include <string>
 #include <string_view>
 
@@ -27,8 +28,8 @@ class Font {
   Font(Font &&other) = default;
   Font &operator=(Font &&other) = default;
 
-  [[nodiscard]] RAII applyScoped();
-  [[nodiscard]] RAII applyScopedIfNotDefault();
+  [[nodiscard]] ScopeExit<std::function<void()>> applyScoped();
+  [[nodiscard]] ScopeExit<std::function<void()>> applyScopedIfNotDefault();
 
   [[nodiscard]] bool operator==(const Font &rhs) const;
   [[nodiscard]] bool operator!=(const Font &rhs) const;

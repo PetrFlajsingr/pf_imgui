@@ -311,7 +311,7 @@ void LogPanel<Category, RecordLimit>::renderImpl() {
 template<Enum Category, std::size_t RecordLimit>
   requires((RecordLimit & (RecordLimit - 1)) == 0)
 void LogPanel<Category, RecordLimit>::renderTextArea() {
-  RAII end{ImGui::EndChild};
+  ScopeExit end{&ImGui::EndChild};
   const auto wrapEnabled = wrapTextToggle.getValue();
   if (ImGui::BeginChild(getName().c_str(), ImVec2{0, 0}, true,
                         wrapEnabled ? ImGuiWindowFlags{} : ImGuiWindowFlags_HorizontalScrollbar)) {

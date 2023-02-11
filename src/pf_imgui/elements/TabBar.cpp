@@ -41,7 +41,7 @@ void Tab::renderImpl() {
   const auto frameFlags = flags | (setSelectedInNextFrame ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None);
   *selected.modify() = ImGui::BeginTabItem(label->get().c_str(), open.get(), frameFlags);
   if (*selected) {
-    RAII end{ImGui::EndTabItem};
+    ScopeExit end{&ImGui::EndTabItem};
     std::ranges::for_each(getChildren(), &Renderable::render);
   }
   if (open != nullptr && !*open && *open != wasOpen) { Event_notify(closeEvent); }
@@ -75,7 +75,7 @@ void TabBar::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::BeginTabBar(getName().c_str(), flags)) {
-    RAII end{ImGui::EndTabBar};
+    ScopeExit end{&ImGui::EndTabBar};
     std::ranges::for_each(tabs, [](auto &tab) { tab->render(); });
   }
 }

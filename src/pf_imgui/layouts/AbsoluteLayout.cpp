@@ -19,9 +19,9 @@ void AbsoluteLayout::renderImpl() {
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   const auto flags = isScrollable() ? ImGuiWindowFlags_HorizontalScrollbar
                                     : ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-  RAII end{ImGui::EndChild};
+  ScopeExit end{&ImGui::EndChild};
   if (ImGui::BeginChild(getName().c_str(), static_cast<ImVec2>(*size), isDrawBorder(), flags)) {
-    auto scrollApplier = applyScroll();
+    [[maybe_unused]] auto scrollApplier = applyScroll();
     std::ranges::for_each(children, [](auto &childPair) {
       const auto &[child, position] = childPair;
       ImGui::SetCursorPos(static_cast<ImVec2>(position));
@@ -30,10 +30,11 @@ void AbsoluteLayout::renderImpl() {
   }
 }
 void AbsoluteLayout::setChildPosition(const std::string &childName, Position position) {
-  if (auto foundChild = findIf(children | ranges::views::addressof,
-                               [childName](auto child) { return child->first->getName() == childName; });
-      foundChild.has_value()) {
-    (*foundChild)->second = position;
+  auto childrenAddr = children | ranges::views::addressof;
+  if (const auto iter =
+          std::ranges::find_if(childrenAddr, [childName](auto child) { return child->first->getName() == childName; });
+      iter != childrenAddr.end()) {
+    (*iter)->second = position;
   }
 }
 void AbsoluteLayout::removeChild(const std::string &childName) {

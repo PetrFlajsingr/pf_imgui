@@ -4,18 +4,13 @@
 
 #include "Button.h"
 #include <imgui.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 #include <utility>
 
 namespace pf::ui::ig {
 
 ButtonBase::ButtonBase(std::string_view elementName, Repeatable isRepeatable)
     : ItemElement(elementName), repeatable(isRepeatable == Repeatable::Yes) {}
-
-RAII ButtonBase::setButtonRepeat() {
-  ImGui::PushButtonRepeat(repeatable);
-  return RAII{ImGui::PopButtonRepeat};
-}
 
 InvisibleButton::InvisibleButton(InvisibleButton::Config &&config)
     : InvisibleButton(config.name, config.size, config.clickButton,

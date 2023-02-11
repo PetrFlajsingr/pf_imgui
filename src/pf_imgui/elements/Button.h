@@ -44,7 +44,10 @@ class PF_IMGUI_EXPORT ButtonBase : public ItemElement {
   Event<> clickEvent;
 
  protected:
-  [[nodiscard]] RAII setButtonRepeat();
+  [[nodiscard]] inline direct_specialization_of<ScopeExit> auto setButtonRepeat() {
+    ImGui::PushButtonRepeat(repeatable);
+    return ScopeExit{&ImGui::PopButtonRepeat};
+  }
 };
 
 /**

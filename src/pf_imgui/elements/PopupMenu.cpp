@@ -27,7 +27,7 @@ void PopupMenu::renderImpl() {
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     if (firstRender) { ImGui::OpenPopup(getName().c_str()); }
     if (ImGui::BeginPopup(getName().c_str())) {
-      RAII end{ImGui::EndPopup};
+      ScopeExit end{&ImGui::EndPopup};
       renderItems();
       firstRender = false;
     } else {

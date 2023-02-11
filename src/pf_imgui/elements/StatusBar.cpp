@@ -24,9 +24,9 @@ void AppStatusBar::renderImpl() {
   height = ImGui::GetFrameHeight();
   if (ImGui::BeginViewportSideBar(fmt::format("##{}", getName()).c_str(), viewport, ImGuiDir_Down, height,
                                   window_flags)) {
-    RAII end{ImGui::End};
+    ScopeExit end{&ImGui::End};
     if (ImGui::BeginMenuBar()) {
-      RAII endMenu{ImGui::EndMenuBar};
+      ScopeExit endMenu{&ImGui::EndMenuBar};
       std::ranges::for_each(getChildren(), &Renderable::render);
     }
   }

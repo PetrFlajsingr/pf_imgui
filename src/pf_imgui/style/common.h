@@ -8,6 +8,7 @@
 #include <imgui.h>
 #include <optional>
 #include <pf_common/algorithms.h>
+#include <pf_common/array.h>
 #include <pf_imgui/common/Color.h>
 
 namespace pf::ui::ig {
@@ -107,12 +108,12 @@ template<ColorOf ColorType>
 using ColorOfAsOptionalColor = std::optional<ColorOfAsColor<ColorType>>;
 
 constexpr bool isFloatStyle(StyleOf style) {
-  return isIn(style,
-              std::array<StyleOf, 15>{StyleOf::Alpha, StyleOf::WindowRounding, StyleOf::WindowBorderSize,
-                                      StyleOf::ChildRounding, StyleOf::ChildBorderSize, StyleOf::PopupRounding,
-                                      StyleOf::PopupBorderSize, StyleOf::FrameRounding, StyleOf::FrameBorderSize,
-                                      StyleOf::IndentSpacing, StyleOf::ScrollbarSize, StyleOf::ScrollbarRounding,
-                                      StyleOf::GrabMinSize, StyleOf::GrabRounding, StyleOf::TabRounding});
+  constexpr auto FLOAT_STYLES = make_array<StyleOf>(
+      StyleOf::Alpha, StyleOf::WindowRounding, StyleOf::WindowBorderSize, StyleOf::ChildRounding,
+      StyleOf::ChildBorderSize, StyleOf::PopupRounding, StyleOf::PopupBorderSize, StyleOf::FrameRounding,
+      StyleOf::FrameBorderSize, StyleOf::IndentSpacing, StyleOf::ScrollbarSize, StyleOf::ScrollbarRounding,
+      StyleOf::GrabMinSize, StyleOf::GrabRounding, StyleOf::TabRounding);
+  return contains(FLOAT_STYLES, style);
 }
 
 template<StyleOf Style>

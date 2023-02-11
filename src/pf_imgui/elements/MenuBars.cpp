@@ -16,7 +16,7 @@ void WindowMenuBar::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::BeginMenuBar()) {
-    RAII end{ImGui::EndMenuBar};
+    ScopeExit end{&ImGui::EndMenuBar};
     renderItems();
   }
 }
@@ -30,7 +30,7 @@ void AppMenuBar::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   if (ImGui::BeginMainMenuBar()) {
-    RAII end{ImGui::EndMainMenuBar};
+    ScopeExit end{&ImGui::EndMainMenuBar};
     renderItems();
   }
 }

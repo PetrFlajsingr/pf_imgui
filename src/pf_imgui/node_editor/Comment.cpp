@@ -3,7 +3,7 @@
 //
 
 #include "Comment.h"
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 
 namespace pf::ui::ig {
 
@@ -28,13 +28,13 @@ void Comment::renderImpl() {
     ax::NodeEditor::PushStyleColor(ax::NodeEditor::StyleColor_NodeBg, bgColor);
     ax::NodeEditor::PushStyleColor(ax::NodeEditor::StyleColor_NodeBorder, borderColor);
 
-    [[maybe_unused]] auto stylePop = RAII{[] {
+    [[maybe_unused]] auto stylePop = ScopeExit{[] {
       ImGui::PopStyleVar();
       ax::NodeEditor::PopStyleColor(2);
     }};
 
     ax::NodeEditor::BeginNode(getId());
-    [[maybe_unused]] auto endNode = RAII{ax::NodeEditor::EndNode};
+    [[maybe_unused]] auto endNode = ScopeExit{&ax::NodeEditor::EndNode};
     ImGui::BeginVertical("content");
     {
       if (sizeDirty) {

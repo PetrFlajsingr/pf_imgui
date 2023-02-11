@@ -18,7 +18,7 @@ void GroupBox::renderImpl() {
   [[maybe_unused]] auto styleScoped = style.applyScoped();
   [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
   ImGui::BeginGroupPanel(label->get().c_str(), static_cast<ImVec2>(*size));
-  RAII end{ImGui::EndGroupPanel};
+  ScopeExit end{&ImGui::EndGroupPanel};
   std::ranges::for_each(getChildren(), &Renderable::render);
 }
 

@@ -10,7 +10,7 @@
 
 #include <concepts>
 #include <imgui.h>
-#include <pf_common/concepts/Integral.h>
+#include <pf_common/concepts/FundamentalTypes.h>
 #include <pf_imgui/_export.h>
 
 namespace pf::ui::ig {
@@ -36,19 +36,18 @@ class PF_IMGUI_EXPORT Color {
   [[nodiscard]] constexpr bool operator==(const Color &rhs) const { return color == rhs.color; }
   [[nodiscard]] constexpr bool operator!=(const Color &rhs) const { return !(rhs == *this); }
 
-  [[nodiscard]] constexpr static Color RGB(Integral auto red, Integral auto green, Integral auto blue,
-                                           Integral auto alpha) {
+  [[nodiscard]] constexpr static Color RGB(IntType auto red, IntType auto green, IntType auto blue,
+                                           IntType auto alpha) {
     return Color{IM_COL32(red, green, blue, alpha)};
   }
-  [[nodiscard]] constexpr static Color RGB(Integral auto red, Integral auto green, Integral auto blue) {
+  [[nodiscard]] constexpr static Color RGB(IntType auto red, IntType auto green, IntType auto blue) {
     return Color{IM_COL32(red, green, blue, 255)};
   }
-  [[nodiscard]] constexpr static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
-                                           std::same_as<float> auto blue, std::same_as<float> auto alpha) {
+  [[nodiscard]] constexpr static Color RGB(FloatType auto red, FloatType auto green, FloatType auto blue,
+                                           FloatType auto alpha) {
     return Color{ImColor(red, green, blue, alpha)};
   }
-  [[nodiscard]] constexpr static Color RGB(std::same_as<float> auto red, std::same_as<float> auto green,
-                                           std::same_as<float> auto blue) {
+  [[nodiscard]] constexpr static Color RGB(FloatType auto red, FloatType auto green, FloatType auto blue) {
     return Color{ImColor(red, green, blue, 1.f)};
   }
 
@@ -61,16 +60,15 @@ class PF_IMGUI_EXPORT Color {
                                 static_cast<float>(value) / 255.f, r, g, b);
     return RGB(r, g, b, alpha);
   }
-  [[nodiscard]] constexpr static Color HSV(std::same_as<float> auto hue, std::same_as<float> auto saturation,
-                                           std::same_as<float> auto value, std::same_as<float> auto alpha) {
+  [[nodiscard]] constexpr static Color HSV(FloatType auto hue, FloatType auto saturation, FloatType auto value,
+                                           FloatType auto alpha) {
     float r;
     float g;
     float b;
     ImGui::ColorConvertHSVtoRGB(hue, saturation, value, r, g, b);
     return RGB(r, g, b, alpha);
   }
-  [[nodiscard]] constexpr static Color HSV(std::same_as<float> auto hue, std::same_as<float> auto saturation,
-                                           std::same_as<float> auto value) {
+  [[nodiscard]] constexpr static Color HSV(FloatType auto hue, FloatType auto saturation, FloatType auto value) {
     return HSV(hue, saturation, value, 1.f);
   }
 
@@ -100,22 +98,22 @@ class PF_IMGUI_EXPORT Color {
     color = ImGui::ColorConvertFloat4ToU32(col);
   }
 
-  constexpr void setRed(std::same_as<float> auto red) {
+  constexpr void setRed(FloatType auto red) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.x = red;
     color = ImGui::ColorConvertFloat4ToU32(col);
   }
-  constexpr void setGreen(std::same_as<float> auto green) {
+  constexpr void setGreen(FloatType auto green) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.y = green;
     color = ImGui::ColorConvertFloat4ToU32(col);
   }
-  constexpr void setBlue(std::same_as<float> auto blue) {
+  constexpr void setBlue(FloatType auto blue) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.z = blue;
     color = ImGui::ColorConvertFloat4ToU32(col);
   }
-  constexpr void setAlpha(std::same_as<float> auto alpha) {
+  constexpr void setAlpha(FloatType auto alpha) {
     auto col = static_cast<ImVec4>(ImColor{color});
     col.w = alpha;
     color = ImGui::ColorConvertFloat4ToU32(col);

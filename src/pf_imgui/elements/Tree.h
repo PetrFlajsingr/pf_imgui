@@ -205,7 +205,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Simple>
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!*collapsed);
     *collapsed.modify() = !ImGui::TreeNodeEx(label->get().c_str(), *flags);
-    RAII end{[this] {
+    ScopeExit end{[this] {
       if (!*collapsed && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
     }};
     if (!*collapsed) {
@@ -314,7 +314,7 @@ class PF_IMGUI_EXPORT TreeNode<TreeType::Advanced>
     [[maybe_unused]] auto fontScoped = font.applyScopedIfNotDefault();
     ImGui::SetNextItemOpen(!*collapsed);
     *collapsed.modify() = !ImGui::TreeNodeEx(label->get().c_str(), *flags);
-    RAII end{[this] {
+    ScopeExit end{[this] {
       if (!*collapsed && !flags.is(ImGuiTreeNodeFlags_NoTreePushOnOpen)) { ImGui::TreePop(); }
     }};
     if (!*collapsed) {

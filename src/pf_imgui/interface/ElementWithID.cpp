@@ -5,7 +5,7 @@
 #include "ElementWithID.h"
 #include <imgui.h>
 #include <imgui_internal.h>
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 
 namespace pf::ui::ig {
 
@@ -19,7 +19,7 @@ void ElementWithID::render() {
   // TODO: do this only once?
   setId(ImGui::GetID(getName().c_str()));
   ImGui::PushOverrideID(id);
-  RAII end{[&] { ImGui::PopID(); }};
+  ScopeExit end{[&] { ImGui::PopID(); }};
   Element::render();
 }
 

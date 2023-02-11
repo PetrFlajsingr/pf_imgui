@@ -8,7 +8,7 @@
 #ifndef PF_IMGUI_STYLE_STYLEOPTIONS_H
 #define PF_IMGUI_STYLE_STYLEOPTIONS_H
 
-#include <pf_common/RAII.h>
+#include <pf_common/ScopeExit.h>
 #include <pf_common/concepts/OneOf.h>
 #include <pf_imgui/style/common.h>
 
@@ -59,12 +59,12 @@ class PF_IMGUI_EXPORT StyleOptions {
   }
 
   /**
-   * Add style options on imgui stack and return an instance of RAII which resets it.
-   * @return RAII resetting the stack
+   * Add style options on imgui stack and return an instance of ScopeExit which resets it.
+   * @return ScopeExit resetting the stack
    */
-  [[nodiscard]] RAII applyScoped() {
+  [[nodiscard]] ScopeExit<std::function<void()>> applyScoped() {
     if (!modified) {
-      return RAII{[] {}};
+      return ScopeExit<std::function<void()>>{[] {}};
     }
     std::size_t popCount = 0;
     auto index = std::size_t{};
@@ -77,7 +77,7 @@ class PF_IMGUI_EXPORT StyleOptions {
           ++index;
         },
         styleValues);
-    return RAII{[popCount] { ImGui::PopStyleVar(static_cast<int>(popCount)); }};
+    return ScopeExit<std::function<void()>>{[popCount] { ImGui::PopStyleVar(static_cast<int>(popCount)); }};
   }
 
  private:

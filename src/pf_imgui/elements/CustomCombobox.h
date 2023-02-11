@@ -122,7 +122,7 @@ void CustomCombobox<T, R>::renderImpl() {
   [[maybe_unused]] auto fontScoped = this->font.applyScopedIfNotDefault();
   const char *previewPtr = previewValue.c_str();
   if (ImGui::BeginCombo(label->get().c_str(), previewPtr, *flags)) {
-    RAII end{ImGui::EndCombo};
+    ScopeExit end{&ImGui::EndCombo};
     checkClose();
     std::ranges::for_each(CustomItemBox<T, R>::filteredItems, [](auto item) { item->second->render(); });
   }
